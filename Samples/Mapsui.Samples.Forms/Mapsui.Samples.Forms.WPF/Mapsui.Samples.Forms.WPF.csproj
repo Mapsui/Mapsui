@@ -24,7 +24,6 @@
     <PackageReference Include="System.Data.DataSetExtensions" />
     <PackageReference Include="System.Memory" />
     <PackageReference Include="System.Net.Http" />
-    <PackageReference Include="System.Security.Cryptography.Algorithms" />
     <PackageReference Include="System.Security.Cryptography.X509Certificates" />
     <PackageReference Include="Topten.RichTextKit" />
     <PackageReference Include="Xam.Plugin.Geolocator" />
