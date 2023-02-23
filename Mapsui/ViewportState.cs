@@ -63,8 +63,6 @@ public record class ViewportState
     /// </summary>
     public double Height { get; init; }
 
-    public MRect Extent => this.GetExtent();
-
     public static ViewportState operator -(ViewportState a, ViewportState b)
     {
         return a with

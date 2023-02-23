@@ -165,7 +165,7 @@ public class MapRegressionTests
         }
 
         await mapControl.WaitForLoadingAsync();
-        var fetchInfo = new FetchInfo(mapControl.Viewport.State.GetSection(), mapControl.Map?.CRS);
+        var fetchInfo = new FetchInfo(mapControl.Viewport.State.ToSection(), mapControl.Map?.CRS);
         mapControl.Map?.RefreshData(fetchInfo);
 
         // TODO: MapView should be available for all Targets
