@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Rendering;
@@ -19,7 +20,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     private readonly float _pixelDensity;
     private readonly object _syncLock = new();
     private bool _busy;
-    private Viewport? _currentViewport;
+    private MSection? _currentSection;
     private bool _modified;
     private IEnumerable<IFeature>? _previousFeatures;
     private readonly IRenderer _rasterizer = DefaultRendererFactory.Create();
@@ -105,7 +106,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
                 if (_fetchInfo.Extent == null || _fetchInfo.Extent?.Width <= 0 || _fetchInfo.Extent?.Height <= 0) return;
                 var viewport = CreateViewport(_fetchInfo.Extent!, _fetchInfo.Resolution, _renderResolutionMultiplier, _overscan);
 
-                _currentViewport = viewport;
+                _currentSection = viewport.State.ToSection();
 
                 using var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
                 RemoveExistingFeatures();
@@ -181,9 +182,9 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
         if (MaxVisible < fetchInfo.Resolution) return;
 
         if (!_onlyRerasterizeIfOutsideOverscan ||
-            (_currentViewport == null) ||
-            (_currentViewport.Resolution != newViewport.Resolution) ||
-            !_currentViewport.Extent.Contains(newViewport.Extent))
+            (_currentSection == null) ||
+            (_currentSection.Resolution != newViewport.Resolution) ||
+            !_currentSection.Extent.Contains(newViewport.Extent))
         {
             // Explicitly set the change type to discrete for rasterization
             _fetchInfo = new FetchInfo(fetchInfo.Section, fetchInfo.CRS);
