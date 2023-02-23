@@ -128,8 +128,6 @@
     <PackageReference Include="SkiaSharp.HarfBuzz" />
     <PackageReference Include="SkiaSharp.Views.Forms" />
     <PackageReference Include="HarfBuzzSharp" />
-    <PackageReference Include="HarfBuzzSharp.NativeAssets.macOS" />
-    <PackageReference Include="SkiaSharp.NativeAssets.macOS" />
     <PackageReference Include="sqlite-net-pcl" />
     <PackageReference Include="Svg.Skia" />
     <PackageReference Include="Topten.RichTextKit" />

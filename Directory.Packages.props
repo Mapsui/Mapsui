@@ -31,8 +31,6 @@
     <PackageVersion Include="Eto.SkiaDraw" Version="[0.2.0,0.3.0)" />
     <PackageVersion Include="HarfBuzzSharp" Version="[2.8.2.3,3.0.0.0)" />
     <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="[2.8.2.3,3.0.0.0)" />
-    <PackageVersion Include="HarfBuzzSharp.NativeAssets.macOS" Version="2.8.2.3" />
-    <PackageVersion Include="SkiaSharp.NativeAssets.macOS" Version="2.88.3" />
     <PackageVersion Include="IDisposableAnalyzers" Version="[4.0.2,5.0.0)" />
     <PackageVersion Include="Itinero" Version="[1.5.0,2.0.0)" />
     <PackageVersion Include="Mapsui.Android" Version="4.0.0-beta.8" />
