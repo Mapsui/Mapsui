@@ -34,8 +34,7 @@
 		<PackageReference Include="Appveyor.TestLogger" />
 		<PackageReference Include="BruTile" />
 		<PackageReference Include="System.Diagnostics.Debug" />
-		<PackageReference Include="System.Security.Cryptography.Algorithms" />
-		<PackageReference Include="System.Security.Cryptography.X509Certificates" />
+    <PackageReference Include="System.Security.Cryptography.X509Certificates" />
 		<PackageReference Include="System.Threading" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
 		<PackageReference Include="coverlet.collector" />
