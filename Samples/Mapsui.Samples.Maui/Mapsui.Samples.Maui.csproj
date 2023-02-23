@@ -50,7 +50,6 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui.Markup" />
 		<PackageReference Include="CommunityToolkit.Mvvm" />
-    <PackageReference Include="Microsoft.Extensions.Logging" />
 	</ItemGroup>
 
 	<ItemGroup>
