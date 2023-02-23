@@ -1,16 +1,20 @@
 # Roadmap 
-*Updated March 2022*
+*Updated February 2023*
 
-## v4
-- Use NTS for geometries
-- License to MIT
-- Improvements around Mapsui:
-  - Improve the documentation.
-  - Adding 'getting started' tutorials for all platforms.
-  - Improve the samples. Add comments, make them smaller (single purpose) and make them look better. 
+## Mapsui 4
+- Use NTS for geometries (done)
+- License to MIT (done)
+- Improve Viewport logic (in progress)
+- Improve MVVM support [#1731](https://github.com/Mapsui/Mapsui/issues/1731)
+- In render loop only draw skia object (do not create them) [#1448](https://github.com/Mapsui/Mapsui/issues/1448)
+- Release RC.1
+- Improve documentation
+- Improve samples
+- Add 'getting started' tutorials for all platforms
 
-## Options for v5
-- Improve performance
+
+## Mapsui 5
+- Everything to .NET 6 and remove legacy projects
 - World wrap
+- Further improve performance
 - Add vector tiles
-- Everything to .NET 6
