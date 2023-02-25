@@ -32,7 +32,6 @@
     <PackageVersion Include="HarfBuzzSharp" Version="[2.8.2.3,3.0.0.0)" />
     <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="[2.8.2.3,3.0.0.0)" />
     <PackageVersion Include="IDisposableAnalyzers" Version="[4.0.2,5.0.0)" />
-    <PackageVersion Include="Itinero" Version="[1.5.0,2.0.0)" />
     <PackageVersion Include="Mapsui.Android" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.ArcGIS" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Avalonia" Version="4.0.0-beta.8" />
