@@ -17,7 +17,7 @@ internal class SampleTileSource : ITileSource
     public Attribution Attribution { get; } = new Attribution();
     public ITileProvider Provider { get; }
 
-    public async Task<byte[]> GetTileAsync(TileInfo tileInfo)
+    public async Task<byte[]?> GetTileAsync(TileInfo tileInfo)
     {
         return await Provider.GetTileAsync(tileInfo);
     }
