@@ -26,6 +26,11 @@
 		<PackageReference Include="Xamarin.Forms" />
 	</ItemGroup>
 
+	<!--target to remove System.Memory-->
+  <ItemGroup>
+    <None Include="Mapsui.Forms.targets" PackagePath="build/xamarinios1.0/Mapsui.Forms.targets" Pack="true" />
+  </ItemGroup>
+
 	<ItemGroup>
     <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
     <ProjectReference Include="..\Mapsui.Tiling\Mapsui.Tiling.csproj" />

@@ -28,7 +28,8 @@ dotnet pack /p:RestorePackages=true /p:Configuration=Release /p:Version=%Version
 
 dotnet pack /p:RestorePackages=true /p:Configuration=Release /p:Version=%Version% Mapsui.UI.Blazor/Mapsui.UI.Blazor.csproj --output Artifacts
 
-dotnet pack /p:RestorePackages=true /p:Configuration=Release /p:Version=%Version% Mapsui.UI.Forms/Mapsui.UI.Forms.csproj --output Artifacts
+msbuild /p:RestorePackages=true /p:Configuration=Release /p:Version=%Version% Mapsui.UI.Forms/Mapsui.UI.Forms.csproj /t:Pack 
+xcopy Mapsui.UI.Forms\bin\Release\*.nupkg Artifacts /Y
 
 dotnet pack /p:RestorePackages=true /p:Configuration=Release /p:Version=%Version% Mapsui.UI.Avalonia/Mapsui.UI.Avalonia.csproj --output Artifacts
 
