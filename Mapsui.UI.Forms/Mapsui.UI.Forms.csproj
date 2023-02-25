@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;xamarinios1.0</TargetFrameworks>
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageId>Mapsui.Forms</PackageId>
 		<Description>Mapsui.Forms - Library for mapping for Xamarin.Forms</Description>
