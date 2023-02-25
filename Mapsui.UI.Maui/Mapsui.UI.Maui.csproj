@@ -46,7 +46,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging" />
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="SkiaSharp.Views.Maui.Controls" />
     <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" />
