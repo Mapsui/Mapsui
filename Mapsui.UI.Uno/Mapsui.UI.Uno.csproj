@@ -41,11 +41,15 @@
 		<PackageReference Include="SkiaSharp.Views.Uno" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
-    <ProjectReference Include="..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
-    <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
-  </ItemGroup>
+	<ItemGroup Condition="$(TargetFramework.Contains('uap'))">
+		<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" />
+	</ItemGroup>
+	
+  	<ItemGroup>
+    	<ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
+    	<ProjectReference Include="..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
+    	<ProjectReference Include="..\Mapsui\Mapsui.csproj" />
+  	</ItemGroup>
 
 	<ItemGroup>
 		<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
