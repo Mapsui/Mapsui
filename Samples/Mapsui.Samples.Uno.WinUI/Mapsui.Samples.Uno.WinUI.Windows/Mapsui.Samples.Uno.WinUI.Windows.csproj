@@ -39,6 +39,7 @@
 
 	<ItemGroup>
     <PackageReference Include="Uno.WinUI" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" />
     <PackageReference Include="Microsoft.Windows.CsWinRT" />
     <PackageReference Include="SkiaSharp.Views.WinUI" />
     <PackageReference Include="Microsoft.WindowsAppSDK" />
