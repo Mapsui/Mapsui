@@ -53,14 +53,12 @@
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="[7.0.0,8.0.0)" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="[7.0.0,8.0.0)" />
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="[7.0.0,8.0.0)" />
-    <PackageVersion Include="Microsoft.CSharp" Version="[4.7.0,5.0.0)" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="[16.11.0,17.0.0)" />
     <PackageVersion Include="Microsoft.Graphics.Win2D" Version="[1.0.3.1,2.0.0.0)" />
     <PackageVersion Include="Microsoft.Net.Compilers.Toolset" Version="[4.5.0-2.final,5.0.0)" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="[16.9.4,17.0.0)" />
     <PackageVersion Include="Microsoft.UI.Xaml" Version="[2.6.2,3.0.0)" />
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="[17.2.32,18.0.0)" />
-    <PackageVersion Include="Microsoft.Win32.Primitives" Version="[4.3.0,5.0.0)" />
     <PackageVersion Include="Microsoft.Windows.CsWin32" Version="[0.1.588-beta,1.0.0)" />
     <PackageVersion Include="Microsoft.Windows.CsWinRT" Version="[2.0.0,3.0.0)" />
     <PackageVersion Include="Microsoft.WindowsAppSDK" Version="[1.1.5,2.0.0)" />
@@ -92,34 +90,10 @@
     <PackageVersion Include="sqlite-net-pcl" Version="[1.8.116,2.0.0)" />
     <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="[2.1.2,3.0.0)" />
     <PackageVersion Include="Svg.Skia" Version="[0.5.16,1.0.0)" />
-    <PackageVersion Include="System.AppContext" Version="[4.3.0,5.0.0)" />
-    <PackageVersion Include="System.Collections" Version="[4.3.0,5.0.0)" />
-    <PackageVersion Include="System.Console" Version="[4.3.1,5.0.0)" />
-    <PackageVersion Include="System.Data.DataSetExtensions" Version="[4.5.0,5.0.0)" />
-    <PackageVersion Include="System.Diagnostics.Debug" Version="[4.3.0,5.0.0)" />
     <PackageVersion Include="System.Drawing.Common" Version="[6.0.0,7.0.0)" />
-    <PackageVersion Include="System.Globalization" Version="[4.3.0,5.0.0)" />
-    <PackageVersion Include="System.IO" Version="[4.3.0,5.0.0)" />
-    <PackageVersion Include="System.IO.Compression.ZipFile" Version="[4.3.0,5.0.0)" />
     <PackageVersion Include="System.Linq.Async" Version="[6.0.1,7.0.0)" />
-    <PackageVersion Include="System.Linq.Expressions" Version="[4.3.0,5.0.0)" />
-    <PackageVersion Include="System.Memory" Version="[4.5.5,5.0.0)" />
-    <PackageVersion Include="System.Net.Http" Version="[4.3.4,5.0.0)" />
-    <PackageVersion Include="System.Net.Sockets" Version="[4.3.0,5.0.0)" />
-    <PackageVersion Include="System.ObjectModel" Version="[4.3.0,5.0.0)" />
-    <PackageVersion Include="System.Reflection" Version="[4.3.0,5.0.0)" />
-    <PackageVersion Include="System.Reflection.Primitives" Version="[4.3.0,5.0.0)" />
-    <PackageVersion Include="System.Reflection.TypeExtensions" Version="[4.7.0,5.0.0)" />
-    <PackageVersion Include="System.Resources.ResourceManager" Version="[4.3.0,5.0.0)" />
-    <PackageVersion Include="System.Runtime" Version="[4.3.1,5.0.0)" />
-    <PackageVersion Include="System.Runtime.InteropServices.RuntimeInformation" Version="[4.3.0,5.0.0)" />
-    <PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="[4.3.2,5.0.0)" />
-    <PackageVersion Include="System.Text.Encoding" Version="[4.3.0,5.0.0)" />
     <PackageVersion Include="System.Text.Encoding.CodePages" Version="[6.0.0,7.0.0)" />
-    <PackageVersion Include="System.Threading" Version="[4.3.0,5.0.0)" />
-    <PackageVersion Include="System.Threading.Tasks" Version="[4.3.0,5.0.0)" />
-    <PackageVersion Include="System.Threading.Timer" Version="[4.3.0,5.0.0)" />
-    <PackageVersion Include="System.Xml.XDocument" Version="[4.3.0,5.0.0)" />
+    <PackageVersion Include="System.Memory" Version="[4.5.5,5.0.0)" />
     <PackageVersion Include="Topten.RichTextKit" Version="[0.4.151,1.0.0)" />
     <PackageVersion Include="Uno.Core" Version="[4.0.1,5.0.0)" />
     <PackageVersion Include="Uno.Extensions.Logging.OSLog" Version="[1.4.0,2.0.0)" />
@@ -143,7 +117,7 @@
     <PackageVersion Include="Uno.WinUI.RemoteControl" Version="[4.6.19,5.0.0)" />
     <PackageVersion Include="Uno.WinUI.WebAssembly" Version="[4.6.19,5.0.0)" />
     <PackageVersion Include="Microsoft.Windows.Compatibility" Version="[5.0.0,6.0.0)" />
-    <PackageVersion Include="Xam.Plugin.Geolocator" Version="[4.5.0.6,5.0.0)" />
+    <PackageVersion Include="Xam.Plugin.Geolocator" Version="[5.0.0-beta,6.0.0)" />
     <PackageVersion Include="Xamarin.Android.Support.v7.MediaRouter" Version="[28.0.0.3,29.0.0.0)" />
     <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="[1.4.1.1,2.0.0.0)" />
     <PackageVersion Include="Xamarin.AndroidX.CoordinatorLayout" Version="[1.2.0.1,2.0.0.0)" />
