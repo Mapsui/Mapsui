@@ -119,7 +119,6 @@
     <PackageReference Include="SkiaSharp.Views.Forms" />
     <PackageReference Include="Topten.RichTextKit" />
     <PackageReference Include="Xam.Plugin.Geolocator" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" />
     <PackageReference Include="Xamarin.Forms" />
   </ItemGroup>
   <ItemGroup>

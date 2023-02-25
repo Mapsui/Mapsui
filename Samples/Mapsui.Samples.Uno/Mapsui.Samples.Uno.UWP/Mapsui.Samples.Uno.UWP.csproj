@@ -7,7 +7,6 @@
      you need to make sure that the version provided here matches https://github.com/novotnyllc/MSBuildSdkExtras/blob/main/Source/MSBuild.Sdk.Extras/DefaultItems/ImplicitPackages.targets#L11.
      This is not an issue when libraries are referenced through nuget packages. See https://github.com/unoplatform/uno/issues/446 for more details.
      -->
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" />
     <PackageReference Include="Microsoft.UI.Xaml" />
     <PackageReference Include="Uno.Core" />
     <PackageReference Include="Uno.UI" />
