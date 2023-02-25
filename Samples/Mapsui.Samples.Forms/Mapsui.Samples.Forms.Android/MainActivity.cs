@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using Plugin.Permissions;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
