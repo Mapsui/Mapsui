@@ -1,5 +1,6 @@
 name: Build Website
-
+env:
+  PUBLISH_DIR: website/Samples
 on:
   push:
     branches:  
@@ -22,6 +23,13 @@ jobs:
     - name: Run DocFx
       # Use a .cmd so this script can be run locally for testing
       run: docfx\build-site.cmd      
+    - name: Compile Blazor App
+      run: dotnet publish -c Release Samples\Mapsui.Samples.Blazor\Mapsui.Samples.Blazor.csproj -p:PublishDir=${{ env.PUBLISH_DIR }}
+    - name: Rewrite base href
+      uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
+      with:
+        html_path: ${{ env.PUBLISH_DIR }}/index.html
+        base_href: /Samples/        
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1
       with:
