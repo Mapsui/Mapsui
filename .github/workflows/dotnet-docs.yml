@@ -1,6 +1,6 @@
 name: Build Website
 env:
-  PUBLISH_DIR: website/Samples
+  PUBLISH_DIR: website/Samples/wwwroot/
 on:
   push:
     branches:  
@@ -22,7 +22,8 @@ jobs:
         fetch-depth: 0      
     - name: Run DocFx
       # Use a .cmd so this script can be run locally for testing
-      run: docfx\build-site.cmd      
+      run: docfx\build-site.cmd
+    # https://github.com/SteveSandersonMS/BlazorOnGitHubPages  
     - name: Compile Blazor App
       run: dotnet publish -c Release Samples\Mapsui.Samples.Blazor\Mapsui.Samples.Blazor.csproj -p:PublishDir=${{ env.PUBLISH_DIR }}
     - name: Rewrite base href
