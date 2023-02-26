@@ -44,7 +44,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 #if __MAUI__
     // GPU does not work currently on MAUI
     // See https://github.com/mono/SkiaSharp/issues/1893
-    public static bool UseGPU = DeviceInfo.Platform != DevicePlatform.WinUI;
+    // https://github.com/Mapsui/Mapsui/issues/1676
+    public static bool UseGPU = DeviceInfo.Platform != DevicePlatform.WinUI && DeviceInfo.Platform != DevicePlatform.macOS;
 #else
     public static bool UseGPU = true;
 #endif
