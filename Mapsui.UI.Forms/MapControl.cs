@@ -44,7 +44,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 #if __MAUI__
     // GPU does not work currently on MAUI
     // See https://github.com/mono/SkiaSharp/issues/1893
-    public static bool UseGPU = DeviceInfo.Platform != DevicePlatform.WinUI;
+    // https://github.com/Mapsui/Mapsui/issues/1676
+    public static bool UseGPU = DeviceInfo.Platform != DevicePlatform.WinUI && DeviceInfo.Platform != DevicePlatform.macOS;
 #else
     public static bool UseGPU = true;
 #endif
@@ -158,7 +159,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             // Events
             _canvasView.Touch += OnTouch;
             _canvasView.PaintSurface += OnPaintSurface;
-            _invalidate = () => { RunOnUIThread(() => Catch.Exceptions(() => _canvasView.InvalidateSurface())); };
+            _invalidate = () => { RunOnUIThread(() => _canvasView.InvalidateSurface()); };
             view = _canvasView;
         }
 
@@ -829,10 +830,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     protected void RunOnUIThread(Action action)
     {
-#if __MAUI__ // WORKAROUND for Preview 11 will be fixed in Preview 13 https://github.com/dotnet/maui/issues/3597
-        Application.Current?.Dispatcher.Dispatch(action);
+#if __MAUI__ 
+        Dispatcher.Dispatch(() => Catch.Exceptions(action));
 #else
-        Device.BeginInvokeOnMainThread(action);
+        Device.BeginInvokeOnMainThread(() => Catch.Exceptions(action));
 #endif
     }
 
