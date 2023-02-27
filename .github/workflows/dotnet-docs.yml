@@ -1,6 +1,6 @@
 name: Build Website
 env:
-  PUBLISH_DIR: website/Samples/wwwroot/
+  PUBLISH_DIR: website/Samples/
 on:
   push:
     branches:  
@@ -29,8 +29,8 @@ jobs:
     - name: Rewrite base href
       uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
       with:
-        html_path: ${{ env.PUBLISH_DIR }}/index.html
-        base_href: /Samples/        
+        html_path: ${{ env.PUBLISH_DIR }}/wwwroot/index.html
+        base_href: /Samples/wwwroot/        
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1
       with:
