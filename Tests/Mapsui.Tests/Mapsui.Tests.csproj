@@ -33,10 +33,6 @@
 		<Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
 		<PackageReference Include="Appveyor.TestLogger" />
 		<PackageReference Include="BruTile" />
-		<PackageReference Include="System.Diagnostics.Debug" />
-		<PackageReference Include="System.Security.Cryptography.Algorithms" />
-		<PackageReference Include="System.Security.Cryptography.X509Certificates" />
-		<PackageReference Include="System.Threading" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
 		<PackageReference Include="coverlet.collector" />
 		<PackageReference Include="Microsoft.CodeCoverage" />
