@@ -39,10 +39,10 @@
 
 	<ItemGroup>
     <PackageReference Include="Uno.WinUI" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" />
     <PackageReference Include="Microsoft.Windows.CsWinRT" />
     <PackageReference Include="SkiaSharp.Views.WinUI" />
     <PackageReference Include="Microsoft.WindowsAppSDK" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" />
     <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" />
     <Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>
