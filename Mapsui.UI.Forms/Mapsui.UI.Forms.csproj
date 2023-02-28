@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;xamarinios1.0</TargetFrameworks>
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageId>Mapsui.Forms</PackageId>
 		<Description>Mapsui.Forms - Library for mapping for Xamarin.Forms</Description>
@@ -25,6 +25,11 @@
 		<PackageReference Include="Xamarin.Essentials" />
 		<PackageReference Include="Xamarin.Forms" />
 	</ItemGroup>
+
+	<!--target to remove System.Memory-->
+  <ItemGroup>
+    <None Include="Mapsui.Forms.targets" PackagePath="build/xamarinios1.0/Mapsui.Forms.targets" Pack="true" />
+  </ItemGroup>
 
 	<ItemGroup>
     <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
