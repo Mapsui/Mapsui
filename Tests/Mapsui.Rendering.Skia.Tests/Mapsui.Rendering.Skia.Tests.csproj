@@ -30,8 +30,6 @@
   <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" />
     <PackageReference Include="BruTile" />
-    <PackageReference Include="Microsoft.CSharp" />
-    <PackageReference Include="Microsoft.Win32.Primitives" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="NUnit" />
     <PackageReference Include="NUnit3TestAdapter">
@@ -40,8 +38,6 @@
     </PackageReference>
     <PackageReference Include="coverlet.collector" />
     <PackageReference Include="Svg.Skia" />
-    <PackageReference Include="OpenTK" />
-    <PackageReference Include="OpenTK.GLControl" />
   </ItemGroup>
 
   <ItemGroup>

@@ -115,7 +115,6 @@
   </ItemGroup>
 	<ItemGroup>
     <PackageReference Include="BruTile.MbTiles" />
-    <PackageReference Include="Itinero" />
     <PackageReference Include="Plugin.CurrentActivity" />
     <PackageReference Include="SkiaSharp.Views.Forms" />
     <PackageReference Include="sqlite-net-pcl" />

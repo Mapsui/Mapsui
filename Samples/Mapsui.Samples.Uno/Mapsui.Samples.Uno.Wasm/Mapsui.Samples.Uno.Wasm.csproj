@@ -53,9 +53,6 @@
     <None Include="wwwroot\web.config" />
   </ItemGroup>
   <ItemGroup>
-    <!--Don't remove this Reference it is a workaround for Central Package Management-->
-    <PackageReference Include="Microsoft.Windows.Compatibility" />
-    <PackageReference Include="Microsoft.Extensions.Logging" />
     <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" />
     <PackageReference Include="Uno.UI.WebAssembly" />
     <PackageReference Include="Uno.UI.RemoteControl" Condition="'$(Configuration)'=='Debug'" />
