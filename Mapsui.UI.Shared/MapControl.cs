@@ -24,7 +24,7 @@ namespace Mapsui.UI.Maui;
 namespace Mapsui.UI.Uwp;
 #elif __ANDROID__ && !HAS_UNO_WINUI
 namespace Mapsui.UI.Android;
-#elif __IOS__ && !HAS_UNO_WINUI
+#elif __IOS__ && !HAS_UNO_WINUI && !__FORMS__
 namespace Mapsui.UI.iOS;
 #elif __WINUI__
 namespace Mapsui.UI.WinUI;
