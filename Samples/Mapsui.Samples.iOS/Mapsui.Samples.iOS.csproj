@@ -18,7 +18,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BruTile.MbTiles" />
-    <PackageReference Include="Itinero" />
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="SkiaSharp.Views" />
     <PackageReference Include="SkiaSharp.HarfBuzz" />
