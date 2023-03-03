@@ -2,7 +2,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Rendering;
@@ -14,9 +13,6 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
 {
     private readonly ConcurrentStack<RasterFeature> _cache;
     private readonly ILayer _layer;
-    private readonly bool _onlyRerasterizeIfOutsideOverscan;
-    private readonly double _overscan;
-    private readonly double _renderResolutionMultiplier;
     private readonly float _pixelDensity;
     private readonly object _syncLock = new();
     private bool _busy;
@@ -34,10 +30,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     /// </summary>
     /// <param name="layer">The Layer to be rasterized</param>
     /// <param name="delayBeforeRasterize">Delay after viewport change to start re-rasterizing</param>
-    /// <param name="renderResolutionMultiplier"></param>
     /// <param name="rasterizer">Rasterizer to use. null will use the default</param>
-    /// <param name="overscanRatio">The ratio of the size of the rasterized output to the current viewport</param>
-    /// <param name="onlyRerasterizeIfOutsideOverscan">
     ///     Set the rasterization policy. false will trigger a rasterization on
     ///     every viewport change. true will trigger a re-rasterization only if the viewport moves outside the existing
     ///     rasterization.
@@ -47,24 +40,16 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     public RasterizingLayer(
         ILayer layer,
         int delayBeforeRasterize = 1000,
-        double renderResolutionMultiplier = 1,
         IRenderer? rasterizer = null,
-        double overscanRatio = 1,
-        bool onlyRerasterizeIfOutsideOverscan = false,
         float pixelDensity = 1,
         RenderFormat renderFormat = RenderFormat.Png)
     {
-        if (overscanRatio < 1)
-            throw new ArgumentException($"{nameof(overscanRatio)} must be >= 1", nameof(overscanRatio));
-
+        _renderFormat = renderFormat;
         _renderFormat = renderFormat;
         _layer = layer;
         Name = layer.Name;
-        _renderResolutionMultiplier = renderResolutionMultiplier;
         if (rasterizer != null) _rasterizer = rasterizer;
         _cache = new ConcurrentStack<RasterFeature>();
-        _overscan = overscanRatio;
-        _onlyRerasterizeIfOutsideOverscan = onlyRerasterizeIfOutsideOverscan;
         _pixelDensity = pixelDensity;
         _layer.DataChanged += LayerOnDataChanged;
         Delayer.StartWithDelay = true;
@@ -104,16 +89,17 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
                 if (_fetchInfo == null) return;
                 if (double.IsNaN(_fetchInfo.Resolution) || _fetchInfo.Resolution <= 0) return;
                 if (_fetchInfo.Extent == null || _fetchInfo.Extent?.Width <= 0 || _fetchInfo.Extent?.Height <= 0) return;
-                var viewport = CreateViewport(_fetchInfo.Extent!, _fetchInfo.Resolution, _renderResolutionMultiplier, _overscan);
+                
+                _currentSection = _fetchInfo.Section;
 
-                _currentSection = viewport.State.ToSection();
-
-                using var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
+                using var bitmapStream = _rasterizer.RenderToBitmapStream(ToViewport(_currentSection), 
+                    new[] { _layer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
+                
                 RemoveExistingFeatures();
 
                 _cache.Clear();
                 var features = new RasterFeature[1];
-                features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), viewport.Extent));
+                features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), _currentSection.Extent));
                 _cache.PushRange(features);
 #if DEBUG
                 Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
@@ -175,16 +161,14 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     {
         if (fetchInfo.Extent == null)
             return;
-        var newViewport = CreateViewport(fetchInfo.Extent, fetchInfo.Resolution, _renderResolutionMultiplier, 1);
 
         if (!Enabled) return;
         if (MinVisible > fetchInfo.Resolution) return;
         if (MaxVisible < fetchInfo.Resolution) return;
 
-        if (!_onlyRerasterizeIfOutsideOverscan ||
-            (_currentSection == null) ||
-            (_currentSection.Resolution != newViewport.Resolution) ||
-            !_currentSection.Extent.Contains(newViewport.Extent))
+        if ((_currentSection == null) ||
+            (_currentSection.Resolution != fetchInfo.Section.Resolution) ||
+            !_currentSection.Extent.Contains(fetchInfo.Section.Extent))
         {
             // Explicitly set the change type to discrete for rasterization
             _fetchInfo = new FetchInfo(fetchInfo.Section, fetchInfo.CRS);
@@ -200,20 +184,14 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
         if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
     }
 
-    public static Viewport CreateViewport(
-        MRect extent,
-        double resolution,
-        double renderResolutionMultiplier = 1,
-        double overscan = 1)
+    public static Viewport ToViewport(MSection section)
     {
-        var renderResolution = resolution / renderResolutionMultiplier;
         return new Viewport(
-            extent.Centroid.X,
-            extent.Centroid.Y,
-            renderResolution,
+            section.Extent.Centroid.X,
+            section.Extent.Centroid.Y,
+            section.Resolution,
             0,
-            extent.Width * overscan / renderResolution,
-            extent.Height * overscan / renderResolution
-        );
+            section.ScreenWidth,
+            section.ScreenHeight);
     }
 }
