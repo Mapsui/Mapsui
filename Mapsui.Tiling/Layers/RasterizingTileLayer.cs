@@ -32,7 +32,6 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher
     /// <param name="renderFormat">Format to Render To</param>
     public RasterizingTileLayer(
         ILayer layer,
-        double renderResolutionMultiplier = 1,
         IRenderer? rasterizer = null,
         float pixelDensity = 1,
         int minTiles = 200,
@@ -44,7 +43,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher
         IPersistentCache<byte[]>? persistentCache = null,
         IProjection? projection = null,
         RenderFormat renderFormat = RenderFormat.Png) : base(
-        new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, projection, renderFormat),
+        new RasterizingTileProvider(layer, rasterizer, pixelDensity, persistentCache, projection, renderFormat),
         minTiles,
         maxTiles,
         dataFetchStrategy,

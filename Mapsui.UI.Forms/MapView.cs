@@ -747,7 +747,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     {
         if (Viewport.Extent != null)
         {
-            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, ChangeType.Continuous);
+            var fetchInfo = new FetchInfo(Viewport.State.ToSection(), Map?.CRS, ChangeType.Continuous);
             Map?.RefreshData(fetchInfo);
         }
 
@@ -759,7 +759,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     {
         if (Viewport.Extent != null)
         {
-            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, ChangeType.Continuous);
+            var fetchInfo = new FetchInfo(Viewport.State.ToSection(), Map?.CRS, ChangeType.Continuous);
             Map?.RefreshData(fetchInfo);
         }
 

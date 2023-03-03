@@ -75,7 +75,7 @@ public class LayerThreadingTests
         {
             try
             {
-                await provider.GetFeaturesAsync(new FetchInfo(new FetchInfo(new MRect(0, 0, 0, 0), 1)));
+                await provider.GetFeaturesAsync(new FetchInfo(new MSection(new MRect(0, 0, 0, 0), 1)));
             }
             catch (Exception e)
             {

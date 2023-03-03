@@ -1,12 +1,17 @@
 ﻿using Mapsui.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Mapsui.Extensions;
 
 public static class ViewportStateExtensions
 {
+    /// <summary>
+    /// IsRotated is true, when viewport displays map rotated
+    /// </summary>
+    public static MSection ToSection(this ViewportState viewport)
+    {
+        return new MSection(viewport.ToExtent(), viewport.Resolution);
+    }
+
     /// <summary>
     /// IsRotated is true, when viewport displays map rotated
     /// </summary>
@@ -21,9 +26,9 @@ public static class ViewportStateExtensions
     /// This MRect is horizontally and vertically aligned, even if the viewport
     /// is rotated. So this MRect perhaps contain parts, that are not visible.
     /// </remarks>
-    public static MRect GetExtent(this ViewportState viewportState)
+    public static MRect ToExtent(this ViewportState viewportState)
     {
-        // todo: Find out how this method related to Viewport.UpdateExtent 
+        // todo: Find out how this method relates to Viewport.UpdateExtent 
 
         // calculate the window extent 
         var halfSpanX = viewportState.Width * viewportState.Resolution * 0.5;

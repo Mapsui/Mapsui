@@ -10,15 +10,15 @@ internal static class LineStringExtensions
     /// Converts a LineString in world coordinates to a Skia path
     /// </summary>
     /// <param name="lineString">List of points in Mapsui world coordinates</param>
-    /// <param name="viewport">Viewport implementation</param>
+    /// <param name="viewportState">Viewport implementation</param>
     /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
     /// <returns></returns>
-    public static SKPath ToSkiaPath(this LineString lineString, IReadOnlyViewport viewport, SKRect clipRect)
+    public static SKPath ToSkiaPath(this LineString lineString, ViewportState viewportState, SKRect clipRect)
     {
         var coordinates = lineString.Coordinates;
 
         // First convert List<Points> to screen coordinates
-        var vertices = ClippingFunctions.WorldToScreen(viewport, coordinates);
+        var vertices = ClippingFunctions.WorldToScreen(viewportState, coordinates);
 
         var path = new SKPath();
         var lastPoint = SKPoint.Empty;
