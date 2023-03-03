@@ -14,18 +14,18 @@ jobs:
     # macos-latest is currently macos-11 but i need macos-12
     runs-on: macos-12
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
     # Cache Nugets
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages     
-        key: ${{ runner.os }}-nuget11-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget12-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget11-
+            ${{ runner.os }}-nuget12-
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.0.6      
+      uses: NuGet/setup-nuget@v1.1.1      
       with:
         nuget-version: latest
     # - name: Set default Xamarin SDK versions
@@ -36,10 +36,10 @@ jobs:
     #     XCODE_ROOT=/Applications/Xcode_12.4.app
     #     echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
     #     sudo xcode-select -s $XCODE_ROOT
-    - name: Setup Xcode version 14.0
+    - name: Setup Xcode version 14.2
       uses: maxim-lobanov/setup-xcode@v1.5.1
       with:
-        xcode-version: '14.0'
+        xcode-version: '14.2'
     # .Net 7 already installed on github actions        
     #- name: Setup .NET Core SDK
     #  uses: actions/setup-dotnet@v3
@@ -62,15 +62,7 @@ jobs:
     - name: Build Mapsui.Samples.Forms.Android
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj     
     - name: Build Mapsui.Samples.Forms.iOS
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj     
-    - name: Build Mapsui.Samples.Forms.Mac
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj    
-    # Builds that need XCode 14.2
-    # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
-    - name: Setup Xcode version 14.2
-      uses: maxim-lobanov/setup-xcode@v1.5.1
-      with:
-        xcode-version: '14.2'
+      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj         
     - name: Build Mapsui.Samples.iOS
       run: dotnet build --no-restore --configuration Debug -r iossimulator-x64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
     # Samples Uno
@@ -101,6 +93,14 @@ jobs:
     #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Wasm/Mapsui.Samples.Uno.WinUI.Wasm.csproj
     #- name: Mapsui.Samples.Uno.WinUI.Windows
     #  run: dotnet build --no-restore --configuration Debug  /p:Platform=x64 Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Windows/Mapsui.Samples.Uno.WinUI.Windows.csproj
+    # Builds that need XCode 14.0
+    # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
+    - name: Setup Xcode version 14.0
+      uses: maxim-lobanov/setup-xcode@v1.5.1
+      with:
+        xcode-version: '14.0'
+    - name: Build Mapsui.Samples.Forms.Mac
+      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj        
     # Test Build    
     - name: Build Mapsui.Rendering.Skia.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
@@ -128,10 +128,11 @@ jobs:
       run: dotnet pack --no-restore --configuration Release Mapsui.UI.Android/Mapsui.UI.Android.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
     - name: Build Mapsui.UI.iOS
       run: dotnet pack --no-restore --configuration Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
+   # run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj   
     - name: Build Mapsui.UI.Forms
-      run: dotnet pack --no-restore --configuration Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
+      run: msbuild /t:Pack /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj /p:PackageOutputPath="../Artifacts" -p:PackageVersion=$(git describe --tags)
     - name: Upload packages
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: nupkg.mac
         path: Artifacts/*.nupkg
@@ -139,7 +140,7 @@ jobs:
   winBuild:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
     # Cache Nugets
@@ -150,9 +151,9 @@ jobs:
           ~/.nuget/packages/SkiaSharp* 
           ~/.nuget/packages/System*
           ~/.nuget/packages/Xamarin*
-        key: ${{ runner.os }}-nuget10-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget12-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget10-
+            ${{ runner.os }}-nuget12-
     # .Net 7 already installed on Github Actions      
     #- name: Setup .NET Core SDK
     #  uses: actions/setup-dotnet@v3
@@ -161,7 +162,7 @@ jobs:
     #       7.0.100
     #     include-prerelease: false
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.0.6
+      uses: NuGet/setup-nuget@v1.1.1
       with:
         nuget-version: latest
     - name: setup-msbuild
@@ -268,7 +269,7 @@ jobs:
       run: dotnet build --no-restore --configuration Debug  /p:Platform=x64 Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Windows\Mapsui.Samples.Uno.WinUI.Windows.csproj
     # Publishing  
     - name: Upload packages
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: nupkg.win
         path: Artifacts/*.nupkg  

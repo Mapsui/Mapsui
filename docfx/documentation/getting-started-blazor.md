@@ -1,5 +1,5 @@
 
-# Mapsui Avalonia getting started
+# Mapsui Blazor getting started
 
 ### Step 1
 Create a new Blazor WebAssembly Application in your IDE.
