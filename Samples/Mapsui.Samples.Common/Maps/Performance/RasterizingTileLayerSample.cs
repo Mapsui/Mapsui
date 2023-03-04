@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class RasterizingTileLayerSample : ISample
+public class RasterizingTileLayerWithPointsSample : ISample
 {
-    public string Name => "Rasterizing Tile Layer";
+    public string Name => "RasterizingTileLayer with points";
     public string Category => "Performance";
 
     public Task<Map> CreateMapAsync()

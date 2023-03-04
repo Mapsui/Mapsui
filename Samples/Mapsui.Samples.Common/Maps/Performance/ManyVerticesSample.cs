@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps.Performance;
 
 public class ManyVerticesSample : IMapControlSample
 {
-    public string Name => "Many Vertices";
+    public string Name => "RasterizingLayer with LineString";
     public string Category => "Performance";
 
     public void Setup(IMapControl mapControl)
@@ -27,17 +27,17 @@ public class ManyVerticesSample : IMapControlSample
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(new RasterizingLayer(CreatePointLayer(), pixelDensity: pixelDensity));
+        map.Layers.Add(new RasterizingLayer(CreateLineStringLayer(), pixelDensity: pixelDensity));
         var extent = map.Layers[1].Extent!.Grow(map.Layers[1].Extent!.Width * 0.25);
         map.Home = n => n.NavigateTo(extent);
         return map;
     }
 
-    private static ILayer CreatePointLayer()
+    private static ILayer CreateLineStringLayer()
     {
         return new MemoryLayer
         {
-            Name = "Points",
+            Name = "LineString",
             IsMapInfoLayer = true,
             Features = new List<IFeature>() { GetFeature() }
         };
