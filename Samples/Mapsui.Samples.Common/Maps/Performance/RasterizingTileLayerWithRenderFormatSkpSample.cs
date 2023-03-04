@@ -17,12 +17,12 @@ using System.Reflection;
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class ShapefileSkpTileSample : IMapControlSample
+public class RasterizingTileLayerWithRenderFormatSkpSample : IMapControlSample
 {
 
-    public string Name => "Skia tiling on shapefile";
+    public string Name => "RasterizingTileLayer with RenderFormat.Skp";
 
-    static ShapefileSkpTileSample()
+    static RasterizingTileLayerWithRenderFormatSkpSample()
     {
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
