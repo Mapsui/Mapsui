@@ -17,7 +17,7 @@ public static class ClippingFunctions
     /// <param name="viewport">Viewport implementation</param>
     /// <param name="clipRect">Rectangle to clip to. All points outside aren't drawn.</param>
     /// <returns></returns>
-    public static List<SKPoint> ReducePointsToClipRect(IEnumerable<Coordinate>? points, ViewportState viewport, SKRect clipRect)
+    public static List<SKPoint> ReducePointsToClipRect(IEnumerable<Coordinate>? points, IViewportState viewport, SKRect clipRect)
     {
         var output = WorldToScreen(viewport, points);
 
@@ -83,7 +83,7 @@ public static class ClippingFunctions
     /// <param name="viewportState">Viewport implementation</param>
     /// <param name="points">List of points in Mapsui world coordinates</param>
     /// <returns>List of screen coordinates in SKPoint</returns>
-    internal static List<SKPoint> WorldToScreen(ViewportState viewportState, IEnumerable<Coordinate>? points)
+    internal static List<SKPoint> WorldToScreen(IViewportState viewportState, IEnumerable<Coordinate>? points)
     {
         var result = new List<SKPoint>();
         if (points == null)

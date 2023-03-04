@@ -7,7 +7,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets;
 
 public class HyperlinkWidgetRenderer : ISkiaWidgetRenderer
 {
-    public void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IWidget widget, float layerOpacity)
+    public void Draw(SKCanvas canvas, IViewportState viewport, IWidget widget, float layerOpacity)
     {
         var hyperlink = (Hyperlink)widget;
         if (string.IsNullOrEmpty(hyperlink.Text)) return;

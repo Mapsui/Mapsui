@@ -12,7 +12,7 @@ public static class ViewportExtensions
     /// <param name="viewport">view Port</param>
     /// <param name="rect">rect</param>
     /// <returns>Transformed rect</returns>
-    public static MRect WorldToScreen(this IReadOnlyViewport viewport, MRect rect)
+    public static MRect WorldToScreen(this IViewportState viewport, MRect rect)
     {
         var min = viewport.WorldToScreen(rect.Min);
         var max = viewport.WorldToScreen(rect.Max);

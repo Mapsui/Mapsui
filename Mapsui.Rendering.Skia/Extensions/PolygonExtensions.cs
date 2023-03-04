@@ -14,7 +14,7 @@ internal static class PolygonExtensions
     /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
     /// <param name="strokeWidth">StrokeWidth for inflating clipRect</param>
     /// <returns></returns>
-    public static SKPath ToSkiaPath(this Polygon polygon, ViewportState viewportState, SKRect clipRect, float strokeWidth)
+    public static SKPath ToSkiaPath(this Polygon polygon, IViewportState viewportState, SKRect clipRect, float strokeWidth)
     {
         // Reduce exterior ring to parts, that are visible in clipping rectangle
         // Inflate clipRect, so that we could be sure, nothing of stroke is visible on screen

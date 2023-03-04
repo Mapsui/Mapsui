@@ -21,8 +21,8 @@ public static class ViewportExtensions
     /// <summary> Converts the Extent of the Viewport to a SKRect </summary>
     /// <param name="viewport">viewport</param>
     /// <returns>SkRect</returns>
-    public static SKRect ToSkiaRect(this IReadOnlyViewport viewport)
+    public static SKRect ToSkiaRect(this IViewportState viewport)
     {
-        return viewport.WorldToScreen(viewport.State.ToExtent()).ToSkia();
+        return viewport.WorldToScreen(viewport.ToExtent()).ToSkia();
     }
 }

@@ -10,7 +10,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class RasterStyleRenderer : ISkiaStyleRenderer
 {
-    public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long currentIteration)
+    public bool Draw(SKCanvas canvas, IViewportState viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long currentIteration)
     {
         try
         {
@@ -52,7 +52,7 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
 
             canvas.Save();
 
-            if (viewport.State.IsRotated())
+            if (viewport.IsRotated())
             {
                 var priorMatrix = canvas.TotalMatrix;
 
@@ -98,7 +98,7 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
         return true;
     }
 
-    private static SKMatrix CreateRotationMatrix(IReadOnlyViewport viewport, MRect rect, SKMatrix priorMatrix)
+    private static SKMatrix CreateRotationMatrix(IViewportState viewport, MRect rect, SKMatrix priorMatrix)
     {
         // The front-end sets up the canvas with a matrix based on screen scaling (e.g. retina).
         // We need to retain that effect by combining our matrix with the incoming matrix.
@@ -123,7 +123,7 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
         return matrix;
     }
 
-    private static SKRect WorldToScreen(IReadOnlyViewport viewport, MRect rect)
+    private static SKRect WorldToScreen(IViewportState viewport, MRect rect)
     {
         var first = viewport.WorldToScreen(rect.Min.X, rect.Min.Y);
         var second = viewport.WorldToScreen(rect.Max.X, rect.Max.Y);
