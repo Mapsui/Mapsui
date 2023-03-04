@@ -40,6 +40,7 @@ public class RasterizingLayerWithPointsSample : IMapControlSample
 
         return new MemoryLayer
         {
+            Name = "Points",
             Features = features,
             Style = new SymbolStyle
             {

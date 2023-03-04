@@ -36,6 +36,7 @@ public class RasterizingTileLayerWithPointsSample : ISample
 
         return new MemoryLayer
         {
+            Name = "Points",
             Features = features,
             Style = new SymbolStyle
             {
