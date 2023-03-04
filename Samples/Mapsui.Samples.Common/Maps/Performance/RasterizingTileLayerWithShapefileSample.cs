@@ -25,7 +25,7 @@ public class ShapefileTileSample : IMapControlSample
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
     }
 
-    public string Name => "RasterizingTileLayer with shapefile";
+    public string Name => "RasterizingTileLayer with Shapefile";
     public string Category => "Performance";
 
     public void Setup(IMapControl mapControl)

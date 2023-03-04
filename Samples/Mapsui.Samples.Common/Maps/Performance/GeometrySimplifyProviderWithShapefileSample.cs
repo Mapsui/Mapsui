@@ -17,7 +17,7 @@ public class GeometrySimplifyProviderWithShapefileSample : IMapControlSample
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
     }
 
-    public string Name => "GeometrySimplifyProvider with shapefile";
+    public string Name => "GeometrySimplifyProvider with Shapefile";
     public string Category => "Performance";
 
     public void Setup(IMapControl mapControl)

@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.Performance;
 
 public class RasterizingLayerWithPointsSample : IMapControlSample
 {
-    public string Name => "RasterizingLayer with points";
+    public string Name => "RasterizingLayer with Points";
     public string Category => "Performance";
 
     public void Setup(IMapControl mapControl)
