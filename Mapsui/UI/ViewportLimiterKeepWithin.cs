@@ -82,16 +82,16 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
         var x = viewport.CenterX;
 
         if (viewport.ToExtent()?.Left < maxExtent.Left)
-            x += maxExtent.Left - viewport.Extent.Left;
+            x += maxExtent.Left - viewport.ToExtent().Left;
         else if (viewport.ToExtent()?.Right > maxExtent.Right)
-            x += maxExtent.Right - viewport.Extent.Right;
+            x += maxExtent.Right - viewport.ToExtent().Right;
 
         var y = viewport.CenterY;
 
         if (viewport.ToExtent()?.Top > maxExtent.Top)
-            y += maxExtent.Top - viewport.Extent.Top;
+            y += maxExtent.Top - viewport.ToExtent().Top;
         else if (viewport.ToExtent()?.Bottom < maxExtent.Bottom)
-            y += maxExtent.Bottom - viewport.Extent.Bottom;
+            y += maxExtent.Bottom - viewport.ToExtent().Bottom;
 
         viewport.SetCenter(x, y);
     }

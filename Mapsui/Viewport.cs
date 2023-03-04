@@ -107,9 +107,6 @@ public class Viewport : IViewport
     }
 
     /// <inheritdoc />
-    public MRect Extent => _extent;
-
-    /// <inheritdoc />
     public MPoint WorldToScreen(MPoint worldPosition)
     {
         return WorldToScreen(worldPosition.X, worldPosition.Y);
