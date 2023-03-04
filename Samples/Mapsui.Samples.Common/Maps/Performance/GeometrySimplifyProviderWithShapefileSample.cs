@@ -10,9 +10,9 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class GeometrySimplifySample : IMapControlSample
+public class GeometrySimplifyProviderWithShapefileSample : IMapControlSample
 {
-    static GeometrySimplifySample()
+    static GeometrySimplifyProviderWithShapefileSample()
     {
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
     }
