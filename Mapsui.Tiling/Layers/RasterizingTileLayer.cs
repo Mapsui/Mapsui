@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using BruTile.Cache;
+﻿using BruTile.Cache;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Projections;
@@ -8,7 +6,6 @@ using Mapsui.Rendering;
 using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Provider;
 using Mapsui.Tiling.Rendering;
-using Mapsui.Widgets;
 
 namespace Mapsui.Tiling.Layers;
 
@@ -52,6 +49,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher
         maxExtraTiles)
     {
         SourceLayer = layer;
+        Name = layer.Name;
     }
 
     public ILayer SourceLayer { get; }
