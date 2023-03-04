@@ -1,33 +1,23 @@
-﻿using Mapsui.Extensions.Cache;
+﻿using System.IO;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
-using Mapsui.Rendering;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using Mapsui.Tiling.Layers;
 using Mapsui.UI;
-using System.IO;
-using System.Reflection;
-
-#pragma warning disable IDISP001 // Dispose created
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class ShapefileSkpTileSample : IMapControlSample
+public class GeometrySimplifyProviderWithShapefileSample : IMapControlSample
 {
-
-    public string Name => "Skia tiling on shapefile";
-
-    static ShapefileSkpTileSample()
+    static GeometrySimplifyProviderWithShapefileSample()
     {
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
-        ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
     }
 
+    public string Name => "GeometrySimplifyProvider with Shapefile";
     public string Category => "Performance";
 
     public void Setup(IMapControl mapControl)
@@ -39,7 +29,8 @@ public class ShapefileSkpTileSample : IMapControlSample
     {
         var map = new Map();
 
-        var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true)
+        var countriesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "countries.shp");
+        var countrySource = new ShapeFile(countriesPath, true)
         {
             CRS = "EPSG:4326"
         };
@@ -48,12 +39,8 @@ public class ShapefileSkpTileSample : IMapControlSample
             CRS = "EPSG:3857",
         };
 
-        var geometrySimplify = new GeometrySimplifyProvider(projectedCountrySource);
-        var geometryIntersection = new GeometryIntersectionProvider(geometrySimplify);
-
-        var sqlitePersistentCache = new SqlitePersistentCache("countriesSkp");
-        sqlitePersistentCache.Clear();
-        map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(geometryIntersection), persistentCache: sqlitePersistentCache, renderFormat: RenderFormat.Skp));
+        var simplifyCountrySource = new GeometrySimplifyProvider(projectedCountrySource, distanceTolerance: 200000);
+        map.Layers.Add(new RasterizingLayer(CreateCountryLayer(simplifyCountrySource)));
 
         return map;
     }
