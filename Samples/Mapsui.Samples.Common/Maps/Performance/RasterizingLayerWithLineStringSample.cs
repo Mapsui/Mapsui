@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class ManyVerticesSample : IMapControlSample
+public class RasterizingLayerWithLineStringSample : IMapControlSample
 {
     public string Name => "RasterizingLayer with LineString";
     public string Category => "Performance";
