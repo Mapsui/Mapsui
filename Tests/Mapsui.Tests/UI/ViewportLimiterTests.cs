@@ -1,4 +1,5 @@
-﻿using Mapsui.UI;
+﻿using Mapsui.Extensions;
+using Mapsui.UI;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.UI;
@@ -18,7 +19,7 @@ public class ViewportLimiterTests
         };
 
         // act 
-        limiter.LimitExtent(viewport, viewport.Extent);
+        limiter.LimitExtent(viewport, viewport.ToExtent());
 
         // assert
         Assert.AreEqual(viewport.CenterX, 20);

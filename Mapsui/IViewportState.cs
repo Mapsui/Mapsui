@@ -18,15 +18,6 @@ public interface IViewportState
     double Resolution { get; }
 
     /// <summary>
-    /// MRect of viewport in world coordinates respecting Rotation
-    /// </summary>
-    /// <remarks>
-    /// This MRect is horizontally and vertically aligned, even if the viewport
-    /// is rotated. So this MRect perhaps contain parts, that are not visible.
-    /// </remarks>
-    MRect? Extent { get; }
-
-    /// <summary>
     /// Width of viewport in screen pixels
     /// </summary>
     double Width { get; }

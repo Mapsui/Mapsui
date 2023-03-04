@@ -745,7 +745,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void HandlerPinPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (Viewport.Extent != null)
+        if (Viewport.ToExtent() is not null)
         {
             var fetchInfo = new FetchInfo(Viewport.State.ToSection(), Map?.CRS, ChangeType.Continuous);
             Map?.RefreshData(fetchInfo);
@@ -757,7 +757,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void HandlerDrawablePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (Viewport.Extent != null)
+        if (Viewport.ToExtent() is not null)
         {
             var fetchInfo = new FetchInfo(Viewport.State.ToSection(), Map?.CRS, ChangeType.Continuous);
             Map?.RefreshData(fetchInfo);

@@ -202,7 +202,7 @@ public class MapRenderer : IRenderer
             Resolution = viewport.Resolution
         };
 
-        if (!viewport.Extent?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return result;
+        if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return result;
 
         try
         {

@@ -27,9 +27,10 @@ public static class VisibleFeatureIterator
     private static void IterateLayer(IReadOnlyViewport viewport, ILayer layer, long iteration,
         Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float, long> callback)
     {
-        if (viewport.Extent == null) return;
+        var extent = viewport.ToExtent();
+        if (extent is null) return;
 
-        var features = layer.GetFeatures(viewport.Extent, viewport.Resolution).ToList();
+        var features = layer.GetFeatures(extent, viewport.Resolution).ToList();
 
         // Part 1. Styles on the layer
         var layerStyles = layer.Style.GetStylesToApply(viewport.Resolution);

@@ -615,7 +615,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (touchPoints.Count == 0)
         {
             _mode = TouchMode.None;
-            if (_viewport.Extent != null)
+            if (_viewport.ToExtent() is not null)
             {
                 Map?.RefreshData(new FetchInfo(_viewport.State.ToSection(), Map?.CRS, ChangeType.Discrete));
             }
@@ -659,7 +659,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (touchPoints.Count == 0)
         {
             _mode = TouchMode.None;
-            if (_viewport.Extent != null)
+            if (_viewport.ToExtent() is not null)
             {
                 Map?.RefreshData(new FetchInfo(_viewport.State.ToSection(), Map?.CRS, ChangeType.Discrete));
             }

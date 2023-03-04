@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapsui.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -80,16 +81,16 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
 
         var x = viewport.CenterX;
 
-        if (viewport.Extent?.Left < maxExtent.Left)
+        if (viewport.ToExtent()?.Left < maxExtent.Left)
             x += maxExtent.Left - viewport.Extent.Left;
-        else if (viewport.Extent?.Right > maxExtent.Right)
+        else if (viewport.ToExtent()?.Right > maxExtent.Right)
             x += maxExtent.Right - viewport.Extent.Right;
 
         var y = viewport.CenterY;
 
-        if (viewport.Extent?.Top > maxExtent.Top)
+        if (viewport.ToExtent()?.Top > maxExtent.Top)
             y += maxExtent.Top - viewport.Extent.Top;
-        else if (viewport.Extent?.Bottom < maxExtent.Bottom)
+        else if (viewport.ToExtent()?.Bottom < maxExtent.Bottom)
             y += maxExtent.Bottom - viewport.Extent.Bottom;
 
         viewport.SetCenter(x, y);

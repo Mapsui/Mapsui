@@ -7,7 +7,7 @@ public static class ViewportStateExtensions
     /// <summary>
     /// IsRotated is true, when viewport displays map rotated
     /// </summary>
-    public static MSection ToSection(this ViewportState viewport)
+    public static MSection ToSection(this IViewportState viewport)
     {
         return new MSection(viewport.ToExtent(), viewport.Resolution);
     }
@@ -15,7 +15,7 @@ public static class ViewportStateExtensions
     /// <summary>
     /// IsRotated is true, when viewport displays map rotated
     /// </summary>
-    public static bool IsRotated(this ViewportState viewport) =>
+    public static bool IsRotated(this IViewportState viewport) =>
         !double.IsNaN(viewport.Rotation) && viewport.Rotation > Constants.Epsilon
         && viewport.Rotation < 360 - Constants.Epsilon;
 
@@ -26,7 +26,7 @@ public static class ViewportStateExtensions
     /// This MRect is horizontally and vertically aligned, even if the viewport
     /// is rotated. So this MRect perhaps contain parts, that are not visible.
     /// </remarks>
-    public static MRect ToExtent(this ViewportState viewportState)
+    public static MRect ToExtent(this IViewportState viewportState)
     {
         // todo: Find out how this method relates to Viewport.UpdateExtent 
 

@@ -539,9 +539,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </summary>
     public void RefreshData(ChangeType changeType = ChangeType.Discrete)
     {
-        if (Viewport.Extent == null)
+        if (Viewport.ToExtent() is null)
             return;
-        if (Viewport.Extent.GetArea() <= 0)
+        if (Viewport.ToExtent().GetArea() <= 0)
             return;
 
         var fetchInfo = new FetchInfo(Viewport.State.ToSection(), Map?.CRS, changeType);
