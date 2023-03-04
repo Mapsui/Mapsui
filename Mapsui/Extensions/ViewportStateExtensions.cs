@@ -57,4 +57,121 @@ public static class ViewportStateExtensions
             return windowExtent.Rotate(-viewportState.Rotation, viewportState.CenterX, viewportState.CenterY).ToBoundingBox();
         }
     }
+
+    /// <summary>
+    /// Converts X/Y in world units to a point in device independent unit (or DIP or DP),
+    /// respecting rotation
+    /// </summary>
+    /// <param name="worldPosition">Coordinate in world units</param>
+    /// <returns>MPoint in screen pixels</returns>  
+    public static MPoint WorldToScreen(this IViewportState viewportState, MPoint worldPosition)
+    {
+        return viewportState.WorldToScreen(worldPosition.X, worldPosition.Y);
+    }
+
+    /// <summary>
+    /// Converts a point in screen pixels to one in screen units, respecting rotation
+    /// </summary>
+    /// <param name="screenPosition">Coordinate in screen units</param>
+    /// <returns>MPoint in world units</returns>
+    /// <inheritdoc />
+    public static MPoint ScreenToWorld(this IViewportState viewportState, MPoint screenPosition)
+    {
+        return viewportState.ScreenToWorld(screenPosition.X, screenPosition.Y);
+    }
+
+    /// <summary>
+    /// Converts X/Y in screen pixels to a point in screen units, respecting rotation
+    /// </summary>
+    /// <param name="x">Screen position x coordinate</param>
+    /// <param name="y">Screen position y coordinate</param>
+    /// <returns>MPoint in world units</returns>
+    public static MPoint ScreenToWorld(this IViewportState viewportState, double screenX, double screenY)
+    {
+        var (x, y) = viewportState.ScreenToWorldXY(screenX, screenY);
+        return new MPoint(x, y);
+    }
+
+    /// <summary>
+    /// Converts X/Y in world units to a point in device independent units (or DIP or DP),
+    /// respecting rotation
+    /// </summary>
+    /// <param name="worldX">X coordinate in world units</param>
+    /// <param name="worldY">Y coordinate in world units</param>
+    /// <returns>MPoint in screen pixels</returns>
+    public static MPoint WorldToScreen(this IViewportState viewportState, double worldX, double worldY)
+    {
+        var (x, y) = viewportState.WorldToScreenXY(worldX, worldY);
+        return new MPoint(x, y);
+    }
+
+    /// <summary>
+    /// Converts X/Y in world units to a point in device independent units (or DIP or DP),
+    /// respecting rotation
+    /// </summary>
+    /// <param name="worldX">X coordinate in world units</param>
+    /// <param name="worldY">Y coordinate in world units</param>
+    /// <returns>Tuple of x and y in screen coordinates</returns>
+    public static (double screenX, double screenY) WorldToScreenXY(this IViewportState viewportState, double worldX, double worldY)
+    {
+        var (screenX, screenY) = WorldToScreenUnrotated(viewportState, worldX, worldY);
+
+        if (viewportState.IsRotated())
+        {
+            var screenCenterX = viewportState.Width / 2.0;
+            var screenCenterY = viewportState.Height / 2.0;
+            return Rotate(-viewportState.Rotation, screenX, screenY, screenCenterX, screenCenterY);
+        }
+
+        return (screenX, screenY);
+
+        (double x, double y) Rotate(double degrees, double x, double y, double centerX, double centerY)
+        {
+            // translate this point back to the center
+            var newX = x - centerX;
+            var newY = y - centerY;
+
+            // rotate the values
+            var p = Algorithms.RotateClockwiseDegrees(newX, newY, degrees);
+
+            // translate back to original reference frame
+            newX = p.X + centerX;
+            newY = p.Y + centerY;
+
+            return (newX, newY);
+        }
+
+        (double screenX, double screenY) WorldToScreenUnrotated(IViewportState viewportState,
+            double worldX, double worldY)
+        {
+            var screenCenterX = viewportState.Width / 2.0;
+            var screenCenterY = viewportState.Height / 2.0;
+            var screenX = (worldX - viewportState.CenterX) / viewportState.Resolution + screenCenterX;
+            var screenY = (viewportState.CenterY - worldY) / viewportState.Resolution + screenCenterY;
+            return (screenX, screenY);
+        }
+    }
+
+    /// <summary>
+    /// Converts X/Y in screen pixels to a point in screen units, respecting rotation
+    /// </summary>
+    /// <param name="x">Screen position x coordinate</param>
+    /// <param name="y">Screen position y coordinate</param>
+    /// <returns>Tuple of x and y in world coordinates</returns>
+    public static (double worldX, double worldY) ScreenToWorldXY(this IViewportState viewportState, double screenX, double screenY)
+    {
+        var screenCenterX = viewportState.Width / 2.0;
+        var screenCenterY = viewportState.Height / 2.0;
+
+        if (viewportState.IsRotated())
+        {
+            var screen = new MPoint(screenX, screenY).Rotate(viewportState.Rotation, screenCenterX, screenCenterY);
+            screenX = screen.X;
+            screenY = screen.Y;
+        }
+
+        var worldX = viewportState.CenterX + (screenX - screenCenterX) * viewportState.Resolution;
+        var worldY = viewportState.CenterY - (screenY - screenCenterY) * viewportState.Resolution;
+        return (worldX, worldY);
+    }
 }

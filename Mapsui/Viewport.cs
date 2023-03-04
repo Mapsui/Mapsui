@@ -9,8 +9,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
-using Mapsui.Logging;
 using Mapsui.Utilities;
 using Mapsui.ViewportAnimations;
 
@@ -107,103 +105,11 @@ public class Viewport : IViewport
     }
 
     /// <inheritdoc />
-    public MPoint WorldToScreen(MPoint worldPosition)
-    {
-        return WorldToScreen(worldPosition.X, worldPosition.Y);
-    }
-
-    /// <inheritdoc />
-    public MPoint ScreenToWorld(MPoint position)
-    {
-        return ScreenToWorld(position.X, position.Y);
-    }
-
-    /// <inheritdoc />
-    public MPoint ScreenToWorld(double positionX, double positionY)
-    {
-        var (x, y) = ScreenToWorldXY(positionX, positionY);
-        return new MPoint(x, y);
-    }
-
-    /// <inheritdoc />
-    public MPoint WorldToScreen(double worldX, double worldY)
-    {
-        var (x, y) = WorldToScreenXY(worldX, worldY);
-        return new MPoint(x, y);
-    }
-
-    /// <inheritdoc />
-    public (double screenX, double screenY) WorldToScreenXY(double worldX, double worldY)
-    {
-        var (screenX, screenY) = WorldToScreenUnrotated(worldX, worldY);
-
-        if (_state.IsRotated())
-        {
-            var screenCenterX = Width / 2.0;
-            var screenCenterY = Height / 2.0;
-            return Rotate(-_state.Rotation, screenX, screenY, screenCenterX, screenCenterY);
-        }
-
-        return (screenX, screenY);
-    }
-
-    public (double x, double y) Rotate(double degrees, double x, double y, double centerX, double centerY)
-    {
-        // translate this point back to the center
-        var newX = x - centerX;
-        var newY = y - centerY;
-
-        // rotate the values
-        var p = Algorithms.RotateClockwiseDegrees(newX, newY, degrees);
-
-        // translate back to original reference frame
-        newX = p.X + centerX;
-        newY = p.Y + centerY;
-
-        return (newX, newY);
-    }
-
-    /// <summary>
-    /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
-    /// respecting rotation
-    /// </summary>
-    /// <param name="worldX">X coordinate in map units</param>
-    /// <param name="worldY">Y coordinate in map units</param>
-    /// <returns>The x and y in screen pixels</returns>
-
-    private (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY)
-    {
-        var screenCenterX = Width / 2.0;
-        var screenCenterY = Height / 2.0;
-        var screenX = (worldX - CenterX) / _state.Resolution + screenCenterX;
-        var screenY = (CenterY - worldY) / _state.Resolution + screenCenterY;
-        return (screenX, screenY);
-    }
-
-    /// <inheritdoc />
-    public (double worldX, double worldY) ScreenToWorldXY(double screenX, double screenY)
-    {
-        var screenCenterX = Width / 2.0;
-        var screenCenterY = Height / 2.0;
-
-        if (_state.IsRotated())
-        {
-            var screen = new MPoint(screenX, screenY).Rotate(_state.Rotation, screenCenterX, screenCenterY);
-            screenX = screen.X;
-            screenY = screen.Y;
-        }
-
-        var worldX = CenterX + (screenX - screenCenterX) * _state.Resolution;
-        var worldY = CenterY - (screenY - screenCenterY) * _state.Resolution;
-        return (worldX, worldY);
-    }
-
-    /// <inheritdoc />
     public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0)
     {
         _animations = new();
-        var previous = ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
-        var current = ScreenToWorld(positionScreen.X, positionScreen.Y);
+        var previous = _state.ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
+        var current = _state.ScreenToWorld(positionScreen.X, positionScreen.Y);
 
         var newX = _state.CenterX + previous.X - current.X;
         var newY = _state.CenterY + previous.Y - current.Y;
@@ -229,9 +135,9 @@ public class Viewport : IViewport
 
         if (deltaRotation != 0)
         {
-            current = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
+            current = _state.ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
             _state = _state with { Rotation = Rotation + deltaRotation };
-            var postRotation = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
+            var postRotation = _state.ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
             _state = _state with { CenterX = CenterX - (postRotation.X - current.X), CenterY = CenterY - (postRotation.Y - current.Y) };
         }
 

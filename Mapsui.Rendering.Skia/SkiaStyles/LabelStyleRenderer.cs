@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mapsui.Rendering.Skia.Cache;
+using Mapsui.Extensions;
 
 namespace Mapsui.Rendering.Skia;
 
