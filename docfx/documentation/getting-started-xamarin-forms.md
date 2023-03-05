@@ -64,7 +64,7 @@ var map = new Map
 var tileLayer = OpenStreetMap.CreateTileLayer();
 
 map.Layers.Add(tileLayer);
-map.Widgets.Add(new Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Widgets.Alignment.Center, HorizontalAlignment = Widgets.HorizontalAlignment.Left, VerticalAlignment = Widgets.VerticalAlignment.Bottom });
+map.Widgets.Add(new ScaleBarWidget(map) { TextAlignment = Alignment.Center, HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Bottom });
 
 mapView.Map = map;
 ```
