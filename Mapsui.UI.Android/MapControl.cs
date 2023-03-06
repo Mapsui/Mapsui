@@ -258,7 +258,7 @@ public partial class MapControl : ViewGroup, IMapControl
                                 _virtualRotation += angle - previousAngle;
 
                                 rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                                    _virtualRotation, _viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                                    _virtualRotation, _viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
                             }
 
                             _viewport.Transform(touch, previousTouch, radius / previousRadius, rotationDelta);

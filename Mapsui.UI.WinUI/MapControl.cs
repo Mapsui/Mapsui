@@ -110,7 +110,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
     {
-        _virtualRotation = _viewport.Rotation;
+        _virtualRotation = _viewport.State.Rotation;
     }
 
     private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
@@ -248,7 +248,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             _virtualRotation += rotation;
 
             rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                _virtualRotation, _viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                _virtualRotation, _viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
         }
 
         _viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);

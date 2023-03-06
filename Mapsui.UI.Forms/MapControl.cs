@@ -716,7 +716,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                         _virtualRotation += deltaRotation;
 
                         rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                            _virtualRotation, _viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                            _virtualRotation, _viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
                     }
 
                     if (prevCenter != null)
