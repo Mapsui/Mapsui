@@ -15,7 +15,7 @@ internal static class PolygonRenderer
     private const float Scale = 10.0f;
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
-    public static void Draw(SKCanvas canvas, IViewportState viewport, VectorStyle vectorStyle, IFeature feature,
+    public static void Draw(SKCanvas canvas, ViewportState viewport, VectorStyle vectorStyle, IFeature feature,
         Polygon polygon, float opacity, ISymbolCache? symbolCache = null, IVectorCache? vectorCache = null)
     {
 

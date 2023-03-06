@@ -8,7 +8,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets;
 
 public class ButtonWidgetRenderer : ISkiaWidgetRenderer
 {
-    public void Draw(SKCanvas canvas, IViewportState viewport, IWidget widget, float layerOpacity)
+    public void Draw(SKCanvas canvas, ViewportState viewport, IWidget widget, float layerOpacity)
     {
         var button = (ButtonWidget)widget;
 

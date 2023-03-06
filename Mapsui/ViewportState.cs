@@ -4,7 +4,7 @@
 
 namespace Mapsui;
 
-public record class ViewportState : IViewportState
+public record class ViewportState
 {
     public ViewportState(double centerX, double centerY, double resolution, double rotation, double width, double height)
     {
@@ -14,19 +14,6 @@ public record class ViewportState : IViewportState
         Rotation = rotation;
         Width = width;
         Height = height;
-    }
-
-    public static ViewportState operator +(ViewportState a, ViewportState b)
-    {
-        return a with
-        {
-            CenterX = a.CenterX + b.CenterX,
-            CenterY = a.CenterY + b.CenterY,
-            Resolution = a.Resolution + b.Resolution,
-            Rotation = a.Rotation + b.Rotation,
-            Width = a.Width + b.Width,
-            Height = a.Height + b.Height
-        };
     }
 
     /// <summary>
@@ -60,6 +47,19 @@ public record class ViewportState : IViewportState
     /// Height of viewport in screen pixels
     /// </summary>
     public double Height { get; init; }
+
+    public static ViewportState operator +(ViewportState a, ViewportState b)
+    {
+        return a with
+        {
+            CenterX = a.CenterX + b.CenterX,
+            CenterY = a.CenterY + b.CenterY,
+            Resolution = a.Resolution + b.Resolution,
+            Rotation = a.Rotation + b.Rotation,
+            Width = a.Width + b.Width,
+            Height = a.Height + b.Height
+        };
+    }
 
     public static ViewportState operator -(ViewportState a, ViewportState b)
     {

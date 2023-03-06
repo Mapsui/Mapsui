@@ -45,7 +45,7 @@ public class Viewport : IViewport
     /// Create a new viewport from another viewport
     /// </summary>
     /// <param name="viewport">Viewport from which to copy all values</param>
-    public Viewport(IViewportState viewport) : this()
+    public Viewport(ViewportState viewport) : this()
     {
         _state = new ViewportState(viewport.CenterX, viewport.CenterY, viewport.Resolution, viewport.Rotation, viewport.Width, viewport.Height);
         UpdateExtent();

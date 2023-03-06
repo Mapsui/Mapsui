@@ -13,7 +13,7 @@ internal static class LineStringExtensions
     /// <param name="viewportState">Viewport implementation</param>
     /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
     /// <returns></returns>
-    public static SKPath ToSkiaPath(this LineString lineString, IViewportState viewportState, SKRect clipRect)
+    public static SKPath ToSkiaPath(this LineString lineString, ViewportState viewportState, SKRect clipRect)
     {
         var coordinates = lineString.Coordinates;
 
