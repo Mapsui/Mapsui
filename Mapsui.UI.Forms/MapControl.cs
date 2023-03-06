@@ -589,7 +589,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
             _mode = TouchMode.Zooming;
-            _virtualRotation = Viewport.Rotation;
+            _virtualRotation = Viewport.State.Rotation;
         }
         else
         {
@@ -615,7 +615,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (touchPoints.Count == 0)
         {
             _mode = TouchMode.None;
-            if (_viewport.ToExtent() is not null)
+            if (_viewport.State.ToExtent() is not null)
             {
                 Map?.RefreshData(new FetchInfo(_viewport.State.ToSection(), Map?.CRS, ChangeType.Discrete));
             }
@@ -659,7 +659,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (touchPoints.Count == 0)
         {
             _mode = TouchMode.None;
-            if (_viewport.ToExtent() is not null)
+            if (_viewport.State.ToExtent() is not null)
             {
                 Map?.RefreshData(new FetchInfo(_viewport.State.ToSection(), Map?.CRS, ChangeType.Discrete));
             }

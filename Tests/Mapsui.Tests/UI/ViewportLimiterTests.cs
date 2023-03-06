@@ -19,7 +19,7 @@ public class ViewportLimiterTests
         };
 
         // act 
-        limiter.LimitExtent(viewport, viewport.ToExtent());
+        limiter.LimitExtent(viewport, viewport.State.ToExtent());
 
         // assert
         Assert.AreEqual(viewport.CenterX, 20);

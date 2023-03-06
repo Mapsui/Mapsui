@@ -11,7 +11,7 @@ public class FlyToAnimation
         var animations = new List<AnimationEntry<Viewport>>();
         AnimationEntry<Viewport> entry;
 
-        var viewportCenter = new MPoint(viewport.CenterX, viewport.CenterY);
+        var viewportCenter = new MPoint(viewport.State.CenterX, viewport.State.CenterY);
 
         if (!center.Equals(viewportCenter))
         {
@@ -28,8 +28,8 @@ public class FlyToAnimation
         }
 
         entry = new AnimationEntry<Viewport>(
-            start: viewport.Resolution,
-            end: Math.Min(maxResolution, viewport.Resolution * 2),
+            start: viewport.State.Resolution,
+            end: Math.Min(maxResolution, viewport.State.Resolution * 2),
             animationStart: 0,
             animationEnd: 0.5,
             easing: Easing.SinIn,
@@ -39,8 +39,8 @@ public class FlyToAnimation
         animations.Add(entry);
 
         entry = new AnimationEntry<Viewport>(
-            start: Math.Min(maxResolution, viewport.Resolution * 2),
-            end: viewport.Resolution,
+            start: Math.Min(maxResolution, viewport.State.Resolution * 2),
+            end: viewport.State.Resolution,
             animationStart: 0.5,
             animationEnd: 1,
             easing: Easing.SinIn,

@@ -119,7 +119,7 @@ public class Viewport : IViewport
 
         if (deltaResolution != 1)
         {
-            _state = _state with { Resolution = Resolution / deltaResolution };
+            _state = _state with { Resolution = _state.Resolution / deltaResolution };
 
             // Calculate current position again with adjusted resolution
             // Zooming should be centered on the place where the map is touched.
@@ -256,7 +256,7 @@ public class Viewport : IViewport
     {
         _animations = new();
 
-        if (Resolution == resolution)
+        if (_state.Resolution == resolution)
             return;
 
         if (duration == 0)

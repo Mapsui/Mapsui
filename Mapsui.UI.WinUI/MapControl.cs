@@ -155,7 +155,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
     {
         if (_map?.ZoomLock ?? true) return;
-        if (!Viewport.HasSize()) return;
+        if (!Viewport.State.HasSize()) return;
 
         var currentPoint = e.GetCurrentPoint(this);
 #if __WINUI__
@@ -169,7 +169,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (this.Map == null)
             return;
 
-        resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Extent);
+        resolution = Map.Limiter.LimitResolution(resolution, Viewport.State.Width, Viewport.State.Height, Map.Resolutions, Map.Extent);
         Navigator?.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
 
         e.Handled = true;

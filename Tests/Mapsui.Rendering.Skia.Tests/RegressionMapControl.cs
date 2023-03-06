@@ -105,7 +105,7 @@ public class RegressionMapControl : IMapControl
 
     public void CallHomeIfNeeded()
     {
-        if (Map != null && !Map.Initialized && Viewport.HasSize() && Map?.Extent != null)
+        if (Map != null && !Map.Initialized && Viewport.State.HasSize() && Map?.Extent != null)
         {
             Map.Home?.Invoke(Navigator!);
             Map.Initialized = true;

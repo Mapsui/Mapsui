@@ -247,7 +247,7 @@ public class MyLocationLayer : MemoryLayer
                         _mapView.Refresh();
                 }, 0.0, 1.0);
 
-                if (_mapView.Viewport.ToExtent() is not null)
+                if (_mapView.Viewport.State.ToExtent() is not null)
                 {
                     var fetchInfo = new FetchInfo(_mapView.Viewport.State.ToSection(), _mapView.Map?.CRS, ChangeType.Discrete);
                     // At the end, update viewport

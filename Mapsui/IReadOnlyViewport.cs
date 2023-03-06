@@ -2,7 +2,7 @@
 
 namespace Mapsui;
 
-public interface IReadOnlyViewport : IViewportState
+public interface IReadOnlyViewport
 {
     event PropertyChangedEventHandler ViewportChanged;
 
