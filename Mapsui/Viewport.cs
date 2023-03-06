@@ -27,9 +27,6 @@ public class Viewport : IViewport
 
     // State
     private ViewportState _state = new(0, 0, 1, 0, 0, 0);
-    // Add postponer only for debugging.
-    // Derived from state
-    private readonly MRect _extent;
 
     private List<AnimationEntry<Viewport>> _animations = new();
 
@@ -38,7 +35,6 @@ public class Viewport : IViewport
     /// </summary>
     public Viewport()
     {
-        _extent = new MRect(0, 0, 0, 0);
     }
 
     /// <summary>
@@ -48,13 +44,11 @@ public class Viewport : IViewport
     public Viewport(ViewportState viewport) : this()
     {
         _state = new ViewportState(viewport.CenterX, viewport.CenterY, viewport.Resolution, viewport.Rotation, viewport.Width, viewport.Height);
-        UpdateExtent();
     }
 
     public Viewport(double centerX, double centerY, double resolution, double rotation, double width, double height) : this()
     {
         _state = new ViewportState(centerX, centerY, resolution, rotation, width, height);
-        UpdateExtent();
     }
 
     public ViewportState State
@@ -64,7 +58,6 @@ public class Viewport : IViewport
         {
             if (_state == value) return;
             _state = value;
-            UpdateExtent();
             OnViewportChanged();
         }
     }
@@ -106,49 +99,7 @@ public class Viewport : IViewport
             _state = _state with { CenterX = _state.CenterX - (postRotation.X - current.X), CenterY = _state.CenterY - (postRotation.Y - current.Y) };
         }
 
-        UpdateExtent();
         OnViewportChanged();
-    }
-
-
-    /// <summary>
-    /// Recalculates extent for viewport
-    /// </summary>
-    private void UpdateExtent()
-    {
-        // calculate the window extent which is not rotate
-        var halfSpanX = _state.Width * _state.Resolution * 0.5;
-        var halfSpanY = _state.Height * _state.Resolution * 0.5;
-        var left = _state.CenterX - halfSpanX;
-        var bottom = _state.CenterY - halfSpanY;
-        var right = _state.CenterX + halfSpanX;
-        var top = _state.CenterY + halfSpanY;
-        var windowExtent = new MQuad
-        {
-            BottomLeft = new MPoint(left, bottom),
-            TopLeft = new MPoint(left, top),
-            TopRight = new MPoint(right, top),
-            BottomRight = new MPoint(right, bottom)
-        };
-
-        if (!_state.IsRotated())
-        {
-            _extent.Min.X = left;
-            _extent.Min.Y = bottom;
-            _extent.Max.X = right;
-            _extent.Max.Y = top;
-        }
-        else
-        {
-            // Calculate the extent that will encompass a rotated viewport (slightly larger - used for tiles).
-            // Perform rotations on corner offsets and then add them to the Center point.
-            windowExtent = windowExtent.Rotate(-_state.Rotation, _state.CenterX, _state.CenterY);
-            var rotatedBoundingBox = windowExtent.ToBoundingBox();
-            _extent.Min.X = rotatedBoundingBox.MinX;
-            _extent.Min.Y = rotatedBoundingBox.MinY;
-            _extent.Max.X = rotatedBoundingBox.MaxX;
-            _extent.Max.Y = rotatedBoundingBox.MaxY;
-        }
     }
 
     public void SetSize(double width, double height)
@@ -160,7 +111,6 @@ public class Viewport : IViewport
 
         _state = _state with { Width = width, Height = height };
 
-        UpdateExtent();
         OnViewportChanged();
     }
 
@@ -173,7 +123,6 @@ public class Viewport : IViewport
 
         _state = _state with { CenterX = x, CenterY = y };
 
-        UpdateExtent();
         OnViewportChanged();
     }
 
@@ -193,7 +142,6 @@ public class Viewport : IViewport
             _animations = ViewportStateAnimation.Create(this, State with { CenterX = x, CenterY = y, Resolution = resolution }, duration, easing);
         }
 
-        UpdateExtent();
         OnViewportChanged();
     }
 
@@ -213,7 +161,6 @@ public class Viewport : IViewport
             _animations = ViewportStateAnimation.Create(this, State with { CenterX = center.X, CenterY = center.Y }, duration, easing);
         }
 
-        UpdateExtent();
         OnViewportChanged();
     }
 
@@ -231,7 +178,6 @@ public class Viewport : IViewport
             _animations = ViewportStateAnimation.Create(this, State with { Resolution = resolution }, duration, easing);
         }
 
-        UpdateExtent();
         OnViewportChanged();
     }
 
@@ -248,7 +194,6 @@ public class Viewport : IViewport
             _animations = ViewportStateAnimation.Create(this, State with { Rotation = rotation }, duration, easing);
         }
 
-        UpdateExtent();
         OnViewportChanged();
     }
 
@@ -259,22 +204,6 @@ public class Viewport : IViewport
     private void OnViewportChanged([CallerMemberName] string? propertyName = null)
     {
         ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    public static Viewport Create(MRect extent, double resolution)
-    {
-        // set fields directly or else an update is triggered.
-        var result = new Viewport(
-            extent.Centroid.X,
-            extent.Centroid.Y,
-            resolution,
-            0,
-            extent.Width / resolution,
-            extent.Height / resolution
-        );
-        result.UpdateExtent();
-
-        return result;
     }
 
     public bool UpdateAnimations()
