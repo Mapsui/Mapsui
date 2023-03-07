@@ -16,7 +16,7 @@ public class MouseWheelAnimation
         // The alternative is that use the previous resolution target and add an extra
         // level to that.
         if (!IsAnimating())
-            _toResolution = viewport.Resolution;
+            _toResolution = viewport.State.Resolution;
 
         if (delta > Constants.Epsilon)
         {

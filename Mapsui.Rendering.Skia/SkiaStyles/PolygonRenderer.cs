@@ -15,7 +15,7 @@ internal static class PolygonRenderer
     private const float Scale = 10.0f;
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
-    public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, VectorStyle vectorStyle, IFeature feature,
+    public static void Draw(SKCanvas canvas, ViewportState viewport, VectorStyle vectorStyle, IFeature feature,
         Polygon polygon, float opacity, ISymbolCache? symbolCache = null, IVectorCache? vectorCache = null)
     {
 
@@ -28,13 +28,13 @@ internal static class PolygonRenderer
         {
             paint = CreateSkPaint(vectorStyle?.Outline, opacity);
             paintFill = CreateSkPaint(vectorStyle?.Fill, opacity, viewport.Rotation, symbolCache);
-            path = polygon.ToSkiaPath(viewport.State, canvas.LocalClipBounds, lineWidth);
+            path = polygon.ToSkiaPath(viewport, canvas.LocalClipBounds, lineWidth);
         }
         else
         {
             paint = vectorCache.GetOrCreatePaint(vectorStyle?.Outline, opacity, CreateSkPaint);
             paintFill = vectorCache.GetOrCreatePaint(vectorStyle?.Fill, opacity, viewport.Rotation, CreateSkPaint);
-            path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (geometry, viewport, lineWidth) => geometry.ToSkiaPath(viewport.State, viewport.ToSkiaRect(), lineWidth));
+            path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (geometry, viewport, lineWidth) => geometry.ToSkiaPath(viewport, viewport.ToSkiaRect(), lineWidth));
         }
 
         if (vectorStyle?.Fill?.FillStyle == FillStyle.Solid)

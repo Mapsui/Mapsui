@@ -12,7 +12,7 @@ namespace Mapsui.Rendering.Skia;
 public static class LineStringRenderer
 {
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
-    public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, VectorStyle? vectorStyle,
+    public static void Draw(SKCanvas canvas, ViewportState viewport, VectorStyle? vectorStyle,
         LineString lineString, float opacity, IVectorCache? vectorCache = null)
     {
         if (vectorStyle == null)
@@ -23,14 +23,14 @@ public static class LineStringRenderer
         if (vectorCache == null)
         {
             paint = CreateSkPaint(vectorStyle.Line, opacity);
-            path = lineString.ToSkiaPath(viewport.State, canvas.LocalClipBounds);
+            path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);
         }
         else
         {
             paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
 
             var lineWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1);
-            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, viewport, _) => geometry.ToSkiaPath(viewport.State, viewport.ToSkiaRect()));
+            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, viewport, _) => geometry.ToSkiaPath(viewport, viewport.ToSkiaRect()));
         }
 
         canvas.DrawPath(path, paint);

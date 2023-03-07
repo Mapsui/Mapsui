@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ConcurrentCollections;
-using Mapsui.Fetcher;
 using Mapsui.Styles;
 
 namespace Mapsui.Layers;

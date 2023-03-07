@@ -139,13 +139,13 @@ public partial class MapControl : ComponentBase, IMapControl
         try
         {
             if (Map?.ZoomLock ?? true) return;
-            if (!Viewport.HasSize()) return;
+            if (!Viewport.State.HasSize()) return;
 
             var delta = e.DeltaY;
             var resolution = MouseWheelAnimation.GetResolution((int)delta, _viewport, Map);
 
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-            resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions,
+            resolution = Map.Limiter.LimitResolution(resolution, Viewport.State.Width, Viewport.State.Height, Map.Resolutions,
                 Map.Extent);
             Navigator?.ZoomTo(resolution, e.Location(await BoundingClientRectAsync()).ToMapsui(), MouseWheelAnimation.Duration,
                 MouseWheelAnimation.Easing);
@@ -232,8 +232,8 @@ public partial class MapControl : ComponentBase, IMapControl
             {
                 if (_selectRectangle != null)
                 {
-                    var previous = Viewport.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
-                    var current = Viewport.ScreenToWorld(_selectRectangle.BottomRight.X,
+                    var previous = Viewport.State.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
+                    var current = Viewport.State.ScreenToWorld(_selectRectangle.BottomRight.X,
                         _selectRectangle.BottomRight.Y);
                     ZoomToBox(previous, current);
                 }

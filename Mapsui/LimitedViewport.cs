@@ -18,13 +18,7 @@ public class LimitedViewport : IViewport
     public Map? Map { get; set; }
 
     public event PropertyChangedEventHandler? ViewportChanged;
-    public double CenterX => _viewport.CenterX;
-    public double CenterY => _viewport.CenterY;
-    public double Resolution => _viewport.Resolution;
-    public MRect? Extent => _viewport.Extent;
-    public double Width => _viewport.Width;
-    public double Height => _viewport.Height;
-    public double Rotation => _viewport.Rotation;
+ 
     public ViewportState State { get => _viewport.State; }
 
     public void Transform(MPoint position, MPoint previousPosition, double deltaResolution = 1, double deltaRotation = 0)
@@ -41,7 +35,7 @@ public class LimitedViewport : IViewport
     public void SetSize(double width, double height)
     {
         _viewport.SetSize(width, height);
-        if (_viewport.HasSize()) Limiter?.LimitExtent(_viewport, Map?.Extent);
+        if (_viewport.State.HasSize()) Limiter?.LimitExtent(_viewport, Map?.Extent);
     }
 
     public virtual void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
@@ -70,7 +64,7 @@ public class LimitedViewport : IViewport
         if (Map?.ZoomLock ?? true) return;
         if (Limiter != null)
         {
-            resolution = Limiter.LimitResolution(resolution, _viewport.Width, _viewport.Height, Map.Resolutions, Map.Extent);
+            resolution = Limiter.LimitResolution(resolution, _viewport.State.Width, _viewport.State.Height, Map.Resolutions, Map.Extent);
         }
 
         _viewport.SetResolution(resolution, duration, easing);
@@ -83,26 +77,6 @@ public class LimitedViewport : IViewport
         Limiter?.LimitExtent(_viewport, Map?.Extent);
     }
 
-    public MPoint ScreenToWorld(MPoint position)
-    {
-        return _viewport.ScreenToWorld(position);
-    }
-
-    public MPoint ScreenToWorld(double x, double y)
-    {
-        return _viewport.ScreenToWorld(x, y);
-    }
-
-    public MPoint WorldToScreen(MPoint worldPosition)
-    {
-        return _viewport.WorldToScreen(worldPosition);
-    }
-
-    public MPoint WorldToScreen(double worldX, double worldY)
-    {
-        return _viewport.WorldToScreen(worldX, worldY);
-    }
-
     public bool UpdateAnimations()
     {
         return _viewport.UpdateAnimations();
@@ -111,15 +85,5 @@ public class LimitedViewport : IViewport
     public void SetAnimations(List<AnimationEntry<Viewport>> animations)
     {
         _viewport.SetAnimations(animations);
-    }
-
-    public (double worldX, double worldY) ScreenToWorldXY(double x, double y)
-    {
-        return _viewport.ScreenToWorldXY(x, y);
-    }
-
-    public (double screenX, double screenY) WorldToScreenXY(double worldX, double worldY)
-    {
-        return _viewport.WorldToScreenXY(worldX, worldY);
     }
 }

@@ -59,8 +59,8 @@ public static class FlingAnimation
         if (xMovement == 0 && yMovement == 0)
             return;
 
-        var previous = viewport.ScreenToWorld(0, 0);
-        var current = viewport.ScreenToWorld(xMovement, yMovement);
+        var previous = viewport.State.ScreenToWorld(0, 0);
+        var current = viewport.State.ScreenToWorld(xMovement, yMovement);
 
         var xDiff = current.X - previous.X;
         var yDiff = current.Y - previous.Y;

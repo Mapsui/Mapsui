@@ -2,8 +2,6 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-using Mapsui.Extensions;
-
 namespace Mapsui;
 
 public record class ViewportState
@@ -16,19 +14,6 @@ public record class ViewportState
         Rotation = rotation;
         Width = width;
         Height = height;
-    }
-
-    public static ViewportState operator +(ViewportState a, ViewportState b)
-    {
-        return a with
-        {
-            CenterX = a.CenterX + b.CenterX,
-            CenterY = a.CenterY + b.CenterY,
-            Resolution = a.Resolution + b.Resolution,
-            Rotation = a.Rotation + b.Rotation,
-            Width = a.Width + b.Width,
-            Height = a.Height + b.Height
-        };
     }
 
     /// <summary>
@@ -62,6 +47,19 @@ public record class ViewportState
     /// Height of viewport in screen pixels
     /// </summary>
     public double Height { get; init; }
+
+    public static ViewportState operator +(ViewportState a, ViewportState b)
+    {
+        return a with
+        {
+            CenterX = a.CenterX + b.CenterX,
+            CenterY = a.CenterY + b.CenterY,
+            Resolution = a.Resolution + b.Resolution,
+            Rotation = a.Rotation + b.Rotation,
+            Width = a.Width + b.Width,
+            Height = a.Height + b.Height
+        };
+    }
 
     public static ViewportState operator -(ViewportState a, ViewportState b)
     {

@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mapsui.Rendering.Skia.Cache;
+using Mapsui.Extensions;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -47,7 +48,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     }
 
 
-    public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
+    public bool Draw(SKCanvas canvas, ViewportState viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
     {
         try
         {
