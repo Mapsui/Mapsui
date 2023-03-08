@@ -37,7 +37,6 @@ public class RegressionMapControl : IMapControl
         set
         {
             _map = value ?? throw new ArgumentNullException();
-            ((IDisposable)Navigator)?.Dispose();
             Navigator = new Navigator(_map, _limitedViewport);
             CallHomeIfNeeded();
         }
