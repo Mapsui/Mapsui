@@ -36,28 +36,28 @@ public class LimitedViewport : IViewport
     {
         _viewport.SetSize(width, height);
         if (_viewport.State.HasSize())
-            _viewport.State = Limiter.LimitExtent(_viewport.State, Map?.Extent);
+            _viewport.State = Limiter.Limit(_viewport.State, Map?.Resolutions, Map?.Extent);
     }
 
     public virtual void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
     {
         if (Map?.PanLock ?? false) return;
         _viewport.SetCenter(x, y, duration, easing);
-        _viewport.State = Limiter.LimitExtent(_viewport.State, Map?.Extent);
+        _viewport.State = Limiter.Limit(_viewport.State, Map?.Resolutions, Map?.Extent);
     }
 
     public virtual void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
     {
         if (Map?.PanLock ?? false) return;
         _viewport.SetCenterAndResolution(x, y, resolution, duration, easing);
-        _viewport.State = Limiter.LimitExtent(_viewport.State, Map?.Extent);
+        _viewport.State = Limiter.Limit(_viewport.State, Map?.Resolutions, Map?.Extent);
     }
 
     public void SetCenter(MPoint center, long duration = 0, Easing? easing = default)
     {
         if (Map?.PanLock ?? false) return;
         _viewport.SetCenter(center, duration, easing);
-        _viewport.State = Limiter.LimitExtent(_viewport.State, Map?.Extent);
+        _viewport.State = Limiter.Limit(_viewport.State, Map?.Resolutions, Map?.Extent);
     }
 
     public void SetResolution(double resolution, long duration = 0, Easing? easing = default)
@@ -65,7 +65,7 @@ public class LimitedViewport : IViewport
         if (Map?.ZoomLock ?? true) return;
 
         var viewportState = _viewport.State with {  Resolution = resolution };
-        viewportState = Limiter.LimitResolution(viewportState, _viewport.State.Width, _viewport.State.Height, Map.Resolutions, Map.Extent);
+        viewportState = Limiter.Limit(viewportState, Map.Resolutions, Map.Extent);
         _viewport.SetResolution(viewportState.Resolution, duration, easing);
     }
 
@@ -73,7 +73,7 @@ public class LimitedViewport : IViewport
     {
         if (Map?.RotationLock ?? false) return;
         _viewport.SetRotation(rotation, duration, easing);
-        _viewport.State = Limiter.LimitExtent(_viewport.State, Map?.Extent);
+        _viewport.State = Limiter.Limit(_viewport.State, Map?.Resolutions, Map?.Extent);
     }
 
     public bool UpdateAnimations()

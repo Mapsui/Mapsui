@@ -64,14 +64,13 @@ public class ViewportLimiter : IViewportLimiter
         return new MinMax(mostZoomedOut, mostZoomedIn);
     }
 
-    public ViewportState Limit(ViewportState viewportState, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
+    public ViewportState Limit(ViewportState viewportState, IReadOnlyList<double>? mapResolutions, MRect? mapEnvelope)
     {
-        var state = LimitResolution(viewportState, viewportState.Width, viewportState.Height, mapResolutions, mapEnvelope);
+        var state = LimitResolution(viewportState, mapResolutions);
         return LimitExtent(state, mapEnvelope);
     }
 
-    public ViewportState LimitResolution(ViewportState viewportState, double screenWidth, double screenHeight,
-        IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
+    private ViewportState LimitResolution(ViewportState viewportState, IReadOnlyList<double>? mapResolutions)
     {
         if (ZoomMode == ZoomMode.Unlimited) return viewportState;
 
@@ -87,7 +86,7 @@ public class ViewportLimiter : IViewportLimiter
         return viewportState;
     }
 
-    public ViewportState LimitExtent(ViewportState viewportState, MRect? mapEnvelope)
+    private ViewportState LimitExtent(ViewportState viewportState, MRect? mapEnvelope)
     {
         var maxExtent = PanLimits ?? mapEnvelope;
         if (maxExtent == null)

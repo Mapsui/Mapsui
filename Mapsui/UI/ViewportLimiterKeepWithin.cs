@@ -39,14 +39,13 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
         return new MinMax(mostZoomedOut, mostZoomedIn);
     }
 
-    public ViewportState Limit(ViewportState viewportState, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
+    public ViewportState Limit(ViewportState viewportState, IReadOnlyList<double>? mapResolutions, MRect? mapEnvelope)
     {
-        var state = LimitResolution(viewportState, viewportState.Width, viewportState.Height, mapResolutions, mapEnvelope);
+        var state = LimitResolution(viewportState, mapResolutions, mapEnvelope);
         return LimitExtent(state, mapEnvelope);
     }
 
-    public ViewportState LimitResolution(ViewportState viewportState, double screenWidth, double screenHeight,
-        IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
+    private ViewportState LimitResolution(ViewportState viewportState, IReadOnlyList<double>? mapResolutions, MRect? mapEnvelope)
     {
         var zoomLimits = ZoomLimits ?? GetExtremes(mapResolutions);
         if (zoomLimits == null) return viewportState;
@@ -56,7 +55,7 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
 
         if (zoomLimits.Min > viewportState.Resolution) return viewportState with { Resolution = zoomLimits.Min };
 
-        var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(screenWidth, screenHeight, panLimit);
+        var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(viewportState.Width, viewportState.Height, panLimit);
         if (viewportFillingResolution < zoomLimits.Min) return viewportState; // Mission impossible. Can't adhere to both restrictions
         var limit = Math.Min(zoomLimits.Max, viewportFillingResolution);
         if (limit < viewportState.Resolution) return viewportState with { Resolution = limit };
@@ -69,7 +68,7 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
         return Math.Min(mapEnvelope.Width / screenWidth, mapEnvelope.Height / screenHeight);
     }
 
-    public ViewportState LimitExtent(ViewportState viewport, MRect? mapEnvelope)
+    private ViewportState LimitExtent(ViewportState viewport, MRect? mapEnvelope)
     {
         var maxExtent = PanLimits ?? mapEnvelope;
         if (maxExtent == null)
