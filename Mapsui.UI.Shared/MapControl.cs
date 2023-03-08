@@ -69,14 +69,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private protected void CommonDrawControl(object canvas)
     {
-        if (_drawing)
-            return;
-        if (Renderer == null)
-            return;
-        if (Map == null)
-            return;
-        if (!Viewport.State.HasSize())
-            return;
+        if (_drawing) return;
+        if (Renderer is null) return;
+        if (Map is null) return;
+        if (!Viewport.State.HasSize()) return;
 
         // Start drawing
         _drawing = true;
@@ -470,7 +466,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
 #else
 
-    private Map? _map;
+    private Map _map;
 
     /// <summary>
     /// Map holding data for which is shown in this MapControl
@@ -479,11 +475,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     [Parameter]
     [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties")]
 #endif
-    public Map? Map
+    public Map Map
     {
         get => _map;
         set
         {
+            if (value is null) throw new ArgumentNullException(nameof(value));
+
             BeforeSetMap();
             _map = value;
             AfterSetMap(_map);

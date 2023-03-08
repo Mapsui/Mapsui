@@ -21,7 +21,7 @@ public partial class Window1
     static Window1()
     {
         // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();
+        Tests.Common.Utilities.LoadAssembly();
     }
 
     public Window1()
