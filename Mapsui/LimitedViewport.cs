@@ -29,7 +29,7 @@ public class LimitedViewport : IViewport
         if (Map.ZoomLock) deltaResolution = 1;
         if (Map.PanLock) position = previousPosition;
         _viewport.Transform(position, previousPosition, deltaResolution, deltaRotation);
-        Limiter.Limit(_viewport, Map.Resolutions, Map.Extent);
+        _viewport.State = Limiter.Limit(_viewport.State, Map.Resolutions, Map.Extent);
     }
 
     public void SetSize(double width, double height)

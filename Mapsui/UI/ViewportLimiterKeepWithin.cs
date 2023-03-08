@@ -39,10 +39,10 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
         return new MinMax(mostZoomedOut, mostZoomedIn);
     }
 
-    public void Limit(Viewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
+    public ViewportState Limit(ViewportState viewportState, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
     {
-        viewport.State = LimitResolution(viewport.State, viewport.State.Width, viewport.State.Height, mapResolutions, mapEnvelope);
-        viewport.State = LimitExtent(viewport.State, mapEnvelope);
+        var state = LimitResolution(viewportState, viewportState.Width, viewportState.Height, mapResolutions, mapEnvelope);
+        return LimitExtent(state, mapEnvelope);
     }
 
     public ViewportState LimitResolution(ViewportState viewportState, double screenWidth, double screenHeight,

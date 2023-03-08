@@ -60,14 +60,14 @@ public class ViewportLimiter : IViewportLimiter
         if (resolutions == null || resolutions.Count == 0) return null;
         resolutions = resolutions.OrderByDescending(r => r).ToList();
         var mostZoomedOut = resolutions[0];
-        var mostZoomedIn = resolutions[resolutions.Count - 1] * 0.5; // divide by two to allow one extra level to zoom-in
+        var mostZoomedIn = resolutions[resolutions.Count - 1] * 0.5; // Divide by two to allow one extra level to zoom-in
         return new MinMax(mostZoomedOut, mostZoomedIn);
     }
 
-    public void Limit(Viewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
+    public ViewportState Limit(ViewportState viewportState, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
     {
-        var viewportState = LimitResolution(viewport.State, viewport.State.Width, viewport.State.Height, mapResolutions, mapEnvelope);
-        viewport.State = LimitExtent(viewportState, mapEnvelope);
+        var state = LimitResolution(viewportState, viewportState.Width, viewportState.Height, mapResolutions, mapEnvelope);
+        return LimitExtent(state, mapEnvelope);
     }
 
     public ViewportState LimitResolution(ViewportState viewportState, double screenWidth, double screenHeight,
@@ -87,24 +87,24 @@ public class ViewportLimiter : IViewportLimiter
         return viewportState;
     }
 
-    public ViewportState LimitExtent(ViewportState viewport, MRect? mapEnvelope)
+    public ViewportState LimitExtent(ViewportState viewportState, MRect? mapEnvelope)
     {
         var maxExtent = PanLimits ?? mapEnvelope;
         if (maxExtent == null)
         {
             // Can be null because both panLimits and Map.Extent can be null. 
-            // The Map.Extent can be null if the extent of all layers is null
-            return viewport;
+            // The Map.Extent can be null if the extent of all layers is null.
+            return viewportState;
         }
 
-        var x = viewport.CenterX;
-        if (viewport.CenterX < maxExtent.Left) x = maxExtent.Left;
-        if (viewport.CenterX > maxExtent.Right) x = maxExtent.Right;
+        var x = viewportState.CenterX;
+        if (viewportState.CenterX < maxExtent.Left) x = maxExtent.Left;
+        if (viewportState.CenterX > maxExtent.Right) x = maxExtent.Right;
 
-        var y = viewport.CenterY;
-        if (viewport.CenterY > maxExtent.Top) y = maxExtent.Top;
-        if (viewport.CenterY < maxExtent.Bottom) y = maxExtent.Bottom;
+        var y = viewportState.CenterY;
+        if (viewportState.CenterY > maxExtent.Top) y = maxExtent.Top;
+        if (viewportState.CenterY < maxExtent.Bottom) y = maxExtent.Bottom;
 
-        return viewport with { CenterX = x, CenterY = y };
+        return viewportState with { CenterX = x, CenterY = y };
     }
 }
