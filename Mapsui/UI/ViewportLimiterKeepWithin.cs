@@ -41,27 +41,27 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
 
     public void Limit(Viewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
     {
-        viewport.SetResolution(LimitResolution(viewport.State.Resolution, viewport.State.Width, viewport.State.Height, mapResolutions, mapEnvelope));
-        LimitExtent(viewport, mapEnvelope);
+        viewport.State = LimitResolution(viewport.State, viewport.State.Width, viewport.State.Height, mapResolutions, mapEnvelope);
+        viewport.State = LimitExtent(viewport.State, mapEnvelope);
     }
 
-    public double LimitResolution(double resolution, double screenWidth, double screenHeight,
+    public ViewportState LimitResolution(ViewportState viewportState, double screenWidth, double screenHeight,
         IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
     {
         var zoomLimits = ZoomLimits ?? GetExtremes(mapResolutions);
-        if (zoomLimits == null) return resolution;
+        if (zoomLimits == null) return viewportState;
 
         var panLimit = PanLimits ?? mapEnvelope;
-        if (panLimit == null) return resolution;
+        if (panLimit == null) return viewportState;
 
-        if (zoomLimits.Min > resolution) return zoomLimits.Min;
+        if (zoomLimits.Min > viewportState.Resolution) return viewportState with { Resolution = zoomLimits.Min };
 
         var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(screenWidth, screenHeight, panLimit);
-        if (viewportFillingResolution < zoomLimits.Min) return resolution; // Mission impossible. Can't adhere to both restrictions
+        if (viewportFillingResolution < zoomLimits.Min) return viewportState; // Mission impossible. Can't adhere to both restrictions
         var limit = Math.Min(zoomLimits.Max, viewportFillingResolution);
-        if (limit < resolution) return limit;
+        if (limit < viewportState.Resolution) return viewportState with { Resolution = limit };
 
-        return resolution;
+        return viewportState;
     }
 
     private static double CalculateResolutionAtWhichMapFillsViewport(double screenWidth, double screenHeight, MRect mapEnvelope)
@@ -69,32 +69,32 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
         return Math.Min(mapEnvelope.Width / screenWidth, mapEnvelope.Height / screenHeight);
     }
 
-    public void LimitExtent(Viewport viewport, MRect? mapEnvelope)
+    public ViewportState LimitExtent(ViewportState viewport, MRect? mapEnvelope)
     {
         var maxExtent = PanLimits ?? mapEnvelope;
         if (maxExtent == null)
         {
             // Can be null because both panLimits and Map.Extent can be null. 
             // The Map.Extent can be null if the extent of all layers is null
-            return;
+            return viewport;
         }
 
-        var extent = viewport.State.ToExtent();
+        var extent = viewport.ToExtent();
 
-        var x = viewport.State.CenterX;
+        var x = viewport.CenterX;
 
         if (extent.Left < maxExtent.Left)
             x += maxExtent.Left - extent.Left;
         else if (extent?.Right > maxExtent.Right)
             x += maxExtent.Right - extent.Right;
 
-        var y = viewport.State.CenterY;
+        var y = viewport.CenterY;
 
         if (extent?.Top > maxExtent.Top)
             y += maxExtent.Top - extent.Top;
         else if (extent?.Bottom < maxExtent.Bottom)
             y += maxExtent.Bottom - extent.Bottom;
 
-        viewport.SetCenter(x, y);
+        return viewport with { CenterX = x, CenterY = y };
     }
 }

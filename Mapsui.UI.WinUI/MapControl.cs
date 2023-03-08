@@ -156,6 +156,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (_map?.ZoomLock ?? true) return;
         if (!Viewport.State.HasSize()) return;
+        if (Map is null) return;
 
         var currentPoint = e.GetCurrentPoint(this);
 #if __WINUI__
@@ -163,13 +164,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #else
         var mousePosition = new MPoint(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 #endif
+
         var resolution = MouseWheelAnimation.GetResolution(currentPoint.Properties.MouseWheelDelta, _viewport, _map);
-        // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-
-        if (this.Map == null)
-            return;
-
-        resolution = Map.Limiter.LimitResolution(resolution, Viewport.State.Width, Viewport.State.Height, Map.Resolutions, Map.Extent);
         Navigator?.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
 
         e.Handled = true;

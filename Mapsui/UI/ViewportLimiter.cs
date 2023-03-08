@@ -66,45 +66,45 @@ public class ViewportLimiter : IViewportLimiter
 
     public void Limit(Viewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
     {
-        viewport.SetResolution(LimitResolution(viewport.State.Resolution, viewport.State.Width, viewport.State.Height, mapResolutions, mapEnvelope));
-        LimitExtent(viewport, mapEnvelope);
+        var viewportState = LimitResolution(viewport.State, viewport.State.Width, viewport.State.Height, mapResolutions, mapEnvelope);
+        viewport.State = LimitExtent(viewportState, mapEnvelope);
     }
 
-    public double LimitResolution(double resolution, double screenWidth, double screenHeight,
+    public ViewportState LimitResolution(ViewportState viewportState, double screenWidth, double screenHeight,
         IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
     {
-        if (ZoomMode == ZoomMode.Unlimited) return resolution;
+        if (ZoomMode == ZoomMode.Unlimited) return viewportState;
 
         var resolutionExtremes = ZoomLimits ?? GetExtremes(mapResolutions);
-        if (resolutionExtremes == null) return resolution;
+        if (resolutionExtremes == null) return viewportState;
 
         if (ZoomMode == ZoomMode.KeepWithinResolutions)
         {
-            if (resolutionExtremes.Min > resolution) return resolutionExtremes.Min;
-            if (resolutionExtremes.Max < resolution) return resolutionExtremes.Max;
+            if (resolutionExtremes.Min > viewportState.Resolution) return viewportState with { Resolution = resolutionExtremes.Min };
+            if (resolutionExtremes.Max < viewportState.Resolution) return viewportState with { Resolution = resolutionExtremes.Max };
         }
 
-        return resolution;
+        return viewportState;
     }
 
-    public void LimitExtent(Viewport viewport, MRect? mapEnvelope)
+    public ViewportState LimitExtent(ViewportState viewport, MRect? mapEnvelope)
     {
         var maxExtent = PanLimits ?? mapEnvelope;
         if (maxExtent == null)
         {
             // Can be null because both panLimits and Map.Extent can be null. 
             // The Map.Extent can be null if the extent of all layers is null
-            return;
+            return viewport;
         }
 
-        var x = viewport.State.CenterX;
-        if (viewport.State.CenterX < maxExtent.Left) x = maxExtent.Left;
-        if (viewport.State.CenterX > maxExtent.Right) x = maxExtent.Right;
+        var x = viewport.CenterX;
+        if (viewport.CenterX < maxExtent.Left) x = maxExtent.Left;
+        if (viewport.CenterX > maxExtent.Right) x = maxExtent.Right;
 
-        var y = viewport.State.CenterY;
-        if (viewport.State.CenterY > maxExtent.Top) y = maxExtent.Top;
-        if (viewport.State.CenterY < maxExtent.Bottom) y = maxExtent.Bottom;
+        var y = viewport.CenterY;
+        if (viewport.CenterY > maxExtent.Top) y = maxExtent.Top;
+        if (viewport.CenterY < maxExtent.Bottom) y = maxExtent.Bottom;
 
-        viewport.State = viewport.State with { CenterX = x, CenterY = y };
+        return viewport with { CenterX = x, CenterY = y };
     }
 }

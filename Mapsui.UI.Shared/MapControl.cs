@@ -429,10 +429,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             CallHomeIfNeeded();
             Refresh();
         }
-        if (e.PropertyName == nameof(Map.Limiter))
-        {
-            _viewport.Limiter = Map?.Limiter;
-        }
     }
     // ReSharper restore RedundantNameQualifier
 
@@ -508,7 +504,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             SubscribeToMapEvents(map);
             Navigator = new Navigator(map, _viewport);
             _viewport.Map = map;
-            _viewport.Limiter = map.Limiter;
             CallHomeIfNeeded();
         }
 

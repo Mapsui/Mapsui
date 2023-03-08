@@ -38,7 +38,6 @@ public class RegressionMapControl : IMapControl
             ((IDisposable)Navigator)?.Dispose();
             Navigator = new Navigator(_map, _limitedViewport);
             _limitedViewport.Map = _map;
-            _limitedViewport.Limiter = _map.Limiter;
             CallHomeIfNeeded();
         }
     }

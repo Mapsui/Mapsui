@@ -11,13 +11,14 @@ public class ViewportLimiterWithoutLimits : IViewportLimiter
     {
     }
 
-    public double LimitResolution(double resolution, double screenWidth, double screenHeight, IReadOnlyList<double> mapResolutions,
+    public ViewportState LimitResolution(ViewportState viewportState, double screenWidth, double screenHeight, IReadOnlyList<double> mapResolutions,
         MRect? mapEnvelope)
     {
-        return resolution;
+        return viewportState;
     }
 
-    public void LimitExtent(Viewport viewport, MRect? mapEnvelope)
+    public ViewportState LimitExtent(ViewportState viewportState, MRect? mapEnvelope)
     {
+        return viewportState;
     }
 }

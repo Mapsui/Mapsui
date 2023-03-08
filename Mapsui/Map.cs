@@ -27,7 +27,6 @@ public class Map : INotifyPropertyChanged, IMap, IDisposable
 {
     private LayerCollection _layers = new();
     private Color _backColor = Color.White;
-    private IViewportLimiter _limiter = new ViewportLimiter();
 
     /// <summary>
     /// Initializes a new map
@@ -62,22 +61,6 @@ public class Map : INotifyPropertyChanged, IMap, IDisposable
     /// List of Widgets belonging to map
     /// </summary>
     public ConcurrentQueue<IWidget> Widgets { get; } = new();
-
-    /// <summary>
-    /// Limit the extent to which the user can navigate
-    /// </summary>
-    public IViewportLimiter Limiter
-    {
-        get => _limiter;
-        set
-        {
-            if (!_limiter.Equals(value))
-            {
-                _limiter = value;
-                OnPropertyChanged(nameof(Limiter));
-            }
-        }
-    }
 
     /// <summary>
     /// Projection type of Map. Normally in format like "EPSG:3857"

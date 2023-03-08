@@ -104,8 +104,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (!navigate) return;
 
         var resolution = MouseWheelAnimation.GetResolution(delta, _viewport, _map);
-        // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-        resolution = _map.Limiter.LimitResolution(resolution, Viewport.State.Width, Viewport.State.Height, _map.Resolutions, _map.Extent);
         Navigator?.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
     }
 

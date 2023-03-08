@@ -15,11 +15,11 @@ public interface IViewportLimiter
     /// to anything else than None, resolution is kept between these values.
     /// </summary>
     MinMax? ZoomLimits { get; set; }
-
+    
     void Limit(Viewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope);
 
-    double LimitResolution(double resolution, double screenWidth, double screenHeight,
+    ViewportState LimitResolution(ViewportState viewportState, double screenWidth, double screenHeight,
         IReadOnlyList<double> mapResolutions, MRect? mapEnvelope);
 
-    void LimitExtent(Viewport viewport, MRect? mapEnvelope);
+    ViewportState LimitExtent(ViewportState viewportState, MRect? mapEnvelope);
 }
