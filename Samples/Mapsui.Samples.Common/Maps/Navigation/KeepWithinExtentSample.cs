@@ -14,11 +14,11 @@ public class KeepWithinExtentSample : ISample
     {
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        //!!!
-        //map.Limiter = new ViewportLimiterKeepWithin
-        //{
-        //    PanLimits = GetLimitsOfMadagaskar()
-        //};
+
+        map.Viewport.Limiter = new ViewportLimiterKeepWithin
+        {
+            PanLimits = GetLimitsOfMadagaskar()
+        };
         return Task.FromResult(map);
     }
 

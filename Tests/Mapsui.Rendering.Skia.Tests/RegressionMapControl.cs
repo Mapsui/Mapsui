@@ -18,18 +18,20 @@ namespace Mapsui.Rendering.Skia.Tests;
 
 public class RegressionMapControl : IMapControl
 {
-    private Map? _map;
+    private Map _map;
     private readonly LimitedViewport _limitedViewport;
 
     public RegressionMapControl()
     {
         Renderer = new MapRenderer();
         _limitedViewport = new LimitedViewport();
+        _map = new Map();
+        Navigator = new Navigator(_map, _map.Viewport);
     }
 
     public event EventHandler<MapInfoEventArgs>? Info;
 
-    public Map? Map
+    public Map Map
     {
         get => _map;
         set
@@ -37,7 +39,6 @@ public class RegressionMapControl : IMapControl
             _map = value ?? throw new ArgumentNullException();
             ((IDisposable)Navigator)?.Dispose();
             Navigator = new Navigator(_map, _limitedViewport);
-            _limitedViewport.Map = _map;
             CallHomeIfNeeded();
         }
     }
@@ -92,10 +93,10 @@ public class RegressionMapControl : IMapControl
         throw new NotImplementedException();
     }
 
-    public INavigator? Navigator { get; set; }
+    public INavigator Navigator { get; private set; }
     public Performance? Performance { get; set; }
 
-    public IReadOnlyViewport Viewport => _limitedViewport;
+    public IViewport Viewport => _limitedViewport;
 
     public void SetSize(int width, int height)
     {
@@ -104,9 +105,9 @@ public class RegressionMapControl : IMapControl
 
     public void CallHomeIfNeeded()
     {
-        if (Map != null && !Map.Initialized && Viewport.State.HasSize() && Map?.Extent != null)
+        if (!Map.Initialized && Viewport.State.HasSize() && Map?.Extent != null)
         {
-            Map.Home?.Invoke(Navigator!);
+            Map.Home?.Invoke(Navigator);
             Map.Initialized = true;
         }
     }

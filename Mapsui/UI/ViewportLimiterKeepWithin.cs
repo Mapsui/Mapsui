@@ -9,7 +9,7 @@ namespace Mapsui.UI;
 /// This Viewport limiter will always keep the map within the zoom and pan limits.
 /// An exception is rotation. 
 /// </summary>
-public class ViewportLimiterKeepWithin : IViewportLimiter
+public class ViewportLimiterKeepWithin : BaseViewportLimiter
 {
     // todo: Check validity of the PanLimits and ZoomLimits.
     // It is possible to specify a combination of PanLimits and ZoomLimits that is 
@@ -18,18 +18,8 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
     // be the result of this. In the history of this file there is a MapWidthSpansViewport
     // method that might be helpful. 
 
-    /// <summary>
-    /// Sets the limit to which the user can pan the map.
-    /// If PanLimits is not set, Map.Extent will be used as restricted extent.
-    /// </summary>
-    public MRect? PanLimits { get; set; }
 
-    /// <summary>
-    /// Pair of the limits for the resolutions (smallest and biggest). The resolution is kept 
-    /// between these values.
-    /// </summary>
-    public MinMax? ZoomLimits { get; set; }
-
+    // Todo: GetExtremes should be used to set the PanLimits
     private MinMax? GetExtremes(IReadOnlyList<double>? resolutions)
     {
         if (resolutions == null || resolutions.Count == 0) return null;
@@ -39,25 +29,22 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
         return new MinMax(mostZoomedOut, mostZoomedIn);
     }
 
-    public ViewportState Limit(ViewportState viewportState, IReadOnlyList<double>? mapResolutions, MRect? mapEnvelope)
+    public override ViewportState Limit(ViewportState viewportState)
     {
-        var state = LimitResolution(viewportState, mapResolutions, mapEnvelope);
-        return LimitExtent(state, mapEnvelope);
+        var state = LimitResolution(viewportState);
+        return LimitExtent(state);
     }
 
-    private ViewportState LimitResolution(ViewportState viewportState, IReadOnlyList<double>? mapResolutions, MRect? mapEnvelope)
+    private ViewportState LimitResolution(ViewportState viewportState)
     {
-        var zoomLimits = ZoomLimits ?? GetExtremes(mapResolutions);
-        if (zoomLimits == null) return viewportState;
+        if (ZoomLimits is null) return viewportState;
+        if (PanLimits is null) return viewportState;
 
-        var panLimit = PanLimits ?? mapEnvelope;
-        if (panLimit == null) return viewportState;
+        if (ZoomLimits.Min > viewportState.Resolution) return viewportState with { Resolution = ZoomLimits.Min };
 
-        if (zoomLimits.Min > viewportState.Resolution) return viewportState with { Resolution = zoomLimits.Min };
-
-        var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(viewportState.Width, viewportState.Height, panLimit);
-        if (viewportFillingResolution < zoomLimits.Min) return viewportState; // Mission impossible. Can't adhere to both restrictions
-        var limit = Math.Min(zoomLimits.Max, viewportFillingResolution);
+        var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(viewportState.Width, viewportState.Height, PanLimits);
+        if (viewportFillingResolution < ZoomLimits.Min) return viewportState; // Mission impossible. Can't adhere to both restrictions
+        var limit = Math.Min(ZoomLimits.Max, viewportFillingResolution);
         if (limit < viewportState.Resolution) return viewportState with { Resolution = limit };
 
         return viewportState;
@@ -68,31 +55,25 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
         return Math.Min(mapEnvelope.Width / screenWidth, mapEnvelope.Height / screenHeight);
     }
 
-    private ViewportState LimitExtent(ViewportState viewport, MRect? mapEnvelope)
+    private ViewportState LimitExtent(ViewportState viewport)
     {
-        var maxExtent = PanLimits ?? mapEnvelope;
-        if (maxExtent == null)
-        {
-            // Can be null because both panLimits and Map.Extent can be null. 
-            // The Map.Extent can be null if the extent of all layers is null
-            return viewport;
-        }
+        if (PanLimits is null) return viewport;
 
         var extent = viewport.ToExtent();
 
         var x = viewport.CenterX;
 
-        if (extent.Left < maxExtent.Left)
-            x += maxExtent.Left - extent.Left;
-        else if (extent?.Right > maxExtent.Right)
-            x += maxExtent.Right - extent.Right;
+        if (extent.Left < PanLimits.Left)
+            x += PanLimits.Left - extent.Left;
+        else if (extent?.Right > PanLimits.Right)
+            x += PanLimits.Right - extent.Right;
 
         var y = viewport.CenterY;
 
-        if (extent?.Top > maxExtent.Top)
-            y += maxExtent.Top - extent.Top;
-        else if (extent?.Bottom < maxExtent.Bottom)
-            y += maxExtent.Bottom - extent.Bottom;
+        if (extent?.Top > PanLimits.Top)
+            y += PanLimits.Top - extent.Top;
+        else if (extent?.Bottom < PanLimits.Bottom)
+            y += PanLimits.Bottom - extent.Bottom;
 
         return viewport with { CenterX = x, CenterY = y };
     }

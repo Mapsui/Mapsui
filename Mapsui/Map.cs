@@ -9,6 +9,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Styles;
@@ -35,27 +36,15 @@ public class Map : INotifyPropertyChanged, IMap, IDisposable
     {
         BackColor = Color.White;
         Layers = new LayerCollection();
+        
+        Navigator = new Navigator(this, Viewport);
+        Navigator.Navigated += Navigated;
     }
 
     /// <summary>
     /// To register if the initial Home call has been done.
     /// </summary>
     public bool Initialized { get; set; }
-
-    /// <summary>
-    /// When true the user can not pan (move) the map.
-    /// </summary>
-    public bool PanLock { get; set; }
-
-    /// <summary>
-    /// When true the user an not rotate the map
-    /// </summary>
-    public bool ZoomLock { get; set; }
-
-    /// <summary>
-    /// When true the user can not zoom into the map
-    /// </summary>
-    public bool RotationLock { get; set; }
 
     /// <summary>
     /// List of Widgets belonging to map
@@ -132,11 +121,72 @@ public class Map : INotifyPropertyChanged, IMap, IDisposable
     /// </summary>
     public event DataChangedEventHandler? DataChanged;
 
+    public event EventHandler? RefreshGraphicsRequest;
+
     /// <summary>
     /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
     /// the layers that have IsMapInfoLayer set to true. 
     /// </summary>
     public event EventHandler<MapInfoEventArgs>? Info;
+
+    private protected readonly LimitedViewport _viewport = new LimitedViewport();
+
+    /// <summary>
+    /// Handles all manipulations of the map viewport
+    /// </summary>
+    public INavigator Navigator { get; private set; }
+
+    /// <summary>
+    /// Viewport holding information about visible part of the map. Viewport can never be null.
+    /// </summary>
+    public IViewport Viewport => _viewport;
+
+    private void Navigated(object? sender, ChangeType changeType)
+    {
+        Initialized = true;
+
+        Refresh(changeType);
+    }
+
+    /// <summary>
+    /// Refresh data of the map and than repaint it
+    /// </summary>
+    public void Refresh(ChangeType changeType = ChangeType.Discrete)
+    {
+        RefreshData(changeType);
+        RefreshGraphics();
+    }
+
+    /// <summary>
+    /// Refresh data of Map, but don't paint it
+    /// </summary>
+    public void RefreshData(ChangeType changeType = ChangeType.Discrete)
+    {
+        if (Viewport.State.ToExtent() is null)
+            return;
+        if (Viewport.State.ToExtent().GetArea() <= 0)
+            return;
+
+        var fetchInfo = new FetchInfo(Viewport.State.ToSection(), CRS, changeType);
+        RefreshData(fetchInfo);
+    }
+
+    public void RefreshGraphics()
+    {
+        RefreshGraphicsRequest?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void OnViewportSizeInitialized()
+    {
+        ViewportInitialized?.Invoke(this, EventArgs.Empty);
+    }
+
+
+    /// <summary>
+    /// Called when the viewport is initialized
+    /// </summary>
+    public event EventHandler? ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged
+
 
     /// <summary>
     /// Abort fetching of all layers

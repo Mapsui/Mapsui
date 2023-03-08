@@ -5,13 +5,20 @@
 // This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
 
 using System.Collections.Generic;
+using System.ComponentModel;
 using Mapsui.Animations;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui;
 
-public interface IViewport : IReadOnlyViewport, IAnimatable
+public interface IViewport : IAnimatable
 {
+    IViewportLimiter Limiter { get; set; }
+
+    event PropertyChangedEventHandler ViewportChanged;
+    ViewportState State { get; }
+
     void SetCenter(double x, double y, long duration = 0, Easing? easing = default);
     void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default);
     void SetCenter(MPoint center, long duration = 0, Easing? easing = default);

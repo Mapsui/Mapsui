@@ -14,8 +14,11 @@ public class LimitedViewport : IViewport
     }
 
     private readonly Viewport _viewport = new Viewport();
-    public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
-    public Map? Map { get; set; }
+    public IViewportLimiter Limiter
+    {
+        get => _viewport.Limiter;
+        set => _viewport.Limiter = value;
+    }
 
     public event PropertyChangedEventHandler? ViewportChanged;
  
@@ -23,57 +26,54 @@ public class LimitedViewport : IViewport
 
     public void Transform(MPoint position, MPoint previousPosition, double deltaResolution = 1, double deltaRotation = 0)
     {
-        if (Map == null || Limiter == null)
-            return;
-
-        if (Map.ZoomLock) deltaResolution = 1;
-        if (Map.PanLock) position = previousPosition;
+        if (Limiter.ZoomLock) deltaResolution = 1;
+        if (Limiter.PanLock) position = previousPosition;
         _viewport.Transform(position, previousPosition, deltaResolution, deltaRotation);
-        _viewport.State = Limiter.Limit(_viewport.State, Map.Resolutions, Map.Extent);
+        _viewport.State = Limiter.Limit(_viewport.State);
     }
 
     public void SetSize(double width, double height)
     {
         _viewport.SetSize(width, height);
         if (_viewport.State.HasSize())
-            _viewport.State = Limiter.Limit(_viewport.State, Map?.Resolutions, Map?.Extent);
+            _viewport.State = Limiter.Limit(_viewport.State);
     }
 
     public virtual void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
     {
-        if (Map?.PanLock ?? false) return;
+        if (Limiter.PanLock) return;
         _viewport.SetCenter(x, y, duration, easing);
-        _viewport.State = Limiter.Limit(_viewport.State, Map?.Resolutions, Map?.Extent);
+        _viewport.State = Limiter.Limit(_viewport.State);
     }
 
     public virtual void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
     {
-        if (Map?.PanLock ?? false) return;
+        if (Limiter.PanLock) return;
         _viewport.SetCenterAndResolution(x, y, resolution, duration, easing);
-        _viewport.State = Limiter.Limit(_viewport.State, Map?.Resolutions, Map?.Extent);
+        _viewport.State = Limiter.Limit(_viewport.State);
     }
 
     public void SetCenter(MPoint center, long duration = 0, Easing? easing = default)
     {
-        if (Map?.PanLock ?? false) return;
+        if (Limiter.PanLock) return;
         _viewport.SetCenter(center, duration, easing);
-        _viewport.State = Limiter.Limit(_viewport.State, Map?.Resolutions, Map?.Extent);
+        _viewport.State = Limiter.Limit(_viewport.State);
     }
 
     public void SetResolution(double resolution, long duration = 0, Easing? easing = default)
     {
-        if (Map?.ZoomLock ?? true) return;
+        if (Limiter.ZoomLock) return;
 
         var viewportState = _viewport.State with {  Resolution = resolution };
-        viewportState = Limiter.Limit(viewportState, Map.Resolutions, Map.Extent);
+        viewportState = Limiter.Limit(viewportState);
         _viewport.SetResolution(viewportState.Resolution, duration, easing);
     }
 
     public void SetRotation(double rotation, long duration = 0, Easing? easing = default)
     {
-        if (Map?.RotationLock ?? false) return;
+        if (Limiter.RotationLock) return;
         _viewport.SetRotation(rotation, duration, easing);
-        _viewport.State = Limiter.Limit(_viewport.State, Map?.Resolutions, Map?.Extent);
+        _viewport.State = Limiter.Limit(_viewport.State);
     }
 
     public bool UpdateAnimations()

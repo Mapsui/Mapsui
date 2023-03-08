@@ -47,12 +47,7 @@ public class WmsSample : ISample, ISampleTest
 
     public Task InitializeTestAsync(IMapControl mapControl)
     {
-        if (mapControl.Viewport is IViewport viewport)
-        {
-            // Set Center to Visible Map
-            viewport.SetCenter(412, 1316);
-        }
-
+        mapControl.Map.Viewport.SetCenter(412, 1316);
         return Task.CompletedTask;
     }
 }

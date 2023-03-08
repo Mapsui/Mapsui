@@ -77,14 +77,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseWheel(object? sender, PointerWheelEventArgs e)
     {
-        if (_map?.ZoomLock ?? true) return;
-        if (!Viewport.State.HasSize()) return;
+        if (Map.Viewport.Limiter.ZoomLock) return;
+        if (!Map.Viewport.State.HasSize()) return;
 
         _currentMousePosition = e.GetPosition(this).ToMapsui();
         //Needed for both MouseMove and MouseWheel event for mousewheel event
 
         if (double.IsNaN(_toResolution))
-            _toResolution = Viewport.State.Resolution;
+            _toResolution = Map.Viewport.State.Resolution;
 
         _mouseWheelPos += e.Delta.Y;
         int delta = (int)_mouseWheelPos;
@@ -103,8 +103,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         }
         if (!navigate) return;
 
-        var resolution = MouseWheelAnimation.GetResolution(delta, _viewport, _map);
-        Navigator?.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        var resolution = MouseWheelAnimation.GetResolution(delta, Map.Viewport, _map);
+        Map.Navigator.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
     }
 
     private void MapControlMouseLeftButtonDown(PointerPressedEventArgs e)
@@ -124,7 +124,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             foreach (var layer in Map.Layers)
             {
                 // ReSharper disable once SuspiciousTypeConversion.Global
-                (layer as IFeatureInfo)?.GetFeatureInfo(Viewport.State, _downMousePosition.X, _downMousePosition.Y,
+                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Viewport.State, _downMousePosition.X, _downMousePosition.Y,
                     OnFeatureInfo);
             }
     }
@@ -153,7 +153,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
                 return;
             }
 
-            _viewport.Transform(_currentMousePosition, _previousMousePosition);
+            Map.Viewport.Transform(_currentMousePosition, _previousMousePosition);
             RefreshGraphics();
             _previousMousePosition = _currentMousePosition;
         }

@@ -22,7 +22,7 @@ public class ViewportFlyToAnimationSample : IMapControlSample
             if (a.MapInfo?.WorldPosition != null)
             {
                 // 'FlyTo' is a specific navigation that moves to a new center while moving in and out.
-                mapControl.Navigator?.FlyTo(a.MapInfo.WorldPosition, a.MapInfo.Resolution * 1.5, 500);
+                mapControl.Map.Navigator.FlyTo(a.MapInfo.WorldPosition, a.MapInfo.Resolution * 1.5, 500);
             }
         };
     }

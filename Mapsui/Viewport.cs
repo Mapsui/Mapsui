@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
+using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.ViewportAnimations;
 
@@ -29,6 +30,9 @@ public class Viewport : IViewport
     private ViewportState _state = new(0, 0, 1, 0, 0, 0);
 
     private List<AnimationEntry<Viewport>> _animations = new();
+
+    public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
+
 
     /// <summary>
     /// Create a new viewport

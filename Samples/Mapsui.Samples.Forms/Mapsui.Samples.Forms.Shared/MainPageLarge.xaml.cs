@@ -185,7 +185,7 @@ public partial class MainPageLarge : ContentPage
         Device.BeginInvokeOnMainThread(() =>
         {
             mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
-            mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Viewport.State.Rotation);
+            mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Map.Viewport.State.Rotation);
             mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
             mapView.MyLocationLayer.CalloutText = $"My location:\nlat={e.Position.Latitude:F6}°\nlon={e.Position.Longitude:F6}°";
         });

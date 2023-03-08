@@ -27,16 +27,15 @@ public sealed partial class MainWindow : Window
     static MainWindow()
     {
         // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();
+        Tests.Common.Utilities.LoadAssembly();
     }
 
     public MainWindow()
     {
         InitializeComponent();
 
-
-        MapControl.Map!.Layers.Add(OpenStreetMap.CreateTileLayer());
-        MapControl.Map.RotationLock = false;
+        MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        MapControl.Map.Viewport.Limiter.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -107,12 +106,10 @@ public sealed partial class MainWindow : Window
         return radioButton;
     }
 
-    private static string MbTilesLocationOnWinUI => ApplicationData.Current.LocalFolder.Path;
-
     private void RotationSlider_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
     {
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-        MapControl.Navigator?.RotateTo(percent * 360);
+        MapControl.Map.Navigator.RotateTo(percent * 360);
         MapControl.Refresh();
     }
 }
