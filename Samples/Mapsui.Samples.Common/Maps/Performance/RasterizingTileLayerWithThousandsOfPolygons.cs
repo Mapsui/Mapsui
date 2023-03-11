@@ -17,12 +17,6 @@ namespace Mapsui.Samples.Common.Maps.Performance;
 
 public class RasterizingTileLayerWithThousandsOfPolygons : IMapControlSample
 {
-    static RasterizingTileLayerWithThousandsOfPolygons()
-    {
-        ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
-        ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
-    }
-
     public string Name => "RasterizingTileLayer with Thousands of Polygons";
     public string Category => "Performance";
 
@@ -37,8 +31,8 @@ public class RasterizingTileLayerWithThousandsOfPolygons : IMapControlSample
 
         map.Layers.Add(Tiling.OpenStreetMap.CreateTileLayer());
         map.Layers.Add(new RasterizingTileLayer(CreatePolygonLayer()));
-        var home = Mercator.FromLonLat(15, 54);
-        map.Home = n => n.NavigateTo(home, map.Resolutions[5]);
+        var home = Mercator.FromLonLat(0, 0);
+        map.Home = n => n.NavigateTo(home, map.Resolutions[6]);
 
         return map;
     }
