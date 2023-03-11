@@ -33,28 +33,6 @@ public class Viewport
 
     public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
 
-
-    /// <summary>
-    /// Create a new viewport
-    /// </summary>
-    public Viewport()
-    {
-    }
-
-    /// <summary>
-    /// Create a new viewport from another viewport
-    /// </summary>
-    /// <param name="viewport">Viewport from which to copy all values</param>
-    public Viewport(ViewportState viewport) : this()
-    {
-        _state = new ViewportState(viewport.CenterX, viewport.CenterY, viewport.Resolution, viewport.Rotation, viewport.Width, viewport.Height);
-    }
-
-    public Viewport(double centerX, double centerY, double resolution, double rotation, double width, double height) : this()
-    {
-        _state = new ViewportState(centerX, centerY, resolution, rotation, width, height);
-    }
-
     public ViewportState State
     {
         get => _state;
