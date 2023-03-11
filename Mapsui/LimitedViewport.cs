@@ -8,29 +8,25 @@ namespace Mapsui;
 
 public class LimitedViewport : IViewport
 {
+    private readonly Viewport _viewport = new Viewport();
+
     public LimitedViewport()
     {
         _viewport.ViewportChanged += (sender, args) => ViewportChanged?.Invoke(sender, args);
     }
 
-    private readonly Viewport _viewport = new Viewport();
     public IViewportLimiter Limiter
     {
         get => _viewport.Limiter;
         set => _viewport.Limiter = value;
     }
 
+    public ViewportState State => _viewport.State;
+
     public event PropertyChangedEventHandler? ViewportChanged;
  
-    public ViewportState State { get => _viewport.State; }
-
     public void Transform(MPoint position, MPoint previousPosition, double deltaResolution = 1, double deltaRotation = 0)
-    {
-        if (Limiter.ZoomLock) deltaResolution = 1;
-        if (Limiter.PanLock) position = previousPosition;
-        _viewport.Transform(position, previousPosition, deltaResolution, deltaRotation);
-        _viewport.State = Limiter.Limit(_viewport.State);
-    }
+        => _viewport.Transform(position, previousPosition, deltaResolution, deltaRotation);
 
     public void SetSize(double width, double height)
     {
@@ -42,6 +38,7 @@ public class LimitedViewport : IViewport
     public virtual void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
     {
         if (Limiter.PanLock) return;
+
         _viewport.SetCenter(x, y, duration, easing);
         _viewport.State = Limiter.Limit(_viewport.State);
     }
@@ -49,6 +46,7 @@ public class LimitedViewport : IViewport
     public virtual void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
     {
         if (Limiter.PanLock) return;
+
         _viewport.SetCenterAndResolution(x, y, resolution, duration, easing);
         _viewport.State = Limiter.Limit(_viewport.State);
     }
@@ -56,6 +54,7 @@ public class LimitedViewport : IViewport
     public void SetCenter(MPoint center, long duration = 0, Easing? easing = default)
     {
         if (Limiter.PanLock) return;
+
         _viewport.SetCenter(center, duration, easing);
         _viewport.State = Limiter.Limit(_viewport.State);
     }
@@ -72,6 +71,7 @@ public class LimitedViewport : IViewport
     public void SetRotation(double rotation, long duration = 0, Easing? easing = default)
     {
         if (Limiter.RotationLock) return;
+
         _viewport.SetRotation(rotation, duration, easing);
         _viewport.State = Limiter.Limit(_viewport.State);
     }

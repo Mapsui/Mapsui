@@ -4,6 +4,7 @@
 
 // This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -60,8 +61,10 @@ public class Viewport : IViewport
         get => _state;
         set
         {
-            if (_state == value) return;
-            _state = value;
+            var newState = Limiter.Limit(value);
+            if (_state == newState) return;
+            _state = newState;
+
             OnViewportChanged();
         }
     }
@@ -69,41 +72,50 @@ public class Viewport : IViewport
     /// <inheritdoc />
     public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0)
     {
+        if (Limiter.ZoomLock) deltaResolution = 1;
+        if (Limiter.PanLock) positionScreen = previousPositionScreen;
+
         _animations = new();
-        var previous = _state.ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
-        var current = _state.ScreenToWorld(positionScreen.X, positionScreen.Y);
+  
+        State = Limiter.Limit(TransformState(_state, positionScreen, previousPositionScreen,deltaResolution, deltaRotation));
+    }
 
-        var newX = _state.CenterX + previous.X - current.X;
-        var newY = _state.CenterY + previous.Y - current.Y;
+    private static ViewportState TransformState(ViewportState state, MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation)
+    {
+        var previous = state.ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
+        var current = state.ScreenToWorld(positionScreen.X, positionScreen.Y);
 
-        if (deltaResolution == 1 && deltaRotation == 0 && _state.CenterX == newX && _state.CenterY == newY)
-            return;
+        var newX = state.CenterX + previous.X - current.X;
+        var newY = state.CenterY + previous.Y - current.Y;
+
+        if (deltaResolution == 1 && deltaRotation == 0 && state.CenterX == newX && state.CenterY == newY)
+            return state;
 
         if (deltaResolution != 1)
         {
-            _state = _state with { Resolution = _state.Resolution / deltaResolution };
+            state = state with { Resolution = state.Resolution / deltaResolution };
 
             // Calculate current position again with adjusted resolution
             // Zooming should be centered on the place where the map is touched.
             // This is done with the scale correction.
-            var scaleCorrectionX = (1 - deltaResolution) * (current.X - _state.CenterX);
-            var scaleCorrectionY = (1 - deltaResolution) * (current.Y - _state.CenterY);
+            var scaleCorrectionX = (1 - deltaResolution) * (current.X - state.CenterX);
+            var scaleCorrectionY = (1 - deltaResolution) * (current.Y - state.CenterY);
 
             newX -= scaleCorrectionX;
             newY -= scaleCorrectionY;
         }
 
-        _state = _state with { CenterX = newX, CenterY = newY };
+        state = state with { CenterX = newX, CenterY = newY };
 
         if (deltaRotation != 0)
         {
-            current = _state.ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
-            _state = _state with { Rotation = _state.Rotation + deltaRotation };
-            var postRotation = _state.ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
-            _state = _state with { CenterX = _state.CenterX - (postRotation.X - current.X), CenterY = _state.CenterY - (postRotation.Y - current.Y) };
+            current = state.ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
+            state = state with { Rotation = state.Rotation + deltaRotation };
+            var postRotation = state.ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
+            state = state with { CenterX = state.CenterX - (postRotation.X - current.X), CenterY = state.CenterY - (postRotation.Y - current.Y) };
         }
 
-        OnViewportChanged();
+        return state;
     }
 
     public void SetSize(double width, double height)
