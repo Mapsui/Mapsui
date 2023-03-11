@@ -390,7 +390,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public void CallHomeIfNeeded()
     {
-        if (!Map.Initialized && Map.Viewport.State.HasSize() && Map?.Extent is not null && Map.Navigator is not null)
+        if (!Map.Initialized && Map.Viewport.State.HasSize() && Map?.Extent is not null)
         {
             Map.Home?.Invoke(Map.Navigator);
             Map.Initialized = true;
