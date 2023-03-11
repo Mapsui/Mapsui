@@ -93,7 +93,7 @@ public class MapRegressionTests
             if (map != null)
             {
                 // act
-                using var bitmap = new MapRenderer().RenderToBitmapStream(mapControl.Viewport.State, map.Layers, map.BackColor, 2);
+                using var bitmap = new MapRenderer().RenderToBitmapStream(mapControl.Map.Viewport.State, map.Layers, map.BackColor, 2);
 
                 // aside
                 if (bitmap is { Length: > 0 })
@@ -162,8 +162,8 @@ public class MapRegressionTests
         }
 
         await mapControl.WaitForLoadingAsync();
-        var fetchInfo = new FetchInfo(mapControl.Viewport.State.ToSection(), mapControl.Map?.CRS);
-        mapControl.Map?.RefreshData(fetchInfo);
+        var fetchInfo = new FetchInfo(mapControl.Map.Viewport.State.ToSection(), mapControl.Map.CRS);
+        mapControl.Map.RefreshData(fetchInfo);
 
         // TODO: MapView should be available for all Targets
         ////if (sample is IFormsSample formsSample)

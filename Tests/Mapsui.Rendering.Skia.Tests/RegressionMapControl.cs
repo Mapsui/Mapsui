@@ -4,14 +4,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-#pragma warning disable IDISP008 // Don't assign member with injected and created disposables
 #pragma warning disable CS0067 // The event is never used
 
 namespace Mapsui.Rendering.Skia.Tests;
@@ -19,14 +16,11 @@ namespace Mapsui.Rendering.Skia.Tests;
 public class RegressionMapControl : IMapControl
 {
     private Map _map;
-    private readonly Viewport _viewport;
 
     public RegressionMapControl()
     {
         Renderer = new MapRenderer();
-        _viewport = new();
         _map = new();
-        Navigator = new Navigator(_map, _map.Viewport);
     }
 
     public event EventHandler<MapInfoEventArgs>? Info;
@@ -37,7 +31,7 @@ public class RegressionMapControl : IMapControl
         set
         {
             _map = value ?? throw new ArgumentNullException();
-            Navigator = new Navigator(_map, _viewport);
+            _map.Viewport.SetSize(ScreenWidth, ScreenHeight);
             CallHomeIfNeeded();
         }
     }
@@ -92,21 +86,20 @@ public class RegressionMapControl : IMapControl
         throw new NotImplementedException();
     }
 
-    public INavigator Navigator { get; private set; }
     public Performance? Performance { get; set; }
 
-    public Viewport Viewport => _viewport;
-
-    public void SetSize(int width, int height)
+    public double ScreenWidth { get; private set; }
+    public double ScreenHeight { get; private set; }
+    public void SetSize(int screenWidth, int screenHeight)
     {
-        _viewport.SetSize(width, height);
+        ScreenWidth = screenWidth;
+        ScreenHeight = screenHeight;
     }
-
     public void CallHomeIfNeeded()
     {
-        if (!Map.Initialized && Viewport.State.HasSize() && Map?.Extent != null)
+        if (!Map.Initialized && Map.Viewport.State.HasSize() && Map?.Extent is not null)
         {
-            Map.Home?.Invoke(Navigator);
+            Map.Home?.Invoke(Map.Navigator);
             Map.Initialized = true;
         }
     }
