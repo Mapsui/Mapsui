@@ -95,7 +95,7 @@ public class RegressionMapControl : IMapControl
     public INavigator Navigator { get; private set; }
     public Performance? Performance { get; set; }
 
-    public IViewport Viewport => _viewport;
+    public Viewport Viewport => _viewport;
 
     public void SetSize(int width, int height)
     {

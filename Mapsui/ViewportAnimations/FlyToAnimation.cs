@@ -6,7 +6,7 @@ namespace Mapsui.ViewportAnimations;
 
 public class FlyToAnimation
 {
-    public static List<AnimationEntry<Viewport>> Create(IViewport viewport, MPoint center, double maxResolution, long duration)
+    public static List<AnimationEntry<Viewport>> Create(Viewport viewport, MPoint center, double maxResolution, long duration)
     {
         var animations = new List<AnimationEntry<Viewport>>();
         AnimationEntry<Viewport> entry;

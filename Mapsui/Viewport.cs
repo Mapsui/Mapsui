@@ -22,7 +22,7 @@ namespace Mapsui;
 /// Viewport is the connection between Map and MapControl. It tells MapControl,
 /// which part of Map should be displayed on screen.
 /// </remarks>
-public class Viewport : IViewport
+public class Viewport
 {
     public event PropertyChangedEventHandler? ViewportChanged;
 

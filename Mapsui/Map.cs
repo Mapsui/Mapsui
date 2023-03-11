@@ -139,7 +139,7 @@ public class Map : INotifyPropertyChanged, IMap, IDisposable
     /// <summary>
     /// Viewport holding information about visible part of the map. Viewport can never be null.
     /// </summary>
-    public IViewport Viewport => _viewport;
+    public Viewport Viewport => _viewport;
 
     private void Navigated(object? sender, ChangeType changeType)
     {

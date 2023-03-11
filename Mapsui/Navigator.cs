@@ -11,11 +11,11 @@ namespace Mapsui;
 public class Navigator : INavigator
 {
     private readonly Map _map;
-    private readonly IViewport _viewport;
+    private readonly Viewport _viewport;
 
     public EventHandler<ChangeType>? Navigated { get; set; }
 
-    public Navigator(Map map, IViewport viewport)
+    public Navigator(Map map, Viewport viewport)
     {
         _map = map;
         _viewport = viewport;
