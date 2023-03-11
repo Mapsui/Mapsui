@@ -1,8 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Mapsui.Limiting;
 
@@ -11,15 +9,8 @@ namespace Mapsui.Limiting;
 /// It should not be possible to view anything outside the pan limits.
 /// An exception is rotation. 
 /// </summary>
-public class ViewportLimiterKeepWithin : BaseViewportLimiter
+public class ViewportLimiterKeepWithinExtent : BaseViewportLimiter
 {
-    // todo: Check validity of the PanLimits and ZoomLimits.
-    // It is possible to specify a combination of PanLimits and ZoomLimits that is 
-    // impossible to apply. If the lowest allowed resolution does not fill the 
-    // screen it can never be kept within the extent. Weird jumpy map behavior will
-    // be the result of this. In the history of this file there is a MapWidthSpansViewport
-    // method that might be helpful. 
-
     public override ViewportState Limit(ViewportState viewportState)
     {
         var state = LimitResolution(viewportState);

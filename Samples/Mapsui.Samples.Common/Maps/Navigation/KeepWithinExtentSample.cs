@@ -16,7 +16,7 @@ public class KeepWithinExtentSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
         var panLimits = GetLimitsOfMadagaskar();
-        map.Viewport.Limiter = new ViewportLimiterKeepWithin
+        map.Viewport.Limiter = new ViewportLimiterKeepWithinExtent
         {
             PanLimits = panLimits
         };
