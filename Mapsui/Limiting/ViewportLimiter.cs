@@ -23,26 +23,8 @@ public class MinMax
     public double Max { get; }
 }
 
-public enum ZoomMode
-{
-    /// <summary>
-    /// Restricts zoom in no way
-    /// </summary>
-    Unlimited,
-    /// <summary>
-    /// Restricts zoom of the viewport to ZoomLimits and, if ZoomLimits isn't 
-    /// set, to minimum and maximum of Resolutions
-    /// </summary>
-    KeepWithinResolutions,
-}
-
 public class ViewportLimiter : BaseViewportLimiter
 {
-    /// <summary>
-    /// Zoom mode to use, when map is zoomed
-    /// </summary>
-    public ZoomMode ZoomMode { get; set; } = ZoomMode.KeepWithinResolutions;
-
     public override ViewportState Limit(ViewportState viewportState)
     {
         var state = LimitResolution(viewportState);
@@ -51,14 +33,10 @@ public class ViewportLimiter : BaseViewportLimiter
 
     private ViewportState LimitResolution(ViewportState viewportState)
     {
-        if (ZoomMode == ZoomMode.Unlimited) return viewportState;
         if (ZoomLimits is null) return viewportState;
 
-        if (ZoomMode == ZoomMode.KeepWithinResolutions)
-        {
-            if (ZoomLimits.Min > viewportState.Resolution) return viewportState with { Resolution = ZoomLimits.Min };
-            if (ZoomLimits.Max < viewportState.Resolution) return viewportState with { Resolution = ZoomLimits.Max };
-        }
+        if (ZoomLimits.Min > viewportState.Resolution) return viewportState with { Resolution = ZoomLimits.Min };
+        if (ZoomLimits.Max < viewportState.Resolution) return viewportState with { Resolution = ZoomLimits.Max };
 
         return viewportState;
     }
