@@ -43,11 +43,6 @@ jobs:
       run: |
         msbuild Mapsui.UI.Uno/Mapsui.UI.Uno.csproj /t:restore /p:Configuration=Release 
         msbuild Mapsui.UI.Uno/Mapsui.UI.Uno.csproj /t:pack /p:Configuration=Release /p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${{ github.workspace }}/nugets"
-        
-    - name: Pack Uno WinUI
-      run: |
-        msbuild Mapsui.UI.Uno.WinUI/Mapsui.UI.Uno.WinUI.csproj /t:restore /p:Configuration=Release 
-        msbuild Mapsui.UI.Uno.WinUI/Mapsui.UI.Uno.WinUI.csproj /t:pack /p:Configuration=Release /p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${{ github.workspace }}/nugets"
 
     - name: Pack Xamarin Forms
       run: |
