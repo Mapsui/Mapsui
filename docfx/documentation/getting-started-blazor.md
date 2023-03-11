@@ -14,6 +14,10 @@ PM> Install-Package Mapsui.Blazor -pre
 ### Step 3
 In Index.razor add this to the to Page.
 
+```csharp
+@using Mapsui.UI.Blazor
+```
+
 ```html
 <div class="container">
     <div class="row">
