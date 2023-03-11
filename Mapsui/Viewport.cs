@@ -4,7 +4,6 @@
 
 // This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -61,10 +60,8 @@ public class Viewport : IViewport
         get => _state;
         set
         {
-            var newState = Limiter.Limit(value);
-            if (_state == newState) return;
-            _state = newState;
-
+            if (_state == value) return;
+            _state = value;
             OnViewportChanged();
         }
     }
@@ -122,95 +119,79 @@ public class Viewport : IViewport
     {
         _animations = new();
 
-        if (width == _state.Width && height == _state.Height)
-            return;
-
-        _state = _state with { Width = width, Height = height };
-
-        OnViewportChanged();
+        var newState = _state with { Width = width, Height = height };
+        newState = Limiter.Limit(newState);
+        State = newState;
     }
 
     public void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
     {
+        if (Limiter.PanLock) return;
         _animations = new();
 
-        if (x == _state.CenterX && y == _state.CenterY)
-            return;
-
-        _state = _state with { CenterX = x, CenterY = y };
-
-        OnViewportChanged();
+        var newState = Limiter.Limit(_state with { CenterX = x, CenterY = y });
+        State = newState;
     }
 
     public void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
     {
+        if (Limiter.PanLock) return;
+        if (Limiter.ZoomLock) return;
+
         _animations = new();
 
-        if (x == _state.CenterX && y == _state.CenterY && resolution == _state.Resolution)
-            return;
+        var newState = _state with { CenterX = x, CenterY = y, Resolution = resolution };
+        newState = Limiter.Limit(newState);
 
         if (duration == 0)
-        {
-            _state = _state with { CenterX = x, CenterY = y, Resolution = resolution };
-        }
+            State = newState;
         else
-        {
-            _animations = ViewportStateAnimation.Create(this, State with { CenterX = x, CenterY = y, Resolution = resolution }, duration, easing);
-        }
-
-        OnViewportChanged();
+            _animations = ViewportStateAnimation.Create(this, newState, duration, easing);
     }
 
     public void SetCenter(MPoint center, long duration = 0, Easing? easing = default)
     {
+        if (Limiter.PanLock) return;
+
         _animations = new();
 
-        if (center.X == _state.CenterX && center.Y == _state.CenterY)
-            return;
+        var newState = _state with {  CenterX = center.X, CenterY = center.Y };
+        newState = Limiter.Limit(newState);
 
         if (duration == 0)
-        {
-            _state = _state with { CenterX = center.X, CenterY = center.Y };
-        }
+            State = newState;
         else
-        {
-            _animations = ViewportStateAnimation.Create(this, State with { CenterX = center.X, CenterY = center.Y }, duration, easing);
-        }
-
-        OnViewportChanged();
+            _animations = ViewportStateAnimation.Create(this, newState, duration, easing);
     }
 
     public void SetResolution(double resolution, long duration = 0, Easing? easing = default)
     {
+        if (Limiter.ZoomLock) return;
+
         _animations = new();
 
-        if (_state.Resolution == resolution)
-            return;
+        var newState = _state with {  Resolution = resolution };
+        newState = Limiter.Limit(newState);
 
         if (duration == 0)
-            _state = _state with { Resolution = resolution };
+            State = newState;
         else
-        {
-            _animations = ViewportStateAnimation.Create(this, State with { Resolution = resolution }, duration, easing);
-        }
-
-        OnViewportChanged();
+            _animations = ViewportStateAnimation.Create(this, newState, duration, easing);
     }
 
     public void SetRotation(double rotation, long duration = 0, Easing? easing = default)
     {
+        if (Limiter.RotationLock) return;
+
         _animations = new();
 
-        if (_state.Rotation == rotation) return;
+        var newState = _state with { Rotation = rotation };
+        newState = Limiter.Limit(newState);
 
         if (duration == 0)
-            _state = _state with { Rotation = rotation };
+            State = newState;
         else
-        {
-            _animations = ViewportStateAnimation.Create(this, State with { Rotation = rotation }, duration, easing);
-        }
-
-        OnViewportChanged();
+            _animations = ViewportStateAnimation.Create(this, newState, duration, easing);
     }
 
     /// <summary>
