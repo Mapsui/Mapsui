@@ -1,4 +1,5 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Extensions;
+using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
@@ -12,7 +13,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
-    public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
+    public bool Draw(SKCanvas canvas, ViewportState viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
     {
         var symbolStyle = (SymbolStyle)style;
         switch (feature)
@@ -52,7 +53,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    private bool DrawXY(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, ISymbolCache symbolCache)
+    private bool DrawXY(SKCanvas canvas, ViewportState viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, ISymbolCache symbolCache)
     {
         if (symbolStyle.SymbolType == SymbolType.Image)
         {
@@ -64,7 +65,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    private static bool DrawImage(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, ISymbolCache symbolCache)
+    private static bool DrawImage(SKCanvas canvas, ViewportState viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, ISymbolCache symbolCache)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
@@ -141,7 +142,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    public static bool DrawSymbol(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle)
+    public static bool DrawSymbol(SKCanvas canvas, ViewportState viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 

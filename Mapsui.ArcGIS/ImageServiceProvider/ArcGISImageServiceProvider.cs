@@ -100,8 +100,7 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
 
     public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
-        var viewport = fetchInfo.ToViewport();
-        var (success, raster) = await TryGetMapAsync(viewport);
+        var (success, raster) = await TryGetMapAsync(fetchInfo.Section);
         if (success)
         {
             return new[] { new RasterFeature(raster) };
@@ -109,15 +108,15 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
         return Enumerable.Empty<IFeature>();
     }
 
-    public async Task<(bool Success, MRaster? Raster)> TryGetMapAsync(IViewport viewport)
+    public async Task<(bool Success, MRaster? Raster)> TryGetMapAsync(MSection section)
     {
         int width;
         int height;
 
         try
         {
-            width = Convert.ToInt32(viewport.Width);
-            height = Convert.ToInt32(viewport.Height);
+            width = Convert.ToInt32(section.ScreenWidth);
+            height = Convert.ToInt32(section.ScreenHeight);
         }
         catch (OverflowException ex)
         {
@@ -125,7 +124,7 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
             return (false, null);
         }
 
-        var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
+        var uri = new Uri(GetRequestUrl(section.Extent, width, height));
         try
         {
             using var handler = new HttpClientHandler();
@@ -152,13 +151,9 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
                     _persistentCache?.Add(uri.ToString(), bytes);
                 }
 
-                if (viewport.Extent != null)
-                {
-                    var raster = new MRaster(bytes, viewport.Extent);
-                    return (true, raster);
-                }
+                var raster = new MRaster(bytes, section.Extent);
+                return (true, raster);
 
-                return (false, null);
             }
             catch (Exception ex)
             {

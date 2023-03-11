@@ -15,8 +15,8 @@ public class ViewportTests
         viewport.SetCenter(10, 20);
 
         // Assert
-        Assert.AreEqual(10, viewport.CenterX);
-        Assert.AreEqual(20, viewport.CenterY);
+        Assert.AreEqual(10, viewport.State.CenterX);
+        Assert.AreEqual(20, viewport.State.CenterY);
     }
 
     [Test]
@@ -30,8 +30,8 @@ public class ViewportTests
         viewport.Transform(new MPoint(10, 10), new MPoint(20, 20), 1);
 
         // Assert
-        Assert.AreEqual(20, viewport.CenterX);
-        Assert.AreEqual(10, viewport.CenterY);
+        Assert.AreEqual(20, viewport.State.CenterX);
+        Assert.AreEqual(10, viewport.State.CenterY);
     }
 
     [Test]
@@ -45,7 +45,7 @@ public class ViewportTests
         viewport.Transform(new MPoint(10, 10), new MPoint(20, 20), 2);
 
         // Assert
-        Assert.AreEqual(30, viewport.CenterX);
-        Assert.AreEqual(0, viewport.CenterY);
+        Assert.AreEqual(30, viewport.State.CenterX);
+        Assert.AreEqual(0, viewport.State.CenterY);
     }
 }

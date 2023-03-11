@@ -2,24 +2,30 @@
 
 public class FetchInfo
 {
-    public FetchInfo(MRect extent, double resolution, string? crs = null, ChangeType changeType = ChangeType.Discrete)
+    public FetchInfo(MSection section, string? crs = null, ChangeType changeType = ChangeType.Discrete)
     {
-        Extent = extent;
-        Resolution = resolution;
+        Section = section;
         CRS = crs;
         ChangeType = changeType;
     }
 
     public FetchInfo(FetchInfo fetchInfo)
     {
-        Extent = new MRect(fetchInfo.Extent);
-        Resolution = fetchInfo.Resolution;
+        Section = fetchInfo.Section;
         CRS = fetchInfo.CRS;
         ChangeType = fetchInfo.ChangeType;
     }
 
-    public MRect Extent { get; }
-    public double Resolution { get; }
+    public MSection Section { get; }
+
+    public MRect Extent => Section.Extent;
+    public double Resolution => Section.Resolution;
     public string? CRS { get; }
     public ChangeType ChangeType { get; }
+
+    public FetchInfo Grow(double amountInScreenUnits)
+    {
+        var amount = amountInScreenUnits * 2 * Resolution;
+        return new FetchInfo(new MSection(Section.Extent.Grow(amount), Resolution), CRS, ChangeType);
+    }
 }

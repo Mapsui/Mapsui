@@ -23,11 +23,7 @@ internal class FeatureFetcher
     public FeatureFetcher(FetchInfo fetchInfo, IProvider provider, DataArrivedDelegate dataArrived, long timeOfRequest = default)
     {
         _dataArrived = dataArrived;
-        var biggerBox = fetchInfo.Extent.Grow(
-            SymbolStyle.DefaultWidth * 2 * fetchInfo.Resolution,
-            SymbolStyle.DefaultHeight * 2 * fetchInfo.Resolution);
-        _fetchInfo = new FetchInfo(biggerBox, fetchInfo.Resolution, fetchInfo.CRS, fetchInfo.ChangeType);
-
+        _fetchInfo = fetchInfo.Grow(SymbolStyle.DefaultWidth);
         _provider = provider;
         _timeOfRequest = timeOfRequest;
     }

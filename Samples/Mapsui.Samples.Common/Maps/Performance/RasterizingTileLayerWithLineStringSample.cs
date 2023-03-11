@@ -2,19 +2,20 @@
 using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 using NetTopologySuite.Geometries;
 using System.Collections.Generic;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
+#pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class ManyVerticesSample : IMapControlSample
+public class RasterizingTileLayerWithLineStringSample : IMapControlSample
 {
-    public string Name => "Many Vertices";
+    public string Name => "RasterizingTileLayer with LineString";
     public string Category => "Performance";
 
     public void Setup(IMapControl mapControl)
@@ -27,17 +28,18 @@ public class ManyVerticesSample : IMapControlSample
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(new RasterizingLayer(CreatePointLayer(), pixelDensity: pixelDensity));
-        var extent = map.Layers[1].Extent!.Grow(map.Layers[1].Extent!.Width * 0.25);
+        var lineStringLayer = CreateLineStringLayer();
+        map.Layers.Add(new RasterizingTileLayer(lineStringLayer, pixelDensity: pixelDensity));
+        var extent = lineStringLayer.Extent!.Grow(lineStringLayer.Extent!.Width * 0.25);
         map.Home = n => n.NavigateTo(extent);
         return map;
     }
 
-    private static ILayer CreatePointLayer()
+    private static ILayer CreateLineStringLayer()
     {
         return new MemoryLayer
         {
-            Name = "Points",
+            Name = "LineString",
             IsMapInfoLayer = true,
             Features = new List<IFeature>() { GetFeature() }
         };

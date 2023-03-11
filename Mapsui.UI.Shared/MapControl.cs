@@ -75,7 +75,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             return;
         if (Map == null)
             return;
-        if (!Viewport.HasSize())
+        if (!Viewport.State.HasSize())
             return;
 
         // Start drawing
@@ -86,7 +86,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         // All requested updates up to this point will be handled by this redraw
         _refresh = false;
-        Renderer.Render(canvas, new Viewport(Viewport), Map.Layers, Map.Widgets, Map.BackColor);
+        Renderer.Render(canvas, Viewport.State, Map.Layers, Map.Widgets, Map.BackColor);
 
         // Stop stopwatch after drawing control
         _stopwatch.Stop();
@@ -438,7 +438,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public void CallHomeIfNeeded()
     {
-        if (Map != null && !Map.Initialized && _viewport.HasSize() && Map?.Extent != null && Navigator != null)
+        if (Map != null && !Map.Initialized && _viewport.State.HasSize() && Map?.Extent != null && Navigator != null)
         {
             Map.Home?.Invoke(Navigator);
             Map.Initialized = true;
@@ -539,12 +539,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </summary>
     public void RefreshData(ChangeType changeType = ChangeType.Discrete)
     {
-        if (Viewport.Extent == null)
+        if (Viewport.State.ToExtent() is null)
             return;
-        if (Viewport.Extent.GetArea() <= 0)
+        if (Viewport.State.ToExtent().GetArea() <= 0)
             return;
 
-        var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, changeType);
+        var fetchInfo = new FetchInfo(Viewport.State.ToSection(), Map?.CRS, changeType);
         Map?.RefreshData(fetchInfo);
     }
 
@@ -574,13 +574,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (screenPosition == null)
             return null;
 
-        return Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map?.Layers ?? new LayerCollection(), margin);
+        return Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport.State, Map?.Layers ?? new LayerCollection(), margin);
     }
 
     /// <inheritdoc />
     public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null)
     {
-        using var stream = Renderer.RenderToBitmapStream(Viewport, layers ?? Map?.Layers ?? new LayerCollection(), pixelDensity: PixelDensity);
+        using var stream = Renderer.RenderToBitmapStream(Viewport.State, layers ?? Map?.Layers ?? new LayerCollection(), pixelDensity: PixelDensity);
         return stream.ToArray();
     }
 
@@ -633,7 +633,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
 
         // Check which features in the map were tapped.
-        var mapInfo = Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map?.Layers ?? new LayerCollection());
+        var mapInfo = Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport.State, Map?.Layers ?? new LayerCollection());
 
         if (mapInfo != null)
         {
@@ -650,9 +650,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private protected void SetViewportSize()
     {
-        var hadSize = Viewport.HasSize();
+        var hadSize = Viewport.State.HasSize();
         _viewport.SetSize(ViewportWidth, ViewportHeight);
-        if (!hadSize && Viewport.HasSize()) OnViewportSizeInitialized();
+        if (!hadSize && Viewport.State.HasSize()) OnViewportSizeInitialized();
         CallHomeIfNeeded();
         Refresh();
     }
