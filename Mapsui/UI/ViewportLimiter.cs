@@ -43,15 +43,6 @@ public class ViewportLimiter : BaseViewportLimiter
     /// </summary>
     public ZoomMode ZoomMode { get; set; } = ZoomMode.KeepWithinResolutions;
 
-    private MinMax? GetExtremes(IReadOnlyList<double>? resolutions)
-    {
-        if (resolutions == null || resolutions.Count == 0) return null;
-        resolutions = resolutions.OrderByDescending(r => r).ToList();
-        var mostZoomedOut = resolutions[0];
-        var mostZoomedIn = resolutions[resolutions.Count - 1] * 0.5; // Divide by two to allow one extra level to zoom-in
-        return new MinMax(mostZoomedOut, mostZoomedIn);
-    }
-
     public override ViewportState Limit(ViewportState viewportState)
     {
         var state = LimitResolution(viewportState);

@@ -248,7 +248,18 @@ public class Map : INotifyPropertyChanged, IMap, IDisposable
     private void LayersChanged()
     {
         Resolutions = DetermineResolutions(Layers);
+        Viewport.Limiter.ZoomLimits = GetMinMaxResolution(Resolutions);
+        Viewport.Limiter.PanLimits = Extent?.Copy();
         OnPropertyChanged(nameof(Layers));
+    }
+
+    private MinMax? GetMinMaxResolution(IEnumerable<double>? resolutions)
+    {
+        if (resolutions == null || resolutions.Count() == 0) return null;
+        resolutions = resolutions.OrderByDescending(r => r).ToList();
+        var mostZoomedOut = resolutions.First();
+        var mostZoomedIn = resolutions.Last() * 0.5; // Divide by two to allow one extra level to zoom-in
+        return new MinMax(mostZoomedOut, mostZoomedIn);
     }
 
     private static IReadOnlyList<double> DetermineResolutions(IEnumerable<ILayer> layers)
