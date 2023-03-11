@@ -1,4 +1,4 @@
-﻿namespace Mapsui;
+﻿namespace Mapsui.Limiting;
 public class LimitResult
 {
     public LimitResult(ViewportState input, ViewportState output)
