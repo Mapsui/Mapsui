@@ -1,4 +1,4 @@
-﻿namespace Mapsui.UI;
+﻿namespace Mapsui.Limiting;
 
 public class ViewportLimiterWithoutLimits : BaseViewportLimiter
 {

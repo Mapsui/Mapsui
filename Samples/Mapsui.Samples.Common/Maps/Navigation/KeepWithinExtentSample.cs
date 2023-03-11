@@ -1,6 +1,6 @@
-﻿using Mapsui.Projections;
+﻿using Mapsui.Limiting;
+using Mapsui.Projections;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Navigation;
@@ -15,10 +15,12 @@ public class KeepWithinExtentSample : ISample
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
+        var panLimits = GetLimitsOfMadagaskar();
         map.Viewport.Limiter = new ViewportLimiterKeepWithin
         {
-            PanLimits = GetLimitsOfMadagaskar()
+            PanLimits = panLimits
         };
+        map.Home = n => n.NavigateTo(panLimits);
         return Task.FromResult(map);
     }
 

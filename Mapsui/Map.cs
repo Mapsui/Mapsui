@@ -12,6 +12,7 @@ using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
+using Mapsui.Limiting;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Widgets;

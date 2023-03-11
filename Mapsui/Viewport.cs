@@ -9,7 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
-using Mapsui.UI;
+using Mapsui.Limiting;
 using Mapsui.Utilities;
 using Mapsui.ViewportAnimations;
 
@@ -58,7 +58,7 @@ public class Viewport
     public ViewportState State
     {
         get => _state;
-        set
+        private set
         {
             if (_state == value) return;
             _state = value;
@@ -73,8 +73,8 @@ public class Viewport
         if (Limiter.PanLock) positionScreen = previousPositionScreen;
 
         _animations = new();
-  
-        State = Limiter.Limit(TransformState(_state, positionScreen, previousPositionScreen,deltaResolution, deltaRotation));
+
+        State = Limiter.Limit(TransformState(_state, positionScreen, previousPositionScreen, deltaResolution, deltaRotation));
     }
 
     private static ViewportState TransformState(ViewportState state, MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation)
@@ -155,7 +155,7 @@ public class Viewport
 
         _animations = new();
 
-        var newState = _state with {  CenterX = center.X, CenterY = center.Y };
+        var newState = _state with { CenterX = center.X, CenterY = center.Y };
         newState = Limiter.Limit(newState);
 
         if (duration == 0)
@@ -170,7 +170,7 @@ public class Viewport
 
         _animations = new();
 
-        var newState = _state with {  Resolution = resolution };
+        var newState = _state with { Resolution = resolution };
         newState = Limiter.Limit(newState);
 
         if (duration == 0)
@@ -212,5 +212,12 @@ public class Viewport
     public void SetAnimations(List<AnimationEntry<Viewport>> animations)
     {
         _animations = animations;
+    }
+
+    public LimitResult SetViewportStateWithLimit(ViewportState viewportState)
+    {
+        var newState = Limiter.Limit(viewportState);
+        State = newState;
+        return new LimitResult(viewportState, newState);
     }
 }

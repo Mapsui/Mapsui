@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Mapsui.UI;
+namespace Mapsui.Limiting;
 
 public class MinMax
 {

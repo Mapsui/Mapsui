@@ -1,6 +1,6 @@
-﻿using Mapsui.Projections;
+﻿using Mapsui.Limiting;
+using Mapsui.Projections;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Navigation;
