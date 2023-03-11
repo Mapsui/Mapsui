@@ -140,13 +140,13 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
     {
         if (_map?.ZoomLock ?? true) return;
-        if (!Viewport.HasSize()) return;
+        if (!Viewport.State.HasSize()) return;
 
         _currentMousePosition = e.GetPosition(this).ToMapsui();
 
         var resolution = MouseWheelAnimation.GetResolution(e.Delta, _viewport, _map);
         // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-        resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Extent);
+        resolution = _map.Limiter.LimitResolution(resolution, Viewport.State.Width, Viewport.State.Height, _map.Resolutions, _map.Extent);
         Navigator?.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
     }
 
@@ -198,8 +198,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         {
             if (IsInBoxZoomMode())
             {
-                var previous = Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
-                var current = Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
+                var previous = Viewport.State.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
+                var current = Viewport.State.ScreenToWorld(mousePosition.X, mousePosition.Y);
                 ZoomToBox(previous, current);
             }
             else if (_downMousePosition != null && IsClick(mousePosition, _downMousePosition))
@@ -286,7 +286,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
                 foreach (var layer in Map.Layers)
                 {
                     // ReSharper disable once SuspiciousTypeConversion.Global
-                    (layer as IFeatureInfo)?.GetFeatureInfo(Viewport, _downMousePosition.X, _downMousePosition.Y,
+                    (layer as IFeatureInfo)?.GetFeatureInfo(Viewport.State, _downMousePosition.X, _downMousePosition.Y,
                         OnFeatureInfo);
                 }
             }
@@ -397,7 +397,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnManipulationStarted(object? sender, ManipulationStartedEventArgs e)
     {
         _hasBeenManipulated = false;
-        _virtualRotation = _viewport.Rotation;
+        _virtualRotation = _viewport.State.Rotation;
     }
 
     private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
@@ -420,7 +420,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             _virtualRotation += angle - prevAngle;
 
             rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                _virtualRotation, _viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                _virtualRotation, _viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
         }
 
         _viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);

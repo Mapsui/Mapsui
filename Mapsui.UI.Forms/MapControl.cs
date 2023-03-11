@@ -589,7 +589,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
             _mode = TouchMode.Zooming;
-            _virtualRotation = Viewport.Rotation;
+            _virtualRotation = Viewport.State.Rotation;
         }
         else
         {
@@ -615,10 +615,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (touchPoints.Count == 0)
         {
             _mode = TouchMode.None;
-            if (_viewport.Extent != null)
+            if (_viewport.State.ToExtent() is not null)
             {
-                var fetchInfo = new FetchInfo(_viewport.Extent, _viewport.Resolution, Map?.CRS, ChangeType.Discrete);
-                Map?.RefreshData(fetchInfo);
+                Map?.RefreshData(new FetchInfo(_viewport.State.ToSection(), Map?.CRS, ChangeType.Discrete));
             }
         }
 
@@ -660,10 +659,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (touchPoints.Count == 0)
         {
             _mode = TouchMode.None;
-            if (_viewport.Extent != null)
+            if (_viewport.State.ToExtent() is not null)
             {
-                var fetchInfo = new FetchInfo(_viewport.Extent, _viewport.Resolution, Map?.CRS, ChangeType.Discrete);
-                Map?.RefreshData(fetchInfo);
+                Map?.RefreshData(new FetchInfo(_viewport.State.ToSection(), Map?.CRS, ChangeType.Discrete));
             }
         }
 
@@ -718,7 +716,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                         _virtualRotation += deltaRotation;
 
                         rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                            _virtualRotation, _viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                            _virtualRotation, _viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
                     }
 
                     if (prevCenter != null)

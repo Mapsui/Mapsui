@@ -28,7 +28,7 @@ public class TestLayer : BaseLayer
         var biggerBox = box.Grow(
                 SymbolStyle.DefaultWidth * 2 * resolution,
                 SymbolStyle.DefaultHeight * 2 * resolution);
-        var fetchInfo = new FetchInfo(biggerBox, resolution, CRS);
+        var fetchInfo = new FetchInfo(new MSection(biggerBox, resolution), CRS);
 
         if (DataSource is null)
             return Enumerable.Empty<IFeature>();

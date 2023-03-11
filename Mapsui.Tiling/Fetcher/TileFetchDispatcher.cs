@@ -46,6 +46,8 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     public int NumberTilesNeeded { get; private set; }
 
+    public static int MaxTilesInOneRequest { get; set; } = 64;
+
     public void SetViewport(FetchInfo fetchInfo)
     {
         lock (_lockRoot)
@@ -141,13 +143,25 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
 
     private void UpdateTilesToFetchForViewportChange()
     {
-        if (_fetchInfo == null || _tileSchema == null)
+        // Use local fields to avoid changes caused by other threads during this calculation.
+        var localFetchInfo = _fetchInfo;
+        var localTileSchema = _tileSchema;
+
+        if (localFetchInfo is null || localTileSchema is null)
             return;
 
-        var levelId = BruTile.Utilities.GetNearestLevel(_tileSchema.Resolutions, _fetchInfo.Resolution);
-        var tilesToCoverViewport = _dataFetchStrategy.Get(_tileSchema, _fetchInfo.Extent.ToExtent(), levelId);
+        var levelId = BruTile.Utilities.GetNearestLevel(localTileSchema.Resolutions, localFetchInfo.Resolution);
+        var tilesToCoverViewport = _dataFetchStrategy.Get(localTileSchema, localFetchInfo.Extent.ToExtent(), levelId);
         NumberTilesNeeded = tilesToCoverViewport.Count;
         var tilesToFetch = tilesToCoverViewport.Where(t => _tileCache.Find(t.Index) == null && !_tilesInProgress.Contains(t.Index));
+        if (tilesToFetch.Count() > MaxTilesInOneRequest)
+        {
+            tilesToFetch = tilesToFetch.Take(MaxTilesInOneRequest).ToList();
+            Logger.Log(LogLevel.Warning, $"The number of tiles in one request is exceeds the maximum " +
+                $"of '{MaxTilesInOneRequest}'. The number of tiles will be limited to the maximum. Note, " +
+                $"that this may indicate a bug or configuration error");
+        }
+
         _tilesToFetch.Clear();
         _tilesToFetch.AddRange(tilesToFetch);
         if (_tilesToFetch.Count > 0) Busy = true;

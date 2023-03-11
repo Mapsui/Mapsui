@@ -68,11 +68,11 @@ public partial class MapControl : SkiaDrawable, IMapControl
         base.OnMouseWheel(e);
 
         if (_map?.ZoomLock ?? true) return;
-        if (!Viewport.HasSize()) return;
+        if (!Viewport.State.HasSize()) return;
 
         var resolution = MouseWheelAnimation.GetResolution((int)e.Delta.Height, _viewport, _map);
         // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-        resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Extent);
+        resolution = _map.Limiter.LimitResolution(resolution, Viewport.State.Width, Viewport.State.Height, _map.Resolutions, _map.Extent);
         Navigator?.ZoomTo(resolution, e.Location.ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
     }
     protected override void OnSizeChanged(EventArgs e)
@@ -114,8 +114,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         if (IsInBoxZoomMode)
         {
-            var previous = Viewport.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
-            var current = Viewport.ScreenToWorld(_selectRectangle.BottomRight.X, _selectRectangle.BottomRight.Y);
+            var previous = Viewport.State.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
+            var current = Viewport.State.ScreenToWorld(_selectRectangle.BottomRight.X, _selectRectangle.BottomRight.Y);
             ZoomToBox(previous, current);
         }
         else if (_downMousePosition.HasValue)

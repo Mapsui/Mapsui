@@ -1,32 +1,28 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.UI;
+using Mapsui.Tiling.Layers;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class RasterizingLayerSample : IMapControlSample
+public class RasterizingTileLayerWithPointsSample : ISample
 {
-    public string Name => "Rasterizing Layer";
+    public string Name => "RasterizingTileLayer with Points";
     public string Category => "Performance";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap(mapControl.PixelDensity);
-    }
-
-    public static Map CreateMap(float pixelDensity)
+    public Task<Map> CreateMapAsync()
     {
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(new RasterizingLayer(CreateRandomPointLayer(), pixelDensity: pixelDensity));
+        map.Layers.Add(new RasterizingTileLayer(CreateRandomPointLayer()));
         var extent = map.Layers[1].Extent!.Grow(map.Layers[1].Extent!.Width * 0.1);
         map.Home = n => n.NavigateTo(extent);
-        return map;
+        return Task.FromResult(map);
     }
 
     private static MemoryLayer CreateRandomPointLayer()
@@ -40,6 +36,7 @@ public class RasterizingLayerSample : IMapControlSample
 
         return new MemoryLayer
         {
+            Name = "Points",
             Features = features,
             Style = new SymbolStyle
             {

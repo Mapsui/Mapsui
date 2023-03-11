@@ -477,12 +477,12 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// <param name="e">Event arguments containing what changed</param>
     private void HandlerViewportChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName?.Equals(nameof(Viewport.Rotation)) ?? false)
+        if (e.PropertyName?.Equals(nameof(Viewport.State.Rotation)) ?? false)
         {
-            MyLocationLayer.UpdateMyDirection(MyLocationLayer.Direction, Viewport.Rotation);
+            MyLocationLayer.UpdateMyDirection(MyLocationLayer.Direction, Viewport.State.Rotation);
 
             // Update rotationButton
-            _mapNorthingButton!.Rotation = (float)Viewport.Rotation;
+            _mapNorthingButton!.Rotation = (float)Viewport.State.Rotation;
         }
     }
 
@@ -594,7 +594,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 if (e.MapInfo!.ScreenPosition == null)
                     return;
 
-                var pinArgs = new PinClickedEventArgs(clickedPin, Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(), e.NumTaps);
+                var pinArgs = new PinClickedEventArgs(clickedPin, Viewport.State.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(), e.NumTaps);
 
                 PinClicked?.Invoke(this, pinArgs);
 
@@ -624,7 +624,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 return;
 
             var calloutArgs = new CalloutClickedEventArgs(clickedCallout,
-                Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
+                Viewport.State.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
                 new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
             clickedCallout?.HandleCalloutClicked(this, calloutArgs);
@@ -652,7 +652,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 return;
 
             var drawableArgs = new DrawableClickedEventArgs(
-                Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
+                Viewport.State.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
                 new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
             clickedDrawable?.HandleClicked(drawableArgs);
@@ -668,7 +668,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 return;
 
             var args = new DrawableClickedEventArgs(
-                Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
+                Viewport.State.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
                 new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
             MyLocationLayer?.HandleClicked(args);
@@ -681,7 +681,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void HandlerLongTap(object? sender, TappedEventArgs e)
     {
-        var args = new MapLongClickedEventArgs(Viewport.ScreenToWorld(e.ScreenPosition).ToNative());
+        var args = new MapLongClickedEventArgs(Viewport.State.ScreenToWorld(e.ScreenPosition).ToNative());
         MapLongClicked?.Invoke(this, args);
 
         if (args.Handled)
@@ -719,7 +719,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
             if (mapInfo?.Feature == null)
             {
-                var args = new MapClickedEventArgs(Viewport.ScreenToWorld(e.ScreenPosition).ToNative(), e.NumOfTaps);
+                var args = new MapClickedEventArgs(Viewport.State.ScreenToWorld(e.ScreenPosition).ToNative(), e.NumOfTaps);
                 MapClicked?.Invoke(this, args);
 
                 if (args.Handled)
@@ -745,9 +745,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void HandlerPinPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (Viewport.Extent != null)
+        if (Viewport.State.ToExtent() is not null)
         {
-            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, ChangeType.Continuous);
+            var fetchInfo = new FetchInfo(Viewport.State.ToSection(), Map?.CRS, ChangeType.Continuous);
             Map?.RefreshData(fetchInfo);
         }
 
@@ -757,9 +757,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void HandlerDrawablePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (Viewport.Extent != null)
+        if (Viewport.State.ToExtent() is not null)
         {
-            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, ChangeType.Continuous);
+            var fetchInfo = new FetchInfo(Viewport.State.ToSection(), Map?.CRS, ChangeType.Continuous);
             Map?.RefreshData(fetchInfo);
         }
 

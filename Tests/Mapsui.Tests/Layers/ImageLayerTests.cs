@@ -45,7 +45,7 @@ public class ImageLayerTests
             waitHandle.Go();
         };
 
-        var fetchInfo = new FetchInfo(new MRect(-1, -1, 0, 0), 1, null, ChangeType.Discrete);
+        var fetchInfo = new FetchInfo(new MSection(new MRect(-1, -1, 0, 0), 1), null, ChangeType.Discrete);
 
         // act
         map.RefreshData(fetchInfo);

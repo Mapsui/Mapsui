@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapsui.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -40,7 +41,7 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
 
     public void Limit(Viewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
     {
-        viewport.SetResolution(LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, mapResolutions, mapEnvelope));
+        viewport.SetResolution(LimitResolution(viewport.State.Resolution, viewport.State.Width, viewport.State.Height, mapResolutions, mapEnvelope));
         LimitExtent(viewport, mapEnvelope);
     }
 
@@ -78,19 +79,21 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
             return;
         }
 
-        var x = viewport.CenterX;
+        var extent = viewport.State.ToExtent();
 
-        if (viewport.Extent?.Left < maxExtent.Left)
-            x += maxExtent.Left - viewport.Extent.Left;
-        else if (viewport.Extent?.Right > maxExtent.Right)
-            x += maxExtent.Right - viewport.Extent.Right;
+        var x = viewport.State.CenterX;
 
-        var y = viewport.CenterY;
+        if (extent.Left < maxExtent.Left)
+            x += maxExtent.Left - extent.Left;
+        else if (extent?.Right > maxExtent.Right)
+            x += maxExtent.Right - extent.Right;
 
-        if (viewport.Extent?.Top > maxExtent.Top)
-            y += maxExtent.Top - viewport.Extent.Top;
-        else if (viewport.Extent?.Bottom < maxExtent.Bottom)
-            y += maxExtent.Bottom - viewport.Extent.Bottom;
+        var y = viewport.State.CenterY;
+
+        if (extent?.Top > maxExtent.Top)
+            y += maxExtent.Top - extent.Top;
+        else if (extent?.Bottom < maxExtent.Bottom)
+            y += maxExtent.Bottom - extent.Bottom;
 
         viewport.SetCenter(x, y);
     }
