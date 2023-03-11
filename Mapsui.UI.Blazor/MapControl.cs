@@ -141,7 +141,7 @@ public partial class MapControl : ComponentBase, IMapControl
             if (Map?.ZoomLock ?? true) return;
             if (!Viewport.State.HasSize()) return;
 
-            var delta = e.DeltaY;
+            var delta = e.DeltaY * -1; // so that it zooms like on windows
             var resolution = MouseWheelAnimation.GetResolution((int)delta, _viewport, Map);
 
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
