@@ -63,7 +63,6 @@
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="[17.2.32,18.0.0)" />
     <PackageVersion Include="Microsoft.Windows.CsWin32" Version="[0.1.588-beta,1.0.0)" />
     <PackageVersion Include="Microsoft.Windows.CsWinRT" Version="[2.0.0,3.0.0)" />
-    <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="[10.0.22621.1,3.0.0)" />
     <PackageVersion Include="Microsoft.WindowsAppSDK" Version="[1.2.221109.1,2.0.0)" />
     <PackageVersion Include="NeoSmart.AsyncLock" Version="[3.2.1,4.0.0)" />
     <PackageVersion Include="NetTopologySuite" Version="[2.4.0,3.0.0)" />
