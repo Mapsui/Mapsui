@@ -19,13 +19,13 @@ namespace Mapsui.Rendering.Skia.Tests;
 public class RegressionMapControl : IMapControl
 {
     private Map _map;
-    private readonly LimitedViewport _limitedViewport;
+    private readonly Viewport _viewport;
 
     public RegressionMapControl()
     {
         Renderer = new MapRenderer();
-        _limitedViewport = new LimitedViewport();
-        _map = new Map();
+        _viewport = new();
+        _map = new();
         Navigator = new Navigator(_map, _map.Viewport);
     }
 
@@ -37,7 +37,7 @@ public class RegressionMapControl : IMapControl
         set
         {
             _map = value ?? throw new ArgumentNullException();
-            Navigator = new Navigator(_map, _limitedViewport);
+            Navigator = new Navigator(_map, _viewport);
             CallHomeIfNeeded();
         }
     }
@@ -95,11 +95,11 @@ public class RegressionMapControl : IMapControl
     public INavigator Navigator { get; private set; }
     public Performance? Performance { get; set; }
 
-    public IViewport Viewport => _limitedViewport;
+    public IViewport Viewport => _viewport;
 
     public void SetSize(int width, int height)
     {
-        _limitedViewport.SetSize(width, height);
+        _viewport.SetSize(width, height);
     }
 
     public void CallHomeIfNeeded()

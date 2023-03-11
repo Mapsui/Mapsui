@@ -129,7 +129,7 @@ public class Map : INotifyPropertyChanged, IMap, IDisposable
     /// </summary>
     public event EventHandler<MapInfoEventArgs>? Info;
 
-    private protected readonly LimitedViewport _viewport = new LimitedViewport();
+    private protected readonly Viewport _viewport = new();
 
     /// <summary>
     /// Handles all manipulations of the map viewport
