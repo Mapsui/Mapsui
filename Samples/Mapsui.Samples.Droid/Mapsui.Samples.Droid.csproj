@@ -38,9 +38,6 @@
   <ItemGroup>
     <PackageReference Include="BruTile.MbTiles" />
     <PackageReference Include="SkiaSharp" />
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" />
-    <PackageReference Include="Xamarin.AndroidX.CoordinatorLayout" />
-    <PackageReference Include="Xamarin.Google.Android.Material" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
