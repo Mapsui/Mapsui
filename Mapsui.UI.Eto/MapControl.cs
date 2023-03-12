@@ -40,6 +40,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
         RefreshGraphics();
 
         Content = CreateBoundingBoxDrawable();
+
+        SizeChanged += (s, e) => SetViewportSize();
     }
 
     private Drawable CreateBoundingBoxDrawable()
