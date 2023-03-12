@@ -28,7 +28,8 @@
   </ItemGroup>
  <Choose>
     <When Condition="'$(TargetFramework)'=='net6.0-android'">
-      <ItemGroup>        
+      <ItemGroup>
+        <PackageReference Include="Xamarin.Google.Android.Material" />        
         <PackageReference Include="Uno.UniversalImageLoader" />
       </ItemGroup>
       <ItemGroup>
