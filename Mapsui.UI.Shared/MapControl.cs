@@ -96,6 +96,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void InvalidateTimerCallback(object? state)
     {
+        // In MAUI if you use binding there is an event where the new value is null even though
+        // the current value en the value you are binding to are not null. Perhaps this should be
+        // considered a bug.
+        if (Map is null) return; 
+
         // Check, if we have to redraw the screen
 
         if (Map.UpdateAnimations() == true)
@@ -247,7 +252,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             }
         }
     }
-        
+
     /// <summary>
     /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
     /// the layers that have IsMapInfoLayer set to true. 
@@ -414,7 +419,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         object oldValue, object newValue)
     {
         var mapControl = (MapControl)bindable;
-        mapControl.AfterSetMap(mapControl.Map);
+        mapControl.AfterSetMap((Map)newValue);
     }
 
 
@@ -452,13 +457,17 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void BeforeSetMap()
     {
+        if (Map is null) return; // Although the Map property can not null the map argument can null during initializing and binding.
+
         UnsubscribeFromMapEvents(Map);
     }
 
-    private void AfterSetMap(Map map)
+    private void AfterSetMap(Map? map)
     {
-        SubscribeToMapEvents(map);
+        if (map is null) return; // Although the Map property can not null the map argument can null during initializing and binding.
+
         map.Viewport.SetSize(ViewportWidth, ViewportHeight);
+        SubscribeToMapEvents(map);
         CallHomeIfNeeded();
         Refresh();
     }

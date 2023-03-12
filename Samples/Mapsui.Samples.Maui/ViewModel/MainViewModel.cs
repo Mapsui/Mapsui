@@ -6,11 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Mapsui.Logging;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps;
-using Mapsui.UI;
 using Mapsui.UI.Maui;
 
 #pragma warning disable IDISP008 // Don't assign member with injected and created disposables.
@@ -32,6 +29,7 @@ public partial class MainViewModel : ObservableObject
         selectedCategory = Categories.First();
         PopulateSamples(selectedCategory);
         selectedSample = Samples.First();
+        Map = new Map();
     }
 
     [ObservableProperty]
@@ -41,7 +39,7 @@ public partial class MainViewModel : ObservableObject
     ISampleBase selectedSample;
 
     [ObservableProperty]
-    Map? map;
+    Map map;
 
     public ObservableCollection<ISampleBase> Samples { get; set; } = new();
     public ObservableCollection<string> Categories { get; } = new();
