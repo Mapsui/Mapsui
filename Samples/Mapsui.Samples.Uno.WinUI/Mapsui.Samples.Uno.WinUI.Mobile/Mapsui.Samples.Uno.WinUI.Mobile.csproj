@@ -42,9 +42,6 @@
   <Choose>
     <When Condition="'$(TargetFramework)'=='net6.0-android'">
       <ItemGroup>
-        <PackageReference Include="Xamarin.Google.Android.Material" />
-      </ItemGroup>
-      <ItemGroup>
         <AndroidEnvironment Include="Android/environment.conf" />
       </ItemGroup>
     </When>
