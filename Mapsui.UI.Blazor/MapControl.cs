@@ -141,7 +141,7 @@ public partial class MapControl : ComponentBase, IMapControl
             if (Map.Viewport.Limiter.ZoomLock) return;
             if (!Map.Viewport.State.HasSize()) return;
 
-            var delta = e.DeltaY;
+            var delta = e.DeltaY * -1; // so that it zooms like on windows
             var resolution = MouseWheelAnimation.GetResolution((int)delta, Map.Viewport, Map);
             Map.Navigator.ZoomTo(resolution, e.Location(await BoundingClientRectAsync()).ToMapsui(), 
                 MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
