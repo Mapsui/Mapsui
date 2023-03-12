@@ -48,7 +48,7 @@ public class MainActivity : AppCompatActivity
         _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol) ?? throw new NullReferenceException();
         _mapControl.Map = MbTilesSample.CreateMap();
         _mapControl.Info += MapOnInfo;
-        _mapControl.Map.RotationLock = true;
+        _mapControl.Map.Viewport.Limiter.RotationLock = true;
         _mapControl.UnSnapRotationDegrees = 20;
         _mapControl.ReSnapRotationDegrees = 5;
         _mapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -211,7 +211,7 @@ public class MainActivity : AppCompatActivity
                 return;
 
             // Or position on feature position: 
-            var screenPosition = _mapControl.Viewport.State.WorldToScreen(geometryFeature.Extent.Centroid);
+            var screenPosition = _mapControl.Map.Viewport.State.WorldToScreen(geometryFeature.Extent.Centroid);
             var screenPositionInPixels = _mapControl.ToPixels(screenPosition);
 
             _popup.SetX((float)screenPositionInPixels.X);

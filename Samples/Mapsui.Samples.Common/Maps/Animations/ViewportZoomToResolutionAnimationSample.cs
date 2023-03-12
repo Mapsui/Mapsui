@@ -23,7 +23,7 @@ public class ViewportZoomToResolutionAnimationSample : IMapControlSample
             if (a.MapInfo?.WorldPosition != null)
             {
                 // Zoom to the a new resolution
-                mapControl.Navigator?.ZoomTo(a.MapInfo.Resolution * 0.5, 500, Easing.CubicOut);
+                mapControl.Map.Navigator.ZoomTo(a.MapInfo.Resolution * 0.5, 500, Easing.CubicOut);
             }
         };
     }

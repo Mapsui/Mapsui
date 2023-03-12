@@ -11,11 +11,11 @@ namespace Mapsui;
 public class Navigator : INavigator
 {
     private readonly Map _map;
-    private readonly IViewport _viewport;
+    private readonly Viewport _viewport;
 
     public EventHandler<ChangeType>? Navigated { get; set; }
 
-    public Navigator(Map map, IViewport viewport)
+    public Navigator(Map map, Viewport viewport)
     {
         _map = map;
         _viewport = viewport;
@@ -92,7 +92,17 @@ public class Navigator : INavigator
     /// <param name="easing">The easing of the animation when duration is > 0</param>
     public void ZoomTo(double resolution, MPoint centerOfZoomInScreenCoordinates, long duration = 0, Easing? easing = default)
     {
+        if (_viewport.Limiter.ZoomLock) return;
+
         var (centerOfZoomX, centerOfZoomY) = _viewport.State.ScreenToWorldXY(centerOfZoomInScreenCoordinates.X, centerOfZoomInScreenCoordinates.Y);
+
+        if (_viewport.Limiter.PanLock)
+        { 
+            // Avoid pan by zooming on center
+            centerOfZoomX = _viewport.State.CenterX;
+            centerOfZoomY = _viewport.State.CenterY;
+        }
+
         var animationEntries = ZoomAroundLocationAnimation.Create(_viewport, centerOfZoomX, centerOfZoomY, resolution,
             _viewport.State, duration, easing ?? Easing.SinInOut);
         AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
@@ -209,6 +219,8 @@ public class Navigator : INavigator
     /// <param name="maxDuration">Maximum duration of fling deceleration></param>
     public void FlingWith(double velocityX, double velocityY, long maxDuration)
     {
+        if (_viewport.Limiter.PanLock) return;
+
         var response = FlingAnimation.Create(velocityX, velocityY, maxDuration);
         _viewport.SetAnimations(response.Entries);
         OnNavigated(response.Duration, ChangeType.Discrete);

@@ -5,7 +5,6 @@ using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
-using System;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
@@ -24,7 +23,7 @@ public class ViewportCenterAndZoomAnimationSample : IMapControlSample
             if (a.MapInfo?.WorldPosition != null)
             {
                 // Animate to the new center and new resultion
-                mapControl.Navigator?.NavigateTo(a.MapInfo.WorldPosition, a.MapInfo.Resolution * 0.5, 500, Easing.CubicOut);
+                mapControl.Map.Navigator.NavigateTo(a.MapInfo.WorldPosition, a.MapInfo.Resolution * 0.5, 500, Easing.CubicOut);
             }
         };
     }

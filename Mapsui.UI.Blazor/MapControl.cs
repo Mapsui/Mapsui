@@ -138,17 +138,13 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (Map?.ZoomLock ?? true) return;
-            if (!Viewport.State.HasSize()) return;
+            if (Map.Viewport.Limiter.ZoomLock) return;
+            if (!Map.Viewport.State.HasSize()) return;
 
             var delta = e.DeltaY * -1; // so that it zooms like on windows
-            var resolution = MouseWheelAnimation.GetResolution((int)delta, _viewport, Map);
-
-            // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-            resolution = Map.Limiter.LimitResolution(resolution, Viewport.State.Width, Viewport.State.Height, Map.Resolutions,
-                Map.Extent);
-            Navigator?.ZoomTo(resolution, e.Location(await BoundingClientRectAsync()).ToMapsui(), MouseWheelAnimation.Duration,
-                MouseWheelAnimation.Easing);
+            var resolution = MouseWheelAnimation.GetResolution((int)delta, Map.Viewport, Map);
+            Map.Navigator.ZoomTo(resolution, e.Location(await BoundingClientRectAsync()).ToMapsui(), 
+                MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
         }
         catch (Exception ex)
         {
@@ -232,8 +228,8 @@ public partial class MapControl : ComponentBase, IMapControl
             {
                 if (_selectRectangle != null)
                 {
-                    var previous = Viewport.State.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
-                    var current = Viewport.State.ScreenToWorld(_selectRectangle.BottomRight.X,
+                    var previous = Map.Viewport.State.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
+                    var current = Map.Viewport.State.ScreenToWorld(_selectRectangle.BottomRight.X,
                         _selectRectangle.BottomRight.Y);
                     ZoomToBox(previous, current);
                 }
@@ -281,7 +277,7 @@ public partial class MapControl : ComponentBase, IMapControl
                 {
                     Cursor = MoveCursor;
 
-                    _viewport.Transform(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui());
+                    Map.Viewport.Transform(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui());
 
                     RefreshGraphics();
 
@@ -305,7 +301,7 @@ public partial class MapControl : ComponentBase, IMapControl
         ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
             ViewportWidth, ViewportHeight, out var x, out var y, out var resolution);
 
-        Navigator?.NavigateTo(new MPoint(x, y), resolution, 384);
+        Map.Navigator.NavigateTo(new MPoint(x, y), resolution, 384);
 
         RefreshData();
         RefreshGraphics();

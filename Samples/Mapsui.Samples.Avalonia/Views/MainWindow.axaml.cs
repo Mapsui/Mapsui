@@ -37,8 +37,8 @@ public partial class MainWindow : Window
     {
         AvaloniaXamlLoader.Load(this);
 
-        MapControl.Map!.Layers.Add(OpenStreetMap.CreateTileLayer());
-        MapControl.Map.RotationLock = false;
+        MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        MapControl.Map.Viewport.Limiter.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -116,7 +116,7 @@ public partial class MainWindow : Window
     {
         // This is probably not the proper event handler for this but I don't know what is.
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-        MapControl.Navigator?.RotateTo(percent * 360);
+        MapControl.Map.Navigator.RotateTo(percent * 360);
         MapControl.Refresh();
     }
 

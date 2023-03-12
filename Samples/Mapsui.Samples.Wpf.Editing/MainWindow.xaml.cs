@@ -37,7 +37,7 @@ public partial class MainWindow
         MapControl.MouseLeftButtonDown += MapControlOnMouseLeftButtonDown;
         MapControl.MouseLeftButtonUp += MapControlOnMouseLeftButtonUp;
 
-        MapControl.Map!.RotationLock = false;
+        MapControl.Map.Viewport.Limiter.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
 
@@ -140,14 +140,14 @@ public partial class MainWindow
     private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
     {
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-        MapControl.Navigator?.RotateTo(percent * 360);
+        MapControl.Map.Navigator.RotateTo(percent * 360);
         MapControl.Refresh();
     }
 
     private void ZoomSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
     {
         if (MapControl.Map != null)
-            MapControl.Navigator?.ZoomTo(MapControl.Map.Resolutions[(int)args.NewValue]);
+            MapControl.Map.Navigator?.ZoomTo(MapControl.Map.Resolutions[(int)args.NewValue]);
     }
 
     private void InitializeEditSetup()
@@ -163,7 +163,7 @@ public partial class MainWindow
         Loaded += (_, _) =>
         {
             var extent = _editManager.Layer.Extent!.Grow(_editManager.Layer.Extent.Width * 0.2);
-            MapControl.Navigator?.NavigateTo(extent);
+            MapControl.Map.Navigator.NavigateTo(extent);
         };
     }
 
@@ -292,7 +292,7 @@ public partial class MainWindow
     private void MapControlOnMouseMove(object sender, MouseEventArgs args)
     {
         var screenPosition = args.GetPosition(MapControl).ToMapsui();
-        var worldPosition = MapControl.Viewport.State.ScreenToWorld(screenPosition);
+        var worldPosition = MapControl.Map.Viewport.State.ScreenToWorld(screenPosition);
         MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
 
         if (args.LeftButton == MouseButtonState.Pressed)
@@ -310,7 +310,7 @@ public partial class MainWindow
     private void MapControlOnMouseLeftButtonUp(object sender, MouseButtonEventArgs args)
     {
         if (MapControl.Map != null)
-            MapControl.Map.PanLock = _editManipulation.Manipulate(MouseState.Up,
+            MapControl.Map.Viewport.Limiter.PanLock = _editManipulation.Manipulate(MouseState.Up,
             args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
 
         if (_selectMode)
@@ -331,13 +331,13 @@ public partial class MainWindow
 
         if (args.ClickCount > 1)
         {
-            MapControl.Map.PanLock = _editManipulation.Manipulate(MouseState.DoubleClick,
+            MapControl.Map.Viewport.Limiter.PanLock = _editManipulation.Manipulate(MouseState.DoubleClick,
                 args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
             args.Handled = true;
         }
         else
         {
-            MapControl.Map.PanLock = _editManipulation.Manipulate(MouseState.Down,
+            MapControl.Map.Viewport.Limiter.PanLock = _editManipulation.Manipulate(MouseState.Down,
                 args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
         }
     }

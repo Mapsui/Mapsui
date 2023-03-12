@@ -1,9 +1,21 @@
-﻿using System.Collections.Generic;
-
-namespace Mapsui.UI;
+﻿namespace Mapsui.Limiting;
 
 public interface IViewportLimiter
 {
+    /// <summary>
+    /// When true the user can not pan (move) the map.
+    /// </summary>
+    public bool PanLock { get; set; }
+
+    /// <summary>
+    /// When true the user an not rotate the map
+    /// </summary>
+    public bool ZoomLock { get; set; }
+
+    /// <summary>
+    /// When true the user can not zoom into the map
+    /// </summary>
+    public bool RotationLock { get; set; }
     /// <summary>
     /// Sets the limit to which the user can pan the map.
     /// If PanLimits is not set, Map.Extent will be used as restricted extent.
@@ -16,10 +28,5 @@ public interface IViewportLimiter
     /// </summary>
     MinMax? ZoomLimits { get; set; }
 
-    void Limit(Viewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope);
-
-    double LimitResolution(double resolution, double screenWidth, double screenHeight,
-        IReadOnlyList<double> mapResolutions, MRect? mapEnvelope);
-
-    void LimitExtent(Viewport viewport, MRect? mapEnvelope);
+    ViewportState Limit(ViewportState viewportState);
 }
