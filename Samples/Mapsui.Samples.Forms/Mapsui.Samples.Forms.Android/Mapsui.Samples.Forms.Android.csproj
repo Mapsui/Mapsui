@@ -54,8 +54,7 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-		<PackageReference Include="Xamarin.Google.Android.Material" VersionOverride="1.4.0.6" />
+  <ItemGroup>	    
     <PackageReference Include="Xamarin.Forms" />
     <PackageReference Include="Xamarin.Essentials" />
   </ItemGroup>
@@ -122,6 +121,7 @@
     <PackageReference Include="Svg.Skia" />
     <PackageReference Include="Xam.Plugin.Geolocator" />
     <PackageReference Include="Xamarin.Forms" />
+    <PackageReference Include="Xamarin.Google.Android.Material" VersionOverride="1.4.0.6" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

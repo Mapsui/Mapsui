@@ -123,8 +123,8 @@
     <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="[1.5.1,2.0.0.0)" />
     <PackageVersion Include="Xamarin.AndroidX.CoordinatorLayout" Version="[1.2.0.2,2.0.0.0)" />
     <PackageVersion Include="Xamarin.Essentials" Version="[1.7.0,2.0.0)" />
-    <PackageVersion Include="Xamarin.Forms" Version="[5.0.0.2478,6.0.0.0)" />
-    <PackageVersion Include="Xamarin.Forms.Platform.WPF" Version="[5.0.0.2478,6.0.0.0)" />
+    <PackageVersion Include="Xamarin.Forms" Version="[5.0.0.2545,6.0.0.0)" />
+    <PackageVersion Include="Xamarin.Forms.Platform.WPF" Version="[5.0.0.2545,6.0.0.0)" />
     <PackageVersion Include="Xamarin.Google.Android.Material" Version="[1.7.0,2.0.0)" />
   </ItemGroup>
 </Project>
