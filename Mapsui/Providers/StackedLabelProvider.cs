@@ -63,7 +63,7 @@ public class StackedLabelProvider : IProvider
 
             var offsetY = double.NaN;
 
-            var orderedFeatures = cluster.Features?.OrderBy(f => f.Extent.Centroid.Y);
+            var orderedFeatures = cluster.Features?.OrderBy(f => f.Extent?.Centroid.Y);
 
             if (orderedFeatures != null)
             {
