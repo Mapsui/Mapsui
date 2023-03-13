@@ -37,8 +37,6 @@ Mapsui is a C# map component for apps
 | Mapsui.ArcGIS | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.ArcGIS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.ArcGIS/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.ArcGIS.svg)](https://www.nuget.org/packages/Mapsui.ArcGIS) |
 | Mapsui.Extensions | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Extensions.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Extensions/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Extensions.svg)](https://www.nuget.org/packages/Mapsui.Extensions) |
 
-
-
 ## Build Status
 | platform | status |
 | ------------- |:-------------:|
