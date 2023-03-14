@@ -107,6 +107,13 @@ public class GeoJsonProvider : IProvider
                                 FillFields(geometryFeature, feature.Attributes);
 
                                 _index.Insert(boundingBox, geometryFeature);
+
+                                // build extent
+                                var mRect = boundingBox.ToMRect();
+                                if (_extent == null)
+                                    _extent = mRect;
+                                else
+                                    _extent.Join(mRect);
                             }
                         }
                     }
@@ -125,18 +132,8 @@ public class GeoJsonProvider : IProvider
     {
         if (_extent == null)
         {
-            foreach (var geometry in FeatureCollection.ItemBoundables)
-            {
-                var boundingBox = geometry.Bounds;
-                if (boundingBox != null)
-                {
-                    var mRect = boundingBox.ToMRect();
-                    if (_extent == null)
-                        _extent = mRect;
-                    else
-                        _extent.Join(mRect);
-                }
-            }
+            // builds extent
+            _ = this.FeatureCollection;
         }
 
         return _extent;
