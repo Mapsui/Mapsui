@@ -84,8 +84,8 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             lineSize = Math.Max(lineSize, vectorStyle.Outline.Width);
         }
 
-        // add half line size.
-        size += (lineSize / 2.0);
+        // add line size.
+        size += lineSize;
 
         return size;
     }
