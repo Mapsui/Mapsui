@@ -10,7 +10,7 @@ using System;
 
 namespace Mapsui.Rendering.Skia;
 
-public class VectorStyleRenderer : ISkiaStyleRenderer
+public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
     public bool Draw(SKCanvas canvas, ViewportState viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
     {
@@ -58,5 +58,35 @@ public class VectorStyleRenderer : ISkiaStyleRenderer
         }
 
         return true;
+    }
+
+    double IFeatureSize.FeatureSize(IFeature feature, IStyle style, IRenderCache renderCache)
+    {
+        if (style is VectorStyle vectorStyle)
+        {
+            return FeatureSize(vectorStyle);
+        }
+
+        return 0;
+    }
+
+    public static double FeatureSize(VectorStyle vectorStyle)
+    {
+        var size = Math.Max(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
+        double lineSize = 1;
+        if (vectorStyle.Line != null)
+        {
+            lineSize = Math.Max(lineSize, vectorStyle.Line.Width);
+        }
+
+        if (vectorStyle.Outline != null)
+        {
+            lineSize = Math.Max(lineSize, vectorStyle.Outline.Width);
+        }
+
+        // add half line size.
+        size += (lineSize / 2.0);
+
+        return size;
     }
 }

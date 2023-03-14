@@ -287,7 +287,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             case SymbolType.Ellipse:
             case SymbolType.Rectangle:
             case SymbolType.Triangle:
-                symbolSize = new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
+                var vectorSize = VectorStyleRenderer.FeatureSize(symbolStyle);
+                symbolSize = new Size(vectorSize, vectorSize);
                 break;
         }
 
