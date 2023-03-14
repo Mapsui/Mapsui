@@ -133,7 +133,7 @@ public class GeoJsonProvider : IProvider
         if (_extent == null)
         {
             // builds extent
-            _ = this.FeatureCollection;
+            _ = FeatureCollection;
         }
 
         return _extent;
