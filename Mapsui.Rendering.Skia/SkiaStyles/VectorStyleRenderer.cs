@@ -60,7 +60,9 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    double IFeatureSize.FeatureSize(IFeature feature, IStyle style, IRenderCache renderCache)
+    bool IFeatureSize.NeedsFeature => false;
+
+    double IFeatureSize.FeatureSize(IStyle style, IRenderCache renderCache, IFeature? feature)
     {
         if (style is VectorStyle vectorStyle)
         {
