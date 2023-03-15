@@ -18,21 +18,6 @@ public class ViewportZoomAroundLocationAnimationSample : ISample
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-
-        mapControl.Map.Info += (s, a) =>
-        {
-            if (a.MapInfo?.WorldPosition != null)
-            {
-                // Zoom in while keeping centerOfZoom at the same position. If you click somewhere to zoom in the mousepointer
-                // will still be above the same location in the map. This can be you used for mouse wheel zoom.
-                mapControl.Map.Navigator.ZoomTo(a.MapInfo.Resolution * 0.5, a.MapInfo.ScreenPosition!, 500, Easing.CubicOut);
-            }
-        };
-    }
-
     public static Map CreateMap()
     {
         var map = new Map
@@ -47,6 +32,15 @@ public class ViewportZoomAroundLocationAnimationSample : ISample
             VerticalAlignment = VerticalAlignment.Top
         });
         map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+        map.Info += (s, a) =>
+        {
+            if (a.MapInfo?.WorldPosition != null)
+            {
+                // Zoom in while keeping centerOfZoom at the same position. If you click somewhere to zoom in the mousepointer
+                // will still be above the same location in the map. This can be you used for mouse wheel zoom.
+                map.Navigator.ZoomTo(a.MapInfo.Resolution * 0.5, a.MapInfo.ScreenPosition!, 500, Easing.CubicOut);
+            }
+        };
         return map;
     }
 }

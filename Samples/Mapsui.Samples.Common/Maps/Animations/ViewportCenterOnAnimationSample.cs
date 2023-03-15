@@ -18,20 +18,6 @@ public class ViewportCenterOnAnimationSample : ISample
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-
-        mapControl.Map.Info += (s, a) =>
-        {
-            if (a.MapInfo?.WorldPosition != null)
-            {
-                // Animate to the new center.
-                mapControl.Map.Navigator.CenterOn(a.MapInfo.WorldPosition, 500, Easing.CubicOut);
-            }
-        };
-    }
-
     public static Map CreateMap()
     {
         var map = new Map
@@ -46,6 +32,14 @@ public class ViewportCenterOnAnimationSample : ISample
             VerticalAlignment = VerticalAlignment.Top
         });
         map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+        map.Info += (s, a) =>
+        {
+            if (a.MapInfo?.WorldPosition != null)
+            {
+                // Animate to the new center.
+                map.Navigator.CenterOn(a.MapInfo.WorldPosition, 500, Easing.CubicOut);
+            }
+        };
         return map;
     }
 }

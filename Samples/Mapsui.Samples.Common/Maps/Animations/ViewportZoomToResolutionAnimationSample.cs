@@ -17,19 +17,6 @@ public class ViewportZoomToResolutionAnimationSample : ISample
     public static int mode = 1;
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-
-        mapControl.Map.Info += (s, a) =>
-        {
-            if (a.MapInfo?.WorldPosition != null)
-            {
-                // Zoom to the a new resolution
-                mapControl.Map.Navigator.ZoomTo(a.MapInfo.Resolution * 0.5, 500, Easing.CubicOut);
-            }
-        };
-    }
 
     public static Map CreateMap()
     {
@@ -45,6 +32,15 @@ public class ViewportZoomToResolutionAnimationSample : ISample
             VerticalAlignment = VerticalAlignment.Top
         });
         map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+
+        map.Info += (s, a) =>
+        {
+            if (a.MapInfo?.WorldPosition != null)
+            {
+                // Zoom to the a new resolution
+                map.Navigator.ZoomTo(a.MapInfo.Resolution * 0.5, 500, Easing.CubicOut);
+            }
+        };
         return map;
     }
 }

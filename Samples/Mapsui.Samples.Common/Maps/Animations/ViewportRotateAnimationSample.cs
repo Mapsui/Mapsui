@@ -18,20 +18,6 @@ public class ViewportRotateAnimationSample : ISample
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-
-        mapControl.Map.Info += (s, a) =>
-        {
-            if (a.MapInfo?.WorldPosition != null)
-            {
-                // Animate towards a new rotation, choosing the most adjacent angle.
-                mapControl.Map.Navigator.RotateTo(mapControl.Map.Viewport.State.Rotation + 45, 500, Easing.CubicIn);
-            }
-        };
-    }
-
     public static Map CreateMap()
     {
         var map = new Map
@@ -46,6 +32,14 @@ public class ViewportRotateAnimationSample : ISample
             VerticalAlignment = VerticalAlignment.Top
         });
         map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+        map.Info += (s, a) =>
+        {
+            if (a.MapInfo?.WorldPosition != null)
+            {
+                // Animate towards a new rotation, choosing the most adjacent angle.
+                map.Navigator.RotateTo(map.Viewport.State.Rotation + 45, 500, Easing.CubicIn);
+            }
+        };
         return map;
     }
 }

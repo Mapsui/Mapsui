@@ -14,10 +14,7 @@ public class ViewportFlyToAnimationSample : ISample
 
     public static int mode = 1;
 
-    public Task<Map> CreateMapAsync()
-    {
-        return Task.FromResult(CreateMap());
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
