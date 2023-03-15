@@ -32,7 +32,7 @@ public class RegressionMapControl : IMapControl
         {
             _map = value ?? throw new ArgumentNullException();
             _map.Viewport.SetSize(ScreenWidth, ScreenHeight);
-            CallHomeIfNeeded();
+            TryToCallHomeAtStartup();
         }
     }
 
@@ -95,12 +95,19 @@ public class RegressionMapControl : IMapControl
         ScreenWidth = screenWidth;
         ScreenHeight = screenHeight;
     }
-    public void CallHomeIfNeeded()
+    private void TryToCallHomeAtStartup()
     {
-        if (!Map.Initialized && Map.Viewport.State.HasSize() && Map?.Extent is not null)
+        if (!Map.HomeIsCalledOnce && // This method is only meant for Map Startup
+            Map.Viewport.State.HasSize() && // Most Navigate methods need a screen size
+            Map?.Extent is not null) // Some Navigate methods need a Map.Extent
         {
-            Map.Home?.Invoke(Map.Navigator);
-            Map.Initialized = true;
+            CallHome();
+            Map.HomeIsCalledOnce = true; // To avoid subsequent calls to Home from this method.
         }
+    }
+
+    public void CallHome()
+    {
+        Map.Home?.Invoke(Map.Navigator);
     }
 }
