@@ -15,8 +15,7 @@ public class LineSample : ISample
     public string Name => "Line";
     public string Category => "Tests";
 
-    public Task<Map> CreateMapAsync()
-        => Task.FromResult(CreateMap());
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {

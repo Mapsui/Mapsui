@@ -5,15 +5,18 @@ using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
-public class ViewportZoomToResolutionAnimationSample : IMapControlSample
+public class ViewportZoomToResolutionAnimationSample : ISample
 {
     public string Name => "Animated Viewport - Zoom";
     public string Category => "Animations";
 
     public static int mode = 1;
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
     public void Setup(IMapControl mapControl)
     {
         mapControl.Map = CreateMap();

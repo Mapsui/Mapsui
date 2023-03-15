@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -7,15 +8,13 @@ using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class PointInWorldUnitsSample : IMapControlSample
+public class PointInWorldUnitsSample : ISample
 {
     public string Name => "Point in World Units";
     public string Category => "Tests";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
 
     public static Map CreateMap()
     {

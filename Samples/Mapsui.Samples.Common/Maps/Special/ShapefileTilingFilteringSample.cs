@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
@@ -16,7 +17,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Special;
 
-public class ShapefileTilingFilteringSample : IMapControlSample
+public class ShapefileTilingFilteringSample : ISample
 {
     static ShapefileTilingFilteringSample()
     {
@@ -27,10 +28,8 @@ public class ShapefileTilingFilteringSample : IMapControlSample
     public string Name => "Filtering on shapefile";
     public string Category => "Special";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
 
     public static Map CreateMap()
     {

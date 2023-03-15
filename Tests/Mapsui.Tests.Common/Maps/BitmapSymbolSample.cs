@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -10,15 +11,13 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class BitmapSymbolSample : IMapControlSample
+public class BitmapSymbolSample : ISample
 {
     public string Name => "Bitmap Symbol";
     public string Category => "Tests";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
 
     public static Map CreateMap()
     {

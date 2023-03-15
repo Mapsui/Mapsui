@@ -21,8 +21,7 @@ public class MapTilerSample : ISample
     public string Name => " 9 Tiles on file system";
     public string Category => "Data Formats";
 
-    public Task<Map> CreateMapAsync()
-        => Task.FromResult(CreateMap());
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {

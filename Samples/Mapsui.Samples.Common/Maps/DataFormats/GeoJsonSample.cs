@@ -22,8 +22,7 @@ public class GeoJsonSample : ISample
     public string Name => "13 GeoJson";
     public string Category => "Data Formats";
 
-    public Task<Map> CreateMapAsync()
-        => Task.FromResult(CreateMap());
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {

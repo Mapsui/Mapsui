@@ -5,20 +5,19 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 #pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class SvgSymbolSample : IMapControlSample
+public class SvgSymbolSample : ISample
 {
     public string Name => "Svg Symbol";
     public string Category => "Tests";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
 
     public static Map CreateMap()
     {
