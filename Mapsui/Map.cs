@@ -25,7 +25,7 @@ namespace Mapsui;
 /// <remarks>
 /// Map holds all map related infos like the target CRS, layers, widgets and so on.
 /// </remarks>
-public class Map : INotifyPropertyChanged, IMap, IDisposable
+public class Map : INotifyPropertyChanged, IDisposable
 {
     private LayerCollection _layers = new();
     private Color _backColor = Color.White;
@@ -45,7 +45,7 @@ public class Map : INotifyPropertyChanged, IMap, IDisposable
     /// <summary>
     /// To register if the initial Home call has been done.
     /// </summary>
-    public bool Initialized { get; set; }
+    public bool HomeIsCalledOnce { get; set; }
 
     /// <summary>
     /// List of Widgets belonging to map
@@ -144,8 +144,6 @@ public class Map : INotifyPropertyChanged, IMap, IDisposable
 
     private void Navigated(object? sender, ChangeType changeType)
     {
-        Initialized = true;
-
         Refresh(changeType);
     }
 
