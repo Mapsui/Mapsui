@@ -394,7 +394,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             if (MyLocationFollow)
             {
                 _mapMyLocationButton!.Picture = _pictMyLocationCenter;
-                Map.Navigator?.CenterOn(MyLocationLayer.MyLocation.ToMapsui());
+                Map.Navigator.CenterOn(MyLocationLayer.MyLocation.ToMapsui());
             }
             else
             {
