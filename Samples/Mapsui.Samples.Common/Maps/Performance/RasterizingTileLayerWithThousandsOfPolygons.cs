@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
+using Mapsui.Nts.Providers;
 using Mapsui.Projections;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Utilities;
@@ -52,7 +53,7 @@ public class RasterizingTileLayerWithThousandsOfPolygons : IMapControlSample
     {
         return new Layer("Polygons")
         {
-            DataSource = new MemoryProvider(CreatePolygon().ToFeatures()),
+            DataSource = new IndexedMemoryProvider(CreatePolygon().ToFeatures()),
             Style = new VectorStyle
             {
                 Fill = new Brush(Color.Red),

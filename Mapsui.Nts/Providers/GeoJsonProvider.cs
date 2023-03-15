@@ -39,7 +39,7 @@ public class GeoJsonProvider : IProvider
         }
     }
 
-    private FeatureCollection DeserializContent(string geoJson, JsonSerializerOptions options)
+    private FeatureCollection DeserializeContent(string geoJson, JsonSerializerOptions options)
     {
         var b = new ReadOnlySpan<byte>(Encoding.UTF8.GetBytes(geoJson));
         return Deserialize(b, options);
@@ -86,7 +86,7 @@ public class GeoJsonProvider : IProvider
             if (_featureCollection == null)
             {
                 // maybe it has GeoJson Content.
-                _featureCollection = IsGeoJsonContent() ? DeserializContent(_geoJson, DefaultOptions) : DeserializeFile(_geoJson, DefaultOptions);
+                _featureCollection = IsGeoJsonContent() ? DeserializeContent(_geoJson, DefaultOptions) : DeserializeFile(_geoJson, DefaultOptions);
             }
 
             return _featureCollection;
