@@ -78,7 +78,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         if (!Map.Viewport.State.HasSize()) return;
 
         var resolution = MouseWheelAnimation.GetResolution((int)e.Delta.Height, Map.Viewport, _map);
-        Map.Navigator?.ZoomTo(resolution, e.Location.ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        Map.Navigator.ZoomTo(resolution, e.Location.ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
     }
 
     protected override void OnSizeChanged(EventArgs e)
