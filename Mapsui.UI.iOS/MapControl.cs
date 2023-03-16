@@ -129,7 +129,7 @@ public partial class MapControl : UIView, IMapControl
         tapGestureRecognizer.RequireGestureRecognizerToFail(doubleTapGestureRecognizer);
         AddGestureRecognizer(tapGestureRecognizer);
 
-        _viewport.SetSize(ViewportWidth, ViewportHeight);
+        Map.Viewport.SetSize(ViewportWidth, ViewportHeight);
     }
 
 
@@ -173,7 +173,7 @@ public partial class MapControl : UIView, IMapControl
     {
         base.TouchesBegan(touches, evt);
 
-        _virtualRotation = Viewport.State.Rotation;
+        _virtualRotation = Map.Viewport.State.Rotation;
     }
 
     public override void TouchesMoved(NSSet touches, UIEvent? evt)
@@ -187,10 +187,10 @@ public partial class MapControl : UIView, IMapControl
                 var position = touch.LocationInView(this).ToMapsui();
                 var previousPosition = touch.PreviousLocationInView(this).ToMapsui();
 
-                _viewport.Transform(position, previousPosition);
+                Map.Viewport.Transform(position, previousPosition);
                 RefreshGraphics();
 
-                _virtualRotation = Viewport.State.Rotation;
+                _virtualRotation = Map.Viewport.State.Rotation;
             }
         }
         else if (evt?.AllTouches.Count >= 2)
@@ -206,15 +206,15 @@ public partial class MapControl : UIView, IMapControl
 
             double rotationDelta = 0;
 
-            if (Map?.RotationLock == false)
+            if (Map.Viewport.Limiter.RotationLock == false)
             {
                 _virtualRotation += angle - previousAngle;
 
                 rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                    _virtualRotation, _viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                    _virtualRotation, Map.Viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
             }
 
-            _viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
+            Map.Viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
             RefreshGraphics();
         }
     }

@@ -23,7 +23,7 @@ public class ViewportCenterOnAnimationSample : IMapControlSample
             if (a.MapInfo?.WorldPosition != null)
             {
                 // Animate to the new center.
-                mapControl.Navigator?.CenterOn(a.MapInfo.WorldPosition, 500, Easing.CubicOut);
+                mapControl.Map.Navigator.CenterOn(a.MapInfo.WorldPosition, 500, Easing.CubicOut);
             }
         };
     }
