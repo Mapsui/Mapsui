@@ -1,15 +1,13 @@
-﻿using System;
-using Mapsui.Cache;
+﻿using Mapsui.Cache;
 using Mapsui.Layers;
 using Mapsui.Providers.Wms;
 using System.Threading.Tasks;
 using Mapsui.Styles;
-using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
-public class WmsSample : ISample, ISampleTest
-{
+public class WmsSample : ISample
+{ 
     public string Name => " 6 WMS";
     public string Category => "Data Formats";
     public static IUrlPersistentCache? DefaultCache { get; set; }
@@ -19,6 +17,7 @@ public class WmsSample : ISample, ISampleTest
         var map = new Map { CRS = "EPSG:28992" };
         // The WMS request needs a CRS
         map.Layers.Add(await CreateLayerAsync());
+        map.Home = (n) => n.NavigateTo(new MPoint(155000, 463000), 500);
         return map;
     }
 
@@ -43,16 +42,5 @@ public class WmsSample : ISample, ISampleTest
         provider.AddLayer("windsnelheden100m");
         provider.SetImageFormat(provider.OutputFormats[0]);
         return provider;
-    }
-
-    public Task InitializeTestAsync(IMapControl mapControl)
-    {
-        if (mapControl.Viewport is IViewport viewport)
-        {
-            // Set Center to Visible Map
-            viewport.SetCenter(412, 1316);
-        }
-
-        return Task.CompletedTask;
     }
 }

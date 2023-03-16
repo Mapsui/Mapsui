@@ -36,8 +36,8 @@ public sealed partial class MainPage : Page
     {
         InitializeComponent();
 
-        MapControl.Map!.Layers.Add(OpenStreetMap.CreateTileLayer());
-        MapControl.Map.RotationLock = false;
+        MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        MapControl.Map.Viewport.Limiter.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -111,7 +111,7 @@ public sealed partial class MainPage : Page
     private void RotationSlider_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
     {
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-        MapControl.Navigator?.RotateTo(percent * 360);
+        MapControl.Map.Navigator.RotateTo(percent * 360);
         MapControl.Refresh();
     }
 }

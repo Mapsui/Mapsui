@@ -24,7 +24,7 @@ public class ViewportZoomAroundLocationAnimationSample : IMapControlSample
             {
                 // Zoom in while keeping centerOfZoom at the same position. If you click somewhere to zoom in the mousepointer
                 // will still be above the same location in the map. This can be you used for mouse wheel zoom.
-                mapControl.Navigator?.ZoomTo(a.MapInfo.Resolution * 0.5, a.MapInfo.ScreenPosition!, 500, Easing.CubicOut);
+                mapControl.Map.Navigator.ZoomTo(a.MapInfo.Resolution * 0.5, a.MapInfo.ScreenPosition!, 500, Easing.CubicOut);
             }
         };
     }

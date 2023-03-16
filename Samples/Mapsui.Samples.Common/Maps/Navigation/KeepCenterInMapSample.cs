@@ -1,6 +1,6 @@
-﻿using Mapsui.Projections;
+﻿using Mapsui.Limiting;
+using Mapsui.Projections;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Navigation;
@@ -22,8 +22,9 @@ public class KeepCenterInMapSample : ISample
         // the top ZoomLimit.
 
         var extent = GetLimitsOfMadagaskar();
-        map.Limiter.PanLimits = extent;
-        map.Limiter.ZoomLimits = new MinMax(0.15, 2500);
+
+        map.Viewport.Limiter.PanLimits = extent;
+        map.Viewport.Limiter.ZoomLimits = new MinMax(0.15, 2500);
         map.Home = n => n.NavigateTo(extent);
         return Task.FromResult(map);
     }

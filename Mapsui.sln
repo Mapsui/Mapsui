@@ -21,13 +21,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB6CAC-1C30-42C9-B628-BACEBF790AB9}"
 	ProjectSection(SolutionItems) = preProject
 		Scripts\buildpack.bat = Scripts\buildpack.bat
-		Scripts\buildpackpush.bat = Scripts\buildpackpush.bat
 		.github\workflows\dotnet-docs.yml = .github\workflows\dotnet-docs.yml
 		.github\workflows\dotnet-release-nugets.yml = .github\workflows\dotnet-release-nugets.yml
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		Scripts\NugetRestore.cmd = Scripts\NugetRestore.cmd
-		Scripts\readme.txt = Scripts\readme.txt
-		Scripts\rename.ps1 = Scripts\rename.ps1
 		Scripts\SamplesMapsuiNugetReferences.ps1 = Scripts\SamplesMapsuiNugetReferences.ps1
 		Scripts\test-image-copier.cmd = Scripts\test-image-copier.cmd
 	EndProjectSection

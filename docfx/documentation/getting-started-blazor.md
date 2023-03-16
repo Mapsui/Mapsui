@@ -15,9 +15,7 @@ PM> Install-Package Mapsui.Blazor -pre
 In Index.razor add this to the to Page.
 
 ```csharp
-@code {
-    private ElementReference? _mapControl;
-}
+@using Mapsui.UI.Blazor
 ```
 
 ```html
@@ -29,16 +27,20 @@ In Index.razor add this to the to Page.
     </div>
 </div>
 ```
-
 ```csharp
-protected override void OnAfterRender(bool firstRender)
+@code 
 {
-  base.OnAfterRender(firstRender);
-  if (firstRender)
-  {
-      if (_mapControl != null)
-         _mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-  }
+    private MapControl? _mapControl;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if (firstRender)
+        {
+            if (_mapControl != null)
+                _mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
+        }
+    }
 }
 ```
 

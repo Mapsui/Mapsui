@@ -67,6 +67,6 @@ public static class FlingAnimation
 
         var newX = viewport.State.CenterX + xDiff;
         var newY = viewport.State.CenterY + yDiff;
-        viewport.State = viewport.State with { CenterX = newX, CenterY = newY };
+        var result = viewport.SetViewportStateWithLimit(viewport.State with { CenterX = newX, CenterY = newY });
     }
 }

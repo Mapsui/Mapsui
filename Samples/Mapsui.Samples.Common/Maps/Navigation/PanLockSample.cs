@@ -17,7 +17,7 @@ public class PanLockSample : IMapControlSample
         // the entire map plus PanLock is created before it is assigned to the 
         // MapControl.Map. This is confusing. If you set PanLock it should be clear
         // what the extent is that you are locking to.
-        mapControl.Map.PanLock = true;
+        mapControl.Map.Viewport.Limiter.PanLock = true;
     }
 
     public static Map CreateMap()

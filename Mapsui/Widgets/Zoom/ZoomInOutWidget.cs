@@ -153,11 +153,11 @@ public class ZoomInOutWidget : Widget, INotifyPropertyChanged
         if (Orientation == Orientation.Vertical && position.Y < Envelope.MinY + Envelope.Height * 0.5 ||
             Orientation == Orientation.Horizontal && position.X < Envelope.MinX + Envelope.Width * 0.5)
         {
-            navigator?.ZoomIn(500);
+            navigator.ZoomIn(500);
         }
         else
         {
-            navigator?.ZoomOut(500);
+            navigator.ZoomOut(500);
         }
 
         return true;
