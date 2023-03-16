@@ -181,7 +181,7 @@ public partial class MapPage : ContentPage
             info.Text = $"{coords.ToString()} - D:{(int)e.Position.Heading} S:{Math.Round(e.Position.Speed, 2)}";
 
             mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
-            mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Viewport.Rotation);
+            mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Map.Viewport.State.Rotation);
             mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
             mapView.MyLocationLayer.CalloutText = $"My location:\nlat={e.Position.Latitude:F6}°\nlon={e.Position.Longitude:F6}°";
         });
@@ -189,7 +189,7 @@ public partial class MapPage : ContentPage
 
     private void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
     {
-        mapView.MyLocationLayer.UpdateMyViewDirection(e.Reading.HeadingMagneticNorth, mapView.Viewport.Rotation, false);
+        mapView.MyLocationLayer.UpdateMyViewDirection(e.Reading.HeadingMagneticNorth, mapView.Map.Viewport.State.Rotation, false);
     }
 
     public void MyLocationClicked(object sender, DrawableClickedEventArgs args)

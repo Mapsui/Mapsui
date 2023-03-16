@@ -10,13 +10,13 @@ public class MouseWheelAnimation
     public int Duration { get; set; } = 1000;
     public Easing Easing { get; set; } = Easing.QuarticOut;
 
-    public double GetResolution(int delta, IViewport viewport, IMap map)
+    public double GetResolution(int delta, Viewport viewport, Map map)
     {
         // If the animation has ended then start from the current resolution.
         // The alternative is that use the previous resolution target and add an extra
         // level to that.
         if (!IsAnimating())
-            _toResolution = viewport.Resolution;
+            _toResolution = viewport.State.Resolution;
 
         if (delta > Constants.Epsilon)
         {

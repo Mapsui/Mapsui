@@ -1,4 +1,4 @@
-﻿using Mapsui.UI;
+﻿using Mapsui.Limiting;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.UI;
@@ -10,7 +10,7 @@ public class ViewportLimiterTests
     public void TestRestrictZoom()
     {
         // arrange
-        var viewport = new Viewport (0, 0, 1, 0, 100, 100);
+        var viewportState = new ViewportState (0, 0, 1, 0, 100, 100);
         // viewport.Center is (0, 0) at this point
         var limiter = new ViewportLimiter
         {
@@ -18,10 +18,10 @@ public class ViewportLimiterTests
         };
 
         // act 
-        limiter.LimitExtent(viewport, viewport.Extent);
+        var result = limiter.Limit(viewportState);
 
         // assert
-        Assert.AreEqual(viewport.CenterX, 20);
-        Assert.AreEqual(viewport.CenterY, 40);
+        Assert.AreEqual(20, result.CenterX);
+        Assert.AreEqual(40, result.CenterY);
     }
 }

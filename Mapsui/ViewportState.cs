@@ -6,6 +6,16 @@ namespace Mapsui;
 
 public record class ViewportState
 {
+    public ViewportState(double centerX, double centerY, double resolution, double rotation, double width, double height)
+    {
+        CenterX = centerX;
+        CenterY = centerY;
+        Resolution = resolution;
+        Rotation = rotation;
+        Width = width;
+        Height = height;
+    }
+
     /// <summary>
     /// The X coordinate of the center of the viewport in world coordinates
     /// </summary>
@@ -37,16 +47,6 @@ public record class ViewportState
     /// Height of viewport in screen pixels
     /// </summary>
     public double Height { get; init; }
-
-    public ViewportState(double centerX, double centerY, double resolution, double rotation, double width, double height)
-    {
-        CenterX = centerX;
-        CenterY = centerY;
-        Resolution = resolution;
-        Rotation = rotation;
-        Width = width;
-        Height = height;
-    }
 
     public static ViewportState operator +(ViewportState a, ViewportState b)
     {

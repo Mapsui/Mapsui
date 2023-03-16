@@ -241,15 +241,15 @@ public class MyLocationLayer : MemoryLayer
                     var modified = InternalUpdateMyLocation(new Position(_animationMyLocationStart.Latitude + deltaLat, _animationMyLocationStart.Longitude + deltaLon));
                     // Update viewport
                     if (modified && _mapView.MyLocationFollow && _mapView.MyLocationEnabled)
-                        _mapView.Navigator?.CenterOn(MyLocation.ToMapsui());
+                        _mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
                     // Refresh map
                     if (_mapView.MyLocationEnabled && modified)
                         _mapView.Refresh();
                 }, 0.0, 1.0);
 
-                if (_mapView.Viewport.Extent != null)
+                if (_mapView.Map.Viewport.State.ToExtent() is not null)
                 {
-                    var fetchInfo = new FetchInfo(_mapView.Viewport.Extent, _mapView.Viewport.Resolution, _mapView.Map?.CRS, ChangeType.Discrete);
+                    var fetchInfo = new FetchInfo(_mapView.Map.Viewport.State.ToSection(), _mapView.Map?.CRS, ChangeType.Discrete);
                     // At the end, update viewport
                     animation.Commit(_mapView, AnimationMyLocationName, 100, 3000, finished: (s, v) => _mapView.Map?.RefreshData(fetchInfo));
                 }
@@ -259,7 +259,7 @@ public class MyLocationLayer : MemoryLayer
                 var modified = InternalUpdateMyLocation(newLocation);
                 // Update viewport
                 if (modified && _mapView.MyLocationFollow && _mapView.MyLocationEnabled)
-                    _mapView.Navigator?.CenterOn(MyLocation.ToMapsui());
+                    _mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
                 // Refresh map
                 if (_mapView.MyLocationEnabled && modified)
                     _mapView.Refresh();

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Mapsui.Cache;
+using Mapsui.Extensions;
 using Mapsui.Styles;
-using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
@@ -43,9 +43,9 @@ public class VectorCache : IVectorCache
         return (T)paint;
     }
 
-    public TPath GetOrCreatePath<TPath, TGeometry>(IReadOnlyViewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, IReadOnlyViewport, float, TPath> toPath) where TPath : class where TGeometry : class
+    public TPath GetOrCreatePath<TPath, TGeometry>(ViewportState viewport, TGeometry geometry, float lineWidth, Func<TGeometry, ViewportState, float, TPath> toPath) where TPath : class where TGeometry : class
     {
-        var key = (viewport.Extent, viewport.Rotation, geometry, lineWidth);
+        var key = (viewport.ToExtent(), viewport.Rotation, geometry, lineWidth);
         if (!_pathCache.TryGetValue(key, out var path))
         {
             path = toPath(geometry, viewport, lineWidth);

@@ -110,7 +110,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
     {
-        _virtualRotation = _viewport.Rotation;
+        _virtualRotation = Map.Viewport.State.Rotation;
     }
 
     private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
@@ -154,8 +154,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
     {
-        if (_map?.ZoomLock ?? true) return;
-        if (!Viewport.HasSize()) return;
+        if (Map.Viewport.Limiter.ZoomLock) return;
+        if (!Map.Viewport.State.HasSize()) return;
+        if (Map is null) return;
 
         var currentPoint = e.GetCurrentPoint(this);
 #if __WINUI__
@@ -163,14 +164,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #else
         var mousePosition = new MPoint(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 #endif
-        var resolution = MouseWheelAnimation.GetResolution(currentPoint.Properties.MouseWheelDelta, _viewport, _map);
-        // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
 
-        if (this.Map == null)
-            return;
-
-        resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Extent);
-        Navigator?.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        var resolution = MouseWheelAnimation.GetResolution(currentPoint.Properties.MouseWheelDelta, Map.Viewport, _map);
+        Map.Navigator.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
 
         e.Handled = true;
     }
@@ -243,15 +239,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         double rotationDelta = 0;
 
-        if (Map?.RotationLock == false)
+        if (Map.Viewport.Limiter.RotationLock == false)
         {
             _virtualRotation += rotation;
 
             rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                _virtualRotation, _viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                _virtualRotation, Map.Viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
         }
 
-        _viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
+        Map.Viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
         RefreshGraphics();
         e.Handled = true;
     }

@@ -37,7 +37,7 @@ public class RasterizingLayerTests
             waitHandle.Set();
         };
 
-        var fetchInfo = new FetchInfo(box, resolution, null, ChangeType.Discrete);
+        var fetchInfo = new FetchInfo(new MSection(box, resolution), null, ChangeType.Discrete);
 
         // act
         layer.RefreshData(fetchInfo);

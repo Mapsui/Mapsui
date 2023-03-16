@@ -23,7 +23,7 @@ public class ViewportRotateAnimationSample : IMapControlSample
             if (a.MapInfo?.WorldPosition != null)
             {
                 // Animate towards a new rotation, choosing the most adjacent angle.
-                mapControl.Navigator?.RotateTo(mapControl.Viewport.Rotation + 45, 500, Easing.CubicIn);
+                mapControl.Map.Navigator.RotateTo(mapControl.Map.Viewport.State.Rotation + 45, 500, Easing.CubicIn);
             }
         };
     }

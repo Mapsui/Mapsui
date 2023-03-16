@@ -5,13 +5,13 @@ namespace Mapsui.ViewportAnimations;
 
 internal class ViewportStateAnimation
 {
-    public static List<AnimationEntry<Viewport>> Create(IViewport viewport, ViewportState viewportState, long duration, Easing? easing)
+    public static List<AnimationEntry<Viewport>> Create(Viewport viewport, ViewportState newViewportState, long duration, Easing? easing)
     {
         var animations = new List<AnimationEntry<Viewport>>();
 
         var entry = new AnimationEntry<Viewport>(
             start: viewport.State,
-            end: viewportState,
+            end: newViewportState,
             animationStart: 0,
             animationEnd: 1,
             easing: easing ?? Easing.SinInOut,
@@ -29,11 +29,11 @@ internal class ViewportStateAnimation
     {
         var start = (ViewportState)entry.Start;
         var end = (ViewportState)entry.End;
-        viewport.State = start + (end - start) * entry.Easing.Ease(value);
+        var result = viewport.SetViewportStateWithLimit(start + (end - start) * entry.Easing.Ease(value));
     }
 
     private static void Final(Viewport viewport, AnimationEntry<Viewport> entry)
     {
-        viewport.State = (ViewportState)entry.End;
+        var result = viewport.SetViewportStateWithLimit((ViewportState)entry.End);
     }
 }

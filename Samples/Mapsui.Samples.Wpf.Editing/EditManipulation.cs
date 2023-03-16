@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using Mapsui.Extensions;
 using Mapsui.Nts.Extensions;
 using Mapsui.Samples.Wpf.Editing.Editing;
 using Mapsui.UI.Wpf;
@@ -53,7 +54,7 @@ public class EditManipulation
                         return editManager.TryInsertCoordinate(
                             mapControl.GetMapInfo(screenPosition, editManager.VertexRadius));
                     }
-                    return editManager.AddVertex(mapControl.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
+                    return editManager.AddVertex(mapControl.Map.Viewport.State.ScreenToWorld(screenPosition).ToCoordinate());
                 }
                 return false;
             case MouseState.Down:

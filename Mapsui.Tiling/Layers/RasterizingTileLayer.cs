@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using BruTile.Cache;
+﻿using BruTile.Cache;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Projections;
@@ -8,7 +6,6 @@ using Mapsui.Rendering;
 using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Provider;
 using Mapsui.Tiling.Rendering;
-using Mapsui.Widgets;
 
 namespace Mapsui.Tiling.Layers;
 
@@ -32,7 +29,6 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher
     /// <param name="renderFormat">Format to Render To</param>
     public RasterizingTileLayer(
         ILayer layer,
-        double renderResolutionMultiplier = 1,
         IRenderer? rasterizer = null,
         float pixelDensity = 1,
         int minTiles = 200,
@@ -44,7 +40,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher
         IPersistentCache<byte[]>? persistentCache = null,
         IProjection? projection = null,
         RenderFormat renderFormat = RenderFormat.Png) : base(
-        new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, projection, renderFormat),
+        new RasterizingTileProvider(layer, rasterizer, pixelDensity, persistentCache, projection, renderFormat),
         minTiles,
         maxTiles,
         dataFetchStrategy,
@@ -53,6 +49,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher
         maxExtraTiles)
     {
         SourceLayer = layer;
+        Name = layer.Name;
     }
 
     public ILayer SourceLayer { get; }

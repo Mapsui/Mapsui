@@ -78,12 +78,12 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         _mapDrawableLayer = new ObservableMemoryLayer<Drawable>(f => f.Feature) { Name = DrawableLayerName, IsMapInfoLayer = true };
 
         // Get defaults from MapControl
-        RotationLock = Map?.RotationLock ?? false;
-        ZoomLock = Map?.ZoomLock ?? true;
-        PanLock = Map?.PanLock ?? false;
+        RotationLock = Map.Viewport.Limiter.RotationLock;
+        ZoomLock = Map.Viewport.Limiter.ZoomLock;
+        PanLock = Map.Viewport.Limiter.PanLock;
 
         // Add some events to _mapControl
-        Viewport.ViewportChanged += HandlerViewportChanged;
+        Map.Viewport.ViewportChanged += HandlerViewportChanged;
         Info += HandlerInfo;
         SingleTap += HandlerTap;
         DoubleTap += HandlerTap;
@@ -99,7 +99,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         AddLayers();
 
         // Add some events to _mapControl.Map.Layers
-        Map!.Layers.Changed += HandleLayersChanged;
+        Map.Layers.Changed += HandleLayersChanged;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
         _pictMyLocationNoCenter = EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.LocationNoCenter.svg");
@@ -394,7 +394,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             if (MyLocationFollow)
             {
                 _mapMyLocationButton!.Picture = _pictMyLocationCenter;
-                Navigator?.CenterOn(MyLocationLayer.MyLocation.ToMapsui());
+                Map.Navigator.CenterOn(MyLocationLayer.MyLocation.ToMapsui());
             }
             else
             {
@@ -405,13 +405,13 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         }
 
         if (Map != null && (propertyName.Equals(nameof(RotationLockProperty)) || propertyName.Equals(nameof(RotationLock))))
-            Map.RotationLock = RotationLock;
+            Map.Viewport.Limiter.RotationLock = RotationLock;
 
         if (Map != null && (propertyName.Equals(nameof(ZoomLockProperty)) || propertyName.Equals(nameof(ZoomLock))))
-            Map.ZoomLock = ZoomLock;
+            Map.Viewport.Limiter.ZoomLock = ZoomLock;
 
         if (Map != null && (propertyName.Equals(nameof(PanLockProperty)) || propertyName.Equals(nameof(PanLock))))
-            Map.PanLock = PanLock;
+            Map.Viewport.Limiter.PanLock = PanLock;
 
         if (propertyName.Equals(nameof(IsZoomButtonVisibleProperty)) || propertyName.Equals(nameof(IsZoomButtonVisible)))
         {
@@ -462,7 +462,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 CreateButtons();
 
                 // Add event handlers
-                Viewport.ViewportChanged += HandlerViewportChanged;
+                Map.Viewport.ViewportChanged += HandlerViewportChanged;
                 Info += HandlerInfo;
             }
         }
@@ -477,12 +477,12 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// <param name="e">Event arguments containing what changed</param>
     private void HandlerViewportChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName?.Equals(nameof(Viewport.Rotation)) ?? false)
+        if (e.PropertyName?.Equals(nameof(Viewport.State.Rotation)) ?? false)
         {
-            MyLocationLayer.UpdateMyDirection(MyLocationLayer.Direction, Viewport.Rotation);
+            MyLocationLayer.UpdateMyDirection(MyLocationLayer.Direction, Map.Viewport.State.Rotation);
 
             // Update rotationButton
-            _mapNorthingButton!.Rotation = (float)Viewport.Rotation;
+            _mapNorthingButton!.Rotation = (float)Map.Viewport.State.Rotation;
         }
     }
 
@@ -594,7 +594,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 if (e.MapInfo!.ScreenPosition == null)
                     return;
 
-                var pinArgs = new PinClickedEventArgs(clickedPin, Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(), e.NumTaps);
+                var pinArgs = new PinClickedEventArgs(clickedPin, Map.Viewport.State.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(), e.NumTaps);
 
                 PinClicked?.Invoke(this, pinArgs);
 
@@ -624,7 +624,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 return;
 
             var calloutArgs = new CalloutClickedEventArgs(clickedCallout,
-                Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
+                Map.Viewport.State.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
                 new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
             clickedCallout?.HandleCalloutClicked(this, calloutArgs);
@@ -652,7 +652,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 return;
 
             var drawableArgs = new DrawableClickedEventArgs(
-                Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
+                Map.Viewport.State.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
                 new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
             clickedDrawable?.HandleClicked(drawableArgs);
@@ -668,7 +668,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 return;
 
             var args = new DrawableClickedEventArgs(
-                Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
+                Map.Viewport.State.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
                 new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
             MyLocationLayer?.HandleClicked(args);
@@ -681,7 +681,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void HandlerLongTap(object? sender, TappedEventArgs e)
     {
-        var args = new MapLongClickedEventArgs(Viewport.ScreenToWorld(e.ScreenPosition).ToNative());
+        var args = new MapLongClickedEventArgs(Map.Viewport.State.ScreenToWorld(e.ScreenPosition).ToNative());
         MapLongClicked?.Invoke(this, args);
 
         if (args.Handled)
@@ -705,7 +705,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             {
                 if (widget.Enabled && (widget.Envelope?.Contains(e.ScreenPosition) ?? false))
                 {
-                    if (Navigator != null && widget.HandleWidgetTouched(Navigator, e.ScreenPosition))
+                    if (widget.HandleWidgetTouched(Map.Navigator, e.ScreenPosition))
                     {
                         e.Handled = true;
                         return;
@@ -719,7 +719,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
             if (mapInfo?.Feature == null)
             {
-                var args = new MapClickedEventArgs(Viewport.ScreenToWorld(e.ScreenPosition).ToNative(), e.NumOfTaps);
+                var args = new MapClickedEventArgs(Map.Viewport.State.ScreenToWorld(e.ScreenPosition).ToNative(), e.NumOfTaps);
                 MapClicked?.Invoke(this, args);
 
                 if (args.Handled)
@@ -745,9 +745,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void HandlerPinPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (Viewport.Extent != null)
+        if (Map.Viewport.State.ToExtent() is not null)
         {
-            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, ChangeType.Continuous);
+            var fetchInfo = new FetchInfo(Map.Viewport.State.ToSection(), Map?.CRS, ChangeType.Continuous);
             Map?.RefreshData(fetchInfo);
         }
 
@@ -757,9 +757,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void HandlerDrawablePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (Viewport.Extent != null)
+        if (Map.Viewport.State.ToExtent() is not null)
         {
-            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, ChangeType.Continuous);
+            var fetchInfo = new FetchInfo(Map.Viewport.State.ToSection(), Map?.CRS, ChangeType.Continuous);
             Map?.RefreshData(fetchInfo);
         }
 
@@ -843,12 +843,12 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void CreateButtons()
     {
-        _mapZoomInButton = _mapZoomInButton ?? CreateButton(0, 0, _pictZoomIn, (s, e) => { Navigator?.ZoomIn(); e.Handled = true; });
+        _mapZoomInButton = _mapZoomInButton ?? CreateButton(0, 0, _pictZoomIn, (s, e) => { Map.Navigator.ZoomIn(); e.Handled = true; });
         _mapZoomInButton.Picture = _pictZoomIn;
         _mapZoomInButton.Enabled = IsZoomButtonVisible;
         Map!.Widgets.Add(_mapZoomInButton);
 
-        _mapZoomOutButton = _mapZoomOutButton ?? CreateButton(0, 40, _pictZoomOut, (s, e) => { Navigator?.ZoomOut(); e.Handled = true; });
+        _mapZoomOutButton = _mapZoomOutButton ?? CreateButton(0, 40, _pictZoomOut, (s, e) => { Map.Navigator.ZoomOut(); e.Handled = true; });
         _mapZoomOutButton.Picture = _pictZoomOut;
         _mapZoomOutButton.Enabled = IsZoomButtonVisible;
         Map!.Widgets.Add(_mapZoomOutButton);
@@ -858,7 +858,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
         Map!.Widgets.Add(_mapMyLocationButton);
 
-        _mapNorthingButton = _mapNorthingButton ?? CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Navigator?.RotateTo(0)); e.Handled = true; });
+        _mapNorthingButton = _mapNorthingButton ?? CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Map.Navigator.RotateTo(0)); e.Handled = true; });
         _mapNorthingButton.Picture = _pictNorthing;
         _mapNorthingButton.Enabled = IsNorthingButtonVisible;
         Map!.Widgets.Add(_mapNorthingButton);

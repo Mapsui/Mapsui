@@ -4,42 +4,35 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-#pragma warning disable IDISP008 // Don't assign member with injected and created disposables
 #pragma warning disable CS0067 // The event is never used
 
 namespace Mapsui.Rendering.Skia.Tests;
 
 public class RegressionMapControl : IMapControl
 {
-    private Map? _map;
-    private readonly LimitedViewport _limitedViewport;
+    private Map _map;
 
     public RegressionMapControl()
     {
         Renderer = new MapRenderer();
-        _limitedViewport = new LimitedViewport();
+        _map = new();
     }
 
     public event EventHandler<MapInfoEventArgs>? Info;
 
-    public Map? Map
+    public Map Map
     {
         get => _map;
         set
         {
             _map = value ?? throw new ArgumentNullException();
-            ((IDisposable)Navigator)?.Dispose();
-            Navigator = new Navigator(_map, _limitedViewport);
-            _limitedViewport.Map = _map;
-            _limitedViewport.Limiter = _map.Limiter;
-            CallHomeIfNeeded();
+            _map.Viewport.SetSize(ScreenWidth, ScreenHeight);
+            TryToCallHomeAtStartup();
         }
     }
 
@@ -93,22 +86,28 @@ public class RegressionMapControl : IMapControl
         throw new NotImplementedException();
     }
 
-    public INavigator? Navigator { get; set; }
     public Performance? Performance { get; set; }
 
-    public IReadOnlyViewport Viewport => _limitedViewport;
-
-    public void SetSize(int width, int height)
+    public double ScreenWidth { get; private set; }
+    public double ScreenHeight { get; private set; }
+    public void SetSize(int screenWidth, int screenHeight)
     {
-        _limitedViewport.SetSize(width, height);
+        ScreenWidth = screenWidth;
+        ScreenHeight = screenHeight;
+    }
+    private void TryToCallHomeAtStartup()
+    {
+        if (!Map.HomeIsCalledOnce && // This method is only meant for Map Startup
+            Map.Viewport.State.HasSize() && // Most Navigate methods need a screen size
+            Map?.Extent is not null) // Some Navigate methods need a Map.Extent
+        {
+            CallHome();
+            Map.HomeIsCalledOnce = true; // To avoid subsequent calls to Home from this method.
+        }
     }
 
-    public void CallHomeIfNeeded()
+    public void CallHome()
     {
-        if (Map != null && !Map.Initialized && Viewport.HasSize() && Map?.Extent != null)
-        {
-            Map.Home?.Invoke(Navigator!);
-            Map.Initialized = true;
-        }
+        Map.Home?.Invoke(Map.Navigator);
     }
 }

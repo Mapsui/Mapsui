@@ -7,7 +7,6 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Mapsui.Extensions;
 using Mapsui.Logging;
-using Mapsui.Providers;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.UI;
@@ -21,7 +20,7 @@ public partial class Window1
     static Window1()
     {
         // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();
+        Tests.Common.Utilities.LoadAssembly();
     }
 
     public Window1()
@@ -32,7 +31,7 @@ public partial class Window1
 
         MapControl.FeatureInfo += MapControlFeatureInfo;
         MapControl.MouseMove += MapControlOnMouseMove;
-        MapControl.Map!.RotationLock = false;
+        MapControl.Map.Viewport.Limiter.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -48,7 +47,7 @@ public partial class Window1
     private void MapControlOnMouseMove(object sender, MouseEventArgs e)
     {
         var screenPosition = e.GetPosition(MapControl);
-        var worldPosition = MapControl.Viewport.ScreenToWorld(screenPosition.X, screenPosition.Y);
+        var worldPosition = MapControl.Map.Viewport.State.ScreenToWorld(screenPosition.X, screenPosition.Y);
         MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
     }
 
@@ -138,7 +137,7 @@ public partial class Window1
     private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-        MapControl.Navigator?.RotateTo(percent * 360);
+        MapControl.Map.Navigator.RotateTo(percent * 360);
         MapControl.Refresh();
     }
 

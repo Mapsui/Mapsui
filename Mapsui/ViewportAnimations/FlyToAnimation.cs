@@ -6,12 +6,12 @@ namespace Mapsui.ViewportAnimations;
 
 public class FlyToAnimation
 {
-    public static List<AnimationEntry<Viewport>> Create(IViewport viewport, MPoint center, double maxResolution, long duration)
+    public static List<AnimationEntry<Viewport>> Create(Viewport viewport, MPoint center, double maxResolution, long duration)
     {
         var animations = new List<AnimationEntry<Viewport>>();
         AnimationEntry<Viewport> entry;
 
-        var viewportCenter = new MPoint(viewport.CenterX, viewport.CenterY);
+        var viewportCenter = new MPoint(viewport.State.CenterX, viewport.State.CenterY);
 
         if (!center.Equals(viewportCenter))
         {
@@ -28,8 +28,8 @@ public class FlyToAnimation
         }
 
         entry = new AnimationEntry<Viewport>(
-            start: viewport.Resolution,
-            end: Math.Min(maxResolution, viewport.Resolution * 2),
+            start: viewport.State.Resolution,
+            end: Math.Min(maxResolution, viewport.State.Resolution * 2),
             animationStart: 0,
             animationEnd: 0.5,
             easing: Easing.SinIn,
@@ -39,8 +39,8 @@ public class FlyToAnimation
         animations.Add(entry);
 
         entry = new AnimationEntry<Viewport>(
-            start: Math.Min(maxResolution, viewport.Resolution * 2),
-            end: viewport.Resolution,
+            start: Math.Min(maxResolution, viewport.State.Resolution * 2),
+            end: viewport.State.Resolution,
             animationStart: 0.5,
             animationEnd: 1,
             easing: Easing.SinIn,
@@ -57,21 +57,23 @@ public class FlyToAnimation
     {
         var newX = ((MPoint)entry.Start).X + (((MPoint)entry.End).X - ((MPoint)entry.Start).X) * entry.Easing.Ease(value);
         var newY = ((MPoint)entry.Start).Y + (((MPoint)entry.End).Y - ((MPoint)entry.Start).Y) * entry.Easing.Ease(value);
-        viewport.State = viewport.State with { CenterX = newX, CenterY = newY };
+        var result = viewport.SetViewportStateWithLimit(viewport.State with { CenterX = newX, CenterY = newY });
     }
 
     private static void CenterFinal(Viewport viewport, AnimationEntry<Viewport> entry)
     {
-        viewport.State = viewport.State with { CenterX = ((MPoint)entry.End).X, CenterY = ((MPoint)entry.End).Y };
+        var result = viewport.SetViewportStateWithLimit(
+            viewport.State with { CenterX = ((MPoint)entry.End).X, CenterY = ((MPoint)entry.End).Y });
     }
 
     private static void ResolutionTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
     {
-        viewport.State = viewport.State with { Resolution = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value) };
+        var result = viewport.SetViewportStateWithLimit(
+            viewport.State with { Resolution = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value) });
     }
 
     private static void ResolutionFinal(Viewport viewport, AnimationEntry<Viewport> entry)
     {
-        viewport.State = viewport.State with { Resolution = (double)entry.End };
+        var result = viewport.SetViewportStateWithLimit(viewport.State with { Resolution = (double)entry.End });
     }
 }

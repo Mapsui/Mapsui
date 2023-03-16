@@ -34,16 +34,16 @@ public class MainForm : Form
     Slider RotationSlider = new() { Width = 200 };
     public MainForm()
     {
-        this.MinimumSize = new Size(3, 2) * 100;
-        this.Size = this.MinimumSize * 4;
-        this.Padding = 10;
+        MinimumSize = new Size(3, 2) * 100;
+        Size = MinimumSize * 4;
+        Padding = 10;
 
         var eto_platform = global::Eto.Platform.Instance.ToString();
-        var os_platform = System.Environment.OSVersion.ToString();
-        this.Title = $"Mapsui SampleApp - {eto_platform} - {os_platform}";
+        var os_platform = Environment.OSVersion.ToString();
+        Title = $"Mapsui SampleApp - {eto_platform} - {os_platform}";
 
         MapControl.MouseMove += MapControlOnMouseMove;
-        MapControl.Map!.RotationLock = false;
+        MapControl.Map.Viewport.Limiter.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         RotationSlider.ValueChanged += RotationSliderChanged;
@@ -88,7 +88,7 @@ public class MainForm : Form
 
     private void MapControlOnMouseMove(object? sender, MouseEventArgs e)
     {
-        var worldPosition = MapControl.Viewport.ScreenToWorld(e.Location.X, e.Location.Y);
+        var worldPosition = MapControl.Map.Viewport.State.ScreenToWorld(e.Location.X, e.Location.Y);
         MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
     }
     private void FillListWithSamples()
@@ -170,7 +170,7 @@ public class MainForm : Form
     private void RotationSliderChanged(object? sender, EventArgs e)
     {
         var percent = (double)RotationSlider.Value / (RotationSlider.MaxValue - RotationSlider.MinValue);
-        MapControl.Navigator?.RotateTo(percent * 360);
+        MapControl.Map.Navigator.RotateTo(percent * 360);
         MapControl.Refresh();
     }
 

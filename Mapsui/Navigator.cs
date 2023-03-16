@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Utilities;
 using Mapsui.ViewportAnimations;
 
@@ -10,11 +11,11 @@ namespace Mapsui;
 public class Navigator : INavigator
 {
     private readonly Map _map;
-    private readonly IViewport _viewport;
+    private readonly Viewport _viewport;
 
     public EventHandler<ChangeType>? Navigated { get; set; }
 
-    public Navigator(Map map, IViewport viewport)
+    public Navigator(Map map, Viewport viewport)
     {
         _map = map;
         _viewport = viewport;
@@ -32,7 +33,7 @@ public class Navigator : INavigator
         if (extent == null) return;
 
         var resolution = ZoomHelper.DetermineResolution(
-            extent.Width, extent.Height, _viewport.Width, _viewport.Height, scaleMethod);
+            extent.Width, extent.Height, _viewport.State.Width, _viewport.State.Height, scaleMethod);
 
         NavigateTo(extent.Centroid, resolution, duration, easing);
     }
@@ -91,9 +92,19 @@ public class Navigator : INavigator
     /// <param name="easing">The easing of the animation when duration is > 0</param>
     public void ZoomTo(double resolution, MPoint centerOfZoomInScreenCoordinates, long duration = 0, Easing? easing = default)
     {
-        var (centerOfZoomX, centerOfZoomY) = _viewport.ScreenToWorldXY(centerOfZoomInScreenCoordinates.X, centerOfZoomInScreenCoordinates.Y);
+        if (_viewport.Limiter.ZoomLock) return;
+
+        var (centerOfZoomX, centerOfZoomY) = _viewport.State.ScreenToWorldXY(centerOfZoomInScreenCoordinates.X, centerOfZoomInScreenCoordinates.Y);
+
+        if (_viewport.Limiter.PanLock)
+        { 
+            // Avoid pan by zooming on center
+            centerOfZoomX = _viewport.State.CenterX;
+            centerOfZoomY = _viewport.State.CenterY;
+        }
+
         var animationEntries = ZoomAroundLocationAnimation.Create(_viewport, centerOfZoomX, centerOfZoomY, resolution,
-            _viewport.CenterX, _viewport.CenterY, _viewport.Resolution, duration, easing ?? Easing.SinInOut);
+            _viewport.State, duration, easing ?? Easing.SinInOut);
         AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
         _viewport.SetAnimations(animationEntries);
 
@@ -106,7 +117,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomIn(long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
+        var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.State.Resolution);
 
         ZoomTo(resolution, duration, easing);
     }
@@ -118,7 +129,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomOut(long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
+        var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.State.Resolution);
 
         ZoomTo(resolution, duration, easing);
     }
@@ -132,7 +143,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomIn(MPoint centerOfZoom, long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
+        var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.State.Resolution);
 
         ZoomTo(resolution, centerOfZoom, duration, easing);
     }
@@ -146,7 +157,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomOut(MPoint centerOfZoom, long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
+        var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.State.Resolution);
         ZoomTo(resolution, centerOfZoom, duration, easing);
     }
 
@@ -208,6 +219,8 @@ public class Navigator : INavigator
     /// <param name="maxDuration">Maximum duration of fling deceleration></param>
     public void FlingWith(double velocityX, double velocityY, long maxDuration)
     {
+        if (_viewport.Limiter.PanLock) return;
+
         var response = FlingAnimation.Create(velocityX, velocityY, maxDuration);
         _viewport.SetAnimations(response.Entries);
         OnNavigated(response.Duration, ChangeType.Discrete);

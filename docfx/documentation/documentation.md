@@ -5,7 +5,7 @@
 - There is a /docfx folder with a docfx project called Mapsui. 
 - This projects documenation folder contains all the md files used to generate the 'documentation' tab in the site. This is the source of those files, they should be edited there.
 - In the docfx folder there is a script (build-site.cmd) that generates the documentation site (in /docfx/mapsui/_site) and copies it to the /docs folder.
-- The Mapsui project on github is configured to automatically publish this docs folder to https://mapsui.github.io/mapsui
+- The Mapsui project on github is configured to automatically publish this docs folder to https://mapsui.github.io/Mapsui
 - A commit of an md file should trigger the build server. This should run the build-site.cmd. This should commit the generated site to the repo. It will when then show up on the website. We should have two separate build configurations one for the docs which ignores the project and one for the project which ignores the docs.
 
 ## Documentation guidelines

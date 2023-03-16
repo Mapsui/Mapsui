@@ -11,8 +11,8 @@ namespace Mapsui.Rendering;
 
 public static class VisibleFeatureIterator
 {
-    public static void IterateLayers(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, long iteration,
-        Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float, long> callback)
+    public static void IterateLayers(ViewportState viewport, IEnumerable<ILayer> layers, long iteration,
+        Action<ViewportState, ILayer, IStyle, IFeature, float, long> callback)
     {
         foreach (var layer in layers)
         {
@@ -24,12 +24,13 @@ public static class VisibleFeatureIterator
         }
     }
 
-    private static void IterateLayer(IReadOnlyViewport viewport, ILayer layer, long iteration,
-        Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float, long> callback)
+    private static void IterateLayer(ViewportState viewport, ILayer layer, long iteration,
+        Action<ViewportState, ILayer, IStyle, IFeature, float, long> callback)
     {
-        if (viewport.Extent == null) return;
+        var extent = viewport.ToExtent();
+        if (extent is null) return;
 
-        var features = layer.GetFeatures(viewport.Extent, viewport.Resolution).ToList();
+        var features = layer.GetFeatures(extent, viewport.Resolution).ToList();
 
         // Part 1. Styles on the layer
         var layerStyles = layer.Style.GetStylesToApply(viewport.Resolution);

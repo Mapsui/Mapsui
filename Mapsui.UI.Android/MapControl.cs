@@ -174,7 +174,7 @@ public partial class MapControl : ViewGroup, IMapControl
 
     public void OnFling(object? sender, GestureDetector.FlingEventArgs args)
     {
-        Navigator?.FlingWith(args.VelocityX / 10, args.VelocityY / 10, 1000);
+        Map.Navigator.FlingWith(args.VelocityX / 10, args.VelocityY / 10, 1000);
     }
 
     public void MapView_Touch(object? sender, TouchEventArgs args)
@@ -198,7 +198,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 {
                     (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                     _mode = TouchMode.Zooming;
-                    _virtualRotation = Viewport.Rotation;
+                    _virtualRotation = Map.Viewport.State.Rotation;
                 }
                 else
                 {
@@ -217,7 +217,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 {
                     (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                     _mode = TouchMode.Zooming;
-                    _virtualRotation = Viewport.Rotation;
+                    _virtualRotation = Map.Viewport.State.Rotation;
                 }
                 else
                 {
@@ -237,7 +237,7 @@ public partial class MapControl : ViewGroup, IMapControl
                             var touch = touchPoints.First();
                             if (_previousTouch != null)
                             {
-                                _viewport.Transform(touch, _previousTouch);
+                                Map.Viewport.Transform(touch, _previousTouch);
                                 RefreshGraphics();
                             }
                             _previousTouch = touch;
@@ -253,15 +253,15 @@ public partial class MapControl : ViewGroup, IMapControl
 
                             double rotationDelta = 0;
 
-                            if (Map?.RotationLock == false)
+                            if (Map.Viewport.Limiter.RotationLock is false)
                             {
                                 _virtualRotation += angle - previousAngle;
 
                                 rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                                    _virtualRotation, _viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                                    _virtualRotation, Map.Viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
                             }
 
-                            _viewport.Transform(touch, previousTouch, radius / previousRadius, rotationDelta);
+                            Map.Viewport.Transform(touch, previousTouch, radius / previousRadius, rotationDelta);
                             RefreshGraphics();
 
                             (_previousTouch, _previousRadius, _previousAngle) = (touch, radius, angle);
