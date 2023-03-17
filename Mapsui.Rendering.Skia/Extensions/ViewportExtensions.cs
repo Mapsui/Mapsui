@@ -18,6 +18,11 @@ public static class ViewportExtensions
         return matrix;
     }
 
+    public static SKMatrix ToSKMatrix(this ViewportState viewportState, SKMatrix matrix)
+    {
+        return SKMatrix.Concat(viewportState.ToSKMatrix(), matrix);
+    }
+
     /// <summary> Converts the Extent of the Viewport to a SKRect </summary>
     /// <param name="viewport">viewport</param>
     /// <returns>SkRect</returns>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -24,6 +25,7 @@ internal static class PolygonRenderer
         SKPaint paint;
         SKPaint paintFill;
         SKPath path;
+        MatrixKeeper? matrixKeeper = null;
         if (vectorCache == null)
         {
             paint = CreateSkPaint(vectorStyle?.Outline, opacity);
@@ -34,7 +36,9 @@ internal static class PolygonRenderer
         {
             paint = vectorCache.GetOrCreatePaint(vectorStyle?.Outline, opacity, CreateSkPaint);
             paintFill = vectorCache.GetOrCreatePaint(vectorStyle?.Fill, opacity, viewport.Rotation, CreateSkPaint);
-            path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (geometry, viewport, lineWidth) => geometry.ToSkiaPath(viewport, viewport.ToSkiaRect(), lineWidth));
+            var extent = viewport.ToExtent();
+            path = vectorCache.GetOrCreatePath(extent, polygon, lineWidth, (geometry, extent, lineWidth) => geometry.ToSkiaPath(extent.ToViewPortState(), extent.ToSkia(), lineWidth));
+            matrixKeeper = new MatrixKeeper(viewport, canvas);
         }
 
         if (vectorStyle?.Fill?.FillStyle == FillStyle.Solid)
@@ -60,6 +64,8 @@ internal static class PolygonRenderer
         {
             canvas.DrawPath(path, paint);
         }
+
+        matrixKeeper?.Dispose();
     }
 
     private static SKPaint CreateSkPaint(Brush? brush, float opacity, double rotation, ISymbolCache? symbolCache)

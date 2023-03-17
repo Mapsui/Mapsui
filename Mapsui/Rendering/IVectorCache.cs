@@ -8,10 +8,12 @@ public interface IVectorCache
     T GetOrCreatePaint<T>(Pen? pen, float opacity, Func<Pen?, float, T> toPaint)
         where T : class;
 
-    T GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint)
+    T GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation,
+        Func<Brush?, float, double, ISymbolCache, T> toPaint)
         where T : class;
 
-    TPath GetOrCreatePath<TPath, TGeometry>(ViewportState viewport, TGeometry geometry, float lineWidth, Func<TGeometry, ViewportState, float, TPath> toPath)
+    TPath GetOrCreatePath<TPath, TGeometry>(MRect? extent, TGeometry geometry, float lineWidth, Func<TGeometry, MRect?, float, TPath> toPath)
         where TPath : class
         where TGeometry : class;
 }
+
