@@ -5,9 +5,12 @@ namespace Mapsui.Rendering.Skia.Extensions;
 
 public static class MRectExtensions
 {
-    private static readonly SKRect _maxSkRect = new SKRect(float.MinValue, float.MinValue, float.MaxValue, float.MaxValue);
+    private const float _minFloatValue = float.MinValue / 2 - 1;
+    private const float _maxFloatValue = float.MaxValue / 2 - 1;
 
-    private static readonly ViewportState _maxViewPort = new ViewportState(0, 0, 1, 0, double.MaxValue, double.MaxValue);
+    private static readonly SKRect _maxSkRect = new SKRect(_minFloatValue, _minFloatValue, _maxFloatValue, _maxFloatValue);
+
+    private static readonly ViewportState _maxViewPort = new ViewportState(0, 0, 1, 0, 0, 0);
 
     public static SKRect ToSkia(this MRect? rect)
     {
