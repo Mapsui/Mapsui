@@ -12,6 +12,7 @@ internal class MatrixKeeper : IDisposable
     {
         _matrix = viewportState.ToSKMatrix(canvas.TotalMatrix);
         _canvas = canvas;
+        _canvas.SetMatrix(_matrix);        
     }
 
     public MatrixKeeper(SKMatrix matrix, SKCanvas canvas)
