@@ -18,18 +18,14 @@ public static class ViewportExtensions
         return matrix;
     }
 
-    public static SKMatrix ToSKMatrix(this ViewportState viewport, SKMatrix priorMatrix, MRect rect)
+    public static SKMatrix ToSKMatrix(this ViewportState viewport, SKMatrix priorMatrix)
     {      
         var userRotation = SKMatrix.CreateRotationDegrees((float)viewport.Rotation);
-        var focalPointOffset = SKMatrix.CreateTranslation(
-            (float)(rect.Left - viewport.CenterX),
-            (float)(viewport.CenterY - rect.Top));
         var zoom = 1.0 / viewport.Resolution;
         var zoomScale = SKMatrix.CreateScale((float)zoom, (float)zoom);
         var moveToCenter = SKMatrix.CreateTranslation((float)(-viewport.CenterX * zoom), (float)(-viewport.CenterY * zoom));
              
-        var matrix = SKMatrix.Concat(zoomScale, focalPointOffset);
-        matrix = SKMatrix.Concat(userRotation, matrix);
+        var matrix = SKMatrix.Concat(userRotation, zoomScale);
         matrix = SKMatrix.Concat(moveToCenter, matrix);
         matrix = SKMatrix.Concat(priorMatrix, matrix);
 
