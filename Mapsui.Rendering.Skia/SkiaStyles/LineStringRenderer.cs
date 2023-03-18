@@ -33,6 +33,10 @@ public static class LineStringRenderer
             var lineWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1);
             var extent = viewport.ToExtent();
             path = vectorCache.GetOrCreatePath(null, lineString, null,(geometry, _, _) => geometry.ToSkiaPath());                        
+            var matrix = viewport.ToSKMatrix(canvas.TotalMatrix);
+            var path2 = lineString.ToSkiaPath();
+            path2.Transform(matrix);
+
             matrixKeeper = new MatrixKeeper(viewport, canvas);
         }
 
