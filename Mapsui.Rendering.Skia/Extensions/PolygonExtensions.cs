@@ -10,6 +10,17 @@ internal static class PolygonExtensions
     /// Converts a Polygon into a SKPath, that is clipped to clipRect, where exterior is bigger than interior
     /// </summary>
     /// <param name="polygon">Polygon to convert</param>
+    /// <param name="strokeWidth">StrokeWidth for inflating clipRect</param>
+    /// <returns></returns>
+    public static SKPath ToSkiaPath(this Polygon polygon, float strokeWidth)
+    {
+
+    }
+
+    /// <summary>
+    /// Converts a Polygon into a SKPath, that is clipped to clipRect, where exterior is bigger than interior
+    /// </summary>
+    /// <param name="polygon">Polygon to convert</param>
     /// <param name="viewportState">Viewport implementation</param>
     /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
     /// <param name="strokeWidth">StrokeWidth for inflating clipRect</param>
