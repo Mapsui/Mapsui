@@ -12,7 +12,7 @@ public interface IVectorCache
         Func<Brush?, float, double, ISymbolCache, T> toPaint)
         where T : class;
 
-    TPath GetOrCreatePath<TPath, TGeometry>(MRect? extent, TGeometry geometry, float lineWidth, Func<TGeometry, MRect?, float, TPath> toPath)
+    TPath GetOrCreatePath<TPath, TGeometry>(MRect? extent, TGeometry geometry, Func<TGeometry, MRect?, TPath> toPath)
         where TPath : class
         where TGeometry : class;
 }

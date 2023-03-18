@@ -43,7 +43,7 @@ public class VectorCache : IVectorCache
         return (T)paint;
     }
 
-    public TPath GetOrCreatePath<TPath, TGeometry>(MRect extent, TGeometry geometry, float lineWidth, Func<TGeometry, MRect?, float, TPath> toPath) where TPath : class where TGeometry : class
+    public TPath GetOrCreatePath<TPath, TGeometry>(MRect extent, TGeometry geometry, Func<TGeometry, MRect?, float, TPath> toPath) where TPath : class where TGeometry : class
     {
         var key = (extent, geometry, lineWidth);
         if (!_pathCache.TryGetValue(key, out var path))
