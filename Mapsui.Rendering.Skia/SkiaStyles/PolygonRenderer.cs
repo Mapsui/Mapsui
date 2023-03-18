@@ -38,7 +38,8 @@ internal static class PolygonRenderer
             paintFill = vectorCache.GetOrCreatePaint(vectorStyle?.Fill, opacity, viewport.Rotation, CreateSkPaint);
             var extent = viewport.ToExtent();
             path = vectorCache.GetOrCreatePath(null, polygon, null, (geometry, _, _) => geometry.ToSkiaPath());
-            matrixKeeper = new MatrixKeeper(viewport, canvas);
+            var matrix = viewport.ToSKMatrix(canvas.TotalMatrix);
+            matrixKeeper = new MatrixKeeper(matrix, canvas);
         }
 
         if (vectorStyle?.Fill?.FillStyle == FillStyle.Solid)
