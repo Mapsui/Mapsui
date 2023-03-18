@@ -1,7 +1,6 @@
 ﻿using System;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
-using NetTopologySuite.Geometries;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
@@ -49,8 +48,8 @@ public class RenderCache : IRenderCache
         return VectorCache == null ? toPaint(brush, opacity, rotation, SymbolCache) : VectorCache.GetOrCreatePaint(brush, opacity, rotation, toPaint);
     }
 
-    public TPath GetOrCreatePath<TPath, TGeometry>(MRect? extent, TGeometry geometry, Func<TGeometry, MRect?, TPath> toPath) where TPath : class where TGeometry : class
+    public TPath GetOrCreatePath<TPath, TGeometry>(ViewportState? viewport, TGeometry geometry, float? lineWidth, Func<TGeometry, ViewportState?, float?, TPath> toPath) where TPath : class where TGeometry : class
     {
-        return VectorCache == null ? toPath(geometry, extent) : VectorCache.GetOrCreatePath(extent, geometry, toPath);
+        return VectorCache == null ? toPath(geometry, viewport, lineWidth) : VectorCache.GetOrCreatePath(viewport, geometry, lineWidth, toPath);
     }
 }
