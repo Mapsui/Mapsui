@@ -381,8 +381,12 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }).ToArray();
     }
 
-    double IFeatureSize.FeatureSize(IFeature feature, IStyle style, IRenderCache renderingCache)
+    bool IFeatureSize.NeedsFeature => true;
+
+    double IFeatureSize.FeatureSize(IStyle style, IRenderCache renderingCache, IFeature? feature)
     {
+        if (feature == null) throw new ArgumentNullException(nameof(feature));
+
         if (style is LabelStyle labelStyle)
         {
             return FeatureSize(feature, labelStyle, Paint, renderingCache);
