@@ -20,7 +20,7 @@ public class SymbolStyleFeatureSizeTests
         var symbolCache = new SymbolCache();
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
 
-        Assert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth));
+        Assert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1);
     }
 
     [Test]
@@ -35,7 +35,7 @@ public class SymbolStyleFeatureSizeTests
         var symbolCache = new SymbolCache();
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
 
-        Assert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) * 2);
+        Assert.AreEqual(size, (Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1) * 2);
     }
 
     [Test]
@@ -50,7 +50,7 @@ public class SymbolStyleFeatureSizeTests
         var symbolCache = new SymbolCache();
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
 
-        Assert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 2 * 2);
+        Assert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 2 * 2 + 1);
     }
 
     [Test]
@@ -65,7 +65,7 @@ public class SymbolStyleFeatureSizeTests
         var symbolCache = new SymbolCache();
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
 
-        Assert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 2 * 2);
+        Assert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 2 * 2 + 1);
     }
 
     [Test]
@@ -80,7 +80,7 @@ public class SymbolStyleFeatureSizeTests
         var symbolCache = new SymbolCache();
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
 
-        Assert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + Math.Sqrt(2 * 2 + 2 * 2) * 2);
+        Assert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1 + Math.Sqrt(2 * 2 + 2 * 2) * 2);
     }
 
     [Test]
