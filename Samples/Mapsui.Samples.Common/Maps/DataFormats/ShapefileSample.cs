@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers.Shapefile;
@@ -10,7 +11,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
-public class ShapefileSample : IMapControlSample
+public class ShapefileSample : ISample
 {
     static ShapefileSample()
     {
@@ -21,10 +22,7 @@ public class ShapefileSample : IMapControlSample
     public string Name => "12 Shapefile with labels";
     public string Category => "Data Formats";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
