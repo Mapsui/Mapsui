@@ -111,7 +111,7 @@ public static class Animation
                 if (!entriesArray[i].Repeat)
                 {
                     // Animation shouldn't be repeated, so remove it
-                    Stop(target, entriesArray[i], true);
+                    target = Stop(target, entriesArray[i], true).CurrentState;
                     continue;
                 }
 
@@ -128,7 +128,9 @@ public static class Animation
                 continue;
             }
 
-            isRunning |= entriesArray[i].Tick(target, value).IsRunning;            
+            var result = entriesArray[i].Tick(target, value);
+            isRunning |= result.IsRunning;
+            target = result.CurrentState;
         }
 
         return new AnimationResult<T>(target, isRunning);
