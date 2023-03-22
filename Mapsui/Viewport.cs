@@ -186,7 +186,9 @@ public class Viewport
     {
         if (_animations.All(a => a.Done))
             _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
-        return Animation.UpdateAnimations(this, _animations).IsRunning;
+        var result = Animation.UpdateAnimations(this, _animations);
+        State = result.CurrentState.State;
+        return result.IsRunning;
     }
 
     public void SetAnimations(List<AnimationEntry<Viewport>> animations)
