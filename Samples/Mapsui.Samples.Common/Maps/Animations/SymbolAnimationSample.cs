@@ -1,4 +1,5 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Animations;
+using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
@@ -72,8 +73,8 @@ public class SymbolAnimationSample : IMapControlSample, IPrepareSampleTest, ISam
             animationEnd: .5,
             easing: Easing.SinInOut,
             repeat: _repeat,
-            tick: (symbolStyle, e, v) => { style.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); },
-            final: (symbolStyle, e) => { style.SymbolScale = (double)e.End; }
+            tick: (s, e, v) => { s.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); return new AnimationResult<SymbolStyle>(s, true); },
+            final: (s, e) => { s.SymbolScale = (double)e.End; ; return new AnimationResult<SymbolStyle>(s, true); }
         );
         animations.Add(entry1);
 
@@ -84,8 +85,8 @@ public class SymbolAnimationSample : IMapControlSample, IPrepareSampleTest, ISam
             animationEnd: 1,
             easing: Easing.SinInOut,
             repeat: _repeat,
-            tick: (symbolStyle, e, v) => { style.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); },
-            final: (symbolStyle, e) => { style.SymbolScale = (double)e.End; }
+            tick: (s, e, v) => { s.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); return new AnimationResult<SymbolStyle>(s, true); },
+            final: (s, e) => { s.SymbolScale = (double)e.End; ; return new AnimationResult<SymbolStyle>(s, true); }
         );
         animations.Add(entry2);
 
@@ -95,24 +96,26 @@ public class SymbolAnimationSample : IMapControlSample, IPrepareSampleTest, ISam
             animationStart: 0,
             animationEnd: 1,
             easing: Easing.SinInOut,
-            tick: (symbolStyle, e, v) =>
+            tick: (s, e, v) =>
             {
                 var start = (Color)e.Start;
                 var end = (Color)e.End;
-                if (symbolStyle.Fill != null)
+                if (s.Fill != null)
                 {
-                    symbolStyle.Fill.Color = new Color(
+                    s.Fill.Color = new Color(
                         (int)(start.R * (1.0 - v) + end.R * v),
                         (int)(start.G * (1.0 - v) + end.G * v),
                         (int)(start.B * (1.0 - v) + end.B * v));
                 }
+                return new AnimationResult<SymbolStyle>(s, true);
             },
-            final: (symbolStyle, e) =>
+            final: (s, e) =>
             {
-                if (symbolStyle.Fill != null)
+                if (s.Fill != null)
                 {
-                    symbolStyle.Fill.Color = (Color)e.End;
+                    s.Fill.Color = (Color)e.End;
                 }
+                return new AnimationResult<SymbolStyle>(s, true);
             }
         );
         animations.Add(entry3);

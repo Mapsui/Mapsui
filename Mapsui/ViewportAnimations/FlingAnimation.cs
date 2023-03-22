@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Utilities;
 
@@ -42,7 +43,7 @@ public static class FlingAnimation
         return (animations, (long)Math.Ceiling(duration));
     }
 
-    private static void FlingTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
+    private static AnimationResult<Viewport> FlingTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
     {
         var timeAmount = 16 / 1000d; // 16 milliseconds 
 
@@ -57,7 +58,7 @@ public static class FlingAnimation
             yMovement = 0;
 
         if (xMovement == 0 && yMovement == 0)
-            return;
+            return new AnimationResult<Viewport>(viewport, false);
 
         var previous = viewport.State.ScreenToWorld(0, 0);
         var current = viewport.State.ScreenToWorld(xMovement, yMovement);
@@ -68,5 +69,6 @@ public static class FlingAnimation
         var newX = viewport.State.CenterX + xDiff;
         var newY = viewport.State.CenterY + yDiff;
         var result = viewport.SetViewportStateWithLimit(viewport.State with { CenterX = newX, CenterY = newY });
+        return new AnimationResult<Viewport>(viewport, result.ViewportStateChanged);
     }
 }

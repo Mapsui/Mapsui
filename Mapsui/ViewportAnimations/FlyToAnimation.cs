@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Mapsui.Animations;
 using Mapsui.Utilities;
 
 namespace Mapsui.ViewportAnimations;
@@ -53,27 +54,31 @@ public class FlyToAnimation
         return animations;
     }
 
-    private static void CenterTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
+    private static AnimationResult<Viewport> CenterTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
     {
         var newX = ((MPoint)entry.Start).X + (((MPoint)entry.End).X - ((MPoint)entry.Start).X) * entry.Easing.Ease(value);
         var newY = ((MPoint)entry.Start).Y + (((MPoint)entry.End).Y - ((MPoint)entry.Start).Y) * entry.Easing.Ease(value);
         var result = viewport.SetViewportStateWithLimit(viewport.State with { CenterX = newX, CenterY = newY });
+        return new AnimationResult<Viewport>(viewport, result.ViewportStateChanged);
     }
 
-    private static void CenterFinal(Viewport viewport, AnimationEntry<Viewport> entry)
+    private static AnimationResult<Viewport> CenterFinal(Viewport viewport, AnimationEntry<Viewport> entry)
     {
-        var result = viewport.SetViewportStateWithLimit(
+        viewport.SetViewportStateWithLimit(
             viewport.State with { CenterX = ((MPoint)entry.End).X, CenterY = ((MPoint)entry.End).Y });
+        return new AnimationResult<Viewport>(viewport, true);
     }
 
-    private static void ResolutionTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
+    private static AnimationResult<Viewport> ResolutionTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
     {
         var result = viewport.SetViewportStateWithLimit(
             viewport.State with { Resolution = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value) });
+        return new AnimationResult<Viewport>(viewport, result.ViewportStateChanged);
     }
 
-    private static void ResolutionFinal(Viewport viewport, AnimationEntry<Viewport> entry)
+    private static AnimationResult<Viewport> ResolutionFinal(Viewport viewport, AnimationEntry<Viewport> entry)
     {
-        var result = viewport.SetViewportStateWithLimit(viewport.State with { Resolution = (double)entry.End });
+        viewport.SetViewportStateWithLimit(viewport.State with { Resolution = (double)entry.End });
+        return new AnimationResult<Viewport>(viewport, true);
     }
 }

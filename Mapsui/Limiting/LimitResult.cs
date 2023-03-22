@@ -8,14 +8,17 @@ public class LimitResult
         PanYLimited = input.CenterY != output.CenterY;
         PanXOrYLimited = PanXLimited || PanYLimited;
         PanLimited = PanXLimited && PanYLimited;
+        ViewportStateChanged = input != output;
     }
 
+    public bool ViewportStateChanged { get; }
     public bool ZoomLimited { get; }
     public bool PanLimited { get; }
 
-    // Not sure if I need to properties below
+    // Not sure if I need the properties below
     public bool PanXOrYLimited { get; }
     public bool PanXLimited { get; }
     public bool PanYLimited { get; }
+    public bool Limited => ZoomLimited || PanLimited;
 
 }

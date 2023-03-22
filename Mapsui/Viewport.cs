@@ -29,7 +29,7 @@ public class Viewport
     // State
     private ViewportState _state = new(0, 0, 1, 0, 0, 0);
 
-    private List<AnimationEntry<Viewport>> _animations = new();
+    private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
 
     public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
 
@@ -50,7 +50,7 @@ public class Viewport
         if (Limiter.ZoomLock) deltaResolution = 1;
         if (Limiter.PanLock) positionScreen = previousPositionScreen;
 
-        _animations = new();
+        _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
 
         State = Limiter.Limit(TransformState(_state, positionScreen, previousPositionScreen, deltaResolution, deltaRotation));
     }
@@ -95,7 +95,7 @@ public class Viewport
 
     public void SetSize(double width, double height)
     {
-        _animations = new();
+        _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
 
         var newState = _state with { Width = width, Height = height };
         newState = Limiter.Limit(newState);
@@ -105,7 +105,7 @@ public class Viewport
     public void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
     {
         if (Limiter.PanLock) return;
-        _animations = new();
+        _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
 
         var newState = Limiter.Limit(_state with { CenterX = x, CenterY = y });
         State = newState;
@@ -116,7 +116,7 @@ public class Viewport
         if (Limiter.PanLock) return;
         if (Limiter.ZoomLock) return;
 
-        _animations = new();
+        _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
 
         var newState = _state with { CenterX = x, CenterY = y, Resolution = resolution };
         newState = Limiter.Limit(newState);
@@ -131,7 +131,7 @@ public class Viewport
     {
         if (Limiter.PanLock) return;
 
-        _animations = new();
+        _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
 
         var newState = _state with { CenterX = center.X, CenterY = center.Y };
         newState = Limiter.Limit(newState);
@@ -146,7 +146,7 @@ public class Viewport
     {
         if (Limiter.ZoomLock) return;
 
-        _animations = new();
+        _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
 
         var newState = _state with { Resolution = resolution };
         newState = Limiter.Limit(newState);
@@ -161,7 +161,7 @@ public class Viewport
     {
         if (Limiter.RotationLock) return;
 
-        _animations = new();
+        _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
 
         var newState = _state with { Rotation = rotation };
         newState = Limiter.Limit(newState);
@@ -183,7 +183,8 @@ public class Viewport
 
     public bool UpdateAnimations()
     {
-        if (_animations.All(a => a.Done)) _animations = new List<AnimationEntry<Viewport>>();
+        if (_animations.All(a => a.Done))
+            _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
         return Animation.UpdateAnimations(this, _animations);
     }
 
@@ -194,8 +195,7 @@ public class Viewport
 
     public LimitResult SetViewportStateWithLimit(ViewportState viewportState)
     {
-        var newState = Limiter.Limit(viewportState);
-        State = newState;
-        return new LimitResult(viewportState, newState);
+        State = Limiter.Limit(viewportState);
+        return new LimitResult(viewportState, State);
     }
 }

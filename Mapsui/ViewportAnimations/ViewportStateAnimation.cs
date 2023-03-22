@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Mapsui.Animations;
 using Mapsui.Utilities;
 
 namespace Mapsui.ViewportAnimations;
@@ -25,15 +26,17 @@ internal class ViewportStateAnimation
         return animations;
     }
 
-    private static void Tick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
+    private static AnimationResult<Viewport> Tick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
     {
         var start = (ViewportState)entry.Start;
         var end = (ViewportState)entry.End;
         var result = viewport.SetViewportStateWithLimit(start + (end - start) * entry.Easing.Ease(value));
+        return new AnimationResult<Viewport>(viewport, !result.Limited);
     }
 
-    private static void Final(Viewport viewport, AnimationEntry<Viewport> entry)
+    private static AnimationResult<Viewport> Final(Viewport viewport, AnimationEntry<Viewport> entry)
     {
-        var result = viewport.SetViewportStateWithLimit((ViewportState)entry.End);
+        viewport.SetViewportStateWithLimit((ViewportState)entry.End); //!!! We should  not always call final.
+        return new AnimationResult<Viewport>(viewport, true);
     }
 }

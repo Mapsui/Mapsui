@@ -100,7 +100,7 @@ public static class Animation
 
         var isRunning = false;
 
-        for (var i = 0; i < entriesArray.Length; i++)
+        for (var i = 0; i < entriesArray.Length; i++)        
         {
             if (ticks > entriesArray[i].EndTicks)
             {
@@ -126,7 +126,7 @@ public static class Animation
                 continue;
             }
 
-            isRunning |= entriesArray[i].Tick(target, value);
+            isRunning |= entriesArray[i].Tick(target, value).IsRunning;
         }
 
         return isRunning;
