@@ -4,7 +4,7 @@
 
 namespace Mapsui;
 
-public record class ViewportState
+public record struct ViewportState
 {
     public ViewportState(double centerX, double centerY, double resolution, double rotation, double width, double height)
     {

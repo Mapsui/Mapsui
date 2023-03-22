@@ -144,6 +144,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         _currentMousePosition = e.GetPosition(this).ToMapsui();
 
+        // Todo: Move GetResolution inside the Navigator and use ZoomIn/Out with screenPosition
         var resolution = MouseWheelAnimation.GetResolution(e.Delta, Map.Viewport, _map);
         Map.Navigator.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
     }
@@ -318,15 +319,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             Map.Viewport.Transform(_currentMousePosition, _previousMousePosition);
             RefreshGraphics();
             _previousMousePosition = _currentMousePosition;
-        }
-        else
-        {
-            if (MouseWheelAnimation.IsAnimating())
-            {
-                // Disabled because not performing:
-                // Navigator.ZoomTo(_toResolution, _currentMousePosition, _mouseWheelAnimationDuration, Easing.QuarticOut);
-            }
-
         }
     }
 

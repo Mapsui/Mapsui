@@ -13,7 +13,7 @@ public class MouseWheelAnimation
     public double GetResolution(int delta, Viewport viewport, Map map)
     {
         // If the animation has ended then start from the current resolution.
-        // The alternative is that use the previous resolution target and add an extra
+        // The alternative is to use the previous resolution target and add an extra
         // level to that.
         if (!IsAnimating())
             _toResolution = viewport.State.Resolution;
@@ -21,10 +21,16 @@ public class MouseWheelAnimation
         if (delta > Constants.Epsilon)
         {
             _toResolution = ZoomHelper.ZoomIn(map.Resolutions, _toResolution);
+            // Todo: Move this to ZoomIn. Make limiting consistent.
+            if (viewport.Limiter.ZoomLimits is not null)
+                _toResolution = Math.Max(_toResolution, viewport.Limiter.ZoomLimits.Min);
         }
         else if (delta < Constants.Epsilon)
         {
             _toResolution = ZoomHelper.ZoomOut(map.Resolutions, _toResolution);
+            // Todo: Move this to ZoomOut. Make limiting consistent.
+            if (viewport.Limiter.ZoomLimits is not null)
+                _toResolution = Math.Min(_toResolution, viewport.Limiter.ZoomLimits.Max);
         }
 
         // TickCount is fast https://stackoverflow.com/a/4075602/85325
@@ -33,7 +39,7 @@ public class MouseWheelAnimation
         return _toResolution;
     }
 
-    public bool IsAnimating()
+    private bool IsAnimating()
     {
         var tickProgress = Environment.TickCount - _tickCount;
         return (tickProgress >= 0) && (tickProgress < Duration);

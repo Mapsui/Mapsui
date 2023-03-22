@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
+using Mapsui.Animations;
 using Mapsui.Utilities;
 
 namespace Mapsui.ViewportAnimations;
 
 internal class ViewportStateAnimation
 {
-    public static List<AnimationEntry<Viewport>> Create(Viewport viewport, ViewportState newViewportState, long duration, Easing? easing)
+    public static List<AnimationEntry<ViewportState>> Create(ViewportState viewport, ViewportState destination, long duration, Easing? easing)
     {
-        var animations = new List<AnimationEntry<Viewport>>();
+        var animations = new List<AnimationEntry<ViewportState>>();
 
-        var entry = new AnimationEntry<Viewport>(
-            start: viewport.State,
-            end: newViewportState,
+        var entry = new AnimationEntry<ViewportState>(
+            start: viewport,
+            end: destination,
             animationStart: 0,
             animationEnd: 1,
             easing: easing ?? Easing.SinInOut,
@@ -25,15 +26,16 @@ internal class ViewportStateAnimation
         return animations;
     }
 
-    private static void Tick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
+    private static AnimationResult<ViewportState> Tick(ViewportState viewport, AnimationEntry<ViewportState> entry, double value)
     {
         var start = (ViewportState)entry.Start;
         var end = (ViewportState)entry.End;
-        var result = viewport.SetViewportStateWithLimit(start + (end - start) * entry.Easing.Ease(value));
+        var result = start + (end - start) * entry.Easing.Ease(value);
+        return new AnimationResult<ViewportState>(result, true);
     }
 
-    private static void Final(Viewport viewport, AnimationEntry<Viewport> entry)
+    private static AnimationResult<ViewportState> Final(ViewportState viewport, AnimationEntry<ViewportState> entry)
     {
-        var result = viewport.SetViewportStateWithLimit((ViewportState)entry.End);
+        return new AnimationResult<ViewportState>((ViewportState)entry.End, true);
     }
 }

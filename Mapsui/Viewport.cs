@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Limiting;
 using Mapsui.Utilities;
@@ -29,7 +30,7 @@ public class Viewport
     // State
     private ViewportState _state = new(0, 0, 1, 0, 0, 0);
 
-    private List<AnimationEntry<Viewport>> _animations = new();
+    private IEnumerable<AnimationEntry<ViewportState>> _animations = Enumerable.Empty<AnimationEntry<ViewportState>>();
 
     public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
 
@@ -50,7 +51,7 @@ public class Viewport
         if (Limiter.ZoomLock) deltaResolution = 1;
         if (Limiter.PanLock) positionScreen = previousPositionScreen;
 
-        _animations = new();
+        ClearAnimations();
 
         State = Limiter.Limit(TransformState(_state, positionScreen, previousPositionScreen, deltaResolution, deltaRotation));
     }
@@ -95,7 +96,8 @@ public class Viewport
 
     public void SetSize(double width, double height)
     {
-        _animations = new();
+        ClearAnimations();
+
 
         var newState = _state with { Width = width, Height = height };
         newState = Limiter.Limit(newState);
@@ -104,8 +106,10 @@ public class Viewport
 
     public void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
     {
+        // Todo: Fix the unused animation parameters.
+
         if (Limiter.PanLock) return;
-        _animations = new();
+        ClearAnimations();
 
         var newState = Limiter.Limit(_state with { CenterX = x, CenterY = y });
         State = newState;
@@ -116,7 +120,7 @@ public class Viewport
         if (Limiter.PanLock) return;
         if (Limiter.ZoomLock) return;
 
-        _animations = new();
+        ClearAnimations();
 
         var newState = _state with { CenterX = x, CenterY = y, Resolution = resolution };
         newState = Limiter.Limit(newState);
@@ -124,14 +128,14 @@ public class Viewport
         if (duration == 0)
             State = newState;
         else
-            _animations = ViewportStateAnimation.Create(this, newState, duration, easing);
+            _animations = ViewportStateAnimation.Create(State, newState, duration, easing);
     }
 
     public void SetCenter(MPoint center, long duration = 0, Easing? easing = default)
     {
         if (Limiter.PanLock) return;
 
-        _animations = new();
+        ClearAnimations();
 
         var newState = _state with { CenterX = center.X, CenterY = center.Y };
         newState = Limiter.Limit(newState);
@@ -139,14 +143,14 @@ public class Viewport
         if (duration == 0)
             State = newState;
         else
-            _animations = ViewportStateAnimation.Create(this, newState, duration, easing);
+            _animations = ViewportStateAnimation.Create(State, newState, duration, easing);
     }
 
     public void SetResolution(double resolution, long duration = 0, Easing? easing = default)
     {
         if (Limiter.ZoomLock) return;
 
-        _animations = new();
+        ClearAnimations();
 
         var newState = _state with { Resolution = resolution };
         newState = Limiter.Limit(newState);
@@ -154,14 +158,19 @@ public class Viewport
         if (duration == 0)
             State = newState;
         else
-            _animations = ViewportStateAnimation.Create(this, newState, duration, easing);
+            _animations = ViewportStateAnimation.Create(State, newState, duration, easing);
+    }
+
+    private void ClearAnimations()
+    {
+        _animations = Enumerable.Empty<AnimationEntry<ViewportState>>();
     }
 
     public void SetRotation(double rotation, long duration = 0, Easing? easing = default)
     {
         if (Limiter.RotationLock) return;
 
-        _animations = new();
+        ClearAnimations();
 
         var newState = _state with { Rotation = rotation };
         newState = Limiter.Limit(newState);
@@ -169,7 +178,7 @@ public class Viewport
         if (duration == 0)
             State = newState;
         else
-            _animations = ViewportStateAnimation.Create(this, newState, duration, easing);
+            _animations = ViewportStateAnimation.Create(State, newState, duration, easing);
     }
 
     /// <summary>
@@ -183,19 +192,28 @@ public class Viewport
 
     public bool UpdateAnimations()
     {
-        if (_animations.All(a => a.Done)) _animations = new List<AnimationEntry<Viewport>>();
-        return Animation.UpdateAnimations(this, _animations);
+        if (!_animations.Any()) return false;
+        if (_animations.All(a => a.Done))
+            ClearAnimations();
+
+        var result = Animation.UpdateAnimations(State, _animations);
+
+
+        var limitResult = SetViewportStateWithLimit(result.CurrentState);
+        if (limitResult.ZoomLimited || limitResult.FullyLimited)
+            ClearAnimations();
+
+        return result.IsRunning;
     }
 
-    public void SetAnimations(List<AnimationEntry<Viewport>> animations)
+    public void SetAnimations(List<AnimationEntry<ViewportState>> animations)
     {
         _animations = animations;
     }
 
     public LimitResult SetViewportStateWithLimit(ViewportState viewportState)
     {
-        var newState = Limiter.Limit(viewportState);
-        State = newState;
-        return new LimitResult(viewportState, newState);
+        State = Limiter.Limit(viewportState);
+        return new LimitResult(viewportState, State);
     }
 }

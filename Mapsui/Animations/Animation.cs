@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapsui.Animations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -60,16 +61,18 @@ public static class Animation
     /// </summary>
     /// <param name="entry">AnimationEntry to stop</param>
     /// <param name="callFinal">Final function is called, if callFinal is true</param>
-    public static void Stop<T>(T target, AnimationEntry<T> entry, bool callFinal = true)
+    public static AnimationResult<T> Stop<T>(T target, AnimationEntry<T> entry, bool callFinal = true)
     {
-        if (entry == null)
-            return;
+        entry.Done = true;
 
+        if (entry == null)
+            return new AnimationResult<T>(target, false);
+         
         if (callFinal)
         {
-            entry.Done = true;
-            entry.Final(target);
+            return entry.Final(target);
         }
+        return new AnimationResult<T>(target, false);
     }
 
     /// <summary>
@@ -87,7 +90,7 @@ public static class Animation
     /// Update all AnimationEntrys and check, if a redraw is needed
     /// </summary>
     /// <returns>True, if a redraw of the screen is needed</returns>
-    public static bool UpdateAnimations<T>(T target, IEnumerable<AnimationEntry<T>> entries)
+    public static AnimationResult<T> UpdateAnimations<T>(T target, IEnumerable<AnimationEntry<T>> entries)
     {
         var ticks = DateTime.Now.Ticks;
 
@@ -96,11 +99,11 @@ public static class Animation
         entriesArray = entries.ToArray();
 
         if (entriesArray.Length == 0)
-            return false;
+            return new AnimationResult<T>(target, false);
 
-        var isRunning = false;
+        bool isRunning = false;
 
-        for (var i = 0; i < entriesArray.Length; i++)
+        for (var i = 0; i < entriesArray.Length; i++)        
         {
             if (ticks > entriesArray[i].EndTicks)
             {
@@ -108,11 +111,10 @@ public static class Animation
                 if (!entriesArray[i].Repeat)
                 {
                     // Animation shouldn't be repeated, so remove it
-                    Stop(target, entriesArray[i], true);
+                    target = Stop(target, entriesArray[i], true).CurrentState;
                     continue;
                 }
 
-                isRunning = true;
                 // Set new values for repeating this animation
                 entriesArray[i].StartTicks = entriesArray[i].EndTicks;
                 entriesArray[i].EndTicks = entriesArray[i].StartTicks + entriesArray[i].DurationTicks;
@@ -126,9 +128,11 @@ public static class Animation
                 continue;
             }
 
-            isRunning |= entriesArray[i].Tick(target, value);
+            var result = entriesArray[i].Tick(target, value);
+            isRunning |= result.IsRunning;
+            target = result.CurrentState;
         }
 
-        return isRunning;
+        return new AnimationResult<T>(target, isRunning);
     }
 }

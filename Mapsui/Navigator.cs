@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Utilities;
 using Mapsui.ViewportAnimations;
@@ -103,10 +104,21 @@ public class Navigator : INavigator
             centerOfZoomY = _viewport.State.CenterY;
         }
 
-        var animationEntries = ZoomAroundLocationAnimation.Create(_viewport, centerOfZoomX, centerOfZoomY, resolution,
-            _viewport.State, duration, easing ?? Easing.SinInOut);
-        AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
-        _viewport.SetAnimations(animationEntries);
+        if (duration == 0)
+        {
+            // Todo: If there is limiting of one dimension the other dimension should be limited accordingly. 
+            var (x, y) = TransformationAlgorithms.CalculateCenterOfMap(
+                centerOfZoomX, centerOfZoomY, resolution, _viewport.State.CenterX, _viewport.State.CenterY, _viewport.State.Resolution);
+            _viewport.SetViewportStateWithLimit(_viewport.State with { CenterX = x, CenterY = y, Resolution = resolution });
+            OnNavigated(ChangeType.Discrete);
+        }
+        else
+        {
+            var animationEntries = ZoomAroundLocationAnimation.Create(_viewport.State, centerOfZoomX, centerOfZoomY, resolution,
+                _viewport.State, duration, easing ?? Easing.SinInOut);
+            AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
+            _viewport.SetAnimations(animationEntries);
+        }
 
     }
 
@@ -193,7 +205,7 @@ public class Navigator : INavigator
     /// <param name="duration">Duration for animation in milliseconds.</param>
     public void FlyTo(MPoint center, double maxResolution, long duration = 500)
     {
-        var animationEntries = FlyToAnimation.Create(_viewport, center, maxResolution, duration);
+        var animationEntries = FlyToAnimation.Create(_viewport.State, center, maxResolution, duration);
         AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
         _viewport.SetAnimations(animationEntries);
     }
@@ -229,12 +241,12 @@ public class Navigator : INavigator
     /// <summary> Adds the final action. </summary>
     /// <param name="animationEntries">The animation entries.</param>
     /// <param name="action">The action.</param>
-    private void AddFinalAction(List<AnimationEntry<Viewport>> animationEntries, Action action)
+    private void AddFinalAction(List<AnimationEntry<ViewportState>> animationEntries, Action action)
     {
         var entry = animationEntries.FirstOrDefault();
         if (entry != null)
         {
-            animationEntries.Add(new AnimationEntry<Viewport>(entry.Start, entry.End, final: (v, a) => action()));
+            animationEntries.Add(new AnimationEntry<ViewportState>(entry.Start, entry.End, final: (v, a) => { action(); return new AnimationResult<ViewportState>(v, true); }));
         }
     }
 
