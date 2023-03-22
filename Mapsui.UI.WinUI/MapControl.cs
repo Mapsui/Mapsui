@@ -14,6 +14,7 @@ using Windows.System;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Utilities;
+using NetTopologySuite.GeometriesGraph;
 #if __WINUI__
 using System.Runtime.Versioning;
 using Mapsui.UI.WinUI.Extensions;
@@ -162,9 +163,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #else
         var mousePosition = new MPoint(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 #endif
+        var delta = currentPoint.Properties.MouseWheelDelta;
 
-        var resolution = Map.Navigator.MouseWheelAnimation.GetResolution(currentPoint.Properties.MouseWheelDelta, Map.Viewport, Map.Resolutions);
-        Map.Navigator.ZoomTo(resolution, mousePosition, Map.Navigator.MouseWheelAnimation.Duration, Map.Navigator.MouseWheelAnimation.Easing);
+        ZoomInOrOut(delta, mousePosition);
 
         e.Handled = true;
     }

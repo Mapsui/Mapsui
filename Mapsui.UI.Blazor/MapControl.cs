@@ -142,9 +142,10 @@ public partial class MapControl : ComponentBase, IMapControl
             if (!Map.Viewport.State.HasSize()) return;
 
             var delta = e.DeltaY * -1; // so that it zooms like on windows
-            var resolution = Map.Navigator.MouseWheelAnimation.GetResolution((int)delta, Map.Viewport, Map.Resolutions);
-            Map.Navigator.ZoomTo(resolution, e.Location(await BoundingClientRectAsync()).ToMapsui(), 
-                Map.Navigator.MouseWheelAnimation.Duration, Map.Navigator.MouseWheelAnimation.Easing);
+
+            var currentMousePosition = e.Location(await BoundingClientRectAsync()).ToMapsui();
+                       
+            ZoomInOrOut((int)delta, currentMousePosition);
         }
         catch (Exception ex)
         {

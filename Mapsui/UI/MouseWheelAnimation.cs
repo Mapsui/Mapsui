@@ -9,7 +9,7 @@ public class MouseWheelAnimation
     private int _tickCount = int.MinValue;
     private double _toResolution;
 
-    public int Duration { get; set; } = 1000;
+    public int Duration { get; set; } = 600;
     public Easing Easing { get; set; } = Easing.QuarticOut;
 
     public double GetResolution(int delta, Viewport viewport, IReadOnlyList<double> resolutions)

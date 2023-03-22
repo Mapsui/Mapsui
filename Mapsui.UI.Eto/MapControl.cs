@@ -10,6 +10,7 @@ using global::Eto.Drawing;
 using global::Eto.Forms;
 using System.Diagnostics;
 using Mapsui.Extensions;
+using NetTopologySuite.GeometriesGraph;
 
 public partial class MapControl : SkiaDrawable, IMapControl
 {
@@ -76,8 +77,9 @@ public partial class MapControl : SkiaDrawable, IMapControl
         if (Map.Viewport.Limiter.ZoomLock) return;
         if (!Map.Viewport.State.HasSize()) return;
 
-        var resolution = Map.Navigator.MouseWheelAnimation.GetResolution((int)e.Delta.Height, Map.Viewport, Map.Resolutions);
-        Map.Navigator.ZoomTo(resolution, e.Location.ToMapsui(), Map.Navigator.MouseWheelAnimation.Duration, Map.Navigator.MouseWheelAnimation.Easing);
+        var delta = (int)e.Delta.Height;
+        var currentMousePosition = e.Location.ToMapsui();
+        ZoomInOrOut(delta, currentMousePosition);
     }
 
     protected override void OnSizeChanged(EventArgs e)

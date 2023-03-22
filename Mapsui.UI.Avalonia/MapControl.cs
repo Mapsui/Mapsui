@@ -102,8 +102,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         }
         if (!navigate) return;
 
-        var resolution = Map.Navigator.MouseWheelAnimation.GetResolution(delta, Map.Viewport, Map.Resolutions);
-        Map.Navigator.ZoomTo(resolution, _currentMousePosition, Map.Navigator.MouseWheelAnimation.Duration, Map.Navigator.MouseWheelAnimation.Easing);
+        ZoomInOrOut(delta, _currentMousePosition);
     }
 
     private void MapControlMouseLeftButtonDown(PointerPressedEventArgs e)
