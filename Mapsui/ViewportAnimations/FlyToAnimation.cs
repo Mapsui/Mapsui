@@ -7,16 +7,16 @@ namespace Mapsui.ViewportAnimations;
 
 public class FlyToAnimation
 {
-    public static List<AnimationEntry<Viewport>> Create(Viewport viewport, MPoint center, double maxResolution, long duration)
+    public static List<AnimationEntry<ViewportState>> Create(ViewportState viewport, MPoint center, double maxResolution, long duration)
     {
-        var animations = new List<AnimationEntry<Viewport>>();
-        AnimationEntry<Viewport> entry;
+        var animations = new List<AnimationEntry<ViewportState>>();
+        AnimationEntry<ViewportState> entry;
 
-        var viewportCenter = new MPoint(viewport.State.CenterX, viewport.State.CenterY);
+        var viewportCenter = new MPoint(viewport.CenterX, viewport.CenterY);
 
         if (!center.Equals(viewportCenter))
         {
-            entry = new AnimationEntry<Viewport>(
+            entry = new AnimationEntry<ViewportState>(
                 start: viewportCenter,
                 end: center,
                 animationStart: 0,
@@ -28,9 +28,9 @@ public class FlyToAnimation
             animations.Add(entry);
         }
 
-        entry = new AnimationEntry<Viewport>(
-            start: viewport.State.Resolution,
-            end: Math.Min(maxResolution, viewport.State.Resolution * 2),
+        entry = new AnimationEntry<ViewportState>(
+            start: viewport.Resolution,
+            end: Math.Min(maxResolution, viewport.Resolution * 2),
             animationStart: 0,
             animationEnd: 0.5,
             easing: Easing.SinIn,
@@ -39,9 +39,9 @@ public class FlyToAnimation
         );
         animations.Add(entry);
 
-        entry = new AnimationEntry<Viewport>(
-            start: Math.Min(maxResolution, viewport.State.Resolution * 2),
-            end: viewport.State.Resolution,
+        entry = new AnimationEntry<ViewportState>(
+            start: Math.Min(maxResolution, viewport.Resolution * 2),
+            end: viewport.Resolution,
             animationStart: 0.5,
             animationEnd: 1,
             easing: Easing.SinIn,
@@ -54,31 +54,29 @@ public class FlyToAnimation
         return animations;
     }
 
-    private static AnimationResult<Viewport> CenterTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
+    private static AnimationResult<ViewportState> CenterTick(ViewportState viewport, AnimationEntry<ViewportState> entry, double value)
     {
         var newX = ((MPoint)entry.Start).X + (((MPoint)entry.End).X - ((MPoint)entry.Start).X) * entry.Easing.Ease(value);
         var newY = ((MPoint)entry.Start).Y + (((MPoint)entry.End).Y - ((MPoint)entry.Start).Y) * entry.Easing.Ease(value);
-        var result = viewport.SetViewportStateWithLimit(viewport.State with { CenterX = newX, CenterY = newY });
-        return new AnimationResult<Viewport>(viewport, result.ViewportStateChanged);
+        var result = viewport with { CenterX = newX, CenterY = newY };
+        return new AnimationResult<ViewportState>(result, true);
     }
 
-    private static AnimationResult<Viewport> CenterFinal(Viewport viewport, AnimationEntry<Viewport> entry)
+    private static AnimationResult<ViewportState> CenterFinal(ViewportState viewport, AnimationEntry<ViewportState> entry)
     {
-        viewport.SetViewportStateWithLimit(
-            viewport.State with { CenterX = ((MPoint)entry.End).X, CenterY = ((MPoint)entry.End).Y });
-        return new AnimationResult<Viewport>(viewport, true);
+        var result = viewport with { CenterX = ((MPoint)entry.End).X, CenterY = ((MPoint)entry.End).Y };
+        return new AnimationResult<ViewportState>(result, true);
     }
 
-    private static AnimationResult<Viewport> ResolutionTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
+    private static AnimationResult<ViewportState> ResolutionTick(ViewportState viewport, AnimationEntry<ViewportState> entry, double value)
     {
-        var result = viewport.SetViewportStateWithLimit(
-            viewport.State with { Resolution = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value) });
-        return new AnimationResult<Viewport>(viewport, result.ViewportStateChanged);
+        var result = viewport with { Resolution = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value) };
+        return new AnimationResult<ViewportState>(result, true);
     }
 
-    private static AnimationResult<Viewport> ResolutionFinal(Viewport viewport, AnimationEntry<Viewport> entry)
+    private static AnimationResult<ViewportState> ResolutionFinal(ViewportState viewport, AnimationEntry<ViewportState> entry)
     {
-        viewport.SetViewportStateWithLimit(viewport.State with { Resolution = (double)entry.End });
-        return new AnimationResult<Viewport>(viewport, true);
+        var result = viewport with { Resolution = (double)entry.End };
+        return new AnimationResult<ViewportState>(result, true);
     }
 }

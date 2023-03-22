@@ -114,9 +114,9 @@ public class Navigator : INavigator
         }
         else
         {
-            var animationEntries = ZoomAroundLocationAnimation.Create(_viewport, centerOfZoomX, centerOfZoomY, resolution,
+            var animationEntries = ZoomAroundLocationAnimation.Create(_viewport.State, centerOfZoomX, centerOfZoomY, resolution,
                 _viewport.State, duration, easing ?? Easing.SinInOut);
-            AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete)); //!!! This overrides the current Final.
+            AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
             _viewport.SetAnimations(animationEntries);
         }
 
@@ -205,8 +205,8 @@ public class Navigator : INavigator
     /// <param name="duration">Duration for animation in milliseconds.</param>
     public void FlyTo(MPoint center, double maxResolution, long duration = 500)
     {
-        var animationEntries = FlyToAnimation.Create(_viewport, center, maxResolution, duration);
-        AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete)); //!!! This overrides the current Final.
+        var animationEntries = FlyToAnimation.Create(_viewport.State, center, maxResolution, duration);
+        AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
         _viewport.SetAnimations(animationEntries);
     }
 
@@ -241,12 +241,12 @@ public class Navigator : INavigator
     /// <summary> Adds the final action. </summary>
     /// <param name="animationEntries">The animation entries.</param>
     /// <param name="action">The action.</param>
-    private void AddFinalAction(List<AnimationEntry<Viewport>> animationEntries, Action action)
+    private void AddFinalAction(List<AnimationEntry<ViewportState>> animationEntries, Action action)
     {
         var entry = animationEntries.FirstOrDefault();
         if (entry != null)
         {
-            animationEntries.Add(new AnimationEntry<Viewport>(entry.Start, entry.End, final: (v, a) => { action(); return new AnimationResult<Viewport>(v, true); }));
+            animationEntries.Add(new AnimationEntry<ViewportState>(entry.Start, entry.End, final: (v, a) => { action(); return new AnimationResult<ViewportState>(v, true); }));
         }
     }
 

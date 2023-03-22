@@ -21,14 +21,14 @@ public class MouseWheelAnimation
         if (delta > Constants.Epsilon)
         {
             _toResolution = ZoomHelper.ZoomIn(map.Resolutions, _toResolution);
-            // Todo: Move this to ZoomIn. Make limiting consistent. //!!!
+            // Todo: Move this to ZoomIn. Make limiting consistent.
             if (viewport.Limiter.ZoomLimits is not null)
                 _toResolution = Math.Max(_toResolution, viewport.Limiter.ZoomLimits.Min);
         }
         else if (delta < Constants.Epsilon)
         {
             _toResolution = ZoomHelper.ZoomOut(map.Resolutions, _toResolution);
-            // Todo: Move this to ZoomOut. Make limiting consistent. //!!!
+            // Todo: Move this to ZoomOut. Make limiting consistent.
             if (viewport.Limiter.ZoomLimits is not null)
                 _toResolution = Math.Min(_toResolution, viewport.Limiter.ZoomLimits.Max);
         }

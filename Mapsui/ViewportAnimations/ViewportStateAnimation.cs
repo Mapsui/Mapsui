@@ -6,13 +6,13 @@ namespace Mapsui.ViewportAnimations;
 
 internal class ViewportStateAnimation
 {
-    public static List<AnimationEntry<Viewport>> Create(Viewport viewport, ViewportState newViewportState, long duration, Easing? easing)
+    public static List<AnimationEntry<ViewportState>> Create(ViewportState viewport, ViewportState destination, long duration, Easing? easing)
     {
-        var animations = new List<AnimationEntry<Viewport>>();
+        var animations = new List<AnimationEntry<ViewportState>>();
 
-        var entry = new AnimationEntry<Viewport>(
-            start: viewport.State,
-            end: newViewportState,
+        var entry = new AnimationEntry<ViewportState>(
+            start: viewport,
+            end: destination,
             animationStart: 0,
             animationEnd: 1,
             easing: easing ?? Easing.SinInOut,
@@ -26,17 +26,16 @@ internal class ViewportStateAnimation
         return animations;
     }
 
-    private static AnimationResult<Viewport> Tick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
+    private static AnimationResult<ViewportState> Tick(ViewportState viewport, AnimationEntry<ViewportState> entry, double value)
     {
         var start = (ViewportState)entry.Start;
         var end = (ViewportState)entry.End;
-        var result = viewport.SetViewportStateWithLimit(start + (end - start) * entry.Easing.Ease(value));
-        return new AnimationResult<Viewport>(viewport, !result.Limited);
+        var result = start + (end - start) * entry.Easing.Ease(value);
+        return new AnimationResult<ViewportState>(result, true);
     }
 
-    private static AnimationResult<Viewport> Final(Viewport viewport, AnimationEntry<Viewport> entry)
+    private static AnimationResult<ViewportState> Final(ViewportState viewport, AnimationEntry<ViewportState> entry)
     {
-        viewport.SetViewportStateWithLimit((ViewportState)entry.End); //!!! We should  not always call final.
-        return new AnimationResult<Viewport>(viewport, true);
+        return new AnimationResult<ViewportState>((ViewportState)entry.End, true);
     }
 }
