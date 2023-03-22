@@ -336,14 +336,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             }
             else if (e.ActionType == SKTouchAction.WheelChanged)
             {
-                if (e.WheelDelta > 0)
-                {
-                    OnZoomIn(location);
-                }
-                else
-                {
-                    OnZoomOut(location);
-                }
+                OnZoomInOrOut(e.WheelDelta, location);
             }
         }
         catch (Exception ex)
@@ -467,49 +460,24 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     public event EventHandler<ZoomedEventArgs>? Zoomed;
 
     /// <summary>
-    /// Called, when map should zoom out
+    /// Called, when map should zoom in or out
     /// </summary>
     /// <param name="screenPosition">Center of zoom out event</param>
-    private bool OnZoomOut(MPoint screenPosition)
+    private bool OnZoomInOrOut(int delta, MPoint screenPosition)
     {
         if (Map.Viewport.Limiter.ZoomLock)
         {
             return true;
         }
 
-        var args = new ZoomedEventArgs(screenPosition, ZoomDirection.ZoomOut);
+        var args = new ZoomedEventArgs(screenPosition, delta > 0 ? ZoomDirection.ZoomIn : ZoomDirection.ZoomOut);
 
         Zoomed?.Invoke(this, args);
 
         if (args.Handled)
             return true;
 
-        // Perform standard behavior
-        Map.Navigator.ZoomOut(screenPosition);
-
-        return true;
-    }
-
-    /// <summary>
-    /// Called, when map should zoom in
-    /// </summary>
-    /// <param name="screenPosition">Center of zoom in event</param>
-    private bool OnZoomIn(MPoint screenPosition)
-    {
-        if (Map.Viewport.Limiter.ZoomLock)
-        {
-            return true;
-        }
-
-        var args = new ZoomedEventArgs(screenPosition, ZoomDirection.ZoomIn);
-
-        Zoomed?.Invoke(this, args);
-
-        if (args.Handled)
-            return true;
-
-        // Perform standard behavior
-        Map.Navigator.ZoomIn(screenPosition);
+        ZoomInOrOut(delta, screenPosition);
 
         return true;
     }
@@ -753,7 +721,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             return true;
 
         // Double tap as zoom
-        return OnZoomIn(screenPosition);
+        return OnZoomInOrOut(1, screenPosition); // delta > 0 to zoom in
     }
 
     /// <summary>
