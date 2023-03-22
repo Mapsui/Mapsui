@@ -192,6 +192,7 @@ public class Viewport
 
     public bool UpdateAnimations()
     {
+        if (!_animations.Any()) return false;
         if (_animations.All(a => a.Done))
             ClearAnimations();
 
@@ -200,8 +201,8 @@ public class Viewport
 
         var limitResult = SetViewportStateWithLimit(result.CurrentState);
         if (limitResult.ZoomLimited || limitResult.FullyLimited)
-            ClearAnimations();        
-        
+            ClearAnimations();
+
         return result.IsRunning;
     }
 

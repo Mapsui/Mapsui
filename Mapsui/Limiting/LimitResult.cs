@@ -6,7 +6,7 @@ public class LimitResult
         ZoomLimited = input.Resolution != output.Resolution;
         PanXLimited = input.CenterX != output.CenterX;
         PanYLimited = input.CenterY != output.CenterY;
-        FullyLimited = input == output;
+        FullyLimited = ZoomLimited && PanXLimited && PanYLimited;
     }
 
     public bool ZoomLimited { get; }
