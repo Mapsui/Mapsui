@@ -10,7 +10,6 @@ public class LimitResult
     }
 
     public bool ZoomLimited { get; }
-    public bool PanLimited => PanXLimited && PanYLimited;
     public bool PanXLimited { get; }
     public bool PanYLimited { get; }
     public bool FullyLimited { get; }

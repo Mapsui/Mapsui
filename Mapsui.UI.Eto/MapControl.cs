@@ -21,7 +21,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
     public Keys MoveModifier { get; set; } = Keys.None;
     public MouseButtons ZoomButton { get; set; } = MouseButtons.Primary;
     public Keys ZoomModifier { get; set; } = Keys.Control;
-    public MouseWheelAnimation MouseWheelAnimation { get; } = new();
 
     public MapControl()
     {
@@ -77,8 +76,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
         if (Map.Viewport.Limiter.ZoomLock) return;
         if (!Map.Viewport.State.HasSize()) return;
 
-        var resolution = MouseWheelAnimation.GetResolution((int)e.Delta.Height, Map.Viewport, _map);
-        Map.Navigator.ZoomTo(resolution, e.Location.ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        var resolution = Map.Navigator.MouseWheelAnimation.GetResolution((int)e.Delta.Height, Map.Viewport, Map.Resolutions);
+        Map.Navigator.ZoomTo(resolution, e.Location.ToMapsui(), Map.Navigator.MouseWheelAnimation.Duration, Map.Navigator.MouseWheelAnimation.Easing);
     }
 
     protected override void OnSizeChanged(EventArgs e)

@@ -38,7 +38,7 @@ public partial class MapControl : ComponentBase, IMapControl
     public int MoveModifier { get; set; } = Keys.None;
     public int ZoomButton { get; set; } = MouseButtons.Primary;
     public int ZoomModifier { get; set; } = Keys.Control;
-    public MouseWheelAnimation MouseWheelAnimation { get; } = new();
+
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
     private MapsuiJsInterop? _interop;
 
@@ -142,9 +142,9 @@ public partial class MapControl : ComponentBase, IMapControl
             if (!Map.Viewport.State.HasSize()) return;
 
             var delta = e.DeltaY * -1; // so that it zooms like on windows
-            var resolution = MouseWheelAnimation.GetResolution((int)delta, Map.Viewport, Map);
+            var resolution = Map.Navigator.MouseWheelAnimation.GetResolution((int)delta, Map.Viewport, Map.Resolutions);
             Map.Navigator.ZoomTo(resolution, e.Location(await BoundingClientRectAsync()).ToMapsui(), 
-                MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+                Map.Navigator.MouseWheelAnimation.Duration, Map.Navigator.MouseWheelAnimation.Easing);
         }
         catch (Exception ex)
         {

@@ -56,8 +56,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
     private double _virtualRotation;
 
-    public MouseWheelAnimation MouseWheelAnimation { get; } = new MouseWheelAnimation { Duration = 0 };
-
     public MapControl()
     {
         CommonInitialize();
@@ -165,8 +163,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         var mousePosition = new MPoint(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 #endif
 
-        var resolution = MouseWheelAnimation.GetResolution(currentPoint.Properties.MouseWheelDelta, Map.Viewport, _map);
-        Map.Navigator.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        var resolution = Map.Navigator.MouseWheelAnimation.GetResolution(currentPoint.Properties.MouseWheelDelta, Map.Viewport, Map.Resolutions);
+        Map.Navigator.ZoomTo(resolution, mousePosition, Map.Navigator.MouseWheelAnimation.Duration, Map.Navigator.MouseWheelAnimation.Easing);
 
         e.Handled = true;
     }

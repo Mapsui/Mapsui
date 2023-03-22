@@ -31,8 +31,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private double _mouseWheelPos = 0.0;
 
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
-    public MouseWheelAnimation MouseWheelAnimation { get; } = new() { Duration = 0 };
-
+    
     public MapControl()
     {
         ClipToBounds = true;
@@ -103,8 +102,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         }
         if (!navigate) return;
 
-        var resolution = MouseWheelAnimation.GetResolution(delta, Map.Viewport, _map);
-        Map.Navigator.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        var resolution = Map.Navigator.MouseWheelAnimation.GetResolution(delta, Map.Viewport, Map.Resolutions);
+        Map.Navigator.ZoomTo(resolution, _currentMousePosition, Map.Navigator.MouseWheelAnimation.Duration, Map.Navigator.MouseWheelAnimation.Easing);
     }
 
     private void MapControlMouseLeftButtonDown(PointerPressedEventArgs e)

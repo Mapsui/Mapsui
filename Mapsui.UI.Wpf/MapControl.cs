@@ -32,8 +32,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private double _virtualRotation;
     private readonly FlingTracker _flingTracker = new();
 
-    public MouseWheelAnimation MouseWheelAnimation { get; } = new();
-
     /// <summary>
     /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
     /// </summary>
@@ -144,9 +142,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         _currentMousePosition = e.GetPosition(this).ToMapsui();
 
-        // Todo: Move GetResolution inside the Navigator and use ZoomIn/Out with screenPosition
-        var resolution = MouseWheelAnimation.GetResolution(e.Delta, Map.Viewport, _map);
-        Map.Navigator.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        ZoomInOrOut(e.Delta, _currentMousePosition);
     }
 
     private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)

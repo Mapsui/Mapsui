@@ -1,10 +1,13 @@
 ﻿using System;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui;
 
 public interface INavigator
 {
+    MouseWheelAnimation MouseWheelAnimation { get; }
+
     /// <summary>
     /// Called each time one of the navigation methods is called
     /// </summary>
