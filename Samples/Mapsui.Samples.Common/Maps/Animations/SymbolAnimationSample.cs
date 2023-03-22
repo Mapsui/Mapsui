@@ -11,24 +11,21 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
-public class SymbolAnimationSample : IMapControlSample, IPrepareSampleTest, ISampleTest
+public class SymbolAnimationSample : ISample, IPrepareSampleTest, ISampleTest
 {
     private Layer? _animationLayer;
     private static bool _repeat = true;
     public string Name => "Animated Symbols";
     public string Category => "Animations";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-        _animationLayer = (Layer)mapControl.Map.Layers.Last();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
-    public static Map CreateMap()
+    public Map CreateMap()
     {
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreateLayer());
+        _animationLayer = (Layer)map.Layers.Last();
         return map;
     }
 

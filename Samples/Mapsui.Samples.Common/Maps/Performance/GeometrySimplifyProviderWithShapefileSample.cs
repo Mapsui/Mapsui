@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers;
 using Mapsui.Nts.Providers.Shapefile;
@@ -10,7 +11,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class GeometrySimplifyProviderWithShapefileSample : IMapControlSample
+public class GeometrySimplifyProviderWithShapefileSample : ISample
 {
     static GeometrySimplifyProviderWithShapefileSample()
     {
@@ -20,10 +21,7 @@ public class GeometrySimplifyProviderWithShapefileSample : IMapControlSample
     public string Name => "GeometrySimplifyProvider with Shapefile";
     public string Category => "Performance";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {

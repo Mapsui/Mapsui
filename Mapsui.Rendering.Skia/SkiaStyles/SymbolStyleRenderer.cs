@@ -257,7 +257,9 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if ((lineColor != null) && lineColor.Color.Alpha != 0) canvas.DrawPath(path, lineColor);
     }
 
-    double IFeatureSize.FeatureSize(IFeature feature, IStyle style, IRenderCache renderCache)
+    bool IFeatureSize.NeedsFeature => false;
+
+    double IFeatureSize.FeatureSize(IStyle style, IRenderCache renderCache, IFeature? feature)
     {
         if (style is SymbolStyle symbolStyle)
         {
@@ -287,7 +289,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             case SymbolType.Ellipse:
             case SymbolType.Rectangle:
             case SymbolType.Triangle:
-                symbolSize = new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
+                var vectorSize = VectorStyleRenderer.FeatureSize(symbolStyle);
+                symbolSize = new Size(vectorSize, vectorSize);
                 break;
         }
 

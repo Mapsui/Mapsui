@@ -6,18 +6,17 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class BitmapAtlasSample : IMapControlSample
+public class BitmapAtlasSample : ISample
 {
     public string Name => "Bitmap Atlas";
     public string Category => "Tests";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
 
     public static Map CreateMap()
     {

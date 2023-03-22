@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
@@ -13,7 +14,7 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
-public class ThemeStyleSample : IMapControlSample
+public class ThemeStyleSample : ISample
 {
     static ThemeStyleSample()
     {
@@ -23,10 +24,7 @@ public class ThemeStyleSample : IMapControlSample
     public string Name => "ThemeStyle on shapefile";
     public string Category => "Styles";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {

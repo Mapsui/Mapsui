@@ -11,13 +11,14 @@ using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 
 #pragma warning disable IDISP001 // Dispose created
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class RasterizingTileLayerWithRenderFormatSkpSample : IMapControlSample
+public class RasterizingTileLayerWithRenderFormatSkpSample : ISample
 {
 
     public string Name => "RasterizingTileLayer with RenderFormat.Skp";
@@ -30,10 +31,8 @@ public class RasterizingTileLayerWithRenderFormatSkpSample : IMapControlSample
 
     public string Category => "Performance";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
 
     public static Map CreateMap()
     {
