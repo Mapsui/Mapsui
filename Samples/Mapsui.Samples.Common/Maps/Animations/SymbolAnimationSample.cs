@@ -43,7 +43,7 @@ public class SymbolAnimationSample : IMapControlSample, IPrepareSampleTest, ISam
         };
 
         var animations = CreateAnimationsForSymbolStyle(style);
-        layer.Animations.Add(() => Animation.UpdateAnimations(style, animations));
+        layer.Animations.Add(() => Animation.UpdateAnimations(style, animations).IsRunning);
 
         return layer;
 
@@ -73,8 +73,8 @@ public class SymbolAnimationSample : IMapControlSample, IPrepareSampleTest, ISam
             animationEnd: .5,
             easing: Easing.SinInOut,
             repeat: _repeat,
-            tick: (s, e, v) => { s.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); return new AnimationResult<SymbolStyle>(s, true); },
-            final: (s, e) => { s.SymbolScale = (double)e.End; ; return new AnimationResult<SymbolStyle>(s, true); }
+            tick: (symbolStyle, e, v) => { style.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); return new AnimationResult<SymbolStyle>(style, true); },
+            final: (symbolStyle, e) => { style.SymbolScale = (double)e.End; return new AnimationResult<SymbolStyle>(style, true); }
         );
         animations.Add(entry1);
 
@@ -85,8 +85,8 @@ public class SymbolAnimationSample : IMapControlSample, IPrepareSampleTest, ISam
             animationEnd: 1,
             easing: Easing.SinInOut,
             repeat: _repeat,
-            tick: (s, e, v) => { s.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); return new AnimationResult<SymbolStyle>(s, true); },
-            final: (s, e) => { s.SymbolScale = (double)e.End; ; return new AnimationResult<SymbolStyle>(s, true); }
+            tick: (symbolStyle, e, v) => { style.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); return new AnimationResult<SymbolStyle>(style, true); },
+            final: (symbolStyle, e) => { style.SymbolScale = (double)e.End; return new AnimationResult<SymbolStyle>(style, true); }
         );
         animations.Add(entry2);
 
@@ -96,27 +96,28 @@ public class SymbolAnimationSample : IMapControlSample, IPrepareSampleTest, ISam
             animationStart: 0,
             animationEnd: 1,
             easing: Easing.SinInOut,
-            tick: (s, e, v) =>
+            tick: (symbolStyle, e, v) =>
             {
                 var start = (Color)e.Start;
                 var end = (Color)e.End;
-                if (s.Fill != null)
+                if (symbolStyle.Fill != null)
                 {
-                    s.Fill.Color = new Color(
+                    symbolStyle.Fill.Color = new Color(
                         (int)(start.R * (1.0 - v) + end.R * v),
                         (int)(start.G * (1.0 - v) + end.G * v),
                         (int)(start.B * (1.0 - v) + end.B * v));
                 }
-                return new AnimationResult<SymbolStyle>(s, true);
+                return new AnimationResult<SymbolStyle>(symbolStyle, true);
             },
-            final: (s, e) =>
+            final: (symbolStyle, e) =>
             {
-                if (s.Fill != null)
+                if (symbolStyle.Fill != null)
                 {
-                    s.Fill.Color = (Color)e.End;
+                    symbolStyle.Fill.Color = (Color)e.End;
                 }
-                return new AnimationResult<SymbolStyle>(s, true);
+                return new AnimationResult<SymbolStyle>(symbolStyle, true);
             }
+
         );
         animations.Add(entry3);
 

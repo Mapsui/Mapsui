@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Limiting;
 using Mapsui.Utilities;
@@ -185,7 +186,7 @@ public class Viewport
     {
         if (_animations.All(a => a.Done))
             _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
-        return Animation.UpdateAnimations(this, _animations);
+        return Animation.UpdateAnimations(this, _animations).IsRunning;
     }
 
     public void SetAnimations(List<AnimationEntry<Viewport>> animations)
