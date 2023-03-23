@@ -1,7 +1,6 @@
-﻿using Mapsui.Animations;
-using System;
+﻿using System;
 
-namespace Mapsui.Utilities;
+namespace Mapsui.Animations;
 
 public class AnimationEntry<T>
 {
@@ -93,7 +92,7 @@ public class AnimationEntry<T>
             return _tick(target, this, v);
         }
 
-        return new AnimationResult<T> (target, false);
+        return new AnimationResult<T>(target, false);
     }
 
     /// <summary>

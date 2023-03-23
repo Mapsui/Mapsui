@@ -11,7 +11,6 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
-using Mapsui.UI;
 using Mapsui.Tiling;
 using Mapsui.UI.WinUI;
 using Mapsui.Samples.Common.Utilities;

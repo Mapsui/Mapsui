@@ -1,7 +1,7 @@
-﻿using Mapsui.Extensions;
+﻿using Mapsui.Animations;
+using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.UI;
-using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;

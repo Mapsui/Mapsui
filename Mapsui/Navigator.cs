@@ -4,9 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Animations;
 using Mapsui.Extensions;
-using Mapsui.UI;
 using Mapsui.Utilities;
-using Mapsui.ViewportAnimations;
 
 namespace Mapsui;
 
@@ -102,7 +100,7 @@ public class Navigator : INavigator
         var (centerOfZoomX, centerOfZoomY) = _viewport.State.ScreenToWorldXY(centerOfZoomInScreenCoordinates.X, centerOfZoomInScreenCoordinates.Y);
 
         if (_viewport.Limiter.PanLock)
-        { 
+        {
             // Avoid pan by zooming on center
             centerOfZoomX = _viewport.State.CenterX;
             centerOfZoomY = _viewport.State.CenterY;

@@ -12,7 +12,6 @@ using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using Mapsui.UI.Avalonia;
 
 namespace Mapsui.Samples.Avalonia.Views;

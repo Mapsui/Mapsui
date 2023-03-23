@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Mapsui.Utilities;
 
-namespace Mapsui.ViewportAnimations;
+namespace Mapsui.Animations;
 
 internal class ZoomAroundLocationAnimation
 {

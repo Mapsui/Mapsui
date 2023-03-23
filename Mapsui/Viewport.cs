@@ -11,8 +11,6 @@ using System.Runtime.CompilerServices;
 using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Limiting;
-using Mapsui.Utilities;
-using Mapsui.ViewportAnimations;
 
 namespace Mapsui;
 

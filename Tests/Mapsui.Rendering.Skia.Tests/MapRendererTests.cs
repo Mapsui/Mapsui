@@ -269,7 +269,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = WidgetsSample.CreateMap();
-        var viewport = new ViewportState (0, 0, 1, 0, 600, 600);
+        var viewport = new ViewportState(0, 0, 1, 0, 600, 600);
         const string fileName = "widgets.png";
 
         // act

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -31,7 +30,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private double _mouseWheelPos = 0.0;
 
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
-    
+
     public MapControl()
     {
         ClipToBounds = true;

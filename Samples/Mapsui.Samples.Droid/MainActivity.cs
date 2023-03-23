@@ -17,7 +17,6 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
-using Mapsui.UI;
 using Mapsui.UI.Android;
 using Mapsui.Samples.Common.Maps.DataFormats;
 

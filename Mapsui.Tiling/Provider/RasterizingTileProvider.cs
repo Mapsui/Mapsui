@@ -164,7 +164,7 @@ public class RasterizingTileProvider : ITileSource
                     }
                 }
             }
-            
+
             result = ConvertToCoordinates(tempSize, section.Resolution);
             _searchSizeCache[tileInfo.Index] = result;
         }

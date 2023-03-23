@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Mapsui.UI;
+namespace Mapsui;
 
 public class FeatureInfoEventArgs : EventArgs
 {

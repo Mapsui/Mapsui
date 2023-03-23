@@ -14,7 +14,6 @@ using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Limiting;
 using Mapsui.Styles;
-using Mapsui.UI;
 using Mapsui.Widgets;
 
 namespace Mapsui;
@@ -37,7 +36,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = new LayerCollection();
-        
+
         Navigator = new Navigator(this, Viewport);
         Navigator.Navigated += Navigated;
     }

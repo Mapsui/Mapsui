@@ -5,7 +5,6 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
