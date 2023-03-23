@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Mapsui.Animations;
 
-namespace Mapsui.ViewportAnimations;
+namespace Mapsui.Animations;
 
 internal class ViewportStateAnimation
 {

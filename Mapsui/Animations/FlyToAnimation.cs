@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mapsui.Animations;
 
-namespace Mapsui.ViewportAnimations;
+namespace Mapsui.Animations;
 
 public class FlyToAnimation
 {

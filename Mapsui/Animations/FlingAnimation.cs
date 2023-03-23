@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mapsui.Animations;
 using Mapsui.Extensions;
 
-namespace Mapsui.ViewportAnimations;
+namespace Mapsui.Animations;
 
 public static class FlingAnimation
 {

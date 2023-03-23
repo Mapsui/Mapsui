@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Utilities;
-using Mapsui.ViewportAnimations;
 
 namespace Mapsui;
 
