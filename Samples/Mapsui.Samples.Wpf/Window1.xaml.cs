@@ -9,7 +9,6 @@ using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Samples.Wpf.Utilities;
-using Mapsui.UI;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 

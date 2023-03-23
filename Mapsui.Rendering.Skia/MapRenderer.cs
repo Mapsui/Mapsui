@@ -11,7 +11,6 @@ using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Styles;
-using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidget;
 using Mapsui.Widgets.ScaleBar;

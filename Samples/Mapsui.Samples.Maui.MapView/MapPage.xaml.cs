@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
-using Mapsui.UI;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Logging;
@@ -81,7 +80,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
         mapView.Refresh();
     }
 
-    private void MapView_Info(object? sender, UI.MapInfoEventArgs? e)
+    private void MapView_Info(object? sender, Mapsui.MapInfoEventArgs? e)
     {
         if (e?.MapInfo?.Feature != null)
         {
