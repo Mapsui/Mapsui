@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mapsui.Animations;
 using Mapsui.Utilities;
 
-namespace Mapsui.UI;
+namespace Mapsui.Animations;
 
 public class MouseWheelAnimation
 {
@@ -45,6 +44,6 @@ public class MouseWheelAnimation
     private bool IsAnimating()
     {
         var tickProgress = Environment.TickCount - _tickCount;
-        return (tickProgress >= 0) && (tickProgress < Duration);
+        return tickProgress >= 0 && tickProgress < Duration;
     }
 }

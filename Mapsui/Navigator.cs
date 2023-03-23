@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Animations;
 using Mapsui.Extensions;
-using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.ViewportAnimations;
 
