@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Animations;
 using Mapsui.Extensions;
+using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.ViewportAnimations;
 
@@ -21,6 +22,9 @@ public class Navigator : INavigator
         _map = map;
         _viewport = viewport;
     }
+
+    public MouseWheelAnimation MouseWheelAnimation { get; } = new();
+
 
     /// <summary>
     /// Navigate center of viewport to center of extent and change resolution

@@ -14,6 +14,7 @@ using Windows.System;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Utilities;
+using NetTopologySuite.GeometriesGraph;
 #if __WINUI__
 using System.Runtime.Versioning;
 using Mapsui.UI.WinUI.Extensions;
@@ -55,8 +56,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
     private double _virtualRotation;
-
-    public MouseWheelAnimation MouseWheelAnimation { get; } = new MouseWheelAnimation { Duration = 0 };
 
     public MapControl()
     {
@@ -164,9 +163,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #else
         var mousePosition = new MPoint(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 #endif
+        var delta = currentPoint.Properties.MouseWheelDelta;
 
-        var resolution = MouseWheelAnimation.GetResolution(currentPoint.Properties.MouseWheelDelta, Map.Viewport, _map);
-        Map.Navigator.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        ZoomInOrOut(delta, mousePosition);
 
         e.Handled = true;
     }
