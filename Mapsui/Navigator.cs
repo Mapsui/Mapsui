@@ -102,7 +102,7 @@ public class Navigator : INavigator
         var (centerOfZoomX, centerOfZoomY) = _viewport.State.ScreenToWorldXY(centerOfZoomInScreenCoordinates.X, centerOfZoomInScreenCoordinates.Y);
 
         if (_viewport.Limiter.PanLock)
-        { 
+        {
             // Avoid pan by zooming on center
             centerOfZoomX = _viewport.State.CenterX;
             centerOfZoomY = _viewport.State.CenterY;

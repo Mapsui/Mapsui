@@ -7,7 +7,7 @@ using Mapsui.Styles;
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
 public class WmsSample : ISample
-{ 
+{
     public string Name => " 6 WMS";
     public string Category => "Data Formats";
     public static IUrlPersistentCache? DefaultCache { get; set; }

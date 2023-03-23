@@ -44,6 +44,6 @@ public class MouseWheelAnimation
     private bool IsAnimating()
     {
         var tickProgress = Environment.TickCount - _tickCount;
-        return (tickProgress >= 0) && (tickProgress < Duration); 
+        return (tickProgress >= 0) && (tickProgress < Duration);
     }
 }

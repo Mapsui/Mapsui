@@ -99,7 +99,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         // In MAUI if you use binding there is an event where the new value is null even though
         // the current value en the value you are binding to are not null. Perhaps this should be
         // considered a bug.
-        if (Map is null) return; 
+        if (Map is null) return;
 
         // Check, if we have to redraw the screen
 

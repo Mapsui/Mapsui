@@ -144,7 +144,7 @@ public partial class MapControl : ComponentBase, IMapControl
             var delta = e.DeltaY * -1; // so that it zooms like on windows
 
             var currentMousePosition = e.Location(await BoundingClientRectAsync()).ToMapsui();
-                       
+
             ZoomInOrOut((int)delta, currentMousePosition);
         }
         catch (Exception ex)

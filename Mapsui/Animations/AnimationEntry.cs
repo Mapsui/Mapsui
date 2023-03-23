@@ -93,7 +93,7 @@ public class AnimationEntry<T>
             return _tick(target, this, v);
         }
 
-        return new AnimationResult<T> (target, false);
+        return new AnimationResult<T>(target, false);
     }
 
     /// <summary>

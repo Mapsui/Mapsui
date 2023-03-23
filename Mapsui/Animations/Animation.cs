@@ -67,7 +67,7 @@ public static class Animation
 
         if (entry == null)
             return new AnimationResult<T>(target, false);
-         
+
         if (callFinal)
         {
             return entry.Final(target);
@@ -103,7 +103,7 @@ public static class Animation
 
         bool isRunning = false;
 
-        for (var i = 0; i < entriesArray.Length; i++)        
+        for (var i = 0; i < entriesArray.Length; i++)
         {
             if (ticks > entriesArray[i].EndTicks)
             {

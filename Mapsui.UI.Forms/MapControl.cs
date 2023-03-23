@@ -49,7 +49,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 #else
     public static bool UseGPU = true;
 #endif
-     
+
     private class TouchEvent
     {
         public long Id { get; }
@@ -108,7 +108,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         CommonInitialize();
         Initialize();
 
-        _initialized = true;        
+        _initialized = true;
     }
 
     public float ScreenWidth => (float)Width;

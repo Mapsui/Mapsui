@@ -89,12 +89,12 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
                 if (_fetchInfo == null) return;
                 if (double.IsNaN(_fetchInfo.Resolution) || _fetchInfo.Resolution <= 0) return;
                 if (_fetchInfo.Extent == null || _fetchInfo.Extent?.Width <= 0 || _fetchInfo.Extent?.Height <= 0) return;
-                
+
                 _currentSection = _fetchInfo.Section;
 
-                using var bitmapStream = _rasterizer.RenderToBitmapStream(ToViewportState(_currentSection), 
+                using var bitmapStream = _rasterizer.RenderToBitmapStream(ToViewportState(_currentSection),
                     new[] { _layer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
-                
+
                 RemoveExistingFeatures();
 
                 _cache.Clear();

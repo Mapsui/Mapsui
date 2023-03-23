@@ -37,7 +37,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = new LayerCollection();
-        
+
         Navigator = new Navigator(this, Viewport);
         Navigator.Navigated += Navigated;
     }
