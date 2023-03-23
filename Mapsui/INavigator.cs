@@ -1,4 +1,5 @@
 ﻿using System;
+using Mapsui.Animations;
 using Mapsui.UI;
 using Mapsui.Utilities;
 

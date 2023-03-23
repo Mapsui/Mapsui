@@ -1,9 +1,8 @@
-﻿using Mapsui.Animations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Mapsui.Utilities;
+namespace Mapsui.Animations;
 
 public static class Animation
 {
@@ -101,7 +100,7 @@ public static class Animation
         if (entriesArray.Length == 0)
             return new AnimationResult<T>(target, false);
 
-        bool isRunning = false;
+        var isRunning = false;
 
         for (var i = 0; i < entriesArray.Length; i++)
         {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Mapsui.Animations;
-using Mapsui.Utilities;
 
 namespace Mapsui.ViewportAnimations;
 
