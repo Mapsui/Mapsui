@@ -69,7 +69,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         mapView.Refresh();
     }
 
-    private void MapView_Info(object? sender, Mapsui.MapInfoEventArgs? e)
+    private void MapView_Info(object? sender, MapInfoEventArgs? e)
     {
         featureInfo.Text = $"Click Info:";
 
