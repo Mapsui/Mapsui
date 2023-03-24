@@ -163,9 +163,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #else
         var mousePosition = new MPoint(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 #endif
-        var delta = currentPoint.Properties.MouseWheelDelta;
+        var mouseWheelDelta = currentPoint.Properties.MouseWheelDelta;
 
-        ZoomInOrOut(delta, mousePosition);
+        ZoomInOrOut(mouseWheelDelta, mousePosition);
 
         e.Handled = true;
     }

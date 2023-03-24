@@ -77,9 +77,9 @@ public partial class MapControl : SkiaDrawable, IMapControl
         if (Map.Viewport.Limiter.ZoomLock) return;
         if (!Map.Viewport.State.HasSize()) return;
 
-        var delta = (int)e.Delta.Height;
+        var mouseWheelDelta = (int)e.Delta.Height;
         var currentMousePosition = e.Location.ToMapsui();
-        ZoomInOrOut(delta, currentMousePosition);
+        ZoomInOrOut(mouseWheelDelta, currentMousePosition);
     }
 
     protected override void OnSizeChanged(EventArgs e)
