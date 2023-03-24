@@ -616,14 +616,14 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidateTimer = null;
     }
 
-    private void ZoomInOrOut(int delta, MPoint centerOfZoom)
+    private void ZoomInOrOut(int mouseWheelDelta, MPoint centerOfZoom)
     {
-        var resolution = Map.Navigator.MouseWheelAnimation.GetResolution(delta, Map.Viewport, Map.Resolutions);
-        if (delta > Constants.Epsilon)
+        var resolution = Map.Navigator.MouseWheelAnimation.GetResolution(mouseWheelDelta, Map.Viewport, Map.Resolutions);
+        if (mouseWheelDelta > Constants.Epsilon)
         {
             Map.Navigator.ZoomTo(resolution, centerOfZoom, Map.Navigator.MouseWheelAnimation.Duration, Map.Navigator.MouseWheelAnimation.Easing);
         }
-        else if (delta < Constants.Epsilon)
+        else if (mouseWheelDelta < Constants.Epsilon)
         {
             Map.Navigator.ZoomTo(resolution, centerOfZoom, Map.Navigator.MouseWheelAnimation.Duration, Map.Navigator.MouseWheelAnimation.Easing);
         }

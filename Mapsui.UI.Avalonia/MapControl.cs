@@ -14,7 +14,6 @@ using Avalonia.Threading;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.UI.Avalonia.Extensions;
-using Mapsui.Utilities;
 
 namespace Mapsui.UI.Avalonia;
 
@@ -26,8 +25,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private MPoint? _downMousePosition;
     private bool _mouseDown;
     private MPoint? _previousMousePosition;
-    private double _toResolution = double.NaN;
-    private double _mouseWheelPos = 0.0;
 
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
 
@@ -79,29 +76,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (!Map.Viewport.State.HasSize()) return;
 
         _currentMousePosition = e.GetPosition(this).ToMapsui();
-        //Needed for both MouseMove and MouseWheel event for mousewheel event
 
-        if (double.IsNaN(_toResolution))
-            _toResolution = Map.Viewport.State.Resolution;
-
-        _mouseWheelPos += e.Delta.Y;
-        int delta = (int)_mouseWheelPos;
-        bool navigate = false;
-        if (_mouseWheelPos >= 1.0)
-        {
-            _toResolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
-            _mouseWheelPos -= 1.0;
-            navigate = true;
-        }
-        else if (_mouseWheelPos <= -1.0)
-        {
-            _toResolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
-            _mouseWheelPos += 1.0;
-            navigate = true;
-        }
-        if (!navigate) return;
-
-        ZoomInOrOut(delta, _currentMousePosition);
+        ZoomInOrOut((int)e.Delta.Y, _currentMousePosition);
     }
 
     private void MapControlMouseLeftButtonDown(PointerPressedEventArgs e)

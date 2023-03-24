@@ -463,21 +463,21 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// Called, when map should zoom in or out
     /// </summary>
     /// <param name="screenPosition">Center of zoom out event</param>
-    private bool OnZoomInOrOut(int delta, MPoint screenPosition)
+    private bool OnZoomInOrOut(int mouseWheelDelta, MPoint screenPosition)
     {
         if (Map.Viewport.Limiter.ZoomLock)
         {
             return true;
         }
 
-        var args = new ZoomedEventArgs(screenPosition, delta > 0 ? ZoomDirection.ZoomIn : ZoomDirection.ZoomOut);
+        var args = new ZoomedEventArgs(screenPosition, mouseWheelDelta > 0 ? ZoomDirection.ZoomIn : ZoomDirection.ZoomOut);
 
         Zoomed?.Invoke(this, args);
 
         if (args.Handled)
             return true;
 
-        ZoomInOrOut(delta, screenPosition);
+        ZoomInOrOut(mouseWheelDelta, screenPosition);
 
         return true;
     }
@@ -721,7 +721,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             return true;
 
         // Double tap as zoom
-        return OnZoomInOrOut(1, screenPosition); // delta > 0 to zoom in
+        return OnZoomInOrOut(1, screenPosition); // mouseWheelDelta > 0 to zoom in
     }
 
     /// <summary>

@@ -141,11 +141,11 @@ public partial class MapControl : ComponentBase, IMapControl
             if (Map.Viewport.Limiter.ZoomLock) return;
             if (!Map.Viewport.State.HasSize()) return;
 
-            var delta = e.DeltaY * -1; // so that it zooms like on windows
+            var mouseWheelDelta = e.DeltaY * -1; // so that it zooms like on windows
 
             var currentMousePosition = e.Location(await BoundingClientRectAsync()).ToMapsui();
 
-            ZoomInOrOut((int)delta, currentMousePosition);
+            ZoomInOrOut((int)mouseWheelDelta, currentMousePosition);
         }
         catch (Exception ex)
         {
