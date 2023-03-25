@@ -11,18 +11,18 @@ namespace Mapsui.Limiting;
 /// </summary>
 public class ViewportLimiterKeepWithinExtent : BaseViewportLimiter
 {
-    public override ViewportState Limit(ViewportState viewportState)
+    public override ViewportState Limit(ViewportState viewportState, MRect? panExtent, MMinMax? zoomExtremes)
     {
-        var state = LimitResolution(viewportState);
-        return LimitExtent(state);
+        var state = LimitResolution(viewportState, zoomExtremes);
+        return LimitExtent(state, panExtent, zoomExtremes);
     }
 
-    private ViewportState LimitResolution(ViewportState viewportState)
+    private ViewportState LimitResolution(ViewportState viewportState, MMinMax? zoomExtremes)
     {
-        if (ZoomLimits is null) return viewportState;
+        if (zoomExtremes is null) return viewportState;
 
-        if (ZoomLimits.Min > viewportState.Resolution) return viewportState with { Resolution = ZoomLimits.Min };
-        if (ZoomLimits.Max < viewportState.Resolution) return viewportState with { Resolution = ZoomLimits.Max };
+        if (zoomExtremes.Min > viewportState.Resolution) return viewportState with { Resolution = zoomExtremes.Min };
+        if (zoomExtremes.Max < viewportState.Resolution) return viewportState with { Resolution = zoomExtremes.Max };
 
         return viewportState;
     }
@@ -32,17 +32,17 @@ public class ViewportLimiterKeepWithinExtent : BaseViewportLimiter
         return Math.Min(mapEnvelope.Width / screenWidth, mapEnvelope.Height / screenHeight);
     }
 
-    private ViewportState LimitExtent(ViewportState viewport)
+    private ViewportState LimitExtent(ViewportState viewport, MRect? panExtent, MMinMax? zoomExtremes)
     {
-        if (PanLimits is null) return viewport;
+        if (panExtent is null) return viewport;
 
         // Below we limit the resolution. Why is this part of LimitExtent?
         // This is because it is impossible to limit the map to a certain extent
         // at the more zoomed-out resolutions. If you can see the entire world it is 
         // not possible to limit the extents to an individual country. So here
         // we limit the resolution to a level which could cover the entire extent.
-        var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(viewport.Width, viewport.Height, PanLimits);
-        if (viewportFillingResolution < ZoomLimits?.Min == true)
+        var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(viewport.Width, viewport.Height, panExtent);
+        if (viewportFillingResolution < zoomExtremes?.Min == true)
         {
             Logger.Log(LogLevel.Error, "Error in limiter configuration. The minimum zoomlevel does not cover the entire extent");
         }
@@ -53,17 +53,17 @@ public class ViewportLimiterKeepWithinExtent : BaseViewportLimiter
 
         var x = viewport.CenterX;
 
-        if (extent.Left < PanLimits.Left)
-            x += PanLimits.Left - extent.Left;
-        else if (extent?.Right > PanLimits.Right)
-            x += PanLimits.Right - extent.Right;
+        if (extent.Left < panExtent.Left)
+            x += panExtent.Left - extent.Left;
+        else if (extent?.Right > panExtent.Right)
+            x += panExtent.Right - extent.Right;
 
         var y = viewport.CenterY;
 
-        if (extent?.Top > PanLimits.Top)
-            y += PanLimits.Top - extent.Top;
-        else if (extent?.Bottom < PanLimits.Bottom)
-            y += PanLimits.Bottom - extent.Bottom;
+        if (extent?.Top > panExtent.Top)
+            y += panExtent.Top - extent.Top;
+        else if (extent?.Bottom < panExtent.Bottom)
+            y += panExtent.Bottom - extent.Bottom;
 
         return viewport with { CenterX = x, CenterY = y };
     }

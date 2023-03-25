@@ -9,6 +9,16 @@ namespace Mapsui;
 
 public interface INavigator
 {
+    /// <summary>
+    /// Sets the extent used to restrict panning. Exactly how this extent affects panning
+    /// depends on the implementation of the IViewportLimiter.
+    /// </summary>
+    MRect? PanExtent { get; set; }
+    /// <summary>
+    /// A pair of the most extreme resolutions (smallest and biggest). How these extremes affect zooming
+    /// depends on the implementation of the IViewportLimiter.
+    /// </summary>
+    MMinMax? ZoomExtremes { get; set; }
     IViewportLimiter Limiter { get; set; }
     ViewportState State { get; }
 

@@ -233,22 +233,23 @@ public class Map : INotifyPropertyChanged, IDisposable
 
     private void LayersChanged()
     {
-        // Todo: There should be a way the user can set the Resolutions in the code below is not called.
+        // Todo: It is possible for the user to assign the three fields below override
+        // this initialization. However, whenever a layer changes this will override the
+        // the users settings again. This is a bug that needs to be fixed with a better
+        // design.
         Navigator.Resolutions = DetermineResolutions(Layers);
-        // Todo: Perhaps Navigator.ZoomExtremes should be used instead of Limiter.ZoomLimits
-        Navigator.Limiter.ZoomLimits = GetMinMaxResolution(Navigator.Resolutions);
-        // Todo: Perhaps Navigator.PanExtent should be used instead of Limiter.PanLimits
-        Navigator.Limiter.PanLimits = Extent?.Copy();
+        Navigator.ZoomExtremes = GetMinMaxResolution(Navigator.Resolutions);
+        Navigator.PanExtent = Extent?.Copy();
         OnPropertyChanged(nameof(Layers));
     }
 
-    private MinMax? GetMinMaxResolution(IEnumerable<double>? resolutions)
+    private MMinMax? GetMinMaxResolution(IEnumerable<double>? resolutions)
     {
         if (resolutions == null || resolutions.Count() == 0) return null;
         resolutions = resolutions.OrderByDescending(r => r).ToList();
         var mostZoomedOut = resolutions.First();
         var mostZoomedIn = resolutions.Last() * 0.5; // Divide by two to allow one extra level to zoom-in
-        return new MinMax(mostZoomedOut, mostZoomedIn);
+        return new MMinMax(mostZoomedOut, mostZoomedIn);
     }
 
     private static IReadOnlyList<double> DetermineResolutions(IEnumerable<ILayer> layers)
