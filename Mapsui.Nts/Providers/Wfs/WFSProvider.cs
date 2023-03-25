@@ -396,6 +396,7 @@ public class WFSProvider : IProvider, IDisposable
     public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
                GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
+        _httpClientUtil?.Dispose();
         _httpClientUtil = new HttpClientUtil(persistentCache);
         _persistentCache = persistentCache;
         _featureTypeInfoQueryManager = getCapabilitiesCache;
