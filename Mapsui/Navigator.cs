@@ -16,9 +16,7 @@ public class Navigator : INavigator
 {
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
-
     public EventHandler<ChangeType>? Navigated { get; set; }
-
     public event PropertyChangedEventHandler? ViewportChanged;
 
     /// <inheritdoc />
@@ -39,7 +37,6 @@ public class Navigator : INavigator
             OnViewportChanged();
         }
     }
-
 
     /// <inheritdoc />
     public IReadOnlyList<double> Resolutions { get; set; } = new List<double>();
@@ -104,7 +101,6 @@ public class Navigator : INavigator
 
         SetCenterAndResolution(center.X, center.Y, resolution, duration, easing);
         OnNavigated(duration, ChangeType.Discrete);
-
     }
 
     /// <summary>
@@ -301,8 +297,7 @@ public class Navigator : INavigator
     {
         Navigated?.Invoke(this, changeType);
     }
-
-  
+      
     /// <inheritdoc />
     public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0)
     {
@@ -392,7 +387,6 @@ public class Navigator : INavigator
         if (Limiter.PanLock) return;
 
         ClearAnimations();
-
         
         var newViewport = Limit(_viewport with { CenterX = center.X, CenterY = center.Y });
 
@@ -453,7 +447,6 @@ public class Navigator : INavigator
             ClearAnimations();
 
         var result = Animation.UpdateAnimations(Viewport, _animations);
-
 
         var limitResult = SetViewportWithLimit(result.CurrentState);
         if (limitResult.ZoomLimited || limitResult.FullyLimited)
