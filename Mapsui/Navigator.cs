@@ -21,6 +21,9 @@ public class Navigator : INavigator
         _viewport = viewport;
     }
 
+    /// <inheritdoc />
+    public IReadOnlyList<double> Resolutions { get; set; } = new List<double>();
+
     public MouseWheelAnimation MouseWheelAnimation { get; } = new();
 
 
@@ -131,7 +134,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomIn(long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.State.Resolution);
+        var resolution = ZoomHelper.ZoomIn(Resolutions, _viewport.State.Resolution);
 
         ZoomTo(resolution, duration, easing);
     }
@@ -143,7 +146,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomOut(long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.State.Resolution);
+        var resolution = ZoomHelper.ZoomOut(Resolutions, _viewport.State.Resolution);
 
         ZoomTo(resolution, duration, easing);
     }
@@ -157,7 +160,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomIn(MPoint centerOfZoom, long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.State.Resolution);
+        var resolution = ZoomHelper.ZoomIn(Resolutions, _viewport.State.Resolution);
 
         ZoomTo(resolution, centerOfZoom, duration, easing);
     }
@@ -171,7 +174,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomOut(MPoint centerOfZoom, long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.State.Resolution);
+        var resolution = ZoomHelper.ZoomOut(Resolutions, _viewport.State.Resolution);
         ZoomTo(resolution, centerOfZoom, duration, easing);
     }
 

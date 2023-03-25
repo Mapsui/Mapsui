@@ -107,11 +107,6 @@ public class Map : INotifyPropertyChanged, IDisposable
     }
 
     /// <summary>
-    /// List of all native resolutions of this map
-    /// </summary>
-    public IReadOnlyList<double> Resolutions { get; private set; } = new List<double>();
-
-    /// <summary>
     /// Called whenever a property changed
     /// </summary>
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -245,8 +240,11 @@ public class Map : INotifyPropertyChanged, IDisposable
 
     private void LayersChanged()
     {
-        Resolutions = DetermineResolutions(Layers);
-        Viewport.Limiter.ZoomLimits = GetMinMaxResolution(Resolutions);
+        // Todo: There should be a way the user can set the Resolutions in the code below is not called.
+        Navigator.Resolutions = DetermineResolutions(Layers);
+        // Todo: Perhaps Navigator.ZoomExtremes should be used instead of Limiter.ZoomLimits
+        Viewport.Limiter.ZoomLimits = GetMinMaxResolution(Navigator.Resolutions);
+        // Todo: Perhaps Navigator.PanExtent should be used instead of Limiter.PanLimits
         Viewport.Limiter.PanLimits = Extent?.Copy();
         OnPropertyChanged(nameof(Layers));
     }

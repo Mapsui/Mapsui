@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Mapsui.Animations;
 using Mapsui.Utilities;
 
@@ -6,6 +7,16 @@ namespace Mapsui;
 
 public interface INavigator
 {
+    /// <summary>
+    /// List of resolutions that can be used when going to a new zoom level. In the most common
+    /// case these resolutions correspond to the resolutions of the background layer of the map. 
+    /// In the Mapsui samples this is usually the openstreetmap layer, but there are also situations
+    /// where this is no background layer with resolutions. Or where one app switches between different 
+    /// background layers with different resolutions. Also note that when pinch zooming these resolutions 
+    /// are not used.
+    /// </summary>
+    IReadOnlyList<double> Resolutions { get; set; }
+
     MouseWheelAnimation MouseWheelAnimation { get; }
 
     /// <summary>
