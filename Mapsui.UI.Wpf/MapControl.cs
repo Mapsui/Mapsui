@@ -142,7 +142,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         _currentMousePosition = e.GetPosition(this).ToMapsui();
 
-        ZoomInOrOut(e.Delta, _currentMousePosition);
+        Map.Navigator.ZoomInOrOut(e.Delta, _currentMousePosition);
     }
 
     private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)

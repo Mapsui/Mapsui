@@ -26,6 +26,18 @@ public class Navigator : INavigator
 
     public MouseWheelAnimation MouseWheelAnimation { get; } = new();
 
+    public void ZoomInOrOut(int mouseWheelDelta, MPoint centerOfZoom)
+    {
+        var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, _viewport, Resolutions);
+        if (mouseWheelDelta > Constants.Epsilon)
+        {
+            ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        }
+        else if (mouseWheelDelta < Constants.Epsilon)
+        {
+            ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        }
+    }
 
     /// <summary>
     /// Navigate center of viewport to center of extent and change resolution

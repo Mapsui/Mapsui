@@ -615,17 +615,4 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
         _invalidateTimer = null;
     }
-
-    private void ZoomInOrOut(int mouseWheelDelta, MPoint centerOfZoom)
-    {
-        var resolution = Map.Navigator.MouseWheelAnimation.GetResolution(mouseWheelDelta, Map.Viewport, Map.Navigator.Resolutions);
-        if (mouseWheelDelta > Constants.Epsilon)
-        {
-            Map.Navigator.ZoomTo(resolution, centerOfZoom, Map.Navigator.MouseWheelAnimation.Duration, Map.Navigator.MouseWheelAnimation.Easing);
-        }
-        else if (mouseWheelDelta < Constants.Epsilon)
-        {
-            Map.Navigator.ZoomTo(resolution, centerOfZoom, Map.Navigator.MouseWheelAnimation.Duration, Map.Navigator.MouseWheelAnimation.Easing);
-        }
-    }
 }
