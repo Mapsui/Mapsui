@@ -67,7 +67,7 @@ public interface INavigator
     /// <param name="scaleMethod"></param>
     /// <param name="duration">Duration of animation in millisecondsScale method to use to determine resolution</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-    void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = 0, Easing? easing = default);
+    void ZoomToPanExtent(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = 0, Easing? easing = default);
 
     /// <summary>
     /// Change resolution of viewport

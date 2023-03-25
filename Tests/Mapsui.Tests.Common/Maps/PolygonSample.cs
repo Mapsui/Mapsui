@@ -31,7 +31,7 @@ public class PolygonTestSample : ISample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.NavigateToFullEnvelope(ScaleMethod.Fit)
+            Home = n => n.ZoomToPanExtent(ScaleMethod.Fit)
         };
 
         map.Layers.Add(layer);
