@@ -75,8 +75,6 @@ public class MapRenderer : IRenderer
     public MemoryStream RenderToBitmapStream(ViewportState viewport, IEnumerable<ILayer> layers,
         Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png)
     {
-        if (viewport == null) throw new ArgumentNullException(nameof(viewport));
-
         try
         {
             var width = viewport.Width;

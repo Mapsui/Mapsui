@@ -23,29 +23,29 @@ public class ViewportTests
     public void SetTransformDeltaResolution1()
     {
         // Arrange
-        var viewport = new Navigator(new Map());
+        var navigator = new Navigator(new Map());
 
         // Act
-        viewport.SetCenter(10, 20);
-        viewport.Transform(new MPoint(10, 10), new MPoint(20, 20), 1);
+        navigator.SetCenter(10, 20);
+        navigator.Transform(new MPoint(10, 10), new MPoint(20, 20), 1);
 
         // Assert
-        Assert.AreEqual(20, viewport.State.CenterX);
-        Assert.AreEqual(10, viewport.State.CenterY);
+        Assert.AreEqual(20, navigator.State.CenterX);
+        Assert.AreEqual(10, navigator.State.CenterY);
     }
 
     [Test]
     public void SetTransformDeltaResolution2()
     {
         // Arrange
-        var viewport = new Navigator(new Map());
+        var navigator = new Navigator(new Map());
 
         // Act
-        viewport.SetCenter(10, 20);
-        viewport.Transform(new MPoint(10, 10), new MPoint(20, 20), 2);
+        navigator.SetCenter(10, 20);
+        navigator.Transform(new MPoint(10, 10), new MPoint(20, 20), 2);
 
         // Assert
-        Assert.AreEqual(30, viewport.State.CenterX);
-        Assert.AreEqual(0, viewport.State.CenterY);
+        Assert.AreEqual(30, navigator.State.CenterX);
+        Assert.AreEqual(0, navigator.State.CenterY);
     }
 }

@@ -315,7 +315,7 @@ public class WmsProvider : IProvider, IProjectingProvider
 
             if (section.Extent == null)
             {
-                Logger.Log(LogLevel.Warning, "Viewport Extent was null");
+                Logger.Log(LogLevel.Warning, "The Extent was null while getting the WMS image.");
                 return (false, null);
             }
 

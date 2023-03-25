@@ -21,6 +21,11 @@ This is the UI component that you add to you project.
 
 Holds all information about the map like layers and widgets.
 
+### Navigator
+
+Is responsible for all Viewport manipulations. 
+
+
 ### Viewport
 
-Holds all information about the part of the map that is visible on the screen like center, extent, rotation, resolution and so on. It is created automatically when Map is created. You can access it with MapControl.Map.Viewport.
+Holds all information about the part of the map that is visible on the screen like center, extent, rotation, resolution and so on. It is created automatically when Map is created. You can access it with MapControl.Map.Navigator.Viewport.
