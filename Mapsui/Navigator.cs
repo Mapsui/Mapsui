@@ -355,11 +355,7 @@ public class Navigator : INavigator
     public void SetSize(double width, double height)
     {
         ClearAnimations();
-
-
-        var newState = _viewport with { Width = width, Height = height };
-        newState = Limit(newState);
-        Viewport = newState;
+        Viewport = Limit(_viewport with { Width = width, Height = height });
     }
 
     // Todo: Make private or merge with caller
@@ -370,8 +366,7 @@ public class Navigator : INavigator
         if (Limiter.PanLock) return;
         ClearAnimations();
 
-        var newState = Limit(_viewport with { CenterX = x, CenterY = y });
-        Viewport = newState;
+        Viewport = Limit(_viewport with { CenterX = x, CenterY = y });
     }
 
     // Todo: Make private or merge with caller
@@ -382,13 +377,13 @@ public class Navigator : INavigator
 
         ClearAnimations();
 
-        var newState = _viewport with { CenterX = x, CenterY = y, Resolution = resolution };
-        newState = Limit(newState);
+        var newViewport = _viewport with { CenterX = x, CenterY = y, Resolution = resolution };
+        newViewport = Limit(newViewport);
 
         if (duration == 0)
-            Viewport = newState;
+            Viewport = newViewport;
         else
-            _animations = ViewportAnimation.Create(Viewport, newState, duration, easing);
+            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
     }
 
     // Todo: Make private or merge with caller
@@ -398,13 +393,13 @@ public class Navigator : INavigator
 
         ClearAnimations();
 
-        var newState = _viewport with { CenterX = center.X, CenterY = center.Y };
-        newState = Limit(newState);
+        
+        var newViewport = Limit(_viewport with { CenterX = center.X, CenterY = center.Y });
 
         if (duration == 0)
-            Viewport = newState;
+            Viewport = newViewport;
         else
-            _animations = ViewportAnimation.Create(Viewport, newState, duration, easing);
+            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
     }
 
     // Todo: Make private or merge with caller
@@ -414,13 +409,12 @@ public class Navigator : INavigator
 
         ClearAnimations();
 
-        var newState = _viewport with { Resolution = resolution };
-        newState = Limit(newState);
+        var newViewport = Limit(_viewport with { Resolution = resolution });
 
         if (duration == 0)
-            Viewport = newState;
+            Viewport = newViewport;
         else
-            _animations = ViewportAnimation.Create(Viewport, newState, duration, easing);
+            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
     }
 
     private void ClearAnimations()
@@ -435,13 +429,12 @@ public class Navigator : INavigator
 
         ClearAnimations();
 
-        var newState = _viewport with { Rotation = rotation };
-        newState = Limit(newState);
+        var newViewport = Limit(_viewport with { Rotation = rotation });
 
         if (duration == 0)
-            Viewport = newState;
+            Viewport = newViewport;
         else
-            _animations = ViewportAnimation.Create(Viewport, newState, duration, easing);
+            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
     }
 
     /// <summary>

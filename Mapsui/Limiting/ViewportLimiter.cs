@@ -4,8 +4,7 @@ public class ViewportLimiter : BaseViewportLimiter
 {
     public override Viewport Limit(Viewport viewport, MRect? panExtent, MMinMax? zoomExtremes)
     {
-        var state = LimitResolution(viewport, zoomExtremes);
-        return LimitExtent(state, panExtent);
+        return LimitExtent(LimitResolution(viewport, zoomExtremes), panExtent);
     }
 
     private Viewport LimitResolution(Viewport viewport, MMinMax? zoomExtremes)
