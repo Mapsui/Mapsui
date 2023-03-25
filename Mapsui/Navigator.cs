@@ -155,7 +155,7 @@ public class Navigator : INavigator
         else
         {
             var animationEntries = ZoomAroundLocationAnimation.Create(Viewport, centerOfZoomX, centerOfZoomY, resolution,
-                Viewport, duration, easing ?? Easing.SinInOut);
+                duration, easing ?? Easing.SinInOut);
             AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
             SetViewportAnimations(animationEntries);
         }

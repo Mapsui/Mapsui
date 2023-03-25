@@ -5,13 +5,12 @@ namespace Mapsui.Animations;
 
 internal class ZoomAroundLocationAnimation
 {
-    public static List<AnimationEntry<Viewport>> Create(Viewport viewport, double centerOfZoomX, double centerOfZoomY, double resolution,
-        Viewport currentState, long duration, Easing easing)
+    public static List<AnimationEntry<Viewport>> Create(Viewport viewport, double centerOfZoomX, double centerOfZoomY, double resolution, long duration, Easing easing)
     {
         var (x, y) = TransformationAlgorithms.CalculateCenterOfMap(
-            centerOfZoomX, centerOfZoomY, resolution, currentState.CenterX, currentState.CenterY, currentState.Resolution);
+            centerOfZoomX, centerOfZoomY, resolution, viewport.CenterX, viewport.CenterY, viewport.Resolution);
 
-        var newState = currentState with { CenterX = x, CenterY = y, Resolution = resolution };
-        return ViewportAnimation.Create(viewport, newState, duration, easing);
+        var destinationViewport = viewport with { CenterX = x, CenterY = y, Resolution = resolution };
+        return ViewportAnimation.Create(viewport, destinationViewport, duration, easing);
     }
 }
