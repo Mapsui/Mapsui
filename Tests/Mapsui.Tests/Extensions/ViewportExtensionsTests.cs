@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Mapsui.Tests.Extensions;
 
 [TestFixture]
-public class ViewportStateExtensionsTests
+public class ViewportExtensionsTests
 {
     [Test]
     public void ToExtentWidthIsZeroWhenResolutionIsZeroTest()

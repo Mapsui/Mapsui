@@ -2,7 +2,7 @@
 
 namespace Mapsui.Animations;
 
-internal class ViewportStateAnimation
+internal class ViewportAnimation
 {
     public static List<AnimationEntry<Viewport>> Create(Viewport viewport, Viewport destination, long duration, Easing? easing)
     {

@@ -2,7 +2,7 @@
 
 namespace Mapsui.Extensions;
 
-public static class ViewportStateExtensions
+public static class ViewportExtensions
 {
     /// <summary>
     /// True if Width and Height are not zero

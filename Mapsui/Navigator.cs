@@ -388,7 +388,7 @@ public class Navigator : INavigator
         if (duration == 0)
             State = newState;
         else
-            _animations = ViewportStateAnimation.Create(State, newState, duration, easing);
+            _animations = ViewportAnimation.Create(State, newState, duration, easing);
     }
 
     // Todo: Make private or merge with caller
@@ -404,7 +404,7 @@ public class Navigator : INavigator
         if (duration == 0)
             State = newState;
         else
-            _animations = ViewportStateAnimation.Create(State, newState, duration, easing);
+            _animations = ViewportAnimation.Create(State, newState, duration, easing);
     }
 
     // Todo: Make private or merge with caller
@@ -420,7 +420,7 @@ public class Navigator : INavigator
         if (duration == 0)
             State = newState;
         else
-            _animations = ViewportStateAnimation.Create(State, newState, duration, easing);
+            _animations = ViewportAnimation.Create(State, newState, duration, easing);
     }
 
     private void ClearAnimations()
@@ -441,7 +441,7 @@ public class Navigator : INavigator
         if (duration == 0)
             State = newState;
         else
-            _animations = ViewportStateAnimation.Create(State, newState, duration, easing);
+            _animations = ViewportAnimation.Create(State, newState, duration, easing);
     }
 
     /// <summary>
