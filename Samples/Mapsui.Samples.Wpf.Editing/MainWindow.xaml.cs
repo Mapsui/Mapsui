@@ -93,7 +93,7 @@ public partial class MainWindow
             MapControl.Map = sample.Value();
 
             LayerList.Initialize(MapControl!.Map.Layers);
-            InitializeZoomSlider(MapControl!.Map.Resolutions);
+            InitializeZoomSlider(MapControl!.Map.Navigator.Resolutions);
             if (MapControl!.Map.Layers.Any(l => l.Name.ToLower().Contains("edit"))) InitializeEditSetup();
         };
         return radioButton;
@@ -147,7 +147,7 @@ public partial class MainWindow
     private void ZoomSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
     {
         if (MapControl.Map != null)
-            MapControl.Map.Navigator.ZoomTo(MapControl.Map.Resolutions[(int)args.NewValue]);
+            MapControl.Map.Navigator.ZoomTo(MapControl.Map.Navigator.Resolutions[(int)args.NewValue]);
     }
 
     private void InitializeEditSetup()
