@@ -138,7 +138,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
     {
         if (Map.Navigator.Limiter.ZoomLock) return;
-        if (!Map.Navigator.State.HasSize()) return;
+        if (!Map.Navigator.Viewport.HasSize()) return;
 
         _currentMousePosition = e.GetPosition(this).ToMapsui();
 
@@ -193,8 +193,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         {
             if (IsInBoxZoomMode())
             {
-                var previous = Map.Navigator.State.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
-                var current = Map.Navigator.State.ScreenToWorld(mousePosition.X, mousePosition.Y);
+                var previous = Map.Navigator.Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
+                var current = Map.Navigator.Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
                 ZoomToBox(previous, current);
             }
             else if (_downMousePosition != null && IsClick(mousePosition, _downMousePosition))
@@ -279,7 +279,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             foreach (var layer in Map.Layers)
             {
                 // ReSharper disable once SuspiciousTypeConversion.Global
-                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.State, _downMousePosition.X, _downMousePosition.Y,
+                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.Viewport, _downMousePosition.X, _downMousePosition.Y,
                     OnFeatureInfo);
             }
 
@@ -381,7 +381,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnManipulationStarted(object? sender, ManipulationStartedEventArgs e)
     {
         _hasBeenManipulated = false;
-        _virtualRotation = Map.Navigator.State.Rotation;
+        _virtualRotation = Map.Navigator.Viewport.Rotation;
     }
 
     private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
@@ -404,7 +404,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             _virtualRotation += angle - prevAngle;
 
             rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                _virtualRotation, Map.Navigator.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
         }
 
         Map.Navigator.Transform(center, previousCenter, radius / previousRadius, rotationDelta);

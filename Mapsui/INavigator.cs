@@ -20,7 +20,7 @@ public interface INavigator
     /// </summary>
     MMinMax? ZoomExtremes { get; set; }
     IViewportLimiter Limiter { get; set; }
-    Viewport State { get; }
+    Viewport Viewport { get; }
 
     event PropertyChangedEventHandler? ViewportChanged;
 

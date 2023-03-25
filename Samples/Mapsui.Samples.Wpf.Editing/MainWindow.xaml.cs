@@ -292,7 +292,7 @@ public partial class MainWindow
     private void MapControlOnMouseMove(object sender, MouseEventArgs args)
     {
         var screenPosition = args.GetPosition(MapControl).ToMapsui();
-        var worldPosition = MapControl.Map.Navigator.State.ScreenToWorld(screenPosition);
+        var worldPosition = MapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition);
         MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
 
         if (args.LeftButton == MouseButtonState.Pressed)

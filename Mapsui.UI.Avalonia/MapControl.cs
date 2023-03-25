@@ -73,7 +73,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseWheel(object? sender, PointerWheelEventArgs e)
     {
         if (Map.Navigator.Limiter.ZoomLock) return;
-        if (!Map.Navigator.State.HasSize()) return;
+        if (!Map.Navigator.Viewport.HasSize()) return;
 
         _currentMousePosition = e.GetPosition(this).ToMapsui();
 
@@ -97,7 +97,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             foreach (var layer in Map.Layers)
             {
                 // ReSharper disable once SuspiciousTypeConversion.Global
-                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.State, _downMousePosition.X, _downMousePosition.Y,
+                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.Viewport, _downMousePosition.X, _downMousePosition.Y,
                     OnFeatureInfo);
             }
     }

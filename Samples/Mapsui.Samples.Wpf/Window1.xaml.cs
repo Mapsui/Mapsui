@@ -46,7 +46,7 @@ public partial class Window1
     private void MapControlOnMouseMove(object sender, MouseEventArgs e)
     {
         var screenPosition = e.GetPosition(MapControl);
-        var worldPosition = MapControl.Map.Navigator.State.ScreenToWorld(screenPosition.X, screenPosition.Y);
+        var worldPosition = MapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition.X, screenPosition.Y);
         MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
     }
 

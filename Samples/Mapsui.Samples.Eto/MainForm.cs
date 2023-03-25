@@ -88,7 +88,7 @@ public class MainForm : Form
 
     private void MapControlOnMouseMove(object? sender, MouseEventArgs e)
     {
-        var worldPosition = MapControl.Map.Navigator.State.ScreenToWorld(e.Location.X, e.Location.Y);
+        var worldPosition = MapControl.Map.Navigator.Viewport.ScreenToWorld(e.Location.X, e.Location.Y);
         MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
     }
     private void FillListWithSamples()

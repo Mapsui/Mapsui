@@ -173,7 +173,7 @@ public partial class MapControl : UIView, IMapControl
     {
         base.TouchesBegan(touches, evt);
 
-        _virtualRotation = Map.Navigator.State.Rotation;
+        _virtualRotation = Map.Navigator.Viewport.Rotation;
     }
 
     public override void TouchesMoved(NSSet touches, UIEvent? evt)
@@ -190,7 +190,7 @@ public partial class MapControl : UIView, IMapControl
                 Map.Navigator.Transform(position, previousPosition);
                 RefreshGraphics();
 
-                _virtualRotation = Map.Navigator.State.Rotation;
+                _virtualRotation = Map.Navigator.Viewport.Rotation;
             }
         }
         else if (evt?.AllTouches.Count >= 2)
@@ -211,7 +211,7 @@ public partial class MapControl : UIView, IMapControl
                 _virtualRotation += angle - previousAngle;
 
                 rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                    _virtualRotation, Map.Navigator.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                    _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
             }
 
             Map.Navigator.Transform(center, previousCenter, radius / previousRadius, rotationDelta);

@@ -73,11 +73,11 @@ public class RenderToCpuPerformance : IDisposable
         mapControl.Map = CreateMap(renderFormat, tiling, rasterizing);
 
         // zoom to correct Zoom level
-        var resolution = ZoomHelper.ZoomOut(mapControl.Map.Navigator.Resolutions, mapControl.Map.Navigator.State.Resolution);
+        var resolution = ZoomHelper.ZoomOut(mapControl.Map.Navigator.Resolutions, mapControl.Map.Navigator.Viewport.Resolution);
         mapControl.Map.Navigator.ZoomTo(resolution);
 
         // fetch data first time
-        var fetchInfo = new FetchInfo(mapControl.Map.Navigator.State.ToSection(), mapControl.Map.CRS);
+        var fetchInfo = new FetchInfo(mapControl.Map.Navigator.Viewport.ToSection(), mapControl.Map.CRS);
         mapControl.Map.RefreshData(fetchInfo);
         mapControl.Map.Layers.WaitForLoadingAsync().Wait();
 
@@ -161,56 +161,56 @@ public class RenderToCpuPerformance : IDisposable
     public async Task RenderDefaultWithoutCacheAsync()
     {
         await map.WaitForLoadingAsync();
-        mapRendererWithoutCache.Render(skCanvas, map.Map.Navigator.State, map.Map.Layers, map.Map.Widgets, Color.White);
+        mapRendererWithoutCache.Render(skCanvas, map.Map.Navigator.Viewport, map.Map.Layers, map.Map.Widgets, Color.White);
     }
 
     [Benchmark]
     public async Task RenderDefaultAsync()
     {
         await map.WaitForLoadingAsync();
-        mapRenderer.Render(skCanvas, map.Map.Navigator.State, map.Map.Layers, map.Map.Widgets, Color.White);
+        mapRenderer.Render(skCanvas, map.Map.Navigator.Viewport, map.Map.Layers, map.Map.Widgets, Color.White);
     }
 
     [Benchmark]
     public async Task RenderRasterizingPngAsync()
     {
         await rasterizingPngMap.WaitForLoadingAsync();
-        mapRenderer.Render(skCanvas, rasterizingPngMap.Map.Navigator.State, rasterizingPngMap.Map!.Layers, rasterizingPngMap.Map!.Widgets, Color.White);
+        mapRenderer.Render(skCanvas, rasterizingPngMap.Map.Navigator.Viewport, rasterizingPngMap.Map!.Layers, rasterizingPngMap.Map!.Widgets, Color.White);
     }
 
     [Benchmark]
     public async Task RenderRasterizingSkpAsync()
     {
         await rasterizingSkpMap.WaitForLoadingAsync();
-        mapRenderer.Render(skCanvas, rasterizingSkpMap.Map.Navigator.State, rasterizingSkpMap.Map!.Layers, rasterizingSkpMap.Map!.Widgets, Color.White);
+        mapRenderer.Render(skCanvas, rasterizingSkpMap.Map.Navigator.Viewport, rasterizingSkpMap.Map!.Layers, rasterizingSkpMap.Map!.Widgets, Color.White);
     }
 
     [Benchmark]
     public async Task RenderRasterizingTilingSkpAsync()
     {
         await rasterizingTilingSkpMap.WaitForLoadingAsync();
-        mapRenderer.Render(skCanvas, rasterizingTilingSkpMap.Map.Navigator.State, rasterizingTilingSkpMap.Map!.Layers, rasterizingTilingSkpMap.Map!.Widgets, Color.White);
+        mapRenderer.Render(skCanvas, rasterizingTilingSkpMap.Map.Navigator.Viewport, rasterizingTilingSkpMap.Map!.Layers, rasterizingTilingSkpMap.Map!.Widgets, Color.White);
     }
 
     [Benchmark]
     public async Task RenderTilingPngAsync()
     {
         await tilingPngMap.WaitForLoadingAsync();
-        mapRenderer.Render(skCanvas, tilingPngMap.Map.Navigator.State, tilingPngMap.Map!.Layers, tilingPngMap.Map!.Widgets, Color.White);
+        mapRenderer.Render(skCanvas, tilingPngMap.Map.Navigator.Viewport, tilingPngMap.Map!.Layers, tilingPngMap.Map!.Widgets, Color.White);
     }
 
     [Benchmark]
     public async Task RenderTilingWebPAsync()
     {
         await tilingWebpMap.WaitForLoadingAsync();
-        mapRenderer.Render(skCanvas, tilingWebpMap.Map.Navigator.State, tilingWebpMap.Map.Layers, tilingWebpMap.Map.Widgets, Color.White);
+        mapRenderer.Render(skCanvas, tilingWebpMap.Map.Navigator.Viewport, tilingWebpMap.Map.Layers, tilingWebpMap.Map.Widgets, Color.White);
     }
 
     [Benchmark]
     public async Task RenderTilingSkpAsync()
     {
         await tilingSkpMap.WaitForLoadingAsync();
-        mapRenderer.Render(skCanvas, tilingSkpMap.Map.Navigator.State, tilingSkpMap.Map.Layers, tilingSkpMap.Map.Widgets, Color.White);
+        mapRenderer.Render(skCanvas, tilingSkpMap.Map.Navigator.Viewport, tilingSkpMap.Map.Layers, tilingSkpMap.Map.Widgets, Color.White);
     }
 
     public void Dispose()
