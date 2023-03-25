@@ -1,57 +1,34 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Mapsui.Limiting;
-
-public class MinMax
-{
-    public MinMax(double value1, double value2)
-    {
-        if (value1 < value2)
-        {
-            Min = value1;
-            Max = value2;
-        }
-        else
-        {
-            Min = value2;
-            Max = value1;
-        }
-    }
-
-    public double Min { get; }
-    public double Max { get; }
-}
+﻿namespace Mapsui.Limiting;
 
 public class ViewportLimiter : BaseViewportLimiter
 {
-    public override ViewportState Limit(ViewportState viewportState)
+    public override ViewportState Limit(ViewportState viewportState, MRect? panExtent, MMinMax? zoomExtremes)
     {
-        var state = LimitResolution(viewportState);
-        return LimitExtent(state);
+        var state = LimitResolution(viewportState, zoomExtremes);
+        return LimitExtent(state, panExtent);
     }
 
-    private ViewportState LimitResolution(ViewportState viewportState)
+    private ViewportState LimitResolution(ViewportState viewportState, MMinMax? zoomExtremes)
     {
-        if (ZoomLimits is null) return viewportState;
+        if (zoomExtremes is null) return viewportState;
 
-        if (ZoomLimits.Min > viewportState.Resolution) return viewportState with { Resolution = ZoomLimits.Min };
-        if (ZoomLimits.Max < viewportState.Resolution) return viewportState with { Resolution = ZoomLimits.Max };
+        if (zoomExtremes.Min > viewportState.Resolution) return viewportState with { Resolution = zoomExtremes.Min };
+        if (zoomExtremes.Max < viewportState.Resolution) return viewportState with { Resolution = zoomExtremes.Max };
 
         return viewportState;
     }
 
-    private ViewportState LimitExtent(ViewportState viewportState)
+    private ViewportState LimitExtent(ViewportState viewportState, MRect? panExtent)
     {
-        if (PanLimits is null) return viewportState;
+        if (panExtent is null) return viewportState;
 
         var x = viewportState.CenterX;
-        if (viewportState.CenterX < PanLimits.Left) x = PanLimits.Left;
-        if (viewportState.CenterX > PanLimits.Right) x = PanLimits.Right;
+        if (viewportState.CenterX < panExtent.Left) x = panExtent.Left;
+        if (viewportState.CenterX > panExtent.Right) x = panExtent.Right;
 
         var y = viewportState.CenterY;
-        if (viewportState.CenterY > PanLimits.Top) y = PanLimits.Top;
-        if (viewportState.CenterY < PanLimits.Bottom) y = PanLimits.Bottom;
+        if (viewportState.CenterY > panExtent.Top) y = panExtent.Top;
+        if (viewportState.CenterY < panExtent.Bottom) y = panExtent.Bottom;
 
         return viewportState with { CenterX = x, CenterY = y };
     }

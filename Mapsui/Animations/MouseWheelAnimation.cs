@@ -24,15 +24,15 @@ public class MouseWheelAnimation
         {
             _toResolution = ZoomHelper.ZoomIn(resolutions, _toResolution);
             // Todo: Move this to ZoomIn. Make limiting consistent.
-            if (navigator.Limiter.ZoomLimits is not null)
-                _toResolution = Math.Max(_toResolution, navigator.Limiter.ZoomLimits.Min);
+            if (navigator.ZoomExtremes is not null)
+                _toResolution = Math.Max(_toResolution, navigator.ZoomExtremes.Min);
         }
         else if (mouseWheelDelta < Constants.Epsilon)
         {
             _toResolution = ZoomHelper.ZoomOut(resolutions, _toResolution);
             // Todo: Move this to ZoomOut. Make limiting consistent.
-            if (navigator.Limiter.ZoomLimits is not null)
-                _toResolution = Math.Min(_toResolution, navigator.Limiter.ZoomLimits.Max);
+            if (navigator.ZoomExtremes is not null)
+                _toResolution = Math.Min(_toResolution, navigator.ZoomExtremes.Max);
         }
 
         // TickCount is fast https://stackoverflow.com/a/4075602/85325

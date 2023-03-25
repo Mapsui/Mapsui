@@ -25,7 +25,13 @@ public class Navigator : INavigator
     }
 
     public event PropertyChangedEventHandler? ViewportChanged;
-        
+
+    /// <inheritdoc />
+    public MRect? PanExtent { get; set; }
+
+    /// <inheritdoc />
+    public MMinMax? ZoomExtremes { get; set; }
+
     public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
 
     public ViewportState State
@@ -308,7 +314,7 @@ public class Navigator : INavigator
 
         ClearAnimations();
 
-        State = Limiter.Limit(TransformState(_viewport, positionScreen, previousPositionScreen, deltaResolution, deltaRotation));
+        State = Limit(TransformState(_viewport, positionScreen, previousPositionScreen, deltaResolution, deltaRotation));
     }
 
     private static ViewportState TransformState(ViewportState state, MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation)
@@ -355,7 +361,7 @@ public class Navigator : INavigator
 
 
         var newState = _viewport with { Width = width, Height = height };
-        newState = Limiter.Limit(newState);
+        newState = Limit(newState);
         State = newState;
     }
 
@@ -367,7 +373,7 @@ public class Navigator : INavigator
         if (Limiter.PanLock) return;
         ClearAnimations();
 
-        var newState = Limiter.Limit(_viewport with { CenterX = x, CenterY = y });
+        var newState = Limit(_viewport with { CenterX = x, CenterY = y });
         State = newState;
     }
 
@@ -380,7 +386,7 @@ public class Navigator : INavigator
         ClearAnimations();
 
         var newState = _viewport with { CenterX = x, CenterY = y, Resolution = resolution };
-        newState = Limiter.Limit(newState);
+        newState = Limit(newState);
 
         if (duration == 0)
             State = newState;
@@ -396,7 +402,7 @@ public class Navigator : INavigator
         ClearAnimations();
 
         var newState = _viewport with { CenterX = center.X, CenterY = center.Y };
-        newState = Limiter.Limit(newState);
+        newState = Limit(newState);
 
         if (duration == 0)
             State = newState;
@@ -412,7 +418,7 @@ public class Navigator : INavigator
         ClearAnimations();
 
         var newState = _viewport with { Resolution = resolution };
-        newState = Limiter.Limit(newState);
+        newState = Limit(newState);
 
         if (duration == 0)
             State = newState;
@@ -433,7 +439,7 @@ public class Navigator : INavigator
         ClearAnimations();
 
         var newState = _viewport with { Rotation = rotation };
-        newState = Limiter.Limit(newState);
+        newState = Limit(newState);
 
         if (duration == 0)
             State = newState;
@@ -473,8 +479,17 @@ public class Navigator : INavigator
 
     public LimitResult SetViewportWithLimit(ViewportState viewportState)
     {
-        State = Limiter.Limit(viewportState);
+        State = Limit(viewportState);
         return new LimitResult(viewportState, State);
     }
 
+    /// <summary>
+    /// To make the other limiting call in this class a bit shorter.
+    /// </summary>
+    /// <param name="viewport"></param>
+    /// <returns></returns>
+    private ViewportState Limit(ViewportState viewport)
+    {
+        return Limiter.Limit(viewport, PanExtent, ZoomExtremes);
+    }
 }
