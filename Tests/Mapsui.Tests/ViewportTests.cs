@@ -9,21 +9,21 @@ public class ViewportTests
     public void SetCenterTest()
     {
         // Arrange
-        var viewport = new Viewport();
+        var navigator = new Navigator(new Map());
 
         // Act
-        viewport.SetCenter(10, 20);
+        navigator.SetCenter(10, 20);
 
         // Assert
-        Assert.AreEqual(10, viewport.State.CenterX);
-        Assert.AreEqual(20, viewport.State.CenterY);
+        Assert.AreEqual(10, navigator.State.CenterX);
+        Assert.AreEqual(20, navigator.State.CenterY);
     }
 
     [Test]
     public void SetTransformDeltaResolution1()
     {
         // Arrange
-        var viewport = new Viewport();
+        var viewport = new Navigator(new Map());
 
         // Act
         viewport.SetCenter(10, 20);
@@ -38,7 +38,7 @@ public class ViewportTests
     public void SetTransformDeltaResolution2()
     {
         // Arrange
-        var viewport = new Viewport();
+        var viewport = new Navigator(new Map());
 
         // Act
         viewport.SetCenter(10, 20);

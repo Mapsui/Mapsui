@@ -23,8 +23,8 @@ public class KeepCenterInMapSample : ISample
 
         var extent = GetLimitsOfMadagaskar();
 
-        map.Viewport.Limiter.PanLimits = extent;
-        map.Viewport.Limiter.ZoomLimits = new MinMax(0.15, 2500);
+        map.Navigator.Limiter.PanLimits = extent;
+        map.Navigator.Limiter.ZoomLimits = new MinMax(0.15, 2500);
         map.Home = n => n.NavigateTo(extent);
         return Task.FromResult(map);
     }

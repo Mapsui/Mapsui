@@ -465,7 +465,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <param name="screenPosition">Center of zoom out event</param>
     private bool OnZoomInOrOut(int mouseWheelDelta, MPoint screenPosition)
     {
-        if (Map.Viewport.Limiter.ZoomLock)
+        if (Map.Navigator.Limiter.ZoomLock)
         {
             return true;
         }
@@ -557,7 +557,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
             _mode = TouchMode.Zooming;
-            _virtualRotation = Map.Viewport.State.Rotation;
+            _virtualRotation = Map.Navigator.State.Rotation;
         }
         else
         {
@@ -583,9 +583,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (touchPoints.Count == 0)
         {
             _mode = TouchMode.None;
-            if (Map.Viewport.State.ToExtent() is not null)
+            if (Map.Navigator.State.ToExtent() is not null)
             {
-                Map?.RefreshData(new FetchInfo(Map.Viewport.State.ToSection(), Map?.CRS, ChangeType.Discrete));
+                Map?.RefreshData(new FetchInfo(Map.Navigator.State.ToSection(), Map?.CRS, ChangeType.Discrete));
             }
         }
 
@@ -627,9 +627,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (touchPoints.Count == 0)
         {
             _mode = TouchMode.None;
-            if (Map.Viewport.State.ToExtent() is not null)
+            if (Map.Navigator.State.ToExtent() is not null)
             {
-                Map?.RefreshData(new FetchInfo(Map.Viewport.State.ToSection(), Map?.CRS, ChangeType.Discrete));
+                Map?.RefreshData(new FetchInfo(Map.Navigator.State.ToSection(), Map?.CRS, ChangeType.Discrete));
             }
         }
 
@@ -658,9 +658,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     var touchPosition = touchPoints.First();
 
-                    if (!Map.Viewport.Limiter.PanLock && _previousCenter != null)
+                    if (!Map.Navigator.Limiter.PanLock && _previousCenter != null)
                     {
-                        Map.Viewport.Transform(touchPosition, _previousCenter);
+                        Map.Navigator.Transform(touchPosition, _previousCenter);
 
                         RefreshGraphics();
                     }
@@ -678,17 +678,17 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     double rotationDelta = 0;
 
-                    if (Map.Viewport.Limiter.RotationLock == false)
+                    if (Map.Navigator.Limiter.RotationLock == false)
                     {
                         var deltaRotation = angle - prevAngle;
                         _virtualRotation += deltaRotation;
 
                         rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                            _virtualRotation, Map.Viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                            _virtualRotation, Map.Navigator.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
                     }
 
                     if (prevCenter != null)
-                        Map.Viewport.Transform(center, prevCenter, Map.Viewport.Limiter.ZoomLock ? 1 : radius / prevRadius, rotationDelta);
+                        Map.Navigator.Transform(center, prevCenter, Map.Navigator.Limiter.ZoomLock ? 1 : radius / prevRadius, rotationDelta);
 
                     (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
 

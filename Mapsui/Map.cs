@@ -37,7 +37,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         BackColor = Color.White;
         Layers = new LayerCollection();
 
-        Navigator = new Navigator(this, Viewport);
+        Navigator = new Navigator(this);
         Navigator.Navigated += Navigated;
     }
 
@@ -124,17 +124,10 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </summary>
     public event EventHandler<MapInfoEventArgs>? Info;
 
-    private protected readonly Viewport _viewport = new();
-
     /// <summary>
     /// Handles all manipulations of the map viewport
     /// </summary>
     public INavigator Navigator { get; private set; }
-
-    /// <summary>
-    /// Viewport holding information about visible part of the map. Viewport can never be null.
-    /// </summary>
-    public Viewport Viewport => _viewport;
 
     private void Navigated(object? sender, ChangeType changeType)
     {
@@ -155,12 +148,12 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </summary>
     public void RefreshData(ChangeType changeType = ChangeType.Discrete)
     {
-        if (Viewport.State.ToExtent() is null)
+        if (Navigator.State.ToExtent() is null)
             return;
-        if (Viewport.State.ToExtent().GetArea() <= 0)
+        if (Navigator.State.ToExtent().GetArea() <= 0)
             return;
 
-        var fetchInfo = new FetchInfo(Viewport.State.ToSection(), CRS, changeType);
+        var fetchInfo = new FetchInfo(Navigator.State.ToSection(), CRS, changeType);
         RefreshData(fetchInfo);
     }
 
@@ -243,9 +236,9 @@ public class Map : INotifyPropertyChanged, IDisposable
         // Todo: There should be a way the user can set the Resolutions in the code below is not called.
         Navigator.Resolutions = DetermineResolutions(Layers);
         // Todo: Perhaps Navigator.ZoomExtremes should be used instead of Limiter.ZoomLimits
-        Viewport.Limiter.ZoomLimits = GetMinMaxResolution(Navigator.Resolutions);
+        Navigator.Limiter.ZoomLimits = GetMinMaxResolution(Navigator.Resolutions);
         // Todo: Perhaps Navigator.PanExtent should be used instead of Limiter.PanLimits
-        Viewport.Limiter.PanLimits = Extent?.Copy();
+        Navigator.Limiter.PanLimits = Extent?.Copy();
         OnPropertyChanged(nameof(Layers));
     }
 

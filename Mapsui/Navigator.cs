@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Mapsui.Animations;
 using Mapsui.Extensions;
+using Mapsui.Limiting;
 using Mapsui.Utilities;
 
 namespace Mapsui;
@@ -11,14 +14,12 @@ namespace Mapsui;
 public class Navigator : INavigator
 {
     private readonly Map _map;
-    private readonly Viewport _viewport;
 
     public EventHandler<ChangeType>? Navigated { get; set; }
 
-    public Navigator(Map map, Viewport viewport)
+    public Navigator(Map map)
     {
         _map = map;
-        _viewport = viewport;
     }
 
     /// <inheritdoc />
@@ -28,7 +29,8 @@ public class Navigator : INavigator
 
     public void ZoomInOrOut(int mouseWheelDelta, MPoint centerOfZoom)
     {
-        var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, _viewport, Resolutions);
+        // Todo: Find a way in which the Navigator argument is not needed.
+        var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, this, Resolutions);
         if (mouseWheelDelta > Constants.Epsilon)
         {
             ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
@@ -51,7 +53,7 @@ public class Navigator : INavigator
         if (extent == null) return;
 
         var resolution = ZoomHelper.DetermineResolution(
-            extent.Width, extent.Height, _viewport.State.Width, _viewport.State.Height, scaleMethod);
+            extent.Width, extent.Height, State.Width, State.Height, scaleMethod);
 
         NavigateTo(extent.Centroid, resolution, duration, easing);
     }
@@ -79,7 +81,7 @@ public class Navigator : INavigator
     {
         if (center == null) throw new ArgumentNullException(nameof(center));
 
-        _viewport.SetCenterAndResolution(center.X, center.Y, resolution, duration, easing);
+        SetCenterAndResolution(center.X, center.Y, resolution, duration, easing);
         OnNavigated(duration, ChangeType.Discrete);
 
     }
@@ -92,7 +94,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomTo(double resolution, long duration = 0, Easing? easing = default)
     {
-        _viewport.SetResolution(resolution, duration, easing);
+        SetResolution(resolution, duration, easing);
         OnNavigated(duration, ChangeType.Discrete);
     }
 
@@ -110,31 +112,31 @@ public class Navigator : INavigator
     /// <param name="easing">The easing of the animation when duration is > 0</param>
     public void ZoomTo(double resolution, MPoint centerOfZoomInScreenCoordinates, long duration = 0, Easing? easing = default)
     {
-        if (_viewport.Limiter.ZoomLock) return;
+        if (Limiter.ZoomLock) return;
 
-        var (centerOfZoomX, centerOfZoomY) = _viewport.State.ScreenToWorldXY(centerOfZoomInScreenCoordinates.X, centerOfZoomInScreenCoordinates.Y);
+        var (centerOfZoomX, centerOfZoomY) = State.ScreenToWorldXY(centerOfZoomInScreenCoordinates.X, centerOfZoomInScreenCoordinates.Y);
 
-        if (_viewport.Limiter.PanLock)
+        if (Limiter.PanLock)
         {
             // Avoid pan by zooming on center
-            centerOfZoomX = _viewport.State.CenterX;
-            centerOfZoomY = _viewport.State.CenterY;
+            centerOfZoomX = State.CenterX;
+            centerOfZoomY = State.CenterY;
         }
 
         if (duration == 0)
         {
             // Todo: If there is limiting of one dimension the other dimension should be limited accordingly. 
             var (x, y) = TransformationAlgorithms.CalculateCenterOfMap(
-                centerOfZoomX, centerOfZoomY, resolution, _viewport.State.CenterX, _viewport.State.CenterY, _viewport.State.Resolution);
-            _viewport.SetViewportStateWithLimit(_viewport.State with { CenterX = x, CenterY = y, Resolution = resolution });
+                centerOfZoomX, centerOfZoomY, resolution, State.CenterX, State.CenterY, State.Resolution);
+            SetViewportStateWithLimit(State with { CenterX = x, CenterY = y, Resolution = resolution });
             OnNavigated(ChangeType.Discrete);
         }
         else
         {
-            var animationEntries = ZoomAroundLocationAnimation.Create(_viewport.State, centerOfZoomX, centerOfZoomY, resolution,
-                _viewport.State, duration, easing ?? Easing.SinInOut);
+            var animationEntries = ZoomAroundLocationAnimation.Create(State, centerOfZoomX, centerOfZoomY, resolution,
+                State, duration, easing ?? Easing.SinInOut);
             AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
-            _viewport.SetAnimations(animationEntries);
+            SetAnimations(animationEntries);
         }
 
     }
@@ -146,7 +148,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomIn(long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomIn(Resolutions, _viewport.State.Resolution);
+        var resolution = ZoomHelper.ZoomIn(Resolutions, State.Resolution);
 
         ZoomTo(resolution, duration, easing);
     }
@@ -158,7 +160,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomOut(long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomOut(Resolutions, _viewport.State.Resolution);
+        var resolution = ZoomHelper.ZoomOut(Resolutions, State.Resolution);
 
         ZoomTo(resolution, duration, easing);
     }
@@ -172,7 +174,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomIn(MPoint centerOfZoom, long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomIn(Resolutions, _viewport.State.Resolution);
+        var resolution = ZoomHelper.ZoomIn(Resolutions, State.Resolution);
 
         ZoomTo(resolution, centerOfZoom, duration, easing);
     }
@@ -186,7 +188,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomOut(MPoint centerOfZoom, long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomOut(Resolutions, _viewport.State.Resolution);
+        var resolution = ZoomHelper.ZoomOut(Resolutions, State.Resolution);
         ZoomTo(resolution, centerOfZoom, duration, easing);
     }
 
@@ -210,7 +212,7 @@ public class Navigator : INavigator
     /// <param name="easing">Function for easing</param>
     public void CenterOn(MPoint center, long duration = 0, Easing? easing = default)
     {
-        _viewport.SetCenter(center, duration, easing);
+        SetCenter(center, duration, easing);
         OnNavigated(duration, ChangeType.Discrete);
     }
 
@@ -222,9 +224,9 @@ public class Navigator : INavigator
     /// <param name="duration">Duration for animation in milliseconds.</param>
     public void FlyTo(MPoint center, double maxResolution, long duration = 500)
     {
-        var animationEntries = FlyToAnimation.Create(_viewport.State, center, maxResolution, duration);
+        var animationEntries = FlyToAnimation.Create(State, center, maxResolution, duration);
         AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
-        _viewport.SetAnimations(animationEntries);
+        SetAnimations(animationEntries);
     }
 
     /// <summary>
@@ -235,7 +237,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void RotateTo(double rotation, long duration = 0, Easing? easing = default)
     {
-        _viewport.SetRotation(rotation, duration, easing);
+        SetRotation(rotation, duration, easing);
 
         OnNavigated(duration, ChangeType.Discrete);
     }
@@ -248,10 +250,10 @@ public class Navigator : INavigator
     /// <param name="maxDuration">Maximum duration of fling deceleration></param>
     public void FlingWith(double velocityX, double velocityY, long maxDuration)
     {
-        if (_viewport.Limiter.PanLock) return;
+        if (Limiter.PanLock) return;
 
         var response = FlingAnimation.Create(velocityX, velocityY, maxDuration);
-        _viewport.SetAnimations(response.Entries);
+        SetAnimations(response.Entries);
         OnNavigated(response.Duration, ChangeType.Discrete);
     }
 
@@ -278,4 +280,199 @@ public class Navigator : INavigator
     {
         Navigated?.Invoke(this, changeType);
     }
+
+    //##################################################################################
+
+    public event PropertyChangedEventHandler? ViewportChanged;
+
+    // State
+    private ViewportState _state = new(0, 0, 1, 0, 0, 0);
+
+    private IEnumerable<AnimationEntry<ViewportState>> _animations = Enumerable.Empty<AnimationEntry<ViewportState>>();
+
+    public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
+
+    public ViewportState State
+    {
+        get => _state;
+        private set
+        {
+            if (_state == value) return;
+            _state = value;
+            OnViewportChanged();
+        }
+    }
+
+    /// <inheritdoc />
+    public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0)
+    {
+        if (Limiter.ZoomLock) deltaResolution = 1;
+        if (Limiter.PanLock) positionScreen = previousPositionScreen;
+
+        ClearAnimations();
+
+        State = Limiter.Limit(TransformState(_state, positionScreen, previousPositionScreen, deltaResolution, deltaRotation));
+    }
+
+    private static ViewportState TransformState(ViewportState state, MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation)
+    {
+        var previous = state.ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
+        var current = state.ScreenToWorld(positionScreen.X, positionScreen.Y);
+
+        var newX = state.CenterX + previous.X - current.X;
+        var newY = state.CenterY + previous.Y - current.Y;
+
+        if (deltaResolution == 1 && deltaRotation == 0 && state.CenterX == newX && state.CenterY == newY)
+            return state;
+
+        if (deltaResolution != 1)
+        {
+            state = state with { Resolution = state.Resolution / deltaResolution };
+
+            // Calculate current position again with adjusted resolution
+            // Zooming should be centered on the place where the map is touched.
+            // This is done with the scale correction.
+            var scaleCorrectionX = (1 - deltaResolution) * (current.X - state.CenterX);
+            var scaleCorrectionY = (1 - deltaResolution) * (current.Y - state.CenterY);
+
+            newX -= scaleCorrectionX;
+            newY -= scaleCorrectionY;
+        }
+
+        state = state with { CenterX = newX, CenterY = newY };
+
+        if (deltaRotation != 0)
+        {
+            current = state.ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
+            state = state with { Rotation = state.Rotation + deltaRotation };
+            var postRotation = state.ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
+            state = state with { CenterX = state.CenterX - (postRotation.X - current.X), CenterY = state.CenterY - (postRotation.Y - current.Y) };
+        }
+
+        return state;
+    }
+
+    public void SetSize(double width, double height)
+    {
+        ClearAnimations();
+
+
+        var newState = _state with { Width = width, Height = height };
+        newState = Limiter.Limit(newState);
+        State = newState;
+    }
+
+    public void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
+    {
+        // Todo: Fix the unused animation parameters.
+
+        if (Limiter.PanLock) return;
+        ClearAnimations();
+
+        var newState = Limiter.Limit(_state with { CenterX = x, CenterY = y });
+        State = newState;
+    }
+
+    public void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
+    {
+        if (Limiter.PanLock) return;
+        if (Limiter.ZoomLock) return;
+
+        ClearAnimations();
+
+        var newState = _state with { CenterX = x, CenterY = y, Resolution = resolution };
+        newState = Limiter.Limit(newState);
+
+        if (duration == 0)
+            State = newState;
+        else
+            _animations = ViewportStateAnimation.Create(State, newState, duration, easing);
+    }
+
+    public void SetCenter(MPoint center, long duration = 0, Easing? easing = default)
+    {
+        if (Limiter.PanLock) return;
+
+        ClearAnimations();
+
+        var newState = _state with { CenterX = center.X, CenterY = center.Y };
+        newState = Limiter.Limit(newState);
+
+        if (duration == 0)
+            State = newState;
+        else
+            _animations = ViewportStateAnimation.Create(State, newState, duration, easing);
+    }
+
+    public void SetResolution(double resolution, long duration = 0, Easing? easing = default)
+    {
+        if (Limiter.ZoomLock) return;
+
+        ClearAnimations();
+
+        var newState = _state with { Resolution = resolution };
+        newState = Limiter.Limit(newState);
+
+        if (duration == 0)
+            State = newState;
+        else
+            _animations = ViewportStateAnimation.Create(State, newState, duration, easing);
+    }
+
+    private void ClearAnimations()
+    {
+        _animations = Enumerable.Empty<AnimationEntry<ViewportState>>();
+    }
+
+    public void SetRotation(double rotation, long duration = 0, Easing? easing = default)
+    {
+        if (Limiter.RotationLock) return;
+
+        ClearAnimations();
+
+        var newState = _state with { Rotation = rotation };
+        newState = Limiter.Limit(newState);
+
+        if (duration == 0)
+            State = newState;
+        else
+            _animations = ViewportStateAnimation.Create(State, newState, duration, easing);
+    }
+
+    /// <summary>
+    /// Property change event
+    /// </summary>
+    /// <param name="propertyName">Name of property that changed</param>
+    private void OnViewportChanged([CallerMemberName] string? propertyName = null)
+    {
+        ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    public bool UpdateAnimations()
+    {
+        if (!_animations.Any()) return false;
+        if (_animations.All(a => a.Done))
+            ClearAnimations();
+
+        var result = Animation.UpdateAnimations(State, _animations);
+
+
+        var limitResult = SetViewportStateWithLimit(result.CurrentState);
+        if (limitResult.ZoomLimited || limitResult.FullyLimited)
+            ClearAnimations();
+
+        return result.IsRunning;
+    }
+
+    public void SetAnimations(List<AnimationEntry<ViewportState>> animations)
+    {
+        _animations = animations;
+    }
+
+    public LimitResult SetViewportStateWithLimit(ViewportState viewportState)
+    {
+        State = Limiter.Limit(viewportState);
+        return new LimitResult(viewportState, State);
+    }
+
 }
