@@ -24,6 +24,8 @@ public interface INavigator
     /// </summary>
     EventHandler<ChangeType>? Navigated { get; set; }
 
+    void ZoomInOrOut(int mouseWheelDelta, MPoint centerOfZoom);
+
     /// <summary>
     /// Navigate center of viewport to center of extent and change resolution
     /// </summary>

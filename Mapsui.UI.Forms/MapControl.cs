@@ -477,7 +477,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (args.Handled)
             return true;
 
-        ZoomInOrOut(mouseWheelDelta, screenPosition);
+        Map.Navigator.ZoomInOrOut(mouseWheelDelta, screenPosition);
 
         return true;
     }

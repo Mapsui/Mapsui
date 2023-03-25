@@ -77,7 +77,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         _currentMousePosition = e.GetPosition(this).ToMapsui();
 
-        ZoomInOrOut((int)e.Delta.Y, _currentMousePosition);
+        Map.Navigator.ZoomInOrOut((int)e.Delta.Y, _currentMousePosition);
     }
 
     private void MapControlMouseLeftButtonDown(PointerPressedEventArgs e)

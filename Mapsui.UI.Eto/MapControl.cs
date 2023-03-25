@@ -79,7 +79,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         var mouseWheelDelta = (int)e.Delta.Height;
         var currentMousePosition = e.Location.ToMapsui();
-        ZoomInOrOut(mouseWheelDelta, currentMousePosition);
+        Map.Navigator.ZoomInOrOut(mouseWheelDelta, currentMousePosition);
     }
 
     protected override void OnSizeChanged(EventArgs e)
