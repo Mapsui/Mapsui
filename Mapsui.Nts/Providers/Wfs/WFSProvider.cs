@@ -302,6 +302,7 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="persistentCache">Persistent Cache</param>
     public WFSProvider(WfsFeatureTypeInfo featureTypeInfo, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
+        _httpClientUtil?.Dispose();
         _httpClientUtil = new HttpClientUtil(persistentCache);
         _persistentCache = persistentCache;
         _featureTypeInfo = featureTypeInfo;
@@ -337,6 +338,7 @@ public class WFSProvider : IProvider, IDisposable
     public WFSProvider(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType,
                string geometryName, GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
+        _httpClientUtil?.Dispose();
         _httpClientUtil = new HttpClientUtil(persistentCache);
         _persistentCache = persistentCache;
         _featureTypeInfo = new WfsFeatureTypeInfo(serviceUri, nsPrefix, featureTypeNamespace, featureType,
