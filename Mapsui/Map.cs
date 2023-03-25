@@ -36,8 +36,6 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = new LayerCollection();
-
-        Navigator = new Navigator(this);
         Navigator.Navigated += Navigated;
     }
 
@@ -127,7 +125,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Handles all manipulations of the map viewport
     /// </summary>
-    public INavigator Navigator { get; private set; }
+    public INavigator Navigator { get; private set; } =  new Navigator();
 
     private void Navigated(object? sender, ChangeType changeType)
     {
@@ -311,7 +309,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         DataChanged?.Invoke(sender, e);
     }
 
-    public Action<INavigator> Home { get; set; } = n => n.NavigateToFullEnvelope();
+    public Action<INavigator> Home { get; set; } = n => n.ZoomToPanExtent();
 
     public IEnumerable<IWidget> GetWidgetsOfMapAndLayers()
     {

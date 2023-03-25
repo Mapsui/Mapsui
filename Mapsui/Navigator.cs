@@ -7,22 +7,17 @@ using System.Threading.Tasks;
 using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Limiting;
+using Mapsui.Logging;
 using Mapsui.Utilities;
 
 namespace Mapsui;
 
 public class Navigator : INavigator
 {
-    private readonly Map _map;
     private ViewportState _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<ViewportState>> _animations = Enumerable.Empty<AnimationEntry<ViewportState>>();
 
     public EventHandler<ChangeType>? Navigated { get; set; }
-
-    public Navigator(Map map)
-    {
-        _map = map;
-    }
 
     public event PropertyChangedEventHandler? ViewportChanged;
 
@@ -88,10 +83,12 @@ public class Navigator : INavigator
     /// <param name="scaleMethod">Scale method to use to determine resolution</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-    public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = -1, Easing? easing = default)
+    public void ZoomToPanExtent(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = -1, Easing? easing = default)
     {
-        if (_map.Extent != null)
-            NavigateTo(_map.Extent, scaleMethod, duration, easing);
+        if (PanExtent is not null)
+            NavigateTo(PanExtent, scaleMethod, duration, easing);
+        else
+            Logger.Log(LogLevel.Warning, "ZoomToPanExtent was called but PanExtent was null");
     }
 
     /// <summary>

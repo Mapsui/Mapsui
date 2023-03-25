@@ -9,7 +9,7 @@ public class ViewportTests
     public void SetCenterTest()
     {
         // Arrange
-        var navigator = new Navigator(new Map());
+        var navigator = new Navigator();
 
         // Act
         navigator.SetCenter(10, 20);
@@ -23,7 +23,7 @@ public class ViewportTests
     public void SetTransformDeltaResolution1()
     {
         // Arrange
-        var navigator = new Navigator(new Map());
+        var navigator = new Navigator();
 
         // Act
         navigator.SetCenter(10, 20);
@@ -38,7 +38,7 @@ public class ViewportTests
     public void SetTransformDeltaResolution2()
     {
         // Arrange
-        var navigator = new Navigator(new Map());
+        var navigator = new Navigator();
 
         // Act
         navigator.SetCenter(10, 20);
