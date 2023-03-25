@@ -13,8 +13,8 @@ public static class ClippingFunctions
     /// Reduce list of points, so that all are inside of cliptRect
     /// See https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm
     /// </summary>
-    /// <param name="points">List of points to reduce</param>
-    /// <param name="viewport">Viewport implementation</param>
+    /// <param name="points">List of points to reduce.</param>
+    /// <param name="viewport">The Viewport that is used for the conversions.</param>
     /// <param name="clipRect">Rectangle to clip to. All points outside aren't drawn.</param>
     /// <returns></returns>
     public static List<SKPoint> ReducePointsToClipRect(IEnumerable<Coordinate>? points, ViewportState viewport, SKRect clipRect)
@@ -80,7 +80,7 @@ public static class ClippingFunctions
     /// <summary>
     /// Convert a list of Mapsui points in world coordinates to SKPoint in screen coordinates
     /// </summary>
-    /// <param name="viewportState">Viewport implementation</param>
+    /// <param name="viewportState">The Viewport that is used for the conversions.</param>
     /// <param name="points">List of points in Mapsui world coordinates</param>
     /// <returns>List of screen coordinates in SKPoint</returns>
     internal static List<SKPoint> WorldToScreen(ViewportState viewportState, IEnumerable<Coordinate>? points)

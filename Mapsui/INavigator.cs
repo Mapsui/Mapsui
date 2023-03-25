@@ -9,6 +9,11 @@ namespace Mapsui;
 
 public interface INavigator
 {
+    IViewportLimiter Limiter { get; set; }
+    ViewportState State { get; }
+
+    event PropertyChangedEventHandler? ViewportChanged;
+
     /// <summary>
     /// List of resolutions that can be used when going to a new zoom level. In the most common
     /// case these resolutions correspond to the resolutions of the background layer of the map. 
@@ -137,21 +142,15 @@ public interface INavigator
 
     void FlyTo(MPoint center, double maxResolution, long duration = 2000);
 
-    //#####################################################################
+    // Todo: Check if we need all the methods below in the interface
 
-    IViewportLimiter Limiter { get; set; }
-    ViewportState State { get; }
-
-    event PropertyChangedEventHandler? ViewportChanged;
-
-    void SetAnimations(List<AnimationEntry<ViewportState>> animations);
+    void SetViewportAnimations(List<AnimationEntry<ViewportState>> animations);
     void SetCenter(double x, double y, long duration = 0, Easing? easing = null);
     void SetCenter(MPoint center, long duration = 0, Easing? easing = null);
     void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = null);
     void SetResolution(double resolution, long duration = 0, Easing? easing = null);
-    void SetRotation(double rotation, long duration = 0, Easing? easing = null);
     void SetSize(double width, double height);
-    LimitResult SetViewportStateWithLimit(ViewportState viewportState);
+    LimitResult SetViewportWithLimit(ViewportState viewportState);
     void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0);
     bool UpdateAnimations();
 }
