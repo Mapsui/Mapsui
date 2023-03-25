@@ -20,7 +20,7 @@ public interface INavigator
     /// </summary>
     MMinMax? ZoomExtremes { get; set; }
     IViewportLimiter Limiter { get; set; }
-    ViewportState State { get; }
+    Viewport State { get; }
 
     event PropertyChangedEventHandler? ViewportChanged;
 
@@ -154,13 +154,13 @@ public interface INavigator
 
     // Todo: Check if we need all the methods below in the interface
 
-    void SetViewportAnimations(List<AnimationEntry<ViewportState>> animations);
+    void SetViewportAnimations(List<AnimationEntry<Viewport>> animations);
     void SetCenter(double x, double y, long duration = 0, Easing? easing = null);
     void SetCenter(MPoint center, long duration = 0, Easing? easing = null);
     void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = null);
     void SetResolution(double resolution, long duration = 0, Easing? easing = null);
     void SetSize(double width, double height);
-    LimitResult SetViewportWithLimit(ViewportState viewportState);
+    LimitResult SetViewportWithLimit(Viewport viewport);
     void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0);
     bool UpdateAnimations();
 }

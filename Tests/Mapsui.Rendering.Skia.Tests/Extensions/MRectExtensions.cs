@@ -2,9 +2,9 @@
 
 public static class MRectExtensions
 {
-    public static ViewportState ToViewportState(this MRect rect, double width)
+    public static Viewport ToViewport(this MRect rect, double width)
     {
-        return new ViewportState(
+        return new Viewport(
             rect.Centroid.X,
             rect.Centroid.Y,
             rect.Width / width,

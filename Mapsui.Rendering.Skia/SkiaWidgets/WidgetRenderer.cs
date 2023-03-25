@@ -7,7 +7,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets;
 
 public static class WidgetRenderer
 {
-    public static void Render(object target, ViewportState viewport, IEnumerable<IWidget> widgets,
+    public static void Render(object target, Viewport viewport, IEnumerable<IWidget> widgets,
         IDictionary<Type, IWidgetRenderer> renders, float layerOpacity)
     {
         var canvas = (SKCanvas)target;

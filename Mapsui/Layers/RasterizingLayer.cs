@@ -92,7 +92,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
 
                 _currentSection = _fetchInfo.Section;
 
-                using var bitmapStream = _rasterizer.RenderToBitmapStream(ToViewportState(_currentSection),
+                using var bitmapStream = _rasterizer.RenderToBitmapStream(ToViewport(_currentSection),
                     new[] { _layer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
 
                 RemoveExistingFeatures();
@@ -184,9 +184,9 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
         if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
     }
 
-    public static ViewportState ToViewportState(MSection section)
+    public static Viewport ToViewport(MSection section)
     {
-        return new ViewportState(
+        return new Viewport(
             section.Extent.Centroid.X,
             section.Extent.Centroid.Y,
             section.Resolution,

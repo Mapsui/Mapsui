@@ -7,14 +7,14 @@ public static class ViewportStateExtensions
     /// <summary>
     /// True if Width and Height are not zero
     /// </summary>
-    public static bool HasSize(this ViewportState viewport) =>
+    public static bool HasSize(this Viewport viewport) =>
         viewport.Width > 0 && viewport.Height > 0;
 
     /// <summary> World To Screen Translation of a Rect </summary>
     /// <param name="viewport">view Port</param>
     /// <param name="rect">rect</param>
     /// <returns>Transformed rect</returns>
-    public static MRect WorldToScreen(this ViewportState viewport, MRect rect)
+    public static MRect WorldToScreen(this Viewport viewport, MRect rect)
     {
         var min = viewport.WorldToScreen(rect.Min);
         var max = viewport.WorldToScreen(rect.Max);
@@ -24,7 +24,7 @@ public static class ViewportStateExtensions
     /// <summary>
     /// IsRotated is true, when viewport displays map rotated
     /// </summary>
-    public static MSection ToSection(this ViewportState viewport)
+    public static MSection ToSection(this Viewport viewport)
     {
         return new MSection(viewport.ToExtent(), viewport.Resolution);
     }
@@ -32,7 +32,7 @@ public static class ViewportStateExtensions
     /// <summary>
     /// IsRotated is true, when viewport displays map rotated
     /// </summary>
-    public static bool IsRotated(this ViewportState viewport) =>
+    public static bool IsRotated(this Viewport viewport) =>
         !double.IsNaN(viewport.Rotation) && viewport.Rotation > Constants.Epsilon
         && viewport.Rotation < 360 - Constants.Epsilon;
 
@@ -43,19 +43,19 @@ public static class ViewportStateExtensions
     /// This MRect is horizontally and vertically aligned, even if the viewport
     /// is rotated. So this MRect perhaps contain parts, that are not visible.
     /// </remarks>
-    public static MRect ToExtent(this ViewportState viewportState)
+    public static MRect ToExtent(this Viewport viewport)
     {
         // todo: Find out how this method relates to Viewport.UpdateExtent 
 
         // calculate the window extent 
-        var halfSpanX = viewportState.Width * viewportState.Resolution * 0.5;
-        var halfSpanY = viewportState.Height * viewportState.Resolution * 0.5;
-        var minX = viewportState.CenterX - halfSpanX;
-        var minY = viewportState.CenterY - halfSpanY;
-        var maxX = viewportState.CenterX + halfSpanX;
-        var maxY = viewportState.CenterY + halfSpanY;
+        var halfSpanX = viewport.Width * viewport.Resolution * 0.5;
+        var halfSpanY = viewport.Height * viewport.Resolution * 0.5;
+        var minX = viewport.CenterX - halfSpanX;
+        var minY = viewport.CenterY - halfSpanY;
+        var maxX = viewport.CenterX + halfSpanX;
+        var maxY = viewport.CenterY + halfSpanY;
 
-        if (!viewportState.IsRotated())
+        if (!viewport.IsRotated())
         {
             return new MRect(minX, minY, maxX, maxY);
         }
@@ -71,7 +71,7 @@ public static class ViewportStateExtensions
 
             // Calculate the extent that will encompass a rotated viewport (slightly larger - used for tiles).
             // Perform rotations on corner offsets and then add them to the Center point.
-            return windowExtent.Rotate(-viewportState.Rotation, viewportState.CenterX, viewportState.CenterY).ToBoundingBox();
+            return windowExtent.Rotate(-viewport.Rotation, viewport.CenterX, viewport.CenterY).ToBoundingBox();
         }
     }
 
@@ -81,9 +81,9 @@ public static class ViewportStateExtensions
     /// </summary>
     /// <param name="worldPosition">Coordinate in world units</param>
     /// <returns>MPoint in screen pixels</returns>  
-    public static MPoint WorldToScreen(this ViewportState viewportState, MPoint worldPosition)
+    public static MPoint WorldToScreen(this Viewport viewport, MPoint worldPosition)
     {
-        return viewportState.WorldToScreen(worldPosition.X, worldPosition.Y);
+        return viewport.WorldToScreen(worldPosition.X, worldPosition.Y);
     }
 
     /// <summary>
@@ -92,9 +92,9 @@ public static class ViewportStateExtensions
     /// <param name="screenPosition">Coordinate in screen units</param>
     /// <returns>MPoint in world units</returns>
     /// <inheritdoc />
-    public static MPoint ScreenToWorld(this ViewportState viewportState, MPoint screenPosition)
+    public static MPoint ScreenToWorld(this Viewport viewport, MPoint screenPosition)
     {
-        return viewportState.ScreenToWorld(screenPosition.X, screenPosition.Y);
+        return viewport.ScreenToWorld(screenPosition.X, screenPosition.Y);
     }
 
     /// <summary>
@@ -103,9 +103,9 @@ public static class ViewportStateExtensions
     /// <param name="x">Screen position x coordinate</param>
     /// <param name="y">Screen position y coordinate</param>
     /// <returns>MPoint in world units</returns>
-    public static MPoint ScreenToWorld(this ViewportState viewportState, double screenX, double screenY)
+    public static MPoint ScreenToWorld(this Viewport viewport, double screenX, double screenY)
     {
-        var (x, y) = viewportState.ScreenToWorldXY(screenX, screenY);
+        var (x, y) = viewport.ScreenToWorldXY(screenX, screenY);
         return new MPoint(x, y);
     }
 
@@ -116,9 +116,9 @@ public static class ViewportStateExtensions
     /// <param name="worldX">X coordinate in world units</param>
     /// <param name="worldY">Y coordinate in world units</param>
     /// <returns>MPoint in screen pixels</returns>
-    public static MPoint WorldToScreen(this ViewportState viewportState, double worldX, double worldY)
+    public static MPoint WorldToScreen(this Viewport viewport, double worldX, double worldY)
     {
-        var (x, y) = viewportState.WorldToScreenXY(worldX, worldY);
+        var (x, y) = viewport.WorldToScreenXY(worldX, worldY);
         return new MPoint(x, y);
     }
 
@@ -129,15 +129,15 @@ public static class ViewportStateExtensions
     /// <param name="worldX">X coordinate in world units</param>
     /// <param name="worldY">Y coordinate in world units</param>
     /// <returns>Tuple of x and y in screen coordinates</returns>
-    public static (double screenX, double screenY) WorldToScreenXY(this ViewportState viewportState, double worldX, double worldY)
+    public static (double screenX, double screenY) WorldToScreenXY(this Viewport viewport, double worldX, double worldY)
     {
-        var (screenX, screenY) = WorldToScreenUnrotated(viewportState, worldX, worldY);
+        var (screenX, screenY) = WorldToScreenUnrotated(viewport, worldX, worldY);
 
-        if (viewportState.IsRotated())
+        if (viewport.IsRotated())
         {
-            var screenCenterX = viewportState.Width / 2.0;
-            var screenCenterY = viewportState.Height / 2.0;
-            return Rotate(-viewportState.Rotation, screenX, screenY, screenCenterX, screenCenterY);
+            var screenCenterX = viewport.Width / 2.0;
+            var screenCenterY = viewport.Height / 2.0;
+            return Rotate(-viewport.Rotation, screenX, screenY, screenCenterX, screenCenterY);
         }
 
         return (screenX, screenY);
@@ -158,13 +158,12 @@ public static class ViewportStateExtensions
             return (newX, newY);
         }
 
-        (double screenX, double screenY) WorldToScreenUnrotated(ViewportState viewportState,
-            double worldX, double worldY)
+        (double screenX, double screenY) WorldToScreenUnrotated(Viewport viewport, double worldX, double worldY)
         {
-            var screenCenterX = viewportState.Width / 2.0;
-            var screenCenterY = viewportState.Height / 2.0;
-            var screenX = (worldX - viewportState.CenterX) / viewportState.Resolution + screenCenterX;
-            var screenY = (viewportState.CenterY - worldY) / viewportState.Resolution + screenCenterY;
+            var screenCenterX = viewport.Width / 2.0;
+            var screenCenterY = viewport.Height / 2.0;
+            var screenX = (worldX - viewport.CenterX) / viewport.Resolution + screenCenterX;
+            var screenY = (viewport.CenterY - worldY) / viewport.Resolution + screenCenterY;
             return (screenX, screenY);
         }
     }
@@ -175,20 +174,20 @@ public static class ViewportStateExtensions
     /// <param name="x">Screen position x coordinate</param>
     /// <param name="y">Screen position y coordinate</param>
     /// <returns>Tuple of x and y in world coordinates</returns>
-    public static (double worldX, double worldY) ScreenToWorldXY(this ViewportState viewportState, double screenX, double screenY)
+    public static (double worldX, double worldY) ScreenToWorldXY(this Viewport viewport, double screenX, double screenY)
     {
-        var screenCenterX = viewportState.Width / 2.0;
-        var screenCenterY = viewportState.Height / 2.0;
+        var screenCenterX = viewport.Width / 2.0;
+        var screenCenterY = viewport.Height / 2.0;
 
-        if (viewportState.IsRotated())
+        if (viewport.IsRotated())
         {
-            var screen = new MPoint(screenX, screenY).Rotate(viewportState.Rotation, screenCenterX, screenCenterY);
+            var screen = new MPoint(screenX, screenY).Rotate(viewport.Rotation, screenCenterX, screenCenterY);
             screenX = screen.X;
             screenY = screen.Y;
         }
 
-        var worldX = viewportState.CenterX + (screenX - screenCenterX) * viewportState.Resolution;
-        var worldY = viewportState.CenterY - (screenY - screenCenterY) * viewportState.Resolution;
+        var worldX = viewport.CenterX + (screenX - screenCenterX) * viewport.Resolution;
+        var worldY = viewport.CenterY - (screenY - screenCenterY) * viewport.Resolution;
         return (worldX, worldY);
     }
 }

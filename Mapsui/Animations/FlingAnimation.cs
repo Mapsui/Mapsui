@@ -6,9 +6,9 @@ namespace Mapsui.Animations;
 
 public static class FlingAnimation
 {
-    public static (List<AnimationEntry<ViewportState>> Entries, long Duration) Create(double velocityX, double velocityY, long maxDuration)
+    public static (List<AnimationEntry<Viewport>> Entries, long Duration) Create(double velocityX, double velocityY, long maxDuration)
     {
-        var animations = new List<AnimationEntry<ViewportState>>();
+        var animations = new List<AnimationEntry<Viewport>>();
 
         if (maxDuration < 16)
             return (animations, 0);
@@ -26,7 +26,7 @@ public static class FlingAnimation
         if (duration > maxDuration)
             duration = maxDuration;
 
-        var entry = new AnimationEntry<ViewportState>(
+        var entry = new AnimationEntry<Viewport>(
             start: (velocityX, velocityY),
             end: (0d, 0d),
             animationStart: 0,
@@ -41,7 +41,7 @@ public static class FlingAnimation
         return (animations, (long)Math.Ceiling(duration));
     }
 
-    private static AnimationResult<ViewportState> FlingTick(ViewportState viewport, AnimationEntry<ViewportState> entry, double value)
+    private static AnimationResult<Viewport> FlingTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
     {
         var timeAmount = 16 / 1000d; // 16 milliseconds 
 
@@ -56,7 +56,7 @@ public static class FlingAnimation
             yMovement = 0;
 
         if (xMovement == 0 && yMovement == 0)
-            return new AnimationResult<ViewportState>(viewport, false);
+            return new AnimationResult<Viewport>(viewport, false);
 
         var previous = viewport.ScreenToWorld(0, 0);
         var current = viewport.ScreenToWorld(xMovement, yMovement);
@@ -67,6 +67,6 @@ public static class FlingAnimation
         var newX = viewport.CenterX + xDiff;
         var newY = viewport.CenterY + yDiff;
         var result = viewport with { CenterX = newX, CenterY = newY };
-        return new AnimationResult<ViewportState>(result, true);
+        return new AnimationResult<Viewport>(result, true);
     }
 }

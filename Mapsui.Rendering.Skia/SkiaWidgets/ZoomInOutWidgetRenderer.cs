@@ -13,7 +13,7 @@ public class ZoomInOutWidgetRenderer : ISkiaWidgetRenderer
     private static SKPaint? _paintBackground;
     private static SKPaint? _paintText;
 
-    public void Draw(SKCanvas canvas, ViewportState viewport, IWidget widget,
+    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget,
         float layerOpacity)
     {
         var zoomInOut = (ZoomInOutWidget)widget;

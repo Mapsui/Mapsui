@@ -4,9 +4,9 @@
 
 namespace Mapsui;
 
-public record struct ViewportState
+public record struct Viewport
 {
-    public ViewportState(double centerX, double centerY, double resolution, double rotation, double width, double height)
+    public Viewport(double centerX, double centerY, double resolution, double rotation, double width, double height)
     {
         CenterX = centerX;
         CenterY = centerY;
@@ -48,7 +48,7 @@ public record struct ViewportState
     /// </summary>
     public double Height { get; init; }
 
-    public static ViewportState operator +(ViewportState a, ViewportState b)
+    public static Viewport operator +(Viewport a, Viewport b)
     {
         return a with
         {
@@ -61,7 +61,7 @@ public record struct ViewportState
         };
     }
 
-    public static ViewportState operator -(ViewportState a, ViewportState b)
+    public static Viewport operator -(Viewport a, Viewport b)
     {
         return a with
         {
@@ -74,7 +74,7 @@ public record struct ViewportState
         };
     }
 
-    public static ViewportState operator *(ViewportState v, double m)
+    public static Viewport operator *(Viewport v, double m)
     {
         return v with
         {
@@ -87,7 +87,7 @@ public record struct ViewportState
         };
     }
 
-    public static ViewportState operator /(ViewportState v, double d)
+    public static Viewport operator /(Viewport v, double d)
     {
         return v with
         {

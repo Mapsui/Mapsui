@@ -14,8 +14,8 @@ namespace Mapsui;
 
 public class Navigator : INavigator
 {
-    private ViewportState _viewport = new(0, 0, 1, 0, 0, 0);
-    private IEnumerable<AnimationEntry<ViewportState>> _animations = Enumerable.Empty<AnimationEntry<ViewportState>>();
+    private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
+    private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
 
     public EventHandler<ChangeType>? Navigated { get; set; }
 
@@ -29,7 +29,7 @@ public class Navigator : INavigator
 
     public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
 
-    public ViewportState State
+    public Viewport State
     {
         get => _viewport;
         private set
@@ -281,12 +281,12 @@ public class Navigator : INavigator
     /// <summary> Adds the final action. </summary>
     /// <param name="animationEntries">The animation entries.</param>
     /// <param name="action">The action.</param>
-    private void AddFinalAction(List<AnimationEntry<ViewportState>> animationEntries, Action action)
+    private void AddFinalAction(List<AnimationEntry<Viewport>> animationEntries, Action action)
     {
         var entry = animationEntries.FirstOrDefault();
         if (entry != null)
         {
-            animationEntries.Add(new AnimationEntry<ViewportState>(entry.Start, entry.End, final: (v, a) => { action(); return new AnimationResult<ViewportState>(v, true); }));
+            animationEntries.Add(new AnimationEntry<Viewport>(entry.Start, entry.End, final: (v, a) => { action(); return new AnimationResult<Viewport>(v, true); }));
         }
     }
 
@@ -314,7 +314,7 @@ public class Navigator : INavigator
         State = Limit(TransformState(_viewport, positionScreen, previousPositionScreen, deltaResolution, deltaRotation));
     }
 
-    private static ViewportState TransformState(ViewportState state, MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation)
+    private static Viewport TransformState(Viewport state, MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation)
     {
         var previous = state.ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
         var current = state.ScreenToWorld(positionScreen.X, positionScreen.Y);
@@ -425,7 +425,7 @@ public class Navigator : INavigator
 
     private void ClearAnimations()
     {
-        _animations = Enumerable.Empty<AnimationEntry<ViewportState>>();
+        _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
     }
 
     // Todo: Merge with caller
@@ -469,15 +469,15 @@ public class Navigator : INavigator
         return result.IsRunning;
     }
 
-    public void SetViewportAnimations(List<AnimationEntry<ViewportState>> animations)
+    public void SetViewportAnimations(List<AnimationEntry<Viewport>> animations)
     {
         _animations = animations;
     }
 
-    public LimitResult SetViewportWithLimit(ViewportState viewportState)
+    public LimitResult SetViewportWithLimit(Viewport viewport)
     {
-        State = Limit(viewportState);
-        return new LimitResult(viewportState, State);
+        State = Limit(viewport);
+        return new LimitResult(viewport, State);
     }
 
     /// <summary>
@@ -485,7 +485,7 @@ public class Navigator : INavigator
     /// </summary>
     /// <param name="viewport"></param>
     /// <returns></returns>
-    private ViewportState Limit(ViewportState viewport)
+    private Viewport Limit(Viewport viewport)
     {
         return Limiter.Limit(viewport, PanExtent, ZoomExtremes);
     }

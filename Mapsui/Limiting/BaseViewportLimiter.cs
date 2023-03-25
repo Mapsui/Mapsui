@@ -17,5 +17,5 @@ public abstract class BaseViewportLimiter : IViewportLimiter
     /// </summary>
     public bool RotationLock { get; set; }
 
-    public abstract ViewportState Limit(ViewportState viewportState, MRect? panExtent, MMinMax? zoomExtremes);
+    public abstract Viewport Limit(Viewport viewport, MRect? panExtent, MMinMax? zoomExtremes);
 }

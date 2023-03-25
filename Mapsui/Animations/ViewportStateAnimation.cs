@@ -4,11 +4,11 @@ namespace Mapsui.Animations;
 
 internal class ViewportStateAnimation
 {
-    public static List<AnimationEntry<ViewportState>> Create(ViewportState viewport, ViewportState destination, long duration, Easing? easing)
+    public static List<AnimationEntry<Viewport>> Create(Viewport viewport, Viewport destination, long duration, Easing? easing)
     {
-        var animations = new List<AnimationEntry<ViewportState>>();
+        var animations = new List<AnimationEntry<Viewport>>();
 
-        var entry = new AnimationEntry<ViewportState>(
+        var entry = new AnimationEntry<Viewport>(
             start: viewport,
             end: destination,
             animationStart: 0,
@@ -24,16 +24,16 @@ internal class ViewportStateAnimation
         return animations;
     }
 
-    private static AnimationResult<ViewportState> Tick(ViewportState viewport, AnimationEntry<ViewportState> entry, double value)
+    private static AnimationResult<Viewport> Tick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
     {
-        var start = (ViewportState)entry.Start;
-        var end = (ViewportState)entry.End;
+        var start = (Viewport)entry.Start;
+        var end = (Viewport)entry.End;
         var result = start + (end - start) * entry.Easing.Ease(value);
-        return new AnimationResult<ViewportState>(result, true);
+        return new AnimationResult<Viewport>(result, true);
     }
 
-    private static AnimationResult<ViewportState> Final(ViewportState viewport, AnimationEntry<ViewportState> entry)
+    private static AnimationResult<Viewport> Final(Viewport viewport, AnimationEntry<Viewport> entry)
     {
-        return new AnimationResult<ViewportState>((ViewportState)entry.End, true);
+        return new AnimationResult<Viewport>((Viewport)entry.End, true);
     }
 }

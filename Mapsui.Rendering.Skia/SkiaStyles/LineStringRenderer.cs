@@ -12,7 +12,7 @@ namespace Mapsui.Rendering.Skia;
 public static class LineStringRenderer
 {
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
-    public static void Draw(SKCanvas canvas, ViewportState viewport, VectorStyle? vectorStyle,
+    public static void Draw(SKCanvas canvas, Viewport viewport, VectorStyle? vectorStyle,
         LineString lineString, float opacity, IVectorCache? vectorCache = null)
     {
         if (vectorStyle == null)

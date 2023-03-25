@@ -10,10 +10,10 @@ public class ViewportStateExtensionsTests
     public void ToExtentWidthIsZeroWhenResolutionIsZeroTest()
     {
         // Arrange
-        var viewportState = new ViewportState(0, 0, 0, 0, 100, 100);
+        var viewport = new Viewport(0, 0, 0, 0, 100, 100);
 
         // Act
-        var extent = viewportState.ToExtent();
+        var extent = viewport.ToExtent();
 
         // Assert
         Assert.AreEqual(0, extent.Width);
