@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Mapsui.Animations;
+using Mapsui.Limiting;
 using Mapsui.Utilities;
 
 namespace Mapsui;
@@ -134,4 +136,22 @@ public interface INavigator
     void FlingWith(double velocityX, double velocityY, long maxDuration);
 
     void FlyTo(MPoint center, double maxResolution, long duration = 2000);
+
+    //#####################################################################
+
+    IViewportLimiter Limiter { get; set; }
+    ViewportState State { get; }
+
+    event PropertyChangedEventHandler? ViewportChanged;
+
+    void SetAnimations(List<AnimationEntry<ViewportState>> animations);
+    void SetCenter(double x, double y, long duration = 0, Easing? easing = null);
+    void SetCenter(MPoint center, long duration = 0, Easing? easing = null);
+    void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = null);
+    void SetResolution(double resolution, long duration = 0, Easing? easing = null);
+    void SetRotation(double rotation, long duration = 0, Easing? easing = null);
+    void SetSize(double width, double height);
+    LimitResult SetViewportStateWithLimit(ViewportState viewportState);
+    void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0);
+    bool UpdateAnimations();
 }

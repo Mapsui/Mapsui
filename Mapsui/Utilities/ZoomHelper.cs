@@ -97,7 +97,7 @@ public static class ZoomHelper
             throw new Exception("FillMethod not found");
     }
 
-    public static void ZoomToBoudingbox(Viewport viewport,
+    public static void ZoomToBoudingbox(Navigator navigator,
         double x1, double y1, double x2, double y2,
         double screenWidth, double screenHeight,
         ScaleMethod scaleMethod = ScaleMethod.Fit)
@@ -105,8 +105,8 @@ public static class ZoomHelper
         ZoomToBoudingbox(x1, y1, x2, y2, screenWidth, screenHeight,
             out var centerX, out var centerY, out var resolution, scaleMethod);
 
-        viewport.SetCenter(centerX, centerY);
-        viewport.SetResolution(resolution);
+        navigator.SetCenter(centerX, centerY);
+        navigator.SetResolution(resolution);
     }
 
     private static void Swap(ref double xMin, ref double xMax)

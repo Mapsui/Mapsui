@@ -74,8 +74,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnMouseWheel(e);
 
-        if (Map.Viewport.Limiter.ZoomLock) return;
-        if (!Map.Viewport.State.HasSize()) return;
+        if (Map.Navigator.Limiter.ZoomLock) return;
+        if (!Map.Navigator.State.HasSize()) return;
 
         var mouseWheelDelta = (int)e.Delta.Height;
         var currentMousePosition = e.Location.ToMapsui();
@@ -124,8 +124,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         if (IsInBoxZoomMode)
         {
-            var previous = Map.Viewport.State.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
-            var current = Map.Viewport.State.ScreenToWorld(_selectRectangle.BottomRight.X, _selectRectangle.BottomRight.Y);
+            var previous = Map.Navigator.State.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
+            var current = Map.Navigator.State.ScreenToWorld(_selectRectangle.BottomRight.X, _selectRectangle.BottomRight.Y);
             ZoomToBox(previous, current);
         }
         else if (_downMousePosition.HasValue)
@@ -171,7 +171,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
             {
                 Cursor = MoveCursor;
 
-                Map.Viewport.Transform(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui());
+                Map.Navigator.Transform(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui());
 
                 RefreshGraphics();
 

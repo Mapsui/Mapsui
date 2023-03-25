@@ -137,8 +137,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
     {
-        if (Map.Viewport.Limiter.ZoomLock) return;
-        if (!Map.Viewport.State.HasSize()) return;
+        if (Map.Navigator.Limiter.ZoomLock) return;
+        if (!Map.Navigator.State.HasSize()) return;
 
         _currentMousePosition = e.GetPosition(this).ToMapsui();
 
@@ -193,8 +193,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         {
             if (IsInBoxZoomMode())
             {
-                var previous = Map.Viewport.State.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
-                var current = Map.Viewport.State.ScreenToWorld(mousePosition.X, mousePosition.Y);
+                var previous = Map.Navigator.State.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
+                var current = Map.Navigator.State.ScreenToWorld(mousePosition.X, mousePosition.Y);
                 ZoomToBox(previous, current);
             }
             else if (_downMousePosition != null && IsClick(mousePosition, _downMousePosition))
@@ -279,7 +279,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             foreach (var layer in Map.Layers)
             {
                 // ReSharper disable once SuspiciousTypeConversion.Global
-                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Viewport.State, _downMousePosition.X, _downMousePosition.Y,
+                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.State, _downMousePosition.X, _downMousePosition.Y,
                     OnFeatureInfo);
             }
 
@@ -312,7 +312,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
             _flingTracker.AddEvent(1, _currentMousePosition, DateTime.Now.Ticks);
 
-            Map.Viewport.Transform(_currentMousePosition, _previousMousePosition);
+            Map.Navigator.Transform(_currentMousePosition, _previousMousePosition);
             RefreshGraphics();
             _previousMousePosition = _currentMousePosition;
         }
@@ -381,7 +381,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnManipulationStarted(object? sender, ManipulationStartedEventArgs e)
     {
         _hasBeenManipulated = false;
-        _virtualRotation = Map.Viewport.State.Rotation;
+        _virtualRotation = Map.Navigator.State.Rotation;
     }
 
     private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
@@ -399,22 +399,22 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         double rotationDelta = 0;
 
-        if (Map.Viewport.Limiter.RotationLock == false)
+        if (Map.Navigator.Limiter.RotationLock == false)
         {
             _virtualRotation += angle - prevAngle;
 
             rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                _virtualRotation, Map.Viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                _virtualRotation, Map.Navigator.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
         }
 
-        Map.Viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
+        Map.Navigator.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
         RefreshGraphics();
         e.Handled = true;
     }
 
     private double GetDeltaScale(XamlVector scale)
     {
-        if (Map.Viewport.Limiter.ZoomLock) return 1;
+        if (Map.Navigator.Limiter.ZoomLock) return 1;
         var deltaScale = (scale.X + scale.Y) / 2;
         if (Math.Abs(deltaScale) < Constants.Epsilon)
             return 1; // If there is no scaling the deltaScale will be 0.0 in Windows Phone (while it is 1.0 in wpf)

@@ -138,8 +138,8 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (Map.Viewport.Limiter.ZoomLock) return;
-            if (!Map.Viewport.State.HasSize()) return;
+            if (Map.Navigator.Limiter.ZoomLock) return;
+            if (!Map.Navigator.State.HasSize()) return;
 
             var mouseWheelDelta = e.DeltaY * -1; // so that it zooms like on windows
 
@@ -229,8 +229,8 @@ public partial class MapControl : ComponentBase, IMapControl
             {
                 if (_selectRectangle != null)
                 {
-                    var previous = Map.Viewport.State.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
-                    var current = Map.Viewport.State.ScreenToWorld(_selectRectangle.BottomRight.X,
+                    var previous = Map.Navigator.State.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
+                    var current = Map.Navigator.State.ScreenToWorld(_selectRectangle.BottomRight.X,
                         _selectRectangle.BottomRight.Y);
                     ZoomToBox(previous, current);
                 }
@@ -278,7 +278,7 @@ public partial class MapControl : ComponentBase, IMapControl
                 {
                     Cursor = MoveCursor;
 
-                    Map.Viewport.Transform(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui());
+                    Map.Navigator.Transform(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui());
 
                     RefreshGraphics();
 

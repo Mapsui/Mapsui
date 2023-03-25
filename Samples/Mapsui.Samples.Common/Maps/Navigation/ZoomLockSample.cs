@@ -11,8 +11,8 @@ internal class ZoomLockSample : ISample
 
     public Task<Map> CreateMapAsync()
     {
-        var map = new Map { Viewport = { Limiter = { ZoomLock = true } } };
-        map.Viewport.SetViewportStateWithLimit(map.Viewport.State with { Resolution = 4892 });
+        var map = new Map { Navigator = { Limiter = { ZoomLock = true } } };
+        map.Navigator.SetViewportStateWithLimit(map.Navigator.State with { Resolution = 4892 });
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         return Task.FromResult(map);
     }

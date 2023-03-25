@@ -30,7 +30,7 @@ public partial class Window1
 
         MapControl.FeatureInfo += MapControlFeatureInfo;
         MapControl.MouseMove += MapControlOnMouseMove;
-        MapControl.Map.Viewport.Limiter.RotationLock = false;
+        MapControl.Map.Navigator.Limiter.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -46,7 +46,7 @@ public partial class Window1
     private void MapControlOnMouseMove(object sender, MouseEventArgs e)
     {
         var screenPosition = e.GetPosition(MapControl);
-        var worldPosition = MapControl.Map.Viewport.State.ScreenToWorld(screenPosition.X, screenPosition.Y);
+        var worldPosition = MapControl.Map.Navigator.State.ScreenToWorld(screenPosition.X, screenPosition.Y);
         MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
     }
 
