@@ -6,7 +6,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
-public class WritableLayer : BaseLayer
+public class WritableLayer : BaseLayer, IWritableLayer
 {
     private readonly ConcurrentHashSet<IFeature> _cache = new();
 
