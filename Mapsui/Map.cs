@@ -146,12 +146,12 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </summary>
     public void RefreshData(ChangeType changeType = ChangeType.Discrete)
     {
-        if (Navigator.State.ToExtent() is null)
+        if (Navigator.Viewport.ToExtent() is null)
             return;
-        if (Navigator.State.ToExtent().GetArea() <= 0)
+        if (Navigator.Viewport.ToExtent().GetArea() <= 0)
             return;
 
-        var fetchInfo = new FetchInfo(Navigator.State.ToSection(), CRS, changeType);
+        var fetchInfo = new FetchInfo(Navigator.Viewport.ToSection(), CRS, changeType);
         RefreshData(fetchInfo);
     }
 

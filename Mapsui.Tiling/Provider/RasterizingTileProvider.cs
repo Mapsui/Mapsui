@@ -66,7 +66,7 @@ public class RasterizingTileProvider : ITileSource
         {
             var renderer = GetRenderer();
             (MSection section, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo, renderer);
-            using var stream = renderer.RenderToBitmapStream(ToViewportState(section), new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
+            using var stream = renderer.RenderToBitmapStream(ToViewport(section), new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
             _rasterizingLayers.Push(renderer);
             result = stream?.ToArray();
             PersistentCache?.Add(index, result ?? Array.Empty<byte>());
@@ -197,9 +197,9 @@ public class RasterizingTileProvider : ITileSource
     public string Name => _layer.Name;
     public Attribution Attribution => _attribution ??= new Attribution(_layer.Attribution.Text, _layer.Attribution.Url);
 
-    public static ViewportState ToViewportState(MSection section)
+    public static Viewport ToViewport(MSection section)
     {
-        return new ViewportState(
+        return new Viewport(
             section.Extent.Centroid.X,
             section.Extent.Centroid.Y,
             section.Resolution,

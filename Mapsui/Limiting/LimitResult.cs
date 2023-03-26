@@ -1,7 +1,7 @@
 ﻿namespace Mapsui.Limiting;
 public class LimitResult
 {
-    public LimitResult(ViewportState input, ViewportState output)
+    public LimitResult(Viewport input, Viewport output)
     {
         ZoomLimited = input.Resolution != output.Resolution;
         PanXLimited = input.CenterX != output.CenterX;

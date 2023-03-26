@@ -41,7 +41,7 @@ public class PerformanceWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         _envelope = new MRect(_rect.Left, _rect.Top, _rect.Right, _rect.Bottom);
     }
 
-    public void Draw(SKCanvas canvas, ViewportState viewport, IWidget widget, float layerOpacity)
+    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
     {
         var performanceWidget = (PerformanceWidget)widget;
 

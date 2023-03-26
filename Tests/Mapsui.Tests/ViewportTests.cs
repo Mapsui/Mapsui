@@ -15,8 +15,8 @@ public class ViewportTests
         navigator.SetCenter(10, 20);
 
         // Assert
-        Assert.AreEqual(10, navigator.State.CenterX);
-        Assert.AreEqual(20, navigator.State.CenterY);
+        Assert.AreEqual(10, navigator.Viewport.CenterX);
+        Assert.AreEqual(20, navigator.Viewport.CenterY);
     }
 
     [Test]
@@ -30,8 +30,8 @@ public class ViewportTests
         navigator.Transform(new MPoint(10, 10), new MPoint(20, 20), 1);
 
         // Assert
-        Assert.AreEqual(20, navigator.State.CenterX);
-        Assert.AreEqual(10, navigator.State.CenterY);
+        Assert.AreEqual(20, navigator.Viewport.CenterX);
+        Assert.AreEqual(10, navigator.Viewport.CenterY);
     }
 
     [Test]
@@ -45,7 +45,7 @@ public class ViewportTests
         navigator.Transform(new MPoint(10, 10), new MPoint(20, 20), 2);
 
         // Assert
-        Assert.AreEqual(30, navigator.State.CenterX);
-        Assert.AreEqual(0, navigator.State.CenterY);
+        Assert.AreEqual(30, navigator.Viewport.CenterX);
+        Assert.AreEqual(0, navigator.Viewport.CenterY);
     }
 }

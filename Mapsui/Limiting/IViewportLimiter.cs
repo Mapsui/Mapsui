@@ -16,5 +16,5 @@ public interface IViewportLimiter
     /// When true the user can not zoom into the map
     /// </summary>
     public bool RotationLock { get; set; }
-    ViewportState Limit(ViewportState viewportState, MRect? panExtent, MMinMax? zoomExtremes);
+    Viewport Limit(Viewport viewport, MRect? panExtent, MMinMax? zoomExtremes);
 }

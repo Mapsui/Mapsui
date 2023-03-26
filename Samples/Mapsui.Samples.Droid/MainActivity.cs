@@ -210,7 +210,7 @@ public class MainActivity : AppCompatActivity
                 return;
 
             // Or position on feature position: 
-            var screenPosition = _mapControl.Map.Navigator.State.WorldToScreen(geometryFeature.Extent.Centroid);
+            var screenPosition = _mapControl.Map.Navigator.Viewport.WorldToScreen(geometryFeature.Extent.Centroid);
             var screenPositionInPixels = _mapControl.ToPixels(screenPosition);
 
             _popup.SetX((float)screenPositionInPixels.X);

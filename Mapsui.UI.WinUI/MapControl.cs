@@ -109,7 +109,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
     {
-        _virtualRotation = Map.Navigator.State.Rotation;
+        _virtualRotation = Map.Navigator.Viewport.Rotation;
     }
 
     private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
@@ -154,7 +154,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
     {
         if (Map.Navigator.Limiter.ZoomLock) return;
-        if (!Map.Navigator.State.HasSize()) return;
+        if (!Map.Navigator.Viewport.HasSize()) return;
         if (Map is null) return;
 
         var currentPoint = e.GetCurrentPoint(this);
@@ -243,7 +243,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             _virtualRotation += rotation;
 
             rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                _virtualRotation, Map.Navigator.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
         }
 
         Map.Navigator.Transform(center, previousCenter, radius / previousRadius, rotationDelta);

@@ -198,7 +198,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 {
                     (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                     _mode = TouchMode.Zooming;
-                    _virtualRotation = Map.Navigator.State.Rotation;
+                    _virtualRotation = Map.Navigator.Viewport.Rotation;
                 }
                 else
                 {
@@ -217,7 +217,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 {
                     (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                     _mode = TouchMode.Zooming;
-                    _virtualRotation = Map.Navigator.State.Rotation;
+                    _virtualRotation = Map.Navigator.Viewport.Rotation;
                 }
                 else
                 {
@@ -258,7 +258,7 @@ public partial class MapControl : ViewGroup, IMapControl
                                 _virtualRotation += angle - previousAngle;
 
                                 rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                                    _virtualRotation, Map.Navigator.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                                    _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
                             }
 
                             Map.Navigator.Transform(touch, previousTouch, radius / previousRadius, rotationDelta);

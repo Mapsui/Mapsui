@@ -2,8 +2,8 @@
 
 public class ViewportLimiterWithoutLimits : BaseViewportLimiter
 {
-    public override ViewportState Limit(ViewportState viewportState, MRect? panExtent, MMinMax? zoomExtremes)
+    public override Viewport Limit(Viewport viewport, MRect? panExtent, MMinMax? zoomExtremes)
     {
-        return viewportState;
+        return viewport;
     }
 }

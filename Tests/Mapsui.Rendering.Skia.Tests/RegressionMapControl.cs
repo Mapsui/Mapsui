@@ -98,7 +98,7 @@ public class RegressionMapControl : IMapControl
     private void TryToCallHomeAtStartup()
     {
         if (!Map.HomeIsCalledOnce && // This method is only meant for Map Startup
-            Map.Navigator.State.HasSize() && // Most Navigate methods need a screen size
+            Map.Navigator.Viewport.HasSize() && // Most Navigate methods need a screen size
             Map?.Extent is not null) // Some Navigate methods need a Map.Extent
         {
             CallHome();

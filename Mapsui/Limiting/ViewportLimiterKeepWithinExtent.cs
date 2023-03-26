@@ -11,20 +11,19 @@ namespace Mapsui.Limiting;
 /// </summary>
 public class ViewportLimiterKeepWithinExtent : BaseViewportLimiter
 {
-    public override ViewportState Limit(ViewportState viewportState, MRect? panExtent, MMinMax? zoomExtremes)
+    public override Viewport Limit(Viewport viewport, MRect? panExtent, MMinMax? zoomExtremes)
     {
-        var state = LimitResolution(viewportState, zoomExtremes);
-        return LimitExtent(state, panExtent, zoomExtremes);
+        return LimitExtent(LimitResolution(viewport, zoomExtremes), panExtent, zoomExtremes);
     }
 
-    private ViewportState LimitResolution(ViewportState viewportState, MMinMax? zoomExtremes)
+    private Viewport LimitResolution(Viewport viewport, MMinMax? zoomExtremes)
     {
-        if (zoomExtremes is null) return viewportState;
+        if (zoomExtremes is null) return viewport;
 
-        if (zoomExtremes.Min > viewportState.Resolution) return viewportState with { Resolution = zoomExtremes.Min };
-        if (zoomExtremes.Max < viewportState.Resolution) return viewportState with { Resolution = zoomExtremes.Max };
+        if (zoomExtremes.Min > viewport.Resolution) return viewport with { Resolution = zoomExtremes.Min };
+        if (zoomExtremes.Max < viewport.Resolution) return viewport with { Resolution = zoomExtremes.Max };
 
-        return viewportState;
+        return viewport;
     }
 
     private static double CalculateResolutionAtWhichMapFillsViewport(double screenWidth, double screenHeight, MRect mapEnvelope)
@@ -32,7 +31,7 @@ public class ViewportLimiterKeepWithinExtent : BaseViewportLimiter
         return Math.Min(mapEnvelope.Width / screenWidth, mapEnvelope.Height / screenHeight);
     }
 
-    private ViewportState LimitExtent(ViewportState viewport, MRect? panExtent, MMinMax? zoomExtremes)
+    private Viewport LimitExtent(Viewport viewport, MRect? panExtent, MMinMax? zoomExtremes)
     {
         if (panExtent is null) return viewport;
 
