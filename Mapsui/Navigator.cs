@@ -61,15 +61,15 @@ public class Navigator : INavigator
     /// Navigate center of viewport to center of extent and change resolution
     /// </summary>
     /// <param name="extent">New extent for viewport to show</param>
-    /// <param name="scaleMethod">Scale method to use to determine resolution</param>
+    /// <param name="boxFit">Scale method to use to determine resolution</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-    public void NavigateTo(MRect? extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = -1, Easing? easing = default)
+    public void NavigateTo(MRect? extent, BoxFit boxFit = BoxFit.Fit, long duration = -1, Easing? easing = default)
     {
         if (extent == null) return;
 
-        var resolution = ZoomHelper.DetermineResolution(
-            extent.Width, extent.Height, Viewport.Width, Viewport.Height, scaleMethod);
+        var resolution = ZoomHelper.CalculateResolutionForWorldSize(
+            extent.Width, extent.Height, Viewport.Width, Viewport.Height, boxFit);
 
         NavigateTo(extent.Centroid, resolution, duration, easing);
     }
@@ -77,13 +77,13 @@ public class Navigator : INavigator
     /// <summary>
     /// Navigate to a resolution, so such the map uses the fill method
     /// </summary>
-    /// <param name="scaleMethod">Scale method to use to determine resolution</param>
+    /// <param name="boxFit">Scale method to use to determine resolution</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-    public void ZoomToPanExtent(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = -1, Easing? easing = default)
+    public void ZoomToPanExtent(BoxFit boxFit = BoxFit.Fill, long duration = -1, Easing? easing = default)
     {
         if (PanExtent is not null)
-            NavigateTo(PanExtent, scaleMethod, duration, easing);
+            NavigateTo(PanExtent, boxFit, duration, easing);
         else
             Logger.Log(LogLevel.Warning, "ZoomToPanExtent was called but PanExtent was null");
     }

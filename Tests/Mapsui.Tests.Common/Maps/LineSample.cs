@@ -22,7 +22,7 @@ public class LineSample : ISample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.ZoomToPanExtent(ScaleMethod.Fit)
+            Home = n => n.ZoomToPanExtent(BoxFit.Fit)
         };
 
         map.Layers.Add(CreateLayer());
