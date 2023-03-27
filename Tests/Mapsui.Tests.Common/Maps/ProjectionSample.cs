@@ -20,7 +20,6 @@ public class ProjectionSample : ISample
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
-
     public static Map CreateMap()
     {
         // For Projections to work three things need to be set:
