@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Mapsui.Animations;
 using Mapsui.Limiting;
-using Mapsui.Utilities;
 
 namespace Mapsui;
 

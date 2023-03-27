@@ -4,7 +4,7 @@
 
 // This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
 
-namespace Mapsui.Utilities;
+namespace Mapsui;
 
 public enum MBoxFit
 {

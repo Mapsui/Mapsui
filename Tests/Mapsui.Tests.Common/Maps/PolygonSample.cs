@@ -8,7 +8,6 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 using NetTopologySuite.IO;
 
 namespace Mapsui.Tests.Common.Maps;
