@@ -6,7 +6,7 @@
 
 namespace Mapsui.Utilities;
 
-public enum BoxFit
+public enum MBoxFit
 {
     /// <summary>
     ///     Fit within the view port of the screen

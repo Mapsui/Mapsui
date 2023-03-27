@@ -40,20 +40,20 @@ public static class ZoomHelper
     }
 
     public static double CalculateResolutionForWorldSize(double worldWidth, double worldHeight, double screenWidth,
-        double screenHeight, BoxFit boxFit = BoxFit.Fit)
+        double screenHeight, MBoxFit boxFit = MBoxFit.Fit)
     {
         var widthResolution = worldWidth / screenWidth;
         var heightResolution = worldHeight / screenHeight;
 
         switch (boxFit)
         {
-            case BoxFit.FitHeight:
+            case MBoxFit.FitHeight:
                 return heightResolution;
-            case BoxFit.FitWidth:
+            case MBoxFit.FitWidth:
                 return widthResolution;
-            case BoxFit.Fill:
+            case MBoxFit.Fill:
                 return Math.Min(widthResolution, heightResolution);
-            case BoxFit.Fit:
+            case MBoxFit.Fit:
                 return Math.Max(widthResolution, heightResolution);
             default:
                 throw new Exception("BoxFit not supported");

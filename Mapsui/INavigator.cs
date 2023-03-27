@@ -50,7 +50,7 @@ public interface INavigator
     /// <param name="boxFit">Scale method to use to determine the resolution</param>
     /// <param name="duration">Duration of animation in milliseconds</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-    void NavigateTo(MRect extent, BoxFit boxFit = BoxFit.Fit, long duration = 0, Easing? easing = default);
+    void NavigateTo(MRect extent, MBoxFit boxFit = MBoxFit.Fit, long duration = 0, Easing? easing = default);
 
     /// <summary>
     /// Change both center and resolution of the viewport
@@ -67,7 +67,7 @@ public interface INavigator
     /// <param name="boxFit"></param>
     /// <param name="duration">Duration of animation in millisecondsScale method to use to determine resolution</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-    void ZoomToPanExtent(BoxFit boxFit = BoxFit.Fill, long duration = 0, Easing? easing = default);
+    void ZoomToPanExtent(MBoxFit boxFit = MBoxFit.Fill, long duration = 0, Easing? easing = default);
 
     /// <summary>
     /// Change resolution of viewport
