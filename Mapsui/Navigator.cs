@@ -331,12 +331,12 @@ public class Navigator : INavigator
     /// <inheritdoc />
     public void Drag(MPoint positionScreen, MPoint previousPositionScreen)
     {
-        PinchZoom(positionScreen, previousPositionScreen, 0);
+        Pinch(positionScreen, previousPositionScreen, 1);
     }
 
 
     /// <inheritdoc />
-    public void PinchZoom(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation = 0)
+    public void Pinch(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation = 0)
     {
         if (Limiter.ZoomLock) deltaResolution = 1;
         if (Limiter.PanLock) positionScreen = previousPositionScreen;

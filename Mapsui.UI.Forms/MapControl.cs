@@ -688,7 +688,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     }
 
                     if (prevCenter != null)
-                        Map.Navigator.PinchZoom(center, prevCenter, radius / prevRadius, rotationDelta);
+                        Map.Navigator.Pinch(center, prevCenter, radius / prevRadius, rotationDelta);
 
                     (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
 

@@ -214,7 +214,7 @@ public partial class MapControl : UIView, IMapControl
                     _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
             }
 
-            Map.Navigator.PinchZoom(center, previousCenter, radius / previousRadius, rotationDelta);
+            Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
             RefreshGraphics();
         }
     }

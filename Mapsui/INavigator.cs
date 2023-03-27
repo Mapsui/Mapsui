@@ -156,7 +156,7 @@ public interface INavigator
   
     void SetSize(double width, double height);
  
-    void PinchZoom(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation = 0);
+    void Pinch(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation = 0);
 
     void Drag(MPoint positionScreen, MPoint previousPositionScreen);
 

@@ -187,10 +187,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         if (width <= 0) return;
         if (height <= 0) return;
 
-        ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
-            Width, Height, out var x, out var y, out var resolution);
-
-        Map.Navigator.NavigateTo(new MPoint(x, y), resolution, 384);
+        Map.Navigator.NavigateTo(new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y), duration: 300); ;
 
         RefreshData();
         RefreshGraphics();

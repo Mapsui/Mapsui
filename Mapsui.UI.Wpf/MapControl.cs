@@ -30,6 +30,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private bool _hasBeenManipulated;
     private double _virtualRotation;
     private readonly FlingTracker _flingTracker = new();
+    private MPoint? _currentMousePosition;
 
     /// <summary>
     /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
@@ -139,9 +140,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (Map.Navigator.Limiter.ZoomLock) return;
         if (!Map.Navigator.Viewport.HasSize()) return;
 
-        var currentMousePosition = e.GetPosition(this).ToMapsui();
+        _currentMousePosition = e.GetPosition(this).ToMapsui();
 
-        Map.Navigator.ZoomInOrOut(e.Delta, currentMousePosition);
+        Map.Navigator.ZoomInOrOut(e.Delta, _currentMousePosition);
     }
 
     private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
@@ -297,6 +298,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             return;
         }
 
+        _currentMousePosition = e.GetPosition(this).ToMapsui();
         
         if (_mouseDown)
         {
@@ -308,11 +310,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
                 return;
             }
 
-            var currentMousePosition = e.GetPosition(this).ToMapsui();
-            _flingTracker.AddEvent(1, currentMousePosition, DateTime.Now.Ticks);
-            Map.Navigator.Drag(currentMousePosition, _previousMousePosition);
+            _flingTracker.AddEvent(1, _currentMousePosition, DateTime.Now.Ticks);
+            Map.Navigator.Drag(_currentMousePosition, _previousMousePosition);
             RefreshGraphics();
-            _previousMousePosition = currentMousePosition;
+            _previousMousePosition = _currentMousePosition;
         }
     }
 
@@ -323,10 +324,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (width <= 0) return;
         if (height <= 0) return;
 
-        ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
-            ActualWidth, ActualHeight, out var x, out var y, out var resolution);
-
-        Map.Navigator.NavigateTo(new MPoint(x, y), resolution, 384);
+        Map.Navigator.NavigateTo(new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y), duration: 300); ;
 
         RefreshData();
         RefreshGraphics();
@@ -405,7 +403,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
                 _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
         }
 
-        Map.Navigator.PinchZoom(center, previousCenter, radius / previousRadius, rotationDelta);
+        Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
         RefreshGraphics();
         e.Handled = true;
     }
