@@ -185,7 +185,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomIn(long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomIn(Resolutions, Viewport.Resolution);
+        var resolution = ZoomHelper.GetZoomInResolution(Resolutions, Viewport.Resolution);
 
         ZoomTo(resolution, duration, easing);
     }
@@ -197,7 +197,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomOut(long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomOut(Resolutions, Viewport.Resolution);
+        var resolution = ZoomHelper.GetZoomOutResolution(Resolutions, Viewport.Resolution);
 
         ZoomTo(resolution, duration, easing);
     }
@@ -211,7 +211,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomIn(MPoint centerOfZoom, long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomIn(Resolutions, Viewport.Resolution);
+        var resolution = ZoomHelper.GetZoomInResolution(Resolutions, Viewport.Resolution);
 
         ZoomTo(resolution, centerOfZoom, duration, easing);
     }
@@ -225,7 +225,7 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomOut(MPoint centerOfZoom, long duration = -1, Easing? easing = default)
     {
-        var resolution = ZoomHelper.ZoomOut(Resolutions, Viewport.Resolution);
+        var resolution = ZoomHelper.GetZoomOutResolution(Resolutions, Viewport.Resolution);
         ZoomTo(resolution, centerOfZoom, duration, easing);
     }
 
