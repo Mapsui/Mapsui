@@ -27,7 +27,7 @@ public class ViewportTests
 
         // Act
         navigator.SetCenter(10, 20);
-        navigator.Transform(new MPoint(10, 10), new MPoint(20, 20), 1);
+        navigator.PinchZoom(new MPoint(10, 10), new MPoint(20, 20), 1);
 
         // Assert
         Assert.AreEqual(20, navigator.Viewport.CenterX);
@@ -42,7 +42,7 @@ public class ViewportTests
 
         // Act
         navigator.SetCenter(10, 20);
-        navigator.Transform(new MPoint(10, 10), new MPoint(20, 20), 2);
+        navigator.PinchZoom(new MPoint(10, 10), new MPoint(20, 20), 2);
 
         // Assert
         Assert.AreEqual(30, navigator.Viewport.CenterX);

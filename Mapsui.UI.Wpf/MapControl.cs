@@ -24,7 +24,6 @@ namespace Mapsui.UI.Wpf;
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
-    private MPoint? _currentMousePosition;
     private MPoint? _downMousePosition;
     private bool _mouseDown;
     private MPoint? _previousMousePosition;
@@ -140,9 +139,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (Map.Navigator.Limiter.ZoomLock) return;
         if (!Map.Navigator.Viewport.HasSize()) return;
 
-        _currentMousePosition = e.GetPosition(this).ToMapsui();
+        var currentMousePosition = e.GetPosition(this).ToMapsui();
 
-        Map.Navigator.ZoomInOrOut(e.Delta, _currentMousePosition);
+        Map.Navigator.ZoomInOrOut(e.Delta, currentMousePosition);
     }
 
     private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
@@ -298,8 +297,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             return;
         }
 
-        _currentMousePosition = e.GetPosition(this).ToMapsui(); //Needed for both MouseMove and MouseWheel event
-
+        
         if (_mouseDown)
         {
             if (_previousMousePosition == null)
@@ -310,11 +308,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
                 return;
             }
 
-            _flingTracker.AddEvent(1, _currentMousePosition, DateTime.Now.Ticks);
-
-            Map.Navigator.Transform(_currentMousePosition, _previousMousePosition);
+            var currentMousePosition = e.GetPosition(this).ToMapsui();
+            _flingTracker.AddEvent(1, currentMousePosition, DateTime.Now.Ticks);
+            Map.Navigator.Drag(currentMousePosition, _previousMousePosition);
             RefreshGraphics();
-            _previousMousePosition = _currentMousePosition;
+            _previousMousePosition = currentMousePosition;
         }
     }
 
@@ -407,7 +405,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
                 _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
         }
 
-        Map.Navigator.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
+        Map.Navigator.PinchZoom(center, previousCenter, radius / previousRadius, rotationDelta);
         RefreshGraphics();
         e.Handled = true;
     }

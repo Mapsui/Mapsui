@@ -278,7 +278,7 @@ public partial class MapControl : ComponentBase, IMapControl
                 {
                     Cursor = MoveCursor;
 
-                    Map.Navigator.Transform(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui());
+                    Map.Navigator.Drag(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui());
 
                     RefreshGraphics();
 

@@ -237,7 +237,7 @@ public partial class MapControl : ViewGroup, IMapControl
                             var touch = touchPoints.First();
                             if (_previousTouch != null)
                             {
-                                Map.Navigator.Transform(touch, _previousTouch);
+                                Map.Navigator.Drag(touch, _previousTouch);
                                 RefreshGraphics();
                             }
                             _previousTouch = touch;
@@ -261,7 +261,7 @@ public partial class MapControl : ViewGroup, IMapControl
                                     _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
                             }
 
-                            Map.Navigator.Transform(touch, previousTouch, radius / previousRadius, rotationDelta);
+                            Map.Navigator.PinchZoom(touch, previousTouch, radius / previousRadius, rotationDelta);
                             RefreshGraphics();
 
                             (_previousTouch, _previousRadius, _previousAngle) = (touch, radius, angle);

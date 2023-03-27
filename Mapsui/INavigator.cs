@@ -151,16 +151,16 @@ public interface INavigator
     void FlingWith(double velocityX, double velocityY, long maxDuration);
 
     void FlyTo(MPoint center, double maxResolution, long duration = 2000);
-
-    // Todo: Check if we need all the methods below in the interface
-
+  
     void SetViewportAnimations(List<AnimationEntry<Viewport>> animations);
-    void SetCenter(double x, double y, long duration = 0, Easing? easing = null);
-    void SetCenter(MPoint center, long duration = 0, Easing? easing = null);
-    void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = null);
-    void SetResolution(double resolution, long duration = 0, Easing? easing = null);
+  
     void SetSize(double width, double height);
-    LimitResult SetViewportWithLimit(Viewport viewport);
-    void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0);
+ 
+    void PinchZoom(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation = 0);
+
+    void Drag(MPoint positionScreen, MPoint previousPositionScreen);
+
     bool UpdateAnimations();
+   
+    void SetViewport(Viewport viewport, long duration = 0, Easing? easing = default);
 }

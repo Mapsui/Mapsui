@@ -171,7 +171,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
             {
                 Cursor = MoveCursor;
 
-                Map.Navigator.Transform(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui());
+                Map.Navigator.Drag(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui());
 
                 RefreshGraphics();
 

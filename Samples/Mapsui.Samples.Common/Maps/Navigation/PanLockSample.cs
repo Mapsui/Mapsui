@@ -1,4 +1,5 @@
-﻿using Mapsui.Projections;
+﻿using Mapsui.Extensions;
+using Mapsui.Projections;
 using Mapsui.Tiling;
 using System.Threading.Tasks;
 
@@ -15,8 +16,8 @@ public class PanLockSample : ISample
     {
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        var saoPaulo = SphericalMercator.FromLonLat(-46.633, -23.55);
-        map.Navigator.SetViewportWithLimit(map.Navigator.Viewport with { CenterX = saoPaulo.x, CenterY = saoPaulo.y, Resolution = 4892 });
+        var saoPaulo = SphericalMercator.FromLonLat(-46.633, -23.55).ToMPoint();
+        map.Navigator.NavigateTo(saoPaulo, 4892f);
         map.Navigator.Limiter.PanLock = true;
         return map;
     }

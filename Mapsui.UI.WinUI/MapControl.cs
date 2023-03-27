@@ -246,7 +246,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
                 _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
         }
 
-        Map.Navigator.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
+        Map.Navigator.PinchZoom(center, previousCenter, radius / previousRadius, rotationDelta);
         RefreshGraphics();
         e.Handled = true;
     }

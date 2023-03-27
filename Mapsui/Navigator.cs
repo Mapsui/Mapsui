@@ -97,9 +97,19 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void NavigateTo(MPoint center, double resolution, long duration = 0, Easing? easing = default)
     {
-        if (center == null) throw new ArgumentNullException(nameof(center));
+        if (Limiter.PanLock) return;
+        if (Limiter.ZoomLock) return;
 
-        SetCenterAndResolution(center.X, center.Y, resolution, duration, easing);
+        ClearAnimations();
+
+        var newViewport = _viewport with { CenterX = center.X, CenterY = center.Y, Resolution = resolution };
+        newViewport = Limit(newViewport);
+
+        if (duration == 0)
+            Viewport = newViewport;
+        else
+            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
+
         OnNavigated(duration, ChangeType.Discrete);
     }
 
@@ -111,7 +121,17 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomTo(double resolution, long duration = 0, Easing? easing = default)
     {
-        SetResolution(resolution, duration, easing);
+        if (Limiter.ZoomLock) return;
+
+        ClearAnimations();
+
+        var newViewport = Limit(_viewport with { Resolution = resolution });
+
+        if (duration == 0)
+            Viewport = newViewport;
+        else
+            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
+
         OnNavigated(duration, ChangeType.Discrete);
     }
 
@@ -229,7 +249,17 @@ public class Navigator : INavigator
     /// <param name="easing">Function for easing</param>
     public void CenterOn(MPoint center, long duration = 0, Easing? easing = default)
     {
-        SetCenter(center, duration, easing);
+        if (Limiter.PanLock) return;
+
+        ClearAnimations();
+
+        var newViewport = Limit(_viewport with { CenterX = center.X, CenterY = center.Y });
+
+        if (duration == 0)
+            Viewport = newViewport;
+        else
+            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
+
         OnNavigated(duration, ChangeType.Discrete);
     }
 
@@ -297,9 +327,16 @@ public class Navigator : INavigator
     {
         Navigated?.Invoke(this, changeType);
     }
-      
+
     /// <inheritdoc />
-    public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0)
+    public void Drag(MPoint positionScreen, MPoint previousPositionScreen)
+    {
+        PinchZoom(positionScreen, previousPositionScreen, 0);
+    }
+
+
+    /// <inheritdoc />
+    public void PinchZoom(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation = 0)
     {
         if (Limiter.ZoomLock) deltaResolution = 1;
         if (Limiter.PanLock) positionScreen = previousPositionScreen;
@@ -364,53 +401,6 @@ public class Navigator : INavigator
         Viewport = Limit(_viewport with { CenterX = x, CenterY = y });
     }
 
-    // Todo: Make private or merge with caller
-    public void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
-    {
-        if (Limiter.PanLock) return;
-        if (Limiter.ZoomLock) return;
-
-        ClearAnimations();
-
-        var newViewport = _viewport with { CenterX = x, CenterY = y, Resolution = resolution };
-        newViewport = Limit(newViewport);
-
-        if (duration == 0)
-            Viewport = newViewport;
-        else
-            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
-    }
-
-    // Todo: Make private or merge with caller
-    public void SetCenter(MPoint center, long duration = 0, Easing? easing = default)
-    {
-        if (Limiter.PanLock) return;
-
-        ClearAnimations();
-        
-        var newViewport = Limit(_viewport with { CenterX = center.X, CenterY = center.Y });
-
-        if (duration == 0)
-            Viewport = newViewport;
-        else
-            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
-    }
-
-    // Todo: Make private or merge with caller
-    public void SetResolution(double resolution, long duration = 0, Easing? easing = default)
-    {
-        if (Limiter.ZoomLock) return;
-
-        ClearAnimations();
-
-        var newViewport = Limit(_viewport with { Resolution = resolution });
-
-        if (duration == 0)
-            Viewport = newViewport;
-        else
-            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
-    }
-
     private void ClearAnimations()
     {
         _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
@@ -460,7 +450,7 @@ public class Navigator : INavigator
         _animations = animations;
     }
 
-    public LimitResult SetViewportWithLimit(Viewport viewport)
+    private LimitResult SetViewportWithLimit(Viewport viewport)
     {
         Viewport = Limit(viewport);
         return new LimitResult(viewport, Viewport);
@@ -474,5 +464,15 @@ public class Navigator : INavigator
     private Viewport Limit(Viewport viewport)
     {
         return Limiter.Limit(viewport, PanExtent, ZoomExtremes);
+    }
+
+    public void SetViewport(Viewport viewport, long duration = 0, Easing? easing = default)
+    {
+        ClearAnimations();
+
+        if (duration == 0)
+            SetViewportWithLimit(viewport);
+        else
+            _animations = ViewportAnimation.Create(Viewport, viewport, duration, easing);
     }
 }
