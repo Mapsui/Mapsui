@@ -284,7 +284,16 @@ public class Navigator : INavigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void RotateTo(double rotation, long duration = 0, Easing? easing = default)
     {
-        SetRotation(rotation, duration, easing);
+        if (Limiter.RotationLock) return;
+
+        ClearAnimations();
+
+        var newViewport = Limit(_viewport with { Rotation = rotation });
+
+        if (duration == 0)
+            SetViewportWithLimit(newViewport);
+        else
+            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
 
         OnNavigated(duration, ChangeType.Discrete);
     }
@@ -406,20 +415,6 @@ public class Navigator : INavigator
     private void ClearAnimations()
     {
         _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
-    }
-
-    private void SetRotation(double rotation, long duration = 0, Easing? easing = default)
-    {
-        if (Limiter.RotationLock) return;
-
-        ClearAnimations();
-
-        var newViewport = Limit(_viewport with { Rotation = rotation });
-
-        if (duration == 0)
-            SetViewportWithLimit(newViewport);
-        else
-            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
     }
 
     /// <summary>
