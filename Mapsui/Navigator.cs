@@ -331,6 +331,7 @@ public class Navigator : INavigator
     {
         ClearAnimations();
         SetViewportWithLimit(Viewport with { Width = width, Height = height });
+        OnNavigated();
 
     }
 
@@ -339,7 +340,6 @@ public class Navigator : INavigator
         if (_animations.Any())
         {
             _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
-            OnNavigated();
         }
     }
 
@@ -356,13 +356,18 @@ public class Navigator : INavigator
     {
         if (!_animations.Any()) return false;
         if (_animations.All(a => a.Done))
+        {
             ClearAnimations();
-
+            OnNavigated();
+        }
         var result = Animation.UpdateAnimations(Viewport, _animations);
 
         var limitResult = SetViewportWithLimit(result.CurrentState);
         if (limitResult.ZoomLimited || limitResult.FullyLimited)
+        {
             ClearAnimations();
+            OnNavigated();
+        }
 
         return result.IsRunning;
     }
@@ -399,8 +404,6 @@ public class Navigator : INavigator
         }
         else
         {
-            if (_animations.Any())
-                OnNavigated();
             _animations = ViewportAnimation.Create(Viewport, viewport, duration, easing);
         }
     }
