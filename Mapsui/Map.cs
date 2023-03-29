@@ -36,7 +36,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = new LayerCollection();
-        Navigator.Navigated += Navigated;
+        Navigator.RequestDataRefresh += NavigatorRequestDataRefresh;
     }
 
     /// <summary>
@@ -127,9 +127,9 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </summary>
     public Navigator Navigator { get; private set; } =  new Navigator();
 
-    private void Navigated(object? sender, EventArgs eventArgs)
+    private void NavigatorRequestDataRefresh(object? sender, EventArgs e)
     {
-        Refresh(ChangeType.Discrete);
+        RefreshData(ChangeType.Discrete);
     }
 
     /// <summary>

@@ -17,9 +17,9 @@ public class Navigator
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
 
     /// <summary>
-    /// Called each time one of the navigation methods is called
+    /// Called when a data refresh is needed. 
     /// </summary>
-    public EventHandler? Navigated { get; set; }
+    public event EventHandler? RequestDataRefresh;
     public event PropertyChangedEventHandler? ViewportChanged;
 
     /// <summary>
@@ -287,10 +287,10 @@ public class Navigator
         _animations = FlingAnimation.Create(velocityX, velocityY, maxDuration);
     }
 
-    private void OnNavigated()
+    private void OnRequestDataRefresh()
     {
-        Logger.Log(LogLevel.Information, $"Calling {nameof(Navigated)} TickCount {Environment.TickCount}");
-        Navigated?.Invoke(this, EventArgs.Empty);
+        Logger.Log(LogLevel.Information, $"Calling {nameof(RequestDataRefresh)} TickCount {Environment.TickCount}");
+        RequestDataRefresh?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -367,7 +367,7 @@ public class Navigator
     {
         ClearAnimations();
         SetViewportWithLimit(Viewport with { Width = width, Height = height });
-        OnNavigated();
+        OnRequestDataRefresh();
 
     }
 
@@ -394,7 +394,7 @@ public class Navigator
         if (_animations.All(a => a.Done))
         {
             ClearAnimations();
-            OnNavigated();
+            OnRequestDataRefresh();
         }
         var result = Animation.UpdateAnimations(Viewport, _animations);
 
@@ -402,7 +402,7 @@ public class Navigator
         if (limitResult.ZoomLimited || limitResult.FullyLimited)
         {
             ClearAnimations();
-            OnNavigated();
+            OnRequestDataRefresh();
         }
 
         return result.IsRunning;
@@ -435,7 +435,7 @@ public class Navigator
         {
             ClearAnimations();
             SetViewportWithLimit(viewport);
-            OnNavigated();
+            OnRequestDataRefresh();
         }
         else
         {

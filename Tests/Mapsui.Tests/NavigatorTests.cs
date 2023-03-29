@@ -14,7 +14,7 @@ public class NavigatorTests
         var navigator = new Navigator();
         int navigatedCounter = 0;
         navigator.SetViewportAnimations(CreateAnimation());
-        navigator.Navigated += (s, e) => navigatedCounter++;
+        navigator.RequestDataRefresh += (s, e) => navigatedCounter++;
 
         // Act
         navigator.CenterOn(10, 20);
