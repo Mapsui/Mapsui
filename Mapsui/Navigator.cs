@@ -59,8 +59,12 @@ public class Navigator
 
     public MouseWheelAnimation MouseWheelAnimation { get; } = new();
 
-    public void ZoomInOrOut(int mouseWheelDelta, MPoint centerOfZoom)
+    public void MouseWheelZoom(int mouseWheelDelta, MPoint centerOfZoom)
     {
+        // It is unexpected that this method uses the MouseWheelAnimation.Animation and Easing. 
+        // At the moment this solution allows the user to change these fields, so I don't want
+        // them to become hardcoded values in the MapControl. There should be a more general
+        // way to control the animation parameters.
         var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, Viewport.Resolution, ZoomExtremes, Resolutions);
         if (mouseWheelDelta > Constants.Epsilon)
         {

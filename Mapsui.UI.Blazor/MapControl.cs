@@ -145,7 +145,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
             var currentMousePosition = e.Location(await BoundingClientRectAsync()).ToMapsui();
 
-            Map.Navigator.ZoomInOrOut((int)mouseWheelDelta, currentMousePosition);
+            Map.Navigator.MouseWheelZoom((int)mouseWheelDelta, currentMousePosition);
         }
         catch (Exception ex)
         {
