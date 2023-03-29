@@ -395,10 +395,9 @@ public class Navigator : INavigator
 
     public void SetViewport(Viewport viewport, long duration = -1, Easing? easing = default)
     {
-        ClearAnimations();
-
         if (duration <= 0)
         {
+            ClearAnimations();
             SetViewportWithLimit(viewport);
             OnNavigated();
         }
