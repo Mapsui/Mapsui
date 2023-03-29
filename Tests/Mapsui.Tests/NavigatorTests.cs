@@ -3,7 +3,7 @@
 namespace Mapsui.Tests;
 
 [TestFixture]
-public class ViewportTests
+public class NavigatorTests
 {
     [Test]
     public void SetCenterTest()
@@ -12,7 +12,7 @@ public class ViewportTests
         var navigator = new Navigator();
 
         // Act
-        navigator.SetCenter(10, 20);
+        navigator.CenterOn(10, 20);
 
         // Assert
         Assert.AreEqual(10, navigator.Viewport.CenterX);
@@ -26,7 +26,7 @@ public class ViewportTests
         var navigator = new Navigator();
 
         // Act
-        navigator.SetCenter(10, 20);
+        navigator.CenterOn(10, 20);
         navigator.Pinch(new MPoint(10, 10), new MPoint(20, 20), 1);
 
         // Assert
@@ -41,7 +41,7 @@ public class ViewportTests
         var navigator = new Navigator();
 
         // Act
-        navigator.SetCenter(10, 20);
+        navigator.CenterOn(10, 20);
         navigator.Pinch(new MPoint(10, 10), new MPoint(20, 20), 2);
 
         // Assert

@@ -105,7 +105,7 @@ public class Navigator : INavigator
         var newViewport = _viewport with { CenterX = center.X, CenterY = center.Y, Resolution = resolution };
         newViewport = Limit(newViewport);
 
-        if (duration == 0)
+        if (duration <= 0)
             SetViewportWithLimit(newViewport);
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
@@ -127,7 +127,7 @@ public class Navigator : INavigator
 
         var newViewport = Limit(_viewport with { Resolution = resolution });
 
-        if (duration == 0)
+        if (duration <= 0)
             SetViewportWithLimit(newViewport);
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
@@ -160,7 +160,7 @@ public class Navigator : INavigator
             centerOfZoomY = Viewport.CenterY;
         }
 
-        if (duration == 0)
+        if (duration <= 0)
         {
             // Todo: If there is limiting of one dimension the other dimension should be limited accordingly. 
             var (x, y) = TransformationAlgorithms.CalculateCenterOfMap(
@@ -255,7 +255,7 @@ public class Navigator : INavigator
 
         var newViewport = Limit(_viewport with { CenterX = center.X, CenterY = center.Y });
 
-        if (duration == 0)
+        if (duration <= 0)
             SetViewportWithLimit(newViewport);
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
@@ -288,9 +288,9 @@ public class Navigator : INavigator
 
         ClearAnimations();
 
-        var newViewport = Limit(_viewport with { Rotation = rotation });
+        var newViewport = _viewport with { Rotation = rotation };
 
-        if (duration == 0)
+        if (duration <= 0)
             SetViewportWithLimit(newViewport);
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
@@ -401,17 +401,6 @@ public class Navigator : INavigator
 
     }
 
-    // Todo: Make private or merge with caller
-    public void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
-    {
-        // Todo: Fix the unused animation parameters.
-
-        if (Limiter.PanLock) return;
-        ClearAnimations();
-
-        SetViewportWithLimit(_viewport with { CenterX = x, CenterY = y });
-    }
-
     private void ClearAnimations()
     {
         _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
@@ -466,7 +455,7 @@ public class Navigator : INavigator
     {
         ClearAnimations();
 
-        if (duration == 0)
+        if (duration <= 0)
             SetViewportWithLimit(viewport);
         else
             _animations = ViewportAnimation.Create(Viewport, viewport, duration, easing);
