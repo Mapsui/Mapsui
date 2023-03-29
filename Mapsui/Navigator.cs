@@ -61,7 +61,7 @@ public class Navigator
 
     public void ZoomInOrOut(int mouseWheelDelta, MPoint centerOfZoom)
     {
-        var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, this, Resolutions);
+        var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, Viewport.Resolution, ZoomExtremes, Resolutions);
         if (mouseWheelDelta > Constants.Epsilon)
         {
             ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
