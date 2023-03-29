@@ -396,17 +396,18 @@ public class Navigator
             ClearAnimations();
             OnRequestDataRefresh();
         }
-        var result = Animation.UpdateAnimations(Viewport, _animations);
+        var animationResult = Animation.UpdateAnimations(Viewport, _animations);
 
-        SetViewportWithLimit(result.CurrentState);
+        SetViewportWithLimit(animationResult.State);
 
-        if (ShouldAnimationsBeHaltedBecauseOfLimiting(result.CurrentState, Viewport))
+        if (ShouldAnimationsBeHaltedBecauseOfLimiting(animationResult.State, Viewport))
         {
             ClearAnimations();
             OnRequestDataRefresh();
+            return false; // Not running
         }
 
-        return result.IsRunning;
+        return animationResult.IsRunning;
     }
 
     public void SetViewportAnimations(List<AnimationEntry<Viewport>> animations)
