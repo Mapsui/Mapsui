@@ -165,7 +165,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #endif
         var mouseWheelDelta = currentPoint.Properties.MouseWheelDelta;
 
-        Map.Navigator.ZoomInOrOut(mouseWheelDelta, mousePosition);
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
 
         e.Handled = true;
     }

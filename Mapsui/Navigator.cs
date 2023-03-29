@@ -17,9 +17,10 @@ public class Navigator
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
 
     /// <summary>
-    /// Called each time one of the navigation methods is called
+    /// Called when a data refresh is needed. This directly after a non-animated viewport change
+    /// is made and after an animation has completed.
     /// </summary>
-    public EventHandler? Navigated { get; set; }
+    public event EventHandler? RequestDataRefresh;
     public event PropertyChangedEventHandler? ViewportChanged;
 
     /// <summary>
@@ -59,9 +60,13 @@ public class Navigator
 
     public MouseWheelAnimation MouseWheelAnimation { get; } = new();
 
-    public void ZoomInOrOut(int mouseWheelDelta, MPoint centerOfZoom)
+    public void MouseWheelZoom(int mouseWheelDelta, MPoint centerOfZoom)
     {
-        var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, this, Resolutions);
+        // It is unexpected that this method uses the MouseWheelAnimation.Animation and Easing. 
+        // At the moment this solution allows the user to change these fields, so I don't want
+        // them to become hardcoded values in the MapControl. There should be a more general
+        // way to control the animation parameters.
+        var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, Viewport.Resolution, ZoomExtremes, Resolutions);
         if (mouseWheelDelta > Constants.Epsilon)
         {
             ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
@@ -158,7 +163,6 @@ public class Navigator
             centerOfZoomY = Viewport.CenterY;
         }
 
-        // Todo: If there is limiting of one dimension the other dimension should be limited accordingly. 
         var (x, y) = TransformationAlgorithms.CalculateCenterOfMap(
             centerOfZoomX, centerOfZoomY, resolution, Viewport.CenterX, Viewport.CenterY, Viewport.Resolution);
         var newViewport = Viewport with { CenterX = x, CenterY = y, Resolution = resolution };
@@ -269,7 +273,9 @@ public class Navigator
     }
 
     /// <summary>
-    /// Animate Fling of the viewport
+    /// Animate Fling of the viewport. This method is called from
+    /// the MapControl and is usually not called from user code. This method does not call
+    /// Navigated. 
     /// </summary>
     /// <param name="velocityX">VelocityX from SwipedEventArgs></param>
     /// <param name="velocityY">VelocityX from SwipedEventArgs></param>
@@ -281,20 +287,32 @@ public class Navigator
         _animations = FlingAnimation.Create(velocityX, velocityY, maxDuration);
     }
 
-    private void OnNavigated()
+    private void OnRequestDataRefresh()
     {
-        Logger.Log(LogLevel.Information, $"Calling {nameof(Navigated)} TickCount {Environment.TickCount}");
-        Navigated?.Invoke(this, EventArgs.Empty);
+        RequestDataRefresh?.Invoke(this, EventArgs.Empty);
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// To pan the map when dragging with mouse or single finger. This method is called from
+    /// the MapControl and is usually not called from user code. This method does not call
+    /// Navigated. So, Navigated needs to be called from the MapControl on mouse/touch up.
+    /// </summary>
+    /// <param name="positionScreen">Screen position of the dragging mouse or finger.</param>
+    /// <param name="previousPositionScreen">Previous position of the dragging mouse or finger.</param>
     public void Drag(MPoint positionScreen, MPoint previousPositionScreen)
     {
         Pinch(positionScreen, previousPositionScreen, 1);
     }
 
-
-    /// <inheritdoc />
+    /// <summary>
+    /// To change the map viewport when using multiple fingers. This method is called from
+    /// the MapControl and is usually not called from user code. This method does not call
+    /// Navigated. So, Navigated needs to be called from the MapControl on mouse/touch up.
+    /// </summary>
+    /// <param name="currentPinchCenter">The center of the current position of touch positions.</param>
+    /// <param name="previousPinchCenter">The previous center of the current position of touch positions.</param>
+    /// <param name="deltaResolution">The change in resolution cause by moving the fingers together or further apart.</param>
+    /// <param name="deltaRotation">The change in rotation of the finger positions.</param>
     public void Pinch(MPoint currentPinchCenter, MPoint previousPinchCenter, double deltaResolution, double deltaRotation = 0)
     {
         if (Limiter.ZoomLock) deltaResolution = 1;
@@ -348,7 +366,7 @@ public class Navigator
     {
         ClearAnimations();
         SetViewportWithLimit(Viewport with { Width = width, Height = height });
-        OnNavigated();
+        OnRequestDataRefresh();
 
     }
 
@@ -375,18 +393,20 @@ public class Navigator
         if (_animations.All(a => a.Done))
         {
             ClearAnimations();
-            OnNavigated();
+            OnRequestDataRefresh();
         }
-        var result = Animation.UpdateAnimations(Viewport, _animations);
+        var animationResult = Animation.UpdateAnimations(Viewport, _animations);
 
-        var limitResult = SetViewportWithLimit(result.CurrentState);
-        if (limitResult.ZoomLimited || limitResult.FullyLimited)
+        SetViewportWithLimit(animationResult.State);
+
+        if (ShouldAnimationsBeHaltedBecauseOfLimiting(animationResult.State, Viewport))
         {
             ClearAnimations();
-            OnNavigated();
+            OnRequestDataRefresh();
+            return false; // Not running
         }
 
-        return result.IsRunning;
+        return animationResult.IsRunning;
     }
 
     public void SetViewportAnimations(List<AnimationEntry<Viewport>> animations)
@@ -394,10 +414,28 @@ public class Navigator
         _animations = animations;
     }
 
-    private LimitResult SetViewportWithLimit(Viewport viewport)
+    private void SetViewportWithLimit(Viewport viewport)
     {
         Viewport = Limit(viewport);
-        return new LimitResult(viewport, Viewport);
+    }
+
+    private bool ShouldAnimationsBeHaltedBecauseOfLimiting(Viewport input, Viewport output)
+    {
+        var zoomLimited = input.Resolution != output.Resolution;
+        var fullyLimited =
+            input.CenterX != output.CenterX &&
+            input.CenterY != output.CenterY &&
+            zoomLimited;
+
+        // When the viewport is limited in x, y and resolution there will be no 
+        // further change in subsequent updates and the animation should be halted.
+        if (fullyLimited)
+            return true;
+
+        // When the animation hits the zoom limit it should also be halted. 
+        // A further animation in the x or y direction appears as a confusing
+        // drift of the viewport.
+        return zoomLimited;
     }
 
     /// <summary>
@@ -416,10 +454,12 @@ public class Navigator
         {
             ClearAnimations();
             SetViewportWithLimit(viewport);
-            OnNavigated();
+            OnRequestDataRefresh();
         }
         else
         {
+            if (_animations.Any())
+                OnRequestDataRefresh();
             _animations = ViewportAnimation.Create(Viewport, viewport, duration, easing);
         }
     }

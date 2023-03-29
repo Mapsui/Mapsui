@@ -7,38 +7,36 @@ namespace Mapsui.Animations;
 public class MouseWheelAnimation
 {
     private int _tickCount = int.MinValue;
-    private double _toResolution;
+    private double _destinationResolution;
 
     public int Duration { get; set; } = 600;
     public Easing Easing { get; set; } = Easing.QuarticOut;
 
-    public double GetResolution(int mouseWheelDelta, Navigator navigator, IReadOnlyList<double> resolutions)
+    public double GetResolution(int mouseWheelDelta, double currentResolution, MMinMax? zoomExtremes, IReadOnlyList<double> resolutions)
     {
-        // If the animation has ended then start from the current resolution.
-        // The alternative is to use the previous resolution target and add an extra
-        // level to that.
-        if (!IsAnimating())
-            _toResolution = navigator.Viewport.Resolution;
+        // If an animation is already running don't start from the current resolution, but from the 
+        // destination resolution of the previous animation. This way the consequetive mouse wheel
+        // ticks add up which allows for fast zooming to a detailed level.
+        if (IsAnimating())
+            currentResolution = _destinationResolution;
 
         if (mouseWheelDelta > Constants.Epsilon)
         {
-            _toResolution = ZoomHelper.GetResolutionToZoomIn(resolutions, _toResolution);
-            // Todo: Move this to ZoomIn. Make limiting consistent.
-            if (navigator.ZoomExtremes is not null)
-                _toResolution = Math.Max(_toResolution, navigator.ZoomExtremes.Min);
+            _destinationResolution = ZoomHelper.GetResolutionToZoomIn(resolutions, currentResolution);
+            if (zoomExtremes is not null)
+                _destinationResolution = Math.Max(_destinationResolution, zoomExtremes.Min);
         }
         else if (mouseWheelDelta < Constants.Epsilon)
         {
-            _toResolution = ZoomHelper.GetResolutionToZoomOut(resolutions, _toResolution);
-            // Todo: Move this to ZoomOut. Make limiting consistent.
-            if (navigator.ZoomExtremes is not null)
-                _toResolution = Math.Min(_toResolution, navigator.ZoomExtremes.Max);
+            _destinationResolution = ZoomHelper.GetResolutionToZoomOut(resolutions, currentResolution);
+            if (zoomExtremes is not null)
+                _destinationResolution = Math.Min(_destinationResolution, zoomExtremes.Max);
         }
 
         // TickCount is fast https://stackoverflow.com/a/4075602/85325
         _tickCount = Environment.TickCount;
 
-        return _toResolution;
+        return _destinationResolution;
     }
 
     private bool IsAnimating()
