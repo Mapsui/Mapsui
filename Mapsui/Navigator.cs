@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Limiting;
@@ -110,7 +109,7 @@ public class Navigator : INavigator
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
 
-        OnNavigated(duration, ChangeType.Discrete);
+        OnNavigated(ChangeType.Discrete);
     }
 
     /// <summary>
@@ -132,7 +131,7 @@ public class Navigator : INavigator
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
 
-        OnNavigated(duration, ChangeType.Discrete);
+        OnNavigated(ChangeType.Discrete);
     }
 
     /// <summary>
@@ -260,7 +259,7 @@ public class Navigator : INavigator
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
 
-        OnNavigated(duration, ChangeType.Discrete);
+        OnNavigated(ChangeType.Discrete);
     }
 
     /// <summary>
@@ -295,7 +294,7 @@ public class Navigator : INavigator
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
 
-        OnNavigated(duration, ChangeType.Discrete);
+        OnNavigated(ChangeType.Discrete);
     }
 
     /// <summary>
@@ -310,7 +309,7 @@ public class Navigator : INavigator
 
         var response = FlingAnimation.Create(velocityX, velocityY, maxDuration);
         SetViewportAnimations(response.Entries);
-        OnNavigated(response.Duration, ChangeType.Discrete);
+        OnNavigated(ChangeType.Discrete);
     }
 
     /// <summary> Adds the final action. </summary>
@@ -323,13 +322,6 @@ public class Navigator : INavigator
         {
             animationEntries.Add(new AnimationEntry<Viewport>(entry.Start, entry.End, final: (v, a) => { action(); return new AnimationResult<Viewport>(v, true); }));
         }
-    }
-
-    private void OnNavigated(long duration, ChangeType changeType)
-    {
-        // Note. Instead of a delay it may also be possible to call Navigated immediately with the viewport state
-        // that is the result of the animation.
-        _ = Task.Delay((int)duration).ContinueWith(t => OnNavigated(changeType), TaskScheduler.Default);
     }
 
     private void OnNavigated(ChangeType changeType)
@@ -345,14 +337,14 @@ public class Navigator : INavigator
 
 
     /// <inheritdoc />
-    public void Pinch(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation = 0)
+    public void Pinch(MPoint currentPinchCenter, MPoint previousPinchCenter, double deltaResolution, double deltaRotation = 0)
     {
         if (Limiter.ZoomLock) deltaResolution = 1;
-        if (Limiter.PanLock) positionScreen = previousPositionScreen;
+        if (Limiter.PanLock) currentPinchCenter = previousPinchCenter;
 
         ClearAnimations();
 
-        var viewport = TransformState(_viewport, positionScreen, previousPositionScreen, deltaResolution, deltaRotation);
+        var viewport = TransformState(_viewport, currentPinchCenter, previousPinchCenter, deltaResolution, deltaRotation);
         SetViewportWithLimit(viewport);
     }
 
@@ -460,4 +452,6 @@ public class Navigator : INavigator
         else
             _animations = ViewportAnimation.Create(Viewport, viewport, duration, easing);
     }
+
+    internal int GetAnimationsCount => _animations.Count();
 }
