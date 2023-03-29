@@ -290,7 +290,6 @@ public class Navigator
 
     private void OnRequestDataRefresh()
     {
-        Logger.Log(LogLevel.Information, $"Calling {nameof(RequestDataRefresh)} TickCount {Environment.TickCount}");
         RequestDataRefresh?.Invoke(this, EventArgs.Empty);
     }
 
@@ -399,8 +398,9 @@ public class Navigator
         }
         var result = Animation.UpdateAnimations(Viewport, _animations);
 
-        var limitResult = SetViewportWithLimit(result.CurrentState);
-        if (limitResult.ZoomLimited || limitResult.FullyLimited)
+        SetViewportWithLimit(result.CurrentState);
+
+        if (ShouldAnimationsBeHaltedBecauseOfLimiting(result.CurrentState, Viewport))
         {
             ClearAnimations();
             OnRequestDataRefresh();
@@ -414,10 +414,28 @@ public class Navigator
         _animations = animations;
     }
 
-    private LimitResult SetViewportWithLimit(Viewport viewport)
+    private void SetViewportWithLimit(Viewport viewport)
     {
         Viewport = Limit(viewport);
-        return new LimitResult(viewport, Viewport);
+    }
+
+    private bool ShouldAnimationsBeHaltedBecauseOfLimiting(Viewport input, Viewport output)
+    {
+        var zoomLimited = input.Resolution != output.Resolution;
+        var fullyLimited =
+            input.CenterX != output.CenterX &&
+            input.CenterY != output.CenterY &&
+            zoomLimited;
+
+        // When the viewport is limited in x, y and resolution there will be no 
+        // further change in subsequent updates and the animation should be halted.
+        if (fullyLimited)
+            return true;
+
+        // When the animation hits the zoom limit it should also be halted. 
+        // A further animation in the x or y direction appears as a confusing
+        // drift of the viewport.
+        return zoomLimited;
     }
 
     /// <summary>
@@ -440,6 +458,8 @@ public class Navigator
         }
         else
         {
+            if (_animations.Any())
+                OnRequestDataRefresh();
             _animations = ViewportAnimation.Create(Viewport, viewport, duration, easing);
         }
     }
