@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Mapsui.Animations;
 using Mapsui.Limiting;
-using Mapsui.Utilities;
 
 namespace Mapsui;
 
@@ -39,7 +38,7 @@ public interface INavigator
     /// <summary>
     /// Called each time one of the navigation methods is called
     /// </summary>
-    EventHandler<ChangeType>? Navigated { get; set; }
+    EventHandler? Navigated { get; set; }
 
     void ZoomInOrOut(int mouseWheelDelta, MPoint centerOfZoom);
 
@@ -47,10 +46,10 @@ public interface INavigator
     /// Navigate center of viewport to center of extent and change resolution
     /// </summary>
     /// <param name="extent">New extent for viewport to show</param>
-    /// <param name="scaleMethod">Scale method to use to determine the resolution</param>
+    /// <param name="boxFit">Scale method to use to determine the resolution</param>
     /// <param name="duration">Duration of animation in milliseconds</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-    void NavigateTo(MRect extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = 0, Easing? easing = default);
+    void NavigateTo(MRect extent, MBoxFit boxFit = MBoxFit.Fit, long duration = 0, Easing? easing = default);
 
     /// <summary>
     /// Change both center and resolution of the viewport
@@ -64,10 +63,10 @@ public interface INavigator
     /// <summary>
     /// Navigate to a resolution, so such the map uses the fill method
     /// </summary>
-    /// <param name="scaleMethod"></param>
+    /// <param name="boxFit"></param>
     /// <param name="duration">Duration of animation in millisecondsScale method to use to determine resolution</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-    void ZoomToPanExtent(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = 0, Easing? easing = default);
+    void ZoomToPanExtent(MBoxFit boxFit = MBoxFit.Fill, long duration = 0, Easing? easing = default);
 
     /// <summary>
     /// Change resolution of viewport
@@ -148,19 +147,19 @@ public interface INavigator
     /// <param name="velocityX">Screen VelocityX from SwipedEventArgs></param>
     /// <param name="velocityY">Screen VelocityX from SwipedEventArgs></param>
     /// <param name="maxDuration">Max duration of fling deceleration, changes based on total velocity></param>
-    void FlingWith(double velocityX, double velocityY, long maxDuration);
+    void Fling(double velocityX, double velocityY, long maxDuration);
 
     void FlyTo(MPoint center, double maxResolution, long duration = 2000);
-
-    // Todo: Check if we need all the methods below in the interface
-
+  
     void SetViewportAnimations(List<AnimationEntry<Viewport>> animations);
-    void SetCenter(double x, double y, long duration = 0, Easing? easing = null);
-    void SetCenter(MPoint center, long duration = 0, Easing? easing = null);
-    void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = null);
-    void SetResolution(double resolution, long duration = 0, Easing? easing = null);
+  
     void SetSize(double width, double height);
-    LimitResult SetViewportWithLimit(Viewport viewport);
-    void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0);
+ 
+    void Pinch(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation = 0);
+
+    void Drag(MPoint positionScreen, MPoint previousPositionScreen);
+
     bool UpdateAnimations();
+   
+    void SetViewport(Viewport viewport, long duration = 0, Easing? easing = default);
 }

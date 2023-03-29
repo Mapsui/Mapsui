@@ -3,11 +3,8 @@ using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
-using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
-using Mapsui.UI;
-using Mapsui.Utilities;
 using NetTopologySuite.IO;
 
 #pragma warning disable IDISP001 // Dispose created
@@ -22,7 +19,6 @@ public class ProjectionSample : ISample
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
-
 
     public static Map CreateMap()
     {
@@ -39,7 +35,7 @@ public class ProjectionSample : ISample
         };
         map.Layers.Add(geometryLayer);
         map.Layers.Add(CreateCenterOfAmsterdamLayer());
-        map.Home = n => n.ZoomToPanExtent(ScaleMethod.Fit);
+        map.Home = n => n.ZoomToPanExtent(MBoxFit.Fit);
         return map;
     }
 

@@ -8,7 +8,6 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 using NetTopologySuite.IO;
 
 namespace Mapsui.Tests.Common.Maps;
@@ -31,7 +30,7 @@ public class PolygonTestSample : ISample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.ZoomToPanExtent(ScaleMethod.Fit)
+            Home = n => n.ZoomToPanExtent(MBoxFit.Fit)
         };
 
         map.Layers.Add(layer);

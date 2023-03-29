@@ -174,7 +174,7 @@ public partial class MapControl : ViewGroup, IMapControl
 
     public void OnFling(object? sender, GestureDetector.FlingEventArgs args)
     {
-        Map.Navigator.FlingWith(args.VelocityX / 10, args.VelocityY / 10, 1000);
+        Map.Navigator.Fling(args.VelocityX / 10, args.VelocityY / 10, 1000);
     }
 
     public void MapView_Touch(object? sender, TouchEventArgs args)
@@ -237,7 +237,7 @@ public partial class MapControl : ViewGroup, IMapControl
                             var touch = touchPoints.First();
                             if (_previousTouch != null)
                             {
-                                Map.Navigator.Transform(touch, _previousTouch);
+                                Map.Navigator.Drag(touch, _previousTouch);
                                 RefreshGraphics();
                             }
                             _previousTouch = touch;
@@ -261,8 +261,8 @@ public partial class MapControl : ViewGroup, IMapControl
                                     _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
                             }
 
-                            Map.Navigator.Transform(touch, previousTouch, radius / previousRadius, rotationDelta);
-                            RefreshGraphics();
+                            Map.Navigator.Pinch(touch, previousTouch, radius / previousRadius, rotationDelta);
+                            RefreshGraphics(); // Todo: ViewportChanged should trigger RefreshGraphics
 
                             (_previousTouch, _previousRadius, _previousAngle) = (touch, radius, angle);
 

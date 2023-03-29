@@ -9,7 +9,7 @@ public class MRect
     {
         Min = new MPoint(minX, minY);
         Max = new MPoint(maxX, maxY);
-        EnforceMinMax();
+        SwapMinAndMaxIfNeeded();
     }
 
     public MRect(MRect rect) : this(rect.Min.X, rect.Min.Y, rect.Max.X, rect.Max.Y) { }
@@ -111,7 +111,7 @@ public class MRect
     public MRect Grow(double amountInX, double amountInY)
     {
         var grownBox = new MRect(Min.X - amountInX, Min.Y - amountInY, Max.X + amountInX, MaxY + amountInY);
-        EnforceMinMax();
+        SwapMinAndMaxIfNeeded();
         return grownBox;
     }
 
@@ -179,7 +179,7 @@ public class MRect
         return quad.Rotate(degrees, center.X, center.Y);
     }
 
-    private void EnforceMinMax()
+    private void SwapMinAndMaxIfNeeded()
     {
         if (Min.X > Max.X)
         {

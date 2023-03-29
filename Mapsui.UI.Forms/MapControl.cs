@@ -531,7 +531,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (args.Handled)
             return true;
 
-        Map.Navigator.FlingWith(velocityX, velocityY, 1000);
+        Map.Navigator.Fling(velocityX, velocityY, 1000);
 
         return true;
     }
@@ -660,7 +660,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     if (!Map.Navigator.Limiter.PanLock && _previousCenter != null)
                     {
-                        Map.Navigator.Transform(touchPosition, _previousCenter);
+                        Map.Navigator.Drag(touchPosition, _previousCenter);
 
                         RefreshGraphics();
                     }
@@ -688,7 +688,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     }
 
                     if (prevCenter != null)
-                        Map.Navigator.Transform(center, prevCenter, Map.Navigator.Limiter.ZoomLock ? 1 : radius / prevRadius, rotationDelta);
+                        Map.Navigator.Pinch(center, prevCenter, radius / prevRadius, rotationDelta);
 
                     (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
 
