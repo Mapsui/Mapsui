@@ -125,7 +125,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Handles all manipulations of the map viewport
     /// </summary>
-    public INavigator Navigator { get; private set; } =  new Navigator();
+    public Navigator Navigator { get; private set; } =  new Navigator();
 
     private void Navigated(object? sender, EventArgs eventArgs)
     {
@@ -309,7 +309,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         DataChanged?.Invoke(sender, e);
     }
 
-    public Action<INavigator> Home { get; set; } = n => n.ZoomToPanExtent();
+    public Action<Navigator> Home { get; set; } = n => n.ZoomToPanExtent();
 
     public IEnumerable<IWidget> GetWidgetsOfMapAndLayers()
     {

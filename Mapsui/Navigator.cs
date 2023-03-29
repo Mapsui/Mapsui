@@ -11,17 +11,27 @@ using Mapsui.Utilities;
 
 namespace Mapsui;
 
-public class Navigator : INavigator
+public class Navigator
 {
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
+
+    /// <summary>
+    /// Called each time one of the navigation methods is called
+    /// </summary>
     public EventHandler? Navigated { get; set; }
     public event PropertyChangedEventHandler? ViewportChanged;
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Sets the extent used to restrict panning. Exactly how this extent affects panning
+    /// depends on the implementation of the IViewportLimiter.
+    /// </summary>
     public MRect? PanExtent { get; set; }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// A pair of the most extreme resolutions (smallest and biggest). How these extremes affect zooming
+    /// depends on the implementation of the IViewportLimiter.
+    /// </summary>
     public MMinMax? ZoomExtremes { get; set; }
 
     public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
@@ -37,7 +47,14 @@ public class Navigator : INavigator
         }
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// List of resolutions that can be used when going to a new zoom level. In the most common
+    /// case these resolutions correspond to the resolutions of the background layer of the map. 
+    /// In the Mapsui samples this is usually the openstreetmap layer, but there are also situations
+    /// where this is no background layer with resolutions. Or where one app switches between different 
+    /// background layers with different resolutions. Also note that when pinch zooming these resolutions 
+    /// are not used.
+    /// </summary>
     public IReadOnlyList<double> Resolutions { get; set; } = new List<double>();
 
     public MouseWheelAnimation MouseWheelAnimation { get; } = new();
@@ -59,7 +76,7 @@ public class Navigator : INavigator
     /// Navigate center of viewport to center of extent and change resolution
     /// </summary>
     /// <param name="extent">New extent for viewport to show</param>
-    /// <param name="boxFit">Scale method to use to determine resolution</param>
+    /// <param name="boxFit">The way the extent should be fit into the view.</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void NavigateTo(MRect? extent, MBoxFit boxFit = MBoxFit.Fit, long duration = -1, Easing? easing = default)
@@ -73,7 +90,7 @@ public class Navigator : INavigator
     }
 
     /// <summary>
-    /// Navigate to a resolution, so such the map uses the fill method
+    /// Navigate to the Navigator.PanExtent.
     /// </summary>
     /// <param name="boxFit">Scale method to use to determine resolution</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
@@ -150,7 +167,7 @@ public class Navigator : INavigator
     }
 
     /// <summary>
-    /// Zoom in to the next resolution
+    /// Zoom in to the next resolutionin in the Navigator.Resolutions list.
     /// </summary>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
@@ -162,7 +179,7 @@ public class Navigator : INavigator
     }
 
     /// <summary>
-    /// Zoom out to the next resolution
+    /// Zoom out to the next resolution in the Navigator.Resolutions list.
     /// </summary>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>

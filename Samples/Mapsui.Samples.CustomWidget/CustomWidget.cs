@@ -10,7 +10,7 @@ public class CustomWidget : IWidget
     public float MarginX { get; set; } = 20;
     public float MarginY { get; set; } = 20;
     public MRect? Envelope { get; set; }
-    public bool HandleWidgetTouched(INavigator navigator, MPoint position)
+    public bool HandleWidgetTouched(Navigator navigator, MPoint position)
     {
         navigator.CenterOn(0, 0);
         return true;
