@@ -106,7 +106,7 @@ public class Navigator : INavigator
         newViewport = Limit(newViewport);
 
         if (duration == 0)
-            Viewport = newViewport;
+            SetViewportWithLimit(newViewport);
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
 
@@ -128,7 +128,7 @@ public class Navigator : INavigator
         var newViewport = Limit(_viewport with { Resolution = resolution });
 
         if (duration == 0)
-            Viewport = newViewport;
+            SetViewportWithLimit(newViewport);
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
 
@@ -256,7 +256,7 @@ public class Navigator : INavigator
         var newViewport = Limit(_viewport with { CenterX = center.X, CenterY = center.Y });
 
         if (duration == 0)
-            Viewport = newViewport;
+            SetViewportWithLimit(newViewport);
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
 
@@ -343,7 +343,8 @@ public class Navigator : INavigator
 
         ClearAnimations();
 
-        Viewport = Limit(TransformState(_viewport, positionScreen, previousPositionScreen, deltaResolution, deltaRotation));
+        var viewport = TransformState(_viewport, positionScreen, previousPositionScreen, deltaResolution, deltaRotation);
+        SetViewportWithLimit(viewport);
     }
 
     private static Viewport TransformState(Viewport viewport, MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation)
@@ -387,7 +388,8 @@ public class Navigator : INavigator
     public void SetSize(double width, double height)
     {
         ClearAnimations();
-        Viewport = Limit(_viewport with { Width = width, Height = height });
+        SetViewportWithLimit(_viewport with { Width = width, Height = height });
+
     }
 
     // Todo: Make private or merge with caller
@@ -398,7 +400,7 @@ public class Navigator : INavigator
         if (Limiter.PanLock) return;
         ClearAnimations();
 
-        Viewport = Limit(_viewport with { CenterX = x, CenterY = y });
+        SetViewportWithLimit(_viewport with { CenterX = x, CenterY = y });
     }
 
     private void ClearAnimations()
@@ -406,7 +408,6 @@ public class Navigator : INavigator
         _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
     }
 
-    // Todo: Merge with caller
     private void SetRotation(double rotation, long duration = 0, Easing? easing = default)
     {
         if (Limiter.RotationLock) return;
@@ -416,7 +417,7 @@ public class Navigator : INavigator
         var newViewport = Limit(_viewport with { Rotation = rotation });
 
         if (duration == 0)
-            Viewport = newViewport;
+            SetViewportWithLimit(newViewport);
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
     }
