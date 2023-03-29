@@ -23,7 +23,7 @@ public class NavigatorTests
         Assert.AreEqual(10, navigator.Viewport.CenterX);
         Assert.AreEqual(20, navigator.Viewport.CenterY);
         Assert.AreEqual(1, navigatedCounter, "Navigated is called");
-        Assert.AreEqual(0, navigator.GetAnimationsCount);
+        Assert.AreEqual(0, navigator.GetAnimationsCount, "Animations are cleared");
     }
 
     private static List<AnimationEntry<Viewport>> CreateAnimation()

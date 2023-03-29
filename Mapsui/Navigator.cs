@@ -101,7 +101,7 @@ public class Navigator : INavigator
 
         ClearAnimations();
 
-        var newViewport = _viewport with { CenterX = center.X, CenterY = center.Y, Resolution = resolution };
+        var newViewport = Viewport with { CenterX = center.X, CenterY = center.Y, Resolution = resolution };
         newViewport = Limit(newViewport);
 
         if (duration <= 0)
@@ -124,7 +124,7 @@ public class Navigator : INavigator
 
         ClearAnimations();
 
-        var newViewport = Limit(_viewport with { Resolution = resolution });
+        var newViewport = Limit(Viewport with { Resolution = resolution });
 
         if (duration <= 0)
             SetViewportWithLimit(newViewport);
@@ -252,7 +252,7 @@ public class Navigator : INavigator
 
         ClearAnimations();
 
-        var newViewport = Limit(_viewport with { CenterX = center.X, CenterY = center.Y });
+        var newViewport = Limit(Viewport with { CenterX = center.X, CenterY = center.Y });
 
         if (duration <= 0)
             SetViewportWithLimit(newViewport);
@@ -287,7 +287,7 @@ public class Navigator : INavigator
 
         ClearAnimations();
 
-        var newViewport = _viewport with { Rotation = rotation };
+        var newViewport = Viewport with { Rotation = rotation };
 
         if (duration <= 0)
             SetViewportWithLimit(newViewport);
@@ -344,7 +344,7 @@ public class Navigator : INavigator
 
         ClearAnimations();
 
-        var viewport = TransformState(_viewport, currentPinchCenter, previousPinchCenter, deltaResolution, deltaRotation);
+        var viewport = TransformState(Viewport, currentPinchCenter, previousPinchCenter, deltaResolution, deltaRotation);
         SetViewportWithLimit(viewport);
     }
 
@@ -389,7 +389,7 @@ public class Navigator : INavigator
     public void SetSize(double width, double height)
     {
         ClearAnimations();
-        SetViewportWithLimit(_viewport with { Width = width, Height = height });
+        SetViewportWithLimit(Viewport with { Width = width, Height = height });
 
     }
 
