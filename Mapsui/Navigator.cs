@@ -269,7 +269,9 @@ public class Navigator
     }
 
     /// <summary>
-    /// Animate Fling of the viewport
+    /// Animate Fling of the viewport. This method is called from
+    /// the MapControl and is usually not called from user code. This method does not call
+    /// Navigated. 
     /// </summary>
     /// <param name="velocityX">VelocityX from SwipedEventArgs></param>
     /// <param name="velocityY">VelocityX from SwipedEventArgs></param>
@@ -287,14 +289,27 @@ public class Navigator
         Navigated?.Invoke(this, EventArgs.Empty);
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// To pan the map when dragging with mouse or single finger. This method is called from
+    /// the MapControl and is usually not called from user code. This method does not call
+    /// Navigated. So, Navigated needs to be called from the MapControl on mouse/touch up.
+    /// </summary>
+    /// <param name="positionScreen">Screen position of the dragging mouse or finger.</param>
+    /// <param name="previousPositionScreen">Previous position of the dragging mouse or finger.</param>
     public void Drag(MPoint positionScreen, MPoint previousPositionScreen)
     {
         Pinch(positionScreen, previousPositionScreen, 1);
     }
 
-
-    /// <inheritdoc />
+    /// <summary>
+    /// To change the map viewport when using multiple fingers. This method is called from
+    /// the MapControl and is usually not called from user code. This method does not call
+    /// Navigated. So, Navigated needs to be called from the MapControl on mouse/touch up.
+    /// </summary>
+    /// <param name="currentPinchCenter">The center of the current position of touch positions.</param>
+    /// <param name="previousPinchCenter">The previous center of the current position of touch positions.</param>
+    /// <param name="deltaResolution">The change in resolution cause by moving the fingers together or further apart.</param>
+    /// <param name="deltaRotation">The change in rotation of the finger positions.</param>
     public void Pinch(MPoint currentPinchCenter, MPoint previousPinchCenter, double deltaResolution, double deltaRotation = 0)
     {
         if (Limiter.ZoomLock) deltaResolution = 1;
