@@ -163,7 +163,6 @@ public class Navigator
             centerOfZoomY = Viewport.CenterY;
         }
 
-        // Todo: If there is limiting of one dimension the other dimension should be limited accordingly. 
         var (x, y) = TransformationAlgorithms.CalculateCenterOfMap(
             centerOfZoomX, centerOfZoomY, resolution, Viewport.CenterX, Viewport.CenterY, Viewport.Resolution);
         var newViewport = Viewport with { CenterX = x, CenterY = y, Resolution = resolution };
