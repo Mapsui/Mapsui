@@ -15,7 +15,7 @@ public class Navigator : INavigator
 {
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
-    public EventHandler<ChangeType>? Navigated { get; set; }
+    public EventHandler? Navigated { get; set; }
     public event PropertyChangedEventHandler? ViewportChanged;
 
     /// <inheritdoc />
@@ -109,7 +109,7 @@ public class Navigator : INavigator
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
 
-        OnNavigated(ChangeType.Discrete);
+        OnNavigated();
     }
 
     /// <summary>
@@ -131,7 +131,7 @@ public class Navigator : INavigator
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
 
-        OnNavigated(ChangeType.Discrete);
+        OnNavigated();
     }
 
     /// <summary>
@@ -165,13 +165,13 @@ public class Navigator : INavigator
             var (x, y) = TransformationAlgorithms.CalculateCenterOfMap(
                 centerOfZoomX, centerOfZoomY, resolution, Viewport.CenterX, Viewport.CenterY, Viewport.Resolution);
             SetViewportWithLimit(Viewport with { CenterX = x, CenterY = y, Resolution = resolution });
-            OnNavigated(ChangeType.Discrete);
+            OnNavigated();
         }
         else
         {
             var animationEntries = ZoomAroundLocationAnimation.Create(Viewport, centerOfZoomX, centerOfZoomY, resolution,
                 duration, easing ?? Easing.SinInOut);
-            AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
+            AddFinalAction(animationEntries, () => OnNavigated());
             SetViewportAnimations(animationEntries);
         }
 
@@ -259,7 +259,7 @@ public class Navigator : INavigator
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
 
-        OnNavigated(ChangeType.Discrete);
+        OnNavigated();
     }
 
     /// <summary>
@@ -271,7 +271,7 @@ public class Navigator : INavigator
     public void FlyTo(MPoint center, double maxResolution, long duration = 500)
     {
         var animationEntries = FlyToAnimation.Create(Viewport, center, maxResolution, duration);
-        AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
+        AddFinalAction(animationEntries, () => OnNavigated());
         SetViewportAnimations(animationEntries);
     }
 
@@ -294,7 +294,7 @@ public class Navigator : INavigator
         else
             _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
 
-        OnNavigated(ChangeType.Discrete);
+        OnNavigated();
     }
 
     /// <summary>
@@ -309,7 +309,7 @@ public class Navigator : INavigator
 
         var response = FlingAnimation.Create(velocityX, velocityY, maxDuration);
         SetViewportAnimations(response.Entries);
-        OnNavigated(ChangeType.Discrete);
+        OnNavigated();
     }
 
     /// <summary> Adds the final action. </summary>
@@ -324,9 +324,9 @@ public class Navigator : INavigator
         }
     }
 
-    private void OnNavigated(ChangeType changeType)
+    private void OnNavigated()
     {
-        Navigated?.Invoke(this, changeType);
+        Navigated?.Invoke(this, EventArgs.Empty);
     }
 
     /// <inheritdoc />

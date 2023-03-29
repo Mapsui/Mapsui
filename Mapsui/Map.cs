@@ -127,9 +127,9 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </summary>
     public INavigator Navigator { get; private set; } =  new Navigator();
 
-    private void Navigated(object? sender, ChangeType changeType)
+    private void Navigated(object? sender, EventArgs eventArgs)
     {
-        Refresh(changeType);
+        Refresh(ChangeType.Discrete);
     }
 
     /// <summary>

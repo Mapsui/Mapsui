@@ -38,7 +38,7 @@ public interface INavigator
     /// <summary>
     /// Called each time one of the navigation methods is called
     /// </summary>
-    EventHandler<ChangeType>? Navigated { get; set; }
+    EventHandler? Navigated { get; set; }
 
     void ZoomInOrOut(int mouseWheelDelta, MPoint centerOfZoom);
 
