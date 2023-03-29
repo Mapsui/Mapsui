@@ -90,7 +90,7 @@ public class ButtonWidget : Widget, INotifyPropertyChanged
         }
     }
 
-    public override bool HandleWidgetTouched(INavigator navigator, MPoint position)
+    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
     {
         var args = new WidgetTouchedEventArgs(position);
 
