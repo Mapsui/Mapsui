@@ -98,17 +98,8 @@ public class Navigator : INavigator
         if (Limiter.PanLock) return;
         if (Limiter.ZoomLock) return;
 
-        ClearAnimations();
-
         var newViewport = Viewport with { CenterX = center.X, CenterY = center.Y, Resolution = resolution };
-        newViewport = Limit(newViewport);
-
-        if (duration <= 0)
-            SetViewportWithLimit(newViewport);
-        else
-            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
-
-        OnNavigated();
+        SetViewport(newViewport, duration, easing);
     }
 
     /// <summary>
@@ -121,16 +112,8 @@ public class Navigator : INavigator
     {
         if (Limiter.ZoomLock) return;
 
-        ClearAnimations();
-
-        var newViewport = Limit(Viewport with { Resolution = resolution });
-
-        if (duration <= 0)
-            SetViewportWithLimit(newViewport);
-        else
-            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
-
-        OnNavigated();
+        var newViewport = Viewport with { Resolution = resolution };
+        SetViewport(newViewport, duration, easing);
     }
 
     /// <summary>
@@ -158,20 +141,12 @@ public class Navigator : INavigator
             centerOfZoomY = Viewport.CenterY;
         }
 
-        if (duration <= 0)
-        {
-            // Todo: If there is limiting of one dimension the other dimension should be limited accordingly. 
-            var (x, y) = TransformationAlgorithms.CalculateCenterOfMap(
-                centerOfZoomX, centerOfZoomY, resolution, Viewport.CenterX, Viewport.CenterY, Viewport.Resolution);
-            SetViewportWithLimit(Viewport with { CenterX = x, CenterY = y, Resolution = resolution });
-            OnNavigated();
-        }
-        else
-        {
-            var animationEntries = ZoomAroundLocationAnimation.Create(Viewport, centerOfZoomX, centerOfZoomY, resolution,
-                duration, easing ?? Easing.SinInOut);
-            SetViewportAnimations(animationEntries);
-        }
+        // Todo: If there is limiting of one dimension the other dimension should be limited accordingly. 
+        var (x, y) = TransformationAlgorithms.CalculateCenterOfMap(
+            centerOfZoomX, centerOfZoomY, resolution, Viewport.CenterX, Viewport.CenterY, Viewport.Resolution);
+        var newViewport = Viewport with { CenterX = x, CenterY = y, Resolution = resolution };
+
+        SetViewport(newViewport, duration, easing);
     }
 
     /// <summary>
@@ -247,16 +222,8 @@ public class Navigator : INavigator
     {
         if (Limiter.PanLock) return;
 
-        ClearAnimations();
-
-        var newViewport = Limit(Viewport with { CenterX = center.X, CenterY = center.Y });
-
-        if (duration <= 0)
-            SetViewportWithLimit(newViewport);
-        else
-            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
-
-        OnNavigated();
+        var newViewport = Viewport with { CenterX = center.X, CenterY = center.Y };
+        SetViewport(newViewport, duration, easing);
     }
 
     /// <summary>
@@ -267,8 +234,7 @@ public class Navigator : INavigator
     /// <param name="duration">Duration for animation in milliseconds.</param>
     public void FlyTo(MPoint center, double maxResolution, long duration = 500)
     {
-        var animationEntries = FlyToAnimation.Create(Viewport, center, maxResolution, duration);
-        SetViewportAnimations(animationEntries);
+        _animations = FlyToAnimation.Create(Viewport, center, maxResolution, duration);
     }
 
     /// <summary>
@@ -281,16 +247,8 @@ public class Navigator : INavigator
     {
         if (Limiter.RotationLock) return;
 
-        ClearAnimations();
-
         var newViewport = Viewport with { Rotation = rotation };
-
-        if (duration <= 0)
-            SetViewportWithLimit(newViewport);
-        else
-            _animations = ViewportAnimation.Create(Viewport, newViewport, duration, easing);
-
-        OnNavigated();
+        SetViewport(newViewport, duration, easing);
     }
 
     /// <summary>
@@ -299,17 +257,16 @@ public class Navigator : INavigator
     /// <param name="velocityX">VelocityX from SwipedEventArgs></param>
     /// <param name="velocityY">VelocityX from SwipedEventArgs></param>
     /// <param name="maxDuration">Maximum duration of fling deceleration></param>
-    public void FlingWith(double velocityX, double velocityY, long maxDuration)
+    public void Fling(double velocityX, double velocityY, long maxDuration)
     {
         if (Limiter.PanLock) return;
 
-        var response = FlingAnimation.Create(velocityX, velocityY, maxDuration);
-        SetViewportAnimations(response.Entries);
-        OnNavigated();
+        _animations = FlingAnimation.Create(velocityX, velocityY, maxDuration);
     }
 
     private void OnNavigated()
     {
+        Logger.Log(LogLevel.Information, $"Calling {nameof(Navigated)} TickCount {Environment.TickCount}");
         Navigated?.Invoke(this, EventArgs.Empty);
     }
 
@@ -436,9 +393,16 @@ public class Navigator : INavigator
         ClearAnimations();
 
         if (duration <= 0)
+        {
             SetViewportWithLimit(viewport);
+            OnNavigated();
+        }
         else
+        {
+            if (_animations.Any())
+                OnNavigated();
             _animations = ViewportAnimation.Create(Viewport, viewport, duration, easing);
+        }
     }
 
     internal int GetAnimationsCount => _animations.Count();

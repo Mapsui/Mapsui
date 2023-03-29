@@ -147,7 +147,7 @@ public interface INavigator
     /// <param name="velocityX">Screen VelocityX from SwipedEventArgs></param>
     /// <param name="velocityY">Screen VelocityX from SwipedEventArgs></param>
     /// <param name="maxDuration">Max duration of fling deceleration, changes based on total velocity></param>
-    void FlingWith(double velocityX, double velocityY, long maxDuration);
+    void Fling(double velocityX, double velocityY, long maxDuration);
 
     void FlyTo(MPoint center, double maxResolution, long duration = 2000);
   

@@ -237,7 +237,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (args.Handled)
             return true;
 
-        Map.Navigator.FlingWith(velocityX, velocityY, 1000);
+        Map.Navigator.Fling(velocityX, velocityY, 1000);
 
         return true;
     }
