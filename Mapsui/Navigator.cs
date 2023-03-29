@@ -17,7 +17,8 @@ public class Navigator
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
 
     /// <summary>
-    /// Called when a data refresh is needed. 
+    /// Called when a data refresh is needed. This directly after a non-animated viewport change
+    /// is made and after an animation has completed.
     /// </summary>
     public event EventHandler? RequestDataRefresh;
     public event PropertyChangedEventHandler? ViewportChanged;
