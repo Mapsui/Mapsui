@@ -199,14 +199,35 @@ public class WFSProvider : IProvider, IDisposable
     /// <summary>
     /// Initializes a new layer, and downloads and parses the service description
     /// </summary>
-    /// <param name="url">Url of WMS server</param>
-    /// <param name="persistentCache"></param>
-    /// <param name="wmsVersion">Version number of wms leave null to get the default service version</param>
-    /// <param name="getStreamAsync">Download method, leave null for default</param>
-    public static async Task<WFSProvider> CreateAsync(string getCapabilitiesUri, string nsPrefix, string featureType, GeometryTypeEnum geometryType,
-        WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
+    /// <param name="getCapabilitiesUri">Url of WMS server</param>
+    /// <param name="geometryType">geometry Type</param>
+    /// <param name="wfsVersion">Version number of wms leave null to get the default service version</param>
+    /// <param name="nsPrefix">ns Prefix</param>
+    /// <param name="featureType">feature Type</param>
+    /// <param name="persistentCache">persistent Cache</param>
+    /// <param name="proxyUrl">proxy url</param>
+    /// <param name="credentials">credentials</param>
+    public static async Task<WFSProvider> CreateAsync(
+        string getCapabilitiesUri,
+        string nsPrefix,
+        string featureType,
+        GeometryTypeEnum geometryType,
+        WFSVersionEnum wfsVersion,
+        IUrlPersistentCache? persistentCache = null,
+        string? proxyUrl = null,
+        ICredentials? credentials = null)
     {
         var provider = new WFSProvider(getCapabilitiesUri, nsPrefix, featureType, geometryType, wfsVersion, persistentCache);
+        if (!string.IsNullOrEmpty(proxyUrl))
+        {
+            provider.ProxyUrl = proxyUrl;
+        }
+
+        if (credentials != null)
+        {
+            provider.Credentials = credentials;
+        }
+
         await provider.InitAsync();
         return provider;
     }
@@ -222,10 +243,26 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="featureType">The name of the feature type</param>
     /// <param name="wfsVersion">The desired WFS Server version.</param>
     /// <param name="persistentCache">persistent Cache Interface</param>
-    public static async Task<WFSProvider> CreateAsync(string getCapabilitiesUri, string nsPrefix, string featureType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
+    /// <param name="proxyUrl">proxy url</param>
+    /// <param name="credentials">credentials</param>
+    public static async Task<WFSProvider> CreateAsync(
+        string getCapabilitiesUri,
+        string nsPrefix,
+        string featureType,
+        WFSVersionEnum wfsVersion,
+        IUrlPersistentCache? persistentCache = null,
+        string? proxyUrl = null,
+        ICredentials? credentials = null)
     {
-        return await CreateAsync(getCapabilitiesUri, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion,
-            persistentCache: persistentCache);
+        return await CreateAsync(
+            getCapabilitiesUri, 
+            nsPrefix,
+            featureType,
+            GeometryTypeEnum.Unknown,
+            wfsVersion,
+            persistentCache: persistentCache,
+            proxyUrl,
+            credentials);
     }
 
 
