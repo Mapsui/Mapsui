@@ -13,7 +13,6 @@
       "Mapsui.UI.Blazor\\Mapsui.UI.Blazor.csproj",
       "Mapsui.UI.Eto\\Mapsui.UI.Eto.csproj",
       "Mapsui.UI.Forms.Tests\\Mapsui.UI.Forms.Tests.csproj",
-      "Mapsui.UI.Forms\\Mapsui.UI.Forms.csproj",
       "Mapsui.UI.Maui\\Mapsui.UI.Maui.csproj",
       "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
       "Mapsui.UI.Uno.WinUI\\Mapsui.UI.Uno.WinUI.csproj",
