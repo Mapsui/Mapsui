@@ -12,7 +12,7 @@ jobs:
   build:
 
     env:
-      SOLUTION: 'Mapsui.NoUnoUwp.slnf'
+      SOLUTION: 'Mapsui.NoMSBuild.slnf'
 
     runs-on: windows-latest
 
