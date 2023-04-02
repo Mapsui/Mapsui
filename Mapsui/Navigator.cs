@@ -91,6 +91,7 @@ public class Navigator
     {
         if (!Viewport.HasSize()) return;
         if (box == null) return;
+        if (box.Width <= 0 || box.Height <= 0) return;
 
         var resolution = ZoomHelper.CalculateResolutionForWorldSize(
             box.Width, box.Height, Viewport.Width, Viewport.Height, boxFit);
