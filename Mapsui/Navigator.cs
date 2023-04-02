@@ -229,6 +229,16 @@ public class Navigator
     }
 
     /// <summary>
+    /// Zooms to the level indicated. The level is the index of the resolution in the Navigator.Resolutions list.
+    /// </summary>
+    /// <param name="level">The index of the Navigator.Resolutions list.</param>
+    public void ZoomToLevel(int level)
+    {
+        if (level < 0 || level >= Resolutions.Count) return;
+        ZoomTo(Resolutions[level]);
+    }
+
+    /// <summary>
     /// Change center of the viewport to X/Y coordinates
     /// </summary>
     /// <param name="x">X value of the new center</param>

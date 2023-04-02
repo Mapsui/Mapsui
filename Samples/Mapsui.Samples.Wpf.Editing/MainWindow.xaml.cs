@@ -147,7 +147,7 @@ public partial class MainWindow
     private void ZoomSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
     {
         if (MapControl.Map != null)
-            MapControl.Map.Navigator.ZoomTo(MapControl.Map.Navigator.Resolutions[(int)args.NewValue]);
+            MapControl.Map.Navigator.ZoomToLevel((int)args.NewValue);
     }
 
     private void InitializeEditSetup()
