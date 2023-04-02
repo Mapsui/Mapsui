@@ -163,7 +163,7 @@ public partial class MainWindow
         Loaded += (_, _) =>
         {
             var extent = _editManager.Layer.Extent!.Grow(_editManager.Layer.Extent.Width * 0.2);
-            MapControl.Map.Navigator.NavigateTo(extent);
+            MapControl.Map.Navigator.ZoomToBox(extent);
         };
     }
 

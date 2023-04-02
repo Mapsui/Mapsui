@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Samples.Common;
@@ -23,7 +22,7 @@ public class SymbolTypesSample : ISample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.NavigateTo(layer.Extent!.Grow(layer.Extent.Width * 2))
+            Home = n => n.ZoomToBox(layer.Extent!.Grow(layer.Extent.Width * 2))
         };
 
         map.Layers.Add(layer);

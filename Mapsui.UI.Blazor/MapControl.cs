@@ -136,22 +136,10 @@ public partial class MapControl : ComponentBase, IMapControl
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     protected async void OnMouseWheel(WheelEventArgs e)
     {
-        try
-        {
-            if (Map.Navigator.Limiter.ZoomLock) return;
-            if (!Map.Navigator.Viewport.HasSize()) return;
-
-            var mouseWheelDelta = e.DeltaY * -1; // so that it zooms like on windows
-
-            var currentMousePosition = e.Location(await BoundingClientRectAsync()).ToMapsui();
-
-            Map.Navigator.MouseWheelZoom((int)mouseWheelDelta, currentMousePosition);
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
-    }
+        var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
+        var currentMousePosition = e.Location(await BoundingClientRectAsync()).ToMapsui();
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
+}
 
     private async Task<BoundingClientRect> BoundingClientRectAsync()
     {
@@ -299,7 +287,7 @@ public partial class MapControl : ComponentBase, IMapControl
         if (width <= 0) return;
         if (height <= 0) return;
 
-        Map.Navigator.NavigateTo(new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y), duration: 300); ;
+        Map.Navigator.ZoomToBox(new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y), duration: 300); ;
 
         RefreshData();
         RefreshGraphics();

@@ -62,6 +62,8 @@ public class Navigator
 
     public void MouseWheelZoom(int mouseWheelDelta, MPoint centerOfZoom)
     {
+        if (!Viewport.HasSize()) return;
+
         // It is unexpected that this method uses the MouseWheelAnimation.Animation and Easing. 
         // At the moment this solution allows the user to change these fields, so I don't want
         // them to become hardcoded values in the MapControl. There should be a more general
@@ -78,20 +80,22 @@ public class Navigator
     }
 
     /// <summary>
-    /// Navigate center of viewport to center of extent and change resolution
+    /// Zooms the viewport to show the box. The boxFit parameter can be used to deal with a difference in 
+    /// the width/height ratio between the viewport and the box. The center and resolution will change accordingly.
     /// </summary>
-    /// <param name="extent">New extent for viewport to show</param>
-    /// <param name="boxFit">The way the extent should be fit into the view.</param>
+    /// <param name="box">The box to show in the viewport.</param>
+    /// <param name="boxFit">The way the box should be fit into the view.</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-    public void NavigateTo(MRect? extent, MBoxFit boxFit = MBoxFit.Fit, long duration = -1, Easing? easing = default)
+    public void ZoomToBox(MRect? box, MBoxFit boxFit = MBoxFit.Fit, long duration = -1, Easing? easing = default)
     {
-        if (extent == null) return;
+        if (!Viewport.HasSize()) return;
+        if (box == null) return;
 
         var resolution = ZoomHelper.CalculateResolutionForWorldSize(
-            extent.Width, extent.Height, Viewport.Width, Viewport.Height, boxFit);
+            box.Width, box.Height, Viewport.Width, Viewport.Height, boxFit);
 
-        NavigateTo(extent.Centroid, resolution, duration, easing);
+        CenterOnAndZoomTo(box.Centroid, resolution, duration, easing);
     }
 
     /// <summary>
@@ -102,10 +106,14 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomToPanExtent(MBoxFit boxFit = MBoxFit.Fill, long duration = -1, Easing? easing = default)
     {
-        if (PanExtent is not null)
-            NavigateTo(PanExtent, boxFit, duration, easing);
-        else
+        if (!Viewport.HasSize()) return;
+        if (PanExtent is null)
+        {
             Logger.Log(LogLevel.Warning, "ZoomToPanExtent was called but PanExtent was null");
+            return;
+        }
+        
+        ZoomToBox(PanExtent, boxFit, duration, easing);
     }
 
     /// <summary>
@@ -115,7 +123,7 @@ public class Navigator
     /// <param name="resolution">New resolution to use</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-    public void NavigateTo(MPoint center, double resolution, long duration = -1, Easing? easing = default)
+    public void CenterOnAndZoomTo(MPoint center, double resolution, long duration = -1, Easing? easing = default)
     {
         if (Limiter.PanLock) return;
         if (Limiter.ZoomLock) return;
@@ -152,6 +160,7 @@ public class Navigator
     /// <param name="easing">The easing of the animation when duration is > 0</param>
     public void ZoomTo(double resolution, MPoint centerOfZoomInScreenCoordinates, long duration = -1, Easing? easing = default)
     {
+        if (!Viewport.HasSize()) return;
         if (Limiter.ZoomLock) return;
 
         var (centerOfZoomX, centerOfZoomY) = Viewport.ScreenToWorldXY(centerOfZoomInScreenCoordinates.X, centerOfZoomInScreenCoordinates.Y);
@@ -178,7 +187,6 @@ public class Navigator
     public void ZoomIn(long duration = -1, Easing? easing = default)
     {
         var resolution = ZoomHelper.GetResolutionToZoomIn(Resolutions, Viewport.Resolution);
-
         ZoomTo(resolution, duration, easing);
     }
 
@@ -190,7 +198,6 @@ public class Navigator
     public void ZoomOut(long duration = -1, Easing? easing = default)
     {
         var resolution = ZoomHelper.GetResolutionToZoomOut(Resolutions, Viewport.Resolution);
-
         ZoomTo(resolution, duration, easing);
     }
 
@@ -204,7 +211,6 @@ public class Navigator
     public void ZoomIn(MPoint centerOfZoom, long duration = -1, Easing? easing = default)
     {
         var resolution = ZoomHelper.GetResolutionToZoomIn(Resolutions, Viewport.Resolution);
-
         ZoomTo(resolution, centerOfZoom, duration, easing);
     }
 

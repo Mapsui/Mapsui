@@ -25,7 +25,7 @@ public class KeepCenterInMapSample : ISample
 
         map.Navigator.PanExtent = extent;
         map.Navigator.ZoomExtremes = new MMinMax(0.15, 2500);
-        map.Home = n => n.NavigateTo(extent);
+        map.Home = n => n.ZoomToBox(extent);
         return Task.FromResult(map);
     }
 

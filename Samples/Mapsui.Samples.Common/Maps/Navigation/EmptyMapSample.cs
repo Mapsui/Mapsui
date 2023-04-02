@@ -11,7 +11,7 @@ public class EmptyMapSample : ISample
     {
         return Task.FromResult(new Map
         {
-            Home = n => n.NavigateTo(new MRect(-180, -90, 180, 90))
+            Home = n => n.ZoomToBox(new MRect(-180, -90, 180, 90))
         });
     }
 }

@@ -30,7 +30,7 @@ public class PointProjectionSample : ISample
         };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(geometryLayer);
-        map.Home = n => n.NavigateTo(extent);
+        map.Home = n => n.ZoomToBox(extent);
         return Task.FromResult(map);
     }
 
