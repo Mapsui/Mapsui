@@ -91,7 +91,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
                 }
             }
 
-            mapView.Refresh();
+            mapView.RefreshGraphics();
         }
     }
 

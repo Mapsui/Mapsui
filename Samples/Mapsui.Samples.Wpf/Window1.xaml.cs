@@ -137,7 +137,6 @@ public partial class Window1
     {
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
         MapControl.Map.Navigator.RotateTo(percent * 360);
-        MapControl.Refresh();
     }
 
     private void MapControlOnInfo(object? sender, MapInfoEventArgs args)
