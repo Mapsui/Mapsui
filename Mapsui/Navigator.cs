@@ -236,7 +236,8 @@ public class Navigator
     {
         if (level < 0 || level >= Resolutions.Count)
         {
-            Logger.Log(LogLevel.Warning, $"Zoom level '{level}' is not an index in the range of the resolutions list");
+            Logger.Log(LogLevel.Warning, $"Zoom level '{level}' is not an index in the range of the resolutions list. " +
+                $"The resolutions list is length `{Resolutions.Count}`");
             return;
         }
         ZoomTo(Resolutions[level]);
