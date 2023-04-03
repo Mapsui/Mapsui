@@ -12,7 +12,6 @@ using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
-using Mapsui.Limiting;
 using Mapsui.Styles;
 using Mapsui.Widgets;
 
@@ -36,7 +35,13 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = new LayerCollection();
-        Navigator.RequestDataRefresh += NavigatorRequestDataRefresh;
+        Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
+        Navigator.ViewportChanged += Navigator_ViewportChanged;
+    }
+
+    private void Navigator_ViewportChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        RefreshGraphics();
     }
 
     /// <summary>
@@ -127,7 +132,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </summary>
     public Navigator Navigator { get; private set; } =  new Navigator();
 
-    private void NavigatorRequestDataRefresh(object? sender, EventArgs e)
+    private void Navigator_RefreshDataRequest(object? sender, EventArgs e)
     {
         RefreshData(ChangeType.Discrete);
     }

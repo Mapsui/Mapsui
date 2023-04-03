@@ -238,7 +238,6 @@ public partial class MapControl : ViewGroup, IMapControl
                             if (_previousTouch != null)
                             {
                                 Map.Navigator.Drag(touch, _previousTouch);
-                                RefreshGraphics();
                             }
                             _previousTouch = touch;
                         }
@@ -262,7 +261,6 @@ public partial class MapControl : ViewGroup, IMapControl
                             }
 
                             Map.Navigator.Pinch(touch, previousTouch, radius / previousRadius, rotationDelta);
-                            RefreshGraphics(); // Todo: ViewportChanged should trigger RefreshGraphics
 
                             (_previousTouch, _previousRadius, _previousAngle) = (touch, radius, angle);
 

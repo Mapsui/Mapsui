@@ -124,7 +124,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             }
 
             Map.Navigator.Drag(_currentMousePosition, _previousMousePosition);
-            RefreshGraphics();
             _previousMousePosition = _currentMousePosition;
         }
     }

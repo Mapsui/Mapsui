@@ -655,8 +655,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     if (!Map.Navigator.Limiter.PanLock && _previousCenter != null)
                     {
                         Map.Navigator.Drag(touchPosition, _previousCenter);
-
-                        RefreshGraphics();
                     }
 
                     _previousCenter = touchPosition;

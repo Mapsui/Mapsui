@@ -294,12 +294,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <param name="map">Map, to which events to subscribe</param>
     private void SubscribeToMapEvents(Map map)
     {
-        map.DataChanged += MapDataChanged;
-        map.PropertyChanged += MapPropertyChanged;
-        map.RefreshGraphicsRequest += MapRefreshGraphics;
+        map.DataChanged += Map_DataChanged;
+        map.PropertyChanged += Map_PropertyChanged;
+        map.RefreshGraphicsRequest += Map_RefreshGraphicsRequest;
     }
 
-    private void MapRefreshGraphics(object? sender, EventArgs e)
+    private void Map_RefreshGraphicsRequest(object? sender, EventArgs e)
     {
         RefreshGraphics();
     }
@@ -311,9 +311,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private void UnsubscribeFromMapEvents(Map map)
     {
         var localMap = map;
-        localMap.DataChanged -= MapDataChanged;
-        localMap.PropertyChanged -= MapPropertyChanged;
-        localMap.RefreshGraphicsRequest -= MapRefreshGraphics;
+        localMap.DataChanged -= Map_DataChanged;
+        localMap.PropertyChanged -= Map_PropertyChanged;
+        localMap.RefreshGraphicsRequest -= Map_RefreshGraphicsRequest;
         localMap.AbortFetch();
     }
 
@@ -327,7 +327,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _refresh = true;
     }
 
-    private void MapDataChanged(object? sender, DataChangedEventArgs? e)
+    private void Map_DataChanged(object? sender, DataChangedEventArgs? e)
     {
         RunOnUIThread(() =>
         {
@@ -356,13 +356,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             }
             catch (Exception exception)
             {
-                Logger.Log(LogLevel.Warning, $"Unexpected exception in {nameof(MapDataChanged)}", exception);
+                Logger.Log(LogLevel.Warning, $"Unexpected exception in {nameof(Map_DataChanged)}", exception);
             }
         });
     }
     // ReSharper disable RedundantNameQualifier - needed for iOS for disambiguation
 
-    private void MapPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void Map_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(Layers.Layer.Enabled))
         {

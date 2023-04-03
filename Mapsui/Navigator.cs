@@ -20,7 +20,7 @@ public class Navigator
     /// Called when a data refresh is needed. This directly after a non-animated viewport change
     /// is made and after an animation has completed.
     /// </summary>
-    public event EventHandler? RequestDataRefresh;
+    public event EventHandler? RefreshDataRequest;
     public event PropertyChangedEventHandler? ViewportChanged;
 
     /// <summary>
@@ -346,13 +346,12 @@ public class Navigator
     {
         ClearAnimations();
         SetViewportWithLimit(Viewport with { Width = width, Height = height });
-        OnRequestDataRefresh();
-
+        OnRefreshDataRequest();
     }
 
-    private void OnRequestDataRefresh()
+    private void OnRefreshDataRequest()
     {
-        RequestDataRefresh?.Invoke(this, EventArgs.Empty);
+        RefreshDataRequest?.Invoke(this, EventArgs.Empty);
     }
 
     private static Viewport TransformState(Viewport viewport, MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation)
@@ -416,7 +415,7 @@ public class Navigator
         if (_animations.All(a => a.Done))
         {
             ClearAnimations();
-            OnRequestDataRefresh();
+            OnRefreshDataRequest();
         }
         var animationResult = Animation.UpdateAnimations(Viewport, _animations);
 
@@ -425,7 +424,7 @@ public class Navigator
         if (ShouldAnimationsBeHaltedBecauseOfLimiting(animationResult.State, Viewport))
         {
             ClearAnimations();
-            OnRequestDataRefresh();
+            OnRefreshDataRequest();
             return false; // Not running
         }
 
@@ -477,12 +476,12 @@ public class Navigator
         {
             ClearAnimations();
             SetViewportWithLimit(viewport);
-            OnRequestDataRefresh();
+            OnRefreshDataRequest();
         }
         else
         {
             if (_animations.Any())
-                OnRequestDataRefresh();
+                OnRefreshDataRequest();
             _animations = ViewportAnimation.Create(Viewport, viewport, duration, easing);
         }
     }
