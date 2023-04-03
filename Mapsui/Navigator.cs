@@ -234,7 +234,11 @@ public class Navigator
     /// <param name="level">The index of the Navigator.Resolutions list.</param>
     public void ZoomToLevel(int level)
     {
-        if (level < 0 || level >= Resolutions.Count) return;
+        if (level < 0 || level >= Resolutions.Count)
+        {
+            Logger.Log(LogLevel.Warning, $"Zoom level '{level}' is not an index in the range of the resolutions list");
+            return;
+        }
         ZoomTo(Resolutions[level]);
     }
 
@@ -304,11 +308,6 @@ public class Navigator
         _animations = FlingAnimation.Create(velocityX, velocityY, maxDuration);
     }
 
-    private void OnRequestDataRefresh()
-    {
-        RequestDataRefresh?.Invoke(this, EventArgs.Empty);
-    }
-
     /// <summary>
     /// To pan the map when dragging with mouse or single finger. This method is called from
     /// the MapControl and is usually not called from user code. This method does not call
@@ -339,6 +338,19 @@ public class Navigator
 
         var viewport = TransformState(Viewport, currentPinchCenter, previousPinchCenter, deltaResolution, deltaRotation);
         SetViewportWithLimit(viewport);
+    }
+
+    public void SetSize(double width, double height)
+    {
+        ClearAnimations();
+        SetViewportWithLimit(Viewport with { Width = width, Height = height });
+        OnRequestDataRefresh();
+
+    }
+
+    private void OnRequestDataRefresh()
+    {
+        RequestDataRefresh?.Invoke(this, EventArgs.Empty);
     }
 
     private static Viewport TransformState(Viewport viewport, MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation)
@@ -377,14 +389,6 @@ public class Navigator
         }
 
         return viewport;
-    }
-
-    public void SetSize(double width, double height)
-    {
-        ClearAnimations();
-        SetViewportWithLimit(Viewport with { Width = width, Height = height });
-        OnRequestDataRefresh();
-
     }
 
     private void ClearAnimations()
