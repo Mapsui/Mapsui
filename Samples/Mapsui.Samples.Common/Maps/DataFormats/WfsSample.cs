@@ -32,7 +32,7 @@ public class WfsSample : ISample
             map.Layers.Add(CreateWfsLayer(provider));
             map.Layers.Add(CreateLabelLayer(provider));
 
-            map.Home = n => n.NavigateTo(new MPoint(1270000.0, 5880000.0), n.Resolutions[9]);
+            map.Home = n => n.CenterOnAndZoomTo(new MPoint(1270000.0, 5880000.0), n.Resolutions[9]);
 
             return map;
 
@@ -67,7 +67,8 @@ public class WfsSample : ISample
         provider.GetFeatureGetRequest = true;
         provider.CRS = crs;
         provider.Labels = new List<string> { labelField };
-        
+
+        await provider.InitAsync();
         return provider;
     }
 

@@ -74,9 +74,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnMouseWheel(e);
 
-        if (Map.Navigator.Limiter.ZoomLock) return;
-        if (!Map.Navigator.Viewport.HasSize()) return;
-
         var mouseWheelDelta = (int)e.Delta.Height;
         var currentMousePosition = e.Location.ToMapsui();
         Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
@@ -182,12 +179,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
     public void ZoomToBox(MPoint beginPoint, MPoint endPoint)
     {
-        var width = Math.Abs(endPoint.X - beginPoint.X);
-        var height = Math.Abs(endPoint.Y - beginPoint.Y);
-        if (width <= 0) return;
-        if (height <= 0) return;
-
-        Map.Navigator.NavigateTo(new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y), duration: 300); ;
+        var box = new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y);
+        Map.Navigator.ZoomToBox(box, duration: 300); ;
 
         RefreshData();
         RefreshGraphics();

@@ -147,7 +147,7 @@ public partial class MainWindow
     private void ZoomSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
     {
         if (MapControl.Map != null)
-            MapControl.Map.Navigator.ZoomTo(MapControl.Map.Navigator.Resolutions[(int)args.NewValue]);
+            MapControl.Map.Navigator.ZoomToLevel((int)args.NewValue);
     }
 
     private void InitializeEditSetup()
@@ -163,7 +163,7 @@ public partial class MainWindow
         Loaded += (_, _) =>
         {
             var extent = _editManager.Layer.Extent!.Grow(_editManager.Layer.Extent.Width * 0.2);
-            MapControl.Map.Navigator.NavigateTo(extent);
+            MapControl.Map.Navigator.ZoomToBox(extent);
         };
     }
 

@@ -136,22 +136,10 @@ public partial class MapControl : ComponentBase, IMapControl
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     protected async void OnMouseWheel(WheelEventArgs e)
     {
-        try
-        {
-            if (Map.Navigator.Limiter.ZoomLock) return;
-            if (!Map.Navigator.Viewport.HasSize()) return;
-
-            var mouseWheelDelta = e.DeltaY * -1; // so that it zooms like on windows
-
-            var currentMousePosition = e.Location(await BoundingClientRectAsync()).ToMapsui();
-
-            Map.Navigator.MouseWheelZoom((int)mouseWheelDelta, currentMousePosition);
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
-    }
+        var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
+        var currentMousePosition = e.Location(await BoundingClientRectAsync()).ToMapsui();
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
+}
 
     private async Task<BoundingClientRect> BoundingClientRectAsync()
     {
@@ -278,7 +266,8 @@ public partial class MapControl : ComponentBase, IMapControl
                 {
                     Cursor = MoveCursor;
 
-                    Map.Navigator.Drag(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui());
+                    var currentPosition = e.Location(await BoundingClientRectAsync()).ToMapsui();
+                    Map.Navigator.Drag(currentPosition, _downMousePosition.ToMapsui());
 
                     RefreshGraphics();
 
@@ -294,12 +283,8 @@ public partial class MapControl : ComponentBase, IMapControl
 
     public void ZoomToBox(MPoint beginPoint, MPoint endPoint)
     {
-        var width = Math.Abs(endPoint.X - beginPoint.X);
-        var height = Math.Abs(endPoint.Y - beginPoint.Y);
-        if (width <= 0) return;
-        if (height <= 0) return;
-
-        Map.Navigator.NavigateTo(new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y), duration: 300); ;
+        var box = new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y);
+        Map.Navigator.ZoomToBox(box, duration: 300); ;
 
         RefreshData();
         RefreshGraphics();

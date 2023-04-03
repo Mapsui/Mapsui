@@ -25,7 +25,7 @@ public class BitmapAtlasSample : ISample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.NavigateTo(new MPoint(256, 200), 1)
+            Home = n => n.CenterOnAndZoomTo(new MPoint(256, 200), 1)
         };
 
         map.Layers.Add(layer);

@@ -72,12 +72,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseWheel(object? sender, PointerWheelEventArgs e)
     {
-        if (Map.Navigator.Limiter.ZoomLock) return;
-        if (!Map.Navigator.Viewport.HasSize()) return;
-
+        var mouseWheelDelta = (int)e.Delta.Y;
         _currentMousePosition = e.GetPosition(this).ToMapsui();
-
-        Map.Navigator.MouseWheelZoom((int)e.Delta.Y, _currentMousePosition);
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, _currentMousePosition);
     }
 
     private void MapControlMouseLeftButtonDown(PointerPressedEventArgs e)

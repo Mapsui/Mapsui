@@ -462,22 +462,16 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <summary>
     /// Called, when map should zoom in or out
     /// </summary>
-    /// <param name="screenPosition">Center of zoom out event</param>
-    private bool OnZoomInOrOut(int mouseWheelDelta, MPoint screenPosition)
+    /// <param name="currentMousePosition">Center of zoom out event</param>
+    private bool OnZoomInOrOut(int mouseWheelDelta, MPoint currentMousePosition)
     {
-        if (Map.Navigator.Limiter.ZoomLock)
-        {
-            return true;
-        }
-
-        var args = new ZoomedEventArgs(screenPosition, mouseWheelDelta > 0 ? ZoomDirection.ZoomIn : ZoomDirection.ZoomOut);
-
+        var args = new ZoomedEventArgs(currentMousePosition, mouseWheelDelta > 0 ? ZoomDirection.ZoomIn : ZoomDirection.ZoomOut);
         Zoomed?.Invoke(this, args);
 
         if (args.Handled)
             return true;
 
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, screenPosition);
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
 
         return true;
     }

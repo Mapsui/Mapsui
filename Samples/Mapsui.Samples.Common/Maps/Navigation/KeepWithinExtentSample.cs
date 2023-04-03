@@ -18,7 +18,7 @@ public class KeepWithinExtentSample : ISample
         var panLimits = GetLimitsOfMadagaskar();
         map.Navigator.Limiter = new ViewportLimiterKeepWithinExtent();
         map.Navigator.PanExtent = panLimits;
-        map.Home = n => n.NavigateTo(panLimits);
+        map.Home = n => n.ZoomToBox(panLimits);
         return Task.FromResult(map);
     }
 

@@ -137,12 +137,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
     {
-        if (Map.Navigator.Limiter.ZoomLock) return;
-        if (!Map.Navigator.Viewport.HasSize()) return;
-
+        var mouseWheelDelta = e.Delta;
         _currentMousePosition = e.GetPosition(this).ToMapsui();
-
-        Map.Navigator.MouseWheelZoom(e.Delta, _currentMousePosition);
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, _currentMousePosition);
     }
 
     private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
@@ -319,12 +316,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     public void ZoomToBox(MPoint beginPoint, MPoint endPoint)
     {
-        var width = Math.Abs(endPoint.X - beginPoint.X);
-        var height = Math.Abs(endPoint.Y - beginPoint.Y);
-        if (width <= 0) return;
-        if (height <= 0) return;
-
-        Map.Navigator.NavigateTo(new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y), duration: 300); ;
+        var box = new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y);
+        Map.Navigator.ZoomToBox(box, duration: 300); ;
 
         RefreshData();
         RefreshGraphics();

@@ -153,19 +153,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
     {
-        if (Map.Navigator.Limiter.ZoomLock) return;
-        if (!Map.Navigator.Viewport.HasSize()) return;
-        if (Map is null) return;
-
         var currentPoint = e.GetCurrentPoint(this);
 #if __WINUI__
-        var mousePosition = new MPoint(currentPoint.Position.X, currentPoint.Position.Y);
+        var currentMousePosition = new MPoint(currentPoint.Position.X, currentPoint.Position.Y);
 #else
-        var mousePosition = new MPoint(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
+        var currentMousePosition = new MPoint(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 #endif
         var mouseWheelDelta = currentPoint.Properties.MouseWheelDelta;
 
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
 
         e.Handled = true;
     }

@@ -30,7 +30,7 @@ public class StackedLabelsTestSample : ISample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.NavigateTo(layer.Extent!.Grow(layer.Extent.Width * 0.3))
+            Home = n => n.ZoomToBox(layer.Extent!.Grow(layer.Extent.Width * 0.3))
         };
 
         map.Layers.Add(stackedLabelLayer);
