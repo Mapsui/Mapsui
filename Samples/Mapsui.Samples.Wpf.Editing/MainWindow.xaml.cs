@@ -141,7 +141,6 @@ public partial class MainWindow
     {
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
         MapControl.Map.Navigator.RotateTo(percent * 360);
-        MapControl.Refresh();
     }
 
     private void ZoomSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)

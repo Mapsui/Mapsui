@@ -268,9 +268,6 @@ public partial class MapControl : ComponentBase, IMapControl
 
                     var currentPosition = e.Location(await BoundingClientRectAsync()).ToMapsui();
                     Map.Navigator.Drag(currentPosition, _downMousePosition.ToMapsui());
-
-                    RefreshGraphics();
-
                     _downMousePosition = e.Location(await BoundingClientRectAsync());
                 }
             }
@@ -285,9 +282,6 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         var box = new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y);
         Map.Navigator.ZoomToBox(box, duration: 300); ;
-
-        RefreshData();
-        RefreshGraphics();
         ClearBBoxDrawing();
     }
 

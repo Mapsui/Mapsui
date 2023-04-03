@@ -169,9 +169,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
                 Cursor = MoveCursor;
 
                 Map.Navigator.Drag(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui());
-
-                RefreshGraphics();
-
                 _downMousePosition = e.Location;
             }
         }
@@ -181,9 +178,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         var box = new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y);
         Map.Navigator.ZoomToBox(box, duration: 300); ;
-
-        RefreshData();
-        RefreshGraphics();
         ClearBBoxDrawing();
     }
 

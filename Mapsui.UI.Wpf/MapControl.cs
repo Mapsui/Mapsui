@@ -309,7 +309,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
             _flingTracker.AddEvent(1, _currentMousePosition, DateTime.Now.Ticks);
             Map.Navigator.Drag(_currentMousePosition, _previousMousePosition);
-            RefreshGraphics();
             _previousMousePosition = _currentMousePosition;
         }
     }
@@ -318,9 +317,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var box = new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y);
         Map.Navigator.ZoomToBox(box, duration: 300); ;
-
-        RefreshData();
-        RefreshGraphics();
         ClearBBoxDrawing();
     }
 
@@ -397,7 +393,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         }
 
         Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
-        RefreshGraphics();
         e.Handled = true;
     }
 

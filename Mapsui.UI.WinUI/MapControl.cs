@@ -243,7 +243,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         }
 
         Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
-        RefreshGraphics();
         e.Handled = true;
     }
 

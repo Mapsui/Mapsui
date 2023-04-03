@@ -86,7 +86,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
                 }
             }
 
-            mapView.Refresh();
+            mapView.RefreshGraphics();
         }
     }
 

@@ -111,6 +111,5 @@ public sealed partial class MainPage : Page
     {
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
         MapControl.Map.Navigator.RotateTo(percent * 360);
-        MapControl.Refresh();
     }
 }

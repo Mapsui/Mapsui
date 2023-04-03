@@ -186,10 +186,7 @@ public partial class MapControl : UIView, IMapControl
             {
                 var position = touch.LocationInView(this).ToMapsui();
                 var previousPosition = touch.PreviousLocationInView(this).ToMapsui();
-
                 Map.Navigator.Drag(position, previousPosition);
-                RefreshGraphics();
-
                 _virtualRotation = Map.Navigator.Viewport.Rotation;
             }
         }
@@ -215,7 +212,6 @@ public partial class MapControl : UIView, IMapControl
             }
 
             Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
-            RefreshGraphics();
         }
     }
 
