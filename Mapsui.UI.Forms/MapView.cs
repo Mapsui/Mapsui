@@ -8,7 +8,6 @@ using Svg.Skia;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -16,6 +15,7 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using Mapsui.Logging;
 using Mapsui.Utilities;
+using Mapsui.UI.Maui.Utils;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;

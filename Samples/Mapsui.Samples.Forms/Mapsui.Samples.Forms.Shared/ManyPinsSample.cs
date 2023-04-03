@@ -2,7 +2,6 @@
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
 using System;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -10,6 +9,7 @@ using Mapsui.Extensions;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Styles;
 using Mapsui.Widgets.PerformanceWidget;
+using Mapsui.UI.Maui.Utils;
 #if __MAUI__
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Graphics;
