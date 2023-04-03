@@ -6,12 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
-using ConcurrentCollections;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Tiling.Extensions;
+using Mapsui.Utilities;
 
 namespace Mapsui.Tiling.Fetcher;
 
