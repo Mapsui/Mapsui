@@ -334,6 +334,7 @@ public class Navigator
     {
         if (Limiter.ZoomLock) deltaResolution = 1;
         if (Limiter.PanLock) currentPinchCenter = previousPinchCenter;
+        if (Limiter.RotationLock) deltaRotation = 0;
 
         ClearAnimations();
 
