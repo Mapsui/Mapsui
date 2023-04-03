@@ -8,7 +8,6 @@ using Svg.Skia;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -17,6 +16,7 @@ using System.Runtime.CompilerServices;
 using Mapsui.Logging;
 using Mapsui.Utilities;
 #if __MAUI__
+using Mapsui.UI.Maui.Utils;
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
@@ -28,6 +28,7 @@ using SkiaSharp.Views.Maui.Controls;
 
 using Rectangle = Microsoft.Maui.Graphics.Rect;
 #else
+using Mapsui.UI.Forms.Utils;
 using Mapsui.UI.Forms.Extensions;
 using Xamarin.Forms;
 #endif
