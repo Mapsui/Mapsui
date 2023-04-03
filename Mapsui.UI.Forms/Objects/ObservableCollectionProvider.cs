@@ -4,9 +4,9 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
-using ConcurrentCollections;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Utilities;
 
 namespace Mapsui.UI.Objects;
 
