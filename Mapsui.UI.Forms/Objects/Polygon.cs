@@ -20,6 +20,7 @@ using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using Mapsui.UI.Forms.Extensions;
 using Xamarin.Forms;
+using Mapsui.UI.Forms.Utils;
 
 using Color = Xamarin.Forms.Color;
 using KnownColor = Xamarin.Forms.Color;

@@ -1,4 +1,8 @@
-﻿namespace Mapsui.UI.Maui.Utils;
+﻿#if __MAUI__
+namespace Mapsui.UI.Maui.Utils;
+#else
+namespace Mapsui.UI.Forms.Utils;
+#endif
 
 using System;
 using System.Collections;
