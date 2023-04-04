@@ -9,7 +9,7 @@ This part will talk about a few of Mapsui's core components. These are:
 
 ### MapControl
 
-This is the UI component that you add to you app. It derived from some base UI component of the framework and inherits many properties related to that framework. You can control its size and positioning like any other component in your framework.
+This is the UI component that you add to you app. It is derived from a base UI component of the framework and inherits many properties related to that framework. You can control its size and positioning like any other component in your framework.
 
 ### Map
 
@@ -28,7 +28,7 @@ Is responsible for all Viewport manipulations, this includes:
 
 ### Viewport
 
-Holds all information about the part of the map that is visible on the screen like center, extent, rotation, resolution and so on. It is created automatically when Map is created. You can access it with MapControl.Map.Navigator.Viewport.
+Defines what part of the map is visible on the screen. It is a simple immutable struct that contains just state. Id is passed into the renderers and data fetchers.
 
 ### Renderer
 A member of the MapControl. Draws the map on the MapControl when RefreshGraphics is called.
