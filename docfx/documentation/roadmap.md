@@ -18,7 +18,7 @@
   - Xamarin.Forms
   - Xamarin.Android
   - Xamarin.iOS
-  - Uno UWP (not Uno WinUI) and remove legacy projects
+  - Uno UWP (not Uno WinUI)
 - World wrap
 - Further improve performance
 - Add vector tiles
