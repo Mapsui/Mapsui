@@ -236,13 +236,10 @@ public class Map : INotifyPropertyChanged, IDisposable
 
     private void LayersChanged()
     {
-        // Todo: It is possible for the user to assign the three fields below override
-        // this initialization. However, whenever a layer changes this will override the
-        // the users settings again. This is a bug that needs to be fixed with a better
-        // design.
-        Navigator.Resolutions = DetermineResolutions(Layers);
-        Navigator.ZoomExtremes = GetMinMaxResolution(Navigator.Resolutions);
-        Navigator.PanExtent = Extent?.Copy();
+        // Sets the default values this are taken if not set otherwise
+        Navigator.DefaultResolutions = DetermineResolutions(Layers);
+        Navigator.DefaultZoomExtremes = GetMinMaxResolution(Navigator.Resolutions);
+        Navigator.DefaultPanExtent = Extent?.Copy();
         OnPropertyChanged(nameof(Layers));
     }
 

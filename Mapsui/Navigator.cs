@@ -15,6 +15,9 @@ public class Navigator
 {
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
+    private IReadOnlyList<double>? _resolutions;
+    private MMinMax? _zoomExtremes;
+    private MRect? _panExtent;
 
     /// <summary>
     /// Called when a data refresh is needed. This directly after a non-animated viewport change
@@ -27,13 +30,21 @@ public class Navigator
     /// Sets the extent used to restrict panning. Exactly how this extent affects panning
     /// depends on the implementation of the IViewportLimiter.
     /// </summary>
-    public MRect? PanExtent { get; set; }
+    public MRect? PanExtent
+    {
+        get => _panExtent ?? DefaultPanExtent;
+        set => _panExtent = value;
+    }
 
     /// <summary>
     /// A pair of the most extreme resolutions (smallest and biggest). How these extremes affect zooming
     /// depends on the implementation of the IViewportLimiter.
     /// </summary>
-    public MMinMax? ZoomExtremes { get; set; }
+    public MMinMax? ZoomExtremes
+    {
+        get => _zoomExtremes ?? DefaultZoomExtremes;
+        set => _zoomExtremes = value;
+    }
 
     public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
 
@@ -56,7 +67,11 @@ public class Navigator
     /// background layers with different resolutions. Also note that when pinch zooming these resolutions 
     /// are not used.
     /// </summary>
-    public IReadOnlyList<double> Resolutions { get; set; } = new List<double>();
+    public IReadOnlyList<double> Resolutions
+    {
+        get => _resolutions ?? DefaultResolutions;
+        set => _resolutions = value;
+    }
 
     public MouseWheelAnimation MouseWheelAnimation { get; } = new();
 
@@ -487,4 +502,13 @@ public class Navigator
     }
 
     internal int GetAnimationsCount => _animations.Count();
+    
+    /// <summary> Default Resolutions automatically set on Layers changed </summary>
+    internal IReadOnlyList<double> DefaultResolutions { get; set; }  = new List<double>();
+    
+    /// <summary> Default Zoom Extremes automatically set on Layers changed </summary>
+    internal MMinMax? DefaultZoomExtremes { get; set; }
+    
+    /// <summary> Default Pan Extent automatically set on Layers changed </summary>
+    internal MRect? DefaultPanExtent { get; set; }
 }
