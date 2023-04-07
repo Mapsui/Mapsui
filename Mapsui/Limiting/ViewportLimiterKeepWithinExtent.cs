@@ -6,7 +6,7 @@ namespace Mapsui.Limiting;
 
 /// <summary>
 /// This Viewport limiter will always keep the visible map within the zoom and pan limits.
-/// It should not be possible to view anything outside the pan limits.
+/// It should not be possible to view anything outside the panBounds.
 /// An exception is rotation. 
 /// </summary>
 public class ViewportLimiterKeepWithinExtent : IViewportLimiter
