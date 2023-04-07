@@ -15,7 +15,6 @@ public class Navigator
 {
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
-    private IReadOnlyList<double>? _resolutions;
     
     /// <summary>
     /// Called when a data refresh is needed. This directly after a non-animated viewport change
@@ -25,26 +24,32 @@ public class Navigator
     public event PropertyChangedEventHandler? ViewportChanged;
 
     /// <summary>
-    /// Sets the extent used to restrict panning. Exactly how this extent affects panning
+    /// The bounds to restrict panning. Exactly how these bounds affects panning
     /// depends on the implementation of the IViewportLimiter.
     /// </summary>
-    public MRect? PanBounds
-    {
-        get => OverridePanBounds ?? DefaultPanBounds;
-    }
+    public MRect? PanBounds => OverridePanBounds ?? DefaultPanBounds;
 
     /// <summary>
-    /// A pair of the most extreme resolutions (smallest and biggest). How these extremes affect zooming
-    /// depends on the implementation of the IViewportLimiter.
+    /// The bounds of zooming, i.e. the smallest and biggest resolutions. 
+    /// How these bounds affect zooming depends on the implementation of the 
+    /// IViewportLimiter.
     /// </summary>
-    public MMinMax? ZoomBounds
-    {
-        get => OverrideZoomBounds ?? DefaultZoomBounds;
-    }
+    public MMinMax? ZoomBounds => OverrideZoomBounds ?? DefaultZoomBounds;
 
+    /// <summary>
+    /// Overrides the default zoom bounds which are derived from the Map resolutions.
+    /// </summary>
     public MMinMax? OverrideZoomBounds { get; set; }
-
+    
+    /// <summary>
+    /// Overrides the default pan bounds which come from the Map extent.
+    /// </summary>
     public MRect? OverridePanBounds { get; set; }
+
+    /// <summary>
+    /// Overrides the default resolutions which are derived from the Map.Layers resolutions.
+    /// </summary>
+    public IReadOnlyList<double>? OverrideResolutions { get; set; }
 
     public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
 
@@ -67,10 +72,7 @@ public class Navigator
     /// background layers with different resolutions. Also note that when pinch zooming these resolutions 
     /// are not used.
     /// </summary>
-    public IReadOnlyList<double> Resolutions
-    {
-        get => _resolutions ?? DefaultResolutions;
-    }
+    public IReadOnlyList<double> Resolutions => OverrideResolutions ?? DefaultResolutions;
 
     public MouseWheelAnimation MouseWheelAnimation { get; } = new();
 
@@ -119,7 +121,7 @@ public class Navigator
     /// <param name="boxFit">Scale method to use to determine resolution</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-    public void ZoomToPanExtent(MBoxFit boxFit = MBoxFit.Fill, long duration = -1, Easing? easing = default)
+    public void ZoomToPanBounds(MBoxFit boxFit = MBoxFit.Fill, long duration = -1, Easing? easing = default)
     {
         if (!Viewport.HasSize()) return;
         if (PanBounds is null)

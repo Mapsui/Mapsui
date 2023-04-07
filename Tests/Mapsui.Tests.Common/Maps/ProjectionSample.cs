@@ -35,7 +35,7 @@ public class ProjectionSample : ISample
         };
         map.Layers.Add(geometryLayer);
         map.Layers.Add(CreateCenterOfAmsterdamLayer());
-        map.Home = n => n.ZoomToPanExtent(MBoxFit.Fit);
+        map.Home = n => n.ZoomToPanBounds(MBoxFit.Fit);
         return map;
     }
 

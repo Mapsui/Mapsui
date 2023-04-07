@@ -310,7 +310,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         DataChanged?.Invoke(sender, e);
     }
 
-    public Action<Navigator> Home { get; set; } = n => n.ZoomToPanExtent();
+    public Action<Navigator> Home { get; set; } = n => n.ZoomToPanBounds();
 
     public IEnumerable<IWidget> GetWidgetsOfMapAndLayers()
     {
