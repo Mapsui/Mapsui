@@ -100,14 +100,8 @@ public class Navigator
         // them to become hardcoded values in the MapControl. There should be a more general
         // way to control the animation parameters.
         var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, Viewport.Resolution, ZoomBounds, Resolutions);
-        if (mouseWheelDelta > Constants.Epsilon)
-        {
-            ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
-        }
-        else if (mouseWheelDelta < Constants.Epsilon)
-        {
-            ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
-        }
+        if (resolution == Viewport.Resolution) return; // Don even start a animation if are already at the goalResolution.
+        ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
     }
 
     /// <summary>
@@ -491,14 +485,52 @@ public class Navigator
         return zoomLimited;
     }
 
-    /// <summary>
-    /// To make the other limiting call in this class a bit shorter.
-    /// </summary>
-    /// <param name="viewport"></param>
-    /// <returns></returns>
-    private Viewport Limit(Viewport viewport)
+    private Viewport Limit(Viewport goalViewport)
     {
-        return Limiter.Limit(viewport, PanBounds, ZoomBounds);
+        var limitedViewport = Limiter.Limit(goalViewport, PanBounds, ZoomBounds);
+
+        limitedViewport = LimitXYProportianalToResolution(goalViewport, limitedViewport);
+
+        return limitedViewport;
+    }
+
+    private Viewport LimitXYProportianalToResolution(Viewport goalViewport, Viewport limitedViewport)
+    {
+        // From a users experience perspective we want the x/y change to be limited to the same degree
+        // as the resolution. This is to prevent the situation where you hit the resolution limit, and the resolution
+        // won't change but the maps keeps panning
+
+        var resolutionLimiting = CalculatResolutionLimiting(Viewport.Resolution, goalViewport.Resolution, limitedViewport.Resolution);
+
+        if (resolutionLimiting > 0)
+        {
+            var limitedCenterX = Viewport.CenterX + (limitedViewport.CenterX - Viewport.CenterX) * (1 - resolutionLimiting);
+            var limitedCenterY = Viewport.CenterY + (limitedViewport.CenterY - Viewport.CenterY) * (1 - resolutionLimiting);
+            limitedViewport = limitedViewport with { CenterX = limitedCenterX, CenterY = limitedCenterY };
+            // Limit again because this correction could result in x/y values outside of the limit.
+            limitedViewport = Limiter.Limit(limitedViewport, PanBounds, ZoomBounds);
+        }
+
+        return limitedViewport;
+    }
+
+    /// <summary>
+    /// Returns a number between 0 and 1 that represents the limiting of the resolution.
+    /// </summary>
+    /// <param name="orignalResolution"></param>
+    /// <param name="goalResolution"></param>
+    /// <param name="limitedResolution"></param>
+    /// <returns></returns>
+    private double CalculatResolutionLimiting(double originalResolution, double goalResolution, double limitedResolution)
+    {
+        var denominator = Math.Abs(goalResolution - originalResolution);
+
+        if (denominator <= double.Epsilon)
+            return 0; // There was no limiting because there was no difference at all.
+
+        var numerator = Math.Abs(goalResolution - limitedResolution);
+
+        return (double)(numerator / denominator);
     }
 
     public void SetViewport(Viewport viewport, long duration = -1, Easing? easing = default)
