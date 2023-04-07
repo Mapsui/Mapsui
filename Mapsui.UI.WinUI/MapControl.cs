@@ -234,7 +234,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         double rotationDelta = 0;
 
-        if (Map.Navigator.Limiter.RotationLock == false)
+        if (Map.Navigator.RotationLock == false)
         {
             _virtualRotation += rotation;
 

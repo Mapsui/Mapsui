@@ -79,9 +79,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         _mapDrawableLayer = new ObservableMemoryLayer<Drawable>(f => f.Feature) { Name = DrawableLayerName, IsMapInfoLayer = true };
 
         // Get defaults from MapControl
-        RotationLock = Map.Navigator.Limiter.RotationLock;
-        ZoomLock = Map.Navigator.Limiter.ZoomLock;
-        PanLock = Map.Navigator.Limiter.PanLock;
+        RotationLock = Map.Navigator.RotationLock;
+        ZoomLock = Map.Navigator.ZoomLock;
+        PanLock = Map.Navigator.PanLock;
 
         // Add some events to _mapControl
         Map.Navigator.ViewportChanged += HandlerViewportChanged;
@@ -406,13 +406,13 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         }
 
         if (Map != null && (propertyName.Equals(nameof(RotationLockProperty)) || propertyName.Equals(nameof(RotationLock))))
-            Map.Navigator.Limiter.RotationLock = RotationLock;
+            Map.Navigator.RotationLock = RotationLock;
 
         if (Map != null && (propertyName.Equals(nameof(ZoomLockProperty)) || propertyName.Equals(nameof(ZoomLock))))
-            Map.Navigator.Limiter.ZoomLock = ZoomLock;
+            Map.Navigator.ZoomLock = ZoomLock;
 
         if (Map != null && (propertyName.Equals(nameof(PanLockProperty)) || propertyName.Equals(nameof(PanLock))))
-            Map.Navigator.Limiter.PanLock = PanLock;
+            Map.Navigator.PanLock = PanLock;
 
         if (propertyName.Equals(nameof(IsZoomButtonVisibleProperty)) || propertyName.Equals(nameof(IsZoomButtonVisible)))
         {

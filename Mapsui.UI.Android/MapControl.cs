@@ -252,7 +252,7 @@ public partial class MapControl : ViewGroup, IMapControl
 
                             double rotationDelta = 0;
 
-                            if (Map.Navigator.Limiter.RotationLock is false)
+                            if (Map.Navigator.RotationLock is false)
                             {
                                 _virtualRotation += angle - previousAngle;
 

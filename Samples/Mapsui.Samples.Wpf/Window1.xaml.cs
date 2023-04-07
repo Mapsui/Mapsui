@@ -30,7 +30,7 @@ public partial class Window1
 
         MapControl.FeatureInfo += MapControlFeatureInfo;
         MapControl.MouseMove += MapControlOnMouseMove;
-        MapControl.Map.Navigator.Limiter.RotationLock = false;
+        MapControl.Map.Navigator.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();

@@ -24,6 +24,21 @@ public class Navigator
     public event PropertyChangedEventHandler? ViewportChanged;
 
     /// <summary>
+    /// When true the user can not pan (move) the map.
+    /// </summary>
+    public bool PanLock { get; set; }
+
+    /// <summary>
+    /// When true the user an not rotate the map
+    /// </summary>
+    public bool ZoomLock { get; set; }
+
+    /// <summary>
+    /// When true the user can not zoom into the map
+    /// </summary>
+    public bool RotationLock { get; set; }
+
+    /// <summary>
     /// The bounds to restrict panning. Exactly how these bounds affects panning
     /// depends on the implementation of the IViewportLimiter.
     /// </summary>
@@ -142,8 +157,8 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void CenterOnAndZoomTo(MPoint center, double resolution, long duration = -1, Easing? easing = default)
     {
-        if (Limiter.PanLock) return;
-        if (Limiter.ZoomLock) return;
+        if (PanLock) return;
+        if (ZoomLock) return;
 
         var newViewport = Viewport with { CenterX = center.X, CenterY = center.Y, Resolution = resolution };
         SetViewport(newViewport, duration, easing);
@@ -157,7 +172,7 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomTo(double resolution, long duration = -1, Easing? easing = default)
     {
-        if (Limiter.ZoomLock) return;
+        if (ZoomLock) return;
 
         var newViewport = Viewport with { Resolution = resolution };
         SetViewport(newViewport, duration, easing);
@@ -178,11 +193,11 @@ public class Navigator
     public void ZoomTo(double resolution, MPoint centerOfZoomInScreenCoordinates, long duration = -1, Easing? easing = default)
     {
         if (!Viewport.HasSize()) return;
-        if (Limiter.ZoomLock) return;
+        if (ZoomLock) return;
 
         var (centerOfZoomX, centerOfZoomY) = Viewport.ScreenToWorldXY(centerOfZoomInScreenCoordinates.X, centerOfZoomInScreenCoordinates.Y);
 
-        if (Limiter.PanLock)
+        if (PanLock)
         {
             // Avoid pan by zooming on center
             centerOfZoomX = Viewport.CenterX;
@@ -279,7 +294,7 @@ public class Navigator
     /// <param name="easing">Function for easing</param>
     public void CenterOn(MPoint center, long duration = -1, Easing? easing = default)
     {
-        if (Limiter.PanLock) return;
+        if (PanLock) return;
 
         var newViewport = Viewport with { CenterX = center.X, CenterY = center.Y };
         SetViewport(newViewport, duration, easing);
@@ -304,7 +319,7 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void RotateTo(double rotation, long duration = -1, Easing? easing = default)
     {
-        if (Limiter.RotationLock) return;
+        if (RotationLock) return;
 
         var newViewport = Viewport with { Rotation = rotation };
         SetViewport(newViewport, duration, easing);
@@ -320,7 +335,7 @@ public class Navigator
     /// <param name="maxDuration">Maximum duration of fling deceleration></param>
     public void Fling(double velocityX, double velocityY, long maxDuration)
     {
-        if (Limiter.PanLock) return;
+        if (PanLock) return;
 
         _animations = FlingAnimation.Create(velocityX, velocityY, maxDuration);
     }
@@ -348,9 +363,9 @@ public class Navigator
     /// <param name="deltaRotation">The change in rotation of the finger positions.</param>
     public void Pinch(MPoint currentPinchCenter, MPoint previousPinchCenter, double deltaResolution, double deltaRotation = 0)
     {
-        if (Limiter.ZoomLock) deltaResolution = 1;
-        if (Limiter.PanLock) currentPinchCenter = previousPinchCenter;
-        if (Limiter.RotationLock) deltaRotation = 0;
+        if (ZoomLock) deltaResolution = 1;
+        if (PanLock) currentPinchCenter = previousPinchCenter;
+        if (RotationLock) deltaRotation = 0;
 
         ClearAnimations();
 
