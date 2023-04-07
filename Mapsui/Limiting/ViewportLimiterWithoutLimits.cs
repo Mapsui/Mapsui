@@ -2,7 +2,7 @@
 
 public class ViewportLimiterWithoutLimits : IViewportLimiter
 {
-    public Viewport Limit(Viewport viewport, MRect? panExtent, MMinMax? zoomExtremes)
+    public Viewport Limit(Viewport viewport, MRect? panBounds, MMinMax? zoomBounds)
     {
         return viewport;
     }

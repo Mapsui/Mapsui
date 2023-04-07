@@ -2,5 +2,5 @@
 
 public interface IViewportLimiter
 {
-    Viewport Limit(Viewport viewport, MRect? panExtent, MMinMax? zoomExtremes);
+    Viewport Limit(Viewport viewport, MRect? panBounds, MMinMax? zoomBounds);
 }
