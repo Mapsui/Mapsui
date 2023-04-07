@@ -20,7 +20,7 @@ public class TilesSample : ISample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.ZoomToPanExtent()
+            Home = n => n.ZoomToPanBounds()
         };
 
         map.Layers.Add(layer);

@@ -236,10 +236,9 @@ public class Map : INotifyPropertyChanged, IDisposable
 
     private void LayersChanged()
     {
-        // Sets the default values this are taken if not set otherwise
         Navigator.DefaultResolutions = DetermineResolutions(Layers);
-        Navigator.DefaultZoomExtremes = GetMinMaxResolution(Navigator.Resolutions);
-        Navigator.DefaultPanExtent = Extent?.Copy();
+        Navigator.DefaultZoomBounds = GetMinMaxResolution(Navigator.Resolutions);
+        Navigator.DefaultPanBounds = Extent?.Copy();
         OnPropertyChanged(nameof(Layers));
     }
 
@@ -311,7 +310,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         DataChanged?.Invoke(sender, e);
     }
 
-    public Action<Navigator> Home { get; set; } = n => n.ZoomToPanExtent();
+    public Action<Navigator> Home { get; set; } = n => n.ZoomToPanBounds();
 
     public IEnumerable<IWidget> GetWidgetsOfMapAndLayers()
     {
