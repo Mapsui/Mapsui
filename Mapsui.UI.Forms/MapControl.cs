@@ -655,7 +655,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     var touchPosition = touchPoints.First();
 
-                    if (!Map.Navigator.PanLock && _previousCenter != null)
+                    if (_previousCenter != null)
                     {
                         Map.Navigator.Drag(touchPosition, _previousCenter);
                     }
