@@ -384,7 +384,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         double rotationDelta = 0;
 
-        if (Map.Navigator.Limiter.RotationLock == false)
+        if (Map.Navigator.RotationLock == false)
         {
             _virtualRotation += angle - prevAngle;
 
@@ -398,7 +398,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private double GetDeltaScale(XamlVector scale)
     {
-        if (Map.Navigator.Limiter.ZoomLock) return 1;
+        if (Map.Navigator.ZoomLock) return 1;
         var deltaScale = (scale.X + scale.Y) / 2;
         if (Math.Abs(deltaScale) < Constants.Epsilon)
             return 1; // If there is no scaling the deltaScale will be 0.0 in Windows Phone (while it is 1.0 in wpf)

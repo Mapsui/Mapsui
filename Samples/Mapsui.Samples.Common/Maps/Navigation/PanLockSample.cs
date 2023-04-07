@@ -18,7 +18,7 @@ public class PanLockSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         var saoPaulo = SphericalMercator.FromLonLat(-46.633, -23.55).ToMPoint();
         map.Navigator.CenterOnAndZoomTo(saoPaulo, 4892f);
-        map.Navigator.Limiter.PanLock = true;
+        map.Navigator.PanLock = true;
         return map;
     }
 }

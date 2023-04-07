@@ -1,8 +1,8 @@
 ﻿namespace Mapsui.Limiting;
 
-public class ViewportLimiter : BaseViewportLimiter
+public class ViewportLimiter : IViewportLimiter
 {
-    public override Viewport Limit(Viewport viewport, MRect? panExtent, MMinMax? zoomExtremes)
+    public Viewport Limit(Viewport viewport, MRect? panExtent, MMinMax? zoomExtremes)
     {
         return LimitExtent(LimitResolution(viewport, zoomExtremes), panExtent);
     }

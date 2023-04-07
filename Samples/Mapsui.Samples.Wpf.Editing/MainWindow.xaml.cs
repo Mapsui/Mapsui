@@ -37,7 +37,7 @@ public partial class MainWindow
         MapControl.MouseLeftButtonDown += MapControlOnMouseLeftButtonDown;
         MapControl.MouseLeftButtonUp += MapControlOnMouseLeftButtonUp;
 
-        MapControl.Map.Navigator.Limiter.RotationLock = false;
+        MapControl.Map.Navigator.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
 
@@ -309,7 +309,7 @@ public partial class MainWindow
     private void MapControlOnMouseLeftButtonUp(object sender, MouseButtonEventArgs args)
     {
         if (MapControl.Map != null)
-            MapControl.Map.Navigator.Limiter.PanLock = _editManipulation.Manipulate(MouseState.Up,
+            MapControl.Map.Navigator.PanLock = _editManipulation.Manipulate(MouseState.Up,
             args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
 
         if (_selectMode)
@@ -330,13 +330,13 @@ public partial class MainWindow
 
         if (args.ClickCount > 1)
         {
-            MapControl.Map.Navigator.Limiter.PanLock = _editManipulation.Manipulate(MouseState.DoubleClick,
+            MapControl.Map.Navigator.PanLock = _editManipulation.Manipulate(MouseState.DoubleClick,
                 args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
             args.Handled = true;
         }
         else
         {
-            MapControl.Map.Navigator.Limiter.PanLock = _editManipulation.Manipulate(MouseState.Down,
+            MapControl.Map.Navigator.PanLock = _editManipulation.Manipulate(MouseState.Down,
                 args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
         }
     }

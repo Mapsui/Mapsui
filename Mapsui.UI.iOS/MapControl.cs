@@ -203,7 +203,7 @@ public partial class MapControl : UIView, IMapControl
 
             double rotationDelta = 0;
 
-            if (Map.Navigator.Limiter.RotationLock == false)
+            if (Map.Navigator.RotationLock == false)
             {
                 _virtualRotation += angle - previousAngle;
 

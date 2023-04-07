@@ -13,7 +13,7 @@ internal class ZoomLockSample : ISample
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Navigator.ZoomTo(4892);
-        map.Navigator.Limiter.ZoomLock = true;
+        map.Navigator.ZoomLock = true;
         return Task.FromResult(map);
     }
 }

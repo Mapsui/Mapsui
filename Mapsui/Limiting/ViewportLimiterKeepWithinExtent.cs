@@ -9,9 +9,9 @@ namespace Mapsui.Limiting;
 /// It should not be possible to view anything outside the pan limits.
 /// An exception is rotation. 
 /// </summary>
-public class ViewportLimiterKeepWithinExtent : BaseViewportLimiter
+public class ViewportLimiterKeepWithinExtent : IViewportLimiter
 {
-    public override Viewport Limit(Viewport viewport, MRect? panExtent, MMinMax? zoomExtremes)
+    public Viewport Limit(Viewport viewport, MRect? panExtent, MMinMax? zoomExtremes)
     {
         return LimitExtent(LimitResolution(viewport, zoomExtremes), panExtent, zoomExtremes);
     }

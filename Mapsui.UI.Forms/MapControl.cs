@@ -655,7 +655,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     var touchPosition = touchPoints.First();
 
-                    if (!Map.Navigator.Limiter.PanLock && _previousCenter != null)
+                    if (!Map.Navigator.PanLock && _previousCenter != null)
                     {
                         Map.Navigator.Drag(touchPosition, _previousCenter);
                     }
@@ -673,7 +673,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     double rotationDelta = 0;
 
-                    if (Map.Navigator.Limiter.RotationLock == false)
+                    if (Map.Navigator.RotationLock == false)
                     {
                         var deltaRotation = angle - prevAngle;
                         _virtualRotation += deltaRotation;
