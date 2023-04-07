@@ -16,9 +16,7 @@ public class Navigator
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
     private IReadOnlyList<double>? _resolutions;
-    private MMinMax? _zoomExtremes;
-    private MRect? _panExtent;
-
+    
     /// <summary>
     /// Called when a data refresh is needed. This directly after a non-animated viewport change
     /// is made and after an animation has completed.
@@ -30,21 +28,23 @@ public class Navigator
     /// Sets the extent used to restrict panning. Exactly how this extent affects panning
     /// depends on the implementation of the IViewportLimiter.
     /// </summary>
-    public MRect? PanExtent
+    public MRect? PanBounds
     {
-        get => _panExtent ?? DefaultPanExtent;
-        set => _panExtent = value;
+        get => OverridePanBounds ?? DefaultPanBounds;
     }
 
     /// <summary>
     /// A pair of the most extreme resolutions (smallest and biggest). How these extremes affect zooming
     /// depends on the implementation of the IViewportLimiter.
     /// </summary>
-    public MMinMax? ZoomExtremes
+    public MMinMax? ZoomBounds
     {
-        get => _zoomExtremes ?? DefaultZoomExtremes;
-        set => _zoomExtremes = value;
+        get => OverrideZoomBounds ?? DefaultZoomBounds;
     }
+
+    public MMinMax? OverrideZoomBounds { get; set; }
+
+    public MRect? OverridePanBounds { get; set; }
 
     public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
 
@@ -70,7 +70,6 @@ public class Navigator
     public IReadOnlyList<double> Resolutions
     {
         get => _resolutions ?? DefaultResolutions;
-        set => _resolutions = value;
     }
 
     public MouseWheelAnimation MouseWheelAnimation { get; } = new();
@@ -83,7 +82,7 @@ public class Navigator
         // At the moment this solution allows the user to change these fields, so I don't want
         // them to become hardcoded values in the MapControl. There should be a more general
         // way to control the animation parameters.
-        var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, Viewport.Resolution, ZoomExtremes, Resolutions);
+        var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, Viewport.Resolution, ZoomBounds, Resolutions);
         if (mouseWheelDelta > Constants.Epsilon)
         {
             ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
@@ -123,13 +122,13 @@ public class Navigator
     public void ZoomToPanExtent(MBoxFit boxFit = MBoxFit.Fill, long duration = -1, Easing? easing = default)
     {
         if (!Viewport.HasSize()) return;
-        if (PanExtent is null)
+        if (PanBounds is null)
         {
             Logger.Log(LogLevel.Warning, "ZoomToPanExtent was called but PanExtent was null");
             return;
         }
         
-        ZoomToBox(PanExtent, boxFit, duration, easing);
+        ZoomToBox(PanBounds, boxFit, duration, easing);
     }
 
     /// <summary>
@@ -482,7 +481,7 @@ public class Navigator
     /// <returns></returns>
     private Viewport Limit(Viewport viewport)
     {
-        return Limiter.Limit(viewport, PanExtent, ZoomExtremes);
+        return Limiter.Limit(viewport, PanBounds, ZoomBounds);
     }
 
     public void SetViewport(Viewport viewport, long duration = -1, Easing? easing = default)
@@ -507,8 +506,8 @@ public class Navigator
     internal IReadOnlyList<double> DefaultResolutions { get; set; }  = new List<double>();
     
     /// <summary> Default Zoom Extremes automatically set on Layers changed </summary>
-    internal MMinMax? DefaultZoomExtremes { get; set; }
+    internal MMinMax? DefaultZoomBounds { get; set; }
     
     /// <summary> Default Pan Extent automatically set on Layers changed </summary>
-    internal MRect? DefaultPanExtent { get; set; }
+    internal MRect? DefaultPanBounds { get; set; }
 }
