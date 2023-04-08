@@ -100,14 +100,8 @@ public class Navigator
         // them to become hardcoded values in the MapControl. There should be a more general
         // way to control the animation parameters.
         var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, Viewport.Resolution, ZoomBounds, Resolutions);
-        if (mouseWheelDelta > Constants.Epsilon)
-        {
-            ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
-        }
-        else if (mouseWheelDelta < Constants.Epsilon)
-        {
-            ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
-        }
+        if (resolution == Viewport.Resolution) return; // Don even start a animation if are already at the goalResolution.
+        ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
     }
 
     /// <summary>
@@ -131,7 +125,7 @@ public class Navigator
     }
 
     /// <summary>
-    /// Navigate to the Navigator.PanExtent.
+    /// Navigate to the  <see cref="PanBounds" />.
     /// </summary>
     /// <param name="boxFit">Scale method to use to determine resolution</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
@@ -141,7 +135,7 @@ public class Navigator
         if (!Viewport.HasSize()) return;
         if (PanBounds is null)
         {
-            Logger.Log(LogLevel.Warning, "ZoomToPanExtent was called but PanExtent was null");
+            Logger.Log(LogLevel.Warning, $"{nameof(ZoomToPanBounds)} was called but ${nameof(PanBounds)} was null");
             return;
         }
         
@@ -491,14 +485,54 @@ public class Navigator
         return zoomLimited;
     }
 
-    /// <summary>
-    /// To make the other limiting call in this class a bit shorter.
-    /// </summary>
-    /// <param name="viewport"></param>
-    /// <returns></returns>
-    private Viewport Limit(Viewport viewport)
+    private Viewport Limit(Viewport goalViewport)
     {
-        return Limiter.Limit(viewport, PanBounds, ZoomBounds);
+        var limitedViewport = Limiter.Limit(goalViewport, PanBounds, ZoomBounds);
+
+        limitedViewport = LimitXYProportianalToResolution(Viewport, goalViewport, limitedViewport);
+
+        return limitedViewport;
+    }
+
+    private Viewport LimitXYProportianalToResolution(Viewport originalViewport, Viewport goalViewport, Viewport limitedViewport)
+    {
+        // From a users experience perspective we want the x/y change to be limited to the same degree
+        // as the resolution. This is to prevent the situation where you zoom out while hitting the zoom bounds
+        // and you see no change in resolution, but you will see a change in pan.
+
+        var resolutionLimiting = CalculatResolutionLimiting(originalViewport.Resolution, goalViewport.Resolution, limitedViewport.Resolution);
+
+        if (resolutionLimiting > 0)
+        {
+            var correctionX = (limitedViewport.CenterX - originalViewport.CenterX) * resolutionLimiting;
+            var limitedCenterX = limitedViewport.CenterX - correctionX;
+            var correctionY = (limitedViewport.CenterY - originalViewport.CenterY) * resolutionLimiting;
+            var limitedCenterY = limitedViewport.CenterY - correctionY;
+            limitedViewport = limitedViewport with { CenterX = limitedCenterX, CenterY = limitedCenterY };
+            // Limit again because this correction could result in x/y values outside of the limit.
+            limitedViewport = Limiter.Limit(limitedViewport, PanBounds, ZoomBounds);
+        }
+
+        return limitedViewport;
+    }
+
+    /// <summary>
+    /// Returns a number between 0 and 1 that represents the limiting of the resolution.
+    /// </summary>
+    /// <param name="orignalResolution"></param>
+    /// <param name="goalResolution"></param>
+    /// <param name="limitedResolution"></param>
+    /// <returns></returns>
+    private static double CalculatResolutionLimiting(double originalResolution, double goalResolution, double limitedResolution)
+    {
+        var denominator = Math.Abs(goalResolution - originalResolution);
+
+        if (denominator <= double.Epsilon)
+            return 0; // There was no limiting because there was no difference at all.
+
+        var numerator = Math.Abs(goalResolution - limitedResolution);
+
+        return (double)(numerator / denominator);
     }
 
     public void SetViewport(Viewport viewport, long duration = -1, Easing? easing = default)
@@ -522,9 +556,9 @@ public class Navigator
     /// <summary> Default Resolutions automatically set on Layers changed </summary>
     internal IReadOnlyList<double> DefaultResolutions { get; set; }  = new List<double>();
     
-    /// <summary> Default Zoom Extremes automatically set on Layers changed </summary>
+    /// <summary> Default Zoom Bounds automatically set on Layers changed </summary>
     internal MMinMax? DefaultZoomBounds { get; set; }
     
-    /// <summary> Default Pan Extent automatically set on Layers changed </summary>
+    /// <summary> Default Pan Bounds automatically set on Layers changed </summary>
     internal MRect? DefaultPanBounds { get; set; }
 }

@@ -19,7 +19,7 @@ The most important property of the MapControl is the Map. Unlike the MapControl 
 
 Is responsible for all Viewport manipulations, this includes:
 - It checks `PanLock`, `ZoomLock`, `RotationLock`. 
-- It checks the pan limits (`PanExtent`) and zoom limits (`ZoomExtremes`). Both depend on the kind of limiter that is used. 
+- It checks the pan bounds (`PanBounds`) and zoom bounds (`ZoomBounds`). Both depend on the kind of limiter that is used. 
 - It controls the animations. It makes sure only one viewport animation is executed at one time and a previous animation is cancelled before the new one is started. 
 - It calls a `RefreshDataRequest` event on a discrete viewport change or at the end of an animation (after drag or pinch RefreshData needs to called from the MapControl touch up). 
 - It calls the `ViewportChanged` event on all viewport changes. 
