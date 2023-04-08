@@ -125,7 +125,7 @@ public class Navigator
     }
 
     /// <summary>
-    /// Navigate to the Navigator.PanExtent.
+    /// Navigate to the  <see cref="PanBounds" />.
     /// </summary>
     /// <param name="boxFit">Scale method to use to determine resolution</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
@@ -556,9 +556,9 @@ public class Navigator
     /// <summary> Default Resolutions automatically set on Layers changed </summary>
     internal IReadOnlyList<double> DefaultResolutions { get; set; }  = new List<double>();
     
-    /// <summary> Default Zoom Extremes automatically set on Layers changed </summary>
+    /// <summary> Default Zoom Bounds automatically set on Layers changed </summary>
     internal MMinMax? DefaultZoomBounds { get; set; }
     
-    /// <summary> Default Pan Extent automatically set on Layers changed </summary>
+    /// <summary> Default Pan Bounds automatically set on Layers changed </summary>
     internal MRect? DefaultPanBounds { get; set; }
 }
