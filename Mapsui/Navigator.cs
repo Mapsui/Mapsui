@@ -489,23 +489,25 @@ public class Navigator
     {
         var limitedViewport = Limiter.Limit(goalViewport, PanBounds, ZoomBounds);
 
-        limitedViewport = LimitXYProportianalToResolution(goalViewport, limitedViewport);
+        limitedViewport = LimitXYProportianalToResolution(Viewport, goalViewport, limitedViewport);
 
         return limitedViewport;
     }
 
-    private Viewport LimitXYProportianalToResolution(Viewport goalViewport, Viewport limitedViewport)
+    private Viewport LimitXYProportianalToResolution(Viewport originalViewport, Viewport goalViewport, Viewport limitedViewport)
     {
         // From a users experience perspective we want the x/y change to be limited to the same degree
-        // as the resolution. This is to prevent the situation where you hit the resolution limit, and the resolution
-        // won't change but the maps keeps panning
+        // as the resolution. This is to prevent the situation where you zoom out while hitting the zoom bounds
+        // and you see no change in resolution, but you will see a change in pan.
 
-        var resolutionLimiting = CalculatResolutionLimiting(Viewport.Resolution, goalViewport.Resolution, limitedViewport.Resolution);
+        var resolutionLimiting = CalculatResolutionLimiting(originalViewport.Resolution, goalViewport.Resolution, limitedViewport.Resolution);
 
         if (resolutionLimiting > 0)
         {
-            var limitedCenterX = Viewport.CenterX + (limitedViewport.CenterX - Viewport.CenterX) * (1 - resolutionLimiting);
-            var limitedCenterY = Viewport.CenterY + (limitedViewport.CenterY - Viewport.CenterY) * (1 - resolutionLimiting);
+            var correctionX = (limitedViewport.CenterX - originalViewport.CenterX) * resolutionLimiting;
+            var limitedCenterX = limitedViewport.CenterX - correctionX;
+            var correctionY = (limitedViewport.CenterY - originalViewport.CenterY) * resolutionLimiting;
+            var limitedCenterY = limitedViewport.CenterY - correctionY;
             limitedViewport = limitedViewport with { CenterX = limitedCenterX, CenterY = limitedCenterY };
             // Limit again because this correction could result in x/y values outside of the limit.
             limitedViewport = Limiter.Limit(limitedViewport, PanBounds, ZoomBounds);
@@ -521,7 +523,7 @@ public class Navigator
     /// <param name="goalResolution"></param>
     /// <param name="limitedResolution"></param>
     /// <returns></returns>
-    private double CalculatResolutionLimiting(double originalResolution, double goalResolution, double limitedResolution)
+    private static double CalculatResolutionLimiting(double originalResolution, double goalResolution, double limitedResolution)
     {
         var denominator = Math.Abs(goalResolution - originalResolution);
 
