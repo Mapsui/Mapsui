@@ -135,7 +135,7 @@ public class Navigator
         if (!Viewport.HasSize()) return;
         if (PanBounds is null)
         {
-            Logger.Log(LogLevel.Warning, "ZoomToPanExtent was called but PanExtent was null");
+            Logger.Log(LogLevel.Warning, $"{nameof(ZoomToPanBounds)} was called but ${nameof(PanBounds)} was null");
             return;
         }
         
