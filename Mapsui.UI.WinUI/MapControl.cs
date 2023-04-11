@@ -257,8 +257,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private float GetPixelDensity()
     {
-#if __WINUI__
-        return (float)DisplayInformation.GetForCurrentView().ResolutionScale / 100.0f;
+#if HAS_UNO
+         return (float)DisplayInformation.GetForCurrentView().ResolutionScale / 100.0f;
+#elif __WINUI__
+        return (float)(XamlRoot?.RasterizationScale ?? 1f);
 #else
         return (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
 #endif
