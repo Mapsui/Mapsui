@@ -7,10 +7,10 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Appveyor.TestLogger" Version="[2.0.0,3.0.0)" />
-    <PackageVersion Include="Avalonia" Version="[0.10.18,1.0.0)" />
-    <PackageVersion Include="Avalonia.Desktop" Version="[0.10.18,1.0.0)" />
-    <PackageVersion Include="Avalonia.Diagnostics" Version="[0.10.18,1.0.0)" />
-    <PackageVersion Include="Avalonia.ReactiveUI" Version="[0.10.18,1.0.0)" />
+    <PackageVersion Include="Avalonia" Version="[0.10.19,1.0.0)" />
+    <PackageVersion Include="Avalonia.Desktop" Version="[0.10.19,1.0.0)" />
+    <PackageVersion Include="Avalonia.Diagnostics" Version="[0.10.19,1.0.0)" />
+    <PackageVersion Include="Avalonia.ReactiveUI" Version="[0.10.19,1.0.0)" />
     <PackageVersion Include="BenchmarkDotNet" Version="[0.13.2,1.0.0)" />
     <PackageVersion Include="BitMiracle.LibTiff.NET" Version="[2.4.649,3.0.0)" />
     <PackageVersion Include="BrotliSharpLib" Version="[0.3.3,1.0.0)" />
@@ -65,7 +65,7 @@
     <PackageVersion Include="Microsoft.Windows.CsWinRT" Version="[2.0.0,3.0.0)" />
     <PackageVersion Include="Microsoft.WindowsAppSDK" Version="[1.2.230217.4,2.0.0)" />
     <PackageVersion Include="NeoSmart.AsyncLock" Version="[3.2.1,4.0.0)" />
-    <PackageVersion Include="NetTopologySuite" Version="[2.4.0,3.0.0)" />
+    <PackageVersion Include="NetTopologySuite" Version="[2.5.0,3.0.0)" />
     <PackageVersion Include="NetTopologySuite.IO.GeoJSON4STJ" Version="[3.0.0,4.0.0)" />
     <PackageVersion Include="Newtonsoft.Json" Version="[13.0.1,14.0.0)" />
     <PackageVersion Include="NUnit" Version="[3.12.0,4.0.0)" />

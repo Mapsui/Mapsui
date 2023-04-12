@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mapsui.UI;
+namespace Mapsui;
 
 public class MapInfoEventArgs : EventArgs
 {

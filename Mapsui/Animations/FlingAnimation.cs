@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using Mapsui.Extensions;
-using Mapsui.Utilities;
 
-namespace Mapsui.ViewportAnimations;
+namespace Mapsui.Animations;
 
 public static class FlingAnimation
 {
-    public static (List<AnimationEntry<Viewport>> Entries, long Duration) Create(double velocityX, double velocityY, long maxDuration)
+    public static List<AnimationEntry<Viewport>> Create(double velocityX, double velocityY, long maxDuration)
     {
         var animations = new List<AnimationEntry<Viewport>>();
 
         if (maxDuration < 16)
-            return (animations, 0);
+            return animations;
 
         velocityX = -velocityX; // reverse as it finger direction is opposite to map movement
         velocityY = -velocityY; // reverse as it finger direction is opposite to map movement
@@ -22,7 +21,7 @@ public static class FlingAnimation
         var duration = magnitudeOfV / 10;
 
         if (magnitudeOfV < 100 || duration < 16)
-            return (animations, 0); ;
+            return animations; ;
 
         if (duration > maxDuration)
             duration = maxDuration;
@@ -39,10 +38,10 @@ public static class FlingAnimation
 
         Animation.Start(animations, (long)duration);
 
-        return (animations, (long)Math.Ceiling(duration));
+        return animations;
     }
 
-    private static void FlingTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
+    private static AnimationResult<Viewport> FlingTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
     {
         var timeAmount = 16 / 1000d; // 16 milliseconds 
 
@@ -57,16 +56,17 @@ public static class FlingAnimation
             yMovement = 0;
 
         if (xMovement == 0 && yMovement == 0)
-            return;
+            return new AnimationResult<Viewport>(viewport, false);
 
-        var previous = viewport.State.ScreenToWorld(0, 0);
-        var current = viewport.State.ScreenToWorld(xMovement, yMovement);
+        var previous = viewport.ScreenToWorld(0, 0);
+        var current = viewport.ScreenToWorld(xMovement, yMovement);
 
         var xDiff = current.X - previous.X;
         var yDiff = current.Y - previous.Y;
 
-        var newX = viewport.State.CenterX + xDiff;
-        var newY = viewport.State.CenterY + yDiff;
-        var result = viewport.SetViewportStateWithLimit(viewport.State with { CenterX = newX, CenterY = newY });
+        var newX = viewport.CenterX + xDiff;
+        var newY = viewport.CenterY + yDiff;
+        var result = viewport with { CenterX = newX, CenterY = newY };
+        return new AnimationResult<Viewport>(result, true);
     }
 }

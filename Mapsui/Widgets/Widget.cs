@@ -45,5 +45,5 @@ public abstract class Widget : IWidget
         throw new ArgumentException("Unknown vertical alignment: " + VerticalAlignment);
     }
 
-    public abstract bool HandleWidgetTouched(INavigator navigator, MPoint position);
+    public abstract bool HandleWidgetTouched(Navigator navigator, MPoint position);
 }

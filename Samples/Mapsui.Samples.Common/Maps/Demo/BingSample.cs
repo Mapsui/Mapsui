@@ -27,7 +27,7 @@ public class BingSample : ISample
         {
             Name = "Bing Aerial",
         });
-        map.Home = n => n.NavigateTo(new MPoint(1059114.80157058, 5179580.75916194), map.Resolutions[14]);
+        map.Home = n => n.CenterOnAndZoomTo(new MPoint(1059114.80157058, 5179580.75916194), n.Resolutions[14]);
         map.BackColor = Color.FromString("#000613");
 
         return map;

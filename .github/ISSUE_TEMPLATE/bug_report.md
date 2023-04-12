@@ -6,6 +6,16 @@ labels: ''
 assignees: ''
 
 ---
+**Mapsui Version**
+The version of the NuGet package. Or the branch in case you work with the Mapsui code base.
+
+**Mapsui Platform**
+On which platform did you see the bug? MAUI, Blazer, Wpf, Avalonia, Uno or other?
+Also tells us if you tested platforms that did not have the bug.
+
+**Device**
+Windows, Mac, Android, iPhone, iPad? Also tell us which OS and which version of that OS
+if you think this is relevant. For some platforms the browser version might matter.
 
 **Describe the bug**
 A clear and concise description of what the bug is.
@@ -22,17 +32,6 @@ A clear and concise description of what you expected to happen.
 
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
-
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
-
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
 
 **Additional context**
 Add any other context about the problem here.

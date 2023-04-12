@@ -5,7 +5,6 @@ using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
 using Mapsui.Samples.Wpf.Editing.Extensions;
-using Mapsui.UI;
 using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Wpf.Editing.Editing;

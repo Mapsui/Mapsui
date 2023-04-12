@@ -1,37 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts;
-using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
-using Mapsui.UI;
-using Mapsui.Utilities;
 using NetTopologySuite.IO;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class LineSample : IMapControlSample
+public class LineSample : ISample
 {
     public string Name => "Line";
     public string Category => "Tests";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
-        var layer = CreateLayer();
-
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.NavigateToFullEnvelope(ScaleMethod.Fit)
+            Home = n => n.ZoomToPanBounds(MBoxFit.Fit)
         };
 
-        map.Layers.Add(layer);
+        map.Layers.Add(CreateLayer());
 
         return map;
     }

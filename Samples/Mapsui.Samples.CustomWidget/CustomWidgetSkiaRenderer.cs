@@ -7,7 +7,7 @@ namespace Mapsui.Samples.CustomWidget;
 
 public class CustomWidgetSkiaRenderer : ISkiaWidgetRenderer
 {
-    public void Draw(SKCanvas canvas, ViewportState viewport, IWidget widget, float layerOpacity)
+    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
     {
         // Cast to custom widget to be able to access the specific CustomWidget fields
         var customWidget = (CustomWidget)widget;

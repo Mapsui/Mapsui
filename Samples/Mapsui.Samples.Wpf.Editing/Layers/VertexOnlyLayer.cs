@@ -8,7 +8,7 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Wpf.Editing.Layers;
 
-public class VertexOnlyLayer : BaseLayer
+public class VertexOnlyLayer : BaseLayer, IWritableLayer
 {
     private readonly WritableLayer _source;
 

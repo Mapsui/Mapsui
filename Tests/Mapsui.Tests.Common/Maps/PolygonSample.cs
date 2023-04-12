@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
@@ -7,22 +8,18 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 using NetTopologySuite.IO;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class PolygonTestSample : IMapControlSample
+public class PolygonTestSample : ISample
 {
     private static int _bitmapId;
 
     public string Name => "Polygon";
     public string Category => "Tests";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
@@ -33,7 +30,7 @@ public class PolygonTestSample : IMapControlSample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.NavigateToFullEnvelope(ScaleMethod.Fit)
+            Home = n => n.ZoomToPanBounds(MBoxFit.Fit)
         };
 
         map.Layers.Add(layer);

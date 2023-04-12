@@ -14,6 +14,8 @@ using Windows.System;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Utilities;
+using NetTopologySuite.GeometriesGraph;
+using Windows.Graphics.Display;
 #if __WINUI__
 using System.Runtime.Versioning;
 using Mapsui.UI.WinUI.Extensions;
@@ -55,8 +57,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
     private double _virtualRotation;
-
-    public MouseWheelAnimation MouseWheelAnimation { get; } = new MouseWheelAnimation { Duration = 0 };
 
     public MapControl()
     {
@@ -110,7 +110,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
     {
-        _virtualRotation = Map.Viewport.State.Rotation;
+        _virtualRotation = Map.Navigator.Viewport.Rotation;
     }
 
     private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
@@ -154,19 +154,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
     {
-        if (Map.Viewport.Limiter.ZoomLock) return;
-        if (!Map.Viewport.State.HasSize()) return;
-        if (Map is null) return;
-
         var currentPoint = e.GetCurrentPoint(this);
 #if __WINUI__
-        var mousePosition = new MPoint(currentPoint.Position.X, currentPoint.Position.Y);
+        var currentMousePosition = new MPoint(currentPoint.Position.X, currentPoint.Position.Y);
 #else
-        var mousePosition = new MPoint(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
+        var currentMousePosition = new MPoint(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 #endif
+        var mouseWheelDelta = currentPoint.Properties.MouseWheelDelta;
 
-        var resolution = MouseWheelAnimation.GetResolution(currentPoint.Properties.MouseWheelDelta, Map.Viewport, _map);
-        Map.Navigator.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
 
         e.Handled = true;
     }
@@ -239,16 +235,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         double rotationDelta = 0;
 
-        if (Map.Viewport.Limiter.RotationLock == false)
+        if (Map.Navigator.RotationLock == false)
         {
             _virtualRotation += rotation;
 
             rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                _virtualRotation, Map.Viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
         }
 
-        Map.Viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
-        RefreshGraphics();
+        Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
         e.Handled = true;
     }
 
@@ -262,7 +257,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private float GetPixelDensity()
     {
-#if __WINUI__
+#if HAS_UNO
+         return (float)DisplayInformation.GetForCurrentView().ResolutionScale / 100.0f;
+#elif __WINUI__
         return (float)(XamlRoot?.RasterizationScale ?? 1f);
 #else
         return (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;

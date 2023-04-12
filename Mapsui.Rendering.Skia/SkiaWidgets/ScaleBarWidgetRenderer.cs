@@ -14,7 +14,7 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
     private SKPaint? _paintScaleText;
     private SKPaint? _paintScaleTextStroke;
 
-    public void Draw(SKCanvas canvas, ViewportState viewport, IWidget widget,
+    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget,
         float layerOpacity)
     {
         var scaleBar = (ScaleBarWidget)widget;

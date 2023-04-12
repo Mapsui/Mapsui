@@ -69,7 +69,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         mapView.Refresh();
     }
 
-    private void MapView_Info(object? sender, UI.MapInfoEventArgs? e)
+    private void MapView_Info(object? sender, MapInfoEventArgs? e)
     {
         featureInfo.Text = $"Click Info:";
 
@@ -86,7 +86,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
                 }
             }
 
-            mapView.Refresh();
+            mapView.RefreshGraphics();
         }
     }
 
@@ -210,7 +210,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
                 mapView?.MyLocationLayer.UpdateMyLocation(new Position(e.Latitude, e.Longitude));
                 if (e.Course != null)
                 {
-                    mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView?.Map.Viewport.State.Rotation ?? 0);
+                    mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView?.Map.Navigator.Viewport.Rotation ?? 0);
                 }
 
                 if (e.Speed != null)

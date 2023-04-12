@@ -7,7 +7,6 @@ namespace Mapsui.Samples.Eto;
 using System;
 using System.Text;
 using System.Linq;
-using Mapsui.UI;
 using Mapsui.UI.Eto;
 using Mapsui.Logging;
 using Mapsui.Extensions;
@@ -15,6 +14,7 @@ using Mapsui.Samples.Common;
 
 using global::Eto.Forms;
 using global::Eto.Drawing;
+using Mapsui;
 
 public class MainForm : Form
 {
@@ -43,7 +43,7 @@ public class MainForm : Form
         Title = $"Mapsui SampleApp - {eto_platform} - {os_platform}";
 
         MapControl.MouseMove += MapControlOnMouseMove;
-        MapControl.Map.Viewport.Limiter.RotationLock = false;
+        MapControl.Map.Navigator.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         RotationSlider.ValueChanged += RotationSliderChanged;
@@ -88,7 +88,7 @@ public class MainForm : Form
 
     private void MapControlOnMouseMove(object? sender, MouseEventArgs e)
     {
-        var worldPosition = MapControl.Map.Viewport.State.ScreenToWorld(e.Location.X, e.Location.Y);
+        var worldPosition = MapControl.Map.Navigator.Viewport.ScreenToWorld(e.Location.X, e.Location.Y);
         MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
     }
     private void FillListWithSamples()
@@ -171,7 +171,6 @@ public class MainForm : Form
     {
         var percent = (double)RotationSlider.Value / (RotationSlider.MaxValue - RotationSlider.MinValue);
         MapControl.Map.Navigator.RotateTo(percent * 360);
-        MapControl.Refresh();
     }
 
     private void MapControlOnInfo(object? sender, MapInfoEventArgs args)

@@ -13,11 +13,11 @@ public static class ClippingFunctions
     /// Reduce list of points, so that all are inside of cliptRect
     /// See https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm
     /// </summary>
-    /// <param name="points">List of points to reduce</param>
-    /// <param name="viewport">Viewport implementation</param>
+    /// <param name="points">List of points to reduce.</param>
+    /// <param name="viewport">The Viewport that is used for the conversions.</param>
     /// <param name="clipRect">Rectangle to clip to. All points outside aren't drawn.</param>
     /// <returns></returns>
-    public static List<SKPoint> ReducePointsToClipRect(IEnumerable<Coordinate>? points, ViewportState viewport, SKRect clipRect)
+    public static List<SKPoint> ReducePointsToClipRect(IEnumerable<Coordinate>? points, Viewport viewport, SKRect clipRect)
     {
         var output = WorldToScreen(viewport, points);
 
@@ -80,21 +80,21 @@ public static class ClippingFunctions
     /// <summary>
     /// Convert a list of Mapsui points in world coordinates to SKPoint in screen coordinates
     /// </summary>
-    /// <param name="viewportState">Viewport implementation</param>
+    /// <param name="viewport">The Viewport that is used for the conversions.</param>
     /// <param name="points">List of points in Mapsui world coordinates</param>
     /// <returns>List of screen coordinates in SKPoint</returns>
-    internal static List<SKPoint> WorldToScreen(ViewportState viewportState, IEnumerable<Coordinate>? points)
+    internal static List<SKPoint> WorldToScreen(Viewport viewport, IEnumerable<Coordinate>? points)
     {
         var result = new List<SKPoint>();
         if (points == null)
             return result;
 
-        var screenCenterX = viewportState.Width * 0.5;
-        var screenCenterY = viewportState.Height * 0.5;
-        var centerX = viewportState.CenterX;
-        var centerY = viewportState.CenterY;
-        var resolution = 1.0 / viewportState.Resolution;
-        var rotation = viewportState.Rotation / 180f * Math.PI;
+        var screenCenterX = viewport.Width * 0.5;
+        var screenCenterY = viewport.Height * 0.5;
+        var centerX = viewport.CenterX;
+        var centerY = viewport.CenterY;
+        var resolution = 1.0 / viewport.Resolution;
+        var rotation = viewport.Rotation / 180f * Math.PI;
         var sin = Math.Sin(rotation);
         var cos = Math.Cos(rotation);
 
@@ -103,7 +103,7 @@ public static class ClippingFunctions
             var screenX = (point.X - centerX) * resolution;
             var screenY = (centerY - point.Y) * resolution;
 
-            if (viewportState.IsRotated())
+            if (viewport.IsRotated())
             {
                 var newX = screenX * cos - screenY * sin;
                 var newY = screenX * sin + screenY * cos;

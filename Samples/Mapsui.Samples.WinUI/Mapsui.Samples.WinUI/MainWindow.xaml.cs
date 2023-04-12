@@ -10,7 +10,6 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
-using Mapsui.UI;
 using Mapsui.Tiling;
 using Mapsui.Samples.Common.Utilities;
 
@@ -35,7 +34,7 @@ public sealed partial class MainWindow : Window
         InitializeComponent();
 
         MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        MapControl.Map.Viewport.Limiter.RotationLock = false;
+        MapControl.Map.Navigator.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -110,6 +109,5 @@ public sealed partial class MainWindow : Window
     {
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
         MapControl.Map.Navigator.RotateTo(percent * 360);
-        MapControl.Refresh();
     }
 }

@@ -69,7 +69,7 @@ public class RasterizingTileLayerGeoJsonSample : IMapControlSample
         return new VectorStyle
         {
             Fill = new Brush(Color.White),
-            Outline  = new Pen(Color.Black, width: 10),
+            Outline = new Pen(Color.Black, width: 10),
             Line = new Pen(Color.Black, width: 10),
         };
     }

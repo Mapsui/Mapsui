@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
@@ -8,11 +7,8 @@ using Avalonia.Markup.Xaml;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Samples.Common.Maps;
-using Mapsui.Samples.Common.Utilities;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using Mapsui.UI.Avalonia;
 
 namespace Mapsui.Samples.Avalonia.Views;
@@ -38,7 +34,7 @@ public partial class MainWindow : Window
         AvaloniaXamlLoader.Load(this);
 
         MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        MapControl.Map.Viewport.Limiter.RotationLock = false;
+        MapControl.Map.Navigator.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -117,7 +113,6 @@ public partial class MainWindow : Window
         // This is probably not the proper event handler for this but I don't know what is.
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
         MapControl.Map.Navigator.RotateTo(percent * 360);
-        MapControl.Refresh();
     }
 
 }

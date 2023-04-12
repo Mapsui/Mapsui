@@ -54,7 +54,7 @@ public class EditManipulation
                         return editManager.TryInsertCoordinate(
                             mapControl.GetMapInfo(screenPosition, editManager.VertexRadius));
                     }
-                    return editManager.AddVertex(mapControl.Map.Viewport.State.ScreenToWorld(screenPosition).ToCoordinate());
+                    return editManager.AddVertex(mapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
                 }
                 return false;
             case MouseState.Down:

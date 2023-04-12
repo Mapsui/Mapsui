@@ -1,5 +1,4 @@
-﻿using Mapsui.Limiting;
-using Mapsui.Tiling;
+﻿using Mapsui.Tiling;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Navigation;
@@ -11,9 +10,10 @@ internal class ZoomLockSample : ISample
 
     public Task<Map> CreateMapAsync()
     {
-        var map = new Map { Viewport = { Limiter = { ZoomLock = true } } };
-        map.Viewport.SetViewportStateWithLimit(map.Viewport.State with { Resolution = 4892 });
+        var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Navigator.ZoomTo(4892);
+        map.Navigator.ZoomLock = true;
         return Task.FromResult(map);
     }
 }
