@@ -120,10 +120,10 @@ public class MRect
     {
         if (rect is null) return false;
 
-        if (rect.Max.X < Min.X) return false;
-        if (rect.Max.Y < Min.Y) return false;
-        if (rect.Min.X > Max.X) return false;
-        if (rect.Min.Y > Max.Y) return false;
+        if (rect.Max.X <= Min.X) return false;
+        if (rect.Max.Y <= Min.Y) return false;
+        if (rect.Min.X >= Max.X) return false;
+        if (rect.Min.Y >= Max.Y) return false;
 
         return true;
     }
