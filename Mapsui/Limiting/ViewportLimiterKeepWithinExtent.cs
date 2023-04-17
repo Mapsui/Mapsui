@@ -13,6 +13,10 @@ public class ViewportLimiterKeepWithinExtent : IViewportLimiter
 {
     public Viewport Limit(Viewport viewport, MRect? panBounds, MMinMax? zoomBounds)
     {
+        if (viewport.IsRotated())
+        {
+            Logger.Log(LogLevel.Warning, "ViewportLimiterKeepWithinExtent does not support rotation.");
+        }
         return LimitExtent(LimitResolution(viewport, zoomBounds), panBounds, zoomBounds);
     }
 
@@ -64,6 +68,7 @@ public class ViewportLimiterKeepWithinExtent : IViewportLimiter
 
     private static double CalculateResolutionAtWhichMapFillsViewport(double screenWidth, double screenHeight, MRect panBounds)
     {
+        // This method does not take rotation into account. This is possible and could be implemented at some point.
         return Math.Min(panBounds.Width / screenWidth, panBounds.Height / screenHeight);
     }
 }
