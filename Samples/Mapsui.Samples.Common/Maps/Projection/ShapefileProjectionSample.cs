@@ -21,7 +21,7 @@ public class ShapefileProjectionSample : ISample
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
     }
 
-    public string Name => "Shapefile with Dot Spatial Projection";
+    public string Name => "Shapefile with Projection";
     public string Category => "Projection";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
@@ -34,6 +34,7 @@ public class ShapefileProjectionSample : ISample
         };
 
 #pragma warning disable IDISP001 // Dispose created
+#pragma warning disable IDISP004 // Don't ignore created IDisposable 
         var dotSpatialProjection = new DotSpatialProjection();
         var countriesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "countries.shp");
         var countrySource = new ShapeFile(countriesPath, true, true, dotSpatialProjection);
@@ -48,12 +49,13 @@ public class ShapefileProjectionSample : ISample
         {
             CRS = "EPSG:3857"
         };
-#pragma warning restore IDISP001 // Dispose created
 
         map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(countryProjected)));
         map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(cityProjected)));
         map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(countryProjected)));
         map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(cityProjected)));
+#pragma warning restore IDISP001 // Dispose created
+#pragma warning restore IDISP004 // Dispose created
         return map;
     }
 
