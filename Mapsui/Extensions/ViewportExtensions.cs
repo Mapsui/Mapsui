@@ -27,7 +27,11 @@ public static class ViewportExtensions
             return new MRect(min.X, min.Y, max.X, max.Y);
         }
 
-        // In case of the rotated viewport the 
+        // In case of the rotated viewport all four coordinates
+        // are transformed and the min and max x/y of these are
+        // taken to form the new box. In this case the result is
+        // not a real transformation because an MRect can not be
+        // rotated.
         var screenPoints = new List<MPoint>
         {
             viewport.WorldToScreen(rect.BottomLeft),
