@@ -21,7 +21,7 @@ public static class ClippingFunctions
     {
         var output = WorldToScreen(viewport, points);
 
-        // Do this for the 4 edges (left, top, right, bottom) of clipping rectangle
+         // Do this for the 4 edges (left, top, right, bottom) of clipping rectangle
         for (var j = 0; j < 4; j++)
         {
             // If there aren't any points to reduce
@@ -89,31 +89,9 @@ public static class ClippingFunctions
         if (points == null)
             return result;
 
-        var screenCenterX = viewport.Width * 0.5;
-        var screenCenterY = viewport.Height * 0.5;
-        var centerX = viewport.CenterX;
-        var centerY = viewport.CenterY;
-        var resolution = 1.0 / viewport.Resolution;
-        var rotation = viewport.Rotation / 180f * Math.PI;
-        var sin = Math.Sin(rotation);
-        var cos = Math.Cos(rotation);
-
         foreach (var point in points)
         {
-            var screenX = (point.X - centerX) * resolution;
-            var screenY = (centerY - point.Y) * resolution;
-
-            if (viewport.IsRotated())
-            {
-                var newX = screenX * cos - screenY * sin;
-                var newY = screenX * sin + screenY * cos;
-                screenX = newX;
-                screenY = newY;
-            }
-
-            screenX += screenCenterX;
-            screenY += screenCenterY;
-
+            var (screenX, screenY) = viewport.WorldToScreenXY(point.X, point.Y);
             result.Add(new SKPoint((float)screenX, (float)screenY));
         }
 
