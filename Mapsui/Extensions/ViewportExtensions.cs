@@ -1,4 +1,6 @@
 ﻿using Mapsui.Utilities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Mapsui.Extensions;
 
@@ -16,9 +18,20 @@ public static class ViewportExtensions
     /// <returns>Transformed rect</returns>
     public static MRect WorldToScreen(this Viewport viewport, MRect rect)
     {
-        var min = viewport.WorldToScreen(rect.Min);
-        var max = viewport.WorldToScreen(rect.Max);
-        return new MRect(min.X, min.Y, max.X, max.Y);
+        var screenPoints = new List<MPoint>
+        {
+            viewport.WorldToScreen(rect.BottomLeft),
+            viewport.WorldToScreen(rect.BottomRight),
+            viewport.WorldToScreen(rect.TopRight),
+            viewport.WorldToScreen(rect.TopLeft)
+        };
+
+        var minx = screenPoints.Select(p => p.X).Min();
+        var miny = screenPoints.Select(p => p.Y).Min();
+        var maxx = screenPoints.Select(p => p.X).Max();
+        var maxy = screenPoints.Select(p => p.Y).Max();
+
+        return new MRect(minx, miny, maxx, maxy).Grow(-50);
     }
 
     /// <summary>
