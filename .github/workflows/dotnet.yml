@@ -53,6 +53,7 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Gtk/Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj
     - name: Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer/Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer.csproj    
+    # Build Tests      
     - name: Build Mapsui.Rendering.Skia.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
     - name: Build Mapsui.Tests
