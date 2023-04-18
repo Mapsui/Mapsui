@@ -382,12 +382,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\Images\OriginalRegression\GeoTiffSample.Regression.png" />
-    <None Remove="Resources\Images\OriginalRegression\PolygonTestSample.Regression.png" />
-    <None Remove="Resources\Images\OriginalRegression\ShapefileSkpTileSample.Regression.png" />
-    <None Remove="Resources\Images\OriginalRegression\ShapefileTilingFilteringSample.Regression.png" />
-    <None Remove="Resources\Images\OriginalRegression\StackedLabelsTestSample.Regression.png" />
-    <None Remove="Resources\Images\OriginalRegression\WriteToLayerSample.Regression.png" />
-  </ItemGroup>
 </Project>
