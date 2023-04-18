@@ -6,6 +6,7 @@
     <WasmShellILLinkerEnabled>true</WasmShellILLinkerEnabled>
     <WasmShellForceDisableWSL Condition="'$(OS)' != 'Unix' and ('$(CI)' == 'true' or '$(BUILD_BUILDID)' != '')">true</WasmShellForceDisableWSL>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <NoWarn>$(NoWarn);NU1504</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
@@ -61,6 +62,7 @@
     <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" />
     <PackageReference Include="SkiaSharp.Views.Uno" />
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" VersionOverride="7.0.1" />
   </ItemGroup>
 
   <!--Harfbuzz Sharp references Workaround for this issue-->

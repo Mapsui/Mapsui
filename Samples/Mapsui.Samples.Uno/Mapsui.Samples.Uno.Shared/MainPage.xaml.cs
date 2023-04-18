@@ -12,6 +12,7 @@ using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
+using RadioButton = Windows.UI.Xaml.Controls.RadioButton;
 
 namespace Mapsui.Samples.Uwp;
 
