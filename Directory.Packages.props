@@ -110,8 +110,8 @@
     <PackageVersion Include="Uno.UI.Skia.Tizen" Version="[4.7.44,5.0.0)" />
     <PackageVersion Include="Uno.UI.Skia.Wpf" Version="[4.7.44,5.0.0)" />
     <PackageVersion Include="Uno.UI.WebAssembly" Version="[4.7.44,5.0.0)" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap" Version="[3.3.1,8.0.0)" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="[3.3.1,8.0.0)" />
+    <PackageVersion Include="Uno.Wasm.Bootstrap" Version="[3.3.1,4.0.0)" />
+    <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="[3.3.1,4.0.0)" />
     <PackageVersion Include="Uno.WinUI" Version="[4.7.44,5.0.0)" />
     <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="[4.7.44,5.0.0)" />
     <PackageVersion Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="[4.7.44,5.0.0)" />
