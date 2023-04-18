@@ -46,9 +46,7 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Skia.Linux.FrameBuffer/Mapsui.Samples.Uno.Skia.Linux.FrameBuffer.csproj    
     # Samples Uno WinUI    
     - name: Mapsui.Samples.Uno.WinUI.Skia.Gtk
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Gtk/Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj
-    - name: Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer/Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer.csproj    
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Gtk/Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj    
     # Build Tests      
     # tests that depend on skia seem not work because of missing dependencies on linux.
     #- name: Build Mapsui.Rendering.Skia.Tests
