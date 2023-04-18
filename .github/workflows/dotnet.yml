@@ -10,12 +10,12 @@ on:
 
 jobs:
 
- #linuxBuild:      
-    #runs-on: ubuntu-latest
-    #steps:
-    #- uses: actions/checkout@v3
-    #  with:
-    #    fetch-depth: 0
+ linuxBuild:      
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     # Cache Nugets
     #- uses: actions/cache@v3
     #  with:
