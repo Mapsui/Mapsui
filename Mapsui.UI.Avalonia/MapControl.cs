@@ -29,11 +29,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private MPoint? _downMousePosition;
     private bool _mouseDown;
     private MPoint? _previousMousePosition;
-    private double _toResolution = double.NaN;
-    private double _mouseWheelPos = 0.0;
 
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
-    public MouseWheelAnimation MouseWheelAnimation { get; } = new() { Duration = 0 };
 
     public MapControl()
     {
@@ -87,34 +84,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlMouseWheel(object? sender, PointerWheelEventArgs e)
     {
-        if (Map.Viewport.Limiter.ZoomLock) return;
-        if (!Map.Viewport.State.HasSize()) return;
-
+        var mouseWheelDelta = (int)e.Delta.Y;
         _currentMousePosition = e.GetPosition(this).ToMapsui();
-        //Needed for both MouseMove and MouseWheel event for mousewheel event
-
-        if (double.IsNaN(_toResolution))
-            _toResolution = Map.Viewport.State.Resolution;
-
-        _mouseWheelPos += e.Delta.Y;
-        int delta = (int)_mouseWheelPos;
-        bool navigate = false;
-        if (_mouseWheelPos >= 1.0)
-        {
-            _toResolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
-            _mouseWheelPos -= 1.0;
-            navigate = true;
-        }
-        else if (_mouseWheelPos <= -1.0)
-        {
-            _toResolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
-            _mouseWheelPos += 1.0;
-            navigate = true;
-        }
-        if (!navigate) return;
-
-        var resolution = MouseWheelAnimation.GetResolution(delta, Map.Viewport, _map);
-        Map.Navigator.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, _currentMousePosition);
     }
 
     private void MapControlMouseLeftButtonDown(PointerPressedEventArgs e)
@@ -134,7 +106,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             foreach (var layer in Map.Layers)
             {
                 // ReSharper disable once SuspiciousTypeConversion.Global
-                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Viewport.State, _downMousePosition.X, _downMousePosition.Y,
+                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.Viewport, _downMousePosition.X, _downMousePosition.Y,
                     OnFeatureInfo);
             }
     }
@@ -163,8 +135,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
                 return;
             }
 
-            Map.Viewport.Transform(_currentMousePosition, _previousMousePosition);
-            RefreshGraphics();
+            Map.Navigator.Drag(_currentMousePosition, _previousMousePosition);
             _previousMousePosition = _currentMousePosition;
         }
     }

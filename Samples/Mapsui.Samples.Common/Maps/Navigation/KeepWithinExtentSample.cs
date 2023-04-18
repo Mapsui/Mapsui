@@ -15,12 +15,12 @@ public class KeepWithinExtentSample : ISample
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
-        var panLimits = GetLimitsOfMadagaskar();
-        map.Viewport.Limiter = new ViewportLimiterKeepWithinExtent
-        {
-            PanLimits = panLimits
-        };
-        map.Home = n => n.NavigateTo(panLimits);
+        var panBounds = GetLimitsOfMadagaskar();
+        map.Layers.Add(KeepCenterInMapSample.CreatePanBoundsLayer(panBounds));
+        map.Navigator.Limiter = new ViewportLimiterKeepWithinExtent();
+        map.Navigator.RotationLock = true;
+        map.Navigator.OverridePanBounds = panBounds;
+        map.Home = n => n.ZoomToBox(panBounds);
         return Task.FromResult(map);
     }
 

@@ -2,7 +2,7 @@
 using Mapsui.Layers;
 using Mapsui.Rendering;
 
-namespace Mapsui.UI;
+namespace Mapsui;
 
 public class MapInfo
 {

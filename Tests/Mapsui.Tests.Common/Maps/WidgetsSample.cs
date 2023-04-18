@@ -8,19 +8,18 @@ using Mapsui.Widgets.ScaleBar;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class WidgetsSample : IMapControlSample
+public class WidgetsSample : ISample
 {
     public string Name => "Widgets";
 
     public string Category => "Tests";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
 
     public static Map CreateMap()
     {

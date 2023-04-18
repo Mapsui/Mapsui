@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
-using Mapsui.UI;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Logging;
-using Mapsui.Rendering.Skia;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Styles;
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.Xaml;
 using Microsoft.Maui.Devices.Sensors;
 using Compass = Microsoft.Maui.Devices.Sensors.Compass;
 using Microsoft.Maui.Dispatching;
@@ -81,7 +78,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
         mapView.Refresh();
     }
 
-    private void MapView_Info(object? sender, UI.MapInfoEventArgs? e)
+    private void MapView_Info(object? sender, Mapsui.MapInfoEventArgs? e)
     {
         if (e?.MapInfo?.Feature != null)
         {
@@ -94,7 +91,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
                 }
             }
 
-            mapView.Refresh();
+            mapView.RefreshGraphics();
         }
     }
 
@@ -175,7 +172,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
                 mapView?.MyLocationLayer.UpdateMyLocation(new Position(e.Latitude, e.Longitude));
                 if (e.Course != null)
                 {
-                    mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView?.Map.Viewport.State.Rotation ?? 0);
+                    mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView?.Map.Navigator.Viewport.Rotation ?? 0);
                 }
 
                 if (e.Speed != null)
@@ -192,7 +189,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
 
     private void Compass_ReadingChanged(object? sender, CompassChangedEventArgs e)
     {
-        mapView.MyLocationLayer.UpdateMyViewDirection(e.Reading.HeadingMagneticNorth, mapView.Map.Viewport.State.Rotation, false);
+        mapView.MyLocationLayer.UpdateMyViewDirection(e.Reading.HeadingMagneticNorth, mapView.Map.Navigator.Viewport.Rotation, false);
     }
 
     public void Dispose()

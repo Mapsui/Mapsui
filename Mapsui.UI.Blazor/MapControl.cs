@@ -38,7 +38,7 @@ public partial class MapControl : ComponentBase, IMapControl
     public int MoveModifier { get; set; } = Keys.None;
     public int ZoomButton { get; set; } = MouseButtons.Primary;
     public int ZoomModifier { get; set; } = Keys.Control;
-    public MouseWheelAnimation MouseWheelAnimation { get; } = new();
+
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
     private MapsuiJsInterop? _interop;
 
@@ -136,21 +136,10 @@ public partial class MapControl : ComponentBase, IMapControl
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     protected async void OnMouseWheel(WheelEventArgs e)
     {
-        try
-        {
-            if (Map.Viewport.Limiter.ZoomLock) return;
-            if (!Map.Viewport.State.HasSize()) return;
-
-            var delta = e.DeltaY * -1; // so that it zooms like on windows
-            var resolution = MouseWheelAnimation.GetResolution((int)delta, Map.Viewport, Map);
-            Map.Navigator.ZoomTo(resolution, e.Location(await BoundingClientRectAsync()).ToMapsui(), 
-                MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
-    }
+        var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
+        var currentMousePosition = e.Location(await BoundingClientRectAsync()).ToMapsui();
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
+}
 
     private async Task<BoundingClientRect> BoundingClientRectAsync()
     {
@@ -228,8 +217,8 @@ public partial class MapControl : ComponentBase, IMapControl
             {
                 if (_selectRectangle != null)
                 {
-                    var previous = Map.Viewport.State.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
-                    var current = Map.Viewport.State.ScreenToWorld(_selectRectangle.BottomRight.X,
+                    var previous = Map.Navigator.Viewport.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
+                    var current = Map.Navigator.Viewport.ScreenToWorld(_selectRectangle.BottomRight.X,
                         _selectRectangle.BottomRight.Y);
                     ZoomToBox(previous, current);
                 }
@@ -277,10 +266,8 @@ public partial class MapControl : ComponentBase, IMapControl
                 {
                     Cursor = MoveCursor;
 
-                    Map.Viewport.Transform(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui());
-
-                    RefreshGraphics();
-
+                    var currentPosition = e.Location(await BoundingClientRectAsync()).ToMapsui();
+                    Map.Navigator.Drag(currentPosition, _downMousePosition.ToMapsui());
                     _downMousePosition = e.Location(await BoundingClientRectAsync());
                 }
             }
@@ -293,18 +280,8 @@ public partial class MapControl : ComponentBase, IMapControl
 
     public void ZoomToBox(MPoint beginPoint, MPoint endPoint)
     {
-        var width = Math.Abs(endPoint.X - beginPoint.X);
-        var height = Math.Abs(endPoint.Y - beginPoint.Y);
-        if (width <= 0) return;
-        if (height <= 0) return;
-
-        ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
-            ViewportWidth, ViewportHeight, out var x, out var y, out var resolution);
-
-        Map.Navigator.NavigateTo(new MPoint(x, y), resolution, 384);
-
-        RefreshData();
-        RefreshGraphics();
+        var box = new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y);
+        Map.Navigator.ZoomToBox(box, duration: 300); ;
         ClearBBoxDrawing();
     }
 

@@ -1,32 +1,22 @@
-﻿using Mapsui.Extensions;
+﻿using Mapsui.Animations;
+using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.UI;
-using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
-public class ViewportCenterOnAnimationSample : IMapControlSample
+public class ViewportCenterOnAnimationSample : ISample
 {
     public string Name => "Animated Viewport - Center";
     public string Category => "Animations";
 
     public static int mode = 1;
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
 
-        mapControl.Map.Info += (s, a) =>
-        {
-            if (a.MapInfo?.WorldPosition != null)
-            {
-                // Animate to the new center.
-                mapControl.Map.Navigator.CenterOn(a.MapInfo.WorldPosition, 500, Easing.CubicOut);
-            }
-        };
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
@@ -42,6 +32,14 @@ public class ViewportCenterOnAnimationSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top
         });
         map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+        map.Info += (s, a) =>
+        {
+            if (a.MapInfo?.WorldPosition != null)
+            {
+                // Animate to the new center.
+                map.Navigator.CenterOn(a.MapInfo.WorldPosition, 500, Easing.CubicOut);
+            }
+        };
         return map;
     }
 }

@@ -1,25 +1,24 @@
 ﻿using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
+using System.Threading.Tasks;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class EmptySample : IMapControlSample
+public class EmptySample : ISample
 {
     public string Name => "Empty";
     public string Category => "Tests";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
 
     public static Map CreateMap()
     {
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.NavigateTo(new MPoint(0, 0), 1)
+            Home = n => n.CenterOnAndZoomTo(new MPoint(0, 0), 1)
         };
         return map;
     }

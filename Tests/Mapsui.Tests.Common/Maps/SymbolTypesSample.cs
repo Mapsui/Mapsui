@@ -1,24 +1,20 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
-using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class SymbolTypesSample : IMapControlSample
+#pragma warning disable IDISP001 // Dispose created
+
+public class SymbolTypesSample : ISample
 {
     public string Name => "Symbol Types";
     public string Category => "Tests";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001", MessageId = "Dispose created.")]
     public static Map CreateMap()
     {
         var layer = CreateLayer();
@@ -26,7 +22,7 @@ public class SymbolTypesSample : IMapControlSample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.NavigateTo(layer.Extent!.Grow(layer.Extent.Width * 2))
+            Home = n => n.ZoomToBox(layer.Extent!.Grow(layer.Extent.Width * 2))
         };
 
         map.Layers.Add(layer);

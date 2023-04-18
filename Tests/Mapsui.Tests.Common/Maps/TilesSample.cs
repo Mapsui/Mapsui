@@ -2,11 +2,9 @@
 using System.Threading.Tasks;
 using BruTile;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.Tiling.Extensions;
-using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps;
 
@@ -22,7 +20,7 @@ public class TilesSample : ISample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.NavigateToFullEnvelope()
+            Home = n => n.ZoomToPanBounds()
         };
 
         map.Layers.Add(layer);

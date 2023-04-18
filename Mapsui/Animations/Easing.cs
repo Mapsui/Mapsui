@@ -26,7 +26,7 @@
 
 using System;
 
-namespace Mapsui.Utilities;
+namespace Mapsui.Animations;
 
 public class Easing
 {

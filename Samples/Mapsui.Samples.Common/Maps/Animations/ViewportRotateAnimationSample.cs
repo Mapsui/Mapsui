@@ -1,32 +1,22 @@
-﻿using Mapsui.Extensions;
+﻿using Mapsui.Animations;
+using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.UI;
-using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
-public class ViewportRotateAnimationSample : IMapControlSample
+public class ViewportRotateAnimationSample : ISample
 {
     public string Name => "Animated Viewport - Rotate";
     public string Category => "Animations";
 
     public static int mode = 1;
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
 
-        mapControl.Map.Info += (s, a) =>
-        {
-            if (a.MapInfo?.WorldPosition != null)
-            {
-                // Animate towards a new rotation, choosing the most adjacent angle.
-                mapControl.Map.Navigator.RotateTo(mapControl.Map.Viewport.State.Rotation + 45, 500, Easing.CubicIn);
-            }
-        };
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
@@ -42,6 +32,14 @@ public class ViewportRotateAnimationSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top
         });
         map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+        map.Info += (s, a) =>
+        {
+            if (a.MapInfo?.WorldPosition != null)
+            {
+                // Animate towards a new rotation, choosing the most adjacent angle.
+                map.Navigator.RotateTo(map.Navigator.Viewport.Rotation + 45, 500, Easing.CubicIn);
+            }
+        };
         return map;
     }
 }

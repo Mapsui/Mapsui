@@ -22,7 +22,7 @@ public class ComplexPolygonSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         var polygonLayer = CreateLayer();
         map.Layers.Add(polygonLayer);
-        map.Home = n => n.NavigateTo(polygonLayer.Extent!.Centroid, map.Resolutions[15]);
+        map.Home = n => n.CenterOnAndZoomTo(polygonLayer.Extent!.Centroid, n.Resolutions[15]);
         return Task.FromResult(map);
     }
 

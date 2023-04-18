@@ -1,201 +1,102 @@
-// Copyright (c) The Mapsui authors.
+﻿// Copyright (c) The Mapsui authors.
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-// This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
-
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using Mapsui.Extensions;
-using Mapsui.Limiting;
-using Mapsui.Utilities;
-using Mapsui.ViewportAnimations;
-
 namespace Mapsui;
 
-/// <summary>
-/// Viewport holds all information about the visible part of the map.
-/// </summary>
-/// <remarks>
-/// Viewport is the connection between Map and MapControl. It tells MapControl,
-/// which part of Map should be displayed on screen.
-/// </remarks>
-public class Viewport
+public record struct Viewport
 {
-    public event PropertyChangedEventHandler? ViewportChanged;
-
-    // State
-    private ViewportState _state = new(0, 0, 1, 0, 0, 0);
-
-    private List<AnimationEntry<Viewport>> _animations = new();
-
-    public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
-
-    public ViewportState State
+    public Viewport(double centerX, double centerY, double resolution, double rotation, double width, double height)
     {
-        get => _state;
-        private set
-        {
-            if (_state == value) return;
-            _state = value;
-            OnViewportChanged();
-        }
-    }
-
-    /// <inheritdoc />
-    public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0)
-    {
-        if (Limiter.ZoomLock) deltaResolution = 1;
-        if (Limiter.PanLock) positionScreen = previousPositionScreen;
-
-        _animations = new();
-
-        State = Limiter.Limit(TransformState(_state, positionScreen, previousPositionScreen, deltaResolution, deltaRotation));
-    }
-
-    private static ViewportState TransformState(ViewportState state, MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation)
-    {
-        var previous = state.ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
-        var current = state.ScreenToWorld(positionScreen.X, positionScreen.Y);
-
-        var newX = state.CenterX + previous.X - current.X;
-        var newY = state.CenterY + previous.Y - current.Y;
-
-        if (deltaResolution == 1 && deltaRotation == 0 && state.CenterX == newX && state.CenterY == newY)
-            return state;
-
-        if (deltaResolution != 1)
-        {
-            state = state with { Resolution = state.Resolution / deltaResolution };
-
-            // Calculate current position again with adjusted resolution
-            // Zooming should be centered on the place where the map is touched.
-            // This is done with the scale correction.
-            var scaleCorrectionX = (1 - deltaResolution) * (current.X - state.CenterX);
-            var scaleCorrectionY = (1 - deltaResolution) * (current.Y - state.CenterY);
-
-            newX -= scaleCorrectionX;
-            newY -= scaleCorrectionY;
-        }
-
-        state = state with { CenterX = newX, CenterY = newY };
-
-        if (deltaRotation != 0)
-        {
-            current = state.ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
-            state = state with { Rotation = state.Rotation + deltaRotation };
-            var postRotation = state.ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
-            state = state with { CenterX = state.CenterX - (postRotation.X - current.X), CenterY = state.CenterY - (postRotation.Y - current.Y) };
-        }
-
-        return state;
-    }
-
-    public void SetSize(double width, double height)
-    {
-        _animations = new();
-
-        var newState = _state with { Width = width, Height = height };
-        newState = Limiter.Limit(newState);
-        State = newState;
-    }
-
-    public void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
-    {
-        if (Limiter.PanLock) return;
-        _animations = new();
-
-        var newState = Limiter.Limit(_state with { CenterX = x, CenterY = y });
-        State = newState;
-    }
-
-    public void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
-    {
-        if (Limiter.PanLock) return;
-        if (Limiter.ZoomLock) return;
-
-        _animations = new();
-
-        var newState = _state with { CenterX = x, CenterY = y, Resolution = resolution };
-        newState = Limiter.Limit(newState);
-
-        if (duration == 0)
-            State = newState;
-        else
-            _animations = ViewportStateAnimation.Create(this, newState, duration, easing);
-    }
-
-    public void SetCenter(MPoint center, long duration = 0, Easing? easing = default)
-    {
-        if (Limiter.PanLock) return;
-
-        _animations = new();
-
-        var newState = _state with { CenterX = center.X, CenterY = center.Y };
-        newState = Limiter.Limit(newState);
-
-        if (duration == 0)
-            State = newState;
-        else
-            _animations = ViewportStateAnimation.Create(this, newState, duration, easing);
-    }
-
-    public void SetResolution(double resolution, long duration = 0, Easing? easing = default)
-    {
-        if (Limiter.ZoomLock) return;
-
-        _animations = new();
-
-        var newState = _state with { Resolution = resolution };
-        newState = Limiter.Limit(newState);
-
-        if (duration == 0)
-            State = newState;
-        else
-            _animations = ViewportStateAnimation.Create(this, newState, duration, easing);
-    }
-
-    public void SetRotation(double rotation, long duration = 0, Easing? easing = default)
-    {
-        if (Limiter.RotationLock) return;
-
-        _animations = new();
-
-        var newState = _state with { Rotation = rotation };
-        newState = Limiter.Limit(newState);
-
-        if (duration == 0)
-            State = newState;
-        else
-            _animations = ViewportStateAnimation.Create(this, newState, duration, easing);
+        CenterX = centerX;
+        CenterY = centerY;
+        Resolution = resolution;
+        Rotation = rotation;
+        Width = width;
+        Height = height;
     }
 
     /// <summary>
-    /// Property change event
+    /// The X coordinate of the center of the viewport in world coordinates
     /// </summary>
-    /// <param name="propertyName">Name of property that changed</param>
-    private void OnViewportChanged([CallerMemberName] string? propertyName = null)
+    public double CenterX { get; init; }
+    /// <summary>
+    /// The Y coordinate of the center of the viewport in world coordinates
+    /// </summary>
+    public double CenterY { get; init; }
+    /// <summary>
+    /// Resolution of the viewport in units per pixel
+    /// </summary>
+    /// <remarks>
+    /// The Resolution in Mapsui is what is often called zoom level. Because Mapsui is projection independent, there 
+    /// aren't any zoom levels as other map libraries have. If your map has EPSG:3857 as projection
+    /// and you want to calculate the zoom, you should use the following equation
+    /// 
+    ///     var zoom = (float)Math.Log(78271.51696401953125 / resolution, 2);
+    /// </remarks>
+    public double Resolution { get; init; }
+    /// <summary>
+    /// Viewport rotation from True North (clockwise degrees)
+    /// </summary>
+    public double Rotation { get; init; }
+    /// <summary>
+    /// Width of viewport in screen pixels
+    /// </summary>
+    public double Width { get; init; }
+    /// <summary>
+    /// Height of viewport in screen pixels
+    /// </summary>
+    public double Height { get; init; }
+
+    public static Viewport operator +(Viewport a, Viewport b)
     {
-        ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        return a with
+        {
+            CenterX = a.CenterX + b.CenterX,
+            CenterY = a.CenterY + b.CenterY,
+            Resolution = a.Resolution + b.Resolution,
+            Rotation = a.Rotation + b.Rotation,
+            Width = a.Width + b.Width,
+            Height = a.Height + b.Height
+        };
     }
 
-    public bool UpdateAnimations()
+    public static Viewport operator -(Viewport a, Viewport b)
     {
-        if (_animations.All(a => a.Done)) _animations = new List<AnimationEntry<Viewport>>();
-        return Animation.UpdateAnimations(this, _animations);
+        return a with
+        {
+            CenterX = a.CenterX - b.CenterX,
+            CenterY = a.CenterY - b.CenterY,
+            Resolution = a.Resolution - b.Resolution,
+            Rotation = a.Rotation - b.Rotation,
+            Width = a.Width - b.Width,
+            Height = a.Height - b.Height
+        };
     }
 
-    public void SetAnimations(List<AnimationEntry<Viewport>> animations)
+    public static Viewport operator *(Viewport v, double m)
     {
-        _animations = animations;
+        return v with
+        {
+            CenterX = v.CenterX * m,
+            CenterY = v.CenterY * m,
+            Resolution = v.Resolution * m,
+            Rotation = v.Rotation * m,
+            Width = v.Width * m,
+            Height = v.Height * m
+        };
     }
 
-    public LimitResult SetViewportStateWithLimit(ViewportState viewportState)
+    public static Viewport operator /(Viewport v, double d)
     {
-        var newState = Limiter.Limit(viewportState);
-        State = newState;
-        return new LimitResult(viewportState, newState);
+        return v with
+        {
+            CenterX = v.CenterX / d,
+            CenterY = v.CenterY / d,
+            Resolution = v.Resolution / d,
+            Rotation = v.Rotation / d,
+            Width = v.Width / d,
+            Height = v.Height / d
+        };
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -10,16 +11,14 @@ using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class StackedLabelsTestSample : IMapControlSample
+public class StackedLabelsTestSample : ISample
 {
     private const string LabelColumn = "Label";
     public string Category => "Tests";
     public string Name => "Stacked Labels";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
 
     public static Map CreateMap()
     {
@@ -31,7 +30,7 @@ public class StackedLabelsTestSample : IMapControlSample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.NavigateTo(layer.Extent!.Grow(layer.Extent.Width * 0.3))
+            Home = n => n.ZoomToBox(layer.Extent!.Grow(layer.Extent.Width * 0.3))
         };
 
         map.Layers.Add(stackedLabelLayer);

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
@@ -10,15 +11,13 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class BitmapSymbolInCollectionSample : IMapControlSample
+public class BitmapSymbolInCollectionSample : ISample
 {
     public string Name => "Collection with Bitmap Symbol";
     public string Category => "Tests";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
 
     public static Map CreateMap()
     {
@@ -32,7 +31,7 @@ public class BitmapSymbolInCollectionSample : IMapControlSample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.NavigateTo(layer.Extent!.Grow(layer.Extent.Width * 2))
+            Home = n => n.ZoomToBox(layer.Extent!.Grow(layer.Extent.Width * 2))
         };
 
         map.Layers.Add(layer);

@@ -11,7 +11,6 @@ using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Styles;
-using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidget;
 using Mapsui.Widgets.ScaleBar;
@@ -53,7 +52,7 @@ public class MapRenderer : IRenderer
         WidgetRenders[typeof(ButtonWidget)] = new ButtonWidgetRenderer();
     }
 
-    public void Render(object target, ViewportState viewport, IEnumerable<ILayer> layers,
+    public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,
         IEnumerable<IWidget> widgets, Color? background = null)
     {
         var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
@@ -63,7 +62,7 @@ public class MapRenderer : IRenderer
         RenderTypeSave((SKCanvas)target, viewport, layers, allWidgets, background);
     }
 
-    private void RenderTypeSave(SKCanvas canvas, ViewportState viewport, IEnumerable<ILayer> layers,
+    private void RenderTypeSave(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers,
         IEnumerable<IWidget> widgets, Color? background = null)
     {
         if (!viewport.HasSize()) return;
@@ -73,11 +72,9 @@ public class MapRenderer : IRenderer
         Render(canvas, viewport, widgets, 1);
     }
 
-    public MemoryStream RenderToBitmapStream(ViewportState viewport, IEnumerable<ILayer> layers,
+    public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers,
         Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png)
     {
-        if (viewport == null) throw new ArgumentNullException(nameof(viewport));
-
         try
         {
             var width = viewport.Width;
@@ -132,7 +129,7 @@ public class MapRenderer : IRenderer
         }
     }
 
-    private void RenderTo(ViewportState viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
+    private void RenderTo(Viewport viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
         IEnumerable<IWidget>? widgets, SKCanvas skCanvas)
     {
         if (skCanvas == null) throw new ArgumentNullException(nameof(viewport));
@@ -145,7 +142,7 @@ public class MapRenderer : IRenderer
             Render(skCanvas, viewport, widgets, 1);
     }
 
-    private void Render(SKCanvas canvas, ViewportState viewport, IEnumerable<ILayer> layers)
+    private void Render(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers)
     {
         try
         {
@@ -161,7 +158,7 @@ public class MapRenderer : IRenderer
         }
     }
 
-    private void RenderFeature(SKCanvas canvas, ViewportState viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity, long iteration)
+    private void RenderFeature(SKCanvas canvas, Viewport viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity, long iteration)
     {
         // Check, if we have a special renderer for this style
         if (StyleRenderers.ContainsKey(style.GetType()))
@@ -180,12 +177,12 @@ public class MapRenderer : IRenderer
         }
     }
 
-    private void Render(object canvas, ViewportState viewport, IEnumerable<IWidget> widgets, float layerOpacity)
+    private void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
     {
         WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
     }
 
-    public MapInfo? GetMapInfo(double x, double y, ViewportState viewport, IEnumerable<ILayer> layers, int margin = 0)
+    public MapInfo? GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
     {
         // todo: use margin to increase the pixel area
         // todo: We will need to select on style instead of layer

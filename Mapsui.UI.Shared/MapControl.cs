@@ -72,7 +72,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (_drawing) return;
         if (Renderer is null) return;
         if (Map is null) return;
-        if (!Map.Viewport.State.HasSize()) return;
+        if (!Map.Navigator.Viewport.HasSize()) return;
 
         // Start drawing
         _drawing = true;
@@ -82,7 +82,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         // All requested updates up to this point will be handled by this redraw
         _refresh = false;
-        Renderer.Render(canvas, Map.Viewport.State, Map.Layers, Map.Widgets, Map.BackColor);
+        Renderer.Render(canvas, Map.Navigator.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
 
         // Stop stopwatch after drawing control
         _stopwatch.Stop();
@@ -99,14 +99,14 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         // In MAUI if you use binding there is an event where the new value is null even though
         // the current value en the value you are binding to are not null. Perhaps this should be
         // considered a bug.
-        if (Map is null) return; 
+        if (Map is null) return;
 
         // Check, if we have to redraw the screen
 
         if (Map.UpdateAnimations() == true)
             _refresh = true;
 
-        if (Map.Viewport.UpdateAnimations())
+        if (Map.Navigator.UpdateAnimations())
             _refresh = true;
 
         if (!_refresh)
@@ -294,12 +294,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <param name="map">Map, to which events to subscribe</param>
     private void SubscribeToMapEvents(Map map)
     {
-        map.DataChanged += MapDataChanged;
-        map.PropertyChanged += MapPropertyChanged;
-        map.RefreshGraphicsRequest += MapRefreshGraphics;
+        map.DataChanged += Map_DataChanged;
+        map.PropertyChanged += Map_PropertyChanged;
+        map.RefreshGraphicsRequest += Map_RefreshGraphicsRequest;
     }
 
-    private void MapRefreshGraphics(object? sender, EventArgs e)
+    private void Map_RefreshGraphicsRequest(object? sender, EventArgs e)
     {
         RefreshGraphics();
     }
@@ -311,9 +311,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private void UnsubscribeFromMapEvents(Map map)
     {
         var localMap = map;
-        localMap.DataChanged -= MapDataChanged;
-        localMap.PropertyChanged -= MapPropertyChanged;
-        localMap.RefreshGraphicsRequest -= MapRefreshGraphics;
+        localMap.DataChanged -= Map_DataChanged;
+        localMap.PropertyChanged -= Map_PropertyChanged;
+        localMap.RefreshGraphicsRequest -= Map_RefreshGraphicsRequest;
         localMap.AbortFetch();
     }
 
@@ -327,7 +327,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _refresh = true;
     }
 
-    private void MapDataChanged(object? sender, DataChangedEventArgs? e)
+    private void Map_DataChanged(object? sender, DataChangedEventArgs? e)
     {
         RunOnUIThread(() =>
         {
@@ -356,13 +356,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             }
             catch (Exception exception)
             {
-                Logger.Log(LogLevel.Warning, $"Unexpected exception in {nameof(MapDataChanged)}", exception);
+                Logger.Log(LogLevel.Warning, $"Unexpected exception in {nameof(Map_DataChanged)}", exception);
             }
         });
     }
     // ReSharper disable RedundantNameQualifier - needed for iOS for disambiguation
 
-    private void MapPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void Map_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(Layers.Layer.Enabled))
         {
@@ -395,7 +395,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public void CallHomeIfNeeded()
     {
-        if (!Map.HomeIsCalledOnce && Map.Viewport.State.HasSize() && Map?.Extent is not null)
+        if (!Map.HomeIsCalledOnce && Map.Navigator.Viewport.HasSize() && Map?.Extent is not null)
         {
             Map.Home?.Invoke(Map.Navigator);
             Map.HomeIsCalledOnce = true;
@@ -466,7 +466,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (map is null) return; // Although the Map property can not null the map argument can null during initializing and binding.
 
-        map.Viewport.SetSize(ViewportWidth, ViewportHeight);
+        map.Navigator.SetSize(ViewportWidth, ViewportHeight);
         SubscribeToMapEvents(map);
         CallHomeIfNeeded();
         Refresh();
@@ -522,13 +522,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (screenPosition == null)
             return null;
 
-        return Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Viewport.State, Map?.Layers ?? new LayerCollection(), margin);
+        return Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? new LayerCollection(), margin);
     }
 
     /// <inheritdoc />
     public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null)
     {
-        using var stream = Renderer.RenderToBitmapStream(Map.Viewport.State, layers ?? Map?.Layers ?? new LayerCollection(), pixelDensity: PixelDensity);
+        using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? new LayerCollection(), pixelDensity: PixelDensity);
         return stream.ToArray();
     }
 
@@ -581,7 +581,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
 
         // Check which features in the map were tapped.
-        var mapInfo = Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Viewport.State, Map?.Layers ?? new LayerCollection());
+        var mapInfo = Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? new LayerCollection());
 
         if (mapInfo != null)
         {
@@ -598,9 +598,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private protected void SetViewportSize()
     {
-        var hadSize = Map.Viewport.State.HasSize();
-        Map.Viewport.SetSize(ViewportWidth, ViewportHeight);
-        if (!hadSize && Map.Viewport.State.HasSize()) Map.OnViewportSizeInitialized();
+        var hadSize = Map.Navigator.Viewport.HasSize();
+        Map.Navigator.SetSize(ViewportWidth, ViewportHeight);
+        if (!hadSize && Map.Navigator.Viewport.HasSize()) Map.OnViewportSizeInitialized();
         CallHomeIfNeeded();
         Refresh();
     }

@@ -1,19 +1,19 @@
 ﻿using System;
 
-namespace Mapsui.Utilities;
+namespace Mapsui.Animations;
 
 public class AnimationEntry<T>
 {
     private readonly double _animationDelta;
-    private readonly Action<T, AnimationEntry<T>, double>? _tick;
-    private readonly Action<T, AnimationEntry<T>>? _final;
+    private readonly Func<T, AnimationEntry<T>, double, AnimationResult<T>>? _tick;
+    private readonly Func<T, AnimationEntry<T>, AnimationResult<T>>? _final;
 
     public AnimationEntry(object start, object end,
         double animationStart = 0, double animationEnd = 1,
         Easing? easing = null,
         bool repeat = false,
-        Action<T, AnimationEntry<T>, double>? tick = null,
-        Action<T, AnimationEntry<T>>? final = null)
+        Func<T, AnimationEntry<T>, double, AnimationResult<T>>? tick = null,
+        Func<T, AnimationEntry<T>, AnimationResult<T>>? final = null)
     {
         AnimationStart = animationStart;
         AnimationEnd = animationEnd;
@@ -75,11 +75,13 @@ public class AnimationEntry<T>
     /// </summary>
     internal long DurationTicks { get; set; }
 
+
     /// <summary>
     /// Called when a value should changed
     /// </summary>
+    /// <param name="target">The thing that is changed by the animation.</param>
     /// <param name="value">Position in animation cycle between 0 and 1</param>
-    internal bool Tick(T target, double value)
+    internal AnimationResult<T> Tick(T target, double value)
     {
         // Each tick gets a value between 0 and 1 for its own cycle
         // Its independent from the global animation cycle
@@ -87,11 +89,10 @@ public class AnimationEntry<T>
 
         if (_tick != null)
         {
-            _tick(target, this, v);
-            return true;
+            return _tick(target, this, v);
         }
 
-        return false;
+        return new AnimationResult<T>(target, false);
     }
 
     /// <summary>
@@ -102,11 +103,12 @@ public class AnimationEntry<T>
     /// <summary>
     /// Called when the animation cycle is at the end
     /// </summary>
-    internal void Final(T target)
+    internal AnimationResult<T> Final(T target)
     {
         if (_final != null)
         {
-            _final(target, this);
+            return _final(target, this);
         }
+        return new AnimationResult<T>(target, false);
     }
 }

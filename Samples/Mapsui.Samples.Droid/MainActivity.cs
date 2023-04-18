@@ -17,7 +17,6 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
-using Mapsui.UI;
 using Mapsui.UI.Android;
 using Mapsui.Samples.Common.Maps.DataFormats;
 
@@ -48,7 +47,7 @@ public class MainActivity : AppCompatActivity
         _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol) ?? throw new NullReferenceException();
         _mapControl.Map = MbTilesSample.CreateMap();
         _mapControl.Info += MapOnInfo;
-        _mapControl.Map.Viewport.Limiter.RotationLock = true;
+        _mapControl.Map.Navigator.RotationLock = true;
         _mapControl.UnSnapRotationDegrees = 20;
         _mapControl.ReSnapRotationDegrees = 5;
         _mapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -211,7 +210,7 @@ public class MainActivity : AppCompatActivity
                 return;
 
             // Or position on feature position: 
-            var screenPosition = _mapControl.Map.Viewport.State.WorldToScreen(geometryFeature.Extent.Centroid);
+            var screenPosition = _mapControl.Map.Navigator.Viewport.WorldToScreen(geometryFeature.Extent.Centroid);
             var screenPositionInPixels = _mapControl.ToPixels(screenPosition);
 
             _popup.SetX((float)screenPositionInPixels.X);
