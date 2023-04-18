@@ -36,19 +36,13 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                       
     # Samples Forms    
     - name: Build Mapsui.Samples.Forms.Shared
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj    
-    - name: Build Mapsui.Samples.Forms.Android
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj             
-    # Samples Uno
-    - name: Mapsui.Samples.Uno.Mobile
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Mobile/Mapsui.Samples.Uno.Mobile.csproj
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj        
+    # Samples Uno    
     - name: Mapsui.Samples.Uno.Skia.Gtk
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Skia.Gtk/Mapsui.Samples.Uno.Skia.Gtk.csproj
     - name: Mapsui.Samples.Uno.Skia.Linux.FrameBuffer
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Skia.Linux.FrameBuffer/Mapsui.Samples.Uno.Skia.Linux.FrameBuffer.csproj    
-    # Samples Uno WinUI
-    - name: Mapsui.Samples.Uno.WinUI.Mobile
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Mobile/Mapsui.Samples.Uno.WinUI.Mobile.csproj
+    # Samples Uno WinUI    
     - name: Mapsui.Samples.Uno.WinUI.Skia.Gtk
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Gtk/Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj
     - name: Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer
@@ -129,7 +123,9 @@ jobs:
       run: nuget restore Mapsui.Mac.Legacy.sln   
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
-    # Samples Build           
+    # Samples Build               
+    - name: Mapsui.Samples.Avalonia
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia/Mapsui.Samples.Avalonia.csproj
     - name: Build Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                       
     # Samples Forms    
