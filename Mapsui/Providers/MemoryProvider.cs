@@ -54,7 +54,7 @@ public class MemoryProvider : IProvider
         if (fetchInfo == null) throw new ArgumentNullException(nameof(fetchInfo));
         if (fetchInfo.Extent == null) throw new ArgumentNullException(nameof(fetchInfo.Extent));
 
-        var features = Features.ToList();
+        var features = Features.ToArray(); // An Array is faster than a List
 
         fetchInfo = new FetchInfo(fetchInfo);
         // Use a larger extent so that symbols partially outside of the extent are included
@@ -83,7 +83,7 @@ public class MemoryProvider : IProvider
         return _boundingBox;
     }
 
-    private static MRect? GetExtent(IReadOnlyList<IFeature> features)
+    internal static MRect? GetExtent(IReadOnlyList<IFeature> features)
     {
         MRect? box = null;
         foreach (var feature in features)
