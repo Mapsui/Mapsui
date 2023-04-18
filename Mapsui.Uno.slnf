@@ -17,8 +17,6 @@
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.Mobile\\Mapsui.Samples.Uno.WinUI.Mobile.csproj",
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.Shared\\Mapsui.Samples.Uno.WinUI.Shared.shproj",
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.Skia.Gtk\\Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj",
-      "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer\\Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer.csproj",
-      "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.Skia.WPF\\Mapsui.Samples.Uno.WinUI.Skia.WPF.csproj",
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.Wasm\\Mapsui.Samples.Uno.WinUI.Wasm.csproj",
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.Windows\\Mapsui.Samples.Uno.WinUI.Windows.csproj",
       "Samples\\Mapsui.Samples.Uno\\Mapsui.Samples.Uno.Mobile\\Mapsui.Samples.Uno.Mobile.csproj",
