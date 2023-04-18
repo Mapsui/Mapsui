@@ -61,22 +61,8 @@ jobs:
     - name: Run Mapsui.Tests
       run: dotnet test Tests/Mapsui.Tests/bin/Debug/net6.0/Mapsui.Tests.dll
     # Release Build
-    - name: Build Mapsui
-      run: dotnet pack --no-restore --configuration Release Mapsui/Mapsui.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.Rendering.Skia
-      run: dotnet pack --no-restore --configuration Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.Tiling
-      run: dotnet pack --no-restore --configuration Release Mapsui.Tiling/Mapsui.Tiling.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.Nts
-      run: dotnet pack --no-restore --configuration Release Mapsui.Nts/Mapsui.Nts.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.ArcGIS
-      run: dotnet pack --no-restore --configuration Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.Extensions
-      run: dotnet pack --no-restore --configuration Release Mapsui.Extensions/Mapsui.Extensions.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.UI.Android
-      run: dotnet pack --no-restore --configuration Release Mapsui.UI.Android/Mapsui.UI.Android.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)    
-    - name: Build Mapsui.UI.Avalonia
-      run: dotnet pack --no-restore --configuration Release Mapsui.UI.Avalonia/Mapsui.UI.Avalonia.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)    
+    - name: Build Linux packages
+      run: dotnet pack /p:RestorePackages=true /p:Configuration=Release /p:Version=%Version% Mapsui.Linux.slnf --output Artifacts
     - name: Upload packages
       uses: actions/upload-artifact@v3
       with:
