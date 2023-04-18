@@ -80,7 +80,7 @@ jobs:
     - name: Upload packages
       uses: actions/upload-artifact@v3
       with:
-        name: nupkg.mac
+        name: nupkg.linux
         path: Artifacts/*.nupkg
 
   macBuild:  
