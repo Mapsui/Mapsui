@@ -39,6 +39,11 @@
     <PackageReference Include="Svg.Skia" />
   </ItemGroup>
 
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('linux'))">
+    <!-- Explicitly reference Linux native dlls to get them included -->
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
+  </ItemGroup>
+
   <ItemGroup>
     <None Update="Resources\Cache\BingArial.sqlite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

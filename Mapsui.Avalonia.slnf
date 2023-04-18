@@ -10,6 +10,7 @@
       "Mapsui.Tiling\\Mapsui.Tiling.csproj",
       "Mapsui.UI.Avalonia\\Mapsui.UI.Avalonia.csproj",
       "Mapsui.UI.Forms.Tests\\Mapsui.UI.Forms.Tests.csproj",
+      "Mapsui.UI.Forms\\Mapsui.UI.Forms.csproj",
       "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
       "Mapsui\\Mapsui.csproj",
       "Samples\\Mapsui.Samples.Avalonia\\Mapsui.Samples.Avalonia.csproj",
