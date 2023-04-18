@@ -17,20 +17,20 @@ jobs:
       with:
         fetch-depth: 0
     # Cache Nugets
-    #- uses: actions/cache@v3
-    #  with:
-    #    path: ~/.nuget/packages     
-    #    key: ${{ runner.os }}-nuget13-${{ hashFiles('Directory.Packages.props') }}
-    #    restore-keys: |
-    #        ${{ runner.os }}-nuget13-
-    #- name: Setup NuGet.exe for use with actions
-    #  uses: NuGet/setup-nuget@v1.1.1      
-    #  with:
-    #    nuget-version: latest    
-    #- name: install maui android wasm-tools wasm-tools-net6
-    #  run: dotnet workload install maui android wasm-tools wasm-tools-net6    
-    #- name: Restore dependencies Mapsui.Linux
-    #  run: dotnet restore Mapsui.Linux.slnf       
+    - uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages     
+        key: ${{ runner.os }}-nuget13-${{ hashFiles('Directory.Packages.props') }}
+        restore-keys: |
+            ${{ runner.os }}-nuget13-
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.1.1      
+      with:
+        nuget-version: latest    
+    - name: install maui android wasm-tools wasm-tools-net6
+      run: dotnet workload install maui android wasm-tools wasm-tools-net6    
+    - name: Restore dependencies Mapsui.Linux
+      run: dotnet restore Mapsui.Linux.slnf       
     # Samples Build           
     #- name: Build Mapsui.Samples.Droid
     #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                       
