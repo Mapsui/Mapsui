@@ -22,9 +22,7 @@
     <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('ios'))">14.2</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('maccatalyst'))">14.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('android'))">21.0</SupportedOSPlatformVersion>
-	  <!-- Workaround for https://github.com/unoplatform/uno/issues/9723 -->
-	  <_AndroidApiLevel Condition="$(TargetFramework.Contains('android'))">31</_AndroidApiLevel>
-	  <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('macos'))">10.14</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('macos'))">10.14</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(TargetFramework.Contains('windows'))">    
