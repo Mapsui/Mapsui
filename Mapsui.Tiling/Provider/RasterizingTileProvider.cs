@@ -77,7 +77,8 @@ public class RasterizingTileProvider : ITileSource
 
     private async Task<(MSection section, ILayer RenderLayer)> CreateRenderLayerAsync(TileInfo tileInfo, IRenderer renderer)
     {
-        Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
+        var indexLevel = tileInfo.Index.Level;
+        Schema.Resolutions.TryGetValue(indexLevel, out var tileResolution);
 
         var resolution = tileResolution.UnitsPerPixel;
         var section = new MSection(tileInfo.Extent.ToMRect(), resolution);
@@ -85,7 +86,18 @@ public class RasterizingTileProvider : ITileSource
         var extent = section.Extent;
         if (featureSearchGrowth > 0)
         {
-            extent = extent.Grow(featureSearchGrowth);
+            var firstRow = Schema.GetMatrixFirstRow(indexLevel);
+            var lastRow = firstRow + Schema.GetMatrixHeight(indexLevel) -1;
+            var firstCol = Schema.GetMatrixFirstCol(indexLevel);
+            var lastCol = firstCol + Schema.GetMatrixWidth(indexLevel) -1;
+
+            // do not expand beyound the bounds of the Schema fixes not loading data in Because of invalid bounds
+            var minX = tileInfo.Index.Col == firstCol ? extent.MinX : extent.MinX - featureSearchGrowth;
+            var minY = tileInfo.Index.Row == firstRow ? extent.MinY : extent.MinY - featureSearchGrowth;
+            var maxX = tileInfo.Index.Col == lastCol ? extent.MaxX : extent.MaxX + featureSearchGrowth;
+            var maxY = tileInfo.Index.Row == lastRow ? extent.MaxY : extent.MaxY + featureSearchGrowth;
+
+            extent = new MRect(minX, minY, maxX, maxY);
         }
 
         var fetchInfo = new FetchInfo(new MSection(extent, resolution));
