@@ -62,7 +62,7 @@ jobs:
       run: dotnet test Tests/Mapsui.Tests/bin/Debug/net6.0/Mapsui.Tests.dll
     # Release Build
     - name: Build Linux packages
-      run: dotnet pack /p:RestorePackages=true /p:Configuration=Release -p:PackageVersion=$(git describe --tags) Mapsui.Linux.slnf --output Artifacts
+      run: dotnet pack /p:RestorePackages=true /p:Configuration=Release /p:Version=$(git describe --tags) Mapsui.Linux.slnf --output Artifacts
     - name: Upload packages
       uses: actions/upload-artifact@v3
       with:
