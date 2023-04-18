@@ -3,6 +3,8 @@
   <PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net6.0</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 

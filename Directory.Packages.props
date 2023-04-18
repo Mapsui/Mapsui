@@ -68,8 +68,8 @@
     <PackageVersion Include="NetTopologySuite" Version="[2.5.0,3.0.0)" />
     <PackageVersion Include="NetTopologySuite.IO.GeoJSON4STJ" Version="[3.0.0,4.0.0)" />
     <PackageVersion Include="Newtonsoft.Json" Version="[13.0.1,14.0.0)" />
-    <PackageVersion Include="NUnit" Version="[3.12.0,4.0.0)" />
-    <PackageVersion Include="NUnit3TestAdapter" Version="[3.17.0,4.0.0)" />
+    <PackageVersion Include="NUnit" Version="[3.13.3,4.0.0)" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="[4.4.2,5.0.0)" />
     <PackageVersion Include="OpenTK" Version="[3.1.0,4.0.0)" />
     <PackageVersion Include="OpenTK.GLControl" Version="[3.1.0,4.0.0)" />
     <PackageVersion Include="Plugin.CurrentActivity" Version="[2.1.0.4,3.0.0.0)" />
