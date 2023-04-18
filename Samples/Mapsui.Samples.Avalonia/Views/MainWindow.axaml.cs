@@ -24,14 +24,11 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-#if DEBUG
-        this.AttachDevTools();
-#endif
     }
 
     private void InitializeComponent()
     {
-        AvaloniaXamlLoader.Load(this);
+        InitializeComponent(true, true);
 
         MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
         MapControl.Map.Navigator.RotationLock = false;
@@ -47,18 +44,11 @@ public partial class MainWindow : Window
         FillListWithSamples();
     }
 
-    private MapControl MapControl => this.FindControl<MapControl>("MapControl") ?? throw new InvalidOperationException();
-    private ComboBox CategoryComboBox => this.FindControl<ComboBox>("CategoryComboBox") ?? throw new InvalidOperationException();
-    private TextBlock FeatureInfo => this.FindControl<TextBlock>("FeatureInfo") ?? throw new InvalidOperationException();
-    private StackPanel SampleList => this.FindControl<StackPanel>("SampleList") ?? throw new InvalidOperationException();
-    private Slider RotationSlider => this.FindControl<Slider>("RotationSlider") ?? throw new InvalidOperationException();
-
-
     private void FillComboBoxWithCategories()
     {
         Tests.Common.Utilities.LoadAssembly();
 
-        var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
+        var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c).ToArray();
 
         CategoryComboBox.Items = categories;
 
