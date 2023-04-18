@@ -27,8 +27,8 @@ jobs:
       uses: NuGet/setup-nuget@v1.1.1      
       with:
         nuget-version: latest    
-    - name: install android ios wasm-tools wasm-tools-net6
-      run: dotnet workload install android ios wasm-tools wasm-tools-net6    
+    - name: install android wasm-tools wasm-tools-net6
+      run: dotnet workload install android wasm-tools wasm-tools-net6    
     - name: Restore dependencies Mapsui.Linux
       run: dotnet restore Mapsui.Linux.slnf       
     # Samples Build           
