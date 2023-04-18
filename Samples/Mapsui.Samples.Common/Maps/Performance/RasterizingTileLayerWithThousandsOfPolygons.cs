@@ -5,7 +5,6 @@ using Mapsui.Nts.Extensions;
 using Mapsui.Nts.Providers;
 using Mapsui.Projections;
 using Mapsui.Providers;
-using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
 using Mapsui.UI;
@@ -33,7 +32,7 @@ public class RasterizingTileLayerWithThousandsOfPolygons : IMapControlSample
         map.Layers.Add(Tiling.OpenStreetMap.CreateTileLayer());
         map.Layers.Add(new RasterizingTileLayer(CreatePolygonLayer()));
         var home = Mercator.FromLonLat(0, 0);
-        map.Home = n => n.NavigateTo(home, map.Resolutions[6]);
+        map.Home = n => n.CenterOnAndZoomTo(home, map.Navigator.Resolutions[9]);
 
         return map;
     }
