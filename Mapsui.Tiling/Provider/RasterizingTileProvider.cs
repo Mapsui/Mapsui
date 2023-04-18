@@ -91,46 +91,11 @@ public class RasterizingTileProvider : ITileSource
             var firstCol = Schema.GetMatrixFirstCol(indexLevel);
             var lastCol = firstCol + Schema.GetMatrixWidth(indexLevel) -1;
 
-            // do not ex
-            double minX;
-            if (tileInfo.Index.Col == firstCol)
-            {
-                minX = extent.MinX;
-            }
-            else
-            {
-                minX = extent.MinX - featureSearchGrowth;
-            }
-
-            double minY;
-            if (tileInfo.Index.Row == firstRow)
-            {
-                minY = extent.MinY;
-            }
-            else
-            {
-                minY = extent.MinY - featureSearchGrowth;
-            }
-
-            double maxX;
-            if (tileInfo.Index.Col == lastCol)
-            {
-                maxX = extent.MaxX;
-            }
-            else
-            {
-                maxX = extent.MaxX + featureSearchGrowth;
-            }
-
-            double maxY;
-            if (tileInfo.Index.Row == lastRow)
-            {
-                maxY = extent.MaxY;
-            }
-            else
-            {
-                maxY = extent.MaxY + featureSearchGrowth;
-            }
+            // do not expand beyound the bounds of the Schema fixes not loading data in Because of invalid bounds
+            var minX = tileInfo.Index.Col == firstCol ? extent.MinX : extent.MinX - featureSearchGrowth;
+            var minY = tileInfo.Index.Row == firstRow ? extent.MinY : extent.MinY - featureSearchGrowth;
+            var maxX = tileInfo.Index.Col == lastCol ? extent.MaxX : extent.MaxX + featureSearchGrowth;
+            var maxY = tileInfo.Index.Row == lastRow ? extent.MaxY : extent.MaxY + featureSearchGrowth;
 
             extent = new MRect(minX, minY, maxX, maxY);
         }
