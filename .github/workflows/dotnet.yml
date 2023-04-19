@@ -326,6 +326,7 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Wasm\Mapsui.Samples.Uno.WinUI.Wasm.csproj
     - name: Mapsui.Samples.Uno.WinUI.Windows
     # run: dotnet build --no-restore --configuration Debug /p:Platform=x64 Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Windows\Mapsui.Samples.Uno.WinUI.Windows.csproj
+    # woraround for https://github.com/unoplatform/uno/issues/12013
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug -p:Platform=x64 Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Windows\Mapsui.Samples.Uno.WinUI.Windows.csproj
     
     # Publishing  
