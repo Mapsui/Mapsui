@@ -1,4 +1,6 @@
 ﻿using Mapsui.Utilities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Mapsui.Extensions;
 
@@ -10,15 +12,40 @@ public static class ViewportExtensions
     public static bool HasSize(this Viewport viewport) =>
         viewport.Width > 0 && viewport.Height > 0;
 
-    /// <summary> World To Screen Translation of a Rect </summary>
-    /// <param name="viewport">view Port</param>
-    /// <param name="rect">rect</param>
+    /// <summary>Transforms the MRect from world coordinates to screen coordinates. Note, that
+    /// an MRect always represents and unrotated box. If the Viewport is rotated this will result
+    /// in an unrotated box that encompasses the rotated transformation.</summary>
+    /// <param name="viewport">Viewport</param>
+    /// <param name="rect">The MRect to transform</param>
     /// <returns>Transformed rect</returns>
     public static MRect WorldToScreen(this Viewport viewport, MRect rect)
     {
-        var min = viewport.WorldToScreen(rect.Min);
-        var max = viewport.WorldToScreen(rect.Max);
-        return new MRect(min.X, min.Y, max.X, max.Y);
+        if (!viewport.IsRotated()) // Checking on IsRotated for performance reasons
+        {
+            var min = viewport.WorldToScreen(rect.Min);
+            var max = viewport.WorldToScreen(rect.Max);
+            return new MRect(min.X, min.Y, max.X, max.Y);
+        }
+
+        // In case of the rotated viewport all four coordinates
+        // are transformed and the min and max x/y of these are
+        // taken to form the new box. In this case the result is
+        // not a real transformation because an MRect can not be
+        // rotated.
+        var screenPoints = new List<MPoint>
+        {
+            viewport.WorldToScreen(rect.BottomLeft),
+            viewport.WorldToScreen(rect.BottomRight),
+            viewport.WorldToScreen(rect.TopRight),
+            viewport.WorldToScreen(rect.TopLeft)
+        };
+
+        var minx = screenPoints.Select(p => p.X).Min();
+        var miny = screenPoints.Select(p => p.Y).Min();
+        var maxx = screenPoints.Select(p => p.X).Max();
+        var maxy = screenPoints.Select(p => p.Y).Max();
+
+        return new MRect(minx, miny, maxx, maxy).Grow(-50);
     }
 
     /// <summary>
