@@ -1,40 +1,15 @@
-﻿using System;
-using Mapsui.Styles;
+﻿using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Nts;
-using NetTopologySuite.Geometries;
 using Mapsui.Nts.Extensions;
+using Mapsui.UI.Extensions;
 using Mapsui.Utilities;
 
-#if __MAUI__
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-using Mapsui.UI.Maui.Extensions;
-using Mapsui.UI.Maui.Utils;
-
-using Color = Microsoft.Maui.Graphics.Color;
-using KnownColor = Mapsui.UI.Maui.KnownColor;
-#else
-using Mapsui.UI.Forms.Extensions;
-using Xamarin.Forms;
-using Mapsui.UI.Forms.Utils;
-
-using Color = Xamarin.Forms.Color;
-using KnownColor = Xamarin.Forms.Color;
-#endif
-
-
-#if __MAUI__
-namespace Mapsui.UI.Maui;
-#elif __FORMS__
-namespace Mapsui.UI.Forms;
-#else
-namespace Mapsui.UI;
-#endif
+namespace Mapsui.UI.Objects;
 
 public class Polygon : Drawable
 {

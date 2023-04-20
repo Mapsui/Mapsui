@@ -4,7 +4,6 @@ using Mapsui.Widgets;
 using Mapsui.Extensions;
 using Mapsui.Widgets.ButtonWidget;
 using SkiaSharp;
-using Svg.Skia;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,29 +13,29 @@ using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using Mapsui.Logging;
+using Mapsui.UI.Extensions;
 using Mapsui.Utilities;
-#if __MAUI__
-using Mapsui.UI.Maui.Utils;
-using Mapsui.UI.Maui.Extensions;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Graphics;
-using Microsoft.Maui.Layouts;
-using SkiaSharp.Views;
-using SkiaSharp.Views.Maui;
-using SkiaSharp.Views.Maui.Controls;
-
-using Rectangle = Microsoft.Maui.Graphics.Rect;
-#else
-using Mapsui.UI.Forms.Utils;
-using Mapsui.UI.Forms.Extensions;
-using Xamarin.Forms;
-#endif
 
 #if __MAUI__
 namespace Mapsui.UI.Maui;
+#elif __UWP__
+namespace Mapsui.UI.Uwp;
+#elif __ANDROID__ && !HAS_UNO_WINUI
+namespace Mapsui.UI.Android;
+#elif __IOS__ && !HAS_UNO_WINUI && !__FORMS__
+namespace Mapsui.UI.iOS;
+#elif __WINUI__
+namespace Mapsui.UI.WinUI;
 #elif __FORMS__
 namespace Mapsui.UI.Forms;
+#elif __AVALONIA__
+namespace Mapsui.UI.Avalonia;
+#elif __ETO_FORMS__
+namespace Mapsui.UI.Eto;
+#elif __BLAZOR__
+namespace Mapsui.UI.Blazor;
+#elif __WPF__
+namespace Mapsui.UI.Wpf;
 #else
 namespace Mapsui.UI;
 #endif
@@ -154,7 +153,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<IPin>, IM
 
     #region Bindings
 
-    public static readonly BindableProperty SelectedPinProperty = BindableProperty.Create(nameof(SelectedPin), typeof(IPin), typeof(MapView), default(Pin), defaultBindingMode: BindingMode.TwoWay);
+    public static readonly BindableProperty SelectedPinProperty = BindableProperty.Create(nameof(SelectedPin), typeof(Pin), typeof(MapView), default(IPin), defaultBindingMode: BindingMode.TwoWay);
     public static readonly BindableProperty UniqueCalloutProperty = BindableProperty.Create(nameof(UniqueCallout), typeof(bool), typeof(MapView), false, defaultBindingMode: BindingMode.TwoWay);
     public static readonly BindableProperty MyLocationEnabledProperty = BindableProperty.Create(nameof(MyLocationEnabled), typeof(bool), typeof(MapView), false, defaultBindingMode: BindingMode.TwoWay);
     public static readonly BindableProperty MyLocationFollowProperty = BindableProperty.Create(nameof(MyLocationFollow), typeof(bool), typeof(MapView), false, defaultBindingMode: BindingMode.TwoWay);

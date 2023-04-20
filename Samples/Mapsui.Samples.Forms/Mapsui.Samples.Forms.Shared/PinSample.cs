@@ -8,6 +8,7 @@ using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.UI.Forms;
+using Mapsui.UI.Objects;
 using Xamarin.Forms;
 using Color = Xamarin.Forms.Color;
 

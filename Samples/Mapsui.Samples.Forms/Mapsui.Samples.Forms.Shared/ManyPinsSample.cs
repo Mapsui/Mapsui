@@ -8,6 +8,7 @@ using System.Reflection;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Styles;
+using Mapsui.UI.Objects;
 using Mapsui.Utilities;
 using Mapsui.Widgets.PerformanceWidget;
 #if __MAUI__
@@ -19,7 +20,6 @@ using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using Mapsui.UI.Forms;
 using Xamarin.Forms;
-using Mapsui.UI.Forms.Utils;
 using Color = Xamarin.Forms.Color;
 using KnownColor = Xamarin.Forms.Color;
 #endif

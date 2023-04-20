@@ -22,12 +22,10 @@ using SkiaSharp.Views.Maui.Controls;
 
 using Color = Microsoft.Maui.Graphics.Color;
 using Logger = Mapsui.Logging.Logger;
-using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using SkiaSharp.Views.Forms;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using KnownColor = Xamarin.Forms.Color;
 #endif
 
 #if __MAUI__

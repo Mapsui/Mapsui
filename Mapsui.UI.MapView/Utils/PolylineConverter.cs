@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#if __MAUI__
-namespace Mapsui.UI.Maui.Utils;
-#elif __FORMS__
-namespace Mapsui.UI.Forms.Utils;
-#else
 namespace Mapsui.UI.Utils;
-#endif
 
 /// <summary>
 /// Polyline helper class

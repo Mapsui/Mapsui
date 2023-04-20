@@ -1,10 +1,4 @@
-﻿#if __MAUI__
-namespace Mapsui.UI.Maui.Extensions;
-#elif __FORMS__
-namespace Mapsui.UI.Forms.Extensions;
-#else
-namespace Mapsui.UI.Extensions;
-#endif
+﻿namespace Mapsui.UI.Extensions;
 
 public static class ZoomLevelExtensions
 {

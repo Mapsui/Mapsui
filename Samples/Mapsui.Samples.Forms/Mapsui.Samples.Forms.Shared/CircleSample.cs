@@ -3,6 +3,8 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
+using Mapsui.UI.Objects;
+using Mapsui.Utilities;
 #if __MAUI__
 using Mapsui.UI.Maui;
 using Microsoft.Maui;

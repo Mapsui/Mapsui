@@ -4,32 +4,34 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Nts;
 using Mapsui.Styles;
-using Mapsui.UI.Objects;
 using Mapsui.Utilities;
 using SkiaSharp;
-#if __MAUI__
-using Microsoft.Maui;
-using Microsoft.Maui.Graphics;
-using Microsoft.Maui.Controls;
-using SkiaSharp.Views.Maui;
-
-using Color = Microsoft.Maui.Graphics.Color;
-using KnownColor = Mapsui.UI.Maui.KnownColor;
-#else
-using SkiaSharp.Views.Forms;
-using Xamarin.Forms;
-
-using Color = Xamarin.Forms.Color;
-using KnownColor = Xamarin.Forms.Color;
-#endif
 
 #if __MAUI__
-namespace Mapsui.UI.Maui;
+using Mapsui.UI.Maui;
+#elif __UWP__
+using Mapsui.UI.Uwp;
+#elif __ANDROID__ && !HAS_UNO_WINUI
+using Mapsui.UI.Android;
+#elif __IOS__ && !HAS_UNO_WINUI && !__FORMS__
+using Mapsui.UI.iOS;
+#elif __WINUI__
+using Mapsui.UI.WinUI;
 #elif __FORMS__
-namespace Mapsui.UI.Forms;
+using Mapsui.UI.Forms;
+#elif __AVALONIA__
+using Mapsui.UI.Avalonia;
+#elif __ETO_FORMS__
+using Mapsui.UI.Eto;
+#elif __BLAZOR__
+using Mapsui.UI.Blazor;
+#elif __WPF__
+using Mapsui.UI.Wpf;
 #else
-namespace Mapsui.UI;
+using Mapsui.UI;
 #endif
+
+namespace Mapsui.UI.Objects;
 
 public class Pin : BindableObject, IFeatureProvider, IDisposable, IPin
 {

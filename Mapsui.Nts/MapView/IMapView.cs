@@ -13,4 +13,9 @@ public  interface IMapView : IMapControl
     bool MyLocationFollow { get; set; }
     IList<IPin> Pins { get; }
     IList<IDrawable> Drawables { get; }
+
+    /// <summary>
+    /// Selected pin
+    /// </summary>
+    IPin? SelectedPin { get; set; }
 }

@@ -1,5 +1,4 @@
 ﻿using Mapsui.Nts;
-using Mapsui.Styles;
 
 namespace Mapsui.UI.Objects;
 

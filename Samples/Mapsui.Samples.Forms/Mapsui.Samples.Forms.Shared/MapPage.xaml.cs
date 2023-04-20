@@ -13,6 +13,7 @@ using Mapsui.Styles;
 using Mapsui.UI.Forms;
 using Mapsui.UI.Objects;
 using Mapsui.Extensions;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Forms;
 

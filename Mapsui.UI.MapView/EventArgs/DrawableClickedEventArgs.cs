@@ -3,16 +3,9 @@
 using Microsoft.Maui;
 using Microsoft.Maui.Graphics;
 #else
-using Xamarin.Forms;
 #endif
 
-#if __MAUI__
-namespace Mapsui.UI.Maui;
-#elif __FORMS__
-namespace Mapsui.UI.Forms;
-#else
 namespace Mapsui.UI;
-#endif
 
 public sealed class DrawableClickedEventArgs : EventArgs, IDrawableClicked
 {

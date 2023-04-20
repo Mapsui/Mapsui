@@ -3,22 +3,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Nts;
 using Mapsui.Styles;
-#if __MAUI__
-using Mapsui.UI.Maui;
-using Mapsui.UI.Maui.Extensions;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-
-using Color = Microsoft.Maui.Graphics.Color;
-using KnownColor = Mapsui.UI.Maui.KnownColor;
-#else
-using Mapsui.UI.Forms;
-using Mapsui.UI.Forms.Extensions;
-using Xamarin.Forms;
-
-using Color = Xamarin.Forms.Color;
-using KnownColor = Xamarin.Forms.Color;
-#endif
+using Mapsui.UI.Extensions;
 
 namespace Mapsui.UI.Objects;
 
