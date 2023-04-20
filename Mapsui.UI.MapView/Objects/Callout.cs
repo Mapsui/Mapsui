@@ -503,8 +503,6 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable, ICallout
     /// </summary>
     public GeometryFeature Feature { get; }
 
-
-
     protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         if (propertyName is null)
