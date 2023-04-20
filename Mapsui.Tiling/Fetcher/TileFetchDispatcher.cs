@@ -46,7 +46,7 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     public int NumberTilesNeeded { get; private set; }
 
-    public static int MaxTilesInOneRequest { get; set; } = 64;
+    public static int MaxTilesInOneRequest { get; set; } = 128;
 
     public void SetViewport(FetchInfo fetchInfo)
     {
