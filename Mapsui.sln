@@ -218,6 +218,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.UI.MapView", "Mapsui
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.Samples.MapView", "Mapsui.Samples.MapView\Mapsui.Samples.MapView.shproj", "{ACD82D26-DF46-4CCC-9730-E483DAD05D2D}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.Samples.MapView", "Samples\Mapsui.Samples.MapView\Mapsui.Samples.MapView.shproj", "{E0A1DEF5-600C-4FA2-905C-435F86CC992F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|AnyCPU = Ad-Hoc|AnyCPU
@@ -3440,6 +3442,7 @@ Global
 		{10B6CC78-FA95-4E28-8F74-FD278714B9AD} = {671AF0DE-73BD-46C9-81F0-087703E010AE}
 		{BA0E8B89-ADBC-43B8-86D0-A1BC2427AE7F} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{ACD82D26-DF46-4CCC-9730-E483DAD05D2D} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
+		{E0A1DEF5-600C-4FA2-905C-435F86CC992F} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D684C3-0BD3-4D8A-AB23-748FB5527F6F}
@@ -3473,8 +3476,10 @@ Global
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{b59e114d-6886-41a3-82f2-4bec36822d0c}*SharedItemsImports = 5
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{b78cde0f-568f-4064-8b74-fcd920e22351}*SharedItemsImports = 5
 		Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Shared\Mapsui.Samples.Uno.WinUI.Shared.projitems*{bd46650a-f33c-41f2-92f0-c99b9ab8b11d}*SharedItemsImports = 5
-		Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems*{c008562a-ed14-4ef0-bad6-b7967ef9a9f3}*SharedItemsImports = 5
+		Samples\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems*{c008562a-ed14-4ef0-bad6-b7967ef9a9f3}*SharedItemsImports = 5
 		Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Shared\Mapsui.Samples.Uno.WinUI.Shared.projitems*{c022d072-c945-4dbb-9ab3-8ae850024e3d}*SharedItemsImports = 13
+		Samples\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems*{d991d377-2aa4-4fc8-a451-e19624e56ef8}*SharedItemsImports = 5
+		Samples\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems*{e0a1def5-600c-4fa2-905c-435f86cc992f}*SharedItemsImports = 13
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{e71f3053-056c-4381-9638-048ed73bdff6}*SharedItemsImports = 5
 		Samples\Mapsui.Samples.Uno\Mapsui.Samples.Uno.Shared\Mapsui.Samples.Uno.Shared.projitems*{f65dc264-19c3-48e4-8a67-2a871225d4fd}*SharedItemsImports = 5
 	EndGlobalSection

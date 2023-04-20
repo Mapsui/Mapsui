@@ -79,4 +79,6 @@
         <ProjectReference Include="..\Mapsui.Samples.Maui\Mapsui.Samples.Maui.csproj" />
       </ItemGroup>
   
+    <Import Project="..\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems" Label="Shared" />
+  
   </Project>
