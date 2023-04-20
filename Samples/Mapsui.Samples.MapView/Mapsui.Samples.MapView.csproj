@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\MyLocationSample.cs" Link="MyLocationSample.cs" />
+    <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\SnapshotSample.cs" Link="SnapshotSample.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Nts\Mapsui.Nts.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
     <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
