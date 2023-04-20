@@ -47,7 +47,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
 
         Compass.ReadingChanged += Compass_ReadingChanged;
 
-        mapView.MyLocationLayer.UpdateMyLocation(new Mapsui.UI.Maui.Position());
+        mapView.MyLocationLayer.UpdateMyLocation(new Position());
 
         mapView.Info += MapView_Info;
         mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();

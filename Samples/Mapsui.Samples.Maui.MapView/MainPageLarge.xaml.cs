@@ -52,7 +52,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         mapView.PinClicked += OnPinClicked;
         mapView.MapClicked += OnMapClicked;
 
-        mapView.MyLocationLayer.UpdateMyLocation(new UI.Maui.Position());
+        mapView.MyLocationLayer.UpdateMyLocation(new Position());
 
         mapView.IsZoomButtonVisible = true;
         mapView.IsMyLocationButtonVisible = true;
@@ -126,7 +126,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         }
 
         clicker = null;
-        if (sample is IFormsSample formsSample)
+        if (sample is IMapViewSample formsSample)
             clicker = formsSample.OnClick;
 
         listView.SelectedItem = null;
