@@ -11,7 +11,6 @@ public interface IPin
     GeometryFeature? Feature { get; }
     bool IsVisible { get; set; }
     ICallout Callout { get; }
-    IMapView MapView { get; set; }
     bool RotateWithMap { get; set; }
 
     /// <summary>

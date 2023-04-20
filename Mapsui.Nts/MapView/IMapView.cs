@@ -13,7 +13,4 @@ public  interface IMapView : IMapControl
     bool MyLocationFollow { get; set; }
     IList<IPin> Pins { get; }
     IList<IDrawable> Drawables { get; }
-    void RemoveCallout(ICallout callout);
-    void AddCallout(ICallout callout);
-    bool IsCalloutVisible(ICallout callout);
 }

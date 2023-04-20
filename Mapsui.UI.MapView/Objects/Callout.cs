@@ -31,7 +31,7 @@ namespace Mapsui.UI.Forms;
 
 public class Callout : BindableObject, IFeatureProvider, IDisposable, ICallout
 {
-    private readonly IPin _pin;
+    private readonly Pin _pin;
 
     public event EventHandler<ICalloutClicked>? CalloutClicked;
 
@@ -215,10 +215,12 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable, ICallout
         Feature.Styles.Clear();
     }
 
+    IPin ICallout.Pin => Pin;
+
     /// <summary>
     /// Pin to which this callout belongs
     /// </summary>
-    public IPin Pin => _pin;
+    public Pin Pin => _pin;
 
     /// <summary>
     /// Type of Callout
@@ -631,7 +633,7 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable, ICallout
     /// <summary>
     /// Update content and style of callout before display it the first time
     /// </summary>
-    void ICallout.Update()
+    internal void Update()
     {
         UpdateContent();
         UpdateCalloutStyle();

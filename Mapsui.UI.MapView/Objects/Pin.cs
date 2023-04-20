@@ -37,7 +37,7 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable, IPin
     private string _bitmapIdKey = string.Empty; // Key for active _bitmapIds entry
     private int _bitmapId = -1;
     private byte[]? _bitmapData;
-    private IMapView? _mapView;
+    private MapView? _mapView;
 
     public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(PinType), typeof(Pin), default(PinType));
     public static readonly BindableProperty PositionProperty = BindableProperty.Create(nameof(Position), typeof(Position), typeof(Pin), default(Position));
@@ -61,7 +61,7 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable, IPin
     /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Pin"/> class
     /// </summary>
     /// <param name="mapView">MapView to which this pin belongs</param>
-    public Pin(IMapView mapView)
+    public Pin(MapView mapView)
     {
         _mapView = mapView;
 
@@ -78,7 +78,7 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable, IPin
     /// <summary>
     /// Internal MapView for refreshing of screen
     /// </summary>
-    IMapView? IPin.MapView
+    internal MapView? MapView
     {
         get => _mapView;
         set
@@ -264,13 +264,15 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable, IPin
     /// <value>Mapsui feature</value>
     public GeometryFeature? Feature { get; private set; }
 
-    private ICallout? _callout;
+    private Callout? _callout;
+
+    ICallout IPin.Callout => Callout;
 
     /// <summary>
     /// Gets the callout
     /// </summary>
     /// <value>Callout for this pin</value>
-    public ICallout Callout
+    public Callout Callout
     {
         get
         {

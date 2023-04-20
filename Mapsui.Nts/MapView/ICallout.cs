@@ -16,7 +16,6 @@ public interface ICallout : IDisposable
     IPin Pin { get; }
     string Subtitle { get; set; }
     void HandleCalloutClicked(object? sender, ICalloutClicked calloutArgs);
-    void Update();
 
     /// <summary>
     /// Arrow alignment of Callout

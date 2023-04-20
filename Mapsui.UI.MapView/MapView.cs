@@ -335,7 +335,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<IPin>, IM
 
     #endregion
 
-    void IMapView.AddCallout(ICallout callout)
+    internal void AddCallout(ICallout callout)
     {
         if (!_callouts.Contains(callout))
         {
@@ -348,7 +348,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<IPin>, IM
         }
     }
 
-    void IMapView.RemoveCallout(ICallout? callout)
+    internal void RemoveCallout(ICallout? callout)
     {
         if (callout != null && _callouts.Contains(callout))
         {
@@ -358,7 +358,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<IPin>, IM
         }
     }
 
-    bool IMapView.IsCalloutVisible(ICallout callout)
+    internal bool IsCalloutVisible(ICallout callout)
     {
         return _callouts.Contains(callout);
     }
@@ -535,7 +535,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<IPin>, IM
                 if (item is Pin pin)
                 {
                     // Add new pins to layer, so set MapView
-                    ((IPin)pin).MapView = this;
+                    pin.MapView = this;
                     pin.PropertyChanged += HandlerPinPropertyChanged;
                 }
             }
