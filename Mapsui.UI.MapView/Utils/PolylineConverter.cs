@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 #if __MAUI__
 namespace Mapsui.UI.Maui.Utils;
-#else
+#elif __FORMS__
 namespace Mapsui.UI.Forms.Utils;
+#else
+namespace Mapsui.UI.Utils;
 #endif
 
 /// <summary>

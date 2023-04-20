@@ -8,8 +8,10 @@ using Xamarin.Forms;
 
 #if __MAUI__
 namespace Mapsui.UI.Maui;
-#else
+#elif __FORMS__
 namespace Mapsui.UI.Forms;
+#else
+namespace Mapsui.UI;
 #endif
 
 public sealed class DrawableClickedEventArgs : EventArgs, IDrawableClicked

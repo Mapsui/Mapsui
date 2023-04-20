@@ -7,6 +7,7 @@ using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using NetTopologySuite.Geometries;
 using Mapsui.Nts.Extensions;
+using Mapsui.Utilities;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Mapsui.UI.Maui.Utils;
@@ -17,8 +18,10 @@ using Mapsui.UI.Forms.Utils;
 
 #if __MAUI__
 namespace Mapsui.UI.Maui;
-#else
+#elif __FORMS__
 namespace Mapsui.UI.Forms;
+#else
+namespace Mapsui.UI;
 #endif
 
 public class Polyline : Drawable

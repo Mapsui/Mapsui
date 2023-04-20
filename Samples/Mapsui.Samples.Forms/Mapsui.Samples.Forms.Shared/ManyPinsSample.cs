@@ -8,6 +8,7 @@ using System.Reflection;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Styles;
+using Mapsui.Utilities;
 using Mapsui.Widgets.PerformanceWidget;
 #if __MAUI__
 using Mapsui.UI.Maui;

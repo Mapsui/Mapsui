@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using Mapsui.Nts;
 using NetTopologySuite.Geometries;
 using Mapsui.Nts.Extensions;
+using Mapsui.Utilities;
 
 #if __MAUI__
 using Microsoft.Maui;
@@ -29,8 +30,10 @@ using KnownColor = Xamarin.Forms.Color;
 
 #if __MAUI__
 namespace Mapsui.UI.Maui;
-#else
+#elif __FORMS__
 namespace Mapsui.UI.Forms;
+#else
+namespace Mapsui.UI;
 #endif
 
 public class Polygon : Drawable

@@ -1,7 +1,9 @@
 ﻿#if __MAUI__
 namespace Mapsui.UI.Maui.Extensions;
-#else
+#elif __FORMS__
 namespace Mapsui.UI.Forms.Extensions;
+#else
+namespace Mapsui.UI.Extensions;
 #endif
 
 public static class ColorExtensions
