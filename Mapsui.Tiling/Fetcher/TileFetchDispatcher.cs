@@ -157,7 +157,8 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
         if (tilesToFetch.Count() > MaxTilesInOneRequest)
         {
             tilesToFetch = tilesToFetch.Take(MaxTilesInOneRequest).ToList();
-            Logger.Log(LogLevel.Warning, $"The number of tiles in one request is exceeds the maximum " +
+            Logger.Log(LogLevel.Warning, 
+                $"The number tiles requested is '{tilesToFetch.Count()}' which exceeds the maximum " +
                 $"of '{MaxTilesInOneRequest}'. The number of tiles will be limited to the maximum. Note, " +
                 $"that this may indicate a bug or configuration error");
         }
