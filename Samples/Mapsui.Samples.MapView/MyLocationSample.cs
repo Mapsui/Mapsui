@@ -1,11 +1,14 @@
 ﻿using System;
-using Mapsui;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
 
-namespace Mapsui.Samples.MapView;
+#if __MAUI__
+namespace Mapsui.Samples.Maui;
+#else
+namespace Mapsui.Samples.Forms;
+#endif
 
 public class MyLocationSample : IMapViewSample
 {
@@ -15,7 +18,7 @@ public class MyLocationSample : IMapViewSample
 
     public bool OnClick(object? sender, EventArgs args)
     {
-        var mapView = sender as IMapView;
+        var mapView = sender as IMapView;        
 
         if (mapView == null)
             return false;
