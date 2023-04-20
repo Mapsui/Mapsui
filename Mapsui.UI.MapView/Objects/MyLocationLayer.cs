@@ -7,7 +7,6 @@ using Mapsui.Extensions;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
 
-
 #if __MAUI__
 using Mapsui.UI.Maui;
 #elif __UWP__
