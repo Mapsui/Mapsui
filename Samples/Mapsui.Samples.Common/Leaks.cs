@@ -2,7 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace Mapsui.Samples.Forms;
+namespace Mapsui.Samples.Common;
 
 public static class Refs
 {
@@ -28,18 +28,22 @@ public static class Refs
         Dictionary<string, int> count = new();
         foreach (var myref in _refs)
         {
-            object obj = myref.Target;
+            object? obj = myref.Target;
             if (obj != null)
             {
-                string k = obj.GetType().FullName;
-                if (count.TryGetValue(k, out int v))
+                string? k = obj.GetType().FullName;
+                if (k != null)
                 {
-                    count[k] = v + 1;
+                    if (count.TryGetValue(k, out int v))
+                    {
+                        count[k] = v + 1;
+                    }
+                    else
+                    {
+                        count[k] = 1;
+                    }
                 }
-                else
-                {
-                    count[k] = 1;
-                }
+
                 remainingRefs.Enqueue(myref);
             }
         }

@@ -40,7 +40,7 @@ public partial class MainPageLarge : ContentPage
         mapView.PinClicked += OnPinClicked;
         mapView.MapClicked += OnMapClicked;
 
-        mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position());
+        mapView.MyLocationLayer.UpdateMyLocation(new Position());
         mapView.MyLocationLayer.CalloutText = "My location!\n";
         mapView.MyLocationLayer.Clicked += MyLocationClicked;
 
@@ -90,7 +90,7 @@ public partial class MainPageLarge : ContentPage
         }
 
         clicker = null;
-        if (sample is IFormsSample formsSample)
+        if (sample is IMapViewSample formsSample)
             clicker = formsSample.OnClick;
 
         listView.SelectedItem = null;
@@ -184,7 +184,7 @@ public partial class MainPageLarge : ContentPage
     {
         Device.BeginInvokeOnMainThread(() =>
         {
-            mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
+            mapView.MyLocationLayer.UpdateMyLocation(new Position(e.Position.Latitude, e.Position.Longitude));
             mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Map.Navigator.Viewport.Rotation);
             mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
             mapView.MyLocationLayer.CalloutText = $"My location:\nlat={e.Position.Latitude:F6}°\nlon={e.Position.Longitude:F6}°";

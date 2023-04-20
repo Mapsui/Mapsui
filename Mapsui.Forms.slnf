@@ -20,6 +20,7 @@
       "Samples\\Mapsui.Samples.Forms\\Mapsui.Samples.Forms.UWP\\Mapsui.Samples.Forms.UWP.csproj",
       "Samples\\Mapsui.Samples.Forms\\Mapsui.Samples.Forms.WPF\\Mapsui.Samples.Forms.WPF.csproj",
       "Samples\\Mapsui.Samples.Forms\\Mapsui.Samples.Forms.iOS\\Mapsui.Samples.Forms.iOS.csproj",
+      "Samples\\Mapsui.Samples.MapView\\Mapsui.Samples.MapView.csproj",
       "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
       "Tests\\Mapsui.Rendering.Skia.Tests\\Mapsui.Rendering.Skia.Tests.csproj",
       "Tests\\Mapsui.Tests.Common\\Mapsui.Tests.Common.csproj",

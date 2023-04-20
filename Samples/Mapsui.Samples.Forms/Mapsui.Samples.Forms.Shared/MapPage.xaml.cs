@@ -43,7 +43,7 @@ public partial class MapPage : ContentPage
 
         Compass.ReadingChanged += Compass_ReadingChanged;
 
-        mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position());
+        mapView.MyLocationLayer.UpdateMyLocation(new Position());
         mapView.MyLocationLayer.CalloutText = "My location!\n";
         mapView.MyLocationLayer.Clicked += MyLocationClicked;
 
@@ -177,10 +177,10 @@ public partial class MapPage : ContentPage
     {
         Device.BeginInvokeOnMainThread(() =>
         {
-            var coords = new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude);
+            var coords = new Position(e.Position.Latitude, e.Position.Longitude);
             info.Text = $"{coords.ToString()} - D:{(int)e.Position.Heading} S:{Math.Round(e.Position.Speed, 2)}";
 
-            mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
+            mapView.MyLocationLayer.UpdateMyLocation(new Position(e.Position.Latitude, e.Position.Longitude));
             mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Map.Navigator.Viewport.Rotation);
             mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
             mapView.MyLocationLayer.CalloutText = $"My location:\nlat={e.Position.Latitude:F6}°\nlon={e.Position.Longitude:F6}°";

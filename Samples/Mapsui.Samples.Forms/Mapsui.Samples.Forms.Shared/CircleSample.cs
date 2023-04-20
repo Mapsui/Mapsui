@@ -1,4 +1,5 @@
 ﻿using System;
+using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
@@ -18,13 +19,13 @@ namespace Mapsui.Samples.Maui;
 namespace Mapsui.Samples.Forms;
 #endif
 
-public class CircleSample : IFormsSample
+public class CircleSample : IMapViewSample
 {
     private static Random rnd = new Random(1);
 
     public string Name => "Add Circle Sample";
 
-    public string Category => "Forms";
+    public string Category => "MapView";
 
     public bool OnClick(object? sender, EventArgs args)
     {

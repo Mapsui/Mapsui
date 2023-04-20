@@ -29,14 +29,14 @@ namespace Mapsui.Samples.Maui;
 namespace Mapsui.Samples.Forms;
 #endif
 
-public class ManyPinsSample : IFormsSample
+public class ManyPinsSample : IMapViewSample
 {
     static int markerNum = 1;
     static Random rnd = new Random(1);
 
     public string Name => "Add many Pins Sample";
 
-    public string Category => "Forms";
+    public string Category => "MapView";
 
     public bool OnClick(object? sender, EventArgs args)
     {

@@ -13,14 +13,14 @@ using Color = Xamarin.Forms.Color;
 
 namespace Mapsui.Samples.Forms.Shared;
 
-public class PinSample : IFormsSample
+public class PinSample : IMapViewSample
 {
     int _markerNum = 1;
     readonly Random _random = new Random(4);
 
     public string Name => "Add Pin Sample";
 
-    public string Category => "Forms";
+    public string Category => "MapView";
 
     public bool OnClick(object? sender, EventArgs args)
     {

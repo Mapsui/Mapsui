@@ -2,11 +2,8 @@
 using Mapsui.Projections;
 using NetTopologySuite.Geometries;
 
-#if __MAUI__
-namespace Mapsui.UI.Maui;
-#else
-namespace Mapsui.UI.Forms;
-#endif
+// ReSharper disable once CheckNamespace
+namespace Mapsui;
 
 /// <summary>
 /// Structure holding latitude and longitude of a position in spherical coordinate system

@@ -62,6 +62,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private readonly ObservableRangeCollection<Pin> _pins = new ObservableRangeCollection<Pin>();
     private readonly ObservableRangeCollection<Drawable> _drawable = new ObservableRangeCollection<Drawable>();
     private readonly ObservableRangeCollection<Callout> _callouts = new ObservableRangeCollection<Callout>();
+    private readonly MyLocationLayer _myLocationLayer;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.MapView"/> class.
@@ -73,7 +74,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         IsClippedToBounds = true;
         UseDoubleTap = false;
 
-        MyLocationLayer = new MyLocationLayer(this) { Enabled = true };
+        _myLocationLayer = new MyLocationLayer(this) { Enabled = true };
         _mapCalloutLayer = new ObservableMemoryLayer<Callout>(f => f.Feature) { Name = CalloutLayerName, IsMapInfoLayer = true };
         _mapPinLayer = new ObservableMemoryLayer<Pin>(f => f.Feature) { Name = PinLayerName, IsMapInfoLayer = true };
         _mapDrawableLayer = new ObservableMemoryLayer<Drawable>(f => f.Feature) { Name = DrawableLayerName, IsMapInfoLayer = true };
@@ -176,7 +177,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// <summary>
     /// MyLocation layer
     /// </summary>
-    public MyLocationLayer MyLocationLayer { get; }
+    public MyLocationLayer MyLocationLayer => _myLocationLayer;
 
     /// <summary>
     /// Should my location be visible on map

@@ -124,8 +124,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     public IRenderCache RenderCache => _renderer.RenderCache;
 
-    public bool UseDoubleTap = true;
-    public bool UseFling = true;
+    public bool UseDoubleTap { get; set; } = true;
+    public bool UseFling { get; set; } = true;
 #if __MAUI__
     private Size oldSize;
 #endif

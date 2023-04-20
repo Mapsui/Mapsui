@@ -33,7 +33,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Objects\PinType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Polygon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Polyline.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Objects\Position.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ObservableRangeCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\PolylineConverter.cs" />
   </ItemGroup>

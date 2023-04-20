@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
@@ -18,11 +19,11 @@ namespace Mapsui.Samples.Maui;
 namespace Mapsui.Samples.Forms;
 #endif
 
-public class SnapshotSample : IFormsSample
+public class SnapshotSample : IMapViewSample
 {
     public string Name => "Snapshot Sample";
 
-    public string Category => "Forms";
+    public string Category => "MapView";
 
     public bool OnClick(object? sender, EventArgs args)
     {
