@@ -1,6 +1,3 @@
-## News
-- 2023-02-07: Released Mapsui 4.0.0-beta-7 which includes the first version of Blazor.
-
 ## Mapsui (pronounced map-su-wii)
 
 Mapsui is a C# map component for apps
