@@ -28,8 +28,8 @@ public class PolylineSample : IMapViewSample
 
     public bool OnClick(object? sender, EventArgs args)
     {
-        var mapView = sender as MapView;
-        var e = args as MapClickedEventArgs;
+        var mapView = sender as IMapView;
+        var e = args as IMapClicked;
 
         if (mapView == null)
             return false;
@@ -37,7 +37,7 @@ public class PolylineSample : IMapViewSample
         if (e == null)
             return false;
 
-        UI.Objects.Drawable f;
+        IDrawable f;
 
         lock (mapView.Drawables)
         {
@@ -64,6 +64,6 @@ public class PolylineSample : IMapViewSample
     {
         mapControl.Map = OsmSample.CreateMap();
 
-        ((MapView)mapControl).UseDoubleTap = false;
+        ((IMapView)mapControl).UseDoubleTap = false;
     }
 }

@@ -29,11 +29,11 @@ namespace Mapsui.UI.Maui;
 namespace Mapsui.UI.Forms;
 #endif
 
-public class Callout : BindableObject, IFeatureProvider, IDisposable
+public class Callout : BindableObject, IFeatureProvider, IDisposable, ICallout
 {
-    private readonly Pin _pin;
+    private readonly IPin _pin;
 
-    public event EventHandler<CalloutClickedEventArgs>? CalloutClicked;
+    public event EventHandler<ICalloutClicked>? CalloutClicked;
 
     public static double DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
     public static FontAttributes DefaultTitleFontAttributes = FontAttributes.Bold;
@@ -218,7 +218,7 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// <summary>
     /// Pin to which this callout belongs
     /// </summary>
-    public Pin Pin => _pin;
+    public IPin Pin => _pin;
 
     /// <summary>
     /// Type of Callout
@@ -553,9 +553,9 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     /// <param name="sender">Sender</param>
     /// <param name="e">CalloutClickedEventArgs</param>
-    internal void HandleCalloutClicked(object? sender, CalloutClickedEventArgs e)
+    void ICallout.HandleCalloutClicked(object? sender, ICalloutClicked e)
     {
-        CalloutClicked?.Invoke(this, e);
+        CalloutClicked?.Invoke(this, (CalloutClickedEventArgs)e);
 
         if (e.Handled)
             return;
@@ -633,7 +633,7 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// <summary>
     /// Update content and style of callout before display it the first time
     /// </summary>
-    internal void Update()
+    void ICallout.Update()
     {
         UpdateContent();
         UpdateCalloutStyle();

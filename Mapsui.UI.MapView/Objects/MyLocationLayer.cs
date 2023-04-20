@@ -30,7 +30,7 @@ namespace Mapsui.UI.Objects;
 /// There are two different symbols for own loaction: one is used when there isn't a change in position (still),
 /// and one is used, if the position changes (moving).
 /// </remarks>
-public class MyLocationLayer : MemoryLayer
+public class MyLocationLayer : MemoryLayer, IMyLocationLayer
 {
     private readonly MapView _mapView;
     private readonly GeometryFeature _feature;
@@ -121,7 +121,7 @@ public class MyLocationLayer : MemoryLayer
     /// <summary>
     /// This event is triggered whenever the MyLocation symbol or label is clicked.
     /// </summary>
-    public event EventHandler<DrawableClickedEventArgs>? Clicked;
+    public event EventHandler<IDrawableClicked>? Clicked;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="T:Mapsui.UI.Objects.MyLocationLayer"/> class
@@ -417,8 +417,8 @@ public class MyLocationLayer : MemoryLayer
         return modified;
     }
 
-    internal void HandleClicked(DrawableClickedEventArgs e)
+    void IMyLocationLayer.HandleClicked(IDrawableClicked e)
     {
-        Clicked?.Invoke(this, e);
+        Clicked?.Invoke(this, (DrawableClickedEventArgs)e);
     }
 }

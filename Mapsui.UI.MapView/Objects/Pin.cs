@@ -29,7 +29,7 @@ namespace Mapsui.UI.Maui;
 namespace Mapsui.UI.Forms;
 #endif
 
-public class Pin : BindableObject, IFeatureProvider, IDisposable
+public class Pin : BindableObject, IFeatureProvider, IDisposable, IPin
 {
     // Cache for used bitmaps
     private static readonly Dictionary<string, int> _bitmapIds = new Dictionary<string, int>();
@@ -37,7 +37,7 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     private string _bitmapIdKey = string.Empty; // Key for active _bitmapIds entry
     private int _bitmapId = -1;
     private byte[]? _bitmapData;
-    private MapView? _mapView;
+    private IMapView? _mapView;
 
     public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(PinType), typeof(Pin), default(PinType));
     public static readonly BindableProperty PositionProperty = BindableProperty.Create(nameof(Position), typeof(Position), typeof(Pin), default(Position));
@@ -61,7 +61,7 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Pin"/> class
     /// </summary>
     /// <param name="mapView">MapView to which this pin belongs</param>
-    public Pin(MapView mapView)
+    public Pin(IMapView mapView)
     {
         _mapView = mapView;
 
@@ -78,7 +78,7 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// <summary>
     /// Internal MapView for refreshing of screen
     /// </summary>
-    internal MapView? MapView
+    IMapView? IPin.MapView
     {
         get => _mapView;
         set
@@ -264,13 +264,13 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// <value>Mapsui feature</value>
     public GeometryFeature? Feature { get; private set; }
 
-    private Callout? _callout;
+    private ICallout? _callout;
 
     /// <summary>
     /// Gets the callout
     /// </summary>
     /// <value>Callout for this pin</value>
-    public Callout Callout
+    public ICallout Callout
     {
         get
         {

@@ -6,7 +6,7 @@ namespace Mapsui.UI.Maui;
 namespace Mapsui.UI.Forms;
 #endif
 
-public sealed class MapClickedEventArgs : EventArgs
+public sealed class MapClickedEventArgs : EventArgs, IMapClicked
 {
     /// <summary>
     /// Point of click in EPSG:4326 coordinates

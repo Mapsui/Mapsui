@@ -42,14 +42,14 @@ namespace Mapsui.UI.Forms;
 /// <summary>
 /// Class, that uses the API of the original Xamarin.Forms MapView
 /// </summary>
-public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
+public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<IPin>, IMapView
 {
     private const string CalloutLayerName = "Callouts";
     private const string PinLayerName = "Pins";
     private const string DrawableLayerName = "Drawables";
-    private readonly ObservableMemoryLayer<Callout> _mapCalloutLayer;
-    private readonly ObservableMemoryLayer<Pin> _mapPinLayer;
-    private readonly ObservableMemoryLayer<Drawable> _mapDrawableLayer;
+    private readonly ObservableMemoryLayer<ICallout> _mapCalloutLayer;
+    private readonly ObservableMemoryLayer<IPin> _mapPinLayer;
+    private readonly ObservableMemoryLayer<IDrawable> _mapDrawableLayer;
     private ButtonWidget? _mapZoomInButton;
     private ButtonWidget? _mapZoomOutButton;
     private ButtonWidget? _mapMyLocationButton;
@@ -59,10 +59,10 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private readonly SKPicture _pictZoomIn;
     private readonly SKPicture _pictZoomOut;
     private readonly SKPicture _pictNorthing;
-    private readonly ObservableRangeCollection<Pin> _pins = new ObservableRangeCollection<Pin>();
-    private readonly ObservableRangeCollection<Drawable> _drawable = new ObservableRangeCollection<Drawable>();
-    private readonly ObservableRangeCollection<Callout> _callouts = new ObservableRangeCollection<Callout>();
-    private readonly MyLocationLayer _myLocationLayer;
+    private readonly ObservableRangeCollection<IPin> _pins = new ObservableRangeCollection<IPin>();
+    private readonly ObservableRangeCollection<IDrawable> _drawable = new ObservableRangeCollection<IDrawable>();
+    private readonly ObservableRangeCollection<ICallout> _callouts = new ObservableRangeCollection<ICallout>();
+    private readonly IMyLocationLayer _myLocationLayer;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.MapView"/> class.
@@ -75,9 +75,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         UseDoubleTap = false;
 
         _myLocationLayer = new MyLocationLayer(this) { Enabled = true };
-        _mapCalloutLayer = new ObservableMemoryLayer<Callout>(f => f.Feature) { Name = CalloutLayerName, IsMapInfoLayer = true };
-        _mapPinLayer = new ObservableMemoryLayer<Pin>(f => f.Feature) { Name = PinLayerName, IsMapInfoLayer = true };
-        _mapDrawableLayer = new ObservableMemoryLayer<Drawable>(f => f.Feature) { Name = DrawableLayerName, IsMapInfoLayer = true };
+        _mapCalloutLayer = new ObservableMemoryLayer<ICallout>(f => f.Feature) { Name = CalloutLayerName, IsMapInfoLayer = true };
+        _mapPinLayer = new ObservableMemoryLayer<IPin>(f => f.Feature) { Name = PinLayerName, IsMapInfoLayer = true };
+        _mapDrawableLayer = new ObservableMemoryLayer<IDrawable>(f => f.Feature) { Name = DrawableLayerName, IsMapInfoLayer = true };
 
         // Get defaults from MapControl
         RotationLock = Map.Navigator.RotationLock;
@@ -152,7 +152,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     #region Bindings
 
-    public static readonly BindableProperty SelectedPinProperty = BindableProperty.Create(nameof(SelectedPin), typeof(Pin), typeof(MapView), default(Pin), defaultBindingMode: BindingMode.TwoWay);
+    public static readonly BindableProperty SelectedPinProperty = BindableProperty.Create(nameof(SelectedPin), typeof(IPin), typeof(MapView), default(Pin), defaultBindingMode: BindingMode.TwoWay);
     public static readonly BindableProperty UniqueCalloutProperty = BindableProperty.Create(nameof(UniqueCallout), typeof(bool), typeof(MapView), false, defaultBindingMode: BindingMode.TwoWay);
     public static readonly BindableProperty MyLocationEnabledProperty = BindableProperty.Create(nameof(MyLocationEnabled), typeof(bool), typeof(MapView), false, defaultBindingMode: BindingMode.TwoWay);
     public static readonly BindableProperty MyLocationFollowProperty = BindableProperty.Create(nameof(MyLocationFollow), typeof(bool), typeof(MapView), false, defaultBindingMode: BindingMode.TwoWay);
@@ -177,7 +177,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// <summary>
     /// MyLocation layer
     /// </summary>
-    public MyLocationLayer MyLocationLayer => _myLocationLayer;
+    public IMyLocationLayer MyLocationLayer => _myLocationLayer;
 
     /// <summary>
     /// Should my location be visible on map
@@ -227,14 +227,14 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// <summary>
     /// Pins on map
     /// </summary>
-    public IList<Pin> Pins => _pins;
+    public IList<IPin> Pins => _pins;
 
     /// <summary>
     /// Selected pin
     /// </summary>
-    public Pin? SelectedPin
+    public IPin? SelectedPin
     {
-        get => (Pin?)GetValue(SelectedPinProperty);
+        get => (IPin?)GetValue(SelectedPinProperty);
         set => SetValue(SelectedPinProperty, value);
     }
 
@@ -250,7 +250,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// <summary>
     /// List of drawables like polyline and polygon
     /// </summary>
-    public IList<Drawable> Drawables => _drawable;
+    public IList<IDrawable> Drawables => _drawable;
 
     /// <summary>
     /// Enable rotation with pinch gesture
@@ -335,7 +335,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     #endregion
 
-    internal void AddCallout(Callout callout)
+    void IMapView.AddCallout(ICallout callout)
     {
         if (!_callouts.Contains(callout))
         {
@@ -348,7 +348,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         }
     }
 
-    internal void RemoveCallout(Callout? callout)
+    void IMapView.RemoveCallout(ICallout? callout)
     {
         if (callout != null && _callouts.Contains(callout))
         {
@@ -358,7 +358,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         }
     }
 
-    internal bool IsCalloutVisible(Callout callout)
+    bool IMapView.IsCalloutVisible(ICallout callout)
     {
         return _callouts.Contains(callout);
     }
@@ -376,7 +376,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         return GetEnumerator();
     }
 
-    public IEnumerator<Pin> GetEnumerator()
+    public IEnumerator<IPin> GetEnumerator()
     {
         return _pins.GetEnumerator();
     }
@@ -535,7 +535,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 if (item is Pin pin)
                 {
                     // Add new pins to layer, so set MapView
-                    pin.MapView = this;
+                    ((IPin)pin).MapView = this;
                     pin.PropertyChanged += HandlerPinPropertyChanged;
                 }
             }
@@ -575,7 +575,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         // Click on pin?
         if (e.MapInfo?.Layer == _mapPinLayer)
         {
-            Pin? clickedPin = null;
+            IPin? clickedPin = null;
             var pins = _pins.ToList();
 
             foreach (var pin in pins)
@@ -610,7 +610,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         // Check for clicked callouts
         else if (e.MapInfo?.Layer == _mapCalloutLayer)
         {
-            Callout? clickedCallout = null;
+            ICallout? clickedCallout = null;
             var callouts = _callouts.ToList();
 
             foreach (var callout in callouts)
@@ -638,7 +638,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         // Check for clicked drawables
         else if (e.MapInfo?.Layer == _mapDrawableLayer)
         {
-            Drawable? clickedDrawable = null;
+            IDrawable? clickedDrawable = null;
             var drawables = _drawable.ToList();
 
             foreach (var drawable in drawables)

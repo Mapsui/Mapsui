@@ -24,7 +24,7 @@ public class PinSample : IMapViewSample
 
     public bool OnClick(object? sender, EventArgs args)
     {
-        var mapView = sender as MapView;
+        var mapView = sender as IMapView;
         var mapClickedArgs = (MapClickedEventArgs)args;
 
         if (mapView == null)
@@ -147,7 +147,7 @@ public class PinSample : IMapViewSample
         //I like bing Hybrid
         mapControl.Map = BingSample.CreateMap(BingHybrid.DefaultCache, BruTile.Predefined.KnownTileSource.BingHybrid);
 
-        ((MapView)mapControl).UseDoubleTap = true;
+        ((IMapView)mapControl).UseDoubleTap = true;
         //((MapView)mapControl).UniqueCallout = true;
     }
 }

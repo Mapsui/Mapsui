@@ -11,7 +11,7 @@ public sealed class PinClickedEventArgs : EventArgs
     /// <summary>
     /// Pin that was clicked
     /// </summary>
-    public Pin Pin { get; }
+    public IPin Pin { get; }
 
     /// <summary>
     /// Point of click in EPSG:4326 coordinates
@@ -29,7 +29,7 @@ public sealed class PinClickedEventArgs : EventArgs
     /// <value><c>true</c> if handled; otherwise, <c>false</c>.</value>
     public bool Handled { get; set; } = false;
 
-    internal PinClickedEventArgs(Pin pin, Position point, int numOfTaps)
+    internal PinClickedEventArgs(IPin pin, Position point, int numOfTaps)
     {
         Pin = pin;
         Point = point;

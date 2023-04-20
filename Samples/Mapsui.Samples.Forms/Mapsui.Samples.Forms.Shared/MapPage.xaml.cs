@@ -19,14 +19,14 @@ namespace Mapsui.Samples.Forms;
 [XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class MapPage : ContentPage
 {
-    public Func<MapView?, MapClickedEventArgs, bool>? Clicker { get; set; }
+    public Func<IMapView?, MapClickedEventArgs, bool>? Clicker { get; set; }
 
     public MapPage()
     {
         InitializeComponent();
     }
 
-    public MapPage(ISampleBase sample, Func<MapView?, MapClickedEventArgs, bool>? c = null)
+    public MapPage(ISampleBase sample, Func<IMapView?, MapClickedEventArgs, bool>? c = null)
     {
         InitializeComponent();
         Refs.AddRef(this);
@@ -101,7 +101,7 @@ public partial class MapPage : ContentPage
 
     private void OnMapClicked(object sender, MapClickedEventArgs e)
     {
-        e.Handled = Clicker != null ? (Clicker?.Invoke(sender as MapView, e) ?? false) : false;
+        e.Handled = Clicker != null ? (Clicker?.Invoke(sender as IMapView, e) ?? false) : false;
         //Samples.SetPins(mapView, e);
         //Samples.DrawPolylines(mapView, e);
     }
@@ -192,7 +192,7 @@ public partial class MapPage : ContentPage
         mapView.MyLocationLayer.UpdateMyViewDirection(e.Reading.HeadingMagneticNorth, mapView.Map.Navigator.Viewport.Rotation, false);
     }
 
-    public void MyLocationClicked(object sender, DrawableClickedEventArgs args)
+    public void MyLocationClicked(object sender, IDrawableClicked args)
     {
         var myLocLayer = sender as MyLocationLayer;
         args.Handled = true;

@@ -27,8 +27,8 @@ public class PolygonSample : IMapViewSample
 
     public bool OnClick(object? sender, EventArgs args)
     {
-        var mapView = sender as MapView;
-        var e = args as MapClickedEventArgs;
+        var mapView = sender as IMapView;
+        var e = args as IMapClicked;
 
         if (e == null)
             return false;

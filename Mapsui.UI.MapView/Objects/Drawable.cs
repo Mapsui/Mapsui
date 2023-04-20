@@ -25,7 +25,7 @@ namespace Mapsui.UI.Objects;
 /// <summary>
 /// Base class for all drawables like polyline, polygon and circle
 /// </summary>
-public class Drawable : BindableObject, IClickable, IFeatureProvider
+public class Drawable : BindableObject, IClickable, IFeatureProvider, IDrawable
 {
     public static readonly BindableProperty LabelProperty = BindableProperty.Create(nameof(Label), typeof(string), typeof(Pin), default(string));
     public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(nameof(StrokeWidth), typeof(float), typeof(Circle), 1f);
@@ -127,9 +127,9 @@ public class Drawable : BindableObject, IClickable, IFeatureProvider
     {
     }
 
-    internal void HandleClicked(DrawableClickedEventArgs e)
+    void IDrawable.HandleClicked(IDrawableClicked e)
     {
-        Clicked?.Invoke(this, e);
+        Clicked?.Invoke(this, (DrawableClickedEventArgs)e);
     }
 
     protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)

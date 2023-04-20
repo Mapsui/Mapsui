@@ -26,6 +26,7 @@ public class MapRegressionTests
     {
         // todo: find proper way to load assembly
         Mapsui.Tests.Common.Utilities.LoadAssembly();
+        Mapsui.Samples.MapView.Utilities.LoadAssembly();
     }
 
     private static ISampleBase[]? _excludedSamples;

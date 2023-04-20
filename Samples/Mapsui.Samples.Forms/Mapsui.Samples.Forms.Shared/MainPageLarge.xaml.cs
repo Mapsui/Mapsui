@@ -67,7 +67,7 @@ public partial class MainPageLarge : ContentPage
 
     private void OnMapClicked(object sender, MapClickedEventArgs e)
     {
-        e.Handled = clicker != null && (clicker?.Invoke(sender as MapView, e) ?? false);
+        e.Handled = clicker != null && (clicker?.Invoke(sender as IMapView, e) ?? false);
     }
 
     void OnSelection(object sender, SelectedItemChangedEventArgs e)
@@ -192,7 +192,7 @@ public partial class MainPageLarge : ContentPage
     }
 
 
-    public void MyLocationClicked(object sender, DrawableClickedEventArgs args)
+    public void MyLocationClicked(object sender, IDrawableClicked args)
     {
         var myLocLayer = sender as MyLocationLayer;
         args.Handled = true;

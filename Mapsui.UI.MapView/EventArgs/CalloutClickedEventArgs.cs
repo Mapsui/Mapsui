@@ -12,12 +12,12 @@ namespace Mapsui.UI.Maui;
 namespace Mapsui.UI.Forms;
 #endif
 
-public sealed class CalloutClickedEventArgs : EventArgs
+public sealed class CalloutClickedEventArgs : EventArgs, ICalloutClicked
 {
     /// <summary>
     /// Callout that is clicked
     /// </summary>
-    public Callout? Callout { get; }
+    public ICallout? Callout { get; }
 
     /// <summary>
     /// Point of click in EPSG:4326 coordinates
@@ -40,7 +40,7 @@ public sealed class CalloutClickedEventArgs : EventArgs
     /// <value><c>true</c> if handled; otherwise, <c>false</c>.</value>
     public bool Handled { get; set; } = false;
 
-    internal CalloutClickedEventArgs(Callout? callout, Position point, Point screenPoint, int numOfTaps)
+    internal CalloutClickedEventArgs(ICallout? callout, Position point, Point screenPoint, int numOfTaps)
     {
         Callout = callout;
         Point = point;

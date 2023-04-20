@@ -30,7 +30,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Objects\MyLocationLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\ObservableCollectionProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Pin.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Objects\PinType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Polygon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Polyline.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ObservableRangeCollection.cs" />
