@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Nts;
 using Mapsui.Styles;
-using Mapsui.UI.Extensions;
+using Mapsui.UI.Forms;
 using Mapsui.Utilities;
 using NetTopologySuite.Geometries;
 

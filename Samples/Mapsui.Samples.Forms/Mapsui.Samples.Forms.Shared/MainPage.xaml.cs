@@ -3,7 +3,6 @@ using Mapsui.Samples.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Mapsui.Samples.Forms;

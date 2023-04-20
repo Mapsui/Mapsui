@@ -1,6 +1,4 @@
-﻿using Xamarin.Forms;
-
-namespace Mapsui.Samples.Forms;
+﻿namespace Mapsui.Samples.Forms;
 
 public partial class LeaksPage : ContentPage
 {

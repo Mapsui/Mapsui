@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Mapsui.Nts;
+﻿using Mapsui.Nts;
 
 // ReSharper disable once CheckNamespace
 namespace Mapsui;

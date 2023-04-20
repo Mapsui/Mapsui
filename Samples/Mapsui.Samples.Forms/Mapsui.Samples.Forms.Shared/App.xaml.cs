@@ -2,8 +2,6 @@
 using System.Diagnostics;
 using Mapsui.Logging;
 
-using Xamarin.Forms;
-
 namespace Mapsui.Samples.Forms;
 
 public partial class App : Application

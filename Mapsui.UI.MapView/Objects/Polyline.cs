@@ -6,8 +6,7 @@ using Mapsui.Nts;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using Mapsui.Nts.Extensions;
-using Mapsui.UI.Extensions;
-using Mapsui.UI.Utils;
+using Mapsui.UI.Forms;
 using Mapsui.Utilities;
 
 namespace Mapsui.UI.Objects;

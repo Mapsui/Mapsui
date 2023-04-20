@@ -1,6 +1,4 @@
-﻿using Mapsui.Nts;
-
-namespace Mapsui.UI.Objects;
+﻿namespace Mapsui.Nts.Providers;
 
 public interface IFeatureProvider
 {

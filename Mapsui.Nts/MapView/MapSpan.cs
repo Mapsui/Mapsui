@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using Mapsui.Utilities;
 
-namespace Mapsui.UI;
+// ReSharper disable once CheckNamespace
+namespace Mapsui;
 
 /// <summary>
 /// MapSpan represents an area of the earth

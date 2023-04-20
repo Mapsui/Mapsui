@@ -25,7 +25,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Circle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Drawable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\IClickable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Objects\MapSpan.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\MyLocationLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Pin.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Polygon.cs" />

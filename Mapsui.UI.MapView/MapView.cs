@@ -1,5 +1,4 @@
 ﻿using Mapsui.Layers;
-using Mapsui.UI.Objects;
 using Mapsui.Widgets;
 using Mapsui.Extensions;
 using Mapsui.Widgets.ButtonWidget;
@@ -13,7 +12,7 @@ using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using Mapsui.Logging;
-using Mapsui.UI.Extensions;
+using Mapsui.UI.Objects;
 using Mapsui.Utilities;
 
 #if __MAUI__

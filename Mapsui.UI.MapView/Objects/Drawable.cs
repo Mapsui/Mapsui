@@ -2,8 +2,9 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Nts;
+using Mapsui.Nts.Providers;
 using Mapsui.Styles;
-using Mapsui.UI.Extensions;
+using Mapsui.UI.Forms;
 
 namespace Mapsui.UI.Objects;
 

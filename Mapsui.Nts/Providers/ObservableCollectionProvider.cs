@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.UI.Objects;
 using Mapsui.Utilities;
 
 namespace Mapsui.Nts.Providers;

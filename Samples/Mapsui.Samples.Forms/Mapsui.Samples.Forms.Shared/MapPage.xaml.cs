@@ -1,6 +1,5 @@
 ﻿using System;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
@@ -9,9 +8,9 @@ using Mapsui.Logging;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.CustomWidget;
-using Mapsui.UI.Objects;
 using Mapsui.Extensions;
 using Mapsui.UI;
+using Mapsui.UI.Objects;
 
 namespace Mapsui.Samples.Forms;
 

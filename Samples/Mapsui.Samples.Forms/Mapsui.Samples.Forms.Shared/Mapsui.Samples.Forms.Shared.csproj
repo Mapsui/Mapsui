@@ -16,7 +16,5 @@
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\..\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems" Label="Shared" />
-
   <Import Project="..\..\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems" Label="Shared" />
 </Project>
