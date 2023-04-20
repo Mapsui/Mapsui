@@ -27,7 +27,8 @@ public class SnapshotSample : IMapViewSample
             return false;
 
         var snapshot = mapView.GetSnapshot();
-        var test = BitmapHelper.LoadBitmap(new MemoryStream(snapshot));
+        using var bitmapStream = new MemoryStream(snapshot);
+        var test = BitmapHelper.LoadBitmap(bitmapStream);
 
         return true;
     }
