@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <DefineConstants>$(DefineConstants);__FORMS__</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,4 +15,6 @@
     <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
   </ItemGroup>
+
+  <Import Project="..\..\..\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems" Label="Shared" />
 </Project>

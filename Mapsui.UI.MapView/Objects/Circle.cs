@@ -5,10 +5,8 @@ using System.Runtime.CompilerServices;
 using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.UI.Extensions;
-using Mapsui.UI.Objects;
 using Mapsui.Utilities;
 using NetTopologySuite.Geometries;
-
 
 namespace Mapsui.UI.Objects;
 

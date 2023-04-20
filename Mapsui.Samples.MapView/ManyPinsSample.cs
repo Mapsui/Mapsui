@@ -1,5 +1,4 @@
 ﻿using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
 using System;
 using System.Diagnostics;
@@ -11,24 +10,33 @@ using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using Mapsui.Utilities;
 using Mapsui.Widgets.PerformanceWidget;
-#if __MAUI__
-using Mapsui.UI.Maui;
-using Microsoft.Maui.Graphics;
-using Mapsui.UI.Maui.Utils;
-using Color = Microsoft.Maui.Graphics.Color;
-using KnownColor = Mapsui.UI.Maui.KnownColor;
-#else
-using Mapsui.UI.Forms;
-using Xamarin.Forms;
-using Color = Xamarin.Forms.Color;
-using KnownColor = Xamarin.Forms.Color;
-#endif
 
 #if __MAUI__
-namespace Mapsui.Samples.Maui;
+using Mapsui.UI.Maui;
+#elif __UWP__
+using Mapsui.UI.Uwp;
+#elif __ANDROID__ && !HAS_UNO_WINUI
+using Mapsui.UI.Android;
+#elif __IOS__ && !HAS_UNO_WINUI && !__FORMS__
+using Mapsui.UI.iOS;
+#elif __WINUI__
+using Mapsui.UI.WinUI;
+#elif __FORMS__
+using Mapsui.UI.Forms;
+#elif __AVALONIA__
+using Mapsui.UI.Avalonia;
+#elif __ETO_FORMS__
+using Mapsui.UI.Eto;
+#elif __BLAZOR__
+using Mapsui.UI.Blazor;
+#elif __WPF__
+using Mapsui.UI.Wpf;
 #else
-namespace Mapsui.Samples.Forms;
+using Mapsui.UI;
 #endif
+
+// ReSharper disable once CheckNamespace
+namespace Mapsui.Samples;
 
 public class ManyPinsSample : IMapViewSample
 {

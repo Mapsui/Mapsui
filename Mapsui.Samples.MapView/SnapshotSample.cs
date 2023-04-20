@@ -1,18 +1,16 @@
 ﻿using System;
+using System.IO;
+using Mapsui.Rendering.Skia;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
 
-#if __MAUI__
-namespace Mapsui.Samples.Maui;
-#else
-namespace Mapsui.Samples.Forms;
-#endif
+// ReSharper disable once CheckNamespace
+namespace Mapsui.Samples;
 
-public class MyLocationSample : IMapViewSample
+public class SnapshotSample : IMapViewSample
 {
-    public string Name => "MyLocation Sample";
+    public string Name => "Snapshot Sample";
 
     public string Category => "MapView";
 
@@ -23,11 +21,11 @@ public class MyLocationSample : IMapViewSample
         if (mapView == null)
             return false;
 
-        mapView.MyLocationLayer.IsMoving = mapView.MyLocationEnabled;
-        mapView.MyLocationEnabled = true;
-        mapView.UseDoubleTap = true;
+        var snapshot = mapView.GetSnapshot();
+        using var bitmapStream = new MemoryStream(snapshot);
+        var test = BitmapHelper.LoadBitmap(bitmapStream);
 
-        return false;
+        return true;
     }
 
     public void Setup(IMapControl mapControl)

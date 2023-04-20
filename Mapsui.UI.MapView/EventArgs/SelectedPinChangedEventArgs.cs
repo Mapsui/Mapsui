@@ -1,5 +1,4 @@
 ﻿using System;
-using Mapsui.UI.Objects;
 
 namespace Mapsui.UI;
 

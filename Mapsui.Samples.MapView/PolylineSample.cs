@@ -1,25 +1,12 @@
 ﻿using System;
 using System.Linq;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
 using Mapsui.UI.Objects;
-#if __MAUI__
-using Mapsui.UI.Maui;
-using Microsoft.Maui.Graphics;
-using KnownColor = Mapsui.UI.Maui.KnownColor;
-#else
-using Mapsui.UI.Forms;
-using Xamarin.Forms;
-using KnownColor = Xamarin.Forms.Color;
-#endif
 
-#if __MAUI__
-namespace Mapsui.Samples.Maui;
-#else
-namespace Mapsui.Samples.Forms;
-#endif
+// ReSharper disable once CheckNamespace
+namespace Mapsui.Samples;
 
 public class PolylineSample : IMapViewSample
 {

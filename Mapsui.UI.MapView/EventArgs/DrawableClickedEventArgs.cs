@@ -1,9 +1,4 @@
 ﻿using System;
-#if __MAUI__
-using Microsoft.Maui;
-using Microsoft.Maui.Graphics;
-#else
-#endif
 
 namespace Mapsui.UI;
 

@@ -1,10 +1,5 @@
 ﻿using Mapsui.Widgets;
 
-#if __MAUI__
-using Microsoft.Maui;
-#else
-#endif
-
 namespace Mapsui.UI.Extensions;
 
 public static class TextAlignmentExtensions

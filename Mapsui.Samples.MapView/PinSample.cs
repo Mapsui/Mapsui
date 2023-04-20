@@ -9,10 +9,9 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.UI.Forms;
 using Mapsui.UI.Objects;
-using Xamarin.Forms;
-using Color = Xamarin.Forms.Color;
 
-namespace Mapsui.Samples.Forms.Shared;
+// ReSharper disable once CheckNamespace
+namespace Mapsui.Samples;
 
 public class PinSample : IMapViewSample
 {

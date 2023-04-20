@@ -11,16 +11,9 @@ using Mapsui.Logging;
 using Mapsui.Utilities;
 using Mapsui.Extensions;
 #if __MAUI__
-using Mapsui.UI.Maui.Extensions;
-using Microsoft.Maui;
 using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Controls;
 using Microsoft.Maui.Devices;
-using Microsoft.Maui.Graphics;
-using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
-
-using Color = Microsoft.Maui.Graphics.Color;
 using Logger = Mapsui.Logging.Logger;
 #else
 using SkiaSharp.Views.Forms;
