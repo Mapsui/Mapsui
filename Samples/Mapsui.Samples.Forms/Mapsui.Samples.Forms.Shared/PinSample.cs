@@ -24,7 +24,7 @@ public class PinSample : IMapViewSample
 
     public bool OnClick(object? sender, EventArgs args)
     {
-        var mapView = sender as IMapView;
+        var mapView = sender as MapView;
         var mapClickedArgs = (MapClickedEventArgs)args;
 
         if (mapView == null)

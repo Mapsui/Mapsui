@@ -15,7 +15,6 @@ public partial class MainPage : ContentPage
     {
         // todo: find proper way to load assembly
         Mapsui.Tests.Common.Utilities.LoadAssembly();
-        Mapsui.Samples.MapView.Utilities.LoadAssembly();
     }
 
     IEnumerable<ISampleBase>? allSamples;
