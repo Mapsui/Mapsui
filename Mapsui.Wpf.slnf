@@ -7,8 +7,6 @@
       "Mapsui.Nts\\Mapsui.Nts.csproj",
       "Mapsui.Rendering.Skia\\Mapsui.Rendering.Skia.csproj",
       "Mapsui.Tiling\\Mapsui.Tiling.csproj",
-      "Mapsui.UI.Forms.Tests\\Mapsui.UI.Forms.Tests.csproj",
-      "Mapsui.UI.Forms\\Mapsui.UI.Forms.csproj",
       "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
       "Mapsui.UI.Wpf\\Mapsui.UI.Wpf.csproj",
       "Mapsui\\Mapsui.csproj",
