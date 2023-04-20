@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using Mapsui.Nts;
 using Mapsui.Nts.Providers;
 using Mapsui.Styles;
-using Mapsui.UI.Forms;
+using Mapsui.UI.Extensions;
 
 namespace Mapsui.UI.Objects;
 
