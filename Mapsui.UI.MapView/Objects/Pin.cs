@@ -496,12 +496,15 @@ public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
         {
             if (Feature == null)
             {
+#pragma warning disable IDISP003 // Dispose previous before re-assigning
                 // Create a new one
                 Feature = new GeometryFeature
                 {
                     Geometry = Position.ToPoint(),
                     ["Label"] = Label,
                 };
+#pragma warning restore IDISP003 // Dispose previous before re-assigning
+
                 if (_callout != null)
                     _callout.Feature.Geometry = Position.ToPoint();
             }
