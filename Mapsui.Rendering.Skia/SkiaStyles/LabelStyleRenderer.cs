@@ -9,6 +9,7 @@ using SkiaSharp;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Mapsui.Rendering.Skia.Cache;
@@ -25,6 +26,9 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         FakeBoldText = false,
         IsEmbeddedBitmapText = true
     };
+
+    private float _lastMidx;
+    private float _lastX;
 
     public void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity, ILabelCache labelCache)
     {
@@ -273,7 +277,23 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             }
         }
         else
-            target.DrawText(text, drawRect.Left, drawRect.Top + baseline, Paint);
+        {
+
+            if (_lastMidx != drawRect.MidX)
+            {
+                var abs = Math.Abs(_lastMidx - drawRect.MidX);
+                var xDif = Math.Abs(_lastX - x);
+                if (_lastMidx != 0 && abs > 9)
+                {
+                    Debug.WriteLine($"Jump of MidX {abs}");
+                }
+
+                _lastMidx = drawRect.MidX;
+                _lastX = x;
+                target.DrawText(text, drawRect.Left, drawRect.Top + baseline, Paint);
+            }
+        }
+            
     }
 
     private static float CalcHorizontalAlignment(LabelStyle.HorizontalAlignmentEnum horizontalAlignment)

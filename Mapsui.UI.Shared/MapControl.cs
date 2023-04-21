@@ -91,8 +91,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
 
         // End drawing
-        _drawing = false;
         _invalidated = false;
+        _drawing = false;
     }
 
     private void InvalidateTimerCallback(object? state)
