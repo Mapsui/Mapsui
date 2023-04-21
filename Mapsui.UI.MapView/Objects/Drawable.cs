@@ -35,7 +35,7 @@ public class Drawable : IClickable, IFeatureProvider, INotifyPropertyChanged
     private double _maxVisible = double.MaxValue;
     private int _zIndex;
     private bool _isClickable;
-    private Color _strokeColor = Color.Black;
+    private Color _strokeColor = KnownColor.Black;
     private object? _tag;
 
     /// <summary>
