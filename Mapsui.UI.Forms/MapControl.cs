@@ -43,8 +43,17 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 {
     static MapControl()
     {
-        Callout.DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
-        Callout.DefaultSubtitleFontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
+        try
+        {
+            Callout.DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
+            Callout.DefaultSubtitleFontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
+        }
+        catch (Exception ex)
+        {
+            // Catch Xamarin Forms not initialized exception happens in unit tests.
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
+        
 #if __FORMS__
         Callout.DefaultTitleFontName = Font.Default.FontFamily;
         Callout.DefaultSubtitleFontName = Font.Default.FontFamily;
