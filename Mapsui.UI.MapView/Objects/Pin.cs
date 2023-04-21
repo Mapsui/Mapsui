@@ -522,21 +522,24 @@ public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
                     // Check, if it is already in cache
                     if (_bitmapIds.ContainsKey(Svg!))
                     {
-                        _bitmapId = _bitmapIds[Svg];
-                        _bitmapIdKey = Svg;
+                        _bitmapId = _bitmapIds[Svg!];
+                        _bitmapIdKey = Svg!;
                         break;
                     }
                     // Save this SVG for later use
-                    _bitmapId = BitmapRegistry.Instance.Register(Svg);
-                    _bitmapIdKey = Svg;
-                    _bitmapIds.Add(Svg, _bitmapId);
+                    _bitmapId = BitmapRegistry.Instance.Register(Svg!);
+                    _bitmapIdKey = Svg!;
+                    _bitmapIds.Add(Svg!, _bitmapId);
                     break;
                 case PinType.Pin:
                     var colorInHex = Color.ToHex();
+                    if (colorInHex == null)
+                        return;
+
                     // Check, if it is already in cache
-                    if (_bitmapIds.ContainsKey(colorInHex))
+                    if (_bitmapIds.TryGetValue(colorInHex, out var id))
                     {
-                        _bitmapId = _bitmapIds[colorInHex];
+                        _bitmapId = id;
                         _bitmapIdKey = colorInHex;
                         break;
                     }
