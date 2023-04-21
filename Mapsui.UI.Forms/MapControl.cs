@@ -41,6 +41,16 @@ namespace Mapsui.UI.Forms;
 /// </summary>
 public partial class MapControl : ContentView, IMapControl, IDisposable
 {
+    static MapControl()
+    {
+        Callout.DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
+        Callout.DefaultSubtitleFontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
+#if __FORMS__
+        Callout.DefaultTitleFontName = Font.Default.FontFamily;
+        Callout.DefaultSubtitleFontName = Font.Default.FontFamily;
+#endif
+}
+
 #if __MAUI__
     // GPU does not work currently on MAUI
     // See https://github.com/mono/SkiaSharp/issues/1893

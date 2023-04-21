@@ -37,21 +37,16 @@ public class Callout : IFeatureProvider, IDisposable, INotifyPropertyChanged
 
     public event EventHandler<CalloutClickedEventArgs>? CalloutClicked;
 
-    public static double DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
+    public static double DefaultTitleFontSize = 24;
     public static FontAttributes DefaultTitleFontAttributes = FontAttributes.Bold;
     public static TextAlignment DefaultTitleTextAlignment = TextAlignment.Center;
     public static Color DefaultTitleFontColor = KnownColor.Black;
-    public static double DefaultSubtitleFontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
+    public static double DefaultSubtitleFontSize = 20;
     public static FontAttributes DefaultSubtitleFontAttributes = FontAttributes.None;
     public static Color DefaultSubtitleFontColor = KnownColor.Black;
     public static TextAlignment DefaultSubtitleTextAlignment = TextAlignment.Start; // Center;
-#if __MAUI__
-    public static string? DefaultTitleFontName = null; // TODO: default font per platform
-    public static string? DefaultSubtitleFontName = null; // TODO: default font per platform
-#else
-    public static string DefaultTitleFontName = Xamarin.Forms.Font.Default.FontFamily;
-    public static string DefaultSubtitleFontName = Xamarin.Forms.Font.Default.FontFamily;
-#endif
+    public static string? DefaultTitleFontName = null;
+    public static string? DefaultSubtitleFontName = null;
 
     private CalloutType _type;
     private Point _anchor;
