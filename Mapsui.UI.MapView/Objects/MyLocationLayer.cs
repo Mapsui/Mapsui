@@ -8,30 +8,28 @@ using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
 
 #if __MAUI__
-using Mapsui.UI.Maui;
+namespace Mapsui.UI.Maui;
 #elif __UWP__
-using Mapsui.UI.Uwp;
+namespace Mapsui.UI.Uwp;
 #elif __ANDROID__ && !HAS_UNO_WINUI
-using Mapsui.UI.Android;
+namespace Mapsui.UI.Android;
 #elif __IOS__ && !HAS_UNO_WINUI && !__FORMS__
-using Mapsui.UI.iOS;
+namespace Mapsui.UI.iOS;
 #elif __WINUI__
-using Mapsui.UI.WinUI;
+namespace Mapsui.UI.WinUI;
 #elif __FORMS__
-using Mapsui.UI.Forms;
+namespace Mapsui.UI.Forms;
 #elif __AVALONIA__
-using Mapsui.UI.Avalonia;
+namespace Mapsui.UI.Avalonia;
 #elif __ETO_FORMS__
-using Mapsui.UI.Eto;
+namespace Mapsui.UI.Eto;
 #elif __BLAZOR__
-using Mapsui.UI.Blazor;
+namespace Mapsui.UI.Blazor;
 #elif __WPF__
-using Mapsui.UI.Wpf;
+namespace Mapsui.UI.Wpf;
 #else
-using Mapsui.UI;
+namespace Mapsui.UI;
 #endif
-
-namespace Mapsui.UI.Objects;
 
 /// <summary>
 /// A layer to display a symbol for own location

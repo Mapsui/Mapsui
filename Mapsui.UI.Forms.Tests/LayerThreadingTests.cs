@@ -5,8 +5,31 @@ using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers;
 using Mapsui.UI.Forms;
-using Mapsui.UI.Objects;
 using NUnit.Framework;
+
+#if __MAUI__
+using Mapsui.UI.Maui;
+#elif __UWP__
+using Mapsui.UI.Uwp;
+#elif __ANDROID__ && !HAS_UNO_WINUI
+using Mapsui.UI.Android;
+#elif __IOS__ && !HAS_UNO_WINUI && !__FORMS__
+using Mapsui.UI.iOS;
+#elif __WINUI__
+using Mapsui.UI.WinUI;
+#elif __FORMS__
+using Mapsui.UI.Forms;
+#elif __AVALONIA__
+using Mapsui.UI.Avalonia;
+#elif __ETO_FORMS__
+using Mapsui.UI.Eto;
+#elif __BLAZOR__
+using Mapsui.UI.Blazor;
+#elif __WPF__
+using Mapsui.UI.Wpf;
+#else
+using Mapsui.UI;
+#endif
 
 namespace Mapsui.Tests.Layers;
 

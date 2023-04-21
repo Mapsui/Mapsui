@@ -12,7 +12,6 @@ using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using Mapsui.Logging;
-using Mapsui.UI.Objects;
 using Mapsui.Utilities;
 
 #if __MAUI__

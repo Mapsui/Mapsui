@@ -7,7 +7,6 @@ using System.Reflection;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Styles;
-using Mapsui.UI.Objects;
 using Mapsui.Utilities;
 using Mapsui.Widgets.PerformanceWidget;
 
