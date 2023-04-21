@@ -92,6 +92,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         // End drawing
         _drawing = false;
+        _invalidated = false;
     }
 
     private void InvalidateTimerCallback(object? state)
@@ -120,6 +121,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             return;
         }
 
+        if (_invalidated)
+        {
+            return;
+        }
+
+        _invalidated = true;
         _invalidate?.Invoke();
     }
 
@@ -155,6 +162,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </remarks>
     public void ForceUpdate()
     {
+        _invalidated = true;
         _invalidate?.Invoke();
     }
 
@@ -432,6 +440,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #else
 
     private Map _map = new Map();
+    private bool _invalidated;
 
     /// <summary>
     /// Map holding data for which is shown in this MapControl
