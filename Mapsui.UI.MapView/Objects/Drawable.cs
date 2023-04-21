@@ -41,7 +41,7 @@ public class Drawable : IClickable, IFeatureProvider, INotifyPropertyChanged
     /// <summary>
     /// Label of drawable
     /// </summary>
-    public string Label
+    public string? Label
     {
         get => _label;
         set
@@ -183,7 +183,7 @@ public class Drawable : IClickable, IFeatureProvider, INotifyPropertyChanged
         Clicked?.Invoke(this, e);
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {

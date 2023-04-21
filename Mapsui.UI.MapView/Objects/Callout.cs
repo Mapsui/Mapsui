@@ -71,13 +71,13 @@ public class Callout : IFeatureProvider, IDisposable, INotifyPropertyChanged
     private double _maxWidth = 300.0;
     private bool _isClosableByClick = true;
     private int _content = -1;
-    private string _title;
+    private string? _title;
     private string _titleFontName = DefaultTitleFontName;
     private double _titleFontSize = DefaultTitleFontSize;
     private FontAttributes _titleFontAttributes = DefaultTitleFontAttributes;
     private Color _titleFontColor = DefaultTitleFontColor;
     private TextAlignment _titleTextAlignment = DefaultTitleTextAlignment;
-    private string _subtitle;
+    private string? _subtitle;
     private string _subtitleFontName = DefaultSubtitleFontName;
     private double _subtitleFontSize = DefaultSubtitleFontSize;
     private FontAttributes _subtitleFontAttributes = DefaultSubtitleFontAttributes;
@@ -362,7 +362,7 @@ public class Callout : IFeatureProvider, IDisposable, INotifyPropertyChanged
     /// <summary>
     /// Content of Callout title label
     /// </summary>
-    public string Title
+    public string? Title
     {
         get => _title;
         set
@@ -446,7 +446,7 @@ public class Callout : IFeatureProvider, IDisposable, INotifyPropertyChanged
     /// <summary>
     /// Content of Callout detail label
     /// </summary>
-    public string Subtitle
+    public string? Subtitle
     {
         get => _subtitle;
         set
@@ -628,7 +628,7 @@ public class Callout : IFeatureProvider, IDisposable, INotifyPropertyChanged
         Feature.Dispose();
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {

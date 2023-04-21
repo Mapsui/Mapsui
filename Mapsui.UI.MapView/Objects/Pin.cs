@@ -141,7 +141,7 @@ public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
     /// <summary>
     /// Label of pin
     /// </summary>
-    public string Label
+    public string? Label
     {
         get => _label;
         set
@@ -156,7 +156,7 @@ public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
     /// <summary>
     /// Adress (like street) of pin
     /// </summary>
-    public string Address
+    public string? Address
     {
         get => _address;
         set
@@ -171,7 +171,7 @@ public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
     /// <summary>
     /// Byte[] holding the bitmap informations
     /// </summary>
-    public byte[] Icon
+    public byte[]? Icon
     {
         get => _icon;
         set
@@ -185,7 +185,7 @@ public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
     /// <summary>
     /// String holding the Svg image informations
     /// </summary>
-    public string Svg
+    public string? Svg
     {
         get => _svg;
         set
@@ -474,10 +474,10 @@ public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
     private Position _position;
     private float _scale;
     private Color _color;
-    private string _label;
-    private string _address;
-    private byte[] _icon;
-    private string _svg;
+    private string? _label;
+    private string? _address;
+    private byte[]? _icon;
+    private string? _svg;
     private float _rotation;
     private bool _rotateWithMap;
     private bool _isVisible;
@@ -520,7 +520,7 @@ public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
                     if (string.IsNullOrEmpty(Svg))
                         return;
                     // Check, if it is already in cache
-                    if (_bitmapIds.ContainsKey(Svg))
+                    if (_bitmapIds.ContainsKey(Svg!))
                     {
                         _bitmapId = _bitmapIds[Svg];
                         _bitmapIdKey = Svg;
@@ -619,7 +619,7 @@ public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
         Feature?.Dispose();
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
