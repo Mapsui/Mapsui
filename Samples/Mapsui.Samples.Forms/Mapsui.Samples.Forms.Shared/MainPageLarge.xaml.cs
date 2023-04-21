@@ -52,7 +52,7 @@ public partial class MainPageLarge : ContentPage
         var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
         picker.ItemsSource = categories.ToList<string>();
         picker.SelectedIndexChanged += PickerSelectedIndexChanged;
-        picker.SelectedItem = "Forms";
+        picker.SelectedItem = "MapView";
 
         mapView.RotationLock = false;
         mapView.UnSnapRotationDegrees = 30;
