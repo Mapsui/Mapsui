@@ -45,6 +45,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private double _unSnapRotationDegrees;
     // Flag indicating if a drawing process is running
     private bool _drawing;
+    // Flag indicating if the control has to be redrawn
+    private bool _invalidated;
     // Flag indicating if a new drawing process should start
     private bool _refresh;
     // Action to call for a redraw of the control
@@ -440,7 +442,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #else
 
     private Map _map = new Map();
-    private bool _invalidated;
 
     /// <summary>
     /// Map holding data for which is shown in this MapControl
