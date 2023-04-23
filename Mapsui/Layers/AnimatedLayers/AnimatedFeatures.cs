@@ -17,7 +17,7 @@ public class AnimatedFeatures : IAnimatable
 {
     private List<AnimatedFeature> _cache = new();
     private long _startTimeAnimation;
-    private bool _animating = false;
+    private bool _animating;
 
     /// <summary>
     /// When the distance between the current and the previous position is larger
@@ -38,10 +38,15 @@ public class AnimatedFeatures : IAnimatable
     public int AnimationDuration { get; set; }
     public EasingFunction Function { get; set; }
 
-    public void AddFeatures(IEnumerable<PointFeature> features)
+    public async Task AddFeaturesAsync(IEnumerable<PointFeature> features)
     {
-        var previousCache = _cache;
+        while (_animating)
+        {
+            // wait for current animation to finish.
+            await Task.Delay(1);
+        }
 
+        var previousCache = _cache;
         _cache = ConvertToAnimatedFeatures(features.ToList(), previousCache, IdField);
         _startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
         _animating = true;
@@ -123,6 +128,9 @@ public class AnimatedFeatures : IAnimatable
 
     public bool UpdateAnimations()
     {
+        if (!_animating)
+            return false;
+
         var progress = CalculateProgress(_startTimeAnimation, AnimationDuration, Function);
         if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress, DistanceThreshold);
         else _animating = false;
