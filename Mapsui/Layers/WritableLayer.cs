@@ -6,7 +6,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Layers;
 
-public class WritableLayer : BaseLayer, IWritableLayer
+public class WritableLayer : BaseLayer, IModifyFeatureLayer
 {
     private readonly ConcurrentHashSet<IFeature> _cache = new();
 
