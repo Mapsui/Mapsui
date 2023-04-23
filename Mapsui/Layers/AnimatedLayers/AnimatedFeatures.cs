@@ -40,6 +40,8 @@ public class AnimatedFeatures : IAnimatable
 
     public async Task AddFeaturesAsync(IEnumerable<PointFeature> features)
     {
+        // save time so that the animation continues at the right time
+        var startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
         while (_animating)
         {
             // wait for current animation to finish.
@@ -48,7 +50,7 @@ public class AnimatedFeatures : IAnimatable
 
         var previousCache = _cache;
         _cache = ConvertToAnimatedFeatures(features.ToList(), previousCache, IdField);
-        _startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+        _startTimeAnimation = startTimeAnimation;
         _animating = true;
         _first = true;
     }
