@@ -42,7 +42,7 @@ public class AnimatedFeatures : IAnimatable
     {
         // save time so that the animation continues at the right time
         var startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-        await StopAnimation();
+        await StopAnimationAsync();
 
         var previousCache = _cache;
         _cache = ConvertToAnimatedFeatures(features.ToList(), previousCache, IdField);
@@ -51,14 +51,14 @@ public class AnimatedFeatures : IAnimatable
         _first = true;
     }
 
-    private async Task StopAnimation()
+    private async Task StopAnimationAsync()
     {
         // setting the time backwards so that the animation finishes faster.
         _startTimeAnimation -= AnimationDuration;
-        await WaitForAnimationToFinish();
+        await WaitForAnimationToFinishAsync();
     }
 
-    private async Task WaitForAnimationToFinish()
+    private async Task WaitForAnimationToFinishAsync()
     {
         while (_animating)
         {
