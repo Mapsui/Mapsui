@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>1a4666db-cd58-4380-858c-7730c0508a85</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Mapsui.UI.MapView</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\CalloutClickedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\DrawableClickedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\MapClickedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\MapLongClickedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\PinClickedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\SelectedPinChangedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ColorExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\PositionExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextAlignmentExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ZoomLevelExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Callout.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Circle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Distance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Drawable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\IClickable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\IFeatureProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\MapSpan.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\MyLocationLayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\ObservableCollectionProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Pin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\PinType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Polygon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Polyline.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Position.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\ObservableRangeCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\PolylineConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Images\Close.svg" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Images\LocationCenter.svg" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Images\LocationNoCenter.svg" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Images\MyLocationDir.svg" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Images\MyLocationMoving.svg" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Images\MyLocationStill.svg" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Images\Pin.svg" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Images\RotationZero.svg" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Images\ZoomIn.svg" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Images\ZoomOut.svg" />
+  </ItemGroup>
+</Project>
