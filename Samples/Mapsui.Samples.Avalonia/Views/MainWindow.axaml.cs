@@ -50,8 +50,8 @@ public partial class MainWindow : Window
 
         var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c).ToArray();
 
-        CategoryComboBox.Items = categories;
-
+        CategoryComboBox.ItemsSource = categories;
+        
         CategoryComboBox.SelectedIndex = 1;
     }
 
