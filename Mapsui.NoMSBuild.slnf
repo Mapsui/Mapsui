@@ -12,7 +12,7 @@
       "Mapsui.UI.Avalonia\\Mapsui.UI.Avalonia.csproj",
       "Mapsui.UI.Blazor\\Mapsui.UI.Blazor.csproj",
       "Mapsui.UI.Eto\\Mapsui.UI.Eto.csproj",
-      "Mapsui.UI.Forms.Tests\\Mapsui.UI.Forms.Tests.csproj",
+      "Mapsui.UI.MapView\\Mapsui.UI.MapView.shproj",
       "Mapsui.UI.Maui\\Mapsui.UI.Maui.csproj",
       "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
       "Mapsui.UI.Uno.WinUI\\Mapsui.UI.Uno.WinUI.csproj",

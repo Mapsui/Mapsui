@@ -26,6 +26,7 @@
       "Samples\\Mapsui.Samples.Uno\\Mapsui.Samples.Uno.Skia.Gtk\\Mapsui.Samples.Uno.Skia.Gtk.csproj",
       "Samples\\Mapsui.Samples.Uno\\Mapsui.Samples.Uno.Skia.Linux.FrameBuffer\\Mapsui.Samples.Uno.Skia.Linux.FrameBuffer.csproj",
       "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
+      "Tests\\Mapsui.Rendering.Skia.Tests\\Mapsui.Rendering.Skia.Tests.csproj",
       "Tests\\Mapsui.Tests.Common\\Mapsui.Tests.Common.csproj",
       "Tests\\Mapsui.Tests\\Mapsui.Tests.csproj"
     ]
