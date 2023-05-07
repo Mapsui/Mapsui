@@ -7,11 +7,24 @@ using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Styles;
 using Mapsui.UI;
+
+#if __MAUI__
+using Mapsui.UI.Maui;
+using Microsoft.Maui.Graphics;
+using Microsoft.Maui;
+using Color = Microsoft.Maui.Graphics.Color;
+#else
 using Mapsui.UI.Forms;
 using Xamarin.Forms;
 using Color = Xamarin.Forms.Color;
+using Colors = Xamarin.Forms.Color;
+#endif
 
-namespace Mapsui.Samples.Forms.Shared;
+#if __MAUI__
+namespace Mapsui.Samples.Maui;
+#else
+namespace Mapsui.Samples.Forms;
+#endif
 
 public class PinSample : IFormsSample
 {
@@ -43,7 +56,7 @@ public class PinSample : IFormsSample
                     Position = mapClickedArgs.Point,
                     Address = mapClickedArgs.Point.ToString(),
                     Type = PinType.Pin,
-                    Color = new Color(_random.Next(0, 256) / 256.0, _random.Next(0, 256) / 256.0, _random.Next(0, 256) / 256.0),
+                    Color = new Color(_random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f),
                     Transparency = 0.5f,
                     Scale = _random.Next(50, 130) / 100f,
                     RotateWithMap = true,
@@ -56,7 +69,7 @@ public class PinSample : IFormsSample
                 pin.Callout.ArrowPosition = _random.Next(0, 100) / 100.0;
                 pin.Callout.StrokeWidth = _random.Next(0, 10);
                 pin.Callout.Padding = new Thickness(_random.Next(0, 20), _random.Next(0, 20));
-                pin.Callout.BackgroundColor = Color.White;
+                pin.Callout.BackgroundColor = Colors.White;
                 pin.Callout.RotateWithMap = true;
                 pin.Callout.IsClosableByClick = true;
                 pin.Callout.Color = pin.Color;
@@ -66,7 +79,7 @@ public class PinSample : IFormsSample
                     pin.Callout.TitleFontSize = _random.Next(15, 30);
                     pin.Callout.TitleTextAlignment = TextAlignment.Center;
                     pin.Callout.SubtitleFontSize = pin.Callout.TitleFontSize - 5;
-                    pin.Callout.TitleFontColor = new Color(_random.Next(0, 256) / 256.0, _random.Next(0, 256) / 256.0, _random.Next(0, 256) / 256.0);
+                    pin.Callout.TitleFontColor = new Color(_random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f);
                     pin.Callout.SubtitleFontColor = pin.Color;
                     pin.Callout.SubtitleTextAlignment = TextAlignment.Center;
                     pin.Callout.Spacing = _random.Next(0, 10);
