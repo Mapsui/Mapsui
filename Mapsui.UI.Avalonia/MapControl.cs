@@ -25,6 +25,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private MPoint? _downMousePosition;
     private bool _mouseDown;
     private MPoint? _previousMousePosition;
+    private double _mouseWheelPos = 0.0;
 
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
 
@@ -72,9 +73,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseWheel(object? sender, PointerWheelEventArgs e)
     {
-        var mouseWheelDelta = (int)e.Delta.Y;
+        _mouseWheelPos += e.Delta.Y;
+
+        if (Math.Abs(_mouseWheelPos) < 1.0) return;
+
+        int delta = (int)Math.Sign(_mouseWheelPos);
+        _mouseWheelPos -= delta;
+
         _currentMousePosition = e.GetPosition(this).ToMapsui();
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, _currentMousePosition);
+        Map.Navigator.MouseWheelZoom(delta, _currentMousePosition);
     }
 
     private void MapControlMouseLeftButtonDown(PointerPressedEventArgs e)
