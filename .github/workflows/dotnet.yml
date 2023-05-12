@@ -99,8 +99,14 @@ jobs:
       uses: maxim-lobanov/setup-xcode@v1.5.1
       with:
         xcode-version: '14.3'
-    - name: Install Visual Studio for mac
-      run: brew install --cask visual-studio
+    - name: Install mono mdk
+      run: brew install --cask mono-mdk
+    - name: Install Xamarin iOS
+      run: brew install --cask xamarin-ios
+    - name: Install Xamarin iOS
+      run: brew install --cask xamarin-mac
+    #- name: Install Visual Studio for mac
+    #  run: brew install --cask visual-studio
     # .Net 7 already installed on github actions        
     #- name: Setup .NET Core SDK
     #  uses: actions/setup-dotnet@v3
