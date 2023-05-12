@@ -99,6 +99,8 @@ jobs:
       uses: maxim-lobanov/setup-xcode@v1.5.1
       with:
         xcode-version: '14.2'
+    - name: Install Mono 6.12
+      run: brew install mono
     # .Net 7 already installed on github actions        
     #- name: Setup .NET Core SDK
     #  uses: actions/setup-dotnet@v3
