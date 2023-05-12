@@ -99,14 +99,6 @@ jobs:
       uses: maxim-lobanov/setup-xcode@v1.5.1
       with:
         xcode-version: '14.3'
-    - name: Install uno-check
-      run: dotnet tool install -g uno.check
-    - name: Install Xamarin iOS/macos/android
-      run: uno-check --target ios --target android --target macos --target wasm --fix --non-interactive
-    #- name: Install Xamarin Mac
-    #  run: brew install --cask xamarin-mac
-    #- name: Install Visual Studio for mac
-    #  run: brew install --cask visual-studio
     # .Net 7 already installed on github actions        
     #- name: Setup .NET Core SDK
     #  uses: actions/setup-dotnet@v3
@@ -114,12 +106,13 @@ jobs:
     #     dotnet-version: |
     #       7.0.100
     #     include-prerelease: false    
-    #- name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
-    #  run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
-    - name: Restore dependencies Legacy
-      run: nuget restore Mapsui.Mac.Legacy.sln   
-    - name: Restore dependencies Mapsui.Mac
-      run: dotnet restore Mapsui.Mac.slnf       
+    - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
+    # macos image needs Visual Studio for Mac installed
+    #- name: Restore dependencies Legacy
+    #  run: nuget restore Mapsui.Mac.Legacy.sln   
+    #- name: Restore dependencies Mapsui.Mac
+    #  run: dotnet restore Mapsui.Mac.slnf       
     # Samples Build               
     - name: Mapsui.Samples.Avalonia
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia/Mapsui.Samples.Avalonia.csproj
@@ -164,12 +157,13 @@ jobs:
     #  run: dotnet build --no-restore --configuration Debug  /p:Platform=x64 Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Windows/Mapsui.Samples.Uno.WinUI.Windows.csproj
     # Builds that need XCode 14.0
     # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
-    - name: Setup Xcode version 14.0
-      uses: maxim-lobanov/setup-xcode@v1.5.1
-      with:
-        xcode-version: '14.0'
-    - name: Build Mapsui.Samples.Forms.Mac
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj        
+    # macos image needs Visual Studio for Mac installed
+    #- name: Setup Xcode version 14.0
+    #  uses: maxim-lobanov/setup-xcode@v1.5.1
+    #  with:
+    #    xcode-version: '14.0'
+    #- name: Build Mapsui.Samples.Forms.Mac
+    #  run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj        
     # Test Build    
     - name: Build Mapsui.Rendering.Skia.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
