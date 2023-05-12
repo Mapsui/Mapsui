@@ -99,12 +99,10 @@ jobs:
       uses: maxim-lobanov/setup-xcode@v1.5.1
       with:
         xcode-version: '14.3'
-    - name: Install mono mdk
-      run: brew install --cask mono-mdk
-    - name: Install Xamarin iOS
-      run: brew install --cask xamarin-ios
-    - name: Install Xamarin Android
-      run: brew install --cask xamarin-android
+    - name: Install uno-check
+      run: dotnet tool install -g uno.check
+    - name: Install Xamarin iOS/macos/android
+      run: uno-check --target ios --target android --target macos --fix --non-interactive
     #- name: Install Xamarin Mac
     #  run: brew install --cask xamarin-mac
     #- name: Install Visual Studio for mac
