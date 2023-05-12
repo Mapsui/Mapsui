@@ -103,8 +103,8 @@ jobs:
       run: brew install --cask mono-mdk
     - name: Install Xamarin iOS
       run: brew install --cask xamarin-ios
-    - name: Install Xamarin iOS
-      run: brew install --cask xamarin-mac
+    #- name: Install Xamarin Mac
+    #  run: brew install --cask xamarin-mac
     #- name: Install Visual Studio for mac
     #  run: brew install --cask visual-studio
     # .Net 7 already installed on github actions        
