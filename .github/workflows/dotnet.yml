@@ -102,7 +102,7 @@ jobs:
     - name: Install uno-check
       run: dotnet tool install -g uno.check
     - name: Install Xamarin iOS/macos/android
-      run: uno-check --target ios --target android --target macos --fix --non-interactive
+      run: uno-check --target ios --target android --target macos --target wasm --fix --non-interactive
     #- name: Install Xamarin Mac
     #  run: brew install --cask xamarin-mac
     #- name: Install Visual Studio for mac
@@ -114,8 +114,8 @@ jobs:
     #     dotnet-version: |
     #       7.0.100
     #     include-prerelease: false    
-    - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
+    #- name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
+    #  run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
     - name: Restore dependencies Legacy
       run: nuget restore Mapsui.Mac.Legacy.sln   
     - name: Restore dependencies Mapsui.Mac
