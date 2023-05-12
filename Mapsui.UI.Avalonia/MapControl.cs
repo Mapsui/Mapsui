@@ -242,6 +242,18 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             // No-op
         }
 
+        public void Render(ImmediateDrawingContext context)
+        {
+            var leaseFeature = context.TryGetFeature<ISkiaSharpApiLeaseFeature>();
+            if (leaseFeature == null)
+                return;
+            using var lease = leaseFeature.Lease();
+            var canvas = lease.SkCanvas;
+            canvas.Save();
+            _mapControl.CommonDrawControl(canvas);
+            canvas.Restore();
+        }
+
         public Rect Bounds { get; set; }
 
         public bool HitTest(Point p)
@@ -252,19 +264,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         public bool Equals(ICustomDrawOperation? other)
         {
             return false;
-        }
-
-
-        public void Render(IDrawingContextImpl context)
-        {
-            var leaseFeature = context.GetFeature<ISkiaSharpApiLeaseFeature>();
-            if (leaseFeature == null)
-                return;
-            using var lease = leaseFeature.Lease();
-            var canvas = lease.SkCanvas;
-            canvas.Save();
-            _mapControl.CommonDrawControl(canvas);
-            canvas.Restore();
         }
     }
 
