@@ -69,6 +69,67 @@ jobs:
         name: nupkg.linux
         path: Artifacts/*.nupkg
 
+  macBuildLegacy:  
+    # macos-latest is currently macos-13
+    runs-on: macos-12
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    # Cache Nugets
+    - uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages     
+        key: ${{ runner.os }}-nuget13-${{ hashFiles('Directory.Packages.props') }}
+        restore-keys: |
+            ${{ runner.os }}-nuget13-
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.1.1      
+      with:
+        nuget-version: latest
+    - name: Setup Xcode version 14.2
+      uses: maxim-lobanov/setup-xcode@v1.5.1
+      with:
+        xcode-version: '14.2'
+    # macos image needs Visual Studio for Mac installed
+    - name: Restore dependencies Legacy
+      run: nuget restore Mapsui.Mac.Legacy.sln                          
+    # Samples Forms    
+    - name: Build Mapsui.Samples.Forms.Shared
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj    
+    - name: Build Mapsui.Samples.Forms.Android
+      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj     
+    - name: Build Mapsui.Samples.Forms.iOS
+      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj         
+    # Builds that need XCode 14.0
+    # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
+    - name: Setup Xcode version 14.0
+      uses: maxim-lobanov/setup-xcode@v1.5.1
+      with:
+        xcode-version: '14.0'
+    - name: Build Mapsui.Samples.Forms.Mac
+      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj        
+    # Release Build
+    - name: Build Mapsui
+      run: dotnet pack --no-restore --configuration Release Mapsui/Mapsui.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
+    - name: Build Mapsui.Rendering.Skia
+      run: dotnet pack --no-restore --configuration Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
+    - name: Build Mapsui.Tiling
+      run: dotnet pack --no-restore --configuration Release Mapsui.Tiling/Mapsui.Tiling.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
+    - name: Build Mapsui.Nts
+      run: dotnet pack --no-restore --configuration Release Mapsui.Nts/Mapsui.Nts.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
+    - name: Build Mapsui.ArcGIS
+      run: dotnet pack --no-restore --configuration Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
+    - name: Build Mapsui.Extensions
+      run: dotnet pack --no-restore --configuration Release Mapsui.Extensions/Mapsui.Extensions.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
+    - name: Build Mapsui.UI.Forms
+      run: msbuild /t:Pack /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj /p:PackageOutputPath="../Artifacts" -p:PackageVersion=$(git describe --tags)
+    - name: Upload packages
+      uses: actions/upload-artifact@v3
+      with:
+        name: nupkg.mac
+        path: Artifacts/*.nupkg   
+
   macBuild:  
     # macos-latest is currently macos-13
     runs-on: macos-13
