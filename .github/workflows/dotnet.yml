@@ -98,10 +98,10 @@ jobs:
     - name: Setup Xamarin version 14.3
       uses: maxim-lobanov/setup-xamarin@v1
       with:
-        mono-version: latest # specify version in '<major>.<minor>' format
-        xamarin-ios-version: latest # specify version in '<major>' format
-        xamarin-mac-version: latest # specify 'latest' keyword to pick up the latest available version
-        xamarin-android-version: latest # specify full version; it is not recomended option because your pipeline can be broken suddenly in future
+        mono-version: '6.12' # specify version in '<major>.<minor>' format
+        xamarin-ios-version: '16.4' # specify version in '<major>' format
+        xamarin-mac-version: '9.3' # specify 'latest' keyword to pick up the latest available version
+        xamarin-android-version: '13.2' # specify full version; it is not recomended option because your pipeline can be broken suddenly in future
         xcode-version: '14.3'
     # .Net 7 already installed on github actions        
     #- name: Setup .NET Core SDK
