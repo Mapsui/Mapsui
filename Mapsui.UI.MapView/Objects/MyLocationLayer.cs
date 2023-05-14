@@ -255,7 +255,7 @@ public class MyLocationLayer : MemoryLayer
                                 _animationMyLocationStart.Latitude + deltaLat,
                                 _animationMyLocationStart.Longitude + deltaLon));
                             // Update viewport
-                            if (modified && _mapView.MyLocationFollow && _mapView.MyLocationEnabled)
+                            if (modified && mapView.MyLocationFollow && mapView.MyLocationEnabled)
                                 mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
                             // Refresh map
                             if (mapView.MyLocationEnabled && modified)
@@ -265,13 +265,13 @@ public class MyLocationLayer : MemoryLayer
                         },
                         final: (mapView, entry) =>
                         {
-                            _mapView.Map?.RefreshData(fetchInfo);
+                            mapView.Map?.RefreshData(fetchInfo);
                             if (MyLocation != _animationMyLocationEnd)
                             {
                                 InternalUpdateMyLocation(_animationMyLocationEnd);
                                 // Refresh map
-                                if (_mapView.MyLocationEnabled)
-                                    _mapView.Refresh();
+                                if (mapView.MyLocationEnabled)
+                                    mapView.Refresh();
                             }
                      
                             return new AnimationResult<MapView>(mapView, false);
@@ -319,8 +319,11 @@ public class MyLocationLayer : MemoryLayer
             Direction = newDirection;
 
             // We have a direction update, so abort last animation
-            if (_mapView.AnimationIsRunning(AnimationMyDirectionName))
-                _mapView.AbortAnimation(AnimationMyDirectionName);
+            if (_animations.Count > 0)
+            {
+                Animation.Stop(_mapView, _animations, callFinal: true);
+                _animations.Clear();
+            }
 
             if (newRotation < 90 && oldRotation > 270)
             {
@@ -427,7 +430,7 @@ public class MyLocationLayer : MemoryLayer
                     if ((int)v != (int)_dirStyle.SymbolRotation)
                     {
                         _dirStyle.SymbolRotation = (int)v % 360;
-                        _mapView.Refresh();
+                        mapView.Refresh();
                     }
 
                     return new AnimationResult<MapView>(mapView, true);
