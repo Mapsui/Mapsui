@@ -30,7 +30,7 @@ namespace Mapsui.UI.Objects;
 /// There are two different symbols for own loaction: one is used when there isn't a change in position (still),
 /// and one is used, if the position changes (moving).
 /// </remarks>
-public class MyLocationLayer : MemoryLayer, IWritableLayer
+public class MyLocationLayer : BaseLayer, IWritableLayer
 {
     private readonly MapView _mapView;
     private readonly GeometryFeature _feature;
@@ -67,6 +67,7 @@ public class MyLocationLayer : MemoryLayer, IWritableLayer
 
     private Position myLocation = new(0, 0);
     private ConcurrentBag<AnimationEntry<MapView>> _animations = new ();
+    private readonly List<IFeature> _features;
 
     /// <summary>
     /// Position of location, that is displayed
@@ -213,7 +214,7 @@ public class MyLocationLayer : MemoryLayer, IWritableLayer
         _feature.Styles.Add(_locStyle);
         _feature.Styles.Add(_coStyle);
 
-        Features = new List<IFeature> { _feature };
+        _features = new List<IFeature> { _feature };
         Style = null;
     }
 
@@ -308,6 +309,11 @@ public class MyLocationLayer : MemoryLayer, IWritableLayer
         }
 
         return base.UpdateAnimations();
+    }
+
+    public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
+    {
+        return _features;
     }
 
     /// <summary>
