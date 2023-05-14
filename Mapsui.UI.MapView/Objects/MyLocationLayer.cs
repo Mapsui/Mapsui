@@ -269,6 +269,10 @@ public class MyLocationLayer : MemoryLayer
                             if (MyLocation != _animationMyLocationEnd)
                             {
                                 InternalUpdateMyLocation(_animationMyLocationEnd);
+
+                                if (mapView.MyLocationFollow && mapView.MyLocationEnabled)
+                                    mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
+
                                 // Refresh map
                                 if (mapView.MyLocationEnabled)
                                     mapView.Refresh();
