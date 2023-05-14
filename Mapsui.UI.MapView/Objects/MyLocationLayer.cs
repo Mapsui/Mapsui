@@ -225,8 +225,12 @@ public class MyLocationLayer : MemoryLayer
         if (!MyLocation.Equals(newLocation))
         {
             // We have a location update, so abort last animation
-            if (_mapView.AnimationIsRunning(AnimationMyLocationName))
-                _mapView.AbortAnimation(AnimationMyLocationName);
+            // We have a direction update, so abort last animation
+            if (_animation != null)
+            {
+                Animation.Stop(1, _animation, callFinal: true);
+                _animation = null;
+            }
 
             if (animated)
             {
@@ -238,7 +242,7 @@ public class MyLocationLayer : MemoryLayer
                 {
                     var fetchInfo = new FetchInfo(_mapView.Map.Navigator.Viewport.ToSection(), _mapView.Map?.CRS,
                         ChangeType.Discrete);
-                    var animationEntry = new AnimationEntry<double>(
+                    _animation = new AnimationEntry<double>(
                         0.0,
                         1.0,
                         tick: (mapView, entry, v) =>
@@ -264,7 +268,7 @@ public class MyLocationLayer : MemoryLayer
                             return new AnimationResult<double>(1, false);
                         });
 
-                    Animation.Start(animationEntry, TimeSpan.TicksPerSecond);
+                    Animation.Start(_animation, TimeSpan.TicksPerSecond);
                 }
             }
             else
