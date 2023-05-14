@@ -42,8 +42,6 @@ public class MyLocationLayer : BaseLayer, IWritableLayer
     private static int _bitmapStillId = -1;
     private static int _bitmapDirId = -1;
 
-    private const string AnimationMyLocationName = "animationMyLocationPosition";
-    private const string AnimationMyDirectionName = "animationMyDirectionPosition";
     private Position _animationMyLocationStart;
     private Position _animationMyLocationEnd;
 
@@ -65,15 +63,15 @@ public class MyLocationLayer : BaseLayer, IWritableLayer
         }
     }
 
-    private Position myLocation = new(0, 0);
-    private ConcurrentBag<AnimationEntry<MapView>> _animations = new ();
+    private Position _myLocation = new(0, 0);
+    private readonly ConcurrentBag<AnimationEntry<MapView>> _animations = new ();
     private readonly List<IFeature> _features;
 
     /// <summary>
     /// Position of location, that is displayed
     /// </summary>
     /// <value>Position of location</value>
-    public Position MyLocation => myLocation;
+    public Position MyLocation => _myLocation;
 
     /// <summary>
     /// Movement direction of device at location
@@ -133,7 +131,7 @@ public class MyLocationLayer : BaseLayer, IWritableLayer
     /// <param name="position">Position, where to start</param>
     public MyLocationLayer(MapView view, Position position) : this(view)
     {
-        myLocation = position;
+        _myLocation = position;
     }
 
     /// <summary>
@@ -170,7 +168,7 @@ public class MyLocationLayer : BaseLayer, IWritableLayer
 
         _feature = new GeometryFeature
         {
-            Geometry = myLocation.ToMapsui().ToPoint(),
+            Geometry = _myLocation.ToMapsui().ToPoint(),
             ["Label"] = "MyLocation moving",
         };
 
@@ -280,10 +278,11 @@ public class MyLocationLayer : BaseLayer, IWritableLayer
                                 if (mapView.MyLocationEnabled)
                                     mapView.Refresh();
                             }
-                     
+                            
                             return new AnimationResult<MapView>(mapView, false);
                         });
 
+                    Animation.Start(animation, 1000);
                     _animations.Add(animation);
                 }
             }
@@ -368,6 +367,7 @@ public class MyLocationLayer : BaseLayer, IWritableLayer
                         return new AnimationResult<MapView>(mapView, false);
                     });
 
+                Animation.Start(animation, 1000);
                 _animations.Add(animation);
             }
             else
@@ -456,6 +456,7 @@ public class MyLocationLayer : BaseLayer, IWritableLayer
                     return new AnimationResult<MapView>(mapView, true);
                 });
 
+                Animation.Start(animation, 1000);
                 _animations.Add(animation);
             }
             else
@@ -480,10 +481,10 @@ public class MyLocationLayer : BaseLayer, IWritableLayer
     {
         var modified = false;
 
-        if (!myLocation.Equals(newLocation))
+        if (!_myLocation.Equals(newLocation))
         {
-            myLocation = newLocation;
-            _feature.Geometry = myLocation.ToPoint();
+            _myLocation = newLocation;
+            _feature.Geometry = _myLocation.ToPoint();
             modified = true;
         }
 

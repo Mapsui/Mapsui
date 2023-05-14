@@ -60,6 +60,7 @@ public class AnimatedMyLocationSample : IFormsSample
 
             _mapView.MyLocationLayer.UpdateMyLocation(_newLocation, true);
             _mapView.MyLocationLayer.UpdateMyDirection(_mapView.MyLocationLayer.Direction + 10, 0, true);
+            _mapView.MyLocationLayer.UpdateMyViewDirection(_mapView.MyLocationLayer.ViewingDirection + 10, 0, true);
         }
     }
 }
