@@ -438,6 +438,8 @@ public class MyLocationLayer : BaseLayer, IWritableLayer
                 oldRotation += 360;
             }
 
+            var endRotation = newRotation % 360;
+
             if (animated)
             {
                 var animation = new AnimationEntry<MapView>(
@@ -446,22 +448,32 @@ public class MyLocationLayer : BaseLayer, IWritableLayer
                     animationStart: 0,
                     animationEnd: 1,
                     tick: (mapView, entry, v) =>
-                {
-                    if ((int)v != (int)_dirStyle.SymbolRotation)
                     {
-                        _dirStyle.SymbolRotation = (int)v % 360;
-                        mapView.Refresh();
-                    }
+                        if ((int)v != (int)_dirStyle.SymbolRotation)
+                        {
+                            _dirStyle.SymbolRotation = (int)v % 360;
+                            mapView.Refresh();
+                        }
 
-                    return new AnimationResult<MapView>(mapView, true);
-                });
+                        return new AnimationResult<MapView>(mapView, true);
+                    },
+                    final: (mapView, v) =>
+                    {
+                        if ((int)_dirStyle.SymbolRotation != endRotation)
+                        {
+                            _dirStyle.SymbolRotation = endRotation;
+                            mapView.Refresh();
+                        }
+
+                        return new AnimationResult<MapView>(mapView, false);
+                    });
 
                 Animation.Start(animation, 1000);
                 _animations.Add(animation);
             }
             else
             {
-                _dirStyle.SymbolRotation = newRotation % 360;
+                _dirStyle.SymbolRotation = endRotation;
                 _mapView.Refresh();
             }
         }
