@@ -30,7 +30,7 @@ namespace Mapsui.UI.Objects;
 /// There are two different symbols for own loaction: one is used when there isn't a change in position (still),
 /// and one is used, if the position changes (moving).
 /// </remarks>
-public class MyLocationLayer : MemoryLayer
+public class MyLocationLayer : MemoryLayer, IWritableLayer
 {
     private readonly MapView _mapView;
     private readonly GeometryFeature _feature;
@@ -246,6 +246,8 @@ public class MyLocationLayer : MemoryLayer
                     var animation = new AnimationEntry<MapView>(
                         0.0,
                         1.0,
+                        animationStart: 0,
+                        animationEnd: 1,
                         tick: (mapView, entry, v) =>
                         {
                             var deltaLat = (_animationMyLocationEnd.Latitude - _animationMyLocationStart.Latitude) * v;
@@ -429,6 +431,8 @@ public class MyLocationLayer : MemoryLayer
                 var animation = new AnimationEntry<MapView>(
                     oldRotation,
                     newRotation,
+                    animationStart: 0,
+                    animationEnd: 1,
                     tick: (mapView, entry, v) =>
                 {
                     if ((int)v != (int)_dirStyle.SymbolRotation)
