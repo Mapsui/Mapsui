@@ -265,6 +265,7 @@ public class MyLocationLayer : MemoryLayer
                         final: (v, entry) =>
                         {
                             _mapView.Map?.RefreshData(fetchInfo);
+                            InternalUpdateMyLocation(_animationMyLocationEnd);
                             return new AnimationResult<double>(1, false);
                         });
 
