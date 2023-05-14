@@ -44,6 +44,7 @@ public class AnimatedMyLocationSample : IFormsSample
         Catch.TaskRun(RunTimerAsync);
     }
 
+    public bool UpdateLocation => false;
     public bool OnClick(object? sender, EventArgs args)
     {
         return true; 

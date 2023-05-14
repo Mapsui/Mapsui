@@ -10,4 +10,9 @@ namespace Mapsui.Samples.Forms;
 public interface IFormsSample : IMapControlSample
 {
     bool OnClick(object? sender, EventArgs args);
+
+    bool UpdateLocation
+    {
+        get { return true; }
+    }
 }

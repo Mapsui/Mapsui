@@ -29,6 +29,8 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
     IEnumerable<ISampleBase> allSamples;
     Func<object?, EventArgs, bool>? clicker;
     private CancellationTokenSource? gpsCancelation;
+    private bool _updateLocationels;
+    private bool _updateLocation;
 
     public MainPageLarge()
     {
@@ -127,7 +129,12 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
 
         clicker = null;
         if (sample is IFormsSample formsSample)
+        {
             clicker = formsSample.OnClick;
+            _updateLocation = formsSample.UpdateLocation;
+        }
+        else
+            _updateLocation = true;
 
         listView.SelectedItem = null;
     }
@@ -205,6 +212,10 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
     {
         try
         {
+            // check if I should update location
+            if (!_updateLocation)
+                return;
+
             await Application.Current?.Dispatcher?.DispatchAsync(() =>
             {
                 mapView?.MyLocationLayer.UpdateMyLocation(new Position(e.Latitude, e.Longitude));
