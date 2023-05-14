@@ -3,6 +3,7 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Animations;
@@ -65,7 +66,7 @@ public class MyLocationLayer : MemoryLayer
     }
 
     private Position myLocation = new(0, 0);
-    private AnimationEntry<double>? _animation;
+    private ConcurrentBag<AnimationEntry<MapView>>? _animations = new ();
 
     /// <summary>
     /// Position of location, that is displayed
@@ -226,10 +227,10 @@ public class MyLocationLayer : MemoryLayer
         {
             // We have a location update, so abort last animation
             // We have a direction update, so abort last animation
-            if (_animation != null)
+            if (_animations.Count > 0)
             {
-                Animation.Stop(1, _animation, callFinal: true);
-                _animation = null;
+                Animation.Stop(_mapView, _animations, callFinal: true);
+                _animations.Clear();
             }
 
             if (animated)
@@ -242,7 +243,7 @@ public class MyLocationLayer : MemoryLayer
                 {
                     var fetchInfo = new FetchInfo(_mapView.Map.Navigator.Viewport.ToSection(), _mapView.Map?.CRS,
                         ChangeType.Discrete);
-                    _animation = new AnimationEntry<double>(
+                    var animation = new AnimationEntry<MapView>(
                         0.0,
                         1.0,
                         tick: (mapView, entry, v) =>
@@ -260,9 +261,9 @@ public class MyLocationLayer : MemoryLayer
                             if (_mapView.MyLocationEnabled && modified)
                                 _mapView.Refresh();
                             var isRunning = Math.Abs(v - 1) < 0.001;
-                            return new AnimationResult<double>(v, isRunning);
+                            return new AnimationResult<MapView>(mapView, isRunning);
                         },
-                        final: (v, entry) =>
+                        final: (mapView, entry) =>
                         {
                             _mapView.Map?.RefreshData(fetchInfo);
                             if (MyLocation != _animationMyLocationEnd)
@@ -273,10 +274,10 @@ public class MyLocationLayer : MemoryLayer
                                     _mapView.Refresh();
                             }
                      
-                            return new AnimationResult<double>(1, false);
+                            return new AnimationResult<MapView>(mapView, false);
                         });
 
-                    Animation.Start(_animation, TimeSpan.TicksPerSecond);
+                    _animations.Add(animation);
                 }
             }
             else
@@ -390,10 +391,10 @@ public class MyLocationLayer : MemoryLayer
             ViewingDirection = newDirection;
 
             // We have a direction update, so abort last animation
-            if (_animation != null)
+            if (_animations.Count > 0)
             {
-                Animation.Stop(1, _animation, callFinal: true);
-                _animation = null;
+                Animation.Stop(_mapView, _animations, callFinal: true);
+                _animations.Clear();
             }
 
             if (newRotation < 90 && oldRotation > 270)
@@ -407,7 +408,7 @@ public class MyLocationLayer : MemoryLayer
 
             if (animated)
             {
-                _animation = new AnimationEntry<double>(
+                var animation = new AnimationEntry<MapView>(
                     oldRotation,
                     newRotation,
                     tick: (mapView, entry, v) =>
@@ -418,10 +419,10 @@ public class MyLocationLayer : MemoryLayer
                         _mapView.Refresh();
                     }
 
-                    return new AnimationResult<double>(v, true);
+                    return new AnimationResult<MapView>(mapView, true);
                 });
 
-                Animation.Start(_animation, TimeSpan.TicksPerSecond);
+                _animations.Add(animation);
             }
             else
             {
