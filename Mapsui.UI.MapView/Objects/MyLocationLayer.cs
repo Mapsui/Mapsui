@@ -66,7 +66,7 @@ public class MyLocationLayer : MemoryLayer
     }
 
     private Position myLocation = new(0, 0);
-    private ConcurrentBag<AnimationEntry<MapView>>? _animations = new ();
+    private ConcurrentBag<AnimationEntry<MapView>> _animations = new ();
 
     /// <summary>
     /// Position of location, that is displayed
@@ -256,10 +256,10 @@ public class MyLocationLayer : MemoryLayer
                                 _animationMyLocationStart.Longitude + deltaLon));
                             // Update viewport
                             if (modified && _mapView.MyLocationFollow && _mapView.MyLocationEnabled)
-                                _mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
+                                mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
                             // Refresh map
-                            if (_mapView.MyLocationEnabled && modified)
-                                _mapView.Refresh();
+                            if (mapView.MyLocationEnabled && modified)
+                                mapView.Refresh();
                             var isRunning = Math.Abs(v - 1) < 0.001;
                             return new AnimationResult<MapView>(mapView, isRunning);
                         },
@@ -293,6 +293,17 @@ public class MyLocationLayer : MemoryLayer
         }
     }
 
+    public override bool UpdateAnimations()
+    {
+        if (_animations.Count > 0)
+        {
+            var animation = Animation.UpdateAnimations(_mapView, _animations);
+            return animation.IsRunning;
+        }
+
+        return base.UpdateAnimations();
+    }
+
     /// <summary>
     /// Updates my movement direction
     /// </summary>
@@ -322,7 +333,7 @@ public class MyLocationLayer : MemoryLayer
 
             if (animated)
             {
-                var animationEntry = new AnimationEntry<double>(
+                var animation = new AnimationEntry<MapView>(
                     oldRotation,
                     newRotation, 
                     tick: (mapView, entry, v) =>
@@ -333,10 +344,10 @@ public class MyLocationLayer : MemoryLayer
                         _mapView.Refresh();
                     }
 
-                    return new AnimationResult<double>(v, true);
+                    return new AnimationResult<MapView>(mapView, true);
                 });
 
-                Animation.Start(animationEntry, TimeSpan.TicksPerSecond);
+                _animations.Add(animation);
             }
             else
             {
