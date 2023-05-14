@@ -58,7 +58,8 @@ public class AnimatedMyLocationSample : IFormsSample
 
             _newLocation = new (_newLocation.Latitude + 0.00005, _newLocation.Longitude + 0.00005);                                
 
-            this._mapView.MyLocationLayer.UpdateMyLocation(_newLocation, true);
+            _mapView.MyLocationLayer.UpdateMyLocation(_newLocation, true);
+            _mapView.MyLocationLayer.UpdateMyDirection(_mapView.MyLocationLayer.Direction + 10, 0, true);
         }
     }
 }

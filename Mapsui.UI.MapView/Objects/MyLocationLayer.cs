@@ -352,15 +352,21 @@ public class MyLocationLayer : BaseLayer, IWritableLayer
                     oldRotation,
                     newRotation, 
                     tick: (mapView, entry, v) =>
-                {
-                    if ((int)v != (int)_locStyle.SymbolRotation)
                     {
-                        _locStyle.SymbolRotation = (int)v % 360;
-                        _mapView.Refresh();
-                    }
+                        if ((int)v != (int)_locStyle.SymbolRotation)
+                        {
+                            _locStyle.SymbolRotation = (int)v % 360;
+                            _mapView.Refresh();
+                        }
 
-                    return new AnimationResult<MapView>(mapView, true);
-                });
+                        return new AnimationResult<MapView>(mapView, true);
+                    },
+                    final: (mapView, v) =>
+                    {
+                        _locStyle.SymbolRotation = newRotation;
+                        _mapView.Refresh();
+                        return new AnimationResult<MapView>(mapView, false);
+                    });
 
                 _animations.Add(animation);
             }
