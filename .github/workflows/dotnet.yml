@@ -69,9 +69,9 @@ jobs:
         name: nupkg.linux
         path: Artifacts/*.nupkg
 
-  macBuild:  
-    # macos-latest is currently macos-12
-    runs-on: macos-latest
+  macBuildLegacy:  
+    # macos-latest is currently macos-13
+    runs-on: macos-12
     steps:
     - uses: actions/checkout@v3
       with:
@@ -87,29 +87,70 @@ jobs:
       uses: NuGet/setup-nuget@v1.1.1      
       with:
         nuget-version: latest
-    # - name: Set default Xamarin SDK versions
-    #   run: |
-    #     $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --ios=14.14 --android=11.1
-    # - name: Set default Xcode 12.4
-    #   run: |
-    #     XCODE_ROOT=/Applications/Xcode_12.4.app
-    #     echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
-    #     sudo xcode-select -s $XCODE_ROOT
     - name: Setup Xcode version 14.2
       uses: maxim-lobanov/setup-xcode@v1.5.1
       with:
         xcode-version: '14.2'
-    # .Net 7 already installed on github actions        
-    #- name: Setup .NET Core SDK
-    #  uses: actions/setup-dotnet@v3
-    #  with:
-    #     dotnet-version: |
-    #       7.0.100
-    #     include-prerelease: false    
+    # macos image needs Visual Studio for Mac installed
+    - name: Restore dependencies Legacy
+      run: nuget restore Mapsui.Mac.Legacy.sln                          
+    # Samples Forms    
+    - name: Build Mapsui.Samples.Forms.Shared
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj    
+    - name: Build Mapsui.Samples.Forms.Android
+      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj     
+    - name: Build Mapsui.Samples.Forms.iOS
+      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj         
+    # Builds that need XCode 14.0
+    # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
+    - name: Setup Xcode version 14.0
+      uses: maxim-lobanov/setup-xcode@v1.5.1
+      with:
+        xcode-version: '14.0'
+    - name: Build Mapsui.Samples.Forms.Mac
+      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj        
+    # Release Build
+    - name: Build Mapsui.UI.Forms
+      run: msbuild /t:Pack /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj /p:PackageOutputPath="../Artifacts" -p:PackageVersion=$(git describe --tags)
+    - name: Upload packages
+      uses: actions/upload-artifact@v3
+      with:
+        name: nupkg.mac
+        path: Artifacts/*.nupkg   
+
+  macBuild:  
+    # macos-latest is currently macos-13
+    runs-on: macos-13
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    # Cache Nugets
+    - uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages     
+        key: ${{ runner.os }}-nuget13-${{ hashFiles('Directory.Packages.props') }}
+        restore-keys: |
+            ${{ runner.os }}-nuget13-
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.1.1      
+      with:
+        nuget-version: latest
+    - name: Setup Xcode version 14.3
+      uses: maxim-lobanov/setup-xcode@v1.5.1
+      with:
+        xcode-version: '14.3' 
+    - name: Setup .NET Core 6 SDK
+      uses: actions/setup-dotnet@v3
+      with:
+         dotnet-version: |
+           6.0.x
+         include-prerelease: false
     - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
-    - name: Restore dependencies Legacy
-      run: nuget restore Mapsui.Mac.Legacy.sln   
+    # macos image needs Visual Studio for Mac installed
+    #- name: Restore dependencies Legacy
+    #  run: nuget restore Mapsui.Mac.Legacy.sln   
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
     # Samples Build               
@@ -120,10 +161,10 @@ jobs:
     # Samples Forms    
     - name: Build Mapsui.Samples.Forms.Shared
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj    
-    - name: Build Mapsui.Samples.Forms.Android
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj     
-    - name: Build Mapsui.Samples.Forms.iOS
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj         
+    #- name: Build Mapsui.Samples.Forms.Android
+    #  run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj     
+    #- name: Build Mapsui.Samples.Forms.iOS
+    #  run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj         
     - name: Build Mapsui.Samples.iOS
       run: dotnet build --no-restore --configuration Debug -r iossimulator-x64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
     # Samples Uno
@@ -156,12 +197,12 @@ jobs:
     #  run: dotnet build --no-restore --configuration Debug  /p:Platform=x64 Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Windows/Mapsui.Samples.Uno.WinUI.Windows.csproj
     # Builds that need XCode 14.0
     # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
-    - name: Setup Xcode version 14.0
-      uses: maxim-lobanov/setup-xcode@v1.5.1
-      with:
-        xcode-version: '14.0'
-    - name: Build Mapsui.Samples.Forms.Mac
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj        
+    #- name: Setup Xcode version 14.0
+    #  uses: maxim-lobanov/setup-xcode@v1.5.1
+    #  with:
+    #    xcode-version: '14.0'
+    #- name: Build Mapsui.Samples.Forms.Mac
+    #  run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj        
     # Test Build    
     - name: Build Mapsui.Rendering.Skia.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
@@ -190,8 +231,8 @@ jobs:
     - name: Build Mapsui.UI.iOS
       run: dotnet pack --no-restore --configuration Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
    # run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj   
-    - name: Build Mapsui.UI.Forms
-      run: msbuild /t:Pack /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj /p:PackageOutputPath="../Artifacts" -p:PackageVersion=$(git describe --tags)
+   # - name: Build Mapsui.UI.Forms
+   #   run: msbuild /t:Pack /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj /p:PackageOutputPath="../Artifacts" -p:PackageVersion=$(git describe --tags)
     - name: Upload packages
       uses: actions/upload-artifact@v3
       with:
