@@ -56,10 +56,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\Raw\AboutAssets.txt" />
   </ItemGroup>
-  
-  <ItemGroup Condition="$(TargetFramework)=='net6.0-windows10.0.19041.0'">
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" VersionOverride="10.0.22621.1"/>
-  </ItemGroup>
      
     <ItemGroup>
       <PackageReference Include="SkiaSharp" />
