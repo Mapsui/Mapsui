@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using Mapsui.Nts;
 using NetTopologySuite.Geometries;
 using Mapsui.Nts.Extensions;
+using Mapsui.Utilities;
 
 #if __MAUI__
 using Microsoft.Maui;

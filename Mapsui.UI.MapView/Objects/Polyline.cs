@@ -7,6 +7,7 @@ using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using NetTopologySuite.Geometries;
 using Mapsui.Nts.Extensions;
+using Mapsui.Utilities;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Mapsui.UI.Maui.Utils;
