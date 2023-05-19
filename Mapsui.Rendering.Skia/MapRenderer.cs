@@ -161,12 +161,12 @@ public class MapRenderer : IRenderer
     private void RenderFeature(SKCanvas canvas, Viewport viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity, long iteration)
     {
         // Check, if we have a special renderer for this style
-        if (StyleRenderers.ContainsKey(style.GetType()))
+        if (StyleRenderers.TryGetValue(style.GetType(), out var renderer))
         {
             // Save canvas
             canvas.Save();
             // We have a special renderer, so try, if it could draw this
-            var styleRenderer = (ISkiaStyleRenderer)StyleRenderers[style.GetType()];
+            var styleRenderer = (ISkiaStyleRenderer)renderer;
             var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, _renderCache, iteration);
             // Restore old canvas
             canvas.Restore();
