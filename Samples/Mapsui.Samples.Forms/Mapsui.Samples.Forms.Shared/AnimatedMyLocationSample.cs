@@ -21,8 +21,6 @@ namespace Mapsui.Samples.Forms;
 
 public class AnimatedMyLocationSample : IFormsSample
 {
-  
-
     private readonly PeriodicTimer _timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
     private Position _newLocation;
     private MapView _mapView;
@@ -46,7 +44,6 @@ public class AnimatedMyLocationSample : IFormsSample
         _mapView.MyLocationFollow = true;
         _mapView.UseDoubleTap = true;
 
-    
         _mapView.MyLocationLayer.UpdateMyLocation(_newLocation);
         _mapView.Map.Navigator.CenterOn(_newLocation.ToMapsui());
 
