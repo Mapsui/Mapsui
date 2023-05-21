@@ -17,7 +17,7 @@ public class AnimatedFeatures : IAnimatable
 {
     private List<AnimatedFeature> _cache = new();
     private long _startTimeAnimation;
-    private bool _animating = false;
+    private bool _animating;
 
     /// <summary>
     /// When the distance between the current and the previous position is larger
@@ -38,14 +38,33 @@ public class AnimatedFeatures : IAnimatable
     public int AnimationDuration { get; set; }
     public EasingFunction Function { get; set; }
 
-    public void AddFeatures(IEnumerable<PointFeature> features)
+    public async Task AddFeaturesAsync(IEnumerable<PointFeature> features)
     {
-        var previousCache = _cache;
+        // save time so that the animation continues at the right time
+        var startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+        await StopAnimationAsync();
 
+        var previousCache = _cache;
         _cache = ConvertToAnimatedFeatures(features.ToList(), previousCache, IdField);
-        _startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+        _startTimeAnimation = startTimeAnimation;
         _animating = true;
         _first = true;
+    }
+
+    private async Task StopAnimationAsync()
+    {
+        // setting the time backwards so that the animation finishes faster.
+        _startTimeAnimation -= AnimationDuration;
+        await WaitForAnimationToFinishAsync();
+    }
+
+    private async Task WaitForAnimationToFinishAsync()
+    {
+        while (_animating)
+        {
+            // wait for current animation to finish.
+            await Task.Delay(1000 / 60);
+        }
     }
 
     public IEnumerable<IFeature> GetFeatures()
@@ -123,6 +142,9 @@ public class AnimatedFeatures : IAnimatable
 
     public bool UpdateAnimations()
     {
+        if (!_animating)
+            return false;
+
         var progress = CalculateProgress(_startTimeAnimation, AnimationDuration, Function);
         if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress, DistanceThreshold);
         else _animating = false;

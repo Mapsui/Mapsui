@@ -45,7 +45,7 @@ public static class ViewportExtensions
         var maxx = screenPoints.Select(p => p.X).Max();
         var maxy = screenPoints.Select(p => p.Y).Max();
 
-        return new MRect(minx, miny, maxx, maxy).Grow(-50);
+        return new MRect(minx, miny, maxx, maxy);
     }
 
     /// <summary>

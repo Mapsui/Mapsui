@@ -45,6 +45,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private double _unSnapRotationDegrees;
     // Flag indicating if a drawing process is running
     private bool _drawing;
+    // Flag indicating if the control has to be redrawn
+    private bool _invalidated;
     // Flag indicating if a new drawing process should start
     private bool _refresh;
     // Action to call for a redraw of the control
@@ -92,6 +94,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         // End drawing
         _drawing = false;
+        _invalidated = false;
     }
 
     private void InvalidateTimerCallback(object? state)
@@ -120,6 +123,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             return;
         }
 
+        if (_invalidated)
+        {
+            return;
+        }
+
+        _invalidated = true;
         _invalidate?.Invoke();
     }
 
@@ -155,6 +164,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </remarks>
     public void ForceUpdate()
     {
+        _invalidated = true;
         _invalidate?.Invoke();
     }
 

@@ -6,9 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.UI.Objects;
 using Mapsui.Utilities;
 
-namespace Mapsui.UI.Objects;
+namespace Mapsui.Nts.Providers;
 
 public class ObservableCollectionProvider<T> : IProvider where T : IFeatureProvider
 {
@@ -27,7 +28,7 @@ public class ObservableCollectionProvider<T> : IProvider where T : IFeatureProvi
         }
     }
 
-    private void Collection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void Collection_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         switch (e.Action)
         {

@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using Mapsui.Nts;
 using NetTopologySuite.Geometries;
 using Mapsui.Nts.Extensions;
+using Mapsui.Utilities;
 
 #if __MAUI__
 using Microsoft.Maui;
@@ -35,7 +36,7 @@ namespace Mapsui.UI.Forms;
 
 public class Polygon : Drawable
 {
-    public static readonly BindableProperty FillColorProperty = BindableProperty.Create(nameof(FillColor), typeof(Color), typeof(Polygon), KnownColor.DarkGray);
+    private Color _fillColor = KnownColor.DarkGray;
     private readonly ObservableRangeCollection<Position> _positions = new ObservableRangeCollection<Position>();
     private readonly ObservableRangeCollection<Position[]> _holes = new ObservableRangeCollection<Position[]>();
 
@@ -55,8 +56,13 @@ public class Polygon : Drawable
     /// </summary>
     public Color FillColor
     {
-        get { return (Color)GetValue(FillColorProperty); }
-        set { SetValue(FillColorProperty, value); }
+        get => _fillColor;
+        set
+        {
+            if (value.Equals(_fillColor)) return;
+            _fillColor = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
