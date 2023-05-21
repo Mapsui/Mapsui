@@ -33,13 +33,22 @@ public class AnimatedMyLocationSample : IFormsSample
 
     public void Setup(IMapControl mapControl)
     {
+        // 54°54′24″N 25°19′12″E Center of Europe
+        _newLocation = new Position(54.5424, 25.1912);
+
         _mapView = (MapView)mapControl;
-        mapControl.Map = OsmSample.CreateMap();
-        _newLocation = _mapView.MyLocationLayer.MyLocation;
+        var map = OsmSample.CreateMap();
+        map.Home = n => n.CenterOnAndZoomTo(_newLocation.ToMapsui(), n.Resolutions[14]);
+        mapControl.Map = map;
 
         _mapView.MyLocationLayer.IsMoving = true;
         _mapView.MyLocationEnabled = true;
+        _mapView.MyLocationFollow = true;
         _mapView.UseDoubleTap = true;
+
+    
+        _mapView.MyLocationLayer.UpdateMyLocation(_newLocation);
+        _mapView.Map.Navigator.CenterOn(_newLocation.ToMapsui());
 
         Catch.TaskRun(RunTimerAsync);
     }
