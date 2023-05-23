@@ -41,6 +41,25 @@ namespace Mapsui.UI.Forms;
 /// </summary>
 public partial class MapControl : ContentView, IMapControl, IDisposable
 {
+    static MapControl()
+    {
+        try
+        {
+            Callout.DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
+            Callout.DefaultSubtitleFontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
+        }
+        catch (Exception ex)
+        {
+            // Catch Xamarin Forms not initialized exception happens in unit tests.
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
+        
+#if __FORMS__
+        Callout.DefaultTitleFontName = Font.Default.FontFamily;
+        Callout.DefaultSubtitleFontName = Font.Default.FontFamily;
+#endif
+}
+
 #if __MAUI__
     // GPU does not work currently on MAUI
     // See https://github.com/mono/SkiaSharp/issues/1893

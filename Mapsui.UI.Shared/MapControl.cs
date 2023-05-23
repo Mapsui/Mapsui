@@ -45,6 +45,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private double _unSnapRotationDegrees;
     // Flag indicating if a drawing process is running
     private bool _drawing;
+    // Flag indicating if the control has to be redrawn
+    private bool _invalidated;
     // Flag indicating if a new drawing process should start
     private bool _refresh;
     // Action to call for a redraw of the control
@@ -92,6 +94,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         // End drawing
         _drawing = false;
+        _invalidated = false;
     }
 
     private void InvalidateTimerCallback(object? state)
@@ -120,6 +123,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             return;
         }
 
+        if (_invalidated)
+        {
+            return;
+        }
+
+        _invalidated = true;
         _invalidate?.Invoke();
     }
 
@@ -155,6 +164,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </remarks>
     public void ForceUpdate()
     {
+        _invalidated = true;
         _invalidate?.Invoke();
     }
 
@@ -329,36 +339,33 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void Map_DataChanged(object? sender, DataChangedEventArgs? e)
     {
-        RunOnUIThread(() =>
+        try
         {
-            try
+            if (e == null)
             {
-                if (e == null)
-                {
-                    Logger.Log(LogLevel.Warning, "Unexpected error: DataChangedEventArgs can not be null");
-                }
-                else if (e.Cancelled)
-                {
-                    Logger.Log(LogLevel.Warning, "Fetching data was cancelled.");
-                }
-                else if (e.Error is WebException)
-                {
-                    Logger.Log(LogLevel.Warning, $"A WebException occurred. Do you have internet? Exception: {e.Error?.Message}", e.Error);
-                }
-                else if (e.Error != null)
-                {
-                    Logger.Log(LogLevel.Warning, $"An error occurred while fetching data. Exception: {e.Error?.Message}", e.Error);
-                }
-                else // no problems
-                {
-                    RefreshGraphics();
-                }
+                Logger.Log(LogLevel.Warning, "Unexpected error: DataChangedEventArgs can not be null");
             }
-            catch (Exception exception)
+            else if (e.Cancelled)
             {
-                Logger.Log(LogLevel.Warning, $"Unexpected exception in {nameof(Map_DataChanged)}", exception);
+                Logger.Log(LogLevel.Warning, "Fetching data was cancelled.");
             }
-        });
+            else if (e.Error is WebException)
+            {
+                Logger.Log(LogLevel.Warning, $"A WebException occurred. Do you have internet? Exception: {e.Error?.Message}", e.Error);
+            }
+            else if (e.Error != null)
+            {
+                Logger.Log(LogLevel.Warning, $"An error occurred while fetching data. Exception: {e.Error?.Message}", e.Error);
+            }
+            else // no problems
+            {
+                RefreshGraphics();
+            }
+        }
+        catch (Exception exception)
+        {
+            Logger.Log(LogLevel.Warning, $"Unexpected exception in {nameof(Map_DataChanged)}", exception);
+        }        
     }
     // ReSharper disable RedundantNameQualifier - needed for iOS for disambiguation
 

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Nts;
 using Mapsui.Styles;
+
 #if __MAUI__
 using Mapsui.UI.Maui;
 using Mapsui.UI.Maui.Extensions;
@@ -19,29 +22,34 @@ using Xamarin.Forms;
 using Color = Xamarin.Forms.Color;
 using KnownColor = Xamarin.Forms.Color;
 #endif
-
 namespace Mapsui.UI.Objects;
 
 /// <summary>
 /// Base class for all drawables like polyline, polygon and circle
 /// </summary>
-public class Drawable : BindableObject, IClickable, IFeatureProvider
+public class Drawable : IClickable, IFeatureProvider, INotifyPropertyChanged
 {
-    public static readonly BindableProperty LabelProperty = BindableProperty.Create(nameof(Label), typeof(string), typeof(Pin), default(string));
-    public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(nameof(StrokeWidth), typeof(float), typeof(Circle), 1f);
-    public static readonly BindableProperty MinVisibleProperty = BindableProperty.Create(nameof(MinVisible), typeof(double), typeof(Circle), 0.0);
-    public static readonly BindableProperty MaxVisibleProperty = BindableProperty.Create(nameof(MaxVisible), typeof(double), typeof(Circle), double.MaxValue);
-    public static readonly BindableProperty ZIndexProperty = BindableProperty.Create(nameof(ZIndex), typeof(int), typeof(Circle), 0);
-    public static readonly BindableProperty IsClickableProperty = BindableProperty.Create(nameof(IsClickable), typeof(bool), typeof(Drawable), false);
-    public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor), typeof(Color), typeof(Circle), KnownColor.Black);
+    private string? _label;
+    private float _strokeWidth = 1f;
+    private double _minVisible;
+    private double _maxVisible = double.MaxValue;
+    private int _zIndex;
+    private bool _isClickable;
+    private Color _strokeColor = KnownColor.Black;
+    private object? _tag;
 
     /// <summary>
     /// Label of drawable
     /// </summary>
-    public string Label
+    public string? Label
     {
-        get => (string)GetValue(LabelProperty);
-        set => SetValue(LabelProperty, value);
+        get => _label;
+        set
+        {
+            if (value == _label) return;
+            _label = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -49,8 +57,13 @@ public class Drawable : BindableObject, IClickable, IFeatureProvider
     /// </summary>
     public float StrokeWidth
     {
-        get => (float)GetValue(StrokeWidthProperty);
-        set => SetValue(StrokeWidthProperty, value);
+        get => _strokeWidth;
+        set
+        {
+            if (value.Equals(_strokeWidth)) return;
+            _strokeWidth = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -58,8 +71,13 @@ public class Drawable : BindableObject, IClickable, IFeatureProvider
     /// </summary>
     public Color StrokeColor
     {
-        get { return (Color)GetValue(StrokeColorProperty); }
-        set { SetValue(StrokeColorProperty, value); }
+        get => _strokeColor;
+        set
+        {
+            if (value.Equals(_strokeColor)) return;
+            _strokeColor = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -67,8 +85,13 @@ public class Drawable : BindableObject, IClickable, IFeatureProvider
     /// </summary>
     public double MinVisible
     {
-        get => (double)GetValue(MinVisibleProperty);
-        set => SetValue(MinVisibleProperty, value);
+        get => _minVisible;
+        set
+        {
+            if (value.Equals(_minVisible)) return;
+            _minVisible = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -76,8 +99,13 @@ public class Drawable : BindableObject, IClickable, IFeatureProvider
     /// </summary>
     public double MaxVisible
     {
-        get => (double)GetValue(MaxVisibleProperty);
-        set => SetValue(MaxVisibleProperty, value);
+        get => _maxVisible;
+        set
+        {
+            if (value.Equals(_maxVisible)) return;
+            _maxVisible = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -85,8 +113,13 @@ public class Drawable : BindableObject, IClickable, IFeatureProvider
     /// </summary>
     public int ZIndex
     {
-        get => (int)GetValue(ZIndexProperty);
-        set => SetValue(ZIndexProperty, value);
+        get => _zIndex;
+        set
+        {
+            if (value == _zIndex) return;
+            _zIndex = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -94,14 +127,28 @@ public class Drawable : BindableObject, IClickable, IFeatureProvider
     /// </summary>
     public bool IsClickable
     {
-        get => (bool)GetValue(IsClickableProperty);
-        set => SetValue(IsClickableProperty, value);
+        get => _isClickable;
+        set
+        {
+            if (value == _isClickable) return;
+            _isClickable = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
     /// Object for free use
     /// </summary>
-    public object? Tag { get; set; }
+    public object? Tag
+    {
+        get => _tag;
+        set
+        {
+            if (Equals(value, _tag)) return;
+            _tag = value;
+            OnPropertyChanged();
+        }
+    }
 
     private GeometryFeature? feature;
 
@@ -114,7 +161,11 @@ public class Drawable : BindableObject, IClickable, IFeatureProvider
         set
         {
             if (feature == null || !feature.Equals(value))
+            {
+                if (Equals(value, feature)) return;
                 feature = value;
+                OnPropertyChanged();
+            }
         }
     }
 
@@ -132,9 +183,11 @@ public class Drawable : BindableObject, IClickable, IFeatureProvider
         Clicked?.Invoke(this, e);
     }
 
-    protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
-        base.OnPropertyChanged(propertyName);
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         var vectorStyle = ((VectorStyle?)Feature?.Styles.FirstOrDefault());
         if (vectorStyle == null || vectorStyle.Line == null)
@@ -155,5 +208,13 @@ public class Drawable : BindableObject, IClickable, IFeatureProvider
                 vectorStyle.MaxVisible = MaxVisible;
                 break;
         }
+    }
+
+    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+        field = value;
+        OnPropertyChanged(propertyName);
+        return true;
     }
 }

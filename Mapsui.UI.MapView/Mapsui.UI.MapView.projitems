@@ -25,16 +25,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Distance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Drawable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\IClickable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Objects\IFeatureProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\MapSpan.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\MyLocationLayer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Objects\ObservableCollectionProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Pin.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\PinType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Polygon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Polyline.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Position.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utils\ObservableRangeCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\PolylineConverter.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -31,11 +31,11 @@ namespace Mapsui.UI.Forms;
 
 public class Circle : Drawable
 {
-    public static readonly BindableProperty CenterProperty = BindableProperty.Create(nameof(Center), typeof(Position), typeof(Circle), default(Position));
-    public static readonly BindableProperty RadiusProperty = BindableProperty.Create(nameof(Radius), typeof(Distance), typeof(Circle), Distance.FromMeters(1));
-    public static readonly BindableProperty QualityProperty = BindableProperty.Create(nameof(Quality), typeof(double), typeof(Circle), 3.0);
-    public static readonly BindableProperty FillColorProperty = BindableProperty.Create(nameof(FillColor), typeof(Color), typeof(Circle), KnownColor.DarkGray);
-
+    private Position _center;
+    private Distance _radius = Distance.FromMeters(1);
+    private double _quality = 3.0;
+    private Color _fillColor = KnownColor.DarkGray;
+    
     public Circle()
     {
         CreateFeature();
@@ -48,8 +48,13 @@ public class Circle : Drawable
     /// </summary>
     public Position Center
     {
-        get => (Position)GetValue(CenterProperty);
-        set => SetValue(CenterProperty, value);
+        get => _center;
+        set
+        {
+            if (value.Equals(_center)) return;
+            _center = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -57,8 +62,13 @@ public class Circle : Drawable
     /// </summary>
     public Distance Radius
     {
-        get => (Distance)GetValue(RadiusProperty);
-        set => SetValue(RadiusProperty, value);
+        get => _radius;
+        set
+        {
+            if (value.Equals(_radius)) return;
+            _radius = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -66,8 +76,13 @@ public class Circle : Drawable
     /// </summary>
     public Color FillColor
     {
-        get => (Color)GetValue(FillColorProperty);
-        set => SetValue(FillColorProperty, value);
+        get => _fillColor;
+        set
+        {
+            if (value.Equals(_fillColor)) return;
+            _fillColor = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -75,8 +90,13 @@ public class Circle : Drawable
     /// </summary>
     public double Quality
     {
-        get => (double)GetValue(QualityProperty);
-        set => SetValue(QualityProperty, value);
+        get => _quality;
+        set
+        {
+            if (value.Equals(_quality)) return;
+            _quality = value;
+            OnPropertyChanged();
+        }
     }
 
     protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
