@@ -26,6 +26,7 @@
 	  <PackageReference Include="Microsoft.WindowsAppSDK" GeneratePathProperty="true" />
 	  <PackageReference Include="Microsoft.Graphics.Win2D" />
     <PackageReference Include="SkiaSharp.Views.WinUI" />
+    <PackageReference Include="Microsoft.DotNet.ApiCompat.Task" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
