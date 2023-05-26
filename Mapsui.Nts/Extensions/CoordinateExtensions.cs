@@ -27,9 +27,6 @@ public static class CoordinateExtensions
 
     public static LinearRing ToLinearRing(this IEnumerable<Coordinate> coordinates)
     {
-        if (coordinates.Count() == 0)
-            throw new Exception("coordinates can not be length 0");
-
         var list = coordinates.ToList(); // Not using ToList could be more performant
         if (list.Count == 1)
             list.Add(list[0].Copy()); // LineString needs at least two coordinates
