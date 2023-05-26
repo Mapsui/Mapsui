@@ -27,6 +27,13 @@ jobs:
       uses: NuGet/setup-nuget@v1.1.1      
       with:
         nuget-version: latest    
+    # .Net 7 update     
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v3
+      with:
+         dotnet-version: |
+           7.0.x
+         include-prerelease: false
     - name: install android wasm-tools wasm-tools-net6
       run: dotnet workload install android wasm-tools wasm-tools-net6    
     - name: Restore dependencies Mapsui.Linux
@@ -87,6 +94,13 @@ jobs:
       uses: NuGet/setup-nuget@v1.1.1      
       with:
         nuget-version: latest
+    # .Net 7 update     
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v3
+      with:
+         dotnet-version: |
+           7.0.x
+         include-prerelease: false
     - name: Setup Xcode version 14.2
       uses: maxim-lobanov/setup-xcode@v1.5.1
       with:
@@ -145,6 +159,13 @@ jobs:
       with:
          dotnet-version: |
            6.0.x
+         include-prerelease: false
+    # .Net 7 update     
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v3
+      with:
+         dotnet-version: |
+           7.0.x
          include-prerelease: false
     - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
@@ -256,13 +277,13 @@ jobs:
         key: ${{ runner.os }}-nuget13-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
             ${{ runner.os }}-nuget13-
-    # .Net 7 already installed on Github Actions      
-    #- name: Setup .NET Core SDK
-    #  uses: actions/setup-dotnet@v3
-    #  with:
-    #     dotnet-version: |
-    #       7.0.100
-    #     include-prerelease: false
+    # .Net 7 update     
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v3
+      with:
+         dotnet-version: |
+           7.0.x
+         include-prerelease: false
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.1.1
       with:
