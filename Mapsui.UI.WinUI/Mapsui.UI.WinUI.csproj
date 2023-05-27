@@ -16,7 +16,6 @@
     <RunApiCompat>false</RunApiCompat>
   </PropertyGroup>	
 
-
   <ItemGroup>
 	  <PackageReference Include="Microsoft.WindowsAppSDK" />
 	  <PackageReference Include="Microsoft.Graphics.Win2D" />
@@ -28,7 +27,6 @@
     <ProjectReference Include="..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
-
 
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
 
