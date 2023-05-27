@@ -33,8 +33,9 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
     public async Task UpdateDataAsync()
     {
         if (_fetchInfo is null) return;
+
         var features = await _dataSource.GetFeaturesAsync(_fetchInfo);
-        await _animatedFeatures.AddFeaturesAsync(features.Cast<PointFeature>());
+        _animatedFeatures.AddFeatures(features.Cast<PointFeature>());
         OnDataChanged(new DataChangedEventArgs());
     }
 
