@@ -16,15 +16,9 @@
     <RunApiCompat>false</RunApiCompat>
   </PropertyGroup>	
 
-	<!-- Workaround for https://github.com/microsoft/WindowsAppSDK/issues/1217 -->
-	<Target Name="FixBinPlaceBootstrapDll" BeforeTargets="BinPlaceBootstrapDll">
-		<PropertyGroup>
-			<_WindowsAppSDKFoundationPlatform>x86</_WindowsAppSDKFoundationPlatform>
-		</PropertyGroup>
-	</Target>
 
   <ItemGroup>
-	  <PackageReference Include="Microsoft.WindowsAppSDK" GeneratePathProperty="true" />
+	  <PackageReference Include="Microsoft.WindowsAppSDK" />
 	  <PackageReference Include="Microsoft.Graphics.Win2D" />
     <PackageReference Include="SkiaSharp.Views.WinUI" />
   </ItemGroup>
@@ -35,13 +29,6 @@
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
 
-	<!-- Required - WinUI can't deploy in a multi-targeting environment -->
-	<Target Name="FixReferenceCopyLocalPaths" BeforeTargets="ResolvePackageAssets">
-	  <ItemGroup>
-		<ReferenceCopyLocalPaths Remove="$(PkgMicrosoft_WindowsAppSDK)\build\..\runtimes\lib\native\AnyCPU\Microsoft.WindowsAppRuntime.Bootstrap.dll" />
-		<ReferenceCopyLocalPaths Remove="$(PkgMicrosoft_WindowsAppSDK)\build\..\runtimes\lib\native\\Microsoft.WindowsAppRuntime.Bootstrap.dll" />
-	  </ItemGroup>
-	</Target>
 
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
 
