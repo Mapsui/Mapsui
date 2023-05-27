@@ -32,7 +32,7 @@ public static class CoordinateExtensions
             list.Add(list[0].Copy()); // LineString needs at least two coordinates
         if (list.Count == 2)
             list.Add(list[0].Copy()); // LinearRing needs at least three coordinates
-        if (!list.First().Equals2D(list.Last()))
+        if (list.Count > 2 && !list.First().Equals2D(list.Last()))
             list.Add(list[0].Copy()); // LinearRing needs to be 'closed' (first should equal last)
         return new LinearRing(list.ToArray());
     }
