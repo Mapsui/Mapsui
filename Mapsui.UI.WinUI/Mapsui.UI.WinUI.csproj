@@ -13,7 +13,7 @@
 		<IsPackable>true</IsPackable>
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
-    <EnableApiCompat>false</EnableApiCompat>
+    <RunApiCompat>false</RunApiCompat>
   </PropertyGroup>	
 
 	<!-- Workaround for https://github.com/microsoft/WindowsAppSDK/issues/1217 -->
