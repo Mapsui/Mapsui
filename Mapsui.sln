@@ -210,6 +210,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Blazor", "Samples\Mapsui.Samples.Blazor\Mapsui.Samples.Blazor.csproj", "{BA0E8B89-ADBC-43B8-86D0-A1BC2427AE7F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Uno.WinUI", "Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.csproj", "{741484E5-6E06-46E3-BCC6-22953A31FE9F}"
+EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.UI.MapView", "Mapsui.UI.MapView\Mapsui.UI.MapView.shproj", "{1A4666DB-CD58-4380-858C-7730C0508A85}"
 EndProject
 Global
