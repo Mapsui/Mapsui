@@ -13,17 +13,12 @@
 		<IsPackable>true</IsPackable>
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <!--Disable Run Api Compat Task causes Build failure on github actions with visual studio 2022 17.5 and .net Compilers Toolset 4.6-->
+    <RunApiCompat>false</RunApiCompat>
   </PropertyGroup>	
 
-	<!-- Workaround for https://github.com/microsoft/WindowsAppSDK/issues/1217 -->
-	<Target Name="FixBinPlaceBootstrapDll" BeforeTargets="BinPlaceBootstrapDll">
-		<PropertyGroup>
-			<_WindowsAppSDKFoundationPlatform>x86</_WindowsAppSDKFoundationPlatform>
-		</PropertyGroup>
-	</Target>
-
   <ItemGroup>
-	  <PackageReference Include="Microsoft.WindowsAppSDK" GeneratePathProperty="true" />
+	  <PackageReference Include="Microsoft.WindowsAppSDK" />
 	  <PackageReference Include="Microsoft.Graphics.Win2D" />
     <PackageReference Include="SkiaSharp.Views.WinUI" />
   </ItemGroup>
@@ -33,14 +28,6 @@
     <ProjectReference Include="..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
-
-	<!-- Required - WinUI can't deploy in a multi-targeting environment -->
-	<Target Name="FixReferenceCopyLocalPaths" BeforeTargets="ResolvePackageAssets">
-	  <ItemGroup>
-		<ReferenceCopyLocalPaths Remove="$(PkgMicrosoft_WindowsAppSDK)\build\..\runtimes\lib\native\AnyCPU\Microsoft.WindowsAppRuntime.Bootstrap.dll" />
-		<ReferenceCopyLocalPaths Remove="$(PkgMicrosoft_WindowsAppSDK)\build\..\runtimes\lib\native\\Microsoft.WindowsAppRuntime.Bootstrap.dll" />
-	  </ItemGroup>
-	</Target>
 
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
 
