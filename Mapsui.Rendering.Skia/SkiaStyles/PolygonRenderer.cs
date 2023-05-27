@@ -26,7 +26,7 @@ internal static class PolygonRenderer
         SKPaint paint;
         SKPaint paintFill;
         SKPath path;
-        if (vectorCache == null || layer is IWritableLayer)
+        if (vectorCache == null || layer is IModifyFeatureLayer)
         {
             paint = CreateSkPaint(vectorStyle?.Outline, opacity);
             paintFill = CreateSkPaint(vectorStyle?.Fill, opacity, viewport.Rotation, symbolCache);

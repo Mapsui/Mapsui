@@ -25,6 +25,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private MPoint? _downMousePosition;
     private bool _mouseDown;
     private MPoint? _previousMousePosition;
+    private double _mouseWheelPos = 0.0;
 
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
 
@@ -72,9 +73,16 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseWheel(object? sender, PointerWheelEventArgs e)
     {
-        var mouseWheelDelta = (int)e.Delta.Y;
+        // In Avalonia the touchpad can trigger the mousewheel event. In that case there are more events and the Delta.Y is a double value, 
+        // which is usually smaller than 1.0. In the code below the deltas are accumelated until they are larger than 1.0. Only then 
+        // MouseWheelZoom is called.
+        _mouseWheelPos += e.Delta.Y;
+        if (Math.Abs(_mouseWheelPos) < 1.0) return; // Ignore the mouse wheel event if the accumulated delta is still too small
+        int delta = Math.Sign(_mouseWheelPos);
+        _mouseWheelPos -= delta;
+
         _currentMousePosition = e.GetPosition(this).ToMapsui();
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, _currentMousePosition);
+        Map.Navigator.MouseWheelZoom(delta, _currentMousePosition);
     }
 
     private void MapControlMouseLeftButtonDown(PointerPressedEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Nts;
@@ -29,7 +30,7 @@ namespace Mapsui.UI.Maui;
 namespace Mapsui.UI.Forms;
 #endif
 
-public class Pin : BindableObject, IFeatureProvider, IDisposable
+public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
 {
     // Cache for used bitmaps
     private static readonly Dictionary<string, int> _bitmapIds = new Dictionary<string, int>();
@@ -38,24 +39,6 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     private int _bitmapId = -1;
     private byte[]? _bitmapData;
     private MapView? _mapView;
-
-    public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(PinType), typeof(Pin), default(PinType));
-    public static readonly BindableProperty PositionProperty = BindableProperty.Create(nameof(Position), typeof(Position), typeof(Pin), default(Position));
-    public static readonly BindableProperty LabelProperty = BindableProperty.Create(nameof(Label), typeof(string), typeof(Pin), default(string));
-    public static readonly BindableProperty AddressProperty = BindableProperty.Create(nameof(Address), typeof(string), typeof(Pin), default(string));
-    public static readonly BindableProperty IconProperty = BindableProperty.Create(nameof(Icon), typeof(byte[]), typeof(Pin), default(byte[]));
-    public static readonly BindableProperty SvgProperty = BindableProperty.Create(nameof(Svg), typeof(string), typeof(Pin), default(string));
-    public static readonly BindableProperty ScaleProperty = BindableProperty.Create(nameof(Scale), typeof(float), typeof(Pin), 1.0f);
-    public static readonly BindableProperty RotationProperty = BindableProperty.Create(nameof(Rotation), typeof(float), typeof(Pin), 0f);
-    public static readonly BindableProperty RotateWithMapProperty = BindableProperty.Create(nameof(RotateWithMap), typeof(bool), typeof(Pin), false);
-    public static readonly BindableProperty IsVisibleProperty = BindableProperty.Create(nameof(IsVisible), typeof(bool), typeof(Pin), true);
-    public static readonly BindableProperty MinVisibleProperty = BindableProperty.Create(nameof(MinVisible), typeof(double), typeof(Pin), 0.0);
-    public static readonly BindableProperty MaxVisibleProperty = BindableProperty.Create(nameof(MaxVisible), typeof(double), typeof(Pin), double.MaxValue);
-    public static readonly BindableProperty WidthProperty = BindableProperty.Create(nameof(Width), typeof(double), typeof(Pin), -1.0, BindingMode.OneWayToSource);
-    public static readonly BindableProperty HeightProperty = BindableProperty.Create(nameof(Height), typeof(double), typeof(Pin), -1.0);
-    public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Point), typeof(Pin), new Point(0, 28));
-    public static readonly BindableProperty TransparencyProperty = BindableProperty.Create(nameof(Transparency), typeof(float), typeof(Pin), 0f);
-    public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(Pin), KnownColor.Red);
 
     /// <summary>
     /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Pin"/> class
@@ -104,8 +87,13 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public PinType Type
     {
-        get => (PinType)GetValue(TypeProperty);
-        set => SetValue(TypeProperty, value);
+        get => _type;
+        set
+        {
+            if (value == _type) return;
+            _type = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -113,8 +101,13 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public Position Position
     {
-        get => (Position)GetValue(PositionProperty);
-        set => SetValue(PositionProperty, value);
+        get => _position;
+        set
+        {
+            if (value.Equals(_position)) return;
+            _position = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -122,8 +115,13 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public float Scale
     {
-        get => (float)GetValue(ScaleProperty);
-        set => SetValue(ScaleProperty, value);
+        get => _scale;
+        set
+        {
+            if (value.Equals(_scale)) return;
+            _scale = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -131,44 +129,71 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public Color Color
     {
-        get { return (Color)GetValue(ColorProperty); }
-        set { SetValue(ColorProperty, value); }
+        get => _color;
+        set
+        {
+            if (value.Equals(_color)) return;
+            _color = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
     /// Label of pin
     /// </summary>
-    public string Label
+    public string? Label
     {
-        get => (string)GetValue(LabelProperty);
-        set => SetValue(LabelProperty, value);
+        get => _label;
+        set
+        {
+            if (value == _label) return;
+            _label = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(Callout));
+        }
     }
 
     /// <summary>
     /// Adress (like street) of pin
     /// </summary>
-    public string Address
+    public string? Address
     {
-        get => (string)GetValue(AddressProperty);
-        set => SetValue(AddressProperty, value);
+        get => _address;
+        set
+        {
+            if (value == _address) return;
+            _address = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(Callout));
+        }
     }
 
     /// <summary>
     /// Byte[] holding the bitmap informations
     /// </summary>
-    public byte[] Icon
+    public byte[]? Icon
     {
-        get => (byte[])GetValue(IconProperty);
-        set => SetValue(IconProperty, value);
+        get => _icon;
+        set
+        {
+            if (Equals(value, _icon)) return;
+            _icon = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
     /// String holding the Svg image informations
     /// </summary>
-    public string Svg
+    public string? Svg
     {
-        get => (string)GetValue(SvgProperty);
-        set => SetValue(SvgProperty, value);
+        get => _svg;
+        set
+        {
+            if (value == _svg) return;
+            _svg = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -176,8 +201,13 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public float Rotation
     {
-        get => (float)GetValue(RotationProperty);
-        set => SetValue(RotationProperty, value);
+        get => _rotation;
+        set
+        {
+            if (value.Equals(_rotation)) return;
+            _rotation = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -186,8 +216,13 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public bool RotateWithMap
     {
-        get => (bool)GetValue(RotateWithMapProperty);
-        set => SetValue(RotateWithMapProperty, value);
+        get => _rotateWithMap;
+        set
+        {
+            if (value == _rotateWithMap) return;
+            _rotateWithMap = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -195,8 +230,13 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public bool IsVisible
     {
-        get => (bool)GetValue(IsVisibleProperty);
-        set => SetValue(IsVisibleProperty, value);
+        get => _isVisible;
+        set
+        {
+            if (value == _isVisible) return;
+            _isVisible = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -204,8 +244,13 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double MinVisible
     {
-        get => (double)GetValue(MinVisibleProperty);
-        set => SetValue(MinVisibleProperty, value);
+        get => _minVisible;
+        set
+        {
+            if (value.Equals(_minVisible)) return;
+            _minVisible = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -213,8 +258,13 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double MaxVisible
     {
-        get => (double)GetValue(MaxVisibleProperty);
-        set => SetValue(MaxVisibleProperty, value);
+        get => _maxVisible;
+        set
+        {
+            if (value.Equals(_maxVisible)) return;
+            _maxVisible = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -222,8 +272,13 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double Width
     {
-        get => (double)GetValue(WidthProperty);
-        private set => SetValue(WidthProperty, value);
+        get => _width;
+        set
+        {
+            if (value.Equals(_width)) return;
+            _width = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -231,8 +286,13 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double Height
     {
-        get => (double)GetValue(HeightProperty);
-        private set => SetValue(HeightProperty, value);
+        get => _height;
+        set
+        {
+            if (value.Equals(_height)) return;
+            _height = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -240,8 +300,13 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public Point Anchor
     {
-        get => (Point)GetValue(AnchorProperty);
-        set => SetValue(AnchorProperty, value);
+        get => _anchor;
+        set
+        {
+            if (value.Equals(_anchor)) return;
+            _anchor = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -249,20 +314,43 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public float Transparency
     {
-        get => (float)GetValue(TransparencyProperty);
-        set => SetValue(TransparencyProperty, value);
+        get => _transparency;
+        set
+        {
+            if (value.Equals(_transparency)) return;
+            _transparency = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
     /// Tag holding free data
     /// </summary>
-    public object? Tag { get; set; }
+    public object? Tag
+    {
+        get => _tag;
+        set
+        {
+            if (Equals(value, _tag)) return;
+            _tag = value;
+            OnPropertyChanged();
+        }
+    }
 
     /// <summary>
     /// Mapsui feature for this pin
     /// </summary>
     /// <value>Mapsui feature</value>
-    public GeometryFeature? Feature { get; private set; }
+    public GeometryFeature? Feature
+    {
+        get => _feature;
+        private set
+        {
+            if (Equals(value, _feature)) return;
+            _feature = value;
+            OnPropertyChanged();
+        }
+    }
 
     private Callout? _callout;
 
@@ -297,7 +385,11 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
         internal set
         {
             if (value != null && _callout != value)
+            {
+                if (Equals(value, _callout)) return;
                 _callout = value;
+                OnPropertyChanged();
+            }
         }
     }
 
@@ -377,80 +469,26 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
         return string.Equals(Label, other.Label) && Equals(Position, other.Position) && Type == other.Type && string.Equals(Address, other.Address);
     }
 
-    protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        base.OnPropertyChanged(propertyName);
-
-        switch (propertyName)
-        {
-            case nameof(Position):
-                if (Feature != null)
-                {
-                    Feature.Geometry = Position.ToPoint();
-                    if (_callout != null)
-                        _callout.Feature.Geometry = Feature.Geometry;
-                }
-                break;
-            case nameof(Label):
-                if (Feature != null)
-                    Feature["Label"] = Label;
-                Callout.Title = Label;
-                break;
-            case nameof(Address):
-                Callout.Subtitle = Address;
-                break;
-            case nameof(Transparency):
-                if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).Opacity = 1 - Transparency;
-                break;
-            case nameof(Anchor):
-                if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).SymbolOffset = new Offset(Anchor.X, Anchor.Y);
-                break;
-            case nameof(Rotation):
-                if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).SymbolRotation = Rotation;
-                break;
-            case nameof(RotateWithMap):
-                if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).RotateWithMap = RotateWithMap;
-                break;
-            case nameof(IsVisible):
-                if (!IsVisible)
-                    HideCallout();
-                if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).Enabled = IsVisible;
-                break;
-            case nameof(MinVisible):
-                // TODO: Update callout MinVisble too
-                if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).MinVisible = MinVisible;
-                break;
-            case nameof(MaxVisible):
-                // TODO: Update callout MaxVisble too
-                if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).MaxVisible = MaxVisible;
-                break;
-            case nameof(Scale):
-                if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).SymbolScale = Scale;
-                break;
-            case nameof(Type):
-            case nameof(Color):
-                CreateFeature();
-                break;
-            case nameof(Icon):
-                if (Type == PinType.Icon)
-                    CreateFeature();
-                break;
-            case nameof(Svg):
-                if (Type == PinType.Svg)
-                    CreateFeature();
-                break;
-        }
-    }
-
     private readonly object _sync = new object();
+    private PinType _type;
+    private Position _position;
+    private float _scale = 1f;
+    private Color _color = KnownColor.Red;
+    private string? _label;
+    private string? _address;
+    private byte[]? _icon;
+    private string? _svg;
+    private float _rotation;
+    private bool _rotateWithMap;
+    private bool _isVisible = true;
+    private double _minVisible;
+    private double _maxVisible = Double.MaxValue;
+    private double _width = -1;
+    private double _height = -1;
+    private Point _anchor = new Point(0, 28);
+    private float _transparency;
+    private object? _tag;
+    private GeometryFeature? _feature;
 
     private void CreateFeature()
     {
@@ -458,12 +496,15 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
         {
             if (Feature == null)
             {
+#pragma warning disable IDISP003 // Dispose previous before re-assigning
                 // Create a new one
                 Feature = new GeometryFeature
                 {
                     Geometry = Position.ToPoint(),
                     ["Label"] = Label,
                 };
+#pragma warning restore IDISP003 // Dispose previous before re-assigning
+
                 if (_callout != null)
                     _callout.Feature.Geometry = Position.ToPoint();
             }
@@ -482,23 +523,26 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
                     if (string.IsNullOrEmpty(Svg))
                         return;
                     // Check, if it is already in cache
-                    if (_bitmapIds.ContainsKey(Svg))
+                    if (_bitmapIds.ContainsKey(Svg!))
                     {
-                        _bitmapId = _bitmapIds[Svg];
-                        _bitmapIdKey = Svg;
+                        _bitmapId = _bitmapIds[Svg!];
+                        _bitmapIdKey = Svg!;
                         break;
                     }
                     // Save this SVG for later use
-                    _bitmapId = BitmapRegistry.Instance.Register(Svg);
-                    _bitmapIdKey = Svg;
-                    _bitmapIds.Add(Svg, _bitmapId);
+                    _bitmapId = BitmapRegistry.Instance.Register(Svg!);
+                    _bitmapIdKey = Svg!;
+                    _bitmapIds.Add(Svg!, _bitmapId);
                     break;
                 case PinType.Pin:
                     var colorInHex = Color.ToHex();
+                    if (colorInHex == null)
+                        return;
+
                     // Check, if it is already in cache
-                    if (_bitmapIds.ContainsKey(colorInHex))
+                    if (_bitmapIds.TryGetValue(colorInHex, out var id))
                     {
-                        _bitmapId = _bitmapIds[colorInHex];
+                        _bitmapId = id;
                         _bitmapIdKey = colorInHex;
                         break;
                     }
@@ -579,5 +623,88 @@ public class Pin : BindableObject, IFeatureProvider, IDisposable
     {
         _callout?.Dispose();
         Feature?.Dispose();
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+         switch (propertyName)
+        {
+            case nameof(Position):
+                if (Feature != null)
+                {
+                    Feature.Geometry = Position.ToPoint();
+                    if (_callout != null)
+                        _callout.Feature.Geometry = Feature.Geometry;
+                }
+                break;
+            case nameof(Label):
+                if (Feature != null)
+                    Feature["Label"] = Label;
+                Callout.Title = Label;
+                break;
+            case nameof(Address):
+                Callout.Subtitle = Address;
+                break;
+            case nameof(Transparency):
+                if (Feature != null)
+                    ((SymbolStyle)Feature.Styles.First()).Opacity = 1 - Transparency;
+                break;
+            case nameof(Anchor):
+                if (Feature != null)
+                    ((SymbolStyle)Feature.Styles.First()).SymbolOffset = new Offset(Anchor.X, Anchor.Y);
+                break;
+            case nameof(Rotation):
+                if (Feature != null)
+                    ((SymbolStyle)Feature.Styles.First()).SymbolRotation = Rotation;
+                break;
+            case nameof(RotateWithMap):
+                if (Feature != null)
+                    ((SymbolStyle)Feature.Styles.First()).RotateWithMap = RotateWithMap;
+                break;
+            case nameof(IsVisible):
+                if (!IsVisible)
+                    HideCallout();
+                if (Feature != null)
+                    ((SymbolStyle)Feature.Styles.First()).Enabled = IsVisible;
+                break;
+            case nameof(MinVisible):
+                // TODO: Update callout MinVisble too
+                if (Feature != null)
+                    ((SymbolStyle)Feature.Styles.First()).MinVisible = MinVisible;
+                break;
+            case nameof(MaxVisible):
+                // TODO: Update callout MaxVisble too
+                if (Feature != null)
+                    ((SymbolStyle)Feature.Styles.First()).MaxVisible = MaxVisible;
+                break;
+            case nameof(Scale):
+                if (Feature != null)
+                    ((SymbolStyle)Feature.Styles.First()).SymbolScale = Scale;
+                break;
+            case nameof(Type):
+            case nameof(Color):
+                CreateFeature();
+                break;
+            case nameof(Icon):
+                if (Type == PinType.Icon)
+                    CreateFeature();
+                break;
+            case nameof(Svg):
+                if (Type == PinType.Svg)
+                    CreateFeature();
+                break;
+        }
+    }
+
+    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+        field = value;
+        OnPropertyChanged(propertyName);
+        return true;
     }
 }
