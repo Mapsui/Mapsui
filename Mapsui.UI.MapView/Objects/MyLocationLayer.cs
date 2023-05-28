@@ -250,8 +250,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                         tick: (mapView, entry, v) =>
                         {
                             var deltaLat = (_animationMyLocationEnd.Latitude - _animationMyLocationStart.Latitude) * v;
-                            var deltaLon = (_animationMyLocationEnd.Longitude - _animationMyLocationStart.Longitude) *
-                                           v;
+                            var deltaLon = (_animationMyLocationEnd.Longitude - _animationMyLocationStart.Longitude) * v;
                             var modified = InternalUpdateMyLocation(new Position(
                                 _animationMyLocationStart.Latitude + deltaLat,
                                 _animationMyLocationStart.Longitude + deltaLon));
