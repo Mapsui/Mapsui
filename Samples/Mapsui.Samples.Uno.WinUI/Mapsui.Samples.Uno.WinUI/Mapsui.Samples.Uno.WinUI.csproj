@@ -6,6 +6,8 @@
 
 		<!-- Ensures the .xr.xml files are generated in a proper layout folder -->
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
+		<!--Workaround for this https://github.com/microsoft/WindowsAppSDK/issues/3548-->
+    <EnableCoreMrtTooling Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">false</EnableCoreMrtTooling>
   </PropertyGroup>
 
 	<ItemGroup>
