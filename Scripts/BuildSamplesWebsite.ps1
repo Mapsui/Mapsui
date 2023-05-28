@@ -7,4 +7,7 @@ dotnet publish -c Release Samples\Mapsui.Samples.Blazor\Mapsui.Samples.Blazor.cs
 New-Item -ItemType File -Path "release/wwwroot/.nojekyll"
 # fix 404 errors
 cp release/wwwroot/index.html release/wwwroot/404.html
+# copy it to website/samples
+Copy-Item -Path "release/wwwroot/*" -Destination "website/samples" -Recurse
+
 
