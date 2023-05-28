@@ -5,6 +5,8 @@ namespace Mapsui.Layers.AnimationLayers;
 
 internal class AnimatedPointFeature : PointFeature
 {
+    long startTime;
+
     public AnimatedPointFeature(PointFeature pointFeature) : base(pointFeature)
     {
         Start = new MPoint(pointFeature.Point);
@@ -12,6 +14,9 @@ internal class AnimatedPointFeature : PointFeature
         foreach (var field in pointFeature.Fields)
             this[field] = pointFeature[field];
     }
+
+    public MPoint End { get; set; }
+    public MPoint Start { get; set; }
 
     public void SetAnimationTarget(MPoint target)
     {
@@ -21,12 +26,12 @@ internal class AnimatedPointFeature : PointFeature
         Point.X = Start.X;
         Point.Y = Start.Y;
 
-        StartTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+        startTime = Environment.TickCount;
     }
 
     public bool UpdateAnimation(int duration, Easing easing, double distanceThreshold)
     {
-        var progress = CalculateProgress(StartTime, duration, easing);
+        var progress = CalculateProgress(startTime, duration, easing);
         if (progress >= 1) return false;
 
         // This is a solution to a situator where some vehicle was not updated for a long time 
@@ -43,12 +48,8 @@ internal class AnimatedPointFeature : PointFeature
 
     private static double CalculateProgress(long startTime, int animationDuration, Easing easing)
     {
-        var currentTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+        var currentTime = Environment.TickCount;
         var elapsedTime = currentTime - startTime;
         return easing.Ease(elapsedTime / (float)animationDuration);
     }
-
-    public MPoint End { get; set; }
-    public MPoint Start { get; set; }
-    public long StartTime { get; set; }
 }
