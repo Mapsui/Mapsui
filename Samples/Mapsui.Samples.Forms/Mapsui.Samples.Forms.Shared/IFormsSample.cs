@@ -11,8 +11,5 @@ public interface IFormsSample : IMapControlSample
 {
     bool OnClick(object? sender, EventArgs args);
 
-    bool UpdateLocation
-    {
-        get { return true; }
-    }
+    bool UpdateLocation { get; }
 }
