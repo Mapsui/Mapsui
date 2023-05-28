@@ -10,4 +10,4 @@ The samples can be found in this folder: Samples\Mapsui\Mapsui.Samples.Common\Ma
 - For 3.0 look [here](https://github.com/Mapsui/Mapsui/tree/develop/3.0/Samples/Mapsui.Samples.Common/Maps)
 
 ## Online Blazor samples
-[here](https://mapsui.com/samples/index.html)
+[Blazor samples](https://mapsui.com/samples/index.html)
