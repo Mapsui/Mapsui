@@ -265,7 +265,12 @@ public class Client
                 throw new Exception($"Unexpected response code: {response.StatusCode}");
             }
 
-            result = (await response.Content.ReadAsStreamAsync()).ToBytes();
+#if NETSTANDARD2_0
+            using var readAsStreamAsync = await response.Content.ReadAsStreamAsync();
+#else
+            await using var readAsStreamAsync = await response.Content.ReadAsStreamAsync();
+#endif
+            result = readAsStreamAsync.ToBytes();
             _persistentCache?.Add(url, result);
         }
 

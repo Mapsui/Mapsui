@@ -1,7 +1,7 @@
 ﻿using Mapsui.Layers.AnimatedLayers;
 using Mapsui.Styles;
 using System.Threading.Tasks;
-using Mapsui.Nts.Extensions;
+using Mapsui.Tiling;
 
 #if NET6_0_OR_GREATER
 
@@ -18,7 +18,7 @@ public class AnimatedBusSamples : ISample
     public Task<Map> CreateMapAsync()
     {
         var map = new Map();
-        map!.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer("trippit-kiosk-avalonia"));
+        map!.Layers.Add(OpenStreetMap.CreateTileLayer("AnimatedBusSamplesUserAgent"));
         map.Layers.Add(new AnimatedPointLayer(new BusPointProvider())
         {
             Name = "Buses",
