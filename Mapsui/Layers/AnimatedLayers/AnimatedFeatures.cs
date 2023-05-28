@@ -9,25 +9,30 @@ public class AnimatedFeatures : IAnimatable
 {
     private List<AnimatedPointFeature> _features = new();
 
+    public AnimatedFeatures()
+    {
+        // Todo: There should be a assignable function to find the previous feature, so the user has all flexibility
+        IdField = "ID";
+    }
+
     /// <summary>
     /// When the distance between the current and the previous position is larger
     /// than the DistanceThreshold it will not be animated. 
     /// The default is Double.MaxValue
     /// </summary>
-    public double DistanceThreshold { get; set; }
-
-    public AnimatedFeatures()
-    {
-        AnimationDuration = 1000;
-        // Todo: There should be a assignable function to find the previous feature, so the user has all flexibility
-        IdField = "ID";
-        Easing = Easing.CubicOut;
-        DistanceThreshold = double.MaxValue;
-    }
-
+    public double DistanceThreshold { get; set; } = double.MaxValue;
     public string IdField { get; set; }
-    public int AnimationDuration { get; set; }
-    public Easing Easing { get; set; }
+    
+    /// <summary>
+    /// The period of which the animaton should move from the previous position to the new position.
+    /// The default is 1000 milliseconds.
+    /// </summary>
+    public int AnimationDuration { get; set; } = 1000;
+
+    /// <summary>
+    /// The easing function to use for the animation. The default is Easing.CubicOut.
+    /// </summary>
+    public Easing Easing { get; set; } = Easing.CubicOut;
 
     public IEnumerable<IFeature> GetFeatures()
     {
