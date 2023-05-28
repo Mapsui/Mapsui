@@ -1,30 +1,67 @@
-﻿using System;
+﻿using Mapsui.Layers.AnimatedLayers;
+using System;
 
 namespace Mapsui.Layers.AnimationLayers;
 
-internal class AnimatedFeature
+internal class AnimatedPointFeature : PointFeature
 {
-    // Todo: This is not a feature but holds state related to the animation.
-    // Either turn this into a feature, and perhaps just update it, instead of creating a new.
-    // Or rename this to AnimatedFeatureState or something like that.
-    public AnimatedFeature(PointFeature feature, MPoint? previousPosition)
+    public AnimatedPointFeature(PointFeature pointFeature) : base(pointFeature)
     {
-        // Todo: Use the current animated position instead of the previousPosition
-        // so that the new animation starts from the current position
-
-        Destination = new MPoint(feature.Point);
-        Feature = feature;
-        if (previousPosition is not null)
-        {
-            Feature.Point.X = previousPosition.X;
-            Feature.Point.Y = previousPosition.Y;
-            Origin = new MPoint(previousPosition);
-        }
-        StartTimeInTicks = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+        Start = new MPoint(pointFeature.Point);
+        End = new MPoint(pointFeature.Point);
+        foreach (var field in pointFeature.Fields)
+            this[field] = pointFeature[field];
     }
 
-    public PointFeature Feature { get; }
-    public MPoint? Destination { get; set; }
-    public MPoint? Origin { get; }
-    public long StartTimeInTicks { get; }
+    public void UpdateAnimation(MPoint point)
+    {
+        Start = new MPoint(End); // Start where the previous animation ended
+        End = new MPoint(point);
+
+        Point.X = Start.X;
+        Point.Y = Start.Y;
+
+        StartTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+    }
+
+    public bool UpdateAnimation(int duration, EasingFunction function, double distanceThreshold)
+    {
+        var progress = CalculateProgress(StartTime, duration, function);
+        if (progress >= 1) return false;
+
+        // This is a solution to a situator where some vehicle was not updated for a long time 
+        // and then at some point was updated again. This caused a huge jump in the animation.
+        // In that case it was better to just show the vehicle on the new position.
+        // Not sure how important this is, and perhaps there is a better solution, like checking
+        // the time between the previous and the current update.
+        if (Start.Distance(End) > distanceThreshold) return false;
+
+        Point.X = Start.X + (End.X - Start.X) * progress;
+        Point.Y = Start.Y + (End.Y - Start.Y) * progress;
+        return true;
+    }
+
+    private static double CalculateProgress(long startTime, int animationDuration, EasingFunction function)
+    {
+        var currentTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+        var elapsedTime = currentTime - startTime;
+
+        if (function == EasingFunction.CubicEaseOut)
+            return Math.Min(CubicEaseOut(animationDuration, elapsedTime), 1);
+        return Math.Min(Linear(animationDuration, elapsedTime), 1);
+    }
+
+    private static double Linear(double d, double t)
+    {
+        return t / d;
+    }
+
+    private static double CubicEaseOut(double d, double t)
+    {
+        return (t = t / d - 1) * t * t + 1;
+    }
+
+    public MPoint End { get; set; }
+    public MPoint Start { get; set; }
+    public long StartTime { get; set; }
 }
