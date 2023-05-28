@@ -1,7 +1,7 @@
 ﻿#if NETSTANDARD2_0
 
 // ReSharper disable once CheckNamespace
-namespace System.Collections.Concurrent.Generic;
+namespace System.Collections.Concurrent;
 
 public static class ConcurrentBagExtensions
 {
