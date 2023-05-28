@@ -20,7 +20,7 @@ public static class LineStringRenderer
 
         SKPaint paint;
         SKPath path;
-        if (vectorCache == null || layer is IWritableLayer)
+        if (vectorCache == null || layer is IModifyFeatureLayer)
         {
             paint = CreateSkPaint(vectorStyle.Line, opacity);
             path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);

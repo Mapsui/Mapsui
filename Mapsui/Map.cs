@@ -55,9 +55,10 @@ public class Map : INotifyPropertyChanged, IDisposable
     public ConcurrentQueue<IWidget> Widgets { get; } = new();
 
     /// <summary>
-    /// Projection type of Map. Normally in format like "EPSG:3857"
+    /// Coordinate reference system (projection type of map).
+    /// Default: "EPSG:3857" (SphericalMercator).
     /// </summary>
-    public string? CRS { get; set; }
+    public string? CRS { get; set; } = "EPSG:3857";
 
     /// <summary>
     /// A collection of layers. The first layer in the list is drawn first, the last one on top.

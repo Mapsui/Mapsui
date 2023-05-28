@@ -1,10 +1,14 @@
 {
-	"profiles": {
-		"Mapsui.Samples.Uno.WinUI.Windows (Package)": {
-			"commandName": "MsixPackage"
-		},
-		"Mapsui.Samples.Uno.WinUI.Windows (Unpackaged)": {
-			"commandName": "Project"
-		}
-	}
+  "profiles": {
+    "Mapsui.Samples.Uno.WinUI.Windows (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Mapsui.Samples.Uno.WinUI.Windows (Unpackaged)": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    }
+  }
 }

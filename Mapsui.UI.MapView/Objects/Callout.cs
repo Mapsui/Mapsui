@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
@@ -29,181 +31,53 @@ namespace Mapsui.UI.Maui;
 namespace Mapsui.UI.Forms;
 #endif
 
-public class Callout : BindableObject, IFeatureProvider, IDisposable
+public class Callout : IFeatureProvider, IDisposable, INotifyPropertyChanged
 {
     private readonly Pin _pin;
 
     public event EventHandler<CalloutClickedEventArgs>? CalloutClicked;
 
-    public static double DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
+    public static double DefaultTitleFontSize = 24;
     public static FontAttributes DefaultTitleFontAttributes = FontAttributes.Bold;
     public static TextAlignment DefaultTitleTextAlignment = TextAlignment.Center;
     public static Color DefaultTitleFontColor = KnownColor.Black;
-    public static double DefaultSubtitleFontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
+    public static double DefaultSubtitleFontSize = 20;
     public static FontAttributes DefaultSubtitleFontAttributes = FontAttributes.None;
     public static Color DefaultSubtitleFontColor = KnownColor.Black;
     public static TextAlignment DefaultSubtitleTextAlignment = TextAlignment.Start; // Center;
-#if __MAUI__
-    public static string? DefaultTitleFontName = null; // TODO: default font per platform
-    public static string? DefaultSubtitleFontName = null; // TODO: default font per platform
-#else
-    public static string DefaultTitleFontName = Xamarin.Forms.Font.Default.FontFamily;
-    public static string DefaultSubtitleFontName = Xamarin.Forms.Font.Default.FontFamily;
-#endif
+    public static string? DefaultTitleFontName = null;
+    public static string? DefaultSubtitleFontName = null;
 
-    #region Bindings
-
-    /// <summary>
-    /// Bindable property for the <see cref="Type"/> property
-    /// </summary>
-    public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(CalloutType), typeof(MapView), default(CalloutType));
-
-    /// <summary>
-    /// Bindable property for the <see cref="Anchor"/> property
-    /// </summary>
-    public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Point), typeof(MapView), default(Point));
-
-    /// <summary>
-    /// Bindable property for the <see cref="ArrowAlignment"/> property
-    /// </summary>
-    public static readonly BindableProperty ArrowAlignmentProperty = BindableProperty.Create(nameof(ArrowAlignment), typeof(ArrowAlignment), typeof(MapView), default(ArrowAlignment), defaultBindingMode: BindingMode.TwoWay);
-
-    /// <summary>
-    /// Bindable property for the <see cref="ArrowWidth"/> property
-    /// </summary>
-    public static readonly BindableProperty ArrowWidthProperty = BindableProperty.Create(nameof(ArrowWidth), typeof(double), typeof(MapView), 12.0);
-
-    /// <summary>
-    /// Bindable property for the <see cref="ArrowHeight"/> property
-    /// </summary>
-    public static readonly BindableProperty ArrowHeightProperty = BindableProperty.Create(nameof(ArrowHeight), typeof(double), typeof(MapView), 16.0);
-
-    /// <summary>
-    /// Bindable property for the <see cref="ArrowPosition"/> property
-    /// </summary>
-    public static readonly BindableProperty ArrowPositionProperty = BindableProperty.Create(nameof(ArrowPosition), typeof(double), typeof(MapView), 0.5);
-
-    /// <summary>
-    /// Bindable property for the <see cref="Color"/> property
-    /// </summary>
-    public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(MapView), KnownColor.White);
-
-    /// <summary>
-    /// Bindable property for the <see cref="BackgroundColor"/> property
-    /// </summary>
-    public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create(nameof(BackgroundColor), typeof(Color), typeof(MapView), KnownColor.White);
-
-    /// <summary>
-    /// Bindable property for the <see cref="ShadowWidth"/> property
-    /// </summary>
-    public static readonly BindableProperty ShadowWidthProperty = BindableProperty.Create(nameof(ShadowWidth), typeof(double), typeof(MapView), default(double));
-
-    /// <summary>
-    /// Bindable property for the <see cref="StrokeWidth"/> property
-    /// </summary>
-    public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(nameof(StrokeWidth), typeof(double), typeof(MapView), default(double));
-
-    /// <summary>
-    /// Bindable property for the <see cref="Rotation"/> property
-    /// </summary>
-    public static readonly BindableProperty RotationProperty = BindableProperty.Create(nameof(Rotation), typeof(double), typeof(MapView), default(double));
-
-    /// <summary>
-    /// Bindable property for the <see cref="RotateWithMap"/> property
-    /// </summary>
-    public static readonly BindableProperty RotateWithMapProperty = BindableProperty.Create(nameof(RotateWithMap), typeof(bool), typeof(MapView), false);
-
-    /// <summary>
-    /// Bindable property for the <see cref="RectRadius"/> property
-    /// </summary>
-    public static readonly BindableProperty RectRadiusProperty = BindableProperty.Create(nameof(RectRadius), typeof(double), typeof(MapView), default(double));
-
-    /// <summary>
-    /// Bindable property for the <see cref="Padding"/> property
-    /// </summary>
-    public static readonly BindableProperty PaddingProperty = BindableProperty.Create(nameof(Padding), typeof(Thickness), typeof(MapView), new Thickness(6));
-
-    /// <summary>
-    /// Bindable property for the <see cref="Spacing"/> property
-    /// </summary>
-    public static readonly BindableProperty SpacingProperty = BindableProperty.Create(nameof(Spacing), typeof(double), typeof(MapView), 2.0);
-
-    /// <summary>
-    /// Bindable property for the <see cref="MaxWidth"/> property
-    /// </summary>
-    public static readonly BindableProperty MaxWidthProperty = BindableProperty.Create(nameof(MaxWidth), typeof(double), typeof(MapView), 300.0);
-
-    /// <summary>
-    /// Bindable property for the <see cref="IsClosableByClick"/> property
-    /// </summary>
-    public static readonly BindableProperty IsClosableByClickProperty = BindableProperty.Create(nameof(IsClosableByClick), typeof(bool), typeof(MapView), true);
-
-    /// <summary>
-    /// Bindable property for the <see cref="Content"/> property
-    /// </summary>
-    public static readonly BindableProperty ContentProperty = BindableProperty.Create(nameof(Content), typeof(int), typeof(MapView), -1);
-
-    /// <summary>
-    /// Bindable property for the <see cref="Title"/> property
-    /// </summary>
-    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(MapView));
-
-    /// <summary>
-    /// Bindable property for the <see cref="TitleFontName"/> property
-    /// </summary>
-    public static readonly BindableProperty TitleFontNameProperty = BindableProperty.Create(nameof(TitleFontName), typeof(string), typeof(MapView), DefaultTitleFontName);
-
-    /// <summary>
-    /// Bindable property for the <see cref="TitleFontSize"/> property
-    /// </summary>
-    public static readonly BindableProperty TitleFontSizeProperty = BindableProperty.Create(nameof(TitleFontSize), typeof(double), typeof(MapView), DefaultTitleFontSize);
-
-    /// <summary>
-    /// Bindable property for the <see cref="TitleFontAttributes"/> property
-    /// </summary>
-    public static readonly BindableProperty TitleFontAttributesProperty = BindableProperty.Create(nameof(TitleFontAttributes), typeof(FontAttributes), typeof(MapView), DefaultTitleFontAttributes);
-
-    /// <summary>
-    /// Bindable property for the <see cref="TitleFontColor"/> property
-    /// </summary>
-    public static readonly BindableProperty TitleFontColorProperty = BindableProperty.Create(nameof(TitleFontColor), typeof(Color), typeof(MapView), DefaultTitleFontColor);
-
-    /// <summary>
-    /// Bindable property for the <see cref="TitleTextAlignment"/> property
-    /// </summary>
-    public static readonly BindableProperty TitleTextAlignmentProperty = BindableProperty.Create(nameof(TitleTextAlignment), typeof(TextAlignment), typeof(MapView), DefaultTitleTextAlignment);
-
-    /// <summary>
-    /// Bindable property for the <see cref="Subtitle"/> property
-    /// </summary>
-    public static readonly BindableProperty SubtitleProperty = BindableProperty.Create(nameof(Subtitle), typeof(string), typeof(MapView));
-
-    /// <summary>
-    /// Bindable property for the <see cref="SubtitleFontName"/> property
-    /// </summary>
-    public static readonly BindableProperty SubtitleFontNameProperty = BindableProperty.Create(nameof(SubtitleFontName), typeof(string), typeof(MapView), DefaultSubtitleFontName);
-
-    /// <summary>
-    /// Bindable property for the <see cref="SubtitleFontSize"/> property
-    /// </summary>
-    public static readonly BindableProperty SubtitleFontSizeProperty = BindableProperty.Create(nameof(SubtitleFontSize), typeof(double), typeof(MapView), DefaultSubtitleFontSize);
-
-    /// <summary>
-    /// Bindable property for the <see cref="SubtitleFontAttributes"/> property
-    /// </summary>
-    public static readonly BindableProperty SubtitleFontAttributesProperty = BindableProperty.Create(nameof(SubtitleFontAttributes), typeof(FontAttributes), typeof(MapView), DefaultSubtitleFontAttributes);
-
-    /// <summary>
-    /// Bindable property for the <see cref="SubtitleFontColor"/> property
-    /// </summary>
-    public static readonly BindableProperty SubtitleFontColorProperty = BindableProperty.Create(nameof(SubtitleFontColor), typeof(Color), typeof(MapView), DefaultSubtitleFontColor);
-
-    /// <summary>
-    /// Bindable property for the <see cref="SubtitleTextAlignment"/> property
-    /// </summary>
-    public static readonly BindableProperty SubtitleTextAlignmentProperty = BindableProperty.Create(nameof(SubtitleTextAlignment), typeof(TextAlignment), typeof(MapView), DefaultSubtitleTextAlignment);
-
-    #endregion
+    private CalloutType _type;
+    private Point _anchor;
+    private ArrowAlignment _arrowAlignment;
+    private double _arrowWidth = 12.0;
+    private double _arrowHeight = 16.0;
+    private double _arrowPosition = 0.5;
+    private Color _color = KnownColor.White;
+    private Color _backgroundColor = KnownColor.White;
+    private double _shadowWidth;
+    private double _strokeWidth;
+    private double _rotation;
+    private bool _rotateWithMap;
+    private double _rectRadius;
+    private Thickness _padding = new Thickness(6);
+    private double _spacing = 2;
+    private double _maxWidth = 300.0;
+    private bool _isClosableByClick = true;
+    private int _content = -1;
+    private string? _title;
+    private string _titleFontName = DefaultTitleFontName;
+    private double _titleFontSize = DefaultTitleFontSize;
+    private FontAttributes _titleFontAttributes = DefaultTitleFontAttributes;
+    private Color _titleFontColor = DefaultTitleFontColor;
+    private TextAlignment _titleTextAlignment = DefaultTitleTextAlignment;
+    private string? _subtitle;
+    private string _subtitleFontName = DefaultSubtitleFontName;
+    private double _subtitleFontSize = DefaultSubtitleFontSize;
+    private FontAttributes _subtitleFontAttributes = DefaultSubtitleFontAttributes;
+    private Color _subtitleFontColor = DefaultSubtitleFontColor;
+    private TextAlignment _subtitleTextAlignment = DefaultSubtitleTextAlignment;
 
     public Callout(Pin pin)
     {
@@ -228,8 +102,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </remarks>
     public CalloutType Type
     {
-        get => (CalloutType)GetValue(TypeProperty);
-        set => SetValue(TypeProperty, value);
+        get => _type;
+        set
+        {
+            if (value == _type) return;
+            _type = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -237,8 +116,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public Point Anchor
     {
-        get => (Point)GetValue(AnchorProperty);
-        set => SetValue(AnchorProperty, value);
+        get => _anchor;
+        set
+        {
+            if (value.Equals(_anchor)) return;
+            _anchor = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -246,8 +130,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public ArrowAlignment ArrowAlignment
     {
-        get => (ArrowAlignment)GetValue(ArrowAlignmentProperty);
-        set => SetValue(ArrowAlignmentProperty, value);
+        get => _arrowAlignment;
+        set
+        {
+            if (value == _arrowAlignment) return;
+            _arrowAlignment = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -255,8 +144,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double ArrowWidth
     {
-        get => (double)GetValue(ArrowWidthProperty);
-        set => SetValue(ArrowWidthProperty, value);
+        get => _arrowWidth;
+        set
+        {
+            if (value.Equals(_arrowWidth)) return;
+            _arrowWidth = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -264,8 +158,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double ArrowHeight
     {
-        get => (double)GetValue(ArrowHeightProperty);
-        set => SetValue(ArrowHeightProperty, value);
+        get => _arrowHeight;
+        set
+        {
+            if (value.Equals(_arrowHeight)) return;
+            _arrowHeight = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -273,8 +172,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double ArrowPosition
     {
-        get => (double)GetValue(ArrowPositionProperty);
-        set => SetValue(ArrowPositionProperty, value);
+        get => _arrowPosition;
+        set
+        {
+            if (value.Equals(_arrowPosition)) return;
+            _arrowPosition = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -282,8 +186,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public Color Color
     {
-        get => (Color)GetValue(ColorProperty);
-        set => SetValue(ColorProperty, value);
+        get => _color;
+        set
+        {
+            if (value.Equals(_color)) return;
+            _color = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -291,8 +200,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public Color BackgroundColor
     {
-        get => (Color)GetValue(BackgroundColorProperty);
-        set => SetValue(BackgroundColorProperty, value);
+        get => _backgroundColor;
+        set
+        {
+            if (value.Equals(_backgroundColor)) return;
+            _backgroundColor = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -300,8 +214,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double ShadowWidth
     {
-        get => (double)GetValue(ShadowWidthProperty);
-        set => SetValue(ShadowWidthProperty, value);
+        get => _shadowWidth;
+        set
+        {
+            if (value.Equals(_shadowWidth)) return;
+            _shadowWidth = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -309,8 +228,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double StrokeWidth
     {
-        get => (double)GetValue(StrokeWidthProperty);
-        set => SetValue(StrokeWidthProperty, value);
+        get => _strokeWidth;
+        set
+        {
+            if (value.Equals(_strokeWidth)) return;
+            _strokeWidth = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -318,8 +242,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double Rotation
     {
-        get => (double)GetValue(RotationProperty);
-        set => SetValue(RotationProperty, value);
+        get => _rotation;
+        set
+        {
+            if (value.Equals(_rotation)) return;
+            _rotation = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -327,8 +256,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public bool RotateWithMap
     {
-        get => (bool)GetValue(RotateWithMapProperty);
-        set => SetValue(RotateWithMapProperty, value);
+        get => _rotateWithMap;
+        set
+        {
+            if (value == _rotateWithMap) return;
+            _rotateWithMap = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -336,8 +270,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double RectRadius
     {
-        get => (double)GetValue(RectRadiusProperty);
-        set => SetValue(RectRadiusProperty, value);
+        get => _rectRadius;
+        set
+        {
+            if (value.Equals(_rectRadius)) return;
+            _rectRadius = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -345,8 +284,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public Thickness Padding
     {
-        get => (Thickness)GetValue(PaddingProperty);
-        set => SetValue(PaddingProperty, value);
+        get => _padding;
+        set
+        {
+            if (value.Equals(_padding)) return;
+            _padding = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -354,8 +298,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double Spacing
     {
-        get => (double)GetValue(SpacingProperty);
-        set => SetValue(SpacingProperty, value);
+        get => _spacing;
+        set
+        {
+            if (value.Equals(_spacing)) return;
+            _spacing = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -363,8 +312,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double MaxWidth
     {
-        get => (double)GetValue(MaxWidthProperty);
-        set => SetValue(MaxWidthProperty, value);
+        get => _maxWidth;
+        set
+        {
+            if (value.Equals(_maxWidth)) return;
+            _maxWidth = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -377,8 +331,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public bool IsClosableByClick
     {
-        get => (bool)GetValue(IsClosableByClickProperty);
-        set => SetValue(IsClosableByClickProperty, value);
+        get => _isClosableByClick;
+        set
+        {
+            if (value == _isClosableByClick) return;
+            _isClosableByClick = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -386,17 +345,27 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public int Content
     {
-        get => (int)GetValue(ContentProperty);
-        set => SetValue(ContentProperty, value);
+        get => _content;
+        set
+        {
+            if (value == _content) return;
+            _content = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
     /// Content of Callout title label
     /// </summary>
-    public string Title
+    public string? Title
     {
-        get => (string)GetValue(TitleProperty);
-        set => SetValue(TitleProperty, value);
+        get => _title;
+        set
+        {
+            if (value == _title) return;
+            _title = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -404,8 +373,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public string TitleFontName
     {
-        get => (string)GetValue(TitleFontNameProperty);
-        set => SetValue(TitleFontNameProperty, value);
+        get => _titleFontName;
+        set
+        {
+            if (value == _titleFontName) return;
+            _titleFontName = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -413,8 +387,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double TitleFontSize
     {
-        get => (double)GetValue(TitleFontSizeProperty);
-        set => SetValue(TitleFontSizeProperty, value);
+        get => _titleFontSize;
+        set
+        {
+            if (value.Equals(_titleFontSize)) return;
+            _titleFontSize = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -422,8 +401,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public FontAttributes TitleFontAttributes
     {
-        get => (FontAttributes)GetValue(TitleFontAttributesProperty);
-        set => SetValue(TitleFontAttributesProperty, value);
+        get => _titleFontAttributes;
+        set
+        {
+            if (value == _titleFontAttributes) return;
+            _titleFontAttributes = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -431,8 +415,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public Color TitleFontColor
     {
-        get => (Color)GetValue(TitleFontColorProperty);
-        set => SetValue(TitleFontColorProperty, value);
+        get => _titleFontColor;
+        set
+        {
+            if (value.Equals(_titleFontColor)) return;
+            _titleFontColor = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -440,17 +429,27 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public TextAlignment TitleTextAlignment
     {
-        get => (TextAlignment)GetValue(TitleTextAlignmentProperty);
-        set => SetValue(TitleTextAlignmentProperty, value);
+        get => _titleTextAlignment;
+        set
+        {
+            if (value == _titleTextAlignment) return;
+            _titleTextAlignment = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
     /// Content of Callout detail label
     /// </summary>
-    public string Subtitle
+    public string? Subtitle
     {
-        get => (string)GetValue(SubtitleProperty);
-        set => SetValue(SubtitleProperty, value);
+        get => _subtitle;
+        set
+        {
+            if (value == _subtitle) return;
+            _subtitle = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -458,8 +457,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public string SubtitleFontName
     {
-        get => (string)GetValue(SubtitleFontNameProperty);
-        set => SetValue(SubtitleFontNameProperty, value);
+        get => _subtitleFontName;
+        set
+        {
+            if (value == _subtitleFontName) return;
+            _subtitleFontName = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -467,8 +471,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public double SubtitleFontSize
     {
-        get => (double)GetValue(SubtitleFontSizeProperty);
-        set => SetValue(SubtitleFontSizeProperty, value);
+        get => _subtitleFontSize;
+        set
+        {
+            if (value.Equals(_subtitleFontSize)) return;
+            _subtitleFontSize = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -476,8 +485,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public FontAttributes SubtitleFontAttributes
     {
-        get => (FontAttributes)GetValue(SubtitleFontAttributesProperty);
-        set => SetValue(SubtitleFontAttributesProperty, value);
+        get => _subtitleFontAttributes;
+        set
+        {
+            if (value == _subtitleFontAttributes) return;
+            _subtitleFontAttributes = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -485,8 +499,13 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public Color SubtitleFontColor
     {
-        get => (Color)GetValue(SubtitleFontColorProperty);
-        set => SetValue(SubtitleFontColorProperty, value);
+        get => _subtitleFontColor;
+        set
+        {
+            if (value.Equals(_subtitleFontColor)) return;
+            _subtitleFontColor = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
@@ -494,59 +513,19 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     /// </summary>
     public TextAlignment SubtitleTextAlignment
     {
-        get => (TextAlignment)GetValue(SubtitleTextAlignmentProperty);
-        set => SetValue(SubtitleTextAlignmentProperty, value);
+        get => _subtitleTextAlignment;
+        set
+        {
+            if (value == _subtitleTextAlignment) return;
+            _subtitleTextAlignment = value;
+            OnPropertyChanged();
+        }
     }
 
     /// <summary>
     /// Feature, which belongs to callout. Should be the same as for the pin to which this callout belongs.
     /// </summary>
     public GeometryFeature Feature { get; }
-
-
-
-    protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        if (propertyName is null)
-            return;
-
-        base.OnPropertyChanged(propertyName);
-
-        if (Type != CalloutType.Custom && propertyName.Equals(nameof(Content)))
-            Type = CalloutType.Custom;
-
-        if (IsVisible && (propertyName.Equals(nameof(Title))
-            || propertyName.Equals(nameof(Subtitle))
-            || propertyName.Equals(nameof(Content))
-            || propertyName.Equals(nameof(Type))
-            || propertyName.Equals(nameof(TitleFontName))
-            || propertyName.Equals(nameof(TitleFontSize))
-            || propertyName.Equals(nameof(TitleFontAttributes))
-            || propertyName.Equals(nameof(TitleFontColor))
-            || propertyName.Equals(nameof(TitleTextAlignment))
-            || propertyName.Equals(nameof(SubtitleFontName))
-            || propertyName.Equals(nameof(SubtitleFontSize))
-            || propertyName.Equals(nameof(SubtitleFontAttributes))
-            || propertyName.Equals(nameof(SubtitleFontColor))
-            || propertyName.Equals(nameof(SubtitleTextAlignment))
-            || propertyName.Equals(nameof(Spacing))
-            || propertyName.Equals(nameof(MaxWidth)))
-            )
-            UpdateContent();
-        else if (IsVisible && propertyName.Equals(nameof(ArrowAlignment))
-            || propertyName.Equals(nameof(ArrowWidth))
-            || propertyName.Equals(nameof(ArrowHeight))
-            || propertyName.Equals(nameof(ArrowPosition))
-            || propertyName.Equals(nameof(Anchor))
-            || propertyName.Equals(nameof(IsVisible))
-            || propertyName.Equals(nameof(Padding))
-            || propertyName.Equals(nameof(Color))
-            || propertyName.Equals(nameof(BackgroundColor))
-            || propertyName.Equals(nameof(RectRadius)))
-            UpdateCalloutStyle();
-
-        _pin.MapView?.Refresh();
-    }
 
     /// <summary>
     /// Callout is touched
@@ -642,5 +621,58 @@ public class Callout : BindableObject, IFeatureProvider, IDisposable
     public virtual void Dispose()
     {
         Feature.Dispose();
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        if (propertyName == null)
+            return;
+
+        if (Type != CalloutType.Custom && propertyName.Equals(nameof(Content)))
+            Type = CalloutType.Custom;
+
+        if (IsVisible && (propertyName.Equals(nameof(Title))
+                          || propertyName.Equals(nameof(Subtitle))
+                          || propertyName.Equals(nameof(Content))
+                          || propertyName.Equals(nameof(Type))
+                          || propertyName.Equals(nameof(TitleFontName))
+                          || propertyName.Equals(nameof(TitleFontSize))
+                          || propertyName.Equals(nameof(TitleFontAttributes))
+                          || propertyName.Equals(nameof(TitleFontColor))
+                          || propertyName.Equals(nameof(TitleTextAlignment))
+                          || propertyName.Equals(nameof(SubtitleFontName))
+                          || propertyName.Equals(nameof(SubtitleFontSize))
+                          || propertyName.Equals(nameof(SubtitleFontAttributes))
+                          || propertyName.Equals(nameof(SubtitleFontColor))
+                          || propertyName.Equals(nameof(SubtitleTextAlignment))
+                          || propertyName.Equals(nameof(Spacing))
+                          || propertyName.Equals(nameof(MaxWidth)))
+           )
+            UpdateContent();
+        else if (IsVisible && propertyName.Equals(nameof(ArrowAlignment))
+                 || propertyName.Equals(nameof(ArrowWidth))
+                 || propertyName.Equals(nameof(ArrowHeight))
+                 || propertyName.Equals(nameof(ArrowPosition))
+                 || propertyName.Equals(nameof(Anchor))
+                 || propertyName.Equals(nameof(IsVisible))
+                 || propertyName.Equals(nameof(Padding))
+                 || propertyName.Equals(nameof(Color))
+                 || propertyName.Equals(nameof(BackgroundColor))
+                 || propertyName.Equals(nameof(RectRadius)))
+            UpdateCalloutStyle();
+
+        _pin.MapView?.Refresh();
+    }
+
+    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+        field = value;
+        OnPropertyChanged(propertyName);
+        return true;
     }
 }

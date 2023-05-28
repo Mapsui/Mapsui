@@ -87,7 +87,7 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
+            // The exception is returned to the caller and should be logged there.
             FetchCompleted(tileInfo, null, ex);
         }
     }

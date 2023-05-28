@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Mapsui.Animations;
 using Mapsui.Layers.AnimationLayers;
 
@@ -16,8 +15,6 @@ public enum EasingFunction
 public class AnimatedFeatures : IAnimatable
 {
     private List<AnimatedFeature> _cache = new();
-    private long _startTimeAnimation;
-    private bool _animating = false;
 
     /// <summary>
     /// When the distance between the current and the previous position is larger
@@ -29,7 +26,9 @@ public class AnimatedFeatures : IAnimatable
     public AnimatedFeatures()
     {
         AnimationDuration = 1000;
+        // Todo: There should be a assignable function to find the previous feature, so the user has all flexibility
         IdField = "ID";
+        // Todo: Use the animation functions from Mapsui.Animations
         Function = EasingFunction.CubicEaseOut;
         DistanceThreshold = double.MaxValue;
     }
@@ -40,77 +39,29 @@ public class AnimatedFeatures : IAnimatable
 
     public void AddFeatures(IEnumerable<PointFeature> features)
     {
-        var previousCache = _cache;
-
-        _cache = ConvertToAnimatedFeatures(features.ToList(), previousCache, IdField);
-        _startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-        _animating = true;
-        _first = true;
+        _cache = ConvertToAnimatedFeatures(features.ToList(), _cache, IdField);
     }
 
     public IEnumerable<IFeature> GetFeatures()
     {
-        LogAllFeatures(_cache);
-        return _cache.Select(i => i.Feature);
-    }
-
-    private static bool Completed(double progress)
-    {
-        return progress >= 1;
-    }
-
-    private static void LogAllFeatures(IEnumerable<AnimatedFeature> animatedFeatures)
-    {
-        if (!_first) return;
-        _first = false;
-
-        foreach (var animatedFeature in animatedFeatures)
-        {
-            var target = animatedFeature.Feature?.Point;
-            if (animatedFeature.PreviousPoint == null || animatedFeature.CurrentPoint == null || target == null) continue;
-            if (animatedFeature.PreviousPoint.Distance(animatedFeature.CurrentPoint) < 10000) continue;
-        }
+        return _cache.Select(i => i.Feature).ToList();
     }
 
     private static List<AnimatedFeature> ConvertToAnimatedFeatures(
-        IEnumerable<PointFeature> features, List<AnimatedFeature> previousItems, string idField)
+        IEnumerable<PointFeature> features, List<AnimatedFeature> previousFeatures, string idField)
     {
-        return features.Select(f => new AnimatedFeature(f, FindPreviousPoint(previousItems, f, idField))).ToList();
+        return features.Select(f => new AnimatedFeature(f, FindPreviousFeature(previousFeatures, f, idField)?.Destination)).ToList();
     }
 
-    private static bool _first = true;
-
-    private static void InterpolateAnimatedPosition(IEnumerable<AnimatedFeature> items, double progress, double threshold)
-    {
-        foreach (var item in items)
-        {
-            var target = item.Feature?.Point;
-            if (item.PreviousPoint == null || item.CurrentPoint == null || target == null) continue;
-            if (item.PreviousPoint.Distance(item.CurrentPoint) > threshold) continue;
-            target.X = item.PreviousPoint.X + (item.CurrentPoint.X - item.PreviousPoint.X) * progress;
-            target.Y = item.PreviousPoint.Y + (item.CurrentPoint.Y - item.PreviousPoint.Y) * progress;
-        }
-    }
-
-    private static MPoint? FindPreviousPoint(IEnumerable<AnimatedFeature>? previousItems, IFeature feature,
+    private static AnimatedFeature? FindPreviousFeature(IEnumerable<AnimatedFeature>? previousItems, IFeature feature,
         string idField)
     {
         // There is no guarantee the idField is set since the features are added by the user. Things do not crash
         // right now because AnimatedPointSample a feature is created with an "ID" field. This is an unresolved
         // issue.
-        return previousItems?.FirstOrDefault(f => f.Feature[idField]?.Equals(feature[idField]) ?? false)?.CurrentPoint;
+        return previousItems?.FirstOrDefault(f => f.Feature[idField]?.Equals(feature[idField]) ?? false);
     }
-
-    private static double CalculateProgress(long startTime, int animationDuration, EasingFunction function)
-    {
-        var currentTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-        var elapsedTime = (double)currentTime - startTime;
-
-        if (function == EasingFunction.CubicEaseOut)
-            return CubicEaseOut(animationDuration, elapsedTime);
-        return Linear(animationDuration, elapsedTime);
-    }
-
+        
     private static double Linear(double d, double t)
     {
         return t / d;
@@ -123,10 +74,32 @@ public class AnimatedFeatures : IAnimatable
 
     public bool UpdateAnimations()
     {
-        var progress = CalculateProgress(_startTimeAnimation, AnimationDuration, Function);
-        if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress, DistanceThreshold);
-        else _animating = false;
+        return InterpolateAnimatedPosition(_cache, AnimationDuration, Function, DistanceThreshold);
+    }
 
-        return _animating;
+    private static bool InterpolateAnimatedPosition(IEnumerable<AnimatedFeature> items, int duration, EasingFunction function, double distanceThreshold)
+    {
+        var animating = false;
+        foreach (var item in items)
+        {
+            var progress = CalculateProgress(item.StartTimeInTicks, duration, function);
+            if (progress < 1) animating = true;
+            var target = item.Feature?.Point;
+            if (item.Origin == null || item.Destination == null || target == null) continue;
+            if (item.Origin.Distance(item.Destination) > distanceThreshold) continue;
+            target.X = item.Origin.X + (item.Destination.X - item.Origin.X) * progress;
+            target.Y = item.Origin.Y + (item.Destination.Y - item.Origin.Y) * progress;
+        }
+        return animating;
+    }
+
+    private static double CalculateProgress(long startTime, int animationDuration, EasingFunction function)
+    {
+        var currentTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+        var elapsedTime = currentTime - startTime;
+
+        if (function == EasingFunction.CubicEaseOut)
+            return Math.Min(CubicEaseOut(animationDuration, elapsedTime), 1);
+        return Math.Min(Linear(animationDuration, elapsedTime), 1);
     }
 }

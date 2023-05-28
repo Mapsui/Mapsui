@@ -9,7 +9,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Layers.AnimatedLayers;
 
-public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
+public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>, IModifyFeatureLayer
 {
     private readonly IProvider _dataSource;
     private FetchInfo? _fetchInfo;
@@ -33,6 +33,7 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
     public async Task UpdateDataAsync()
     {
         if (_fetchInfo is null) return;
+
         var features = await _dataSource.GetFeaturesAsync(_fetchInfo);
         _animatedFeatures.AddFeatures(features.Cast<PointFeature>());
         OnDataChanged(new DataChangedEventArgs());
