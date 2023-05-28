@@ -13,10 +13,10 @@ internal class AnimatedPointFeature : PointFeature
             this[field] = pointFeature[field];
     }
 
-    public void UpdateAnimation(MPoint point)
+    public void SetAnimationTarget(MPoint target)
     {
         Start = new MPoint(End); // Start where the previous animation ended
-        End = new MPoint(point);
+        End = new MPoint(target);
 
         Point.X = Start.X;
         Point.Y = Start.Y;

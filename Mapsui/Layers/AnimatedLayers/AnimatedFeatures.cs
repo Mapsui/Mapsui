@@ -37,34 +37,28 @@ public class AnimatedFeatures : IAnimatable
     public int AnimationDuration { get; set; }
     public EasingFunction Function { get; set; }
 
-    public void UpdateFeatures(IEnumerable<PointFeature> features)
-    {
-        UpdateStartAndFinish(_features, features, IdField);
-    }
-
     public IEnumerable<IFeature> GetFeatures()
     {
         return _features;
     }
 
-    private void UpdateStartAndFinish(
-        List<AnimatedPointFeature> animatedFeatures, IEnumerable<PointFeature> incoming, string idField)
+    public void SetAnimationTarget(IEnumerable<PointFeature> targets)
     {
-        foreach (var feature in incoming)
+        foreach (var target in targets)
         {
-            var animatedpointFeature = FindAnimatedPointFeature(animatedFeatures, feature, idField);
+            var animatedpointFeature = FindPrevious(_features, target, IdField);
             if (animatedpointFeature is null)
-                animatedFeatures.Add(new AnimatedPointFeature(feature));
+                _features.Add(new AnimatedPointFeature(target));
             else
             {
-                animatedpointFeature.UpdateAnimation(feature.Point);
-                foreach (var field in feature.Fields)
-                    animatedpointFeature[field] = feature[field];
+                animatedpointFeature.SetAnimationTarget(target.Point);
+                foreach (var field in target.Fields)
+                    animatedpointFeature[field] = target[field];
             }
         }
     }
 
-    private static AnimatedPointFeature? FindAnimatedPointFeature(IEnumerable<AnimatedPointFeature>? features, IFeature feature,
+    private static AnimatedPointFeature? FindPrevious(IEnumerable<AnimatedPointFeature>? features, IFeature feature,
         string idField)
     {
         // There is no guarantee the idField is set since the features are added by the user. Things do not crash
@@ -75,15 +69,10 @@ public class AnimatedFeatures : IAnimatable
 
     public bool UpdateAnimations()
     {
-        return InterpolateAnimatedPosition(_features, AnimationDuration, Function, DistanceThreshold);
-    }
-
-    private static bool InterpolateAnimatedPosition(IEnumerable<AnimatedPointFeature> items, int duration, EasingFunction function, double distanceThreshold)
-    {
         var animating = false;
-        foreach (var item in items)
+        foreach (var feature in _features)
         {
-            if (item.UpdateAnimation(duration, function, distanceThreshold))
+            if (feature.UpdateAnimation(AnimationDuration, Function, DistanceThreshold))
                 animating = true;
         }
         return animating;
