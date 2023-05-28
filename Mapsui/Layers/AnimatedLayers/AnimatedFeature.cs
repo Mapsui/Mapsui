@@ -1,4 +1,4 @@
-﻿using Mapsui.Layers.AnimatedLayers;
+﻿using Mapsui.Animations;
 using System;
 
 namespace Mapsui.Layers.AnimationLayers;
@@ -24,9 +24,9 @@ internal class AnimatedPointFeature : PointFeature
         StartTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
     }
 
-    public bool UpdateAnimation(int duration, EasingFunction function, double distanceThreshold)
+    public bool UpdateAnimation(int duration, Easing easing, double distanceThreshold)
     {
-        var progress = CalculateProgress(StartTime, duration, function);
+        var progress = CalculateProgress(StartTime, duration, easing);
         if (progress >= 1) return false;
 
         // This is a solution to a situator where some vehicle was not updated for a long time 
@@ -41,24 +41,11 @@ internal class AnimatedPointFeature : PointFeature
         return true;
     }
 
-    private static double CalculateProgress(long startTime, int animationDuration, EasingFunction function)
+    private static double CalculateProgress(long startTime, int animationDuration, Easing easing)
     {
         var currentTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
         var elapsedTime = currentTime - startTime;
-
-        if (function == EasingFunction.CubicEaseOut)
-            return Math.Min(CubicEaseOut(animationDuration, elapsedTime), 1);
-        return Math.Min(Linear(animationDuration, elapsedTime), 1);
-    }
-
-    private static double Linear(double d, double t)
-    {
-        return t / d;
-    }
-
-    private static double CubicEaseOut(double d, double t)
-    {
-        return (t = t / d - 1) * t * t + 1;
+        return easing.Ease(elapsedTime / (float)animationDuration);
     }
 
     public MPoint End { get; set; }

@@ -1,16 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Animations;
 using Mapsui.Layers.AnimationLayers;
 
 namespace Mapsui.Layers.AnimatedLayers;
-
-public enum EasingFunction
-{
-    CubicEaseOut,
-    Linear
-}
 
 public class AnimatedFeatures : IAnimatable
 {
@@ -28,14 +21,13 @@ public class AnimatedFeatures : IAnimatable
         AnimationDuration = 1000;
         // Todo: There should be a assignable function to find the previous feature, so the user has all flexibility
         IdField = "ID";
-        // Todo: Use the animation functions from Mapsui.Animations
-        Function = EasingFunction.CubicEaseOut;
+        Easing = Easing.CubicOut;
         DistanceThreshold = double.MaxValue;
     }
 
     public string IdField { get; set; }
     public int AnimationDuration { get; set; }
-    public EasingFunction Function { get; set; }
+    public Easing Easing { get; set; }
 
     public IEnumerable<IFeature> GetFeatures()
     {
@@ -72,7 +64,7 @@ public class AnimatedFeatures : IAnimatable
         var animating = false;
         foreach (var feature in _features)
         {
-            if (feature.UpdateAnimation(AnimationDuration, Function, DistanceThreshold))
+            if (feature.UpdateAnimation(AnimationDuration, Easing, DistanceThreshold))
                 animating = true;
         }
         return animating;
