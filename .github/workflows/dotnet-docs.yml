@@ -30,14 +30,11 @@ jobs:
     - name: Run DocFx
       # Use a .cmd so this script can be run locally for testing
       run: docfx\build-site.cmd
-    # https://github.com/SteveSandersonMS/BlazorOnGitHubPages  
-    - name: Compile Blazor App
-      run: dotnet publish -c Release Samples\Mapsui.Samples.Blazor\Mapsui.Samples.Blazor.csproj -p:PublishDir=${{ env.PUBLISH_DIR }}
-    - name: Rewrite base href
-      uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
-      with:
-        html_path: ${{ env.PUBLISH_DIR }}/wwwroot/index.html
-        base_href: /Samples/wwwroot/        
+      # build blazor samples to website/samples/
+    - name: Build Blazor Website Sample
+      shell: pwsh
+      run: |
+        ./Scripts/BuildSamplesWebsite.ps1     
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1
       with:
