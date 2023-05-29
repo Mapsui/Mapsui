@@ -7,12 +7,10 @@ internal class AnimatedPointFeature : PointFeature
 {
     long startTime;
 
-    public AnimatedPointFeature(PointFeature pointFeature) : base(pointFeature)
+    public AnimatedPointFeature(double x, double y) : base(x, y)
     {
-        Start = new MPoint(pointFeature.Point);
-        End = new MPoint(pointFeature.Point);
-        foreach (var field in pointFeature.Fields)
-            this[field] = pointFeature[field];
+        Start = new MPoint(x, y);
+        End = new MPoint(x, y);
     }
 
     public MPoint End { get; set; }

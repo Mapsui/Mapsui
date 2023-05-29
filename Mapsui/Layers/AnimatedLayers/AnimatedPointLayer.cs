@@ -9,6 +9,8 @@ using Mapsui.Fetcher;
 using Mapsui.Layers.AnimationLayers;
 using Mapsui.Providers;
 
+#pragma warning disable IDISP001 // Dispose created
+
 namespace Mapsui.Layers.AnimatedLayers;
 
 public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>, IModifyFeatureLayer
@@ -70,13 +72,16 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
         {
             var animatedpointFeature = FindPrevious(_features, target, IdField);
             if (animatedpointFeature is null)
-                _features.Add(new AnimatedPointFeature(target));
+            {
+                animatedpointFeature = new AnimatedPointFeature(target.Point.X, target.Point.Y);
+                _features.Add(animatedpointFeature);
+            }
             else
             {
                 animatedpointFeature.SetAnimationTarget(target.Point);
-                foreach (var field in target.Fields)
-                    animatedpointFeature[field] = target[field];
             }
+            foreach (var field in target.Fields)
+                animatedpointFeature[field] = target[field];
         }
     }
 
