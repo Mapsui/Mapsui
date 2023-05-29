@@ -10,6 +10,7 @@ using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
+using Mapsui.Utilities;
 using Animation = Mapsui.Animations.Animation;
 
 #if __MAUI__
@@ -64,8 +65,10 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
     }
 
     private Position _myLocation = new(0, 0);
-    private readonly ConcurrentBag<AnimationEntry<MapView>> _animations = new ();
+    private readonly ConcurrentHashSet<AnimationEntry<MapView>> _animations = new ();
     private readonly List<IFeature> _features;
+    private AnimationEntry<MapView>? _animationUpdateDirection;
+    private AnimationEntry<MapView>? _animationMyViewDirection;
 
     /// <summary>
     /// Position of location, that is displayed
@@ -330,10 +333,11 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
             Direction = newDirection;
 
             // We have a direction update, so abort last animation
-            if (_animations.Count > 0)
+            if (_animationUpdateDirection != null)
             {
-                Animation.Stop(_mapView, _animations, callFinal: true);
-                _animations.Clear();
+                Animation.Stop(_mapView, _animationUpdateDirection, callFinal: true);
+                _animations.TryRemove(_animationUpdateDirection);
+                _animationUpdateDirection = null;
             }
 
             if (newRotation < 90 && oldRotation > 270)
@@ -349,7 +353,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
 
             if (animated)
             {
-                var animation = new AnimationEntry<MapView>(
+                _animationUpdateDirection = new AnimationEntry<MapView>(
                     oldRotation,
                     newRotation,
                     animationStart: 0,
@@ -376,8 +380,8 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                         return new AnimationResult<MapView>(mapView, false);
                     });
 
-                Animation.Start(animation, 1000);
-                _animations.Add(animation);
+                Animation.Start(_animationUpdateDirection, 1000);
+                _animations.Add(_animationUpdateDirection);
             }
             else
             {
@@ -416,6 +420,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
     /// </summary>
     /// <param name="newDirection">New direction</param>
     /// <param name="newViewportRotation">New viewport rotation</param>
+    /// <param name="animated">true if animated</param>
     public void UpdateMyViewDirection(double newDirection, double newViewportRotation, bool animated = false)
     {
         var newRotation = (int)(newDirection - newViewportRotation);
@@ -429,15 +434,16 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
         }
         else if (newRotation != oldRotation)
         {
+            // We have a direction update, so abort last animation
+            if (_animationMyViewDirection != null)
+            {
+                Animation.Stop(_mapView, _animationMyViewDirection, callFinal: true);
+                _animations.TryRemove(_animationMyViewDirection);
+                _animationMyViewDirection = null;
+            }
+
             _dirStyle.Enabled = true;
             ViewingDirection = newDirection;
-
-            // We have a direction update, so abort last animation
-            if (_animations.Count > 0)
-            {
-                Animation.Stop(_mapView, _animations, callFinal: true);
-                _animations.Clear();
-            }
 
             if (newRotation < 90 && oldRotation > 270)
             {
@@ -452,7 +458,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
 
             if (animated)
             {
-                var animation = new AnimationEntry<MapView>(
+                _animationMyViewDirection = new AnimationEntry<MapView>(
                     oldRotation,
                     newRotation,
                     animationStart: 0,
@@ -479,8 +485,8 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                         return new AnimationResult<MapView>(mapView, false);
                     });
 
-                Animation.Start(animation, 1000);
-                _animations.Add(animation);
+                Animation.Start(_animationMyViewDirection, 1000);
+                _animations.Add(_animationMyViewDirection);
             }
             else
             {
