@@ -375,6 +375,7 @@ public class WmsProvider : IProvider, IProjectingProvider
             }
         }
 
+        strReq.Append("&SERVICE=WMS");
         strReq.AppendFormat("&WIDTH={0}&Height={1}", width, height);
         strReq.Append("&Layers=");
         if (LayerList != null && LayerList.Count > 0)
