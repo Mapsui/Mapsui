@@ -1,5 +1,6 @@
 name: Build Website
-
+env:
+  PUBLISH_DIR: website/Samples/
 on:
   push:
     branches:  
@@ -28,7 +29,12 @@ jobs:
          include-prerelease: false
     - name: Run DocFx
       # Use a .cmd so this script can be run locally for testing
-      run: docfx\build-site.cmd      
+      run: docfx\build-site.cmd
+      # build blazor samples to website/samples/
+    - name: Build Blazor Website Sample
+      shell: pwsh
+      run: |
+        ./Scripts/BuildSamplesWebsite.ps1     
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1
       with:
