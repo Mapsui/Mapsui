@@ -323,6 +323,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
     {
         var newRotation = (int)(newDirection - newViewportRotation);
         var oldRotation = (int)_locStyle.SymbolRotation;
+        var diffRotation = newDirection - oldRotation;
 
         if (newRotation != oldRotation)
         {
@@ -344,7 +345,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                 oldRotation += 360;
             }
 
-            var diffRotation = newRotation - oldRotation;
+            var endRotation = newRotation % 360;
 
             if (animated)
             {
@@ -366,9 +367,9 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                     },
                     final: (mapView, v) =>
                     {
-                        if ((int)_locStyle.SymbolRotation != (int)newRotation)
+                        if ((int)_locStyle.SymbolRotation != (int)endRotation)
                         {
-                            _locStyle.SymbolRotation = newRotation;
+                            _locStyle.SymbolRotation = endRotation;
                             mapView.Refresh();
                         }
                       
@@ -380,7 +381,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
             }
             else
             {
-                _locStyle.SymbolRotation = newRotation % 360;
+                _locStyle.SymbolRotation = endRotation;
                 _mapView.Refresh();
             }
         }
