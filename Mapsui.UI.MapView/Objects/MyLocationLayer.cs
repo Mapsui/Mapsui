@@ -344,7 +344,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                 oldRotation += 360;
             }
 
-            var deltaRotation = newRotation - oldRotation;
+            var diffRotation = newRotation - oldRotation;
 
             if (animated)
             {
@@ -355,10 +355,11 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                     animationEnd: 1,
                     tick: (mapView, entry, v) =>
                     {
-                        if ((int)v != (int)_locStyle.SymbolRotation)
+                        var symbolRotation = (oldRotation + (int)(v * diffRotation)) % 360;
+                        if ((int)symbolRotation != (int)_locStyle.SymbolRotation)
                         {
-                            _locStyle.SymbolRotation = (int)(deltaRotation * v) % 360;
-                            _mapView.Refresh();
+                            _locStyle.SymbolRotation = symbolRotation;
+                            mapView.Refresh();
                         }
 
                         return new AnimationResult<MapView>(mapView, true);
@@ -368,7 +369,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                         if ((int)_locStyle.SymbolRotation != (int)newRotation)
                         {
                             _locStyle.SymbolRotation = newRotation;
-                            _mapView.Refresh();
+                            mapView.Refresh();
                         }
                       
                         return new AnimationResult<MapView>(mapView, false);
@@ -457,9 +458,10 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                     animationEnd: 1,
                     tick: (mapView, entry, v) =>
                     {
-                        if ((int)v != (int)_dirStyle.SymbolRotation)
+                        var symbolRotation = (oldRotation + (int)(v * diffRotation)) % 360;
+                        if ((int)symbolRotation != (int)_dirStyle.SymbolRotation)
                         {
-                            _dirStyle.SymbolRotation = (oldRotation + (int)(v * diffRotation)) % 360;
+                            _dirStyle.SymbolRotation = symbolRotation;
                             mapView.Refresh();
                         }
 
