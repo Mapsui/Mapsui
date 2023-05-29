@@ -265,8 +265,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                             // Refresh map
                             if (mapView.MyLocationEnabled && modified)
                                 mapView.Refresh();
-                            var isRunning = Math.Abs(v - 1) < 0.001;
-                            return new AnimationResult<MapView>(mapView, isRunning);
+                            return new AnimationResult<MapView>(mapView, true);
                         },
                         final: (mapView, entry) =>
                         {
