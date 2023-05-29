@@ -67,8 +67,9 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
     private Position _myLocation = new(0, 0);
     private readonly ConcurrentHashSet<AnimationEntry<MapView>> _animations = new ();
     private readonly List<IFeature> _features;
-    private AnimationEntry<MapView>? _animationUpdateDirection;
+    private AnimationEntry<MapView>? _animationMyDirection;
     private AnimationEntry<MapView>? _animationMyViewDirection;
+    private AnimationEntry<MapView>? _animationMyLocation;
 
     /// <summary>
     /// Position of location, that is displayed
@@ -229,10 +230,11 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
         {
             // We have a location update, so abort last animation
             // We have a direction update, so abort last animation
-            if (_animations.Count > 0)
+            if (_animationMyLocation != null)
             {
-                Animation.Stop(_mapView, _animations, callFinal: true);
-                _animations.Clear();
+                Animation.Stop(_mapView, _animationMyLocation, callFinal: true);
+                _animations.TryRemove(_animationMyLocation);
+                _animationMyLocation = null;
             }
 
             if (animated)
@@ -247,9 +249,9 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                 {
                     var fetchInfo = new FetchInfo(_mapView.Map.Navigator.Viewport.ToSection(), _mapView.Map?.CRS,
                         ChangeType.Discrete);
-                    var animation = new AnimationEntry<MapView>(
-                        0.0,
-                        1.0,
+                    _animationMyLocation = new AnimationEntry<MapView>(
+                        _animationMyLocationStart,
+                        _animationMyLocationEnd,
                         animationStart: 0,
                         animationEnd: 1,
                         tick: (mapView, entry, v) =>
@@ -271,21 +273,22 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                             mapView.Map?.RefreshData(fetchInfo);
                             if (MyLocation != _animationMyLocationEnd)
                             {
-                                InternalUpdateMyLocation(_animationMyLocationEnd);
+                                if (InternalUpdateMyLocation(_animationMyLocationEnd))
+                                {
+                                    if (mapView.MyLocationFollow && mapView.MyLocationEnabled)
+                                        mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
 
-                                if (mapView.MyLocationFollow && mapView.MyLocationEnabled)
-                                    mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
-
-                                // Refresh map
-                                if (mapView.MyLocationEnabled)
-                                    mapView.Refresh();
+                                    // Refresh map
+                                    if (mapView.MyLocationEnabled)
+                                        mapView.Refresh();
+                                }
                             }
                             
                             return new AnimationResult<MapView>(mapView, false);
                         });
 
-                    Animation.Start(animation, 1000);
-                    _animations.Add(animation);
+                    Animation.Start(_animationMyLocation, 1000);
+                    _animations.Add(_animationMyLocation);
                 }
             }
             else
@@ -333,11 +336,11 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
             Direction = newDirection;
 
             // We have a direction update, so abort last animation
-            if (_animationUpdateDirection != null)
+            if (_animationMyDirection != null)
             {
-                Animation.Stop(_mapView, _animationUpdateDirection, callFinal: true);
-                _animations.TryRemove(_animationUpdateDirection);
-                _animationUpdateDirection = null;
+                Animation.Stop(_mapView, _animationMyDirection, callFinal: true);
+                _animations.TryRemove(_animationMyDirection);
+                _animationMyDirection = null;
             }
 
             if (newRotation < 90 && oldRotation > 270)
@@ -353,7 +356,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
 
             if (animated)
             {
-                _animationUpdateDirection = new AnimationEntry<MapView>(
+                _animationMyDirection = new AnimationEntry<MapView>(
                     oldRotation,
                     newRotation,
                     animationStart: 0,
@@ -380,8 +383,8 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                         return new AnimationResult<MapView>(mapView, false);
                     });
 
-                Animation.Start(_animationUpdateDirection, 1000);
-                _animations.Add(_animationUpdateDirection);
+                Animation.Start(_animationMyDirection, 1000);
+                _animations.Add(_animationMyDirection);
             }
             else
             {
