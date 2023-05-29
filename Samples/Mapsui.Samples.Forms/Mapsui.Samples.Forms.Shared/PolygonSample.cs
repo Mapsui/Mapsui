@@ -24,6 +24,8 @@ public class PolygonSample : IFormsSample
 
     public string Category => "Forms";
 
+    public bool UpdateLocation => true;
+
     public bool OnClick(object? sender, EventArgs args)
     {
         var mapView = sender as MapView;

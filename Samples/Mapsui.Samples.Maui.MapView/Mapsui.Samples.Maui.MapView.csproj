@@ -57,7 +57,7 @@
     <AndroidResource Include="Resources\Raw\AboutAssets.txt" />
   </ItemGroup>
      
-    <ItemGroup>
+  <ItemGroup>
       <PackageReference Include="SkiaSharp" />
       <PackageReference Include="SkiaSharp.HarfBuzz" />
       <PackageReference Include="SkiaSharp.Views.Maui.Controls" />
@@ -75,10 +75,12 @@
       </ItemGroup>
   
     <ItemGroup>
+      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\AnimatedMyLocationSample.cs" Link="AnimatedMyLocationSample.cs" />
       <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\CircleSample.cs" Link="CircleSample.cs" />
       <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\IFormsSample.cs" Link="IFormsSample.cs" />
       <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\ManyPinsSample.cs" Link="ManyPinsSample.cs" />
       <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\MyLocationSample.cs" Link="MyLocationSample.cs" />
+      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PinSample.cs" Link="PinSample.cs" />
       <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PolygonSample.cs" Link="PolygonSample.cs" />
       <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PolylineSample.cs" Link="PolylineSample.cs" />
       <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\SnapshotSample.cs" Link="SnapshotSample.cs" />

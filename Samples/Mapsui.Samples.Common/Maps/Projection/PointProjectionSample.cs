@@ -13,6 +13,9 @@ public class PointProjectionSample : ISample
     public string Name => "Point projection";
     public string Category => "Projection";
 
+    // The region below is used by docfx to include a code snippet in the generated documentation, search for #projectionsample
+    #region projectionsample
+
     public Task<Map> CreateMapAsync()
     {
         // For Projections to work three things need to be set:
@@ -70,4 +73,6 @@ public class PointProjectionSample : ISample
             Opacity = 0.5f
         };
     }
+
+    #endregion
 }
