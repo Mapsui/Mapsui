@@ -14,6 +14,7 @@ using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
 using Mapsui.UI.WinUI;
 using Mapsui.Samples.Common.Utilities;
+using RadioButton = Microsoft.UI.Xaml.Controls.RadioButton;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
