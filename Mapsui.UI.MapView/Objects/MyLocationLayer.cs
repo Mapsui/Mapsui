@@ -3,22 +3,23 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-
+using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
+using Mapsui.Utilities;
+using Animation = Mapsui.Animations.Animation;
 
 #if __MAUI__
 using Mapsui.UI.Maui;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
-using Animation = Microsoft.Maui.Controls.Animation;
 #else
 using Mapsui.UI.Forms;
 using Xamarin.Forms;
-using Animation = Xamarin.Forms.Animation;
 #endif
 
 namespace Mapsui.UI.Objects;
@@ -30,7 +31,7 @@ namespace Mapsui.UI.Objects;
 /// There are two different symbols for own loaction: one is used when there isn't a change in position (still),
 /// and one is used, if the position changes (moving).
 /// </remarks>
-public class MyLocationLayer : MemoryLayer, IModifyFeatureLayer
+public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
 {
     private readonly MapView _mapView;
     private readonly GeometryFeature _feature;
@@ -42,8 +43,6 @@ public class MyLocationLayer : MemoryLayer, IModifyFeatureLayer
     private static int _bitmapStillId = -1;
     private static int _bitmapDirId = -1;
 
-    private const string AnimationMyLocationName = "animationMyLocationPosition";
-    private const string AnimationMyDirectionName = "animationMyDirectionPosition";
     private Position _animationMyLocationStart;
     private Position _animationMyLocationEnd;
 
@@ -65,13 +64,18 @@ public class MyLocationLayer : MemoryLayer, IModifyFeatureLayer
         }
     }
 
-    private Position myLocation = new(0, 0);
+    private Position _myLocation = new(0, 0);
+    private readonly ConcurrentHashSet<AnimationEntry<MapView>> _animations = new ();
+    private readonly List<IFeature> _features;
+    private AnimationEntry<MapView>? _animationMyDirection;
+    private AnimationEntry<MapView>? _animationMyViewDirection;
+    private AnimationEntry<MapView>? _animationMyLocation;
 
     /// <summary>
     /// Position of location, that is displayed
     /// </summary>
     /// <value>Position of location</value>
-    public Position MyLocation => myLocation;
+    public Position MyLocation => _myLocation;
 
     /// <summary>
     /// Movement direction of device at location
@@ -131,7 +135,7 @@ public class MyLocationLayer : MemoryLayer, IModifyFeatureLayer
     /// <param name="position">Position, where to start</param>
     public MyLocationLayer(MapView view, Position position) : this(view)
     {
-        myLocation = position;
+        _myLocation = position;
     }
 
     /// <summary>
@@ -168,7 +172,7 @@ public class MyLocationLayer : MemoryLayer, IModifyFeatureLayer
 
         _feature = new GeometryFeature
         {
-            Geometry = myLocation.ToMapsui().ToPoint(),
+            Geometry = _myLocation.ToMapsui().ToPoint(),
             ["Label"] = "MyLocation moving",
         };
 
@@ -212,7 +216,7 @@ public class MyLocationLayer : MemoryLayer, IModifyFeatureLayer
         _feature.Styles.Add(_locStyle);
         _feature.Styles.Add(_coStyle);
 
-        Features = new List<IFeature> { _feature };
+        _features = new List<IFeature> { _feature };
         Style = null;
     }
 
@@ -225,33 +229,64 @@ public class MyLocationLayer : MemoryLayer, IModifyFeatureLayer
         if (!MyLocation.Equals(newLocation))
         {
             // We have a location update, so abort last animation
-            if (_mapView.AnimationIsRunning(AnimationMyLocationName))
-                _mapView.AbortAnimation(AnimationMyLocationName);
+            // We have a direction update, so abort last animation
+            if (_animationMyLocation != null)
+            {
+                Animation.Stop(_mapView, _animationMyLocation, callFinal: true);
+                _animations.TryRemove(_animationMyLocation);
+                _animationMyLocation = null;
+            }
 
             if (animated)
             {
                 // Save values for new animation
                 _animationMyLocationStart = MyLocation;
                 _animationMyLocationEnd = newLocation;
-
-                var animation = new Animation((v) =>
-                {
-                    var deltaLat = (_animationMyLocationEnd.Latitude - _animationMyLocationStart.Latitude) * v;
-                    var deltaLon = (_animationMyLocationEnd.Longitude - _animationMyLocationStart.Longitude) * v;
-                    var modified = InternalUpdateMyLocation(new Position(_animationMyLocationStart.Latitude + deltaLat, _animationMyLocationStart.Longitude + deltaLon));
-                    // Update viewport
-                    if (modified && _mapView.MyLocationFollow && _mapView.MyLocationEnabled)
-                        _mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
-                    // Refresh map
-                    if (_mapView.MyLocationEnabled && modified)
-                        _mapView.Refresh();
-                }, 0.0, 1.0);
+                var deltaLat = _animationMyLocationEnd.Latitude - _animationMyLocationStart.Latitude;
+                var deltaLon = _animationMyLocationEnd.Longitude - _animationMyLocationStart.Longitude;
 
                 if (_mapView.Map.Navigator.Viewport.ToExtent() is not null)
                 {
-                    var fetchInfo = new FetchInfo(_mapView.Map.Navigator.Viewport.ToSection(), _mapView.Map?.CRS, ChangeType.Discrete);
-                    // At the end, update viewport
-                    animation.Commit(_mapView, AnimationMyLocationName, 100, 3000, finished: (s, v) => _mapView.Map?.RefreshData(fetchInfo));
+                    var fetchInfo = new FetchInfo(_mapView.Map.Navigator.Viewport.ToSection(), _mapView.Map?.CRS,
+                        ChangeType.Discrete);
+                    _animationMyLocation = new AnimationEntry<MapView>(
+                        _animationMyLocationStart,
+                        _animationMyLocationEnd,
+                        animationStart: 0,
+                        animationEnd: 1,
+                        tick: (mapView, entry, v) =>
+                        {
+                            var modified = InternalUpdateMyLocation(new Position(
+                                _animationMyLocationStart.Latitude + deltaLat * v,
+                                _animationMyLocationStart.Longitude + deltaLon * v));
+                            // Update viewport
+                            if (modified && mapView.MyLocationFollow && mapView.MyLocationEnabled)
+                                mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
+                            // Refresh map
+                            if (mapView.MyLocationEnabled && modified)
+                                mapView.Refresh();
+                            return new AnimationResult<MapView>(mapView, true);
+                        },
+                        final: (mapView, entry) =>
+                        {
+                            mapView.Map?.RefreshData(fetchInfo);
+                            if (MyLocation != _animationMyLocationEnd)
+                            {
+                                InternalUpdateMyLocation(_animationMyLocationEnd);
+
+                                if (mapView.MyLocationFollow && mapView.MyLocationEnabled)
+                                    mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
+
+                                // Refresh map
+                                if (mapView.MyLocationEnabled)
+                                    mapView.Refresh();
+                            }
+                            
+                            return new AnimationResult<MapView>(mapView, false);
+                        });
+
+                    Animation.Start(_animationMyLocation, 1000);
+                    _animations.Add(_animationMyLocation);
                 }
             }
             else
@@ -267,6 +302,22 @@ public class MyLocationLayer : MemoryLayer, IModifyFeatureLayer
         }
     }
 
+    public override bool UpdateAnimations()
+    {
+        if (_animations.Count > 0)
+        {
+            var animation = Animation.UpdateAnimations(_mapView, _animations);
+            return animation.IsRunning;
+        }
+
+        return base.UpdateAnimations();
+    }
+
+    public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
+    {
+        return _features;
+    }
+
     /// <summary>
     /// Updates my movement direction
     /// </summary>
@@ -276,14 +327,19 @@ public class MyLocationLayer : MemoryLayer, IModifyFeatureLayer
     {
         var newRotation = (int)(newDirection - newViewportRotation);
         var oldRotation = (int)_locStyle.SymbolRotation;
+        var diffRotation = newDirection - oldRotation;
 
         if (newRotation != oldRotation)
         {
             Direction = newDirection;
 
             // We have a direction update, so abort last animation
-            if (_mapView.AnimationIsRunning(AnimationMyDirectionName))
-                _mapView.AbortAnimation(AnimationMyDirectionName);
+            if (_animationMyDirection != null)
+            {
+                Animation.Stop(_mapView, _animationMyDirection, callFinal: true);
+                _animations.TryRemove(_animationMyDirection);
+                _animationMyDirection = null;
+            }
 
             if (newRotation < 90 && oldRotation > 270)
             {
@@ -294,22 +350,43 @@ public class MyLocationLayer : MemoryLayer, IModifyFeatureLayer
                 oldRotation += 360;
             }
 
+            var endRotation = newRotation % 360;
+
             if (animated)
             {
-                var animation = new Animation((v) =>
-                {
-                    if ((int)v != (int)_locStyle.SymbolRotation)
+                _animationMyDirection = new AnimationEntry<MapView>(
+                    oldRotation,
+                    newRotation,
+                    animationStart: 0,
+                    animationEnd: 1,
+                    tick: (mapView, entry, v) =>
                     {
-                        _locStyle.SymbolRotation = (int)v % 360;
-                        _mapView.Refresh();
-                    }
-                }, oldRotation, newRotation);
+                        var symbolRotation = (oldRotation + (int)(v * diffRotation)) % 360;
+                        if ((int)symbolRotation != (int)_locStyle.SymbolRotation)
+                        {
+                            _locStyle.SymbolRotation = symbolRotation;
+                            mapView.Refresh();
+                        }
 
-                animation.Commit(_mapView, AnimationMyDirectionName, 50, 500);
+                        return new AnimationResult<MapView>(mapView, true);
+                    },
+                    final: (mapView, v) =>
+                    {
+                        if ((int)_locStyle.SymbolRotation != (int)endRotation)
+                        {
+                            _locStyle.SymbolRotation = endRotation;
+                            mapView.Refresh();
+                        }
+                      
+                        return new AnimationResult<MapView>(mapView, false);
+                    });
+
+                Animation.Start(_animationMyDirection, 1000);
+                _animations.Add(_animationMyDirection);
             }
             else
             {
-                _locStyle.SymbolRotation = newRotation % 360;
+                _locStyle.SymbolRotation = endRotation;
                 _mapView.Refresh();
             }
         }
@@ -344,10 +421,12 @@ public class MyLocationLayer : MemoryLayer, IModifyFeatureLayer
     /// </summary>
     /// <param name="newDirection">New direction</param>
     /// <param name="newViewportRotation">New viewport rotation</param>
+    /// <param name="animated">true if animated</param>
     public void UpdateMyViewDirection(double newDirection, double newViewportRotation, bool animated = false)
     {
         var newRotation = (int)(newDirection - newViewportRotation);
         var oldRotation = (int)_dirStyle.SymbolRotation;
+        var diffRotation = newDirection - oldRotation;
 
         if (newRotation == -1.0)
         {
@@ -356,12 +435,16 @@ public class MyLocationLayer : MemoryLayer, IModifyFeatureLayer
         }
         else if (newRotation != oldRotation)
         {
+            // We have a direction update, so abort last animation
+            if (_animationMyViewDirection != null)
+            {
+                Animation.Stop(_mapView, _animationMyViewDirection, callFinal: true);
+                _animations.TryRemove(_animationMyViewDirection);
+                _animationMyViewDirection = null;
+            }
+
             _dirStyle.Enabled = true;
             ViewingDirection = newDirection;
-
-            // We have a direction update, so abort last animation
-            if (_mapView.AnimationIsRunning(AnimationMyDirectionName))
-                _mapView.AbortAnimation(AnimationMyDirectionName);
 
             if (newRotation < 90 && oldRotation > 270)
             {
@@ -372,22 +455,43 @@ public class MyLocationLayer : MemoryLayer, IModifyFeatureLayer
                 oldRotation += 360;
             }
 
+            var endRotation = newRotation % 360;
+
             if (animated)
             {
-                var animation = new Animation((v) =>
-                {
-                    if ((int)v != (int)_dirStyle.SymbolRotation)
+                _animationMyViewDirection = new AnimationEntry<MapView>(
+                    oldRotation,
+                    newRotation,
+                    animationStart: 0,
+                    animationEnd: 1,
+                    tick: (mapView, entry, v) =>
                     {
-                        _dirStyle.SymbolRotation = (int)v % 360;
-                        _mapView.Refresh();
-                    }
-                }, oldRotation, newRotation);
+                        var symbolRotation = (oldRotation + (int)(v * diffRotation)) % 360;
+                        if ((int)symbolRotation != (int)_dirStyle.SymbolRotation)
+                        {
+                            _dirStyle.SymbolRotation = symbolRotation;
+                            mapView.Refresh();
+                        }
 
-                animation.Commit(_mapView, AnimationMyDirectionName, 50, 500);
+                        return new AnimationResult<MapView>(mapView, true);
+                    },
+                    final: (mapView, v) =>
+                    {
+                        if ((int)_dirStyle.SymbolRotation != endRotation)
+                        {
+                            _dirStyle.SymbolRotation = endRotation;
+                            mapView.Refresh();
+                        }
+
+                        return new AnimationResult<MapView>(mapView, false);
+                    });
+
+                Animation.Start(_animationMyViewDirection, 1000);
+                _animations.Add(_animationMyViewDirection);
             }
             else
             {
-                _dirStyle.SymbolRotation = newRotation % 360;
+                _dirStyle.SymbolRotation = endRotation;
                 _mapView.Refresh();
             }
         }
@@ -407,10 +511,10 @@ public class MyLocationLayer : MemoryLayer, IModifyFeatureLayer
     {
         var modified = false;
 
-        if (!myLocation.Equals(newLocation))
+        if (!_myLocation.Equals(newLocation))
         {
-            myLocation = newLocation;
-            _feature.Geometry = myLocation.ToPoint();
+            _myLocation = newLocation;
+            _feature.Geometry = _myLocation.ToPoint();
             modified = true;
         }
 
