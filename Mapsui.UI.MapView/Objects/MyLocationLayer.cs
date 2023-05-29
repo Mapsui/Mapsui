@@ -450,7 +450,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                     {
                         if ((int)v != (int)_dirStyle.SymbolRotation)
                         {
-                            _dirStyle.SymbolRotation = (int)v % 360;
+                            _dirStyle.SymbolRotation = (oldRotation + (int)v) % 360;
                             mapView.Refresh();
                         }
 
