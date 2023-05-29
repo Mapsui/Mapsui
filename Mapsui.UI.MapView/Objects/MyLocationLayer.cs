@@ -273,15 +273,14 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                             mapView.Map?.RefreshData(fetchInfo);
                             if (MyLocation != _animationMyLocationEnd)
                             {
-                                if (InternalUpdateMyLocation(_animationMyLocationEnd))
-                                {
-                                    if (mapView.MyLocationFollow && mapView.MyLocationEnabled)
-                                        mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
+                                InternalUpdateMyLocation(_animationMyLocationEnd);
 
-                                    // Refresh map
-                                    if (mapView.MyLocationEnabled)
-                                        mapView.Refresh();
-                                }
+                                if (mapView.MyLocationFollow && mapView.MyLocationEnabled)
+                                    mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
+
+                                // Refresh map
+                                if (mapView.MyLocationEnabled)
+                                    mapView.Refresh();
                             }
                             
                             return new AnimationResult<MapView>(mapView, false);
