@@ -410,6 +410,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
     {
         var newRotation = (int)(newDirection - newViewportRotation);
         var oldRotation = (int)_dirStyle.SymbolRotation;
+        var diffRotation = newDirection - oldRotation;
 
         if (newRotation == -1.0)
         {
@@ -450,7 +451,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                     {
                         if ((int)v != (int)_dirStyle.SymbolRotation)
                         {
-                            _dirStyle.SymbolRotation = (oldRotation + (int)v) % 360;
+                            _dirStyle.SymbolRotation = (oldRotation + (int)v * diffRotation) % 360;
                             mapView.Refresh();
                         }
 
