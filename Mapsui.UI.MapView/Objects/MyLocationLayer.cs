@@ -237,6 +237,8 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                 // Save values for new animation
                 _animationMyLocationStart = MyLocation;
                 _animationMyLocationEnd = newLocation;
+                var deltaLat = _animationMyLocationEnd.Latitude - _animationMyLocationStart.Latitude;
+                var deltaLon = _animationMyLocationEnd.Longitude - _animationMyLocationStart.Longitude;
 
                 if (_mapView.Map.Navigator.Viewport.ToExtent() is not null)
                 {
@@ -249,11 +251,9 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                         animationEnd: 1,
                         tick: (mapView, entry, v) =>
                         {
-                            var deltaLat = (_animationMyLocationEnd.Latitude - _animationMyLocationStart.Latitude) * v;
-                            var deltaLon = (_animationMyLocationEnd.Longitude - _animationMyLocationStart.Longitude) * v;
                             var modified = InternalUpdateMyLocation(new Position(
-                                _animationMyLocationStart.Latitude + deltaLat,
-                                _animationMyLocationStart.Longitude + deltaLon));
+                                _animationMyLocationStart.Latitude + deltaLat * v,
+                                _animationMyLocationStart.Longitude + deltaLon * v));
                             // Update viewport
                             if (modified && mapView.MyLocationFollow && mapView.MyLocationEnabled)
                                 mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
@@ -344,16 +344,20 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                 oldRotation += 360;
             }
 
+            var deltaRotation = newRotation - oldRotation;
+
             if (animated)
             {
                 var animation = new AnimationEntry<MapView>(
                     oldRotation,
-                    newRotation, 
+                    newRotation,
+                    animationStart: 0,
+                    animationEnd: 1,
                     tick: (mapView, entry, v) =>
                     {
                         if ((int)v != (int)_locStyle.SymbolRotation)
                         {
-                            _locStyle.SymbolRotation = (int)v % 360;
+                            _locStyle.SymbolRotation = (int)(deltaRotation * v) % 360;
                             _mapView.Refresh();
                         }
 
@@ -361,8 +365,12 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                     },
                     final: (mapView, v) =>
                     {
-                        _locStyle.SymbolRotation = newRotation;
-                        _mapView.Refresh();
+                        if ((int)_locStyle.SymbolRotation != (int)newRotation)
+                        {
+                            _locStyle.SymbolRotation = newRotation;
+                            _mapView.Refresh();
+                        }
+                      
                         return new AnimationResult<MapView>(mapView, false);
                     });
 
