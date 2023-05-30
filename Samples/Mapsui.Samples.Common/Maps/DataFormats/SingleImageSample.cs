@@ -5,6 +5,7 @@ using Mapsui.Tiling;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Mapsui.Samples.Common.Utilities;
 
 namespace Mapsui.Samples.Common.Maps.Demo;
 
@@ -12,6 +13,11 @@ public class SingleImageSample : ISample
 {
     public string Name => "14 Single Image";
     public string Category => "Data Formats";
+
+    static SingleImageSample()
+    {
+        ImagesDeployer.CopyEmbeddedResourceToFile("a123330.jpeg");
+    }
 
     public Task<Map> CreateMapAsync()
     {
@@ -34,7 +40,7 @@ public class SingleImageSample : ISample
     private static ILayer CreateLayerWithRasterFeature(MRect extent)
     {
         // For this example we used a single bing maps tile loaded as MRaster.
-        var path = Path.Combine(Directory.GetCurrentDirectory(), "GeoData", "Images", "a123330.jpeg");
+        var path = Path.Combine(ImagesDeployer.ImagesLocation, "a123330.jpeg");
         using var fileStream = File.OpenRead(path);
         var bytes = fileStream.ToBytes();
         // Note that currently a RasterStyle is necessary for the feature to show up.

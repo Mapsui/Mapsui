@@ -45,9 +45,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="GeoData\Images\a123330.jpeg">
+    <EmbeddedResource Include="GeoData\Images\a123330.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

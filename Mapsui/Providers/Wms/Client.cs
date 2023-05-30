@@ -257,7 +257,8 @@ public class Client
         var result = _persistentCache?.Find(url);
         if (result == null)
         {
-            var client = new HttpClient();
+            var handler = new HttpClientHandler();
+            using var client = new HttpClient(handler);
             var response = await client.GetAsync(url).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
