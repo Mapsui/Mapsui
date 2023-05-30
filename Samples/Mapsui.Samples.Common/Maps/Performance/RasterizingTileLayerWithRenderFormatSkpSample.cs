@@ -38,7 +38,8 @@ public class RasterizingTileLayerWithRenderFormatSkpSample : ISample
     {
         var map = new Map();
 
-        var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true)
+        var shapeFileLocation = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "countries.shp");
+        var countrySource = new ShapeFile(shapeFileLocation, true)
         {
             CRS = "EPSG:4326"
         };
