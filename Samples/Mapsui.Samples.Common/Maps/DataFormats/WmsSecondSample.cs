@@ -2,7 +2,9 @@
 using Mapsui.Layers;
 using Mapsui.Providers.Wms;
 using System.Threading.Tasks;
+using Mapsui.Nts.Extensions;
 using Mapsui.Styles;
+using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
@@ -14,10 +16,13 @@ public class WmsSecondSample : ISample
 
     public async Task<Map> CreateMapAsync()
     {
-        var map = new Map { CRS = "EPSG:28992" };
+        var map = new Mapsui.Map
+        {
+            CRS = "EPSG:3857",
+        };
+
         // The WMS request needs a CRS
         map.Layers.Add(await CreateLayerAsync());
-        map.Home = (n) => n.CenterOnAndZoomTo(new MPoint(155000, 463000), 500);
         return map;
     }
 
@@ -38,7 +43,7 @@ public class WmsSecondSample : ISample
         provider.TimeOut = 20000;
         provider.CRS = "EPSG:3857";
         provider.AddLayer("igm25k_lazio_wgs");
-        provider.SetImageFormat((provider.OutputFormats)[0]);
+        provider.SetImageFormat((provider.OutputFormats)[1]);
         return provider;
     }
 }
