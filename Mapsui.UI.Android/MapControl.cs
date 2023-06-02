@@ -134,7 +134,7 @@ public partial class MapControl : ViewGroup, IMapControl
             return;
 
         var position = GetScreenPosition(e.Event, this);
-        OnInfo(InvokeInfo(position, position, 2));
+        OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 
     private void OnSingleTapped(object? sender, GestureDetector.SingleTapConfirmedEventArgs e)
@@ -143,7 +143,7 @@ public partial class MapControl : ViewGroup, IMapControl
             return;
 
         var position = GetScreenPosition(e.Event, this);
-        OnInfo(InvokeInfo(position, position, 1));
+        OnInfo(CreateMapInfoEventArgs(position, position, 1));
     }
 
     protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)

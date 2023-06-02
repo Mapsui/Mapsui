@@ -136,13 +136,13 @@ public partial class MapControl : UIView, IMapControl
     private void OnDoubleTapped(UITapGestureRecognizer gesture)
     {
         var position = GetScreenPosition(gesture.LocationInView(this));
-        OnInfo(InvokeInfo(position, position, 2));
+        OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 
     private void OnSingleTapped(UITapGestureRecognizer gesture)
     {
         var position = GetScreenPosition(gesture.LocationInView(this));
-        OnInfo(InvokeInfo(position, position, 1));
+        OnInfo(CreateMapInfoEventArgs(position, position, 1));
     }
 
     private void OnPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)

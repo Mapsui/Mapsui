@@ -137,7 +137,7 @@ public partial class MapControl : ComponentBase, IMapControl
     protected async void OnMouseWheel(WheelEventArgs e)
     {
         var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
-        var currentMousePosition = e.Location(await BoundingClientRectAsync()).ToMapsui();
+        var currentMousePosition = e.Location(await BoundingClientRectAsync());
         Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
 }
 
@@ -225,8 +225,9 @@ public partial class MapControl : ComponentBase, IMapControl
             }
             else if (_downMousePosition != null)
             {
-                if (IsClick(e.Location(await BoundingClientRectAsync()), _downMousePosition))
-                    OnInfo(InvokeInfo(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui(), 1));
+                var location = e.Location(await BoundingClientRectAsync());
+                if (IsClick(location, _downMousePosition))
+                    OnInfo(CreateMapInfoEventArgs(location, _downMousePosition, 1));
             }
 
             _downMousePosition = null;
@@ -266,8 +267,8 @@ public partial class MapControl : ComponentBase, IMapControl
                 {
                     Cursor = MoveCursor;
 
-                    var currentPosition = e.Location(await BoundingClientRectAsync()).ToMapsui();
-                    Map.Navigator.Drag(currentPosition, _downMousePosition.ToMapsui());
+                    var currentPosition = e.Location(await BoundingClientRectAsync());
+                    Map.Navigator.Drag(currentPosition, _downMousePosition);
                     _downMousePosition = e.Location(await BoundingClientRectAsync());
                 }
             }
