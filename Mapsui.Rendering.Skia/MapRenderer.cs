@@ -187,9 +187,10 @@ public class MapRenderer : IRenderer
         // todo: use margin to increase the pixel area
         // todo: We will need to select on style instead of layer
 
-        layers = layers
+        var mapInfoLayers = layers
             .Select(l => (l is ISourceLayer sl) ? sl.SourceLayer : l)
-            .Where(l => l.IsMapInfoLayer);
+            .Where(l => l.IsMapInfoLayer)
+            .ToList();
 
         var list = new List<MapInfoRecord>();
         var result = new MapInfo
@@ -225,20 +226,27 @@ public class MapRenderer : IRenderer
                 var color = pixmap.GetPixelColor(intX, intY);
 
 
-                VisibleFeatureIterator.IterateLayers(viewport, layers, 0, (v, layer, style, feature, opacity, iteration) =>
+                VisibleFeatureIterator.IterateLayers(viewport, mapInfoLayers, 0, (v, layer, style, feature, opacity, iteration) =>
                 {
-                    // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
-                    surface.Canvas.Save();
-                    // 1) Clear the entire bitmap
-                    surface.Canvas.Clear(SKColors.Transparent);
-                    // 2) Render the feature to the clean canvas
-                    RenderFeature(surface.Canvas, v, layer, style, feature, opacity, 0);
-                    // 3) Check if the pixel has changed.
-                    if (color != pixmap.GetPixelColor(intX, intY))
-                        // 4) Add feature and style to result
-                        list.Add(new MapInfoRecord(feature, style, layer));
-                    surface.Canvas.Restore();
-                    // ReSharper restore AccessToDisposedClosure
+                    try
+                    {
+                        // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
+                        surface.Canvas.Save();
+                        // 1) Clear the entire bitmap
+                        surface.Canvas.Clear(SKColors.Transparent);
+                        // 2) Render the feature to the clean canvas
+                        RenderFeature(surface.Canvas, v, layer, style, feature, opacity, 0);
+                        // 3) Check if the pixel has changed.
+                        if (color != pixmap.GetPixelColor(intX, intY))
+                            // 4) Add feature and style to result
+                            list.Add(new MapInfoRecord(feature, style, layer));
+                        surface.Canvas.Restore();
+                        // ReSharper restore AccessToDisposedClosure
+                    }
+                    catch (Exception exception)
+                    {
+                        Logger.Log(LogLevel.Error, "Unexpected error in the code detecting if a feature is clicked. This uses SkiaSharp.", exception);
+                    }
                 });
             }
 

@@ -546,9 +546,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
     /// <param name="numTaps">Number of clickes/taps</param>
     /// <returns>True, if something done </returns>
-    private protected MapInfoEventArgs? InvokeInfo(MPoint? screenPosition, MPoint? startScreenPosition, int numTaps)
+    private protected MapInfoEventArgs? CreateMapInfoEventArgs(MPoint? screenPosition, MPoint? startScreenPosition, int numTaps)
     {
-        return InvokeInfo(
+        return CreateMapInfoEventArgs(
             Map?.GetWidgetsOfMapAndLayers() ?? new List<IWidget>(),
             screenPosition,
             startScreenPosition,
@@ -565,7 +565,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <param name="widgetCallback">Callback, which is called when Widget is hit</param>
     /// <param name="numTaps">Number of clickes/taps</param>
     /// <returns>True, if something done </returns>
-    private MapInfoEventArgs? InvokeInfo(IEnumerable<IWidget> widgets, MPoint? screenPosition,
+    private MapInfoEventArgs? CreateMapInfoEventArgs(IEnumerable<IWidget> widgets, MPoint? screenPosition,
         MPoint? startScreenPosition, Func<IWidget, MPoint, bool> widgetCallback, int numTaps)
     {
         if (screenPosition == null || startScreenPosition == null)
