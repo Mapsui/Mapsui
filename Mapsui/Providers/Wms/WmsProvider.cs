@@ -375,6 +375,7 @@ public class WmsProvider : IProvider, IProjectingProvider
             }
         }
 
+        strReq.Append("&SERVICE=WMS");
         strReq.AppendFormat("&WIDTH={0}&Height={1}", width, height);
         strReq.Append("&Layers=");
         if (LayerList != null && LayerList.Count > 0)
@@ -494,7 +495,16 @@ public class WmsProvider : IProvider, IProjectingProvider
 
     private async Task<Stream> GetStreamAsync(string url)
     {
-        var handler = new HttpClientHandler { Credentials = Credentials };
+        var handler = new HttpClientHandler();
+        try
+        {
+            handler.Credentials = Credentials;
+        }
+        catch (NotSupportedException)
+        {
+            // Ignore not supported exception (fixes blazor)
+        }
+           
         var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
         var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type ?? "GET"), url);
         var response = await client.SendAsync(req);

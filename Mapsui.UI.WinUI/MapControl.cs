@@ -115,13 +115,13 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
     {
         var tapPosition = e.GetPosition(this).ToMapsui();
-        OnInfo(InvokeInfo(tapPosition, tapPosition, 2));
+        OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
     }
 
     private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
     {
         var tabPosition = e.GetPosition(this).ToMapsui();
-        OnInfo(InvokeInfo(tabPosition, tabPosition, 1));
+        OnInfo(CreateMapInfoEventArgs(tabPosition, tabPosition, 1));
     }
 
     private static Rectangle CreateSelectRectangle()

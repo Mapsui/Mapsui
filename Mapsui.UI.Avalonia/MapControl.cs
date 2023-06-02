@@ -162,7 +162,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (IsClick(_currentMousePosition, _downMousePosition))
         {
             HandleFeatureInfo(e);
-            OnInfo(InvokeInfo(_mousePosition, _mousePosition, 1));
+            OnInfo(CreateMapInfoEventArgs(_mousePosition, _mousePosition, 1));
         }
     }
 
@@ -186,7 +186,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         // We have a new interaction with the screen, so stop all navigator animations
         var tapPosition = _mousePosition;
-        OnInfo(InvokeInfo(tapPosition, tapPosition, 2));
+        OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
     }
 
     public override void Render(DrawingContext context)

@@ -197,7 +197,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             else if (_downMousePosition != null && IsClick(mousePosition, _downMousePosition))
             {
                 HandleFeatureInfo(e);
-                OnInfo(InvokeInfo(mousePosition, _downMousePosition, e.ClickCount));
+                OnInfo(CreateMapInfoEventArgs(mousePosition, _downMousePosition, e.ClickCount));
             }
         }
 
@@ -254,7 +254,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             // todo: Pass the touchDown position. It needs to be set at touch down.
 
             // todo: Figure out how to do a number of taps for WPF
-            OnInfo(InvokeInfo(touchPosition, touchPosition, 1));
+            OnInfo(CreateMapInfoEventArgs(touchPosition, touchPosition, 1));
         }
     }
 

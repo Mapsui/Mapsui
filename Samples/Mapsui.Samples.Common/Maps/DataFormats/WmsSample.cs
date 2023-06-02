@@ -32,7 +32,7 @@ public class WmsSample : ISample
 
     private static async Task<WmsProvider> CreateWmsProviderAsync()
     {
-        const string wmsUrl = "https://geodata.nationaalgeoregister.nl/windkaart/wms?request=GetCapabilities";
+        const string wmsUrl = "https://service.pdok.nl/rvo/windkaart/wms/v1_0?request=getcapabilities&service=wms";
 
         var provider = await WmsProvider.CreateAsync(wmsUrl, persistentCache: DefaultCache);
         provider.ContinueOnError = true;
