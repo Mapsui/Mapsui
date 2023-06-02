@@ -729,7 +729,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (args.Handled)
             return true;
 
-        var eventReturn = InvokeInfo(screenPosition, screenPosition, numOfTaps);
+        var eventReturn = CreateMapInfoEventArgs(screenPosition, screenPosition, numOfTaps);
 
         if (eventReturn?.Handled == true)
             return true;
@@ -752,7 +752,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (args.Handled)
             return true;
 
-        var infoToInvoke = InvokeInfo(screenPosition, screenPosition, 1);
+        var infoToInvoke = CreateMapInfoEventArgs(screenPosition, screenPosition, 1);
 
         if (infoToInvoke?.Handled == true)
             return true;

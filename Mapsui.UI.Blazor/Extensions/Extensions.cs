@@ -1,5 +1,4 @@
-﻿
-using System.Drawing;
+﻿using System.Drawing;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace Mapsui.UI.Blazor.Extensions;
@@ -9,11 +8,6 @@ public static class Extensions
     public static MPoint ToMapsui(this PointF point)
     {
         return new MPoint(point.X, point.Y);
-    }
-
-    public static MPoint ToMapsui(this MPoint point)
-    {
-        return point;
     }
 
     public static MPoint Location(this MouseEventArgs e, BoundingClientRect clientRect)
