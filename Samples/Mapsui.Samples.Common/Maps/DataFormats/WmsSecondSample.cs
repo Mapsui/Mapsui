@@ -18,7 +18,7 @@ public class WmsSecondSample : ISample
     {
         var map = new Mapsui.Map
         {
-            CRS = "EPSG:3857",
+            CRS = "EPSG:4326",
         };
 
         // The WMS request needs a CRS
@@ -41,7 +41,7 @@ public class WmsSecondSample : ISample
         var provider = await WmsProvider.CreateAsync(wmsUrl, persistentCache: null);
         provider.ContinueOnError = true;
         provider.TimeOut = 20000;
-        provider.CRS = "EPSG:3857";
+        provider.CRS = "EPSG:4326";
         provider.AddLayer("igm25k_lazio_wgs");
         provider.SetImageFormat((provider.OutputFormats)[1]);
         return provider;
