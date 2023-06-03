@@ -16,13 +16,13 @@ namespace Mapsui.Samples.Maui;
 namespace Mapsui.Samples.Forms;
 #endif
 
-public class PolygonSample : IFormsSample
+public class PolygonSample : IMapViewSample
 {
     static readonly Random random = new Random(1);
 
     public string Name => "Add Polygon Sample";
 
-    public string Category => "Forms";
+    public string Category => "MapView";
 
     public bool UpdateLocation => true;
 

@@ -11,7 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AnimatedMyLocationSample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CircleSample.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IFormsSample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IMapViewSample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ManyPinsSample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MyLocationSample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PinSample.cs" />

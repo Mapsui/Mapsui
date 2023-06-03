@@ -19,11 +19,11 @@ namespace Mapsui.Samples.Maui;
 namespace Mapsui.Samples.Forms;
 #endif
 
-public class PolylineSample : IFormsSample
+public class PolylineSample : IMapViewSample
 {
     public string Name => "Add Polyline Sample";
 
-    public string Category => "Forms";
+    public string Category => "MapView";
 
     public bool UpdateLocation => true;
 
