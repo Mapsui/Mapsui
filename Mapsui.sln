@@ -21,8 +21,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB6CAC-1C30-42C9-B628-BACEBF790AB9}"
 	ProjectSection(SolutionItems) = preProject
 		Scripts\buildpack.bat = Scripts\buildpack.bat
-		Scripts\NugetRestore.cmd = Scripts\NugetRestore.cmd
 		Scripts\BuildSamplesWebsite.ps1 = Scripts\BuildSamplesWebsite.ps1
+		Scripts\NugetRestore.cmd = Scripts\NugetRestore.cmd
 		Scripts\SamplesMapsuiNugetReferences.ps1 = Scripts\SamplesMapsuiNugetReferences.ps1
 		Scripts\test-image-copier.cmd = Scripts\test-image-copier.cmd
 	EndProjectSection
@@ -213,6 +213,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Uno.WinUI", "Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.csproj", "{741484E5-6E06-46E3-BCC6-22953A31FE9F}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.UI.MapView", "Mapsui.UI.MapView\Mapsui.UI.MapView.shproj", "{1A4666DB-CD58-4380-858C-7730C0508A85}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{F161CDAC-1F47-4942-976B-FB7B154A542E}"
+	ProjectSection(SolutionItems) = preProject
+		docfx\samples\ProjectionSample.md = docfx\samples\ProjectionSample.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -3379,6 +3384,7 @@ Global
 		{10B6CC78-FA95-4E28-8F74-FD278714B9AD} = {671AF0DE-73BD-46C9-81F0-087703E010AE}
 		{BA0E8B89-ADBC-43B8-86D0-A1BC2427AE7F} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{741484E5-6E06-46E3-BCC6-22953A31FE9F} = {B12E8967-0E5B-4728-B877-F3BDFE0871F2}
+		{F161CDAC-1F47-4942-976B-FB7B154A542E} = {97458DE1-C297-4DED-AECB-5FEFED2B5610}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D684C3-0BD3-4D8A-AB23-748FB5527F6F}
