@@ -90,7 +90,7 @@ public partial class MainPageLarge : ContentPage
         }
 
         clicker = null;
-        if (sample is IFormsSample formsSample)
+        if (sample is IMapViewSample formsSample)
             clicker = formsSample.OnClick;
 
         listView.SelectedItem = null;
