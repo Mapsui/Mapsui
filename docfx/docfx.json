@@ -36,7 +36,7 @@
           "documentation/**.md",
           "documentation/**/toc.md",
           "documentation/**.png",
-		  "samples/**.md",
+		  "codesamples/**.md",
           "toc.yml",
           "*.md"
         ],
