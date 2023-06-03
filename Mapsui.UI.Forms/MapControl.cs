@@ -323,11 +323,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                 _flingTracker.RemoveId(e.Id);
 
-                if (_touches.Count == 1)
-                {
-                    e.Handled = OnTouchStart(_touches.Select(t => t.Value.Location).ToList());
-                }
-
                 if (!e.Handled)
                     e.Handled = OnTouchEnd(_touches.Select(t => t.Value.Location).ToList(), releasedTouch.Location);
             }
