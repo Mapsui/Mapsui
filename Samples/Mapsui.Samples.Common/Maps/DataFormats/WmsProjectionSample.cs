@@ -44,7 +44,7 @@ public class WmsProjectionSample : ISample
     private static async Task<WmsProvider> CreateWmsProviderAsync()
     {
         const string wmsUrl = "https://sgi2.isprambiente.it/arcgis/services/raster/igm25k_lazio_wgs/ImageServer/WMSServer?service=wms&request=getCapabilities&version=1.3.0";
-        var provider = await WmsProvider.CreateAsync(wmsUrl, persistentCache: null);
+        var provider = await WmsProvider.CreateAsync(wmsUrl, persistentCache: DefaultCache);
         provider.ContinueOnError = true;
         provider.TimeOut = 20000;
         provider.CRS = "EPSG:4326";
