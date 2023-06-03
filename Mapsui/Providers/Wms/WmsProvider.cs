@@ -41,6 +41,7 @@ public class WmsProvider : IProvider, IProjectingProvider
     private readonly Client? _wmsClient;
     private Func<string, Task<Stream>>? _getStreamAsync;
     private readonly IUrlPersistentCache? _persistentCache;
+    private static readonly CrsAxisOrderRegistry _axisOrder = new();
 
     public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
         : this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache)
@@ -354,8 +355,26 @@ public class WmsProvider : IProvider, IProjectingProvider
             strReq.Append("&");
         if (box != null)
         {
-            strReq.AppendFormat(CultureInfo.InvariantCulture, "REQUEST=GetMap&BBOX={0},{1},{2},{3}",
+            var wmsVersion = "1.3.0";
+            if (_wmsClient != null)
+            {
+                wmsVersion = _wmsClient.WmsVersion;
+            }
+
+            if (wmsVersion.Equals("1.3.0") && CRS != null && !_axisOrder[CRS])
+            {
+                // This is a fix for the inverted X/Y coordinates in WMS 1.3.0 suggesed by der1Mac here:
+                // https://github.com/Mapsui/Mapsui/issues/1925#issuecomment-1493411132
+                // Who based this on:
+                // https://viswaug.wordpress.com/2009/03/15/reversed-co-ordinate-axis-order-for-epsg4326-vs-crs84-when-requesting-wms-130-images/
+                strReq.AppendFormat(CultureInfo.InvariantCulture, "REQUEST=GetMap&BBOX={0},{1},{2},{3}",
+                    box.Min.Y, box.Min.X, box.Max.Y, box.Max.X);
+            }
+            else
+            {
+                strReq.AppendFormat(CultureInfo.InvariantCulture, "REQUEST=GetMap&BBOX={0},{1},{2},{3}",
                     box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
+            }
         }
 
         strReq.Append("&SERVICE=WMS");
@@ -459,7 +478,20 @@ public class WmsProvider : IProvider, IProjectingProvider
 
     public MRect? GetExtent()
     {
-        return CRS != null && _wmsClient != null && _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS) ? _wmsClient.Layer.BoundingBoxes[CRS] : null;
+        if (CRS != null && _wmsClient != null && _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS))
+        {
+            if (_axisOrder[CRS])
+            {
+                return _wmsClient.Layer.BoundingBoxes[CRS];
+            }
+
+            // change x with y
+            var temp = _wmsClient.Layer.BoundingBoxes[CRS];
+            return new MRect(temp.MinY, temp.MinX, temp.MaxY, temp.MaxX);
+
+        }
+
+        return null;
     }
 
     public bool? IsCrsSupported(string crs)
