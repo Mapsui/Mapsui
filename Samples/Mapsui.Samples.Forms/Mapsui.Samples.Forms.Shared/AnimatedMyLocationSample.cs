@@ -19,11 +19,11 @@ namespace Mapsui.Samples.Maui;
 namespace Mapsui.Samples.Forms;
 #endif
 
-public class AnimatedMyLocationSample : IFormsSample
+public class AnimatedMyLocationSample : IFormsSample, IDisposable
 {
     private readonly PeriodicTimer _timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
     private Position _newLocation;
-    private MapView _mapView;
+    private MapView? _mapView;
 
     public string Name => "Animated MyLocation Sample";
 
@@ -68,6 +68,12 @@ public class AnimatedMyLocationSample : IFormsSample
             _mapView.MyLocationLayer.UpdateMyDirection(_mapView.MyLocationLayer.Direction + 10, 0, true);
             _mapView.MyLocationLayer.UpdateMyViewDirection(_mapView.MyLocationLayer.ViewingDirection + 10, 0, true);
         }
+    }
+
+    public void Dispose()
+    {
+        _timer.Dispose();
+        _mapView?.Dispose();
     }
 }
 #endif
