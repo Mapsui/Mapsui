@@ -74,16 +74,6 @@
         <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
       </ItemGroup>
   
-    <ItemGroup>
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\AnimatedMyLocationSample.cs" Link="AnimatedMyLocationSample.cs" />
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\CircleSample.cs" Link="CircleSample.cs" />
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\IFormsSample.cs" Link="IFormsSample.cs" />
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\ManyPinsSample.cs" Link="ManyPinsSample.cs" />
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\MyLocationSample.cs" Link="MyLocationSample.cs" />
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PinSample.cs" Link="PinSample.cs" />
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PolygonSample.cs" Link="PolygonSample.cs" />
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PolylineSample.cs" Link="PolylineSample.cs" />
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\SnapshotSample.cs" Link="SnapshotSample.cs" />
-    </ItemGroup>
+    <Import Project="..\..\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems" Label="Shared" />
   
   </Project>
