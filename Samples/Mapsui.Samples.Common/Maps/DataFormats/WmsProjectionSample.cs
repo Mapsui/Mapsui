@@ -3,14 +3,15 @@ using Mapsui.Layers;
 using Mapsui.Providers.Wms;
 using System.Threading.Tasks;
 using Mapsui.Nts.Extensions;
+using Mapsui.Providers;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
-public class WmsSecondSample : ISample
+public class WmsProjectionSample : ISample
 {
-    public string Name => " 6 WMS 2";
+    public string Name => " 6 WMS Projection";
     public string Category => "Data Formats";
     public static IUrlPersistentCache? DefaultCache { get; set; }
 
@@ -18,7 +19,7 @@ public class WmsSecondSample : ISample
     {
         var map = new Mapsui.Map
         {
-            CRS = "EPSG:4326",
+            CRS = "EPSG:3857",
         };
 
         // The WMS request needs a CRS
@@ -28,9 +29,14 @@ public class WmsSecondSample : ISample
 
     public static async Task<ILayer> CreateLayerAsync()
     {
+        var dataSource = new ProjectingProvider(await CreateWmsProviderAsync())
+        {
+            CRS = "EPSG:3857"
+        };
+
         return new ImageLayer("mainmap")
         {
-            DataSource = await CreateWmsProviderAsync(),
+            DataSource = dataSource,
             Style = new RasterStyle()
         };
     }
