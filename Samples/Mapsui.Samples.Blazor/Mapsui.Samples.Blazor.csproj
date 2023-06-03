@@ -14,9 +14,10 @@
 
   <ItemGroup>
 		<PackageReference Include="SkiaSharp.Views.Blazor" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" PrivateAssets="all" />
-  </ItemGroup>
+		<NativeFileReference Include="libHarfBuzzSharp.a" />
+	</ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.UI.Blazor\Mapsui.UI.Blazor.csproj" />
