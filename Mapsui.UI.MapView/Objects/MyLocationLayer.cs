@@ -269,7 +269,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer
                         },
                         final: (mapView, entry) =>
                         {
-                            mapView.Map?.RefreshData(fetchInfo);
+                            mapView.Map.RefreshData(fetchInfo);
                             if (MyLocation != _animationMyLocationEnd)
                             {
                                 InternalUpdateMyLocation(_animationMyLocationEnd);
