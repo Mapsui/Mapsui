@@ -3493,6 +3493,7 @@ Global
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{ae693902-feda-4034-a7c5-9aa9872f7878}*SharedItemsImports = 5
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{b59e114d-6886-41a3-82f2-4bec36822d0c}*SharedItemsImports = 5
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{b78cde0f-568f-4064-8b74-fcd920e22351}*SharedItemsImports = 5
+		Samples\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems*{c008562a-ed14-4ef0-bad6-b7967ef9a9f3}*SharedItemsImports = 5
 		Samples\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems*{d5e9ecb0-9621-49d8-8d50-b3ba642d368c}*SharedItemsImports = 13
 		Samples\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems*{d991d377-2aa4-4fc8-a451-e19624e56ef8}*SharedItemsImports = 5
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{e71f3053-056c-4381-9638-048ed73bdff6}*SharedItemsImports = 5
