@@ -6,6 +6,7 @@
       "Mapsui.Extensions\\Mapsui.Extensions.csproj",
       "Mapsui.Nts\\Mapsui.Nts.csproj",
       "Mapsui.Rendering.Skia\\Mapsui.Rendering.Skia.csproj",
+      "Mapsui.Samples.MapView\\Mapsui.Samples.MapView.shproj",
       "Mapsui.Tiling\\Mapsui.Tiling.csproj",
       "Mapsui.UI.MapView\\Mapsui.UI.MapView.shproj",
       "Mapsui.UI.Maui\\Mapsui.UI.Maui.csproj",

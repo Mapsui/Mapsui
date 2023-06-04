@@ -14,16 +14,22 @@ using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Providers;
+using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
 public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>, IDisposable, ILayer
 {
+    public ImageLayer()
+    {
+        Style = new RasterStyle();
+    }
+
     protected override void Dispose(bool disposing)
     {
         if (disposing)
         {
-            _startFetchTimer.Dispose();
+            _startFetchTimer?.Dispose();
         }
 
         base.Dispose(disposing);
@@ -39,7 +45,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
     private bool _needsUpdate = true;
     private FetchInfo? _fetchInfo;
     private List<FeatureSets> _sets = new();
-    private readonly Timer _startFetchTimer;
+    private readonly Timer? _startFetchTimer;
     private IProvider? _dataSource;
     private readonly int _numberOfFeaturesReturned;
 
@@ -124,7 +130,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
             return;
         }
 
-        _startFetchTimer.Change(FetchDelay, Timeout.Infinite);
+        _startFetchTimer?.Change(FetchDelay, Timeout.Infinite);
     }
 
     private void StartNewFetch(FetchInfo fetchInfo)
