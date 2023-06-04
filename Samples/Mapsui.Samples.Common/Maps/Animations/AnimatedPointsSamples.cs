@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
-public class AnimatedPointsSamples : ISample
+public class AnimatedPointsSample : ISample
 {
     public string Name => "Animated Points";
 
