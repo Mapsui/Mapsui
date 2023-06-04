@@ -11,6 +11,87 @@
 		<WasmNativeStrip>false</WasmNativeStrip>
 		<EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
 	</PropertyGroup>
+	<ItemGroup>
+	  <Content Include="codesamples\AnimatedBusSample.html" />
+	  <Content Include="codesamples\AnimatedMyLocationSample.html" />
+	  <Content Include="codesamples\ArcGISImageServiceSample.html" />
+	  <Content Include="codesamples\AtlasSample.html" />
+	  <Content Include="codesamples\BingSample.html" />
+	  <Content Include="codesamples\CenterOnLocationSample.html" />
+	  <Content Include="codesamples\CircleSample.html" />
+	  <Content Include="codesamples\ComplexPolygonSample.html" />
+	  <Content Include="codesamples\CustomCalloutSample.html" />
+	  <Content Include="codesamples\CustomStyleSample.html" />
+	  <Content Include="codesamples\CustomWidgetSample.html" />
+	  <Content Include="codesamples\DynamicSvgStyleSample.html" />
+	  <Content Include="codesamples\EditingSample.html" />
+	  <Content Include="codesamples\EmptyMapSample.html" />
+	  <Content Include="codesamples\GeoJsonSample.html" />
+	  <Content Include="codesamples\GeometrySimplifyProviderWithShapefileSample.html" />
+	  <Content Include="codesamples\GeoTiffSample.html" />
+	  <Content Include="codesamples\IFormsSample.html" />
+	  <Content Include="codesamples\IMapControlSample.html" />
+	  <Content Include="codesamples\InfoLayersSample.html" />
+	  <Content Include="codesamples\ISample.html" />
+	  <Content Include="codesamples\KeepCenterInMapSample.html" />
+	  <Content Include="codesamples\KeepWithinExtentSample.html" />
+	  <Content Include="codesamples\LabelsSample.html" />
+	  <Content Include="codesamples\LineStringSample.html" />
+	  <Content Include="codesamples\ManyPinsSample.html" />
+	  <Content Include="codesamples\MapTilerSample.html" />
+	  <Content Include="codesamples\MbTilesOverlaySample.html" />
+	  <Content Include="codesamples\MbTilesSample.html" />
+	  <Content Include="codesamples\MultiPolygonProjectionSample.html" />
+	  <Content Include="codesamples\MutatingTriangleSample.html" />
+	  <Content Include="codesamples\MyLocationSample.html" />
+	  <Content Include="codesamples\OpacityStyleSample.html" />
+	  <Content Include="codesamples\OsmSample.html" />
+	  <Content Include="codesamples\PanLockSample.html" />
+	  <Content Include="codesamples\PenStrokeCapSample.html" />
+	  <Content Include="codesamples\PerformanceWidgetSample.html" />
+	  <Content Include="codesamples\PinSample.html" />
+	  <Content Include="codesamples\PointProjectionSample.html" />
+	  <Content Include="codesamples\PointsSample.html" />
+	  <Content Include="codesamples\PolygonSample.html" />
+	  <Content Include="codesamples\PolylineSample.html" />
+	  <Content Include="codesamples\ProjectionSample.html" />
+	  <Content Include="codesamples\RasterizingLayerWithLineStringSample.html" />
+	  <Content Include="codesamples\RasterizingLayerWithPointsSample.html" />
+	  <Content Include="codesamples\RasterizingTileLayerGeoJsonSample.html" />
+	  <Content Include="codesamples\RasterizingTileLayerWithLineStringSample.html" />
+	  <Content Include="codesamples\RasterizingTileLayerWithPointsSample.html" />
+	  <Content Include="codesamples\RasterizingTileLayerWithRenderFormatSkpSample.html" />
+	  <Content Include="codesamples\RasterizingTileLayerWithShapefileSample.html" />
+	  <Content Include="codesamples\ScaleBarSample.html" />
+	  <Content Include="codesamples\SelectionStyleSample.html" />
+	  <Content Include="codesamples\ShapefileProjectionSample.html" />
+	  <Content Include="codesamples\ShapefileSample.html" />
+	  <Content Include="codesamples\ShapefileTilingFilteringSample.html" />
+	  <Content Include="codesamples\SingleCalloutSample.html" />
+	  <Content Include="codesamples\SingleImageSample.html" />
+	  <Content Include="codesamples\SnapshotSample.html" />
+	  <Content Include="codesamples\StackedLabelsSample.html" />
+	  <Content Include="codesamples\SvgSample.html" />
+	  <Content Include="codesamples\SymbolAnimationSample.html" />
+	  <Content Include="codesamples\SymbolsSample.html" />
+	  <Content Include="codesamples\ThemeStyleSample.html" />
+	  <Content Include="codesamples\TiledWmsSample.html" />
+	  <Content Include="codesamples\TmsSample.html" />
+	  <Content Include="codesamples\VariousSample.html" />
+	  <Content Include="codesamples\ViewportCenterAndZoomAnimationSample.html" />
+	  <Content Include="codesamples\ViewportCenterOnAnimationSample.html" />
+	  <Content Include="codesamples\ViewportFlyToAnimationSample.html" />
+	  <Content Include="codesamples\ViewportRotateAnimationSample.html" />
+	  <Content Include="codesamples\ViewportZoomAroundLocationAnimationSample.html" />
+	  <Content Include="codesamples\ViewportZoomToResolutionAnimationSample.html" />
+	  <Content Include="codesamples\WfsSample.html" />
+	  <Content Include="codesamples\WidgetSample.html" />
+	  <Content Include="codesamples\WmsSample.html" />
+	  <Content Include="codesamples\WmtsMichellinSample.html" />
+	  <Content Include="codesamples\WmtsSample.html" />
+	  <Content Include="codesamples\WriteToLayerSample.html" />
+	  <Content Include="codesamples\ZoomLockSample.html" />
+	</ItemGroup>
 
   <ItemGroup>
 		<PackageReference Include="SkiaSharp.Views.Blazor" />

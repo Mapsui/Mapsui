@@ -51,13 +51,7 @@
     }
     else if (_activeTab == 1)
     {
-        <div class="container">
-            <div class="row">
-                <div class="col border rounded p-2 canvas-container">
-                    <iframe src="@_sourceCodeUrl" />
-                </div>
-            </div>   
-        </div>
+        <iframe src="@_sourceCodeUrl" class="source-code-iframe"></iframe>
     }
 </div>
 
@@ -84,6 +78,12 @@
         border-top: none;
         padding: 10px;
         border-radius: 0 5px 5px 5px;
+    }
+
+    .source-code-iframe {
+        width: 100%;
+        height: calc(100vh - 250px); /* Adjust the height as needed */
+        border: none;
     }
 </style>
 
