@@ -19,7 +19,7 @@ namespace Mapsui.Samples.Maui;
 namespace Mapsui.Samples.Forms;
 #endif
 
-public class AnimatedMyLocationSample : IFormsSample
+public class AnimatedMyLocationSample : IMapViewSample
 {
     private readonly PeriodicTimer _timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
     private Position _newLocation;
@@ -27,7 +27,7 @@ public class AnimatedMyLocationSample : IFormsSample
 
     public string Name => "Animated MyLocation Sample";
 
-    public string Category => "Forms";
+    public string Category => "MapView";
 
     public void Setup(IMapControl mapControl)
     {

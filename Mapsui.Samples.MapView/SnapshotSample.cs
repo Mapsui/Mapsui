@@ -18,11 +18,11 @@ namespace Mapsui.Samples.Maui;
 namespace Mapsui.Samples.Forms;
 #endif
 
-public class SnapshotSample : IFormsSample
+public class SnapshotSample : IMapViewSample
 {
     public string Name => "Snapshot Sample";
 
-    public string Category => "Forms";
+    public string Category => "MapView";
 
     public bool UpdateLocation => true;
 

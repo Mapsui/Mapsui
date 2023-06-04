@@ -128,7 +128,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         }
 
         clicker = null;
-        if (sample is IFormsSample formsSample)
+        if (sample is IMapViewSample formsSample)
         {
             clicker = formsSample.OnClick;
             _updateLocation = formsSample.UpdateLocation;
