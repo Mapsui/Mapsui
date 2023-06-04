@@ -149,7 +149,7 @@
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
-        if (firstRender || (_render && _activeTab == 0))
+        if (_activeTab == 0 && (firstRender || _render ))
         {
             _render = false;
             FillMap();
@@ -157,13 +157,6 @@
                 _mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
         }
 
-        // // if (!firstRender && _render && _activeTab == 0)
-        // // {
-        // //     _render = false;
-        // //     Sample = MapSamples.FirstOrDefault(f => f.Name == SampleId);
-        // //     FillMap();
-        // //     _mapControl?.Refresh();
-        // // }
     }
 
     private void SetActiveTab(int tab)
