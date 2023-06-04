@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Geometries;
 
-public class PolygonSample : ISample
+public class PolygonGeometrySample : ISample
 {
     public string Name => "3 Polygons";
     public string Category => "Geometries";
