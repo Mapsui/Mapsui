@@ -58,7 +58,11 @@ public class TilesSample : ISample
                     new TileRange(tileIndex.Col, tileIndex.Row), tileIndex.Level, tileSource.Schema)
             };
 
-            var raster = new MRaster(await tileSource.GetTileAsync(tileInfo), tileInfo.Extent.ToMRect());
+            var tileAsync = await tileSource.GetTileAsync(tileInfo);
+            if (tileAsync == null)
+                continue;
+
+            var raster = new MRaster(tileAsync, tileInfo.Extent.ToMRect());
             features.Add(new RasterFeature(raster));
         }
         return features;

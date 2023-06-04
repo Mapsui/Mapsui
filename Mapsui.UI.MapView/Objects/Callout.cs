@@ -67,13 +67,13 @@ public class Callout : IFeatureProvider, IDisposable, INotifyPropertyChanged
     private bool _isClosableByClick = true;
     private int _content = -1;
     private string? _title;
-    private string _titleFontName = DefaultTitleFontName;
+    private string? _titleFontName = DefaultTitleFontName;
     private double _titleFontSize = DefaultTitleFontSize;
     private FontAttributes _titleFontAttributes = DefaultTitleFontAttributes;
     private Color _titleFontColor = DefaultTitleFontColor;
     private TextAlignment _titleTextAlignment = DefaultTitleTextAlignment;
     private string? _subtitle;
-    private string _subtitleFontName = DefaultSubtitleFontName;
+    private string? _subtitleFontName = DefaultSubtitleFontName;
     private double _subtitleFontSize = DefaultSubtitleFontSize;
     private FontAttributes _subtitleFontAttributes = DefaultSubtitleFontAttributes;
     private Color _subtitleFontColor = DefaultSubtitleFontColor;
@@ -371,7 +371,7 @@ public class Callout : IFeatureProvider, IDisposable, INotifyPropertyChanged
     /// <summary>
     /// Font name to use rendering title
     /// </summary>
-    public string TitleFontName
+    public string? TitleFontName
     {
         get => _titleFontName;
         set
@@ -455,7 +455,7 @@ public class Callout : IFeatureProvider, IDisposable, INotifyPropertyChanged
     /// <summary>
     /// Font name to use rendering subtitle
     /// </summary>
-    public string SubtitleFontName
+    public string? SubtitleFontName
     {
         get => _subtitleFontName;
         set

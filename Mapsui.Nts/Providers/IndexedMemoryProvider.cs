@@ -49,7 +49,7 @@ public class IndexedMemoryProvider : IProvider
                     _index = new();
                     foreach (var feature in Features)
                     {
-                        var envelope = feature.Extent.ToEnvelope();
+                        var envelope = feature.Extent?.ToEnvelope();
                         _index.Insert(envelope, feature);
                     }
 
@@ -101,7 +101,7 @@ public class IndexedMemoryProvider : IProvider
         // Use a larger extent so that symbols partially outside of the extent are included
         var biggerBox = fetchInfo.Extent?.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
         
-        var fetchExtent = biggerBox.ToEnvelope();
+        var fetchExtent = biggerBox?.ToEnvelope();
         IEnumerable<IFeature> result = index.Query(fetchExtent);
         return Task.FromResult(result);
     }

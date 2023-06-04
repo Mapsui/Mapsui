@@ -1,10 +1,7 @@
 ﻿@page "/"
 @using Mapsui.Samples.Common
 @using Mapsui.Samples.Common.Extensions
-@using Mapsui.Extensions
-@using Mapsui.Logging
 @using Mapsui.Samples.CustomWidget
-@using Mapsui.UI
 @using System.Diagnostics.CodeAnalysis
 
 <PageTitle>Mapsui</PageTitle>
@@ -21,33 +18,83 @@
             </InputSelect>
         </div>
     </div>
-    <div class="form-group row">
-        <label for="category" class="col-sm-2 col-form-label">
-            Sample
-        </label>
-        <div class="col-sm-10">
-            <InputSelect id="sample" @bind-Value="SampleId" class="form-control">
-                @foreach (var sample in Samples)
-                {
-                    <option value="@sample">@sample</option>
-                }
-            </InputSelect>
-        </div>
+<div class="form-group row">
+    <label for="category" class="col-sm-2 col-form-label">
+        Sample
+    </label>
+    <div class="col-sm-10">
+        <InputSelect id="sample" @bind-Value="SampleId" class="form-control">
+            @foreach (var sample in Samples)
+            {
+                <option value="@sample">@sample</option>
+            }
+        </InputSelect>
     </div>
-
-<div class="container">
-    <div class="row">
-        <div class="col border rounded p-2 canvas-container">
-            <MapControlComponent @ref="_mapControl" />
-        </div>
-    </div>   
 </div>
+
+
+<div class="tabs">
+    <div class="tab @(_activeTab == 0 ? "active" : "")" @onclick="(() => SetActiveTab(0))">Map</div>
+    <div class="tab @(_activeTab == 1 ? "active" : "")" @onclick="(() => SetActiveTab(1))">SourceCode</div>
+</div>
+
+<div class="tab-content">
+    @if (_activeTab == 0)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col border rounded p-2 canvas-container">
+                    <MapControlComponent @ref="_mapControl" />
+                </div>
+            </div>   
+        </div>
+    }
+    else if (_activeTab == 1)
+    {
+        <iframe src="@_sourceCodeUrl" class="source-code-iframe"></iframe>
+    }
+</div>
+
+<style>
+    .tabs {
+        display: flex;
+    }
+
+    .tab {
+        padding: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+        background-color: #eee;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .tab.active {
+        background-color: #ccc;
+    }
+
+    .tab-content {
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-top: none;
+        padding: 10px;
+        border-radius: 0 5px 5px 5px;
+    }
+
+    .source-code-iframe {
+        width: 100%;
+        height: calc(100vh - 250px); /* Adjust the height as needed */
+        border: none;
+    }
+</style>
 
 @code
 {
+    private string? _sourceCodeUrl = null;
+    private int _activeTab = 0;
     private MapControl? _mapControl;
     private string? _categoryId;
     private string? _sampleId;
+    private bool _render;
 
     public List<string> Samples { get; set; } = new();
 
@@ -102,12 +149,21 @@
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
-        if (firstRender)
+        if (_activeTab == 0 && (firstRender || _render ))
         {
+            _render = false;
             FillMap();
             if (_mapControl != null)
                 _mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
         }
+
+    }
+
+    private void SetActiveTab(int tab)
+    {
+        _activeTab = tab;
+        _render = true;
+        StateHasChanged(); // Add this line
     }
 
     private void FillComboBoxWithCategories()
@@ -142,7 +198,8 @@
         {
             var sample = Sample;
             Title = sample.Name;            
-            await sample.SetupAsync(_mapControl);            
+            await sample.SetupAsync(_mapControl);
+            _sourceCodeUrl = $@"../codesamples/{sample.GetType().Name}.html";
         }
     }
 

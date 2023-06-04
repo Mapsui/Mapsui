@@ -81,6 +81,7 @@ public class GeoJsonProvider : IProvider
     }
 
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "Data is kept")]
     private STRtree<GeometryFeature> FeatureCollection
     {
         get

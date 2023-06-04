@@ -39,7 +39,7 @@ public partial class MainViewModel : ObservableObject
     ISampleBase selectedSample;
 
     [ObservableProperty]
-    Map map;
+    Map? map;
 
     public ObservableCollection<ISampleBase> Samples { get; set; } = new();
     public ObservableCollection<string> Categories { get; } = new();
