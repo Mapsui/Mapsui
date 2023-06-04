@@ -37,6 +37,7 @@ public class RenderToBitmapPerformance
         map = CreateMapControl();
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits", Justification = "Needs to be synchronous")]
     public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null)
     {
         var mapControl = new RegressionMapControl();

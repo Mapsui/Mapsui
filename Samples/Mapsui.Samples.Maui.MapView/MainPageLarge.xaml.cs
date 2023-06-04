@@ -29,7 +29,6 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
     IEnumerable<ISampleBase> allSamples;
     Func<object?, EventArgs, bool>? clicker;
     private CancellationTokenSource? gpsCancelation;
-    private bool _updateLocationels;
     private bool _updateLocation;
 
     public MainPageLarge()
