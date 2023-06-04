@@ -34,8 +34,7 @@
   <!--target to add Harfbuzzsharp.NativeAssets.Webassembly -->
   <!--fixes this https://github.com/Mapsui/Mapsui/issues/2014-->
   <ItemGroup>
-    <None Include="Blazor.targets" PackagePath="build/net6.0/Blazor.targets" Pack="true" />
-    <None Include="Blazor.targets" PackagePath="build/net7.0/Blazor.targets" Pack="true" />
+    <None Include="Mapsui.Blazor.targets" PackagePath="build/net7.0/Mapsui.Blazor.targets" Pack="true" />
   </ItemGroup>
 
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />

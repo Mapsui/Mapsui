@@ -106,6 +106,6 @@
     <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\Mapsui.UI.Blazor\Blazor.targets" />
+  <Import Project="..\..\Mapsui.UI.Blazor\Mapsui.Blazor.targets" />
 
 </Project>
