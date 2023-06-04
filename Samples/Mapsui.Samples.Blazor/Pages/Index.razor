@@ -94,6 +94,7 @@
     private MapControl? _mapControl;
     private string? _categoryId;
     private string? _sampleId;
+    private bool _render;
 
     public List<string> Samples { get; set; } = new();
 
@@ -148,21 +149,28 @@
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
-        if (firstRender)
+        if (firstRender || (_render && _activeTab == 0))
         {
+            _render = false;
             FillMap();
             if (_mapControl != null)
                 _mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
         }
+
+        // // if (!firstRender && _render && _activeTab == 0)
+        // // {
+        // //     _render = false;
+        // //     Sample = MapSamples.FirstOrDefault(f => f.Name == SampleId);
+        // //     FillMap();
+        // //     _mapControl?.Refresh();
+        // // }
     }
 
     private void SetActiveTab(int tab)
     {
         _activeTab = tab;
-        if (_activeTab == 0)
-        {
-            _mapControl?.Refresh();
-        }
+        _render = true;
+        StateHasChanged(); // Add this line
     }
 
     private void FillComboBoxWithCategories()
