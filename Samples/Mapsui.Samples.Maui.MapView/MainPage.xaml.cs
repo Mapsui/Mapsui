@@ -56,7 +56,7 @@ public partial class MainPage : ContentPage
         var sample = allSamples.FirstOrDefault(x => x.Name == sampleName);
 
         clicker = null;
-        if (sample is IFormsSample formsSample)
+        if (sample is IMapViewSample formsSample)
             clicker = formsSample.OnClick;
 
         if (sample != null)
