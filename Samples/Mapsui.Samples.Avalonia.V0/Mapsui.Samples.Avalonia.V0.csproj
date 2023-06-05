@@ -11,11 +11,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Avalonia" />
-		<PackageReference Include="Avalonia.Desktop" />
+		<PackageReference Include="Avalonia" VersionOverride="[0.10.21,1.0.0)" />
+		<PackageReference Include="Avalonia.Desktop" VersionOverride="[0.10.21,1.0.0)" />
 		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" />
-		<PackageReference Include="Avalonia.ReactiveUI" />
+		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" VersionOverride="[0.10.21,1.0.0)" />
+		<PackageReference Include="Avalonia.ReactiveUI" VersionOverride="[0.10.21,1.0.0)" />
 	</ItemGroup>
 
 	<ItemGroup>
