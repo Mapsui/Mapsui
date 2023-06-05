@@ -106,7 +106,7 @@
     <PackageVersion Include="Uno.UI" Version="[4.9.17,5.0.0)" />
     <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="[4.9.17,5.0.0)" />
     <PackageVersion Include="Uno.UI.RemoteControl" Version="[4.9.17,5.0.0)" />
-    <PackageVersion Include="Uno.Resizetizer" Version="[1.0.2, 2.0.0)" />
+    <PackageVersion Include="Uno.Resizetizer" Version="[1.0.4, 2.0.0)" />
     <PackageVersion Include="Uno.UI.Skia.Gtk" Version="[4.9.17,5.0.0)" />
     <PackageVersion Include="Uno.UI.Skia.Linux.FrameBuffer" Version="[4.9.17,5.0.0)" />
     <PackageVersion Include="Uno.UI.Skia.Tizen" Version="[4.9.17,5.0.0)" />
