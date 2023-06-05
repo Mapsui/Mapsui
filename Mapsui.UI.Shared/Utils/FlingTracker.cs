@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Numerics;
 
 namespace Mapsui.UI.Utils;
 
@@ -46,13 +47,19 @@ public class FlingTracker
         events.Clear();
     }
 
-    public (double vx, double vy) CalcVelocity(long id, long now)
+    /// <summary>
+    /// Calculates the fling velocity in pixels per second.
+    /// </summary>
+    /// <param name="id">Event id.</param>
+    /// <param name="now">Current time in ticks.</param>
+    /// <returns></returns>
+    public Vector2 CalcVelocity(long id, long now)
     {
-        double distanceX = 0;
-        double distanceY = 0;
+        float distanceX = 0;
+        float distanceY = 0;
 
         if (!events.ContainsKey(id) || events[id].Count < 2)
-            return (0d, 0d);
+            return new Vector2(0);
 
         var eventQueue = events[id];
         var eventsArray = eventQueue.ToArray();
@@ -69,16 +76,16 @@ public class FlingTracker
             // Only calc velocities for last maxTicks ticks
             if (now - lastTime < maxTicks)
             {
-                // Calc velocity in pixel per sec
-                distanceX += (nowX - lastX) * 10000000;// / (nowTime - lastTime);
-                distanceY += (nowY - lastY) * 10000000;// / (nowTime - lastTime);
+                distanceX += (float)(nowX - lastX);// / (nowTime - lastTime);
+                distanceY += (float)(nowY - lastY);// / (nowTime - lastTime);
             }
 
             finalTime = nowTime;
         }
 
-        var totalTime = finalTime - firstTime;
+        float totalTimeInv = 10000000 / (finalTime - firstTime);
 
-        return (distanceX / totalTime, distanceY / totalTime);
+        // Calc velocity in pixel per sec
+        return new Vector2(distanceX * totalTimeInv, distanceY * totalTimeInv);
     }
 }

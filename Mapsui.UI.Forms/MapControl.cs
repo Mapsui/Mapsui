@@ -5,6 +5,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -260,21 +261,19 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             // Delete e.Id from _touches, because finger is released
             else if (e.ActionType == SKTouchAction.Released && _touches.TryRemove(e.Id, out var releasedTouch))
             {
-                // Is this a fling or swipe?
                 if (_touches.Count == 0)
                 {
-                    double velocityX;
-                    double velocityY;
+                    // This was the last finger on screen, so this is a swipe or fling
+                    Vector2 velocity = _flingTracker.CalcVelocity(e.Id, ticks);
 
-                    if (UseFling)
+                    if (UseFling && velocity.Length() > 200)
                     {
-                        (velocityX, velocityY) = _flingTracker.CalcVelocity(e.Id, ticks);
-
-                        if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
-                        {
-                            // This was the last finger on screen, so this is a fling
-                            e.Handled = OnFlinged(velocityX, velocityY);
-                        }
+                        // high velocity -> fling
+                        e.Handled = OnFlinged(velocity.X, velocity.Y);
+                    }
+                    else
+                    {
+                        e.Handled = OnSwiped(velocity.X, velocity.Y);
                     }
 
                     // Do we have a tap event
