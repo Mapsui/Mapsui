@@ -68,6 +68,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Extensions", "Mapsui
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.UI.MapView", "Mapsui.UI.MapView\Mapsui.UI.MapView.shproj", "{1A4666DB-CD58-4380-858C-7730C0508A85}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.Samples.MapView", "Samples\Mapsui.Samples.MapView\Mapsui.Samples.MapView.shproj", "{D5E9ECB0-9621-49D8-8D50-B3BA642D368C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Addins debug|Any CPU = Addins debug|Any CPU
@@ -2921,6 +2923,7 @@ Global
 		{AB12E84B-E58B-4DFA-8050-C9E69DE707B4} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{26CD18DB-016D-45E8-95F1-672C5DB13B76} = {D425FA31-8775-4D44-8438-83F30CC86BFE}
 		{747B2FF1-C82A-42B9-B78E-914170C51393} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
+		{D5E9ECB0-9621-49D8-8D50-B3BA642D368C} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {81D8C216-9447-48B9-8D59-3FA1F8E91C85}
@@ -2930,6 +2933,8 @@ Global
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{06e3ebf5-49a2-4c71-948a-1720831213d4}*SharedItemsImports = 5
 		Mapsui.UI.MapView\Mapsui.UI.MapView.projitems*{1a4666db-cd58-4380-858c-7730c0508a85}*SharedItemsImports = 13
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{239f2b0d-13cb-4bcf-83bf-f52d696a47b7}*SharedItemsImports = 13
+		Samples\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems*{26cd18db-016d-45e8-95f1-672c5db13b76}*SharedItemsImports = 5
+		Samples\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems*{d5e9ecb0-9621-49d8-8d50-b3ba642d368c}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
