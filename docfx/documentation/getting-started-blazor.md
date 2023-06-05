@@ -44,7 +44,7 @@ In Index.razor add this to the to Page.
 }
 ```
 ### Step 5
-Add Follwing to the Blazor project is a workaround that text is rendered.
+Add Follwing to the Blazor project, is a workaround that text is rendered.
 ```xml
    <ItemGroup>
 	<PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2.3" GeneratePathProperty="true" />
