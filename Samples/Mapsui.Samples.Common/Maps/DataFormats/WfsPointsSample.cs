@@ -1,10 +1,14 @@
-﻿using Mapsui.Cache;
+﻿using System;
+using System.Collections.Generic;
+using Mapsui.Cache;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers.Wfs;
 using Mapsui.Styles;
 using System.Net;
 using System.Threading.Tasks;
+using Mapsui.Limiting;
+using Mapsui.Nts;
 
 #pragma warning disable IDISP001 // Dispose created
 
@@ -22,7 +26,7 @@ public class WfsPointsSample : ISample
     {
         try
         {
-            var map = new Map() { CRS = crs };
+            var map = new Map { CRS = crs };
             var provider = await CreateWfsProviderAsync();
             map.Layers.Add(CreateWfsLayer(provider));
 
@@ -33,7 +37,9 @@ public class WfsPointsSample : ISample
                 , 256000
             );
 
-            map.Home = n => n.CenterOnAndZoomTo(new MPoint(-34800, 255950), 10);
+            map.Navigator.OverridePanBounds = bbox;
+            map.Navigator.PanLock = true;
+            map.Navigator.ZoomToPanBounds();
 
             return map;
 
@@ -49,9 +55,9 @@ public class WfsPointsSample : ISample
     {
         return new Layer("Laser Points")
         {
-            SymbolStyle = new SymbolStyle { Fill = new Brush(Color.Red), SymbolScale = 1 },
+            Style = new SymbolStyle { Fill = new Brush(Color.Red), SymbolScale = 1 },
             DataSource = provider,
-            IsMapInfoLayer = true
+            IsMapInfoLayer = true,
         };
     }
 
@@ -67,6 +73,22 @@ public class WfsPointsSample : ISample
         provider.CRS = crs;
 
         await provider.InitAsync();
+
+        MRect bbox = new(
+            -34900
+            , 255900
+            , -34800
+            , 256000
+        );
+
+        IEnumerable<IFeature> features = await provider.ExecuteIntersectionQueryAsync(bbox);
+        foreach (IFeature feature in features) {
+            if (feature is not GeometryFeature ntsGeometryFeature) {
+                continue;
+            }
+            Console.WriteLine(ntsGeometryFeature.Geometry);
+        }
+
         return provider;
     }
 }
