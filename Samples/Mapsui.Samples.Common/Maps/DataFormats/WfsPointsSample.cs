@@ -74,21 +74,6 @@ public class WfsPointsSample : ISample
 
         await provider.InitAsync();
 
-        MRect bbox = new(
-            -34900
-            , 255900
-            , -34800
-            , 256000
-        );
-
-        IEnumerable<IFeature> features = await provider.ExecuteIntersectionQueryAsync(bbox);
-        foreach (IFeature feature in features) {
-            if (feature is not GeometryFeature ntsGeometryFeature) {
-                continue;
-            }
-            Console.WriteLine(ntsGeometryFeature.Geometry);
-        }
-
         return provider;
     }
 }
