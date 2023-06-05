@@ -13,9 +13,9 @@ using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.UI.AvaloniaV0.Extensions;
+using Mapsui.UI.Avalonia.V0.Extensions;
 
-namespace Mapsui.UI.AvaloniaV0;
+namespace Mapsui.UI.Avalonia.V0;
 
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
