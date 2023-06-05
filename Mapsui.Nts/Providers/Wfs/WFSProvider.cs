@@ -337,6 +337,7 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="featureTypeInfo">The featureTypeInfo Instance</param>
     /// <param name="wfsVersion">The desired WFS Server version.</param>
     /// <param name="persistentCache">Persistent Cache</param>
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
     public WFSProvider(WfsFeatureTypeInfo featureTypeInfo, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
         _persistentCache = persistentCache;
@@ -370,6 +371,7 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="featureType">The name of the feature type</param>
     /// <param name="wfsVersion">The desired WFS Server version.</param>
     /// <param name="persistentCache">Persistent Cache</param>
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
     public WFSProvider(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType,
                string geometryName, GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
@@ -426,6 +428,7 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="featureType">The name of the feature type</param>
     /// <param name="wfsVersion">The desired WFS Server version.</param>
     /// <param name="persistentCache">persistent Cache</param>
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
     public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
                GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {

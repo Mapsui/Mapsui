@@ -11,7 +11,7 @@ internal class Program
     public static void Main(string[] args)
     {
         BuildAvaloniaApp()
-.StartWithClassicDesktopLifetime(args);
+        .StartWithClassicDesktopLifetime(args);
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.
@@ -21,8 +21,8 @@ internal class Program
                        .UsePlatformDetect()
                        .With(new Win32PlatformOptions
                        {
-                           EnableMultitouch = true,
-                           AllowEglInitialization = true
+                           // Not in v11. Is there an alternative?: EnableMultitouch = true,
+                           AllowEglInitialization = false
                        })
                        .LogToTrace()
                        .UseReactiveUI();

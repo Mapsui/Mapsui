@@ -24,14 +24,11 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-#if DEBUG
-        this.AttachDevTools();
-#endif
     }
 
     private void InitializeComponent()
     {
-        AvaloniaXamlLoader.Load(this);
+        InitializeComponent(true, true);
 
         MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
         MapControl.Map.Navigator.RotationLock = false;
@@ -47,21 +44,14 @@ public partial class MainWindow : Window
         FillListWithSamples();
     }
 
-    private MapControl MapControl => this.FindControl<MapControl>("MapControl");
-    private ComboBox CategoryComboBox => this.FindControl<ComboBox>("CategoryComboBox");
-    private TextBlock FeatureInfo => this.FindControl<TextBlock>("FeatureInfo");
-    private StackPanel SampleList => this.FindControl<StackPanel>("SampleList");
-    private Slider RotationSlider => this.FindControl<Slider>("RotationSlider");
-
-
     private void FillComboBoxWithCategories()
     {
         Tests.Common.Utilities.LoadAssembly();
 
-        var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
+        var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c).ToArray();
 
-        CategoryComboBox.Items = categories;
-
+        CategoryComboBox.ItemsSource = categories;
+        
         CategoryComboBox.SelectedIndex = 1;
     }
 
@@ -84,7 +74,7 @@ public partial class MainWindow : Window
         FillListWithSamples();
     }
 
-    private IControl CreateRadioButton(ISampleBase sample)
+    private RadioButton CreateRadioButton(ISampleBase sample)
     {
         var radioButton = new RadioButton
         {
