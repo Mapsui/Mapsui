@@ -43,7 +43,7 @@ In Index.razor add this to the to Page.
     }
 }
 ```
-### Step 6
+### Step 5
 Add Follwing to the Blazor project is a workaround that text is rendered.
 ```xml
    <ItemGroup>
@@ -52,5 +52,5 @@ Add Follwing to the Blazor project is a workaround that text is rendered.
   </ItemGroup>
 ```	
 
-### Step 5
+### Step 6
 Run it and you should see a map of the world.
