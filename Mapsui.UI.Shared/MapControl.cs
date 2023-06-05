@@ -32,6 +32,8 @@ namespace Mapsui.UI.WinUI;
 namespace Mapsui.UI.Forms;
 #elif __AVALONIA__
 namespace Mapsui.UI.Avalonia;
+#elif __AVALONIA_V0__
+namespace Mapsui.UI.Avalonia.V0;
 #elif __ETO_FORMS__
 namespace Mapsui.UI.Eto;
 #elif __BLAZOR__

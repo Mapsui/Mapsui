@@ -10,7 +10,7 @@ namespace Mapsui.UI.Blazor.Extensions;
 // This class can be registered as scoped DI service and then injected into Blazor
 // components for use.
 
-public class MapsuiJsInterop : IAsyncDisposable
+public sealed class MapsuiJsInterop : IAsyncDisposable
 {
     private readonly AsyncLazy<IJSObjectReference> _moduleTask;
 

@@ -28,7 +28,7 @@ public class SampleTileProvider : ITileProvider
 
     public Task<byte[]?> GetTileAsync(TileInfo tileInfo)
     {
-        return Task.FromResult(_dictionary[tileInfo.Index]);
+        return Task.FromResult((byte[]?)_dictionary[tileInfo.Index]);
     }
 
     private static Stream GetTileStream(TileIndex index)

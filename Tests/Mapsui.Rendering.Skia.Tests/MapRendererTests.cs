@@ -232,7 +232,7 @@ internal class MapRendererTests
     public void RenderProjection()
     {
         // arrange
-        using var map = ProjectionSample.CreateMap();
+        using var map = ProjectionTestSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "projection.png";
 

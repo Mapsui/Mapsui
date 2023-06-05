@@ -9,7 +9,7 @@ using Mapsui.Tiling;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
-public class AnimatedBusSamples : ISample
+public class AnimatedBusSample : ISample
 {
     public string Name => "Animated Bus";
 
