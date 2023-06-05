@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -204,15 +205,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         RefreshData();
         _mouseDown = false;
 
-        double velocityX;
-        double velocityY;
+        Vector2 velocity = _flingTracker.CalcVelocity(1, DateTime.Now.Ticks);
 
-        (velocityX, velocityY) = _flingTracker.CalcVelocity(1, DateTime.Now.Ticks);
-
-        if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
+        if (velocity.Length() > 200)
         {
             // This was the last finger on screen, so this is a fling
-            e.Handled = OnFlinged(velocityX, velocityY);
+            e.Handled = OnFlinged(velocity.X, velocity.Y);
         }
         _flingTracker.RemoveId(1);
 
