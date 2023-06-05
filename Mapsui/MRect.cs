@@ -111,7 +111,7 @@ public class MRect
     public MRect Grow(double amountInX, double amountInY)
     {
         var grownBox = new MRect(Min.X - amountInX, Min.Y - amountInY, Max.X + amountInX, MaxY + amountInY);
-        SwapMinAndMaxIfNeeded();
+        grownBox.SwapMinAndMaxIfNeeded();
         return grownBox;
     }
 
