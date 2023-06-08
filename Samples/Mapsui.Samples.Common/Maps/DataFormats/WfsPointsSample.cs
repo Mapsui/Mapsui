@@ -39,7 +39,7 @@ public class WfsPointsSample : ISample
 
             map.Navigator.OverridePanBounds = bbox;
             map.Navigator.PanLock = true;
-            map.Navigator.ZoomToPanBounds();
+            map.Navigator.ZoomToPanBounds(); 
 
             return map;
 
@@ -71,6 +71,7 @@ public class WfsPointsSample : ISample
             persistentCache: DefaultCache);
 
         provider.CRS = crs;
+        provider.AxisOrder = new int []{0,1};
 
         await provider.InitAsync();
 
