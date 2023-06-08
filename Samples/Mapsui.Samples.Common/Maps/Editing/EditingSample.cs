@@ -16,9 +16,14 @@ namespace Mapsui.Samples.Common.Maps.Editing;
 
 public class EditingSample : IMapControlSample
 {
-    public string Name => "Editing Sample";
+    public string Name => "Editing Modify";
     public string Category => "Editing";
     public void Setup(IMapControl mapControl)
+    {
+        InitEditMode(mapControl, EditMode.Modify);
+    }
+
+    public static void InitEditMode(IMapControl mapControl, EditMode editMode)
     {
         var map = CreateMap();
         var editManager = new EditManager
@@ -31,8 +36,8 @@ public class EditingSample : IMapControlSample
         editManager.Layer.AddRange(targetLayer.GetFeatures().Copy());
         targetLayer.Clear();
 
-        editManager.EditMode = EditMode.Modify;
-        
+        editManager.EditMode = editMode;
+
         var editManipulation = new EditManipulation();
 
         map.Home = n =>
@@ -46,7 +51,7 @@ public class EditingSample : IMapControlSample
 
         if (mapControl is IMapControlEdit edit)
         {
-            var editConnector = new EditConnector(edit, editManager, editManipulation);    
+            var editConnector = new EditConnector(edit, editManager, editManipulation);
         }
 
         mapControl.Map = map;
