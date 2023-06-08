@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using Mapsui.Extensions;
+using Mapsui.Nts.Editing;
 using Mapsui.Nts.Extensions;
 using Mapsui.UI.Wpf;
 

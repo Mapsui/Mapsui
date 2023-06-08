@@ -10,7 +10,7 @@ using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Samples.Wpf.Editing.Utilities;
 using Mapsui.Logging;
-
+using Mapsui.Nts.Editing;
 using Mapsui.UI.Wpf.Extensions;
 
 namespace Mapsui.Samples.Wpf.Editing;

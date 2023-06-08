@@ -67,7 +67,7 @@ public class EditManager
         return false;
     }
 
-    internal void HoveringVertex(MapInfo? mapInfo)
+    public void HoveringVertex(MapInfo? mapInfo)
     {
         if (_addInfo.Vertex != null)
         {

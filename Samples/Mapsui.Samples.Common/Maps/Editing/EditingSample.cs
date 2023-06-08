@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
+using Mapsui.Nts.Editing;
 using Mapsui.Nts.Layers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
@@ -22,16 +24,23 @@ public class EditingSample : ISample
         var map = CreateMap();
         var vertexLayer = (VertexOnlyLayer)map.Layers.First(f => f is VertexOnlyLayer);
         var editLayer = vertexLayer.Source;
+
+        var editManager = new EditManager();
+        editManager.Layer = (WritableLayer)map.Layers.First(l => l.Name == "EditLayer");
+        var targetLayer = (WritableLayer)map.Layers.First(l => l.Name == "Layer 3");
+
+        // Load the polygon layer on startup so you can start modifying right away
+        editManager.Layer.AddRange(targetLayer.GetFeatures().Copy());
+        targetLayer.Clear();
+
+        editManager.EditMode = EditMode.Modify;
+        
         map.Home = n =>
         {
-            foreach (var layer in map.Layers)
+            if (editManager.Layer.Extent != null)
             {
-                if (layer is not WritableLayer writableLayer) continue;
-                if (layer.Extent == null) continue;
-                
-                var extent = layer.Extent!.Grow(layer.Extent.Width * 0.2);
+                var extent = editManager.Layer.Extent!.Grow(editManager.Layer.Extent.Width * 0.2);
                 map.Navigator.ZoomToBox(extent);
-                break;
             }
         };
         return Task.FromResult(map);
