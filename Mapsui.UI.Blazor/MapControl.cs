@@ -249,7 +249,7 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
             if (EditMouseLeftButtonUp != null && e.Button == 0)
             {
                 var position = e.Location(await BoundingClientRectAsync());
-                var args = new EditMouseArgs(position, true, 0);
+                var args = new EditMouseArgs(position, true, 1);
                 EditMouseLeftButtonUp(this, args);
                 if (args.Handled)
                 {
