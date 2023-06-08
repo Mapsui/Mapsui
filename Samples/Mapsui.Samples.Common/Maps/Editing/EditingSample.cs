@@ -48,6 +48,8 @@ public class EditingSample : IMapControlSample
         {
             var editConnector = new EditConnector(edit, editManager, editManipulation);    
         }
+
+        mapControl.Map = map;
     }
 
     public static Map CreateMap()
