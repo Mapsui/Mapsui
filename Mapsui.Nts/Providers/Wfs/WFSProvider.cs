@@ -109,7 +109,7 @@ public class WFSProvider : IProvider, IDisposable
             //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
             _axisOrder ?? (_wfsVersion == WFSVersionEnum.WFS_1_0_0
                 ? new[] { 0, 1 }
-                : new AxisOrderRegistry()[CRS ?? throw new ArgumentException("CRS needs to be set")]);
+                : new CrsAxisOrderRegistry()[CRS ?? throw new ArgumentException("CRS needs to be set")]);
         set
         {
             if (value != null)

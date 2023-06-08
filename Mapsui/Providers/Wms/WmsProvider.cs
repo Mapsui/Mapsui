@@ -21,6 +21,7 @@ using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Projections;
 using Mapsui.Rendering;
 using Mapsui.Utilities;
 
@@ -361,7 +362,7 @@ public class WmsProvider : IProvider, IProjectingProvider
                 wmsVersion = _wmsClient.WmsVersion;
             }
 
-            if (wmsVersion.Equals("1.3.0") && CRS != null && !_axisOrder[CRS])
+            if (wmsVersion.Equals("1.3.0") && CRS != null && !_axisOrder[CRS].IsNaturalOrder())
             {
                 // This is a fix for the inverted X/Y coordinates in WMS 1.3.0 suggesed by der1Mac here:
                 // https://github.com/Mapsui/Mapsui/issues/1925#issuecomment-1493411132
@@ -480,7 +481,7 @@ public class WmsProvider : IProvider, IProjectingProvider
     {
         if (CRS != null && _wmsClient != null && _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS))
         {
-            if (_axisOrder[CRS])
+            if (_axisOrder[CRS].IsNaturalOrder())
             {
                 return _wmsClient.Layer.BoundingBoxes[CRS];
             }

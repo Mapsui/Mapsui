@@ -71,7 +71,7 @@ public class WfsPointsSample : ISample
             persistentCache: DefaultCache);
 
         provider.CRS = crs;
-        provider.AxisOrder = new int []{0,1};
+        provider.AxisOrder = new []{0,1};
 
         await provider.InitAsync();
 
