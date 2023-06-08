@@ -5,7 +5,7 @@ namespace Mapsui.Nts.Editing;
 
 public class AddInfo
 {
-    public GeometryFeature? Feature;
-    public IList<Coordinate>? Vertices;
-    public Coordinate? Vertex;
+    public GeometryFeature? Feature { get; set; }
+    public IList<Coordinate>? Vertices{ get; set; }
+    public Coordinate? Vertex{ get; set; }
 }
