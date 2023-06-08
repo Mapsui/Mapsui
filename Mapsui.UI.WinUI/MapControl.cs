@@ -279,8 +279,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #if HAS_UNO            
             _canvas?.Dispose();
             _selectRectangle?.Dispose();
-            _map?.Dispose();
+            _invalidateTimer?.Dispose();
 #endif
+            _map?.Dispose();
+
         }
         CommonDispose(disposing);
 
