@@ -101,7 +101,7 @@ public class WFSProvider : IProvider, IDisposable
     /// </summary>
     /// <remarks>
     /// The axis order is an array of array offsets. It can be either {0, 1} or {1, 0}.
-    /// <para/>If not set explictly, <see cref="AxisOrderRegistry"/> is asked for a value based on <see cref="SRID"/>.</remarks>
+    /// <para/>If not set explictly, <see cref="CrsAxisOrderRegistry"/> is asked for a value based on <see cref="SRID"/>.</remarks>
     [AllowNull]
     public int[] AxisOrder
     {
