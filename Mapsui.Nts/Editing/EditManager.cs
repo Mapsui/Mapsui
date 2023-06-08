@@ -33,7 +33,6 @@ public class EditManager
 
     public int VertexRadius { get; set; } = 12;
     public bool SelectMode { get; set; }
-    public MPoint MouseCoordinates { get; set; }
 
     public bool EndEdit()
     {
