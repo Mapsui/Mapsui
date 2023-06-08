@@ -4,7 +4,7 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Nts.Extensions;
 
-public static class GeometryExtensions
+public static partial class GeometryExtensions
 {
     public static IEnumerable<GeometryFeature> ToFeatures(this IEnumerable<Geometry> geometries)
     {

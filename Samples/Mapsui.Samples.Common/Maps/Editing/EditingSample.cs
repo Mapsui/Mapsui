@@ -1,15 +1,42 @@
-﻿using Mapsui.Samples.Wpf.Editing.Layers;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Layers;
+using Mapsui.Nts;
+using Mapsui.Nts.Layers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using Mapsui.Nts;
-using NetTopologySuite.IO;
 using Mapsui.Tiling;
+using NetTopologySuite.IO;
 
-namespace Mapsui.Samples.Wpf.Editing.Samples;
+#pragma warning disable IDISP001 // Dispose created
 
-public static class EditingSample
+namespace Mapsui.Samples.Common.Maps.Editing;
+
+public class EditingSample : ISample
 {
+    public string Name => "Editing Sample";
+    public string Category => "Editing";
+
+    public Task<Map> CreateMapAsync()
+    {
+        var map = CreateMap();
+        var vertexLayer = (VertexOnlyLayer)map.Layers.First(f => f is VertexOnlyLayer);
+        var editLayer = vertexLayer.Source;
+        map.Home = n =>
+        {
+            foreach (var layer in map.Layers)
+            {
+                if (layer is not WritableLayer writableLayer) continue;
+                if (layer.Extent == null) continue;
+                
+                var extent = layer.Extent!.Grow(layer.Extent.Width * 0.2);
+                map.Navigator.ZoomToBox(extent);
+                break;
+            }
+        };
+        return Task.FromResult(map);
+    }
+
     public static Map CreateMap()
     {
         var map = new Map();

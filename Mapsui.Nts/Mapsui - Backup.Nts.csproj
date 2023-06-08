@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+		<TargetFrameworks Condition="'$(SolutionName)' != 'Mapsui.Mac.Legacy'">$(TargetFrameworks);net6.0</TargetFrameworks>
+		<Description>Mapsui - Library for mapping</Description>
+		<PackageTags>$(PackageTags) nts</PackageTags>
+		<IsPackable>true</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="NetTopologySuite" />
+		<PackageReference Include="NetTopologySuite.IO.GeoJSON4STJ" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard2.1'">
+		<PackageReference Include="System.Text.Encoding.CodePages" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Mapsui\Mapsui.csproj" />
+	</ItemGroup>
+
+</Project>
