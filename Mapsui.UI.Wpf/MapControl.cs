@@ -171,7 +171,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable, IMapControlEdi
         if (EditMouseLeftButtonDown != null)
         {
             var mousePosition = e.GetPosition(this).ToMapsui();
-            var editMouseArgs = new EditMouseArgs(mousePosition, e.LeftButton == MouseButtonState.Pressed, e.ClickCount);
+            var editMouseArgs = new EditMouseArgs(mousePosition, true, e.ClickCount);
             EditMouseLeftButtonDown(this, editMouseArgs);
             if (editMouseArgs.Handled)
             {
@@ -200,7 +200,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable, IMapControlEdi
         
         if (EditMouseLeftButtonUp != null)
         {
-            var editMouseArgs = new EditMouseArgs(mousePosition, e.LeftButton == MouseButtonState.Pressed, e.ClickCount);
+            var editMouseArgs = new EditMouseArgs(mousePosition, true, e.ClickCount);
             EditMouseLeftButtonUp(this, editMouseArgs);
             if (editMouseArgs.Handled)
             {
