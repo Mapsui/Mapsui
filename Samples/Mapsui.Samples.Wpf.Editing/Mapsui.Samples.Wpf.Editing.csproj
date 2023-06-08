@@ -18,9 +18,4 @@
     <PackageReference Include="BruTile" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Layers\" />
-    <Folder Include="Samples\" />
-  </ItemGroup>
-
 </Project>

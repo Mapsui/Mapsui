@@ -1,9 +1,8 @@
-﻿using Mapsui.Nts;
-using NetTopologySuite.Geometries;
+﻿using NetTopologySuite.Geometries;
 
-namespace Mapsui.Samples.Wpf.Editing.Editing;
+namespace Mapsui.Nts.Editing;
 
-public class RotateInfo
+internal class ScaleInfo
 {
     public GeometryFeature? Feature { get; set; }
     public Point? PreviousPosition { get; set; }

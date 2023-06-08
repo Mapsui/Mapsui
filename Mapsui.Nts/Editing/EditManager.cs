@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Layers;
-using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
-using Mapsui.Samples.Wpf.Editing.Extensions;
 using NetTopologySuite.Geometries;
 
-namespace Mapsui.Samples.Wpf.Editing.Editing;
+namespace Mapsui.Nts.Editing;
 
 public enum EditMode
 {

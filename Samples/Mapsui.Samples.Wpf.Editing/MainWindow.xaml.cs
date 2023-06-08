@@ -8,7 +8,6 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Samples.Wpf.Editing.Editing;
 using Mapsui.Samples.Wpf.Editing.Utilities;
 using Mapsui.Logging;
 

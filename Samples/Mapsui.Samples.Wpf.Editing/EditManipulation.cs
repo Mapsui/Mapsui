@@ -2,7 +2,6 @@
 using System.Windows.Input;
 using Mapsui.Extensions;
 using Mapsui.Nts.Extensions;
-using Mapsui.Samples.Wpf.Editing.Editing;
 using Mapsui.UI.Wpf;
 
 namespace Mapsui.Samples.Wpf.Editing;

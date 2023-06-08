@@ -43,4 +43,22 @@ public static class CoordinateExtensions
             return new Polygon(coordinates.ToLinearRing());
         return new Polygon(coordinates.ToLinearRing(), holes.Select(h => h.ToLinearRing()).ToArray());
     }
+    
+    public static void SetXY(this Coordinate? target, Coordinate? source)
+    {
+        if (target is null) return;
+        if (source is null) return;
+
+        target.X = source.X;
+        target.Y = source.Y;
+    }
+
+    public static void SetXY(this Coordinate? target, MPoint? source)
+    {
+        if (target is null) return;
+        if (source is null) return;
+
+        target.X = source.X;
+        target.Y = source.Y;
+    }
 }
