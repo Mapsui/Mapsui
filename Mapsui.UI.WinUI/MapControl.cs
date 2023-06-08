@@ -279,6 +279,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #if HAS_UNO            
             _canvas?.Dispose();
             _selectRectangle?.Dispose();
+#endif
+#if HAS_UNO || __UWP__ || __WINUI__
             _invalidateTimer?.Dispose();
 #endif
             _map?.Dispose();
