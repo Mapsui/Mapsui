@@ -312,18 +312,18 @@ public partial class MapControl : Grid, IMapControl, IDisposable, IMapControlEdi
 
     private void MapControlMouseMove(object sender, MouseEventArgs e)
     {
-        ////if (EditMouseMove != null)
-        ////{
-        ////    var mousePosition = e.GetPosition(this).ToMapsui();
-        ////    var editMouseArgs = new EditMouseArgs(mousePosition, e.LeftButton == MouseButtonState.Pressed, 0);
-        ////    EditMouseMove(this, editMouseArgs);
-        ////    if (editMouseArgs.Handled)
-        ////    {
-        ////        e.Handled = true;
-        ////        return;
-        ////    }            
-        ////}
-        
+        if (EditMouseMove != null)
+        {
+            var mousePosition = e.GetPosition(this).ToMapsui();
+            var editMouseArgs = new EditMouseArgs(mousePosition, e.LeftButton == MouseButtonState.Pressed, 0);
+            EditMouseMove(this, editMouseArgs);
+            if (editMouseArgs.Handled)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
         if (IsInBoxZoomMode())
         {
             DrawBbox(e.GetPosition(this));
