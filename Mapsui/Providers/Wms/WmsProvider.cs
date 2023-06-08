@@ -153,7 +153,7 @@ public class WmsProvider : IProvider, IProjectingProvider
     {
         get =>
             //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
-            _axisOrder ?? new CrsAxisOrderRegistry()[CRS ?? throw new ArgumentException("CRS needs to be set")]);
+            _axisOrder ?? new CrsAxisOrderRegistry()[CRS ?? throw new ArgumentException("CRS needs to be set")];
         set
         {
             if (value != null)
