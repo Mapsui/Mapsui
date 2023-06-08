@@ -45,8 +45,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         try
         {
+#if __MAUI__
+            Callout.DefaultTitleFontSize = 24;  // excplicit values from maui debugging
+            Callout.DefaultSubtitleFontSize = 20; // excplicit values from maui debugging
+#else
             Callout.DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
             Callout.DefaultSubtitleFontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
+#endif
         }
         catch (Exception ex)
         {
