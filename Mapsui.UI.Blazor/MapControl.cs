@@ -274,8 +274,10 @@ public partial class MapControl : ComponentBase, IMapControl
                     var currentPosition = e.Location(await BoundingClientRectAsync());
                     Map.Navigator.Drag(currentPosition, _previousMousePosition);
                     _previousMousePosition = e.Location(await BoundingClientRectAsync());
-                    _downMousePosition = null;
                 }
+
+                // cleanout down mouse position because it is now a move
+                _downMousePosition = null;
             }
         }
         catch (Exception ex)
