@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Windows.Input;
 using Mapsui.Extensions;
-using Mapsui.Nts.Editing;
 using Mapsui.Nts.Extensions;
 using Mapsui.UI;
 
-namespace Mapsui.Samples.Wpf.Editing;
+namespace Mapsui.Nts.Editing;
 
 public enum MouseState
 {
@@ -46,7 +44,7 @@ public class EditManipulation
                 {
                     if (editManager.EditMode == EditMode.Modify)
                     {
-                        if (IsShiftDown())
+                        if (IsShiftDown(mapControl))
                         {
                             return editManager.TryDeleteCoordinate(
                                 mapControl.GetMapInfo(screenPosition, editManager.VertexRadius), editManager.VertexRadius);
@@ -102,9 +100,14 @@ public class EditManipulation
         }
     }
 
-    private static bool IsShiftDown()
+    private static bool IsShiftDown(IMapControl mapControl)
     {
-        return Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+        if (mapControl is IMapControlEdit edit)
+        {
+            return edit.ShiftPressed;
+        }
+
+        return false;
     }
 
     private static bool IsClick(MPoint? screenPosition, MPoint? mouseDownScreenPosition)

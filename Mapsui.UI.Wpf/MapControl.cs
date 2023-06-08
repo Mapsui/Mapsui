@@ -21,7 +21,7 @@ using XamlVector = System.Windows.Vector;
 
 namespace Mapsui.UI.Wpf;
 
-public partial class MapControl : Grid, IMapControl, IDisposable
+public partial class MapControl : Grid, IMapControl, IDisposable, IMapControlEdit
 {
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private MPoint? _downMousePosition;
@@ -460,4 +460,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Dispose(true);
         GC.SuppressFinalize(this);
     }
+
+    public bool ShiftPressed => Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
 }
