@@ -75,6 +75,7 @@ public class WFSProvider : IProvider, IDisposable
     private string? _sridOverride;
     private string? _proxyUrl;
     private ICredentials? _credentials;
+    private CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
 
     // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
     // It helps to accelerate the rendering process significantly.
@@ -109,7 +110,7 @@ public class WFSProvider : IProvider, IDisposable
             //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
             _axisOrder ?? (_wfsVersion == WFSVersionEnum.WFS_1_0_0
                 ? new[] { 0, 1 }
-                : new CrsAxisOrderRegistry()[CRS ?? throw new ArgumentException("CRS needs to be set")]);
+                : _crsAxisOrderRegistry[CRS ?? throw new ArgumentException("CRS needs to be set")]);
         set
         {
             if (value != null)

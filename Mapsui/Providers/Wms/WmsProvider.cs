@@ -43,6 +43,7 @@ public class WmsProvider : IProvider, IProjectingProvider
     private Func<string, Task<Stream>>? _getStreamAsync;
     private readonly IUrlPersistentCache? _persistentCache;
     private static int[]? _axisOrder;
+    private CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
 
     public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
         : this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache)
@@ -151,9 +152,11 @@ public class WmsProvider : IProvider, IProjectingProvider
     [AllowNull]
     public int[] AxisOrder
     {
-        get =>
+        get
+        {
             //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
-            _axisOrder ?? new CrsAxisOrderRegistry()[CRS ?? throw new ArgumentException("CRS needs to be set")];
+            return _axisOrder ?? _crsAxisOrderRegistry[CRS ?? throw new ArgumentException("CRS needs to be set")];
+        }
         set
         {
             if (value != null)
