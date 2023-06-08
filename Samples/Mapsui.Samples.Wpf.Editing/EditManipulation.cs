@@ -3,7 +3,7 @@ using System.Windows.Input;
 using Mapsui.Extensions;
 using Mapsui.Nts.Editing;
 using Mapsui.Nts.Extensions;
-using Mapsui.UI.Wpf;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Wpf.Editing;
 
@@ -24,7 +24,7 @@ public class EditManipulation
     public static int MinPixelsMovedForDrag { get; set; } = 4;
 
     public bool Manipulate(MouseState mouseState, MPoint screenPosition,
-        EditManager editManager, MapControl mapControl)
+        EditManager editManager, IMapControl mapControl)
     {
         switch (mouseState)
         {
