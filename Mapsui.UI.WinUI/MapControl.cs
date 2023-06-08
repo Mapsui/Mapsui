@@ -276,11 +276,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (disposing)
         {
-            (_canvas as IDisposable)?.Dispose();
-#if __IOS__ || __MACOS__ || __ANDROID__ || NETSTANDARD
-            (_selectRectangle as IDisposable)?.Dispose();
-#endif
+#if HAS_UNO            
+            _canvas?.Dispose();
+            _selectRectangle?.Dispose();
             _map?.Dispose();
+#endif
         }
         CommonDispose(disposing);
 
