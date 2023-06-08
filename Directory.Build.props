@@ -37,7 +37,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <Compile Include="$(MSBuildThisFileDirectory)/Nullable.cs" />
+	  <!--<Compile Include="$(MSBuildThisFileDirectory)/Nullable.cs" />-->
 	  <Compile Include="$(MSBuildThisFileDirectory)/InitProperty.cs" />
   </ItemGroup>
 
