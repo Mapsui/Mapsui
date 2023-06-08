@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
@@ -8,25 +7,24 @@ using Mapsui.Nts.Layers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
+using Mapsui.UI;
 using NetTopologySuite.IO;
 
 #pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Common.Maps.Editing;
 
-public class EditingSample : ISample
+public class EditingSample : IMapControlSample
 {
     public string Name => "Editing Sample";
     public string Category => "Editing";
-
-    public Task<Map> CreateMapAsync()
+    public void Setup(IMapControl mapControl)
     {
         var map = CreateMap();
-        var vertexLayer = (VertexOnlyLayer)map.Layers.First(f => f is VertexOnlyLayer);
-        var editLayer = vertexLayer.Source;
-
-        var editManager = new EditManager();
-        editManager.Layer = (WritableLayer)map.Layers.First(l => l.Name == "EditLayer");
+        var editManager = new EditManager
+        {
+            Layer = (WritableLayer)map.Layers.First(l => l.Name == "EditLayer")
+        };
         var targetLayer = (WritableLayer)map.Layers.First(l => l.Name == "Layer 3");
 
         // Load the polygon layer on startup so you can start modifying right away
@@ -35,6 +33,8 @@ public class EditingSample : ISample
 
         editManager.EditMode = EditMode.Modify;
         
+        var editManipulation = new EditManipulation();
+
         map.Home = n =>
         {
             if (editManager.Layer.Extent != null)
@@ -43,7 +43,11 @@ public class EditingSample : ISample
                 map.Navigator.ZoomToBox(extent);
             }
         };
-        return Task.FromResult(map);
+
+        if (mapControl is IMapControlEdit edit)
+        {
+            var editConnector = new EditConnector(edit, editManager, editManipulation);    
+        }
     }
 
     public static Map CreateMap()
