@@ -35,7 +35,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.Contains('windows'))">
-    <PackageReference Include="Microsoft.WindowsAppSDK" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" VersionOverride="[1.3.230502000,2.0.0)"  />
     <PackageReference Include="SkiaSharp.Views.WinUI" />
   </ItemGroup>
 
