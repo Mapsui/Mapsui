@@ -4,7 +4,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFramework>net6.0-android31.0</TargetFramework>
+    <TargetFrameworks>net6.0-android31.0;net7.0-android33.0</TargetFrameworks>
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageId>Mapsui.Android</PackageId>
