@@ -129,14 +129,23 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
         RefreshGraphics();
     }
 
-    private void OnLoadComplete()
+    private async void OnLoadComplete()
     {
-        SetViewportSize();
+        try 
+        { 
+            SetViewportSize();
+            await DisableMouseWheel();
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
     }
 
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     protected async void OnMouseWheel(WheelEventArgs e)
     {
+        
         var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
         var currentMousePosition = e.Location(await BoundingClientRectAsync());
         Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
@@ -150,6 +159,16 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
         }
 
         return await Interop.BoundingClientRectAsync(_elementId);
+    }
+
+    private async Task DisableMouseWheel()
+    {
+        if (Interop == null)
+        {
+            throw new ArgumentException("Interop is null");
+        }
+
+        await Interop.DisableMouseWheel(_elementId);
     }
 
     private void OnSizeChanged()
