@@ -260,14 +260,14 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             // Delete e.Id from _touches, because finger is released
             else if (e.ActionType == SKTouchAction.Released && _touches.TryRemove(e.Id, out var releasedTouch))
             {
-                // Is this a fling or swipe?
                 if (_touches.Count == 0)
                 {
-                    double velocityX;
-                    double velocityY;
-
+                    // Is this a fling?
                     if (UseFling)
                     {
+                        double velocityX;
+                        double velocityY;
+
                         (velocityX, velocityY) = _flingTracker.CalcVelocity(e.Id, ticks);
 
                         if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
@@ -452,12 +452,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     public event EventHandler<HoveredEventArgs>? Hovered;
 
     /// <summary>
-    /// Swipe is called, when user release mouse button or lift finger while moving with a certain speed 
-    /// </summary>
-    public event EventHandler<SwipedEventArgs>? Swipe;
-
-    /// <summary>
-    /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
+    /// Fling is called, when user release mouse button or lift finger while moving with a certain speed
     /// </summary>
     public event EventHandler<SwipedEventArgs>? Fling;
 
@@ -509,23 +504,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         var args = new HoveredEventArgs(screenPosition);
 
         Hovered?.Invoke(this, args);
-
-        return args.Handled;
-    }
-
-    /// <summary>
-    /// Called, when mouse/finger/pen swiped over map
-    /// </summary>
-    /// <param name="velocityX">Velocity in x direction in pixel/second</param>
-    /// <param name="velocityY">Velocity in y direction in pixel/second</param>
-    private bool OnSwiped(double velocityX, double velocityY)
-    {
-        var args = new SwipedEventArgs(velocityX, velocityY);
-
-        Swipe?.Invoke(this, args);
-
-        // TODO
-        // Perform standard behavior
 
         return args.Handled;
     }

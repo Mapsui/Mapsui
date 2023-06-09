@@ -21,6 +21,7 @@ using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Projections;
 using Mapsui.Rendering;
 using Mapsui.Utilities;
 
@@ -41,7 +42,8 @@ public class WmsProvider : IProvider, IProjectingProvider
     private readonly Client? _wmsClient;
     private Func<string, Task<Stream>>? _getStreamAsync;
     private readonly IUrlPersistentCache? _persistentCache;
-    private static readonly CrsAxisOrderRegistry _axisOrder = new();
+    private static int[]? _axisOrder;
+    private CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
 
     public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
         : this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache)
@@ -140,6 +142,36 @@ public class WmsProvider : IProvider, IProjectingProvider
     /// Timeout of web request in milliseconds. Defaults to 10 seconds
     /// </summary>
     public int TimeOut { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating the axis order
+    /// </summary>
+    /// <remarks>
+    /// The axis order is an array of array offsets. It can be either {0, 1} or {1, 0}.
+    /// <para/>If not set explictly, <see cref="CrsAxisOrderRegistry"/> is asked for a value based on <see cref="SRID"/>.</remarks>
+    [AllowNull]
+    public int[] AxisOrder
+    {
+        get
+        {
+            //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
+            return _axisOrder ?? _crsAxisOrderRegistry[CRS ?? throw new ArgumentException("CRS needs to be set")];
+        }
+        set
+        {
+            if (value != null)
+            {
+                if (value.Length != 2)
+                    throw new ArgumentException("Axis order array must have 2 elements");
+                if (!((value[0] == 0 && value[1] == 1) ||
+                      (value[0] == 1 && value[1] == 0)))
+                    throw new ArgumentException("Axis order array values must be 0 or 1");
+                if (value[0] + value[1] != 1)
+                    throw new ArgumentException("Sum of values in axis order array must 1");
+            }
+            _axisOrder = value;
+        }
+    }
 
     /// <summary>
     /// Adds a layer to WMS request
@@ -361,7 +393,7 @@ public class WmsProvider : IProvider, IProjectingProvider
                 wmsVersion = _wmsClient.WmsVersion;
             }
 
-            if (wmsVersion.Equals("1.3.0") && CRS != null && !_axisOrder[CRS])
+            if (wmsVersion.Equals("1.3.0") && CRS != null && !AxisOrder.IsNaturalOrder())
             {
                 // This is a fix for the inverted X/Y coordinates in WMS 1.3.0 suggesed by der1Mac here:
                 // https://github.com/Mapsui/Mapsui/issues/1925#issuecomment-1493411132
@@ -480,7 +512,7 @@ public class WmsProvider : IProvider, IProjectingProvider
     {
         if (CRS != null && _wmsClient != null && _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS))
         {
-            if (_axisOrder[CRS])
+            if (AxisOrder.IsNaturalOrder())
             {
                 return _wmsClient.Layer.BoundingBoxes[CRS];
             }
