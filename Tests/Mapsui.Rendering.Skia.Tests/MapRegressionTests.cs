@@ -46,6 +46,7 @@ public class MapRegressionTests
         WmsSample.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
         WmsProjectionSample.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
         WfsSample.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
+        WfsPointsSample.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
         ArcGISImageServiceSample.DefaultCache ??= File.ReadFromCacheFolder("ArcGisImageServiceSample");
     }
 

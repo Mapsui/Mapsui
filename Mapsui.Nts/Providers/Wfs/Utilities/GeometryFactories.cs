@@ -274,13 +274,15 @@ internal abstract class GeometryFactory : IDisposable
                                                  (NameTable)XmlReader!.NameTable);
         IPathNode posListNode = new PathNode("http://www.opengis.net/gml", "posList",
                                              (NameTable)XmlReader.NameTable);
+        IPathNode posNode = new PathNode("http://www.opengis.net/gml", "pos", 
+            (NameTable)XmlReader.NameTable);
         IPathNode ogcServiceExceptionNode = new PathNode("http://www.opengis.net/ogc", "ServiceException",
                                                          (NameTable)XmlReader.NameTable);
         IPathNode serviceExceptionNode = new PathNode("", "ServiceException", (NameTable)XmlReader.NameTable);
         //ServiceExceptions without ogc prefix are returned by deegree. PDD.
         IPathNode exceptionTextNode = new PathNode("http://www.opengis.net/ows", "ExceptionText",
                                                    (NameTable)XmlReader.NameTable);
-        CoordinatesNode = new AlternativePathNodesCollection(coordinatesNode, posListNode);
+        CoordinatesNode = new AlternativePathNodesCollection(coordinatesNode, posListNode, posNode);
         ServiceExceptionNode = new AlternativePathNodesCollection(ogcServiceExceptionNode, exceptionTextNode,
                                                                    serviceExceptionNode);
         FeatureNode = new PathNode(FeatureTypeInfo.FeatureTypeNamespace, FeatureTypeInfo.Name,
