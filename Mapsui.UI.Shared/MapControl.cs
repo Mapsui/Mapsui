@@ -16,6 +16,8 @@ using Mapsui.Widgets;
 
 #nullable enable
 #pragma warning disable IDISP008 // Don't assign member with injected and created disposables
+#pragma warning disable IDISP001 // Dispose created.
+#pragma warning disable IDISP002 // Dispose member.
 
 #if __MAUI__
 using Microsoft.Maui.Controls;
