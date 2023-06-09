@@ -27,7 +27,7 @@ internal class MapControlGestureListener : GestureDetector.SimpleOnGestureListen
 {
     public EventHandler<GestureDetector.FlingEventArgs>? Fling;
 
-    public override bool OnFling(MotionEvent? e1, MotionEvent? e2, float velocityX, float velocityY)
+    public override bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
     {
         if (Fling != null)
         {
