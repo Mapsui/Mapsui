@@ -30,6 +30,7 @@ public partial class MapControl : ComponentBase, IMapControl
     private bool _onLoaded;
     private MRect? _selectRectangle;
     private MPoint? _downMousePosition;
+    private MPoint? _previousMousePosition;
     private string? _defaultCursor = Cursors.Default;
     private readonly HashSet<string> _pressedKeys = new();
     private bool _isInBoxZoomMode;
@@ -175,7 +176,9 @@ public partial class MapControl : ComponentBase, IMapControl
                 _defaultCursor = Cursor;
 
             if (moveMode || IsInBoxZoomMode)
-                _downMousePosition = e.Location(await BoundingClientRectAsync());
+                _previousMousePosition = e.Location(await BoundingClientRectAsync());
+                
+            _downMousePosition = e.Location(await BoundingClientRectAsync());
         }
         catch (Exception ex)
         {
@@ -231,6 +234,7 @@ public partial class MapControl : ComponentBase, IMapControl
             }
 
             _downMousePosition = null;
+            _previousMousePosition = null;
 
             Cursor = _defaultCursor;
 
@@ -252,7 +256,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (_downMousePosition != null)
+            if (_previousMousePosition != null)
             {
                 if (IsInBoxZoomMode)
                 {
@@ -268,9 +272,12 @@ public partial class MapControl : ComponentBase, IMapControl
                     Cursor = MoveCursor;
 
                     var currentPosition = e.Location(await BoundingClientRectAsync());
-                    Map.Navigator.Drag(currentPosition, _downMousePosition);
-                    _downMousePosition = e.Location(await BoundingClientRectAsync());
+                    Map.Navigator.Drag(currentPosition, _previousMousePosition);
+                    _previousMousePosition = e.Location(await BoundingClientRectAsync());
                 }
+
+                // cleanout down mouse position because it is now a move
+                _downMousePosition = null;
             }
         }
         catch (Exception ex)

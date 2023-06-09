@@ -73,7 +73,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         IsClippedToBounds = true;
         UseDoubleTap = false;
 
-        MyLocationLayer = new MyLocationLayer(this) { Enabled = true };
+        MyLocationLayer = new Objects.MyLocationLayer(this) { Enabled = true };
         _mapCalloutLayer = new ObservableMemoryLayer<Callout>(f => f.Feature) { Name = CalloutLayerName, IsMapInfoLayer = true };
         _mapPinLayer = new ObservableMemoryLayer<Pin>(f => f.Feature) { Name = PinLayerName, IsMapInfoLayer = true };
         _mapDrawableLayer = new ObservableMemoryLayer<Drawable>(f => f.Feature) { Name = DrawableLayerName, IsMapInfoLayer = true };
@@ -176,7 +176,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// <summary>
     /// MyLocation layer
     /// </summary>
-    public MyLocationLayer MyLocationLayer { get; }
+    public Objects.MyLocationLayer MyLocationLayer { get; }
 
     /// <summary>
     /// Should my location be visible on map
