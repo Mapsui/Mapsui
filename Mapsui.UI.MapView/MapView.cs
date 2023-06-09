@@ -714,12 +714,18 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 }
             }
 
-            // Check, if we hit a drawable
-            // Is there a drawable at this position
+            // Check if we hit a drawable/pin/callout etc
             var mapInfo = GetMapInfo(e.ScreenPosition);
 
-            if (mapInfo?.Feature == null)
+            var mapInfoEventArgs = new MapInfoEventArgs { MapInfo = mapInfo, Handled = e.Handled, NumTaps = e.NumOfTaps };
+
+            HandlerInfo(sender, mapInfoEventArgs);
+
+            e.Handled = mapInfoEventArgs.Handled;
+
+            if (!e.Handled)
             {
+                // if nothing else was hit, then we hit the map
                 var args = new MapClickedEventArgs(Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToNative(), e.NumOfTaps);
                 MapClicked?.Invoke(this, args);
 
@@ -734,13 +740,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
                 return;
             }
-
-            // A feature is clicked
-            var mapInfoEventArgs = new MapInfoEventArgs { MapInfo = mapInfo, Handled = e.Handled, NumTaps = e.NumOfTaps };
-
-            HandlerInfo(sender, mapInfoEventArgs);
-
-            e.Handled = mapInfoEventArgs.Handled;
         }
     }
 
