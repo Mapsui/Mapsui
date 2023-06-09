@@ -41,7 +41,10 @@ public class EditManager
 
         if (EditMode == EditMode.DrawingLine)
         {
-            _addInfo.Vertices.RemoveAt(_addInfo.Vertices.Count - 1); // Remove duplicate last element added by the final double click
+            // line needs to be at least 2 vertices
+            if (_addInfo.Vertices.Count > 2)
+                _addInfo.Vertices.RemoveAt(_addInfo.Vertices.Count - 1); // Remove duplicate last element added by the final double click
+
             _addInfo.Feature.Geometry = new LineString(_addInfo.Vertices.ToArray());
 
             _addInfo.Feature = null;
@@ -50,7 +53,9 @@ public class EditManager
         }
         else if (EditMode == EditMode.DrawingPolygon)
         {
-            _addInfo.Vertices.RemoveAt(_addInfo.Vertices.Count - 1); // correct for double click
+            // Polygon needs to be at least 3 vertices
+            if (_addInfo.Vertices.Count > 3)
+                _addInfo.Vertices.RemoveAt(_addInfo.Vertices.Count - 1); // correct for double click
             var polygon = _addInfo.Feature.Geometry as Polygon;
             if (polygon == null) return false;
 
