@@ -351,7 +351,7 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf/Mapsui.Samples.Wpf.csproj
     - name: Mapsui.Samples.Wpf.Editing    
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf.Editing/Mapsui.Samples.Wpf.Editing.csproj    
-    # Samples Formsdotnet pack /p:RestorePackages=true /p:Configuration=Release /p:Version=%Version% Mapsui.UI.Avalonia/Mapsui.UI.Avalonia.csproj --output Artifacts
+    # Samples Forms
     - name: Mapsui.Samples.Forms.Android
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj
     - name: Mapsui.Samples.Forms.iOS
