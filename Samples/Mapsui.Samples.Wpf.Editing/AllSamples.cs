@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mapsui.Samples.Wpf.Editing.Samples;
+using Mapsui.Samples.Common.Maps.Editing;
 
 namespace Mapsui.Samples.Wpf.Editing;
 

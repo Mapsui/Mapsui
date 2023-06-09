@@ -21,7 +21,7 @@ using XamlVector = System.Windows.Vector;
 
 namespace Mapsui.UI.Wpf;
 
-public partial class MapControl : Grid, IMapControl, IDisposable
+public partial class MapControl : Grid, IMapControl, IDisposable, IMapControlEdit
 {
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private MPoint? _downMousePosition;
@@ -168,6 +168,18 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
+        if (EditMouseLeftButtonDown != null)
+        {
+            var mousePosition = e.GetPosition(this).ToMapsui();
+            var editMouseArgs = new EditMouseArgs(mousePosition, true, e.ClickCount);
+            EditMouseLeftButtonDown(this, editMouseArgs);
+            if (editMouseArgs.Handled)
+            {
+                e.Handled = true;
+                return;
+            }            
+        }
+        
         var touchPosition = e.GetPosition(this).ToMapsui();
         _previousMousePosition = touchPosition;
         _downMousePosition = touchPosition;
@@ -185,6 +197,17 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
         var mousePosition = e.GetPosition(this).ToMapsui();
+        
+        if (EditMouseLeftButtonUp != null)
+        {
+            var editMouseArgs = new EditMouseArgs(mousePosition, true, e.ClickCount);
+            EditMouseLeftButtonUp(this, editMouseArgs);
+            if (editMouseArgs.Handled)
+            {
+                e.Handled = true;
+                return;
+            }            
+        }
 
         if (_previousMousePosition != null)
         {
@@ -289,6 +312,18 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseMove(object sender, MouseEventArgs e)
     {
+        if (EditMouseMove != null)
+        {
+            var mousePosition = e.GetPosition(this).ToMapsui();
+            var editMouseArgs = new EditMouseArgs(mousePosition, e.LeftButton == MouseButtonState.Pressed, 0);
+            EditMouseMove(this, editMouseArgs);
+            if (editMouseArgs.Handled)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
         if (IsInBoxZoomMode())
         {
             DrawBbox(e.GetPosition(this));
@@ -460,4 +495,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Dispose(true);
         GC.SuppressFinalize(this);
     }
+
+    public bool ShiftPressed => Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+    public event Action<object, EditMouseArgs>? EditMouseLeftButtonDown;
+    public event Action<object, EditMouseArgs>? EditMouseLeftButtonUp;
+    public event Action<object, EditMouseArgs>? EditMouseMove;
 }

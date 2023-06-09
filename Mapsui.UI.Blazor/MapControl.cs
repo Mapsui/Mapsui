@@ -16,7 +16,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.UI.Blazor;
 
-public partial class MapControl : ComponentBase, IMapControl
+public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
 {
     public static bool UseGPU { get; set; } = false;
 
@@ -164,10 +164,43 @@ public partial class MapControl : ComponentBase, IMapControl
     }
 
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
+    protected async void OnDblClick(MouseEventArgs e)
+    {
+        try
+        {
+            if (EditMouseLeftButtonDown != null && e.Button == 0)
+            {
+                var position = e.Location(await BoundingClientRectAsync());
+                var args = new EditMouseArgs(position, true, 2);
+                EditMouseLeftButtonDown(this, args);
+                if (args.Handled)
+                {
+                    return;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
+    }
+
+    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     protected async void OnMouseDown(MouseEventArgs e)
     {
         try
         {
+            if (EditMouseLeftButtonDown != null && e.Button == 0)
+            {
+                var position = e.Location(await BoundingClientRectAsync());
+                var args = new EditMouseArgs(position, true, 1);
+                EditMouseLeftButtonDown(this, args);
+                if (args.Handled)
+                {
+                    return;
+                }
+            }
+
             IsInBoxZoomMode = e.Button == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
 
             bool moveMode = e.Button == MoveButton && (MoveModifier == Keys.None || ModifierPressed(MoveModifier));
@@ -216,6 +249,17 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
+            if (EditMouseLeftButtonUp != null && e.Button == 0)
+            {
+                var position = e.Location(await BoundingClientRectAsync());
+                var args = new EditMouseArgs(position, true, 1);
+                EditMouseLeftButtonUp(this, args);
+                if (args.Handled)
+                {
+                    return;
+                }
+            }
+
             if (IsInBoxZoomMode)
             {
                 if (_selectRectangle != null)
@@ -256,6 +300,17 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
+            if (EditMouseMove != null)
+            {
+                var position = e.Location(await BoundingClientRectAsync());
+                var args = new EditMouseArgs(position, e.Button == 0, 0);
+                EditMouseMove(this, args);
+                if (args.Handled)
+                {
+                    return;
+                }
+            }
+
             if (_previousMousePosition != null)
             {
                 if (IsInBoxZoomMode)
@@ -330,4 +385,10 @@ public partial class MapControl : ComponentBase, IMapControl
         }
 
     }
+
+    public bool ShiftPressed => _pressedKeys.Contains("ShiftLeft") || _pressedKeys.Contains("ShiftRight") || _pressedKeys.Contains("Shift");
+
+    public event Action<object, EditMouseArgs>? EditMouseLeftButtonDown;
+    public event Action<object, EditMouseArgs>? EditMouseLeftButtonUp;
+    public event Action<object, EditMouseArgs>? EditMouseMove;
 }

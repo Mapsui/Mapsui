@@ -1,15 +1,62 @@
-﻿using Mapsui.Samples.Wpf.Editing.Layers;
+﻿using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Nts;
+using Mapsui.Nts.Editing;
+using Mapsui.Nts.Layers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using Mapsui.Nts;
-using NetTopologySuite.IO;
 using Mapsui.Tiling;
+using Mapsui.UI;
+using NetTopologySuite.IO;
 
-namespace Mapsui.Samples.Wpf.Editing.Samples;
+#pragma warning disable IDISP001 // Dispose created
 
-public static class EditingSample
+namespace Mapsui.Samples.Common.Maps.Editing;
+
+public class EditingSample : IMapControlSample
 {
+    public string Name => "Editing Modify";
+    public string Category => "Editing";
+    public void Setup(IMapControl mapControl)
+    {
+        InitEditMode(mapControl, EditMode.Modify);
+    }
+
+    public static void InitEditMode(IMapControl mapControl, EditMode editMode)
+    {
+        var map = CreateMap();
+        var editManager = new EditManager
+        {
+            Layer = (WritableLayer)map.Layers.First(l => l.Name == "EditLayer")
+        };
+        var targetLayer = (WritableLayer)map.Layers.First(l => l.Name == "Layer 3");
+
+        // Load the polygon layer on startup so you can start modifying right away
+        editManager.Layer.AddRange(targetLayer.GetFeatures().Copy());
+        targetLayer.Clear();
+
+        editManager.EditMode = editMode;
+
+        var editManipulation = new EditManipulation();
+
+        map.Home = n =>
+        {
+            if (editManager.Layer.Extent != null)
+            {
+                var extent = editManager.Layer.Extent!.Grow(editManager.Layer.Extent.Width * 0.2);
+                map.Navigator.ZoomToBox(extent);
+            }
+        };
+
+        if (mapControl is IMapControlEdit edit)
+        {
+            var editConnector = new EditConnector(edit, editManager, editManipulation);
+        }
+
+        mapControl.Map = map;
+    }
+
     public static Map CreateMap()
     {
         var map = new Map();

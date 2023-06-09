@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using NetTopologySuite.Geometries;
 
-namespace Mapsui.Samples.Wpf.Editing;
+namespace Mapsui.Nts.Extensions;
 
-public static class GeometryExtensions
+public static partial class GeometryExtensions
 {
     /// <summary>
     /// For editing features it is simpler if we can treat al

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Mapsui.Nts.Extensions;
-using NetTopologySuite.Geometries;
 using Mapsui.Utilities;
+using NetTopologySuite.Geometries;
 
-namespace Mapsui.Samples.Wpf.Editing.Editing;
+namespace Mapsui.Nts.Editing;
 
 public static class EditHelper
 {

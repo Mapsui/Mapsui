@@ -1,29 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Fetcher;
 using Mapsui.Layers;
-using Mapsui.Nts;
+using Mapsui.Nts.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 
-namespace Mapsui.Samples.Wpf.Editing.Layers;
+namespace Mapsui.Nts.Layers;
 
 public class VertexOnlyLayer : BaseLayer, IModifyFeatureLayer
 {
-    private readonly WritableLayer _source;
-
-    public override MRect? Extent => _source.Extent;
+    public override MRect? Extent => Source.Extent;
+    public WritableLayer Source { get; }
 
     public VertexOnlyLayer(WritableLayer source)
     {
-        _source = source;
-        _source.DataChanged += (_, args) => OnDataChanged(args);
+        Source = source;
+        Source.DataChanged += (_, args) => OnDataChanged(args);
         Style = new SymbolStyle { SymbolScale = 0.5 };
     }
 
     public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
     {
-        var features = _source.GetFeatures(box, resolution).Cast<GeometryFeature>().ToList();
+        var features = Source.GetFeatures(box, resolution).Cast<GeometryFeature>().ToList();
         foreach (var feature in features)
         {
             if (feature.Geometry is Point || feature.Geometry is MultiPoint) continue; // Points with a vertex on top confuse me
