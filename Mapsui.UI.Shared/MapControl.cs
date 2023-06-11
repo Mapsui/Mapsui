@@ -443,6 +443,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #else
 
     private Map _map = new Map();
+    private List<IWidgetExtended>? _extendedWidgets;
 
     /// <summary>
     /// Map holding data for which is shown in this MapControl
@@ -625,5 +626,70 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             _invalidateTimer?.Dispose();
         }
         _invalidateTimer = null;
+    }
+
+    private bool HandleMoving(MPoint position, bool leftButton, int clickCount, bool shift)
+    {
+        var extendedWidgets = GetExtendedWidgets();
+        if (extendedWidgets.Count == 0)
+            return false;
+        
+        var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
+        foreach (var extendedWidget in extendedWidgets)
+        {
+            if (extendedWidget.HandleWidgetMoving(_map.Navigator, position, widgetArgs))
+                return true;
+        }
+
+        return false;
+    }
+    
+    private bool HandleTouching(MPoint position, bool leftButton, int clickCount, bool shift)
+    {
+        var extendedWidgets = GetExtendedWidgets();
+        if (extendedWidgets.Count == 0)
+            return false;
+        
+        var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
+        foreach (var extendedWidget in extendedWidgets)
+        {
+            if (extendedWidget.HandleWidgetTouching(_map.Navigator, position, widgetArgs))
+                return true;
+        }
+
+        return false;
+    }
+    
+    private bool HandleTouched(MPoint position, bool leftButton, int clickCount, bool shift)
+    {
+        var extendedWidgets = GetExtendedWidgets();
+        if (extendedWidgets.Count == 0)
+            return false;
+        
+        var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
+        foreach (var extendedWidget in extendedWidgets)
+        {
+            if (extendedWidget.HandleWidgetTouched(_map.Navigator, position, widgetArgs))
+                return true;
+        }
+
+        return false;
+    }
+
+    private List<IWidgetExtended> GetExtendedWidgets()
+    {
+        if (_extendedWidgets == null)
+        {
+            _extendedWidgets = new List<IWidgetExtended>();
+            foreach (var widget in Map.GetWidgetsOfMapAndLayers())
+            {
+                if (widget is IWidgetExtended extendedWidget)
+                {
+                    _extendedWidgets.Add(extendedWidget);
+                }
+            }
+        }
+
+        return _extendedWidgets;
     }
 }

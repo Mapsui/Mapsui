@@ -6,6 +6,7 @@ using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Nts.Editing;
 using Mapsui.Nts.Layers;
+using Mapsui.Nts.Widgets;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
@@ -62,11 +63,8 @@ public class EditingSample : IMapControlSample
             }
         };
 
-        if (mapControl is IMapControlEdit edit)
-        {
-            var editConnector = new EditConnector(edit, editManager, editManipulation);
-        }
-
+        mapControl.Map.Widgets.Add(new EditingWidget(mapControl, editManager, editManipulation));
+        
         mapControl.Map = map;
         return editManager;
     }

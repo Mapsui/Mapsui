@@ -29,6 +29,4 @@ public class MousePositionWidget : TextBox, IWidgetExtended
     {
         return false;
     }
-
-    public bool Global => true;
 }
