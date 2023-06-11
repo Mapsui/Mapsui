@@ -9,12 +9,7 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
 {
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
     {
-        DrawText(canvas, viewport, (TextBox)widget, layerOpacity);
-    }
-
-    internal static void DrawText(SKCanvas canvas, Viewport viewport, TextBox widget, float layerOpacity)
-    {
-        var hyperlink = widget;
+        var hyperlink = (TextBox)widget;
         if (string.IsNullOrEmpty(hyperlink.Text)) return;
         using var textPaint = new SKPaint { Color = hyperlink.TextColor.ToSkia(layerOpacity), IsAntialias = true };
         using var backPaint = new SKPaint { Color = hyperlink.BackColor.ToSkia(layerOpacity) };
@@ -38,7 +33,7 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
             offsetY - textRect.Top + hyperlink.PaddingY, textPaint);
     }
 
-    private static float GetOffsetX(float width, float offsetX, HorizontalAlignment horizontalAlignment, double screenWidth)
+    public static float GetOffsetX(float width, float offsetX, HorizontalAlignment horizontalAlignment, double screenWidth)
     {
         if (horizontalAlignment == HorizontalAlignment.Left) return offsetX;
         if (horizontalAlignment == HorizontalAlignment.Right) return (float)(screenWidth - width - offsetX);
@@ -46,7 +41,7 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
         throw new Exception($"Unknown {nameof(HorizontalAlignment)} type");
     }
 
-    private static float GetOffsetY(float height, float offsetY, VerticalAlignment verticalAlignment, double screenHeight)
+    public static float GetOffsetY(float height, float offsetY, VerticalAlignment verticalAlignment, double screenHeight)
     {
         if (verticalAlignment == VerticalAlignment.Top) return offsetY;
         if (verticalAlignment == VerticalAlignment.Bottom) return (float)(screenHeight - height - offsetY);

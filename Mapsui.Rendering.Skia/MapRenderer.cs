@@ -12,6 +12,7 @@ using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Styles;
 using Mapsui.Widgets;
+using Mapsui.Widgets.BoxWidget;
 using Mapsui.Widgets.ButtonWidget;
 using Mapsui.Widgets.PerformanceWidget;
 using Mapsui.Widgets.ScaleBar;
@@ -52,6 +53,7 @@ public class MapRenderer : IRenderer
         WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
         WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
         WidgetRenders[typeof(ButtonWidget)] = new ButtonWidgetRenderer();
+        WidgetRenders[typeof(BoxWidget)] = new BoxWidgetRenderer();
     }
 
     public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,

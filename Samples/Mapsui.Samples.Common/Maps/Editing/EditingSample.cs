@@ -9,6 +9,7 @@ using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using Mapsui.Widgets;
+using Mapsui.Widgets.BoxWidget;
 using Mapsui.Widgets.ButtonWidget;
 using NetTopologySuite.IO;
 
@@ -63,9 +64,18 @@ public class EditingSample : IMapControlSample
 
     private static void InitEditButtons(Map map)
     {
+        map.Widgets.Add(new BoxWidget()
+        {
+            Width = 200,
+            Height = 400,
+            MarginY = 0,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            BackColor = Color.Transparent,
+        });
+
         map.Widgets.Add(new TextBox
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -76,7 +86,6 @@ public class EditingSample : IMapControlSample
         // Layers
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 20,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -85,7 +94,6 @@ public class EditingSample : IMapControlSample
         });
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 40,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -94,7 +102,6 @@ public class EditingSample : IMapControlSample
         });
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 60,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -104,7 +111,6 @@ public class EditingSample : IMapControlSample
         // Persistence
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 80,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -113,7 +119,6 @@ public class EditingSample : IMapControlSample
         });
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 100,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -122,7 +127,6 @@ public class EditingSample : IMapControlSample
         });
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 120,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -132,7 +136,6 @@ public class EditingSample : IMapControlSample
 
         map.Widgets.Add(new TextBox
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 150,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -142,7 +145,6 @@ public class EditingSample : IMapControlSample
         // Editing Modes
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 170,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -151,7 +153,6 @@ public class EditingSample : IMapControlSample
         });
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 190,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -160,7 +161,6 @@ public class EditingSample : IMapControlSample
         });
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 210,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -169,7 +169,6 @@ public class EditingSample : IMapControlSample
         });
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 230,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -178,7 +177,6 @@ public class EditingSample : IMapControlSample
         });
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 250,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -187,7 +185,6 @@ public class EditingSample : IMapControlSample
         });
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 270,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -196,7 +193,6 @@ public class EditingSample : IMapControlSample
         });
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 290,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -207,7 +203,6 @@ public class EditingSample : IMapControlSample
         // Deletion
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 320,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -216,7 +211,6 @@ public class EditingSample : IMapControlSample
         });
         map.Widgets.Add(new ButtonWidget
         {
-            Envelope = new MRect(0, 0, 200, 20),
             MarginY = 340,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
