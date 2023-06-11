@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -444,6 +445,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private Map _map = new Map();
     private List<IWidgetExtended>? _extendedWidgets;
+    // keeps track of the widgets count to see if i need to recalculate the extended widgets.
+    private int _updateWidget = 0;
 
     /// <summary>
     /// Map holding data for which is shown in this MapControl
@@ -678,10 +681,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private List<IWidgetExtended> GetExtendedWidgets()
     {
-        if (_extendedWidgets == null)
+        if (_updateWidget != _map.Widgets.Count || _extendedWidgets == null)
         {
+            _updateWidget = _map.Widgets.Count;
             _extendedWidgets = new List<IWidgetExtended>();
-            foreach (var widget in Map.GetWidgetsOfMapAndLayers())
+            var widgetsOfMapAndLayers = Map.GetWidgetsOfMapAndLayers().ToList();
+            foreach (var widget in widgetsOfMapAndLayers)
             {
                 if (widget is IWidgetExtended extendedWidget)
                 {

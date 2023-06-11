@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Nts.Widgets;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
@@ -56,6 +57,7 @@ public class MapRenderer : IRenderer
         WidgetRenders[typeof(ButtonWidget)] = new ButtonWidgetRenderer();
         WidgetRenders[typeof(BoxWidget)] = new BoxWidgetRenderer();
         WidgetRenders[typeof(MousePositionWidget)] = new MousePositionWidgetRenderer();
+        WidgetRenders[typeof(EditingWidget)] = new EditingWidgetRenderer();
     }
 
     public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,

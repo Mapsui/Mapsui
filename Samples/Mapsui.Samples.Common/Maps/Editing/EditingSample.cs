@@ -63,7 +63,7 @@ public class EditingSample : IMapControlSample
             }
         };
 
-        mapControl.Map.Widgets.Add(new EditingWidget(mapControl, editManager, editManipulation));
+        map.Widgets.Add(new EditingWidget(mapControl, editManager, editManipulation));
         
         mapControl.Map = map;
         return editManager;
