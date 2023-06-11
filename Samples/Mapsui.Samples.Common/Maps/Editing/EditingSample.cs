@@ -23,10 +23,11 @@ public class EditingSample : IMapControlSample
     public string Category => "Editing";
     public void Setup(IMapControl mapControl)
     {
-        InitEditMode(mapControl, EditMode.Modify);
+        var editManager = InitEditMode(mapControl, EditMode.Modify);
+        InitEditButtons(mapControl.Map, editManager);
     }
 
-    public static void InitEditMode(IMapControl mapControl, EditMode editMode)
+    public static EditManager InitEditMode(IMapControl mapControl, EditMode editMode)
     {
         var map = CreateMap();
         var editManager = new EditManager
@@ -57,12 +58,11 @@ public class EditingSample : IMapControlSample
             var editConnector = new EditConnector(edit, editManager, editManipulation);
         }
 
-        InitEditButtons(map);
-
         mapControl.Map = map;
+        return editManager;
     }
 
-    private static void InitEditButtons(Map map)
+    private static void InitEditButtons(Map map, EditManager editManager)
     {
         map.Widgets.Add(new BoxWidget
         {
@@ -84,7 +84,7 @@ public class EditingSample : IMapControlSample
         });
 
         // Layers
-        map.Widgets.Add(new ButtonWidget
+        var layer1 = new ButtonWidget
         {
             MarginY = 20,
             MarginX = 5,
@@ -95,8 +95,9 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Layer 1",
             BackColor = Color.LightGray,
-        });
-        map.Widgets.Add(new ButtonWidget
+        };
+        map.Widgets.Add(layer1);
+        var layer2 = new ButtonWidget
         {
             MarginY = 40,
             MarginX = 5,
@@ -107,8 +108,9 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Layer 2",
             BackColor = Color.LightGray,
-        });
-        map.Widgets.Add(new ButtonWidget
+        };
+        map.Widgets.Add(layer2);
+        var layer3 = new ButtonWidget
         {
             MarginY = 60,
             MarginX = 5,
@@ -119,9 +121,10 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Layer 3",
             BackColor = Color.LightGray,
-        });
+        };
+        map.Widgets.Add(layer3);
         // Persistence
-        map.Widgets.Add(new ButtonWidget
+        var save = new ButtonWidget
         {
             MarginY = 80,
             MarginX = 5,
@@ -132,8 +135,9 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Save",
             BackColor = Color.LightGray,
-        });
-        map.Widgets.Add(new ButtonWidget
+        };
+        map.Widgets.Add(save);
+        var load = new ButtonWidget
         {
             MarginY = 100,
             MarginX = 5,
@@ -144,8 +148,9 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Load",
             BackColor = Color.LightGray,
-        });
-        map.Widgets.Add(new ButtonWidget
+        };
+        map.Widgets.Add(load);
+        var cancel = new ButtonWidget
         {
             MarginY = 120,
             MarginX = 5,
@@ -156,7 +161,8 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Cancel",
             BackColor = Color.LightGray,
-        });
+        };
+        map.Widgets.Add(cancel);
 
         map.Widgets.Add(new TextBox
         {
@@ -167,7 +173,7 @@ public class EditingSample : IMapControlSample
             BackColor = Color.Transparent,
         });
         // Editing Modes
-        map.Widgets.Add(new ButtonWidget
+        var addPoint = new ButtonWidget
         {
             MarginY = 170,
             MarginX = 5,
@@ -178,8 +184,9 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Add Point",
             BackColor = Color.LightGray,
-        });
-        map.Widgets.Add(new ButtonWidget
+        };
+        map.Widgets.Add(addPoint);
+        var addLine = new ButtonWidget
         {
             MarginY = 190,
             MarginX = 5,
@@ -190,8 +197,9 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Add Line",
             BackColor = Color.LightGray,
-        });
-        map.Widgets.Add(new ButtonWidget
+        };
+        map.Widgets.Add(addLine);
+        var addPolygon = new ButtonWidget
         {
             MarginY = 210,
             MarginX = 5,
@@ -202,8 +210,9 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Add Polygon",
             BackColor = Color.LightGray,
-        });
-        map.Widgets.Add(new ButtonWidget
+        };
+        map.Widgets.Add(addPolygon);
+        var modify = new ButtonWidget
         {
             MarginY = 230,
             MarginX = 5,
@@ -214,8 +223,9 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Modify",
             BackColor = Color.LightGray,
-        });
-        map.Widgets.Add(new ButtonWidget
+        };
+        map.Widgets.Add(modify);
+        var rotate = new ButtonWidget
         {
             MarginY = 250,
             MarginX = 5,
@@ -226,8 +236,9 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Rotate",
             BackColor = Color.LightGray,
-        });
-        map.Widgets.Add(new ButtonWidget
+        };
+        map.Widgets.Add(rotate);
+        var scale = new ButtonWidget
         {
             MarginY = 270,
             MarginX = 5,
@@ -238,8 +249,9 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Scale",
             BackColor = Color.LightGray,
-        });
-        map.Widgets.Add(new ButtonWidget
+        };
+        map.Widgets.Add(scale);
+        var none = new ButtonWidget
         {
             MarginY = 290,
             MarginX = 5,
@@ -250,10 +262,11 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "None",
             BackColor = Color.LightGray,
-        });
+        };
+        map.Widgets.Add(none);
 
         // Deletion
-        map.Widgets.Add(new ButtonWidget
+        var selectForDelete = new ButtonWidget
         {
             MarginY = 320,
             MarginX = 5,
@@ -264,8 +277,9 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Select (for delete)",
             BackColor = Color.LightGray,
-        });
-        map.Widgets.Add(new ButtonWidget
+        };
+        map.Widgets.Add(selectForDelete);
+        var delete = new ButtonWidget
         {
             MarginY = 340,
             MarginX = 5,
@@ -276,7 +290,8 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Delete",
             BackColor = Color.LightGray,
-        });
+        };
+        map.Widgets.Add(delete);
     }
 
     public static Map CreateMap()
