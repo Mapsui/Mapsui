@@ -63,15 +63,166 @@ public class EditingSample : IMapControlSample
 
     private static void InitEditButtons(Map map)
     {
-        var widget = new TextBox()
+        map.Widgets.Add(new TextBox
         {
-            Envelope = new MRect(0, 0, 20, 200),
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
-            Text = "Select Layer To Edit:"
-        };
+            Text = "Select Layer To Edit:",
+            BackColor = Color.Transparent,
+        });
 
-        map.Widgets.Add(widget);
+        // Layers
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 20,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Layer 1",
+            BackColor = Color.LightGray,
+        });
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 40,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Layer 2",
+            BackColor = Color.LightGray,
+        });
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 60,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Layer 3",
+            BackColor = Color.LightGray,
+        });
+        // Persistence
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 80,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Save",
+            BackColor = Color.LightGray,
+        });
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 100,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Load",
+            BackColor = Color.LightGray,
+        });
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 120,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Cancel",
+            BackColor = Color.LightGray,
+        });
+
+        map.Widgets.Add(new TextBox
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 150,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Editing Modes:",
+            BackColor = Color.Transparent,
+        });
+        // Editing Modes
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 170,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Add Point",
+            BackColor = Color.LightGray,
+        });
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 190,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Add Line",
+            BackColor = Color.LightGray,
+        });
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 210,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Add Polygon",
+            BackColor = Color.LightGray,
+        });
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 230,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Modify",
+            BackColor = Color.LightGray,
+        });
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 250,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Rotate",
+            BackColor = Color.LightGray,
+        });
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 270,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Scale",
+            BackColor = Color.LightGray,
+        });
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 290,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "None",
+            BackColor = Color.LightGray,
+        });
+
+        // Deletion
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 320,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Select (for delete)",
+            BackColor = Color.LightGray,
+        });
+        map.Widgets.Add(new ButtonWidget
+        {
+            Envelope = new MRect(0, 0, 200, 20),
+            MarginY = 340,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Delete",
+            BackColor = Color.LightGray,
+        });
     }
 
     public static Map CreateMap()
