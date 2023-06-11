@@ -16,7 +16,7 @@ In MainWindow.xaml.cs add in the constructor **after** InitializeComponent():
 ```csharp
 var mapControl = new Mapsui.UI.Wpf.MapControl();
 
-mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
+mapControl.Map?.Layers.Add(Mapsui.Utilities.OpenStreetMap.CreateTileLayer());
 
 Content = mapControl;
 ```
