@@ -64,19 +64,19 @@ public class EditingSample : IMapControlSample
 
     private static void InitEditButtons(Map map)
     {
-        map.Widgets.Add(new BoxWidget()
+        map.Widgets.Add(new BoxWidget
         {
-            Width = 200,
-            Height = 400,
+            Width = 130,
+            Height = 370,
             MarginY = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
-            BackColor = Color.Transparent,
         });
 
         map.Widgets.Add(new TextBox
         {
             MarginY = 0,
+            MarginX = 5,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Select Layer To Edit:",
@@ -87,6 +87,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 20,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Layer 1",
@@ -95,6 +99,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 40,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Layer 2",
@@ -103,6 +111,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 60,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Layer 3",
@@ -112,6 +124,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 80,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Save",
@@ -120,6 +136,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 100,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Load",
@@ -128,6 +148,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 120,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Cancel",
@@ -146,6 +170,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 170,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Add Point",
@@ -154,6 +182,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 190,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Add Line",
@@ -162,6 +194,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 210,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Add Polygon",
@@ -170,6 +206,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 230,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Modify",
@@ -178,6 +218,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 250,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Rotate",
@@ -186,6 +230,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 270,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Scale",
@@ -194,6 +242,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 290,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "None",
@@ -204,6 +256,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 320,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Select (for delete)",
@@ -212,6 +268,10 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(new ButtonWidget
         {
             MarginY = 340,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 0,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             Text = "Delete",

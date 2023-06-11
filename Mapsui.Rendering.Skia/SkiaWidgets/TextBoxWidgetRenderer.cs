@@ -2,6 +2,7 @@
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
 using SkiaSharp;
+using Topten.RichTextKit;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets;
 
@@ -9,28 +10,47 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
 {
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
     {
-        var hyperlink = (TextBox)widget;
-        if (string.IsNullOrEmpty(hyperlink.Text)) return;
-        using var textPaint = new SKPaint { Color = hyperlink.TextColor.ToSkia(layerOpacity), IsAntialias = true };
-        using var backPaint = new SKPaint { Color = hyperlink.BackColor.ToSkia(layerOpacity) };
+        DrawText(canvas, viewport, widget, layerOpacity);
+    }
+
+    public static void DrawText(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
+    {
+        var textBox = (TextBox)widget;
+        if (string.IsNullOrEmpty(textBox.Text)) return;
+        using var textPaint = new SKPaint { Color = textBox.TextColor.ToSkia(layerOpacity), IsAntialias = true };
+        using var backPaint = new SKPaint { Color = textBox.BackColor.ToSkia(layerOpacity) };
         // The textRect has an offset which can be confusing. 
         // This is because DrawText's origin is the baseline of the text, not the bottom.
         // Read more here: https://developer.xamarin.com/guides/xamarin-forms/advanced/skiasharp/basics/text/
         var textRect = new SKRect();
-        textPaint.MeasureText(hyperlink.Text, ref textRect);
+        textPaint.MeasureText(textBox.Text, ref textRect);
         // The backRect is straight forward. It is leading for our purpose.
+
+        float paddingX = textBox.PaddingX;
+        float paddingY = textBox.PaddingY;
+
+        if (textBox.Width != null)
+        {
+            paddingX = (textBox.Width.Value - textRect.Width) / 2.0f;
+        }
+
+        if (textBox.Height != null)
+        {
+            paddingY = (textBox.Height.Value - textPaint.TextSize) / 2.0f;
+        }
+
         var backRect = new SKRect(0, 0,
-            textRect.Width + hyperlink.PaddingX * 2,
-            textPaint.TextSize + hyperlink.PaddingY * 2); // Use the font's TextSize for consistency
-        var offsetX = GetOffsetX(backRect.Width, hyperlink.MarginX, hyperlink.HorizontalAlignment, viewport.Width);
-        var offsetY = GetOffsetY(backRect.Height, hyperlink.MarginY, hyperlink.VerticalAlignment, viewport.Height);
+            textRect.Width + paddingX * 2,
+            textPaint.TextSize + paddingY * 2); // Use the font's TextSize for consistency
+        var offsetX = GetOffsetX(backRect.Width, textBox.MarginX, textBox.HorizontalAlignment, viewport.Width);
+        var offsetY = GetOffsetY(backRect.Height, textBox.MarginY, textBox.VerticalAlignment, viewport.Height);
         backRect.Offset(offsetX, offsetY);
-        canvas.DrawRoundRect(backRect, hyperlink.CornerRadius, hyperlink.CornerRadius, backPaint);
-        hyperlink.Envelope = backRect.ToMRect();
+        canvas.DrawRoundRect(backRect, textBox.CornerRadius, textBox.CornerRadius, backPaint);
+        textBox.Envelope = backRect.ToMRect();
         // To position the text within the backRect correct using the textRect's offset.
-        canvas.DrawText(hyperlink.Text,
-            offsetX - textRect.Left + hyperlink.PaddingX,
-            offsetY - textRect.Top + hyperlink.PaddingY, textPaint);
+        canvas.DrawText(textBox.Text,
+            offsetX - textRect.Left + paddingX,
+            offsetY - textRect.Top + paddingY, textPaint);
     }
 
     public static float GetOffsetX(float width, float offsetX, HorizontalAlignment horizontalAlignment, double screenWidth)
