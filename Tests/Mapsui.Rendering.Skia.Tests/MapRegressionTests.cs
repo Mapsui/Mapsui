@@ -98,7 +98,7 @@ public class MapRegressionTests
             if (map != null)
             {
                 // act
-                using var bitmap = CreateMapRenderer(mapControl).RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2, map.Widgets);
+                using var bitmap = CreateMapRenderer(mapControl).RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
 
                 // aside
                 if (bitmap is { Length: > 0 })
