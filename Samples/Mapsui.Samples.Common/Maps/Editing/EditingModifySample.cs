@@ -5,9 +5,9 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Editing;
 
-public class ModifyScaleSample : IMapControlSample
+public class EditingModifySample : IMapControlSample
 {
-    public string Name => "Editing Scale";
+    public string Name => "Editing Modify";
     public string Category => "Editing";
     public void Setup(IMapControl mapControl)
     {
