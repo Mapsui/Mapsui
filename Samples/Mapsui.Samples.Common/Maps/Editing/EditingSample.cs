@@ -8,6 +8,8 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
 using Mapsui.UI;
+using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidget;
 using NetTopologySuite.IO;
 
 #pragma warning disable IDISP001 // Dispose created
@@ -16,7 +18,7 @@ namespace Mapsui.Samples.Common.Maps.Editing;
 
 public class EditingSample : IMapControlSample
 {
-    public string Name => "Editing Modify";
+    public string Name => "Editing";
     public string Category => "Editing";
     public void Setup(IMapControl mapControl)
     {
@@ -54,7 +56,22 @@ public class EditingSample : IMapControlSample
             var editConnector = new EditConnector(edit, editManager, editManipulation);
         }
 
+        InitEditButtons(map);
+
         mapControl.Map = map;
+    }
+
+    private static void InitEditButtons(Map map)
+    {
+        var widget = new TextBox()
+        {
+            Envelope = new MRect(0, 0, 20, 200),
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Select Layer To Edit:"
+        };
+
+        map.Widgets.Add(widget);
     }
 
     public static Map CreateMap()
