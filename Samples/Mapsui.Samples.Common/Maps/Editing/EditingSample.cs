@@ -14,7 +14,7 @@ using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidget;
 using Mapsui.Widgets.ButtonWidget;
-using Mapsui.Widgets.MousePositionWidget;
+using Mapsui.Widgets.MouseCoordinatesWidget;
 using NetTopologySuite.IO;
 
 #pragma warning disable IDISP001 // Dispose created
@@ -431,7 +431,7 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(delete);
 
         // Mouse Position Widget
-        map.Widgets.Add(new MousePositionWidget());
+        map.Widgets.Add(new MouseCoordinatesWidget(map));
     }
 
     private void AddPoint_WidgetTouched(object? sender, WidgetTouchedEventArgs e)

@@ -15,7 +15,7 @@ using Mapsui.Styles;
 using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidget;
 using Mapsui.Widgets.ButtonWidget;
-using Mapsui.Widgets.MousePositionWidget;
+using Mapsui.Widgets.MouseCoordinatesWidget;
 using Mapsui.Widgets.PerformanceWidget;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
@@ -56,7 +56,7 @@ public class MapRenderer : IRenderer
         WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
         WidgetRenders[typeof(ButtonWidget)] = new ButtonWidgetRenderer();
         WidgetRenders[typeof(BoxWidget)] = new BoxWidgetRenderer();
-        WidgetRenders[typeof(MousePositionWidget)] = new MousePositionWidgetRenderer();
+        WidgetRenders[typeof(MouseCoordinatesWidget)] = new MouseCoordinatesWidgetRenderer();
         WidgetRenders[typeof(EditingWidget)] = new EditingWidgetRenderer();
     }
 

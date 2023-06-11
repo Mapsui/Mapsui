@@ -1,9 +1,6 @@
-﻿using System.Linq;
-using Mapsui.Extensions;
-using Mapsui.Nts.Editing;
+﻿using Mapsui.Nts.Editing;
 using Mapsui.UI;
 using Mapsui.Widgets;
-using Mapsui.Widgets.MousePositionWidget;
 
 namespace Mapsui.Nts.Widgets;
 public class EditingWidget : Widget, IWidgetExtended
@@ -17,10 +14,6 @@ public class EditingWidget : Widget, IWidgetExtended
         MapControl = mapControl;
         EditManager = editManager;
         EditManipulation = editManipulation;
-        if (!MapControl.Map.Widgets.Any(f => f is MousePositionWidget))
-        {
-            MapControl.Map.Widgets.Add(new MousePositionWidget());
-        }
     }
 
     public override bool HandleWidgetTouched(Navigator navigator, MPoint position)

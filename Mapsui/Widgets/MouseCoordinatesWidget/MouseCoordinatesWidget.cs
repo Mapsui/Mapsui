@@ -1,22 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Mapsui.Extensions;
 
-namespace Mapsui.Widgets.MousePositionWidget;
+namespace Mapsui.Widgets.MouseCoordinatesWidget;
 
-public class MousePositionWidget : TextBox, IWidgetExtended
+public class MouseCoordinatesWidget : TextBox, IWidgetExtended
 {
-    public MousePositionWidget()
+    public Map Map { get; }
+    
+    public MouseCoordinatesWidget(Map map)
     {
         HorizontalAlignment = HorizontalAlignment.Center;
         VerticalAlignment = VerticalAlignment.Bottom;
         Text = "Mouse Position";
+        Map = map;
     }
 
     public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetArgs args)
     {
+        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(position);
         // update the Mouse position
-        this.Text = $"{position.X:F0}, {position.Y:F0}";
+        this.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
         return false;
     }
 
