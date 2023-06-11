@@ -13,6 +13,7 @@ using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidget;
 using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.MousePositionWidget;
 using NetTopologySuite.IO;
 
 #pragma warning disable IDISP001 // Dispose created
@@ -31,7 +32,7 @@ public class EditingSample : IMapControlSample
     public void Setup(IMapControl mapControl)
     {
         _editManager = InitEditMode(mapControl, EditMode.Modify);
-        InitEditButtons(mapControl.Map);
+        InitEditWidgets(mapControl.Map);
         _mapControl = mapControl;
     }
 
@@ -70,7 +71,7 @@ public class EditingSample : IMapControlSample
         return editManager;
     }
 
-    private void InitEditButtons(Map map)
+    private void InitEditWidgets(Map map)
     {
         _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 3") as WritableLayer;
 
@@ -430,6 +431,9 @@ public class EditingSample : IMapControlSample
             }
         };
         map.Widgets.Add(delete);
+
+        // Mouse Position Widget
+        map.Widgets.Add(new MousePositionWidget());
     }
 
     private void AddPoint_WidgetTouched(object? sender, WidgetTouchedEventArgs e)
