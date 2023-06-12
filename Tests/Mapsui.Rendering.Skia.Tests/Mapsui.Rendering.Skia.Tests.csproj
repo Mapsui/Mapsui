@@ -389,8 +389,10 @@
     <None Remove="Resources\Images\OriginalRegression\EditingAddPolygonSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\EditingDrawingLineSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\EditingDrawingPolygonSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingModifySample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\EditingRotateSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\EditingScaleSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\ModifyScaleSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\MyLocationLayerSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\PolygonGeometrySample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\ProjectionTestSample.Regression.png" />

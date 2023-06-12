@@ -38,6 +38,7 @@ public class Color
     public static Color Black => new() { A = 255, R = 0, G = 0, B = 0 };
     public static Color White => new() { A = 255, R = 255, G = 255, B = 255 };
     public static Color DarkGray => FromString(KnownColors["darkgray"]);
+    public static Color LightGray => FromString(KnownColors["lightgray"]);
     public static Color Gray => new() { A = 255, R = 128, G = 128, B = 128 };
     public static Color Red => new() { A = 255, R = 255, G = 0, B = 0 };
     public static Color Yellow => new() { A = 255, R = 255, G = 255, B = 0 };

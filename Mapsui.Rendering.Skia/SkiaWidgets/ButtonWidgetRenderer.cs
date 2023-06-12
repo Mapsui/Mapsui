@@ -1,4 +1,5 @@
-﻿using Mapsui.Utilities;
+﻿using Mapsui.Rendering.Skia.Extensions;
+using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidget;
 using SkiaSharp;
@@ -11,6 +12,7 @@ public class ButtonWidgetRenderer : ISkiaWidgetRenderer
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
     {
         var button = (ButtonWidget)widget;
+        TextBoxWidgetRenderer.DrawText(canvas, viewport, button, layerOpacity);
 
         if (button.Picture == null && string.IsNullOrEmpty(button.SvgImage))
             return;
