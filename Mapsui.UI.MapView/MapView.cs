@@ -238,6 +238,11 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     }
 
     /// <summary>
+    /// Get callouts on map (those that are currently visible).
+    /// </summary>
+    public IReadOnlyList<Callout> GetCallouts() { return _callouts.ToList(); }
+
+    /// <summary>
     /// Single or multiple callouts possible
     /// </summary>
     public bool UniqueCallout
