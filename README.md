@@ -1,11 +1,12 @@
 ## Mapsui (pronounced map-su-wii)
 
-Mapsui is a C# map component for apps
+Mapsui is a map component to use in apps on platforms like MAUI, Avalonia, Uno, WPF and Blazor. For a list of all supported platforms see the table below. The right most column has a link to the gettings started.
 
-- Supported platforms: Xamarin.Forms (including Android, iOS, MacOS, UWP and WPF), WPF, Xamarin.Android, Xamarin.iOS.
-- Platforms in beta: MAUI, Avalonia, WinUI, Blazor, Uno.WinUI, Uno and Eto.
-- The core nugets contain most of the functionality and are platform independent (.NET Standard 2.0/2.1 and .NET 6.0)
-- Designed to be fast and responsive
+## Samples
+After going through the getting started you could look into the samples. There are online samples in Blazor [here](https://mapsui.com/samples/). They are accompanied by a 'source code' tab. All these samples also work on all other platforms. To see the samples of the other platforms you need to clone the Mapsui project (through the 'code' button on the top right). The sln contains a Samples folder with an app for all supported platforms. Set one of them as started project and run. The accompanying code of the samples can be found [here](https://github.com/Mapsui/Mapsui/tree/master/Samples/Mapsui.Samples.Common/Maps).
+
+## Documentation
+The documentation can be found at [mapsui.com](https://mapsui.com).
 
 ## Platform Nugets
 
@@ -34,18 +35,11 @@ Mapsui is a C# map component for apps
 | Mapsui.ArcGIS | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.ArcGIS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.ArcGIS/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.ArcGIS.svg)](https://www.nuget.org/packages/Mapsui.ArcGIS) |
 | Mapsui.Extensions | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Extensions.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Extensions/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Extensions.svg)](https://www.nuget.org/packages/Mapsui.Extensions) |
 
-
 ## Build Status
 | platform | status |
 | ------------- |:-------------:|
 | Build code | [![Build status](https://github.com/mapsui/mapsui/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Mapsui/Mapsui/actions/workflows/dotnet.yml?query=branch%3Amaster) |
 | Build docs | [![Build status](https://github.com/mapsui/mapsui/actions/workflows/dotnet-docs.yml/badge.svg)](https://github.com/Mapsui/Mapsui/actions/workflows/dotnet-docs.yml?query=branch%3Amaster) |
-
-## Documentation
-The documentation can be found at [mapsui.com](https://mapsui.com). Let us know what kind of information you are missing.
-
-## Samples
-The best way to get going with Mapsui is by using the Samples. If you clone the project there is a Samples folder with a Mapsui.Samples.Wpf project with the list of samples. The accompanying code can be found [here](https://github.com/Mapsui/Mapsui/tree/master/Samples/Mapsui.Samples.Common/Maps).
 
 ## Community
 - If you have an issue please submit it [here on github](https://github.com/mapsui/Mapsui/issues).

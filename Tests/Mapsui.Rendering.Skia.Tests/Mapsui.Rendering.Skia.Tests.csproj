@@ -384,6 +384,16 @@
   <ItemGroup>
     <None Remove="Resources\Images\OriginalRegression\AnimatedBusSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\AnimatedPointsSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingAddLineSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingAddPointSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingAddPolygonSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingDrawingLineSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingDrawingPolygonSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingModifySample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingRotateSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingScaleSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\ModifyScaleSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\MyLocationLayerSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\PolygonGeometrySample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\ProjectionTestSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\WfsPointsSample.Regression.png" />

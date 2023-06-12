@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
@@ -8,6 +10,9 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
 using Mapsui.UI;
+using Mapsui.Widgets;
+using Mapsui.Widgets.BoxWidget;
+using Mapsui.Widgets.ButtonWidget;
 using NetTopologySuite.IO;
 
 #pragma warning disable IDISP001 // Dispose created
@@ -16,14 +21,21 @@ namespace Mapsui.Samples.Common.Maps.Editing;
 
 public class EditingSample : IMapControlSample
 {
-    public string Name => "Editing Modify";
+    private EditManager _editManager = new();
+    private WritableLayer? _targetLayer;
+    private IMapControl? _mapControl;
+    private List<IFeature>? _tempFeatures;
+
+    public string Name => "Editing";
     public string Category => "Editing";
     public void Setup(IMapControl mapControl)
     {
-        InitEditMode(mapControl, EditMode.Modify);
+        _editManager = InitEditMode(mapControl, EditMode.Modify);
+        InitEditButtons(mapControl.Map);
+        _mapControl = mapControl;
     }
 
-    public static void InitEditMode(IMapControl mapControl, EditMode editMode)
+    public static EditManager InitEditMode(IMapControl mapControl, EditMode editMode)
     {
         var map = CreateMap();
         var editManager = new EditManager
@@ -40,7 +52,7 @@ public class EditingSample : IMapControlSample
 
         var editManipulation = new EditManipulation();
 
-        map.Home = n =>
+        map.Home = _ =>
         {
             if (editManager.Layer.Extent != null)
             {
@@ -55,6 +67,374 @@ public class EditingSample : IMapControlSample
         }
 
         mapControl.Map = map;
+        return editManager;
+    }
+
+    private void InitEditButtons(Map map)
+    {
+        _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 3") as WritableLayer;
+
+
+        map.Widgets.Add(new BoxWidget
+        {
+            Width = 130,
+            Height = 370,
+            MarginY = 0,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+        });
+
+        map.Widgets.Add(new TextBox
+        {
+            MarginY = 0,
+            MarginX = 5,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Select Layer To Edit:",
+            BackColor = Color.Transparent,
+        });
+
+        // Layers
+        var layer1 = new ButtonWidget
+        {
+            MarginY = 20,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Layer 1",
+            BackColor = Color.LightGray,
+        };
+        layer1.WidgetTouched += (_, _) =>
+        {
+            _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 1") as WritableLayer;
+        };
+
+        map.Widgets.Add(layer1);
+        var layer2 = new ButtonWidget
+        {
+            MarginY = 40,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Layer 2",
+            BackColor = Color.LightGray,
+        };
+        layer2.WidgetTouched += (_, _) =>
+        {
+            _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 2") as WritableLayer;
+        };
+        map.Widgets.Add(layer2);
+        var layer3 = new ButtonWidget
+        {
+            MarginY = 60,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Layer 3",
+            BackColor = Color.LightGray,
+        };
+        layer3.WidgetTouched += (_, _) =>
+        {
+            _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 3") as WritableLayer;
+        };
+        map.Widgets.Add(layer3);
+        // Persistence
+        var save = new ButtonWidget
+        {
+            MarginY = 80,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Save",
+            BackColor = Color.LightGray,
+        };
+        save.WidgetTouched += (_, _) =>
+        {
+            _targetLayer?.AddRange(_editManager.Layer?.GetFeatures().Copy() ?? new List<IFeature>());
+            _editManager.Layer?.Clear();
+
+            _mapControl?.RefreshGraphics();
+        };
+        map.Widgets.Add(save);
+        var load = new ButtonWidget
+        {
+            MarginY = 100,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Load",
+            BackColor = Color.LightGray,
+        };
+        load.WidgetTouched += (_, _) =>
+        {
+            var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
+
+            foreach (var feature in features)
+            {
+                feature.RenderedGeometry.Clear();
+            }
+
+            _tempFeatures = new List<IFeature>(features);
+
+            _editManager.Layer?.AddRange(features);
+            _targetLayer?.Clear();
+
+            _mapControl?.RefreshGraphics();
+        };
+        map.Widgets.Add(load);
+        var cancel = new ButtonWidget
+        {
+            MarginY = 120,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Cancel",
+            BackColor = Color.LightGray,
+        };
+        cancel.WidgetTouched += (_, _) =>
+        {
+            if (_targetLayer != null && _tempFeatures != null)
+            {
+                _targetLayer.Clear();
+                _targetLayer.AddRange(_tempFeatures.Copy());
+                _mapControl?.RefreshGraphics();
+            }
+
+            _editManager.Layer?.Clear();
+
+            _mapControl?.RefreshGraphics();
+
+            _editManager.EditMode = EditMode.None;
+
+            _tempFeatures = null;
+        };
+        map.Widgets.Add(cancel);
+
+        map.Widgets.Add(new TextBox
+        {
+            MarginY = 150,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Editing Modes:",
+            BackColor = Color.Transparent,
+        });
+        // Editing Modes
+        var addPoint = new ButtonWidget
+        {
+            MarginY = 170,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Add Point",
+            BackColor = Color.LightGray,
+        };
+        addPoint.WidgetTouched += (_, _) =>
+        {
+            var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
+
+            foreach (var feature in features)
+            {
+                feature.RenderedGeometry.Clear();
+            }
+
+            _tempFeatures = new List<IFeature>(features);
+
+            _editManager.EditMode = EditMode.AddPoint;
+        };
+        map.Widgets.Add(addPoint);
+        var addLine = new ButtonWidget
+        {
+            MarginY = 190,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Add Line",
+            BackColor = Color.LightGray,
+        };
+        addLine.WidgetTouched += (_, _) =>
+        {
+            var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
+
+            foreach (var feature in features)
+            {
+                feature.RenderedGeometry.Clear();
+            }
+
+            _tempFeatures = new List<IFeature>(features);
+
+            _editManager.EditMode = EditMode.AddLine;
+        };
+        map.Widgets.Add(addLine);
+        var addPolygon = new ButtonWidget
+        {
+            MarginY = 210,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Add Polygon",
+            BackColor = Color.LightGray,
+        };
+        addPolygon.WidgetTouched += (_, _) =>
+        {
+            var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
+
+            foreach (var feature in features)
+            {
+                feature.RenderedGeometry.Clear();
+            }
+
+            _tempFeatures = new List<IFeature>(features);
+
+            _editManager.EditMode = EditMode.AddPolygon;
+        };
+        map.Widgets.Add(addPolygon);
+        var modify = new ButtonWidget
+        {
+            MarginY = 230,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Modify",
+            BackColor = Color.LightGray,
+        };
+        modify.WidgetTouched += (_, _) =>
+        {
+            _editManager.EditMode = EditMode.Modify;
+        };
+        map.Widgets.Add(modify);
+        var rotate = new ButtonWidget
+        {
+            MarginY = 250,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Rotate",
+            BackColor = Color.LightGray,
+        };
+        rotate.WidgetTouched += (_, _) =>
+        {
+            _editManager.EditMode = EditMode.Rotate;
+        };
+        map.Widgets.Add(rotate);
+        var scale = new ButtonWidget
+        {
+            MarginY = 270,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Scale",
+            BackColor = Color.LightGray,
+        };
+        scale.WidgetTouched += (_, _) =>
+        {
+            _editManager.EditMode = EditMode.Scale;
+        };
+        map.Widgets.Add(scale);
+        var none = new ButtonWidget
+        {
+            MarginY = 290,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "None",
+            BackColor = Color.LightGray,
+        };
+        none.WidgetTouched += (_, _) =>
+        {
+            _editManager.EditMode = EditMode.None;
+        };
+        map.Widgets.Add(none);
+
+        // Deletion
+        var selectForDelete = new ButtonWidget
+        {
+            MarginY = 320,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Select (for delete)",
+            BackColor = Color.LightGray,
+        };
+        selectForDelete.WidgetTouched += (_, _) =>
+        {
+            _editManager.SelectMode = !_editManager.SelectMode;
+        };
+        map.Widgets.Add(selectForDelete);
+        var delete = new ButtonWidget
+        {
+            MarginY = 340,
+            MarginX = 5,
+            Height = 18,
+            Width = 120,
+            CornerRadius = 2,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Text = "Delete",
+            BackColor = Color.LightGray,
+        };
+        delete.WidgetTouched += (_, _) =>
+        {
+            if (_editManager.SelectMode)
+            {
+                var selectedFeatures = _editManager.Layer?.GetFeatures().Where(f => (bool?)f["Selected"] == true) ??
+                                       Array.Empty<IFeature>();
+
+                foreach (var selectedFeature in selectedFeatures)
+                {
+                    _editManager.Layer?.TryRemove(selectedFeature);
+                }
+
+                _mapControl?.RefreshGraphics();
+            }
+        };
+        map.Widgets.Add(delete);
+    }
+
+    private void AddPoint_WidgetTouched(object? sender, WidgetTouchedEventArgs e)
+    {
+        throw new NotImplementedException();
     }
 
     public static Map CreateMap()
