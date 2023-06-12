@@ -129,12 +129,13 @@ public partial class MapControl : ComponentBase, IMapControl
         RefreshGraphics();
     }
 
+    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     private async void OnLoadComplete()
     {
         try 
         { 
             SetViewportSize();
-            await DisableMouseWheel();
+            await DisableMouseWheelAsync();
         }
         catch (Exception ex)
         {
@@ -161,14 +162,14 @@ public partial class MapControl : ComponentBase, IMapControl
         return await Interop.BoundingClientRectAsync(_elementId);
     }
 
-    private async Task DisableMouseWheel()
+    private async Task DisableMouseWheelAsync()
     {
         if (Interop == null)
         {
             throw new ArgumentException("Interop is null");
         }
 
-        await Interop.DisableMouseWheel(_elementId);
+        await Interop.DisableMouseWheelAsync(_elementId);
     }
 
     private void OnSizeChanged()
@@ -303,11 +304,14 @@ public partial class MapControl : ComponentBase, IMapControl
                 if (IsInBoxZoomMode)
                 {
                     var x = e.Location(await BoundingClientRectAsync());
-                    var y = _downMousePosition;
-                    _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X),
-                        Math.Max(x.Y, y.Y));
-                    if (_invalidate != null)
-                        _invalidate();
+                    if (_downMousePosition != null)
+                    {
+                        var y = _downMousePosition;
+                        _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X),
+                            Math.Max(x.Y, y.Y));
+                        if (_invalidate != null)
+                            _invalidate();
+                    }
                 }
                 else // drag/pan - mode
                 {
