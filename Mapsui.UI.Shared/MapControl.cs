@@ -62,6 +62,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private int _updateInterval = 16;
     // Stopwatch for measuring drawing times
     private readonly System.Diagnostics.Stopwatch _stopwatch = new System.Diagnostics.Stopwatch();
+    // saving list of extended Widgets
+    private List<IWidgetExtended>? _extendedWidgets;
+    // keeps track of the widgets count to see if i need to recalculate the extended widgets.
+    private int _updateWidget = 0;
 
     private protected void CommonInitialize()
     {
@@ -444,10 +448,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #else
 
     private Map _map = new Map();
-    private List<IWidgetExtended>? _extendedWidgets;
-    // keeps track of the widgets count to see if i need to recalculate the extended widgets.
-    private int _updateWidget = 0;
-
+    
     /// <summary>
     /// Map holding data for which is shown in this MapControl
     /// </summary>
@@ -640,7 +641,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
         foreach (var extendedWidget in extendedWidgets)
         {
-            if (extendedWidget.HandleWidgetMoving(_map.Navigator, position, widgetArgs))
+            if (extendedWidget.HandleWidgetMoving(Map.Navigator, position, widgetArgs))
                 return true;
         }
 
@@ -656,7 +657,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
         foreach (var extendedWidget in extendedWidgets)
         {
-            if (extendedWidget.HandleWidgetTouching(_map.Navigator, position, widgetArgs))
+            if (extendedWidget.HandleWidgetTouching(Map.Navigator, position, widgetArgs))
                 return true;
         }
 
@@ -672,7 +673,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
         foreach (var extendedWidget in extendedWidgets)
         {
-            if (extendedWidget.HandleWidgetTouched(_map.Navigator, position, widgetArgs))
+            if (extendedWidget.HandleWidgetTouched(Map.Navigator, position, widgetArgs))
                 return true;
         }
 
@@ -681,9 +682,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private List<IWidgetExtended> GetExtendedWidgets()
     {
-        if (_updateWidget != _map.Widgets.Count || _extendedWidgets == null)
+        if (_updateWidget != Map.Widgets.Count || _extendedWidgets == null)
         {
-            _updateWidget = _map.Widgets.Count;
+            _updateWidget = Map.Widgets.Count;
             _extendedWidgets = new List<IWidgetExtended>();
             var widgetsOfMapAndLayers = Map.GetWidgetsOfMapAndLayers().ToList();
             foreach (var widget in widgetsOfMapAndLayers)
