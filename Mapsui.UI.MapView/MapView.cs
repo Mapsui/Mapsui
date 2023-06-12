@@ -700,9 +700,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void HandlerTap(object? sender, TappedEventArgs e)
     {
-        // Close all closable Callouts
-        var pins = _pins.ToList();
-
         e.Handled = false;
 
         if (Map != null)
