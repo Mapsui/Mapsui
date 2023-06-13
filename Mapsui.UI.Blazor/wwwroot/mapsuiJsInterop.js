@@ -4,3 +4,12 @@
 export function getBoundingClientRect(elementId) {
     return document.getElementById(elementId).getBoundingClientRect();
 };
+
+export function disableMousewheelScroll(elementId) {
+    var element = document.getElementById(elementId);
+    if (element) {
+        element.addEventListener('wheel', function (e) {
+            e.preventDefault();
+        }, { passive: false });
+    }
+};

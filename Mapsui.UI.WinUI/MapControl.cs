@@ -4,6 +4,9 @@
 
 // This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
 
+#pragma warning disable IDISP001 // Dispose created.
+#pragma warning disable IDISP002 // Dispose member.
+
 #nullable enable
 
 using System;
@@ -274,11 +277,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (disposing)
         {
-            (_canvas as IDisposable)?.Dispose();
-#if __IOS__ || __MACOS__ || __ANDROID__ || NETSTANDARD
-            (_selectRectangle as IDisposable)?.Dispose();
+#if HAS_UNO           
+            _canvas?.Dispose();
+            _selectRectangle?.Dispose();
+#endif
+#if HAS_UNO || __UWP__ || __WINUI__
+            _invalidateTimer?.Dispose();
 #endif
             _map?.Dispose();
+
         }
         CommonDispose(disposing);
 

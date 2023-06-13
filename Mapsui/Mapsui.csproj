@@ -10,6 +10,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\Nullable.cs" Link="Nullable.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\MyLocationDir.svg" />
+    <None Remove="Resources\Images\MyLocationMoving.svg" />
+    <None Remove="Resources\Images\MyLocationStill.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\MyLocationDir.svg" />
+    <EmbeddedResource Include="Resources\Images\MyLocationMoving.svg" />
+    <EmbeddedResource Include="Resources\Images\MyLocationStill.svg" />
     <EmbeddedResource Include="Resources\Images\Pin.svg" />
   </ItemGroup>
   

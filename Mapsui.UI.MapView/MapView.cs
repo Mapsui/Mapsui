@@ -73,7 +73,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         IsClippedToBounds = true;
         UseDoubleTap = false;
 
-        MyLocationLayer = new MyLocationLayer(this) { Enabled = true };
+        MyLocationLayer = new Objects.MyLocationLayer(this) { Enabled = true };
         _mapCalloutLayer = new ObservableMemoryLayer<Callout>(f => f.Feature) { Name = CalloutLayerName, IsMapInfoLayer = true };
         _mapPinLayer = new ObservableMemoryLayer<Pin>(f => f.Feature) { Name = PinLayerName, IsMapInfoLayer = true };
         _mapDrawableLayer = new ObservableMemoryLayer<Drawable>(f => f.Feature) { Name = DrawableLayerName, IsMapInfoLayer = true };
@@ -176,7 +176,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// <summary>
     /// MyLocation layer
     /// </summary>
-    public MyLocationLayer MyLocationLayer { get; }
+    public Objects.MyLocationLayer MyLocationLayer { get; }
 
     /// <summary>
     /// Should my location be visible on map
@@ -714,12 +714,18 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 }
             }
 
-            // Check, if we hit a drawable
-            // Is there a drawable at this position
+            // Check if we hit a drawable/pin/callout etc
             var mapInfo = GetMapInfo(e.ScreenPosition);
 
-            if (mapInfo?.Feature == null)
+            var mapInfoEventArgs = new MapInfoEventArgs { MapInfo = mapInfo, Handled = e.Handled, NumTaps = e.NumOfTaps };
+
+            HandlerInfo(sender, mapInfoEventArgs);
+
+            e.Handled = mapInfoEventArgs.Handled;
+
+            if (!e.Handled)
             {
+                // if nothing else was hit, then we hit the map
                 var args = new MapClickedEventArgs(Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToNative(), e.NumOfTaps);
                 MapClicked?.Invoke(this, args);
 
@@ -734,13 +740,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
                 return;
             }
-
-            // A feature is clicked
-            var mapInfoEventArgs = new MapInfoEventArgs { MapInfo = mapInfo, Handled = e.Handled, NumTaps = e.NumOfTaps };
-
-            HandlerInfo(sender, mapInfoEventArgs);
-
-            e.Handled = mapInfoEventArgs.Handled;
         }
     }
 

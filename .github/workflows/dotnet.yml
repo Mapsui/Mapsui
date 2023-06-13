@@ -331,6 +331,8 @@ jobs:
     # Samples Build 
     - name: Mapsui.Samples.Avalonia
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia/Mapsui.Samples.Avalonia.csproj
+    - name: Mapsui.Samples.Avalonia.V0
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia.V0/Mapsui.Samples.Avalonia.V0.csproj
     - name: Mapsui.Samples.Blazor
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Blazor/Mapsui.Samples.Blazor.csproj
     - name: Mapsui.Samples.Droid

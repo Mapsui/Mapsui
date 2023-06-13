@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps.DataFormats;
 using Mapsui.Samples.Common.PersistentCaches;
+using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
 using Mapsui.UI;
+using Mapsui.Widgets.PerformanceWidget;
 using NUnit.Framework;
 
 namespace Mapsui.Rendering.Skia.Tests;
@@ -46,6 +49,7 @@ public class MapRegressionTests
         WmsSample.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
         WmsProjectionSample.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
         WfsSample.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
+        WfsPointsSample.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
         ArcGISImageServiceSample.DefaultCache ??= File.ReadFromCacheFolder("ArcGisImageServiceSample");
     }
 
@@ -94,7 +98,7 @@ public class MapRegressionTests
             if (map != null)
             {
                 // act
-                using var bitmap = new MapRenderer().RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2);
+                using var bitmap = CreateMapRenderer(mapControl).RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
 
                 // aside
                 if (bitmap is { Length: > 0 })
@@ -137,6 +141,25 @@ public class MapRegressionTests
         }
     }
 
+    private static MapRenderer CreateMapRenderer(IMapControl mapControl)
+    {
+        var mapRenderer = new MapRenderer
+        {
+            WidgetRenders =
+            {
+                [typeof(CustomWidget)] = new CustomWidgetSkiaRenderer(),
+            }
+        };
+        foreach (var widgetRender in mapControl.Renderer.WidgetRenders)
+        {
+            if (!mapRenderer.WidgetRenders.Contains(widgetRender))
+            {
+                mapRenderer.WidgetRenders[widgetRender.Key] = widgetRender.Value;
+            }
+        }
+        return mapRenderer;
+    }
+
     [Test]
     [TestCaseSource(nameof(ExcludedSamples))]
     public async Task ExcludedTestSampleAsync(ISampleBase sample)
@@ -147,6 +170,7 @@ public class MapRegressionTests
     private static async Task<RegressionMapControl> InitMapAsync(ISampleBase sample)
     {
         var mapControl = new RegressionMapControl();
+        
         mapControl.SetSize(800, 600);
 
         if (sample is IPrepareSampleTest prepareTest)

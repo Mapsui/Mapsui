@@ -8,10 +8,9 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Samples.Wpf.Editing.Editing;
 using Mapsui.Samples.Wpf.Editing.Utilities;
 using Mapsui.Logging;
-
+using Mapsui.Nts.Editing;
 using Mapsui.UI.Wpf.Extensions;
 
 namespace Mapsui.Samples.Wpf.Editing;
@@ -26,7 +25,6 @@ public partial class MainWindow
     private IEnumerable<IFeature>? _tempFeatures;
     private readonly EditManager _editManager = new();
     private readonly EditManipulation _editManipulation = new();
-    private bool _selectMode;
     private readonly LimitedQueue<LogModel> _logMessage = new(6);
 
     public MainWindow()
@@ -200,7 +198,7 @@ public partial class MainWindow
 
     private void Select_OnClick(object sender, RoutedEventArgs args)
     {
-        _selectMode = !_selectMode;
+        _editManager.SelectMode = !_editManager.SelectMode;
     }
 
     private void AddLine_OnClick(object sender, RoutedEventArgs args)
@@ -276,7 +274,7 @@ public partial class MainWindow
 
     private void Delete_OnClick(object sender, RoutedEventArgs args)
     {
-        if (_selectMode)
+        if (_editManager.SelectMode)
         {
             var selectedFeatures = _editManager.Layer?.GetFeatures().Where(f => (bool?)f["Selected"] == true) ?? Array.Empty<IFeature>();
 
@@ -312,7 +310,7 @@ public partial class MainWindow
             MapControl.Map.Navigator.PanLock = _editManipulation.Manipulate(MouseState.Up,
             args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
 
-        if (_selectMode)
+        if (_editManager.SelectMode)
         {
             var infoArgs = MapControl.GetMapInfo(args.GetPosition(MapControl).ToMapsui());
             if (infoArgs?.Feature != null)
