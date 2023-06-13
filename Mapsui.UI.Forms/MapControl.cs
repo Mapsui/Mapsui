@@ -217,8 +217,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         }
 
         listeners.Add(new WeakReference<MapControl>(mapControl));
+#endif
     }
 
+#if __MAUI__    
     private static void Shell_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         switch(e.PropertyName)
