@@ -25,7 +25,6 @@
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="Avalonia" VersionOverride="[0.10.21,1.0.0)" />
     <PackageReference Include="Avalonia.Skia" VersionOverride="[0.10.21,1.0.0)" />
-    <PackageReference Include="Avalonia.Desktop" VersionOverride="[0.10.21,1.0.0)" />
     <PackageReference Include="Avalonia.ReactiveUI" VersionOverride="[0.10.21,1.0.0)" />
   </ItemGroup>
 
