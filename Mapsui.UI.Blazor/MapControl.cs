@@ -1,8 +1,5 @@
-using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.AspNetCore.Components;
 using SkiaSharp;
 using Microsoft.JSInterop;
 using Mapsui.Extensions;
@@ -10,7 +7,6 @@ using Mapsui.Logging;
 using Mapsui.UI.Blazor.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using SkiaSharp.Views.Blazor;
-using Mapsui.Utilities;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -99,7 +95,7 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
         if (!_onLoaded)
         {
             _onLoaded = true;
-            OnLoadComplete();
+            _ = OnLoadCompleteAsync();
         }
 
         // Size changed Workaround
@@ -129,12 +125,12 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
         RefreshGraphics();
     }
 
-    private async void OnLoadComplete()
+    private async Task OnLoadCompleteAsync()
     {
         try 
         { 
             SetViewportSize();
-            await DisableMouseWheel();
+            await DisableManipulationAsync();
         }
         catch (Exception ex)
         {
@@ -161,14 +157,15 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
         return await Interop.BoundingClientRectAsync(_elementId);
     }
 
-    private async Task DisableMouseWheel()
+    private async Task DisableManipulationAsync()
     {
         if (Interop == null)
         {
             throw new ArgumentException("Interop is null");
         }
 
-        await Interop.DisableMouseWheel(_elementId);
+        await Interop.DisableMouseWheelAsync(_elementId);
+        await Interop.DisableTouchAsync(_elementId);
     }
 
     private void OnSizeChanged()
@@ -410,4 +407,33 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
     public event Action<object, EditMouseArgs>? EditMouseLeftButtonDown;
     public event Action<object, EditMouseArgs>? EditMouseLeftButtonUp;
     public event Action<object, EditMouseArgs>? EditMouseMove;
+
+
+    private MPoint? _touchPreviousPosition;
+
+    public void OnTouchStart(TouchEventArgs e)
+    {
+        if (e.Touches.Length == 1)
+        {
+            _touchPreviousPosition = e.Touches[0].ToMPoint();
+        }
+    }
+
+    public void OnTouchMove(TouchEventArgs e)
+    {
+        if (e.Touches.Length == 1)
+        {
+            if (_touchPreviousPosition is not null)
+            {
+                var touchPosition = e.Touches[0].ToMPoint();
+                Map.Navigator.Drag(touchPosition, _touchPreviousPosition);
+            }
+            _touchPreviousPosition = e.Touches[0].ToMPoint();
+        }
+    }
+
+    public void OnTouchEnd(TouchEventArgs e)
+    {
+        _touchPreviousPosition = null;
+    }
 }

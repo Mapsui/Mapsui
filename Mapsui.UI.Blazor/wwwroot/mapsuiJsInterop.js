@@ -13,3 +13,21 @@ export function disableMousewheelScroll(elementId) {
         }, { passive: false });
     }
 };
+
+export function disableTouch(elementId) {
+    var element = document.getElementById(elementId);
+    if (element) {
+
+        element.addEventListener('touchstart', function (e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        element.addEventListener('touchmove', function (e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        element.addEventListener('touchend', function (e) {
+            e.preventDefault();
+        }, { passive: false });
+    }
+};
