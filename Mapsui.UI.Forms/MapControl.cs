@@ -206,39 +206,64 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private static void InitTouchesReset(MapControl mapControl)
     {
 #if __MAUI__
-        if (listeners == null)
-        {
-            listeners = new List<WeakReference<MapControl>>();
-            if (Shell.Current != null)
+        try 
+        {   
+            if (listeners == null)
             {
-                Shell.Current.PropertyChanged -= Shell_PropertyChanged;
-                Shell.Current.PropertyChanged += Shell_PropertyChanged;
+                listeners = new List<WeakReference<MapControl>>();
+                if (Shell.Current != null)
+                {
+                    Shell.Current.PropertyChanged -= Shell_PropertyChanged;
+                    Shell.Current.PropertyChanged += Shell_PropertyChanged;
+                }
             }
-        }
 
-        listeners.Add(new WeakReference<MapControl>(mapControl));
+            // remove dead references
+            foreach (var entry in listeners.ToArray())
+            {
+                if (!entry.TryGetTarget(out _))
+                {
+                    listeners.Remove(entry);
+                }
+            }
+            
+            // add control to listeners
+            listeners.Add(new WeakReference<MapControl>(mapControl));
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
+     
 #endif
     }
 
 #if __MAUI__    
     private static void Shell_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        switch(e.PropertyName)
+        try
         {
-            case nameof(Shell.FlyoutIsPresented):
-                if (listeners != null)
-                    foreach (var entry in listeners.ToArray())
-                    {
-                        if (entry.TryGetTarget(out var control))
+            switch(e.PropertyName)
+            {
+                case nameof(Shell.FlyoutIsPresented):
+                    if (listeners != null)
+                        foreach (var entry in listeners.ToArray())
                         {
-                            control.ClearTouchState();
+                            if (entry.TryGetTarget(out var control))
+                            {
+                                control.ClearTouchState();
+                            }
+                            else
+                            {
+                                listeners.Remove(entry);
+                            }
                         }
-                        else
-                        {
-                            listeners.Remove(entry);
-                        }
-                    }
-                break;
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
         }
     }
 
@@ -692,10 +717,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             case TouchMode.Dragging:
                 {
-                    // remove old points avoids freeze after flyout
-                    LimitPoints(1, touchPoints);
-
-                    if (touchPoints.Count != 1)
+                    if (touchPoints.Count < 1)
                         return false;
 
                     var touchPosition = touchPoints.First();
@@ -710,14 +732,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 break;
             case TouchMode.Zooming:
                 {
-                    // remove old points avoids freeze after flyout
-                    LimitPoints(2, touchPoints);
-
-                    if (touchPoints.Count != 2)
+                    if (touchPoints.Count < 2)
                         return false;
                     
                     var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
-                    var (center, radius, angle) = GetPinchValues(touchPoints);
+                    var (center, radius, angle) = GetPinchValues(touchPoints.TakeLast(2).ToList());
 
                     double rotationDelta = 0;
 
@@ -741,27 +760,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         }
 
         return true;
-    }
-
-    /// <summary> Limit Points </summary>
-    /// <param name="max">max points</param>
-    /// <param name="touchPoints"></param>
-    private void LimitPoints(int max, List<MPoint> touchPoints)
-    {
-        if (_touches.Count > max)
-        {
-            var removes = _touches.Values.OrderBy(f => f.Tick).Take(_touches.Count - max).ToArray();
-            foreach (var remove in removes)
-            {
-                _touches.TryRemove(remove.Id, out _);
-            }
-
-            touchPoints.Clear();
-            foreach (var touch in _touches)
-            {
-                touchPoints.Add(touch.Value.Location);
-            }
-        }
     }
 
     /// <summary>
