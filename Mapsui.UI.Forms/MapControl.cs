@@ -409,7 +409,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     _flingTracker.AddEvent(e.Id, location, ticks);
 
                 if (e.InContact && !e.Handled)
-                    e.Handled = OnTouchMove(_touches.Select(t => t.Value.Location).ToList());
+                    e.Handled = OnTouchMove(_touches.OrderByDescending(f => f.Value.Tick).Select(t => t.Value.Location).ToList());
                 else
                     e.Handled = OnHovered(_touches.Select(t => t.Value.Location).FirstOrDefault());
             }
