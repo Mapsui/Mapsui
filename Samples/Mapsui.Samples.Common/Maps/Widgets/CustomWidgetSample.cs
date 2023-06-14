@@ -25,7 +25,7 @@ public class CustomWidgetSample : ISample
             MarginY = 20,
             Width = 100,
             Height = 20,
-            Color = Color.FromString(Color.KnownColors["goldenrod"])
+            Color = Color.GoldenRod
         });
 
         return Task.FromResult(map);
