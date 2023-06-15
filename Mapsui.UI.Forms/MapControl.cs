@@ -409,7 +409,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     _flingTracker.AddEvent(e.Id, location, ticks);
 
                 if (e.InContact && !e.Handled)
-                    e.Handled = OnTouchMove(_touches.OrderByDescending(f => f.Value.Tick).Select(t => t.Value.Location).ToList());
+                    e.Handled = OnTouchMove(_touches.Select(t => t.Value.Location).ToList());
                 else
                     e.Handled = OnHovered(_touches.Select(t => t.Value.Location).FirstOrDefault());
             }
@@ -717,7 +717,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             case TouchMode.Dragging:
                 {
-                    if (touchPoints.Count < 1)
+                    if (touchPoints.Count != 1)
                         return false;
 
                     var touchPosition = touchPoints.First();
@@ -732,7 +732,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 break;
             case TouchMode.Zooming:
                 {
-                    if (touchPoints.Count < 2)
+                    if (touchPoints.Count != 2)
                         return false;
                     
                     var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
