@@ -734,9 +734,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 {
                     if (touchPoints.Count != 2)
                         return false;
-                    
+
                     var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
-                    var (center, radius, angle) = GetPinchValues(touchPoints.Take(2).ToList());
+                    var (center, radius, angle) = GetPinchValues(touchPoints);
 
                     double rotationDelta = 0;
 
