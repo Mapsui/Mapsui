@@ -637,30 +637,32 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         // Check for clicked drawables
         else if (e.MapInfo?.Layer == _mapDrawableLayer)
         {
-            Drawable? clickedDrawable = null;
             var drawables = _drawable.ToList();
-
-            foreach (var drawable in drawables)
-            {
-                if (drawable.IsClickable && (drawable.Feature?.Equals(e.MapInfo.Feature) ?? false))
-                {
-                    clickedDrawable = drawable;
-                    break;
-                }
-            }
 
             if (e.MapInfo!.ScreenPosition == null)
                 return;
 
-            var drawableArgs = new DrawableClickedEventArgs(
-                Map.Navigator.Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
-                new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
+            foreach (var rec in e.MapInfo.MapInfoRecords)
+            {
+                foreach (var drawable in drawables)
+                {
+                    if (!drawable.IsClickable)
+                        continue;
+                    if (drawable.Feature?.Equals(rec.Feature) ?? false)
+                    {
+                        var drawableArgs = new DrawableClickedEventArgs(
+                            Map.Navigator.Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
+                            new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
-            clickedDrawable?.HandleClicked(drawableArgs);
+                        drawable?.HandleClicked(drawableArgs);
 
-            e.Handled = drawableArgs.Handled;
+                        e.Handled = drawableArgs.Handled;
 
-            return;
+                        if (e.Handled)
+                            return;
+                    }
+                }
+            }
         }
         // Check for clicked mylocation
         else if (e.MapInfo?.Layer == MyLocationLayer)
