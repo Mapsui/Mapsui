@@ -15,7 +15,6 @@ public class WmsProjectionDotSpatialSample : ISample
 {
     public string Name => " 6 WMS Projection DotSpatial";
     public string Category => "Data Formats";
-    public static IUrlPersistentCache? DefaultCache { get; set; }
 
     public async Task<Map> CreateMapAsync()
     {
@@ -52,7 +51,7 @@ public class WmsProjectionDotSpatialSample : ISample
     private static async Task<WmsProvider> CreateWmsProviderAsync()
     {
         const string wmsUrl = "https://wms.cartografia.agenziaentrate.gov.it/inspire/wms/ows01.php?service=WMS&request=getcapabilities";
-        var provider = await WmsProvider.CreateAsync(wmsUrl, persistentCache: DefaultCache);
+        var provider = await WmsProvider.CreateAsync(wmsUrl);
         provider.ContinueOnError = true;
         provider.TimeOut = 20000;
         provider.CRS = "EPSG:6706";
