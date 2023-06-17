@@ -1,13 +1,12 @@
-using Mapsui.Rendering.Skia;
-using System.Diagnostics.CodeAnalysis;
-using SkiaSharp;
-using Microsoft.JSInterop;
 using Mapsui.Extensions;
 using Mapsui.Logging;
+using Mapsui.Rendering.Skia;
 using Mapsui.UI.Blazor.Extensions;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
+using SkiaSharp;
 using SkiaSharp.Views.Blazor;
-using Mapsui.Layers;
+using System.Diagnostics.CodeAnalysis;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -33,31 +32,20 @@ public partial class MapControl : ComponentBase, IMapControl
     private bool _isInBoxZoomMode;
     private TouchState? _previousTouchState;
     double _pixelDensityFromInterop = 1;
-    BoundingClientRect _boundingClientRect = new BoundingClientRect();
+    BoundingClientRect _clientRect = new BoundingClientRect();
+    protected readonly string _elementId = Guid.NewGuid().ToString("N");
+    private MapsuiJsInterop? _interop;
 
     public string MoveCursor { get; set; } = Cursors.Move;
     public int MoveButton { get; set; } = MouseButtons.Primary;
     public int MoveModifier { get; set; } = Keys.None;
     public int ZoomButton { get; set; } = MouseButtons.Primary;
     public int ZoomModifier { get; set; } = Keys.Control;
-
-    protected readonly string _elementId = Guid.NewGuid().ToString("N");
-    private MapsuiJsInterop? _interop;
-
     public string ElementId => _elementId;
-
-    protected MapsuiJsInterop? Interop
-    {
-        get
-        {
-            if (_interop == null && JsRuntime != null)
-            {
-                _interop ??= new MapsuiJsInterop(JsRuntime);
-            }
-
-            return _interop;
-        }
-    }
+    protected MapsuiJsInterop? Interop =>
+            _interop == null && JsRuntime != null 
+                ? _interop ??= new MapsuiJsInterop(JsRuntime)
+                : _interop;
 
     protected override void OnInitialized()
     {
@@ -149,7 +137,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
 
         var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
-        var currentMousePosition = e.Location(_boundingClientRect);
+        var currentMousePosition = e.ToLocation(_clientRect);
         Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
     }
 
@@ -183,7 +171,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
     private async Task UpdateBoundingRectAsync()
     {
-        _boundingClientRect = await BoundingClientRectAsync();
+        _clientRect = await BoundingClientRectAsync();
     }
 
     private protected void RunOnUIThread(Action action)
@@ -197,7 +185,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleTouching(e.Location(_boundingClientRect), e.Button == 0, 2, ShiftPressed))
+            if (HandleTouching(e.ToLocation(_clientRect), e.Button == 0, 2, ShiftPressed))
                 return;
         }
         catch (Exception ex)
@@ -211,7 +199,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleTouching(e.Location(_boundingClientRect), e.Button == 0, 1, ShiftPressed))
+            if (HandleTouching(e.ToLocation(_clientRect), e.Button == 0, 1, ShiftPressed))
                 return;
 
             IsInBoxZoomMode = e.Button == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
@@ -222,9 +210,9 @@ public partial class MapControl : ComponentBase, IMapControl
                 _defaultCursor = Cursor;
 
             if (moveMode || IsInBoxZoomMode)
-                _previousMousePosition = e.Location(_boundingClientRect);
+                _previousMousePosition = e.ToLocation(_clientRect);
 
-            _downMousePosition = e.Location(_boundingClientRect);
+            _downMousePosition = e.ToLocation(_clientRect);
         }
         catch (Exception ex)
         {
@@ -262,7 +250,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleTouched(e.Location(_boundingClientRect), e.Button == 0, 1, ShiftPressed))
+            if (HandleTouched(e.ToLocation(_clientRect), e.Button == 0, 1, ShiftPressed))
                 return;
 
             if (IsInBoxZoomMode)
@@ -277,7 +265,7 @@ public partial class MapControl : ComponentBase, IMapControl
             }
             else if (_downMousePosition != null)
             {
-                var location = e.Location(_boundingClientRect);
+                var location = e.ToLocation(_clientRect);
                 if (IsClick(location, _downMousePosition))
                     OnInfo(CreateMapInfoEventArgs(location, _downMousePosition, 1));
             }
@@ -305,14 +293,14 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleMoving(e.Location(_boundingClientRect), e.Button == 0, 0, ShiftPressed))
+            if (HandleMoving(e.ToLocation(_clientRect), e.Button == 0, 0, ShiftPressed))
                 return;
 
             if (_previousMousePosition != null)
             {
                 if (IsInBoxZoomMode)
                 {
-                    var x = e.Location(_boundingClientRect);
+                    var x = e.ToLocation(_clientRect);
                     if (_downMousePosition != null)
                     {
                         var y = _downMousePosition;
@@ -326,9 +314,9 @@ public partial class MapControl : ComponentBase, IMapControl
                 {
                     Cursor = MoveCursor;
 
-                    var currentPosition = e.Location(_boundingClientRect);
+                    var currentPosition = e.ToLocation(_clientRect);
                     Map.Navigator.Drag(currentPosition, _previousMousePosition);
-                    _previousMousePosition = e.Location(_boundingClientRect);
+                    _previousMousePosition = e.ToLocation(_clientRect);
                 }
 
                 // cleanout down mouse position because it is now a move
@@ -387,13 +375,12 @@ public partial class MapControl : ComponentBase, IMapControl
 
     public void OnTouchStart(TouchEventArgs e)
     {
-        _previousTouchState = TouchState.FromLocations(e.TargetTouches.ToMPoints(_boundingClientRect));
+        _previousTouchState = TouchState.FromLocations(e.TargetTouches.ToLocations(_clientRect));
     }
 
     public void OnTouchMove(TouchEventArgs e)
     {
-
-        var touchState = TouchState.FromLocations(e.TargetTouches.ToMPoints(_boundingClientRect));
+        var touchState = TouchState.FromLocations(e.TargetTouches.ToLocations(_clientRect));
 
         if (_previousTouchState is { }) // Should not happen but we do not control the events of the framework so just checking.
         {
@@ -407,7 +394,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
     public void OnTouchEnd(TouchEventArgs e)
     {
-        _previousTouchState = TouchState.FromLocations(e.TargetTouches.ToMPoints(_boundingClientRect));
+        _previousTouchState = TouchState.FromLocations(e.TargetTouches.ToLocations(_clientRect));
         RefreshData();
     }
 }
