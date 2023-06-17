@@ -34,7 +34,7 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
 
         var splits = crs.Split(':');
         if (splits.Length == 2)
-            if (string.Compare(splits[0], "epsg", StringComparison.InvariantCultureIgnoreCase) == 0)
+            if (string.Compare(splits[0], "crs", StringComparison.InvariantCultureIgnoreCase) == 0)
                 if (int.TryParse(splits[1], out var number))
                     return number;
 
@@ -252,14 +252,15 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         return result;
     }
 
-    public void Register(string epsg, string esriString)
+    public void Register(string crs, string esriString)
     {
-        var id = GetIdFromCrs(epsg);
+        var id = GetIdFromCrs(crs);
         if (id == null)
-            throw new ArgumentException(nameof(epsg));
+            throw new ArgumentException(nameof(crs));
 
         var projection = ProjectionInfo.FromEsriString(esriString);
-
         Projections[id.Value] = projection;
+
+        CrsFromEsriLookup[esriString] = crs;
     }
 }
