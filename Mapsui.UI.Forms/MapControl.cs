@@ -302,6 +302,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             var ticks = DateTime.Now.Ticks;
 
             var location = GetScreenPosition(e.Location);
+            
+            if (HandleTouch(e, location))
+            {
+                return;
+            }
 
             // if user handles action by his own return
             TouchAction?.Invoke(sender, e);
@@ -436,6 +441,19 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             Logger.Log(LogLevel.Error, ex.Message, ex);
         }
     }
+
+    private bool HandleTouch(SKTouchEventArgs e, MPoint location)
+    {
+        return e.ActionType switch
+        {
+            SKTouchAction.Pressed when HandleTouching(location, true, Math.Max(1, _numOfTaps), ShiftPessed) => true,
+            SKTouchAction.Released when HandleTouched(location, true, 0, ShiftPessed) => true,
+            SKTouchAction.Moved when HandleMoving(location, true, Math.Max(1, _numOfTaps), ShiftPessed) => true,
+            _ => false
+        };
+    }
+    
+    public bool ShiftPessed { get; set; }
 
     private bool IsAround(TouchEvent releasedTouch)
     {
