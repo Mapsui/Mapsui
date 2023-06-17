@@ -46,8 +46,10 @@ public class WmsProvider : IProvider, IProjectingProvider
     private static int[]? _axisOrder;
     private CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
 
+    public static IUrlPersistentCache? DefaultCache { get; set; }
+
     public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
-        : this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache)
+        : this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache ?? DefaultCache)
     {
         InitialiseGetStreamAsyncMethod(getStreamAsync);
     }
@@ -61,15 +63,15 @@ public class WmsProvider : IProvider, IProjectingProvider
     /// <param name="getStreamAsync">Download method, leave null for default</param>
     public static async Task<WmsProvider> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
     {
-        var client = await Client.CreateAsync(url, wmsVersion, getStreamAsync, persistentCache: persistentCache);
-        var provider = new WmsProvider(client, persistentCache: persistentCache);
+        var client = await Client.CreateAsync(url, wmsVersion, getStreamAsync, persistentCache: persistentCache ?? DefaultCache);
+        var provider = new WmsProvider(client, persistentCache: persistentCache?? DefaultCache);
         provider.InitialiseGetStreamAsyncMethod(getStreamAsync);
         return provider;
     }
 
     private WmsProvider(Client wmsClient, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
     {
-        _persistentCache = persistentCache;
+        _persistentCache = persistentCache ?? DefaultCache;
         InitialiseGetStreamAsyncMethod(getStreamAsync);
         _wmsClient = wmsClient;
         TimeOut = 10000;

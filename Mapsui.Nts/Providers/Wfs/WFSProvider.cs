@@ -81,6 +81,8 @@ public class WFSProvider : IProvider, IDisposable
     // It helps to accelerate the rendering process significantly.
 
 
+    /// <summary> Default Cache </summary>
+    public static IUrlPersistentCache? DefaultCache { get; set; }
 
     /// <summary>
     /// This cache (obtained from an already instantiated dataprovider that retrieves a featuretype hosted by the same service) 
@@ -219,7 +221,7 @@ public class WFSProvider : IProvider, IDisposable
         string? proxyUrl = null,
         ICredentials? credentials = null)
     {
-        var provider = new WFSProvider(getCapabilitiesUri, nsPrefix, featureType, geometryType, wfsVersion, persistentCache);
+        var provider = new WFSProvider(getCapabilitiesUri, nsPrefix, featureType, geometryType, wfsVersion, persistentCache ?? DefaultCache);
         if (!string.IsNullOrEmpty(proxyUrl))
         {
             provider.ProxyUrl = proxyUrl;
@@ -341,7 +343,7 @@ public class WFSProvider : IProvider, IDisposable
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
     public WFSProvider(WfsFeatureTypeInfo featureTypeInfo, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
-        _persistentCache = persistentCache;
+        _persistentCache = persistentCache ?? DefaultCache;
         _featureTypeInfo = featureTypeInfo;
 
         if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
@@ -376,7 +378,7 @@ public class WFSProvider : IProvider, IDisposable
     public WFSProvider(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType,
                string geometryName, GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
-        _persistentCache = persistentCache;
+        _persistentCache = persistentCache ?? DefaultCache;
         _featureTypeInfo = new WfsFeatureTypeInfo(serviceUri, nsPrefix, featureTypeNamespace, featureType,
                                                   geometryName, geometryType);
 
@@ -433,7 +435,7 @@ public class WFSProvider : IProvider, IDisposable
     public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
                GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
-        _persistentCache = persistentCache;
+        _persistentCache = persistentCache ?? DefaultCache;
         _featureTypeInfoQueryManager = getCapabilitiesCache;
 
         if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
