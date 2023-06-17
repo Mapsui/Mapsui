@@ -32,7 +32,7 @@ public class WmsProjectionDotSpatialSample : ISample
     public static async Task<ILayer> CreateLayerAsync()
     {
         var dotSpatialProjection = new DotSpatialProjection();
-        // WKT defintion from https://epsg.io/6706
+        // Projection definition from https://epsg.io/6706
         dotSpatialProjection.Register("EPSG:6706",
             """
             GEOGCS["RDN2008",DATUM["Rete_Dinamica_Nazionale_2008",SPHEROID["GRS 1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],AUTHORITY["EPSG","1132"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","6706"]]
