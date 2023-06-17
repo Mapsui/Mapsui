@@ -100,7 +100,7 @@ public partial class MapControl : ComponentBase, IMapControl
         if (!_onLoaded)
         {
             _onLoaded = true;
-            _ = OnLoadCompleteAsync();
+            OnLoadCompleteAsync();
         }
 
         // Size changed Workaround
@@ -131,7 +131,7 @@ public partial class MapControl : ComponentBase, IMapControl
     }
 
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
-    private async void OnLoadComplete()
+    private async void OnLoadCompleteAsync()
     {
         try
         {
@@ -197,7 +197,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleTouching(e.Location(await BoundingClientRectAsync()), e.Button == 0, 2, ShiftPressed))
+            if (HandleTouching(e.Location(_boundingClientRect), e.Button == 0, 2, ShiftPressed))
                 return;
         }
         catch (Exception ex)
@@ -211,7 +211,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleTouching(e.Location(await BoundingClientRectAsync()), e.Button == 0, 1, ShiftPressed))
+            if (HandleTouching(e.Location(_boundingClientRect), e.Button == 0, 1, ShiftPressed))
                 return;
 
             IsInBoxZoomMode = e.Button == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
@@ -262,7 +262,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleTouched(e.Location(await BoundingClientRectAsync()), e.Button == 0, 1, ShiftPressed))
+            if (HandleTouched(e.Location(_boundingClientRect), e.Button == 0, 1, ShiftPressed))
                 return;
 
             if (IsInBoxZoomMode)
@@ -305,14 +305,14 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleMoving(e.Location(await BoundingClientRectAsync()), e.Button == 0, 0, ShiftPressed))
+            if (HandleMoving(e.Location(_boundingClientRect), e.Button == 0, 0, ShiftPressed))
                 return;
 
             if (_previousMousePosition != null)
             {
                 if (IsInBoxZoomMode)
                 {
-                    var x = e.Location(await BoundingClientRectAsync());
+                    var x = e.Location(_boundingClientRect);
                     if (_downMousePosition != null)
                     {
                         var y = _downMousePosition;
