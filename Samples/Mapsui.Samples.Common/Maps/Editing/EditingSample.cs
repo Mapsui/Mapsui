@@ -106,9 +106,10 @@ public class EditingSample : IMapControlSample
             Text = "Layer 1",
             BackColor = Color.LightGray,
         };
-        layer1.WidgetTouched += (_, _) =>
+        layer1.WidgetTouched += (_, e) =>
         {
             _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 1") as WritableLayer;
+            e.Handled = true;
         };
 
         map.Widgets.Add(layer1);
@@ -124,9 +125,10 @@ public class EditingSample : IMapControlSample
             Text = "Layer 2",
             BackColor = Color.LightGray,
         };
-        layer2.WidgetTouched += (_, _) =>
+        layer2.WidgetTouched += (_, e) =>
         {
             _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 2") as WritableLayer;
+            e.Handled = true;
         };
         map.Widgets.Add(layer2);
         var layer3 = new ButtonWidget
@@ -141,9 +143,10 @@ public class EditingSample : IMapControlSample
             Text = "Layer 3",
             BackColor = Color.LightGray,
         };
-        layer3.WidgetTouched += (_, _) =>
+        layer3.WidgetTouched += (_, e) =>
         {
             _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 3") as WritableLayer;
+            e.Handled = true;
         };
         map.Widgets.Add(layer3);
         // Persistence
@@ -159,12 +162,13 @@ public class EditingSample : IMapControlSample
             Text = "Save",
             BackColor = Color.LightGray,
         };
-        save.WidgetTouched += (_, _) =>
+        save.WidgetTouched += (_, e) =>
         {
             _targetLayer?.AddRange(_editManager.Layer?.GetFeatures().Copy() ?? new List<IFeature>());
             _editManager.Layer?.Clear();
 
             _mapControl?.RefreshGraphics();
+            e.Handled = true;
         };
         map.Widgets.Add(save);
         var load = new ButtonWidget
@@ -179,7 +183,7 @@ public class EditingSample : IMapControlSample
             Text = "Load",
             BackColor = Color.LightGray,
         };
-        load.WidgetTouched += (_, _) =>
+        load.WidgetTouched += (_, e) =>
         {
             var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
 
@@ -194,6 +198,7 @@ public class EditingSample : IMapControlSample
             _targetLayer?.Clear();
 
             _mapControl?.RefreshGraphics();
+            e.Handled = true;
         };
         map.Widgets.Add(load);
         var cancel = new ButtonWidget
@@ -208,7 +213,7 @@ public class EditingSample : IMapControlSample
             Text = "Cancel",
             BackColor = Color.LightGray,
         };
-        cancel.WidgetTouched += (_, _) =>
+        cancel.WidgetTouched += (_, e) =>
         {
             if (_targetLayer != null && _tempFeatures != null)
             {
@@ -224,6 +229,7 @@ public class EditingSample : IMapControlSample
             _editManager.EditMode = EditMode.None;
 
             _tempFeatures = null;
+            e.Handled = true;
         };
         map.Widgets.Add(cancel);
 
@@ -248,7 +254,7 @@ public class EditingSample : IMapControlSample
             Text = "Add Point",
             BackColor = Color.LightGray,
         };
-        addPoint.WidgetTouched += (_, _) =>
+        addPoint.WidgetTouched += (_, e) =>
         {
             var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
 
@@ -260,6 +266,7 @@ public class EditingSample : IMapControlSample
             _tempFeatures = new List<IFeature>(features);
 
             _editManager.EditMode = EditMode.AddPoint;
+            e.Handled = true;
         };
         map.Widgets.Add(addPoint);
         var addLine = new ButtonWidget
@@ -274,7 +281,7 @@ public class EditingSample : IMapControlSample
             Text = "Add Line",
             BackColor = Color.LightGray,
         };
-        addLine.WidgetTouched += (_, _) =>
+        addLine.WidgetTouched += (_, e) =>
         {
             var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
 
@@ -286,6 +293,7 @@ public class EditingSample : IMapControlSample
             _tempFeatures = new List<IFeature>(features);
 
             _editManager.EditMode = EditMode.AddLine;
+            e.Handled = true;
         };
         map.Widgets.Add(addLine);
         var addPolygon = new ButtonWidget
@@ -300,7 +308,7 @@ public class EditingSample : IMapControlSample
             Text = "Add Polygon",
             BackColor = Color.LightGray,
         };
-        addPolygon.WidgetTouched += (_, _) =>
+        addPolygon.WidgetTouched += (_, e) =>
         {
             var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
 
@@ -312,6 +320,7 @@ public class EditingSample : IMapControlSample
             _tempFeatures = new List<IFeature>(features);
 
             _editManager.EditMode = EditMode.AddPolygon;
+            e.Handled = true;
         };
         map.Widgets.Add(addPolygon);
         var modify = new ButtonWidget
@@ -326,9 +335,10 @@ public class EditingSample : IMapControlSample
             Text = "Modify",
             BackColor = Color.LightGray,
         };
-        modify.WidgetTouched += (_, _) =>
+        modify.WidgetTouched += (_, e) =>
         {
             _editManager.EditMode = EditMode.Modify;
+            e.Handled = true;
         };
         map.Widgets.Add(modify);
         var rotate = new ButtonWidget
@@ -343,9 +353,11 @@ public class EditingSample : IMapControlSample
             Text = "Rotate",
             BackColor = Color.LightGray,
         };
-        rotate.WidgetTouched += (_, _) =>
+        rotate.WidgetTouched += (_, e) =>
         {
             _editManager.EditMode = EditMode.Rotate;
+            e.Handled = true;
+            
         };
         map.Widgets.Add(rotate);
         var scale = new ButtonWidget
@@ -360,9 +372,10 @@ public class EditingSample : IMapControlSample
             Text = "Scale",
             BackColor = Color.LightGray,
         };
-        scale.WidgetTouched += (_, _) =>
+        scale.WidgetTouched += (_, e) =>
         {
             _editManager.EditMode = EditMode.Scale;
+            e.Handled = true;
         };
         map.Widgets.Add(scale);
         var none = new ButtonWidget
@@ -377,9 +390,10 @@ public class EditingSample : IMapControlSample
             Text = "None",
             BackColor = Color.LightGray,
         };
-        none.WidgetTouched += (_, _) =>
+        none.WidgetTouched += (_, e) =>
         {
             _editManager.EditMode = EditMode.None;
+            e.Handled = true;
         };
         map.Widgets.Add(none);
 
@@ -396,9 +410,10 @@ public class EditingSample : IMapControlSample
             Text = "Select (for delete)",
             BackColor = Color.LightGray,
         };
-        selectForDelete.WidgetTouched += (_, _) =>
+        selectForDelete.WidgetTouched += (_, e) =>
         {
             _editManager.SelectMode = !_editManager.SelectMode;
+            e.Handled = true;
         };
         map.Widgets.Add(selectForDelete);
         var delete = new ButtonWidget
@@ -413,7 +428,7 @@ public class EditingSample : IMapControlSample
             Text = "Delete",
             BackColor = Color.LightGray,
         };
-        delete.WidgetTouched += (_, _) =>
+        delete.WidgetTouched += (_, e) =>
         {
             if (_editManager.SelectMode)
             {
@@ -427,6 +442,8 @@ public class EditingSample : IMapControlSample
 
                 _mapControl?.RefreshGraphics();
             }
+
+            e.Handled = true;
         };
         map.Widgets.Add(delete);
 

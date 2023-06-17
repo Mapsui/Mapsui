@@ -477,6 +477,8 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
         return false;
     }
 
+    public override bool Touchable => false;
+
     public bool CanProject()
     {
         if (_map?.CRS == null)
