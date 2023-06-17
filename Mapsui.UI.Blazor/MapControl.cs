@@ -7,6 +7,7 @@ using Mapsui.Logging;
 using Mapsui.UI.Blazor.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using SkiaSharp.Views.Blazor;
+using Mapsui.Layers;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -30,6 +31,10 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
     private string? _defaultCursor = Cursors.Default;
     private readonly HashSet<string> _pressedKeys = new();
     private bool _isInBoxZoomMode;
+    private TouchState? _previousTouchState;
+    double _pixelDensityFromInterop = 1;
+    BoundingClientRect _boundingClientRect = new BoundingClientRect();
+
     public string MoveCursor { get; set; } = Cursors.Move;
     public int MoveButton { get; set; } = MouseButtons.Primary;
     public int MoveModifier { get; set; } = Keys.None;
@@ -127,10 +132,10 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
 
     private async Task OnLoadCompleteAsync()
     {
-        try 
-        { 
+        try
+        {
             SetViewportSize();
-            await DisableManipulationAsync();
+            await InitializingInteropAsync();
         }
         catch (Exception ex)
         {
@@ -141,11 +146,11 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     protected async void OnMouseWheel(WheelEventArgs e)
     {
-        
+
         var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
-        var currentMousePosition = e.Location(await BoundingClientRectAsync());
+        var currentMousePosition = e.Location(_boundingClientRect);
         Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
-}
+    }
 
     private async Task<BoundingClientRect> BoundingClientRectAsync()
     {
@@ -157,7 +162,7 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
         return await Interop.BoundingClientRectAsync(_elementId);
     }
 
-    private async Task DisableManipulationAsync()
+    private async Task InitializingInteropAsync()
     {
         if (Interop == null)
         {
@@ -166,11 +171,18 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
 
         await Interop.DisableMouseWheelAsync(_elementId);
         await Interop.DisableTouchAsync(_elementId);
+        _pixelDensityFromInterop = await Interop.GetPixelDensityAsync();
     }
-
+    
     private void OnSizeChanged()
     {
         SetViewportSize();
+        _ = UpdateBoundingRectAsync();
+    }
+
+    private async Task UpdateBoundingRectAsync()
+    {
+        _boundingClientRect = await BoundingClientRectAsync();
     }
 
     private protected void RunOnUIThread(Action action)
@@ -186,7 +198,7 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
         {
             if (EditMouseLeftButtonDown != null && e.Button == 0)
             {
-                var position = e.Location(await BoundingClientRectAsync());
+                var position = e.Location(_boundingClientRect);
                 var args = new EditMouseArgs(position, true, 2);
                 EditMouseLeftButtonDown(this, args);
                 if (args.Handled)
@@ -208,7 +220,7 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
         {
             if (EditMouseLeftButtonDown != null && e.Button == 0)
             {
-                var position = e.Location(await BoundingClientRectAsync());
+                var position = e.Location(_boundingClientRect);
                 var args = new EditMouseArgs(position, true, 1);
                 EditMouseLeftButtonDown(this, args);
                 if (args.Handled)
@@ -225,9 +237,9 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
                 _defaultCursor = Cursor;
 
             if (moveMode || IsInBoxZoomMode)
-                _previousMousePosition = e.Location(await BoundingClientRectAsync());
-                
-            _downMousePosition = e.Location(await BoundingClientRectAsync());
+                _previousMousePosition = e.Location(_boundingClientRect);
+
+            _downMousePosition = e.Location(_boundingClientRect);
         }
         catch (Exception ex)
         {
@@ -267,7 +279,7 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
         {
             if (EditMouseLeftButtonUp != null && e.Button == 0)
             {
-                var position = e.Location(await BoundingClientRectAsync());
+                var position = e.Location(_boundingClientRect);
                 var args = new EditMouseArgs(position, true, 1);
                 EditMouseLeftButtonUp(this, args);
                 if (args.Handled)
@@ -288,7 +300,7 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
             }
             else if (_downMousePosition != null)
             {
-                var location = e.Location(await BoundingClientRectAsync());
+                var location = e.Location(_boundingClientRect);
                 if (IsClick(location, _downMousePosition))
                     OnInfo(CreateMapInfoEventArgs(location, _downMousePosition, 1));
             }
@@ -318,7 +330,7 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
         {
             if (EditMouseMove != null)
             {
-                var position = e.Location(await BoundingClientRectAsync());
+                var position = e.Location(_boundingClientRect);
                 var args = new EditMouseArgs(position, e.Button == 0, 0);
                 EditMouseMove(this, args);
                 if (args.Handled)
@@ -331,7 +343,7 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
             {
                 if (IsInBoxZoomMode)
                 {
-                    var x = e.Location(await BoundingClientRectAsync());
+                    var x = e.Location(_boundingClientRect);
                     var y = _downMousePosition;
                     _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X),
                         Math.Max(x.Y, y.Y));
@@ -342,9 +354,9 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
                 {
                     Cursor = MoveCursor;
 
-                    var currentPosition = e.Location(await BoundingClientRectAsync());
+                    var currentPosition = e.Location(_boundingClientRect);
                     Map.Navigator.Drag(currentPosition, _previousMousePosition);
-                    _previousMousePosition = e.Location(await BoundingClientRectAsync());
+                    _previousMousePosition = e.Location(_boundingClientRect);
                 }
 
                 // cleanout down mouse position because it is now a move
@@ -371,10 +383,7 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
 
     private protected float GetPixelDensity()
     {
-        return 1;
-        // TODO: Ask for the Real Pixel size.
-        // var center = PointToScreen(Location + Size / 2);
-        // return Screen.FromPoint(center).LogicalPixelSize;
+        return (float)_pixelDensityFromInterop;
     }
 
     public virtual void Dispose()
@@ -408,32 +417,29 @@ public partial class MapControl : ComponentBase, IMapControl, IMapControlEdit
     public event Action<object, EditMouseArgs>? EditMouseLeftButtonUp;
     public event Action<object, EditMouseArgs>? EditMouseMove;
 
-
-    private MPoint? _touchPreviousPosition;
-
     public void OnTouchStart(TouchEventArgs e)
     {
-        if (e.Touches.Length == 1)
-        {
-            _touchPreviousPosition = e.Touches[0].ToMPoint();
-        }
+        _previousTouchState = TouchState.FromLocations(e.TargetTouches.ToMPoints(_boundingClientRect));
     }
 
     public void OnTouchMove(TouchEventArgs e)
     {
-        if (e.Touches.Length == 1)
+
+        var touchState = TouchState.FromLocations(e.TargetTouches.ToMPoints(_boundingClientRect));
+
+        if (_previousTouchState is { }) // Should not happen but we do not control the events of the framework so just checking.
         {
-            if (_touchPreviousPosition is not null)
-            {
-                var touchPosition = e.Touches[0].ToMPoint();
-                Map.Navigator.Drag(touchPosition, _touchPreviousPosition);
-            }
-            _touchPreviousPosition = e.Touches[0].ToMPoint();
+            if (touchState.Mode == TouchMode.Zooming && _previousTouchState.Mode == TouchMode.Zooming)
+                Map.Navigator.Pinch(touchState.Center, _previousTouchState.Center, touchState.Radius / _previousTouchState.Radius, 0);
+            else if (touchState.Mode == TouchMode.Dragging && _previousTouchState.Mode != TouchMode.None)
+                Map.Navigator.Drag(touchState.Center, _previousTouchState.Center);
         }
-    }
+        _previousTouchState = touchState;
+   }
 
     public void OnTouchEnd(TouchEventArgs e)
     {
-        _touchPreviousPosition = null;
+        _previousTouchState = TouchState.FromLocations(e.TargetTouches.ToMPoints(_boundingClientRect));
+        RefreshData();
     }
 }

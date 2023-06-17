@@ -51,4 +51,10 @@ public sealed class MapsuiJsInterop : IAsyncDisposable
         var module = await _moduleTask;
         await module.InvokeVoidAsync(@"disableTouch", elementId);
     }
+
+    public async ValueTask<double> GetPixelDensityAsync()
+    {
+        var module = await _moduleTask;
+        return await module.InvokeAsync<double>(@"getPixelDensity");
+    }
 }

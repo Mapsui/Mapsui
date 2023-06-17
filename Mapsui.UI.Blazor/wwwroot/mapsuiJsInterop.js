@@ -31,3 +31,7 @@ export function disableTouch(elementId) {
         }, { passive: false });
     }
 };
+
+export function getPixelDensity() {
+    return window.devicePixelRatio || 1;
+};
