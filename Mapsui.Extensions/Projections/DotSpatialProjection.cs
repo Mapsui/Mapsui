@@ -231,4 +231,15 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
 
         return result;
     }
+
+    public void Register(string epsg, string esriString)
+    {
+        var id = GetIdFromCrs(epsg);
+        if (id == null)
+            throw new ArgumentException(nameof(epsg));
+
+        var projection = ProjectionInfo.FromEsriString(esriString);
+
+        Projections[id.Value] = projection;
+    }
 }
