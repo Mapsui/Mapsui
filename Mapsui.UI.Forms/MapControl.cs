@@ -73,6 +73,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     public static bool UseGPU = 
         DeviceInfo.Platform != DevicePlatform.WinUI && 
         DeviceInfo.Platform != DevicePlatform.macOS && 
+        DeviceInfo.Platform != DevicePlatform.MacCatalyst &&
         DeviceInfo.Platform != DevicePlatform.Android;
 #else
     public static bool UseGPU = true;
