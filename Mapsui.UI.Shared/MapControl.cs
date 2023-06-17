@@ -64,8 +64,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private readonly System.Diagnostics.Stopwatch _stopwatch = new System.Diagnostics.Stopwatch();
     // saving list of extended Widgets
     private List<IWidgetExtended>? _extendedWidgets;
+    // saving list of touchable Widgets
+    private List<IWidget>? _touchableWidgets;
     // keeps track of the widgets count to see if i need to recalculate the extended widgets.
     private int _updateWidget = 0;
+    // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
+    private int _updateTouchableWidget;
 
     private protected void CommonInitialize()
     {
@@ -669,7 +673,14 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var extendedWidgets = GetExtendedWidgets();
         if (extendedWidgets.Count == 0)
             return false;
-        
+
+        // Exit on Touchable Widgets or else the Button Handling for example does not work
+        // TODO: In the Next Mapsui Major Version handle Touch Events here
+        var touchableWidgets = GetTouchableWidgets();
+        var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
+        if (touchedWidgets.Any())
+            return false;
+
         var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
         foreach (var extendedWidget in extendedWidgets)
         {
@@ -686,6 +697,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (extendedWidgets.Count == 0)
             return false;
         
+        // Exit on Touchable Widgets or else the Button Handling for example does not work
+        // TODO: In the Next Mapsui Major Version handle Touch Events here
+        var touchableWidgets = GetTouchableWidgets();
+        var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
+        if (touchedWidgets.Any())
+            return false;
+
         var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
         foreach (var extendedWidget in extendedWidgets)
         {
@@ -713,5 +731,26 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
 
         return _extendedWidgets;
+    }
+
+    private List<IWidget> GetTouchableWidgets()
+    {
+        if (_updateTouchableWidget != Map.Widgets.Count || _touchableWidgets == null)
+        {
+            _updateTouchableWidget = Map.Widgets.Count;
+            _touchableWidgets = new List<IWidget>();
+            var touchableWidgets = Map.GetWidgetsOfMapAndLayers().ToList();
+            foreach (var widget in touchableWidgets)
+            {
+                if (widget is IWidgetExtended)
+                    continue;
+
+                if (widget is IWidgetTouchable { Touchable: false }) continue;
+
+                _touchableWidgets.Add(widget);
+            }
+        }
+
+        return _touchableWidgets;
     }
 }

@@ -17,4 +17,6 @@ public class TextBox : Widget
         // don has any action
         return false;
     }
+
+    public override bool Touchable => false;
 }
