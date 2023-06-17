@@ -13,6 +13,7 @@ using Mapsui.Nts;
 using Mapsui.Nts.Projections;
 using Mapsui.Projections;
 using NetTopologySuite.Geometries;
+using NetTopologySuite.Geometries.Utilities;
 
 namespace Mapsui.Extensions.Projections;
 
@@ -120,14 +121,24 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
             // no transformation needed
             return;
 
-        var transform = GetGeometryTransformation(fromId, toId);
+        var geometryTransform = GetGeometryTransformation(fromId, toId);
+        if (geometryTransform == null) throw new ArgumentException();
+        var transform = GetTransformation(fromId, toId);
         if (transform == null) throw new ArgumentException();
 
         foreach (var feature in features)
             if (feature is GeometryFeature geometryFeature)
             {
                 var geometry = geometryFeature.Geometry;
-                if (geometry != null) Transform(geometry, transform);
+                if (geometry != null) Transform(geometry, geometryTransform);
+            }
+            else
+            {
+                feature.CoordinateVisitor((x, y, setter) =>
+                {
+                    var (xOut, yOut) = Transform(x, y, transform);
+                    setter(xOut, yOut);
+                });
             }
     }
 
@@ -139,13 +150,22 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
             // no transformation needed
             return;
 
-        var transform = GetGeometryTransformation(fromId, toId);
-        if (transform == null) throw new ArgumentException();
-
         if (feature is GeometryFeature geometryFeature)
         {
+            var geometryTransform = GetGeometryTransformation(fromId, toId);
+            if (geometryTransform == null) throw new ArgumentException();
             var geometry = geometryFeature.Geometry;
-            if (geometry != null) Transform(geometry, transform);
+            if (geometry != null) Transform(geometry, geometryTransform);
+        }
+        else
+        {
+            var transform = GetTransformation(fromId, toId);
+            if (transform == null) throw new ArgumentException();
+            feature.CoordinateVisitor((x, y, setter) =>
+            {
+                var (xOut, yOut) = Transform(x, y, transform);
+                setter(xOut, yOut);
+            });
         }
     }
 
