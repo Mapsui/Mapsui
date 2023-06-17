@@ -15,4 +15,6 @@ public class BoxWidget : Widget
     {
         return false;
     }
+
+    public override bool Touchable => false;
 }

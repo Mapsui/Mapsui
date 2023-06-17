@@ -114,4 +114,6 @@ public class ButtonWidget : TextBox, INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
+
+    public override bool Touchable => true;
 }

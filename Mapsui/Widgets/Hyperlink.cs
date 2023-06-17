@@ -16,6 +16,8 @@ public class Hyperlink : TextBox
 
         return args.Handled;
     }
+
+    public override bool Touchable => true;
 }
 
 public class HyperlinkWidgetArguments
