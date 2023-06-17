@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -428,7 +429,12 @@ public class WmsProvider : IProvider, IProjectingProvider
             strReq.AppendFormat("&VERSION={0}", wmsVersion);
         }
 
-        strReq.Append("&TRANSPARENT=true");
+        if (Transparent != null)
+        {
+            var transVal = Transparent.Value ? "true" : "false";
+            strReq.Append($"&TRANSPARENT={transVal}");
+        }
+        
         strReq.Append("&Styles=");
         if (StylesList != null && StylesList.Count > 0)
         {
@@ -445,6 +451,11 @@ public class WmsProvider : IProvider, IProjectingProvider
 
         return strReq.ToString();
     }
+
+    /// <summary>
+    /// If it should set the Wms Image to Transparent
+    /// </summary>
+    public bool? Transparent { get; set; } = true;
 
     /// <summary>
     /// Gets the URL for a map request base on current settings, the image size and BoundingBox

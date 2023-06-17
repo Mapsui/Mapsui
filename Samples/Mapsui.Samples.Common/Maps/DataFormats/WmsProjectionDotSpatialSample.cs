@@ -56,8 +56,9 @@ public class WmsProjectionDotSpatialSample : ISample
         provider.ContinueOnError = true;
         provider.TimeOut = 20000;
         provider.CRS = "EPSG:6706";
-        provider.AddLayer("CP.CadastralParcel");
-        provider.SetImageFormat((provider.OutputFormats)[1]);
+        provider.AddLayer("province");
+        provider.SetImageFormat((provider.OutputFormats)[0]);
+        provider.Transparent = null;
         return provider;
     }
 }
