@@ -7,6 +7,7 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using Mapsui.Extensions.Projections;
+using Mapsui.Widgets;
 using NetTopologySuite.Utilities;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
@@ -44,7 +45,18 @@ public class WmsProjectionDotSpatialSample : ISample
         return new ImageLayer("mainmap")
         {
             DataSource = dataSource,
-            Style = new RasterStyle()
+            Style = new RasterStyle(),
+            Attribution = new Hyperlink()
+            {
+                Text = "@Agenzia delle Entrate 2023",
+                VerticalAlignment = VerticalAlignment.Bottom,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                MarginX = 10,
+                MarginY = 10,
+                PaddingX = 4,
+                PaddingY = 4,
+                BackColor = Color.LightGray,
+            }
         };
     }
 
