@@ -647,7 +647,23 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         return false;
     }
-    
+
+    private bool HandleTouchingTouched(MPoint position, bool leftButton, int clickCount, bool shift)
+    {
+        if (HandleTouching(position, leftButton, clickCount, shift))
+        {
+            return true; 
+        }
+
+        if (HandleTouched(position, leftButton, clickCount, shift))
+        {
+            return true; 
+        }
+
+        return false;
+    }
+
+
     private bool HandleTouching(MPoint position, bool leftButton, int clickCount, bool shift)
     {
         var extendedWidgets = GetExtendedWidgets();
