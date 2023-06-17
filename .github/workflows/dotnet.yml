@@ -20,9 +20,9 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages     
-        key: ${{ runner.os }}-nuget14-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget14-
+            ${{ runner.os }}-nuget15-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.1.1      
       with:
@@ -85,9 +85,9 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages     
-        key: ${{ runner.os }}-nuget14-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget14-
+            ${{ runner.os }}-nuget15-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.1.1      
       with:
@@ -272,9 +272,9 @@ jobs:
           ~/.nuget/packages/SkiaSharp* 
           ~/.nuget/packages/System*
           ~/.nuget/packages/Xamarin*
-        key: ${{ runner.os }}-nuget14-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget14-
+            ${{ runner.os }}-nuget15-
     # .Net 7 update     
     - name: Setup .NET 7 SDK
       uses: actions/setup-dotnet@v3

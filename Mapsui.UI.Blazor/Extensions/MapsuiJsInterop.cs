@@ -40,7 +40,7 @@ public sealed class MapsuiJsInterop : IAsyncDisposable
         }
     }
 
-    public async ValueTask DisableMouseWheel(string elementId)
+    public async ValueTask DisableMouseWheelAsync(string elementId)
     {
         var module = await _moduleTask;
         await module.InvokeVoidAsync(@"disableMousewheelScroll", elementId);
