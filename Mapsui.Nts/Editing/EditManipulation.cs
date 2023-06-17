@@ -22,7 +22,7 @@ public class EditManipulation
     public static int MinPixelsMovedForDrag { get; set; } = 4;
 
     public bool Manipulate(MouseState mouseState, MPoint screenPosition,
-        EditManager editManager, IMapControl mapControl)
+        EditManager editManager, IMapControl mapControl, bool isShiftDown)
     {
         switch (mouseState)
         {
@@ -44,7 +44,7 @@ public class EditManipulation
                 {
                     if (editManager.EditMode == EditMode.Modify)
                     {
-                        if (IsShiftDown(mapControl))
+                        if (isShiftDown)
                         {
                             return editManager.TryDeleteCoordinate(
                                 mapControl.GetMapInfo(screenPosition, editManager.VertexRadius), editManager.VertexRadius);
@@ -98,16 +98,6 @@ public class EditManipulation
             default:
                 throw new Exception();
         }
-    }
-
-    private static bool IsShiftDown(IMapControl mapControl)
-    {
-        if (mapControl is IMapControlEdit edit)
-        {
-            return edit.ShiftPressed;
-        }
-
-        return false;
     }
 
     private static bool IsClick(MPoint? screenPosition, MPoint? mouseDownScreenPosition)

@@ -6,6 +6,7 @@ using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Nts.Editing;
 using Mapsui.Nts.Layers;
+using Mapsui.Nts.Widgets;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
@@ -13,6 +14,7 @@ using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidget;
 using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.MouseCoordinatesWidget;
 using NetTopologySuite.IO;
 
 #pragma warning disable IDISP001 // Dispose created
@@ -31,7 +33,7 @@ public class EditingSample : IMapControlSample
     public void Setup(IMapControl mapControl)
     {
         _editManager = InitEditMode(mapControl, EditMode.Modify);
-        InitEditButtons(mapControl.Map);
+        InitEditWidgets(mapControl.Map);
         _mapControl = mapControl;
     }
 
@@ -61,16 +63,13 @@ public class EditingSample : IMapControlSample
             }
         };
 
-        if (mapControl is IMapControlEdit edit)
-        {
-            var editConnector = new EditConnector(edit, editManager, editManipulation);
-        }
-
+        map.Widgets.Add(new EditingWidget(mapControl, editManager, editManipulation));
+        
         mapControl.Map = map;
         return editManager;
     }
 
-    private void InitEditButtons(Map map)
+    private void InitEditWidgets(Map map)
     {
         _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 3") as WritableLayer;
 
@@ -430,6 +429,9 @@ public class EditingSample : IMapControlSample
             }
         };
         map.Widgets.Add(delete);
+
+        // Mouse Position Widget
+        map.Widgets.Add(new MouseCoordinatesWidget(map));
     }
 
     private void AddPoint_WidgetTouched(object? sender, WidgetTouchedEventArgs e)

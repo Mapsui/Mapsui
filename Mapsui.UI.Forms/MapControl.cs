@@ -4,6 +4,7 @@ using SkiaSharp;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Layers;
@@ -72,6 +73,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     public static bool UseGPU = 
         DeviceInfo.Platform != DevicePlatform.WinUI && 
         DeviceInfo.Platform != DevicePlatform.macOS && 
+        DeviceInfo.Platform != DevicePlatform.MacCatalyst &&
         DeviceInfo.Platform != DevicePlatform.Android;
 #else
     public static bool UseGPU = true;
@@ -152,6 +154,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     public bool UseFling = true;
 #if __MAUI__
     private Size oldSize;
+    private static List<WeakReference<MapControl>>? listeners;
 #endif
 
     private void Initialize()
@@ -197,11 +200,74 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 #endif
 
         Content = view;
-
         BackgroundColor = KnownColor.White;
+        InitTouchesReset(this);
     }
 
+    private static void InitTouchesReset(MapControl mapControl)
+    {
 #if __MAUI__
+        try 
+        {   
+            if (listeners == null)
+            {
+                listeners = new List<WeakReference<MapControl>>();
+                if (Shell.Current != null)
+                {
+                    Shell.Current.PropertyChanged -= Shell_PropertyChanged;
+                    Shell.Current.PropertyChanged += Shell_PropertyChanged;
+                }
+            }
+
+            // remove dead references
+            foreach (var entry in listeners.ToArray())
+            {
+                if (!entry.TryGetTarget(out _))
+                {
+                    listeners.Remove(entry);
+                }
+            }
+            
+            // add control to listeners
+            listeners.Add(new WeakReference<MapControl>(mapControl));
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
+     
+#endif
+    }
+
+#if __MAUI__    
+    private static void Shell_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        try
+        {
+            switch(e.PropertyName)
+            {
+                case nameof(Shell.FlyoutIsPresented):
+                    if (listeners != null)
+                        foreach (var entry in listeners.ToArray())
+                        {
+                            if (entry.TryGetTarget(out var control))
+                            {
+                                control.ClearTouchState();
+                            }
+                            else
+                            {
+                                listeners.Remove(entry);
+                            }
+                        }
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
+    }
+
     private void View_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
@@ -225,7 +291,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private void OnSizeChanged(object? sender, EventArgs e)
     {
-        _touches.Clear();
+        ClearTouchState();
         SetViewportSize();
     }
 
@@ -237,6 +303,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             var ticks = DateTime.Now.Ticks;
 
             var location = GetScreenPosition(e.Location);
+            
+            if (HandleTouch(e, location))
+            {
+                return;
+            }
 
             // if user handles action by his own return
             TouchAction?.Invoke(sender, e);
@@ -371,6 +442,19 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             Logger.Log(LogLevel.Error, ex.Message, ex);
         }
     }
+
+    private bool HandleTouch(SKTouchEventArgs e, MPoint location)
+    {
+        return e.ActionType switch
+        {
+            SKTouchAction.Pressed when HandleTouching(location, true, Math.Max(1, _numOfTaps), ShiftPessed) => true,
+            SKTouchAction.Released when HandleTouched(location, true, 0, ShiftPessed) => true,
+            SKTouchAction.Moved when HandleMoving(location, true, Math.Max(1, _numOfTaps), ShiftPessed) => true,
+            _ => false
+        };
+    }
+    
+    public bool ShiftPessed { get; set; }
 
     private bool IsAround(TouchEvent releasedTouch)
     {
@@ -791,6 +875,14 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Launcher.OpenAsync(new Uri(url));
     }
 
+    /// <summary>
+    /// Clears the Touch State
+    /// </summary>
+    public void ClearTouchState()
+    {
+        _touches.Clear();
+    }
+
     protected void RunOnUIThread(Action action)
     {
 #if __MAUI__ 
@@ -808,6 +900,14 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
+#if __MAUI__
+        var weakReference = listeners?.FirstOrDefault(f => f.TryGetTarget(out var control) && control == this);
+        if (weakReference != null)
+        {
+            listeners?.Remove(weakReference);
+        }
+#endif
+
         if (disposing)
         {
             Map?.Dispose();

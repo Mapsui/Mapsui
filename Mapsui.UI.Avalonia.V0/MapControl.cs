@@ -50,6 +50,19 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         PointerWheelChanged += MapControlMouseWheel;
 
         DoubleTapped += OnDoubleTapped;
+    
+        KeyDown += MapControl_KeyDown;
+        KeyUp += MapControl_KeyUp;
+    }
+
+    private void MapControl_KeyUp(object? sender, KeyEventArgs e)
+    {
+        ShiftPressed = (e.KeyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
+    }
+
+    private void MapControl_KeyDown(object? sender, KeyEventArgs e)
+    {
+        ShiftPressed = (e.KeyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
     }
 
     protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
@@ -65,7 +78,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+        var leftButtonPressed = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
+        if (HandleTouching(e.GetPosition(this).ToMapsui(), leftButtonPressed, e.ClickCount, ShiftPressed))
+        {
+            e.Handled = true;
+            return;
+        }
+
+        if (leftButtonPressed)
         {
             MapControlMouseLeftButtonDown(e);
         }
@@ -138,7 +158,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        if (e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased)
+        var leftButtonPressed = e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased;
+        if (HandleTouched(e.GetPosition(this).ToMapsui(), leftButtonPressed, 1, ShiftPressed))
+        {
+            e.Handled = true;
+            return;
+        }
+
+        if (leftButtonPressed)
         {
             MapControlMouseLeftButtonUp(e);
         }
@@ -172,12 +199,21 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         base.OnPointerMoved(e);
         _mousePosition = e.GetPosition(this).ToMapsui();
+        if (HandleMoving(_mousePosition, true, 0, ShiftPressed))
+            e.Handled = true;
     }
+
+    public bool ShiftPressed { get; set; }
 
     private void OnDoubleTapped(object? sender, RoutedEventArgs e)
     {
         // We have a new interaction with the screen, so stop all navigator animations
         var tapPosition = _mousePosition;
+        if (tapPosition != null && HandleTouchingTouched(tapPosition, true, 2, ShiftPressed))
+        {
+            e.Handled = true;
+            return;
+        }
         OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
     }
 

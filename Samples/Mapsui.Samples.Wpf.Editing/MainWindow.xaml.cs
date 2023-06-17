@@ -295,12 +295,12 @@ public partial class MainWindow
         if (args.LeftButton == MouseButtonState.Pressed)
         {
             _editManipulation.Manipulate(MouseState.Dragging, screenPosition,
-                _editManager, MapControl);
+                _editManager, MapControl, MapControl.ShiftPressed);
         }
         else
         {
             _editManipulation.Manipulate(MouseState.Moving, screenPosition,
-                _editManager, MapControl);
+                _editManager, MapControl, MapControl.ShiftPressed);
         }
     }
 
@@ -308,7 +308,7 @@ public partial class MainWindow
     {
         if (MapControl.Map != null)
             MapControl.Map.Navigator.PanLock = _editManipulation.Manipulate(MouseState.Up,
-            args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
+            args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl, MapControl.ShiftPressed);
 
         if (_editManager.SelectMode)
         {
@@ -329,13 +329,13 @@ public partial class MainWindow
         if (args.ClickCount > 1)
         {
             MapControl.Map.Navigator.PanLock = _editManipulation.Manipulate(MouseState.DoubleClick,
-                args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
+                args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl, MapControl.ShiftPressed);
             args.Handled = true;
         }
         else
         {
             MapControl.Map.Navigator.PanLock = _editManipulation.Manipulate(MouseState.Down,
-                args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
+                args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl, MapControl.ShiftPressed);
         }
     }
 }

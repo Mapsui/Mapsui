@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -61,6 +62,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private int _updateInterval = 16;
     // Stopwatch for measuring drawing times
     private readonly System.Diagnostics.Stopwatch _stopwatch = new System.Diagnostics.Stopwatch();
+    // saving list of extended Widgets
+    private List<IWidgetExtended>? _extendedWidgets;
+    // keeps track of the widgets count to see if i need to recalculate the extended widgets.
+    private int _updateWidget = 0;
 
     private protected void CommonInitialize()
     {
@@ -443,7 +448,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #else
 
     private Map _map = new Map();
-
+    
     /// <summary>
     /// Map holding data for which is shown in this MapControl
     /// </summary>
@@ -625,5 +630,88 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             _invalidateTimer?.Dispose();
         }
         _invalidateTimer = null;
+    }
+
+    private bool HandleMoving(MPoint position, bool leftButton, int clickCount, bool shift)
+    {
+        var extendedWidgets = GetExtendedWidgets();
+        if (extendedWidgets.Count == 0)
+            return false;
+        
+        var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
+        foreach (var extendedWidget in extendedWidgets)
+        {
+            if (extendedWidget.HandleWidgetMoving(Map.Navigator, position, widgetArgs))
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool HandleTouchingTouched(MPoint position, bool leftButton, int clickCount, bool shift)
+    {
+        if (HandleTouching(position, leftButton, clickCount, shift))
+        {
+            return true; 
+        }
+
+        if (HandleTouched(position, leftButton, clickCount, shift))
+        {
+            return true; 
+        }
+
+        return false;
+    }
+
+
+    private bool HandleTouching(MPoint position, bool leftButton, int clickCount, bool shift)
+    {
+        var extendedWidgets = GetExtendedWidgets();
+        if (extendedWidgets.Count == 0)
+            return false;
+        
+        var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
+        foreach (var extendedWidget in extendedWidgets)
+        {
+            if (extendedWidget.HandleWidgetTouching(Map.Navigator, position, widgetArgs))
+                return true;
+        }
+
+        return false;
+    }
+    
+    private bool HandleTouched(MPoint position, bool leftButton, int clickCount, bool shift)
+    {
+        var extendedWidgets = GetExtendedWidgets();
+        if (extendedWidgets.Count == 0)
+            return false;
+        
+        var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
+        foreach (var extendedWidget in extendedWidgets)
+        {
+            if (extendedWidget.HandleWidgetTouched(Map.Navigator, position, widgetArgs))
+                return true;
+        }
+
+        return false;
+    }
+
+    private List<IWidgetExtended> GetExtendedWidgets()
+    {
+        if (_updateWidget != Map.Widgets.Count || _extendedWidgets == null)
+        {
+            _updateWidget = Map.Widgets.Count;
+            _extendedWidgets = new List<IWidgetExtended>();
+            var widgetsOfMapAndLayers = Map.GetWidgetsOfMapAndLayers().ToList();
+            foreach (var widget in widgetsOfMapAndLayers)
+            {
+                if (widget is IWidgetExtended extendedWidget)
+                {
+                    _extendedWidgets.Add(extendedWidget);
+                }
+            }
+        }
+
+        return _extendedWidgets;
     }
 }

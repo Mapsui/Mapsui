@@ -98,10 +98,29 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         Tapped += OnSingleTapped;
         DoubleTapped += OnDoubleTapped;
+        PointerMoved += MapControl_PointerMoved;
+        KeyDown += MapControl_KeyDown;
+        KeyUp += MapControl_KeyUp;
 
         var orientationSensor = SimpleOrientationSensor.GetDefault();
         if (orientationSensor != null)
             orientationSensor.OrientationChanged += (sender, args) => RunOnUIThread(() => Refresh());
+    }
+
+    private void MapControl_KeyUp(object sender, KeyRoutedEventArgs e)
+    {
+        if (e.Key == VirtualKey.Shift)
+        {
+            this.ShiftPressed = true;
+        }
+    }
+
+    private void MapControl_KeyDown(object sender, KeyRoutedEventArgs e)
+    {
+        if (e.Key == VirtualKey.Shift)
+        {
+            this.ShiftPressed = false;
+        }
     }
 
     private void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
@@ -115,15 +134,36 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         _virtualRotation = Map.Navigator.Viewport.Rotation;
     }
 
+    private void MapControl_PointerMoved(object sender, PointerRoutedEventArgs e)
+    {
+        var position = e.GetCurrentPoint(this).Position.ToMapsui();
+        if (HandleMoving(position, true, 0, e.KeyModifiers == VirtualKeyModifiers.Shift))
+            e.Handled = true;
+    }
+
     private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
     {
         var tapPosition = e.GetPosition(this).ToMapsui();
+        if (HandleTouchingTouched(tapPosition, true, 2, ShiftPressed))
+        {
+            e.Handled = true;
+            return; 
+        }
+
         OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
     }
+
+    public bool ShiftPressed { get; set; }
 
     private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
     {
         var tabPosition = e.GetPosition(this).ToMapsui();
+        if (HandleTouchingTouched(tabPosition, true, 1, ShiftPressed))
+        {
+            e.Handled = true;
+            return; 
+        }
+
         OnInfo(CreateMapInfoEventArgs(tabPosition, tabPosition, 1));
     }
 
@@ -259,9 +299,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private float GetPixelDensity()
     {
-#if HAS_UNO
-         return (float)DisplayInformation.GetForCurrentView().ResolutionScale / 100.0f;
-#elif __WINUI__
+#if __WINUI__
         return (float)(XamlRoot?.RasterizationScale ?? 1f);
 #else
         return (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
