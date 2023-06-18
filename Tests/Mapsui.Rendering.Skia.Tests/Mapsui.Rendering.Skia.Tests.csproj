@@ -399,6 +399,7 @@
     <None Remove="Resources\Images\OriginalRegression\WfsPointsSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\WmsProjectionDotSpatialSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\WmsProjectionSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\WmsProjectionTilingSample.Regression.png" />
   </ItemGroup>
 
 </Project>
