@@ -22,13 +22,19 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
     private static readonly ConcurrentDictionary<int, ProjectionInfo> Projections = new();
     private static readonly ConcurrentDictionary<(int From, int To), GeometryTransform> GeometryTransformations = new();
     private static readonly ConcurrentDictionary<string, string> CrsFromEsriLookup = new();
+    private static bool _initialized;
 
     public static void Init()
     {
-        ProjectionDefaults.Projection = new DotSpatialProjection();
+        if (!_initialized)
+        {
+            _initialized = true;
+            ProjectionDefaults.Projection = new DotSpatialProjection();
+            InitProjections();
+        }
     }
 
-    public int? GetIdFromCrs(string? crs)
+    public static int? GetIdFromCrs(string? crs)
     {
         if (crs == null) return null;
 
@@ -192,7 +198,7 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
             Projections[id] = result;
         }
 
-        return result;
+        return result; 
     }
 
     private static GeometryTransform? GetGeometryTransformation(int? fromId, int? toId)
@@ -258,9 +264,32 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         if (id == null)
             throw new ArgumentException(nameof(crs));
 
+        InitProjections();
+
         var projection = ProjectionInfo.FromEsriString(esriString);
         Projections[id.Value] = projection;
 
         CrsFromEsriLookup[esriString] = crs;
+    }
+
+    private static void InitProjections()
+    {
+        if (Projections.Count > 0)
+            return;
+
+        // Initialize Authority Code Handler
+        var instance = AuthorityCodeHandler.Instance;
+        var field = typeof(AuthorityCodeHandler).GetField("_authorityCodeToProjectionInfo", BindingFlags.Instance | BindingFlags.NonPublic);
+        var dictionary = (IDictionary<string, ProjectionInfo>?)field?.GetValue(instance);
+        if (dictionary != null)
+            foreach (var it in dictionary)
+            {
+                CrsFromEsriLookup[it.Value.ToEsriString()] = it.Key;
+                var id = GetIdFromCrs(it.Key);
+                if (id != null)
+                {
+                    Projections[id.Value] = it.Value;
+                }
+            }
     }
 }
