@@ -34,7 +34,7 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
 
         var splits = crs.Split(':');
         if (splits.Length == 2)
-            if (string.Compare(splits[0], "crs", StringComparison.InvariantCultureIgnoreCase) == 0)
+            if (string.Compare(splits[0], "epsg", StringComparison.InvariantCultureIgnoreCase) == 0)
                 if (int.TryParse(splits[1], out var number))
                     return number;
 
