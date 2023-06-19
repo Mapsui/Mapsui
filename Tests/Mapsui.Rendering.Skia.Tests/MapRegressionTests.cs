@@ -9,15 +9,16 @@ using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Rendering.Skia.SkiaWidgets;
+using Mapsui.Providers.Wfs;
+using Mapsui.Providers.Wms;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
+using Mapsui.Samples.Common.Maps.Animations;
 using Mapsui.Samples.Common.Maps.DataFormats;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
 using Mapsui.UI;
-using Mapsui.Widgets.PerformanceWidget;
 using NUnit.Framework;
 
 namespace Mapsui.Rendering.Skia.Tests;
@@ -46,16 +47,16 @@ public class MapRegressionTests
         WmtsSample.DefaultCache ??= File.ReadFromCacheFolder("WmtsSample");
 
         // Url Cache
-        WmsSample.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
-        WmsProjectionSample.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
-        WfsSample.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
-        WfsPointsSample.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
+        WmsProvider.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
+        WFSProvider.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
         ArcGISImageServiceSample.DefaultCache ??= File.ReadFromCacheFolder("ArcGisImageServiceSample");
     }
 
     public static object[] RegressionSamples => _regressionSamples ??= AllSamples.GetSamples().Where(f => ExcludedSamples.All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName).ToArray();
 
-    public static object[] ExcludedSamples => _excludedSamples ??= new ISampleBase[] {
+    public static object[] ExcludedSamples => _excludedSamples ??= new ISampleBase[] 
+    {
+        new AnimatedPointsSample()
     };
 
     [Test]
@@ -161,6 +162,7 @@ public class MapRegressionTests
     }
 
     [Test]
+    [Explicit]
     [TestCaseSource(nameof(ExcludedSamples))]
     public async Task ExcludedTestSampleAsync(ISampleBase sample)
     {

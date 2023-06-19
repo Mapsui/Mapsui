@@ -13,7 +13,6 @@ public class WmsProjectionSample : ISample
 {
     public string Name => " 6 WMS Projection";
     public string Category => "Data Formats";
-    public static IUrlPersistentCache? DefaultCache { get; set; }
 
     public async Task<Map> CreateMapAsync()
     {
@@ -44,7 +43,7 @@ public class WmsProjectionSample : ISample
     private static async Task<WmsProvider> CreateWmsProviderAsync()
     {
         const string wmsUrl = "https://sgi2.isprambiente.it/arcgis/services/raster/igm25k_lazio_wgs/ImageServer/WMSServer?service=wms&request=getCapabilities&version=1.3.0";
-        var provider = await WmsProvider.CreateAsync(wmsUrl, persistentCache: DefaultCache);
+        var provider = await WmsProvider.CreateAsync(wmsUrl);
         provider.ContinueOnError = true;
         provider.TimeOut = 20000;
         provider.CRS = "EPSG:4326";

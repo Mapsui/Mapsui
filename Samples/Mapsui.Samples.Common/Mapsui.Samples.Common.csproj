@@ -158,6 +158,14 @@
     <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="GeoData\Cache\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\Tests\Mapsui.Rendering.Skia.Tests\Resources\Cache\WmsSample.sqlite" Link="GeoData\Cache\WmsSample.sqlite" />
+  </ItemGroup>
+
   <PropertyGroup>
     <DebugType>portable</DebugType>
   </PropertyGroup>
