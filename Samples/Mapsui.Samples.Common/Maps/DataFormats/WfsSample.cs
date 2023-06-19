@@ -14,7 +14,6 @@ public class WfsSample : ISample
 {
     public string Name => " 7 WFS";
     public string Category => "Data Formats";
-    public static IUrlPersistentCache? DefaultCache { get; set; }
 
     private const string wfsUri = "https://geoservices1.civis.bz.it/geoserver/p_bz-AdministrativeUnits/ows";
     private const string crs = "EPSG:3857";  // originally: "EPSG:25832"
@@ -60,8 +59,7 @@ public class WfsSample : ISample
             getCapabilitiesUri,
             nsPrefix,
             layerName,
-            WFSProvider.WFSVersionEnum.WFS_1_1_0,
-            persistentCache: DefaultCache);
+            WFSProvider.WFSVersionEnum.WFS_1_1_0);
 
         provider.QuickGeometries = false;
         provider.GetFeatureGetRequest = true;

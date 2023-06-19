@@ -397,7 +397,9 @@
     <None Remove="Resources\Images\OriginalRegression\PolygonGeometrySample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\ProjectionTestSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\WfsPointsSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\WmsProjectionDotSpatialSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\WmsProjectionSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\WmsProjectionTilingSample.Regression.png" />
   </ItemGroup>
 
 </Project>
