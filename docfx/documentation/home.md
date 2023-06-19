@@ -1,25 +1,18 @@
 # Introduction
-Mapsui is a .NET component to show a map in your app.
+Mapsui is a .NET map component.
 
-## Supported platforms in v3
-- Xamarin.Forms
-- WPF
-- UWP
-- Xamarin.Android
-- Xamarin.iOS
-
-### Upcoming in v4
-- Avalonia
-- Eto.Forms
+## Platforms
 - MAUI
-- Uno platform
-- Win UI
+- WPF
+- Avalonia
+- Uno Platform
+- WinUI
+- Xamarin (Forms, Android and iOS)
+- Eto.Forms
 
-## Supported data
-- Points, Lines and Polygons.
-- Mapsui uses the BruTile library to display tile layers such as:
-  - OpenStreetMap tiles
-  - WMTS
-  - TMS
-  - WMS
-  - MBTiles. An offline format to store tile data in sqlite file.
+## Functionality
+- Points, Lines and Polygons using [NTS](https://github.com/NetTopologySuite/NetTopologySuite), a mature library which support all kinds of geometric operations. 
+- OpenStreetMap tiles based on [BruTile library](https://github.com/BruTile/BruTile) and almost all other tile sources.
+- OGC standards with data providers for WMS, WFS and WMTS.
+- Offline maps are possible using MBTiles implemented with [BruTile.MBTiles](https://www.nuget.org/packages/BruTile.MbTiles). This stores map tiles in a sqlite file.
+- Generates static map images to could be embedded in PDFs. 
