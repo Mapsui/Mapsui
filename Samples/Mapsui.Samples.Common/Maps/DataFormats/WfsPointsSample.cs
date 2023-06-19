@@ -18,7 +18,6 @@ public class WfsPointsSample : ISample
 {
     public string Name => " 7 WFS Points";
     public string Category => "Data Formats";
-    public static IUrlPersistentCache? DefaultCache { get; set; }
 
     private const string crs = "EPSG:31254";
 
@@ -67,8 +66,7 @@ public class WfsPointsSample : ISample
             "https://vogis.cnv.at/geoserver/vogis/laser_2002_04_punkte/ows",
             "vogis",
             "laser_2002_04_punkte", 
-            WFSProvider.WFSVersionEnum.WFS_1_1_0,
-            persistentCache: DefaultCache);
+            WFSProvider.WFSVersionEnum.WFS_1_1_0);
 
         provider.CRS = crs;
         provider.AxisOrder = new []{0,1};

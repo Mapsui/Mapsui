@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Providers.Wfs;
+using Mapsui.Providers.Wms;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps.Animations;
@@ -45,10 +47,8 @@ public class MapRegressionTests
         WmtsSample.DefaultCache ??= File.ReadFromCacheFolder("WmtsSample");
 
         // Url Cache
-        WmsSample.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
-        WmsProjectionSample.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
-        WfsSample.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
-        WfsPointsSample.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
+        WmsProvider.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
+        WFSProvider.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
         ArcGISImageServiceSample.DefaultCache ??= File.ReadFromCacheFolder("ArcGisImageServiceSample");
     }
 
