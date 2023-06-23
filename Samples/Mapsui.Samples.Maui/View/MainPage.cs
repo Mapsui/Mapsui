@@ -1,11 +1,7 @@
 using CommunityToolkit.Maui.Markup;
-using Mapsui.Extensions;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps;
-using Mapsui.Samples.Common.Utilities;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Samples.Maui.ViewModel;
-using Mapsui.Tiling;
 using Mapsui.UI.Maui;
 
 namespace Mapsui.Samples.Maui.View;
@@ -40,14 +36,17 @@ public sealed class MainPage : ContentPage, IDisposable
             },
             Children =
             {
-                new VerticalStackLayout()
+                new ScrollView()
                 {
-                    Spacing = 20,
-                    Children =
+                    Content = new VerticalStackLayout()
                     {
-                        categoryPicker,
-                        collectionView
-                    }
+                        Spacing = 20,
+                        Children =
+                        {
+                            categoryPicker,
+                            collectionView
+                        }
+                    } 
                 }.Column(0).Padding(20),
                 mapControl.Column(1)
             }
@@ -69,7 +68,8 @@ public sealed class MainPage : ContentPage, IDisposable
     {
         return new CollectionView
         {
-            ItemTemplate = new DataTemplate(() => CreateCollectionViewTemplate()),
+            Margin = 4,
+            ItemTemplate = new DataTemplate(CreateCollectionViewTemplate),
             SelectionMode = SelectionMode.Single,
             ItemsSource = mainViewModel.Samples
         }
@@ -79,13 +79,10 @@ public sealed class MainPage : ContentPage, IDisposable
 
     private static IView CreateCollectionViewTemplate()
     {
-        return new Frame
+        return new Border
         {
-            BorderColor = Color.FromArgb("#DDDDDD"),
-            HasShadow = true,
-            CornerRadius = 4,
             Padding = 10,
-            Margin = new Thickness(0, 2),
+            Margin = new Thickness(2, 2),
             Content = new Label
             {
                 WidthRequest = 200,
