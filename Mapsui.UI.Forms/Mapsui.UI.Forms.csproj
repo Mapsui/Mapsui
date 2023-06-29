@@ -8,6 +8,7 @@
 		<Authors>Dirk Weltz</Authors>
 		<PackageTags>$(PackageTags) xamarin.forms xamarin ios android windows uwp macos cross-platform</PackageTags>
 		<IsPackable>true</IsPackable>
+		<BuildWithMSBuildOnMono>true</BuildWithMSBuildOnMono>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
