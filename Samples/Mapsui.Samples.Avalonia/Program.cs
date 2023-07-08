@@ -1,4 +1,6 @@
-﻿using Avalonia;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Avalonia;
 using Avalonia.ReactiveUI;
 
 namespace Mapsui.Samples.Avalonia;
@@ -22,7 +24,7 @@ internal class Program
                        .With(new Win32PlatformOptions
                        {
                            // Not in v11. Is there an alternative?: EnableMultitouch = true,
-                           AllowEglInitialization = false
+                           RenderingMode = new ReadOnlyCollection<Win32RenderingMode>(new[]{Win32RenderingMode.Software}),
                        })
                        .LogToTrace()
                        .UseReactiveUI();
