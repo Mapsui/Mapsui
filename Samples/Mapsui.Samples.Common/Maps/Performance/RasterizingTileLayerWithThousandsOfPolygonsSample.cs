@@ -15,7 +15,7 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class RasterizingTileLayerWithThousandsOfPolygons : IMapControlSample
+public class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapControlSample
 {
     public string Name => "RasterizingTileLayer with Thousands of Polygons";
     public string Category => "Performance";
