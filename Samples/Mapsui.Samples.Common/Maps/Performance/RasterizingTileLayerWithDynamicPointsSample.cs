@@ -50,10 +50,10 @@ public class RasterizingTileLayerWithDynmicPointsSample : IMapControlSample
 
         _ = Task.Run(async () =>
         {
-            for (var i = 0; i < 1000; i++)
+            for (var i = 0; i < 100; i++)
             {
                 observableCollection.Add(new MPoint(rnd.Next(0, 5000000), rnd.Next(0, 5000000)));
-                await Task.Delay(300);
+                await Task.Delay(100);
             }
         });
 
