@@ -3,6 +3,7 @@ using Android.Content.PM;
 using Avalonia;
 using Avalonia.Android;
 using Avalonia.ReactiveUI;
+using System.Collections.ObjectModel;
 
 namespace Mapsui.Samples.Avalonia.Android;
 
@@ -17,6 +18,11 @@ public class MainActivity : AvaloniaMainActivity<App>
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
         return base.CustomizeAppBuilder(builder)
+             .With(new AndroidPlatformOptions
+            {
+                // Only use Software Rendering
+                RenderingMode = new ReadOnlyCollection<AndroidRenderingMode>(new[]{AndroidRenderingMode.Software}),
+            })
             .UseReactiveUI();
     }
 }
