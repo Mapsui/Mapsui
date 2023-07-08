@@ -38,16 +38,7 @@ public class RasterizingTileLayerWithDynmicPointsSample : IMapControlSample
         var features = new List<IFeature>();
         var observableCollection = new ObservableCollection<MPoint>();
 
-        _ = Task.Run(async () =>
-        {
-            for (var i = 0; i < 100; i++)
-            {
-                observableCollection.Add(new MPoint(rnd.Next(0, 5000000), rnd.Next(0, 5000000)));
-                await Task.Delay(100);
-            }
-        });
-
-        return new ObservableMemoryLayer<MPoint>(f => new PointFeature(f))
+        var layer = new ObservableMemoryLayer<MPoint>(f => new PointFeature(f))
         {
             Name = "Points",
             Features = features,
@@ -58,5 +49,16 @@ public class RasterizingTileLayerWithDynmicPointsSample : IMapControlSample
             },
             ObservableCollection = observableCollection,
         };
+
+        _ = Task.Run(async () =>
+        {
+            for (var i = 0; i < 1000; i++)
+            {
+                observableCollection.Add(new MPoint(rnd.Next(0, 5000000), rnd.Next(0, 5000000)));
+                await Task.Delay(300);
+            }
+        });
+
+        return layer;
     }
 }
