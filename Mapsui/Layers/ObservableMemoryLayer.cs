@@ -72,6 +72,7 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                     }
                 }
 
+                DataHasChanged();
                 break;
             case NotifyCollectionChangedAction.Reset:
                 _shadowCollection.Clear();
@@ -83,6 +84,7 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                             _shadowCollection.Add(feature);
                     }
 
+                DataHasChanged();
                 break;
             case NotifyCollectionChangedAction.Move:
                 // do nothing
