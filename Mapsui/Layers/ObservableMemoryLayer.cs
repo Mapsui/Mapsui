@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using Mapsui.Utilities;
 
 namespace Mapsui.Layers;
@@ -35,7 +36,7 @@ public class ObservableMemoryLayer<T> : MemoryLayer
             {
                 _observableCollection.CollectionChanged += DataSource_CollectionChanged;
                 _shadowCollection.Clear();
-                foreach (var it in _observableCollection)
+                foreach (var it in _observableCollection.ToArray()) // collection has been changed.
                 {
                     var feature = _getFeature(it);
                     if (feature != null)
