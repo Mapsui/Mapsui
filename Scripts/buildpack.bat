@@ -32,7 +32,7 @@ msbuild /p:RestorePackages=true /p:Configuration=Release /p:Version=%Version% Ma
 
 dotnet pack /p:RestorePackages=true /p:Configuration=Release /p:Version=%Version% Mapsui.UI.Avalonia/Mapsui.UI.Avalonia.csproj --output Artifacts
 
-dotnet pack /p:RestorePackages=true /p:Configuration=Release /p:Version=%Version% Mapsui.UI.Avalonia/Mapsui.UI.Avalonia.V0.csproj --output Artifacts
+dotnet pack /p:RestorePackages=true /p:Configuration=Release /p:Version=%Version% Mapsui.UI.Avalonia.V0/Mapsui.UI.Avalonia.V0.csproj --output Artifacts
 
 dotnet pack /p:RestorePackages=true /p:Configuration=Release /p:Version=%Version% Mapsui.UI.Eto/Mapsui.UI.Eto.csproj --output Artifacts
 
