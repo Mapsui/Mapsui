@@ -121,11 +121,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
             // Check, if we have to redraw the screen
 
-            if (Map.UpdateAnimations() == true)
+            if (Map?.UpdateAnimations() == true)
                 _refresh = true;
 
             // seems that this could be null sometimes
-            if (Map.Navigator?.UpdateAnimations() ?? false)
+            if (Map?.Navigator?.UpdateAnimations() ?? false)
                 _refresh = true;
 
             if (!_refresh)
