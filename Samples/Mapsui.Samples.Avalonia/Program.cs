@@ -24,6 +24,8 @@ internal class Program
                        .With(new Win32PlatformOptions
                        {
                            // Not in v11. Is there an alternative?: EnableMultitouch = true,
+                           // Egl does not work on all platforms for example not on Windows on Arm so only use software rendering for now.
+                           // This was in earlier versions AllowEglInitialization = false
                            RenderingMode = new ReadOnlyCollection<Win32RenderingMode>(new[]{Win32RenderingMode.Software}),
                        })
                        .LogToTrace()
