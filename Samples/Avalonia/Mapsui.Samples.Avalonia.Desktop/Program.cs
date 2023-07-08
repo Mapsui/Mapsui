@@ -26,5 +26,6 @@ class Program
                 RenderingMode = new ReadOnlyCollection<Win32RenderingMode>(new[]{Win32RenderingMode.Software}),
             })
             .LogToTrace()
+            .WithInterFont()
             .UseReactiveUI();
 }

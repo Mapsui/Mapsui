@@ -23,6 +23,7 @@ public class MainActivity : AvaloniaMainActivity<App>
                 // Only use Software Rendering
                 RenderingMode = new ReadOnlyCollection<AndroidRenderingMode>(new[]{AndroidRenderingMode.Software}),
             })
+            .WithInterFont()
             .UseReactiveUI();
     }
 }
