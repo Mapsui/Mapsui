@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -18,14 +19,23 @@ public class ObservableMemoryLayer<T> : MemoryLayer
     {
         _getFeature = getFeature;
         _shadowCollection = new ConcurrentHashSet<IFeature>();
-        Features = _shadowCollection;
+        base.Features = _shadowCollection;
     }
+
+    /// <summary>
+    /// Hide set from Base Features Collection because, if this is set than observable memory layer does not work
+    /// </summary>
+    public new IEnumerable<IFeature> Features => _shadowCollection;
 
     public ObservableCollection<T>? ObservableCollection
     {
         get => _observableCollection;
         set
         {
+            // safety check
+            if (base.Features != _shadowCollection)
+                base.Features = _shadowCollection;
+
             if (_observableCollection != null)
             {
                 _observableCollection.CollectionChanged -= DataSource_CollectionChanged;

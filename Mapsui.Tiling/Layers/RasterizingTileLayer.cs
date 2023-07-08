@@ -1,4 +1,5 @@
-﻿using BruTile.Cache;
+﻿using System.Collections.Generic;
+using BruTile.Cache;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Projections;
@@ -11,6 +12,9 @@ namespace Mapsui.Tiling.Layers;
 
 public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher
 {
+    private MRect? _currentExtent;
+    private double? _currentResolution;
+
     /// <summary>
     ///     Creates a RasterizingTileLayer which rasterizes a layer for performance
     /// </summary>
@@ -54,7 +58,18 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher
         {
             ClearCache();
             DataHasChanged();
+            if (_currentExtent != null && _currentResolution != null)
+            {
+                RefreshData(new FetchInfo(new MSection(_currentExtent, _currentResolution.Value)));
+            }
         };
+    }
+
+    public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
+    {
+        _currentExtent = extent;
+        _currentResolution = resolution;
+        return base.GetFeatures(extent, resolution);
     }
 
     public ILayer SourceLayer { get; }

@@ -35,13 +35,11 @@ public class RasterizingTileLayerWithDynmicPointsSample : IMapControlSample
     private static MemoryLayer CreateRandomPointLayer()
     {
         var rnd = new Random(3462); // Fix the random seed so the features don't move after a refresh
-        var features = new List<IFeature>();
         var observableCollection = new ObservableCollection<MPoint>();
 
         var layer = new ObservableMemoryLayer<MPoint>(f => new PointFeature(f))
         {
             Name = "Points",
-            Features = features,
             Style = new SymbolStyle
             {
                 SymbolType = SymbolType.Triangle,
