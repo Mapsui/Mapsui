@@ -8,9 +8,7 @@ using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling.Layers;
-using Mapsui.UI;
 using System.IO;
-using System.Reflection;
 using System.Threading.Tasks;
 
 #pragma warning disable IDISP001 // Dispose created
