@@ -508,11 +508,11 @@ public class WmsProvider : IProvider, IProjectingProvider
             throw new InvalidOperationException("Wms Client needs to be set");
         //We prefer get. Seek for supported 'get' method
         for (var i = 0; i < _wmsClient.GetMapRequests.Length; i++)
-            if (_wmsClient.GetMapRequests[i].Type?.ToLower() == "get")
+            if (string.Compare(_wmsClient.GetMapRequests[i].Type, "GET", StringComparison.InvariantCultureIgnoreCase) == 0)
                 return _wmsClient.GetMapRequests[i];
         //Next we prefer the 'post' method
         for (var i = 0; i < _wmsClient.GetMapRequests.Length; i++)
-            if (_wmsClient.GetMapRequests[i].Type?.ToLower() == "post")
+            if (string.Compare(_wmsClient.GetMapRequests[i].Type, "POST", StringComparison.InvariantCultureIgnoreCase) == 0)
                 return _wmsClient.GetMapRequests[i];
         return _wmsClient.GetMapRequests[0];
     }
@@ -566,7 +566,7 @@ public class WmsProvider : IProvider, IProjectingProvider
         }
            
         var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
-        var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type ?? "GET"), url);
+        var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type?.ToUpper() ?? "GET"), url);
         var response = await client.SendAsync(req);
 
         if (!response.IsSuccessStatusCode)
