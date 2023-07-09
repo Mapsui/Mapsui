@@ -579,6 +579,6 @@ public class WmsProvider : IProvider, IProjectingProvider
             throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, got - {response.Content.Headers.ContentType?.MediaType}");
         }
 
-        return await response.Content.ReadAsStreamAsync();
+        return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
     }
 }

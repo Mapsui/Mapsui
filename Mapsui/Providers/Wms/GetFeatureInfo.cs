@@ -96,7 +96,7 @@ public class GetFeatureInfo
             throw new Exception($"Unexpected response code: {response.StatusCode}");
         }
 
-        return await response.Content.ReadAsStreamAsync();
+        return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
     }
 
     private string CreateRequestUrl(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double x, double y, double mapWidth, double mapHeight)
