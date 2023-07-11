@@ -88,7 +88,7 @@ public partial class MapControl : ComponentBase, IMapControl
         if (!_onLoaded)
         {
             _onLoaded = true;
-            OnLoadCompleteAsync();
+            OnLoadComplete();
         }
 
         // Size changed Workaround
@@ -119,7 +119,7 @@ public partial class MapControl : ComponentBase, IMapControl
     }
 
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
-    private async void OnLoadCompleteAsync()
+    private async void OnLoadComplete()
     {
         try
         {
@@ -132,8 +132,7 @@ public partial class MapControl : ComponentBase, IMapControl
         }
     }
 
-    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
-    protected async void OnMouseWheel(WheelEventArgs e)
+    protected void OnMouseWheel(WheelEventArgs e)
     {
 
         var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
@@ -180,8 +179,7 @@ public partial class MapControl : ComponentBase, IMapControl
         action();
     }
 
-    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
-    protected async void OnDblClick(MouseEventArgs e)
+    protected void OnDblClick(MouseEventArgs e)
     {
         try
         {
@@ -194,8 +192,7 @@ public partial class MapControl : ComponentBase, IMapControl
         }
     }
 
-    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
-    protected async void OnMouseDown(MouseEventArgs e)
+    protected void OnMouseDown(MouseEventArgs e)
     {
         try
         {
@@ -245,8 +242,7 @@ public partial class MapControl : ComponentBase, IMapControl
         }
     }
 
-    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
-    protected async void OnMouseUp(MouseEventArgs e)
+    protected void OnMouseUp(MouseEventArgs e)
     {
         try
         {
@@ -288,8 +284,7 @@ public partial class MapControl : ComponentBase, IMapControl
         return Math.Abs(currentPosition.Distance(previousPosition)) < 5;
     }
 
-    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
-    protected async void OnMouseMove(MouseEventArgs e)
+    protected void OnMouseMove(MouseEventArgs e)
     {
         try
         {
