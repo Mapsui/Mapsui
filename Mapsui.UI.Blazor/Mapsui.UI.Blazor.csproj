@@ -25,6 +25,12 @@
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
   </ItemGroup>
 
+  <!--target to remove System.Memory-->
+  <ItemGroup>
+    <None Include="Mapsui.Blazor.targets" PackagePath="build/Mapsui.Blazor.targets" Pack="true" />
+    <None Include="Mapsui.Blazor.targets" PackagePath="buildTransitive/Mapsui.Blazor.targets" Pack="true" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
     <ProjectReference Include="..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
