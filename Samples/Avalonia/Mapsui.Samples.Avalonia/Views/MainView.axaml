@@ -1,0 +1,41 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AvaloniaApplication1.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             xmlns:avalonia="clr-namespace:Mapsui.UI.Avalonia;assembly=Mapsui.UI.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Mapsui.Samples.Avalonia.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+
+    <Grid>
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <avalonia:MapControl Grid.Column="1" x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+            <Border Grid.Row ="0" Grid.Column="0" BorderBrush="White" Opacity="0.65" BorderThickness="6" MinWidth="140"
+                    MinHeight="30" HorizontalAlignment="Left">
+                <RelativePanel VerticalAlignment="Stretch" >
+                    <ComboBox x:Name="CategoryComboBox" Margin="0,0, 0, 10"/>
+                    <ScrollViewer RelativePanel.Below="CategoryComboBox">
+                        <StackPanel Width="{x:Static sys:Double.NaN}" x:Name="SampleList"/>
+                    </ScrollViewer>
+                    <TextBlock RelativePanel.Above="RotationSlider" x:Name="FeatureInfo" TextWrapping="Wrap"/>
+                    <Slider RelativePanel.AlignBottomWithPanel="True" x:Name="RotationSlider" MinWidth="140"/>
+                </RelativePanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

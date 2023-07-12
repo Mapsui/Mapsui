@@ -3,32 +3,30 @@ using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Markup.Xaml;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
-using Mapsui.UI.Avalonia;
 
 namespace Mapsui.Samples.Avalonia.Views;
 
-public partial class MainWindow : Window
+public partial class MainView : UserControl
 {
-    static MainWindow()
+    static MainView()
     {
         // todo: find proper way to load assembly
         Mapsui.Tests.Common.Utilities.LoadAssembly();
     }
 
-    public MainWindow()
+    public MainView()
     {
         InitializeComponent();
     }
 
     private void InitializeComponent()
     {
-        InitializeComponent(true, true);
+        InitializeComponent(true);
 
         MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
         MapControl.Map.Navigator.RotationLock = false;
@@ -51,14 +49,16 @@ public partial class MainWindow : Window
         var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c).ToArray();
 
         CategoryComboBox.ItemsSource = categories;
-        
+
         CategoryComboBox.SelectedIndex = 1;
     }
 
     private void MapOnInfo(object? sender, MapInfoEventArgs args)
     {
         if (args.MapInfo?.Feature != null)
+        {
             FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";
+        }
     }
 
     private void FillListWithSamples()
@@ -66,7 +66,9 @@ public partial class MainWindow : Window
         var selectedCategory = CategoryComboBox.SelectedItem?.ToString() ?? "";
         SampleList.Children.Clear();
         foreach (var sample in AllSamples.GetSamples().Where(s => s.Category == selectedCategory))
+        {
             SampleList.Children.Add(CreateRadioButton(sample));
+        }
     }
 
     private void CategoryComboBoxSelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -104,5 +106,4 @@ public partial class MainWindow : Window
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
         MapControl.Map.Navigator.RotateTo(percent * 360);
     }
-
 }
