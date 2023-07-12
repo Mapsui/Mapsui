@@ -40,7 +40,7 @@ jobs:
       run: dotnet restore Mapsui.Linux.slnf       
     # Samples Build     
     - name: Mapsui.Samples.Avalonia
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia/Mapsui.Samples.Avalonia.csproj    
+      run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj    
     - name: Build Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                       
     # Samples Forms    
@@ -174,7 +174,7 @@ jobs:
       run: dotnet restore Mapsui.Mac.slnf       
     # Samples Build               
     - name: Mapsui.Samples.Avalonia
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia/Mapsui.Samples.Avalonia.csproj
+      run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj
     - name: Build Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                       
     # Samples Forms    
@@ -330,9 +330,9 @@ jobs:
     #  run: nuget restore Mapsui.sln      
     # Samples Build 
     - name: Mapsui.Samples.Avalonia
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia/Mapsui.Samples.Avalonia.csproj
+      run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj
     - name: Mapsui.Samples.Avalonia.V0
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia.V0/Mapsui.Samples.Avalonia.V0.csproj
+      run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.V0/Mapsui.Samples.Avalonia.V0.csproj
     - name: Mapsui.Samples.Blazor
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Blazor/Mapsui.Samples.Blazor.csproj
     - name: Mapsui.Samples.Droid
