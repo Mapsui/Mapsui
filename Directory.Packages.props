@@ -41,6 +41,7 @@
     <PackageVersion Include="Mapsui.Android" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.ArcGIS" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Avalonia" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.Avalonia.V0" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Blazor" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Eto" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Extensions" Version="4.0.0-beta.8" />
@@ -61,7 +62,6 @@
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="[7.0.0,8.0.0)" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="[16.11.0,17.0.0)" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="[7.0.0,8.0.0)" />
-    <PackageVersion Include="Microsoft.Graphics.Win2D" Version="[1.0.4,2.0.0.0)" />
     <PackageVersion Include="Microsoft.Net.Compilers.Toolset" Version="[4.6.0,5.0.0)" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="[16.9.4,17.0.0)" />
     <PackageVersion Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="[6.2.14,7.0.0)" />
