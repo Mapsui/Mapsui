@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
@@ -14,6 +16,8 @@ using Avalonia.Threading;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.UI.Avalonia.Extensions;
+using Mapsui.UI.Utils;
+using ReactiveUI;
 
 namespace Mapsui.UI.Avalonia;
 
@@ -27,6 +31,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private MPoint? _previousMousePosition;
     private double _mouseWheelPos = 0.0;
 
+    // Touch Handling
+    private readonly ConcurrentDictionary<long, TouchEvent> _touches = new();
+
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
 
     public MapControl()
@@ -34,6 +41,12 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         ClipToBounds = true;
         CommonInitialize();
         Initialize();
+    }
+
+    /// <summary> Clears the Touch State </summary>
+    public void ClearTouchState()
+    {
+        _touches.Clear();
     }
 
     private void Initialize()
@@ -89,7 +102,12 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControl_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var leftButtonPressed = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
-        if (HandleTouching(e.GetPosition(this).ToMapsui(), leftButtonPressed, e.ClickCount, ShiftPressed))
+        var location = e.GetPosition(this).ToMapsui();
+        // Save time, when the event occurs
+        var ticks = DateTime.Now.Ticks;
+        _touches[e.Pointer.Id] = new TouchEvent(e.Pointer.Id, location, ticks);
+
+        if (HandleTouching(location, leftButtonPressed, e.ClickCount, ShiftPressed))
         {
             e.Handled = true;
             return;
@@ -145,10 +163,12 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControlMouseLeave(object? sender, PointerEventArgs e)
     {
         _previousMousePosition = null;
+        ClearTouchState();
     }
 
     private void MapControlMouseMove(object? sender, PointerEventArgs e)
     {
+        var ticks = DateTime.Now.Ticks;
         _currentMousePosition = e.GetPosition(this).ToMapsui(); // Needed for both MouseMove and MouseWheel event
 
         if (_mouseDown)
@@ -161,6 +181,37 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
                 return;
             }
 
+            if (_touches.Count == 2)
+            {
+                if (!_touches.TryGetValue(e.Pointer.Id, out var initialPosition))
+                {
+                    return;
+                }
+
+                var otherTouchPoint = _touches.Where(f => f.Key != e.Pointer.Id).Select(f => f.Value).FirstOrDefault()?.Location;
+                if (otherTouchPoint == null)
+                {
+                    return;
+                }
+
+                var mouseDistance = (otherTouchPoint.Distance(_currentMousePosition) -
+                                     otherTouchPoint.Distance(initialPosition.Location));
+
+                if (Math.Abs(mouseDistance) < TouchConstants.TouchSlop)
+                {
+                    return;
+                }
+
+                // update the previous position
+                _touches[e.Pointer.Id] = new TouchEvent(e.Pointer.Id, _currentMousePosition, ticks);
+
+                e.Handled = true;
+                var mouseWheelDelta = Convert.ToInt32(mouseDistance);
+                Map.Navigator.MouseWheelZoom(mouseWheelDelta, _currentMousePosition);
+
+                return;
+            }
+
             Map.Navigator.Drag(_currentMousePosition, _previousMousePosition);
             _previousMousePosition = _currentMousePosition;
         }
@@ -168,6 +219,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
+        _touches.TryRemove(e.Pointer.Id, out _);
+
         var leftButtonPressed = e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased;
         if (HandleTouched(e.GetPosition(this).ToMapsui(), leftButtonPressed, 1, ShiftPressed))
         {

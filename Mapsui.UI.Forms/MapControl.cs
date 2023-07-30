@@ -82,14 +82,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private SKGLView? _glView;
     private SKCanvasView? _canvasView;
 
-    /// <summary>
-    /// If a finger touches down and up it counts as a tap if the distance between the down and up location is smaller
-    /// then the touch slob.
-    /// The slob is initialized at 8. How did we get to 8? Well you could read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
-    /// We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
-    /// </summary>
-    private const int TouchSlop = 8;
-
     protected readonly bool _initialized;
 
     private double _virtualRotation;
@@ -440,7 +432,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         if (_firstTouch == null) { return false; }
         if (releasedTouch.Location == null) { return false; }
-        return _firstTouch != null && Utilities.Algorithms.Distance(releasedTouch.Location, _firstTouch) < TouchSlop;
+        return _firstTouch != null && Utilities.Algorithms.Distance(releasedTouch.Location, _firstTouch) < TouchConstants.TouchSlop;
     }
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
@@ -820,30 +812,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         LongTap?.Invoke(this, args);
 
         return args.Handled;
-    }
-
-    private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
-    {
-        if (locations.Count < 2)
-            throw new ArgumentException();
-
-        double centerX = 0;
-        double centerY = 0;
-
-        foreach (var location in locations)
-        {
-            centerX += location.X;
-            centerY += location.Y;
-        }
-
-        centerX = centerX / locations.Count;
-        centerY = centerY / locations.Count;
-
-        var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
-
-        var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
-
-        return (new MPoint(centerX, centerY), radius, angle);
     }
 
     /// <summary>
