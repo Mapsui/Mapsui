@@ -19,5 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MapControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\FlingTracker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\PCLTimer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\TouchConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\TouchEvent.cs" />
   </ItemGroup>
 </Project>

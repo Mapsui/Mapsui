@@ -79,28 +79,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     public static bool UseGPU = true;
 #endif
 
-    private class TouchEvent
-    {
-        public long Id { get; }
-        public MPoint Location { get; }
-        public long Tick { get; }
-
-        public TouchEvent(long id, MPoint screenPosition, long tick)
-        {
-            Id = id;
-            Location = screenPosition;
-            Tick = tick;
-        }
-    }
-
     private SKGLView? _glView;
     private SKCanvasView? _canvasView;
-
-    // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
-    private const int ShortTap = 125;
-    private const int ShortClick = 250;
-    private const int DelayTap = 200;
-    private const int longTap = 500;
 
     /// <summary>
     /// If a finger touches down and up it counts as a tap if the distance between the down and up location is smaller
@@ -367,10 +347,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     // If touch start and end is in the same area and the touch time is shorter
                     // than longTap, than we have a tap.
-                    if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? ShortClick : longTap) * 10000)
+                    if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? TouchConstants.ShortClick : TouchConstants.longTap) * 10000)
                     {
                         _waitingForDoubleTap = true;
-                        if (UseDoubleTap) { await Task.Delay(DelayTap); }
+                        if (UseDoubleTap) { await Task.Delay(TouchConstants.DelayTap); }
 
                         if (_numOfTaps > 1)
                         {
@@ -390,7 +370,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                             _waitingForDoubleTap = false; ;
                         }
                     }
-                    else if (isAround && (ticks - releasedTouch.Tick) >= longTap * 10000)
+                    else if (isAround && (ticks - releasedTouch.Tick) >= TouchConstants.longTap * 10000)
                     {
                         if (!e.Handled)
                             e.Handled = OnLongTapped(location);
