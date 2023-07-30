@@ -45,10 +45,7 @@ internal class MapControlGestureListener : GestureDetector.SimpleOnGestureListen
 public partial class MapControl : ViewGroup, IMapControl
 {
     private View? _canvas;
-    private double _virtualRotation;
     private GestureDetector? _gestureDetector;
-    private double _previousAngle;
-    private double _previousRadius = 1f;
     private TouchMode _mode = TouchMode.None;
     private Handler? _mainLooperHandler;
     /// <summary>
@@ -373,30 +370,6 @@ public partial class MapControl : ViewGroup, IMapControl
         CommonDispose(disposing);
 
         base.Dispose(disposing);
-    }
-
-    private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
-    {
-        if (locations.Count < 2)
-            throw new ArgumentException();
-
-        double centerX = 0;
-        double centerY = 0;
-
-        foreach (var location in locations)
-        {
-            centerX += location.X;
-            centerY += location.Y;
-        }
-
-        centerX = centerX / locations.Count;
-        centerY = centerY / locations.Count;
-
-        var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
-
-        var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
-
-        return (new MPoint(centerX, centerY), radius, angle);
     }
 
     private float ViewportWidth => ToDeviceIndependentUnits(Width);

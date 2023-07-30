@@ -28,7 +28,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private bool _mouseDown;
     private MPoint? _previousMousePosition;
     private bool _hasBeenManipulated;
-    private double _virtualRotation;
     private readonly FlingTracker _flingTracker = new();
     private MPoint? _currentMousePosition;
 

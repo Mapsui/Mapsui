@@ -20,7 +20,6 @@ public partial class MapControl : UIView, IMapControl
 {
     private SKGLView? _glCanvas;
     private SKCanvasView? _canvas;
-    private double _virtualRotation;
     private bool _init;
 
     public static bool UseGPU { get; set; } = true;
@@ -301,30 +300,6 @@ public partial class MapControl : UIView, IMapControl
         }
 
         CommonDispose(disposing);
-    }
-
-    private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
-    {
-        if (locations.Count < 2)
-            throw new ArgumentException();
-
-        double centerX = 0;
-        double centerY = 0;
-
-        foreach (var location in locations)
-        {
-            centerX += location.X;
-            centerY += location.Y;
-        }
-
-        centerX = centerX / locations.Count;
-        centerY = centerY / locations.Count;
-
-        var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
-
-        var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
-
-        return (new MPoint(centerX, centerY), radius, angle);
     }
 
     private float ViewportWidth
