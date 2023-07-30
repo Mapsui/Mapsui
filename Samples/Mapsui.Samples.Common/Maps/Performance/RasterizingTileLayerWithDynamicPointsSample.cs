@@ -12,7 +12,7 @@ using Mapsui.Tiling.Layers;
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class RasterizingTileLayerWithDynmicPointsSample : IMapControlSample
+public class RasterizingTileLayerWithDynamicPointsSample : IMapControlSample
 {
     public string Name => "RasterizingTileLayer with Dynamic Points";
     public string Category => "Performance";

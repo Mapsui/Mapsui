@@ -19,7 +19,6 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher
     ///     Creates a RasterizingTileLayer which rasterizes a layer for performance
     /// </summary>
     /// <param name="layer">The Layer to be rasterized</param>
-    /// <param name="renderResolutionMultiplier"></param>
     /// <param name="rasterizer">Rasterizer to use. null will use the default</param>
     /// <param name="pixelDensity"></param>
     /// <param name="minTiles">Minimum number of tiles to cache</param>
@@ -48,7 +47,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher
         minTiles,
         maxTiles,
         dataFetchStrategy,
-        renderFetchStrategy,
+        new TilingRenderFetchStrategy(renderFetchStrategy),
         minExtraTiles,
         maxExtraTiles)
     {

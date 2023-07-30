@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Mapsui;
 
-public class MRect
+public class MRect : IEquatable<MRect>
 {
     public MRect(double minX, double minY, double maxX, double maxY)
     {
@@ -90,7 +90,7 @@ public class MRect
         return Min.X <= r.Min.X && Min.Y <= r.Min.Y && Max.X >= r.Max.X && Max.Y >= r.Max.Y;
     }
 
-    protected bool Equals(MRect? other)
+    public bool Equals(MRect? other)
     {
         if (other == null)
             return false;
