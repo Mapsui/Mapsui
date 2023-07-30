@@ -84,23 +84,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     protected readonly bool _initialized;
 
-    private double _virtualRotation;
     private readonly ConcurrentDictionary<long, TouchEvent> _touches = new();
     private MPoint? _firstTouch;
     private bool _waitingForDoubleTap;
     private int _numOfTaps;
     private readonly FlingTracker _flingTracker = new();
-    private MPoint? _previousCenter;
-
-    /// <summary>
-    /// Saver for angle before last pinch movement
-    /// </summary>
-    private double _previousAngle;
-
-    /// <summary>
-    /// Saver for radius before last pinch movement
-    /// </summary>
-    private double _previousRadius = 1f;
 
     private TouchMode _mode;
 
@@ -610,9 +598,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
         if (touchPoints.Count == 2)
         {
-            (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
+            OnPinchStart(touchPoints);
             _mode = TouchMode.Zooming;
-            _virtualRotation = Map.Navigator.Viewport.Rotation;
         }
         else
         {
@@ -723,29 +710,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 break;
             case TouchMode.Zooming:
                 {
-                    if (touchPoints.Count != 2)
-                        return false;
-
-                    var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
-                    var (center, radius, angle) = GetPinchValues(touchPoints);
-
-                    double rotationDelta = 0;
-
-                    if (Map.Navigator.RotationLock == false)
+                    if (!OnPinchMove(touchPoints))
                     {
-                        var deltaRotation = angle - prevAngle;
-                        _virtualRotation += deltaRotation;
-
-                        rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                            _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                        return false;
                     }
-
-                    if (prevCenter != null)
-                        Map.Navigator.Pinch(center, prevCenter, radius / prevRadius, rotationDelta);
-
-                    (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
-
-                    RefreshGraphics();
                 }
                 break;
         }

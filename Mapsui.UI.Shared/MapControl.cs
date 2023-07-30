@@ -71,6 +71,15 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
 
+    /// <summary> Virtual Rotation </summary>
+    private double _virtualRotation;
+    /// <summary> Previous Center for Pinch </summary>
+    private MPoint? _previousCenter;
+    /// <summary> Saver for angle before last pinch movement </summary>
+    private double _previousAngle;
+    /// <summary> Saver for radius before last pinch movement </summary>
+    private double _previousRadius = 1f;
+
     private protected void CommonInitialize()
     {
         // Create map
@@ -752,6 +761,43 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
 
         return _touchableWidgets;
+    }
+
+    private bool OnPinchMove(List<MPoint> touchPoints)
+    {
+        if (touchPoints.Count != 2)
+            return false;
+
+        var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
+        var (center, radius, angle) = GetPinchValues(touchPoints);
+
+        double rotationDelta = 0;
+
+        if (Map.Navigator.RotationLock == false)
+        {
+            var deltaRotation = angle - prevAngle;
+            _virtualRotation += deltaRotation;
+
+            rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
+                _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+        }
+
+        if (prevCenter != null)
+            Map.Navigator.Pinch(center, prevCenter, radius / prevRadius, rotationDelta);
+
+        (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
+
+        RefreshGraphics();
+        return true;
+    }
+
+    private void OnPinchStart(List<MPoint> touchPoints)
+    {
+        if (touchPoints.Count == 2)
+        {
+            (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
+            _virtualRotation = Map.Navigator.Viewport.Rotation;
+        }
     }
 
     private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)

@@ -106,6 +106,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         // Save time, when the event occurs
         var ticks = DateTime.Now.Ticks;
         _touches[e.Pointer.Id] = new TouchEvent(e.Pointer.Id, location, ticks);
+        OnPinchStart(_touches.Select(t => t.Value.Location).ToList());
 
         if (HandleTouching(location, leftButtonPressed, e.ClickCount, ShiftPressed))
         {
@@ -168,8 +169,10 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlMouseMove(object? sender, PointerEventArgs e)
     {
+        // Save time, when the event occurs
         var ticks = DateTime.Now.Ticks;
         _currentMousePosition = e.GetPosition(this).ToMapsui(); // Needed for both MouseMove and MouseWheel event
+        _touches[e.Pointer.Id] = new TouchEvent(e.Pointer.Id, _currentMousePosition, ticks);
 
         if (_mouseDown)
         {
@@ -181,34 +184,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
                 return;
             }
 
-            if (_touches.Count == 2)
+            if (OnPinchMove(_touches.Select(t => t.Value.Location).ToList()))
             {
-                if (!_touches.TryGetValue(e.Pointer.Id, out var initialPosition))
-                {
-                    return;
-                }
-
-                var otherTouchPoint = _touches.Where(f => f.Key != e.Pointer.Id).Select(f => f.Value).FirstOrDefault()?.Location;
-                if (otherTouchPoint == null)
-                {
-                    return;
-                }
-
-                var mouseDistance = (otherTouchPoint.Distance(_currentMousePosition) -
-                                     otherTouchPoint.Distance(initialPosition.Location));
-
-                if (Math.Abs(mouseDistance) < TouchConstants.TouchSlop)
-                {
-                    return;
-                }
-
-                // update the previous position
-                _touches[e.Pointer.Id] = new TouchEvent(e.Pointer.Id, _currentMousePosition, ticks);
-
                 e.Handled = true;
-                var mouseWheelDelta = Convert.ToInt32(mouseDistance);
-                Map.Navigator.MouseWheelZoom(mouseWheelDelta, _currentMousePosition);
-
                 return;
             }
 
