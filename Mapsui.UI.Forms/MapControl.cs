@@ -546,11 +546,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     public event EventHandler<SwipedEventArgs>? Fling;
 
     /// <summary>
-    /// SingleTap is called, when user clicks with a mouse button or tap with a finger on map 
-    /// </summary>
-    public event EventHandler<TappedEventArgs>? SingleTap;
-
-    /// <summary>
     /// LongTap is called, when user clicks with a mouse button or tap with a finger on map for 500 ms
     /// </summary>
     public event EventHandler<TappedEventArgs>? LongTap;
@@ -815,7 +810,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         var args = new TappedEventArgs(screenPosition, 1);
 
         SingleTap?.Invoke(this, args);
-
+        
         if (args.Handled)
             return true;
 

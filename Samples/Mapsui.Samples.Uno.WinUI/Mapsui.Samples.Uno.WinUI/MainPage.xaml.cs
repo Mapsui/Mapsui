@@ -14,6 +14,7 @@ using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
 using Mapsui.UI.WinUI;
 using Mapsui.Samples.Common.Utilities;
+using Mapsui.UI;
 using RadioButton = Microsoft.UI.Xaml.Controls.RadioButton;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -26,6 +27,8 @@ namespace Mapsui.Samples.Uno.WinUI;
 /// </summary>
 public sealed partial class MainPage : Page
 {
+    private Func<object?, EventArgs, bool>? _clicker;
+
     static MainPage()
     {
         // todo: find proper way to load assembly
@@ -41,11 +44,17 @@ public sealed partial class MainPage : Page
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
+        MapControl.SingleTap += MapControl_SingleTap;
 
         CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
 
         FillComboBoxWithCategories();
         FillListWithSamples();
+    }
+
+    private void MapControl_SingleTap(object? sender, UI.TappedEventArgs e)
+    {
+        e.Handled = _clicker?.Invoke(sender as IMapControl, e) ?? false;
     }
 
     private void FillComboBoxWithCategories()
@@ -102,6 +111,10 @@ public sealed partial class MainPage : Page
                 await sample.SetupAsync(MapControl);
                 MapControl.Info += MapOnInfo;
                 MapControl.Refresh();
+
+                _clicker = null;
+                if (sample is IMapViewSample mapViewSample)
+                    _clicker = mapViewSample.OnClick;
             });
         };
 

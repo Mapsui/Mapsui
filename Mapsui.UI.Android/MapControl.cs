@@ -146,6 +146,10 @@ public partial class MapControl : ViewGroup, IMapControl
             return;
 
         var position = GetScreenPosition(e.Event, this);
+        var args = new TappedEventArgs(position, 1);
+        SingleTap?.Invoke(this, args);
+        if (args.Handled)
+            return;
         OnInfo(CreateMapInfoEventArgs(position, position, 1));
     }
 

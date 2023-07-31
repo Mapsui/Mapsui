@@ -164,6 +164,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             return; 
         }
 
+        var args = new TappedEventArgs(tabPosition, 1);
+        SingleTap?.Invoke(this, args);
+        if (args.Handled)
+            return;
         OnInfo(CreateMapInfoEventArgs(tabPosition, tabPosition, 1));
     }
 

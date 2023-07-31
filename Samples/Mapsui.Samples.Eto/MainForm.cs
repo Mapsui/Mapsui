@@ -1,4 +1,5 @@
 using Mapsui.Samples.Common.Extensions;
+using Mapsui.UI;
 
 #pragma warning disable IDISP001 // Dispose created
 
@@ -46,6 +47,7 @@ public class MainForm : Form
         MapControl.Map.Navigator.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
+        MapControl.SingleTap += MapControl_SingleTap;
         RotationSlider.ValueChanged += RotationSliderChanged;
 
         MapControl.ZoomButton = MouseButtons.Alternate;
@@ -72,6 +74,12 @@ public class MainForm : Form
 
         this.Content = new DynamicLayout(new DynamicRow(sample_layout, map_layout)) { Spacing = new Size(4, 4) };
     }
+
+    private void MapControl_SingleTap(object? sender, UI.TappedEventArgs e)
+    {
+        e.Handled = _clicker?.Invoke(sender as IMapControl, e) ?? false;
+    }
+
     private void MapLayoutSizeChanged(object? sender, EventArgs e)
     {
         if (sender is PixelLayout layout)
@@ -134,6 +142,10 @@ public class MainForm : Form
             {
                 MapControl.Map?.Layers.Clear();
 
+                _clicker = null;
+                if (sample is IMapViewSample mapViewSample)
+                    _clicker = mapViewSample.OnClick;
+
                 await sample.SetupAsync(MapControl);
 
                 MapControl.Info += MapControlOnInfo;
@@ -149,6 +161,8 @@ public class MainForm : Form
     }
 
     readonly LimitedQueue<LogModel> _logMessage = new(6);
+    private Func<object?, EventArgs, bool>? _clicker;
+
     private void LogMethod(LogLevel logLevel, string? message, Exception? exception)
     {
         _logMessage.Enqueue(new LogModel { Exception = exception, LogLevel = logLevel, Message = message });

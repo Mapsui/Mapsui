@@ -11,6 +11,7 @@ using Mapsui.Samples.CustomWidget;
 using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Wpf;
 
@@ -34,6 +35,7 @@ public partial class Window1
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
+        MapControl.SingleTap += MapControl_SingleTap;
 
         Logger.LogDelegate += LogMethod;
 
@@ -41,6 +43,11 @@ public partial class Window1
 
         FillComboBoxWithCategories();
         FillListWithSamples();
+    }
+
+    private void MapControl_SingleTap(object? sender, UI.TappedEventArgs e)
+    {
+        e.Handled = _clicker?.Invoke(sender as IMapControl, e) ?? false;
     }
 
     private void MapControlOnMouseMove(object sender, MouseEventArgs e)
@@ -98,6 +105,10 @@ public partial class Window1
 
                 await sample.SetupAsync(MapControl);
 
+                _clicker = null;
+                if (sample is IMapViewSample mapViewSample)
+                    _clicker = mapViewSample.OnClick;
+
                 MapControl.Info += MapControlOnInfo;
                 if (MapControl.Map != null)
                     LayerList.Initialize(MapControl.Map.Layers);
@@ -107,6 +118,7 @@ public partial class Window1
     }
 
     readonly LimitedQueue<LogModel> _logMessage = new LimitedQueue<LogModel>(6);
+    private Func<object?, EventArgs, bool>? _clicker;
 
     private void LogMethod(LogLevel logLevel, string? message, Exception? exception)
     {

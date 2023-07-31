@@ -3,6 +3,7 @@
 @using Mapsui.Samples.Common.Extensions
 @using Mapsui.Samples.CustomWidget
 @using System.Diagnostics.CodeAnalysis
+@using Mapsui.UI
 
 <PageTitle>Mapsui</PageTitle>
    <div class="form-group row">
@@ -95,6 +96,8 @@
     private string? _categoryId;
     private string? _sampleId;
     private bool _render;
+    private Func<object?, EventArgs, bool>? _clicker
+    ;
 
     public List<string> Samples { get; set; } = new();
 
@@ -154,9 +157,18 @@
             _render = false;
             FillMap();
             if (_mapControl != null)
+            {
                 _mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
+                _mapControl.SingleTap -= MapControl_SingleTap;
+                _mapControl.SingleTap += MapControl_SingleTap;
+            }
         }
 
+    }
+
+    private void MapControl_SingleTap(object? sender, UI.TappedEventArgs e)
+    {
+        e.Handled = _clicker?.Invoke(sender as IMapControl, e) ?? false;
     }
 
     private void SetActiveTab(int tab)
@@ -200,6 +212,10 @@
             Title = sample.Name;            
             await sample.SetupAsync(_mapControl);
             _sourceCodeUrl = $@"../codesamples/{sample.GetType().Name}.html";
+
+            _clicker = null;
+            if (sample is IMapViewSample mapViewSample)
+                _clicker = mapViewSample.OnClick;
         }
     }
 

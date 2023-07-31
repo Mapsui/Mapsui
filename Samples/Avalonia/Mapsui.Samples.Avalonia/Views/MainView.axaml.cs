@@ -8,6 +8,7 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Avalonia.Views;
 
@@ -18,6 +19,8 @@ public partial class MainView : UserControl
         // todo: find proper way to load assembly
         Mapsui.Tests.Common.Utilities.LoadAssembly();
     }
+
+    private Func<IMapControl?, Mapsui.UI.TappedEventArgs, bool>? _clicker;
 
     public MainView()
     {
@@ -33,13 +36,17 @@ public partial class MainView : UserControl
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
-
-        RotationSlider.PointerMoved += RotationSliderOnPointerMoved;
+        MapControl.SingleTap += MapControl_SingleTap; ;
 
         CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
 
         FillComboBoxWithCategories();
         FillListWithSamples();
+    }
+
+    private void MapControl_SingleTap(object? sender, UI.TappedEventArgs e)
+    {
+        e.Handled = _clicker?.Invoke(sender as IMapControl, e) ?? false;
     }
 
     private void FillComboBoxWithCategories()
@@ -94,6 +101,11 @@ public partial class MainView : UserControl
                 await sample.SetupAsync(MapControl);
                 MapControl.Info += MapOnInfo;
                 MapControl.Refresh();
+
+                _clicker = null;
+                if (sample is IMapViewSample mapViewSample)
+                    _clicker = mapViewSample.OnClick;
+
             });
         };
 

@@ -12,6 +12,7 @@ using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
+using Mapsui.UI;
 using RadioButton = Windows.UI.Xaml.Controls.RadioButton;
 
 namespace Mapsui.Samples.Uwp;
@@ -19,6 +20,8 @@ namespace Mapsui.Samples.Uwp;
 // ReSharper disable once RedundantExtendsListEntry
 public sealed partial class MainPage : Page
 {
+    private Func<object?, EventArgs, bool>? _clicker;
+
     static MainPage()
     {
         // todo: find proper way to load assembly
@@ -34,11 +37,15 @@ public sealed partial class MainPage : Page
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
-
-        CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
+        MapControl.SingleTap += MapControl_SingleTap;
 
         FillComboBoxWithCategories();
         FillListWithSamples();
+    }
+
+    private void MapControl_SingleTap(object? sender, UI.TappedEventArgs e)
+    {
+        e.Handled = _clicker?.Invoke(sender as IMapControl, e) ?? false;
     }
 
     private void FillComboBoxWithCategories()
@@ -97,6 +104,10 @@ public sealed partial class MainPage : Page
                 await sample.SetupAsync(MapControl);
                 MapControl.Info += MapOnInfo;
                 MapControl.Refresh();
+
+                _clicker = null;
+                if (sample is IMapViewSample mapViewSample)
+                    _clicker = mapViewSample.OnClick;
             });
         };
 

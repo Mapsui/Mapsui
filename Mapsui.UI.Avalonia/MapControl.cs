@@ -191,6 +191,10 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (IsClick(_currentMousePosition, _downMousePosition))
         {
             HandleFeatureInfo(e);
+            var args = new TappedEventArgs(_mousePosition, 1);
+            SingleTap?.Invoke(this, args);
+            if (args.Handled)
+                return;
             OnInfo(CreateMapInfoEventArgs(_mousePosition, _mousePosition, 1));
         }
     }

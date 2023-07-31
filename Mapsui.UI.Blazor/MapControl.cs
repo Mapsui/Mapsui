@@ -263,7 +263,13 @@ public partial class MapControl : ComponentBase, IMapControl
             {
                 var location = e.ToLocation(_clientRect);
                 if (IsClick(location, _downMousePosition))
+                {
+                    var args = new TappedEventArgs(location, 1);
+                    SingleTap?.Invoke(this, args);
+                    if (args.Handled)
+                        return;
                     OnInfo(CreateMapInfoEventArgs(location, _downMousePosition, 1));
+                }
             }
 
             _downMousePosition = null;

@@ -1,4 +1,5 @@
 ﻿using System;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Common;
 

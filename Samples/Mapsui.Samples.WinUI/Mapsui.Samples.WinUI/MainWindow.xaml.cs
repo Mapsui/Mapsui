@@ -12,6 +12,7 @@ using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
 using Mapsui.Samples.Common.Utilities;
+using Mapsui.UI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,6 +24,8 @@ namespace Mapsui.Samples.WinUI;
 /// </summary>
 public sealed partial class MainWindow : Window
 {
+    private Func<object?, EventArgs, bool>? _clicker;
+
     static MainWindow()
     {
         // todo: find proper way to load assembly
@@ -38,11 +41,17 @@ public sealed partial class MainWindow : Window
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
+        MapControl.SingleTap += MapControl_SingleTap;
 
         CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
 
         FillComboBoxWithCategories();
         FillListWithSamples();
+    }
+
+    private void MapControl_SingleTap(object? sender, UI.TappedEventArgs e)
+    {
+        e.Handled = _clicker?.Invoke(sender as IMapControl, e) ?? false;
     }
 
     private void FillComboBoxWithCategories()
@@ -99,6 +108,10 @@ public sealed partial class MainWindow : Window
                 await sample.SetupAsync(MapControl);
                 MapControl.Info += MapOnInfo;
                 MapControl.Refresh();
+
+                _clicker = null;
+                if (sample is IMapViewSample mapViewSample)
+                    _clicker = mapViewSample.OnClick;
             });
         };
 

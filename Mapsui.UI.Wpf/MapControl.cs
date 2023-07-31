@@ -258,6 +258,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             var touchPosition = e.GetTouchPoint(this).Position.ToMapsui();
             // todo: Pass the touchDown position. It needs to be set at touch down.
 
+            var args = new TappedEventArgs(touchPosition, 1);
+            SingleTap?.Invoke(this, args);
+            if (args.Handled)
+                return;
+
             // todo: Figure out how to do a number of taps for WPF
             OnInfo(CreateMapInfoEventArgs(touchPosition, touchPosition, 1));
         }

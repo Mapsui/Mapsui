@@ -128,7 +128,13 @@ public partial class MapControl : SkiaDrawable, IMapControl
         else if (_downMousePosition.HasValue)
         {
             if (IsClick(e.Location, _downMousePosition.Value))
-                OnInfo(CreateMapInfoEventArgs(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui(), 1));
+            {
+                var args = new TappedEventArgs(e.Location.ToMapsui(), 1);
+                SingleTap?.Invoke(this, args);
+                if (args.Handled)
+                    return;
+                OnInfo(CreateMapInfoEventArgs(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui(), 1)
+            }
         }
 
         _downMousePosition = null;

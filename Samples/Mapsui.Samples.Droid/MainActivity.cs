@@ -19,6 +19,7 @@ using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.UI.Android;
 using Mapsui.Samples.Common.Maps.DataFormats;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Droid;
 
@@ -34,6 +35,7 @@ public class MainActivity : AppCompatActivity
     private LinearLayout? _popup;
     private MapControl? _mapControl;
     private TextView? _textView;
+    private Func<object?, EventArgs, bool>? _clicker;
 
     protected override void OnCreate(Android.OS.Bundle? savedInstanceState)
     {
@@ -51,6 +53,7 @@ public class MainActivity : AppCompatActivity
         _mapControl.UnSnapRotationDegrees = 20;
         _mapControl.ReSnapRotationDegrees = 5;
         _mapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
+        _mapControl.SingleTap += MapControl_SingleTap;
 
         var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout) ?? throw new NullReferenceException(); ;
         _popup?.Dispose();
@@ -65,6 +68,11 @@ public class MainActivity : AppCompatActivity
 
         //_mapControl.Info += MapControlOnInfo;
         //LayerList.Initialize(_mapControl.Map.Layers);
+    }
+
+    private void MapControl_SingleTap(object? sender, UI.TappedEventArgs e)
+    {
+        e.Handled = _clicker?.Invoke(sender as IMapControl, e) ?? false;
     }
 
     public override bool OnCreateOptionsMenu(IMenu? menu)
@@ -132,6 +140,10 @@ public class MainActivity : AppCompatActivity
 
                 Catch.Exceptions(async () =>
                 {
+                    _clicker = null;
+                    if (sample is IMapViewSample mapViewSample)
+                        _clicker = mapViewSample.OnClick;
+
                     await sample.SetupAsync(_mapControl!);
                 });
 

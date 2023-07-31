@@ -143,6 +143,10 @@ public partial class MapControl : UIView, IMapControl
     private void OnSingleTapped(UITapGestureRecognizer gesture)
     {
         var position = GetScreenPosition(gesture.LocationInView(this));
+        var args = new TappedEventArgs(position, 1);
+        SingleTap?.Invoke(this, args);
+        if (args.Handled)
+            return;
         OnInfo(CreateMapInfoEventArgs(position, position, 1));
     }
 

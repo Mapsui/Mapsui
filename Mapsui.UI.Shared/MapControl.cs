@@ -71,6 +71,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
 
+    /// <summary>
+    /// SingleTap is called, when user clicks with a mouse button or tap with a finger on map 
+    /// </summary>
+    public event EventHandler<TappedEventArgs>? SingleTap;
+
     private protected void CommonInitialize()
     {
         // Create map
