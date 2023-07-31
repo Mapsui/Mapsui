@@ -1,12 +1,10 @@
 ﻿using System;
 using System.IO;
 using Mapsui.Rendering.Skia;
-using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
 
-namespace Mapsui.Samples.Maps.MapView;
+namespace Mapsui.Samples.Common.Maps.MapView;
 
 public class SnapshotSample : IMapViewSample
 {
