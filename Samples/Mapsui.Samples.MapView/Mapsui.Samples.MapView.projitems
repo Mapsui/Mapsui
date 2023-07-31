@@ -17,6 +17,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)PinSample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PolygonSample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PolylineSample.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SnapshotSample.cs" />
   </ItemGroup>
 </Project>

@@ -1,17 +1,10 @@
 ﻿using System;
 using System.IO;
+using Mapsui.Rendering.Skia;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
-#if __MAUI__
-using Mapsui.UI.Maui;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Graphics;
-#else
-using Mapsui.UI.Forms;
-using Xamarin.Forms;
-#endif
 
 namespace Mapsui.Samples.Maps.MapView;
 
@@ -25,14 +18,14 @@ public class SnapshotSample : IMapViewSample
 
     public bool OnClick(object? sender, EventArgs args)
     {
-        var mapView = sender as MapView;
-        var e = args as MapClickedEventArgs;
+        var mapView = sender as IMapControl;
 
         if (mapView == null)
             return false;
 
         var snapshot = mapView.GetSnapshot();
-        var test = ImageSource.FromStream(() => new MemoryStream(snapshot));
+        using var memoryStream = new MemoryStream(snapshot);
+        var test = BitmapHelper.LoadBitmap(memoryStream);
 
         return true;
     }
