@@ -133,7 +133,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
                 SingleTap?.Invoke(this, args);
                 if (args.Handled)
                     return;
-                OnInfo(CreateMapInfoEventArgs(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui(), 1)
+                OnInfo(CreateMapInfoEventArgs(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui(), 1));
             }
         }
 
