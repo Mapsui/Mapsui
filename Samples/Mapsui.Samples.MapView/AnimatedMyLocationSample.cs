@@ -4,6 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
+using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
@@ -13,11 +14,7 @@ using Mapsui.UI.Maui;
 using Mapsui.UI.Forms;
 #endif
 
-#if __MAUI__
-namespace Mapsui.Samples.Maui;
-#else
-namespace Mapsui.Samples.Forms;
-#endif
+namespace Mapsui.Samples.Maps.MapView;
 
 public sealed class AnimatedMyLocationSample : IMapViewSample, IDisposable
 {

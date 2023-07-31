@@ -1,11 +1,6 @@
-﻿using Mapsui.Samples.Common;
-using System;
+﻿using System;
 
-#if __MAUI__
-namespace Mapsui.Samples.Maui;
-#else
-namespace Mapsui.Samples.Forms;
-#endif
+namespace Mapsui.Samples.Common;
 
 public interface IMapViewSample : IMapControlSample
 {

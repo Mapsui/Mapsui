@@ -20,11 +20,7 @@ using Color = Xamarin.Forms.Color;
 using Colors = Xamarin.Forms.Color;
 #endif
 
-#if __MAUI__
-namespace Mapsui.Samples.Maui;
-#else
-namespace Mapsui.Samples.Forms;
-#endif
+namespace Mapsui.Samples.Maps.MapView;
 
 public class PinSample : IMapViewSample
 {

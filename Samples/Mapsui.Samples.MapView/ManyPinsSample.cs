@@ -24,11 +24,7 @@ using Color = Xamarin.Forms.Color;
 using KnownColor = Xamarin.Forms.Color;
 #endif
 
-#if __MAUI__
-namespace Mapsui.Samples.Maui;
-#else
-namespace Mapsui.Samples.Forms;
-#endif
+namespace Mapsui.Samples.Maps.MapView;
 
 public class ManyPinsSample : IMapViewSample
 {

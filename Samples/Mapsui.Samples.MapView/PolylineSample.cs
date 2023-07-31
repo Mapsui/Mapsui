@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
@@ -13,11 +14,7 @@ using Xamarin.Forms;
 using KnownColor = Xamarin.Forms.Color;
 #endif
 
-#if __MAUI__
-namespace Mapsui.Samples.Maui;
-#else
-namespace Mapsui.Samples.Forms;
-#endif
+namespace Mapsui.Samples.Maps.MapView;
 
 public class PolylineSample : IMapViewSample
 {
