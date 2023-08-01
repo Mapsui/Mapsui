@@ -47,7 +47,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher
         minTiles,
         maxTiles,
         dataFetchStrategy,
-        new TilingRenderFetchStrategy(renderFetchStrategy),
+        renderFetchStrategy ?? new TilingRenderFetchStrategy(null),
         minExtraTiles,
         maxExtraTiles)
     {
