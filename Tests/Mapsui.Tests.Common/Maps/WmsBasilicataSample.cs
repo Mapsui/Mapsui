@@ -20,6 +20,7 @@ public class WmsBasilicataSample : ISample
     {
         var map = new Map { CRS = "EPSG:4326" };
         // The WMS request needs a CRS
+        map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
         map.Layers.Add(await CreateLayerAsync());
         map.Home = (n) => n.CenterOnAndZoomTo(SphericalMercator.FromLonLat(15.804827, 40.63506).ToMPoint(), 500);
         return map;
