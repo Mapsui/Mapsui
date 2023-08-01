@@ -56,8 +56,8 @@ public class WmsBasilicataSample : ISample
 
     public static MRect GetLimitsOfBasilicata()
     {
-        var (minX, minY) = SphericalMercator.FromLonLat(13.804827, 38.63506);
-        var (maxX, maxY) = SphericalMercator.FromLonLat(17.804827, 42.63506);
+        var (minX, minY) = (13.804827, 38.63506);
+        var (maxX, maxY) = (17.804827, 42.63506);
         return new MRect(minX, minY, maxX, maxY);
     }
 }
