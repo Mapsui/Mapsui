@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using CoreFoundation;
-using CoreGraphics;
-using Foundation;
 using Mapsui.Logging;
 using Mapsui.UI.iOS.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp.Views.iOS;
-using UIKit;
 
 #nullable enable
 
