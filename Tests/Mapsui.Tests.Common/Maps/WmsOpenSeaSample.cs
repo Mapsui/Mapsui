@@ -4,6 +4,7 @@ using BruTile;
 using BruTile.Wmts.Generated;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Limiting;
 using Mapsui.Projections;
 using Mapsui.Providers.Wms;
 using Mapsui.Samples.Common;
@@ -21,9 +22,12 @@ public class WmsOpenSeaSample : ISample
     {
         var map = new Map { CRS = "EPSG:4326" };
         // The WMS request needs a CRS
-        map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
         map.Layers.Add(await CreateLayerAsync());
-        map.Home = (n) => n.CenterOnAndZoomTo(SphericalMercator.FromLonLat(15, 46).ToMPoint(), 500);
+        var panBounds = WmsBasilicataSample.GetLimitsOfBasilicata();
+        map.Navigator.Limiter = new ViewportLimiterKeepWithinExtent();
+        map.Navigator.RotationLock = true;
+        map.Navigator.OverridePanBounds = panBounds;
+        map.Home = n => n.ZoomToBox(panBounds);     
         return map;
     }
 
@@ -42,7 +46,7 @@ public class WmsOpenSeaSample : ISample
 
         var provider = await WmsProvider.CreateAsync(wmsUrl, userAgent: "Wms Basilicata Sample");
         provider.ContinueOnError = true;
-        provider.TimeOut = 20000;
+        provider.TimeOut = 40000;
         provider.CRS = "EPSG:4326";
 
         provider.AddLayer("gebco_2021");

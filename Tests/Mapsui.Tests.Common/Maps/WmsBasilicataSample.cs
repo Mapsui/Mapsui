@@ -3,9 +3,11 @@ using System.Threading.Tasks;
 using BruTile;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Limiting;
 using Mapsui.Projections;
 using Mapsui.Providers.Wms;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Maps.Navigation;
 using Mapsui.Styles;
 using Mapsui.Tiling.Extensions;
 
@@ -18,11 +20,14 @@ public class WmsBasilicataSample : ISample
 
     public async Task<Map> CreateMapAsync()
     {
-        var map = new Map { CRS = "EPSG:4326" };
+        var map = new Map() { CRS = "EPSG:4326" };
         // The WMS request needs a CRS
-        map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
         map.Layers.Add(await CreateLayerAsync());
-        map.Home = (n) => n.CenterOnAndZoomTo(SphericalMercator.FromLonLat(15.804827, 40.63506).ToMPoint(), 500);
+        var panBounds = GetLimitsOfBasilicata();
+        map.Navigator.Limiter = new ViewportLimiterKeepWithinExtent();
+        map.Navigator.RotationLock = true;
+        map.Navigator.OverridePanBounds = panBounds;
+        map.Home = n => n.ZoomToBox(panBounds);        
         return map;
     }
 
@@ -41,11 +46,18 @@ public class WmsBasilicataSample : ISample
 
         var provider = await WmsProvider.CreateAsync(wmsUrl, userAgent: "Wms Basilicata Sample");
         provider.ContinueOnError = true;
-        provider.TimeOut = 20000;
+        provider.TimeOut = 40000;
         provider.CRS = "EPSG:4326";
 
         provider.AddLayer("LC.LandCoverRaster");
         provider.SetImageFormat(provider.OutputFormats[0]);
         return provider;
+    }
+
+    public static MRect GetLimitsOfBasilicata()
+    {
+        var (minX, minY) = SphericalMercator.FromLonLat(13.804827, 38.63506);
+        var (maxX, maxY) = SphericalMercator.FromLonLat(17.804827, 42.63506);
+        return new MRect(minX, minY, maxX, maxY);
     }
 }
