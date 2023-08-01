@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BruTile;
+using BruTile.Wmts.Generated;
+using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Projections;
 using Mapsui.Providers.Wms;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
@@ -19,7 +22,7 @@ public class WmsOpenSeaSample : ISample
         var map = new Map { CRS = "EPSG:4326" };
         // The WMS request needs a CRS
         map.Layers.Add(await CreateLayerAsync());
-        map.Home = (n) => n.CenterOnAndZoomTo(new MPoint(155000, 463000), 500);
+        map.Home = (n) => n.CenterOnAndZoomTo(SphericalMercator.FromLonLat(15, 46).ToMPoint(), 500);
         return map;
     }
 
@@ -36,7 +39,7 @@ public class WmsOpenSeaSample : ISample
     {
         const string wmsUrl = "https://depth.openseamap.org/geoserver/gebco2021/wms";
 
-        var provider = await WmsProvider.CreateAsync(wmsUrl);
+        var provider = await WmsProvider.CreateAsync(wmsUrl, userAgent: "Wms Basilicata Sample");
         provider.ContinueOnError = true;
         provider.TimeOut = 20000;
         provider.CRS = "EPSG:4326";

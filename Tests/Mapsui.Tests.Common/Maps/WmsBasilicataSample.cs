@@ -38,7 +38,7 @@ public class WmsBasilicataSample : ISample
     {
         const string wmsUrl = "http://rsdi.regione.basilicata.it:80/rbgeoserver2016/maps_ctr/LC.LandCoverRaster/ows";
 
-        var provider = await WmsProvider.CreateAsync(wmsUrl);
+        var provider = await WmsProvider.CreateAsync(wmsUrl, userAgent: "Wms Basilicata Sample");
         provider.ContinueOnError = true;
         provider.TimeOut = 20000;
         provider.CRS = "EPSG:4326";
