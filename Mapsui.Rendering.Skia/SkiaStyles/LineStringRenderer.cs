@@ -30,10 +30,7 @@ public static class LineStringRenderer
             paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
 
             var lineWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1);
-            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth,(geometry, _, _) => geometry.ToSkiaPath());                        
-            var matrix = viewport.ToSKMatrix(canvas.TotalMatrix);
-            var path2 = lineString.ToSkiaPath();
-            path2.Transform(matrix);
+            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, viewport, _) => geometry.ToSkiaPath(viewport, viewport.ToSkiaRect()));
         }
 
         canvas.DrawPath(path, paint);
