@@ -10,6 +10,7 @@ using global::Eto.Drawing;
 using global::Eto.Forms;
 using System.Diagnostics;
 using Mapsui.Extensions;
+using NetTopologySuite.GeometriesGraph;
 
 public partial class MapControl : SkiaDrawable, IMapControl
 {
@@ -21,7 +22,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
     public Keys MoveModifier { get; set; } = Keys.None;
     public MouseButtons ZoomButton { get; set; } = MouseButtons.Primary;
     public Keys ZoomModifier { get; set; } = Keys.Control;
-    public MouseWheelAnimation MouseWheelAnimation { get; } = new();
 
     public MapControl()
     {
@@ -74,11 +74,9 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnMouseWheel(e);
 
-        if (Map.Viewport.Limiter.ZoomLock) return;
-        if (!Map.Viewport.State.HasSize()) return;
-
-        var resolution = MouseWheelAnimation.GetResolution((int)e.Delta.Height, Map.Viewport, _map);
-        Map.Navigator.ZoomTo(resolution, e.Location.ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        var mouseWheelDelta = (int)e.Delta.Height;
+        var currentMousePosition = e.Location.ToMapsui();
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
     }
 
     protected override void OnSizeChanged(EventArgs e)
@@ -123,14 +121,14 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         if (IsInBoxZoomMode)
         {
-            var previous = Map.Viewport.State.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
-            var current = Map.Viewport.State.ScreenToWorld(_selectRectangle.BottomRight.X, _selectRectangle.BottomRight.Y);
+            var previous = Map.Navigator.Viewport.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
+            var current = Map.Navigator.Viewport.ScreenToWorld(_selectRectangle.BottomRight.X, _selectRectangle.BottomRight.Y);
             ZoomToBox(previous, current);
         }
         else if (_downMousePosition.HasValue)
         {
             if (IsClick(e.Location, _downMousePosition.Value))
-                OnInfo(InvokeInfo(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui(), 1));
+                OnInfo(CreateMapInfoEventArgs(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui(), 1));
         }
 
         _downMousePosition = null;
@@ -170,10 +168,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
             {
                 Cursor = MoveCursor;
 
-                Map.Viewport.Transform(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui());
-
-                RefreshGraphics();
-
+                Map.Navigator.Drag(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui());
                 _downMousePosition = e.Location;
             }
         }
@@ -181,18 +176,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
     public void ZoomToBox(MPoint beginPoint, MPoint endPoint)
     {
-        var width = Math.Abs(endPoint.X - beginPoint.X);
-        var height = Math.Abs(endPoint.Y - beginPoint.Y);
-        if (width <= 0) return;
-        if (height <= 0) return;
-
-        ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
-            Width, Height, out var x, out var y, out var resolution);
-
-        Map.Navigator.NavigateTo(new MPoint(x, y), resolution, 384);
-
-        RefreshData();
-        RefreshGraphics();
+        var box = new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y);
+        Map.Navigator.ZoomToBox(box, duration: 300); ;
         ClearBBoxDrawing();
     }
 

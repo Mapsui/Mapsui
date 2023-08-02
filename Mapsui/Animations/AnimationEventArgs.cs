@@ -1,4 +1,4 @@
-﻿namespace Mapsui.Utilities;
+﻿namespace Mapsui.Animations;
 
 public class AnimationEventArgs
 {

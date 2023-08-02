@@ -9,5 +9,5 @@ namespace Mapsui.Layers;
 /// </summary>
 public interface IFeatureInfo
 {
-    void GetFeatureInfo(ViewportState viewport, double x, double y, Action<IDictionary<string, IEnumerable<IFeature>>> callback);
+    void GetFeatureInfo(Viewport viewport, double x, double y, Action<IDictionary<string, IEnumerable<IFeature>>> callback);
 }

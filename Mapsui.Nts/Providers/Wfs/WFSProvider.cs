@@ -58,7 +58,6 @@ public class WFSProvider : IProvider, IDisposable
 
     private readonly GeometryTypeEnum _geometryType = GeometryTypeEnum.Unknown;
     private readonly string? _getCapabilitiesUri;
-    private readonly HttpClientUtil _httpClientUtil;
     private readonly IWFS_TextResources _textResources;
     private readonly WFSVersionEnum _wfsVersion;
     private bool _disposed;
@@ -74,11 +73,16 @@ public class WFSProvider : IProvider, IDisposable
     private int[]? _axisOrder;
     private readonly IUrlPersistentCache? _persistentCache;
     private string? _sridOverride;
+    private string? _proxyUrl;
+    private ICredentials? _credentials;
+    private CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
 
     // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
     // It helps to accelerate the rendering process significantly.
 
 
+    /// <summary> Default Cache </summary>
+    public static IUrlPersistentCache? DefaultCache { get; set; }
 
     /// <summary>
     /// This cache (obtained from an already instantiated dataprovider that retrieves a featuretype hosted by the same service) 
@@ -100,7 +104,7 @@ public class WFSProvider : IProvider, IDisposable
     /// </summary>
     /// <remarks>
     /// The axis order is an array of array offsets. It can be either {0, 1} or {1, 0}.
-    /// <para/>If not set explictly, <see cref="AxisOrderRegistry"/> is asked for a value based on <see cref="SRID"/>.</remarks>
+    /// <para/>If not set explictly, <see cref="CrsAxisOrderRegistry"/> is asked for a value based on <see cref="SRID"/>.</remarks>
     [AllowNull]
     public int[] AxisOrder
     {
@@ -108,7 +112,7 @@ public class WFSProvider : IProvider, IDisposable
             //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
             _axisOrder ?? (_wfsVersion == WFSVersionEnum.WFS_1_0_0
                 ? new[] { 0, 1 }
-                : new AxisOrderRegistry()[CRS ?? throw new ArgumentException("CRS needs to be set")]);
+                : _crsAxisOrderRegistry[CRS ?? throw new ArgumentException("CRS needs to be set")]);
         set
         {
             if (value != null)
@@ -183,8 +187,8 @@ public class WFSProvider : IProvider, IDisposable
     /// </summary>
     public ICredentials? Credentials
     {
-        get => _httpClientUtil.Credentials;
-        set => _httpClientUtil.Credentials = value;
+        get => _credentials;
+        set => _credentials = value;
     }
 
     /// <summary>
@@ -192,21 +196,42 @@ public class WFSProvider : IProvider, IDisposable
     /// </summary>
     public string? ProxyUrl
     {
-        get => _httpClientUtil.ProxyUrl;
-        set => _httpClientUtil.ProxyUrl = value;
+        get => _proxyUrl;
+        set => _proxyUrl = value;
     }
 
     /// <summary>
     /// Initializes a new layer, and downloads and parses the service description
     /// </summary>
-    /// <param name="url">Url of WMS server</param>
-    /// <param name="persistentCache"></param>
-    /// <param name="wmsVersion">Version number of wms leave null to get the default service version</param>
-    /// <param name="getStreamAsync">Download method, leave null for default</param>
-    public static async Task<WFSProvider> CreateAsync(string getCapabilitiesUri, string nsPrefix, string featureType, GeometryTypeEnum geometryType,
-        WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
+    /// <param name="getCapabilitiesUri">Url of WMS server</param>
+    /// <param name="geometryType">geometry Type</param>
+    /// <param name="wfsVersion">Version number of wms leave null to get the default service version</param>
+    /// <param name="nsPrefix">ns Prefix</param>
+    /// <param name="featureType">feature Type</param>
+    /// <param name="persistentCache">persistent Cache</param>
+    /// <param name="proxyUrl">proxy url</param>
+    /// <param name="credentials">credentials</param>
+    public static async Task<WFSProvider> CreateAsync(
+        string getCapabilitiesUri,
+        string nsPrefix,
+        string featureType,
+        GeometryTypeEnum geometryType,
+        WFSVersionEnum wfsVersion,
+        IUrlPersistentCache? persistentCache = null,
+        string? proxyUrl = null,
+        ICredentials? credentials = null)
     {
-        var provider = new WFSProvider(getCapabilitiesUri, nsPrefix, featureType, geometryType, wfsVersion, persistentCache);
+        var provider = new WFSProvider(getCapabilitiesUri, nsPrefix, featureType, geometryType, wfsVersion, persistentCache ?? DefaultCache);
+        if (!string.IsNullOrEmpty(proxyUrl))
+        {
+            provider.ProxyUrl = proxyUrl;
+        }
+
+        if (credentials != null)
+        {
+            provider.Credentials = credentials;
+        }
+
         await provider.InitAsync();
         return provider;
     }
@@ -222,10 +247,26 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="featureType">The name of the feature type</param>
     /// <param name="wfsVersion">The desired WFS Server version.</param>
     /// <param name="persistentCache">persistent Cache Interface</param>
-    public static async Task<WFSProvider> CreateAsync(string getCapabilitiesUri, string nsPrefix, string featureType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
+    /// <param name="proxyUrl">proxy url</param>
+    /// <param name="credentials">credentials</param>
+    public static async Task<WFSProvider> CreateAsync(
+        string getCapabilitiesUri,
+        string nsPrefix,
+        string featureType,
+        WFSVersionEnum wfsVersion,
+        IUrlPersistentCache? persistentCache = null,
+        string? proxyUrl = null,
+        ICredentials? credentials = null)
     {
-        return await CreateAsync(getCapabilitiesUri, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion,
-            persistentCache: persistentCache);
+        return await CreateAsync(
+            getCapabilitiesUri, 
+            nsPrefix,
+            featureType,
+            GeometryTypeEnum.Unknown,
+            wfsVersion,
+            persistentCache: persistentCache,
+            proxyUrl,
+            credentials);
     }
 
 
@@ -247,7 +288,6 @@ public class WFSProvider : IProvider, IDisposable
     private WFSProvider(string getCapabilitiesUri, string nsPrefix, string featureType, GeometryTypeEnum geometryType,
                WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
-        _httpClientUtil = new HttpClientUtil(persistentCache);
         _persistentCache = persistentCache;
         _getCapabilitiesUri = getCapabilitiesUri;
         _featureType = featureType;
@@ -300,10 +340,10 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="featureTypeInfo">The featureTypeInfo Instance</param>
     /// <param name="wfsVersion">The desired WFS Server version.</param>
     /// <param name="persistentCache">Persistent Cache</param>
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
     public WFSProvider(WfsFeatureTypeInfo featureTypeInfo, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
-        _httpClientUtil = new HttpClientUtil(persistentCache);
-        _persistentCache = persistentCache;
+        _persistentCache = persistentCache ?? DefaultCache;
         _featureTypeInfo = featureTypeInfo;
 
         if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
@@ -334,11 +374,11 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="featureType">The name of the feature type</param>
     /// <param name="wfsVersion">The desired WFS Server version.</param>
     /// <param name="persistentCache">Persistent Cache</param>
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
     public WFSProvider(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType,
                string geometryName, GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
-        _httpClientUtil = new HttpClientUtil(persistentCache);
-        _persistentCache = persistentCache;
+        _persistentCache = persistentCache ?? DefaultCache;
         _featureTypeInfo = new WfsFeatureTypeInfo(serviceUri, nsPrefix, featureTypeNamespace, featureType,
                                                   geometryName, geometryType);
 
@@ -391,11 +431,11 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="featureType">The name of the feature type</param>
     /// <param name="wfsVersion">The desired WFS Server version.</param>
     /// <param name="persistentCache">persistent Cache</param>
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
     public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
                GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
-        _httpClientUtil = new HttpClientUtil(persistentCache);
-        _persistentCache = persistentCache;
+        _persistentCache = persistentCache ?? DefaultCache;
         _featureTypeInfoQueryManager = getCapabilitiesCache;
 
         if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
@@ -459,7 +499,8 @@ public class WFSProvider : IProvider, IDisposable
 
         // Configuration for GetFeature request */
         var config = new WFSClientHttpConfigurator(_textResources);
-        config.ConfigureForWfsGetFeatureRequest(_httpClientUtil, _featureTypeInfo, _labels, bbox, _ogcFilter,
+        using var httpClientUtil = CreateHttpClientUtil();
+        config.ConfigureForWfsGetFeatureRequest(httpClientUtil, _featureTypeInfo, _labels, bbox, _ogcFilter,
                                                 _getFeatureGetRequest);
 
         try
@@ -470,31 +511,31 @@ public class WFSProvider : IProvider, IDisposable
 
                 // GML2
                 case "PointPropertyType":
-                    geomFactory = new PointFactory(_httpClientUtil, _featureTypeInfo);
+                    geomFactory = new PointFactory(httpClientUtil, _featureTypeInfo);
                     break;
 
                 // GML2
                 case "LineStringPropertyType":
                     geomFactory?.Dispose();
-                    geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo);
+                    geomFactory = new LineStringFactory(httpClientUtil, _featureTypeInfo);
                     break;
 
                 // GML2
                 case "PolygonPropertyType":
                     geomFactory?.Dispose();
-                    geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo);
+                    geomFactory = new PolygonFactory(httpClientUtil, _featureTypeInfo);
                     break;
 
                 // GML3
                 case "CurvePropertyType":
                     geomFactory?.Dispose();
-                    geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo);
+                    geomFactory = new LineStringFactory(httpClientUtil, _featureTypeInfo);
                     break;
 
                 // GML3
                 case "SurfacePropertyType":
                     geomFactory?.Dispose();
-                    geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo);
+                    geomFactory = new PolygonFactory(httpClientUtil, _featureTypeInfo);
                     break;
 
                 /* Aggregate geometry elements */
@@ -503,52 +544,52 @@ public class WFSProvider : IProvider, IDisposable
                 case "MultiPointPropertyType":
                     geomFactory?.Dispose();
                     if (_multiGeometries)
-                        geomFactory = new MultiPointFactory(_httpClientUtil, _featureTypeInfo);
+                        geomFactory = new MultiPointFactory(httpClientUtil, _featureTypeInfo);
                     else
-                        geomFactory = new PointFactory(_httpClientUtil, _featureTypeInfo);
+                        geomFactory = new PointFactory(httpClientUtil, _featureTypeInfo);
                     break;
 
                 // GML2
                 case "MultiLineStringPropertyType":
                     geomFactory?.Dispose();
                     if (_multiGeometries)
-                        geomFactory = new MultiLineStringFactory(_httpClientUtil, _featureTypeInfo);
+                        geomFactory = new MultiLineStringFactory(httpClientUtil, _featureTypeInfo);
                     else
-                        geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo);
+                        geomFactory = new LineStringFactory(httpClientUtil, _featureTypeInfo);
                     break;
 
                 // GML2
                 case "MultiPolygonPropertyType":
                     geomFactory?.Dispose();
                     if (_multiGeometries)
-                        geomFactory = new MultiPolygonFactory(_httpClientUtil, _featureTypeInfo);
+                        geomFactory = new MultiPolygonFactory(httpClientUtil, _featureTypeInfo);
                     else
-                        geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo);
+                        geomFactory = new PolygonFactory(httpClientUtil, _featureTypeInfo);
                     break;
 
                 // GML3
                 case "MultiCurvePropertyType":
                     geomFactory?.Dispose();
                     if (_multiGeometries)
-                        geomFactory = new MultiLineStringFactory(_httpClientUtil, _featureTypeInfo);
+                        geomFactory = new MultiLineStringFactory(httpClientUtil, _featureTypeInfo);
                     else
-                        geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo);
+                        geomFactory = new LineStringFactory(httpClientUtil, _featureTypeInfo);
                     break;
 
                 // GML3
                 case "MultiSurfacePropertyType":
                     geomFactory?.Dispose();
                     if (_multiGeometries)
-                        geomFactory = new MultiPolygonFactory(_httpClientUtil, _featureTypeInfo);
+                        geomFactory = new MultiPolygonFactory(httpClientUtil, _featureTypeInfo);
                     else
-                        geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo);
+                        geomFactory = new PolygonFactory(httpClientUtil, _featureTypeInfo);
                     break;
 
                 // .e.g. 'gml:GeometryAssociationType' or 'GeometryPropertyType'
                 //It's better to set the geometry type manually, if it is known...
                 default:
                     geomFactory?.Dispose();
-                    geomFactory = new UnspecifiedGeometryFactoryWfs100Gml2(_httpClientUtil, _featureTypeInfo,
+                    geomFactory = new UnspecifiedGeometryFactoryWfs100Gml2(httpClientUtil, _featureTypeInfo,
                                                                                _multiGeometries, _quickGeometries);
                     break;
             }
@@ -562,6 +603,22 @@ public class WFSProvider : IProvider, IDisposable
         {
             geomFactory?.Dispose();
         }
+    }
+
+    private HttpClientUtil CreateHttpClientUtil()
+    {
+        var httpClientUtil = new HttpClientUtil(_persistentCache);
+        if (_credentials != null)
+        {
+            httpClientUtil.Credentials = _credentials;
+        }
+
+        if (_proxyUrl != null)
+        {
+            httpClientUtil.ProxyUrl = _proxyUrl;
+        }
+
+        return httpClientUtil;
     }
 
     [SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits")]
@@ -604,7 +661,6 @@ public class WFSProvider : IProvider, IDisposable
         if (disposing)
         {
             _featureTypeInfoQueryManager = null;
-            _httpClientUtil.Close();
         }
         _disposed = true;
     }
@@ -614,322 +670,318 @@ public class WFSProvider : IProvider, IDisposable
     /// </summary>
     private async Task GetFeatureTypeInfoAsync()
     {
-        try
+    
+        _featureTypeInfo = new WfsFeatureTypeInfo();
+        var config = new WFSClientHttpConfigurator(_textResources);
+
+        _featureTypeInfo.Prefix = _nsPrefix;
+        _featureTypeInfo.Name = _featureType!; // is set in constructor
+
+        var featureQueryName = string.IsNullOrEmpty(_nsPrefix)
+                                      ? _featureType! // is set in constructor
+                                      : _nsPrefix + ":" + _featureType;
+
+        /***************************/
+        /* GetCapabilities request  /
+        /***************************/
+
+        using var httpClientUtil = CreateHttpClientUtil();
+        if (_featureTypeInfoQueryManager == null)
         {
-            _featureTypeInfo = new WfsFeatureTypeInfo();
-            var config = new WFSClientHttpConfigurator(_textResources);
-
-            _featureTypeInfo.Prefix = _nsPrefix;
-            _featureTypeInfo.Name = _featureType!; // is set in constructor
-
-            var featureQueryName = string.IsNullOrEmpty(_nsPrefix)
-                                          ? _featureType! // is set in constructor
-                                          : _nsPrefix + ":" + _featureType;
-
-            /***************************/
-            /* GetCapabilities request  /
-            /***************************/
-
-            if (_featureTypeInfoQueryManager == null)
-            {
-                /* Initialize IXPathQueryManager with configured HttpClientUtil */
-                _featureTypeInfoQueryManager =
-                    new XPathQueryManagerCompiledExpressionsDecorator(new XPathQueryManager());
-                await _featureTypeInfoQueryManager.SetDocumentToParseAsync(
-                    config.ConfigureForWfsGetCapabilitiesRequest(_httpClientUtil, _getCapabilitiesUri!)); // is set in constructor
-                /* Namespaces for XPath queries */
-                _featureTypeInfoQueryManager.AddNamespace(_textResources.NSWFSPREFIX, _textResources.NSWFS);
-                _featureTypeInfoQueryManager.AddNamespace(_textResources.NSOWSPREFIX, _textResources.NSOWS);
-                _featureTypeInfoQueryManager.AddNamespace(_textResources.NSXLINKPREFIX, _textResources.NSXLINK);
-            }
-
-            /* Service URI (for WFS GetFeature request) */
-            _featureTypeInfo.ServiceUri = _featureTypeInfoQueryManager.GetValueFromNode
-                (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_GETFEATURERESOURCE));
-            /* If no GetFeature URI could be found, try GetCapabilities URI */
-            if (_featureTypeInfo.ServiceUri == null) _featureTypeInfo.ServiceUri = _getCapabilitiesUri;
-            else if (_featureTypeInfo.ServiceUri.EndsWith("?", StringComparison.Ordinal))
-                _featureTypeInfo.ServiceUri =
-                    _featureTypeInfo.ServiceUri.Remove(_featureTypeInfo.ServiceUri.Length - 1);
-
-            /* URI for DescribeFeatureType request */
-            var describeFeatureTypeUri = _featureTypeInfoQueryManager.GetValueFromNode
-                (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_DESCRIBEFEATURETYPERESOURCE));
-            /* If no DescribeFeatureType URI could be found, try GetCapabilities URI */
-            if (describeFeatureTypeUri == null) describeFeatureTypeUri = _getCapabilitiesUri;
-            else if (describeFeatureTypeUri.EndsWith("?", StringComparison.Ordinal))
-                describeFeatureTypeUri =
-                    describeFeatureTypeUri.Remove(describeFeatureTypeUri.Length - 1);
-
-            /* Spatial reference ID */
-            var srid = _featureTypeInfoQueryManager.GetValueFromNode
-                (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_SRS), new[] { new DictionaryEntry("_param1", featureQueryName) });
-            /* If no SRID could be found, try '4326' by default */
-            srid = (srid == null) ? "4326" : srid.Substring(srid.LastIndexOf(":", StringComparison.Ordinal) + 1);
-            _featureTypeInfo.SRID = _sridOverride ?? srid; // override the srid
-
-            /* Bounding Box */
-            var bboxQuery = _featureTypeInfoQueryManager.GetXPathQueryManagerInContext(
-                _featureTypeInfoQueryManager.Compile(_textResources.XPATH_BBOX),
-                new[] { new DictionaryEntry("_param1", featureQueryName) });
-
-            if (bboxQuery != null)
-            {
-                var bbox = new WfsFeatureTypeInfo.BoundingBox();
-                var formatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
-                string? bboxVal;
-
-                if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                    bbox.MinLat =
-                        Convert.ToDouble(
-                            (bboxVal =
-                             bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
-                            null
-                                ? bboxVal
-                                : "0.0", formatInfo);
-                else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                    bbox.MinLat =
-                        Convert.ToDouble(
-                            (bboxVal =
-                             bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
-                            null
-                                ? bboxVal.Substring(bboxVal.IndexOf(' ') + 1)
-                                : "0.0", formatInfo);
-
-                if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                    bbox.MaxLat =
-                        Convert.ToDouble(
-                            (bboxVal =
-                             bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
-                            null
-                                ? bboxVal
-                                : "0.0", formatInfo);
-                else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                    bbox.MaxLat =
-                        Convert.ToDouble(
-                            (bboxVal =
-                             bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
-                            null
-                                ? bboxVal.Substring(bboxVal.IndexOf(' ') + 1)
-                                : "0.0", formatInfo);
-
-                if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                    bbox.MinLong =
-                        Convert.ToDouble(
-                            (bboxVal =
-                             bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
-                            null
-                                ? bboxVal
-                                : "0.0", formatInfo);
-                else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                    bbox.MinLong =
-                        Convert.ToDouble(
-                            (bboxVal =
-                             bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
-                            null
-                                ? bboxVal.Substring(0, bboxVal.IndexOf(' ') + 1)
-                                : "0.0", formatInfo);
-
-                if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                    bbox.MaxLong =
-                        Convert.ToDouble(
-                            (bboxVal =
-                             bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
-                            null
-                                ? bboxVal
-                                : "0.0", formatInfo);
-                else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                    bbox.MaxLong =
-                        Convert.ToDouble(
-                            (bboxVal =
-                             bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
-                            null
-                                ? bboxVal.Substring(0, bboxVal.IndexOf(' ') + 1)
-                                : "0.0", formatInfo);
-
-                _featureTypeInfo.BBox = bbox;
-            }
-
-            //Continue with a clone in order to preserve the 'GetCapabilities' response
-            var describeFeatureTypeQueryManager = _featureTypeInfoQueryManager.Clone();
-
-            /******************************/
-            /* DescribeFeatureType request /
-            /******************************/
-
             /* Initialize IXPathQueryManager with configured HttpClientUtil */
-            describeFeatureTypeQueryManager.ResetNamespaces();
-            await describeFeatureTypeQueryManager.SetDocumentToParseAsync(config.ConfigureForWfsDescribeFeatureTypeRequest
-                                                                   (_httpClientUtil, describeFeatureTypeUri!, // is set in constructor
-                                                                    featureQueryName));
-
+            _featureTypeInfoQueryManager =
+                new XPathQueryManagerCompiledExpressionsDecorator(new XPathQueryManager());
+            await _featureTypeInfoQueryManager.SetDocumentToParseAsync(
+                config.ConfigureForWfsGetCapabilitiesRequest(httpClientUtil, _getCapabilitiesUri!)); // is set in constructor
             /* Namespaces for XPath queries */
-            describeFeatureTypeQueryManager.AddNamespace(_textResources.NSSCHEMAPREFIX, _textResources.NSSCHEMA);
-            describeFeatureTypeQueryManager.AddNamespace(_textResources.NSGMLPREFIX, _textResources.NSGML);
+            _featureTypeInfoQueryManager.AddNamespace(_textResources.NSWFSPREFIX, _textResources.NSWFS);
+            _featureTypeInfoQueryManager.AddNamespace(_textResources.NSOWSPREFIX, _textResources.NSOWS);
+            _featureTypeInfoQueryManager.AddNamespace(_textResources.NSXLINKPREFIX, _textResources.NSXLINK);
+        }
 
-            /* Get target namespace */
-            var targetNs = describeFeatureTypeQueryManager.GetValueFromNode(
-                describeFeatureTypeQueryManager.Compile(_textResources.XPATH_TARGETNS));
-            if (targetNs != null)
-                _featureTypeInfo.FeatureTypeNamespace = targetNs;
+        /* Service URI (for WFS GetFeature request) */
+        _featureTypeInfo.ServiceUri = _featureTypeInfoQueryManager.GetValueFromNode
+            (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_GETFEATURERESOURCE));
+        /* If no GetFeature URI could be found, try GetCapabilities URI */
+        if (_featureTypeInfo.ServiceUri == null) _featureTypeInfo.ServiceUri = _getCapabilitiesUri;
+        else if (_featureTypeInfo.ServiceUri.EndsWith("?", StringComparison.Ordinal))
+            _featureTypeInfo.ServiceUri =
+                _featureTypeInfo.ServiceUri.Remove(_featureTypeInfo.ServiceUri.Length - 1);
 
-            /* Get geometry */
-            var geomType = _geometryType == GeometryTypeEnum.Unknown ? null : _geometryType.ToString();
-            string? geomName = null;
+        /* URI for DescribeFeatureType request */
+        var describeFeatureTypeUri = _featureTypeInfoQueryManager.GetValueFromNode
+            (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_DESCRIBEFEATURETYPERESOURCE));
+        /* If no DescribeFeatureType URI could be found, try GetCapabilities URI */
+        if (describeFeatureTypeUri == null) describeFeatureTypeUri = _getCapabilitiesUri;
+        else if (describeFeatureTypeUri.EndsWith("?", StringComparison.Ordinal))
+            describeFeatureTypeUri =
+                describeFeatureTypeUri.Remove(describeFeatureTypeUri.Length - 1);
 
-            /* The easiest way to get geometry info, just ask for the 'gml'-prefixed type-attribute... 
-               Simple, but effective in 90% of all cases...this is the standard GeoServer creates.*/
-            /* example: <xs:element nillable = "false" name = "the_geom" maxOccurs = "1" type = "gml:MultiPolygonPropertyType" minOccurs = "0" /> */
-            /* Try to get context of the geometry element by asking for a 'gml:*' type-attribute */
-            var geomQuery = describeFeatureTypeQueryManager.GetXPathQueryManagerInContext(
-                describeFeatureTypeQueryManager.Compile(_textResources.XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY));
+        /* Spatial reference ID */
+        var srid = _featureTypeInfoQueryManager.GetValueFromNode
+            (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_SRS), new[] { new DictionaryEntry("_param1", featureQueryName) });
+        /* If no SRID could be found, try '4326' by default */
+        srid = (srid == null) ? "4326" : srid.Substring(srid.LastIndexOf(":", StringComparison.Ordinal) + 1);
+        _featureTypeInfo.SRID = _sridOverride ?? srid; // override the srid
+
+        /* Bounding Box */
+        var bboxQuery = _featureTypeInfoQueryManager.GetXPathQueryManagerInContext(
+            _featureTypeInfoQueryManager.Compile(_textResources.XPATH_BBOX),
+            new[] { new DictionaryEntry("_param1", featureQueryName) });
+
+        if (bboxQuery != null)
+        {
+            var bbox = new WfsFeatureTypeInfo.BoundingBox();
+            var formatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
+            string? bboxVal;
+
+            if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
+                bbox.MinLat =
+                    Convert.ToDouble(
+                        (bboxVal =
+                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
+                        null
+                            ? bboxVal
+                            : "0.0", formatInfo);
+            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
+                bbox.MinLat =
+                    Convert.ToDouble(
+                        (bboxVal =
+                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
+                        null
+                            ? bboxVal.Substring(bboxVal.IndexOf(' ') + 1)
+                            : "0.0", formatInfo);
+
+            if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
+                bbox.MaxLat =
+                    Convert.ToDouble(
+                        (bboxVal =
+                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
+                        null
+                            ? bboxVal
+                            : "0.0", formatInfo);
+            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
+                bbox.MaxLat =
+                    Convert.ToDouble(
+                        (bboxVal =
+                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
+                        null
+                            ? bboxVal.Substring(bboxVal.IndexOf(' ') + 1)
+                            : "0.0", formatInfo);
+
+            if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
+                bbox.MinLong =
+                    Convert.ToDouble(
+                        (bboxVal =
+                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
+                        null
+                            ? bboxVal
+                            : "0.0", formatInfo);
+            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
+                bbox.MinLong =
+                    Convert.ToDouble(
+                        (bboxVal =
+                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
+                        null
+                            ? bboxVal.Substring(0, bboxVal.IndexOf(' ') + 1)
+                            : "0.0", formatInfo);
+
+            if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
+                bbox.MaxLong =
+                    Convert.ToDouble(
+                        (bboxVal =
+                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
+                        null
+                            ? bboxVal
+                            : "0.0", formatInfo);
+            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
+                bbox.MaxLong =
+                    Convert.ToDouble(
+                        (bboxVal =
+                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
+                        null
+                            ? bboxVal.Substring(0, bboxVal.IndexOf(' ') + 1)
+                            : "0.0", formatInfo);
+
+            _featureTypeInfo.BBox = bbox;
+        }
+
+        //Continue with a clone in order to preserve the 'GetCapabilities' response
+        var describeFeatureTypeQueryManager = _featureTypeInfoQueryManager.Clone();
+
+        /******************************/
+        /* DescribeFeatureType request /
+        /******************************/
+
+        /* Initialize IXPathQueryManager with configured HttpClientUtil */
+        describeFeatureTypeQueryManager.ResetNamespaces();
+        await describeFeatureTypeQueryManager.SetDocumentToParseAsync(config.ConfigureForWfsDescribeFeatureTypeRequest
+                                                               (httpClientUtil, describeFeatureTypeUri!, // is set in constructor
+                                                                featureQueryName));
+
+        /* Namespaces for XPath queries */
+        describeFeatureTypeQueryManager.AddNamespace(_textResources.NSSCHEMAPREFIX, _textResources.NSSCHEMA);
+        describeFeatureTypeQueryManager.AddNamespace(_textResources.NSGMLPREFIX, _textResources.NSGML);
+
+        /* Get target namespace */
+        var targetNs = describeFeatureTypeQueryManager.GetValueFromNode(
+            describeFeatureTypeQueryManager.Compile(_textResources.XPATH_TARGETNS));
+        if (targetNs != null)
+            _featureTypeInfo.FeatureTypeNamespace = targetNs;
+
+        /* Get geometry */
+        var geomType = _geometryType == GeometryTypeEnum.Unknown ? null : _geometryType.ToString();
+        string? geomName = null;
+
+        /* The easiest way to get geometry info, just ask for the 'gml'-prefixed type-attribute... 
+           Simple, but effective in 90% of all cases...this is the standard GeoServer creates.*/
+        /* example: <xs:element nillable = "false" name = "the_geom" maxOccurs = "1" type = "gml:MultiPolygonPropertyType" minOccurs = "0" /> */
+        /* Try to get context of the geometry element by asking for a 'gml:*' type-attribute */
+        var geomQuery = describeFeatureTypeQueryManager.GetXPathQueryManagerInContext(
+            describeFeatureTypeQueryManager.Compile(_textResources.XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY));
+        if (geomQuery != null)
+        {
+            geomName = geomQuery.GetValueFromNode(geomQuery.Compile(_textResources.XPATH_NAMEATTRIBUTEQUERY));
+
+            /* Just, if not set manually... */
+            geomType ??= geomQuery.GetValueFromNode(geomQuery.Compile(_textResources.XPATH_TYPEATTRIBUTEQUERY));
+
+            /* read all the elements */
+            var iterator = geomQuery.GetIterator(geomQuery.Compile("//ancestor::xs:sequence/xs:element"));
+            if (iterator != null)
+                foreach (XPathNavigator node in iterator)
+                {
+                    node.MoveToAttribute("type", string.Empty);
+                    var type = node.Value;
+
+                    if (type.StartsWith("gml:")) // we skip geometry element cause we already found it
+                        continue;
+
+                    node.MoveToParent();
+
+                    node.MoveToAttribute("name", string.Empty);
+                    var name = node.Value;
+
+                    _featureTypeInfo.Elements.Add(new WfsFeatureTypeInfo.ElementInfo(name, type));
+                }
+        }
+        else
+        {
+            /* Try to get context of a complexType with element ref ='gml:*' - use the global context */
+            /* example:
+            <xs:complexType name="geomType">
+                <xs:sequence>
+                    <xs:element ref="gml:polygonProperty" minOccurs="0"/>
+                </xs:sequence>
+            </xs:complexType> */
+            geomQuery = describeFeatureTypeQueryManager.GetXPathQueryManagerInContext(
+                describeFeatureTypeQueryManager.Compile(
+                    _textResources.XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY));
             if (geomQuery != null)
             {
-                geomName = geomQuery.GetValueFromNode(geomQuery.Compile(_textResources.XPATH_NAMEATTRIBUTEQUERY));
+                /* Ask for the name of the complextype - use the local context*/
+                var geomComplexTypeName = geomQuery.GetValueFromNode(geomQuery.Compile(_textResources.XPATH_NAMEATTRIBUTEQUERY));
 
-                /* Just, if not set manually... */
-                geomType ??= geomQuery.GetValueFromNode(geomQuery.Compile(_textResources.XPATH_TYPEATTRIBUTEQUERY));
-
-                /* read all the elements */
-                var iterator = geomQuery.GetIterator(geomQuery.Compile("//ancestor::xs:sequence/xs:element"));
-                if (iterator != null)
-                    foreach (XPathNavigator node in iterator)
-                    {
-                        node.MoveToAttribute("type", string.Empty);
-                        var type = node.Value;
-
-                        if (type.StartsWith("gml:")) // we skip geometry element cause we already found it
-                            continue;
-
-                        node.MoveToParent();
-
-                        node.MoveToAttribute("name", string.Empty);
-                        var name = node.Value;
-
-                        _featureTypeInfo.Elements.Add(new WfsFeatureTypeInfo.ElementInfo(name, type));
-                    }
-            }
-            else
-            {
-                /* Try to get context of a complexType with element ref ='gml:*' - use the global context */
-                /* example:
-                <xs:complexType name="geomType">
-                    <xs:sequence>
-                        <xs:element ref="gml:polygonProperty" minOccurs="0"/>
-                    </xs:sequence>
-                </xs:complexType> */
-                geomQuery = describeFeatureTypeQueryManager.GetXPathQueryManagerInContext(
-                    describeFeatureTypeQueryManager.Compile(
-                        _textResources.XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY));
-                if (geomQuery != null)
+                if (geomComplexTypeName != null)
                 {
-                    /* Ask for the name of the complextype - use the local context*/
-                    var geomComplexTypeName = geomQuery.GetValueFromNode(geomQuery.Compile(_textResources.XPATH_NAMEATTRIBUTEQUERY));
-
-                    if (geomComplexTypeName != null)
+                    /* Ask for the name of an element with a complextype of 'geomComplexType' - use the global context */
+                    geomName =
+                        describeFeatureTypeQueryManager.GetValueFromNode(
+                            describeFeatureTypeQueryManager.Compile(
+                                _textResources.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY), new[]
+                                                                                          {
+                                                                                              new DictionaryEntry
+                                                                                                  ("_param1",
+                                                                                                   _featureTypeInfo
+                                                                                                       .
+                                                                                                       FeatureTypeNamespace)
+                                                                                              ,
+                                                                                              new DictionaryEntry
+                                                                                                  ("_param2",
+                                                                                                   geomComplexTypeName)
+                                                                                          });
+                }
+                else
+                {
+                    /* The geometry element must be an ancestor, if we found an anonymous complextype */
+                    /* Ask for the element hosting the anonymous complextype - use the global context */
+                    /* example: 
+                    <xs:element name ="SHAPE">
+                        <xs:complexType>
+                        	<xs:sequence>
+                          		<xs:element ref="gml:lineStringProperty" minOccurs="0"/>
+                          </xs:sequence>
+                        </xs:complexType>
+                    </xs:element> */
+                    geomName =
+                        describeFeatureTypeQueryManager.GetValueFromNode(
+                            describeFeatureTypeQueryManager.Compile(
+                                _textResources.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE));
+                }
+                /* Just, if not set manually... */
+                if (geomType == null)
+                {
+                    /* Ask for the 'ref'-attribute - use the local context */
+                    if (
+                        (geomType =
+                         geomQuery.GetValueFromNode(
+                             geomQuery.Compile(_textResources.XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY))) != null)
                     {
-                        /* Ask for the name of an element with a complextype of 'geomComplexType' - use the global context */
-                        geomName =
-                            describeFeatureTypeQueryManager.GetValueFromNode(
-                                describeFeatureTypeQueryManager.Compile(
-                                    _textResources.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY), new[]
-                                                                                              {
-                                                                                                  new DictionaryEntry
-                                                                                                      ("_param1",
-                                                                                                       _featureTypeInfo
-                                                                                                           .
-                                                                                                           FeatureTypeNamespace)
-                                                                                                  ,
-                                                                                                  new DictionaryEntry
-                                                                                                      ("_param2",
-                                                                                                       geomComplexTypeName)
-                                                                                              });
-                    }
-                    else
-                    {
-                        /* The geometry element must be an ancestor, if we found an anonymous complextype */
-                        /* Ask for the element hosting the anonymous complextype - use the global context */
-                        /* example: 
-                        <xs:element name ="SHAPE">
-                            <xs:complexType>
-                        	    <xs:sequence>
-                          		    <xs:element ref="gml:lineStringProperty" minOccurs="0"/>
-                              </xs:sequence>
-                            </xs:complexType>
-                        </xs:element> */
-                        geomName =
-                            describeFeatureTypeQueryManager.GetValueFromNode(
-                                describeFeatureTypeQueryManager.Compile(
-                                    _textResources.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE));
-                    }
-                    /* Just, if not set manually... */
-                    if (geomType == null)
-                    {
-                        /* Ask for the 'ref'-attribute - use the local context */
-                        if (
-                            (geomType =
-                             geomQuery.GetValueFromNode(
-                                 geomQuery.Compile(_textResources.XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY))) != null)
+                        switch (geomType)
                         {
-                            switch (geomType)
-                            {
-                                case "gml:pointProperty":
-                                    geomType = "PointPropertyType";
-                                    break;
-                                case "gml:lineStringProperty":
-                                    geomType = "LineStringPropertyType";
-                                    break;
-                                case "gml:curveProperty":
-                                    geomType = "CurvePropertyType";
-                                    break;
-                                case "gml:polygonProperty":
-                                    geomType = "PolygonPropertyType";
-                                    break;
-                                case "gml:surfaceProperty":
-                                    geomType = "SurfacePropertyType";
-                                    break;
-                                case "gml:multiPointProperty":
-                                    geomType = "MultiPointPropertyType";
-                                    break;
-                                case "gml:multiLineStringProperty":
-                                    geomType = "MultiLineStringPropertyType";
-                                    break;
-                                case "gml:multiCurveProperty":
-                                    geomType = "MultiCurvePropertyType";
-                                    break;
-                                case "gml:multiPolygonProperty":
-                                    geomType = "MultiPolygonPropertyType";
-                                    break;
-                                case "gml:multiSurfaceProperty":
-                                    geomType = "MultiSurfacePropertyType";
-                                    break;
-                            }
+                            case "gml:pointProperty":
+                                geomType = "PointPropertyType";
+                                break;
+                            case "gml:lineStringProperty":
+                                geomType = "LineStringPropertyType";
+                                break;
+                            case "gml:curveProperty":
+                                geomType = "CurvePropertyType";
+                                break;
+                            case "gml:polygonProperty":
+                                geomType = "PolygonPropertyType";
+                                break;
+                            case "gml:surfaceProperty":
+                                geomType = "SurfacePropertyType";
+                                break;
+                            case "gml:multiPointProperty":
+                                geomType = "MultiPointPropertyType";
+                                break;
+                            case "gml:multiLineStringProperty":
+                                geomType = "MultiLineStringPropertyType";
+                                break;
+                            case "gml:multiCurveProperty":
+                                geomType = "MultiCurvePropertyType";
+                                break;
+                            case "gml:multiPolygonProperty":
+                                geomType = "MultiPolygonPropertyType";
+                                break;
+                            case "gml:multiSurfaceProperty":
+                                geomType = "MultiSurfacePropertyType";
+                                break;
                         }
                     }
                 }
             }
-
-            // Default value for geometry column = geom 
-            geomName ??= "geom";
-
-            // Set geomType to an empty string in order to avoid exceptions.
-            // The geometry type is not necessary by all means - it can be detected in 'GetFeature' response too.. 
-            geomType ??= string.Empty;
-
-            // Remove prefix
-            if (geomType.Contains(":"))
-                geomType = geomType.Substring(geomType.IndexOf(":", StringComparison.Ordinal) + 1);
-
-            _featureTypeInfo.Geometry = new WfsFeatureTypeInfo.GeometryInfo
-            {
-                GeometryName = geomName,
-                GeometryType = geomType
-            };
         }
-        finally
+
+        // Default value for geometry column = geom 
+        geomName ??= "geom";
+
+        // Set geomType to an empty string in order to avoid exceptions.
+        // The geometry type is not necessary by all means - it can be detected in 'GetFeature' response too.. 
+        geomType ??= string.Empty;
+
+        // Remove prefix
+        if (geomType.Contains(":"))
+            geomType = geomType.Substring(geomType.IndexOf(":", StringComparison.Ordinal) + 1);
+
+        _featureTypeInfo.Geometry = new WfsFeatureTypeInfo.GeometryInfo
         {
-            _httpClientUtil.Close();
-        }
+            GeometryName = geomName,
+            GeometryType = geomType
+        };
+        
     }
 
     private void ResolveFeatureType(string featureType)
@@ -956,8 +1008,6 @@ public class WFSProvider : IProvider, IDisposable
 
         private readonly IWFS_TextResources _wfsTextResources;
 
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="WFSClientHttpConfigurator"/> class.
         /// An instance of this class can be used to configure a <see cref="HttpClientUtil"/> object.
@@ -970,8 +1020,6 @@ public class WFSProvider : IProvider, IDisposable
         {
             _wfsTextResources = wfsTextResources;
         }
-
-
 
         /// <summary>
         /// Configures for WFS 'GetCapabilities' request using an instance implementing <see cref="IWFS_TextResources"/>.

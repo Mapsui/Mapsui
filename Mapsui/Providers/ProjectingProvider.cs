@@ -45,7 +45,9 @@ public class ProjectingProvider : IProvider
 
         // throws exception when CRS or _provider.CRS is null (so I don't have to check it here)
         _projection.Project(CRS!, _provider.CRS!, extentToProject);
-        fetchInfo = new FetchInfo(new MSection(extentToProject, fetchInfo.Resolution), CRS, fetchInfo.ChangeType);
+        var scale = fetchInfo.Extent.Width / extentToProject.Width;
+        var projectedResolution = fetchInfo.Resolution / scale;
+        fetchInfo = new FetchInfo(new MSection(extentToProject, projectedResolution), CRS, fetchInfo.ChangeType);
         return false;
     }
 

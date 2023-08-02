@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -15,11 +14,10 @@ using Avalonia.Threading;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.UI.Avalonia.Extensions;
-using Mapsui.Utilities;
 
 namespace Mapsui.UI.Avalonia;
 
-public partial class MapControl : Grid, IMapControl, IDisposable
+public partial class MapControl : UserControl, IMapControl, IDisposable
 {
     private MPoint? _mousePosition;
     private MapsuiCustomDrawOp? _drawOp;
@@ -27,11 +25,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private MPoint? _downMousePosition;
     private bool _mouseDown;
     private MPoint? _previousMousePosition;
-    private double _toResolution = double.NaN;
     private double _mouseWheelPos = 0.0;
 
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
-    public MouseWheelAnimation MouseWheelAnimation { get; } = new() { Duration = 0 };
 
     public MapControl()
     {
@@ -49,27 +45,57 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         PointerPressed += MapControl_PointerPressed;
         PointerReleased += MapControl_PointerReleased;
         PointerMoved += MapControlMouseMove;
-        PointerLeave += MapControlMouseLeave;
+        PointerExited += MapControlMouseLeave;
+        PointerCaptureLost += MapControlPointerCaptureLost;
 
         PointerWheelChanged += MapControlMouseWheel;
 
         DoubleTapped += OnDoubleTapped;
+
+        KeyDown += MapControl_KeyDown;
+        KeyUp += MapControl_KeyUp;
     }
 
-    protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
+    private void MapControl_KeyUp(object? sender, KeyEventArgs e)
     {
+        ShiftPressed = (e.KeyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
+    }
+
+    public bool ShiftPressed { get; set; }
+
+    private void MapControl_KeyDown(object? sender, KeyEventArgs e)
+    {
+        ShiftPressed = (e.KeyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
+    }
+
+    private void MapControlPointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
+    {
+        _previousMousePosition = null;
+    }
+
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+
         switch (change.Property.Name)
         {
             case nameof(Bounds):
                 // size changed
                 MapControlSizeChanged();
                 break;
-        }
+        } 
     }
 
     private void MapControl_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+        var leftButtonPressed = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
+        if (HandleTouching(e.GetPosition(this).ToMapsui(), leftButtonPressed, e.ClickCount, ShiftPressed))
+        {
+            e.Handled = true;
+            return;
+        }
+
+        if (leftButtonPressed)
         {
             MapControlMouseLeftButtonDown(e);
         }
@@ -77,34 +103,16 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseWheel(object? sender, PointerWheelEventArgs e)
     {
-        if (Map.Viewport.Limiter.ZoomLock) return;
-        if (!Map.Viewport.State.HasSize()) return;
+        // In Avalonia the touchpad can trigger the mousewheel event. In that case there are more events and the Delta.Y is a double value, 
+        // which is usually smaller than 1.0. In the code below the deltas are accumelated until they are larger than 1.0. Only then 
+        // MouseWheelZoom is called.
+        _mouseWheelPos += e.Delta.Y;
+        if (Math.Abs(_mouseWheelPos) < 1.0) return; // Ignore the mouse wheel event if the accumulated delta is still too small
+        int delta = Math.Sign(_mouseWheelPos);
+        _mouseWheelPos -= delta;
 
         _currentMousePosition = e.GetPosition(this).ToMapsui();
-        //Needed for both MouseMove and MouseWheel event for mousewheel event
-
-        if (double.IsNaN(_toResolution))
-            _toResolution = Map.Viewport.State.Resolution;
-
-        _mouseWheelPos += e.Delta.Y;
-        int delta = (int)_mouseWheelPos;
-        bool navigate = false;
-        if (_mouseWheelPos >= 1.0)
-        {
-            _toResolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
-            _mouseWheelPos -= 1.0;
-            navigate = true;
-        }
-        else if (_mouseWheelPos <= -1.0)
-        {
-            _toResolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
-            _mouseWheelPos += 1.0;
-            navigate = true;
-        }
-        if (!navigate) return;
-
-        var resolution = MouseWheelAnimation.GetResolution(delta, Map.Viewport, _map);
-        Map.Navigator.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        Map.Navigator.MouseWheelZoom(delta, _currentMousePosition);
     }
 
     private void MapControlMouseLeftButtonDown(PointerPressedEventArgs e)
@@ -124,7 +132,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             foreach (var layer in Map.Layers)
             {
                 // ReSharper disable once SuspiciousTypeConversion.Global
-                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Viewport.State, _downMousePosition.X, _downMousePosition.Y,
+                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.Viewport, _downMousePosition.X, _downMousePosition.Y,
                     OnFeatureInfo);
             }
     }
@@ -153,15 +161,21 @@ public partial class MapControl : Grid, IMapControl, IDisposable
                 return;
             }
 
-            Map.Viewport.Transform(_currentMousePosition, _previousMousePosition);
-            RefreshGraphics();
+            Map.Navigator.Drag(_currentMousePosition, _previousMousePosition);
             _previousMousePosition = _currentMousePosition;
         }
     }
 
     private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        if (e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased)
+        var leftButtonPressed = e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased;
+        if (HandleTouched(e.GetPosition(this).ToMapsui(), leftButtonPressed, 1, ShiftPressed))
+        {
+            e.Handled = true;
+            return;
+        }
+
+        if (leftButtonPressed)
         {
             MapControlMouseLeftButtonUp(e);
         }
@@ -177,7 +191,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (IsClick(_currentMousePosition, _downMousePosition))
         {
             HandleFeatureInfo(e);
-            OnInfo(InvokeInfo(_mousePosition, _mousePosition, 1));
+            OnInfo(CreateMapInfoEventArgs(_mousePosition, _mousePosition, 1));
         }
     }
 
@@ -195,13 +209,20 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         base.OnPointerMoved(e);
         _mousePosition = e.GetPosition(this).ToMapsui();
+        if (HandleMoving(_mousePosition, true, 0, ShiftPressed))
+            e.Handled = true;
     }
 
     private void OnDoubleTapped(object? sender, RoutedEventArgs e)
     {
         // We have a new interaction with the screen, so stop all navigator animations
         var tapPosition = _mousePosition;
-        OnInfo(InvokeInfo(tapPosition, tapPosition, 2));
+        if (tapPosition != null && HandleTouchingTouched(tapPosition, true, 2, ShiftPressed))
+        {
+            e.Handled = true;
+            return;
+        }
+        OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
     }
 
     public override void Render(DrawingContext context)
@@ -254,11 +275,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         private readonly MapControl _mapControl;
 
-        private readonly FormattedText _noSkia = new()
-        {
-            Text = "Current rendering API is not Skia"
-        };
-
         public MapsuiCustomDrawOp(Rect bounds, MapControl mapControl)
         {
             Bounds = bounds;
@@ -268,6 +284,18 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         public void Dispose()
         {
             // No-op
+        }
+
+        public void Render(ImmediateDrawingContext context)
+        {
+            var leaseFeature = context.TryGetFeature<ISkiaSharpApiLeaseFeature>();
+            if (leaseFeature == null)
+                return;
+            using var lease = leaseFeature.Lease();
+            var canvas = lease.SkCanvas;
+            canvas.Save();
+            _mapControl.CommonDrawControl(canvas);
+            canvas.Restore();
         }
 
         public Rect Bounds { get; set; }
@@ -280,19 +308,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         public bool Equals(ICustomDrawOperation? other)
         {
             return false;
-        }
-
-        public void Render(IDrawingContextImpl context)
-        {
-            var canvas = (context as ISkiaDrawingContextImpl)?.SkCanvas;
-            if (canvas == null)
-                context.DrawText(Brushes.Black, new Point(), _noSkia.PlatformImpl);
-            else
-            {
-                canvas.Save();
-                _mapControl.CommonDrawControl(canvas);
-                canvas.Restore();
-            }
         }
     }
 

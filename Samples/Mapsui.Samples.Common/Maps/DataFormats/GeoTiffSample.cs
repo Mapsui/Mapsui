@@ -6,12 +6,13 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 #pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
-public class GeoTiffSample : IMapControlSample
+public class GeoTiffSample : ISample
 {
     static GeoTiffSample()
     {
@@ -21,10 +22,7 @@ public class GeoTiffSample : IMapControlSample
     public string Name => "10 Geo Tiff";
     public string Category => "Data Formats";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {

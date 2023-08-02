@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Nts.Widgets;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Styles;
-using Mapsui.UI;
 using Mapsui.Widgets;
+using Mapsui.Widgets.BoxWidget;
 using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.MouseCoordinatesWidget;
+using Mapsui.Widgets.PerformanceWidget;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using SkiaSharp;
@@ -47,13 +50,17 @@ public class MapRenderer : IRenderer
         StyleRenderers[typeof(SymbolStyle)] = new SymbolStyleRenderer();
         StyleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
 
+        WidgetRenders[typeof(TextBox)] = new TextBoxWidgetRenderer();
         WidgetRenders[typeof(Hyperlink)] = new HyperlinkWidgetRenderer();
         WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
         WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
         WidgetRenders[typeof(ButtonWidget)] = new ButtonWidgetRenderer();
+        WidgetRenders[typeof(BoxWidget)] = new BoxWidgetRenderer();
+        WidgetRenders[typeof(MouseCoordinatesWidget)] = new MouseCoordinatesWidgetRenderer();
+        WidgetRenders[typeof(EditingWidget)] = new EditingWidgetRenderer();
     }
 
-    public void Render(object target, ViewportState viewport, IEnumerable<ILayer> layers,
+    public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,
         IEnumerable<IWidget> widgets, Color? background = null)
     {
         var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
@@ -63,7 +70,7 @@ public class MapRenderer : IRenderer
         RenderTypeSave((SKCanvas)target, viewport, layers, allWidgets, background);
     }
 
-    private void RenderTypeSave(SKCanvas canvas, ViewportState viewport, IEnumerable<ILayer> layers,
+    private void RenderTypeSave(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers,
         IEnumerable<IWidget> widgets, Color? background = null)
     {
         if (!viewport.HasSize()) return;
@@ -73,11 +80,9 @@ public class MapRenderer : IRenderer
         Render(canvas, viewport, widgets, 1);
     }
 
-    public MemoryStream RenderToBitmapStream(ViewportState viewport, IEnumerable<ILayer> layers,
+    public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers,
         Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png)
     {
-        if (viewport == null) throw new ArgumentNullException(nameof(viewport));
-
         try
         {
             var width = viewport.Width;
@@ -132,7 +137,7 @@ public class MapRenderer : IRenderer
         }
     }
 
-    private void RenderTo(ViewportState viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
+    private void RenderTo(Viewport viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
         IEnumerable<IWidget>? widgets, SKCanvas skCanvas)
     {
         if (skCanvas == null) throw new ArgumentNullException(nameof(viewport));
@@ -145,7 +150,7 @@ public class MapRenderer : IRenderer
             Render(skCanvas, viewport, widgets, 1);
     }
 
-    private void Render(SKCanvas canvas, ViewportState viewport, IEnumerable<ILayer> layers)
+    private void Render(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers)
     {
         try
         {
@@ -161,15 +166,15 @@ public class MapRenderer : IRenderer
         }
     }
 
-    private void RenderFeature(SKCanvas canvas, ViewportState viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity, long iteration)
+    private void RenderFeature(SKCanvas canvas, Viewport viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity, long iteration)
     {
         // Check, if we have a special renderer for this style
-        if (StyleRenderers.ContainsKey(style.GetType()))
+        if (StyleRenderers.TryGetValue(style.GetType(), out var renderer))
         {
             // Save canvas
             canvas.Save();
             // We have a special renderer, so try, if it could draw this
-            var styleRenderer = (ISkiaStyleRenderer)StyleRenderers[style.GetType()];
+            var styleRenderer = (ISkiaStyleRenderer)renderer;
             var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, _renderCache, iteration);
             // Restore old canvas
             canvas.Restore();
@@ -180,19 +185,20 @@ public class MapRenderer : IRenderer
         }
     }
 
-    private void Render(object canvas, ViewportState viewport, IEnumerable<IWidget> widgets, float layerOpacity)
+    private void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
     {
         WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
     }
 
-    public MapInfo? GetMapInfo(double x, double y, ViewportState viewport, IEnumerable<ILayer> layers, int margin = 0)
+    public MapInfo? GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
     {
         // todo: use margin to increase the pixel area
         // todo: We will need to select on style instead of layer
 
-        layers = layers
+        var mapInfoLayers = layers
             .Select(l => (l is ISourceLayer sl) ? sl.SourceLayer : l)
-            .Where(l => l.IsMapInfoLayer);
+            .Where(l => l.IsMapInfoLayer)
+            .ToList();
 
         var list = new List<MapInfoRecord>();
         var result = new MapInfo
@@ -228,20 +234,27 @@ public class MapRenderer : IRenderer
                 var color = pixmap.GetPixelColor(intX, intY);
 
 
-                VisibleFeatureIterator.IterateLayers(viewport, layers, 0, (v, layer, style, feature, opacity, iteration) =>
+                VisibleFeatureIterator.IterateLayers(viewport, mapInfoLayers, 0, (v, layer, style, feature, opacity, iteration) =>
                 {
-                    // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
-                    surface.Canvas.Save();
-                    // 1) Clear the entire bitmap
-                    surface.Canvas.Clear(SKColors.Transparent);
-                    // 2) Render the feature to the clean canvas
-                    RenderFeature(surface.Canvas, v, layer, style, feature, opacity, 0);
-                    // 3) Check if the pixel has changed.
-                    if (color != pixmap.GetPixelColor(intX, intY))
-                        // 4) Add feature and style to result
-                        list.Add(new MapInfoRecord(feature, style, layer));
-                    surface.Canvas.Restore();
-                    // ReSharper restore AccessToDisposedClosure
+                    try
+                    {
+                        // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
+                        surface.Canvas.Save();
+                        // 1) Clear the entire bitmap
+                        surface.Canvas.Clear(SKColors.Transparent);
+                        // 2) Render the feature to the clean canvas
+                        RenderFeature(surface.Canvas, v, layer, style, feature, opacity, 0);
+                        // 3) Check if the pixel has changed.
+                        if (color != pixmap.GetPixelColor(intX, intY))
+                            // 4) Add feature and style to result
+                            list.Add(new MapInfoRecord(feature, style, layer));
+                        surface.Canvas.Restore();
+                        // ReSharper restore AccessToDisposedClosure
+                    }
+                    catch (Exception exception)
+                    {
+                        Logger.Log(LogLevel.Error, "Unexpected error in the code detecting if a feature is clicked. This uses SkiaSharp.", exception);
+                    }
                 });
             }
 

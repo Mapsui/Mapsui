@@ -27,7 +27,7 @@ public class RasterizingTileProvider : ITileSource
     private Attribution? _attribution;
     private readonly IProvider? _dataSource;
     private readonly RenderFormat _renderFormat;
-    private IDictionary<TileIndex, double> _searchSizeCache = new ConcurrentDictionary<TileIndex, double>();
+    private readonly IDictionary<TileIndex, double> _searchSizeCache = new ConcurrentDictionary<TileIndex, double>();
 
     public RasterizingTileProvider(
         ILayer layer,
@@ -66,7 +66,7 @@ public class RasterizingTileProvider : ITileSource
         {
             var renderer = GetRenderer();
             (MSection section, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo, renderer);
-            using var stream = renderer.RenderToBitmapStream(ToViewportState(section), new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
+            using var stream = renderer.RenderToBitmapStream(ToViewport(section), new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
             _rasterizingLayers.Push(renderer);
             result = stream?.ToArray();
             PersistentCache?.Add(index, result ?? Array.Empty<byte>());
@@ -77,7 +77,8 @@ public class RasterizingTileProvider : ITileSource
 
     private async Task<(MSection section, ILayer RenderLayer)> CreateRenderLayerAsync(TileInfo tileInfo, IRenderer renderer)
     {
-        Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
+        var indexLevel = tileInfo.Index.Level;
+        Schema.Resolutions.TryGetValue(indexLevel, out var tileResolution);
 
         var resolution = tileResolution.UnitsPerPixel;
         var section = new MSection(tileInfo.Extent.ToMRect(), resolution);
@@ -85,7 +86,18 @@ public class RasterizingTileProvider : ITileSource
         var extent = section.Extent;
         if (featureSearchGrowth > 0)
         {
-            extent = extent.Grow(featureSearchGrowth);
+            var firstRow = Schema.GetMatrixFirstRow(indexLevel);
+            var lastRow = firstRow + Schema.GetMatrixHeight(indexLevel) -1;
+            var firstCol = Schema.GetMatrixFirstCol(indexLevel);
+            var lastCol = firstCol + Schema.GetMatrixWidth(indexLevel) -1;
+
+            // do not expand beyound the bounds of the Schema fixes not loading data in Because of invalid bounds
+            var minX = tileInfo.Index.Col == firstCol ? extent.MinX : extent.MinX - featureSearchGrowth;
+            var minY = tileInfo.Index.Row == firstRow ? extent.MinY : extent.MinY - featureSearchGrowth;
+            var maxX = tileInfo.Index.Col == lastCol ? extent.MaxX : extent.MaxX + featureSearchGrowth;
+            var maxY = tileInfo.Index.Row == lastRow ? extent.MaxY : extent.MaxY + featureSearchGrowth;
+
+            extent = new MRect(minX, minY, maxX, maxY);
         }
 
         var fetchInfo = new FetchInfo(new MSection(extent, resolution));
@@ -140,22 +152,32 @@ public class RasterizingTileProvider : ITileSource
     {
         if (!_searchSizeCache.TryGetValue(tileInfo.Index, out var result))
         {
-            result = 0;
-            var features = await GetFeaturesAsync(tileInfo);
-            var layers = new List<ILayer> { new RenderLayer(_layer, features) };
+            double tempSize = 0;
 
-            void MeasureFeature(IStyle style, IFeature feature)
+            var layerStyles = _layer.Style.GetStylesToApply(section.Resolution);
+            foreach (var style in layerStyles)
             {
-                var tempSize = GetFeatureSize(feature, style, renderer);
-                var coordinateTempSize = ConvertToCoordinates(tempSize, section.Resolution);
-                result = Math.Max(coordinateTempSize, result);
+                if (renderer.StyleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
+                {
+                    if (styleRenderer is IFeatureSize featureSize)
+                    {
+                        if (featureSize.NeedsFeature)
+                        {
+                            var features = await GetFeaturesAsync(tileInfo);
+                            foreach (var feature in features)
+                            {
+                                tempSize = Math.Max(tempSize, featureSize.FeatureSize(style, renderer.RenderCache, feature));
+                            }
+                        }
+                        else
+                        {
+                            tempSize = featureSize.FeatureSize(style, renderer.RenderCache, null);
+                        }
+                    }
+                }
             }
 
-            VisibleFeatureIterator.IterateLayers(ToViewportState(section), layers, 0, (v, l, s, f, o, i) =>
-            {
-                MeasureFeature(s, f);
-            });
-
+            result = ConvertToCoordinates(tempSize, section.Resolution);
             _searchSizeCache[tileInfo.Index] = result;
         }
 
@@ -165,22 +187,6 @@ public class RasterizingTileProvider : ITileSource
     private double ConvertToCoordinates(double tempSize, double resolution)
     {
         return tempSize * resolution * 0.5; // I need to load half the Size more of the Features
-    }
-
-    private double GetFeatureSize(IFeature feature, IStyle style, IRenderer renderer)
-    {
-        double size = 0;
-
-        if (renderer.StyleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
-        {
-            if (styleRenderer is IFeatureSize featureSize)
-            {
-                var tempSize = featureSize.FeatureSize(feature, style, renderer.RenderCache);
-                size = Math.Max(tempSize, size);
-            }
-        }
-
-        return size;
     }
 
     private async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
@@ -203,9 +209,9 @@ public class RasterizingTileProvider : ITileSource
     public string Name => _layer.Name;
     public Attribution Attribution => _attribution ??= new Attribution(_layer.Attribution.Text, _layer.Attribution.Url);
 
-    public static ViewportState ToViewportState(MSection section)
+    public static Viewport ToViewport(MSection section)
     {
-        return new ViewportState(
+        return new Viewport(
             section.Extent.Centroid.X,
             section.Extent.Centroid.Y,
             section.Resolution,

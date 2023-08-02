@@ -1,0 +1,22 @@
+{
+  "solution": {
+    "path": "Mapsui.sln",
+    "projects": [
+      "Mapsui.ArcGIS\\Mapsui.ArcGIS.csproj",
+      "Mapsui.Extensions\\Mapsui.Extensions.csproj",
+      "Mapsui.Nts\\Mapsui.Nts.csproj",
+      "Mapsui.Rendering.Skia\\Mapsui.Rendering.Skia.csproj",
+      "Mapsui.Tiling\\Mapsui.Tiling.csproj",
+      "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
+      "Mapsui.UI.iOS\\Mapsui.UI.iOS.csproj",
+      "Mapsui\\Mapsui.csproj",
+      "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",
+      "Samples\\Mapsui.Samples.CustomWidget\\Mapsui.Samples.CustomWidget.csproj",
+      "Samples\\Mapsui.Samples.iOS\\Mapsui.Samples.iOS.csproj",
+      "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
+      "Tests\\Mapsui.Rendering.Skia.Tests\\Mapsui.Rendering.Skia.Tests.csproj",
+      "Tests\\Mapsui.Tests.Common\\Mapsui.Tests.Common.csproj",
+      "Tests\\Mapsui.Tests\\Mapsui.Tests.csproj"
+    ]
+  }
+}

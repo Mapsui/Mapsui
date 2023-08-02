@@ -43,6 +43,11 @@
 		</PackageReference>
 	</ItemGroup>
 
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('linux'))">
+    <!-- Explicitly reference Linux native dlls to get them included -->
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<Content Include="Resources\capabilities_1_1_1.xml">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>

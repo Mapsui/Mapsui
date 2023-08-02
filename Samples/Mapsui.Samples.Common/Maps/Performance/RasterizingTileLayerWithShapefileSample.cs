@@ -8,16 +8,15 @@ using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling.Layers;
-using Mapsui.UI;
 using System.IO;
-using System.Reflection;
+using System.Threading.Tasks;
 
 #pragma warning disable IDISP001 // Dispose created
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class ShapefileTileSample : IMapControlSample
+public class ShapefileTileSample : ISample
 {
     static ShapefileTileSample()
     {
@@ -28,10 +27,8 @@ public class ShapefileTileSample : IMapControlSample
     public string Name => "RasterizingTileLayer with Shapefile";
     public string Category => "Performance";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
 
     public static Map CreateMap()
     {
@@ -63,7 +60,7 @@ public class ShapefileTileSample : IMapControlSample
         map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(projectedCountrySource)));
         map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(projectedCitySource)));
         var home = Mercator.FromLonLat(15, 54);
-        map.Home = n => n.NavigateTo(home, map.Resolutions[5]);
+        map.Home = n => n.CenterOnAndZoomTo(home, n.Resolutions[5]);
 
         return map;
     }

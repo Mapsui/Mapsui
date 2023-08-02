@@ -82,7 +82,7 @@ public partial class MainPage : ContentPage
         var sample = allSamples.Where(x => x.Name == sampleName).FirstOrDefault<ISampleBase>();
 
         clicker = null;
-        if (sample is IFormsSample fsample)
+        if (sample is IMapViewSample fsample)
             clicker = fsample.OnClick;
 
         NavigateToPage(new MapPage(sample, clicker));

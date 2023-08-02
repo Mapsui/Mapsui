@@ -5,7 +5,7 @@ namespace Mapsui.Rendering.Skia.Extensions;
 
 public static class ViewportExtensions
 {
-    public static SKMatrix ToSKMatrix(this ViewportState viewport)
+    public static SKMatrix ToSKMatrix(this Viewport viewport)
     {
         var mapCenterX = (float)viewport.Width * 0.5f;
         var mapCenterY = (float)viewport.Height * 0.5f;
@@ -18,7 +18,7 @@ public static class ViewportExtensions
         return matrix;
     }
 
-    public static SKMatrix ToSKMatrix(this ViewportState viewport, SKMatrix priorMatrix)
+    public static SKMatrix ToSKMatrix(this Viewport viewport, SKMatrix priorMatrix)
     {      
         var userRotation = SKMatrix.CreateRotationDegrees((float)viewport.Rotation);
         var zoom = 1.0 / viewport.Resolution;
@@ -28,14 +28,14 @@ public static class ViewportExtensions
         var matrix = SKMatrix.Concat(userRotation, zoomScale);
         matrix = SKMatrix.Concat(moveToCenter, matrix);
         matrix = SKMatrix.Concat(priorMatrix, matrix);
-
+        
         return matrix;
     }
 
     /// <summary> Converts the Extent of the Viewport to a SKRect </summary>
     /// <param name="viewport">viewport</param>
     /// <returns>SkRect</returns>
-    public static SKRect ToSkiaRect(this ViewportState viewport)
+    public static SKRect ToSkiaRect(this Viewport viewport)
     {
         return viewport.WorldToScreen(viewport.ToExtent()).ToSkia();
     }

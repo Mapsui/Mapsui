@@ -18,5 +18,5 @@ public record MSection
     public MRect Extent { get; }
     public double Resolution { get; }
     public double ScreenWidth => Extent.Width / Resolution;
-    public double ScreenHeight => Extent.Height / Resolution; 
+    public double ScreenHeight => Extent.Height / Resolution;
 }

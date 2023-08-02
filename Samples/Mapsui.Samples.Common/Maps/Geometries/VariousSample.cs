@@ -21,7 +21,7 @@ public class VariousSample : ISample, ISampleTest
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(PolygonSample.CreateLayer());
+        map.Layers.Add(PolygonGeometrySample.CreateLayer());
         map.Layers.Add(LineStringSample.CreateLineStringLayer(LineStringSample.CreateLineStringStyle()));
         map.Layers.Add(CreateLayerWithStyleOnLayer(map.Extent, 10));
         map.Layers.Add(CreateLayerWithStyleOnFeature(map.Extent, 10));

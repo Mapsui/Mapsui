@@ -7,7 +7,6 @@ using Mapsui.Styles;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using SkiaSharp;
-using Xamarin.Forms;
 using OSPlatform = System.Runtime.InteropServices.OSPlatform;
 
 namespace Mapsui.Rendering.Skia.Tests;

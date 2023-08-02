@@ -1,16 +1,22 @@
 ﻿<Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <!--This should be enabled because this reduces the number of nuget packages that get donwloded without 
+    <!--This should be enabled because this reduces the number of nuget packages that get donwloded without
     this the several versions of a nuget package are downloaded causing the builds to be slower-->
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Appveyor.TestLogger" Version="[2.0.0,3.0.0)" />
-    <PackageVersion Include="Avalonia" Version="[0.10.18,1.0.0)" />
-    <PackageVersion Include="Avalonia.Desktop" Version="[0.10.18,1.0.0)" />
-    <PackageVersion Include="Avalonia.Diagnostics" Version="[0.10.18,1.0.0)" />
-    <PackageVersion Include="Avalonia.ReactiveUI" Version="[0.10.18,1.0.0)" />
+    <PackageVersion Include="Avalonia" Version="[11.0.0,12.0.0)" />
+    <PackageVersion Include="Avalonia.Skia" Version="[11.0.0,12.0.0)" />
+    <PackageVersion Include="Avalonia.Desktop" Version="[11.0.0,12.0.0)" />
+    <PackageVersion Include="Avalonia.Browser" Version="[11.0.0,12.0.0)" />
+    <PackageVersion Include="Avalonia.Android" Version="[11.0.0,12.0.0)" />
+    <PackageVersion Include="Avalonia.iOS" Version="[11.0.0,12.0.0)" />
+    <PackageVersion Include="Avalonia.Diagnostics" Version="[11.0.0,12.0.0)" />
+    <PackageVersion Include="Avalonia.ReactiveUI" Version="[11.0.0,12.0.0)" />
+    <PackageVersion Include="Avalonia.Themes.Fluent" Version="[11.0.0,12.0.0)" />
+    <PackageVersion Include="Avalonia.Fonts.Inter" Version="[11.0.0,12.0.0)" />
     <PackageVersion Include="BenchmarkDotNet" Version="[0.13.2,1.0.0)" />
     <PackageVersion Include="BitMiracle.LibTiff.NET" Version="[2.4.649,3.0.0)" />
     <PackageVersion Include="BrotliSharpLib" Version="[0.3.3,1.0.0)" />
@@ -31,10 +37,11 @@
     <PackageVersion Include="Eto.SkiaDraw" Version="[0.2.0,0.3.0)" />
     <PackageVersion Include="HarfBuzzSharp" Version="[2.8.2.3,3.0.0.0)" />
     <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="[2.8.2.3,3.0.0.0)" />
-    <PackageVersion Include="IDisposableAnalyzers" Version="[4.0.2,5.0.0)" />
+    <PackageVersion Include="IDisposableAnalyzers" Version="[4.0.6,5.0.0)" />
     <PackageVersion Include="Mapsui.Android" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.ArcGIS" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Avalonia" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.Avalonia.V0" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Blazor" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Eto" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Extensions" Version="4.0.0-beta.8" />
@@ -49,35 +56,34 @@
     <PackageVersion Include="Mapsui.Uno.WinUI" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.WinUI" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Wpf" Version="4.0.0-beta.8" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="[7.0.0,8.0.0)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="[7.0.0,8.0.0)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="[7.0.0,8.0.0)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="[7.0.5,8.0.0)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="[7.0.5,8.0.0)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="[7.0.5,8.0.0)" />
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="[7.0.0,8.0.0)" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="[16.11.0,17.0.0)" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="[7.0.0,8.0.0)" />
-    <PackageVersion Include="Microsoft.Graphics.Win2D" Version="[1.0.4,2.0.0.0)" />
-    <PackageVersion Include="Microsoft.Net.Compilers.Toolset" Version="[4.5.0,5.0.0)" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="[16.9.4,17.0.0)" />   
+    <PackageVersion Include="Microsoft.Net.Compilers.Toolset" Version="[4.6.0,5.0.0)" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="[16.9.4,17.0.0)" />
     <PackageVersion Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="[6.2.14,7.0.0)" />
     <PackageVersion Include="Microsoft.UI.Xaml" Version="[2.6.2,3.0.0)" />
-    <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="[17.2.32,18.0.0)" />
+    <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="[17.6.40,18.0.0)" />
     <PackageVersion Include="Microsoft.Windows.CsWin32" Version="[0.1.588-beta,1.0.0)" />
     <PackageVersion Include="Microsoft.Windows.CsWinRT" Version="[2.0.0,3.0.0)" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="[1.2.230217.4,2.0.0)" />
     <PackageVersion Include="NeoSmart.AsyncLock" Version="[3.2.1,4.0.0)" />
-    <PackageVersion Include="NetTopologySuite" Version="[2.4.0,3.0.0)" />
+    <PackageVersion Include="NetTopologySuite" Version="[2.5.0,3.0.0)" />
     <PackageVersion Include="NetTopologySuite.IO.GeoJSON4STJ" Version="[3.0.0,4.0.0)" />
-    <PackageVersion Include="Newtonsoft.Json" Version="[13.0.1,14.0.0)" />
-    <PackageVersion Include="NUnit" Version="[3.12.0,4.0.0)" />
-    <PackageVersion Include="NUnit3TestAdapter" Version="[3.17.0,4.0.0)" />
+    <PackageVersion Include="Newtonsoft.Json" Version="[13.0.2,14.0.0)" />
+    <PackageVersion Include="NUnit" Version="[3.13.3,4.0.0)" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="[4.4.2,5.0.0)" />
     <PackageVersion Include="OpenTK" Version="[3.1.0,4.0.0)" />
     <PackageVersion Include="OpenTK.GLControl" Version="[3.1.0,4.0.0)" />
     <PackageVersion Include="Plugin.CurrentActivity" Version="[2.1.0.4,3.0.0.0)" />
-    <PackageVersion Include="SkiaSharp" Version="[2.88.3,3.0.0)" />    
+    <PackageVersion Include="SkiaSharp" Version="[2.88.3,3.0.0)" />
     <PackageVersion Include="SkiaSharp.HarfBuzz" Version="[2.88.3,3.0.0)" />
     <PackageVersion Include="SkiaSharp.NativeAssets.Linux" Version="[2.88.3,3.0.0)" />
     <PackageVersion Include="SkiaSharp.NativeAssets.iOS" Version="[2.88.3,3.0.0)" />
     <PackageVersion Include="SkiaSharp.NativeAssets.WebAssembly" Version="[2.88.3,3.0.0)" />
+    <PackageVersion Include="SkiaSharp.Skottie" Version="[2.88.3,3.0.0)" />
     <PackageVersion Include="SkiaSharp.Views" Version="[2.88.3,3.0.0)" />
     <PackageVersion Include="SkiaSharp.Views.Blazor" Version="[2.88.3,3.0.0)" />
     <PackageVersion Include="SkiaSharp.Views.Forms" Version="[2.88.3,3.0.0)" />
@@ -91,10 +97,10 @@
     <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="[2.88.3,3.0.0)" />
     <PackageVersion Include="sqlite-net-pcl" Version="[1.8.116,2.0.0)" />
     <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="[2.1.2,3.0.0)" />
-    <PackageVersion Include="Svg.Skia" Version="[0.6.0-preview5,1.0.0)" />
-    <PackageVersion Include="System.Drawing.Common" Version="[6.0.0,7.0.0)" />
+    <PackageVersion Include="Svg.Skia" Version="[1.0.0,2.0.0)" />
+    <PackageVersion Include="System.Drawing.Common" Version="[7.0.0,8.0.0)" />
     <PackageVersion Include="System.Linq.Async" Version="[6.0.1,7.0.0)" />
-    <PackageVersion Include="System.Text.Encoding.CodePages" Version="[6.0.0,7.0.0)" />
+    <PackageVersion Include="System.Text.Encoding.CodePages" Version="[7.0.0,8.0.0)" />
     <PackageVersion Include="System.Memory" Version="[4.5.5,5.0.0)" />
     <PackageVersion Include="Topten.RichTextKit" Version="[0.4.165,1.0.0)" />
     <PackageVersion Include="Uno.Core" Version="[4.0.1,5.0.0)" />
@@ -102,23 +108,23 @@
     <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="[1.4.0,2.0.0)" />
     <PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="[4.0.1,5.0.0)" />
     <PackageVersion Include="Uno.UniversalImageLoader" Version="[1.9.36,2.0.0)" />
-    <PackageVersion Include="Uno.UI" Version="[4.6.41,5.0.0)" />
-    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="[4.6.41,5.0.0)" />
-    <PackageVersion Include="Uno.UI.RemoteControl" Version="[4.6.41,5.0.0)" />
-    <PackageVersion Include="Uno.UI.Skia.Gtk" Version="[4.6.41,5.0.0)" />
-    <PackageVersion Include="Uno.UI.Skia.Linux.FrameBuffer" Version="[4.6.41,5.0.0)" />
-    <PackageVersion Include="Uno.UI.Skia.Tizen" Version="[4.6.41,5.0.0)" />
-    <PackageVersion Include="Uno.UI.Skia.Wpf" Version="[4.6.41,5.0.0)" />
-    <PackageVersion Include="Uno.UI.WebAssembly" Version="[4.6.41,5.0.0)" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap" Version="[3.3.1,4.0.0)" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="[3.3.1,4.0.0)" />
-    <PackageVersion Include="Uno.WinUI" Version="[4.6.41,5.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="[4.6.41,5.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="[4.6.41,5.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Wpf" Version="[4.6.41,5.0.0)" />
-    <PackageVersion Include="Uno.WinUI.RemoteControl" Version="[4.6.41,5.0.0)" />
-    <PackageVersion Include="Uno.WinUI.WebAssembly" Version="[4.6.41,5.0.0)" />
-    <PackageVersion Include="Microsoft.Windows.Compatibility" Version="[5.0.0,6.0.0)" />
+    <PackageVersion Include="Uno.UI" Version="[4.9.20,5.0.0)" />
+    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="[4.9.20,5.0.0)" />
+    <PackageVersion Include="Uno.UI.RemoteControl" Version="[4.9.20,5.0.0)" />
+    <PackageVersion Include="Uno.Resizetizer" Version="[1.0.4, 2.0.0)" />
+    <PackageVersion Include="Uno.UI.Skia.Gtk" Version="[4.9.20,5.0.0)" />
+    <PackageVersion Include="Uno.UI.Skia.Linux.FrameBuffer" Version="[4.9.20,5.0.0)" />
+    <PackageVersion Include="Uno.UI.Skia.Tizen" Version="[4.9.20,5.0.0)" />
+    <PackageVersion Include="Uno.UI.Skia.Wpf" Version="[4.9.20,5.0.0)" />
+    <PackageVersion Include="Uno.UI.WebAssembly" Version="[4.9.20,5.0.0)" />
+    <PackageVersion Include="Uno.Wasm.Bootstrap" Version="[7.0.24,8.0.0)" />
+    <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="[7.0.24,8.0.0)" />
+    <PackageVersion Include="Uno.WinUI" Version="[4.9.20,5.0.0)" />
+    <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="[4.9.20,5.0.0)" />
+    <PackageVersion Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="[4.9.20,5.0.0)" />
+    <PackageVersion Include="Uno.WinUI.Skia.Wpf" Version="[4.9.20,5.0.0)" />
+    <PackageVersion Include="Uno.WinUI.RemoteControl" Version="[4.9.20,5.0.0)" />
+    <PackageVersion Include="Uno.WinUI.WebAssembly" Version="[4.9.20,5.0.0)" />
     <PackageVersion Include="Xam.Plugin.Geolocator" Version="[5.0.0-beta,6.0.0)" />
     <PackageVersion Include="Xamarin.Essentials" Version="[1.7.0,2.0.0)" />
     <PackageVersion Include="Xamarin.Forms" Version="[5.0.0.2545,6.0.0.0)" />

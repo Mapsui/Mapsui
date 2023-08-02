@@ -13,15 +13,15 @@ public static class ClippingFunctions
     /// Reduce list of points, so that all are inside of cliptRect
     /// See https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm
     /// </summary>
-    /// <param name="points">List of points to reduce</param>
-    /// <param name="viewport">Viewport implementation</param>
+    /// <param name="points">List of points to reduce.</param>
+    /// <param name="viewport">The Viewport that is used for the conversions.</param>
     /// <param name="clipRect">Rectangle to clip to. All points outside aren't drawn.</param>
     /// <returns></returns>
-    public static List<SKPoint> ReducePointsToClipRect(IEnumerable<Coordinate>? points, ViewportState viewport, SKRect clipRect)
+    public static List<SKPoint> ReducePointsToClipRect(IEnumerable<Coordinate>? points, Viewport viewport, SKRect clipRect)
     {
         var output = WorldToScreen(viewport, points);
 
-        // Do this for the 4 edges (left, top, right, bottom) of clipping rectangle
+         // Do this for the 4 edges (left, top, right, bottom) of clipping rectangle
         for (var j = 0; j < 4; j++)
         {
             // If there aren't any points to reduce
@@ -80,40 +80,18 @@ public static class ClippingFunctions
     /// <summary>
     /// Convert a list of Mapsui points in world coordinates to SKPoint in screen coordinates
     /// </summary>
-    /// <param name="viewportState">Viewport implementation</param>
+    /// <param name="viewport">The Viewport that is used for the conversions.</param>
     /// <param name="points">List of points in Mapsui world coordinates</param>
     /// <returns>List of screen coordinates in SKPoint</returns>
-    internal static List<SKPoint> WorldToScreen(ViewportState viewportState, IEnumerable<Coordinate>? points)
+    internal static List<SKPoint> WorldToScreen(Viewport viewport, IEnumerable<Coordinate>? points)
     {
         var result = new List<SKPoint>();
         if (points == null)
             return result;
 
-        var screenCenterX = viewportState.Width * 0.5;
-        var screenCenterY = viewportState.Height * 0.5;
-        var centerX = viewportState.CenterX;
-        var centerY = viewportState.CenterY;
-        var resolution = 1.0 / viewportState.Resolution;
-        var rotation = viewportState.Rotation / 180f * Math.PI;
-        var sin = Math.Sin(rotation);
-        var cos = Math.Cos(rotation);
-
         foreach (var point in points)
         {
-            var screenX = (point.X - centerX) * resolution;
-            var screenY = (centerY - point.Y) * resolution;
-
-            if (viewportState.IsRotated())
-            {
-                var newX = screenX * cos - screenY * sin;
-                var newY = screenX * sin + screenY * cos;
-                screenX = newX;
-                screenY = newY;
-            }
-
-            screenX += screenCenterX;
-            screenY += screenCenterY;
-
+            var (screenX, screenY) = viewport.WorldToScreenXY(point.X, point.Y);
             result.Add(new SKPoint((float)screenX, (float)screenY));
         }
 

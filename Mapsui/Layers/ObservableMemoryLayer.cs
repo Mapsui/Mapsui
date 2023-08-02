@@ -1,7 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using ConcurrentCollections;
+using Mapsui.Utilities;
 
 namespace Mapsui.Layers;
 

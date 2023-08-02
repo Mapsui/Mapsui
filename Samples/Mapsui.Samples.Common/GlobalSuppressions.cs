@@ -5,7 +5,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Animations.AnimatedPointsSamples.CreateAnimatedPointLayer~Mapsui.Layers.ILayer")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Animations.AnimatedPointsSample.CreateAnimatedPointLayer~Mapsui.Layers.ILayer")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.DataFormats.ShapefileSample.CreateMap~Mapsui.Map")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.DataFormats.ShapefileSample.CreateMap~Mapsui.Map")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.DataFormats.WfsSample.CreateMapAsync~System.Threading.Tasks.Task{Mapsui.Map}")]
@@ -14,3 +14,5 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Performance.GeometrySimplifyProviderWithShapefileSample.CreateMap~Mapsui.Map")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Performance.GeometrySimplifyProviderWithShapefileSample.CreateMap~Mapsui.Map")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Projection.MultiPolygonProjectionSample.CreateMapAsync~System.Threading.Tasks.Task{Mapsui.Map}")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.DataFormats.WmsProjectionDotSpatialSample.CreateLayerAsync~System.Threading.Tasks.Task{Mapsui.Layers.ILayer}")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.DataFormats.WmsProjectionTilingSample.CreateLayerAsync~System.Threading.Tasks.Task{Mapsui.Layers.ILayer}")]

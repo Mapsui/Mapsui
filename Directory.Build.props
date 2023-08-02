@@ -15,6 +15,8 @@
     <PackageTags>map maps mapping geo gis osm</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
     <IsPackable>false</IsPackable> <!--Default to not packable and override in projects that do need to be packed.-->
+    <!--Disable Run Api Compat Task causes Build failure on github actions with visual studio 2022 17.5 and .net Compilers Toolset 4.6-->
+    <RunApiCompat>false</RunApiCompat>
   </PropertyGroup>
 
 	<!--Package Icon Include -->
@@ -35,7 +37,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <Compile Include="$(MSBuildThisFileDirectory)/Nullable.cs" />
+	  <!--<Compile Include="$(MSBuildThisFileDirectory)/Nullable.cs" />-->
 	  <Compile Include="$(MSBuildThisFileDirectory)/InitProperty.cs" />
   </ItemGroup>
 

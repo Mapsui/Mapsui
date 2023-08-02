@@ -12,9 +12,7 @@ using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
-using Mapsui.Limiting;
 using Mapsui.Styles;
-using Mapsui.UI;
 using Mapsui.Widgets;
 
 namespace Mapsui;
@@ -37,9 +35,13 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = new LayerCollection();
-        
-        Navigator = new Navigator(this, Viewport);
-        Navigator.Navigated += Navigated;
+        Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
+        Navigator.ViewportChanged += Navigator_ViewportChanged;
+    }
+
+    private void Navigator_ViewportChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        RefreshGraphics();
     }
 
     /// <summary>
@@ -53,9 +55,10 @@ public class Map : INotifyPropertyChanged, IDisposable
     public ConcurrentQueue<IWidget> Widgets { get; } = new();
 
     /// <summary>
-    /// Projection type of Map. Normally in format like "EPSG:3857"
+    /// Coordinate reference system (projection type of map).
+    /// Default: "EPSG:3857" (SphericalMercator).
     /// </summary>
-    public string? CRS { get; set; }
+    public string? CRS { get; set; } = "EPSG:3857";
 
     /// <summary>
     /// A collection of layers. The first layer in the list is drawn first, the last one on top.
@@ -108,11 +111,6 @@ public class Map : INotifyPropertyChanged, IDisposable
     }
 
     /// <summary>
-    /// List of all native resolutions of this map
-    /// </summary>
-    public IReadOnlyList<double> Resolutions { get; private set; } = new List<double>();
-
-    /// <summary>
     /// Called whenever a property changed
     /// </summary>
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -130,21 +128,14 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </summary>
     public event EventHandler<MapInfoEventArgs>? Info;
 
-    private protected readonly Viewport _viewport = new();
-
     /// <summary>
     /// Handles all manipulations of the map viewport
     /// </summary>
-    public INavigator Navigator { get; private set; }
+    public Navigator Navigator { get; private set; } =  new Navigator();
 
-    /// <summary>
-    /// Viewport holding information about visible part of the map. Viewport can never be null.
-    /// </summary>
-    public Viewport Viewport => _viewport;
-
-    private void Navigated(object? sender, ChangeType changeType)
+    private void Navigator_RefreshDataRequest(object? sender, EventArgs e)
     {
-        Refresh(changeType);
+        RefreshData(ChangeType.Discrete);
     }
 
     /// <summary>
@@ -161,12 +152,12 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </summary>
     public void RefreshData(ChangeType changeType = ChangeType.Discrete)
     {
-        if (Viewport.State.ToExtent() is null)
+        if (Navigator.Viewport.ToExtent() is null)
             return;
-        if (Viewport.State.ToExtent().GetArea() <= 0)
+        if (Navigator.Viewport.ToExtent().GetArea() <= 0)
             return;
 
-        var fetchInfo = new FetchInfo(Viewport.State.ToSection(), CRS, changeType);
+        var fetchInfo = new FetchInfo(Navigator.Viewport.ToSection(), CRS, changeType);
         RefreshData(fetchInfo);
     }
 
@@ -246,19 +237,19 @@ public class Map : INotifyPropertyChanged, IDisposable
 
     private void LayersChanged()
     {
-        Resolutions = DetermineResolutions(Layers);
-        Viewport.Limiter.ZoomLimits = GetMinMaxResolution(Resolutions);
-        Viewport.Limiter.PanLimits = Extent?.Copy();
+        Navigator.DefaultResolutions = DetermineResolutions(Layers);
+        Navigator.DefaultZoomBounds = GetMinMaxResolution(Navigator.Resolutions);
+        Navigator.DefaultPanBounds = Extent?.Copy();
         OnPropertyChanged(nameof(Layers));
     }
 
-    private MinMax? GetMinMaxResolution(IEnumerable<double>? resolutions)
+    private MMinMax? GetMinMaxResolution(IEnumerable<double>? resolutions)
     {
         if (resolutions == null || resolutions.Count() == 0) return null;
         resolutions = resolutions.OrderByDescending(r => r).ToList();
         var mostZoomedOut = resolutions.First();
         var mostZoomedIn = resolutions.Last() * 0.5; // Divide by two to allow one extra level to zoom-in
-        return new MinMax(mostZoomedOut, mostZoomedIn);
+        return new MMinMax(mostZoomedOut, mostZoomedIn);
     }
 
     private static IReadOnlyList<double> DetermineResolutions(IEnumerable<ILayer> layers)
@@ -320,7 +311,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         DataChanged?.Invoke(sender, e);
     }
 
-    public Action<INavigator> Home { get; set; } = n => n.NavigateToFullEnvelope();
+    public Action<Navigator> Home { get; set; } = n => n.ZoomToPanBounds();
 
     public IEnumerable<IWidget> GetWidgetsOfMapAndLayers()
     {

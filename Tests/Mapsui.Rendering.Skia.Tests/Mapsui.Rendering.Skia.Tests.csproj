@@ -17,9 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
-    <ProjectReference Include="..\..\Mapsui.UI.Forms\Mapsui.UI.Forms.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
-    <ProjectReference Include="..\..\Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.csproj" />
     <ProjectReference Include="..\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
   </ItemGroup>
 
@@ -38,6 +36,11 @@
     </PackageReference>
     <PackageReference Include="coverlet.collector" />
     <PackageReference Include="Svg.Skia" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('linux'))">
+    <!-- Explicitly reference Linux native dlls to get them included -->
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
   </ItemGroup>
 
   <ItemGroup>
@@ -379,11 +382,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Images\OriginalRegression\GeoTiffSample.Regression.png" />
-    <None Remove="Resources\Images\OriginalRegression\PolygonTestSample.Regression.png" />
-    <None Remove="Resources\Images\OriginalRegression\ShapefileSkpTileSample.Regression.png" />
-    <None Remove="Resources\Images\OriginalRegression\ShapefileTilingFilteringSample.Regression.png" />
-    <None Remove="Resources\Images\OriginalRegression\StackedLabelsTestSample.Regression.png" />
-    <None Remove="Resources\Images\OriginalRegression\WriteToLayerSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\AnimatedBusSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\AnimatedPointsSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingAddLineSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingAddPointSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingAddPolygonSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingDrawingLineSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingDrawingPolygonSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingModifySample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingRotateSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\EditingScaleSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\ModifyScaleSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\MyLocationLayerSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\PolygonGeometrySample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\ProjectionTestSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\WfsPointsSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\WmsProjectionDotSpatialSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\WmsProjectionSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\WmsProjectionTilingSample.Regression.png" />
   </ItemGroup>
+
 </Project>

@@ -9,8 +9,8 @@ namespace Mapsui.Rendering;
 
 public interface IRenderer : IRenderInfo
 {
-    void Render(object target, ViewportState viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, Color? background = null);
-    MemoryStream RenderToBitmapStream(ViewportState viewport, IEnumerable<ILayer> layers,
+    void Render(object target, Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, Color? background = null);
+    MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers,
         Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png);
     IRenderCache RenderCache { get; }
     IDictionary<Type, IWidgetRenderer> WidgetRenders { get; }

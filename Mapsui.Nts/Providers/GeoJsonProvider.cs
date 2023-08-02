@@ -10,6 +10,7 @@ using Mapsui.Nts.Extensions;
 using Mapsui.Providers;
 using NetTopologySuite.Features;
 using NetTopologySuite.Geometries;
+using NetTopologySuite.Index.Strtree;
 using NetTopologySuite.IO.Converters;
 
 namespace Mapsui.Nts.Providers;
@@ -18,7 +19,8 @@ public class GeoJsonProvider : IProvider
 {
     private static ReadOnlySpan<byte> Utf8Bom => new byte[] { 0xEF, 0xBB, 0xBF };
     private string _geoJson;
-    private FeatureCollection? _featureCollection;
+    private object _lock = new();
+    private STRtree<GeometryFeature>? _index;
     private MRect? _extent;
 
     public GeoJsonProvider(string geojson)
@@ -39,7 +41,7 @@ public class GeoJsonProvider : IProvider
         }
     }
 
-    private FeatureCollection DeserializeContent(string geoJson, JsonSerializerOptions options)
+    private FeatureCollection DeserializContent(string geoJson, JsonSerializerOptions options)
     {
         var b = new ReadOnlySpan<byte>(Encoding.UTF8.GetBytes(geoJson));
         return Deserialize(b, options);
@@ -79,17 +81,47 @@ public class GeoJsonProvider : IProvider
     }
 
 
-    private FeatureCollection FeatureCollection
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "Data is kept")]
+    private STRtree<GeometryFeature> FeatureCollection
     {
         get
         {
-            if (_featureCollection == null)
+            if (_index == null)
             {
-                // maybe it has GeoJson Content.
-                _featureCollection = IsGeoJsonContent() ? DeserializeContent(_geoJson, DefaultOptions) : DeserializeFile(_geoJson, DefaultOptions);
+                // only initialization lock
+                lock (_lock)
+                {
+                    if (_index == null)
+                    {
+                        // maybe it has GeoJson Content.
+                        var featureCollection = IsGeoJsonContent()
+                            ? DeserializContent(_geoJson, DefaultOptions)
+                            : DeserializeFile(_geoJson, DefaultOptions);
+                        _index = new();
+                        foreach (var feature in featureCollection)
+                        {
+                            var boundingBox = BoundingBox(feature);
+                            if (boundingBox != null)
+                            {
+                                var geometryFeature = new GeometryFeature();
+                                geometryFeature.Geometry = feature.Geometry;
+                                FillFields(geometryFeature, feature.Attributes);
+
+                                _index.Insert(boundingBox, geometryFeature);
+
+                                // build extent
+                                var mRect = boundingBox.ToMRect();
+                                if (_extent == null)
+                                    _extent = mRect;
+                                else
+                                    _extent.Join(mRect);
+                            }
+                        }
+                    }
+                }
             }
 
-            return _featureCollection;
+            return _index;
         }
     }
 
@@ -101,25 +133,8 @@ public class GeoJsonProvider : IProvider
     {
         if (_extent == null)
         {
-            if (FeatureCollection.BoundingBox != null)
-            {
-                _extent = FeatureCollection.BoundingBox.ToMRect();
-            }
-            else
-            {
-                foreach (var geometry in FeatureCollection)
-                {
-                    var boundingBox = BoundingBox(geometry);
-                    if (boundingBox != null)
-                    {
-                        var mRect = boundingBox.ToMRect();
-                        if (_extent == null)
-                            _extent = mRect;
-                        else
-                            _extent.Join(mRect);
-                    }
-                }
-            }
+            // builds extent
+            _ = FeatureCollection;
         }
 
         return _extent;
@@ -131,19 +146,8 @@ public class GeoJsonProvider : IProvider
         var fetchExtent = fetchInfo.Extent.ToEnvelope();
         var list = new List<IFeature>();
 
-        foreach (NetTopologySuite.Features.IFeature? feature in FeatureCollection)
-        {
-            var boundingBox = BoundingBox(feature);
-            if (boundingBox.Intersects(fetchExtent))
-            {
-                var geometryFeature = new GeometryFeature();
-                geometryFeature.Geometry = feature.Geometry;
-                FillFields(geometryFeature, feature.Attributes);
-                list.Add(geometryFeature);
-            }
-        }
-
-        return Task.FromResult((IEnumerable<IFeature>)list);
+        IEnumerable<IFeature> result = FeatureCollection.Query(fetchExtent);
+        return Task.FromResult(result);
     }
 
     private void FillFields(GeometryFeature geometryFeature, IAttributesTable featureAttributes)

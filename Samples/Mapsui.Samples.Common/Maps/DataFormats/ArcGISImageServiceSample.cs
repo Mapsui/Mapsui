@@ -40,7 +40,7 @@ public class ArcGISImageServiceSample : ISample
     {
         var map = new Map
         {
-            Home = n => n.NavigateTo(new MPoint(1270000.0, 5880000.0), 10000)
+            Home = n => n.CenterOnAndZoomTo(new MPoint(1270000.0, 5880000.0), 10000)
         };
         map.Layers.Add(await CreateLayerAsync());
         return map;

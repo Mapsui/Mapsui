@@ -1,32 +1,21 @@
-﻿using Mapsui.Extensions;
+﻿using Mapsui.Animations;
+using Mapsui.Extensions;
 using Mapsui.Tiling;
-using Mapsui.UI;
-using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
-public class ViewportZoomToResolutionAnimationSample : IMapControlSample
+public class ViewportZoomToResolutionAnimationSample : ISample
 {
     public string Name => "Animated Viewport - Zoom";
     public string Category => "Animations";
 
     public static int mode = 1;
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
 
-        mapControl.Map.Info += (s, a) =>
-        {
-            if (a.MapInfo?.WorldPosition != null)
-            {
-                // Zoom to the a new resolution
-                mapControl.Map.Navigator.ZoomTo(a.MapInfo.Resolution * 0.5, 500, Easing.CubicOut);
-            }
-        };
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
@@ -42,6 +31,15 @@ public class ViewportZoomToResolutionAnimationSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top
         });
         map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+
+        map.Info += (s, a) =>
+        {
+            if (a.MapInfo?.WorldPosition != null)
+            {
+                // Zoom to the a new resolution
+                map.Navigator.ZoomTo(a.MapInfo.Resolution * 0.5, 500, Easing.CubicOut);
+            }
+        };
         return map;
     }
 }

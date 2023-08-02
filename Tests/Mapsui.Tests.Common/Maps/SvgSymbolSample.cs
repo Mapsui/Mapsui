@@ -5,20 +5,19 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 #pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class SvgSymbolSample : IMapControlSample
+public class SvgSymbolSample : ISample
 {
     public string Name => "Svg Symbol";
     public string Category => "Tests";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
 
     public static Map CreateMap()
     {
@@ -32,7 +31,7 @@ public class SvgSymbolSample : IMapControlSample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.NavigateTo(layer.Extent!.Grow(layer.Extent.Width * 2))
+            Home = n => n.ZoomToBox(layer.Extent!.Grow(layer.Extent.Width * 2))
         };
 
         map.Layers.Add(layer);

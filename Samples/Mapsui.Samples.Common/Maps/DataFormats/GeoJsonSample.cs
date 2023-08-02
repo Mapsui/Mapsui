@@ -1,20 +1,18 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
+using Mapsui.Nts.Providers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
-using Mapsui.UI;
-using System.IO;
-using Mapsui.Extensions;
-using Mapsui.Nts.Providers;
-using Mapsui.Styles.Thematics;
 using Mapsui.Tiling.Layers;
+using System.IO;
+using System.Threading.Tasks;
 
 #pragma warning disable IDISP001 // Dispose created
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
-public class GeoJsonSample : IMapControlSample
+public class GeoJsonSample : ISample
 {
     static GeoJsonSample()
     {
@@ -24,12 +22,8 @@ public class GeoJsonSample : IMapControlSample
     public string Name => "13 GeoJson";
     public string Category => "Data Formats";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don\'t ignore created IDisposable")]
     public static Map CreateMap()
     {
         var map = new Map
@@ -48,29 +42,25 @@ public class GeoJsonSample : IMapControlSample
             CRS = "EPSG:3857",
         };
 
-        map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(Tiling.OpenStreetMap.CreateTileLayer());
         map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(dataSource)));
 
         return map;
     }
 
     private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
-    {
-        return new Layer("City labels")
+        => new Layer("City labels")
         {
             DataSource = citiesProvider,
             Enabled = true,
             Style = CreateCityLabelStyle()
         };
-    }
 
     private static LabelStyle CreateCityLabelStyle()
-    {
-        return new LabelStyle
+        => new LabelStyle
         {
             ForeColor = Color.Black,
             BackColor = new Brush(Color.White),
             LabelColumn = "city",
         };
-    }
 }

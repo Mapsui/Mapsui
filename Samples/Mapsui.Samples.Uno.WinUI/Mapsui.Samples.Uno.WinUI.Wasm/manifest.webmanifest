@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "Mapsui.Samples.Uno.WinUI",
+  "display": "standalone",
+  "name": "Mapsui.Samples.Uno.WinUI",
+  "short_name": "Mapsui.Samples.Uno.WinUI",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}

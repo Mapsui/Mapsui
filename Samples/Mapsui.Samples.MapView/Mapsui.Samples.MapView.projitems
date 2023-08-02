@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>748d3d5b-3fc7-40cc-a27d-3caafd268ed5</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Mapsui.Samples.MapView</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AnimatedMyLocationSample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CircleSample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IMapViewSample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ManyPinsSample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MyLocationSample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PinSample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PolygonSample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PolylineSample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SnapshotSample.cs" />
+  </ItemGroup>
+</Project>

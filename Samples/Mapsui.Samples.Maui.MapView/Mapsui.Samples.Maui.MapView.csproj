@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
+    <TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <RootNamespace>Mapsui.Samples.Maui</RootNamespace>
     <UseMaui>true</UseMaui>
@@ -56,12 +56,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\Raw\AboutAssets.txt" />
   </ItemGroup>
-  
-  <ItemGroup Condition="$(TargetFramework)=='net6.0-windows10.0.19041.0'">
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" VersionOverride="10.0.22621.1"/>
-  </ItemGroup>
      
-    <ItemGroup>
+  <ItemGroup>
       <PackageReference Include="SkiaSharp" />
       <PackageReference Include="SkiaSharp.HarfBuzz" />
       <PackageReference Include="SkiaSharp.Views.Maui.Controls" />
@@ -78,14 +74,6 @@
         <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
       </ItemGroup>
   
-    <ItemGroup>
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\CircleSample.cs" Link="CircleSample.cs" />
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\IFormsSample.cs" Link="IFormsSample.cs" />
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\ManyPinsSample.cs" Link="ManyPinsSample.cs" />
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\MyLocationSample.cs" Link="MyLocationSample.cs" />
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PolygonSample.cs" Link="PolygonSample.cs" />
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PolylineSample.cs" Link="PolylineSample.cs" />
-      <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\SnapshotSample.cs" Link="SnapshotSample.cs" />
-    </ItemGroup>
+    <Import Project="..\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems" Label="Shared" />
   
   </Project>

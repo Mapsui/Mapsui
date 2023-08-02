@@ -8,7 +8,7 @@ public class Hyperlink : TextBox
 
     public event EventHandler<HyperlinkWidgetArguments>? Touched;
 
-    public override bool HandleWidgetTouched(INavigator navigator, MPoint position)
+    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
     {
         var args = new HyperlinkWidgetArguments();
 
@@ -16,6 +16,8 @@ public class Hyperlink : TextBox
 
         return args.Handled;
     }
+
+    public override bool Touchable => true;
 }
 
 public class HyperlinkWidgetArguments

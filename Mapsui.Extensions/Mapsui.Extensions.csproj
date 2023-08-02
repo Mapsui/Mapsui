@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\Nullable.cs" Link="Nullable.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Mapsui.Nts\Mapsui.Nts.csproj" />
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>

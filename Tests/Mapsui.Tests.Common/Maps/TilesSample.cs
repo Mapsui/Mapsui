@@ -2,11 +2,9 @@
 using System.Threading.Tasks;
 using BruTile;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.Tiling.Extensions;
-using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps;
 
@@ -22,7 +20,7 @@ public class TilesSample : ISample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.NavigateToFullEnvelope()
+            Home = n => n.ZoomToPanBounds()
         };
 
         map.Layers.Add(layer);
@@ -60,7 +58,11 @@ public class TilesSample : ISample
                     new TileRange(tileIndex.Col, tileIndex.Row), tileIndex.Level, tileSource.Schema)
             };
 
-            var raster = new MRaster(await tileSource.GetTileAsync(tileInfo), tileInfo.Extent.ToMRect());
+            var tileAsync = await tileSource.GetTileAsync(tileInfo);
+            if (tileAsync == null)
+                continue;
+
+            var raster = new MRaster(tileAsync, tileInfo.Extent.ToMRect());
             features.Add(new RasterFeature(raster));
         }
         return features;

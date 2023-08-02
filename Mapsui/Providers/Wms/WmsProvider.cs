@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -21,6 +22,7 @@ using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Projections;
 using Mapsui.Rendering;
 using Mapsui.Utilities;
 
@@ -41,9 +43,13 @@ public class WmsProvider : IProvider, IProjectingProvider
     private readonly Client? _wmsClient;
     private Func<string, Task<Stream>>? _getStreamAsync;
     private readonly IUrlPersistentCache? _persistentCache;
+    private static int[]? _axisOrder;
+    private CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
+
+    public static IUrlPersistentCache? DefaultCache { get; set; }
 
     public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
-        : this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache)
+        : this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache ?? DefaultCache)
     {
         InitialiseGetStreamAsyncMethod(getStreamAsync);
     }
@@ -57,15 +63,15 @@ public class WmsProvider : IProvider, IProjectingProvider
     /// <param name="getStreamAsync">Download method, leave null for default</param>
     public static async Task<WmsProvider> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
     {
-        var client = await Client.CreateAsync(url, wmsVersion, getStreamAsync, persistentCache: persistentCache);
-        var provider = new WmsProvider(client, persistentCache: persistentCache);
+        var client = await Client.CreateAsync(url, wmsVersion, getStreamAsync, persistentCache: persistentCache ?? DefaultCache);
+        var provider = new WmsProvider(client, persistentCache: persistentCache?? DefaultCache);
         provider.InitialiseGetStreamAsyncMethod(getStreamAsync);
         return provider;
     }
 
     private WmsProvider(Client wmsClient, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
     {
-        _persistentCache = persistentCache;
+        _persistentCache = persistentCache ?? DefaultCache;
         InitialiseGetStreamAsyncMethod(getStreamAsync);
         _wmsClient = wmsClient;
         TimeOut = 10000;
@@ -139,6 +145,36 @@ public class WmsProvider : IProvider, IProjectingProvider
     /// Timeout of web request in milliseconds. Defaults to 10 seconds
     /// </summary>
     public int TimeOut { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating the axis order
+    /// </summary>
+    /// <remarks>
+    /// The axis order is an array of array offsets. It can be either {0, 1} or {1, 0}.
+    /// <para/>If not set explictly, <see cref="CrsAxisOrderRegistry"/> is asked for a value based on <see cref="SRID"/>.</remarks>
+    [AllowNull]
+    public int[] AxisOrder
+    {
+        get
+        {
+            //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
+            return _axisOrder ?? _crsAxisOrderRegistry[CRS ?? throw new ArgumentException("CRS needs to be set")];
+        }
+        set
+        {
+            if (value != null)
+            {
+                if (value.Length != 2)
+                    throw new ArgumentException("Axis order array must have 2 elements");
+                if (!((value[0] == 0 && value[1] == 1) ||
+                      (value[0] == 1 && value[1] == 0)))
+                    throw new ArgumentException("Axis order array values must be 0 or 1");
+                if (value[0] + value[1] != 1)
+                    throw new ArgumentException("Sum of values in axis order array must 1");
+            }
+            _axisOrder = value;
+        }
+    }
 
     /// <summary>
     /// Adds a layer to WMS request
@@ -315,7 +351,7 @@ public class WmsProvider : IProvider, IProjectingProvider
 
             if (section.Extent == null)
             {
-                Logger.Log(LogLevel.Warning, "Viewport Extent was null");
+                Logger.Log(LogLevel.Warning, "The Extent was null while getting the WMS image.");
                 return (false, null);
             }
 
@@ -353,9 +389,30 @@ public class WmsProvider : IProvider, IProjectingProvider
         if (!strReq.ToString().EndsWith("&") && !strReq.ToString().EndsWith("?"))
             strReq.Append("&");
         if (box != null)
-            strReq.AppendFormat(CultureInfo.InvariantCulture, "REQUEST=GetMap&BBOX={0},{1},{2},{3}",
-                    box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
+        {
+            var wmsVersion = "1.3.0";
+            if (_wmsClient != null)
+            {
+                wmsVersion = _wmsClient.WmsVersion;
+            }
 
+            if (wmsVersion.Equals("1.3.0") && CRS != null && !AxisOrder.IsNaturalOrder())
+            {
+                // This is a fix for the inverted X/Y coordinates in WMS 1.3.0 suggesed by der1Mac here:
+                // https://github.com/Mapsui/Mapsui/issues/1925#issuecomment-1493411132
+                // Who based this on:
+                // https://viswaug.wordpress.com/2009/03/15/reversed-co-ordinate-axis-order-for-epsg4326-vs-crs84-when-requesting-wms-130-images/
+                strReq.AppendFormat(CultureInfo.InvariantCulture, "REQUEST=GetMap&BBOX={0},{1},{2},{3}",
+                    box.Min.Y, box.Min.X, box.Max.Y, box.Max.X);
+            }
+            else
+            {
+                strReq.AppendFormat(CultureInfo.InvariantCulture, "REQUEST=GetMap&BBOX={0},{1},{2},{3}",
+                    box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
+            }
+        }
+
+        strReq.Append("&SERVICE=WMS");
         strReq.AppendFormat("&WIDTH={0}&Height={1}", width, height);
         strReq.Append("&Layers=");
         if (LayerList != null && LayerList.Count > 0)
@@ -374,7 +431,12 @@ public class WmsProvider : IProvider, IProjectingProvider
             strReq.AppendFormat("&VERSION={0}", wmsVersion);
         }
 
-        strReq.Append("&TRANSPARENT=true");
+        if (Transparent != null)
+        {
+            var transVal = Transparent.Value ? "true" : "false";
+            strReq.Append($"&TRANSPARENT={transVal}");
+        }
+        
         strReq.Append("&Styles=");
         if (StylesList != null && StylesList.Count > 0)
         {
@@ -391,6 +453,11 @@ public class WmsProvider : IProvider, IProjectingProvider
 
         return strReq.ToString();
     }
+
+    /// <summary>
+    /// If it should set the Wms Image to Transparent
+    /// </summary>
+    public bool? Transparent { get; set; } = true;
 
     /// <summary>
     /// Gets the URL for a map request base on current settings, the image size and BoundingBox
@@ -456,7 +523,20 @@ public class WmsProvider : IProvider, IProjectingProvider
 
     public MRect? GetExtent()
     {
-        return CRS != null && _wmsClient != null && _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS) ? _wmsClient.Layer.BoundingBoxes[CRS] : null;
+        if (CRS != null && _wmsClient != null && _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS))
+        {
+            if (AxisOrder.IsNaturalOrder())
+            {
+                return _wmsClient.Layer.BoundingBoxes[CRS];
+            }
+
+            // change x with y
+            var temp = _wmsClient.Layer.BoundingBoxes[CRS];
+            return new MRect(temp.MinY, temp.MinX, temp.MaxY, temp.MaxX);
+
+        }
+
+        return null;
     }
 
     public bool? IsCrsSupported(string crs)
@@ -475,7 +555,16 @@ public class WmsProvider : IProvider, IProjectingProvider
 
     private async Task<Stream> GetStreamAsync(string url)
     {
-        var handler = new HttpClientHandler { Credentials = Credentials };
+        var handler = new HttpClientHandler();
+        try
+        {
+            handler.Credentials = Credentials;
+        }
+        catch (NotSupportedException)
+        {
+            // Ignore not supported exception (fixes blazor)
+        }
+           
         var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
         var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type ?? "GET"), url);
         var response = await client.SendAsync(req);

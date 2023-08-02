@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <TargetFramework>net6.0-ios15.4</TargetFramework>
+    <TargetFrameworks>net6.0-ios15.4;net7.0-ios16.0</TargetFrameworks>
     <ImplicitUsings>true</ImplicitUsings>
     <PackageId>Mapsui.iOS</PackageId>
     <!--<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>-->

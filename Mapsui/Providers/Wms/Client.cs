@@ -257,7 +257,8 @@ public class Client
         var result = _persistentCache?.Find(url);
         if (result == null)
         {
-            var client = new HttpClient();
+            var handler = new HttpClientHandler();
+            using var client = new HttpClient(handler);
             var response = await client.GetAsync(url).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
@@ -265,7 +266,12 @@ public class Client
                 throw new Exception($"Unexpected response code: {response.StatusCode}");
             }
 
-            result = (await response.Content.ReadAsStreamAsync()).ToBytes();
+#if NETSTANDARD2_0
+            using var readAsStreamAsync = await response.Content.ReadAsStreamAsync();
+#else
+            await using var readAsStreamAsync = await response.Content.ReadAsStreamAsync();
+#endif
+            result = readAsStreamAsync.ToBytes();
             _persistentCache?.Add(url, result);
         }
 

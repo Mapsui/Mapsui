@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Avalonia" VersionOverride="[0.10.21,1.0.0)" />
+		<PackageReference Include="Avalonia.Desktop" VersionOverride="[0.10.21,1.0.0)" />
+    <PackageReference Include="Avalonia.Skia" VersionOverride="[0.10.21,1.0.0)" />
+		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" VersionOverride="[0.10.21,1.0.0)" />
+		<PackageReference Include="Avalonia.ReactiveUI" VersionOverride="[0.10.21,1.0.0)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
+		<ProjectReference Include="..\..\..\Mapsui.UI.Avalonia.V0\Mapsui.UI.Avalonia.V0.csproj" />
+		<ProjectReference Include="..\..\..\Mapsui\Mapsui.csproj" />
+		<ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
+		<ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
+		<ProjectReference Include="..\..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
+	</ItemGroup>
+
+</Project>

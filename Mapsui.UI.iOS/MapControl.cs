@@ -5,6 +5,7 @@ using System.Linq;
 using CoreFoundation;
 using CoreGraphics;
 using Foundation;
+using Mapsui.Logging;
 using Mapsui.UI.iOS.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp.Views.iOS;
@@ -129,20 +130,20 @@ public partial class MapControl : UIView, IMapControl
         tapGestureRecognizer.RequireGestureRecognizerToFail(doubleTapGestureRecognizer);
         AddGestureRecognizer(tapGestureRecognizer);
 
-        Map.Viewport.SetSize(ViewportWidth, ViewportHeight);
+        Map.Navigator.SetSize(ViewportWidth, ViewportHeight);
     }
 
 
     private void OnDoubleTapped(UITapGestureRecognizer gesture)
     {
         var position = GetScreenPosition(gesture.LocationInView(this));
-        OnInfo(InvokeInfo(position, position, 2));
+        OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 
     private void OnSingleTapped(UITapGestureRecognizer gesture)
     {
         var position = GetScreenPosition(gesture.LocationInView(this));
-        OnInfo(InvokeInfo(position, position, 1));
+        OnInfo(CreateMapInfoEventArgs(position, position, 1));
     }
 
     private void OnPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
@@ -173,7 +174,7 @@ public partial class MapControl : UIView, IMapControl
     {
         base.TouchesBegan(touches, evt);
 
-        _virtualRotation = Map.Viewport.State.Rotation;
+        _virtualRotation = Map.Navigator.Viewport.Rotation;
     }
 
     public override void TouchesMoved(NSSet touches, UIEvent? evt)
@@ -186,11 +187,8 @@ public partial class MapControl : UIView, IMapControl
             {
                 var position = touch.LocationInView(this).ToMapsui();
                 var previousPosition = touch.PreviousLocationInView(this).ToMapsui();
-
-                Map.Viewport.Transform(position, previousPosition);
-                RefreshGraphics();
-
-                _virtualRotation = Map.Viewport.State.Rotation;
+                Map.Navigator.Drag(position, previousPosition);
+                _virtualRotation = Map.Navigator.Viewport.Rotation;
             }
         }
         else if (evt?.AllTouches.Count >= 2)
@@ -206,16 +204,15 @@ public partial class MapControl : UIView, IMapControl
 
             double rotationDelta = 0;
 
-            if (Map.Viewport.Limiter.RotationLock == false)
+            if (Map.Navigator.RotationLock == false)
             {
                 _virtualRotation += angle - previousAngle;
 
                 rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                    _virtualRotation, Map.Viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                    _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
             }
 
-            Map.Viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
-            RefreshGraphics();
+            Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
         }
     }
 
@@ -269,9 +266,16 @@ public partial class MapControl : UIView, IMapControl
         SetViewportSize();
     }
 
-    public void OpenBrowser(string url)
+    public async void OpenBrowser(string url)
     {
-        UIApplication.SharedApplication.OpenUrl(new NSUrl(url));
+        try
+        {
+            await UIApplication.SharedApplication.OpenUrlAsync(new NSUrl(url), new UIApplicationOpenUrlOptions());
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
     }
 
     public new void Dispose()

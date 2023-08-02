@@ -29,7 +29,7 @@ public class RasterizingLayerWithLineStringSample : IMapControlSample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(new RasterizingLayer(CreateLineStringLayer(), pixelDensity: pixelDensity));
         var extent = map.Layers[1].Extent!.Grow(map.Layers[1].Extent!.Width * 0.25);
-        map.Home = n => n.NavigateTo(extent);
+        map.Home = n => n.ZoomToBox(extent);
         return map;
     }
 

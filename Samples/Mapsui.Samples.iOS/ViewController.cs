@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Text;
 using Mapsui.UI.iOS;
-using Mapsui.UI;
 using Mapsui.Samples.Common.Maps.Demo;
 
 namespace Mapsui.Samples.iOS;

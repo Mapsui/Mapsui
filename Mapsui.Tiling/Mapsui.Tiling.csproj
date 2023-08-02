@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\Nullable.cs" Link="Nullable.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BruTile" />
   </ItemGroup>
 

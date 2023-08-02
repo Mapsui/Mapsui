@@ -14,7 +14,7 @@ internal class VisibleFeatureIteratorTests
     public void TestIfStylesInStyleCollectionAreApplied()
     {
         // Arrange
-        var viewportState = new ViewportState(0, 0, 1, 0, 100, 100);
+        var viewport = new Viewport(0, 0, 1, 0, 100, 100);
         var vectorStyle1 = new VectorStyle();
         var vectorStyle2 = new VectorStyle();
         using var memoryLayer = new MemoryLayer { Style = new ThemeStyle(f => new StyleCollection { Styles = { vectorStyle1, vectorStyle2 } }) };
@@ -23,7 +23,7 @@ internal class VisibleFeatureIteratorTests
         var result = new Dictionary<IFeature, List<IStyle>>();
 
         // Act
-        VisibleFeatureIterator.IterateLayers(viewportState, new[] { memoryLayer }, 0, (v, l, s, f, o, i) =>
+        VisibleFeatureIterator.IterateLayers(viewport, new[] { memoryLayer }, 0, (v, l, s, f, o, i) =>
         {
             if (result.ContainsKey(f))
                 result[f].Add(s);
@@ -41,14 +41,14 @@ internal class VisibleFeatureIteratorTests
     public void TestIfStylesAreAppliedOrNot(IStyle style, bool isAppliedExpected, string assertMessage)
     {
         // Arrange
-        var viewportState = new ViewportState(0, 0, 1, 0, 100, 100);
+        var viewport = new Viewport(0, 0, 1, 0, 100, 100);
         using var memoryLayer = new MemoryLayer { Style = style };
         var feature = new PointFeature(0, 0);
         memoryLayer.Features = new List<IFeature> { feature };
         var isApplied = false;
 
         // Act
-        VisibleFeatureIterator.IterateLayers(viewportState, new[] { memoryLayer }, 0, (v, l, s, f, o, i) => isApplied = true);
+        VisibleFeatureIterator.IterateLayers(viewport, new[] { memoryLayer }, 0, (v, l, s, f, o, i) => isApplied = true);
 
         // Assert
         Assert.AreEqual(isAppliedExpected, isApplied, assertMessage);
@@ -58,7 +58,7 @@ internal class VisibleFeatureIteratorTests
     public void TestIfStylesOnFeaturesAreAppliedOrNot(IStyle style, bool isAppliedExpected, string assertMessage)
     {
         // Arrange
-        var viewportState = new ViewportState(0, 0, 1, 0, 100, 100);
+        var viewport = new Viewport(0, 0, 1, 0, 100, 100);
         using var memoryLayer = new MemoryLayer { Style = null };
         var feature = new PointFeature(0, 0);
         feature.Styles.Add(style);
@@ -66,7 +66,7 @@ internal class VisibleFeatureIteratorTests
         var isApplied = false;
 
         // Act
-        VisibleFeatureIterator.IterateLayers(viewportState, new[] { memoryLayer }, 0, (v, l, s, f, o, i) => isApplied = true);
+        VisibleFeatureIterator.IterateLayers(viewport, new[] { memoryLayer }, 0, (v, l, s, f, o, i) => isApplied = true);
 
         // Assert
         Assert.AreEqual(isAppliedExpected, isApplied, assertMessage);

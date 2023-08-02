@@ -48,7 +48,7 @@ public class RenderCache : IRenderCache
         return VectorCache == null ? toPaint(brush, opacity, rotation, SymbolCache) : VectorCache.GetOrCreatePaint(brush, opacity, rotation, toPaint);
     }
 
-    public TPath GetOrCreatePath<TPath, TGeometry>(ViewportState? viewport, TGeometry geometry, float? lineWidth, Func<TGeometry, ViewportState?, float?, TPath> toPath) where TPath : class where TGeometry : class
+    public TPath GetOrCreatePath<TPath, TGeometry>(Viewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath) where TPath : class where TGeometry : class
     {
         return VectorCache == null ? toPath(geometry, viewport, lineWidth) : VectorCache.GetOrCreatePath(viewport, geometry, lineWidth, toPath);
     }

@@ -74,7 +74,9 @@ public class TileProvider : IProvider
 
         try
         {
-            bitmap.Add(tileInfo.Index, await tileProvider.GetTileAsync(tileInfo));
+            var tileAsync = await tileProvider.GetTileAsync(tileInfo);
+            if (tileAsync != null)
+                bitmap.Add(tileInfo.Index, tileAsync);
         }
         catch (Exception ex)
         {

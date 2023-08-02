@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Providers.Wms;
 using Mapsui.Tests.Utilities;

@@ -13,7 +13,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
-    public bool Draw(SKCanvas canvas, ViewportState viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
     {
         var symbolStyle = (SymbolStyle)style;
         switch (feature)
@@ -53,7 +53,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    private bool DrawXY(SKCanvas canvas, ViewportState viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, ISymbolCache symbolCache)
+    private bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, ISymbolCache symbolCache)
     {
         if (symbolStyle.SymbolType == SymbolType.Image)
         {
@@ -65,7 +65,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    private static bool DrawImage(SKCanvas canvas, ViewportState viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, ISymbolCache symbolCache)
+    private static bool DrawImage(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, ISymbolCache symbolCache)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
@@ -142,7 +142,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    public static bool DrawSymbol(SKCanvas canvas, ViewportState viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle)
+    public static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
@@ -257,7 +257,9 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if ((lineColor != null) && lineColor.Color.Alpha != 0) canvas.DrawPath(path, lineColor);
     }
 
-    double IFeatureSize.FeatureSize(IFeature feature, IStyle style, IRenderCache renderCache)
+    bool IFeatureSize.NeedsFeature => false;
+
+    double IFeatureSize.FeatureSize(IStyle style, IRenderCache renderCache, IFeature? feature)
     {
         if (style is SymbolStyle symbolStyle)
         {
@@ -287,7 +289,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             case SymbolType.Ellipse:
             case SymbolType.Rectangle:
             case SymbolType.Triangle:
-                symbolSize = new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
+                var vectorSize = VectorStyleRenderer.FeatureSize(symbolStyle);
+                symbolSize = new Size(vectorSize, vectorSize);
                 break;
         }
 

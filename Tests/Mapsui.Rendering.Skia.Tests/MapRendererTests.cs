@@ -17,7 +17,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = VectorStyleSample.CreateMap();
-        var viewport = map.Extent!.Multiply(3).ToViewportState(200);
+        var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "vector_symbol.png";
 
         // act
@@ -35,7 +35,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = BitmapSymbolSample.CreateMap();
-        var viewport = map.Extent!.Multiply(3).ToViewportState(200);
+        var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_symbolstyle.png";
 
         // act
@@ -53,7 +53,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = BitmapSymbolInCollectionSample.CreateMap();
-        var viewport = map.Extent!.Multiply(3).ToViewportState(200);
+        var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_symbolstyle.png"; // Todo: Do not reuse the png.
 
         // act
@@ -71,7 +71,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = SvgSymbolSample.CreateMap();
-        var viewport = map.Extent!.Multiply(3).ToViewportState(200);
+        var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_svgsymbolstyle.png";
 
         // act
@@ -89,7 +89,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = BitmapAtlasSample.CreateMap();
-        var viewport = new ViewportState(256, 200, 1, 0, 512, 400);
+        var viewport = new Viewport(256, 200, 1, 0, 512, 400);
         const string fileName = "bitmap_atlas.png";
 
         // act
@@ -107,7 +107,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = BitmapSymbolWithRotationAndOffsetSample.CreateMap();
-        var viewport = map.Extent!.Multiply(4).ToViewportState(200);
+        var viewport = map.Extent!.Multiply(4).ToViewport(200);
         const string fileName = "bitmap_symbol.png";
 
         // act
@@ -125,7 +125,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = SymbolTypesSample.CreateMap();
-        var viewport = map.Extent!.Multiply(3).ToViewportState(200);
+        var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "vector_symbol_symboltype.png";
 
         // act
@@ -143,7 +143,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = PointInWorldUnitsSample.CreateMap();
-        var viewport = map.Extent!.Multiply(3).ToViewportState(200);
+        var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "vector_symbol_unittype.png";
 
         // act
@@ -161,7 +161,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = PolygonTestSample.CreateMap();
-        var viewport = map.Extent!.Multiply(1.1).ToViewportState(600);
+        var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "polygon.png";
 
         // act
@@ -179,7 +179,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = LineSample.CreateMap();
-        var viewport = map.Extent!.Multiply(1.1).ToViewportState(600);
+        var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "line.png";
 
         // act
@@ -197,7 +197,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = await (new TilesSample()).CreateMapAsync();
-        var viewport = map.Extent!.Multiply(1.1).ToViewportState(600);
+        var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "tilelayer.png";
 
         // act
@@ -215,7 +215,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = LabelSample.CreateMap();
-        var viewport = map.Extent!.Multiply(2).ToViewportState(300);
+        var viewport = map.Extent!.Multiply(2).ToViewport(300);
         const string fileName = "labels.png";
 
         // act
@@ -232,8 +232,8 @@ internal class MapRendererTests
     public void RenderProjection()
     {
         // arrange
-        using var map = ProjectionSample.CreateMap();
-        var viewport = map.Extent!.Multiply(1.1).ToViewportState(600);
+        using var map = ProjectionTestSample.CreateMap();
+        var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "projection.png";
 
         // act 
@@ -251,7 +251,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = StackedLabelsTestSample.CreateMap();
-        var viewport = map.Extent!.Multiply(1.2).ToViewportState(600);
+        var viewport = map.Extent!.Multiply(1.2).ToViewport(600);
         const string fileName = "stacked_labels.png";
 
         // act 
@@ -269,7 +269,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = WidgetsSample.CreateMap();
-        var viewport = new ViewportState (0, 0, 1, 0, 600, 600);
+        var viewport = new Viewport(0, 0, 1, 0, 600, 600);
         const string fileName = "widgets.png";
 
         // act

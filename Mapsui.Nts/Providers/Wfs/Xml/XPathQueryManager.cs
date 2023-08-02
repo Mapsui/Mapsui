@@ -480,8 +480,22 @@ public class XPathQueryManager : IXPathQueryManager
         {
             var length = parameters.Length;
             for (var i = 0; i < length; i++)
-                _argumentList.AddParam(parameters[i].Key.ToString()!,
-                                       string.Empty, parameters[i].Value?.ToString() ?? string.Empty);
+            {
+                var key = parameters[i].Key.ToString();
+                var parameter = parameters[i].Value?.ToString() ?? string.Empty;
+                if (key != null)
+                {
+                    try
+                    {
+                        _argumentList.AddParam(key, string.Empty, parameter);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(LogLevel.Error, ex.Message, ex);
+                    }
+                }
+            }
+                
         }
 
         /// <summary>

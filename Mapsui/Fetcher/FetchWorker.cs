@@ -62,9 +62,11 @@ public class FetchWorker : IDisposable // Todo: Make internal
                     cancellationTokenSource.Cancel();
             }
         }
-        catch (ObjectDisposedException e)
+        catch (ObjectDisposedException)
         {
-            Logger.Log(LogLevel.Error, e.Message, e);
+            // Not logging on ObjectDisposedException. This happens when 
+            // cancellationTokenSource.Cancel() is called.
+            // Logger.Log(LogLevel.Error, e.Message, e);
         }
     }
 }

@@ -6,18 +6,17 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class BitmapAtlasSample : IMapControlSample
+public class BitmapAtlasSample : ISample
 {
     public string Name => "Bitmap Atlas";
     public string Category => "Tests";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
 
     public static Map CreateMap()
     {
@@ -26,7 +25,7 @@ public class BitmapAtlasSample : IMapControlSample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.NavigateTo(new MPoint(256, 200), 1)
+            Home = n => n.CenterOnAndZoomTo(new MPoint(256, 200), 1)
         };
 
         map.Layers.Add(layer);

@@ -6,13 +6,12 @@ using BruTile.Predefined;
 using Mapsui.Layers;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Tiling.Layers;
-using Mapsui.UI;
 using System.Threading.Tasks;
 using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
-public class MapTilerSample : IMapControlSample
+public class MapTilerSample : ISample
 {
     static MapTilerSample()
     {
@@ -22,10 +21,7 @@ public class MapTilerSample : IMapControlSample
     public string Name => " 9 Tiles on file system";
     public string Category => "Data Formats";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
@@ -35,9 +31,7 @@ public class MapTilerSample : IMapControlSample
     }
 
     public static ILayer CreateLayer()
-    {
-        return new TileLayer(new MapTilerTileSource()) { Name = "True Marble in MapTiler" };
-    }
+        => new TileLayer(new MapTilerTileSource()) { Name = "True Marble in MapTiler" };
 }
 
 public class MapTilerTileSource : ITileSource

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;netstandard2.0;net6.0</TargetFrameworks>
     <PackageId>Mapsui.Avalonia</PackageId>
     <Description>Avalonia map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) avalonia</PackageTags>
@@ -24,7 +24,7 @@
     <PackageReference Include="BruTile" />
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="Avalonia" />
-    <PackageReference Include="Avalonia.Desktop" />
+    <PackageReference Include="Avalonia.Skia" />
     <PackageReference Include="Avalonia.ReactiveUI" />
   </ItemGroup>
 

@@ -6,6 +6,7 @@
     <WasmShellILLinkerEnabled>true</WasmShellILLinkerEnabled>
     <WasmShellForceDisableWSL Condition="'$(OS)' != 'Unix' and ('$(CI)' == 'true' or '$(BUILD_BUILDID)' != '')">true</WasmShellForceDisableWSL>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <NoWarn>$(NoWarn);NU1504</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
@@ -53,14 +54,17 @@
     <None Include="wwwroot\web.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Routing" VersionOverride="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" VersionOverride="2.2.7" />
     <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" />
     <PackageReference Include="Uno.UI.WebAssembly" />
     <PackageReference Include="Uno.UI.RemoteControl" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
-    <PackageReference Include="Uno.Wasm.Bootstrap" />
-    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" />
+    <PackageReference Include="Uno.Wasm.Bootstrap" VersionOverride="3.3.1" />
+    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" VersionOverride="3.3.1" />
     <PackageReference Include="SkiaSharp.Views.Uno" />
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" VersionOverride="6.0.0" />
   </ItemGroup>
 
   <!--Harfbuzz Sharp references Workaround for this issue-->

@@ -45,9 +45,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="GeoData\Images\a123330.jpeg">
+    <EmbeddedResource Include="GeoData\Images\a123330.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -156,6 +156,14 @@
     <ProjectReference Include="..\..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
     <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="GeoData\Cache\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\Tests\Mapsui.Rendering.Skia.Tests\Resources\Cache\WmsSample.sqlite" Link="GeoData\Cache\WmsSample.sqlite" />
   </ItemGroup>
 
   <PropertyGroup>

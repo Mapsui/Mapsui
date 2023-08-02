@@ -44,5 +44,18 @@ In Index.razor add this to the to Page.
 }
 ```
 
-### Step 4
+
+### Step 6
 Run it and you should see a map of the world.
+
+
+### Troubleshooting
+
+### Text is not displayed
+Add Follwing to the Blazor project, is a workaround that text is rendered.
+```xml
+   <ItemGroup>
+	<PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2.3" GeneratePathProperty="true" />
+    <NativeFileReference Include="$(PKGHarfBuzzSharp_NativeAssets_WebAssembly)\build\netstandard1.0\libHarfBuzzSharp.a\3.1.12\libHarfBuzzSharp.a" />
+  </ItemGroup>
+```	

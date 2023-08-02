@@ -196,7 +196,6 @@ public class HttpClientUtil : IDisposable
     public void Reset()
     {
         _url = null;
-        _proxyUrl = null;
         _postData = null;
         _requestHeaders.Clear();
     }

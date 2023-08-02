@@ -4,6 +4,9 @@
 
 // This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
 
+#pragma warning disable IDISP001 // Dispose created.
+#pragma warning disable IDISP002 // Dispose member.
+
 #nullable enable
 
 using System;
@@ -14,6 +17,8 @@ using Windows.System;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Utilities;
+using NetTopologySuite.GeometriesGraph;
+using Windows.Graphics.Display;
 #if __WINUI__
 using System.Runtime.Versioning;
 using Mapsui.UI.WinUI.Extensions;
@@ -28,7 +33,6 @@ using HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment;
 using VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment;
 #else
 using Mapsui.UI.WinUI.Extensions;
-using Windows.Graphics.Display;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -55,8 +59,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
     private double _virtualRotation;
-
-    public MouseWheelAnimation MouseWheelAnimation { get; } = new MouseWheelAnimation { Duration = 0 };
 
     public MapControl()
     {
@@ -96,10 +98,29 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         Tapped += OnSingleTapped;
         DoubleTapped += OnDoubleTapped;
+        PointerMoved += MapControl_PointerMoved;
+        KeyDown += MapControl_KeyDown;
+        KeyUp += MapControl_KeyUp;
 
         var orientationSensor = SimpleOrientationSensor.GetDefault();
         if (orientationSensor != null)
             orientationSensor.OrientationChanged += (sender, args) => RunOnUIThread(() => Refresh());
+    }
+
+    private void MapControl_KeyUp(object sender, KeyRoutedEventArgs e)
+    {
+        if (e.Key == VirtualKey.Shift)
+        {
+            this.ShiftPressed = true;
+        }
+    }
+
+    private void MapControl_KeyDown(object sender, KeyRoutedEventArgs e)
+    {
+        if (e.Key == VirtualKey.Shift)
+        {
+            this.ShiftPressed = false;
+        }
     }
 
     private void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
@@ -110,19 +131,40 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
     {
-        _virtualRotation = Map.Viewport.State.Rotation;
+        _virtualRotation = Map.Navigator.Viewport.Rotation;
+    }
+
+    private void MapControl_PointerMoved(object sender, PointerRoutedEventArgs e)
+    {
+        var position = e.GetCurrentPoint(this).Position.ToMapsui();
+        if (HandleMoving(position, true, 0, e.KeyModifiers == VirtualKeyModifiers.Shift))
+            e.Handled = true;
     }
 
     private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
     {
         var tapPosition = e.GetPosition(this).ToMapsui();
-        OnInfo(InvokeInfo(tapPosition, tapPosition, 2));
+        if (HandleTouchingTouched(tapPosition, true, 2, ShiftPressed))
+        {
+            e.Handled = true;
+            return; 
+        }
+
+        OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
     }
+
+    public bool ShiftPressed { get; set; }
 
     private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
     {
         var tabPosition = e.GetPosition(this).ToMapsui();
-        OnInfo(InvokeInfo(tabPosition, tabPosition, 1));
+        if (HandleTouchingTouched(tabPosition, true, 1, ShiftPressed))
+        {
+            e.Handled = true;
+            return; 
+        }
+
+        OnInfo(CreateMapInfoEventArgs(tabPosition, tabPosition, 1));
     }
 
     private static Rectangle CreateSelectRectangle()
@@ -154,19 +196,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
     {
-        if (Map.Viewport.Limiter.ZoomLock) return;
-        if (!Map.Viewport.State.HasSize()) return;
-        if (Map is null) return;
-
         var currentPoint = e.GetCurrentPoint(this);
 #if __WINUI__
-        var mousePosition = new MPoint(currentPoint.Position.X, currentPoint.Position.Y);
+        var currentMousePosition = new MPoint(currentPoint.Position.X, currentPoint.Position.Y);
 #else
-        var mousePosition = new MPoint(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
+        var currentMousePosition = new MPoint(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 #endif
+        var mouseWheelDelta = currentPoint.Properties.MouseWheelDelta;
 
-        var resolution = MouseWheelAnimation.GetResolution(currentPoint.Properties.MouseWheelDelta, Map.Viewport, _map);
-        Map.Navigator.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
 
         e.Handled = true;
     }
@@ -239,16 +277,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         double rotationDelta = 0;
 
-        if (Map.Viewport.Limiter.RotationLock == false)
+        if (Map.Navigator.RotationLock == false)
         {
             _virtualRotation += rotation;
 
             rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                _virtualRotation, Map.Viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
         }
 
-        Map.Viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
-        RefreshGraphics();
+        Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
         e.Handled = true;
     }
 
@@ -280,11 +317,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (disposing)
         {
-            (_canvas as IDisposable)?.Dispose();
-#if __IOS__ || __MACOS__ || __ANDROID__ || NETSTANDARD
-            (_selectRectangle as IDisposable)?.Dispose();
+#if HAS_UNO           
+            _canvas?.Dispose();
+            _selectRectangle?.Dispose();
+#endif
+#if HAS_UNO || __UWP__ || __WINUI__
+            _invalidateTimer?.Dispose();
 #endif
             _map?.Dispose();
+
         }
         CommonDispose(disposing);
 

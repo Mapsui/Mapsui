@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConcurrentCollections;
 using Mapsui.Styles;
+using Mapsui.Utilities;
 
 namespace Mapsui.Layers;
 
-public class WritableLayer : BaseLayer
+public class WritableLayer : BaseLayer, IModifyFeatureLayer
 {
     private readonly ConcurrentHashSet<IFeature> _cache = new();
 

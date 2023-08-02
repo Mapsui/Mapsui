@@ -11,3 +11,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.iOS.MapControl.CommonDispose(System.Boolean)")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.iOS.MapControl.OpenBrowser(System.String)")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP023:Don't use reference types in finalizer context.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.iOS.MapControl.Dispose(System.Boolean)")]
+[assembly: SuppressMessage("Usage", "VSTHRD100:Avoid async void methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.iOS.MapControl.OpenBrowser(System.String)")]

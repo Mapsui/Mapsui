@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Mapsui.Styles;
 
 namespace Mapsui.Widgets.ButtonWidget;
 
@@ -20,7 +21,7 @@ namespace Mapsui.Widgets.ButtonWidget;
 /// Rotation: Value for rotation in degrees
 /// Opacity: Opacity of button
 /// </remarks>
-public class ButtonWidget : Widget, INotifyPropertyChanged
+public class ButtonWidget : TextBox, INotifyPropertyChanged
 {
     /// <summary>
     /// Event handler which is called, when the button is touched
@@ -54,7 +55,16 @@ public class ButtonWidget : Widget, INotifyPropertyChanged
     /// <summary>
     /// Object for prerendered image. For internal use only.
     /// </summary>
-    public object? Picture { get; set; }
+    public object? Picture
+    {
+        get => _picture;
+        set
+        {
+            if (Equals(value, _picture)) return;
+            _picture = value;
+            OnPropertyChanged();
+        }
+    }
 
     private float _rotation;
 
@@ -74,6 +84,7 @@ public class ButtonWidget : Widget, INotifyPropertyChanged
     }
 
     private float _opacity = 0.8f;
+    private object? _picture;
 
     /// <summary>
     /// Opacity of background, frame and signs
@@ -90,7 +101,7 @@ public class ButtonWidget : Widget, INotifyPropertyChanged
         }
     }
 
-    public override bool HandleWidgetTouched(INavigator navigator, MPoint position)
+    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
     {
         var args = new WidgetTouchedEventArgs(position);
 
@@ -103,4 +114,6 @@ public class ButtonWidget : Widget, INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
+
+    public override bool Touchable => true;
 }

@@ -280,7 +280,7 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
     /// Text of lower scalebar
     /// </returns>
     public (float scaleBarLength1, string? scaleBarText1, float scaleBarLength2, string? scaleBarText2)
-        GetScaleBarLengthAndText(ViewportState viewport)
+        GetScaleBarLengthAndText(Viewport viewport)
     {
         if (_map?.CRS == null) return (0, null, 0, null);
 
@@ -308,7 +308,7 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
     /// <param name="scaleBarLength2">Length of lower scalebar</param>
     /// <param name="stroke">Width of line</param>
     /// <returns>Array with pairs of Points. First is always the start point, the second is the end point.</returns>
-    public IReadOnlyList<MPoint> GetScaleBarLinePositions(ViewportState viewport, float scaleBarLength1, float scaleBarLength2, float stroke)
+    public IReadOnlyList<MPoint> GetScaleBarLinePositions(Viewport viewport, float scaleBarLength1, float scaleBarLength2, float stroke)
     {
         var points = new List<MPoint>();
 
@@ -418,7 +418,7 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
     /// posX2 as left position of lower scalebar text
     /// posY2 as top position of lower scalebar text
     /// </returns>
-    public (float posX1, float posY1, float posX2, float posY2) GetScaleBarTextPositions(ViewportState viewport,
+    public (float posX1, float posY1, float posX2, float posY2) GetScaleBarTextPositions(Viewport viewport,
         MRect textSize, MRect textSize1, MRect textSize2, float stroke)
     {
         var drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
@@ -472,10 +472,12 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
         }
     }
 
-    public override bool HandleWidgetTouched(INavigator navigator, MPoint position)
+    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
     {
         return false;
     }
+
+    public override bool Touchable => false;
 
     public bool CanProject()
     {
@@ -513,7 +515,7 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
     /// @param unitConverter the DistanceUnitConverter to calculate for
     /// @return scaleBarLength and scaleBarText
     private static (float scaleBarLength, string scaleBarText) CalculateScaleBarLengthAndValue(
-        string CRS, IProjection projection, ViewportState viewport, float width, IUnitConverter unitConverter)
+        string CRS, IProjection projection, Viewport viewport, float width, IUnitConverter unitConverter)
     {
         // We have to calc the angle difference to the equator (angle = 0), 
         // because EPSG:3857 is only there 1 m. At other angles, we

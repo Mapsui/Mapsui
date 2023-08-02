@@ -60,15 +60,15 @@ internal static class PolygonExtensions
     /// Converts a Polygon into a SKPath, that is clipped to clipRect, where exterior is bigger than interior
     /// </summary>
     /// <param name="polygon">Polygon to convert</param>
-    /// <param name="viewportState">Viewport implementation</param>
+    /// <param name="viewport">The Viewport that is used for the conversions.</param>
     /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
     /// <param name="strokeWidth">StrokeWidth for inflating clipRect</param>
     /// <returns></returns>
-    public static SKPath ToSkiaPath(this Polygon polygon, ViewportState viewportState, SKRect clipRect, float strokeWidth)
+    public static SKPath ToSkiaPath(this Polygon polygon, Viewport viewport, SKRect clipRect, float strokeWidth)
     {
         // Reduce exterior ring to parts, that are visible in clipping rectangle
         // Inflate clipRect, so that we could be sure, nothing of stroke is visible on screen
-        var exterior = ClippingFunctions.ReducePointsToClipRect(polygon.ExteriorRing?.Coordinates, viewportState, SKRect.Inflate(clipRect, strokeWidth * 2, strokeWidth * 2));
+        var exterior = ClippingFunctions.ReducePointsToClipRect(polygon.ExteriorRing?.Coordinates, viewport, SKRect.Inflate(clipRect, strokeWidth * 2, strokeWidth * 2));
 
         // Create path for exterior and interior parts
         var path = new SKPath();
@@ -93,7 +93,7 @@ internal static class PolygonExtensions
             // this is not a requirement of the OGC polygon.
 
             // Reduce interior ring to parts, that are visible in clipping rectangle
-            var interior = ClippingFunctions.ReducePointsToClipRect(interiorRing.Coordinates, viewportState, SKRect.Inflate(clipRect, strokeWidth, strokeWidth));
+            var interior = ClippingFunctions.ReducePointsToClipRect(interiorRing.Coordinates, viewport, SKRect.Inflate(clipRect, strokeWidth, strokeWidth));
 
             if (interior.Count == 0)
                 continue;

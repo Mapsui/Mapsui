@@ -11,7 +11,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class CalloutStyleRenderer : ISkiaStyleRenderer
 {
-    public bool Draw(SKCanvas canvas, ViewportState viewport, ILayer layer, IFeature feature, Styles.IStyle style, IRenderCache renderCache, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, Styles.IStyle style, IRenderCache renderCache, long iteration)
     {
         if (!style.Enabled)
             return false;

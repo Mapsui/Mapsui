@@ -8,6 +8,7 @@
 		<Authors>Dirk Weltz</Authors>
 		<PackageTags>$(PackageTags) xamarin.forms xamarin ios android windows uwp macos cross-platform</PackageTags>
 		<IsPackable>true</IsPackable>
+		<BuildWithMSBuildOnMono>true</BuildWithMSBuildOnMono>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -37,33 +38,8 @@
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
 
-	<ItemGroup>
-		<None Remove="Images\Close.svg" />
-		<None Remove="Images\MyLocationMoving.svg" />
-		<None Remove="Images\MyLocationStill.svg" />
-		<None Remove="Images\Pin.svg" />
-		<None Remove="Images\MyLocationMoving.svg" />
-		<None Remove="Images\Location.svg" />
-		<None Remove="Images\LocationCenter.svg" />
-		<None Remove="Images\RotationZero.svg" />
-		<None Remove="Images\ZoomIn.svg" />
-		<None Remove="Images\ZoomOut.svg" />
-		<None Remove="Images\MyLocationDir.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="Images\Close.svg" />
-		<EmbeddedResource Include="Images\MyLocationStill.svg" />
-		<EmbeddedResource Include="Images\Pin.svg" />
-		<EmbeddedResource Include="Images\MyLocationMoving.svg" />
-		<EmbeddedResource Include="Images\LocationNoCenter.svg" />
-		<EmbeddedResource Include="Images\LocationCenter.svg" />
-		<EmbeddedResource Include="Images\RotationZero.svg" />
-		<EmbeddedResource Include="Images\ZoomIn.svg" />
-		<EmbeddedResource Include="Images\ZoomOut.svg" />
-		<EmbeddedResource Include="Images\MyLocationDir.svg" />
-	</ItemGroup>
-
 	<Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
+
+	<Import Project="..\Mapsui.UI.MapView\Mapsui.UI.MapView.projitems" Label="Shared" />
 
 </Project>

@@ -6,12 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
-using ConcurrentCollections;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Tiling.Extensions;
+using Mapsui.Utilities;
 
 namespace Mapsui.Tiling.Fetcher;
 
@@ -46,7 +46,7 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     public int NumberTilesNeeded { get; private set; }
 
-    public static int MaxTilesInOneRequest { get; set; } = 64;
+    public static int MaxTilesInOneRequest { get; set; } = 128;
 
     public void SetViewport(FetchInfo fetchInfo)
     {
@@ -87,7 +87,7 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
+            // The exception is returned to the caller and should be logged there.
             FetchCompleted(tileInfo, null, ex);
         }
     }
@@ -157,7 +157,8 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
         if (tilesToFetch.Count() > MaxTilesInOneRequest)
         {
             tilesToFetch = tilesToFetch.Take(MaxTilesInOneRequest).ToList();
-            Logger.Log(LogLevel.Warning, $"The number of tiles in one request is exceeds the maximum " +
+            Logger.Log(LogLevel.Warning, 
+                $"The number tiles requested is '{tilesToFetch.Count()}' which exceeds the maximum " +
                 $"of '{MaxTilesInOneRequest}'. The number of tiles will be limited to the maximum. Note, " +
                 $"that this may indicate a bug or configuration error");
         }

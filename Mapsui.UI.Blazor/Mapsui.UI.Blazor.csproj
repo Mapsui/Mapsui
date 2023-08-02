@@ -21,6 +21,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
     <PackageReference Include="DotNext.Threading" />
+    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
+    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
+  </ItemGroup>
+
+  <!--target to remove System.Memory-->
+  <ItemGroup>
+    <None Include="Mapsui.Blazor.targets" PackagePath="build/Mapsui.Blazor.targets" Pack="true" />
+    <None Include="Mapsui.Blazor.targets" PackagePath="buildTransitive/Mapsui.Blazor.targets" Pack="true" />
   </ItemGroup>
 
   <ItemGroup>

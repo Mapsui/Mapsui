@@ -11,6 +11,9 @@ using Android.Widget;
 using Com.Nostra13.Universalimageloader.Core;
 using Microsoft.UI.Xaml.Media;
 
+#pragma warning disable IDISP001 // Dispose created
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
 namespace Mapsui.Samples.Uno.WinUI.Droid;
 
 [global::Android.App.ApplicationAttribute(

@@ -9,6 +9,7 @@
       "Mapsui.Tiling\\Mapsui.Tiling.csproj",
       "Mapsui.UI.Forms.Tests\\Mapsui.UI.Forms.Tests.csproj",
       "Mapsui.UI.Forms\\Mapsui.UI.Forms.csproj",
+      "Mapsui.UI.MapView\\Mapsui.UI.MapView.shproj",
       "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
       "Mapsui\\Mapsui.csproj",
       "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",

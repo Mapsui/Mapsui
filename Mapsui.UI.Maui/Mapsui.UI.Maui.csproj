@@ -13,36 +13,32 @@
     <PackageTags>$(PackageTags) maui</PackageTags>
 		<IsPackable>true</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="EventArgs\**" />
+    <Compile Remove="Extensions\**" />
+    <Compile Remove="Images\**" />
+    <Compile Remove="Objects\**" />
+    <EmbeddedResource Remove="EventArgs\**" />
+    <EmbeddedResource Remove="Extensions\**" />
+    <EmbeddedResource Remove="Images\**" />
+    <EmbeddedResource Remove="Objects\**" />
+    <MauiCss Remove="EventArgs\**" />
+    <MauiCss Remove="Extensions\**" />
+    <MauiCss Remove="Images\**" />
+    <MauiCss Remove="Objects\**" />
+    <MauiXaml Remove="EventArgs\**" />
+    <MauiXaml Remove="Extensions\**" />
+    <MauiXaml Remove="Images\**" />
+    <MauiXaml Remove="Objects\**" />
+    <None Remove="EventArgs\**" />
+    <None Remove="Extensions\**" />
+    <None Remove="Images\**" />
+    <None Remove="Objects\**" />
+  </ItemGroup>
 	
   <ItemGroup>
-    <Compile Include="..\Mapsui.UI.Forms\EventArgs\CalloutClickedEventArgs.cs" Link="EventArgs\CalloutClickedEventArgs.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\EventArgs\DrawableClickedEventArgs.cs" Link="EventArgs\DrawableClickedEventArgs.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\EventArgs\MapClickedEventArgs.cs" Link="EventArgs\MapClickedEventArgs.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\EventArgs\MapLongClickedEventArgs.cs" Link="EventArgs\MapLongClickedEventArgs.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\EventArgs\PinClickedEventArgs.cs" Link="EventArgs\PinClickedEventArgs.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\EventArgs\SelectedPinChangedEventArgs.cs" Link="EventArgs\SelectedPinChangedEventArgs.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Extensions\ColorExtensions.cs" Link="Extensions\ColorExtensions.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Extensions\PositionExtensions.cs" Link="Extensions\PositionExtensions.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Extensions\TextAlignmentExtensions.cs" Link="Extensions\TextAlignmentExtensions.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Extensions\ZoomLevelExtensions.cs" Link="Extensions\ZoomLevelExtensions.cs" />
     <Compile Include="..\Mapsui.UI.Forms\MapControl.cs" Link="MapControl.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\MapView.cs" Link="MapView.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Objects\Callout.cs" Link="Objects\Callout.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Objects\Circle.cs" Link="Objects\Circle.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Objects\Distance.cs" Link="Objects\Distance.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Objects\Drawable.cs" Link="Objects\Drawable.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Objects\IClickable.cs" Link="Objects\IClickable.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Objects\IFeatureProvider.cs" Link="Objects\IFeatureProvider.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Objects\MapSpan.cs" Link="Objects\MapSpan.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Objects\MyLocationLayer.cs" Link="Objects\MyLocationLayer.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Objects\ObservableCollectionProvider.cs" Link="Objects\ObservableCollectionProvider.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Objects\Pin.cs" Link="Objects\Pin.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Objects\PinType.cs" Link="Objects\PinType.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Objects\Polygon.cs" Link="Objects\Polygon.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Objects\Polyline.cs" Link="Objects\Polyline.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Objects\Position.cs" Link="Objects\Position.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Utils\ObservableRangeCollection.cs" Link="Utils\ObservableRangeCollection.cs" />
-    <Compile Include="..\Mapsui.UI.Forms\Utils\PolylineConverter.cs" Link="Utils\PolylineConverter.cs" />
   </ItemGroup>
   
   <ItemGroup>
@@ -58,26 +54,8 @@
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="EventArgs\" />
-    <Folder Include="Images\" />
-    <Folder Include="Objects\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="..\Mapsui.UI.Forms\Images\Close.svg" Link="Images\Close.svg" />
-    <EmbeddedResource Include="..\Mapsui.UI.Forms\Images\LocationCenter.svg" Link="Images\LocationCenter.svg" />
-    <EmbeddedResource Include="..\Mapsui.UI.Forms\Images\LocationNoCenter.svg" Link="Images\LocationNoCenter.svg" />
-    <EmbeddedResource Include="..\Mapsui.UI.Forms\Images\MyLocationDir.svg" Link="Images\MyLocationDir.svg" />
-    <EmbeddedResource Include="..\Mapsui.UI.Forms\Images\MyLocationMoving.svg" Link="Images\MyLocationMoving.svg" />
-    <EmbeddedResource Include="..\Mapsui.UI.Forms\Images\MyLocationStill.svg" Link="Images\MyLocationStill.svg" />
-    <EmbeddedResource Include="..\Mapsui.UI.Forms\Images\Pin.svg" Link="Images\Pin.svg" />
-    <EmbeddedResource Include="..\Mapsui.UI.Forms\Images\RotationZero.svg" Link="Images\RotationZero.svg" />
-    <EmbeddedResource Include="..\Mapsui.UI.Forms\Images\ZoomIn.svg" Link="Images\ZoomIn.svg" />
-    <EmbeddedResource Include="..\Mapsui.UI.Forms\Images\ZoomOut.svg" Link="Images\ZoomOut.svg" />
-  </ItemGroup>
-
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
+
+  <Import Project="..\Mapsui.UI.MapView\Mapsui.UI.MapView.projitems" Label="Shared" />
 
 </Project>

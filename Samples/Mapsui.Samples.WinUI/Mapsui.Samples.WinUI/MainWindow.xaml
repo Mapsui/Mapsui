@@ -11,8 +11,12 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray">
-            <winui:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" MinWidth="140"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <winui:MapControl Grid.Column="1" x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+            <Border Grid.Column="0" BorderBrush="White" Opacity="0.65" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" BorderThickness="6" MinWidth="140"
                     MinHeight="30" HorizontalAlignment="Left">
                 <RelativePanel VerticalAlignment="Stretch" >
                     <ComboBox Name="CategoryComboBox" Margin="0,0, 0, 10">

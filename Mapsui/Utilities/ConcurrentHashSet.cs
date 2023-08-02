@@ -2,6 +2,7 @@
 // https://github.com/i3arnon/ConcurrentHashSet
 // because with nuget package it resulted in an error on the build server
 
+using ConcurrentCollections;
 using Mapsui.Logging;
 using System;
 using System.Collections;
@@ -10,7 +11,7 @@ using System.Diagnostics;
 using System.Threading;
 
 // ReSharper disable All - This is a workaround for a limitation of the nuget package
-namespace ConcurrentCollections;
+namespace Mapsui.Utilities;
 
 /// <summary>
 /// Represents a thread-safe hash-based unique collection.
@@ -355,7 +356,7 @@ public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
                 Node? previous = null;
                 for (var current = tables.Buckets[bucketNo]; current != null; current = current.Next)
                 {
-                    Debug.Assert((previous == null && current == tables.Buckets[bucketNo]) || previous?.Next == current);
+                    Debug.Assert(previous == null && current == tables.Buckets[bucketNo] || previous?.Next == current);
 
                     if (hashcode == current.Hashcode && _comparer.Equals(current.Item, item))
                     {

@@ -10,9 +10,9 @@ using System;
 
 namespace Mapsui.Rendering.Skia;
 
-public class VectorStyleRenderer : ISkiaStyleRenderer
+public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
-    public bool Draw(SKCanvas canvas, ViewportState viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
     {
         try
         {
@@ -23,7 +23,7 @@ public class VectorStyleRenderer : ISkiaStyleRenderer
             {
                 case RectFeature rectFeature:
                     if (rectFeature.Rect != null)
-                        PolygonRenderer.Draw(canvas, viewport, vectorStyle, rectFeature, rectFeature.Rect.ToPolygon(), opacity, renderCache, renderCache);
+                        PolygonRenderer.Draw(canvas, viewport, layer, vectorStyle, rectFeature, rectFeature.Rect.ToPolygon(), opacity, renderCache, renderCache);
                     break;
                 case PointFeature pointFeature:
                     SymbolStyleRenderer.DrawSymbol(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, new SymbolStyle { Outline = vectorStyle.Outline, Fill = vectorStyle.Fill, Line = vectorStyle.Line });
@@ -39,10 +39,10 @@ public class VectorStyleRenderer : ISkiaStyleRenderer
                             Draw(canvas, viewport, layer, new PointFeature(point.X, point.Y), style, renderCache, iteration);
                             break;
                         case Polygon polygon:
-                            PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderCache, renderCache);
+                            PolygonRenderer.Draw(canvas, viewport, layer, vectorStyle, feature, polygon, opacity, renderCache, renderCache);
                             break;
                         case LineString lineString:
-                            LineStringRenderer.Draw(canvas, viewport, vectorStyle, lineString, opacity, renderCache);
+                            LineStringRenderer.Draw(canvas, viewport, layer, vectorStyle, lineString, opacity, renderCache);
                             break;
                         case null:
                             throw new ArgumentException($"Geometry is null, Layer: {layer.Name}");
@@ -58,5 +58,37 @@ public class VectorStyleRenderer : ISkiaStyleRenderer
         }
 
         return true;
+    }
+
+    bool IFeatureSize.NeedsFeature => false;
+
+    double IFeatureSize.FeatureSize(IStyle style, IRenderCache renderCache, IFeature? feature)
+    {
+        if (style is VectorStyle vectorStyle)
+        {
+            return FeatureSize(vectorStyle);
+        }
+
+        return 0;
+    }
+
+    public static double FeatureSize(VectorStyle vectorStyle)
+    {
+        var size = Math.Max(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
+        double lineSize = 1;
+        if (vectorStyle.Line != null)
+        {
+            lineSize = Math.Max(lineSize, vectorStyle.Line.Width);
+        }
+
+        if (vectorStyle.Outline != null)
+        {
+            lineSize = Math.Max(lineSize, vectorStyle.Outline.Width);
+        }
+
+        // add line size.
+        size += lineSize;
+
+        return size;
     }
 }
