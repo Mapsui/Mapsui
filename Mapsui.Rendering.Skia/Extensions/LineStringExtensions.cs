@@ -43,27 +43,4 @@ internal static class LineStringExtensions
         }
         return path;
     }
-
-    /// <summary>
-    /// Converts a LineString in world coordinates to a Skia path
-    /// </summary>
-    /// <param name="lineString">List of points in Mapsui world coordinates</param>
-    /// <returns></returns>
-    public static SKPath ToSkiaPath(this LineString lineString)
-    {
-        var coordinates = lineString.Coordinates;
-
-        // First convert List<Points> to screen coordinates
-        var path = new SKPath();
-        var lastPoint = new SKPoint((float)coordinates[0].X, (float)coordinates[0].Y);
-        path.MoveTo(lastPoint);
-
-        for (var i = 1; i < coordinates.Length; i++)
-        {
-            lastPoint = new SKPoint((float)coordinates[i].X, (float)coordinates[i].Y);
-            path.LineTo(lastPoint);
-        }
-
-        return path;
-    }
 }
