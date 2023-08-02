@@ -27,7 +27,6 @@ internal static class PolygonRenderer
         SKPaint paint;
         SKPaint paintFill;
         SKPath path;
-        MatrixKeeper? matrixKeeper = null;
         if (vectorCache == null || layer is IModifyFeatureLayer)
         {
             paint = CreateSkPaint(vectorStyle?.Outline, opacity);
@@ -38,9 +37,7 @@ internal static class PolygonRenderer
         {            
             paint = vectorCache.GetOrCreatePaint(vectorStyle?.Outline, opacity, CreateSkPaint);
             paintFill = vectorCache.GetOrCreatePaint(vectorStyle?.Fill, opacity, viewport.Rotation, CreateSkPaint);
-            var extent = viewport.ToExtent();
-            path = vectorCache.GetOrCreatePath(null, polygon, null, (geometry, _, _) => geometry.ToSkiaPath());            
-            matrixKeeper = new MatrixKeeper(viewport, canvas);
+            path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (geometry, _, _) => geometry.ToSkiaPath());            
         }
 
         if (vectorStyle?.Fill?.FillStyle == FillStyle.Solid)
@@ -66,8 +63,6 @@ internal static class PolygonRenderer
         {
             canvas.DrawPath(path, paint);
         }
-
-        matrixKeeper?.Dispose();
     }
 
     private static SKPaint CreateSkPaint(Brush? brush, float opacity, double rotation, ISymbolCache? symbolCache)

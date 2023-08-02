@@ -20,7 +20,6 @@ public static class LineStringRenderer
 
         SKPaint paint;
         SKPath path;
-        MatrixKeeper? matrixKeeper = null;
         if (vectorCache == null || layer is IModifyFeatureLayer)
         {
             paint = CreateSkPaint(vectorStyle.Line, opacity);
@@ -31,17 +30,13 @@ public static class LineStringRenderer
             paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
 
             var lineWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1);
-            var extent = viewport.ToExtent();
-            path = vectorCache.GetOrCreatePath(null, lineString, null,(geometry, _, _) => geometry.ToSkiaPath());                        
+            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth,(geometry, _, _) => geometry.ToSkiaPath());                        
             var matrix = viewport.ToSKMatrix(canvas.TotalMatrix);
             var path2 = lineString.ToSkiaPath();
             path2.Transform(matrix);
-
-            matrixKeeper = new MatrixKeeper(viewport, canvas);
         }
 
         canvas.DrawPath(path, paint);
-        matrixKeeper?.Dispose();
     }
 
     private static SKPaint CreateSkPaint(Pen? pen, float opacity)
