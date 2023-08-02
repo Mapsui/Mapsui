@@ -18,20 +18,6 @@ public static class ViewportExtensions
         return matrix;
     }
 
-    public static SKMatrix ToSKMatrix(this Viewport viewport, SKMatrix priorMatrix)
-    {      
-        var userRotation = SKMatrix.CreateRotationDegrees((float)viewport.Rotation);
-        var zoom = 1.0 / viewport.Resolution;
-        var zoomScale = SKMatrix.CreateScale((float)zoom, (float)zoom);
-        var moveToCenter = SKMatrix.CreateTranslation((float)(-viewport.CenterX * zoom), (float)(-viewport.CenterY * zoom));
-             
-        var matrix = SKMatrix.Concat(userRotation, zoomScale);
-        matrix = SKMatrix.Concat(moveToCenter, matrix);
-        matrix = SKMatrix.Concat(priorMatrix, matrix);
-        
-        return matrix;
-    }
-
     /// <summary> Converts the Extent of the Viewport to a SKRect </summary>
     /// <param name="viewport">viewport</param>
     /// <returns>SkRect</returns>

@@ -10,56 +10,6 @@ internal static class PolygonExtensions
     /// Converts a Polygon into a SKPath, that is clipped to clipRect, where exterior is bigger than interior
     /// </summary>
     /// <param name="polygon">Polygon to convert</param>
-    /// <returns></returns>
-    public static SKPath ToSkiaPath(this Polygon polygon)
-    {
-        var exterior = polygon.ExteriorRing?.Coordinates;
-            
-        // Create path for exterior and interior parts
-        var path = new SKPath();
-
-        if (exterior == null || exterior.Length == 0)
-            return path;
-        
-        // Draw exterior path
-        path.MoveTo(exterior[0].ToSkiaPoint());
-
-        for (var i = 1; i < exterior.Length; i++)
-            path.LineTo(exterior[i].ToSkiaPoint());
-        
-        // Close exterior path
-        path.Close();
-        
-        foreach (var interiorRing in polygon.InteriorRings)
-        {
-            // note: For Skia inner rings need to be clockwise and outer rings
-            // need to be counter clockwise (if this is the other way around it also
-            // seems to work)
-            // this is not a requirement of the OGC polygon.
-
-            // Reduce interior ring to parts, that are visible in clipping rectangle
-            var interior = interiorRing.Coordinates;
-
-            if (interior == null || interior.Length == 0)
-                continue;
-
-            // Draw interior paths
-            path.MoveTo(interior[0].ToSkiaPoint());
-
-            for (var i = 1; i < interior.Length; i++)
-                path.LineTo(interior[i].ToSkiaPoint());
-        }
-
-        // Close interior paths
-        path.Close();
-
-        return path;
-    }
-
-    /// <summary>
-    /// Converts a Polygon into a SKPath, that is clipped to clipRect, where exterior is bigger than interior
-    /// </summary>
-    /// <param name="polygon">Polygon to convert</param>
     /// <param name="viewport">The Viewport that is used for the conversions.</param>
     /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
     /// <param name="strokeWidth">StrokeWidth for inflating clipRect</param>
