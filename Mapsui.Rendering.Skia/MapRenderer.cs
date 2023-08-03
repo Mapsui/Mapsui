@@ -25,7 +25,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class MapRenderer : IRenderer
 {
-    private readonly IRenderCache _renderCache = new RenderCache();
+    private readonly IRenderCache _renderCache;
     private long _currentIteration;
 
     public IRenderCache RenderCache => _renderCache;
@@ -42,8 +42,9 @@ public class MapRenderer : IRenderer
         DefaultRendererFactory.Create = () => new MapRenderer();
     }
 
-    public MapRenderer()
+    public MapRenderer(IRenderCache renderer)
     {
+        _renderCache = renderer;
         StyleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
         StyleRenderers[typeof(VectorStyle)] = new VectorStyleRenderer();
         StyleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
@@ -58,6 +59,10 @@ public class MapRenderer : IRenderer
         WidgetRenders[typeof(BoxWidget)] = new BoxWidgetRenderer();
         WidgetRenders[typeof(MouseCoordinatesWidget)] = new MouseCoordinatesWidgetRenderer();
         WidgetRenders[typeof(EditingWidget)] = new EditingWidgetRenderer();
+    }
+
+    public MapRenderer() : this(new RenderCache())
+    {
     }
 
     public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,

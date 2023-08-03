@@ -36,7 +36,11 @@ internal static class PolygonRenderer
         {            
             paint = vectorCache.GetOrCreatePaint(vectorStyle?.Outline, opacity, CreateSkPaint);
             paintFill = vectorCache.GetOrCreatePaint(vectorStyle?.Fill, opacity, viewport.Rotation, CreateSkPaint);
-            path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (geometry, viewport, lineWidth) => geometry.ToSkiaPath(viewport, viewport.ToSkiaRect(), lineWidth));
+            path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (geometry, viewport, lineWidth) =>
+            {
+                var skRect = vectorCache.GetOrCreateRect(viewport, ViewportExtensions.ToSkiaRect);
+                return geometry.ToSkiaPath(viewport, skRect, lineWidth);
+            });
         }
 
         if (vectorStyle?.Fill?.FillStyle == FillStyle.Solid)

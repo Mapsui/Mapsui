@@ -11,11 +11,13 @@ public class VectorCache : IVectorCache
     private readonly Dictionary<(Pen? Pen, float Opacity), object> _paintCache = new();
     private readonly Dictionary<(Brush? Brush, float Opacity, double rotation), object> _fillCache = new();
     private readonly LruCache<(MRect? Rect, double Resolution, object Geometry, float lineWidth), object> _pathCache;
+    private readonly LruCache<Viewport, object> _viewportCache;
     private readonly ISymbolCache _symbolCache;
 
     public VectorCache(ISymbolCache symbolCache, int capacity)
     {
         _pathCache = new(capacity);
+        _viewportCache = new(Math.Min(capacity / 100, 1));
         _symbolCache = symbolCache;
     }
 
@@ -41,6 +43,17 @@ public class VectorCache : IVectorCache
         }
 
         return (T)paint;
+    }
+
+    public T GetOrCreateRect<T>(Viewport viewport, Func<Viewport, T> toSkRect)
+    {
+        if (!_viewportCache.TryGetValue(viewport, out var rect))
+        {
+            rect = toSkRect(viewport);
+            _viewportCache[viewport] = rect;
+        }
+
+        return (T)rect;
     }
 
     public TPath GetOrCreatePath<TPath, TGeometry>(Viewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath) where TPath : class where TGeometry : class

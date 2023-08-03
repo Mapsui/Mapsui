@@ -1,11 +1,11 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
-using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
+using ViewportExtensions = Mapsui.Rendering.Skia.Extensions.ViewportExtensions;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -30,7 +30,11 @@ public static class LineStringRenderer
             paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
 
             var lineWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1);
-            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, viewport, _) => geometry.ToSkiaPath(viewport, viewport.ToSkiaRect()));
+            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, viewport, _) =>
+            {
+                var skRect = vectorCache.GetOrCreateRect(viewport, ViewportExtensions.ToSkiaRect);
+                return geometry.ToSkiaPath(viewport, skRect);
+            });
         }
 
         canvas.DrawPath(path, paint);
