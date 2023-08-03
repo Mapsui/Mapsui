@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -28,7 +29,7 @@ public abstract class BaseFeature : IDisposable
         set => _dictionary[key] = value;
     }
 
-    public IDictionary<IStyle, object> RenderedGeometry { get; set; } = new Dictionary<IStyle, object>();
+    public IDictionary<IStyle, object> RenderedGeometry { get; set; } = new ConcurrentDictionary<IStyle, object>();
 
     public virtual void Dispose()
     {
