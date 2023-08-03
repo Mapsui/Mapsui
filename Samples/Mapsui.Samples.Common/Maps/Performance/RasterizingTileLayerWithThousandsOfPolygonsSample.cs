@@ -40,18 +40,6 @@ public class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapControlSamp
     {
         return new Layer("Polygons")
         {
-            DataSource = new Mapsui.Nts.Providers.GeometrySimplifyProvider(new MemoryProvider(CreatePolygon().ToFeatures())),
-            Style = new VectorStyle
-            {
-                Fill = new Brush(Color.Red),
-            }
-        };
-    }
-
-    public static ILayer CreateLayer()
-    {
-        return new Layer("Polygons")
-        {
             DataSource = new IndexedMemoryProvider(CreatePolygon().ToFeatures()),
             Style = new VectorStyle
             {
@@ -59,6 +47,7 @@ public class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapControlSamp
             }
         };
     }
+
     private static List<Polygon> CreatePolygon()
     {
         var result = new List<Polygon>();
