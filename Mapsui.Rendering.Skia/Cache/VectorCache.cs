@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Mapsui.Cache;
 using Mapsui.Extensions;
@@ -8,8 +9,8 @@ namespace Mapsui.Rendering.Skia.Cache;
 
 public class VectorCache : IVectorCache
 {
-    private readonly Dictionary<(Pen? Pen, float Opacity), object> _paintCache = new();
-    private readonly Dictionary<(Brush? Brush, float Opacity, double rotation), object> _fillCache = new();
+    private readonly ConcurrentDictionary<(Pen? Pen, float Opacity), object> _paintCache = new();
+    private readonly ConcurrentDictionary<(Brush? Brush, float Opacity, double rotation), object> _fillCache = new();
     private readonly LruCache<(MRect? Rect, double Resolution, object Geometry, float lineWidth), object> _pathCache;
     private readonly LruCache<Viewport, object> _viewportCache;
     private readonly ISymbolCache _symbolCache;
