@@ -20,9 +20,10 @@ internal static class PolygonRenderer
     public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle vectorStyle, IFeature feature,
         Polygon polygon, float opacity, ISymbolCache? symbolCache = null, IVectorCache? vectorCache = null)
     {
+        if (vectorStyle == null)
+            return;
 
-
-        float lineWidth = Convert.ToSingle(vectorStyle?.Outline?.Width ?? 1);
+        float lineWidth = Convert.ToSingle(vectorStyle.Outline?.Width ?? 1);
         SKPaint paint;
         SKPaint paintFill;
         SKPath path;
@@ -33,13 +34,28 @@ internal static class PolygonRenderer
             path = polygon.ToSkiaPath(viewport, canvas.LocalClipBounds, lineWidth);
         }
         else
-        {            
-            paint = vectorCache.GetOrCreatePaint(vectorStyle?.Outline, opacity, CreateSkPaint);
-            paintFill = vectorCache.GetOrCreatePaint(vectorStyle?.Fill, opacity, viewport.Rotation, CreateSkPaint);
-            path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (geometry, viewport, lineWidth) =>
+        {
+            RenderedGeometry? renderedGeometry;
+            if (!feature.RenderedGeometry.TryGetValue(vectorStyle, out var rendered))
+            {
+                renderedGeometry = new RenderedGeometry
+                {
+                    Paint = paint = vectorCache.GetOrCreatePaint(vectorStyle?.Outline, opacity, CreateSkPaint),
+                    FillPaint = paintFill = vectorCache.GetOrCreatePaint(vectorStyle?.Fill, opacity, viewport.Rotation, CreateSkPaint)
+                };
+                feature.RenderedGeometry[vectorStyle] = renderedGeometry;
+            }
+            else
+            {
+                renderedGeometry = (RenderedGeometry)rendered;
+                paint = renderedGeometry.Paint;
+                paintFill = renderedGeometry.FillPaint;
+            }
+
+            path = renderedGeometry.GetOrCreatePath(viewport, () =>
             {
                 var skRect = vectorCache.GetOrCreateRect(viewport, ViewportExtensions.ToSkiaRect);
-                return geometry.ToSkiaPath(viewport, skRect, lineWidth);
+                return polygon.ToSkiaPath(viewport, skRect, lineWidth);
             });
         }
 

@@ -42,7 +42,7 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                             PolygonRenderer.Draw(canvas, viewport, layer, vectorStyle, feature, polygon, opacity, renderCache, renderCache);
                             break;
                         case LineString lineString:
-                            LineStringRenderer.Draw(canvas, viewport, layer, vectorStyle, lineString, opacity, renderCache);
+                            LineStringRenderer.Draw(canvas, viewport, layer, vectorStyle, feature, lineString, opacity, renderCache);
                             break;
                         case null:
                             throw new ArgumentException($"Geometry is null, Layer: {layer.Name}");

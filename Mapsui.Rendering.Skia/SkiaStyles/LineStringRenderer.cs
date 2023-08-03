@@ -13,7 +13,7 @@ public static class LineStringRenderer
 {
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle? vectorStyle,
-        LineString lineString, float opacity, IVectorCache? vectorCache = null)
+        IFeature feature, LineString lineString, float opacity, IVectorCache? vectorCache = null)
     {
         if (vectorStyle == null)
             return;
@@ -27,13 +27,28 @@ public static class LineStringRenderer
         }
         else
         {
-            paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
-
-            var lineWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1);
-            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, viewport, _) =>
+            RenderedGeometry? renderedGeometry = null;
+            if (!feature.RenderedGeometry.TryGetValue(vectorStyle, out var rendered))
             {
-                var skRect = vectorCache.GetOrCreateRect(viewport, ViewportExtensions.ToSkiaRect);
-                return geometry.ToSkiaPath(viewport, skRect);
+                renderedGeometry = new RenderedGeometry
+                {
+                    Paint = paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint)
+                };
+                feature.RenderedGeometry.Add(vectorStyle, renderedGeometry);
+            }
+            else
+            {
+                renderedGeometry = (RenderedGeometry)rendered;
+                paint = renderedGeometry.Paint;
+            }
+
+            path = renderedGeometry.GetOrCreatePath(viewport, () =>
+            {
+                return vectorCache.GetOrCreatePath(viewport, lineString, 1, (geometry, viewport, _) =>
+                {
+                    var skRect = vectorCache.GetOrCreateRect(viewport, ViewportExtensions.ToSkiaRect);
+                    return geometry.ToSkiaPath(viewport, skRect);
+                });
             });
         }
 
