@@ -30,8 +30,8 @@ internal static class PolygonRenderer
         {
             renderedGeometry = new RenderedGeometry
             {
-                Paint = vectorCache.GetOrCreatePaint(vectorStyle?.Outline, opacity, CreateSkPaint),
-                FillPaint = vectorCache.GetOrCreatePaint(vectorStyle?.Fill, opacity, viewport.Rotation, CreateSkPaint)
+                Paint = vectorCache.GetOrCreatePaint(vectorStyle.Outline, opacity, CreateSkPaint),
+                FillPaint = vectorCache.GetOrCreatePaint(vectorStyle.Fill, opacity, viewport.Rotation, CreateSkPaint)
             };
             feature.RenderedGeometry[vectorStyle] = renderedGeometry;
         }
