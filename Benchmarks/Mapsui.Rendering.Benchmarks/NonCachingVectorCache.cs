@@ -21,6 +21,11 @@ public class NonCachingVectorCache : IVectorCache
         return toPaint(brush, opacity, rotation, _symbolCache);
     }
 
+    public T GetOrCreateRect<T>(Viewport viewport, Func<Viewport, T> toSkRect)
+    {
+        return toSkRect(viewport);
+    }
+
     public TPath GetOrCreatePath<TPath, TGeometry>(Viewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath) where TPath : class where TGeometry : class
     {
         return toPath(geometry, viewport, lineWidth);

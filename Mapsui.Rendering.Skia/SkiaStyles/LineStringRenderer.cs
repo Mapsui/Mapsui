@@ -13,35 +13,34 @@ public static class LineStringRenderer
 {
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle? vectorStyle,
-        IFeature feature, LineString lineString, float opacity, IVectorCache? vectorCache = null)
+        IFeature feature, LineString lineString, float opacity, IVectorCache vectorCache)
     {
         if (vectorStyle == null)
             return;
 
-        SKPaint paint;
-        SKPath path;
-        if (vectorCache == null || layer is IModifyFeatureLayer)
+        RenderedGeometry? renderedGeometry;
+        if (!feature.RenderedGeometry.TryGetValue(vectorStyle, out var rendered))
         {
-            paint = CreateSkPaint(vectorStyle.Line, opacity);
+            renderedGeometry = new RenderedGeometry
+            {
+                Paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint)
+            };
+            feature.RenderedGeometry.Add(vectorStyle, renderedGeometry);
+        }
+        else
+        {
+            renderedGeometry = (RenderedGeometry)rendered;
+        }
+
+        var paint = renderedGeometry.Paint;
+        SKPath path;
+
+        if (layer is IModifyFeatureLayer)
+        {
             path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);
         }
         else
         {
-            RenderedGeometry? renderedGeometry = null;
-            if (!feature.RenderedGeometry.TryGetValue(vectorStyle, out var rendered))
-            {
-                renderedGeometry = new RenderedGeometry
-                {
-                    Paint = paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint)
-                };
-                feature.RenderedGeometry.Add(vectorStyle, renderedGeometry);
-            }
-            else
-            {
-                renderedGeometry = (RenderedGeometry)rendered;
-                paint = renderedGeometry.Paint;
-            }
-
             path = renderedGeometry.GetOrCreatePath(viewport, () =>
             {
                 return vectorCache.GetOrCreatePath(viewport, lineString, 1, (geometry, viewport, _) =>
@@ -49,8 +48,9 @@ public static class LineStringRenderer
                     var skRect = vectorCache.GetOrCreateRect(viewport, ViewportExtensions.ToSkiaRect);
                     return geometry.ToSkiaPath(viewport, skRect);
                 });
-            });
-        }
+            }); 
+        }        
+        
 
         canvas.DrawPath(path, paint);
     }

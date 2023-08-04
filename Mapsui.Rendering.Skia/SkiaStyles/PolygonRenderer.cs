@@ -18,40 +18,37 @@ internal static class PolygonRenderer
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle vectorStyle, IFeature feature,
-        Polygon polygon, float opacity, ISymbolCache? symbolCache = null, IVectorCache? vectorCache = null)
+        Polygon polygon, float opacity, ISymbolCache symbolCache, IVectorCache vectorCache)
     {
         if (vectorStyle == null)
             return;
 
         float lineWidth = Convert.ToSingle(vectorStyle.Outline?.Width ?? 1);
-        SKPaint paint;
-        SKPaint paintFill;
-        SKPath path;
-        if (vectorCache == null || layer is IModifyFeatureLayer)
+
+        RenderedGeometry? renderedGeometry;
+        if (!feature.RenderedGeometry.TryGetValue(vectorStyle, out var rendered))
         {
-            paint = CreateSkPaint(vectorStyle?.Outline, opacity);
-            paintFill = CreateSkPaint(vectorStyle?.Fill, opacity, viewport.Rotation, symbolCache);
+            renderedGeometry = new RenderedGeometry
+            {
+                Paint = vectorCache.GetOrCreatePaint(vectorStyle?.Outline, opacity, CreateSkPaint),
+                FillPaint = vectorCache.GetOrCreatePaint(vectorStyle?.Fill, opacity, viewport.Rotation, CreateSkPaint)
+            };
+            feature.RenderedGeometry[vectorStyle] = renderedGeometry;
+        }
+        else
+        {
+            renderedGeometry = (RenderedGeometry)rendered;
+        }
+
+        var paint = renderedGeometry.Paint;
+        var paintFill = renderedGeometry.FillPaint!;
+        SKPath path;
+        if (layer is IModifyFeatureLayer)
+        {
             path = polygon.ToSkiaPath(viewport, canvas.LocalClipBounds, lineWidth);
         }
         else
         {
-            RenderedGeometry? renderedGeometry;
-            if (!feature.RenderedGeometry.TryGetValue(vectorStyle, out var rendered))
-            {
-                renderedGeometry = new RenderedGeometry
-                {
-                    Paint = paint = vectorCache.GetOrCreatePaint(vectorStyle?.Outline, opacity, CreateSkPaint),
-                    FillPaint = paintFill = vectorCache.GetOrCreatePaint(vectorStyle?.Fill, opacity, viewport.Rotation, CreateSkPaint)
-                };
-                feature.RenderedGeometry[vectorStyle] = renderedGeometry;
-            }
-            else
-            {
-                renderedGeometry = (RenderedGeometry)rendered;
-                paint = renderedGeometry.Paint;
-                paintFill = renderedGeometry.FillPaint!;
-            }
-
             path = renderedGeometry.GetOrCreatePath(viewport, () =>
             {
                 var skRect = vectorCache.GetOrCreateRect(viewport, ViewportExtensions.ToSkiaRect);
