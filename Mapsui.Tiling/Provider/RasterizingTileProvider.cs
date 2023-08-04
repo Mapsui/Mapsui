@@ -95,8 +95,8 @@ public class RasterizingTileProvider : ITileSource
             var schemaExtent = Schema.Extent;
             if (minX < schemaExtent.MinX) minX = schemaExtent.MinX;
             if (minY < schemaExtent.MinY) minY = schemaExtent.MinY;
-            if (maxX < schemaExtent.MaxX) maxX = schemaExtent.MaxX;
-            if (maxY < schemaExtent.MaxY) maxY = schemaExtent.MaxY;
+            if (maxX > schemaExtent.MaxX) maxX = schemaExtent.MaxX;
+            if (maxY > schemaExtent.MaxY) maxY = schemaExtent.MaxY;
 
             extent = new MRect(minX, minY, maxX, maxY);
         }
