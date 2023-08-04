@@ -7,9 +7,9 @@ internal class RenderedGeometry
 {
     private Viewport? _viewport;
 
-    public SKPaint Paint { get; set; }
-    public SKPaint FillPaint { get; set; }
-    public SKPath? Path { get; set; }
+    public SKPaint Paint { get; init; }
+    public SKPaint? FillPaint { get; init; }
+    public SKPath? Path { get; private set; }
 
     public SKPath GetOrCreatePath(Viewport viewport, Func<SKPath> func)
     {

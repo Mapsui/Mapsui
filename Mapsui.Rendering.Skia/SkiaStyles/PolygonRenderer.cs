@@ -49,7 +49,7 @@ internal static class PolygonRenderer
             {
                 renderedGeometry = (RenderedGeometry)rendered;
                 paint = renderedGeometry.Paint;
-                paintFill = renderedGeometry.FillPaint;
+                paintFill = renderedGeometry.FillPaint!;
             }
 
             path = renderedGeometry.GetOrCreatePath(viewport, () =>
