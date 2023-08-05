@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Mapsui.Cache;
@@ -13,7 +10,7 @@ public class LruCache<TKey, TValue>
     private readonly int _capacity;
     private readonly Dictionary<TKey, (LinkedListNode<TKey> Node, TValue Value)> _cache;
     private readonly LinkedList<TKey> _list;
-    private object _lock = new object();
+    private readonly object _lock = new object();
 
     public LruCache(int capacity)
     {
@@ -31,16 +28,6 @@ public class LruCache<TKey, TValue>
                 var node = _cache[key];
                 _list.Remove(node.Node);
                 _list.AddFirst(node.Node);
-                if (!object.ReferenceEquals(node.Value, value))
-                {
-                    // dispose disposable values
-                    if (node.Value is IDisposable disposable)
-                    {
-#pragma warning disable IDISP007 // Don't dispose injected                    
-                        disposable.Dispose();
-#pragma warning restore IDISP007
-                    }
-                }
 
                 _cache[key] = (node.Node, value);
             }
@@ -49,17 +36,9 @@ public class LruCache<TKey, TValue>
                 if (_cache.Count >= _capacity) // Cache full.
                 {
                     var removeKey = _list.Last!.Value;
-                    _cache.TryGetValue(removeKey, out var old);
+                    _cache.TryGetValue(removeKey, out _);
                     _cache.Remove(removeKey);
                     _list.RemoveLast();
-
-                    // dispose disposable values
-                    if (old.Value is IDisposable disposable)
-                    {
-#pragma warning disable IDISP007 // Don't dispose injected                    
-                        disposable.Dispose();
-#pragma warning restore IDISP007
-                    }
                 }
 
                 // add cache
