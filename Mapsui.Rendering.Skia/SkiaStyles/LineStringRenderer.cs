@@ -23,16 +23,16 @@ public static class LineStringRenderer
         {
             renderedGeometry = new RenderedGeometry
             {
-                Paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint)
+                LinePaint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint)
             };
-            feature.RenderedGeometry.Add(vectorStyle, renderedGeometry);
+            feature.RenderedGeometry[vectorStyle] = renderedGeometry;
         }
         else
         {
             renderedGeometry = (RenderedGeometry)rendered;
         }
 
-        var paint = renderedGeometry.Paint;
+        var paint = renderedGeometry.LinePaint;
         SKPath path;
 
         if (layer is IModifyFeatureLayer)
@@ -45,7 +45,7 @@ public static class LineStringRenderer
             {
                 return vectorCache.GetOrCreatePath(viewport, lineString, 1, (geometry, viewport, _) =>
                 {
-                    var skRect = vectorCache.GetOrCreateRect(viewport, ViewportExtensions.ToSkiaRect);
+                    var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
                     return geometry.ToSkiaPath(viewport, skRect);
                 });
             }); 

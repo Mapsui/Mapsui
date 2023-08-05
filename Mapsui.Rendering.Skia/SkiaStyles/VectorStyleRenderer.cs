@@ -26,7 +26,7 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                         PolygonRenderer.Draw(canvas, viewport, layer, vectorStyle, rectFeature, rectFeature.Rect.ToPolygon(), opacity, renderCache, renderCache);
                     break;
                 case PointFeature pointFeature:
-                    SymbolStyleRenderer.DrawSymbol(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, new SymbolStyle { Outline = vectorStyle.Outline, Fill = vectorStyle.Fill, Line = vectorStyle.Line });
+                    SymbolStyleRenderer.DrawSymbol(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, new SymbolStyle { Outline = vectorStyle.Outline, Fill = vectorStyle.Fill, Line = vectorStyle.Line }, renderCache, pointFeature);
                     break;
                 case GeometryFeature geometryFeature:
                     switch (geometryFeature.Geometry)

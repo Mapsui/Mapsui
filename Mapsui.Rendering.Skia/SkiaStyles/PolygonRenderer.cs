@@ -30,7 +30,7 @@ internal static class PolygonRenderer
         {
             renderedGeometry = new RenderedGeometry
             {
-                Paint = vectorCache.GetOrCreatePaint(vectorStyle.Outline, opacity, CreateSkPaint),
+                LinePaint = vectorCache.GetOrCreatePaint(vectorStyle.Outline, opacity, CreateSkPaint),
                 FillPaint = vectorCache.GetOrCreatePaint(vectorStyle.Fill, opacity, viewport.Rotation, CreateSkPaint)
             };
             feature.RenderedGeometry[vectorStyle] = renderedGeometry;
@@ -40,7 +40,7 @@ internal static class PolygonRenderer
             renderedGeometry = (RenderedGeometry)rendered;
         }
 
-        var paint = renderedGeometry.Paint;
+        var paint = renderedGeometry.LinePaint;
         var paintFill = renderedGeometry.FillPaint!;
         SKPath path;
         if (layer is IModifyFeatureLayer)
@@ -51,7 +51,7 @@ internal static class PolygonRenderer
         {
             path = renderedGeometry.GetOrCreatePath(viewport, () =>
             {
-                var skRect = vectorCache.GetOrCreateRect(viewport, ViewportExtensions.ToSkiaRect);
+                var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
                 return polygon.ToSkiaPath(viewport, skRect, lineWidth);
             });
         }

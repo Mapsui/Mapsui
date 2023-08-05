@@ -8,52 +8,52 @@ namespace Mapsui.Rendering.Skia.Cache;
 
 public class VectorCache : IVectorCache
 {
-    private readonly ConcurrentDictionary<(Pen? Pen, float Opacity), object> _paintCache = new();
+    private readonly ConcurrentDictionary<(object? Pen, float Opacity), object> _paintCache = new();
     private readonly ConcurrentDictionary<(Brush? Brush, float Opacity, double rotation), object> _fillCache = new();
     private readonly LruCache<(MRect? Rect, double Resolution, object Geometry, float lineWidth), object> _pathCache;
-    private readonly LruCache<Viewport, object> _viewportCache;
+    private readonly LruCache<object, object> _pathParamCache;
     private readonly ISymbolCache _symbolCache;
 
     public VectorCache(ISymbolCache symbolCache, int capacity)
     {
         _pathCache = new(capacity);
-        _viewportCache = new(Math.Min(capacity / 100, 1));
+        _pathParamCache = new(Math.Min(capacity / 10, 1));
         _symbolCache = symbolCache;
     }
 
-    public T GetOrCreatePaint<T>(Pen? pen, float opacity, Func<Pen?, float, T> toPaint) where T : class
+    public T? GetOrCreatePaint<T, TPen>(TPen? pen, float opacity, Func<TPen?, float, T> toPaint) where T : class?
     {
         var key = (pen, opacity);
         if (!_paintCache.TryGetValue(key, out var paint))
         {
             paint = toPaint(pen, opacity);
-            _paintCache[key] = paint;
+            _paintCache[key] = paint!;
         }
 
-        return (T)paint;
+        return (T?)paint;
     }
 
-    public T GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint) where T : class
+    public T? GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint) where T : class?
     {
         var key = (pen: brush, opacity, rotation);
         if (!_fillCache.TryGetValue(key, out var paint))
         {
             paint = toPaint(brush, opacity, rotation, _symbolCache);
-            _fillCache[key] = paint;
+            _fillCache[key] = paint!;
         }
 
-        return (T)paint;
+        return (T?)paint;
     }
 
-    public T GetOrCreateRect<T>(Viewport viewport, Func<Viewport, T> toSkRect)
+    public T GetOrCreatePath<T, TParam>(TParam viewport, Func<TParam, T> toSkRect)
     {
-        if (!_viewportCache.TryGetValue(viewport, out var rect))
+        if (!_pathParamCache.TryGetValue(viewport!, out var rect))
         {
             rect = toSkRect(viewport);
-            _viewportCache[viewport] = rect;
+            _pathParamCache[viewport!] = rect!;
         }
 
-        return (T)rect;
+        return (T)rect!;
     }
 
     public TPath GetOrCreatePath<TPath, TGeometry>(Viewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath) where TPath : class where TGeometry : class
