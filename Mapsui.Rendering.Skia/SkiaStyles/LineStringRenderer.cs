@@ -25,7 +25,7 @@ public static class LineStringRenderer
             {
                 Paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint)
             };
-            feature.RenderedGeometry.Add(vectorStyle, renderedGeometry);
+            feature.RenderedGeometry[vectorStyle] = renderedGeometry;
         }
         else
         {
