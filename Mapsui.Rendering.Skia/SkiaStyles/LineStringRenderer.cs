@@ -43,12 +43,9 @@ public static class LineStringRenderer
         {
             path = renderedGeometry.GetOrCreatePath(viewport, () =>
             {
-                return vectorCache.GetOrCreatePath(viewport, lineString, 1, (geometry, viewport, _) =>
-                {
-                    var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
-                    return geometry.ToSkiaPath(viewport, skRect);
-                });
-            }); 
+                var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
+                return lineString.ToSkiaPath(viewport, skRect);
+            });
         }        
         
 

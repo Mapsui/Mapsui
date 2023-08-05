@@ -21,6 +21,7 @@ internal class RenderedGeometry
         if (Path == null || _viewport != viewport)
         {
             _viewport = viewport;
+            _path?.Dispose();
             return _path = func();
         }
 
