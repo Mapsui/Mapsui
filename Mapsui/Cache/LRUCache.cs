@@ -15,7 +15,7 @@ public class LruCache<TKey, TValue>
     public LruCache(int capacity)
     {
         _capacity = capacity;
-        _cache = new();
+        _cache = new(capacity);
         _list = new LinkedList<TKey>();
     }
 
