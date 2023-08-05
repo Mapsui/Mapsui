@@ -42,19 +42,11 @@ internal static class PolygonRenderer
 
         var paint = renderedGeometry.LinePaint;
         var paintFill = renderedGeometry.FillPaint!;
-        SKPath path;
-        if (layer is IModifyFeatureLayer)
+        var path = renderedGeometry.GetOrCreatePath(viewport, () =>
         {
-            path = polygon.ToSkiaPath(viewport, canvas.LocalClipBounds, lineWidth);
-        }
-        else
-        {
-            path = renderedGeometry.GetOrCreatePath(viewport, () =>
-            {
-                var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
-                return polygon.ToSkiaPath(viewport, skRect, lineWidth);
-            });
-        }
+            var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
+            return polygon.ToSkiaPath(viewport, skRect, lineWidth);
+        });
 
         if (vectorStyle?.Fill?.FillStyle == FillStyle.Solid)
         {

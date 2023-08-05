@@ -21,7 +21,9 @@ internal class RenderedGeometry
         if (Path == null || _viewport != viewport)
         {
             _viewport = viewport;
+#pragma warning disable IDISP007 // Dispose objects before losing scope
             _path?.Dispose();
+#pragma warning restore IDISP007
             return _path = func();
         }
 

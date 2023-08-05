@@ -33,21 +33,11 @@ public static class LineStringRenderer
         }
 
         var paint = renderedGeometry.LinePaint;
-        SKPath path;
-
-        if (layer is IModifyFeatureLayer)
+        var path = renderedGeometry.GetOrCreatePath(viewport, () =>
         {
-            path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);
-        }
-        else
-        {
-            path = renderedGeometry.GetOrCreatePath(viewport, () =>
-            {
-                var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
-                return lineString.ToSkiaPath(viewport, skRect);
-            });
-        }        
-        
+            var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
+            return lineString.ToSkiaPath(viewport, skRect);
+        });
 
         canvas.DrawPath(path, paint);
     }

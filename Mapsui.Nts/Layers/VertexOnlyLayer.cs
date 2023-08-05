@@ -7,7 +7,7 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Nts.Layers;
 
-public class VertexOnlyLayer : BaseLayer, IModifyFeatureLayer
+public class VertexOnlyLayer : BaseLayer
 {
     public override MRect? Extent => Source.Extent;
     public WritableLayer Source { get; }
