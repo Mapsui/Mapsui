@@ -11,12 +11,12 @@ public class NonCachingVectorCache : IVectorCache
         _symbolCache = symbolCache;
     }
 
-    public T GetOrCreatePaint<T, TPen>(TPen? pen, float opacity, Func<TPen?, float, T> toPaint) where T : class
+    public T? GetOrCreatePaint<T, TPen>(TPen? pen, float opacity, Func<TPen?, float, T> toPaint) where T : class?
     {
         return toPaint(pen, opacity);
     }
 
-    public T GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint) where T : class
+    public T? GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint) where T : class?
     {
         return toPaint(brush, opacity, rotation, _symbolCache);
     }
