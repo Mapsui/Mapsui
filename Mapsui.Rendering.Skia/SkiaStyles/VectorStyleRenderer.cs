@@ -26,7 +26,7 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                         PolygonRenderer.Draw(canvas, viewport, layer, vectorStyle, rectFeature, rectFeature.Rect.ToPolygon(), opacity, renderCache, renderCache);
                     break;
                 case PointFeature pointFeature:
-                    SymbolStyleRenderer.DrawSymbol(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, new SymbolStyle { Outline = vectorStyle.Outline, Fill = vectorStyle.Fill, Line = vectorStyle.Line }, renderCache, pointFeature);
+                    SymbolStyleRenderer.DrawSymbol(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, SymbolStyle(vectorStyle), renderCache, pointFeature);
                     break;
                 case GeometryFeature geometryFeature:
                     switch (geometryFeature.Geometry)
@@ -36,7 +36,7 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                                 Draw(canvas, viewport, layer, new GeometryFeature(collection.GetGeometryN(i)), style, renderCache, iteration);
                             break;
                         case Point point:
-                            Draw(canvas, viewport, layer, new PointFeature(point.X, point.Y), style, renderCache, iteration);
+                            SymbolStyleRenderer.DrawSymbol(canvas, viewport, layer, point.X, point.Y, SymbolStyle(vectorStyle), renderCache, feature);
                             break;
                         case Polygon polygon:
                             PolygonRenderer.Draw(canvas, viewport, layer, vectorStyle, feature, polygon, opacity, renderCache, renderCache);
@@ -58,6 +58,11 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
 
         return true;
+    }
+
+    private static SymbolStyle SymbolStyle(VectorStyle vectorStyle)
+    {
+        return new SymbolStyle { Outline = vectorStyle.Outline, Fill = vectorStyle.Fill, Line = vectorStyle.Line };
     }
 
     bool IFeatureSize.NeedsFeature => false;
