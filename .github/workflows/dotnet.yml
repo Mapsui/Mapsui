@@ -280,7 +280,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
+           7.0.306
          include-prerelease: false
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.1.1
