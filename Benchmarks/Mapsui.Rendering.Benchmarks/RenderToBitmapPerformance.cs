@@ -35,6 +35,10 @@ public class RenderToBitmapPerformance
         pngMap = CreateMapControl(RenderFormat.Png);
         webpMap = CreateMapControl(RenderFormat.WebP);
         map = CreateMapControl();
+        skpMap.WaitForLoadingAsync().Wait();
+        pngMap.WaitForLoadingAsync().Wait();
+        webpMap.WaitForLoadingAsync().Wait();
+        map.WaitForLoadingAsync().Wait();
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits", Justification = "Needs to be synchronous")]
@@ -121,7 +125,6 @@ public class RenderToBitmapPerformance
     [Benchmark]
     public async Task RenderDefaultAsync()
     {
-        await map.WaitForLoadingAsync();
         using var bitmap = mapRenderer.RenderToBitmapStream(map.Map.Navigator.Viewport, map.Map!.Layers, Color.White);
 #if DEBUG
         File.WriteAllBytes(@$"{OutputFolder()}\Test.png", bitmap.ToArray());
@@ -131,7 +134,6 @@ public class RenderToBitmapPerformance
     [Benchmark]
     public async Task RenderRasterizingTilingPngAsync()
     {
-        await pngMap.WaitForLoadingAsync();
         using var bitmap = mapRenderer.RenderToBitmapStream(pngMap.Map.Navigator.Viewport, pngMap.Map!.Layers, Color.White);
 #if DEBUG
         File.WriteAllBytes(@$"{OutputFolder()}\Testpng.png", bitmap.ToArray());
@@ -141,7 +143,6 @@ public class RenderToBitmapPerformance
     [Benchmark]
     public async Task RenderRasterizingTilingWebPAsync()
     {
-        await webpMap.WaitForLoadingAsync();
         using var bitmap = mapRenderer.RenderToBitmapStream(webpMap.Map.Navigator.Viewport, webpMap.Map!.Layers, Color.White);
 #if DEBUG
         File.WriteAllBytes(@$"{OutputFolder()}\Testwebp.png", bitmap.ToArray());
@@ -151,7 +152,6 @@ public class RenderToBitmapPerformance
     [Benchmark]
     public async Task RenderRasterizingTilingSkpAsync()
     {
-        await skpMap.WaitForLoadingAsync();
         using var bitmap = mapRenderer.RenderToBitmapStream(skpMap.Map.Navigator.Viewport, skpMap.Map!.Layers, Color.White);
 #if DEBUG
         File.WriteAllBytes(@$"{OutputFolder()}\Testskp.png", bitmap.ToArray());
