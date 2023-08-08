@@ -280,7 +280,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
+           7.0.306
          include-prerelease: false
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.1.1
@@ -297,7 +297,7 @@ jobs:
     #- name: uno-check fix
     #  run: uno-check --fix --non-interactive
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.sln  
+      run: dotnet restore Mapsui.NoMsBuild.slnf  
     - name: Restore dependencies (nuget)
       run: nuget restore Mapsui.MsBuild.slnf      
     # Test Build
@@ -333,7 +333,7 @@ jobs:
       run: |
        ./Scripts/SamplesMapsuiNugetReferences.ps1 $(git describe --tags)       
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.sln  
+      run: dotnet restore Mapsui.NoMsBuild.slnf  
     - name: Restore dependencies (nuget)
       run: nuget restore Mapsui.MsBuild.slnf   
     # Samples Build 
