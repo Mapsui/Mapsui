@@ -1,23 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!--Reenable for Maui RC 1-->    
-    <TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst;net6.0-macos</TargetFrameworks>
+    <TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst;net7.0-macos</TargetFrameworks>
     <SingleProject>true</SingleProject>
     <OutputType>Exe</OutputType>
-    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-ios'">iossimulator-x64</RuntimeIdentifier>
-    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">maccatalyst-x64</RuntimeIdentifier>
-    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-macos'">osx-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net7.0-ios'">iossimulator-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">maccatalyst-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net7.0-macos'">osx-x64</RuntimeIdentifier>
     <!-- Debugger workaround https://github.com/dotnet/maui-samples/blob/8aa6b8780b12e97b157514c3bdc54bb4a13001cd/HelloMacCatalyst/HelloMacCatalyst.csproj#L7 -->
-    <!-- <MtouchExtraArgs Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">$(MtouchExtraArgs) -setenv:MONO_THREADS_SUSPEND=preemptive</MtouchExtraArgs> -->
+    <!-- <MtouchExtraArgs Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">$(MtouchExtraArgs) -setenv:MONO_THREADS_SUSPEND=preemptive</MtouchExtraArgs> -->
     <!-- Required for C# Hot Reload -->
-    <UseInterpreter Condition="'$(Configuration)' == 'Debug' and '$(TargetFramework)' != 'net6.0-maccatalyst' and '$(TargetFramework)' != 'net6.0-macos'">True</UseInterpreter>
+    <UseInterpreter Condition="'$(Configuration)' == 'Debug' and '$(TargetFramework)' != 'net7.0-maccatalyst' and '$(TargetFramework)' != 'net7.0-macos'">True</UseInterpreter>
     <IsUnoHead>true</IsUnoHead>
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.4</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">21.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-ios'">14.4</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-android'">21.0</SupportedOSPlatformVersion>
 	<!-- Workaround for https://github.com/unoplatform/uno/issues/9723 -->
-	<_AndroidApiLevel Condition="'$(TargetFramework)' == 'net6.0-android'">31</_AndroidApiLevel>		
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net6.0-macos'">10.14</SupportedOSPlatformVersion>
+	<_AndroidApiLevel Condition="'$(TargetFramework)' == 'net7.0-android'">31</_AndroidApiLevel>		
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net7.0-macos'">10.14</SupportedOSPlatformVersion>
     <NoWarn>$(NoWarn);NU1008</NoWarn>
   </PropertyGroup>
   <ItemGroup>
@@ -27,7 +27,7 @@
     <PackageReference Include="SkiaSharp.Views.Uno" />
   </ItemGroup>
  <Choose>
-    <When Condition="'$(TargetFramework)'=='net6.0-android'">
+    <When Condition="'$(TargetFramework)'=='net7.0-android'">
       <ItemGroup>         
         <PackageReference Include="Uno.UniversalImageLoader" />
       </ItemGroup>
@@ -35,8 +35,8 @@
         <AndroidEnvironment Include="Android/environment.conf" />
       </ItemGroup>
     </When>
-    <When Condition="'$(TargetFramework)'=='net6.0-ios'">
-      <PropertyGroup Condition="'$(TargetFramework)'=='net6.0-ios'">
+    <When Condition="'$(TargetFramework)'=='net7.0-ios'">
+      <PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
         <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
         <!-- https://github.com/xamarin/xamarin-macios/issues/14812 -->
         <MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable --registrar:static</MtouchExtraArgs>
@@ -45,7 +45,7 @@
         <PackageReference Include="Uno.Extensions.Logging.OSLog" />
       </ItemGroup>
     </When>
-    <When Condition="'$(TargetFramework)'=='net6.0-maccatalyst'">
+    <When Condition="'$(TargetFramework)'=='net7.0-maccatalyst'">
       <PropertyGroup>
         <!-- Configure the GC -->
         <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
@@ -60,7 +60,7 @@
         <PackageReference Include="Uno.Extensions.Logging.OSLog" />
       </ItemGroup>
     </When>
-    <When Condition="'$(TargetFramework)'=='net6.0-macos'">
+    <When Condition="'$(TargetFramework)'=='net7.0-macos'">
       <PropertyGroup>
       </PropertyGroup>
     </When>
