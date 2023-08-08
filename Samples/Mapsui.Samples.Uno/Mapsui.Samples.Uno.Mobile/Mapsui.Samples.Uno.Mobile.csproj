@@ -15,8 +15,8 @@
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-ios'">14.4</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-android'">21.0</SupportedOSPlatformVersion>
-	<!-- Workaround for https://github.com/unoplatform/uno/issues/9723 -->
-	<_AndroidApiLevel Condition="'$(TargetFramework)' == 'net7.0-android'">31</_AndroidApiLevel>		
+	  <!-- Workaround for https://github.com/unoplatform/uno/issues/9723 -->
+	  <_AndroidApiLevel Condition="'$(TargetFramework)' == 'net7.0-android'">33</_AndroidApiLevel>		
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net7.0-macos'">10.14</SupportedOSPlatformVersion>
     <NoWarn>$(NoWarn);NU1008</NoWarn>
   </PropertyGroup>
