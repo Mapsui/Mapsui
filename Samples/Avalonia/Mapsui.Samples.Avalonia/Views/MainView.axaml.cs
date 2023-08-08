@@ -3,35 +3,30 @@ using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Markup.Xaml;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
-using Mapsui.UI.Avalonia.V0;
 
-namespace Mapsui.Samples.Avalonia.V0.Views;
+namespace Mapsui.Samples.Avalonia.Views;
 
-public partial class MainWindow : Window
+public partial class MainView : UserControl
 {
-    static MainWindow()
+    static MainView()
     {
         // todo: find proper way to load assembly
         Mapsui.Tests.Common.Utilities.LoadAssembly();
     }
 
-    public MainWindow()
+    public MainView()
     {
         InitializeComponent();
-#if DEBUG
-        this.AttachDevTools();
-#endif
     }
 
     private void InitializeComponent()
     {
-        AvaloniaXamlLoader.Load(this);
+        InitializeComponent(true);
 
         MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
         MapControl.Map.Navigator.RotationLock = false;
@@ -47,28 +42,23 @@ public partial class MainWindow : Window
         FillListWithSamples();
     }
 
-    private MapControl MapControl => this.FindControl<MapControl>("MapControl");
-    private ComboBox CategoryComboBox => this.FindControl<ComboBox>("CategoryComboBox");
-    private TextBlock FeatureInfo => this.FindControl<TextBlock>("FeatureInfo");
-    private StackPanel SampleList => this.FindControl<StackPanel>("SampleList");
-    private Slider RotationSlider => this.FindControl<Slider>("RotationSlider");
-
-
     private void FillComboBoxWithCategories()
     {
         Tests.Common.Utilities.LoadAssembly();
 
-        var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
+        var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c).ToArray();
 
-        CategoryComboBox.Items = categories;
+        CategoryComboBox.ItemsSource = categories;
 
         CategoryComboBox.SelectedIndex = 1;
     }
 
-    private void MapOnInfo(object? sender, Mapsui.MapInfoEventArgs args)
+    private void MapOnInfo(object? sender, MapInfoEventArgs args)
     {
         if (args.MapInfo?.Feature != null)
+        {
             FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";
+        }
     }
 
     private void FillListWithSamples()
@@ -76,7 +66,9 @@ public partial class MainWindow : Window
         var selectedCategory = CategoryComboBox.SelectedItem?.ToString() ?? "";
         SampleList.Children.Clear();
         foreach (var sample in AllSamples.GetSamples().Where(s => s.Category == selectedCategory))
+        {
             SampleList.Children.Add(CreateRadioButton(sample));
+        }
     }
 
     private void CategoryComboBoxSelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -84,7 +76,7 @@ public partial class MainWindow : Window
         FillListWithSamples();
     }
 
-    private IControl CreateRadioButton(ISampleBase sample)
+    private RadioButton CreateRadioButton(ISampleBase sample)
     {
         var radioButton = new RadioButton
         {
@@ -114,5 +106,4 @@ public partial class MainWindow : Window
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
         MapControl.Map.Navigator.RotateTo(percent * 360);
     }
-
 }

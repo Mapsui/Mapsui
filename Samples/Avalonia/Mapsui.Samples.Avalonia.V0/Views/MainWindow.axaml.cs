@@ -9,9 +9,9 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
-using Mapsui.UI.Avalonia;
+using Mapsui.UI.Avalonia.V0;
 
-namespace Mapsui.Samples.Avalonia.Views;
+namespace Mapsui.Samples.Avalonia.V0.Views;
 
 public partial class MainWindow : Window
 {
@@ -24,11 +24,14 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+#if DEBUG
+        this.AttachDevTools();
+#endif
     }
 
     private void InitializeComponent()
     {
-        InitializeComponent(true, true);
+        AvaloniaXamlLoader.Load(this);
 
         MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
         MapControl.Map.Navigator.RotationLock = false;
@@ -44,14 +47,21 @@ public partial class MainWindow : Window
         FillListWithSamples();
     }
 
+    private MapControl MapControl => this.FindControl<MapControl>("MapControl");
+    private ComboBox CategoryComboBox => this.FindControl<ComboBox>("CategoryComboBox");
+    private TextBlock FeatureInfo => this.FindControl<TextBlock>("FeatureInfo");
+    private StackPanel SampleList => this.FindControl<StackPanel>("SampleList");
+    private Slider RotationSlider => this.FindControl<Slider>("RotationSlider");
+
+
     private void FillComboBoxWithCategories()
     {
         Tests.Common.Utilities.LoadAssembly();
 
-        var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c).ToArray();
+        var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
 
-        CategoryComboBox.ItemsSource = categories;
-        
+        CategoryComboBox.Items = categories;
+
         CategoryComboBox.SelectedIndex = 1;
     }
 
@@ -74,7 +84,7 @@ public partial class MainWindow : Window
         FillListWithSamples();
     }
 
-    private RadioButton CreateRadioButton(ISampleBase sample)
+    private IControl CreateRadioButton(ISampleBase sample)
     {
         var radioButton = new RadioButton
         {
