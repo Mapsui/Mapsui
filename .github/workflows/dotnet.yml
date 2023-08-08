@@ -292,10 +292,10 @@ jobs:
         vs-prerelease: true
     - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
-    - name: uno-check install
-      run: dotnet tool install -g uno.check
-    - name: uno-check fix
-      run: uno-check --fix --non-interactive
+    #- name: uno-check install
+    #  run: dotnet tool install -g uno.check
+    #- name: uno-check fix
+    #  run: uno-check --fix --non-interactive
     - name: Restore dependencies (dotnet)
       run: dotnet restore Mapsui.NoMsBuild.slnf  
     - name: Restore dependencies (nuget)
