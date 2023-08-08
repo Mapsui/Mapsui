@@ -36,7 +36,8 @@ public static class LineStringRenderer
         var path = renderedGeometry.GetOrCreatePath(viewport, () =>
         {
             var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
-            return lineString.ToSkiaPath(viewport, skRect);
+            float strokeWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1f);
+            return lineString.ToSkiaPath(viewport, skRect, strokeWidth);
         });
 
         canvas.DrawPath(path, paint);

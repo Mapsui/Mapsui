@@ -32,8 +32,7 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     switch (geometryFeature.Geometry)
                     {
                         case GeometryCollection collection:
-                            for (var i = 0; i < collection.NumGeometries; i++)
-                                Draw(canvas, viewport, layer, new GeometryFeature(collection.GetGeometryN(i)), style, renderCache, iteration);
+                            PolygonRenderer.Draw(canvas, viewport, layer, vectorStyle, feature, collection, opacity, renderCache, renderCache);
                             break;
                         case Point point:
                             SymbolStyleRenderer.DrawSymbol(canvas, viewport, layer, point.X, point.Y, CreateSymbolStyle(vectorStyle), renderCache, feature);

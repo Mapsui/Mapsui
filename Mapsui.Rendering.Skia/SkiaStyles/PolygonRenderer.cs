@@ -2,10 +2,13 @@
 using System.Buffers;
 using System.Diagnostics.CodeAnalysis;
 using Mapsui.Layers;
+using Mapsui.Nts;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
+using static SkiaSharp.SKPath;
+using Topten.RichTextKit;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -16,6 +19,27 @@ internal static class PolygonRenderer
     /// </summary>
     private const float Scale = 10.0f;
 
+    public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle vectorStyle, IFeature feature,
+        GeometryCollection collection, float opacity, ISymbolCache symbolCache, IVectorCache vectorCache)
+    {
+        if (vectorStyle == null)
+            return;
+
+        var renderedGeometry = RenderedGeometry(viewport, vectorStyle, feature, opacity, vectorCache);
+
+        float lineWidth = Convert.ToSingle(vectorStyle.Outline?.Width ?? 1);
+
+        var paint = renderedGeometry.LinePaint;
+        var paintFill = renderedGeometry.FillPaint!;
+        var path = renderedGeometry.GetOrCreatePath(viewport, () =>
+        {
+            var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
+            return collection.ToSkiaPath(viewport, skRect, lineWidth);
+        });
+
+        DrawPath(canvas, vectorStyle, path, paintFill, paint);
+    }
+
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle vectorStyle, IFeature feature,
         Polygon polygon, float opacity, ISymbolCache symbolCache, IVectorCache vectorCache)
@@ -23,8 +47,24 @@ internal static class PolygonRenderer
         if (vectorStyle == null)
             return;
 
+        var renderedGeometry = RenderedGeometry(viewport, vectorStyle, feature, opacity, vectorCache);
+
         float lineWidth = Convert.ToSingle(vectorStyle.Outline?.Width ?? 1);
 
+        var paint = renderedGeometry.LinePaint;
+        var paintFill = renderedGeometry.FillPaint!;
+        var path = renderedGeometry.GetOrCreatePath(viewport, () =>
+        {
+            var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
+            return polygon.ToSkiaPath(viewport, skRect, lineWidth);
+        });
+
+        DrawPath(canvas, vectorStyle, path, paintFill, paint);
+    }
+
+    private static RenderedGeometry RenderedGeometry(Viewport viewport, VectorStyle vectorStyle, IFeature feature,
+        float opacity, IVectorCache vectorCache)
+    {
         RenderedGeometry? renderedGeometry;
         if (!feature.RenderedGeometry.TryGetValue(vectorStyle, out var rendered))
         {
@@ -40,14 +80,11 @@ internal static class PolygonRenderer
             renderedGeometry = (RenderedGeometry)rendered;
         }
 
-        var paint = renderedGeometry.LinePaint;
-        var paintFill = renderedGeometry.FillPaint!;
-        var path = renderedGeometry.GetOrCreatePath(viewport, () =>
-        {
-            var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
-            return polygon.ToSkiaPath(viewport, skRect, lineWidth);
-        });
+        return renderedGeometry;
+    }
 
+    private static void DrawPath(SKCanvas canvas, VectorStyle vectorStyle, SKPath path, SKPaint paintFill, SKPaint? paint)
+    {
         if (vectorStyle?.Fill?.FillStyle == FillStyle.Solid)
         {
             canvas.DrawPath(path, paintFill);
