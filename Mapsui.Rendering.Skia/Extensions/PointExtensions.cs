@@ -22,10 +22,9 @@ public static class PointExtensions
         var points = ClippingFunctions.ReducePointsToClipRect(new[] { point.Coordinate }, viewport, SKRect.Inflate(clipRect, width + strokeWidth, width + strokeWidth));
         var transformed = points[0];
 
-        var path = new SKPath();
         var skPath = new SKPath();
         skPath.AddCircle(Convert.ToSingle(transformed.X), Convert.ToSingle(transformed.Y), halfWidth);
 
-        return path;
+        return skPath;
     }
 }
