@@ -62,6 +62,6 @@
 	</ItemGroup>
   <PropertyGroup>
     <!-- Workaround for Error NU1008 Projects that use central package version management should not define the version on the PackageReference ..-->
-    <PreBuildEvent>dotnet restore $(MSBuildProjectDirectory)\Mapsui.Samples.Uno.WinUI.csproj</PreBuildEvent>
+    <PreBuildEvent>dotnet restore $(MSBuildProjectDirectory)/Mapsui.Samples.Uno.WinUI.csproj</PreBuildEvent>
   </PropertyGroup>
 </Project>
