@@ -1,6 +1,5 @@
 using System;
 using Windows.UI.Xaml;
-using Mapsui.Samples.Uwp;
 using Microsoft.Extensions.Logging;
 using Uno.Extensions;
 using Uno.UI;
