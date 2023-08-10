@@ -19,6 +19,7 @@
     <_AndroidApiLevel Condition="'$(TargetFramework)' == 'net7.0-android'">33</_AndroidApiLevel>		
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net7.0-macos'">10.14</SupportedOSPlatformVersion>
     <NoWarn>$(NoWarn);NU1008</NoWarn>
+    <AndroidManifest>Android\AndroidManifest.xml</AndroidManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(RuntimeIdentifier)'==''">
     <!-- Default values for command line builds -->
@@ -88,4 +89,8 @@
     <ProjectReference Include="..\..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
   <Import Project="..\Mapsui.Samples.Uno.Shared\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" />
+  <PropertyGroup>
+    <!-- Workaround for Error NU1008 Projects that use central package version management should not define the version on the PackageReference ..-->
+    <PreBuildEvent>dotnet restore $(MSBuildProjectDirectory)\Mapsui.Samples.Uno.Mobile.csproj</PreBuildEvent>
+  </PropertyGroup>
 </Project>
