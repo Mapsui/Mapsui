@@ -24,6 +24,6 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        root.Content = new global::Uno.UI.Skia.Platform.WpfHost(Dispatcher, () => new Mapsui.Samples.Uwp.App());
+        root.Content = new global::Uno.UI.Skia.Platform.WpfHost(Dispatcher, () => new App());
     }
 }

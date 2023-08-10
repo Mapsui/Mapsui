@@ -7,7 +7,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var host = new TizenHost(() => new Mapsui.Samples.Uwp.App(), args);
+        var host = new TizenHost(() => new App(), args);
         host.Run();
     }
 }
