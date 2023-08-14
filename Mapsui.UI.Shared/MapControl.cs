@@ -112,37 +112,45 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void InvalidateTimerCallback(object? state)
     {
-        // In MAUI if you use binding there is an event where the new value is null even though
-        // the current value en the value you are binding to are not null. Perhaps this should be
-        // considered a bug.
-        if (Map is null) return;
-
-        // Check, if we have to redraw the screen
-
-        if (Map.UpdateAnimations() == true)
-            _refresh = true;
-
-        if (Map.Navigator.UpdateAnimations())
-            _refresh = true;
-
-        if (!_refresh)
-            return;
-
-        if (_drawing)
+        try
         {
-            if (_performance != null)
-                _performance.Dropped++;
+            // In MAUI if you use binding there is an event where the new value is null even though
+            // the current value en the value you are binding to are not null. Perhaps this should be
+            // considered a bug.
+            if (Map is null) return;
 
-            return;
+            // Check, if we have to redraw the screen
+
+            if (Map?.UpdateAnimations() == true)
+                _refresh = true;
+
+            // seems that this could be null sometimes
+            if (Map?.Navigator?.UpdateAnimations() ?? false)
+                _refresh = true;
+
+            if (!_refresh)
+                return;
+
+            if (_drawing)
+            {
+                if (_performance != null)
+                    _performance.Dropped++;
+
+                return;
+            }
+
+            if (_invalidated)
+            {
+                return;
+            }
+
+            _invalidated = true;
+            _invalidate?.Invoke();
         }
-
-        if (_invalidated)
+        catch (Exception ex)
         {
-            return;
+            Logger.Log(LogLevel.Error, ex.Message, ex);
         }
-
-        _invalidated = true;
-        _invalidate?.Invoke();
     }
 
     /// <summary>
