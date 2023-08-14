@@ -11,6 +11,7 @@ using Mapsui.Logging;
 using Mapsui.UI.Android.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp.Views.Android;
+using static Android.Views.View;
 using Math = System.Math;
 
 #nullable enable
@@ -184,6 +185,11 @@ public partial class MapControl : ViewGroup, IMapControl
 
         var touchPoints = GetScreenPositions(args.Event, this);
 
+        if (touchPoints.Count > 0 && HandleTouch(args, touchPoints.First()))
+        {
+            return;
+        }
+
         switch (args.Event?.Action)
         {
             case MotionEventActions.Up:
@@ -270,6 +276,18 @@ public partial class MapControl : ViewGroup, IMapControl
                 }
                 break;
         }
+    }
+
+    private bool HandleTouch(TouchEventArgs e, MPoint location)
+    {
+        var action = e.Event?.Action;
+        return action switch
+        {
+            MotionEventActions.Down when HandleTouching(location, true, Math.Max(1, 0), false) => true,
+            MotionEventActions.Up when HandleTouched(location, true, 0, false) => true,
+            MotionEventActions.Move when HandleMoving(location, true, Math.Max(1, 0), false) => true,
+            _ => false
+        };
     }
 
     /// <summary>

@@ -8,7 +8,7 @@
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageId>Mapsui.Android</PackageId>
-    <Description>Xamarin Android map components based on the Mapsui library</Description>
+    <Description>.Net Android map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) android</PackageTags>
 		<IsPackable>true</IsPackable>
   </PropertyGroup>
