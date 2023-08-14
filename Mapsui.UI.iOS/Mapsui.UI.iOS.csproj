@@ -6,7 +6,7 @@
     <ImplicitUsings>true</ImplicitUsings>
     <PackageId>Mapsui.iOS</PackageId>
     <!--<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>-->
-    <Description>Xamarin iOS map components based on the Mapsui library</Description>
+    <Description>.Net iOS map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) ios</PackageTags>
 		<IsPackable>true</IsPackable>
   </PropertyGroup>

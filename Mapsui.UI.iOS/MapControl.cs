@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using CoreFoundation;
-using CoreGraphics;
-using Foundation;
 using Mapsui.Logging;
 using Mapsui.UI.iOS.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp.Views.iOS;
-using UIKit;
 
 #nullable enable
 
@@ -175,6 +169,15 @@ public partial class MapControl : UIView, IMapControl
         base.TouchesBegan(touches, evt);
 
         _virtualRotation = Map.Navigator.Viewport.Rotation;
+
+        if (touches.AnyObject is UITouch touch)
+        {
+            var position = touch.LocationInView(this).ToMapsui();
+            if (HandleTouching(position, true, 1, false))
+            {
+                return;
+            }
+        }
     }
 
     public override void TouchesMoved(NSSet touches, UIEvent? evt)
@@ -186,6 +189,9 @@ public partial class MapControl : UIView, IMapControl
             if (touches.AnyObject is UITouch touch)
             {
                 var position = touch.LocationInView(this).ToMapsui();
+                if (HandleMoving(position, true, 0, false))
+                    return;
+                
                 var previousPosition = touch.PreviousLocationInView(this).ToMapsui();
                 Map.Navigator.Drag(position, previousPosition);
                 _virtualRotation = Map.Navigator.Viewport.Rotation;
@@ -219,6 +225,15 @@ public partial class MapControl : UIView, IMapControl
     public override void TouchesEnded(NSSet touches, UIEvent? e)
     {
         Refresh();
+
+        if (touches.AnyObject is UITouch touch)
+        {
+            var position = touch.LocationInView(this).ToMapsui();
+            if (HandleTouched(position, true, 1, false))
+            {
+                return;
+            }
+        }
     }
 
     /// <summary>
