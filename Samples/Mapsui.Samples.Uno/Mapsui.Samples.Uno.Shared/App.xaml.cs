@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Application = Windows.UI.Xaml.Application;
 
-namespace Mapsui.Samples.Uwp;
+namespace Mapsui.Samples.Uno;
 
 /// <summary>
 /// Provides application-specific behavior to supplement the default Application class.
