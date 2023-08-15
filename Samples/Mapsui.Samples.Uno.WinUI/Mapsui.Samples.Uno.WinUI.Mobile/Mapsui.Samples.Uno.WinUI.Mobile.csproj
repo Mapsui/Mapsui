@@ -65,4 +65,8 @@
 		<ProjectReference Include="..\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.csproj" />
 	</ItemGroup>
 	<Import Project="..\Mapsui.Samples.Uno.WinUI.Base\base.props" />
+  <PropertyGroup>
+    <!-- Workaround for Error NU1008 Projects that use central package version management should not define the version on the PackageReference ..-->
+    <PreBuildEvent>dotnet restore $(MSBuildProjectDirectory)/Mapsui.Samples.Uno.WinUI.Mobile.csproj</PreBuildEvent>
+  </PropertyGroup>
 </Project>

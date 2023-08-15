@@ -1,5 +1,4 @@
 using AppKit;
-using Mapsui.Samples.Uwp;
 
 namespace Mapsui.Samples.Uno.macOS;
 
