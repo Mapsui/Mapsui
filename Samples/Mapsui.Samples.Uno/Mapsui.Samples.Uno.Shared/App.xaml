@@ -1,5 +1,5 @@
 ﻿<Application
-    x:Class="Mapsui.Samples.Uwp.App"
+    x:Class="Mapsui.Samples.Uno.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     RequestedTheme="Light">
