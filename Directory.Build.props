@@ -41,12 +41,15 @@
 	  <Compile Include="$(MSBuildThisFileDirectory)/InitProperty.cs" />
   </ItemGroup>
 
+	<ItemGroup Condition="'$(SolutionName)'=='Mapsui.Mac.Legacy'" >
+		<!--Specify Compiler for Mac Builds-->
+		<PackageReference Include="Microsoft.Net.Compilers.Toolset" VersionOverride="4.7.0-2.final">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
   <ItemGroup>
-    <!--Specify Compiler for Mac Builds-->
-    <PackageReference Include="Microsoft.Net.Compilers.Toolset">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
     <!--Disposable Analyzer-->
     <PackageReference Include="IDisposableAnalyzers">
         <PrivateAssets>all</PrivateAssets>

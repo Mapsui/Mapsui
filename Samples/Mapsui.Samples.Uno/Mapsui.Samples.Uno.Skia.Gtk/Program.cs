@@ -1,6 +1,5 @@
 using System;
 using GLib;
-using Mapsui.Samples.Uwp;
 using Uno.UI.Runtime.Skia;
 
 namespace Mapsui.Samples.Uno.Skia.Gtk;
