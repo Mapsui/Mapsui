@@ -15,7 +15,7 @@ using Mapsui.Tiling;
 using Mapsui.UI;
 using RadioButton = Windows.UI.Xaml.Controls.RadioButton;
 
-namespace Mapsui.Samples.Uwp;
+namespace Mapsui.Samples.Uno;
 
 // ReSharper disable once RedundantExtendsListEntry
 public sealed partial class MainPage : Page

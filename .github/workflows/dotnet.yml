@@ -280,7 +280,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
+           7.0.306
          include-prerelease: false
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.1.1
@@ -292,8 +292,14 @@ jobs:
         vs-prerelease: true
     - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
-    - name: Restore dependencies
-      run: nuget restore Mapsui.sln     
+    #- name: uno-check install
+    #  run: dotnet tool install -g uno.check
+    #- name: uno-check fix
+    #  run: uno-check --fix --non-interactive
+    - name: Restore dependencies (dotnet)
+      run: dotnet restore Mapsui.NoMsBuild.slnf  
+    - name: Restore dependencies (nuget)
+      run: nuget restore Mapsui.MsBuild.slnf      
     # Test Build
     - name: Mapsui.Nts.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Nts.Tests/Mapsui.Nts.Tests.csproj
@@ -326,8 +332,10 @@ jobs:
       shell: pwsh
       run: |
        ./Scripts/SamplesMapsuiNugetReferences.ps1 $(git describe --tags)       
-    - name: Restore dependencies
-      run: nuget restore Mapsui.sln      
+    - name: Restore dependencies (dotnet)
+      run: dotnet restore Mapsui.NoMsBuild.slnf  
+    - name: Restore dependencies (nuget)
+      run: nuget restore Mapsui.MsBuild.slnf   
     # Samples Build 
     - name: Mapsui.Samples.Avalonia
       run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj

@@ -1,4 +1,3 @@
-using Mapsui.Samples.Uwp;
 using UIKit;
 
 namespace Mapsui.Samples.Uno;

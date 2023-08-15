@@ -298,7 +298,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Called whenever a property is changed
     /// </summary>
-#if __FORMS__ || __MAUI__ || __AVALONIA__
+#if __FORMS__ || __MAUI__ || __AVALONIA__ || __AVALONIA_V0__
     public new event PropertyChangedEventHandler? PropertyChanged;
 #else
     public event PropertyChangedEventHandler? PropertyChanged;
