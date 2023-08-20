@@ -28,6 +28,7 @@ public class EditManager
     private readonly AddInfo _addInfo = new();
     private readonly RotateInfo _rotateInfo = new();
     private readonly ScaleInfo _scaleInfo = new();
+    private double _draggingResolution = 1;
 
     public EditMode EditMode { get; set; }
 
@@ -159,7 +160,7 @@ public class EditManager
             return null;
 
         return vertices.OrderBy(v => v.Distance(mapInfo.WorldPosition.ToCoordinate()))
-            .FirstOrDefault(v => v.Distance(mapInfo.WorldPosition.ToCoordinate()) < mapInfo.Resolution * screenDistance * 100);
+            .FirstOrDefault(v => v.Distance(mapInfo.WorldPosition.ToCoordinate()) < mapInfo.Resolution * screenDistance);
     }
 
     public bool StartDragging(MapInfo mapInfo, double screenDistance)
@@ -171,17 +172,19 @@ public class EditManager
                 if (mapInfo.Feature is GeometryFeature geometryFeature)
                 {
                     var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainCoordinates() ?? new List<Coordinate>(), screenDistance);
-                    if (vertexTouched != null)
+                    _dragInfo.Feature = geometryFeature;
+                    _dragInfo.Vertex = vertexTouched;
+                    if (mapInfo.WorldPosition != null && _dragInfo.Vertex != null)
                     {
-                        _dragInfo.Feature = geometryFeature;
-                        _dragInfo.Vertex = vertexTouched;
-                        if (mapInfo.WorldPosition != null && _dragInfo.Vertex != null)
-                        {
-                            _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition - _dragInfo.Vertex.ToMPoint();
-                        }
-
-                        return true; // to indicate start of drag
+                        _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition - _dragInfo.Vertex.ToMPoint();
                     }
+                    else if (_dragInfo.Feature != null)
+                    {
+                        _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition - mapInfo.Feature.Extent.Centroid;
+                        _dragInfo.VertexFeature = mapInfo.Feature.Extent.Centroid.ToCoordinate();
+                    }
+                  
+                    return true; // to indicate start of drag
                 }
             }
         }
@@ -190,11 +193,11 @@ public class EditManager
 
     public bool Dragging(Point? worldPosition)
     {
-        if (EditMode != EditMode.Modify || _dragInfo.Feature == null || worldPosition == null || _dragInfo.StartOffsetToVertex == null) return false;
+        if (EditMode != EditMode.Modify || _dragInfo.Feature == null || worldPosition == null || (_dragInfo.StartOffsetToVertex == null)) return false;
 
         // set the boundary value at 10 to decide the way of dragging
         // try to modify vertex itself, if the worldPosition of mouse-clicking is close to the _draginfo.Vertex
-        if (worldPosition.Distance(_dragInfo.Vertex!.ToPoint()) < 10)
+        if (_dragInfo.Vertex != null)
         {
             _dragInfo.Vertex.SetXY(worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex);
 
@@ -211,9 +214,9 @@ public class EditManager
                     else if (index == vertices.Length) vertices[0].SetXY(vertices[count - 1]);
             }
         }
-        else  // NEW: try to drag the whole feature when the position of dragging is inside the geometry
+        else if (_dragInfo.VertexFeature != null)  // NEW: try to drag the whole feature when the position of dragging is inside the geometry
         {
-            MPoint prevtx = _dragInfo.Vertex!.ToMPoint(); // record the previous position
+            MPoint prevtx = _dragInfo.VertexFeature.ToMPoint(); // record the previous position
             MPoint newvtx = worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex; // new position
 
             if (_dragInfo.Feature.Geometry is Polygon polygon)
@@ -237,6 +240,7 @@ public class EditManager
                 var vertice = point.Coordinate;
                 vertice.SetXY(vertice.ToMPoint() + (newvtx - prevtx));  // adding the offset
             }
+            _dragInfo.VertexFeature.SetXY(worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex);
         }
 
         _dragInfo.Feature.RenderedGeometry.Clear();
