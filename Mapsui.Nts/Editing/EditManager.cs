@@ -28,7 +28,6 @@ public class EditManager
     private readonly AddInfo _addInfo = new();
     private readonly RotateInfo _rotateInfo = new();
     private readonly ScaleInfo _scaleInfo = new();
-    private double _draggingResolution = 1;
 
     public EditMode EditMode { get; set; }
 
