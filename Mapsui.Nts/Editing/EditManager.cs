@@ -174,14 +174,17 @@ public class EditManager
                     var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainCoordinates() ?? new List<Coordinate>(), screenDistance);
                     _dragInfo.Feature = geometryFeature;
                     _dragInfo.Vertex = vertexTouched;
-                    if (mapInfo.WorldPosition != null && _dragInfo.Vertex != null)
+                    if (mapInfo.WorldPosition != null)
                     {
-                        _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition - _dragInfo.Vertex.ToMPoint();
-                    }
-                    else if (_dragInfo.Feature != null)
-                    {
-                        _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition - mapInfo.Feature.Extent.Centroid;
-                        _dragInfo.VertexFeature = mapInfo.Feature.Extent.Centroid.ToCoordinate();
+                        if (_dragInfo.Vertex != null)
+                        {
+                            _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition - _dragInfo.Vertex.ToMPoint();
+                        }
+                        else if (_dragInfo.Feature != null && mapInfo.Feature.Extent != null)
+                        {
+                            _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition - mapInfo.Feature.Extent.Centroid;
+                            _dragInfo.VertexFeature = mapInfo.Feature.Extent.Centroid.ToCoordinate();
+                        }
                     }
                   
                     return true; // to indicate start of drag
