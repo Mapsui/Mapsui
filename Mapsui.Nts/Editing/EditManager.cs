@@ -177,12 +177,14 @@ public class EditManager
                     {
                         if (_dragInfo.Vertex != null)
                         {
+                            _dragInfo.DraggingFeature = false;
                             _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition - _dragInfo.Vertex.ToMPoint();
                         }
                         else if (_dragInfo.Feature != null && mapInfo.Feature.Extent != null)
                         {
                             _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition - mapInfo.Feature.Extent.Centroid;
-                            _dragInfo.VertexFeature = mapInfo.Feature.Extent.Centroid.ToCoordinate();
+                            _dragInfo.Vertex = mapInfo.Feature.Extent.Centroid.ToCoordinate();
+                            _dragInfo.DraggingFeature = true;
                         }
                     }
                   
@@ -197,52 +199,57 @@ public class EditManager
     {
         if (EditMode != EditMode.Modify || _dragInfo.Feature == null || worldPosition == null || (_dragInfo.StartOffsetToVertex == null)) return false;
 
-        // set the boundary value at 10 to decide the way of dragging
-        // try to modify vertex itself, if the worldPosition of mouse-clicking is close to the _draginfo.Vertex
         if (_dragInfo.Vertex != null)
         {
-            _dragInfo.Vertex.SetXY(worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex);
-
-            if (_dragInfo.Feature.Geometry is Polygon polygon) // Not this only works correctly it the feature is in the outer ring.
+            // only modify the vertex if it is not moving a feature
+            if (!_dragInfo.DraggingFeature)
             {
-                var count = polygon.ExteriorRing?.Coordinates.Length ?? 0;
-                var vertices = polygon.ExteriorRing?.Coordinates ?? Array.Empty<Coordinate>();
-                var index = vertices.ToList().IndexOf(_dragInfo.Vertex!);
-                if (index >= 0)
-                    // It is a ring where the first should be the same as the last.
-                    // So if the first was removed than set the last to the value of the new first
-                    if (index == 0) vertices[count - 1].SetXY(vertices[0]);
-                    // If the last was removed then set the first to the value of the new last
-                    else if (index == vertices.Length) vertices[0].SetXY(vertices[count - 1]);
-            }
-        }
-        else if (_dragInfo.VertexFeature != null)  // NEW: try to drag the whole feature when the position of dragging is inside the geometry
-        {
-            MPoint prevtx = _dragInfo.VertexFeature.ToMPoint(); // record the previous position
-            MPoint newvtx = worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex; // new position
+                _dragInfo.Vertex.SetXY(worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex);
 
-            if (_dragInfo.Feature.Geometry is Polygon polygon)
-            {
-                var vertices = polygon.ExteriorRing?.Coordinates ?? Array.Empty<Coordinate>();
-                foreach (Coordinate vtx in vertices) // modify every vertex on the ring
+                if (_dragInfo.Feature
+                        .Geometry is Polygon
+                    polygon) // Not this only works correctly it the feature is in the outer ring.
                 {
-                    vtx.SetXY(vtx.ToMPoint() + (newvtx - prevtx)); // adding the offset
+                    var count = polygon.ExteriorRing?.Coordinates.Length ?? 0;
+                    var vertices = polygon.ExteriorRing?.Coordinates ?? Array.Empty<Coordinate>();
+                    var index = vertices.ToList().IndexOf(_dragInfo.Vertex!);
+                    if (index >= 0)
+                        // It is a ring where the first should be the same as the last.
+                        // So if the first was removed than set the last to the value of the new first
+                        if (index == 0) vertices[count - 1].SetXY(vertices[0]);
+                        // If the last was removed then set the first to the value of the new last
+                        else if (index == vertices.Length) vertices[0].SetXY(vertices[count - 1]);
                 }
             }
-            else if (_dragInfo.Feature.Geometry is LineString lineString)
+            else // NEW: try to drag the whole feature when the position of dragging is inside the geometry
             {
-                var vertices = lineString.Coordinates ?? Array.Empty<Coordinate>();
-                foreach (Coordinate vtx in vertices)    // modify every vertex on the line
+                MPoint prevtx = _dragInfo.Vertex.ToMPoint(); // record the previous position
+                MPoint newvtx = worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex; // new position
+
+                if (_dragInfo.Feature.Geometry is Polygon polygon)
                 {
-                    vtx.SetXY(vtx.ToMPoint() + (newvtx - prevtx));  // adding the offset
+                    var vertices = polygon.ExteriorRing?.Coordinates ?? Array.Empty<Coordinate>();
+                    foreach (Coordinate vtx in vertices) // modify every vertex on the ring
+                    {
+                        vtx.SetXY(vtx.ToMPoint() + (newvtx - prevtx)); // adding the offset
+                    }
                 }
+                else if (_dragInfo.Feature.Geometry is LineString lineString)
+                {
+                    var vertices = lineString.Coordinates ?? Array.Empty<Coordinate>();
+                    foreach (Coordinate vtx in vertices) // modify every vertex on the line
+                    {
+                        vtx.SetXY(vtx.ToMPoint() + (newvtx - prevtx)); // adding the offset
+                    }
+                }
+                else if (_dragInfo.Feature.Geometry is Point point)
+                {
+                    var vertice = point.Coordinate;
+                    vertice.SetXY(vertice.ToMPoint() + (newvtx - prevtx)); // adding the offset
+                }
+
+                _dragInfo.Vertex.SetXY(worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex);
             }
-            else if (_dragInfo.Feature.Geometry is Point point)
-            {
-                var vertice = point.Coordinate;
-                vertice.SetXY(vertice.ToMPoint() + (newvtx - prevtx));  // adding the offset
-            }
-            _dragInfo.VertexFeature.SetXY(worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex);
         }
 
         _dragInfo.Feature.RenderedGeometry.Clear();
