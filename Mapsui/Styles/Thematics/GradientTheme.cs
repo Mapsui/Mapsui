@@ -114,7 +114,7 @@ public class GradientTheme : Style, IThemeStyle
     public IStyle? GetStyle(IFeature row)
     {
         double attr;
-        try { attr = Convert.ToDouble(row[ColumnName.ToUpper()]); }
+        try { attr = Convert.ToDouble(row[ColumnName]); }
         catch { throw new Exception("Invalid Attribute type in Gradient Theme - Couldn't parse attribute (must be numerical)"); }
         if (MinStyle.GetType() != MaxStyle.GetType())
             throw new ArgumentException("MinStyle and MaxStyle must be of the same type");
