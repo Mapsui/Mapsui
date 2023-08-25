@@ -84,6 +84,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControlPointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
     {
         _previousMousePosition = null;
+        ClearTouchState();
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
