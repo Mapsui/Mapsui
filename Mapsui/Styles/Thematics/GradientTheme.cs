@@ -83,7 +83,7 @@ public class GradientTheme : Style, IThemeStyle
     /// min.Outline.Width = 1f; //Outline width of the minimum value
     /// max.Outline.Width = 3f; //Outline width of the maximum value
     /// //Create a theme interpolating population density between 0 and 400
-    /// Mapsui.Rendering.Thematics.GradientTheme popdens = new Mapsui.Rendering.Thematics.GradientTheme("PopDens", 0, 400, min, max);
+    /// Mapsui.Rendering.Thematics.GradientTheme popdens = new Mapsui.Rendering.Thematics.GradientTheme("POPDENS", 0, 400, min, max);
     /// //Set the fill-style colors to be a rainbow blend from red to blue.
     /// popdens.FillColorBlend = Mapsui.Rendering.Thematics.ColorBlend.Rainbow5;
     /// myVectorLayer.Styles.Add(popdens);
@@ -114,7 +114,7 @@ public class GradientTheme : Style, IThemeStyle
     public IStyle? GetStyle(IFeature row)
     {
         double attr;
-        try { attr = Convert.ToDouble(row[ColumnName.ToUpper()]); }
+        try { attr = Convert.ToDouble(row[ColumnName]); }
         catch { throw new Exception("Invalid Attribute type in Gradient Theme - Couldn't parse attribute (must be numerical)"); }
         if (MinStyle.GetType() != MaxStyle.GetType())
             throw new ArgumentException("MinStyle and MaxStyle must be of the same type");
