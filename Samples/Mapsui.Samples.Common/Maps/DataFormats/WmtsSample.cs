@@ -24,6 +24,7 @@ public class WmtsSample : ISample
         };
         map.Layers.Add(await CreateLayerAsync());
         map.Layers.Add(GeodanOfficesLayerBuilder.Create());
+        map.Home = (n) => n.CenterOnAndZoomTo(new MPoint(155000, 463000), 500);
         return map;
     }
 
@@ -33,7 +34,7 @@ public class WmtsSample : ISample
 
         using var response = await (DefaultCache as IUrlPersistentCache).UrlCachedStreamAsync(url);
         var tileSources = WmtsParser.Parse(response);
-        var nature2000TileSource = tileSources.First(t => t.Name == "natura2000");
+        var nature2000TileSource = tileSources.FirstOrDefault(t => t.Name == "top1000raster") ?? tileSources.First();
         if (DefaultCache != null)
         {
             nature2000TileSource.PersistentCache = DefaultCache;
