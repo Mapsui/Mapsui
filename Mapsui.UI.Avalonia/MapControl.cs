@@ -16,6 +16,7 @@ using Avalonia.Threading;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.UI.Avalonia.Extensions;
+using Mapsui.UI.Avalonia.Utils;
 using Mapsui.UI.Utils;
 using Mapsui.Utilities;
 using ReactiveUI;
