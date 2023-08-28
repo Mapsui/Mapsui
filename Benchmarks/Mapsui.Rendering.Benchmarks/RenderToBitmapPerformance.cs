@@ -115,7 +115,7 @@ public class RenderToBitmapPerformance
         var max = new VectorStyle { Outline = new Pen { Color = Color.Black } };
 
         // Create theme using a density from 0 (min) to 400 (max)
-        return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
+        return new GradientTheme("POPDENS", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
     }
 
     [Benchmark]
