@@ -17,6 +17,7 @@ using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.UI.Avalonia.Extensions;
 using Mapsui.UI.Utils;
+using Mapsui.Utilities;
 using ReactiveUI;
 
 namespace Mapsui.UI.Avalonia;
@@ -301,6 +302,67 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         }
 
         return 1f;
+    }
+
+    private bool OnPinchMove(List<MPoint> touchPoints)
+    {
+        if (touchPoints.Count != 2)
+            return false;
+
+        var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
+        var (center, radius, angle) = GetPinchValues(touchPoints);
+
+        double rotationDelta = 0;
+
+        if (Map.Navigator.RotationLock == false)
+        {
+            var deltaRotation = angle - prevAngle;
+            _virtualRotation += deltaRotation;
+
+            rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
+                _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+        }
+
+        if (prevCenter != null)
+            Map.Navigator.Pinch(center, prevCenter, radius / prevRadius, rotationDelta);
+
+        (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
+
+        RefreshGraphics();
+        return true;
+    }
+
+    private void OnPinchStart(List<MPoint> touchPoints)
+    {
+        if (touchPoints.Count == 2)
+        {
+            (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
+            _virtualRotation = Map.Navigator.Viewport.Rotation;
+        }
+    }
+
+    private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
+    {
+        if (locations.Count < 2)
+            throw new ArgumentException();
+
+        double centerX = 0;
+        double centerY = 0;
+
+        foreach (var location in locations)
+        {
+            centerX += location.X;
+            centerY += location.Y;
+        }
+
+        centerX = centerX / locations.Count;
+        centerY = centerY / locations.Count;
+
+        var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
+
+        var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
+
+        return (new MPoint(centerX, centerY), radius, angle);
     }
 
     private sealed class MapsuiCustomDrawOp : ICustomDrawOperation
