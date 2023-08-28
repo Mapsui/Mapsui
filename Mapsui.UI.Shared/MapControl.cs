@@ -71,15 +71,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
 
-    /// <summary> Virtual Rotation </summary>
-    private double _virtualRotation;
-    /// <summary> Previous Center for Pinch </summary>
-    private MPoint? _previousCenter;
-    /// <summary> Saver for angle before last pinch movement </summary>
-    private double _previousAngle;
-    /// <summary> Saver for radius before last pinch movement </summary>
-    private double _previousRadius = 1f;
-
     private protected void CommonInitialize()
     {
         // Create map

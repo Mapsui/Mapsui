@@ -33,6 +33,15 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private MPoint? _previousMousePosition;
     private double _mouseWheelPos = 0.0;
 
+    /// <summary> Virtual Rotation </summary>
+    private double _virtualRotation;
+    /// <summary> Previous Center for Pinch </summary>
+    private MPoint? _previousCenter;
+    /// <summary> Saver for angle before last pinch movement </summary>
+    private double _previousAngle;
+    /// <summary> Saver for radius before last pinch movement </summary>
+    private double _previousRadius = 1f;
+
     // Touch Handling
     private readonly ConcurrentDictionary<long, TouchEvent> _touches = new();
 
