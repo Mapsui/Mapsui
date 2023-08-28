@@ -91,7 +91,7 @@ public class ShapefileSample : ISample
         var bitmapId = typeof(ShapefileSample).LoadBitmapId(@"Images.icon.png");
         var cityMin = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.5f };
         var cityMax = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 1f };
-        return new GradientTheme("Population", 1000000, 5000000, cityMin, cityMax);
+        return new GradientTheme("POPULATION", 1000000, 5000000, cityMin, cityMax);
     }
 
     private static IThemeStyle CreateCountryTheme()
@@ -105,7 +105,7 @@ public class ShapefileSample : ISample
         var max = new VectorStyle { Outline = new Pen { Color = Color.Black } };
 
         // Create theme using a density from 0 (min) to 400 (max)
-        return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
+        return new GradientTheme("POPDENS", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
     }
 
     private static LabelStyle CreateCityLabelStyle()
@@ -145,6 +145,6 @@ public class ShapefileSample : ISample
             LabelColumn = "NAME"
         };
 
-        return new GradientTheme("PopDens", 0, 400, lblMin, lblMax);
+        return new GradientTheme("POPDENS", 0, 400, lblMin, lblMax);
     }
 }
