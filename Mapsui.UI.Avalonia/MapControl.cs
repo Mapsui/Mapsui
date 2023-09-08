@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
@@ -14,6 +16,10 @@ using Avalonia.Threading;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.UI.Avalonia.Extensions;
+using Mapsui.UI.Avalonia.Utils;
+using Mapsui.UI.Utils;
+using Mapsui.Utilities;
+using ReactiveUI;
 
 namespace Mapsui.UI.Avalonia;
 
@@ -27,6 +33,18 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private MPoint? _previousMousePosition;
     private double _mouseWheelPos = 0.0;
 
+    /// <summary> Virtual Rotation </summary>
+    private double _virtualRotation;
+    /// <summary> Previous Center for Pinch </summary>
+    private MPoint? _previousCenter;
+    /// <summary> Saver for angle before last pinch movement </summary>
+    private double _previousAngle;
+    /// <summary> Saver for radius before last pinch movement </summary>
+    private double _previousRadius = 1f;
+
+    // Touch Handling
+    private readonly ConcurrentDictionary<long, TouchEvent> _touches = new();
+
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
 
     public MapControl()
@@ -34,6 +52,12 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         ClipToBounds = true;
         CommonInitialize();
         Initialize();
+    }
+
+    /// <summary> Clears the Touch State </summary>
+    public void ClearTouchState()
+    {
+        _touches.Clear();
     }
 
     private void Initialize()
@@ -71,6 +95,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControlPointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
     {
         _previousMousePosition = null;
+        ClearTouchState();
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -89,7 +114,13 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControl_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var leftButtonPressed = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
-        if (HandleTouching(e.GetPosition(this).ToMapsui(), leftButtonPressed, e.ClickCount, ShiftPressed))
+        var location = e.GetPosition(this).ToMapsui();
+        // Save time, when the event occurs
+        var ticks = DateTime.Now.Ticks;
+        _touches[e.Pointer.Id] = new TouchEvent(e.Pointer.Id, location, ticks);
+        OnPinchStart(_touches.Select(t => t.Value.Location).ToList());
+
+        if (HandleTouching(location, leftButtonPressed, e.ClickCount, ShiftPressed))
         {
             e.Handled = true;
             return;
@@ -145,11 +176,15 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControlMouseLeave(object? sender, PointerEventArgs e)
     {
         _previousMousePosition = null;
+        ClearTouchState();
     }
 
     private void MapControlMouseMove(object? sender, PointerEventArgs e)
     {
+        // Save time, when the event occurs
+        var ticks = DateTime.Now.Ticks;
         _currentMousePosition = e.GetPosition(this).ToMapsui(); // Needed for both MouseMove and MouseWheel event
+        _touches[e.Pointer.Id] = new TouchEvent(e.Pointer.Id, _currentMousePosition, ticks);
 
         if (_mouseDown)
         {
@@ -161,6 +196,12 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
                 return;
             }
 
+            if (OnPinchMove(_touches.Select(t => t.Value.Location).ToList()))
+            {
+                e.Handled = true;
+                return;
+            }
+
             Map.Navigator.Drag(_currentMousePosition, _previousMousePosition);
             _previousMousePosition = _currentMousePosition;
         }
@@ -168,6 +209,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
+        _touches.TryRemove(e.Pointer.Id, out _);
+
         var leftButtonPressed = e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased;
         if (HandleTouched(e.GetPosition(this).ToMapsui(), leftButtonPressed, 1, ShiftPressed))
         {
@@ -269,6 +312,67 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         }
 
         return 1f;
+    }
+
+    private bool OnPinchMove(List<MPoint> touchPoints)
+    {
+        if (touchPoints.Count != 2)
+            return false;
+
+        var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
+        var (center, radius, angle) = GetPinchValues(touchPoints);
+
+        double rotationDelta = 0;
+
+        if (Map.Navigator.RotationLock == false)
+        {
+            var deltaRotation = angle - prevAngle;
+            _virtualRotation += deltaRotation;
+
+            rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
+                _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+        }
+
+        if (prevCenter != null)
+            Map.Navigator.Pinch(center, prevCenter, radius / prevRadius, rotationDelta);
+
+        (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
+
+        RefreshGraphics();
+        return true;
+    }
+
+    private void OnPinchStart(List<MPoint> touchPoints)
+    {
+        if (touchPoints.Count == 2)
+        {
+            (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
+            _virtualRotation = Map.Navigator.Viewport.Rotation;
+        }
+    }
+
+    private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
+    {
+        if (locations.Count < 2)
+            throw new ArgumentException();
+
+        double centerX = 0;
+        double centerY = 0;
+
+        foreach (var location in locations)
+        {
+            centerX += location.X;
+            centerY += location.Y;
+        }
+
+        centerX = centerX / locations.Count;
+        centerY = centerY / locations.Count;
+
+        var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
+
+        var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
+
+        return (new MPoint(centerX, centerY), radius, angle);
     }
 
     private sealed class MapsuiCustomDrawOp : ICustomDrawOperation
