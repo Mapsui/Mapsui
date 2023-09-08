@@ -2,7 +2,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.IO.Compression;
-using System.Security.AccessControl;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Cache;
@@ -256,8 +255,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 
         return (bytes, NoCompression);
     }
-
-    [return: NotNullIfNotNull("bytes")]
+    
     private byte[]? Decompress(byte[]? bytes, string? compression)
     {
         if (bytes == null || string.IsNullOrEmpty(compression) || string.Equals(compression, NoCompression, StringComparison.InvariantCultureIgnoreCase))
