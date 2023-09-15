@@ -18,9 +18,8 @@
 - Everything to .NET 6
 - Remove:
   - Xamarin.Forms
-  - Xamarin.Android
-  - Xamarin.iOS
-  - Uno UWP (not Uno WinUI)
+  - Uno UWP (but not Uno WinUI)
+  - Mapsui.Avalonia.V0
 - Merge MapView functionality into MapControl.
 
 ## Mapsui 6
