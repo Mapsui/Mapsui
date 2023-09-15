@@ -180,7 +180,7 @@ public class ImageDataSample : ISample
         return new SKPoint((float)x, (float)y);
     }
 
-    private static Random _random = new Random();
+    private static Random _random = new Random(1234);
     private static SKColor[] _dataColors = { SKColors.Blue, SKColors.LightBlue, SKColors.Green, SKColors.LightGreen, SKColors.Yellow, SKColors.Orange, SKColors.Red, SKColors.Pink };
     private static int _numOfDataColors = _dataColors.Length;
 
