@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
@@ -11,7 +7,6 @@ using Mapsui.Logging;
 using Mapsui.UI.Android.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp.Views.Android;
-using static Android.Views.View;
 using Math = System.Math;
 
 #nullable enable
