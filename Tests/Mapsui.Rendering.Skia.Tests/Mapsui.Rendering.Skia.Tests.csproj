@@ -392,11 +392,15 @@
     <None Remove="Resources\Images\OriginalRegression\EditingModifySample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\EditingRotateSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\EditingScaleSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\ImageDataSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\ModifyScaleSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\MyLocationLayerSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\PolygonGeometrySample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\ProjectionTestSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\RasterizingTileLayerWithThousandsOfPolygonsSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\WfsPointsSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\WmsBasilicataSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\WmsOpenSeaSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\WmsProjectionDotSpatialSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\WmsProjectionSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\WmsProjectionTilingSample.Regression.png" />

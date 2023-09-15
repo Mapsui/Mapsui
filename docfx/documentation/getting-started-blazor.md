@@ -26,6 +26,14 @@ In Index.razor add this to the to Page.
         </div>
     </div>
 </div>
+
+<style>
+    .canvas-container canvas {
+        width: 100%;
+        height: 80vh;
+    }
+</style>
+
 ```
 ```csharp
 @code 
