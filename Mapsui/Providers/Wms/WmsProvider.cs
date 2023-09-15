@@ -61,10 +61,14 @@ public class WmsProvider : IProvider, IProjectingProvider
     /// <param name="persistentCache"></param>
     /// <param name="wmsVersion">Version number of wms leave null to get the default service version</param>
     /// <param name="getStreamAsync">Download method, leave null for default</param>
-    public static async Task<WmsProvider> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
+    /// <param name="userAgent">user Agent</param>
+    public static async Task<WmsProvider> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
     {
-        var client = await Client.CreateAsync(url, wmsVersion, getStreamAsync, persistentCache: persistentCache ?? DefaultCache);
-        var provider = new WmsProvider(client, persistentCache: persistentCache?? DefaultCache);
+        var client = await Client.CreateAsync(url, wmsVersion, getStreamAsync, persistentCache: persistentCache ?? DefaultCache, userAgent);
+        var provider = new WmsProvider(client, persistentCache: persistentCache?? DefaultCache)
+        {
+            UserAgent = userAgent
+        };
         provider.InitialiseGetStreamAsyncMethod(getStreamAsync);
         return provider;
     }
@@ -520,6 +524,7 @@ public class WmsProvider : IProvider, IProjectingProvider
     public Dictionary<string, string>? ExtraParams { get; set; }
 
     public string? CRS { get; set; }
+    public string? UserAgent { get; set; }
 
     public MRect? GetExtent()
     {
@@ -566,6 +571,7 @@ public class WmsProvider : IProvider, IProjectingProvider
         }
            
         var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
+        client.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent ?? "If you use Mapsui please specify a user-agent specific to your app");
         var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type?.ToUpper() ?? "GET"), url);
         var response = await client.SendAsync(req);
 
