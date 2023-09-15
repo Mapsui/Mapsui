@@ -161,6 +161,7 @@ public class Client
     private WmsOnlineResource[]? _getFeatureInfoRequests;
     private string _wmsVersion = "1.0.0"; // set default value
     private WmsServerLayer _layer;
+    private readonly string? _userAgent;
 
     /// <summary>
     /// Gets the service description
@@ -209,9 +210,10 @@ public class Client
     /// <param name="wmsVersion">WMS version number, null to get the default from service</param>
     /// <param name="getStreamAsync">Download method, leave null for default</param>
     /// <param name="persistentCache">persistent Cache</param>
-    public static async Task<Client> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
+    /// <param name="userAgent">user Agent</param>
+    public static async Task<Client> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
     {
-        var client = new Client(getStreamAsync, persistentCache);
+        var client = new Client(getStreamAsync, persistentCache, userAgent);
 
         var strReq = new StringBuilder(url);
         if (!url.Contains("?"))
@@ -234,14 +236,16 @@ public class Client
     /// </summary>
     /// <param name="getStreamAsync">Download method, leave null for default</param>
     /// <param name="persistentCache">persistent Cache</param>
-    private Client(Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
+    private Client(Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
     {
+        _userAgent = userAgent;
         _persistentCache = persistentCache;
         _getStreamAsync = InitialiseGetStreamAsyncMethod(getStreamAsync);
     }
 
-    public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>>? getStreamAsync = null)
+    public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>>? getStreamAsync = null, string? userAgent = null)
     {
+        _userAgent = userAgent;
         _getStreamAsync = InitialiseGetStreamAsyncMethod(getStreamAsync);
         _nsmgr = new XmlNamespaceManager(capabilitiesXmlDocument.NameTable);
         ParseCapabilities(capabilitiesXmlDocument);
@@ -259,6 +263,7 @@ public class Client
         {
             var handler = new HttpClientHandler();
             using var client = new HttpClient(handler);
+            client.DefaultRequestHeaders.UserAgent.ParseAdd(_userAgent ?? "If you use BruTile please specify a user-agent specific to your app");
             var response = await client.GetAsync(url).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
