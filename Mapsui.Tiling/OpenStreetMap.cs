@@ -27,8 +27,8 @@ public static class OpenStreetMap
     private static HttpTileSource CreateTileSource(string userAgent)
     {
         return new HttpTileSource(new GlobalSphericalMercator(),
-            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            new[] { "a", "b", "c" }, name: "OpenStreetMap",
+            "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+            name: "OpenStreetMap",
             attribution: OpenStreetMapAttribution, userAgent: userAgent, persistentCache: DefaultCache);
     }
 }
