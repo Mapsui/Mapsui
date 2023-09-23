@@ -2,6 +2,7 @@
   "solution": {
     "path": "Mapsui.sln",
     "projects": [
+      "Benchmarks\\Mapsui.Rendering.Benchmarks\\Mapsui.Rendering.Benchmarks.csproj",
       "Mapsui.ArcGIS\\Mapsui.ArcGIS.csproj",
       "Mapsui.Extensions\\Mapsui.Extensions.csproj",
       "Mapsui.Nts\\Mapsui.Nts.csproj",
