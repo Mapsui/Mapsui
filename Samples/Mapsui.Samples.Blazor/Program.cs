@@ -8,4 +8,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
+Mapsui.Logging.Logger.LogDelegate += (l, m, e) => Console.WriteLine(m + e?.Message);
+
 await builder.Build().RunAsync();
