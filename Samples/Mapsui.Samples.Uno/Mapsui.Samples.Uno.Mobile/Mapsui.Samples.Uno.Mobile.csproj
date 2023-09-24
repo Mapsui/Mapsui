@@ -16,7 +16,6 @@
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-android'">21.0</SupportedOSPlatformVersion>
     <!-- Workaround for https://github.com/unoplatform/uno/issues/9723 -->
     <_AndroidApiLevel Condition="'$(TargetFramework)' == 'net8.0-android'">34</_AndroidApiLevel>		
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net8.0-macos'">10.14</SupportedOSPlatformVersion>
     <NoWarn>$(NoWarn);NU1008</NoWarn>
     <AndroidManifest>Android\AndroidManifest.xml</AndroidManifest>		
     <TrimMode>partial</TrimMode>
@@ -25,7 +24,6 @@
     <!-- Default values for command line builds -->
     <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net8.0-ios'">iossimulator-x64</RuntimeIdentifier>
     <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">maccatalyst-x64</RuntimeIdentifier>
-    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net8.0-macos'">osx-x64</RuntimeIdentifier>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Uno.UI" />
