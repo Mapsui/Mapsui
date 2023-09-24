@@ -1,5 +1,6 @@
 using System;
 using Uno.UI.Runtime.Skia;
+using Uno.UI.Runtime.Skia.Linux.FrameBuffer;
 
 namespace Mapsui.Samples.Uno;
 
@@ -11,7 +12,7 @@ class Program
         {
             Console.CursorVisible = false;
 
-            var host = new FrameBufferHost(() => new App(), args);
+            var host = new FrameBufferHost(() => new App());
             host.Run();
         }
         finally
