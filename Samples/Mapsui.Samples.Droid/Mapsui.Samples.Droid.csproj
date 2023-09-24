@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0-android33.0</TargetFramework>
-    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <TargetFramework>net8.0-android34.0</TargetFramework>
+    <SupportedOSPlatformVersion>22</SupportedOSPlatformVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationId>com.companyname.MapsuiSamples</ApplicationId>
     <OutputType>Exe</OutputType>
