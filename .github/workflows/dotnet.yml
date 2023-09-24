@@ -32,8 +32,8 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
-         include-prerelease: false
+           8.0.x
+         include-prerelease: true
     - name: install android wasm-tools wasm-tools-net6
       run: dotnet workload install android wasm-tools wasm-tools-net6    
     - name: Restore dependencies Mapsui.Linux
@@ -97,8 +97,8 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
-         include-prerelease: false
+           8.0.x
+         include-prerelease: true
     - name: Setup Xcode version 14.2
       uses: maxim-lobanov/setup-xcode@v1.5.1
       with:
@@ -163,8 +163,8 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
-         include-prerelease: false
+           8.0.x
+         include-prerelease: true
     - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
     # macos image needs Visual Studio for Mac installed
@@ -280,8 +280,8 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
-         include-prerelease: false
+           8.0.x
+         include-prerelease: true
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.1.1
       with:

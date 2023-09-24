@@ -29,8 +29,8 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
-         include-prerelease: false
+           8.0.x
+         include-prerelease: true
       
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v1.1
