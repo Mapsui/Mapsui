@@ -43,7 +43,7 @@
 
 	<ItemGroup Condition="'$(SolutionName)'=='Mapsui.Mac.Legacy'" >
 		<!--Specify Compiler for Mac Builds-->
-		<PackageReference Include="Microsoft.Net.Compilers.Toolset" VersionOverride="4.7.0-2.final">
+		<PackageReference Include="Microsoft.Net.Compilers.Toolset" VersionOverride="4.8.0-2.final">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
