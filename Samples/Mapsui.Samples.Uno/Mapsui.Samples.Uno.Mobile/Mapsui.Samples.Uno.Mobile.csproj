@@ -16,11 +16,10 @@
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-android'">21.0</SupportedOSPlatformVersion>
     <!-- Workaround for https://github.com/unoplatform/uno/issues/9723 -->
-    <_AndroidApiLevel Condition="'$(TargetFramework)' == 'net8.0-android'">33</_AndroidApiLevel>		
+    <_AndroidApiLevel Condition="'$(TargetFramework)' == 'net8.0-android'">34</_AndroidApiLevel>		
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net8.0-macos'">10.14</SupportedOSPlatformVersion>
     <NoWarn>$(NoWarn);NU1008</NoWarn>
-    <AndroidManifest>Android\AndroidManifest.xml</AndroidManifest>
-		<PublishTrimmed>false</PublishTrimmed>
+    <AndroidManifest>Android\AndroidManifest.xml</AndroidManifest>		
   </PropertyGroup>
   <PropertyGroup Condition="'$(RuntimeIdentifier)'==''">
     <!-- Default values for command line builds -->
@@ -38,6 +37,9 @@
   </ItemGroup>
   <Choose>
     <When Condition="'$(TargetFramework)'=='net8.0-android'">
+			<PropertyGroup>
+				<PublishTrimmed>false</PublishTrimmed>
+			</PropertyGroup>
       <ItemGroup>
         <PackageReference Include="Xamarin.Google.Android.Material" VersionOverride="1.4.0.4" />
         <PackageReference Include="Uno.UniversalImageLoader" />
