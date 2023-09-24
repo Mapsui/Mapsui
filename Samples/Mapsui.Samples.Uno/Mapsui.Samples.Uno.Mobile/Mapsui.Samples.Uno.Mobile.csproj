@@ -20,6 +20,7 @@
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net8.0-macos'">10.14</SupportedOSPlatformVersion>
     <NoWarn>$(NoWarn);NU1008</NoWarn>
     <AndroidManifest>Android\AndroidManifest.xml</AndroidManifest>		
+    <TrimMode>partial</TrimMode>
   </PropertyGroup>
   <PropertyGroup Condition="'$(RuntimeIdentifier)'==''">
     <!-- Default values for command line builds -->

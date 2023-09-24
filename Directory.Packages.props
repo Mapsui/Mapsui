@@ -102,8 +102,8 @@
     <PackageVersion Include="System.Memory" Version="[4.5.5,5.0.0)" />
     <PackageVersion Include="Topten.RichTextKit" Version="[0.4.165,1.0.0)" />
     <PackageVersion Include="Uno.Core" Version="[4.0.1,5.0.0)" />
-    <PackageVersion Include="Uno.Extensions.Logging.OSLog" Version="[1.4.0,2.0.0)" />
-    <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="[1.4.0,2.0.0)" />
+    <PackageVersion Include="Uno.Extensions.Logging.OSLog" Version="[1.6.0,2.0.0)" />
+    <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="[1.6.0,2.0.0)" />
     <PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="[4.0.1,5.0.0)" />
     <PackageVersion Include="Uno.UniversalImageLoader" Version="[1.9.36,2.0.0)" />
     <PackageVersion Include="Uno.UI" Version="[5.0.0-dev.3182,6.0.0)" />
