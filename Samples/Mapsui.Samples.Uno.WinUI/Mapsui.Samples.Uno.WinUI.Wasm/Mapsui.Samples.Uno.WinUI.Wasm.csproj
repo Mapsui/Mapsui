@@ -94,7 +94,7 @@
   <ItemGroup>
     <PackageReference Include="HarfBuzzSharp" />
     <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
-    <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\2.8.2\*.a" />
+    <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\7.3.0\*.a" />
   </ItemGroup>
 
 	<ItemGroup>
