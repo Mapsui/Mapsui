@@ -48,8 +48,8 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net8.0'">
-    <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="$(MauiVersion),9.0.0)" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" VersionOverride="$(MauiVersion),9.0.0)" />
+    <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="[$(MauiVersion),9.0.0)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" VersionOverride="[$(MauiVersion),9.0.0)" />
   </ItemGroup>
 
   <ItemGroup>
