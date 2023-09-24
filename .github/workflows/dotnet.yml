@@ -28,7 +28,7 @@ jobs:
       with:
         nuget-version: latest    
     # .Net 7 update     
-    - name: Setup .NET 7 SDK
+    - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
@@ -93,7 +93,7 @@ jobs:
       with:
         nuget-version: latest
     # .Net 7 update     
-    - name: Setup .NET 7 SDK
+    - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
@@ -159,7 +159,7 @@ jobs:
            6.0.x
          include-prerelease: false
     # .Net 7 update     
-    - name: Setup .NET 7 SDK
+    - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
@@ -276,7 +276,7 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-nuget15-
     # .Net 7 update     
-    - name: Setup .NET 7 SDK
+    - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
