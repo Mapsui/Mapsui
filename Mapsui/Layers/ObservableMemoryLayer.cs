@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using Mapsui.Utilities;
 
 namespace Mapsui.Layers;
@@ -17,14 +19,23 @@ public class ObservableMemoryLayer<T> : MemoryLayer
     {
         _getFeature = getFeature;
         _shadowCollection = new ConcurrentHashSet<IFeature>();
-        Features = _shadowCollection;
+        base.Features = _shadowCollection;
     }
+
+    /// <summary>
+    /// Hide set from Base Features Collection because, if this is set than observable memory layer does not work
+    /// </summary>
+    public new IEnumerable<IFeature> Features => _shadowCollection;
 
     public ObservableCollection<T>? ObservableCollection
     {
         get => _observableCollection;
         set
         {
+            // safety check
+            if (base.Features != _shadowCollection)
+                base.Features = _shadowCollection;
+
             if (_observableCollection != null)
             {
                 _observableCollection.CollectionChanged -= DataSource_CollectionChanged;
@@ -35,7 +46,7 @@ public class ObservableMemoryLayer<T> : MemoryLayer
             {
                 _observableCollection.CollectionChanged += DataSource_CollectionChanged;
                 _shadowCollection.Clear();
-                foreach (var it in _observableCollection)
+                foreach (var it in _observableCollection.ToArray()) // collection has been changed.
                 {
                     var feature = _getFeature(it);
                     if (feature != null)
@@ -72,6 +83,7 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                     }
                 }
 
+                DataHasChanged();
                 break;
             case NotifyCollectionChangedAction.Reset:
                 _shadowCollection.Clear();
@@ -83,6 +95,7 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                             _shadowCollection.Add(feature);
                     }
 
+                DataHasChanged();
                 break;
             case NotifyCollectionChangedAction.Move:
                 // do nothing
