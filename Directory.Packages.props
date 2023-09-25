@@ -56,9 +56,6 @@
     <PackageVersion Include="Mapsui.Uno.WinUI" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.WinUI" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Wpf" Version="4.0.0-beta.8" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="[7.0.5,8.0.0)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="[7.0.5,8.0.0)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="[7.0.5,8.0.0)" />
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="[7.0.0,8.0.0)" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="[16.11.0,17.0.0)" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="[7.0.0,8.0.0)" />
