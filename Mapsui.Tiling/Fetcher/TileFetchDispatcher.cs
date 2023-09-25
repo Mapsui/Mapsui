@@ -66,7 +66,7 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
             if (_tilesToFetch.TryDequeue(out var tileInfo))
             {
                 _tilesInProgress.Add(tileInfo.Index);
-                method = async () => await FetchOnThreadAsync(tileInfo);
+                method = async () => await FetchOnThreadAsync(tileInfo).ConfigureAwait(false);
                 return true;
             }
 
@@ -82,7 +82,7 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     {
         try
         {
-            var feature = await _fetchTileAsFeature(tileInfo);
+            var feature = await _fetchTileAsFeature(tileInfo).ConfigureAwait(false);
             FetchCompleted(tileInfo, feature, null);
         }
         catch (Exception ex)

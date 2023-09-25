@@ -121,7 +121,7 @@ public class CapabilitiesHelper
                     };
 
                     using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
-                    using var response = await client.GetAsync(requestUri);
+                    using var response = await client.GetAsync(requestUri).ConfigureAwait(false);
 
                     if (!response.IsSuccessStatusCode)
                     {

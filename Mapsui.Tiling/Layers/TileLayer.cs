@@ -143,7 +143,7 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
 
     private async Task<IFeature?> ToFeatureAsync(TileInfo tileInfo)
     {
-        var tileData = await _tileSource.GetTileAsync(tileInfo);
+        var tileData = await _tileSource.GetTileAsync(tileInfo).ConfigureAwait(false);
         var mRaster = ToRaster(tileInfo, tileData);
         if (mRaster != null)
             return new RasterFeature(mRaster);

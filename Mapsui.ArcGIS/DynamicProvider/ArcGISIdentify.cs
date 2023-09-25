@@ -80,7 +80,7 @@ public class ArcGISIdentify
                 Logger.Log(LogLevel.Error, e.Message, e);
             };
             using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
-            using var response = await client.GetAsync(requestUrl);
+            using var response = await client.GetAsync(requestUrl).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -90,7 +90,7 @@ public class ArcGISIdentify
 
             try
             {
-                using var dataStream = CopyAndClose(await response.Content.ReadAsStreamAsync());
+                using var dataStream = CopyAndClose(await response.Content.ReadAsStreamAsync().ConfigureAwait(false));
 
                 if (dataStream != null)
                 {
