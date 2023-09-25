@@ -704,20 +704,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
         if (Map != null)
         {
-            // Check, if we hit a widget
-            // Is there a widget at this position
-            foreach (var widget in Map.Widgets)
-            {
-                if (widget.Enabled && (widget.Envelope?.Contains(e.ScreenPosition) ?? false))
-                {
-                    if (widget.HandleWidgetTouched(Map.Navigator, e.ScreenPosition))
-                    {
-                        e.Handled = true;
-                        return;
-                    }
-                }
-            }
-
             // Check if we hit a drawable/pin/callout etc
             var mapInfo = GetMapInfo(e.ScreenPosition);
 

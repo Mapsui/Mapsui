@@ -64,7 +64,6 @@ public class EditingSample : IMapControlSample
         };
 
         map.Widgets.Add(new EditingWidget(mapControl, editManager, editManipulation));
-        
         mapControl.Map = map;
         return editManager;
     }
@@ -72,7 +71,6 @@ public class EditingSample : IMapControlSample
     private void InitEditWidgets(Map map)
     {
         _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 3") as WritableLayer;
-
 
         map.Widgets.Add(new BoxWidget
         {
@@ -449,11 +447,7 @@ public class EditingSample : IMapControlSample
 
         // Mouse Position Widget
         map.Widgets.Add(new MouseCoordinatesWidget(map));
-    }
 
-    private void AddPoint_WidgetTouched(object? sender, WidgetTouchedEventArgs e)
-    {
-        throw new NotImplementedException();
     }
 
     public static Map CreateMap()

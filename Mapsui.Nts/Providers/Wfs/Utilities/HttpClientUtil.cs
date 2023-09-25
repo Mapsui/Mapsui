@@ -165,11 +165,11 @@ public class HttpClientUtil : IDisposable
             }
             /* HTTP GET */
             else
-                webResponse = await httpClient.GetAsync(_url);
+                webResponse = await httpClient.GetAsync(_url).ConfigureAwait(false);
 
             if (_persistentCache != null)
             {
-                using var stream = await webResponse.Content.ReadAsStreamAsync();
+                using var stream = await webResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
                 if (stream != null && _url != null)
                 {
                     bytes = StreamHelper.ReadFully(stream);
@@ -180,7 +180,7 @@ public class HttpClientUtil : IDisposable
                 return null;
             }
 
-            return await webResponse.Content.ReadAsStreamAsync();
+            return await webResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
         }
         catch (Exception ex)
