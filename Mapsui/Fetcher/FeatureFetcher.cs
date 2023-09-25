@@ -32,7 +32,7 @@ internal class FeatureFetcher
     {
         using (await _providerLock.LockAsync())
         {
-            var features = await _provider.GetFeaturesAsync(_fetchInfo);
+            var features = await _provider.GetFeaturesAsync(_fetchInfo).ConfigureAwait(false);
             _dataArrived.Invoke(features, _timeOfRequest);
         }
     }

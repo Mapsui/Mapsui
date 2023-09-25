@@ -57,7 +57,7 @@ public class FetchWorker : IDisposable // Todo: Make internal
             while (cancellationTokenSource is { Token: { IsCancellationRequested: false } })
             {
                 if (_fetchDispatcher.TryTake(out var method))
-                    await method();
+                    await method().ConfigureAwait(false);
                 else
                     cancellationTokenSource.Cancel();
             }
