@@ -522,26 +522,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         Map.RefreshData(changeType);
     }
 
-
-
     private protected void OnInfo(MapInfoEventArgs? mapInfoEventArgs)
     {
         if (mapInfoEventArgs == null) return;
 
         Map?.OnInfo(mapInfoEventArgs); // Also propagate to Map
         Info?.Invoke(this, mapInfoEventArgs);
-    }
-
-    private bool WidgetTouched(IWidget widget, MPoint screenPosition)
-    {
-        var result = widget.HandleWidgetTouched(Map.Navigator, screenPosition);
-
-        if (!result && widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
-        {
-            OpenBrowser(hyperlink.Url!);
-        }
-
-        return result;
     }
 
     /// <inheritdoc />
@@ -567,46 +553,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
     /// <param name="numTaps">Number of clickes/taps</param>
     /// <returns>True, if something done </returns>
-    private protected MapInfoEventArgs? CreateMapInfoEventArgs(MPoint? screenPosition, MPoint? startScreenPosition, int numTaps)
-    {
-        return CreateMapInfoEventArgs(
-            Map?.GetWidgetsOfMapAndLayers() ?? new List<IWidget>(),
-            screenPosition,
-            startScreenPosition,
-            WidgetTouched,
-            numTaps);
-    }
-
-    /// <summary>
-    /// Check if a widget or feature at a given screen position is clicked/tapped
-    /// </summary>
-    /// <param name="widgets">The Map widgets</param>
-    /// <param name="screenPosition">Screen position to check for widgets and features</param>
-    /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
-    /// <param name="widgetCallback">Callback, which is called when Widget is hit</param>
-    /// <param name="numTaps">Number of clickes/taps</param>
-    /// <returns>True, if something done </returns>
-    private MapInfoEventArgs? CreateMapInfoEventArgs(IEnumerable<IWidget> widgets, MPoint? screenPosition,
-        MPoint? startScreenPosition, Func<IWidget, MPoint, bool> widgetCallback, int numTaps)
+    private MapInfoEventArgs? CreateMapInfoEventArgs(
+        MPoint? screenPosition,
+        MPoint? startScreenPosition, 
+        int numTaps)
     {
         if (screenPosition == null || startScreenPosition == null)
             return null;
-
-        // Check if a Widget is tapped. In the current design they are always on top of the map.
-        var touchedWidgets = WidgetTouch.GetTouchedWidget(screenPosition, startScreenPosition, widgets);
-
-        foreach (var widget in touchedWidgets)
-        {
-            var result = widgetCallback(widget, screenPosition);
-
-            if (result)
-            {
-                return new MapInfoEventArgs
-                {
-                    Handled = true
-                };
-            }
-        }
 
         // Check which features in the map were tapped.
         var mapInfo = Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? new LayerCollection());
@@ -678,22 +631,22 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool HandleTouching(MPoint position, bool leftButton, int clickCount, bool shift)
     {
-        var extendedWidgets = GetExtendedWidgets();
-        if (extendedWidgets.Count == 0)
-            return false;
-
-        // Exit on Touchable Widgets or else the Button Handling for example does not work
-        // TODO: In the Next Mapsui Major Version handle Touch Events here
         var touchableWidgets = GetTouchableWidgets();
         var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
-        if (touchedWidgets.Any())
-            return false;
 
-        var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
-        foreach (var extendedWidget in extendedWidgets)
+        foreach (var widget in touchedWidgets)
         {
-            if (extendedWidget.HandleWidgetTouching(Map.Navigator, position, widgetArgs))
-                return true;
+            if (widget is IWidgetExtended extendedWidget)
+            {
+                var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
+                if (extendedWidget.HandleWidgetTouching(Map.Navigator, position, widgetArgs))
+                    return true;
+            }
+            else
+            {
+                // Handle the touched avoid duplicated touched events
+                return false;
+            }
         }
 
         return false;
@@ -701,22 +654,30 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     
     private bool HandleTouched(MPoint position, bool leftButton, int clickCount, bool shift)
     {
-        var extendedWidgets = GetExtendedWidgets();
-        if (extendedWidgets.Count == 0)
-            return false;
-        
-        // Exit on Touchable Widgets or else the Button Handling for example does not work
-        // TODO: In the Next Mapsui Major Version handle Touch Events here
         var touchableWidgets = GetTouchableWidgets();
         var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
-        if (touchedWidgets.Any())
-            return false;
 
-        var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
-        foreach (var extendedWidget in extendedWidgets)
+        foreach (var widget in touchedWidgets)
         {
-            if (extendedWidget.HandleWidgetTouched(Map.Navigator, position, widgetArgs))
-                return true;
+            if (widget is IWidgetExtended extendedWidget)
+            {
+                var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
+                if (extendedWidget.HandleWidgetTouched(Map.Navigator, position, widgetArgs))
+                    return true;
+            }
+            else
+            {
+
+                if (widget.HandleWidgetTouched(Map.Navigator, position))
+                {
+                    if (widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
+                    {
+                        OpenBrowser(hyperlink.Url!);
+                    }
+
+                    return true;
+                }
+            }
         }
 
         return false;
@@ -731,7 +692,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             var widgetsOfMapAndLayers = Map.GetWidgetsOfMapAndLayers().ToList();
             foreach (var widget in widgetsOfMapAndLayers)
             {
-                if (widget is IWidgetExtended extendedWidget)
+                if (widget is IWidgetExtended extendedWidget && extendedWidget.Touchable)
                 {
                     _extendedWidgets.Add(extendedWidget);
                 }
@@ -750,9 +711,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             var touchableWidgets = Map.GetWidgetsOfMapAndLayers().ToList();
             foreach (var widget in touchableWidgets)
             {
-                if (widget is IWidgetExtended)
-                    continue;
-
                 if (widget is IWidgetTouchable { Touchable: false }) continue;
 
                 _touchableWidgets.Add(widget);

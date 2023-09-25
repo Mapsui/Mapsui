@@ -1,8 +1,9 @@
-﻿using Mapsui.Utilities;
+﻿using System;
+using Mapsui.Utilities;
 
 namespace Mapsui;
 
-public class MPoint
+public class MPoint : IEquatable<MPoint>
 {
     public MPoint() : this(0, 0) { }
 
@@ -32,7 +33,7 @@ public class MPoint
         return Algorithms.Distance(X, Y, point.X, point.Y);
     }
 
-    protected bool Equals(MPoint? point)
+    public bool Equals(MPoint? point)
     {
         if (point == null)
             return false;
