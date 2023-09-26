@@ -277,7 +277,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
 
-        if (_downMousePosition == e.GetPosition(this).ToMapsui())
+        if (Equals(_downMousePosition, e.GetPosition(this).ToMapsui()))
             foreach (var layer in Map.Layers)
             {
                 // ReSharper disable once SuspiciousTypeConversion.Global

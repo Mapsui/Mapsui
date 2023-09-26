@@ -33,7 +33,7 @@ namespace Mapsui.Widgets.ScaleBar;
 /// Font: Font which is used to draw text
 /// TickLength: Length of the ticks at scalebar
 /// </summary>
-public class ScaleBarWidget : Widget, INotifyPropertyChanged
+public class ScaleBarWidget : Widget
 {
     private readonly Map? _map;
     private readonly IProjection? _projection;
@@ -66,8 +66,6 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
 
         _unitConverter = MetricUnitConverter.Instance;
     }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
 
     private float _maxWidth;
 
@@ -499,13 +497,6 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
             return false;
         }
         return true;
-    }
-
-
-    internal void OnPropertyChanged([CallerMemberName] string name = "")
-    {
-        var handler = PropertyChanged;
-        handler?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 
     /// Calculates the required length and value of a scalebar

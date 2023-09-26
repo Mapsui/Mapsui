@@ -18,4 +18,5 @@ public class MRaster : MRect
 
     public byte[] Data { get; }
     public long TickFetched { get; }
+
 }

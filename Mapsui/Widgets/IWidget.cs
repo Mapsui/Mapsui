@@ -1,6 +1,8 @@
-﻿namespace Mapsui.Widgets;
+﻿using System.ComponentModel;
 
-public interface IWidget
+namespace Mapsui.Widgets;
+
+public interface IWidget : INotifyPropertyChanged
 {
     HorizontalAlignment HorizontalAlignment { get; set; }
     VerticalAlignment VerticalAlignment { get; set; }

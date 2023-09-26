@@ -21,13 +21,8 @@ namespace Mapsui.Widgets.ButtonWidget;
 /// Rotation: Value for rotation in degrees
 /// Opacity: Opacity of button
 /// </remarks>
-public class ButtonWidget : TextBox, INotifyPropertyChanged
+public class ButtonWidget : TextBox
 {
-    /// <summary>
-    /// Event handler which is called, when the button is touched
-    /// </summary>
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     /// <summary>
     /// Event handler which is called, when the button is touched
     /// </summary>
@@ -108,11 +103,6 @@ public class ButtonWidget : TextBox, INotifyPropertyChanged
         WidgetTouched?.Invoke(this, args);
 
         return args.Handled;
-    }
-
-    internal void OnPropertyChanged([CallerMemberName] string name = "")
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 
     public override bool Touchable => true;

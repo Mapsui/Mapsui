@@ -11,7 +11,7 @@ namespace Mapsui.Widgets.PerformanceWidget;
 /// With this, the user could see the drawing performance on the screen.
 /// It shows always the values for the last draw before this draw.
 /// </remarks>
-public class PerformanceWidget : Widget, INotifyPropertyChanged
+public class PerformanceWidget : Widget
 {
     public PerformanceWidget(Utilities.Performance performance)
     {
@@ -22,11 +22,6 @@ public class PerformanceWidget : Widget, INotifyPropertyChanged
     /// Performance object which holds the values
     /// </summary>
     public Utilities.Performance Performance { get; }
-
-    /// <summary>
-    /// Event handler which is called, when the button is touched
-    /// </summary>
-    public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
     /// Event handler which is called, when the button is touched
@@ -57,10 +52,5 @@ public class PerformanceWidget : Widget, INotifyPropertyChanged
         WidgetTouched?.Invoke(this, args);
 
         return args.Handled;
-    }
-
-    internal void OnPropertyChanged([CallerMemberName] string name = "")
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

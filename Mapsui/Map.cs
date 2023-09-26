@@ -5,6 +5,7 @@
 // This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 
 using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,7 @@ public class Map : INotifyPropertyChanged, IDisposable
 {
     private LayerCollection _layers = new();
     private Color _backColor = Color.White;
+    private IWidget[] oldWidgets = Array.Empty<IWidget>();
 
     /// <summary>
     /// Initializes a new map
@@ -65,7 +67,11 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </summary>
     public LayerCollection Layers
     {
-        get => _layers;
+        get
+        {
+            AssureWidgetsConnected();
+            return _layers;
+        }
         private set
         {
             var tempLayers = _layers;
@@ -75,6 +81,30 @@ public class Map : INotifyPropertyChanged, IDisposable
             _layers = value;
             _layers.Changed += LayersCollectionChanged;
         }
+    }
+
+    private void AssureWidgetsConnected()
+    {
+        // it would be better if Widgets would be an observable collection then I wouldn't need this workaround
+        if (this.oldWidgets.Length != this.Widgets.Count)
+        {
+            foreach (var widget in this.oldWidgets)
+            {
+                widget.PropertyChanged -= WidgetPropertyChanged;
+            }
+
+            this.oldWidgets = this.Widgets.ToArray();
+
+            foreach (var widget in this.Widgets)
+            {
+                widget.PropertyChanged += WidgetPropertyChanged;
+            }
+        }
+    }
+
+    private void WidgetPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        RefreshGraphics();
     }
 
     /// <summary>

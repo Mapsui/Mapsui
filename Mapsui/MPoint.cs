@@ -136,5 +136,13 @@ public class MPoint : IEquatable<MPoint>
         return Equals((MPoint)obj);
     }
 
+    public static bool operator ==(MPoint? left, MPoint? right)
+    {
+        return Equals(left, right);
+    }
 
+    public static bool operator !=(MPoint? left, MPoint? right)
+    {
+        return !Equals(left, right);
+    }
 }

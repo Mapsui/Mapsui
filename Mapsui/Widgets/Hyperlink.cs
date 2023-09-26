@@ -4,7 +4,22 @@ namespace Mapsui.Widgets;
 
 public class Hyperlink : TextBox
 {
-    public string? Url { get; set; }
+    private string? _url;
+
+    public string? Url
+    {
+        get => _url;
+        set
+        {
+            if (value == _url)
+            {
+                return;
+            }
+
+            _url = value;
+            OnPropertyChanged();
+        }
+    }
 
     public event EventHandler<HyperlinkWidgetArguments>? Touched;
 
