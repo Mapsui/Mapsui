@@ -35,10 +35,10 @@
 
   <ItemGroup>
     <!-- App Icon -->
-    <MauiIcon Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" Color="#512BD4" />
+    <AndroidResource Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" Color="#512BD4" />
 
     <!-- Splash Screen -->
-    <MauiSplashScreen Include="Resources\appiconfg.svg" Color="#512BD4" />
+    <AndroidResource Include="Resources\appiconfg.svg" Color="#512BD4" />
 
     <!-- Images -->
     <MauiImage Include="Resources\Images\*" />
@@ -55,6 +55,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <MauiFont Remove="Resources\Fonts\OpenSansRegular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <MauiImage Remove="Resources\Images\dotnet_bot.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AndroidResource Include="Resources\Fonts\OpenSansRegular.ttf" />
+    <AndroidResource Include="Resources\Images\dotnet_bot.svg" />
     <AndroidResource Include="Resources\Raw\AboutAssets.txt" />
   </ItemGroup>
      
