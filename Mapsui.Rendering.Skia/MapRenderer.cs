@@ -246,6 +246,7 @@ public class MapRenderer : IRenderer
                         {
                             // Workaround for Loading Data in the Layer when it is rendered by Rasterizing Tile Layer or not loaded Layer.
                             asyncDataFetcher.RefreshData(fetchInfo);
+                            layer.WaitForLoadingAsync().Wait();
                         }
                     }
                 }
