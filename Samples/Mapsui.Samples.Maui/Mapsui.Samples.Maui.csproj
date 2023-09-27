@@ -49,8 +49,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiFont Remove="Resources\Fonts\OpenSans-Regular.ttf" />
-	  <MauiFont Remove="Resources\Fonts\OpenSans-Semibold.ttf" />
+	  <MauiFont Remove="Resources\Fonts\OpenSansRegular.ttf" />
+	  <MauiFont Remove="Resources\Fonts\OpenSansSemibold.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -58,8 +58,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Include="Resources\Fonts\OpenSans-Regular.ttf" />
-	  <AndroidResource Include="Resources\Fonts\OpenSans-Semibold.ttf" />
+	  <AndroidResource Include="Resources\Fonts\OpenSansRegular.ttf" />
+	  <AndroidResource Include="Resources\Fonts\OpenSansSemibold.ttf" />
 	</ItemGroup>
 	
 	<ItemGroup>
