@@ -16,8 +16,8 @@ public static class MauiProgram
             .UseSkiaSharp(true)
             .ConfigureFonts(fonts =>
             {
-                fonts.AddFont("OpenSansRegular.ttf", "OpenSansRegular");
-                fonts.AddFont("OpenSansSemibold.ttf", "OpenSansSemibold");
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
         builder.Services.AddSingleton<MainViewModel>();
