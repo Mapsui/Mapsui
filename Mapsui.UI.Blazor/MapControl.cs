@@ -192,10 +192,13 @@ public partial class MapControl : ComponentBase, IMapControl
         }
     }
 
-    protected void OnMouseDown(MouseEventArgs e)
+    protected void OnPointerDown(PointerEventArgs e)
     {
         try
         {
+            // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
+            _ = UpdateBoundingRectAsync();
+
             if (HandleTouching(e.ToLocation(_clientRect), e.Button == 0, 1, ShiftPressed))
                 return;
 
@@ -242,7 +245,7 @@ public partial class MapControl : ComponentBase, IMapControl
         }
     }
 
-    protected void OnMouseUp(MouseEventArgs e)
+    protected void OnPointerUp(PointerEventArgs e)
     {
         try
         {
@@ -284,6 +287,15 @@ public partial class MapControl : ComponentBase, IMapControl
         return Math.Abs(currentPosition.Distance(previousPosition)) < 5;
     }
 
+    // To trigger the Info event on mobile I changed the MouseDown and MouseUp
+    // into PointerDown and PointerUp. When I also changed OnMouseDown to OnPointerDown
+    // the single finger drag gesture causes double speed panning. To fix this I kept
+    // the OnMouseMove event as it was, but conceptually it is a bit confusing. 
+    // I tested the logic on a real device and it works correctly, for pinch, pan,
+    // and Info events, so I am leaving it like this.
+    // An alternative would be keep mouse and touch events completely separate, and
+    // don't use Pointer, but that would involve some rewriting of the touch logic to
+    // support the Info event.
     protected void OnMouseMove(MouseEventArgs e)
     {
         try
