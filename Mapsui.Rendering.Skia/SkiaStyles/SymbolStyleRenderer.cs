@@ -163,25 +163,9 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             canvas.RotateDegrees((float)rotation);
         }
 
-        RenderedGeometry? renderedGeometry;
-        if (!feature.RenderedGeometry.TryGetValue(symbolStyle, out var rendered))
-        {
-            renderedGeometry = new RenderedGeometry
-            {
-                LinePaint = vectorCache.GetOrCreatePaint(symbolStyle.Outline, opacity, CreateLinePaint),
-                FillPaint = vectorCache.GetOrCreatePaint(symbolStyle.Fill, opacity, CreateFillPaint),
-                Path = vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath)
-            };
-            feature.RenderedGeometry[symbolStyle] = renderedGeometry;
-        }
-        else
-        {
-            renderedGeometry = (RenderedGeometry)rendered;
-        }
-        
-        var linePaint = renderedGeometry.LinePaint;
-        var fillPaint = renderedGeometry.FillPaint;
-        var path = renderedGeometry.Path;
+        var linePaint = vectorCache.GetOrCreatePaint(symbolStyle.Outline, opacity, CreateLinePaint);
+        var fillPaint = vectorCache.GetOrCreatePaint(symbolStyle.Fill, opacity, CreateFillPaint);
+        var path = vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath);
 
         if (fillPaint != null && fillPaint.Color.Alpha != 0) canvas.DrawPath(path, fillPaint);
         if (linePaint != null && linePaint.Color.Alpha != 0) canvas.DrawPath(path, linePaint);

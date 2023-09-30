@@ -25,13 +25,12 @@ internal static class PolygonRenderer
         if (vectorStyle == null)
             return;
 
-        var renderedGeometry = RenderedGeometry(viewport, vectorStyle, feature, opacity, vectorCache);
+        var paint = vectorCache.GetOrCreatePaint(vectorStyle.Outline, opacity, CreateSkPaint);
+        var paintFill = vectorCache.GetOrCreatePaint(vectorStyle.Fill, opacity, viewport.Rotation, CreateSkPaint);
 
         float lineWidth = Convert.ToSingle(vectorStyle.Outline?.Width ?? 1);
 
-        var paint = renderedGeometry.LinePaint;
-        var paintFill = renderedGeometry.FillPaint!;
-        var path = renderedGeometry.GetOrCreatePath(viewport, () =>
+        var path = vectorCache.GetOrCreatePath(viewport, collection, lineWidth, (collection, viewport, lineWidth) =>
         {
             var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
             return collection.ToSkiaPath(viewport, skRect, lineWidth);
@@ -47,43 +46,22 @@ internal static class PolygonRenderer
         if (vectorStyle == null)
             return;
 
-        var renderedGeometry = RenderedGeometry(viewport, vectorStyle, feature, opacity, vectorCache);
+
+        var paint = vectorCache.GetOrCreatePaint(vectorStyle.Outline, opacity, CreateSkPaint);
+        var fillPaint = vectorCache.GetOrCreatePaint(vectorStyle.Fill, opacity, viewport.Rotation, CreateSkPaint);
 
         float lineWidth = Convert.ToSingle(vectorStyle.Outline?.Width ?? 1);
 
-        var paint = renderedGeometry.LinePaint;
-        var paintFill = renderedGeometry.FillPaint!;
-        var path = renderedGeometry.GetOrCreatePath(viewport, () =>
+        var path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (polygon, viewport, lineWidth) =>
         {
             var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
             return polygon.ToSkiaPath(viewport, skRect, lineWidth);
         });
 
-        DrawPath(canvas, vectorStyle, path, paintFill, paint);
+        DrawPath(canvas, vectorStyle, path, fillPaint, paint);
     }
 
-    private static RenderedGeometry RenderedGeometry(Viewport viewport, VectorStyle vectorStyle, IFeature feature,
-        float opacity, IVectorCache vectorCache)
-    {
-        RenderedGeometry? renderedGeometry;
-        if (!feature.RenderedGeometry.TryGetValue(vectorStyle, out var rendered))
-        {
-            renderedGeometry = new RenderedGeometry
-            {
-                LinePaint = vectorCache.GetOrCreatePaint(vectorStyle.Outline, opacity, CreateSkPaint),
-                FillPaint = vectorCache.GetOrCreatePaint(vectorStyle.Fill, opacity, viewport.Rotation, CreateSkPaint)
-            };
-            feature.RenderedGeometry[vectorStyle] = renderedGeometry;
-        }
-        else
-        {
-            renderedGeometry = (RenderedGeometry)rendered;
-        }
-
-        return renderedGeometry;
-    }
-
-    private static void DrawPath(SKCanvas canvas, VectorStyle vectorStyle, SKPath path, SKPaint paintFill, SKPaint? paint)
+    private static void DrawPath(SKCanvas canvas, VectorStyle vectorStyle, SKPath path, SKPaint? paintFill, SKPaint? paint)
     {
         if (vectorStyle?.Fill?.FillStyle == FillStyle.Solid)
         {

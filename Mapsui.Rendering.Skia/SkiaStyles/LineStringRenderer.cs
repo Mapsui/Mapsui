@@ -13,32 +13,24 @@ public static class LineStringRenderer
 {
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle? vectorStyle,
-        IFeature feature, LineString lineString, float opacity, IVectorCache vectorCache)
+        IFeature feature, LineString lineString, float opacity, IVectorCache? vectorCache)
     {
         if (vectorStyle == null)
             return;
 
-        RenderedGeometry? renderedGeometry;
-        if (!feature.RenderedGeometry.TryGetValue(vectorStyle, out var rendered))
+        SKPaint paint;
+        SKPath path;
+        var lineWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1);
+        if (vectorCache == null || layer is IModifyFeatureLayer)
         {
-            renderedGeometry = new RenderedGeometry
-            {
-                LinePaint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint)
-            };
-            feature.RenderedGeometry[vectorStyle] = renderedGeometry;
+            paint = CreateSkPaint(vectorStyle.Line, opacity);
+            path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds, lineWidth);
         }
         else
         {
-            renderedGeometry = (RenderedGeometry)rendered;
+            paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
+            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, viewport, _) => geometry.ToSkiaPath(viewport, viewport.ToSkiaRect(), lineWidth));
         }
-
-        var paint = renderedGeometry.LinePaint;
-        var path = renderedGeometry.GetOrCreatePath(viewport, () =>
-        {
-            var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
-            float strokeWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1f);
-            return lineString.ToSkiaPath(viewport, skRect, strokeWidth);
-        });
 
         canvas.DrawPath(path, paint);
     }
