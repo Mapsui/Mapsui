@@ -3,7 +3,7 @@ using System;
 
 namespace Mapsui.Layers.AnimationLayers;
 
-internal class AnimatedPointFeature : PointFeature
+internal class AnimatedPointFeature : PointFeature, IModifyFeatureLayer
 {
     long startTime;
 

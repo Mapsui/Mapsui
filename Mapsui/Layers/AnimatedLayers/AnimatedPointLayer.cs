@@ -13,7 +13,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Layers.AnimatedLayers;
 
-public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
+public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>, IModifyFeatureLayer
 {
     private readonly IProvider _dataSource;
     private FetchInfo? _fetchInfo;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Mapsui.Cache;
@@ -26,6 +27,14 @@ public class LruCache<TKey, TValue>
             if (_cache.ContainsKey(key)) // Key already exists.
             {
                 var node = _cache[key];
+                // dispose disposable values
+                if (node.Value is IDisposable disposable)
+                {
+#pragma warning disable IDISP007 // Don't dispose injected                    
+                    disposable.Dispose();
+#pragma warning restore IDISP007                    
+                }
+
                 _list.Remove(node.Node);
                 _list.AddFirst(node.Node);
 
@@ -36,7 +45,14 @@ public class LruCache<TKey, TValue>
                 if (_cache.Count >= _capacity) // Cache full.
                 {
                     var removeKey = _list.Last!.Value;
-                    _cache.TryGetValue(removeKey, out _);
+                    _cache.TryGetValue(removeKey, out var old);
+                    if (old.Value is IDisposable disposable)
+                    {
+#pragma warning disable IDISP007 // Don't dispose injected                    
+                        disposable.Dispose();
+#pragma warning restore IDISP007
+                    }
+
                     _cache.Remove(removeKey);
                     _list.RemoveLast();
                 }
