@@ -196,6 +196,9 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
+            // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
+            _ = UpdateBoundingRectAsync();
+
             if (HandleTouching(e.ToLocation(_clientRect), e.Button == 0, 1, ShiftPressed))
                 return;
 
