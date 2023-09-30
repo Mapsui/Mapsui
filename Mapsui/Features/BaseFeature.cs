@@ -19,6 +19,7 @@ public abstract class BaseFeature : IDisposable
     }
 
     private readonly Dictionary<string, object?> _dictionary = new();
+    private IDictionary<IStyle, object>? _renderedGeometry;
 
     public ICollection<IStyle> Styles { get; set; } = new Collection<IStyle>();
     public IEnumerable<string> Fields => _dictionary.Keys;
@@ -29,7 +30,11 @@ public abstract class BaseFeature : IDisposable
         set => _dictionary[key] = value;
     }
 
-    public IDictionary<IStyle, object> RenderedGeometry { get; set; } = new ConcurrentDictionary<IStyle, object>();
+    public IDictionary<IStyle, object> RenderedGeometry
+    {
+        get => _renderedGeometry ??= new ConcurrentDictionary<IStyle, object>();
+        set => _renderedGeometry = value;
+    }
 
     public virtual void Dispose()
     {
