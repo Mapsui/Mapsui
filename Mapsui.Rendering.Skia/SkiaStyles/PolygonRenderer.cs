@@ -30,11 +30,17 @@ internal static class PolygonRenderer
 
         float lineWidth = Convert.ToSingle(vectorStyle.Outline?.Width ?? 1);
 
+        Func<GeometryCollection, GeometryCollection>? copy = null;
+        if (layer is IModifyFeatureLayer)
+        {
+            copy = f => (GeometryCollection)f.Copy();
+        }
+
         var path = vectorCache.GetOrCreatePath(viewport, collection, lineWidth, (collection, viewport, lineWidth) =>
         {
             var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
             return collection.ToSkiaPath(viewport, skRect, lineWidth);
-        });
+        }, copy);
 
         DrawPath(canvas, vectorStyle, path, paintFill, paint);
     }
@@ -52,11 +58,17 @@ internal static class PolygonRenderer
 
         float lineWidth = Convert.ToSingle(vectorStyle.Outline?.Width ?? 1);
 
+        Func<Polygon, Polygon>? copy = null;
+        if (layer is IModifyFeatureLayer)
+        {
+            copy = f => (Polygon)f.Copy();
+        }
+
         var path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (polygon, viewport, lineWidth) =>
         {
             var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
             return polygon.ToSkiaPath(viewport, skRect, lineWidth);
-        });
+        }, copy);
 
         DrawPath(canvas, vectorStyle, path, fillPaint, paint);
     }

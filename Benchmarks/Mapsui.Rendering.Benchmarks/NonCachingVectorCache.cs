@@ -26,7 +26,7 @@ public class NonCachingVectorCache : IVectorCache
         return toSkRect(viewport);
     }
 
-    public TPath GetOrCreatePath<TPath, TGeometry>(Viewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath) where TPath : class where TGeometry : class
+    public TPath GetOrCreatePath<TPath, TGeometry>(Viewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath, Func<TGeometry, TGeometry>? copy) where TPath : class where TGeometry : class
     {
         return toPath(geometry, viewport, lineWidth);
     }

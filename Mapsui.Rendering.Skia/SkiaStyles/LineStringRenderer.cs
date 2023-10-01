@@ -21,15 +21,21 @@ public static class LineStringRenderer
         SKPaint paint;
         SKPath path;
         var lineWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1);
-        if (vectorCache == null || layer is IModifyFeatureLayer)
+        if (vectorCache == null)
         {
             paint = CreateSkPaint(vectorStyle.Line, opacity);
             path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds, lineWidth);
         }
         else
         {
+            Func<LineString, LineString>? copy = null;
+            if (layer is IModifyFeatureLayer)
+            {
+                copy = f => (LineString)f.Copy();
+            }
+
             paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
-            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, viewport, _) => geometry.ToSkiaPath(viewport, viewport.ToSkiaRect(), lineWidth));
+            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, viewport, _) => geometry.ToSkiaPath(viewport, viewport.ToSkiaRect(), lineWidth), copy);
         }
 
         canvas.DrawPath(path, paint);
