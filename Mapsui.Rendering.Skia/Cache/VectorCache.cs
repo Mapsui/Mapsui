@@ -18,6 +18,7 @@ public class VectorCache : IVectorCache
     public VectorCache(ISymbolCache symbolCache, int capacity)
     {
         _pathParamCache = new(Math.Min(capacity, 1));
+        _pathCache = new (Math.Max(capacity, 1));
         _symbolCache = symbolCache;
     }
 
