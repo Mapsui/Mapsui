@@ -18,7 +18,7 @@ public static class LineStringRenderer
         if (vectorStyle == null)
             return;
 
-        SKPaint paint;
+        SKPaint? paint;
         SKPath path;
         var lineWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1);
         if (vectorCache == null)
@@ -35,7 +35,7 @@ public static class LineStringRenderer
             }
 
             paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
-            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, viewport, _) => geometry.ToSkiaPath(viewport, viewport.ToSkiaRect(), lineWidth), copy);
+            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, vp, _) => geometry.ToSkiaPath(vp, vp.ToSkiaRect(), lineWidth), copy);
         }
 
         canvas.DrawPath(path, paint);
