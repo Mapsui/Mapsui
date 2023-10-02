@@ -14,7 +14,7 @@ public interface IVectorCache
     T? GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint)
         where T : class?;
 
-    T GetOrCreatePath<T, TParam>(TParam viewport, Func<TParam, T> toSkRect);
+    T GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toSkRect);
 
     TPath GetOrCreatePath<TPath, TGeometry>(Viewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath, Func<TGeometry, TGeometry>? copy)
         where TPath : class

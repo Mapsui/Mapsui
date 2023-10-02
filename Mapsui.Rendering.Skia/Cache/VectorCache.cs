@@ -46,12 +46,12 @@ public class VectorCache : IVectorCache
         return (T?)paint;
     }
 
-    public T GetOrCreatePath<T, TParam>(TParam viewport, Func<TParam, T> toSkRect)
+    public T GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toSkRect)
     {
-        if (!_pathParamCache.TryGetValue(viewport!, out var rect))
+        if (!_pathParamCache.TryGetValue(param!, out var rect))
         {
-            rect = toSkRect(viewport);
-            _pathParamCache[viewport!] = rect!;
+            rect = toSkRect(param);
+            _pathParamCache[param!] = rect!;
         }
 
         return (T)rect!;
