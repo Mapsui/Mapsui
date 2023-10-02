@@ -13,7 +13,7 @@ public static class LineStringRenderer
 {
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle? vectorStyle,
-        IFeature feature, LineString lineString, float opacity, IVectorCache? vectorCache)
+        LineString lineString, float opacity, IVectorCache? vectorCache)
     {
         if (vectorStyle == null)
             return;
