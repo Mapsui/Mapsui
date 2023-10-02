@@ -18,10 +18,13 @@ public partial class LayerList
 
         foreach (var layer in layers)
         {
-            var item = new LayerListItem { LayerName = layer.Name };
-            item.Enabled = layer.Enabled;
-            item.LayerOpacity = layer.Opacity;
-            item.Layer = layer;
+            var item = new LayerListItem
+            {
+                LayerName = layer.Name,
+                Enabled = layer.Enabled,
+                LayerOpacity = layer.Opacity,
+                Layer = layer
+            };
             Items.Children.Add(item);
         }
     }
