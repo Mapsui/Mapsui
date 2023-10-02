@@ -19,32 +19,6 @@ internal static class PolygonRenderer
     /// </summary>
     private const float Scale = 10.0f;
 
-    public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle vectorStyle, IFeature feature,
-        GeometryCollection collection, float opacity, ISymbolCache symbolCache, IVectorCache vectorCache)
-    {
-        if (vectorStyle == null)
-            return;
-
-        var paint = vectorCache.GetOrCreatePaint(vectorStyle.Outline, opacity, CreateSkPaint);
-        var paintFill = vectorCache.GetOrCreatePaint(vectorStyle.Fill, opacity, viewport.Rotation, CreateSkPaint);
-
-        float lineWidth = Convert.ToSingle(vectorStyle.Outline?.Width ?? 1);
-
-        Func<GeometryCollection, GeometryCollection>? copy = null;
-        if (layer is IModifyFeatureLayer)
-        {
-            copy = f => (GeometryCollection)f.Copy();
-        }
-
-        var path = vectorCache.GetOrCreatePath(viewport, collection, lineWidth, (collection, viewport, lineWidth) =>
-        {
-            var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
-            return collection.ToSkiaPath(viewport, skRect, lineWidth);
-        }, copy);
-
-        DrawPath(canvas, vectorStyle, path, paintFill, paint);
-    }
-
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle vectorStyle, IFeature feature,
         Polygon polygon, float opacity, ISymbolCache symbolCache, IVectorCache vectorCache)
@@ -73,7 +47,7 @@ internal static class PolygonRenderer
         DrawPath(canvas, vectorStyle, path, fillPaint, paint);
     }
 
-    private static void DrawPath(SKCanvas canvas, VectorStyle vectorStyle, SKPath path, SKPaint? paintFill, SKPaint? paint)
+    internal static void DrawPath(SKCanvas canvas, VectorStyle vectorStyle, SKPath path, SKPaint? paintFill, SKPaint? paint)
     {
         if (vectorStyle?.Fill?.FillStyle == FillStyle.Solid)
         {
