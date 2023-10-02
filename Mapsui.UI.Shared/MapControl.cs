@@ -620,17 +620,14 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool HandleTouchingTouched(MPoint position, bool leftButton, int clickCount, bool shift)
     {
-        if (HandleTouching(position, leftButton, clickCount, shift))
-        {
-            return true; 
-        }
+        bool result = HandleTouching(position, leftButton, clickCount, shift);
 
         if (HandleTouched(position, leftButton, clickCount, shift))
         {
-            return true; 
+            result = true; 
         }
 
-        return false;
+        return result;
     }
 
 
@@ -650,7 +647,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             else
             {
                 // Handle the touched avoid duplicated touched events
-                return false;
+                return true;
             }
         }
 
