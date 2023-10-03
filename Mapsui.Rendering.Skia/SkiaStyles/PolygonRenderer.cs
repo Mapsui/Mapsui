@@ -74,7 +74,7 @@ internal static class PolygonRenderer
         }
     }
 
-    private static SKPaint CreateSkPaint(Brush? brush, float opacity, double rotation, ISymbolCache? symbolCache)
+    internal static SKPaint CreateSkPaint(Brush? brush, float opacity, double rotation, ISymbolCache? symbolCache)
     {
         var fillColor = Color.Gray; // default
 
@@ -168,7 +168,7 @@ internal static class PolygonRenderer
         return paintFill;
     }
 
-    private static SKPaint CreateSkPaint(Pen? pen, float opacity)
+    internal static SKPaint CreateSkPaint(Pen? pen, float opacity)
     {
         float lineWidth = 1;
         var lineColor = Color.Black; // default
