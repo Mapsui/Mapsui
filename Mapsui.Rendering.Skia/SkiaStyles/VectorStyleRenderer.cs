@@ -50,6 +50,9 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                             throw new ArgumentException($"Unknown geometry type: {geometryFeature.Geometry?.GetType()}, Layer: {layer.Name}");
                     }
                     break;
+                default: 
+                    Logger.Log(LogLevel.Warning, $"{nameof(VectorStyleRenderer)} can not render feature of type '{feature.GetType()}', Layer: {layer.Name}");
+                    break;
             }
         }
         catch (Exception ex)
