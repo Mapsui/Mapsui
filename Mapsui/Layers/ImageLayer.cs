@@ -37,13 +37,13 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
     public ImageLayer()
     {
         Style = new RasterStyle();
+        _startFetchTimer = new Timer(StartFetchTimerElapsed, null, Timeout.Infinite, Timeout.Infinite);
+        _numberOfFeaturesReturned = 1;
     }
 
     public ImageLayer(string layerName) : this()
     {
         Name = layerName;
-        _startFetchTimer = new Timer(StartFetchTimerElapsed, null, Timeout.Infinite, Timeout.Infinite);
-        _numberOfFeaturesReturned = 1;
     }
 
     /// <summary>
