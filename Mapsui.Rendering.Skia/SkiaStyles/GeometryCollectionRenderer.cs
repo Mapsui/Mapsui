@@ -5,11 +5,13 @@ using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
 
+#pragma warning disable IDISP001 // Dispose created
+
 namespace Mapsui.Rendering.Skia.SkiaStyles;
 
 public static class GeometryCollectionRenderer
 {
-    public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle vectorStyle, IFeature feature,
+    public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle? vectorStyle, IFeature feature,
         GeometryCollection collection, float opacity, ISymbolCache symbolCache, IVectorCache vectorCache)
     {
         if (vectorStyle == null)
