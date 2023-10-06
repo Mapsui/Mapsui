@@ -65,10 +65,10 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
                 switch (bitmapInfo.Type)
                 {
                     case BitmapType.Bitmap:
-                        BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap!, RoundToPixel(destination), opacity);
+                        BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap!, destination, opacity);
                         break;
                     case BitmapType.Picture:
-                        PictureRenderer.Draw(canvas, bitmapInfo.Picture!, RoundToPixel(destination), opacity);
+                        PictureRenderer.Draw(canvas, bitmapInfo.Picture!, destination, opacity);
                         break;
                 }
 
