@@ -11,6 +11,7 @@ public sealed class MainPage : ContentPage, IDisposable
     readonly CollectionView collectionView;
     readonly Picker categoryPicker;
     readonly MapControl mapControl = new MapControl();
+    const int menuItemWidth = 220;
 
     public MainPage(MainViewModel mainViewModel)
     {
@@ -38,16 +39,18 @@ public sealed class MainPage : ContentPage, IDisposable
             {
                 new ScrollView()
                 {
+                    WidthRequest = menuItemWidth + 40,
                     Content = new VerticalStackLayout()
                     {
+                        WidthRequest = menuItemWidth + 20,
                         Spacing = 20,
                         Children =
                         {
                             categoryPicker,
                             collectionView
-                        }
+                        }                        
                     } 
-                }.Column(0).Padding(20),
+                }.Column(0).Padding(10),
                 mapControl.Column(1)
             }
         };
@@ -57,7 +60,7 @@ public sealed class MainPage : ContentPage, IDisposable
     {
         return new Picker
         {
-            WidthRequest = 220,
+            WidthRequest = menuItemWidth,
             ItemsSource = mainViewModel.Categories
         }
         .Bind(Picker.SelectedItemProperty, nameof(mainViewModel.SelectedCategory))
@@ -83,10 +86,9 @@ public sealed class MainPage : ContentPage, IDisposable
         {
             Padding = 10,
             Margin = new Thickness(2, 2),
+            WidthRequest = menuItemWidth,
             Content = new Label
             {
-                WidthRequest = 200,
-
             }.Bind(Label.TextProperty, nameof(ISample.Name))
         };
     }
