@@ -57,18 +57,12 @@ public class VectorCache : IVectorCache
         return (T)rect!;
     }
 
-    public TPath GetOrCreatePath<TPath, TGeometry>(Viewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath, Func<TGeometry, TGeometry>? copy) where TPath : class where TGeometry : class
+    public TPath GetOrCreatePath<TPath, TGeometry>(Viewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath) where TPath : class where TGeometry : class
     {
         var key = (viewport.ToExtent(), viewport.Rotation, geometry, lineWidth);
         if (!_pathCache.TryGetValue(key, out var path))
         {
             path = toPath(geometry, viewport, lineWidth);
-            if (copy != null)
-            {
-                // clone copy the key because the geometry can be modified and so create a new instance that is not modified 
-                // to keep the key stable. Happens in Layers that implement IModifyFeature Layer
-                key = (viewport.ToExtent(), viewport.Rotation, copy(geometry), lineWidth);;
-            }
             _pathCache[key] = path;
         }
 

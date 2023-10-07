@@ -8,6 +8,7 @@ public delegate void CoordinateSetter(double x, double y);
 
 public interface IFeature : IDisposable
 {
+    long Id { get; }
     ICollection<IStyle> Styles { get; }
     object? this[string key] { get; set; }
     IEnumerable<string> Fields { get; }

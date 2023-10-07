@@ -28,14 +28,8 @@ public static class LineStringRenderer
         }
         else
         {
-            Func<LineString, LineString>? copy = null;
-            if (layer is IModifyFeatureLayer)
-            {
-                copy = f => (LineString)f.Copy();
-            }
-
             paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
-            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, vp, _) => geometry.ToSkiaPath(vp, vp.ToSkiaRect(), lineWidth), copy);
+            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, vp, _) => geometry.ToSkiaPath(vp, vp.ToSkiaRect(), lineWidth));
         }
 
         canvas.DrawPath(path, paint);

@@ -16,7 +16,7 @@ public interface IVectorCache
 
     T GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toSkRect);
 
-    TPath GetOrCreatePath<TPath, TGeometry>(Viewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath, Func<TGeometry, TGeometry>? copy)
+    TPath GetOrCreatePath<TPath, TGeometry>(Viewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath)
         where TPath : class
         where TGeometry : class;
 }

@@ -21,18 +21,11 @@ public static class GeometryCollectionRenderer
         var paintFill = vectorCache.GetOrCreatePaint<SKPaint>(vectorStyle.Fill, opacity, viewport.Rotation, PolygonRenderer.CreateSkPaint);
 
         float lineWidth = Convert.ToSingle(vectorStyle.Outline?.Width ?? 1);
-
-        Func<GeometryCollection, GeometryCollection>? copy = null;
-        if (layer is IModifyFeatureLayer)
-        {
-            copy = f => (GeometryCollection)f.Copy();
-        }
-
         var path = vectorCache.GetOrCreatePath(viewport, collection, lineWidth, (collection, viewport, lineWidth) =>
         {
             var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
             return collection.ToSkiaPath(viewport, skRect, lineWidth);
-        }, copy);
+        });
 
         PolygonRenderer.DrawPath(canvas, vectorStyle, path, paintFill, paint);
     }

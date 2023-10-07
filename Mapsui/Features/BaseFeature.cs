@@ -3,15 +3,24 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
 public abstract class BaseFeature : IDisposable
 {
-    public BaseFeature() { }
+    // last used feature id
+    private static long _currentFeatureId;
 
-    public BaseFeature(BaseFeature baseFeature)
+    protected BaseFeature()
+    {
+        Id = Interlocked.Increment(ref _currentFeatureId);
+    }
+
+    public long Id { get; private set; }
+
+    protected BaseFeature(BaseFeature baseFeature) : this()
     {
         Styles = baseFeature.Styles.ToList();
         foreach (var field in baseFeature.Fields)
@@ -38,6 +47,8 @@ public abstract class BaseFeature : IDisposable
 
     public void Modified()
     {
+        // is modified needs a new id.
+        Id = Interlocked.Increment(ref _currentFeatureId);
         ClearRenderedGeometry();
     }
 

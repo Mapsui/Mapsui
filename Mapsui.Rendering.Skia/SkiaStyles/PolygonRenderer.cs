@@ -31,18 +31,11 @@ internal static class PolygonRenderer
         var fillPaint = vectorCache.GetOrCreatePaint(vectorStyle.Fill, opacity, viewport.Rotation, CreateSkPaint);
 
         float lineWidth = Convert.ToSingle(vectorStyle.Outline?.Width ?? 1);
-
-        Func<Polygon, Polygon>? copy = null;
-        if (layer is IModifyFeatureLayer)
-        {
-            copy = f => (Polygon)f.Copy();
-        }
-
         var path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (polygon, viewport, lineWidth) =>
         {
             var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
             return polygon.ToSkiaPath(viewport, skRect, lineWidth);
-        }, copy);
+        });
 
         DrawPath(canvas, vectorStyle, path, fillPaint, paint);
     }
