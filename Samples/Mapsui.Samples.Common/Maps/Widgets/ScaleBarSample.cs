@@ -8,7 +8,7 @@ namespace Mapsui.Samples.Common.Maps.Widgets;
 
 public class ScaleBarSample : ISample
 {
-    public string Name => "1 ScaleBar";
+    public string Name => "ScaleBar";
     public string Category => "Widgets";
 
     public Task<Map> CreateMapAsync()
