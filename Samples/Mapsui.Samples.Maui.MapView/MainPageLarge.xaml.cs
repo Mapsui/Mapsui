@@ -36,8 +36,8 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         InitializeComponent();
 
         // nullable warning workaround
-        var test = this.listView ?? throw new InvalidOperationException();
-        var test2 = this.featureInfo ?? throw new InvalidOperationException();
+        var test = listView ?? throw new InvalidOperationException();
+        var test2 = featureInfo ?? throw new InvalidOperationException();
 
         allSamples = AllSamples.GetSamples() ?? new List<ISampleBase>();
 
@@ -162,8 +162,8 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
     {
         try
         {
-            this.gpsCancelation?.Dispose();
-            this.gpsCancelation = new CancellationTokenSource();
+            gpsCancelation?.Dispose();
+            gpsCancelation = new CancellationTokenSource();
 
             await Task.Run(async () =>
             {
@@ -179,7 +179,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
 #else
                     await Device.InvokeOnMainThreadAsync(async () => {
 #endif
-                        var location = await Geolocation.GetLocationAsync(request, this.gpsCancelation.Token)
+                        var location = await Geolocation.GetLocationAsync(request, gpsCancelation.Token)
                             .ConfigureAwait(false);
                         if (location != null)
                         {
@@ -199,7 +199,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
 
     public void StopGPS()
     {
-        this.gpsCancelation?.Cancel();
+        gpsCancelation?.Cancel();
     }
 
     /// <summary>

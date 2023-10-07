@@ -41,7 +41,7 @@ internal class AnimatedPointFeature : PointFeature, IModifyFeatureLayer
 
         Point.X = Start.X + (End.X - Start.X) * progress;
         Point.Y = Start.Y + (End.Y - Start.Y) * progress;
-        this.RenderedGeometry.Clear();
+        Modified();
         return true;
     }
 

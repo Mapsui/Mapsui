@@ -36,7 +36,29 @@ public abstract class BaseFeature : IDisposable
         set => _renderedGeometry = value;
     }
 
+    public void Modified()
+    {
+        ClearRenderedGeometry();
+    }
+
     public virtual void Dispose()
     {
+        ClearRenderedGeometry();
+    }
+
+    public void ClearRenderedGeometry()
+    {
+        if (_renderedGeometry != null)
+        {
+            var values = _renderedGeometry.Values.ToArray();
+            _renderedGeometry = null;
+            foreach (var value in values)
+            {
+                if (value is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
+            }
+        }
     }
 }

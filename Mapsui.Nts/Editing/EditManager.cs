@@ -63,7 +63,7 @@ public class EditManager
             linearRing.Add(linearRing[0].Copy()); // Add first coordinate at end to close the ring.
             _addInfo.Feature.Geometry = new Polygon(new LinearRing(linearRing.ToArray()));
 
-            _addInfo.Feature?.RenderedGeometry.Clear(); // You need to clear the cache to see changes.
+            _addInfo.Feature.Modified(); // You need to clear the cache to see changes.
             _addInfo.Feature = null;
             _addInfo.Vertex = null;
             EditMode = EditMode.AddPolygon;
@@ -78,7 +78,7 @@ public class EditManager
         if (_addInfo.Vertex != null)
         {
             _addInfo.Vertex.SetXY(mapInfo?.WorldPosition);
-            _addInfo.Feature?.RenderedGeometry.Clear();
+            _addInfo.Feature?.Modified();
             Layer?.DataHasChanged();
         }
     }
@@ -114,7 +114,7 @@ public class EditManager
             _addInfo.Vertex = worldPosition.Copy(); // and create a new hover vertex
             _addInfo.Vertices.Add(_addInfo.Vertex);
             _addInfo.Feature.Geometry = new LineString(_addInfo.Vertices.ToArray());
-            _addInfo.Feature?.RenderedGeometry.Clear();
+            _addInfo.Feature?.Modified();
             Layer?.DataHasChanged();
         }
         else if (EditMode == EditMode.AddPolygon)
@@ -147,7 +147,7 @@ public class EditManager
             linearRing.Add(linearRing[0]); // Add first coordinate at end to close the ring.
             _addInfo.Feature.Geometry = new Polygon(new LinearRing(linearRing.ToArray()));
 
-            _addInfo.Feature?.RenderedGeometry.Clear();
+            _addInfo.Feature?.Modified();
             Layer?.DataHasChanged();
         }
         return false;
@@ -252,7 +252,7 @@ public class EditManager
             }
         }
 
-        _dragInfo.Feature.RenderedGeometry.Clear();
+        _dragInfo.Feature.Modified();
         Layer?.DataHasChanged();
         return true;
     }
@@ -278,7 +278,7 @@ public class EditManager
                 if (index >= 0)
                 {
                     geometryFeature.Geometry = geometryFeature.Geometry.DeleteCoordinate(index);
-                    geometryFeature.RenderedGeometry.Clear();
+                    geometryFeature.Modified();
                     Layer?.DataHasChanged();
                 }
             }
@@ -299,7 +299,7 @@ public class EditManager
             if (EditHelper.ShouldInsert(mapInfo.WorldPosition, mapInfo.Resolution, vertices, VertexRadius, out var segment))
             {
                 geometryFeature.Geometry = geometryFeature.Geometry.InsertCoordinate(mapInfo.WorldPosition.ToCoordinate(), segment);
-                geometryFeature.RenderedGeometry.Clear();
+                geometryFeature.Modified();
                 Layer?.DataHasChanged();
             }
         }
@@ -336,7 +336,7 @@ public class EditManager
 
         _rotateInfo.PreviousPosition = worldPosition;
 
-        _rotateInfo.Feature.RenderedGeometry.Clear();
+        _rotateInfo.Feature.Modified();
         Layer?.DataHasChanged();
 
         return true; // to signal pan lock
@@ -387,7 +387,7 @@ public class EditManager
 
         _scaleInfo.PreviousPosition = worldPosition;
 
-        _scaleInfo.Feature.RenderedGeometry.Clear();
+        _scaleInfo.Feature.Modified();
         Layer?.DataHasChanged();
 
         return true; // to signal pan lock

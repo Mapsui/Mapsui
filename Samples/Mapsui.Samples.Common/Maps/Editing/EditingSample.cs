@@ -187,7 +187,7 @@ public class EditingSample : IMapControlSample
 
             foreach (var feature in features)
             {
-                feature.RenderedGeometry.Clear();
+                feature.Modified();
             }
 
             _tempFeatures = new List<IFeature>(features);
@@ -258,7 +258,7 @@ public class EditingSample : IMapControlSample
 
             foreach (var feature in features)
             {
-                feature.RenderedGeometry.Clear();
+                feature.Modified();
             }
 
             _tempFeatures = new List<IFeature>(features);
@@ -285,7 +285,7 @@ public class EditingSample : IMapControlSample
 
             foreach (var feature in features)
             {
-                feature.RenderedGeometry.Clear();
+                feature.Modified();
             }
 
             _tempFeatures = new List<IFeature>(features);
@@ -312,7 +312,7 @@ public class EditingSample : IMapControlSample
 
             foreach (var feature in features)
             {
-                feature.RenderedGeometry.Clear();
+                feature.Modified();
             }
 
             _tempFeatures = new List<IFeature>(features);

@@ -130,11 +130,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     {
         foreach (var feature in features.Cast<RasterFeature>())
         {
-            foreach (var key in feature.RenderedGeometry.Keys)
-            {
-                var disposable = feature.RenderedGeometry[key] as IDisposable;
-                disposable?.Dispose();
-            }
+            feature.ClearRenderedGeometry();
         }
     }
 

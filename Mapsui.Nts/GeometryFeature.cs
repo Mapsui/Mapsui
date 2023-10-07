@@ -32,14 +32,6 @@ public class GeometryFeature : BaseFeature, IFeature, IDisposable
     {
         if (_disposed) return;
         base.Dispose();
-
-        foreach (var keyValuePair in RenderedGeometry)
-        {
-            var disposable = keyValuePair.Value as IDisposable;
-            disposable?.Dispose();
-        }
-        RenderedGeometry.Clear();
-
         _disposed = true;
     }
 

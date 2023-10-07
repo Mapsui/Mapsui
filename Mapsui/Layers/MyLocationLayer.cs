@@ -507,7 +507,7 @@ public class MyLocationLayer : BaseLayer, IDisposable, IModifyFeatureLayer
         if (!_myLocation.Equals(newLocation))
         {
             _myLocation = newLocation;
-            _feature.RenderedGeometry.Clear();
+            _feature.Modified();
             _feature.Point.X = _myLocation.X;
             _feature.Point.Y = _myLocation.Y;
             modified = true;

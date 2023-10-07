@@ -515,7 +515,7 @@ public class MyLocationLayer : BaseLayer
         {
             _myLocation = newLocation;
             _feature.Geometry = _myLocation.ToPoint();
-            _feature.RenderedGeometry.Clear();
+            _feature.Modified();
             modified = true;
         }
 

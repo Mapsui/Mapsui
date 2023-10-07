@@ -303,8 +303,8 @@ public class AsyncLock
             _disposed = true;
 #endif
             var @this = this;
-            var oldId = this._oldId;
-            var oldThreadId = this._oldThreadId;
+            var oldId = _oldId;
+            var oldThreadId = _oldThreadId;
             Task.Run(async () =>
             {
                 await @this._parent._reentrancy.WaitAsync();

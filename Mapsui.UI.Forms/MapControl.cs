@@ -272,16 +272,16 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         switch (e.PropertyName)
         {
-            case nameof(this.Width):
-            case nameof(this.Height):
-                var newSize = new Size(this.Width, this.Height);
+            case nameof(Width):
+            case nameof(Height):
+                var newSize = new Size(Width, Height);
 
-                if (newSize.Width > 0 && newSize.Height > 0 && this.oldSize != newSize)
+                if (newSize.Width > 0 && newSize.Height > 0 && oldSize != newSize)
                 {
-                    this.oldSize = newSize;
+                    oldSize = newSize;
                     // Maui Workaround because the OnSizeChanged Events don't fire.
                     // Maybe this is a Bug and will be fixed in later versions.
-                    this.OnSizeChanged(this, EventArgs.Empty);
+                    OnSizeChanged(this, EventArgs.Empty);
                 }
 
                 break;
