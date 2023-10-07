@@ -57,9 +57,16 @@ public class VectorCache : IVectorCache
         return (T)rect!;
     }
 
-    public TPath GetOrCreatePath<TPath, TGeometry>(Viewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath) where TPath : class where TGeometry : class
+    public TPath GetOrCreatePath<TPath, TFeature, TGeometry>(
+        Viewport viewport,
+        TFeature feature, 
+        TGeometry geometry,
+        float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath) 
+        where TPath : class 
+        where TGeometry : class
+        where TFeature : class, IFeature
     {
-        var key = (viewport.ToExtent(), viewport.Rotation, geometry, lineWidth);
+        var key = (viewport.ToExtent(), viewport.Rotation, feature.Id, lineWidth);
         if (!_pathCache.TryGetValue(key, out var path))
         {
             path = toPath(geometry, viewport, lineWidth);

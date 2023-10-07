@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Mapsui.Layers;
+using Mapsui.Nts;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -13,7 +14,7 @@ public static class LineStringRenderer
 {
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle? vectorStyle,
-        LineString lineString, float opacity, IVectorCache? vectorCache)
+        IFeature feature, LineString lineString, float opacity, IVectorCache? vectorCache)
     {
         if (vectorStyle == null)
             return;
@@ -29,7 +30,8 @@ public static class LineStringRenderer
         else
         {
             paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
-            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, vp, _) => geometry.ToSkiaPath(vp, vp.ToSkiaRect(), lineWidth));
+            path = vectorCache.GetOrCreatePath(viewport, feature, lineString, lineWidth,
+                (geometry, vp, _) => geometry.ToSkiaPath(vp, vp.ToSkiaRect(), lineWidth));
         }
 
         canvas.DrawPath(path, paint);

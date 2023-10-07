@@ -31,7 +31,7 @@ internal static class PolygonRenderer
         var fillPaint = vectorCache.GetOrCreatePaint(vectorStyle.Fill, opacity, viewport.Rotation, CreateSkPaint);
 
         float lineWidth = Convert.ToSingle(vectorStyle.Outline?.Width ?? 1);
-        var path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (polygon, viewport, lineWidth) =>
+        var path = vectorCache.GetOrCreatePath(viewport, feature, polygon, lineWidth, (polygon, viewport, lineWidth) =>
         {
             var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
             return polygon.ToSkiaPath(viewport, skRect, lineWidth);
