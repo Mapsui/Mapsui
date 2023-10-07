@@ -8,7 +8,6 @@ public delegate void CoordinateSetter(double x, double y);
 
 public interface IFeature : IDisposable
 {
-    long Id { get; }
     ICollection<IStyle> Styles { get; }
     object? this[string key] { get; set; }
     IEnumerable<string> Fields { get; }
@@ -16,9 +15,11 @@ public interface IFeature : IDisposable
     public IDictionary<IStyle, object> RenderedGeometry { get; }
     void CoordinateVisitor(Action<double, double, CoordinateSetter> visit);
 #if NETSTANDARD2_0
+    long Id { get; }
     void Modified();
     void ClearRenderedGeometry();
 #else
+    long Id => 0;
     void Modified() { } // default implementation
     void ClearRenderedGeometry() { } // default implementation
 #endif
