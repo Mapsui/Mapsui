@@ -14,13 +14,13 @@ public class HyperlinkSample : ISample
     {
         var map = new Map();
 
-        map.Widgets.Add(CreateHyperlink("Link to Mapsui FAQ", "https://mapsui.com/documentation/faq.html", 
+        map.Widgets.Add(CreateHyperlink("Open Mapsui FAQ", "https://mapsui.com/documentation/faq.html", 
             VerticalAlignment.Top, HorizontalAlignment.Left));
-        map.Widgets.Add(CreateHyperlink("Link to Mapsui readme", "https://github.com/Mapsui/Mapsui/blob/master/README.md", 
+        map.Widgets.Add(CreateHyperlink("Open Mapsui readme.md", "https://github.com/Mapsui/Mapsui/blob/master/README.md", 
             VerticalAlignment.Bottom, HorizontalAlignment.Right));
-        map.Widgets.Add(CreateHyperlink("Link to Mapsui releases", "https://github.com/Mapsui/Mapsui/releases/", 
+        map.Widgets.Add(CreateHyperlink("Open Mapsui releases page", "https://github.com/Mapsui/Mapsui/releases/", 
             VerticalAlignment.Bottom, HorizontalAlignment.Left));
-        map.Widgets.Add(CreateHyperlink("Link to Mapsui on nuget", "https://www.nuget.org/packages/Mapsui", 
+        map.Widgets.Add(CreateHyperlink("Open Mapsui nuget page", "https://www.nuget.org/packages/Mapsui", 
             VerticalAlignment.Top, HorizontalAlignment.Right));
 
         return Task.FromResult(map);
