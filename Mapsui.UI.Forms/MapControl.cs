@@ -306,6 +306,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             
             if (HandleTouch(e, location))
             {
+                e.Handled = true;
                 return;
             }
 
