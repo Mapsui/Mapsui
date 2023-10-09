@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -64,6 +65,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private readonly System.Diagnostics.Stopwatch _stopwatch = new System.Diagnostics.Stopwatch();
     // saving list of extended Widgets
     private List<IWidgetExtended>? _extendedWidgets;
+    // old widget Collection to compare if widget Collection was changed.
+    private ConcurrentQueue<IWidget>? _widgetCollection;
     // saving list of touchable Widgets
     private List<IWidget>? _touchableWidgets;
     // keeps track of the widgets count to see if i need to recalculate the extended widgets.
@@ -682,6 +685,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private List<IWidgetExtended> GetExtendedWidgets()
     {
+        AssureWidgets();
         if (_updateWidget != Map.Widgets.Count || _extendedWidgets == null)
         {
             _updateWidget = Map.Widgets.Count;
@@ -689,7 +693,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             var widgetsOfMapAndLayers = Map.GetWidgetsOfMapAndLayers().ToList();
             foreach (var widget in widgetsOfMapAndLayers)
             {
-                if (widget is IWidgetExtended extendedWidget && extendedWidget.Touchable)
+                if (widget is IWidgetExtended extendedWidget)
                 {
                     _extendedWidgets.Add(extendedWidget);
                 }
@@ -699,8 +703,20 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return _extendedWidgets;
     }
 
+    private void AssureWidgets()
+    {
+        if (_widgetCollection != Map.Widgets)
+        {
+            // reset widgets
+            _extendedWidgets = null;
+            _touchableWidgets = null;
+            _widgetCollection = Map.Widgets;
+        }
+    }
+
     private List<IWidget> GetTouchableWidgets()
     {
+        AssureWidgets();
         if (_updateTouchableWidget != Map.Widgets.Count || _touchableWidgets == null)
         {
             _updateTouchableWidget = Map.Widgets.Count;
