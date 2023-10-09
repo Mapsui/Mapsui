@@ -61,7 +61,7 @@ public class ButtonSample : ISample
     {
         return new ButtonWidget()
         {
-            Text = "This text is apparently needed to update the locations",
+            Text = "hi", // This text is apparently needed to update to position of the button
             SvgImage = LoadSomeSvgAsString(),
             VerticalAlignment = verticalAlignment,
             HorizontalAlignment = horizontalAlignment,
