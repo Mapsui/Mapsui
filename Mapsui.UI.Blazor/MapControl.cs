@@ -139,7 +139,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
         if (Math.Abs(_mouseWheelPos) < 1.0) return;
 
-        int delta = (int)Math.Floor(_mouseWheelPos);
+        int delta = (int)Math.Truncate(_mouseWheelPos);
         _mouseWheelPos -= delta;
 
         var mouseWheelDelta = delta * -1; // so that it zooms like on windows
