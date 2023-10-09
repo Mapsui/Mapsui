@@ -40,10 +40,11 @@ internal sealed class DbaseReader : IDisposable
     private FileStream? _fs;
     private BinaryReader? _br;
     private bool _headerIsParsed;
-    private int Id { get; } = BaseLayer.NextId();
+    private int Id { get; }
 
-    public DbaseReader(string filename)
+    public DbaseReader(string filename, int id)
     {
+        Id = id;
         if (!File.Exists(filename))
             throw new FileNotFoundException($"Could not find file \"{filename}\"");
         _filename = filename;

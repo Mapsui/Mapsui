@@ -7,7 +7,7 @@ using Mapsui.Styles.Thematics;
 
 namespace Mapsui.Providers;
 
-public class StackedLabelProvider : IProvider
+public class StackedLabelProvider : BaseProvider
 {
     private const int SymbolSize = 32; // todo: determine margin by symbol size
     private const int BoxMargin = SymbolSize / 2;
@@ -24,19 +24,17 @@ public class StackedLabelProvider : IProvider
         _rectangleFill = rectangleFill;
     }
 
-    public string? CRS { get; set; }
-
     private readonly Brush? _rectangleFill;
 
     private readonly Pen _rectangleLine;
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public override async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var features = await _provider.GetFeaturesAsync(fetchInfo);
         return GetFeaturesInView(fetchInfo.Resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
     }
 
-    public MRect? GetExtent()
+    public override MRect? GetExtent()
     {
         return _provider.GetExtent();
     }

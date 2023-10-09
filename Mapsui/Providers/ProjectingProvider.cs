@@ -8,7 +8,7 @@ using Mapsui.Projections;
 
 namespace Mapsui.Providers;
 
-public class ProjectingProvider : IProvider
+public class ProjectingProvider : BaseProvider
 {
     private readonly IProvider _provider;
     private readonly IProjection _projection;
@@ -23,9 +23,9 @@ public class ProjectingProvider : IProvider
     /// The CRS of the target. The source CRS will be projected to this target CRS. This should be equal to the
     /// CRS of the Map and the FetchInfo.CRS.
     /// </summary>
-    public string? CRS { get; set; }
+    public override string? CRS { get; set; }
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public override async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         if (GetFetchInfo(ref fetchInfo))
             return Enumerable.Empty<IFeature>();
@@ -51,7 +51,7 @@ public class ProjectingProvider : IProvider
         return false;
     }
 
-    public MRect? GetExtent()
+    public override MRect? GetExtent()
     {
         if (_provider.GetExtent() == null) return null;
         var extent = _provider.GetExtent()!;

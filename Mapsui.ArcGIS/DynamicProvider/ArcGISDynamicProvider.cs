@@ -17,7 +17,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.ArcGIS.DynamicProvider;
 
-public class ArcGISDynamicProvider : IProvider, IProjectingProvider
+public class ArcGISDynamicProvider : BaseProvider, IProjectingProvider
 {
     private int _timeOut;
     private string _url = string.Empty;
@@ -90,13 +90,13 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
         set => _timeOut = value;
     }
 
-    public string? CRS
+    public override string? CRS
     {
         get => _crs;
         set => _crs = value;
     }
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public override async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         //If there are no layers (probably not initialised) return nothing
         if (ArcGisDynamicCapabilities.layers == null)
@@ -110,7 +110,7 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
         return Enumerable.Empty<IFeature>();
     }
 
-    public MRect? GetExtent()
+    public override MRect? GetExtent()
     {
         if (ArcGisDynamicCapabilities.initialExtent == null)
             return null;

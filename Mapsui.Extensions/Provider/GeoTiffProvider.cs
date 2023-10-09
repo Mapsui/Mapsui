@@ -13,7 +13,7 @@ using Color = Mapsui.Styles.Color;
 
 namespace Mapsui.Extensions.Provider;
 
-public class GeoTiffProvider : IProvider, IDisposable
+public class GeoTiffProvider : BaseProvider, IDisposable
 {
     private struct TiffProperties
     {
@@ -226,9 +226,7 @@ public class GeoTiffProvider : IProvider, IDisposable
         return worldProperties;
     }
 
-    public string? CRS { get; set; } = "";
-
-    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public override Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         if (_extent.Intersects(fetchInfo.Extent))
         {
@@ -237,7 +235,7 @@ public class GeoTiffProvider : IProvider, IDisposable
         return Task.FromResult(Enumerable.Empty<IFeature>());
     }
 
-    public MRect? GetExtent()
+    public override MRect? GetExtent()
     {
         return _extent;
     }

@@ -15,7 +15,7 @@ using NetTopologySuite.IO.Converters;
 
 namespace Mapsui.Nts.Providers;
 
-public class GeoJsonProvider : IProvider
+public class GeoJsonProvider : BaseProvider
 {
     private static ReadOnlySpan<byte> Utf8Bom => new byte[] { 0xEF, 0xBB, 0xBF };
     private string _geoJson;
@@ -103,7 +103,9 @@ public class GeoJsonProvider : IProvider
                             var boundingBox = BoundingBox(feature);
                             if (boundingBox != null)
                             {
-                                var geometryFeature = new GeometryFeature();
+                                var id = feature.GetOptionalId("Id");
+                                var geometryFeature = id != null ? new GeometryFeature() : new GeometryFeature((Id, id));
+                                
                                 geometryFeature.Geometry = feature.Geometry;
                                 FillFields(geometryFeature, feature.Attributes);
 
@@ -126,10 +128,7 @@ public class GeoJsonProvider : IProvider
     }
 
     /// <inheritdoc/>
-    public string? CRS { get; set; }
-
-    /// <inheritdoc/>
-    public MRect? GetExtent()
+    public override MRect? GetExtent()
     {
         if (_extent == null)
         {
@@ -141,7 +140,7 @@ public class GeoJsonProvider : IProvider
     }
 
     /// <inheritdoc/>
-    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public override Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var fetchExtent = fetchInfo.Extent.ToEnvelope();
         var list = new List<IFeature>();

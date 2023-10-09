@@ -11,12 +11,10 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Nts.Providers;
 
-public class ObservableCollectionProvider<T> : IProvider where T : IFeatureProvider
+public class ObservableCollectionProvider<T> : BaseProvider where T : IFeatureProvider
 {
     public ObservableCollection<T> Collection { get; }
     private readonly ConcurrentHashSet<T> _shadowCollection = new();
-
-    public string? CRS { get; set; } = "";
 
     public ObservableCollectionProvider(ObservableCollection<T> collection)
     {
@@ -65,7 +63,7 @@ public class ObservableCollectionProvider<T> : IProvider where T : IFeatureProvi
         }
     }
 
-    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public override Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         if (_shadowCollection.Count == 0)
             return Task.FromResult(Enumerable.Empty<IFeature>());
@@ -83,7 +81,7 @@ public class ObservableCollectionProvider<T> : IProvider where T : IFeatureProvi
         return Task.FromResult((IEnumerable<IFeature>)list);
     }
 
-    public MRect? GetExtent()
+    public override MRect? GetExtent()
     {
         if (_shadowCollection.Count == 0)
             return null;
