@@ -689,7 +689,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             var widgetsOfMapAndLayers = Map.GetWidgetsOfMapAndLayers().ToList();
             foreach (var widget in widgetsOfMapAndLayers)
             {
-                if (widget is IWidgetExtended extendedWidget && extendedWidget.Touchable)
+                if (widget is IWidgetExtended extendedWidget)
                 {
                     _extendedWidgets.Add(extendedWidget);
                 }
