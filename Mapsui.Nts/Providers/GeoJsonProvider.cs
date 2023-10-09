@@ -104,7 +104,7 @@ public class GeoJsonProvider : BaseProvider
                             if (boundingBox != null)
                             {
                                 var id = feature.GetOptionalId("Id");
-                                var geometryFeature = id != null ? new GeometryFeature() : new GeometryFeature((Id, id));
+                                var geometryFeature = id == null ? new GeometryFeature() : new GeometryFeature((Id, id));
                                 
                                 geometryFeature.Geometry = feature.Geometry;
                                 FillFields(geometryFeature, feature.Attributes);
