@@ -23,6 +23,11 @@ public class GeometryFeature : BaseFeature, IFeature, IDisposable
         Geometry = geometryFeature.Geometry?.Copy();
     }
 
+    public GeometryFeature(GeometryFeature geometryFeature, object id) : base(geometryFeature, id)
+    {
+        Geometry = geometryFeature.Geometry?.Copy();
+    }
+
     public GeometryFeature(Geometry? geometry)
     {
         Geometry = geometry;

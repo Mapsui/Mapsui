@@ -10,7 +10,7 @@ using NetTopologySuite.Simplify;
 
 namespace Mapsui.Nts.Providers;
 
-public class GeometrySimplifyProvider : IProvider
+public class GeometrySimplifyProvider : IProvider, IProviderExtended
 {
     private readonly IProvider _provider;
     private readonly Func<Geometry, double, Geometry> _simplify;
@@ -22,6 +22,8 @@ public class GeometrySimplifyProvider : IProvider
         _simplify = simplify ?? TopologyPreservingSimplifier.Simplify;
         _distanceTolerance = distanceTolerance;
     }
+
+    public int Id { get; } = BaseLayer.NextId();
 
     public string? CRS
     {
@@ -36,13 +38,14 @@ public class GeometrySimplifyProvider : IProvider
 
     private IEnumerable<IFeature> IterateFeatures(FetchInfo fetchInfo, IEnumerable<IFeature> features)
     {
+        var resolution = _distanceTolerance ?? fetchInfo.Resolution;
         foreach (var feature in features)
             if (feature is GeometryFeature geometryFeature)
             {
-                var copied = new GeometryFeature(geometryFeature);
+                var copied = new GeometryFeature(geometryFeature, (Id, feature.Id, resolution));
                 if (geometryFeature.Geometry != null)
                 {
-                    copied.Geometry = _simplify(geometryFeature.Geometry, _distanceTolerance ?? fetchInfo.Resolution);
+                    copied.Geometry = _simplify(geometryFeature.Geometry, resolution);
                 }
 
                 yield return copied;
