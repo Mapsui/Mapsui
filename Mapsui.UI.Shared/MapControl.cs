@@ -664,14 +664,14 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             }
             else
             {
-
                 if (widget.HandleWidgetTouched(Map.Navigator, position))
+                    return true;
+                else if (widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
                 {
-                    if (widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
-                    {
-                        OpenBrowser(hyperlink.Url!);
-                    }
-
+                    // The HyperLink is a special case because we need platform specific code to open the
+                    // link in a browswer. If the link is not handled within the widget we handle it
+                    // here and return true to indicate this is handled.
+                    OpenBrowser(hyperlink.Url!);
                     return true;
                 }
             }
