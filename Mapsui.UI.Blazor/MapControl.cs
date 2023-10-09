@@ -35,6 +35,7 @@ public partial class MapControl : ComponentBase, IMapControl
     BoundingClientRect _clientRect = new BoundingClientRect();
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
     private MapsuiJsInterop? _interop;
+    private double _mouseWheelPos = 0.0;
 
     public string MoveCursor { get; set; } = Cursors.Move;
     public int MoveButton { get; set; } = MouseButtons.Primary;
@@ -134,8 +135,14 @@ public partial class MapControl : ComponentBase, IMapControl
 
     protected void OnMouseWheel(WheelEventArgs e)
     {
+        _mouseWheelPos += e.DeltaY;
 
-        var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
+        if (Math.Abs(_mouseWheelPos) < 1.0) return;
+
+        int delta = (int)Math.Floor(_mouseWheelPos);
+        _mouseWheelPos -= delta;
+
+        var mouseWheelDelta = delta * -1; // so that it zooms like on windows
         var currentMousePosition = e.ToLocation(_clientRect);
         Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
     }
