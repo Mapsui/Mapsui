@@ -7,11 +7,9 @@ using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Extensions;
 
 namespace Mapsui.Rendering.Skia;
@@ -298,7 +296,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (color.HasValue)
         {
             var rounding = style.CornerRounding;
-            using var backgroundPaint = new SKPaint { Color = color.Value };
+            using var backgroundPaint = new SKPaint { Color = color.Value, IsAntialias = true };
             target.DrawRoundRect(rect, rounding, rounding, backgroundPaint);
             if (style.BorderThickness > 0 &&
                 style.BorderColor != Color.Transparent)
@@ -307,7 +305,8 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 {
                     Color = style.BorderColor.ToSkia(),
                     Style = SKPaintStyle.Stroke,
-                    StrokeWidth = (float)style.BorderThickness
+                    StrokeWidth = (float)style.BorderThickness,
+                    IsAntialias = true
                 };
                 target.DrawRoundRect(rect, rounding, rounding, borderPaint);
             }
