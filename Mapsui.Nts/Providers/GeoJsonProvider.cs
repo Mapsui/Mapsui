@@ -28,6 +28,8 @@ public class GeoJsonProvider : IProvider
         _geoJson = geojson;
     }
 
+    public int Id { get; } = BaseLayer.NextId();
+
     private GeoJsonConverterFactory GeoJsonConverterFactory { get; } = new();
 
     private JsonSerializerOptions DefaultOptions
@@ -103,7 +105,9 @@ public class GeoJsonProvider : IProvider
                             var boundingBox = BoundingBox(feature);
                             if (boundingBox != null)
                             {
-                                var geometryFeature = new GeometryFeature();
+                                var optionalId = feature.GetOptionalId("Id");
+                                var geometryFeature = optionalId != null ? new GeometryFeature((Id, optionalId)) : new GeometryFeature();
+                                
                                 geometryFeature.Geometry = feature.Geometry;
                                 FillFields(geometryFeature, feature.Attributes);
 
