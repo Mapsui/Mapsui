@@ -1,5 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Styles;
+using Mapsui.Tiling;
 using Mapsui.Widgets;
 using System.Threading.Tasks;
 
@@ -14,6 +15,7 @@ public class HyperlinkSample : ISample
     {
         var map = new Map();
 
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(CreateHyperlink("Open Mapsui FAQ", "https://mapsui.com/documentation/faq.html", 
             VerticalAlignment.Top, HorizontalAlignment.Left));
         map.Widgets.Add(CreateHyperlink("Open Mapsui readme.md", "https://github.com/Mapsui/Mapsui/blob/master/README.md", 

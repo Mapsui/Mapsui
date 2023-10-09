@@ -1,5 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Styles;
+using Mapsui.Tiling;
 using Mapsui.Widgets;
 using System.Threading.Tasks;
 
@@ -12,7 +13,8 @@ public class TextBoxSample : ISample
 
     public Task<Map> CreateMapAsync()
     {
-        var map = new Map();
+        var map = new Map();        
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
         map.Widgets.Add(CreateTextBox("Top Right", VerticalAlignment.Top, HorizontalAlignment.Right));
         map.Widgets.Add(CreateTextBox("Center Right", VerticalAlignment.Center, HorizontalAlignment.Right));
