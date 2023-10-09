@@ -37,12 +37,12 @@ public class HyperlinkSample : ISample
             Url = url,
             VerticalAlignment = verticalAlignment,
             HorizontalAlignment = horizontalAlignment,
-            MarginX = 10,
-            MarginY = 10,
+            MarginX = 30,
+            MarginY = 30,
             PaddingX = 4,
             PaddingY = 4,
             CornerRadius = 4,
-            BackColor = new Color(0, 123, 255),
+            BackColor = new Color(23, 162, 184),
             TextColor = Color.White,
         };
     }

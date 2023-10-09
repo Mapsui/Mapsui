@@ -44,7 +44,7 @@ public class TextBoxSample : ISample
             PaddingX = 4,
             PaddingY = 4,
             CornerRadius = 4,
-            BackColor = new Color(0, 123, 255),
+            BackColor = new Color(108, 117, 125),
             TextColor = Color.White,
         };
     }
