@@ -17,23 +17,25 @@ using Mapsui.Tiling.Extensions;
 
 namespace Mapsui.Tiling.Provider;
 
-public class TileProvider : BaseProvider
+public class TileProvider : IProvider
 {
     private readonly ITileSource _source;
     private readonly MemoryCache<byte[]> _bitmaps = new(100, 200);
     private readonly List<TileIndex> _queue = new();
 
-    public override MRect? GetExtent()
+    public MRect? GetExtent()
     {
         return _source.Schema.Extent.ToMRect();
     }
+
+    public string? CRS { get; set; }
 
     public TileProvider(ITileSource tileSource)
     {
         _source = tileSource;
     }
 
-    public override async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var box = fetchInfo.Extent;
         var extent = new Extent(box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);

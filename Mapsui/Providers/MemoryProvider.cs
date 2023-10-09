@@ -6,7 +6,7 @@ using Mapsui.Layers;
 
 namespace Mapsui.Providers;
 
-public class MemoryProvider : BaseProvider
+public class MemoryProvider : IProvider
 {
     private readonly MRect? _boundingBox;
     /// <summary>
@@ -33,6 +33,12 @@ public class MemoryProvider : BaseProvider
     public double SymbolSize { get; set; } = 64;
 
     /// <summary>
+    /// The spatial reference ID (CRS)
+    /// </summary>
+    public string? CRS { get; set; }
+
+
+    /// <summary>
     /// Initializes a new instance of the MemoryProvider
     /// </summary>
     /// <param name="features">Features to be included in this dataSource</param>
@@ -43,7 +49,7 @@ public class MemoryProvider : BaseProvider
     }
 
 
-    public override Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public virtual Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         if (fetchInfo == null) throw new ArgumentNullException(nameof(fetchInfo));
         if (fetchInfo.Extent == null) throw new ArgumentNullException(nameof(fetchInfo.Extent));
@@ -72,7 +78,7 @@ public class MemoryProvider : BaseProvider
     /// BoundingBox of data set
     /// </summary>
     /// <returns>BoundingBox</returns>
-    public override MRect? GetExtent()
+    public MRect? GetExtent()
     {
         return _boundingBox;
     }

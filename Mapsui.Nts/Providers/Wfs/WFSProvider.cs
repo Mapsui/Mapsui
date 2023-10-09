@@ -37,7 +37,7 @@ namespace Mapsui.Providers.Wfs;
 /// - MultiCurvePropertyType
 /// - MultiSurfacePropertyType
 /// </summary>
-public class WFSProvider : BaseProvider, IDisposable
+public class WFSProvider : IProvider, IDisposable
 {
 
     /// <summary>
@@ -622,7 +622,7 @@ public class WFSProvider : BaseProvider, IDisposable
     }
 
     [SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits")]
-    public override MRect? GetExtent()
+    public MRect? GetExtent()
     {
         if (_featureTypeInfo == null)
             return null;
@@ -1076,7 +1076,7 @@ public class WFSProvider : BaseProvider, IDisposable
     /// <summary>
     /// Gets the features within the specified <see cref="FetchInfo"/>."/>
     /// </summary>
-    public override async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         return await ExecuteIntersectionQueryAsync(fetchInfo.Extent);
     }

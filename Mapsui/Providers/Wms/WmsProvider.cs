@@ -37,7 +37,7 @@ namespace Mapsui.Providers.Wms;
 /// and the WmsLayer will set the remaining BoundingBox property and proper requests that changes between the requests.
 /// See the example below.
 /// </remarks>
-public class WmsProvider : BaseProvider, IProjectingProvider
+public class WmsProvider : IProvider, IProjectingProvider
 {
     private string? _mimeType;
     private readonly Client? _wmsClient;
@@ -523,9 +523,10 @@ public class WmsProvider : BaseProvider, IProjectingProvider
 
     public Dictionary<string, string>? ExtraParams { get; set; }
 
+    public string? CRS { get; set; }
     public string? UserAgent { get; set; }
 
-    public override MRect? GetExtent()
+    public MRect? GetExtent()
     {
         if (CRS != null && _wmsClient != null && _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS))
         {
@@ -549,7 +550,7 @@ public class WmsProvider : BaseProvider, IProjectingProvider
         return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
     }
 
-    public override async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var (success, raster) = await TryGetMapAsync(fetchInfo.Section);
         if (success)

@@ -6,7 +6,7 @@ using Mapsui.Layers;
 
 namespace Mapsui.Providers;
 
-public class FilteringProvider : BaseProvider
+public class FilteringProvider : IProvider
 {
     private readonly IProvider _provider;
     private readonly Func<IFeature, bool> _filter;
@@ -17,18 +17,18 @@ public class FilteringProvider : BaseProvider
         _filter = filter;
     }
 
-    public override string? CRS
+    public string? CRS
     {
         get => _provider.CRS;
         set => _provider.CRS = value;
     }
 
-    public override MRect? GetExtent()
+    public MRect? GetExtent()
     {
         return _provider.GetExtent();
     }
 
-    public override async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var features = await _provider.GetFeaturesAsync(fetchInfo);
         return features.Where(f => _filter(f));

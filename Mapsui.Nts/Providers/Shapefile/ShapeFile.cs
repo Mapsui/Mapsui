@@ -131,7 +131,7 @@ public enum ShapeType
 /// M and Z values in a shapefile is ignored by Mapsui.
 /// </para>
 /// </remarks>
-public class ShapeFile : BaseProvider, IDisposable
+public class ShapeFile : IProvider, IDisposable
 {
 
     static ShapeFile()
@@ -203,7 +203,7 @@ public class ShapeFile : BaseProvider, IDisposable
         //Initialize DBF
         var dbfFile = Path.ChangeExtension(filename, ".dbf");
         if (File.Exists(dbfFile))
-            _dbaseFile = new DbaseReader(dbfFile, Id);
+            _dbaseFile = new DbaseReader(dbfFile);
         //Parse shape header
         ParseHeader();
         //Read projection file
@@ -470,7 +470,7 @@ public class ShapeFile : BaseProvider, IDisposable
     /// Returns the extent of the data source
     /// </summary>
     /// <returns></returns>
-    public override MRect? GetExtent()
+    public MRect? GetExtent()
     {
         lock (_syncRoot)
         {
@@ -488,6 +488,11 @@ public class ShapeFile : BaseProvider, IDisposable
             }
         }
     }
+
+    /// <summary>
+    /// Gets or sets the spatial reference ID (CRS)
+    /// </summary>
+    public string? CRS { get; set; } = "";
 
     private void InitializeShape(string filename, bool fileBasedIndex)
     {
@@ -887,7 +892,7 @@ public class ShapeFile : BaseProvider, IDisposable
 
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
-    public override Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         lock (_syncRoot)
         {

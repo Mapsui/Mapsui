@@ -16,7 +16,7 @@ using Mapsui.Rendering;
 
 namespace Mapsui.ArcGIS.ImageServiceProvider;
 
-public class ArcGISImageServiceProvider : BaseProvider, IProjectingProvider
+public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
 {
     private int _timeOut;
     private string _url = string.Empty;
@@ -98,7 +98,7 @@ public class ArcGISImageServiceProvider : BaseProvider, IProjectingProvider
         set => _timeOut = value;
     }
 
-    public override async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var (success, raster) = await TryGetMapAsync(fetchInfo.Section);
         if (success)
@@ -225,7 +225,7 @@ public class ArcGISImageServiceProvider : BaseProvider, IProjectingProvider
         return url.ToString();
     }
 
-    public override MRect? GetExtent()
+    public MRect? GetExtent()
     {
         return ArcGisImageCapabilities.fullExtent.ToMRect() ?? ArcGisImageCapabilities.initialExtent.ToMRect();
     }
