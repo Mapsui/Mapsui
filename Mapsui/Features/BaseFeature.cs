@@ -32,6 +32,16 @@ public abstract class BaseFeature : IDisposable
 
     protected BaseFeature(BaseFeature baseFeature) : this()
     {
+        Copy(baseFeature);
+    }
+
+    protected BaseFeature(BaseFeature baseFeature, object id) : this(id)
+    {
+        Copy(baseFeature);
+    }
+
+    private void Copy(BaseFeature baseFeature)
+    {
         Styles = baseFeature.Styles.ToList();
         foreach (var field in baseFeature.Fields)
             this[field] = baseFeature[field];

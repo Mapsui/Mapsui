@@ -203,7 +203,7 @@ public class ShapeFile : IProvider, IDisposable
         //Initialize DBF
         var dbfFile = Path.ChangeExtension(filename, ".dbf");
         if (File.Exists(dbfFile))
-            _dbaseFile = new DbaseReader(dbfFile);
+            _dbaseFile = new DbaseReader(dbfFile, Id);
         //Parse shape header
         ParseHeader();
         //Read projection file
@@ -212,6 +212,8 @@ public class ShapeFile : IProvider, IDisposable
             ParseProjection();
         }
     }
+
+    public int Id { get; } = BaseLayer.NextId();
 
     /// <summary>
     /// Gets the <see cref="Shapefile.ShapeType">shape geometry type</see> in this shapefile.
