@@ -17,7 +17,7 @@ public class ButtonWidgetRenderer : ISkiaWidgetRenderer
         if (button.Picture == null && string.IsNullOrEmpty(button.SvgImage))
             return;
 
-        button.Picture ??= button.SvgImage?.LoadSvg();
+        button.Picture ??= button.SvgImage?.LoadSvgPicture();
 
         var picture = button.Picture as SKPicture;
 
