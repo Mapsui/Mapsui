@@ -12,7 +12,7 @@ using NetTopologySuite.Utilities;
 
 namespace Mapsui.Nts.Providers;
 
-public class GeometryIntersectionProvider : IProvider
+public class GeometryIntersectionProvider : IProvider, IProviderExtended
 {
     private readonly IProvider _provider;
 
@@ -20,6 +20,8 @@ public class GeometryIntersectionProvider : IProvider
     {
         _provider = provider;
     }
+
+    public int Id { get; } = BaseLayer.NextId();
 
     public string? CRS
     {
@@ -39,7 +41,7 @@ public class GeometryIntersectionProvider : IProvider
         foreach (var feature in features)
             if (feature is GeometryFeature geometryFeature)
             {
-                var copied = new GeometryFeature(geometryFeature);
+                var copied = new GeometryFeature(geometryFeature, (Id, geometryFeature.Id, rectangle));
                 if (geometryFeature.Geometry != null)
                 {
                     copied.Geometry = rectangle.Intersection(geometryFeature.Geometry);
