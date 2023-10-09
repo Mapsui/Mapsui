@@ -14,7 +14,7 @@ public class PerformanceWidgetSample : IMapControlSample
     private IMapControl? _mapControl;
     private readonly Mapsui.Utilities.Performance _performance = new(10);
 
-    public string Name => "4 Performance Widget";
+    public string Name => "PerformanceWidget";
 
     public string Category => "Widgets";
 
