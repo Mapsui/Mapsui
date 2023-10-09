@@ -20,7 +20,12 @@ public abstract class BaseFeature : IDisposable
 
     protected BaseFeature()
     {
-        Id = Interlocked.Increment(ref _currentFeatureId);
+        Id = NextId();
+    }
+
+    private static long NextId()
+    {
+        return Interlocked.Increment(ref _currentFeatureId);
     }
 
     public object Id { get; private set; }
@@ -53,7 +58,7 @@ public abstract class BaseFeature : IDisposable
     public void Modified()
     {
         // is modified needs a new id.
-        Id = Interlocked.Increment(ref _currentFeatureId);
+        Id = NextId();
         ClearRenderedGeometry();
     }
 
