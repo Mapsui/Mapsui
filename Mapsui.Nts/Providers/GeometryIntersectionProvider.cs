@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using Mapsui.Providers;
-using NetTopologySuite.Geometries;
-using NetTopologySuite.Simplify;
-using NetTopologySuite.Utilities;
 
 namespace Mapsui.Nts.Providers;
 
-public class GeometryIntersectionProvider : IProvider
+public class GeometryIntersectionProvider : BaseProvider
 {
     private readonly IProvider _provider;
 
@@ -21,13 +15,13 @@ public class GeometryIntersectionProvider : IProvider
         _provider = provider;
     }
 
-    public string? CRS
+    public override string? CRS
     {
         get => _provider.CRS;
         set => _provider.CRS = value;
     }
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public override async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         return IterateFeatures(fetchInfo, await _provider.GetFeaturesAsync(fetchInfo));
     }
@@ -39,7 +33,7 @@ public class GeometryIntersectionProvider : IProvider
         foreach (var feature in features)
             if (feature is GeometryFeature geometryFeature)
             {
-                var copied = new GeometryFeature(geometryFeature);
+                var copied = new GeometryFeature(geometryFeature, (feature.Id, Id, fetchInfo.Resolution));
                 if (geometryFeature.Geometry != null)
                 {
                     copied.Geometry = rectangle.Intersection(geometryFeature.Geometry);
@@ -51,7 +45,7 @@ public class GeometryIntersectionProvider : IProvider
                 yield return feature;
     }
 
-    public MRect? GetExtent()
+    public override MRect? GetExtent()
     {
         return _provider.GetExtent();
     }

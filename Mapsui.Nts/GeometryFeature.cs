@@ -10,11 +10,15 @@ public class GeometryFeature : BaseFeature, IFeature, IDisposable
 {
     private bool _disposed;
 
+    public GeometryFeature(object id): base(id)
+    {
+    }
+
     public GeometryFeature()
     {
     }
 
-    public GeometryFeature(GeometryFeature geometryFeature) : base(geometryFeature)
+    public GeometryFeature(GeometryFeature geometryFeature, object? id = null) : base(geometryFeature, id)
     {
         Geometry = geometryFeature.Geometry?.Copy();
     }

@@ -13,9 +13,14 @@ public abstract class BaseFeature : IDisposable
     // last used feature id
     private static long _currentFeatureId;
 
-    protected BaseFeature(object id)
+    protected BaseFeature(object? id)
     {
-        Id = id;
+        Id = id ?? NewId();
+    }
+
+    private static long NewId()
+    {
+        return Interlocked.Increment(ref _currentFeatureId);
     }
 
     protected BaseFeature()
@@ -25,7 +30,7 @@ public abstract class BaseFeature : IDisposable
 
     public object Id { get; private set; }
 
-    protected BaseFeature(BaseFeature baseFeature) : this()
+    protected BaseFeature(BaseFeature baseFeature, object? id=null) : this(id)
     {
         Styles = baseFeature.Styles.ToList();
         foreach (var field in baseFeature.Fields)
@@ -53,7 +58,7 @@ public abstract class BaseFeature : IDisposable
     public void Modified()
     {
         // is modified needs a new id.
-        Id = Interlocked.Increment(ref _currentFeatureId);
+        Id = NewId();
         ClearRenderedGeometry();
     }
 

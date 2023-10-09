@@ -10,7 +10,7 @@ using NetTopologySuite.Simplify;
 
 namespace Mapsui.Nts.Providers;
 
-public class GeometrySimplifyProvider : IProvider
+public class GeometrySimplifyProvider : BaseProvider
 {
     private readonly IProvider _provider;
     private readonly Func<Geometry, double, Geometry> _simplify;
@@ -23,26 +23,27 @@ public class GeometrySimplifyProvider : IProvider
         _distanceTolerance = distanceTolerance;
     }
 
-    public string? CRS
+    public override string? CRS
     {
         get => _provider.CRS;
         set => _provider.CRS = value;
     }
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public override async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         return IterateFeatures(fetchInfo, await _provider.GetFeaturesAsync(fetchInfo));
     }
 
     private IEnumerable<IFeature> IterateFeatures(FetchInfo fetchInfo, IEnumerable<IFeature> features)
     {
+        var tolerance = _distanceTolerance ?? fetchInfo.Resolution;
         foreach (var feature in features)
             if (feature is GeometryFeature geometryFeature)
             {
-                var copied = new GeometryFeature(geometryFeature);
+                var copied = new GeometryFeature(geometryFeature, (geometryFeature.Id, Id, tolerance));
                 if (geometryFeature.Geometry != null)
                 {
-                    copied.Geometry = _simplify(geometryFeature.Geometry, _distanceTolerance ?? fetchInfo.Resolution);
+                    copied.Geometry = _simplify(geometryFeature.Geometry, tolerance);
                 }
 
                 yield return copied;
@@ -51,7 +52,7 @@ public class GeometrySimplifyProvider : IProvider
                 yield return feature;
     }
 
-    public MRect? GetExtent()
+    public override MRect? GetExtent()
     {
         return _provider.GetExtent();
     }
