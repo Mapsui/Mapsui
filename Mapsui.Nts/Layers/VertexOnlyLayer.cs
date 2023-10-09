@@ -26,15 +26,10 @@ public class VertexOnlyLayer : BaseLayer
         {
             if (feature.Geometry is Point || feature.Geometry is MultiPoint) continue; // Points with a vertex on top confuse me
             if (feature.Geometry != null)
-            {
-                var count = 0;
                 foreach (var vertex in feature.Geometry.MainCoordinates())
                 {
-                    // id of the vertex is id of feature id of layer and count
-                    yield return new GeometryFeature((feature.Id, Id, count)) { Geometry = new Point(vertex) };
-                    count++;
+                    yield return new GeometryFeature { Geometry = new Point(vertex) };
                 }
-            }
         }
     }
 }

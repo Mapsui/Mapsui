@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Threading;
+using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Styles;
@@ -33,13 +33,7 @@ public abstract class BaseLayer : ILayer
         MinVisible = 0;
         MaxVisible = double.MaxValue;
         Opacity = 1;
-        Id = NextId();
-    }
-
-    internal static int NextId()
-    {
-        // interlocked Increment is thread safe ++ is not thread safe.
-        return Interlocked.Increment(ref _instanceCounter);
+        Id = _instanceCounter++;
     }
 
     /// <summary>

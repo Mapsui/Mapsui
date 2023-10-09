@@ -10,7 +10,6 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using Mapsui.Layers;
 using Mapsui.Nts.Providers.Shapefile.Indexing;
 
 #pragma warning disable SYSLIB0001
@@ -40,7 +39,6 @@ internal sealed class DbaseReader : IDisposable
     private FileStream? _fs;
     private BinaryReader? _br;
     private bool _headerIsParsed;
-    private int Id { get; } = BaseLayer.NextId();
 
     public DbaseReader(string filename)
     {
@@ -412,7 +410,7 @@ internal sealed class DbaseReader : IDisposable
             throw new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture));
         _fs!.Seek(_headerLength + oid * _recordLength, 0);
 
-        var dr = new GeometryFeature((Id, oid));
+        var dr = new GeometryFeature();
 
         if (_br!.ReadChar() == '*') return null; // is record marked deleted?
 

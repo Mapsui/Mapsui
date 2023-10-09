@@ -26,10 +26,4 @@ public interface IProvider
     MRect? GetExtent();
 
     Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo);
-
-#if NETSTANDARD2_0
-     int Id { get;}
-#else
-    int Id => 0;
-#endif
 }
