@@ -10,7 +10,7 @@ public class BoxWidgetRenderer : ISkiaWidgetRenderer
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
     {
         var boxWidget = (BoxWidget)widget;
-        using var backPaint = new SKPaint { Color = boxWidget.BackColor.ToSkia(layerOpacity) };
+        using var backPaint = new SKPaint { Color = boxWidget.BackColor.ToSkia(layerOpacity), IsAntialias = true };
         // The textRect has an offset which can be confusing. 
         // This is because DrawText's origin is the baseline of the text, not the bottom.
         // Read more here: https://developer.xamarin.com/guides/xamarin-forms/advanced/skiasharp/basics/text/
