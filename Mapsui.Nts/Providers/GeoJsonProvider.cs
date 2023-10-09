@@ -15,7 +15,7 @@ using NetTopologySuite.IO.Converters;
 
 namespace Mapsui.Nts.Providers;
 
-public class GeoJsonProvider : IProvider
+public class GeoJsonProvider : IProvider, IProviderExtended
 {
     private static ReadOnlySpan<byte> Utf8Bom => new byte[] { 0xEF, 0xBB, 0xBF };
     private string _geoJson;

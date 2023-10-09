@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using Mapsui.Styles;
@@ -26,10 +27,14 @@ public class VertexOnlyLayer : BaseLayer
         {
             if (feature.Geometry is Point || feature.Geometry is MultiPoint) continue; // Points with a vertex on top confuse me
             if (feature.Geometry != null)
+            {
+                int count = 0;
                 foreach (var vertex in feature.Geometry.MainCoordinates())
                 {
-                    yield return new GeometryFeature { Geometry = new Point(vertex) };
+                    yield return new GeometryFeature((Id, feature.Id, count)) { Geometry = new Point(vertex) };
+                    count++;
                 }
+            }
         }
     }
 }
