@@ -239,23 +239,6 @@ public class MapRenderer : IRenderer
                 using var pixmap = surface.PeekPixels();
                 var color = pixmap.GetPixelColor(intX, intY);
 
-                // load data
-                // TODO: use IFeatureInfo
-                foreach (var layer in mapInfoLayers)
-                {
-                    if (layer is IAsyncDataFetcher asyncDataFetcher)
-                    {
-                        var fetchInfo = new FetchInfo(viewport.ToSection());
-                        var features = layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution);
-                        if (!features.Any())
-                        {
-                            // Workaround for Loading Data in the Layer when it is rendered by Rasterizing Tile Layer or not loaded Layer.
-                            asyncDataFetcher.RefreshData(fetchInfo);
-                            layer.WaitForLoadingAsync().Wait();
-                        }
-                    }
-                }
-
                 VisibleFeatureIterator.IterateLayers(viewport, mapInfoLayers, 0, (v, layer, style, feature, opacity, iteration) =>
                 {
                     try
@@ -282,7 +265,9 @@ public class MapRenderer : IRenderer
                 foreach (var infoLayer in featureInfoLayers)
                 {
                     var layer = ((ILayer)infoLayer);
+#pragma warning disable VSTHRD002 // synchronously waiting
                     var features = infoLayer.GetFeatureInfoAsync(viewport, x, y).Result;
+#pragma warning restore VSTHRD002
                     foreach (var it in features)
                     {
                         foreach (var feature in it.Value)

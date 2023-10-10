@@ -45,7 +45,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     // Touch Handling
     private readonly ConcurrentDictionary<long, TouchEvent> _touches = new();
 
-    [Obsolete("Use OnInfo")]
+    [Obsolete("Use Info")]
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
 
     public MapControl()

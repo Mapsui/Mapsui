@@ -121,7 +121,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         };
     }
 
-    [Obsolete("Use OnInfo")]
+    [Obsolete("Use Info")]
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo; // todo: Remove and add sample for alternative
 
     internal void InvalidateCanvas()

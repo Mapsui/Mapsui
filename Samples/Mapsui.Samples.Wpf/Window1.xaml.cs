@@ -28,7 +28,7 @@ public partial class Window1
 
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-        MapControl.FeatureInfo += MapControlFeatureInfo;
+        MapControl.Info += MapControlInfo;
         MapControl.MouseMove += MapControlOnMouseMove;
         MapControl.Map.Navigator.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
@@ -128,9 +128,9 @@ public partial class Window1
         return result.ToString();
     }
 
-    private static void MapControlFeatureInfo(object? sender, FeatureInfoEventArgs e)
+    private static void MapControlInfo(object? sender, MapInfoEventArgs mapInfoEventArgs)
     {
-        MessageBox.Show(e.FeatureInfo?.ToDisplayText());
+        MessageBox.Show(mapInfoEventArgs.MapInfo?.Feature?.ToDisplayText());
     }
 
     private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

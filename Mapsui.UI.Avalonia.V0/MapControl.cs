@@ -27,7 +27,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private MPoint? _previousMousePosition;
     private double _mouseWheelPos = 0.0;
 
-    [Obsolete("Use OnInfo")]
+    [Obsolete("Use Info")]
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
 
     public MapControl()
