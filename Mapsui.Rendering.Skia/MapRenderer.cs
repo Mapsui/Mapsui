@@ -198,7 +198,12 @@ public class MapRenderer : IRenderer
 
         var mapInfoLayers = layers
             .Select(l => (l is ISourceLayer sl) ? sl.SourceLayer : l)
-            .Where(l => l.IsMapInfoLayer)
+            .Where(l => l.IsMapInfoLayer && l is not IFeatureInfo)
+            .ToList();
+
+        var featureInfoLayers = layers
+            .Select(l => l is ISourceLayer sl and not IFeatureInfo ? sl.SourceLayer : l)
+            .Where(l => l.IsMapInfoLayer && l is IFeatureInfo).Cast<IFeatureInfo>()
             .ToList();
 
         var list = new List<MapInfoRecord>();
@@ -273,6 +278,19 @@ public class MapRenderer : IRenderer
                         Logger.Log(LogLevel.Error, "Unexpected error in the code detecting if a feature is clicked. This uses SkiaSharp.", exception);
                     }
                 });
+
+                foreach (var infoLayer in featureInfoLayers)
+                {
+                    var layer = ((ILayer)infoLayer);
+                    var features = infoLayer.GetFeatureInfoAsync(viewport, x, y).Result;
+                    foreach (var it in features)
+                    {
+                        foreach (var feature in it.Value)
+                        {
+                            list.Add(new MapInfoRecord(feature, layer.Style!, layer));
+                        }
+                    }
+                }
             }
 
             if (list.Count == 0)

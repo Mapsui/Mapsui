@@ -82,7 +82,6 @@ public class GeoJsonInfoSample : ISample
             DataSource = citiesProvider,
             Enabled = true,
             Style = CreateCityLabelStyle(),
-            IsMapInfoLayer = true,
         };
 
     private static LabelStyle CreateCityLabelStyle()
