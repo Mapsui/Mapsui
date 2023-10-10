@@ -221,7 +221,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
     {
         if (DataSource is IFeatureInfo featureInfo)
         {
-            return await featureInfo.GetFeatureInfoAsync(viewport, screenX, screenY);
+            return await featureInfo.GetFeatureInfoAsync(viewport, screenX, screenY).ConfigureAwait(false);
         }
 
         return new Dictionary<string, IEnumerable<IFeature>>();
