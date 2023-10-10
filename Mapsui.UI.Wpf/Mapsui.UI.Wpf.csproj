@@ -7,6 +7,7 @@
     <Description>WPF map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) WPF</PackageTags>
 		<IsPackable>true</IsPackable>
+    <DefineConstants>$(DefineConstants);__WPF__</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

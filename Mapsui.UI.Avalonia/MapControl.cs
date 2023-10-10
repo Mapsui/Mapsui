@@ -45,6 +45,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     // Touch Handling
     private readonly ConcurrentDictionary<long, TouchEvent> _touches = new();
 
+    [Obsolete("Use OnInfo")]
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
 
     public MapControl()
@@ -153,24 +154,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         _downMousePosition = touchPosition;
         _mouseDown = true;
         e.Pointer.Capture(this);
-    }
-
-    private void HandleFeatureInfo(PointerReleasedEventArgs e)
-    {
-        if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
-
-        if (Map != null && _downMousePosition == e.GetPosition(this).ToMapsui())
-            foreach (var layer in Map.Layers)
-            {
-                // ReSharper disable once SuspiciousTypeConversion.Global
-                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.Viewport, _downMousePosition.X, _downMousePosition.Y,
-                    OnFeatureInfo);
-            }
-    }
-
-    private void OnFeatureInfo(IDictionary<string, IEnumerable<IFeature>> features)
-    {
-        FeatureInfo?.Invoke(this, new FeatureInfoEventArgs { FeatureInfo = features });
     }
 
     private void MapControlMouseLeave(object? sender, PointerEventArgs e)
