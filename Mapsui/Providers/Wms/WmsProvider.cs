@@ -622,10 +622,10 @@ public class WmsProvider : IProvider, IProjectingProvider, IFeatureInfo
         var layer = _wmsClient?.Layer.Name ?? LayerList?.FirstOrDefault() ?? string.Empty;
         var infoFormat = GetFeatureInfoFormat();
 
-        var symbolSize = 1.0; // 1 pixel size
+        var halfSymbolSize = 1.0 / 2.0; // 1 pixel size
         var point = viewport.ScreenToWorld(screenX, screenY);
-        var minPoint = viewport.ScreenToWorld(screenX - symbolSize / 2.0, screenY - symbolSize / 2.0);
-        var maxPoint = viewport.ScreenToWorld(screenX + symbolSize / 2.0, screenY + symbolSize / 2.0);
+        var minPoint = viewport.ScreenToWorld(screenX - halfSymbolSize, screenY - halfSymbolSize);
+        var maxPoint = viewport.ScreenToWorld(screenX + halfSymbolSize, screenY + halfSymbolSize);
 
         var extent = new MRect(minPoint.X, minPoint.Y, maxPoint.X, maxPoint.Y);
         var featureInfo = await getFeatureInfo.RequestAsync(resource.OnlineResource!, wmsVersion!, infoFormat, srs!, layer!,extent.MinX,extent.MinY,extent.MaxX,extent.MaxY, (int)screenX, (int)screenY, (int)viewport.Width, (int)viewport.Height).ConfigureAwait(false);
