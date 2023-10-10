@@ -216,7 +216,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
         if (IsClick(_currentMousePosition, _downMousePosition))
         {
-            HandleFeatureInfo(e);
             OnInfo(CreateMapInfoEventArgs(_mousePosition, _mousePosition, 1));
         }
     }
