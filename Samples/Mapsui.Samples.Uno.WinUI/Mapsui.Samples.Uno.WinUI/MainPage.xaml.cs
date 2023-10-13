@@ -1,19 +1,10 @@
-﻿using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using System;
-using System.IO;
-using System.Linq;
-using Windows.Storage;
+﻿using Microsoft.UI.Xaml.Controls.Primitives;
 using Mapsui.Extensions;
-using Mapsui.Providers.Wms;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
 using Mapsui.UI.WinUI;
-using Mapsui.Samples.Common.Utilities;
 using RadioButton = Microsoft.UI.Xaml.Controls.RadioButton;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -61,12 +52,6 @@ public sealed partial class MainPage : Page
         CategoryComboBox.SelectedIndex = 1;
     }
 
-    private void MapOnInfo(object? sender, MapInfoEventArgs args)
-    {
-        if (args.MapInfo?.Feature != null)
-            FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";
-    }
-
     private void FillListWithSamples()
     {
         var selectedCategory = CategoryComboBox.SelectedValue?.ToString() ?? "";
@@ -98,9 +83,7 @@ public sealed partial class MainPage : Page
             Catch.Exceptions(async () =>
             {
                 MapControl.Map!.Layers.Clear();
-                MapControl.Info -= MapOnInfo;
                 await sample.SetupAsync(MapControl);
-                MapControl.Info += MapOnInfo;
                 MapControl.Refresh();
             });
         };

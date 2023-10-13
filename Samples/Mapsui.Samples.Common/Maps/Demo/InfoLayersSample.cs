@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Mapsui.UI;
+using Mapsui.Widgets;
+using Mapsui.Extensions;
 
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
@@ -32,6 +34,17 @@ public class InfoLayersSample : ISample, ISampleTest
         map.Layers.Add(CreatePolygonLayer());
         map.Layers.Add(new WritableLayer());
         map.Layers.Add(CreateLineLayer());
+
+        var textBox = CreateTextBox();
+        map.Widgets.Add(textBox);
+
+        map.Info += (s, a) =>
+        {
+            if (a.MapInfo?.Feature is null) 
+                textBox.Text = "";
+            else
+                textBox.Text = $"Feature Info - {a.MapInfo.Feature.ToDisplayText()}";         
+        };
 
         return map;
     }
@@ -174,4 +187,17 @@ public class InfoLayersSample : ISample, ISampleTest
     {
         await Task.Delay(1000).ConfigureAwait(true);
     }
+
+    private static TextBox CreateTextBox() => new TextBox()
+    {
+        VerticalAlignment = VerticalAlignment.Bottom,
+        HorizontalAlignment = HorizontalAlignment.Left,
+        MarginX = 16,
+        MarginY = 16,
+        PaddingX = 10,
+        PaddingY = 10,
+        CornerRadius = 4,
+        BackColor = new Color(108, 117, 125),
+        TextColor = Color.White,
+    };
 }
