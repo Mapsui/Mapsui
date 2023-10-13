@@ -20,7 +20,7 @@ public class ViewportCenterAndZoomAnimationSample : ISample
 
     public static Map CreateMap()
     {
-        string instructions = "Click on the map to center on that location and zoom in on it";
+        string instructions = "Tap on the map to center on that location and zoom in on it";
 
         var map = new Map { CRS = "EPSG:3857" };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
