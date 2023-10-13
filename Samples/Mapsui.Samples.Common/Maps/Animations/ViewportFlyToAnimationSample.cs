@@ -1,7 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
-using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using System.Threading.Tasks;
 using Mapsui.Styles;
@@ -21,8 +20,6 @@ public class ViewportFlyToAnimationSample : ISample
     {
         var map = new Map { CRS = "EPSG:3857" };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-
-        map.Widgets.Add(CreateScaleBar(map));
         map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
         map.Widgets.Add(CreateTextBox("Tap on the map to fly to that location. The fly-to animation zooms out and then in."));
 
@@ -38,30 +35,17 @@ public class ViewportFlyToAnimationSample : ISample
         return map;
     }
 
-    private static ScaleBarWidget CreateScaleBar(Map map)
+    private static IWidget CreateTextBox(string text) => new TextBox()
     {
-        return new ScaleBarWidget(map)
-        {
-            TextAlignment = Alignment.Center,
-            HorizontalAlignment = HorizontalAlignment.Center,
-            VerticalAlignment = VerticalAlignment.Top
-        };
-    }
-
-    private static IWidget CreateTextBox(string text)
-    {
-        return new TextBox()
-        {
-            Text = text,
-            VerticalAlignment = VerticalAlignment.Top,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            MarginX = 10,
-            MarginY = 10,
-            PaddingX = 8,
-            PaddingY = 8,
-            CornerRadius = 4,
-            BackColor = new Color(108, 117, 125, 128),
-            TextColor = Color.White,
-        };
-    }
+        Text = text,
+        VerticalAlignment = VerticalAlignment.Top,
+        HorizontalAlignment = HorizontalAlignment.Left,
+        MarginX = 10,
+        MarginY = 10,
+        PaddingX = 8,
+        PaddingY = 8,
+        CornerRadius = 4,
+        BackColor = new Color(108, 117, 125, 128),
+        TextColor = Color.White,
+    };
 }

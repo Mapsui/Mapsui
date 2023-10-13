@@ -34,15 +34,15 @@ public class ViewportRotateAnimationSample : ISample
     }
 
     private static ButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new ButtonWidget
-        {
-            Text = text,
-            MarginX = 20,
-            MarginY = 20,
-            PaddingX = 10,
-            PaddingY = 10,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = verticalAlignment,
-            BackColor = new Color(0, 123, 255),
-            TextColor = Color.White
-        };
+    {
+        Text = text,
+        MarginX = 20,
+        MarginY = 20,
+        PaddingX = 10,
+        PaddingY = 10,
+        HorizontalAlignment = HorizontalAlignment.Left,
+        VerticalAlignment = verticalAlignment,
+        BackColor = new Color(0, 123, 255),
+        TextColor = Color.White
+    };
 }

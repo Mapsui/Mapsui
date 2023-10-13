@@ -2,7 +2,6 @@
 using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
-using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using System.Threading.Tasks;
 using Mapsui.Styles;
@@ -22,10 +21,10 @@ public class ViewportZoomAroundLocationAnimationSample : ISample
     {
         var map = new Map { CRS = "EPSG:3857" };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Widgets.Add(AddScaleBar(map));
         map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
 
-        map.Widgets.Add(CreateTextBox("Tap on the map to zoom in the location where you tapped. The place where tap will stay centered on the same location."));
+        map.Widgets.Add(CreateTextBox("Tap on the map to zoom in the location where you tapped. " +
+            "The map will stay centered on the place where you tap."));
 
         map.Info += (s, a) =>
         {
@@ -39,30 +38,17 @@ public class ViewportZoomAroundLocationAnimationSample : ISample
         return map;
     }
 
-    private static ScaleBarWidget AddScaleBar(Map map)
+    private static IWidget CreateTextBox(string text) => new TextBox()
     {
-        return new ScaleBarWidget(map)
-        {
-            TextAlignment = Alignment.Center,
-            HorizontalAlignment = HorizontalAlignment.Center,
-            VerticalAlignment = VerticalAlignment.Top
-        };
-    }
-
-    private static IWidget CreateTextBox(string text)
-    {
-        return new TextBox()
-        {
-            Text = text,
-            VerticalAlignment = VerticalAlignment.Top,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            MarginX = 10,
-            MarginY = 10,
-            PaddingX = 8,
-            PaddingY = 8,
-            CornerRadius = 4,
-            BackColor = new Color(108, 117, 125, 128),
-            TextColor = Color.White,
-        };
-    }
+        Text = text,
+        VerticalAlignment = VerticalAlignment.Top,
+        HorizontalAlignment = HorizontalAlignment.Left,
+        MarginX = 10,
+        MarginY = 10,
+        PaddingX = 8,
+        PaddingY = 8,
+        CornerRadius = 4,
+        BackColor = new Color(108, 117, 125, 128),
+        TextColor = Color.White,
+    };
 }
