@@ -61,7 +61,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
         else
         {
-            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderCache, feature);
+            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderCache);
         }
     }
 
@@ -142,7 +142,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    public static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IVectorCache vectorCache, IFeature feature)
+    public static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IVectorCache vectorCache)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
