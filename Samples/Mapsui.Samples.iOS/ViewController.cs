@@ -16,14 +16,7 @@ public partial class ViewController : UIViewController
     {
         base.ViewDidLoad();
         var mapControl = CreateMap(View!.Bounds);
-        mapControl.Info += MapOnInfo;
         View = mapControl;
-    }
-
-    private void MapOnInfo(object? sender, MapInfoEventArgs e)
-    {
-        if (e.MapInfo?.Feature == null) return;
-        Debug.WriteLine(ToString(e.MapInfo.Feature));
     }
 
     private string ToString(IFeature feature)

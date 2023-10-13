@@ -87,9 +87,7 @@ public sealed partial class MainPage : Page
             Catch.Exceptions(async () =>
             {
                 MapControl.Map.Layers.Clear();
-                MapControl.Info -= MapOnInfo;
                 await sample.SetupAsync(MapControl);
-                MapControl.Info += MapOnInfo;
                 MapControl.Refresh();
             });
         };
