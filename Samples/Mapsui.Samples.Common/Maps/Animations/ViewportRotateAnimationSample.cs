@@ -3,7 +3,6 @@ using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidget;
-
 using System.Threading.Tasks;
 using Mapsui.Styles;
 
@@ -23,22 +22,26 @@ public class ViewportRotateAnimationSample : ISample
         var map = new Map { CRS = "EPSG:3857" };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
-        var button = CreateButton();
-        button.WidgetTouched += (s, e) => map.Navigator.RotateTo(map.Navigator.Viewport.Rotation + 45, 500, Easing.CubicIn);
-        map.Widgets.Add(button);
+        var rotateButton = CreateButton("Click to rotate clockwise", VerticalAlignment.Top);
+        rotateButton.WidgetTouched += (s, e) => map.Navigator.RotateTo(map.Navigator.Viewport.Rotation + 45, 500, Easing.CubicIn);
+        map.Widgets.Add(rotateButton);
+
+        var rotateBackButton = CreateButton("Click to rotate counterclockwise", VerticalAlignment.Bottom);
+        rotateBackButton.WidgetTouched += (s, e) => map.Navigator.RotateTo(map.Navigator.Viewport.Rotation - 45, 500, Easing.CubicIn);
+        map.Widgets.Add(rotateBackButton);
 
         return map;
     }
 
-    private static ButtonWidget CreateButton() => new ButtonWidget
+    private static ButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new ButtonWidget
         {
-            Text = "Click to rotate",
+            Text = text,
             MarginX = 20,
             MarginY = 20,
             PaddingX = 10,
             PaddingY = 10,
             HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            VerticalAlignment = verticalAlignment,
             BackColor = new Color(0, 123, 255),
             TextColor = Color.White
         };
