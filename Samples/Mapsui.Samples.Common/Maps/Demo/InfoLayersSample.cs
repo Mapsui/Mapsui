@@ -43,7 +43,8 @@ public class InfoLayersSample : ISample, ISampleTest
             if (a.MapInfo?.Feature is null) 
                 textBox.Text = "";
             else
-                textBox.Text = $"Feature Info - {a.MapInfo.Feature.ToDisplayText()}";         
+                textBox.Text = $"Feature Info - {a.MapInfo.Feature.ToDisplayText()}";
+            map.RefreshGraphics();
         };
 
         return map;
