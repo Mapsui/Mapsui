@@ -4,7 +4,6 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Samples.CustomWidget;
@@ -29,7 +28,6 @@ public partial class Window1
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
         MapControl.FeatureInfo += MapControlFeatureInfo;
-        MapControl.MouseMove += MapControlOnMouseMove;
         MapControl.Map.Navigator.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
@@ -41,13 +39,6 @@ public partial class Window1
 
         FillComboBoxWithCategories();
         FillListWithSamples();
-    }
-
-    private void MapControlOnMouseMove(object sender, MouseEventArgs e)
-    {
-        var screenPosition = e.GetPosition(MapControl);
-        var worldPosition = MapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition.X, screenPosition.Y);
-        MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
     }
 
     private void FillListWithSamples()
