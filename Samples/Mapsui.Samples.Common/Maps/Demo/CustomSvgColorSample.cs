@@ -26,11 +26,10 @@ public class CustomSvgStyleSample : ISample
     private string Description => "This samples applies custom colors for a specific element of an SVG. This would, for instance, allow users to change the fill and outline of an SVG with different colors.";
 
     private const double circumferenceOfTheEarth = 40075017;
-    private Random _random = new Random();
+    private Random _random = new Random(1337);
 
     public Task<Map> CreateMapAsync()
     {
-
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(new MemoryLayer("Custom Svg Style")
@@ -51,10 +50,10 @@ public class CustomSvgStyleSample : ISample
     private IStyle CreateDynamicSvgStyle() // Use Func to make it get the latest clicked position
     {
         var bitmapIds = new[] {
-            LoadBitmap("Images.arrow.svg", 0),
-            LoadBitmap("Images.arrow.svg", 1),
-            LoadBitmap("Images.arrow.svg", 2),
-            LoadBitmap("Images.arrow.svg", 3),
+            LoadBitmap(0),
+            LoadBitmap(1),
+            LoadBitmap(2),
+            LoadBitmap(3),
         };
 
         return new ThemeStyle((f) =>
@@ -76,31 +75,26 @@ public class CustomSvgStyleSample : ISample
         });
     }
 
-    private static int LoadBitmap(string bitmapPath, int type)
+    private static int LoadBitmap(int type)
     {
+        var bitmapPath = "Images.arrow.svg";
         using var bitmapData = EmbeddedResourceLoader.Load(bitmapPath, typeof(SvgSample));
-        var skPicture = SvgLoader.ToSKPicture(bitmapData, GetTypeColor(type));
-        if (skPicture is null)
-            throw new Exception($"Failed to load bitmap: {bitmapPath}");
+        var skPicture = SvgLoader.ToSKPicture(bitmapData, ToSystemDrawingColor(GetTypeColor(type))) 
+            ?? throw new Exception($"Failed to load bitmap: {bitmapPath}");
         return BitmapRegistry.Instance.Register(skPicture);
     }
 
-    private static System.Drawing.Color GetTypeColor(int type)
+    private static Color GetTypeColor(int type) => type switch
     {
-        return type switch
-        {
-            0 => ToSystemDrawingColor(Color.FromString("#D8737F")),
-            1 => ToSystemDrawingColor(Color.FromString("#AB6C82")),
-            2 => ToSystemDrawingColor(Color.FromString("#685D79")),
-            3 => ToSystemDrawingColor(Color.FromString("#475C7A")),
-            _ => throw new Exception("Unknown type"),
-        };
-    }
+        0 => Color.FromString("#D8737F"),
+        1 => Color.FromString("#AB6C82"),
+        2 => Color.FromString("#685D79"),
+        3 => Color.FromString("#475C7A"),
+        _ => throw new Exception("Unknown type"),
+    };
 
-    public static System.Drawing.Color ToSystemDrawingColor(Color color)
-    {
-        return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
-    }
+    public static System.Drawing.Color ToSystemDrawingColor(Color color) => 
+        System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
 
     private double CalculateAngle(MPoint point1, MPoint point2)
     {
@@ -150,6 +144,5 @@ public class CustomSvgStyleSample : ISample
             }
             return result;
         }
-
     }
 }
