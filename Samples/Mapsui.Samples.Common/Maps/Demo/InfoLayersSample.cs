@@ -36,7 +36,6 @@ public class InfoLayersSample : ISample, ISampleTest
         map.Layers.Add(new WritableLayer());
         map.Layers.Add(CreateLineLayer());
 
-        map.Widgets.Add(new ZoomInOutWidget());
         map.Widgets.Add(new MapInfoWidget(map));
 
 
