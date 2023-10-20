@@ -61,8 +61,7 @@ public static class ViewportExtensions
     /// IsRotated is true, when viewport displays map rotated
     /// </summary>
     public static bool IsRotated(this Viewport viewport) =>
-        !double.IsNaN(viewport.Rotation) && Math.Abs(viewport.Rotation) > Constants.Epsilon
-        && Math.Abs(viewport.Rotation) < 360 - Constants.Epsilon;
+        !double.IsNaN(viewport.Rotation) && Math.Abs(viewport.Rotation % 360) > Constants.Epsilon;
 
     /// <summary>
     /// Calculates extent from the viewport.
