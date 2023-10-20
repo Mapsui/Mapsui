@@ -16,7 +16,7 @@ namespace Mapsui.Tiling.Layers;
 /// Rasterizing Tile Layer. A Layer that Rasterizes and Tiles the Layer. For Faster Performance.
 /// It recreates the Tiles if Data is changed.
 /// </summary>
-public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher, IFeatureInfo
+public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher, ILayerFeatureInfo
 {
     private MRect? _currentExtent;
     private double? _currentResolution;

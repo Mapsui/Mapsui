@@ -198,12 +198,12 @@ public class MapRenderer : IRenderer
 
         var mapInfoLayers = layers
             .Select(l => (l is ISourceLayer sl) ? sl.SourceLayer : l)
-            .Where(l => l.IsMapInfoLayer && l is not IFeatureInfo)
+            .Where(l => l.IsMapInfoLayer && l is not ILayerFeatureInfo)
             .ToList();
 
         var featureInfoLayers = layers
-            .Select(l => l is ISourceLayer sl and not IFeatureInfo ? sl.SourceLayer : l)
-            .Where(l => l.IsMapInfoLayer && l is IFeatureInfo).Cast<IFeatureInfo>()
+            .Select(l => l is ISourceLayer sl and not ILayerFeatureInfo ? sl.SourceLayer : l)
+            .Where(l => l.IsMapInfoLayer && l is ILayerFeatureInfo).Cast<ILayerFeatureInfo>()
             .ToList();
 
         var list = new List<MapInfoRecord>();

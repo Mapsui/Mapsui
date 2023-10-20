@@ -18,7 +18,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
-public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>, IDisposable, ILayer, IFeatureInfo
+public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>, IDisposable, ILayer, ILayerFeatureInfo
 {
     private class FeatureSets
     {
@@ -195,7 +195,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
         {
             if (base.IsMapInfoLayer)
             {
-                return this.DataSource is IFeatureInfo;
+                return this.DataSource is ILayerFeatureInfo;
             }
 
             return false;
@@ -219,7 +219,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
 
     public async Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, double screenX, double screenY)
     {
-        if (DataSource is IFeatureInfo featureInfo)
+        if (DataSource is ILayerFeatureInfo featureInfo)
         {
             return await featureInfo.GetFeatureInfoAsync(viewport, screenX, screenY).ConfigureAwait(false);
         }
