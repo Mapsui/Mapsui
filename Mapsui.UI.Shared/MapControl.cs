@@ -531,25 +531,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         Map?.OnInfo(mapInfoEventArgs); // Also propagate to Map
         Info?.Invoke(this, mapInfoEventArgs);
-        // Backwards Compatibility Can be removed when Feature Info is removed
-#if __AVALONIA_V0__ || __AVALONIA__ || __ || __WPF__      
-        if (FeatureInfo != null)
-        {
-            var featureInfo = new FeatureInfoEventArgs();
-
-            var featureInfos = new Dictionary<string, IEnumerable<IFeature>>();
-            var infoRecords = mapInfoEventArgs.MapInfo?.MapInfoRecords;
-            if (infoRecords != null)
-            {
-                foreach (var record in infoRecords.GroupBy(f => f.Layer.Name))
-                {
-                    featureInfos.Add(record.Key, record.Select(f => f.Feature).ToArray());
-                }
-            }
-
-            featureInfo.FeatureInfo = featureInfos;
-        }
-#endif
     }
 
     /// <inheritdoc />
