@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.Text;
-using Mapsui.UI.iOS;
+﻿using Mapsui.UI.iOS;
 using Mapsui.Samples.Common.Maps.Demo;
 
 namespace Mapsui.Samples.iOS;
@@ -16,25 +14,7 @@ public partial class ViewController : UIViewController
     {
         base.ViewDidLoad();
         var mapControl = CreateMap(View!.Bounds);
-        mapControl.Info += MapOnInfo;
         View = mapControl;
-    }
-
-    private void MapOnInfo(object? sender, MapInfoEventArgs e)
-    {
-        if (e.MapInfo?.Feature == null) return;
-        Debug.WriteLine(ToString(e.MapInfo.Feature));
-    }
-
-    private string ToString(IFeature feature)
-    {
-        var result = new StringBuilder();
-        foreach (var field in feature.Fields)
-        {
-            result.Append($"{field}={feature[field]}, ");
-        }
-
-        return result.ToString();
     }
 
     private static MapControl CreateMap(CGRect bounds)

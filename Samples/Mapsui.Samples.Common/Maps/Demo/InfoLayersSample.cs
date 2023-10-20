@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Mapsui.UI;
+using Mapsui.Widgets;
+using Mapsui.Extensions;
+using Mapsui.Widgets.Zoom;
 
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
@@ -32,6 +35,9 @@ public class InfoLayersSample : ISample, ISampleTest
         map.Layers.Add(CreatePolygonLayer());
         map.Layers.Add(new WritableLayer());
         map.Layers.Add(CreateLineLayer());
+
+        map.Widgets.Add(new MapInfoWidget(map));
+
 
         return map;
     }

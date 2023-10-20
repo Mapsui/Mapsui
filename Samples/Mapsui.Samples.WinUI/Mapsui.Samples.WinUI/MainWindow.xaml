@@ -5,9 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winui="using:Mapsui.UI.WinUI"
-    mc:Ignorable="d"
-    d:DesignWidth="644.572" 
-    d:DesignHeight="333.913">
+    mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray">
@@ -31,10 +29,6 @@
 
             <Border BorderBrush="White" Opacity="0.65" Background="White"
                     BorderThickness="6" HorizontalAlignment="Center" VerticalAlignment="Top">
-            </Border>
-            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
-                    VerticalAlignment="Center" HorizontalAlignment="Right">
-                <TextBlock Name="FeatureInfo" TextWrapping="Wrap"/>
             </Border>
             <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" 
                     VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="40" MinHeight="30">

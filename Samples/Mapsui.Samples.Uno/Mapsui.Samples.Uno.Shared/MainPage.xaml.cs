@@ -56,12 +56,6 @@ public sealed partial class MainPage : Page
         CategoryComboBox.SelectedIndex = 1;
     }
 
-    private void MapOnInfo(object? sender, MapInfoEventArgs args)
-    {
-        if (args.MapInfo?.Feature != null)
-            FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";
-    }
-
     private void FillListWithSamples()
     {
         var selectedCategory = CategoryComboBox.SelectedValue?.ToString() ?? "";
@@ -93,9 +87,7 @@ public sealed partial class MainPage : Page
             Catch.Exceptions(async () =>
             {
                 MapControl.Map.Layers.Clear();
-                MapControl.Info -= MapOnInfo;
                 await sample.SetupAsync(MapControl);
-                MapControl.Info += MapOnInfo;
                 MapControl.Refresh();
             });
         };
