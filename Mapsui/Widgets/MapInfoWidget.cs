@@ -1,5 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Styles;
+using System;
+using System.Text;
 
 namespace Mapsui.Widgets;
 public class MapInfoWidget : TextBox
@@ -24,10 +26,20 @@ public class MapInfoWidget : TextBox
 
     private void Map_Info(object? sender, MapInfoEventArgs a)
     {
-        if (a.MapInfo?.Feature is null)
-            Text = "";
-        else
-            Text = $"Feature Info - {a.MapInfo.Feature.ToDisplayText()}";
+        Text = FeatureToText(a.MapInfo?.Feature);
         _map.RefreshGraphics();
     }
+
+    public Func<IFeature?, string> FeatureToText { get; set; } = (f) =>
+    {
+        if (f is null) return string.Empty;
+
+        var result = new StringBuilder();
+
+        result.Append("Info: ");
+        foreach (var field in f.Fields)
+            result.Append($"{field}: {f[field]} - ");
+        result.Remove(result.Length - 2, 2);
+        return result.ToString();
+    };
 }
