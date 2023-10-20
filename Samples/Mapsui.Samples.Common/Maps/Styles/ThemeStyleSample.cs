@@ -10,6 +10,7 @@ using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
+using Mapsui.Widgets;
 using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
@@ -35,6 +36,8 @@ public class ThemeStyleSample : ISample
 
         map.Layers.Add(CreateCountryLayer(countrySource));
         map.Layers.Add(CreateCityHoverPoints());
+
+        map.Widgets.Add(new MapInfoWidget(map));
 
         return map;
     }

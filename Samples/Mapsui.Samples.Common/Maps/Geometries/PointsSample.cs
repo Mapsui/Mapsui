@@ -3,6 +3,7 @@ using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.Widgets;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,9 @@ public class PointsSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreatePointLayer());
         map.Home = n => n.CenterOnAndZoomTo(map.Layers[1].Extent!.Centroid, n.Resolutions[5]);
+
+        map.Widgets.Add(new MapInfoWidget(map));
+
         return Task.FromResult(map);
     }
 

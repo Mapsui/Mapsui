@@ -5,6 +5,7 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.Widgets;
 using Newtonsoft.Json;
 using SkiaSharp;
 using System;
@@ -34,6 +35,9 @@ public class CustomCalloutSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreatePointLayer());
         map.Home = n => n.CenterOnAndZoomTo(map.Layers[1].Extent!.Centroid, n.Resolutions[5]);
+
+        map.Widgets.Add(new MapInfoWidget(map));
+
         return Task.FromResult(map);
     }
 

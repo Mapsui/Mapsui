@@ -27,9 +27,7 @@ public class MainForm : Form
     DropDown CategoryComboBox = new() { Width = 200 };
     StackLayout SampleList = new();
     MapControl MapControl = new();
-    Label FeatureInfo = new(); // 'click info'
     Label LogTextBox = new(); // 'information time'
-    Label MouseCoordinates = new();
     StackLayout LayerList = new() { HorizontalContentAlignment = HorizontalAlignment.Right };
     Slider RotationSlider = new() { Width = 200 };
     public MainForm()
@@ -42,7 +40,6 @@ public class MainForm : Form
         var os_platform = Environment.OSVersion.ToString();
         Title = $"Mapsui SampleApp - {eto_platform} - {os_platform}";
 
-        MapControl.MouseMove += MapControlOnMouseMove;
         MapControl.Map.Navigator.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
@@ -67,10 +64,8 @@ public class MainForm : Form
         map_layout.Add(MapControl, Point.Empty);
         map_layout.Add(LayerList, Point.Empty);
         map_layout.Add(LogTextBox, Point.Empty);
-        map_layout.Add(FeatureInfo, Point.Empty);
-        map_layout.Add(MouseCoordinates, Point.Empty);
 
-        this.Content = new DynamicLayout(new DynamicRow(sample_layout, map_layout)) { Spacing = new Size(4, 4) };
+        Content = new DynamicLayout(new DynamicRow(sample_layout, map_layout)) { Spacing = new Size(4, 4) };
     }
     private void MapLayoutSizeChanged(object? sender, EventArgs e)
     {
@@ -78,19 +73,11 @@ public class MainForm : Form
         {
             MapControl.Size = layout.Size;
             layout.Move(LayerList, layout.Width - LayerList.Width, 0);
-            var feature_info_height = MouseCoordinates.Height * 2;
-            var logtext_box_height = MouseCoordinates.Height * _logMessage.Limit;
-            layout.Move(LogTextBox, 0, layout.Height - feature_info_height - logtext_box_height);
-            layout.Move(FeatureInfo, 0, layout.Height - feature_info_height);
-            layout.Move(MouseCoordinates, (layout.Width - MouseCoordinates.Width) / 2, layout.Height - MouseCoordinates.Height);
+            var logtext_box_height = LogTextBox.Height * _logMessage.Limit;
+            layout.Move(LogTextBox, 0, layout.Height - logtext_box_height);
         }
     }
 
-    private void MapControlOnMouseMove(object? sender, MouseEventArgs e)
-    {
-        var worldPosition = MapControl.Map.Navigator.Viewport.ScreenToWorld(e.Location.X, e.Location.Y);
-        MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
-    }
     private void FillListWithSamples()
     {
         var selectedCategory = CategoryComboBox.SelectedValue?.ToString() ?? "";
@@ -136,8 +123,6 @@ public class MainForm : Form
 
                 await sample.SetupAsync(MapControl);
 
-                MapControl.Info += MapControlOnInfo;
-
                 LayerList.Items.Clear();
                 if (MapControl.Map != null)
                     foreach (var layer in MapControl.Map.Layers)
@@ -171,18 +156,5 @@ public class MainForm : Form
     {
         var percent = (double)RotationSlider.Value / (RotationSlider.MaxValue - RotationSlider.MinValue);
         MapControl.Map.Navigator.RotateTo(percent * 360);
-    }
-
-    private void MapControlOnInfo(object? sender, MapInfoEventArgs args)
-    {
-        if (args.MapInfo?.Feature != null)
-        {
-            FeatureInfo.Visible = true;
-            FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";
-        }
-        else
-        {
-            FeatureInfo.Visible = false;
-        }
     }
 }

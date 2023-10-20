@@ -4,6 +4,7 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.Widgets;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Projection;
@@ -34,6 +35,9 @@ public class PointProjectionSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(geometryLayer);
         map.Home = n => n.ZoomToBox(extent);
+
+        map.Widgets.Add(new MapInfoWidget(map));
+
         return Task.FromResult(map);
     }
 

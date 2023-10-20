@@ -59,6 +59,7 @@ public class MapRenderer : IRenderer
         WidgetRenders[typeof(BoxWidget)] = new BoxWidgetRenderer();
         WidgetRenders[typeof(MouseCoordinatesWidget)] = new MouseCoordinatesWidgetRenderer();
         WidgetRenders[typeof(EditingWidget)] = new EditingWidgetRenderer();
+        WidgetRenders[typeof(MapInfoWidget)] = new MapInfoWidgetRenderer();
     }
 
     public MapRenderer() : this(new RenderCache())
