@@ -1,8 +1,10 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Extensions;
+using Mapsui.Layers;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Utilities;
+using Mapsui.Widgets;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,6 +22,8 @@ public class SvgSample : ISample
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreateSvgLayer(map.Extent));
+
+        map.Widgets.Add(new MapInfoWidget(map));
 
         return Task.FromResult(map);
     }

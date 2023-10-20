@@ -1,9 +1,11 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Extensions;
+using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Tiling.Layers;
 using Mapsui.UI;
+using Mapsui.Widgets;
 using NetTopologySuite.Geometries;
 using System.Collections.Generic;
 
@@ -32,6 +34,9 @@ public class RasterizingTileLayerWithLineStringSample : IMapControlSample
         map.Layers.Add(new RasterizingTileLayer(lineStringLayer, pixelDensity: pixelDensity));
         var extent = lineStringLayer.Extent!.Grow(lineStringLayer.Extent!.Width * 0.25);
         map.Home = n => n.ZoomToBox(extent);
+
+        map.Widgets.Add(new MapInfoWidget(map));
+
         return map;
     }
 

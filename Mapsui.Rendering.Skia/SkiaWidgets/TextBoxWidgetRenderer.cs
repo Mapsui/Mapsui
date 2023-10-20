@@ -2,13 +2,12 @@
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
 using SkiaSharp;
-using Topten.RichTextKit;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets;
 
 public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
 {
-    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
+    public virtual void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
     {
         DrawText(canvas, viewport, widget, layerOpacity);
     }

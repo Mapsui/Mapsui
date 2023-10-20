@@ -1,9 +1,11 @@
 ﻿using Mapsui.Cache;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers.Wfs;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.Widgets;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
@@ -30,6 +32,8 @@ public class WfsSample : ISample
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateWfsLayer(provider));
             map.Layers.Add(CreateLabelLayer(provider));
+
+            map.Widgets.Add(new MapInfoWidget(map));
 
             map.Home = n => n.CenterOnAndZoomTo(new MPoint(1270000.0, 5880000.0), n.Resolutions[9]);
 
