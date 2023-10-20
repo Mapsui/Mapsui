@@ -5,6 +5,7 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.Widgets;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +31,8 @@ public class SingleCalloutSample : ISample
         map.Layers.Add(CreatePointLayer());
         map.Home = n => n.CenterOnAndZoomTo(map.Layers[1].Extent!.Centroid, n.Resolutions[5]);
         map.Info += MapOnInfo;
+
+        map.Widgets.Add(new MapInfoWidget(map));
 
         return Task.FromResult(map);
     }

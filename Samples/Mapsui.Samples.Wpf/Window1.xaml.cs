@@ -89,7 +89,6 @@ public partial class Window1
 
                 await sample.SetupAsync(MapControl);
 
-                MapControl.Info += MapControlOnInfo;
                 if (MapControl.Map != null)
                     LayerList.Initialize(MapControl.Map.Layers);
             });
@@ -128,19 +127,5 @@ public partial class Window1
     {
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
         MapControl.Map.Navigator.RotateTo(percent * 360);
-    }
-
-    private void MapControlOnInfo(object? sender, MapInfoEventArgs args)
-    {
-        if (args.MapInfo?.Feature != null)
-        {
-            FeatureInfoBorder.Visibility = Visibility.Visible;
-            FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";
-        }
-        else
-        {
-            FeatureInfoBorder.Visibility = Visibility.Collapsed;
-        }
-
     }
 }
