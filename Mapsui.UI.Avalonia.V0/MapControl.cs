@@ -27,7 +27,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private MPoint? _previousMousePosition;
     private double _mouseWheelPos = 0.0;
 
-    [Obsolete("Use Info")]
+    [Obsolete("Use Info and ILayerFeatureInfo")]
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
 
     public MapControl()
@@ -115,6 +115,25 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         e.Pointer.Capture(this);
     }
 
+    [Obsolete]
+    private void HandleFeatureInfo(PointerReleasedEventArgs e)
+    {
+        if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
+
+        if (Map != null && _downMousePosition == e.GetPosition(this).ToMapsui())
+            foreach (var layer in Map.Layers)
+            {
+                // ReSharper disable once SuspiciousTypeConversion.Global
+                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.Viewport, _downMousePosition.X, _downMousePosition.Y,
+                    OnFeatureInfo);
+            }
+    }
+
+    private void OnFeatureInfo(IDictionary<string, IEnumerable<IFeature>> features)
+    {
+        FeatureInfo?.Invoke(this, new FeatureInfoEventArgs { FeatureInfo = features });
+    }
+
     private void MapControlMouseLeave(object? sender, PointerEventArgs e)
     {
         _previousMousePosition = null;
@@ -163,6 +182,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         if (IsClick(_currentMousePosition, _downMousePosition))
         {
+#pragma warning disable CS0612 // Type or member is obsolete
+            HandleFeatureInfo(e);
+#pragma warning restore CS0612 // Type or member is obsolete
             OnInfo(CreateMapInfoEventArgs(_mousePosition, _mousePosition, 1));
         }
     }

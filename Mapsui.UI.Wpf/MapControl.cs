@@ -121,7 +121,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         };
     }
 
-    [Obsolete("Use Info")]
+    [Obsolete("Use Info and ILayerFeatureInfo")]
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo; // todo: Remove and add sample for alternative
 
     internal void InvalidateCanvas()
@@ -202,6 +202,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             }
             else if (_downMousePosition != null && IsClick(mousePosition, _downMousePosition))
             {
+#pragma warning disable CS0612 // Type or member is obsolete
+                HandleFeatureInfo(e);
+#pragma warning restore CS0612 // Type or member is obsolete
                 OnInfo(CreateMapInfoEventArgs(mousePosition, _downMousePosition, e.ClickCount));
             }
         }
@@ -271,6 +274,26 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             // The default for this has changed in .net core, you have to explicitly set if to true for it to work.
             UseShellExecute = true
         });
+    }
+
+    [Obsolete]
+    private void HandleFeatureInfo(MouseButtonEventArgs e)
+    {
+        if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
+
+        if (_downMousePosition == e.GetPosition(this).ToMapsui())
+            foreach (var layer in Map.Layers)
+            {
+                // ReSharper disable once SuspiciousTypeConversion.Global
+                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.Viewport, _downMousePosition.X, _downMousePosition.Y,
+                    OnFeatureInfo);
+            }
+
+    }
+
+    private void OnFeatureInfo(IDictionary<string, IEnumerable<IFeature>> features)
+    {
+        FeatureInfo?.Invoke(this, new FeatureInfoEventArgs { FeatureInfo = features });
     }
 
     private void MapControlMouseMove(object sender, MouseEventArgs e)

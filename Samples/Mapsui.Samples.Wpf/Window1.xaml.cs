@@ -1,16 +1,17 @@
-﻿using System;
+﻿﻿using System;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
+using Mapsui.UI.Wpf;
+using System.Windows.Threading;
 
 namespace Mapsui.Samples.Wpf;
 
@@ -28,8 +29,6 @@ public partial class Window1
 
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-        MapControl.Info += MapControlInfo;
-        MapControl.MouseMove += MapControlOnMouseMove;
         MapControl.Map.Navigator.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
@@ -41,13 +40,6 @@ public partial class Window1
 
         FillComboBoxWithCategories();
         FillListWithSamples();
-    }
-
-    private void MapControlOnMouseMove(object sender, MouseEventArgs e)
-    {
-        var screenPosition = e.GetPosition(MapControl);
-        var worldPosition = MapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition.X, screenPosition.Y);
-        MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
     }
 
     private void FillListWithSamples()
@@ -98,7 +90,6 @@ public partial class Window1
 
                 await sample.SetupAsync(MapControl);
 
-                MapControl.Info += MapControlOnInfo;
                 if (MapControl.Map != null)
                     LayerList.Initialize(MapControl.Map.Layers);
             });
@@ -128,28 +119,9 @@ public partial class Window1
         return result.ToString();
     }
 
-    private static void MapControlInfo(object? sender, MapInfoEventArgs mapInfoEventArgs)
-    {
-        MessageBox.Show(mapInfoEventArgs.MapInfo?.Feature?.ToDisplayText());
-    }
-
     private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
         MapControl.Map.Navigator.RotateTo(percent * 360);
-    }
-
-    private void MapControlOnInfo(object? sender, MapInfoEventArgs args)
-    {
-        if (args.MapInfo?.Feature != null)
-        {
-            FeatureInfoBorder.Visibility = Visibility.Visible;
-            FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";
-        }
-        else
-        {
-            FeatureInfoBorder.Visibility = Visibility.Collapsed;
-        }
-
     }
 }
