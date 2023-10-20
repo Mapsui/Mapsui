@@ -49,7 +49,6 @@ public partial class MainWindow : Window
 
     private MapControl MapControl => this.FindControl<MapControl>("MapControl");
     private ComboBox CategoryComboBox => this.FindControl<ComboBox>("CategoryComboBox");
-    private TextBlock FeatureInfo => this.FindControl<TextBlock>("FeatureInfo");
     private StackPanel SampleList => this.FindControl<StackPanel>("SampleList");
     private Slider RotationSlider => this.FindControl<Slider>("RotationSlider");
 
@@ -63,12 +62,6 @@ public partial class MainWindow : Window
         CategoryComboBox.Items = categories;
 
         CategoryComboBox.SelectedIndex = 1;
-    }
-
-    private void MapOnInfo(object? sender, MapInfoEventArgs args)
-    {
-        if (args.MapInfo?.Feature != null)
-            FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";
     }
 
     private void FillListWithSamples()
@@ -98,9 +91,7 @@ public partial class MainWindow : Window
             Catch.Exceptions(async () =>
             {
                 MapControl.Map?.Layers.Clear();
-                MapControl.Info -= MapOnInfo;
                 await sample.SetupAsync(MapControl);
-                MapControl.Info += MapOnInfo;
                 MapControl.Refresh();
             });
         };

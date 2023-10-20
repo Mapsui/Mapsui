@@ -6,6 +6,7 @@ using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
+using Mapsui.Widgets;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -69,6 +70,8 @@ public class CustomStyleSample : IMapControlSample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreateStylesLayer(map.Extent));
 
+        map.Widgets.Add(new MapInfoWidget(map));
+
         return map;
     }
 
@@ -91,7 +94,7 @@ public class CustomStyleSample : IMapControlSample
         foreach (var point in randomPoints)
         {
             var feature = new PointFeature(point);
-            feature["Label"] = $"I'm no. {counter++} and, \nautsch, you hit me!";
+            feature["Label"] = $"I'm no. {counter++} and, autsch, you hit me!";
             feature.Styles.Add(style); // Here the custom style is set!
             feature.Styles.Add(SmalleDot());
             features.Add(feature);

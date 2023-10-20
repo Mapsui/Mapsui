@@ -31,17 +31,6 @@
                     <Slider RelativePanel.AlignBottomWithPanel="True" x:Name="RotationSlider" MinWidth="140" ValueChanged="RotationSlider_OnValueChanged" />
                 </RelativePanel>
             </Border>
-
-            <Border BorderBrush="White" Opacity="0.65" Background="White"
-                    BorderThickness="6" HorizontalAlignment="Center" VerticalAlignment="Top">
-            </Border>
-            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
-                    VerticalAlignment="Center" HorizontalAlignment="Right">
-                <TextBlock Name="FeatureInfo" TextWrapping="Wrap"/>
-            </Border>
-            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" 
-                    VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="40" MinHeight="30">
-            </Border>
         </Grid>
     </Grid>
 </Page>
