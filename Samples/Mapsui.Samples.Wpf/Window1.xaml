@@ -35,14 +35,6 @@
                         <Slider x:Name="RotationSlider" MinWidth="140" ValueChanged="RotationSliderChanged" />
                     </StackPanel>
                 </Border>
-                <Border Name="FeatureInfoBorder" BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
-                            VerticalAlignment="Bottom" HorizontalAlignment="left">
-                    <TextBlock Name="FeatureInfo" TextWrapping="Wrap"/>
-                </Border>
-                <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
-                            VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="40" MinHeight="30">
-                    <TextBlock x:Name="MouseCoordinates" Text="0, 0" />
-                </Border>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="32"
                                 HorizontalAlignment="Stretch" IsHitTestVisible="False">
                     <TextBlock Name="LogTextBox" Foreground="#a0000000" />

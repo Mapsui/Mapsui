@@ -9,6 +9,8 @@ using System.Net;
 using System.Threading.Tasks;
 using Mapsui.Limiting;
 using Mapsui.Nts;
+using Mapsui.Widgets;
+using Mapsui.Extensions;
 
 #pragma warning disable IDISP001 // Dispose created
 
@@ -28,6 +30,8 @@ public class WfsPointsSample : ISample
             var map = new Map { CRS = crs };
             var provider = await CreateWfsProviderAsync();
             map.Layers.Add(CreateWfsLayer(provider));
+
+            map.Widgets.Add(new MapInfoWidget(map));
 
             MRect bbox = new(
                 -34900

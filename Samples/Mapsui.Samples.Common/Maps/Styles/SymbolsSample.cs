@@ -4,6 +4,7 @@ using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Utilities;
+using Mapsui.Widgets;
 using System.Collections.Generic;
 using System.Linq;
 /* Unmerged change from project 'Mapsui.Samples.Common (netstandard2.0)'
@@ -32,6 +33,8 @@ public class SymbolsSample : ISample
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreateStylesLayer(map.Extent));
+
+        map.Widgets.Add(new MapInfoWidget(map));
 
         return Task.FromResult(map);
     }
