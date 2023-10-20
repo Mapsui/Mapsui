@@ -17,8 +17,6 @@ namespace Mapsui.Samples.Common.Maps.Callouts;
 
 public class GeoJsonInfoSample : ISample
 {
-    private static TextBox? _textBox;
-
     static GeoJsonInfoSample()
     {
         GeoJsonDeployer.CopyEmbeddedResourceToFile("cities.geojson");
@@ -53,27 +51,9 @@ public class GeoJsonInfoSample : ISample
             IsMapInfoLayer = true,
         });
 
-        map.Info += MapOnInfo;
-        _textBox = new TextBox()
-        {
-            MarginY = 0,
-            MarginX = 5,
-            VerticalAlignment = VerticalAlignment.Top,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            BackColor = new Color(255, 255,255, 125),
-            Text = "Information"
-        };
-        map.Widgets.Add(_textBox);
-
+        map.Widgets.Add(new MapInfoWidget(map));
 
         return map;
-    }
-    private static void MapOnInfo(object? sender, MapInfoEventArgs e)
-    {
-        if (_textBox != null)
-        {
-            _textBox.Text = e.MapInfo?.Feature?.ToDisplayText();
-        }
     }
 
     private static ILayer CreateCityLabelLayer(IProvider citiesProvider)

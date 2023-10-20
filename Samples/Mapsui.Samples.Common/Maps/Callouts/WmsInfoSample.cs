@@ -3,7 +3,9 @@ using Mapsui.Cache;
 using Mapsui.Layers;
 using Mapsui.Providers.Wms;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Styles;
+using Mapsui.Widgets;
 
 namespace Mapsui.Samples.Common.Maps.Callouts;
 
@@ -18,6 +20,7 @@ public class WmsInfoSample : ISample
         // The WMS request needs a CRS
         map.Layers.Add(await CreateLayerAsync());
         map.Home = (n) => n.CenterOnAndZoomTo(new MPoint(155000, 463000), 500);
+        map.Widgets.Add(new MapInfoWidget(map));
         return map;
     }
 
