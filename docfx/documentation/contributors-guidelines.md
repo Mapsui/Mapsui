@@ -14,8 +14,8 @@ At all times:
 - The unit tests should succeed
 - All samples should run properly
 
-## Keep our direct and indirect dependencies in sync
-When we have direct and indirect dependecies on a nuget package those should all refer to the same version. For instance we have a direct dependency on SkiaSharp, but we also use  SvgSkia and RichTextKit and those have a dependency on SkiaSharp too. It would be optimal if all referred to the same version of SkiaSharp. This might not always be possible.
+## Our direct and indirect nuget dependencies should point to the same version
+For instance, we have a direct dependency on SkiaSharp, but we also use Svg.Skia which has a dependency on SkiaSharp too. We want both of those to point to the same version. If not, linking or runtime errors could occur. In some cases this might not be possible, when we have to downgrade because of a bug in a library for instance.
 
 ## Extension methods
 - Extension methods should always be in a Extensions folder. 
@@ -55,5 +55,5 @@ Github can generate release notes from PR titles, so the PR titles should be wri
 Growing complexity is one of the biggest problem in software development. To keep this project maintainable we should put effort in keeping the complixity low. Complexity can be caused by clueless spaghetti code but also by [astronaut architectures](https://www.joelonsoftware.com/2008/05/01/architecture-astronauts-take-over/). Keeping things simple is [not easy](https://www.infoq.com/presentations/Simple-Made-Easy) but hard work. It involves thinking up several solutions to your problem weighing the pros and cons and moving it around and upside down to look for even better (simpler) solutions. 
 
 ## Continuous Refactoring
-Mapsui has some older code in it. Don't despair. We continuously improve or replace older code. It is a gradual process. We do it step by step. We have made major changes in the past; From WinForms to WPF, From GDI+ to SL rendering. From .NET Framework to PCL. From PCL to .NET Standard. From WPF rendering to SkiaSharp. Add support for Xamarin.Forms. Future changes will include moving to NTS geometries, improving the Layers list. Taking these steps will cause breaking changes. We are aware of this and clearly communicate it with the user. We use [semver](http://semver.org) so breaking changes go in to major version upgrades.
+Mapsui contains some older code. Don't despair. We continuously improve or replace older code. It is a gradual process. We do it step by step. We have made major changes in the past: from WinForms to WPF, from GDI+ to SL rendering, from .NET Framework to PCL, from PCL to .NET Standard, from WPF rendering to SkiaSharp, from Mapsui geometries to NTS. Taking such steps results in breaking changes. We are aware of this and clearly communicate it with the user. We use [semver](http://semver.org) so breaking changes go in to major version upgrades.
 
