@@ -1,12 +1,13 @@
 # Mapsui Contributor Guidelines
 
-## Issue first
-Submit an issue before a pull request so we can discuss the possible solutions to the problem.
+Note: Below are some contributor guidelines. Items were added when we felt it was useful. It is not intended to be some complete list.
 
-## Sign the Contributor License Agreement (CLA)
-To contribute you need to sign our CLA 
+## If you want to contribute you need to sign the Contributor License Agreement (CLA)
 
 [![CLA assistant](https://cla-assistant.io/readme/badge/Mapsui/Mapsui)](https://cla-assistant.io/Mapsui/Mapsui)
+
+## Issues first
+Submit an issue before a pull request so we can discuss the possible solutions to the problem.
 
 ## All checks should be green all the time
 At all times:
@@ -15,13 +16,14 @@ At all times:
 - All samples should run properly
 
 ## Our direct and indirect nuget dependencies should point to the same version
-For instance, we have a direct dependency on SkiaSharp, but we also use Svg.Skia which has a dependency on SkiaSharp too. We want both of those to point to the same version. If not, linking or runtime errors could occur. In some cases this might not be possible, when we have to downgrade because of a bug in a library for instance.
+For instance, we have a direct dependency on SkiaSharp, but we also use Svg.Skia which has a dependency on SkiaSharp too. We want both of those to point to the same version. If not, linking or runtime errors could occur. In some cases this might not be possible, for instance, when we have to downgrade because of a bug in some package.
 
 ## Extension methods
-- Extension methods should always be in a Extensions folder. 
+- Extension methods should always be in an 'Extensions' folder. 
 - They should be in a class that has the name '{ClassItExtends}Extensions'. 
 - It should be in a namespace that follows the folder name (so not in the namespace of the class it extends).
 - Extensions of a collection (IEnumerable, List, Array etc) of a type should also be in the class that extends the individual type.
+- If an interface is extended, the I should not be in the class name. So and ILayer extension should be LayerExtensions.
 
 ## Ordering of lon lat
 - In our code we prefor a lon, lat order consistent with the x, y order of most cartographic projections.
@@ -29,7 +31,7 @@ For instance, we have a direct dependency on SkiaSharp, but we also use Svg.Skia
 - Also there are many ways in which we can avoid ordering altogher. For instance if we work with Longitude and Latitude properties. In the case of SphericalMercator.FromLonLat we use lon/lat in the method name to avoid confusion.
 
 ## No rendering in the draw/paint loop
-Mapsui strives for optiomal performance, so in the rendering loop the objects should be ready to be painted to canvas directly without any need for preparation. This is currently (4.0.0-beta.8) not the case. For instance in the case of tiles they are rendered on the first iteration, after that the cached version is used. This needs to be improved.
+Mapsui strives for optiomal performance, so in the rendering loop the objects should be ready to be painted to canvas directly without any need for preparation. This is currently (4.1.0) not the case. For instance in the case of tiles they are rendered on the first iteration, after that the cached version is used. This needs to be improved.
 ### About the terminology
 **Rendering**: Create a platform specific resource.
 ```csharp
@@ -41,8 +43,7 @@ canvas.DrawPath(path, paint);
 ```
 
 ## Formatting
-
-We use .editorconfig and we should follow these settings. To apply it in Visual Studio you can select a project | context menu | Analyze and Code Cleanup | Run Code Cleanup (Profile 1 of 2). You can configure which rules to apply in your profile. Alternatively you can use the [dotnet format](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-format) command.
+We use [.editorconfig](https://editorconfig.org) in our repository and the code should comply to this. To apply specifc rules in Visual Studio you can select a project | context menu | Analyze and Code Cleanup | Run Code Cleanup (Profile 1 of 2). You can configure which rules to apply in these profiles. Alternatively you can use the [dotnet format](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-format) command.
 
 ## PR titles should be written as release notes
 Github can generate release notes from PR titles, so the PR titles should be written as release notes entries. Let's do it like this:
@@ -55,5 +56,5 @@ Github can generate release notes from PR titles, so the PR titles should be wri
 Growing complexity is one of the biggest problem in software development. To keep this project maintainable we should put effort in keeping the complixity low. Complexity can be caused by clueless spaghetti code but also by [astronaut architectures](https://www.joelonsoftware.com/2008/05/01/architecture-astronauts-take-over/). Keeping things simple is [not easy](https://www.infoq.com/presentations/Simple-Made-Easy) but hard work. It involves thinking up several solutions to your problem weighing the pros and cons and moving it around and upside down to look for even better (simpler) solutions. 
 
 ## Continuous Refactoring
-Mapsui contains some older code. Don't despair. We continuously improve or replace older code. It is a gradual process. We do it step by step. We have made major changes in the past: from WinForms to WPF, from GDI+ to SL rendering, from .NET Framework to PCL, from PCL to .NET Standard, from WPF rendering to SkiaSharp, from Mapsui geometries to NTS. Taking such steps results in breaking changes. We are aware of this and clearly communicate it with the user. We use [semver](http://semver.org) so breaking changes go in to major version upgrades.
+Mapsui contains some older code. Don't despair. We continuously improve or replace older code. It is a gradual process. We do it step by step. Although the steps are small we have managed to make major changes in the past: from WinForms to WPF, from GDI+ to SL rendering, from .NET Framework to PCL, from PCL to .NET Standard, from WPF rendering to SkiaSharp, from Mapsui geometries to NTS. Taking such steps results in breaking changes. We are aware of this and clearly communicate it with the user. We use [semver](http://semver.org) so breaking changes go in to major version upgrades.
 
