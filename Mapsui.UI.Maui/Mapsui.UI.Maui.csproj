@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
     <!--Windows does not work because of this https://github.com/dotnet/maui/issues/6529-->
 	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks)</TargetFrameworks>
     <UseMaui>true</UseMaui>
@@ -45,6 +45,30 @@
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="SkiaSharp.Views.Maui.Controls" />
     <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
+    <Reference Include="Microsoft.Maui" HintPath="$(ProgramFiles)\dotnet\packs\Microsoft.Maui.Core.Ref.any\6.0.419\ref\net6.0\Microsoft.Maui.dll">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.Maui.Controls" HintPath="$(ProgramFiles)\dotnet\packs\Microsoft.Maui.Controls.Ref.any\6.0.419\ref\net6.0\Microsoft.Maui.Controls.dll">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.Maui.Controls.Compatibility" HintPath="$(ProgramFiles)\dotnet\packs\Microsoft.Maui.Controls.Ref.any\6.0.419\ref\net6.0\Microsoft.Maui.Controls.Compatibility.dll">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.Maui.Essentials" HintPath="$(ProgramFiles)\dotnet\packs\Microsoft.Maui.Essentials.Ref.any\6.0.419\ref\net6.0\Microsoft.Maui.Essentials.dll">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.Maui.Controls.Xaml" HintPath="$(ProgramFiles)\dotnet\packs\Microsoft.Maui.Controls.Ref.any\6.0.419\ref\net6.0\Microsoft.Maui.Controls.Xaml.dll">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>false</Private>
+    </Reference>
+    <PackageReference Include="Microsoft.Maui.Graphics" VersionOverride="6.0.501" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net8.0'">
