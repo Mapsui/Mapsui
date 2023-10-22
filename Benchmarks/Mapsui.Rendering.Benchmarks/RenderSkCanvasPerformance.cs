@@ -13,7 +13,7 @@ namespace Mapsui.Rendering.Benchmarks;
 [SimpleJob(RunStrategy.Throughput)]
 [MemoryDiagnoser]
 [MinColumn, MaxColumn, MeanColumn, MedianColumn]
-public sealed class RenderSkCanvasPerformance : IDisposable
+public class RenderSkCanvasPerformance
 {           
     private readonly SKPaint _paint;
     private readonly SKPath _path;
@@ -142,17 +142,5 @@ public sealed class RenderSkCanvasPerformance : IDisposable
     public void RenderOffCanvas()
     {
         _canvas.DrawPath(_pathOffCanvas, _paint);
-    }
-
-    public void Dispose()
-    {
-        _paint.Dispose();
-        _path.Dispose();
-        _bitmap.Dispose();
-        _canvas.Dispose();
-        _pathOffCanvas.Dispose();
-        _bitmapTransformed.Dispose();
-        _canvasTransformed.Dispose();
-        _pathLessPoints.Dispose();
     }
 }

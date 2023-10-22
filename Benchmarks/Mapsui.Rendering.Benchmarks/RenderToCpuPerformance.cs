@@ -47,13 +47,13 @@ public sealed class RenderToCpuPerformance : IDisposable
         mapRenderer = new MapRenderer();
         mapRendererWithoutCache = new MapRenderer();
         mapRendererWithoutCache.RenderCache.VectorCache = new NonCachingVectorCache(mapRendererWithoutCache.RenderCache.SymbolCache);
-        tilingSkpMap = CreateMapControlAsync(RenderFormat.Skp).Result;
-        tilingPngMap = CreateMapControlAsync(RenderFormat.Png).Result;
-        tilingWebpMap = CreateMapControlAsync(RenderFormat.WebP).Result;
-        rasterizingPngMap = CreateMapControlAsync(RenderFormat.Png, false, true).Result;
-        rasterizingSkpMap = CreateMapControlAsync(RenderFormat.Skp, false, true).Result;
-        rasterizingTilingSkpMap = CreateMapControlAsync(RenderFormat.Skp, true, true).Result;
-        map = CreateMapControlAsync().Result;
+        tilingSkpMap = CreateMapControl(RenderFormat.Skp);
+        tilingPngMap = CreateMapControl(RenderFormat.Png);
+        tilingWebpMap = CreateMapControl(RenderFormat.WebP);
+        rasterizingPngMap = CreateMapControl(RenderFormat.Png, false, true);
+        rasterizingSkpMap = CreateMapControl(RenderFormat.Skp, false, true);
+        rasterizingTilingSkpMap = CreateMapControl(RenderFormat.Skp, true, true);
+        map = CreateMapControl();
     }
 
     public RenderToCpuPerformance()
@@ -65,7 +65,7 @@ public sealed class RenderToCpuPerformance : IDisposable
         skCanvas = surface.Canvas;
     }
 
-    public static async Task<RegressionMapControl> CreateMapControlAsync(RenderFormat? renderFormat = null, bool tiling = true, bool rasterizing = false)
+    public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null, bool tiling = true, bool rasterizing = false)
     {
         var mapControl = new RegressionMapControl();
         mapControl.SetSize(800, 600);
@@ -78,7 +78,7 @@ public sealed class RenderToCpuPerformance : IDisposable
         // fetch data first time
         var fetchInfo = new FetchInfo(mapControl.Map.Navigator.Viewport.ToSection(), mapControl.Map.CRS);
         mapControl.Map.RefreshData(fetchInfo);
-        await mapControl.Map.Layers.WaitForLoadingAsync();
+        mapControl.Map.Layers.WaitForLoadingAsync().Wait();
 
         return mapControl;
     }

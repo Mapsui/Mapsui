@@ -31,10 +31,10 @@ public class RenderToBitmapPerformance
     static RenderToBitmapPerformance()
     {
         mapRenderer = new MapRenderer();
-        skpMap = CreateMapControlAsync(RenderFormat.Skp).Result;
-        pngMap = CreateMapControlAsync(RenderFormat.Png).Result;
-        webpMap = CreateMapControlAsync(RenderFormat.WebP).Result;
-        map = CreateMapControlAsync().Result;
+        skpMap = CreateMapControl(RenderFormat.Skp);
+        pngMap = CreateMapControl(RenderFormat.Png);
+        webpMap = CreateMapControl(RenderFormat.WebP);
+        map = CreateMapControl();
         skpMap.WaitForLoadingAsync().Wait();
         pngMap.WaitForLoadingAsync().Wait();
         webpMap.WaitForLoadingAsync().Wait();
@@ -42,7 +42,7 @@ public class RenderToBitmapPerformance
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits", Justification = "Needs to be synchronous")]
-    public static async Task<RegressionMapControl> CreateMapControlAsync(RenderFormat? renderFormat = null)
+    public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null)
     {
         var mapControl = new RegressionMapControl();
         mapControl.SetSize(800, 600);
@@ -52,7 +52,7 @@ public class RenderToBitmapPerformance
         // fetch data first time
         var fetchInfo = new FetchInfo(mapControl.Map.Navigator.Viewport.ToSection(), mapControl.Map.CRS);
         mapControl.Map.RefreshData(fetchInfo);
-        await mapControl.Map.Layers.WaitForLoadingAsync();
+        mapControl.Map.Layers.WaitForLoadingAsync().Wait();
 
         return mapControl;
     }
@@ -81,7 +81,7 @@ public class RenderToBitmapPerformance
         {
             var sqlitePersistentCache = new SqlitePersistentCache("Performance" + renderFormat);
             sqlitePersistentCache.Clear();
-            layer = new RasterizingTileLayer(layer, mapRenderer, persistentCache: sqlitePersistentCache, renderFormat: renderFormat.Value);
+            layer = new RasterizingTileLayer(layer, persistentCache: sqlitePersistentCache, renderFormat: renderFormat.Value);
         }
 
         map.Layers.Add(layer);
@@ -127,7 +127,7 @@ public class RenderToBitmapPerformance
     {
         using var bitmap = mapRenderer.RenderToBitmapStream(map.Map.Navigator.Viewport, map.Map!.Layers, Color.White);
 #if DEBUG
-        await File.WriteAllBytesAsync(@$"{OutputFolder()}\Test.png", bitmap.ToArray());
+        File.WriteAllBytes(@$"{OutputFolder()}\Test.png", bitmap.ToArray());
 #endif
     }
 
@@ -136,7 +136,7 @@ public class RenderToBitmapPerformance
     {
         using var bitmap = mapRenderer.RenderToBitmapStream(pngMap.Map.Navigator.Viewport, pngMap.Map!.Layers, Color.White);
 #if DEBUG
-        await File.WriteAllBytesAsync(@$"{OutputFolder()}\Testpng.png", bitmap.ToArray());
+        File.WriteAllBytes(@$"{OutputFolder()}\Testpng.png", bitmap.ToArray());
 #endif
     }
 
@@ -145,7 +145,7 @@ public class RenderToBitmapPerformance
     {
         using var bitmap = mapRenderer.RenderToBitmapStream(webpMap.Map.Navigator.Viewport, webpMap.Map!.Layers, Color.White);
 #if DEBUG
-        await File.WriteAllBytesAsync(@$"{OutputFolder()}\Testwebp.png", bitmap.ToArray());
+        File.WriteAllBytes(@$"{OutputFolder()}\Testwebp.png", bitmap.ToArray());
 #endif
     }
 
@@ -154,7 +154,7 @@ public class RenderToBitmapPerformance
     {
         using var bitmap = mapRenderer.RenderToBitmapStream(skpMap.Map.Navigator.Viewport, skpMap.Map!.Layers, Color.White);
 #if DEBUG
-        await File.WriteAllBytesAsync(@$"{OutputFolder()}\Testskp.png", bitmap.ToArray());
+        File.WriteAllBytes(@$"{OutputFolder()}\Testskp.png", bitmap.ToArray());
 #endif
     }
 
