@@ -67,7 +67,7 @@ public sealed class RenderToCpuPerformance : IDisposable
 
     public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null, bool tiling = true, bool rasterizing = false)
     {
-        var mapControl = new RegressionMapControl();
+        var mapControl = new RegressionMapControl(mapRenderer);
         mapControl.SetSize(800, 600);
 
         mapControl.Map = CreateMap(renderFormat, tiling, rasterizing);

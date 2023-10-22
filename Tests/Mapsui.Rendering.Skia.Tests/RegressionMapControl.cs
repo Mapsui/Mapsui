@@ -17,9 +17,9 @@ public class RegressionMapControl : IMapControl
 {
     private Map _map;
 
-    public RegressionMapControl()
+    public RegressionMapControl(MapRenderer? mapRenderer = null)
     {
-        Renderer = new MapRenderer();
+        Renderer = mapRenderer ?? new MapRenderer();
         _map = new();
     }
 

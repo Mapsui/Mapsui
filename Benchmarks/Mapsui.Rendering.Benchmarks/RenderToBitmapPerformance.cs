@@ -37,19 +37,19 @@ public class RenderToBitmapPerformance
         webpMap = CreateMapControl(RenderFormat.WebP);
         map = CreateMapControl();
         mapCached = CreateMapControl();
-        mapCached.WaitForLoadingAsync().Wait();
-        // render one time the map so that the sk path are cached.
-        using var bitmap = mapRenderer.RenderToBitmapStream(mapCached.Map.Navigator.Viewport, mapCached.Map!.Layers, Color.White);
         skpMap.WaitForLoadingAsync().Wait();
         pngMap.WaitForLoadingAsync().Wait();
         webpMap.WaitForLoadingAsync().Wait();
         map.WaitForLoadingAsync().Wait();
+        mapCached.WaitForLoadingAsync().Wait();
+        // render one time the map so that the sk path are cached.
+        using var bitmap = mapRenderer.RenderToBitmapStream(mapCached.Map.Navigator.Viewport, mapCached.Map!.Layers, Color.White);
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits", Justification = "Needs to be synchronous")]
     public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null)
     {
-        var mapControl = new RegressionMapControl();
+        var mapControl = new RegressionMapControl(mapRenderer);
         mapControl.SetSize(800, 600);
 
         mapControl.Map = CreateMap(renderFormat);
