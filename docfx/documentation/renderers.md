@@ -1,12 +1,6 @@
-# Renderers
+## Keep the renderer behind and interface
 
-As of v4 Mapsui has only one renderer, Skia. We still use a renderer interface but there are no plans to add another renderer atm.
-
-## Why use an IRenderer interface?
-
-If you know there is only one renderer why work with an interface. Some things can be simplified if you directly work with the implementation. Since it looks more and more like skiasharp will be the only renderer for as far as we can see we could just add that dependency to all our code and work directly with SkiaSharp classes, that may simplify some things. However, in the past we had to switch many times to different renderers, so I am not so sure if this won't happen again. So let's not settle for one renderer just yet. 
-
-For context, these are the renderers Mapsui had in the past:
+As of v4 Mapsui has only one renderer, SkiaSharp. Although we have only one renderer and have currently no plans to add others we will keep it behind an interface. There are costs to keeping the abstraction but we keep it because a change could happen again, even though it does not seem likely now. In the past we had to switch renderers many times, a list:
 - System.Drawing
 - System.Drawing for PocketPC
 - Silverlight XAML
