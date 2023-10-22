@@ -28,7 +28,7 @@ public class RasterizingTileProvider : ITileSource
     private readonly IProvider? _dataSource;
     private readonly RenderFormat _renderFormat;
     private readonly IDictionary<TileIndex, double> _searchSizeCache = new ConcurrentDictionary<TileIndex, double>();
-    private readonly IRenderCache? _renderCache;
+    private IRenderCache? _renderCache;
 
     public RasterizingTileProvider(
         ILayer layer,
@@ -216,6 +216,7 @@ public class RasterizingTileProvider : ITileSource
                 else
                 {
                     rasterizer = DefaultRendererFactory.Create();
+                    _renderCache = rasterizer.RenderCache; // get the render cache from the first renderer
                 }
             }
         }
