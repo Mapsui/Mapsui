@@ -109,7 +109,7 @@ public sealed class RenderToCpuPerformance : IDisposable
             {
                 var sqliteCache = new SqlitePersistentCache("Performance" + renderFormat);
                 sqliteCache.Clear();
-                layer = new RasterizingTileLayer(layer, persistentCache: sqliteCache, renderFormat: renderFormat.Value);
+                layer = new RasterizingTileLayer(layer, mapRenderer, persistentCache: sqliteCache, renderFormat: renderFormat.Value);
             }
 
             if (rasterizing)
