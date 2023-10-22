@@ -28,6 +28,7 @@ public class RasterizingTileProvider : ITileSource
     private readonly IProvider? _dataSource;
     private readonly RenderFormat _renderFormat;
     private readonly IDictionary<TileIndex, double> _searchSizeCache = new ConcurrentDictionary<TileIndex, double>();
+    private readonly IRenderCache? _renderCache;
 
     public RasterizingTileProvider(
         ILayer layer,
@@ -40,6 +41,7 @@ public class RasterizingTileProvider : ITileSource
         _renderFormat = renderFormat;
         _layer = layer;
         _rasterizer = rasterizer;
+        _renderCache = rasterizer?.RenderCache;
         _pixelDensity = pixelDensity;
         PersistentCache = persistentCache ?? new NullCache();
 
@@ -202,7 +204,22 @@ public class RasterizingTileProvider : ITileSource
 
     private IRenderer GetRenderer()
     {
-        if (!_rasterizingLayers.TryPop(out var rasterizer)) rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
+        if (!_rasterizingLayers.TryPop(out var rasterizer))
+        {
+            rasterizer = _rasterizer;
+            if (rasterizer == null)
+            {
+                if (_renderCache != null)
+                {
+                    rasterizer = DefaultRendererFactory.CreateWithCache(_renderCache);
+                }
+                else
+                {
+                    rasterizer = DefaultRendererFactory.Create();
+                }
+            }
+        }
+
         return rasterizer;
     }
 

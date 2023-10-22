@@ -40,6 +40,7 @@ public class MapRenderer : IRenderer
     static MapRenderer()
     {
         DefaultRendererFactory.Create = () => new MapRenderer();
+        DefaultRendererFactory.CreateWithCache = f => new MapRenderer(f);
     }
 
     public MapRenderer(IRenderCache renderer)

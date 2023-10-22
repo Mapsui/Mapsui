@@ -81,7 +81,7 @@ public class RenderToBitmapPerformance
         {
             var sqlitePersistentCache = new SqlitePersistentCache("Performance" + renderFormat);
             sqlitePersistentCache.Clear();
-            layer = new RasterizingTileLayer(layer, persistentCache: sqlitePersistentCache, renderFormat: renderFormat.Value);
+            layer = new RasterizingTileLayer(layer, mapRenderer, persistentCache: sqlitePersistentCache, renderFormat: renderFormat.Value);
         }
 
         map.Layers.Add(layer);
