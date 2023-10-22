@@ -42,7 +42,7 @@ jobs:
         echo $VERSION_OF_RELEASE
 
     - name: install workloads
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
+      run: Scripts/InstallDependencies.cmd
 
     - name: Test
       run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}

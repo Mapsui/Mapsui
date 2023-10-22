@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB
 		Scripts\buildpack.bat = Scripts\buildpack.bat
 		Scripts\BuildSamplesDocumentation.ps1 = Scripts\BuildSamplesDocumentation.ps1
 		Scripts\BuildSamplesWebsite.ps1 = Scripts\BuildSamplesWebsite.ps1
+		Scripts\InstallDependencies.cmd = Scripts\InstallDependencies.cmd
 		Scripts\NugetRestore.cmd = Scripts\NugetRestore.cmd
 		Scripts\SamplesMapsuiNugetReferences.ps1 = Scripts\SamplesMapsuiNugetReferences.ps1
 		Scripts\test-image-copier.cmd = Scripts\test-image-copier.cmd

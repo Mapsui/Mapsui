@@ -291,7 +291,7 @@ jobs:
       with:
         vs-prerelease: true
     - name: install maui macos android ios maccatalyst wasm-tools
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools
+      run: Scripts/InstallDependencies.cmd
     #- name: uno-check install
     #  run: dotnet tool install -g uno.check
     #- name: uno-check fix
