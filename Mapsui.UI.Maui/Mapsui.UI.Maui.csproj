@@ -45,7 +45,7 @@
     <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net6.0' && $([MSBuild]::IsOSPlatform('windows'))">
+  <ItemGroup Condition="'$(TargetFramework)'=='net6.0' and $([MSBuild]::IsOSPlatform('windows'))">
     <Reference Include="Microsoft.Maui" HintPath="$(ProgramFiles)\dotnet\packs\Microsoft.Maui.Core.Ref.any\6.0.419\ref\net6.0\Microsoft.Maui.dll">
       <SpecificVersion>False</SpecificVersion>
       <Private>false</Private>
