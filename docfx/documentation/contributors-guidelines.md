@@ -9,14 +9,14 @@ Note: Below are some contributor guidelines. Items were added when we felt it wa
 ## Issues first
 Submit an issue before a pull request so we can discuss the possible solutions to the problem.
 
+## Formatting
+We use [.editorconfig](https://editorconfig.org) in our repository and the code should comply to this. To apply specifc rules in Visual Studio you can select a project | context menu | Analyze and Code Cleanup | Run Code Cleanup (Profile 1 of 2). You can configure which rules to apply in these profiles. Alternatively you can use the [dotnet format](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-format) command.
+
 ## All checks should be green all the time
 At all times:
 - All projects should compile
 - The unit tests should succeed
 - All samples should run properly
-
-## Our direct and indirect nuget dependencies should point to the same version
-For instance, we have a direct dependency on SkiaSharp, but we also use Svg.Skia which has a dependency on SkiaSharp too. We want both of those to point to the same version. If not, linking or runtime errors could occur. In some cases this might not be possible, for instance, when we have to downgrade because of a bug in some package.
 
 ## Extension methods
 - Extension methods should always be in an 'Extensions' folder. 
@@ -24,6 +24,16 @@ For instance, we have a direct dependency on SkiaSharp, but we also use Svg.Skia
 - It should be in a namespace that follows the folder name (so not in the namespace of the class it extends).
 - Extensions of a collection (IEnumerable, List, Array etc) of a type should also be in the class that extends the individual type.
 - If an interface is extended, the I should not be in the class name. So and ILayer extension should be LayerExtensions.
+
+## Our direct and indirect nuget dependencies should point to the same version
+For instance, we have a direct dependency on SkiaSharp, but we also use Svg.Skia which has a dependency on SkiaSharp too. We want both of those to point to the same version. If not, linking or runtime errors could occur. In some cases this might not be possible, for instance, when we have to downgrade because of a bug in some package.
+
+## PR titles should be written as release notes
+Github can generate release notes from PR titles, so the PR titles should be written as release notes entries. Let's do it like this:
+- Use imperative mood. See something about this in [this post](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/) about commit messages (which should also use imperative mood). Most of the time the title will begin with a verb, like Fix, Update or Add.
+- Don't use the number of the issue it is referencing in the title but in the branch name (in the format suggested by github when you click the 'create a branch' link next to an issue). It will automatically be associated with the issue.
+- The title should be self explanatory and the interpretation should not depend on the content of the issue it is referring to.
+- The title should be succinct. It can not always be a full description. The users can read the rest in the PR itself. There is a link to the PR next to the entry.
 
 ## Ordering of lon lat
 - In our code we prefor a lon, lat order consistent with the x, y order of most cartographic projections.
@@ -42,16 +52,6 @@ SKPath path = ToSKPath(feature, style);
 canvas.DrawPath(path, paint);
 ```
 
-## Formatting
-We use [.editorconfig](https://editorconfig.org) in our repository and the code should comply to this. To apply specifc rules in Visual Studio you can select a project | context menu | Analyze and Code Cleanup | Run Code Cleanup (Profile 1 of 2). You can configure which rules to apply in these profiles. Alternatively you can use the [dotnet format](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-format) command.
-
-## PR titles should be written as release notes
-Github can generate release notes from PR titles, so the PR titles should be written as release notes entries. Let's do it like this:
-- Use imperative mood. See something about this in [this post](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/) about commit messages (which should also use imperative mood). Most of the time the title will begin with a verb, like Fix, Update or Add.
-- Don't use the number of the issue it is referencing in the title but in the branch name (in the format suggested by github when you click the 'create a branch' link next to an issue). It will automatically be associated with the issue.
-- The title should be self explanatory and the interpretation should not depend on the content of the issue it is referring to.
-- The title should be succinct. It can not always be a full description. The users can read the rest in the PR itself. There is a link to the PR next to the entry.
-
 ## Keep the renderer behind and interface
 As of v4 Mapsui has only one renderer, SkiaSharp. Although we have only one renderer and have currently no plans to add others we will keep it behind an interface. There are costs to keeping the abstraction but we keep it because a change could happen again, even though it does not seem likely now. In the past we had to switch renderers many times, a list:
 - System.Drawing
@@ -64,10 +64,10 @@ As of v4 Mapsui has only one renderer, SkiaSharp. Although we have only one rend
 - OpenTK (this was not mature enough at that point)
 - SkiaSharp
 
-### Do not limit to a single coordinate system
+## Mapsui should not be limited to a single coordinate system
 Mapsui's Map can be in any coordinate system. If you do not specify a coordinate system in the Map and Layers it assumes they are in the same coordinate system (whatever they are). In this case it only transforms these unspecified 'world-coordinates' to 'screen-coordinates' and nothing more. It is also possible to setup a coordinate transformation system using Map.CRS, DataSource.CRS and Map.Transformation. See [projections](projections.md).
 
-### Full implementation of the feature matrix
+## Full implementation of the feature matrix
 These are some of the feature dimensions:
 - Renderers: WPF and Skia
 - Geometries: Point, LineString, Polygon etc.
