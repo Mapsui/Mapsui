@@ -38,7 +38,7 @@
 	</ItemGroup>
 	
 	<ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0' or '$(TargetFramework)'=='net6.0' or '$(TargetFramework)'=='uap10.0.19041'">
-		<PackageReference Include="Uno.UI" VersionOverride="4.10.26 " />
+		<PackageReference Include="Uno.UI" VersionOverride="4.11.0-dev.107" />
 	</ItemGroup>
 	
 	<ItemGroup Condition="$(TargetFramework.Contains('uap'))">
