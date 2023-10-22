@@ -9,9 +9,9 @@
      -->
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" />
     <PackageReference Include="Microsoft.UI.Xaml" />
-    <PackageReference Include="Uno.Core" VersionOverride="4.11.0-dev.107"/>
-    <PackageReference Include="Uno.UI" VersionOverride="4.11.0-dev.107"/>
-    <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" VersionOverride="4.11.0-dev.107"/>
+    <PackageReference Include="Uno.Core" VersionOverride="4.11.0-dev.107" />
+    <PackageReference Include="Uno.UI" VersionOverride="4.11.0-dev.107" />
+    <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" VersionOverride="4.11.0-dev.107" />
     <PackageReference Include="SkiaSharp.Views.Uno" />
   </ItemGroup>
   <PropertyGroup>
