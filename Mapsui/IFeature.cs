@@ -15,11 +15,11 @@ public interface IFeature : IDisposable
     public IDictionary<IStyle, object> RenderedGeometry { get; }
     void CoordinateVisitor(Action<double, double, CoordinateSetter> visit);
 #if NETSTANDARD2_0
-    object Id { get; }
+    long Id { get; }
     void Modified();
     void ClearRenderedGeometry();
 #else
-    object Id => 0;
+    long Id => 0;
     void Modified() { } // default implementation
     void ClearRenderedGeometry() { } // default implementation
 #endif

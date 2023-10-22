@@ -10,6 +10,7 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using Mapsui.Features;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers.Shapefile.Indexing;
 
@@ -413,7 +414,7 @@ internal sealed class DbaseReader : IDisposable
             throw new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture));
         _fs!.Seek(_headerLength + oid * _recordLength, 0);
 
-        var dr = new GeometryFeature((_id, oid));
+        var dr = new GeometryFeature(FeatureId.CreateId(_id, oid));
 
         if (_br!.ReadChar() == '*') return null; // is record marked deleted?
 

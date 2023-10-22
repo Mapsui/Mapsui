@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Mapsui.Features;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using Mapsui.Providers;
@@ -22,6 +23,7 @@ public class GeoJsonProvider : IProvider, IProviderExtended
     private object _lock = new();
     private STRtree<GeometryFeature>? _index;
     private MRect? _extent;
+    private FeatureKeyCreator<string>? _featureKeyCreator;
 
     public GeoJsonProvider(string geojson)
     {
@@ -82,6 +84,12 @@ public class GeoJsonProvider : IProvider, IProviderExtended
         return (_geoJson.IndexOf("{") >= 0 && _geoJson.IndexOf("}") >= 0) || (_geoJson.IndexOf("[") >= 0 && _geoJson.IndexOf("]") >= 0);
     }
 
+    public FeatureKeyCreator<string> FeatureKeyCreator
+    {
+        get => _featureKeyCreator ??= new FeatureKeyCreator<string>();
+        set => _featureKeyCreator = value;
+    }
+
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "Data is kept")]
     private STRtree<GeometryFeature> FeatureCollection
@@ -106,8 +114,23 @@ public class GeoJsonProvider : IProvider, IProviderExtended
                             if (boundingBox != null)
                             {
                                 var optionalId = feature.GetOptionalId("Id");
-                                var geometryFeature = optionalId != null ? new GeometryFeature((Id, optionalId)) : new GeometryFeature();
-                                
+                                GeometryFeature geometryFeature;
+                                switch (optionalId)
+                                {
+                                    case uint number:
+                                        geometryFeature = new GeometryFeature(FeatureId.CreateId(Id, number));
+                                        break;
+                                    case null:
+                                        geometryFeature = new GeometryFeature();
+                                        break;
+                                    default:
+                                    {
+                                        string str = optionalId as string ?? optionalId.ToString() ?? string.Empty;
+                                        geometryFeature = new GeometryFeature(FeatureId.CreateId(Id, str, FeatureKeyCreator.GetKey));
+                                        break;
+                                    }
+                                }
+
                                 geometryFeature.Geometry = feature.Geometry;
                                 FillFields(geometryFeature, feature.Attributes);
 

@@ -14,7 +14,7 @@ public class GeometryFeature : BaseFeature, IFeature, IDisposable
     {
     }
 
-    public GeometryFeature(object id) : base(id)
+    public GeometryFeature(long id) : base(id)
     {
     }
 
@@ -23,7 +23,7 @@ public class GeometryFeature : BaseFeature, IFeature, IDisposable
         Geometry = geometryFeature.Geometry?.Copy();
     }
 
-    public GeometryFeature(GeometryFeature geometryFeature, object id) : base(geometryFeature, id)
+    public GeometryFeature(GeometryFeature geometryFeature, long id) : base(geometryFeature, id)
     {
         Geometry = geometryFeature.Geometry?.Copy();
     }

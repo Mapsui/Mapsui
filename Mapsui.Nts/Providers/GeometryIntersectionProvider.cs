@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
+using Mapsui.Features;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using Mapsui.Providers;
@@ -15,6 +16,7 @@ namespace Mapsui.Nts.Providers;
 public class GeometryIntersectionProvider : IProvider, IProviderExtended
 {
     private readonly IProvider _provider;
+    private FeatureKeyCreator<(long, MRect)>? _featureKeyCreator;
 
     public GeometryIntersectionProvider(IProvider provider)
     {
@@ -29,6 +31,12 @@ public class GeometryIntersectionProvider : IProvider, IProviderExtended
         set => _provider.CRS = value;
     }
 
+    public FeatureKeyCreator<(long, MRect)> FeatureKeyCreator
+    {
+        get => _featureKeyCreator ??= new FeatureKeyCreator<(long, MRect)>();
+        set => _featureKeyCreator = value;
+    }
+
     public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         return IterateFeatures(fetchInfo, await _provider.GetFeaturesAsync(fetchInfo));
@@ -36,15 +44,16 @@ public class GeometryIntersectionProvider : IProvider, IProviderExtended
 
     private IEnumerable<IFeature> IterateFeatures(FetchInfo fetchInfo, IEnumerable<IFeature> features)
     {
-        var rectangle = fetchInfo.Extent.Grow(fetchInfo.Resolution).ToPolygon();
+        var rectangle = fetchInfo.Extent.Grow(fetchInfo.Resolution);
+        var polygon = rectangle.ToPolygon();
 
         foreach (var feature in features)
             if (feature is GeometryFeature geometryFeature)
             {
-                var copied = new GeometryFeature(geometryFeature, (Id, geometryFeature.Id, rectangle));
+                var copied = new GeometryFeature(geometryFeature, FeatureId.CreateId(Id, (geometryFeature.Id, rectangle), FeatureKeyCreator.GetKey));
                 if (geometryFeature.Geometry != null)
                 {
-                    copied.Geometry = rectangle.Intersection(geometryFeature.Geometry);
+                    copied.Geometry = polygon.Intersection(geometryFeature.Geometry);
                 }
 
                 yield return copied;

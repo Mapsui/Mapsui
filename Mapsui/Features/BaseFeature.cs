@@ -13,7 +13,7 @@ public abstract class BaseFeature : IDisposable
     // last used feature id
     private static long _currentFeatureId;
 
-    protected BaseFeature(object id)
+    protected BaseFeature(long id)
     {
         Id = id;
     }
@@ -28,14 +28,14 @@ public abstract class BaseFeature : IDisposable
         return Interlocked.Increment(ref _currentFeatureId);
     }
 
-    public object Id { get; private set; }
+    public long Id { get; private set; }
 
     protected BaseFeature(BaseFeature baseFeature) : this()
     {
         Copy(baseFeature);
     }
 
-    protected BaseFeature(BaseFeature baseFeature, object id) : this(id)
+    protected BaseFeature(BaseFeature baseFeature, long id) : this(id)
     {
         Copy(baseFeature);
     }
