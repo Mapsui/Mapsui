@@ -136,7 +136,7 @@ public class RenderToBitmapPerformance
     }
 
     [Benchmark]
-    public void RenderDefaultAsync()
+    public void RenderDefault()
     {
         using var bitmap = mapRenderer.RenderToBitmapStream(map.Map.Navigator.Viewport, map.Map!.Layers, Color.White);
 #if DEBUG
@@ -145,7 +145,7 @@ public class RenderToBitmapPerformance
     }
 
     [Benchmark]
-    public void RenderDefaultCachedAsync()
+    public void RenderDefaultCached()
     {
         using var bitmap = mapRendererCached.RenderToBitmapStream(mapCached.Map.Navigator.Viewport, mapCached.Map!.Layers, Color.White);
 #if DEBUG
@@ -154,7 +154,7 @@ public class RenderToBitmapPerformance
     }
 
     [Benchmark]
-    public void RenderRasterizingTilingPngAsync()
+    public void RenderRasterizingTilingPng()
     {
         using var bitmap = mapRendererPng.RenderToBitmapStream(pngMap.Map.Navigator.Viewport, pngMap.Map!.Layers, Color.White);
 #if DEBUG
@@ -163,7 +163,7 @@ public class RenderToBitmapPerformance
     }
 
     [Benchmark]
-    public void RenderRasterizingTilingWebPAsync()
+    public void RenderRasterizingTilingWebP()
     {
         using var bitmap = mapRendererWebp.RenderToBitmapStream(webpMap.Map.Navigator.Viewport, webpMap.Map!.Layers, Color.White);
 #if DEBUG
@@ -172,7 +172,7 @@ public class RenderToBitmapPerformance
     }
 
     [Benchmark]
-    public void RenderRasterizingTilingSkpAsync()
+    public void RenderRasterizingTilingSkp()
     {
         using var bitmap = mapRendererSkp.RenderToBitmapStream(skpMap.Map.Navigator.Viewport, skpMap.Map!.Layers, Color.White);
 #if DEBUG
