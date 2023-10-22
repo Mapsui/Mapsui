@@ -34,6 +34,5 @@
 
 # Contributing to Mapsui
 ## [Contributors Guidelines](contributors-guidelines.md)
-## [Development Constraints](development-constraints.md)
 ## [Rendering Tests](rendering-tests.md)
 ## [Documentation](documentation.md)

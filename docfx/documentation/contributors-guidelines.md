@@ -64,9 +64,21 @@ As of v4 Mapsui has only one renderer, SkiaSharp. Although we have only one rend
 - OpenTK (this was not mature enough at that point)
 - SkiaSharp
 
+### Do not limit to a single coordinate system
+Mapsui's Map can be in any coordinate system. If you do not specify a coordinate system in the Map and Layers it assumes they are in the same coordinate system (whatever they are). In this case it only transforms these unspecified 'world-coordinates' to 'screen-coordinates' and nothing more. It is also possible to setup a coordinate transformation system using Map.CRS, DataSource.CRS and Map.Transformation. See [projections](projections.md).
+
+### Full implementation of the feature matrix
+These are some of the feature dimensions:
+- Renderers: WPF and Skia
+- Geometries: Point, LineString, Polygon etc.
+- Operations on Geometries: Distance, Contains.
+- Coordinate projection support
+- Style: fill color, line color, line cap, symbol opacity, symbol scale 
+
+If we choose to support a feature each 'cell' of the multi dimensional matrix should be supported. No surprises for the user. At the moment (v4.1.0) there are holes in the matrix on some point (like differences between the various platforms). 
+
 ## Put effort in keeping things simple
 Growing complexity is one of the biggest problem in software development. To keep this project maintainable we should put effort in keeping the complixity low. Complexity can be caused by clueless spaghetti code but also by [astronaut architectures](https://www.joelonsoftware.com/2008/05/01/architecture-astronauts-take-over/). Keeping things simple is [not easy](https://www.infoq.com/presentations/Simple-Made-Easy) but hard work. It involves thinking up several solutions to your problem weighing the pros and cons and moving it around and upside down to look for even better (simpler) solutions. 
 
 ## Continuous Refactoring
 Mapsui contains some older code. Don't despair. We continuously improve or replace older code. It is a gradual process. We do it step by step. Although the steps are small we have managed to make major changes in the past: from WinForms to WPF, from GDI+ to SL rendering, from .NET Framework to PCL, from PCL to .NET Standard, from WPF rendering to SkiaSharp, from Mapsui geometries to NTS. Taking such steps results in breaking changes. We are aware of this and clearly communicate it with the user. We use [semver](http://semver.org) so breaking changes go in to major version upgrades.
-
