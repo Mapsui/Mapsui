@@ -52,6 +52,18 @@ Github can generate release notes from PR titles, so the PR titles should be wri
 - The title should be self explanatory and the interpretation should not depend on the content of the issue it is referring to.
 - The title should be succinct. It can not always be a full description. The users can read the rest in the PR itself. There is a link to the PR next to the entry.
 
+## Keep the renderer behind and interface
+As of v4 Mapsui has only one renderer, SkiaSharp. Although we have only one renderer and have currently no plans to add others we will keep it behind an interface. There are costs to keeping the abstraction but we keep it because a change could happen again, even though it does not seem likely now. In the past we had to switch renderers many times, a list:
+- System.Drawing
+- System.Drawing for PocketPC
+- Silverlight XAML
+- WPF XAML
+- UWP XAML (could later be merged with WPF XAML)
+- iOS native rendering
+- Android native rendering (this is actually internally using skia)
+- OpenTK (this was not mature enough at that point)
+- SkiaSharp
+
 ## Put effort in keeping things simple
 Growing complexity is one of the biggest problem in software development. To keep this project maintainable we should put effort in keeping the complixity low. Complexity can be caused by clueless spaghetti code but also by [astronaut architectures](https://www.joelonsoftware.com/2008/05/01/architecture-astronauts-take-over/). Keeping things simple is [not easy](https://www.infoq.com/presentations/Simple-Made-Easy) but hard work. It involves thinking up several solutions to your problem weighing the pros and cons and moving it around and upside down to look for even better (simpler) solutions. 
 
