@@ -103,23 +103,23 @@
     <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="[1.6.0,2.0.0)" />
     <PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="[4.0.1,5.0.0)" />
     <PackageVersion Include="Uno.UniversalImageLoader" Version="[1.9.36,2.0.0)" />
-    <PackageVersion Include="Uno.UI" Version="[5.0.0-dev.3182,6.0.0)" />
-    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="[5.0.0-dev.3182,6.0.0)" />
-    <PackageVersion Include="Uno.UI.RemoteControl" Version="[5.0.0-dev.3182,6.0.0)" />
+    <PackageVersion Include="Uno.UI" Version="[5.0.0-dev.3597 ,6.0.0)" />
+    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="[5.0.0-dev.3597 ,6.0.0)" />
+    <PackageVersion Include="Uno.UI.RemoteControl" Version="[5.0.0-dev.3597 ,6.0.0)" />
     <PackageVersion Include="Uno.Resizetizer" Version="[1.0.4, 2.0.0)" />
-    <PackageVersion Include="Uno.UI.Skia.Gtk" Version="[5.0.0-dev.3182,6.0.0)" />
-    <PackageVersion Include="Uno.UI.Skia.Linux.FrameBuffer" Version="[5.0.0-dev.3182,6.0.0)" />
-    <PackageVersion Include="Uno.UI.Skia.Tizen" Version="[5.0.0-dev.3182,6.0.0)" />
-    <PackageVersion Include="Uno.UI.Skia.Wpf" Version="[5.0.0-dev.3182,6.0.0)" />
-    <PackageVersion Include="Uno.UI.WebAssembly" Version="[5.0.0-dev.3182,6.0.0)" />
+    <PackageVersion Include="Uno.UI.Skia.Gtk" Version="[5.0.0-dev.3597 ,6.0.0)" />
+    <PackageVersion Include="Uno.UI.Skia.Linux.FrameBuffer" Version="[5.0.0-dev.3597 ,6.0.0)" />
+    <PackageVersion Include="Uno.UI.Skia.Tizen" Version="[5.0.0-dev.3597 ,6.0.0)" />
+    <PackageVersion Include="Uno.UI.Skia.Wpf" Version="[5.0.0-dev.3597 ,6.0.0)" />
+    <PackageVersion Include="Uno.UI.WebAssembly" Version="[5.0.0-dev.3597 ,6.0.0)" />
     <PackageVersion Include="Uno.Wasm.Bootstrap" Version="[7.0.24,8.0.0)" />
     <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="[7.0.24,8.0.0)" />
-    <PackageVersion Include="Uno.WinUI" Version="[5.0.0-dev.3182,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="[5.0.0-dev.3182,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="[5.0.0-dev.3182,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Wpf" Version="[5.0.0-dev.3182,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.RemoteControl" Version="[5.0.0-dev.3182,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.WebAssembly" Version="[5.0.0-dev.3182,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI" Version="[5.0.0-dev.3597 ,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="[5.0.0-dev.3597 ,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="[5.0.0-dev.3597 ,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.Skia.Wpf" Version="[5.0.0-dev.3597 ,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.RemoteControl" Version="[5.0.0-dev.3597 ,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.WebAssembly" Version="[5.0.0-dev.3597 ,6.0.0)" />
     <PackageVersion Include="Xam.Plugin.Geolocator" Version="[5.0.0-beta,6.0.0)" />
     <PackageVersion Include="Xamarin.Essentials" Version="[1.7.0,2.0.0)" />
     <PackageVersion Include="Xamarin.Forms" Version="[5.0.0.2545,6.0.0.0)" />
