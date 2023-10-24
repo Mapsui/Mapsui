@@ -60,8 +60,8 @@
     <PackageReference Include="Uno.UI.WebAssembly" />
     <PackageReference Include="Uno.UI.RemoteControl" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
-    <PackageReference Include="Uno.Wasm.Bootstrap" VersionOverride="8.0.0-dev.289 " />
-    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" VersionOverride="8.0.0-dev.289 " />
+    <PackageReference Include="Uno.Wasm.Bootstrap" VersionOverride="8.0.0-dev.306 " />
+    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" VersionOverride="8.0.0-dev.306 " />
     <PackageReference Include="SkiaSharp.Views.Uno" />
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
     <PackageReference Include="Microsoft.Windows.Compatibility" VersionOverride="6.0.7" />

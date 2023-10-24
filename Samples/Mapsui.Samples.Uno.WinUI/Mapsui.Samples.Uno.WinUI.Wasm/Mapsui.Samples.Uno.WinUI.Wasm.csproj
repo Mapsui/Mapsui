@@ -18,12 +18,12 @@
 			When building in Release, see https://platform.uno/docs/articles/features/using-il-linker-WebAssembly.html
 		-->
 		<WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
-    <WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
-    
-    <!-- In debug, make builds faster by reducing optimizations -->
-    <!--https://github.com/dotnet/AspNetCore.Docs/issues/24026-->
-    <WasmNativeStrip>false</WasmNativeStrip>
-    <EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
+		<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
+
+		<!-- In debug, make builds faster by reducing optimizations -->
+		<!--https://github.com/dotnet/AspNetCore.Docs/issues/24026-->
+		<WasmNativeStrip>false</WasmNativeStrip>
+		<EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
 		<!-- XAML Resource trimming https://aka.platform.uno/xaml-trimming -->
@@ -67,35 +67,35 @@
 		<PackageReference Include="Uno.WinUI.WebAssembly" />
 		<PackageReference Include="Uno.WinUI.RemoteControl" Condition="'$(Configuration)'=='Debug'" />
 		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
-		<PackageReference Include="Uno.Extensions.Configuration" VersionOverride="3.0.0-dev.2296" />
-		<PackageReference Include="Uno.Extensions.Http" VersionOverride="3.0.0-dev.2296" />
-		<PackageReference Include="Uno.Extensions.Http.Refit" VersionOverride="3.0.0-dev.2296" />
+		<PackageReference Include="Uno.Extensions.Configuration" VersionOverride="3.0.0-dev.2341 " />
+		<PackageReference Include="Uno.Extensions.Http" VersionOverride="3.0.0-dev.2341 " />
+		<PackageReference Include="Uno.Extensions.Http.Refit" VersionOverride="3.0.0-dev.2341 " />
 		<PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" VersionOverride="1.4.0" />
-		<PackageReference Include="Uno.Extensions.Logging.WinUI" VersionOverride="3.0.0-dev.2296" />
-		<PackageReference Include="Uno.Extensions.Logging.Serilog" VersionOverride="3.0.0-dev.2296" />
-		<PackageReference Include="Uno.Extensions.Serialization.Http" VersionOverride="3.0.0-dev.2296" />
-		<PackageReference Include="Uno.Extensions.Serialization.Refit" VersionOverride="3.0.0-dev.2296" />
+		<PackageReference Include="Uno.Extensions.Logging.WinUI" VersionOverride="3.0.0-dev.2341 " />
+		<PackageReference Include="Uno.Extensions.Logging.Serilog" VersionOverride="3.0.0-dev.2341 " />
+		<PackageReference Include="Uno.Extensions.Serialization.Http" VersionOverride="3.0.0-dev.2341 " />
+		<PackageReference Include="Uno.Extensions.Serialization.Refit" VersionOverride="3.0.0-dev.2341 " />
 		<PackageReference Include="Uno.Material.WinUI" VersionOverride="4.0.0-dev.140" />
 		<PackageReference Include="Uno.Toolkit.WinUI.Material" VersionOverride="5.0.0-dev.108" />
 		<PackageReference Include="Uno.Toolkit.WinUI" VersionOverride="5.0.0-dev.108" />
-		<PackageReference Include="Uno.Extensions.Authentication.WinUI" VersionOverride="3.0.0-dev.2296" />
-		<PackageReference Include="Uno.Extensions.Hosting.WinUI" VersionOverride="3.0.0-dev.2296" />
-		<PackageReference Include="Uno.Extensions.Localization.WinUI" VersionOverride="3.0.0-dev.2296" />
-		<PackageReference Include="Uno.Extensions.Navigation.Toolkit.WinUI" VersionOverride="3.0.0-dev.2296" />
-		<PackageReference Include="Uno.Extensions.Navigation.WinUI" VersionOverride="3.0.0-dev.2296" />
-		<PackageReference Include="Uno.Extensions.Reactive.WinUI" VersionOverride="3.0.0-dev.2296" />
+		<PackageReference Include="Uno.Extensions.Authentication.WinUI" VersionOverride="3.0.0-dev.2341 " />
+		<PackageReference Include="Uno.Extensions.Hosting.WinUI" VersionOverride="3.0.0-dev.2341 " />
+		<PackageReference Include="Uno.Extensions.Localization.WinUI" VersionOverride="3.0.0-dev.2341 " />
+		<PackageReference Include="Uno.Extensions.Navigation.Toolkit.WinUI" VersionOverride="3.0.0-dev.2341 " />
+		<PackageReference Include="Uno.Extensions.Navigation.WinUI" VersionOverride="3.0.0-dev.2341 " />
+		<PackageReference Include="Uno.Extensions.Reactive.WinUI" VersionOverride="3.0.0-dev.2341 " />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" />
-    <PackageReference Include="SkiaSharp.Views.Uno.WinUI" />
-    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
+		<PackageReference Include="SkiaSharp.Views.Uno.WinUI" />
+		<PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
 	</ItemGroup>
 
-  <!--Harfbuzz Sharp references Workaround for this issue-->
-  <!--https://github.com/mono/SkiaSharp/issues/1725-->
-  <ItemGroup>
-    <PackageReference Include="HarfBuzzSharp" />
-    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
-    <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\7.3.0\*.a" />
-  </ItemGroup>
+	<!--Harfbuzz Sharp references Workaround for this issue-->
+	<!--https://github.com/mono/SkiaSharp/issues/1725-->
+	<ItemGroup>
+		<PackageReference Include="HarfBuzzSharp" />
+		<PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
+		<NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\7.3.0\*.a" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj" />
