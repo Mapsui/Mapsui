@@ -47,15 +47,15 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
-    <Reference Include="Microsoft.Maui" HintPath="$(SolutionDir)\WorkLoad\net6.0\Maui\Microsoft.Maui.dll">
+    <Reference Include="Microsoft.Maui" HintPath="..\WorkLoad\net6.0\Maui\Microsoft.Maui.dll">
       <SpecificVersion>False</SpecificVersion>
       <Private>false</Private>
     </Reference>
-    <Reference Include="Microsoft.Maui.Controls" HintPath="$(SolutionDir)\WorkLoad\net6.0\Maui\Microsoft.Maui.Controls.dll">
+    <Reference Include="Microsoft.Maui.Controls" HintPath="..\WorkLoad\net6.0\Maui\Microsoft.Maui.Controls.dll">
       <SpecificVersion>False</SpecificVersion>
       <Private>false</Private>
     </Reference>
-    <Reference Include="Microsoft.Maui.Essentials" HintPath="$(SolutionDir)\WorkLoad\net6.0\Maui\Microsoft.Maui.Essentials.dll">
+    <Reference Include="Microsoft.Maui.Essentials" HintPath="..\WorkLoad\net6.0\Maui\Microsoft.Maui.Essentials.dll">
       <SpecificVersion>False</SpecificVersion>
       <Private>false</Private>
     </Reference>
