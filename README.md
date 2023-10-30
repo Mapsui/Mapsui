@@ -1,9 +1,9 @@
 ## Mapsui (pronounced map-su-wii)
 
-Mapsui is a map component to use in apps on platforms like MAUI, Avalonia, Uno, WPF and Blazor. For a list of all supported platforms see the table below. The right most column has a link to the gettings started.
+Mapsui is a map component to use in apps on platforms like MAUI, Avalonia, Uno, WPF and Blazor. For a list of all supported platforms see the table below. The right most column has a link to the guickstart guide.
 
 ## Samples
-After going through the getting started you could look into the samples. There are online samples in Blazor [here](https://mapsui.com/samples/). They are accompanied by a 'source code' tab. All these samples also work on all other platforms. To see the samples of the other platforms you need to clone the Mapsui project (through the 'code' button on the top right). The sln contains a Samples folder with an app for all supported platforms. Set one of them as started project and run. The accompanying code of the samples can be found [here](https://github.com/Mapsui/Mapsui/tree/master/Samples/Mapsui.Samples.Common/Maps).
+After going through the guickstart guide you could look into the samples. There are online samples in Blazor [here](https://mapsui.com/samples/). They are accompanied by a 'source code' tab. All these samples also work on all other platforms. To see the samples of the other platforms you need to clone the Mapsui project (through the 'code' button on the top right). The sln contains a Samples folder with an app for all supported platforms. Set one of them as started project and run. The accompanying code of the samples can be found [here](https://github.com/Mapsui/Mapsui/tree/master/Samples/Mapsui.Samples.Common/Maps).
 
 ## Documentation
 The documentation can be found at [mapsui.com](https://mapsui.com).

@@ -41,6 +41,7 @@ internal class AnimatedPointFeature : PointFeature
 
         Point.X = Start.X + (End.X - Start.X) * progress;
         Point.Y = Start.Y + (End.Y - Start.Y) * progress;
+        Modified();
         return true;
     }
 

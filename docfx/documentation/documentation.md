@@ -10,7 +10,7 @@
 
 ## Documentation guidelines
 - All md files should be in lower case.
-- All md files should be directly in the root of /docfx. Hierachy is created by indenting page references in the toc.md in the documenation folder. By keeping the files itself in the root it is easier to change the hierarchy later one - you do not need to move the files as well - and easier to get contributers to follow the guidelines.
+- All md files should be directly in the root of /docfx. Hierachy is created by indenting page references in the toc.md in the documenation folder. By keeping the files itself in the root it is easier to change the hierarchy later on - you do not need to move the files as well - and easier to get contributers to follow the guidelines.
 - All md files should start with a header one (#) and should have no other header one in that file.
 - All the headers in the toc should be equal to the header one in the file it points to.
 - Mapsui is cased as Mapsui not MapsUI.

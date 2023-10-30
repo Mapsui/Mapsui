@@ -43,7 +43,7 @@ public sealed class MutatingTriangleSample : ISample, ISampleTest, IDisposable
         {
             feature.Geometry = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3).ToArray()));
             // Clear cache for change to show
-            feature.RenderedGeometry.Clear();
+            feature.Modified();
             // Trigger DataChanged notification
             layer.DataHasChanged();
         },

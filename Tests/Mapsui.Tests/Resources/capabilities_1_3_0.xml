@@ -73,7 +73,7 @@
         </Exception>
         <inspire_vs:ExtendedCapabilities>
             <inspire_common:MetadataUrl>
-                <inspire_common:URL>http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=1EBA6F3A-17D6-FE63-C4C8-AD13989714F5&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full</inspire_common:URL>
+                <inspire_common:URL>http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=1EBA6F3A-17D6-FE63-C4C8-AD13989714F5&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full</inspire_common:URL>
                 <inspire_common:MediaType>application/vnd.iso.19139+xml</inspire_common:MediaType>
             </inspire_common:MetadataUrl>
             <inspire_common:SupportedLanguages>
@@ -145,7 +145,7 @@
                 <Identifier authority="NL.TNO">05DE2B8F-C337-CFCA-8EBE-3B39802070F9</Identifier>
                 <MetadataURL type="ISO19115:2003">
                     <Format>text/xml</Format>
-                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=05DE2B8F-C337-CFCA-8EBE-3B39802070F9&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
+                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=05DE2B8F-C337-CFCA-8EBE-3B39802070F9&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
                 </MetadataURL>
                 <Style>
                     <Name>DefaultMapLayerStyle</Name>
@@ -177,7 +177,7 @@
                 <Identifier authority="NL.TNO">63433187-4C8E-C6D9-A198-543E95A06DD5</Identifier>
                 <MetadataURL type="ISO19115:2003">
                     <Format>text/xml</Format>
-                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=63433187-4C8E-C6D9-A198-543E95A06DD5&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
+                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=63433187-4C8E-C6D9-A198-543E95A06DD5&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
                 </MetadataURL>
                 <Style>
                     <Name>DefaultMapLayerStyle</Name>
@@ -209,7 +209,7 @@
                 <Identifier authority="NL.TNO">5D3E3878-EB94-3E38-A967-E4C16FB26C77</Identifier>
                 <MetadataURL type="ISO19115:2003">
                     <Format>text/xml</Format>
-                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=5D3E3878-EB94-3E38-A967-E4C16FB26C77&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
+                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=5D3E3878-EB94-3E38-A967-E4C16FB26C77&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
                 </MetadataURL>
                 <Style>
                     <Name>DefaultMapLayerStyle</Name>
@@ -241,7 +241,7 @@
                 <Identifier authority="NL.TNO">37E9AF99-43C4-AC9C-EBC4-4ACD60CC009A</Identifier>
                 <MetadataURL type="ISO19115:2003">
                     <Format>text/xml</Format>
-                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=37E9AF99-43C4-AC9C-EBC4-4ACD60CC009A&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
+                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=37E9AF99-43C4-AC9C-EBC4-4ACD60CC009A&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
                 </MetadataURL>
                 <Style>
                     <Name>DefaultMapLayerStyle</Name>
@@ -273,7 +273,7 @@
                 <Identifier authority="NL.TNO">6D600A13-5074-EBBB-EDD7-0C153497A109</Identifier>
                 <MetadataURL type="ISO19115:2003">
                     <Format>text/xml</Format>
-                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=6D600A13-5074-EBBB-EDD7-0C153497A109&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
+                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=6D600A13-5074-EBBB-EDD7-0C153497A109&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
                 </MetadataURL>
                 <Style>
                     <Name>DefaultMapLayerStyle</Name>
@@ -305,7 +305,7 @@
                 <Identifier authority="NL.TNO">B0008610-685A-BF20-B0B4-64FC5A58EF44</Identifier>
                 <MetadataURL type="ISO19115:2003">
                     <Format>text/xml</Format>
-                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=B0008610-685A-BF20-B0B4-64FC5A58EF44&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
+                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=B0008610-685A-BF20-B0B4-64FC5A58EF44&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
                 </MetadataURL>
                 <Style>
                     <Name>DefaultMapLayerStyle</Name>
@@ -337,7 +337,7 @@
                 <Identifier authority="NL.TNO">A0AAE8A9-6186-8CD0-A7B1-5A0AAE53D32A</Identifier>
                 <MetadataURL type="ISO19115:2003">
                     <Format>text/xml</Format>
-                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=A0AAE8A9-6186-8CD0-A7B1-5A0AAE53D32A&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
+                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=A0AAE8A9-6186-8CD0-A7B1-5A0AAE53D32A&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
                 </MetadataURL>
                 <Style>
                     <Name>DefaultMapLayerStyle</Name>
@@ -369,7 +369,7 @@
                 <Identifier authority="NL.TNO">12E0BCAB-9DE5-3627-BB78-E7C15A4E9FFE</Identifier>
                 <MetadataURL type="ISO19115:2003">
                     <Format>text/xml</Format>
-                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=12E0BCAB-9DE5-3627-BB78-E7C15A4E9FFE&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
+                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=12E0BCAB-9DE5-3627-BB78-E7C15A4E9FFE&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
                 </MetadataURL>
                 <Style>
                     <Name>DefaultMapLayerStyle</Name>
@@ -401,7 +401,7 @@
                 <Identifier authority="NL.TNO">54743AB2-1EE2-3E1B-E944-17A702C8AA4E</Identifier>
                 <MetadataURL type="ISO19115:2003">
                     <Format>text/xml</Format>
-                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=54743AB2-1EE2-3E1B-E944-17A702C8AA4E&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
+                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=54743AB2-1EE2-3E1B-E944-17A702C8AA4E&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
                 </MetadataURL>
                 <Style>
                     <Name>DefaultMapLayerStyle</Name>
@@ -433,7 +433,7 @@
                 <Identifier authority="NL.TNO">8D3BAC98-C81C-B704-2784-BE2BA5D5983A</Identifier>
                 <MetadataURL type="ISO19115:2003">
                     <Format>text/xml</Format>
-                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=8D3BAC98-C81C-B704-2784-BE2BA5D5983A&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
+                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=8D3BAC98-C81C-B704-2784-BE2BA5D5983A&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
                 </MetadataURL>
                 <Style>
                     <Name>DefaultMapLayerStyle</Name>
@@ -465,7 +465,7 @@
                 <Identifier authority="NL.TNO">E6278C61-1D03-0A7D-BDCB-D68BDA7A5569</Identifier>
                 <MetadataURL type="ISO19115:2003">
                     <Format>text/xml</Format>
-                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=E6278C61-1D03-0A7D-BDCB-D68BDA7A5569&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
+                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=E6278C61-1D03-0A7D-BDCB-D68BDA7A5569&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
                 </MetadataURL>
                 <Style>
                     <Name>DefaultMapLayerStyle</Name>
@@ -497,7 +497,7 @@
                 <Identifier authority="NL.TNO">637BAF2C-D498-0AB6-F8FA-8F7EDA4FF219</Identifier>
                 <MetadataURL type="ISO19115:2003">
                     <Format>text/xml</Format>
-                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=637BAF2C-D498-0AB6-F8FA-8F7EDA4FF219&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
+                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=637BAF2C-D498-0AB6-F8FA-8F7EDA4FF219&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
                 </MetadataURL>
                 <Style>
                     <Name>DefaultMapLayerStyle</Name>
@@ -529,7 +529,7 @@
                 <Identifier authority="NL.TNO">5E029324-42B2-CAC5-3C72-770BF82E52BD</Identifier>
                 <MetadataURL type="ISO19115:2003">
                     <Format>text/xml</Format>
-                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=5E029324-42B2-CAC5-3C72-770BF82E52BD&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
+                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=5E029324-42B2-CAC5-3C72-770BF82E52BD&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
                 </MetadataURL>
                 <Style>
                     <Name>DefaultMapLayerStyle</Name>
@@ -561,7 +561,7 @@
                 <Identifier authority="NL.TNO">95BF3C68-8EE0-193E-584A-DADC70C1E181</Identifier>
                 <MetadataURL type="ISO19115:2003">
                     <Format>text/xml</Format>
-                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;id=95BF3C68-8EE0-193E-584A-DADC70C1E181&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
+                    <OnlineResource xlink:type="simple" xlink:href="http://www.dinoservices.nl/excat-inspire/csw?service=CSW&amp;version=2.0.2&amp;request=getRecordById&amp;featureId=95BF3C68-8EE0-193E-584A-DADC70C1E181&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full"/>
                 </MetadataURL>
                 <Style>
                     <Name>DefaultMapLayerStyle</Name>

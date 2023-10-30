@@ -13,7 +13,7 @@ public static class LayerExtensions
     {
         // The regressions tests are flaky. The line below fixes this. My guess was that layer.Busy
         // was not set yet by the async fetcher, but I am not sure if this actually is the problem.
-        // A better soltion would be to set the Layer.Busy = true immediately in Layer.Refresh data,
+        // A better solution would be to set the Layer.Busy = true immediately in Layer.Refresh data,
         // but we need to be sure that it will be set to false in all scenarios, also when there is 
         // no data, or an exception occurs.
         await Task.Delay(100).ConfigureAwait(false);

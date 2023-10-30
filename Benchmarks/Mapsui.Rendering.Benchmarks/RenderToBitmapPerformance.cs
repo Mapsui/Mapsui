@@ -26,21 +26,38 @@ public class RenderToBitmapPerformance
     private static readonly RegressionMapControl pngMap;
     private static readonly RegressionMapControl webpMap;
     private static readonly RegressionMapControl map;
+    private static readonly RegressionMapControl mapCached;
     private static readonly MapRenderer mapRenderer;
+    private static readonly MapRenderer mapRendererCached;
+    private static readonly MapRenderer mapRendererSkp;
+    private static readonly MapRenderer mapRendererPng;
+    private static readonly MapRenderer mapRendererWebp;
 
     static RenderToBitmapPerformance()
     {
         mapRenderer = new MapRenderer();
-        skpMap = CreateMapControl(RenderFormat.Skp);
-        pngMap = CreateMapControl(RenderFormat.Png);
-        webpMap = CreateMapControl(RenderFormat.WebP);
-        map = CreateMapControl();
+        mapRendererCached = new MapRenderer();
+        mapRendererSkp = new MapRenderer();
+        mapRendererPng = new MapRenderer();
+        mapRendererWebp = new MapRenderer();
+        skpMap = CreateMapControl(RenderFormat.Skp, mapRendererSkp);
+        pngMap = CreateMapControl(RenderFormat.Png, mapRendererPng);
+        webpMap = CreateMapControl(RenderFormat.WebP, mapRendererWebp);
+        map = CreateMapControl(null, mapRenderer);
+        mapCached = CreateMapControl(null, mapRendererCached);
+        skpMap.WaitForLoadingAsync().Wait();
+        pngMap.WaitForLoadingAsync().Wait();
+        webpMap.WaitForLoadingAsync().Wait();
+        map.WaitForLoadingAsync().Wait();
+        mapCached.WaitForLoadingAsync().Wait();
+        // render one time the map so that the sk path are cached.
+        using var bitmap = mapRendererCached.RenderToBitmapStream(mapCached.Map.Navigator.Viewport, mapCached.Map!.Layers, Color.White);
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits", Justification = "Needs to be synchronous")]
-    public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null)
+    public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null, MapRenderer? renderer = null)
     {
-        var mapControl = new RegressionMapControl();
+        var mapControl = new RegressionMapControl(renderer ?? mapRenderer);
         mapControl.SetSize(800, 600);
 
         mapControl.Map = CreateMap(renderFormat);
@@ -77,7 +94,7 @@ public class RenderToBitmapPerformance
         {
             var sqlitePersistentCache = new SqlitePersistentCache("Performance" + renderFormat);
             sqlitePersistentCache.Clear();
-            layer = new RasterizingTileLayer(layer, persistentCache: sqlitePersistentCache, renderFormat: renderFormat.Value);
+            layer = new RasterizingTileLayer(layer, mapRenderer, persistentCache: sqlitePersistentCache, renderFormat: renderFormat.Value);
         }
 
         map.Layers.Add(layer);
@@ -119,9 +136,8 @@ public class RenderToBitmapPerformance
     }
 
     [Benchmark]
-    public async Task RenderDefaultAsync()
+    public void RenderDefault()
     {
-        await map.WaitForLoadingAsync();
         using var bitmap = mapRenderer.RenderToBitmapStream(map.Map.Navigator.Viewport, map.Map!.Layers, Color.White);
 #if DEBUG
         File.WriteAllBytes(@$"{OutputFolder()}\Test.png", bitmap.ToArray());
@@ -129,30 +145,36 @@ public class RenderToBitmapPerformance
     }
 
     [Benchmark]
-    public async Task RenderRasterizingTilingPngAsync()
+    public void RenderDefaultCached()
     {
-        await pngMap.WaitForLoadingAsync();
-        using var bitmap = mapRenderer.RenderToBitmapStream(pngMap.Map.Navigator.Viewport, pngMap.Map!.Layers, Color.White);
+        using var bitmap = mapRendererCached.RenderToBitmapStream(mapCached.Map.Navigator.Viewport, mapCached.Map!.Layers, Color.White);
+#if DEBUG
+        File.WriteAllBytes(@$"{OutputFolder()}\Test.png", bitmap.ToArray());
+#endif
+    }
+
+    [Benchmark]
+    public void RenderRasterizingTilingPng()
+    {
+        using var bitmap = mapRendererPng.RenderToBitmapStream(pngMap.Map.Navigator.Viewport, pngMap.Map!.Layers, Color.White);
 #if DEBUG
         File.WriteAllBytes(@$"{OutputFolder()}\Testpng.png", bitmap.ToArray());
 #endif
     }
 
     [Benchmark]
-    public async Task RenderRasterizingTilingWebPAsync()
+    public void RenderRasterizingTilingWebP()
     {
-        await webpMap.WaitForLoadingAsync();
-        using var bitmap = mapRenderer.RenderToBitmapStream(webpMap.Map.Navigator.Viewport, webpMap.Map!.Layers, Color.White);
+        using var bitmap = mapRendererWebp.RenderToBitmapStream(webpMap.Map.Navigator.Viewport, webpMap.Map!.Layers, Color.White);
 #if DEBUG
         File.WriteAllBytes(@$"{OutputFolder()}\Testwebp.png", bitmap.ToArray());
 #endif
     }
 
     [Benchmark]
-    public async Task RenderRasterizingTilingSkpAsync()
+    public void RenderRasterizingTilingSkp()
     {
-        await skpMap.WaitForLoadingAsync();
-        using var bitmap = mapRenderer.RenderToBitmapStream(skpMap.Map.Navigator.Viewport, skpMap.Map!.Layers, Color.White);
+        using var bitmap = mapRendererSkp.RenderToBitmapStream(skpMap.Map.Navigator.Viewport, skpMap.Map!.Layers, Color.White);
 #if DEBUG
         File.WriteAllBytes(@$"{OutputFolder()}\Testskp.png", bitmap.ToArray());
 #endif

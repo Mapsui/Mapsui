@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Mapsui.Styles;
 
@@ -6,7 +7,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class SymbolCache : ISymbolCache
 {
-    private readonly IDictionary<int, BitmapInfo> _cache = new Dictionary<int, BitmapInfo>();
+    private readonly IDictionary<int, BitmapInfo> _cache = new ConcurrentDictionary<int, BitmapInfo>();
 
     public IBitmapInfo GetOrCreate(int bitmapId)
     {
