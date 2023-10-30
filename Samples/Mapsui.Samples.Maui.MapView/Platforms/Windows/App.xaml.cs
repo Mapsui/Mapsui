@@ -22,7 +22,7 @@ public partial class App : MauiWinUIApplication
     /// </summary>
     public App()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     [SupportedOSPlatform("windows10.0.18362")]

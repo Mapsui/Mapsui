@@ -17,11 +17,11 @@
     <PackageVersion Include="Avalonia.ReactiveUI" Version="[11.0.0,12.0.0)" />
     <PackageVersion Include="Avalonia.Themes.Fluent" Version="[11.0.0,12.0.0)" />
     <PackageVersion Include="Avalonia.Fonts.Inter" Version="[11.0.0,12.0.0)" />
-    <PackageVersion Include="BenchmarkDotNet" Version="[0.13.6,1.0.0)" />
+    <PackageVersion Include="BenchmarkDotNet" Version="[0.13.9,1.0.0)" />
     <PackageVersion Include="BitMiracle.LibTiff.NET" Version="[2.4.649,3.0.0)" />
     <PackageVersion Include="BrotliSharpLib" Version="[0.3.3,1.0.0)" />
-    <PackageVersion Include="BruTile" Version="[5.0.5,6.0)" />
-    <PackageVersion Include="BruTile.MbTiles" Version="[5.0.5,6.0)" />
+    <PackageVersion Include="BruTile" Version="[5.0.6,6.0)" />
+    <PackageVersion Include="BruTile.MbTiles" Version="[5.0.6,6.0)" />
     <PackageVersion Include="coverlet.collector" Version="[3.0.2,4.0.0)" />
     <PackageVersion Include="DotSpatial.Projections" Version="[4.0.656,5.0.0)" />
     <PackageVersion Include="CommandLineParser" Version="[2.9.1,3.0.0)" />
@@ -37,7 +37,7 @@
     <PackageVersion Include="Eto.SkiaDraw" Version="[0.2.0,0.3.0)" />
     <PackageVersion Include="HarfBuzzSharp" Version="[7.3.0,8.0.0.0)" />
     <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="[7.3.0,8.0.0.0)" />
-    <PackageVersion Include="IDisposableAnalyzers" Version="[4.0.6,5.0.0)" />
+    <PackageVersion Include="IDisposableAnalyzers" Version="[4.0.7,5.0.0)" />
     <PackageVersion Include="Mapsui.Android" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.ArcGIS" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Avalonia" Version="4.0.0-beta.8" />

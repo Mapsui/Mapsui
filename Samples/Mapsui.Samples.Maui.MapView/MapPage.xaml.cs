@@ -26,8 +26,8 @@ public sealed partial class MapPage : ContentPage, IDisposable
         InitializeComponent();
 
         // nullable warning workaround
-        var test = this.mapView ?? throw new InvalidOperationException();
-        var test1 = this.info ?? throw new InvalidOperationException();
+        var test = mapView ?? throw new InvalidOperationException();
+        var test1 = info ?? throw new InvalidOperationException();
     }
 
     public MapPage(ISampleBase sample, Func<MapView?, MapClickedEventArgs, bool>? c = null)
@@ -35,8 +35,8 @@ public sealed partial class MapPage : ContentPage, IDisposable
         InitializeComponent();
 
         // nullable warning workaround
-        var test = this.mapView ?? throw new InvalidOperationException();
-        var test1 = this.info ?? throw new InvalidOperationException();
+        var test = mapView ?? throw new InvalidOperationException();
+        var test1 = info ?? throw new InvalidOperationException();
 
         mapView!.RotationLock = false;
         mapView.UnSnapRotationDegrees = 20;
@@ -126,8 +126,8 @@ public sealed partial class MapPage : ContentPage, IDisposable
     {
         try
         {
-            this.gpsCancelation?.Dispose();
-            this.gpsCancelation = new CancellationTokenSource();
+            gpsCancelation?.Dispose();
+            gpsCancelation = new CancellationTokenSource();
 
             await Task.Run(async () =>
             {
@@ -136,7 +136,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
                     var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
                     Application.Current?.Dispatcher.DispatchAsync(async () =>
                     {
-                        var location = await Geolocation.GetLocationAsync(request, this.gpsCancelation.Token).ConfigureAwait(false);
+                        var location = await Geolocation.GetLocationAsync(request, gpsCancelation.Token).ConfigureAwait(false);
                         if (location != null)
                         {
                             MyLocationPositionChanged(location);
@@ -155,7 +155,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
 
     public void StopGPS()
     {
-        this.gpsCancelation?.Cancel();
+        gpsCancelation?.Cancel();
     }
 
     /// <summary>

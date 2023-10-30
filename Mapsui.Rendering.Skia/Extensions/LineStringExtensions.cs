@@ -12,8 +12,9 @@ internal static class LineStringExtensions
     /// <param name="lineString">List of points in Mapsui world coordinates.</param>
     /// <param name="viewport">The Viewport that is used for the conversions.</param>
     /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
+    /// <param name="strokeWidth">stroke Width</param>
     /// <returns></returns>
-    public static SKPath ToSkiaPath(this LineString lineString, Viewport viewport, SKRect clipRect)
+    public static SKPath ToSkiaPath(this LineString lineString, Viewport viewport, SKRect clipRect, float strokeWidth)
     {
         var coordinates = lineString.Coordinates;
 
@@ -26,7 +27,7 @@ internal static class LineStringExtensions
         for (var i = 1; i < vertices.Count; i++)
         {
             // Check each part of LineString, if it is inside or intersects the clipping rectangle
-            var intersect = ClippingFunctions.LiangBarskyClip(vertices[i - 1], vertices[i], clipRect, out var intersectionPoint1, out var intersectionPoint2);
+            var intersect = ClippingFunctions.LiangBarskyClip(vertices[i - 1], vertices[i], SKRect.Inflate(clipRect, strokeWidth, strokeWidth), out var intersectionPoint1, out var intersectionPoint2);
 
             if (intersect != ClippingFunctions.Intersection.CompleteOutside)
             {
