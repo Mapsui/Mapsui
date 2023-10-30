@@ -14,7 +14,16 @@ public class GeometryFeature : BaseFeature, IFeature, IDisposable
     {
     }
 
+    public GeometryFeature(long id) : base(id)
+    {
+    }
+
     public GeometryFeature(GeometryFeature geometryFeature) : base(geometryFeature)
+    {
+        Geometry = geometryFeature.Geometry?.Copy();
+    }
+
+    public GeometryFeature(GeometryFeature geometryFeature, long id) : base(geometryFeature, id)
     {
         Geometry = geometryFeature.Geometry?.Copy();
     }
@@ -32,14 +41,6 @@ public class GeometryFeature : BaseFeature, IFeature, IDisposable
     {
         if (_disposed) return;
         base.Dispose();
-
-        foreach (var keyValuePair in RenderedGeometry)
-        {
-            var disposable = keyValuePair.Value as IDisposable;
-            disposable?.Dispose();
-        }
-        RenderedGeometry.Clear();
-
         _disposed = true;
     }
 

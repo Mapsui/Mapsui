@@ -11,17 +11,29 @@ public class NonCachingVectorCache : IVectorCache
         _symbolCache = symbolCache;
     }
 
-    public T GetOrCreatePaint<T>(Pen? pen, float opacity, Func<Pen?, float, T> toPaint) where T : class
+    public T? GetOrCreatePaint<T, TPen>(TPen? pen, float opacity, Func<TPen?, float, T> toPaint) where T : class?
     {
         return toPaint(pen, opacity);
     }
 
-    public T GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint) where T : class
+    public T? GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint) where T : class?
     {
         return toPaint(brush, opacity, rotation, _symbolCache);
     }
 
-    public TPath GetOrCreatePath<TPath, TGeometry>(Viewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath) where TPath : class where TGeometry : class
+    public T GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toSkRect)
+    {
+        return toSkRect(param);
+    }
+
+    public TPath GetOrCreatePath<TPath, TFeature, TGeometry>(
+        Viewport viewport,
+        TFeature feature,
+        TGeometry geometry,
+        float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath)
+        where TPath : class
+        where TGeometry : class
+        where TFeature : class, IFeature
     {
         return toPath(geometry, viewport, lineWidth);
     }

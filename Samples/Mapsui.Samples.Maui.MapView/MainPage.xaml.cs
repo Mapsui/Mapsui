@@ -24,7 +24,7 @@ public partial class MainPage : ContentPage
         InitializeComponent();
 
         // nullable warning workaround"
-        var test = this.listView ?? throw new InvalidOperationException();
+        var test = listView ?? throw new InvalidOperationException();
 
         allSamples = AllSamples.GetSamples() ?? new List<ISampleBase>();
 

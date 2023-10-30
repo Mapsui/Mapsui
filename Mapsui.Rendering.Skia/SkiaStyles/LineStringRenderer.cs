@@ -1,11 +1,12 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
-using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Nts;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
+using ViewportExtensions = Mapsui.Rendering.Skia.Extensions.ViewportExtensions;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -13,24 +14,24 @@ public static class LineStringRenderer
 {
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle? vectorStyle,
-        LineString lineString, float opacity, IVectorCache? vectorCache = null)
+        IFeature feature, LineString lineString, float opacity, IVectorCache? vectorCache)
     {
         if (vectorStyle == null)
             return;
 
-        SKPaint paint;
+        SKPaint? paint;
         SKPath path;
-        if (vectorCache == null || layer is IModifyFeatureLayer)
+        var lineWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1);
+        if (vectorCache == null)
         {
             paint = CreateSkPaint(vectorStyle.Line, opacity);
-            path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);
+            path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds, lineWidth);
         }
         else
         {
             paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
-
-            var lineWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1);
-            path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, viewport, _) => geometry.ToSkiaPath(viewport, viewport.ToSkiaRect()));
+            path = vectorCache.GetOrCreatePath(viewport, feature, lineString, lineWidth,
+                (geometry, vp, _) => geometry.ToSkiaPath(vp, vp.ToSkiaRect(), lineWidth));
         }
 
         canvas.DrawPath(path, paint);

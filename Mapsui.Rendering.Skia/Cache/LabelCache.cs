@@ -9,9 +9,9 @@ namespace Mapsui.Rendering.Skia.Cache;
 
 public class LabelCache : ILabelCache
 {
-    private readonly Dictionary<Font, object> _cacheTypeface = new();
+    private readonly ConcurrentDictionary<Font, object> _cacheTypeface = new();
 
-    private readonly Dictionary<(string? Text, Font Font, Brush? BackColor, Color ForeColor, float Opacity), IBitmapInfo> _labelCache = new();
+    private readonly ConcurrentDictionary<(string? Text, Font Font, Brush? BackColor, Color ForeColor, float Opacity), IBitmapInfo> _labelCache = new();
 
     public T GetOrCreateTypeface<T>(Font font, Func<Font, T> createTypeFace)
         where T : class
