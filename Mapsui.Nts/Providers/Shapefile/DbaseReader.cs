@@ -10,6 +10,8 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using Mapsui.Features;
+using Mapsui.Layers;
 using Mapsui.Nts.Providers.Shapefile.Indexing;
 
 #pragma warning disable SYSLIB0001
@@ -40,12 +42,13 @@ internal sealed class DbaseReader : IDisposable
     private BinaryReader? _br;
     private bool _headerIsParsed;
 
-    public DbaseReader(string filename)
+    public DbaseReader(string filename, int? id = null)
     {
         if (!File.Exists(filename))
             throw new FileNotFoundException($"Could not find file \"{filename}\"");
         _filename = filename;
         _headerIsParsed = false;
+        _id = id ?? BaseLayer.NextId();
     }
 
     private bool _isOpen;
@@ -385,6 +388,7 @@ internal sealed class DbaseReader : IDisposable
 
     private Encoding? _encoding;
     private Encoding _fileEncoding = Encoding.UTF7;
+    private readonly int _id;
 
     /// <summary>
     /// Gets or sets the <see cref="System.Text.Encoding"/> used for parsing strings from the DBase DBF file.
@@ -410,7 +414,7 @@ internal sealed class DbaseReader : IDisposable
             throw new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture));
         _fs!.Seek(_headerLength + oid * _recordLength, 0);
 
-        var dr = new GeometryFeature();
+        var dr = new GeometryFeature(FeatureId.CreateId(_id, oid));
 
         if (_br!.ReadChar() == '*') return null; // is record marked deleted?
 

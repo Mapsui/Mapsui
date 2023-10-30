@@ -15,7 +15,7 @@ namespace Mapsui.Layers;
 /// There are two different symbols for own loaction: one is used when there isn't a change in position (still),
 /// and one is used, if the position changes (moving).
 /// </remarks>
-public class MyLocationLayer : BaseLayer, IModifyFeatureLayer, IDisposable
+public class MyLocationLayer : BaseLayer, IDisposable
 {
     private readonly Map _map;
     private PointFeature _feature;
@@ -507,6 +507,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer, IDisposable
         if (!_myLocation.Equals(newLocation))
         {
             _myLocation = newLocation;
+            _feature.Modified();
             _feature.Point.X = _myLocation.X;
             _feature.Point.Y = _myLocation.Y;
             modified = true;

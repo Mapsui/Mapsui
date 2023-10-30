@@ -19,17 +19,17 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         switch (feature)
         {
             case PointFeature pointFeature:
-                DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, symbolStyle, renderCache);
+                DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, symbolStyle, renderCache, feature);
                 break;
             case GeometryFeature geometryFeature:
                 switch (geometryFeature.Geometry)
                 {
                     case GeometryCollection collection:
                         foreach (var point in GetPoints(collection))
-                            DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache);
+                            DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache, feature);
                         break;
                     case Point point:
-                        DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache);
+                        DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache, feature);
                         break;
                 }
                 break;
@@ -53,15 +53,15 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    private bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, ISymbolCache symbolCache)
+    private bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderCache renderCache, IFeature feature)
     {
         if (symbolStyle.SymbolType == SymbolType.Image)
         {
-            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, symbolCache);
+            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderCache);
         }
         else
         {
-            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle);
+            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderCache);
         }
     }
 
@@ -142,7 +142,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    public static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle)
+    public static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IVectorCache vectorCache)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
@@ -163,32 +163,41 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             canvas.RotateDegrees((float)rotation);
         }
 
+        var linePaint = vectorCache.GetOrCreatePaint(symbolStyle.Outline, opacity, CreateLinePaint);
+        var fillPaint = vectorCache.GetOrCreatePaint(symbolStyle.Fill, opacity, CreateFillPaint);
+        var path = vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath);
+
+        if (fillPaint != null && fillPaint.Color.Alpha != 0) canvas.DrawPath(path, fillPaint);
+        if (linePaint != null && linePaint.Color.Alpha != 0) canvas.DrawPath(path, linePaint);
+        
+        canvas.Restore();
+
+        return true;
+    }
+
+    private static SKPath CreatePath(SymbolType symbolType)
+    {
         var width = (float)SymbolStyle.DefaultWidth;
         var halfWidth = width / 2;
         var halfHeight = (float)SymbolStyle.DefaultHeight / 2;
+        var skPath = new SKPath();
 
-        using var fillPaint = CreateFillPaint(symbolStyle.Fill, opacity);
-        using var linePaint = CreateLinePaint(symbolStyle.Outline, opacity);
-
-        switch (symbolStyle.SymbolType)
+        switch (symbolType)
         {
             case SymbolType.Ellipse:
-                DrawCircle(canvas, 0, 0, halfWidth, fillPaint, linePaint);
+                skPath.AddCircle(0, 0, halfWidth);
                 break;
             case SymbolType.Rectangle:
-                var rect = new SKRect(-halfWidth, -halfHeight, halfWidth, halfHeight);
-                DrawRect(canvas, rect, fillPaint, linePaint);
+                skPath.AddRect(new SKRect(-halfWidth, -halfHeight, halfWidth, halfHeight));
                 break;
             case SymbolType.Triangle:
-                DrawTriangle(canvas, 0, 0, width, fillPaint, linePaint);
+                TrianglePath(skPath, 0, 0, width);
                 break;
             default: // Invalid value
                 throw new ArgumentOutOfRangeException();
         }
 
-        canvas.Restore();
-
-        return true;
+        return skPath;
     }
 
     private static SKPaint? CreateLinePaint(Pen? outline, float opacity)
@@ -218,23 +227,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         };
     }
 
-    private static void DrawCircle(SKCanvas canvas, float x, float y, float radius, SKPaint? fillColor,
-      SKPaint? lineColor)
-    {
-        if (fillColor != null && fillColor.Color.Alpha != 0) canvas.DrawCircle(x, y, radius, fillColor);
-        if (lineColor != null && lineColor.Color.Alpha != 0) canvas.DrawCircle(x, y, radius, lineColor);
-    }
-
-    private static void DrawRect(SKCanvas canvas, SKRect rect, SKPaint? fillColor, SKPaint? lineColor)
-    {
-        if (fillColor != null && fillColor.Color.Alpha != 0) canvas.DrawRect(rect, fillColor);
-        if (lineColor != null && lineColor.Color.Alpha != 0) canvas.DrawRect(rect, lineColor);
-    }
-
-    /// <summary>
-    /// Equilateral triangle of side 'sideLength', centered on the same point as if a circle of diameter 'sideLength' was there
-    /// </summary>
-    private static void DrawTriangle(SKCanvas canvas, float x, float y, float sideLength, SKPaint? fillColor, SKPaint? lineColor)
+    /// Triangle of side 'sideLength', centered on the same point as if a circle of diameter 'sideLength' was there
+    private static void TrianglePath(SKPath path, float x, float y, float sideLength)
     {
         var altitude = Math.Sqrt(3) / 2.0 * sideLength;
         var inradius = altitude / 3.0;
@@ -247,14 +241,10 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var rightX = x + sideLength * 0.5;
         var rightY = y + inradius;
 
-        using var path = new SKPath();
         path.MoveTo(topX, (float)topY);
         path.LineTo((float)leftX, (float)leftY);
         path.LineTo((float)rightX, (float)rightY);
         path.Close();
-
-        if ((fillColor != null) && fillColor.Color.Alpha != 0) canvas.DrawPath(path, fillColor);
-        if ((lineColor != null) && lineColor.Color.Alpha != 0) canvas.DrawPath(path, lineColor);
     }
 
     bool IFeatureSize.NeedsFeature => false;

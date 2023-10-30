@@ -71,7 +71,7 @@ internal class BitmapRenderer
         if (Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon)
         {
             // Unfortunately for opacity we need to set the Color and the Color
-            // is part of the Paint object. So we need to recreate the paint on
+            // is part of the LinePaint object. So we need to recreate the paint on
             // every draw. 
             dispose = true;
             return new SKPaint
