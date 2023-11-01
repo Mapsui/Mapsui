@@ -75,9 +75,9 @@
 		<PackageReference Include="Uno.Extensions.Logging.Serilog" VersionOverride="3.0.10" />
 		<PackageReference Include="Uno.Extensions.Serialization.Http" VersionOverride="3.0.10" />
 		<PackageReference Include="Uno.Extensions.Serialization.Refit" VersionOverride="3.0.10" />
-		<PackageReference Include="Uno.Material.WinUI" VersionOverride="4.0.0-dev.140" />
-		<PackageReference Include="Uno.Toolkit.WinUI.Material" VersionOverride="5.0.0-dev.108" />
-		<PackageReference Include="Uno.Toolkit.WinUI" VersionOverride="5.0.0-dev.108" />
+		<PackageReference Include="Uno.Material.WinUI" VersionOverride="4.0.4" />
+		<PackageReference Include="Uno.Toolkit.WinUI.Material" VersionOverride="5.0.15" />
+		<PackageReference Include="Uno.Toolkit.WinUI" VersionOverride="5.0.15" />
 		<PackageReference Include="Uno.Extensions.Authentication.WinUI" VersionOverride="3.0.10" />
 		<PackageReference Include="Uno.Extensions.Hosting.WinUI" VersionOverride="3.0.10" />
 		<PackageReference Include="Uno.Extensions.Localization.WinUI" VersionOverride="3.0.10" />
