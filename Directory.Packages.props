@@ -95,7 +95,7 @@
     <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="[2.1.6,3.0.0)" />
     <PackageVersion Include="Svg.Skia" Version="[1.0.0.3,2.0.0)" />
     <PackageVersion Include="System.Linq.Async" Version="[6.0.1,7.0.0)" />
-    <PackageVersion Include="System.Text.Encoding.CodePages" Version="[7.0.0,8.0.0)" />
+    <PackageVersion Include="System.Text.Encoding.CodePages" Version="[8.0.0-rc.2.23479.6,9.0.0)" />
     <PackageVersion Include="System.Memory" Version="[4.5.5,5.0.0)" />
     <PackageVersion Include="Topten.RichTextKit" Version="[0.4.166,1.0.0)" />
     <PackageVersion Include="Uno.Core" Version="[4.0.1,5.0.0)" />
