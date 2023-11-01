@@ -25,6 +25,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SkiaSharp.Views" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" />
+    <PackageReference Include="SkiaSharp.NativeAssets.iOS" />
   </ItemGroup>
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
 </Project>
