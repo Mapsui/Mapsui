@@ -7,7 +7,7 @@
     <OptimizePNGs>False</OptimizePNGs>
     <MtouchUseLlvm>False</MtouchUseLlvm>
     <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
-    <PublishTrimmed>true</PublishTrimmed>
+    <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
