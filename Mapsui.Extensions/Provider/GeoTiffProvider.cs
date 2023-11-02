@@ -160,7 +160,7 @@ public class GeoTiffProvider : IProvider, IDisposable
 
         // get a pointer to the buffer, and give it to the bitmap
         var ptr = GCHandle.Alloc(raster, GCHandleType.Pinned);
-        bitmap.InstallPixels(info, ptr.AddrOfPinnedObject(), info.RowBytes, null, (addr, ctx) => ptr.Free(), null);
+        bitmap.InstallPixels(info, ptr.AddrOfPinnedObject(), info.RowBytes, (_, _) => ptr.Free());
 
         // read the image into the memory buffer
         if (!tifImg.ReadRGBAImageOriented(width, height, raster, Orientation.TOPLEFT))
