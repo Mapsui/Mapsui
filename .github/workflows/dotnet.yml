@@ -170,10 +170,9 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
-   - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
-      with:
-       sdk-version: 31
+    - name: Install Android SDK
+      run: |
+        echo "y" | sudo $ANDROID_HOME/tools/bin/sdkmanager --install "platforms;android-31" "build-tools;31.0.0"
     - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
     # macos image needs Visual Studio for Mac installed
