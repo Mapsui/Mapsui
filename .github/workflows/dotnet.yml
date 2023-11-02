@@ -170,10 +170,10 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
-    - name: Setup Android SDK
+   - name: Setup Android SDK
       uses: android-actions/setup-android@v3
       with:
-        sdk-version: 31
+       sdk-version: 31
     - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
     # macos image needs Visual Studio for Mac installed
