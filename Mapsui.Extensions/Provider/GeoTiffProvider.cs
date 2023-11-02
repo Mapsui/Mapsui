@@ -81,8 +81,11 @@ public class GeoTiffProvider : IProvider, IDisposable
         var img = ConvertTiffToSKBitmap(new MemoryStream(File.ReadAllBytes(tiffPath)));
         try
         {
-            var imageStream = new MemoryStream();
+            if (img == null)
+                throw new NullReferenceException(nameof(img));
 
+            var imageStream = new MemoryStream();
+            
             if (noDataColors != null)
             {
 #pragma warning disable IDISP001 // dispose created
@@ -98,7 +101,7 @@ public class GeoTiffProvider : IProvider, IDisposable
         }
         finally
         {
-            img.Dispose();
+            img?.Dispose();
         }
     }
 
