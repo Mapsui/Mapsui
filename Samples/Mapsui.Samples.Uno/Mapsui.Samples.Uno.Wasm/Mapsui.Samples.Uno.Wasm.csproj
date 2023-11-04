@@ -73,6 +73,7 @@
     <PackageReference Include="HarfBuzzSharp" />
     <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
     <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\2.8.2\*.a" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" VersionOverride="6.0.7" />
   </ItemGroup>
 
   <ItemGroup>    
