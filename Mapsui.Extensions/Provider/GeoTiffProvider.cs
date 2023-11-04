@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using BitMiracle.LibTiff.Classic;
 using Mapsui.Layers;
@@ -80,8 +81,11 @@ public class GeoTiffProvider : IProvider, IDisposable
         var img = ConvertTiffToSKBitmap(new MemoryStream(File.ReadAllBytes(tiffPath)));
         try
         {
-            var imageStream = new MemoryStream();
+            if (img == null)
+                throw new NullReferenceException(nameof(img));
 
+            var imageStream = new MemoryStream();
+            
             if (noDataColors != null)
             {
 #pragma warning disable IDISP001 // dispose created
@@ -97,7 +101,7 @@ public class GeoTiffProvider : IProvider, IDisposable
         }
         finally
         {
-            img.Dispose();
+            img?.Dispose();
         }
     }
 
@@ -136,43 +140,40 @@ public class GeoTiffProvider : IProvider, IDisposable
         return tiffFileProperties;
     }
 
-    public static SKBitmap ConvertTiffToSKBitmap(MemoryStream tifImage)
+    public static SKBitmap? ConvertTiffToSKBitmap(MemoryStream tifImage)
     {
-        SKColor[] pixels;
-        int width, height;
-        // open a Tiff stored in the memory stream, and grab its pixels
-        using (var tifImg = Tiff.ClientOpen("in-memory", "r", tifImage, new TiffStream()))
+        // Used this optimization
+        // https://stackoverflow.com/questions/50312937/skiasharp-tiff-support
+
+        // open a TIFF stored in the stream
+        using var tifImg = Tiff.ClientOpen("in-memory", "r", tifImage, new TiffStream());
+        // read the dimensions
+        var width = tifImg.GetField(TiffTag.IMAGEWIDTH)[0].ToInt();
+        var height = tifImg.GetField(TiffTag.IMAGELENGTH)[0].ToInt();
+
+        // create the bitmap
+        var bitmap = new SKBitmap();
+        var info = new SKImageInfo(width, height);
+
+        // create the buffer that will hold the pixels
+        var raster = new int[width * height];
+
+        // get a pointer to the buffer, and give it to the bitmap
+        var ptr = GCHandle.Alloc(raster, GCHandleType.Pinned);
+        bitmap.InstallPixels(info, ptr.AddrOfPinnedObject(), info.RowBytes, (_, _) => ptr.Free());
+
+        // read the image into the memory buffer
+        if (!tifImg.ReadRGBAImageOriented(width, height, raster, Orientation.TOPLEFT))
         {
-            var value = tifImg.GetField(TiffTag.IMAGEWIDTH);
-            width = value[0].ToInt();
-
-            value = tifImg.GetField(TiffTag.IMAGELENGTH);
-            height = value[0].ToInt();
-
-            // Read the image into the memory buffer 
-            var raster = new int[width * height];
-            if (!tifImg.ReadRGBAImageOriented(width, height, raster, Orientation.TOPLEFT))
-            {
-                // Not a valid TIF image.
-            }
-
-            // store the pixels
-            pixels = new SKColor[width * height];
-            for (var y = 0; y < height; y++)
-            {
-                for (var x = 0; x < width; x++)
-                {
-                    var arrayOffset = y * width + x;
-                    var rgba = raster[arrayOffset];
-                    pixels[arrayOffset] = new SKColor((byte)Tiff.GetR(rgba), (byte)Tiff.GetG(rgba), (byte)Tiff.GetB(rgba), (byte)Tiff.GetA(rgba));
-                }
-            }
+            // not a valid TIF image.
+            return null;
         }
 
-        var bitmap = new SKBitmap(width, height)
+        // swap the red and blue because SkiaSharp may differ from the tiff
+        if (SKImageInfo.PlatformColorType == SKColorType.Bgra8888)
         {
-            Pixels = pixels,
-        };
+            SKSwizzle.SwapRedBlue(ptr.AddrOfPinnedObject(), raster.Length);
+        }
 
         return bitmap;
     }
