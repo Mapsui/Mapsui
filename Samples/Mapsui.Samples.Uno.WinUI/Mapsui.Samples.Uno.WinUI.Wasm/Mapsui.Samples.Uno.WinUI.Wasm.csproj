@@ -62,7 +62,6 @@
 	<ItemGroup>
 		<PackageReference Include="Uno.Resizetizer" />
 		<PackageReference Include="Microsoft.Windows.Compatibility" VersionOverride="8.0.0-rc.2.23479.10" />
-		<PackageReference Include="Microsoft.Windows.Compatibility" VersionOverride="7.0.5" />
 		<PackageReference Include="Uno.Wasm.Bootstrap" />
 		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" />
 		<PackageReference Include="Uno.WinUI.WebAssembly" />
@@ -86,18 +85,6 @@
 		<PackageReference Include="Uno.Extensions.Navigation.WinUI" VersionOverride="3.0.10" />
 		<PackageReference Include="Uno.Extensions.Reactive.WinUI" VersionOverride="3.0.10" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" />
-		<PackageReference Include="SkiaSharp.Views.Uno.WinUI" />
-		<PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
-	</ItemGroup>
-
-	<!--Harfbuzz Sharp references Workaround for this issue-->
-	<!--https://github.com/mono/SkiaSharp/issues/1725-->
-	<ItemGroup>
-		<PackageReference Include="HarfBuzzSharp" />
-		<PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
-		<NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\7.3.0\*.a" />
-	</ItemGroup>
-
 	</ItemGroup>
 
 	<ItemGroup>
