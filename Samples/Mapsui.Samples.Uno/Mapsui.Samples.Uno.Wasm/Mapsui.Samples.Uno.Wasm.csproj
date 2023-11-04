@@ -73,6 +73,9 @@
     <PackageReference Include="HarfBuzzSharp" />
     <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
     <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\7.3.0\*.a" />
+    <PackageReference Include="Uno.Wasm.Bootstrap" VersionOverride="3.3.1" />
+    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" VersionOverride="3.3.1" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" VersionOverride="6.0.7" />
   </ItemGroup>
 
   <ItemGroup>    

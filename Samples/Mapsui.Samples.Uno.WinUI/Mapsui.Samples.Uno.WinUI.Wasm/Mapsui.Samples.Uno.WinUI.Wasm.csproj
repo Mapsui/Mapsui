@@ -62,6 +62,7 @@
 	<ItemGroup>
 		<PackageReference Include="Uno.Resizetizer" />
 		<PackageReference Include="Microsoft.Windows.Compatibility" VersionOverride="8.0.0-rc.2.23479.10" />
+		<PackageReference Include="Microsoft.Windows.Compatibility" VersionOverride="7.0.5" />
 		<PackageReference Include="Uno.Wasm.Bootstrap" />
 		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" />
 		<PackageReference Include="Uno.WinUI.WebAssembly" />
@@ -95,6 +96,8 @@
 		<PackageReference Include="HarfBuzzSharp" />
 		<PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
 		<NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\7.3.0\*.a" />
+	</ItemGroup>
+
 	</ItemGroup>
 
 	<ItemGroup>
