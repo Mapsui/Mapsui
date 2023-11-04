@@ -7,7 +7,7 @@ public class Program
     {
 #if DEBUG
         var benchmark = new RenderToBitmapPerformance();
-        benchmark.RenderDefaultCachedAsync();
+        benchmark.RenderDefaultCached();
 #else
         var summary = BenchmarkRunner.Run(typeof(Program).Assembly);
 #endif
