@@ -182,7 +182,7 @@ public abstract class BaseLayer : ILayer
     public virtual IReadOnlyList<double> Resolutions { get; } = new List<double>();
 
     /// <inheritdoc />
-    public virtual bool IsMapInfoLayer { get; set; }
+    public bool IsMapInfoLayer { get; set; }
 
     /// <inheritdoc />
     public abstract IEnumerable<IFeature> GetFeatures(MRect box, double resolution);

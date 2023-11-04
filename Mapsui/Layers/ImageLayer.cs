@@ -189,24 +189,6 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
         }
     }
 
-    public override bool IsMapInfoLayer
-    {
-        get
-        {
-            if (base.IsMapInfoLayer)
-            {
-                return this.DataSource is ILayerFeatureInfo;
-            }
-
-            return false;
-        }
-
-        set
-        {
-            base.IsMapInfoLayer = value;
-        }
-    }
-
     protected override void Dispose(bool disposing)
     {
         if (disposing)
