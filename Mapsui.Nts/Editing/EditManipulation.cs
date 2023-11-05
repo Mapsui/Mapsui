@@ -22,7 +22,7 @@ public class EditManipulation
 
     public static int MinPixelsMovedForDrag { get; set; } = 4;
 
-    public async Task<bool> Manipulate(MouseState mouseState, MPoint screenPosition,
+    public async Task<bool> ManipulateAsync(MouseState mouseState, MPoint screenPosition,
         EditManager editManager, IMapControl mapControl, bool isShiftDown)
     {
         switch (mouseState)

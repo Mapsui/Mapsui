@@ -28,13 +28,19 @@ public class EditingWidget : Widget, IWidgetExtended
 
         if (args.LeftButton)
         {
-            EditManipulation.Manipulate(MouseState.Dragging, screenPosition,
-                EditManager, MapControl, args.Shift);
+            Catch.Exceptions(async () =>
+            {
+                await EditManipulation.ManipulateAsync(MouseState.Dragging, screenPosition,
+                    EditManager, MapControl, args.Shift);
+            });
         }
         else
         {
-            EditManipulation.Manipulate(MouseState.Moving, screenPosition,
-                EditManager, MapControl, args.Shift);
+            Catch.Exceptions(async () =>
+            {
+                await EditManipulation.ManipulateAsync(MouseState.Moving, screenPosition,
+                    EditManager, MapControl, args.Shift);
+            });
         }
 
         return false;
@@ -52,7 +58,7 @@ public class EditingWidget : Widget, IWidgetExtended
         {
             Catch.Exceptions(async () =>
             {
-                MapControl.Map.Navigator.PanLock = await EditManipulation.Manipulate(MouseState.DoubleClick,
+                MapControl.Map.Navigator.PanLock = await EditManipulation.ManipulateAsync(MouseState.DoubleClick,
                     position, EditManager, MapControl, args.Shift);
             });
            
@@ -61,7 +67,7 @@ public class EditingWidget : Widget, IWidgetExtended
 
         Catch.Exceptions(async () =>
         {
-            MapControl.Map.Navigator.PanLock = await EditManipulation.Manipulate(MouseState.Down,
+            MapControl.Map.Navigator.PanLock = await EditManipulation.ManipulateAsync(MouseState.Down,
                 position, EditManager, MapControl, args.Shift);
 
         });
@@ -77,7 +83,7 @@ public class EditingWidget : Widget, IWidgetExtended
         if (MapControl.Map != null)
             Catch.Exceptions(async () =>
             {
-                MapControl.Map.Navigator.PanLock = await EditManipulation.Manipulate(MouseState.Up,
+                MapControl.Map.Navigator.PanLock = await EditManipulation.ManipulateAsync(MouseState.Up,
                     position, EditManager, MapControl, args.Shift);
 
             });
