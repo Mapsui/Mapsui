@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
@@ -13,7 +12,7 @@ using Mapsui.Widgets;
 #pragma warning disable IDISP001 // Dispose created
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
-namespace Mapsui.Samples.Common.Maps.Callouts;
+namespace Mapsui.Samples.Common.Maps.Info;
 
 public class GeoJsonInfoSample : ISample
 {
