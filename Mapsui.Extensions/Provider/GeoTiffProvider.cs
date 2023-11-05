@@ -85,7 +85,7 @@ public class GeoTiffProvider : IProvider, IDisposable
                 throw new NullReferenceException(nameof(img));
 
             var imageStream = new MemoryStream();
-            
+
             if (noDataColors != null)
             {
 #pragma warning disable IDISP001 // dispose created

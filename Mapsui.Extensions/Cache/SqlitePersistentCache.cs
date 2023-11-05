@@ -255,7 +255,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 
         return (bytes, NoCompression);
     }
-    
+
     private byte[]? Decompress(byte[]? bytes, string? compression)
     {
         if (bytes == null || string.IsNullOrEmpty(compression) || string.Equals(compression, NoCompression, StringComparison.InvariantCultureIgnoreCase))
