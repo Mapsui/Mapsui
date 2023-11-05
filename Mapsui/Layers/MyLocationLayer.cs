@@ -60,7 +60,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// MyLocation is always in the center of the map
     /// </summary>
     public bool IsCentered
-    { 
+    {
         get => _isCentered;
         set
         {
@@ -354,7 +354,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
                             _locStyle.SymbolRotation = endRotation;
                             map.Refresh();
                         }
-                      
+
                         return new AnimationResult<Map>(map, false);
                     });
 

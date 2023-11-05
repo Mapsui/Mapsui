@@ -5,7 +5,7 @@ namespace Mapsui.Widgets.MouseCoordinatesWidget;
 public class MouseCoordinatesWidget : TextBox, IWidgetExtended
 {
     public Map Map { get; }
-    
+
     public MouseCoordinatesWidget(Map map)
     {
         HorizontalAlignment = HorizontalAlignment.Center;
