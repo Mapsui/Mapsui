@@ -302,7 +302,7 @@ jobs:
       run: dotnet restore Mapsui.NoMsBuild.slnf  
     # dotnet format whitespace
     - name: check whitespace formatting
-      run: 
+      run: |
         dotnet format whitespace  Mapsui.sln --verbosity normal --verify-no-changes
         dotnet format style  Mapsui.sln --verbosity normal --verify-no-changes
         # The analyzers still have errors be we are close to fixing all of them
