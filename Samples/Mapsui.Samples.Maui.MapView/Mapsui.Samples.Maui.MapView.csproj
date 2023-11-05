@@ -1,79 +1,85 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Mapsui.Samples.Maui</RootNamespace>
-    <UseMaui>true</UseMaui>
-    <SingleProject>true</SingleProject>
-    <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
-    <PublishedTrimmed>false</PublishedTrimmed>
-    <DefineConstants>__MAUI__</DefineConstants>
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>Mapsui.Samples.Maui</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
+		<PublishedTrimmed>false</PublishedTrimmed>
+		<DefineConstants>__MAUI__</DefineConstants>
 
-    <!-- Display name -->
-    <ApplicationTitle>Mapsui.Samples.Maui</ApplicationTitle>
+		<!-- Display name -->
+		<ApplicationTitle>Mapsui.Samples.Maui</ApplicationTitle>
 
-    <!-- App Identifier -->
-    <ApplicationId>com.companyname.Mapsui.Samples.Maui</ApplicationId>
-    <ApplicationIdGuid>d53f7693-f872-4a4b-b90a-387a5eeea531</ApplicationIdGuid>
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.Mapsui.Samples.Maui</ApplicationId>
+		<ApplicationIdGuid>d53f7693-f872-4a4b-b90a-387a5eeea531</ApplicationIdGuid>
 
-    <!-- Required for C# Hot Reload -->
-    <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
+		<!-- Required for C# Hot Reload -->
+		<UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
 
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 
-    <!-- Don't display nuget warnings -->
-    <NoWarn>NU1703</NoWarn>
-  </PropertyGroup>
+		<!-- Don't display nuget warnings -->
+		<NoWarn>NU1703</NoWarn>
+		<AndroidManifest>Platforms\Android\AndroidManifest.xml</AndroidManifest>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <!-- App Icon -->
-    <MauiIcon Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" Color="#512BD4" />
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" Color="#512BD4" />
 
-    <!-- Splash Screen -->
-    <MauiSplashScreen Include="Resources\appiconfg.svg" Color="#512BD4" />
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\appiconfg.svg" Color="#512BD4" />
 
-    <!-- Images -->
-    <MauiImage Include="Resources\Images\*" />
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
 
-    <!-- Custom Fonts -->
-    <MauiFont Include="Resources\Fonts\*" />
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
 
-    <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-  </ItemGroup>
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <MauiAsset Remove="Resources\Raw\AboutAssets.txt" />
-  </ItemGroup>
+	<ItemGroup>
+		<MauiAsset Remove="Resources\Raw\AboutAssets.txt" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <AndroidResource Include="Resources\Raw\AboutAssets.txt" />
-  </ItemGroup>
-     
-  <ItemGroup>
-      <PackageReference Include="SkiaSharp" />
-      <PackageReference Include="SkiaSharp.HarfBuzz" />
-      <PackageReference Include="SkiaSharp.Views.Maui.Controls" />
-      <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" />
-    </ItemGroup>
-  
-    <ItemGroup>	  	  
-        <ProjectReference Include="..\..\Mapsui.Nts\Mapsui.Nts.csproj" />
-        <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
-        <ProjectReference Include="..\..\Mapsui.UI.Maui\Mapsui.UI.Maui.csproj" />
-        <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
-        <ProjectReference Include="..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
-        <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
-        <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
-      </ItemGroup>
-  
-    <Import Project="..\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems" Label="Shared" />
-  
-  </Project>
+	<ItemGroup>
+		<AndroidResource Include="Resources\Raw\AboutAssets.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="SkiaSharp" />
+		<PackageReference Include="SkiaSharp.HarfBuzz" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$(TargetFramework.StartsWith('net8.0'))">
+		<PackageReference Include="Microsoft.Maui.Controls" VersionOverride="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" VersionOverride="$(MauiVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Mapsui.Nts\Mapsui.Nts.csproj" />
+		<ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
+		<ProjectReference Include="..\..\Mapsui.UI.Maui\Mapsui.UI.Maui.csproj" />
+		<ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
+		<ProjectReference Include="..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
+		<ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
+		<ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
+	</ItemGroup>
+
+	<Import Project="..\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems" Label="Shared" />
+
+</Project>

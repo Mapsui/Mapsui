@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net7.0-windows10.0.19041.0</TargetFramework>
+		<TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
 		<TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
 		<RootNamespace>UnoWinUIQuickStart</RootNamespace>
 		<Platforms>x86;x64;arm64</Platforms>
@@ -11,6 +11,8 @@
 		<EnableMsixTooling>true</EnableMsixTooling>
     <!--Workaround for this https://github.com/microsoft/WindowsAppSDK/issues/3548-->
     <EnableCoreMrtTooling Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">false</EnableCoreMrtTooling>
+    <RuntimeIdentifiers>win10-x64;win10-x86;win10-arm64</RuntimeIdentifiers>
+    <UseRidGraph>true</UseRidGraph>
   </PropertyGroup>
 	<PropertyGroup>
 		<!-- Bundles the WinAppSDK binaries (Uncomment for unpackaged builds) -->
@@ -27,8 +29,8 @@
 	<ItemGroup>
 		<PackageReference Include="Uno.Resizetizer" />
 		<PackageReference Include="Uno.WinUI" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" VersionOverride="[1.3.230502000,2.0.0)"  />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" VersionOverride="10.0.22621.756" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" VersionOverride="[1.4.230913002,2.0.0)" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" VersionOverride="10.0.25936-preview" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" />
 		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />

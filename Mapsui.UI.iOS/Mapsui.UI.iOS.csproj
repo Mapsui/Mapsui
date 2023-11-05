@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <TargetFrameworks>net6.0-ios15.4;net7.0-ios16.0</TargetFrameworks>
+    <TargetFrameworks>net7.0-ios16.0;net8.0-ios</TargetFrameworks>
     <ImplicitUsings>true</ImplicitUsings>
     <PackageId>Mapsui.iOS</PackageId>
     <!--<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>-->
@@ -25,6 +25,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SkiaSharp.Views" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" />
+    <PackageReference Include="SkiaSharp.NativeAssets.iOS" />
   </ItemGroup>
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
 </Project>

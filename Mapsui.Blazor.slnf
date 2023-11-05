@@ -8,6 +8,7 @@
       "Mapsui.Rendering.Skia\\Mapsui.Rendering.Skia.csproj",
       "Mapsui.Tiling\\Mapsui.Tiling.csproj",
       "Mapsui.UI.Blazor\\Mapsui.UI.Blazor.csproj",
+      "Mapsui.UI.Forms\\Mapsui.UI.Forms.csproj",
       "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
       "Mapsui\\Mapsui.csproj",
       "Samples\\Mapsui.Samples.Blazor\\Mapsui.Samples.Blazor.csproj",

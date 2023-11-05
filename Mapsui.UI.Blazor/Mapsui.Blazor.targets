@@ -1,7 +1,12 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)'=='net7.0'">
         <WasmExtraFilesToDeploy Include="$(MSBuildThisFileDirectory)/wwwroot/**/*.*" />
         <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\3.1.7\libHarfBuzzSharp.a" />
         <NativeFileReference Include="$(SkiaSharpStaticLibraryPath)\3.1.7\libSkiaSharp.a" />
     </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)'=='net8.0'">
+		<WasmExtraFilesToDeploy Include="$(MSBuildThisFileDirectory)/wwwroot/**/*.*" />
+		<NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\3.1.34\simd,mt\libHarfBuzzSharp.a" />
+		<NativeFileReference Include="$(SkiaSharpStaticLibraryPath)\3.1.34\simd,mt\libSkiaSharp.a" />
+	</ItemGroup>
 </Project>

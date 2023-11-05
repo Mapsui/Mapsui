@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -14,8 +14,9 @@
 
   <ItemGroup>
     <PackageReference Include="SkiaSharp.Views.Blazor" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" VersionOverride="8.0.0-rc.1.23421.29" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" VersionOverride="8.0.0-rc.1.23421.29" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" VersionOverride="8.0.0-rc.1.23421.29" PrivateAssets="all"/>
 		<!--still needed for direct project reference the nuget package of blazor doesn't need this anymore-->
 		<NativeFileReference Include="libHarfBuzzSharp.a" />
 	  <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />

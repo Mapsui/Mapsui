@@ -1,6 +1,7 @@
 using System;
 using GLib;
 using Uno.UI.Runtime.Skia;
+using Uno.UI.Runtime.Skia.Gtk;
 
 namespace Mapsui.Samples.Uno.Skia.Gtk;
 
@@ -14,7 +15,7 @@ class Program
             expArgs.ExitApplication = true;
         };
 
-        var host = new GtkHost(() => new App(), args);
+        var host = new GtkHost(() => new App());
 
         host.Run();
     }
