@@ -22,10 +22,10 @@ public enum SkiaRenderMode
 internal class MapControlGestureListener : GestureDetector.SimpleOnGestureListener
 {
     public EventHandler<GestureDetector.FlingEventArgs>? Fling;
-#if NET7_0_OR_GREATER
+#if NET7_0
     public override bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
 #else
-    public override bool OnFling(MotionEvent? e1, MotionEvent? e2, float velocityX, float velocityY)
+    public override bool OnFling(MotionEvent? e1, MotionEvent e2, float velocityX, float velocityY)
 #endif
     {
         if (Fling != null)

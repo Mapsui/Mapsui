@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
-    <!--Windows does not work because of this https://github.com/dotnet/maui/issues/6529-->
-	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0</TargetFrameworks>
     <UseMaui>true</UseMaui>
     <SingleProject>true</SingleProject>
     <DefineConstants>__MAUI__</DefineConstants>
@@ -45,6 +44,27 @@
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="SkiaSharp.Views.Maui.Controls" />
     <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
+    <Reference Include="Microsoft.Maui" HintPath="..\WorkLoad\net6.0\Maui\Microsoft.Maui.dll">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.Maui.Controls" HintPath="..\WorkLoad\net6.0\Maui\Microsoft.Maui.Controls.dll">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.Maui.Essentials" HintPath="..\WorkLoad\net6.0\Maui\Microsoft.Maui.Essentials.dll">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>false</Private>
+    </Reference>
+    <PackageReference Include="Microsoft.Maui.Graphics" VersionOverride="6.0.501" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net8.0'">
+    <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="[$(MauiVersion),9.0.0)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" VersionOverride="[$(MauiVersion),9.0.0)" />
   </ItemGroup>
 
   <ItemGroup>

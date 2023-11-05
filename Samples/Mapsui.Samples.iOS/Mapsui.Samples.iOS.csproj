@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0-ios</TargetFramework>
+    <TargetFramework>net8.0-ios</TargetFramework>
     <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
@@ -8,6 +8,7 @@
     <MtouchUseLlvm>False</MtouchUseLlvm>
     <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
     <PublishTrimmed>true</PublishTrimmed>
+	  <MtouchLink>None</MtouchLink>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />

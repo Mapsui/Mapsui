@@ -28,14 +28,14 @@ jobs:
       with:
         nuget-version: latest    
     # .Net 7 update     
-    - name: Setup .NET 7 SDK
+    - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
-         include-prerelease: false
-    - name: install android wasm-tools wasm-tools-net6
-      run: dotnet workload install android wasm-tools wasm-tools-net6    
+           8.0.x
+         include-prerelease: true
+    - name: install android wasm-tools
+      run: dotnet workload install android wasm-tools
     - name: Restore dependencies Mapsui.Linux
       run: dotnet restore Mapsui.Linux.slnf       
     # Samples Build     
@@ -93,14 +93,14 @@ jobs:
       with:
         nuget-version: latest
     # .Net 7 update     
-    - name: Setup .NET 7 SDK
+    - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
-         include-prerelease: false
+           8.0.x
+         include-prerelease: true
     - name: Setup Xcode version 14.2
-      uses: maxim-lobanov/setup-xcode@v1.5.1
+      uses: maxim-lobanov/setup-xcode@v1.6.0
       with:
         xcode-version: '14.2'
     # macos image needs Visual Studio for Mac installed
@@ -116,7 +116,7 @@ jobs:
     # Builds that need XCode 14.0
     # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
     - name: Setup Xcode version 14.0
-      uses: maxim-lobanov/setup-xcode@v1.5.1
+      uses: maxim-lobanov/setup-xcode@v1.6.0
       with:
         xcode-version: '14.0'
     - name: Build Mapsui.Samples.Forms.Mac
@@ -148,10 +148,10 @@ jobs:
       uses: NuGet/setup-nuget@v1.1.1      
       with:
         nuget-version: latest
-    - name: Setup Xcode version 14.3
-      uses: maxim-lobanov/setup-xcode@v1.5.1
+    - name: Setup Xcode version 15.0
+      uses: maxim-lobanov/setup-xcode@v1.6.0
       with:
-        xcode-version: '14.3' 
+        xcode-version: '15.0' 
     - name: Setup .NET 6 SDK
       uses: actions/setup-dotnet@v3
       with:
@@ -159,14 +159,14 @@ jobs:
            6.0.x
          include-prerelease: false
     # .Net 7 update     
-    - name: Setup .NET 7 SDK
+    - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
-         include-prerelease: false
-    - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
+           8.0.x
+         include-prerelease: true
+    - name: install maui macos android ios maccatalyst wasm-tools
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     # macos image needs Visual Studio for Mac installed
     #- name: Restore dependencies Legacy
     #  run: nuget restore Mapsui.Mac.Legacy.sln   
@@ -217,7 +217,7 @@ jobs:
     # Builds that need XCode 14.0
     # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
     #- name: Setup Xcode version 14.0
-    #  uses: maxim-lobanov/setup-xcode@v1.5.1
+    #  uses: maxim-lobanov/setup-xcode@v1.6.0
     #  with:
     #    xcode-version: '14.0'
     #- name: Build Mapsui.Samples.Forms.Mac
@@ -276,12 +276,12 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-nuget15-
     # .Net 7 update     
-    - name: Setup .NET 7 SDK
+    - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
-         include-prerelease: false
+           8.0.x
+         include-prerelease: true
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.1.1
       with:
@@ -290,8 +290,8 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
       with:
         vs-prerelease: true
-    - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
+    - name: install maui macos android ios maccatalyst wasm-tools
+      run: Scripts/InstallDependencies.cmd
     #- name: uno-check install
     #  run: dotnet tool install -g uno.check
     #- name: uno-check fix
