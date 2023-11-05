@@ -556,7 +556,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
     /// <param name="numTaps">Number of clickes/taps</param>
     /// <returns>True, if something done </returns>
-    private async Task<MapInfoEventArgs?> CreateMapInfoEventArgs(
+    private async Task<MapInfoEventArgs?> CreateMapInfoEventArgsAsync(
         MPoint? screenPosition,
         MPoint? startScreenPosition, 
         int numTaps)

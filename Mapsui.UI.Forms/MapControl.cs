@@ -803,7 +803,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 return;
             }
         
-            var eventReturn = await CreateMapInfoEventArgs(screenPosition, screenPosition, numOfTaps);
+            var eventReturn = await CreateMapInfoEventArgsAsync(screenPosition, screenPosition, numOfTaps);
 
             if (eventReturn?.Handled == true)
             {
@@ -841,7 +841,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 return;
             }
 
-            var infoToInvoke = await CreateMapInfoEventArgs(screenPosition, screenPosition, 1);
+            var infoToInvoke = await CreateMapInfoEventArgsAsync(screenPosition, screenPosition, 1);
 
             if (infoToInvoke?.Handled == true)
             {

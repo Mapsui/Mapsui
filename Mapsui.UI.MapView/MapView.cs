@@ -726,13 +726,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                     if (args.Handled)
                     {
                         e.Handled = true;
-                        return;
                     }
-
-                    // Event isn't handled up to now.
-                    // Than look, what we could do.
-
-                    return;
                 }
             }
         }

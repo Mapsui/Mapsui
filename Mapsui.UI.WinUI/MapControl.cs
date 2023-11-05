@@ -152,7 +152,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         Catch.Exceptions(async () =>
         {
-            OnInfo(await CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
+            OnInfo(await CreateMapInfoEventArgsAsync(tapPosition, tapPosition, 2));
         });
     }
 
@@ -169,7 +169,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         Catch.Exceptions(async () =>
         {
-            OnInfo(await CreateMapInfoEventArgs(tabPosition, tabPosition, 1));
+            OnInfo(await CreateMapInfoEventArgsAsync(tabPosition, tabPosition, 1));
         });
     }
 
