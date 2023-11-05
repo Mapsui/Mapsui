@@ -50,7 +50,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         PointerWheelChanged += MapControlMouseWheel;
 
         DoubleTapped += OnDoubleTapped;
-    
+
         KeyDown += MapControl_KeyDown;
         KeyUp += MapControl_KeyUp;
     }
