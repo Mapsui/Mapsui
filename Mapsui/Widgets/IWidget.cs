@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Mapsui.Widgets;
+﻿namespace Mapsui.Widgets;
 
 public interface IWidget
 {
