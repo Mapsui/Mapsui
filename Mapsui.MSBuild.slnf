@@ -20,9 +20,7 @@
       "Samples\\Mapsui.Samples.Forms\\Mapsui.Samples.Forms.UWP\\Mapsui.Samples.Forms.UWP.csproj",
       "Samples\\Mapsui.Samples.Forms\\Mapsui.Samples.Forms.WPF\\Mapsui.Samples.Forms.WPF.csproj",
       "Samples\\Mapsui.Samples.Forms\\Mapsui.Samples.Forms.iOS\\Mapsui.Samples.Forms.iOS.csproj",
-      "Samples\\Mapsui.Samples.MapView\\Mapsui.Samples.MapView.shproj",
-      "Samples\\Mapsui.Samples.Uno\\Mapsui.Samples.Uno.Skia.Tizen\\Mapsui.Samples.Uno.Skia.Tizen.csproj",
-      "Samples\\Mapsui.Samples.Uno\\Mapsui.Samples.Uno.UWP\\Mapsui.Samples.Uno.UWP.csproj"
+      "Samples\\Mapsui.Samples.MapView\\Mapsui.Samples.MapView.shproj"
     ]
   }
 }
