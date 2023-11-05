@@ -238,7 +238,10 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 #pragma warning disable CS0612 // Type or member is obsolete
             HandleFeatureInfo(e);
 #pragma warning restore CS0612 // Type or member is obsolete
-            OnInfo(CreateMapInfoEventArgs(_mousePosition, _mousePosition, 1));
+            Catch.Exceptions(async () =>
+            {
+                OnInfo(await CreateMapInfoEventArgsAsync(_mousePosition, _mousePosition, 1));
+            } );
         }
     }
 
@@ -269,7 +272,11 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             e.Handled = true;
             return;
         }
-        OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
+
+        Catch.Exceptions(async () =>
+        {
+            OnInfo(await CreateMapInfoEventArgsAsync(tapPosition, tapPosition, 2));
+        });
     }
 
     public override void Render(DrawingContext context)

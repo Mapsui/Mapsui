@@ -266,7 +266,10 @@ public partial class MapControl : ComponentBase, IMapControl
             {
                 var location = e.ToLocation(_clientRect);
                 if (IsClick(location, _downMousePosition))
-                    OnInfo(CreateMapInfoEventArgs(location, _downMousePosition, 1));
+                    Catch.Exceptions(async () =>
+                    {
+                        OnInfo(await CreateMapInfoEventArgsAsync(location, _downMousePosition, 1));
+                    });
             }
 
             _downMousePosition = null;

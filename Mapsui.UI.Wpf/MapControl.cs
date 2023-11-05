@@ -205,7 +205,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #pragma warning disable CS0612 // Type or member is obsolete
                 HandleFeatureInfo(e);
 #pragma warning restore CS0612 // Type or member is obsolete
-                OnInfo(CreateMapInfoEventArgs(mousePosition, _downMousePosition, e.ClickCount));
+                Catch.Exceptions(async () =>
+                {
+                    OnInfo(await CreateMapInfoEventArgsAsync(mousePosition, _downMousePosition, e.ClickCount));
+                });
+                
             }
         }
 
@@ -262,7 +266,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             // todo: Pass the touchDown position. It needs to be set at touch down.
 
             // todo: Figure out how to do a number of taps for WPF
-            OnInfo(CreateMapInfoEventArgs(touchPosition, touchPosition, 1));
+            Catch.Exceptions(async () =>
+            {
+                OnInfo(await CreateMapInfoEventArgsAsync(touchPosition, touchPosition, 1));
+            });
+            
         }
     }
 
