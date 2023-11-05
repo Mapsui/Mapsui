@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -195,7 +196,15 @@ public class MapRenderer : IRenderer
         WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
     }
 
+    [Obsolete("Use GetMapInfoAsync")]
     public MapInfo? GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+    {
+#pragma warning disable VSTHRD002 // synchronously waiting
+        return GetMapInfoAsync(x, y, viewport, layers, margin).Result;
+#pragma warning restore VSTHRD002 // synchronously waiting
+    }
+
+    public async Task<MapInfo?> GetMapInfoAsync(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
     {
         // todo: use margin to increase the pixel area
         // todo: We will need to select on style instead of layer
@@ -269,9 +278,7 @@ public class MapRenderer : IRenderer
                 foreach (var infoLayer in featureInfoLayers)
                 {
                     var layer = ((ILayer)infoLayer);
-#pragma warning disable VSTHRD002 // synchronously waiting
-                    var features = infoLayer.GetFeatureInfoAsync(viewport, x, y).Result;
-#pragma warning restore VSTHRD002
+                    var features = await infoLayer.GetFeatureInfoAsync(viewport, x, y);
                     foreach (var it in features)
                     {
                         foreach (var feature in it.Value)
