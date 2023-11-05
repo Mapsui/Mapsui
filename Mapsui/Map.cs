@@ -90,14 +90,20 @@ public class Map : INotifyPropertyChanged, IDisposable
         {
             foreach (var widget in this.oldWidgets)
             {
-                widget.PropertyChanged -= WidgetPropertyChanged;
+                if (widget is INotifyPropertyChanged propertyChanged)
+                {
+                    propertyChanged.PropertyChanged -= WidgetPropertyChanged;
+                }
             }
 
             this.oldWidgets = this.Widgets.ToArray();
 
             foreach (var widget in this.Widgets)
             {
-                widget.PropertyChanged += WidgetPropertyChanged;
+                if (widget is INotifyPropertyChanged propertyChanged)
+                {
+                    propertyChanged.PropertyChanged += WidgetPropertyChanged;
+                }
             }
         }
     }

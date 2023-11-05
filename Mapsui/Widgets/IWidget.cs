@@ -2,7 +2,7 @@
 
 namespace Mapsui.Widgets;
 
-public interface IWidget : INotifyPropertyChanged
+public interface IWidget
 {
     HorizontalAlignment HorizontalAlignment { get; set; }
     VerticalAlignment VerticalAlignment { get; set; }
