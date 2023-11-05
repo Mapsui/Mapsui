@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using Mapsui.Cache;
+﻿using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers.Wms;
-using System.Threading.Tasks;
-using Mapsui.Extensions;
 using Mapsui.Styles;
 using Mapsui.Widgets;
 
-namespace Mapsui.Samples.Common.Maps.Callouts;
+namespace Mapsui.Samples.Common.Maps.Info;
 
 public class WmsInfoSample : ISample
 {
