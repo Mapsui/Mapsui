@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -12,7 +13,7 @@ public class RasterStyle : IStyle
     private const int MinimumTilesToKeep = 32;
     private long _lastIteration;
     private readonly IDictionary<object, IBitmapInfo?> _tileCache =
-        new Dictionary<object, IBitmapInfo?>(new IdentityComparer<object>());
+        new ConcurrentDictionary<object, IBitmapInfo?>(new IdentityComparer<object>());
 
     public double MinVisible { get; set; } = 0;
     public double MaxVisible { get; set; } = double.MaxValue;
