@@ -631,7 +631,7 @@ public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-         switch (propertyName)
+        switch (propertyName)
         {
             case nameof(Position):
                 if (Feature != null)

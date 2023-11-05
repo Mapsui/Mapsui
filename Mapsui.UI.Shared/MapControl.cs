@@ -389,7 +389,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         catch (Exception exception)
         {
             Logger.Log(LogLevel.Warning, $"Unexpected exception in {nameof(Map_DataChanged)}", exception);
-        }        
+        }
     }
     // ReSharper disable RedundantNameQualifier - needed for iOS for disambiguation
 
@@ -463,7 +463,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #else
 
     private Map _map = new Map();
-    
+
     /// <summary>
     /// Map holding data for which is shown in this MapControl
     /// </summary>
@@ -558,7 +558,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <returns>True, if something done </returns>
     private MapInfoEventArgs? CreateMapInfoEventArgs(
         MPoint? screenPosition,
-        MPoint? startScreenPosition, 
+        MPoint? startScreenPosition,
         int numTaps)
     {
         if (screenPosition == null || startScreenPosition == null)
@@ -605,7 +605,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var extendedWidgets = GetExtendedWidgets();
         if (extendedWidgets.Count == 0)
             return false;
-        
+
         var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
         foreach (var extendedWidget in extendedWidgets)
         {
@@ -622,7 +622,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         if (HandleTouched(position, leftButton, clickCount, shift))
         {
-            result = true; 
+            result = true;
         }
 
         return result;
@@ -651,7 +651,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         return false;
     }
-    
+
     private bool HandleTouched(MPoint position, bool leftButton, int clickCount, bool shift)
     {
         var touchableWidgets = GetTouchableWidgets();

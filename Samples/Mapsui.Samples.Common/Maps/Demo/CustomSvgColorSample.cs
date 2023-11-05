@@ -79,7 +79,7 @@ public class CustomSvgStyleSample : ISample
     {
         var bitmapPath = "Images.arrow.svg";
         using var bitmapData = EmbeddedResourceLoader.Load(bitmapPath, typeof(SvgSample));
-        var skPicture = SvgLoader.ToSKPicture(bitmapData, ToSystemDrawingColor(GetTypeColor(type))) 
+        var skPicture = SvgLoader.ToSKPicture(bitmapData, ToSystemDrawingColor(GetTypeColor(type)))
             ?? throw new Exception($"Failed to load bitmap: {bitmapPath}");
         return BitmapRegistry.Instance.Register(skPicture);
     }
@@ -93,7 +93,7 @@ public class CustomSvgStyleSample : ISample
         _ => throw new Exception("Unknown type"),
     };
 
-    public static System.Drawing.Color ToSystemDrawingColor(Color color) => 
+    public static System.Drawing.Color ToSystemDrawingColor(Color color) =>
         System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
 
     private double CalculateAngle(MPoint point1, MPoint point2)

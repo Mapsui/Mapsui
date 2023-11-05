@@ -14,7 +14,7 @@ namespace Mapsui.Rendering.Benchmarks;
 [MemoryDiagnoser]
 [MinColumn, MaxColumn, MeanColumn, MedianColumn]
 public class RenderSkCanvasPerformance : IDisposable
-{           
+{
     private readonly SKPaint _paint;
     private readonly SKPath _path;
     private readonly SKImageInfo _info;
@@ -41,7 +41,7 @@ public class RenderSkCanvasPerformance : IDisposable
 
         _bitmap = new SKBitmap(_info);
         _canvas = new SKCanvas(_bitmap);
-        
+
         _infoTransformed = new SKImageInfo(1000, 1000)
         {
             AlphaType = SKAlphaType.Premul
@@ -60,13 +60,13 @@ public class RenderSkCanvasPerformance : IDisposable
         {
             _path.MoveTo(i, i);
         }
-        
+
         _pathOffCanvas = new SKPath();
         for (int i = -5000; i < 6000; i++)
         {
             _pathOffCanvas.MoveTo(i, i);
         }
-        
+
         _pathLessPoints = new SKPath();
         for (int i = 0; i < 1000; i += 10)
         {
@@ -86,13 +86,13 @@ public class RenderSkCanvasPerformance : IDisposable
     {
         _canvas.DrawPath(_path, _paint);
     }
-    
+
     [Benchmark]
     public void RenderDirectLessPoints()
     {
         _canvas.DrawPath(_pathLessPoints, _paint);
     }
-    
+
     [Benchmark]
     public void RenderRotationCanvasEveryTime()
     {
@@ -100,7 +100,7 @@ public class RenderSkCanvasPerformance : IDisposable
         _canvas.DrawPath(_path, _paint);
         _canvas.ResetMatrix();
     }
-    
+
     [Benchmark]
     public void RenderScaleCanvasEveryTime()
     {
@@ -108,7 +108,7 @@ public class RenderSkCanvasPerformance : IDisposable
         _canvas.DrawPath(_path, _paint);
         _canvas.ResetMatrix();
     }
-    
+
     [Benchmark]
     public void RenderTranslationCanvasEveryTime()
     {
@@ -116,7 +116,7 @@ public class RenderSkCanvasPerformance : IDisposable
         _canvas.DrawPath(_path, _paint);
         _canvas.ResetMatrix();
     }
-    
+
     [Benchmark]
     public void RenderTranslationScaleCanvasEveryTime()
     {
@@ -124,13 +124,13 @@ public class RenderSkCanvasPerformance : IDisposable
         _canvas.DrawPath(_path, _paint);
         _canvas.ResetMatrix();
     }
-    
+
     [Benchmark]
     public void RenderRotationCanvasOnce()
     {
         _canvasTransformed.DrawPath(_path, _paint);
     }
-    
+
     [Benchmark]
     public void RenderRotationPath()
     {
@@ -138,7 +138,7 @@ public class RenderSkCanvasPerformance : IDisposable
         _canvas.DrawPath(_path, _paint);
         _path.Transform(_reverseRotationMatrix);
     }
-    
+
     [Benchmark]
     public void RenderOffCanvas()
     {
