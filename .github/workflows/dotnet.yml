@@ -300,6 +300,9 @@ jobs:
       run: nuget restore Mapsui.MsBuild.slnf      
     - name: Restore dependencies (dotnet)
       run: dotnet restore Mapsui.NoMsBuild.slnf  
+    # dotnet format whitespace
+    - name: check whitespace formatting
+      run: dotnet format Mapsui.sln --verbosity normal --verify-no-changes
     # Test Build
     - name: Mapsui.Nts.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Nts.Tests/Mapsui.Nts.Tests.csproj
