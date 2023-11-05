@@ -12,7 +12,6 @@
       "Mapsui.UI.Eto\\Mapsui.UI.Eto.csproj",
       "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
       "Mapsui.UI.Uno.WinUI\\Mapsui.UI.Uno.WinUI.csproj",
-      "Mapsui.UI.Uno\\Mapsui.UI.Uno.csproj",
       "Mapsui\\Mapsui.csproj",
       "Samples\\Avalonia\\Mapsui.Samples.Avalonia.Desktop\\Mapsui.Samples.Avalonia.Desktop.csproj",
       "Samples\\Avalonia\\Mapsui.Samples.Avalonia.V0\\Mapsui.Samples.Avalonia.V0.csproj",

@@ -17,7 +17,6 @@
       "Mapsui.UI.Maui\\Mapsui.UI.Maui.csproj",
       "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
       "Mapsui.UI.Uno.WinUI\\Mapsui.UI.Uno.WinUI.csproj",
-      "Mapsui.UI.Uno\\Mapsui.UI.Uno.csproj",
       "Mapsui.UI.WinUI\\Mapsui.UI.WinUI.csproj",
       "Mapsui.UI.Wpf\\Mapsui.UI.Wpf.csproj",
       "Mapsui.UI.iOS\\Mapsui.UI.iOS.csproj",
