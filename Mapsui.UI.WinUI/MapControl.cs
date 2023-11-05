@@ -150,7 +150,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             return; 
         }
 
-        OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
+        Catch.Exceptions(async () =>
+        {
+            OnInfo(await CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
+        });
     }
 
     public bool ShiftPressed { get; set; }
@@ -164,7 +167,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             return; 
         }
 
-        OnInfo(CreateMapInfoEventArgs(tabPosition, tabPosition, 1));
+        Catch.Exceptions(async () =>
+        {
+            OnInfo(await CreateMapInfoEventArgs(tabPosition, tabPosition, 1));
+        });
     }
 
     private static Rectangle CreateSelectRectangle()

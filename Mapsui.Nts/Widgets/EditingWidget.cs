@@ -1,4 +1,5 @@
-﻿using Mapsui.Nts.Editing;
+﻿using Mapsui.Extensions;
+using Mapsui.Nts.Editing;
 using Mapsui.UI;
 using Mapsui.Widgets;
 
@@ -49,14 +50,22 @@ public class EditingWidget : Widget, IWidgetExtended
 
         if (args.ClickCount > 1)
         {
-            MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(MouseState.DoubleClick,
-                position, EditManager, MapControl, args.Shift);
+            Catch.Exceptions(async () =>
+            {
+                MapControl.Map.Navigator.PanLock = await EditManipulation.Manipulate(MouseState.DoubleClick,
+                    position, EditManager, MapControl, args.Shift);
+            });
+           
             return true;
         }
 
-        MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(MouseState.Down,
-            position, EditManager, MapControl, args.Shift);
+        Catch.Exceptions(async () =>
+        {
+            MapControl.Map.Navigator.PanLock = await EditManipulation.Manipulate(MouseState.Down,
+                position, EditManager, MapControl, args.Shift);
 
+        });
+       
         return false;
     }
 
@@ -66,17 +75,24 @@ public class EditingWidget : Widget, IWidgetExtended
             return false;
         
         if (MapControl.Map != null)
-            MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(MouseState.Up,
-                position, EditManager, MapControl, args.Shift);
+            Catch.Exceptions(async () =>
+            {
+                MapControl.Map.Navigator.PanLock = await EditManipulation.Manipulate(MouseState.Up,
+                    position, EditManager, MapControl, args.Shift);
 
+            });
+         
         if (EditManager.SelectMode)
         {
-            var infoArgs = MapControl.GetMapInfo(position);
-            if (infoArgs?.Feature != null)
+            Catch.Exceptions(async () =>
             {
-                var currentValue = (bool?)infoArgs.Feature["Selected"] == true;
-                infoArgs.Feature["Selected"] = !currentValue; // invert current value
-            }
+                var infoArgs = await MapControl.GetMapInfoAsync(position);
+                if (infoArgs?.Feature != null)
+                {
+                    var currentValue = (bool?)infoArgs.Feature["Selected"] == true;
+                    infoArgs.Feature["Selected"] = !currentValue; // invert current value
+                }
+            });
         }
 
         return false;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Rendering;
 using Mapsui.Utilities;
@@ -52,7 +53,7 @@ public interface IMapControl
     /// </summary>
     /// <param name="screenPosition">Screen position to check for widgets and features</param>
     /// <param name="margin">An optional extra margin around the feature to enlarge the hit area.</param>
-    MapInfo? GetMapInfo(MPoint screenPosition, int margin = 0);
+    Task<MapInfo?> GetMapInfoAsync(MPoint screenPosition, int margin = 0);
 
     /// <summary>
     /// Create a snapshot form map as PNG image

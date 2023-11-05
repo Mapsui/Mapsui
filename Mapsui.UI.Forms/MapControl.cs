@@ -376,13 +376,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                         if (_numOfTaps > 1)
                         {
                             if (!e.Handled)
-                                e.Handled = OnDoubleTapped(location, _numOfTaps);
+                                OnDoubleTapped(location, _numOfTaps, e);
                         }
                         else
                         {
                             if (!e.Handled)
                             {
-                                e.Handled = OnSingleTapped(location);
+                                OnSingleTapped(location, e);
                             }
                         }
                         _numOfTaps = 1;
@@ -787,46 +787,78 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// </summary>
     /// <param name="screenPosition">First clicked/touched position on screen</param>
     /// <param name="numOfTaps">Number of taps on map (2 is a double click/tap)</param>
+    /// <param name="e">Sk Touch Event Args</param>
     /// <returns>True, if the event is handled</returns>
-    private bool OnDoubleTapped(MPoint screenPosition, int numOfTaps)
+    private async void OnDoubleTapped(MPoint screenPosition, int numOfTaps, SKTouchEventArgs e)
     {
-        var args = new TappedEventArgs(screenPosition, numOfTaps);
+        try
+        {
+            var args = new TappedEventArgs(screenPosition, numOfTaps);
 
-        DoubleTap?.Invoke(this, args);
+            DoubleTap?.Invoke(this, args);
 
-        if (args.Handled)
-            return true;
+            if (args.Handled)
+            {
+                e.Handled = true;
+                return;
+            }
+        
+            var eventReturn = await CreateMapInfoEventArgs(screenPosition, screenPosition, numOfTaps);
 
-        var eventReturn = CreateMapInfoEventArgs(screenPosition, screenPosition, numOfTaps);
+            if (eventReturn?.Handled == true)
+            {
+                e.Handled = true;
+                return;
+            }
 
-        if (eventReturn?.Handled == true)
-            return true;
-
-        // Double tap as zoom
-        return OnZoomInOrOut(1, screenPosition); // mouseWheelDelta > 0 to zoom in
+            // Double tap as zoom
+            e.Handled = OnZoomInOrOut(1, screenPosition); // mouseWheelDelta > 0 to zoom in
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
+       
     }
 
     /// <summary>
     /// Called, when mouse/finger/pen tapped on map one time
     /// </summary>
     /// <param name="screenPosition">Clicked/touched position on screen</param>
+    /// <param name="e">Sk Touch Event Args</param>
     /// <returns>True, if the event is handled</returns>
-    private bool OnSingleTapped(MPoint screenPosition)
+    private async void OnSingleTapped(MPoint screenPosition, SKTouchEventArgs e)
     {
-        var args = new TappedEventArgs(screenPosition, 1);
+        try
+        {
+            var args = new TappedEventArgs(screenPosition, 1);
 
-        SingleTap?.Invoke(this, args);
+            SingleTap?.Invoke(this, args);
 
-        if (args.Handled)
-            return true;
+            if (args.Handled)
+            {
+                e.Handled = true;
+                return;
+            }
 
-        var infoToInvoke = CreateMapInfoEventArgs(screenPosition, screenPosition, 1);
+            var infoToInvoke = await CreateMapInfoEventArgs(screenPosition, screenPosition, 1);
 
-        if (infoToInvoke?.Handled == true)
-            return true;
+            if (infoToInvoke?.Handled == true)
+            {
+                e.Handled = true;
+                return;
+            }
 
-        OnInfo(infoToInvoke);
-        return infoToInvoke?.Handled ?? false;
+            OnInfo(infoToInvoke);
+            if (infoToInvoke?.Handled == true)
+            {
+                e.Handled = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
     }
 
     /// <summary>
