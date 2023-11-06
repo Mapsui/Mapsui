@@ -51,7 +51,6 @@
     <PackageVersion Include="Mapsui" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Rendering.Skia" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Tiling" Version="4.0.0-beta.8" />
-    <PackageVersion Include="Mapsui.Uno" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Uno.WinUI" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.WinUI" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Wpf" Version="4.0.0-beta.8" />
