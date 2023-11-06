@@ -250,10 +250,8 @@ jobs:
     #  run: dotnet tool install -g uno.check
     #- name: uno-check fix
     #  run: uno-check --fix --non-interactive
-    - name: Restore dependencies (nuget)
-      run: nuget restore Mapsui.MsBuild.slnf      
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.NoMsBuild.slnf  
+      run: dotnet restore Mapsui.sln  
     # Test Build
     - name: Mapsui.Nts.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Nts.Tests/Mapsui.Nts.Tests.csproj
@@ -287,9 +285,7 @@ jobs:
       run: |
        ./Scripts/SamplesMapsuiNugetReferences.ps1 $(git describe --tags)       
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.NoMsBuild.slnf  
-    - name: Restore dependencies (nuget)
-      run: nuget restore Mapsui.MsBuild.slnf   
+      run: dotnet restore Mapsui.sln  
     # Samples Build 
     - name: Mapsui.Samples.Avalonia
       run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj
