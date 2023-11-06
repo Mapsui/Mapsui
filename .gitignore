@@ -55,18 +55,6 @@ Mapsui.UI.Android/Resources/Resource.Designer.cs
 Samples/Mapsui.Samples.Droid/Resources/Resource.Designer.cs
 Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Resources/Resource.designer.cs
 
-/Mapsui.UI.Uno/MapControl.cs
-/Mapsui.UI.Uno/ExtensionMethods/PointExtensions.cs
-/Mapsui.UI.Uno/Shared/Utils/FlingTracker.cs
-/Mapsui.UI.Uno/Shared/MapControl.cs
-/Mapsui.UI.Uno/Shared/EventArgs/ZoomedEventArgs.cs
-/Mapsui.UI.Uno/Shared/EventArgs/TouchedEventArgs.cs
-/Mapsui.UI.Uno/Shared/EventArgs/TappedEventArgs.cs
-/Mapsui.UI.Uno/Shared/EventArgs/SwipedEventArgs.cs
-/Mapsui.UI.Uno/Shared/EventArgs/HoveredEventArgs.cs
-/Mapsui.UI.Uno/Shared/Enums/ZoomDirection.cs
-/Mapsui.UI.Uno/Shared/Enums/TouchMode.cs
-/Mapsui.UI.Uno/Shared/Utils/PCLTimer.cs
 AppPackages/
 *.nupkg
 
@@ -74,7 +62,6 @@ AppPackages/
 .DS_Store
 
 /Output-Build.txt
-/Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Wasm/emsdk
 *.binlog
 /dotnet-install.ps1
 /dotnetcli
