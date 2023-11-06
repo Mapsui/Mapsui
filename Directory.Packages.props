@@ -41,7 +41,6 @@
     <PackageVersion Include="Mapsui.Android" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.ArcGIS" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Avalonia" Version="4.0.0-beta.8" />
-    <PackageVersion Include="Mapsui.Avalonia.V0" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Blazor" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Eto" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Extensions" Version="4.0.0-beta.8" />
