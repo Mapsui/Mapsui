@@ -28,12 +28,10 @@ namespace Mapsui.UI.Maui;
 namespace Mapsui.UI.Uwp;
 #elif __ANDROID__ && !HAS_UNO_WINUI
 namespace Mapsui.UI.Android;
-#elif __IOS__ && !HAS_UNO_WINUI && !__FORMS__
+#elif __IOS__ && !HAS_UNO_WINUI
 namespace Mapsui.UI.iOS;
 #elif __WINUI__
 namespace Mapsui.UI.WinUI;
-#elif __FORMS__
-namespace Mapsui.UI.Forms;
 #elif __AVALONIA__
 namespace Mapsui.UI.Avalonia;
 #elif __ETO_FORMS__
@@ -294,13 +292,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Called whenever a property is changed
     /// </summary>
-#if __FORMS__ || __MAUI__ || __AVALONIA__ || __AVALONIA_V0__
+#if __MAUI__ || __AVALONIA__ || __AVALONIA_V0__
     public new event PropertyChangedEventHandler? PropertyChanged;
 #else
     public event PropertyChangedEventHandler? PropertyChanged;
 #endif
 
-#if __FORMS__ || __MAUI__
+#if __MAUI__
     protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
