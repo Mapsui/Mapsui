@@ -138,7 +138,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.ArcGIS", "Mapsui.Arc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Tiling", "Mapsui.Tiling\Mapsui.Tiling.csproj", "{08072ECA-528C-47D5-82A3-85E54300C22A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Forms.Tests", "Mapsui.UI.Forms.Tests\Mapsui.UI.Forms.Tests.csproj", "{A1FFEB6C-BE22-4659-83D2-F80333A6E7FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Maui.Tests", "Tests\Mapsui.UI.Maui.Tests\Mapsui.UI.Maui.Tests.csproj", "{A1FFEB6C-BE22-4659-83D2-F80333A6E7FB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Nts", "Mapsui.Nts\Mapsui.Nts.csproj", "{A95DC7A8-4798-495C-B589-1C6F1333C370}"
 EndProject

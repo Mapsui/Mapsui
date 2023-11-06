@@ -12,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Mapsui.UI.Maui\Mapsui.UI.Maui.csproj" />
+		<ProjectReference Include="..\..\Mapsui.UI.Maui\Mapsui.UI.Maui.csproj" />
 	</ItemGroup>
 	
 	<ItemGroup>

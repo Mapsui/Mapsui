@@ -302,8 +302,8 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
     - name: Mapsui.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj
-    - name: Mapsui.UI.Forms.Tests
-      run: dotnet build --no-restore --configuration Debug Mapsui.UI.Forms.Tests\Mapsui.UI.Forms.Tests.csproj
+    - name: Mapsui.UI.Maui.Tests
+      run: dotnet build --no-restore --configuration Debug Tests/Mapsui.UI.Maui.Tests\Mapsui.UI.Maui.Tests.csproj
     # Test Run
     - name: Run Mapsui.Nts.Tests
       run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net6.0/Mapsui.Nts.Tests.dll
@@ -315,8 +315,8 @@ jobs:
         command: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net6.0/Mapsui.Rendering.Skia.Tests.dll    
     - name: Run Mapsui.Tests
       run: dotnet test Tests/Mapsui.Tests/bin/Debug/net6.0/Mapsui.Tests.dll
-    - name: Run Mapsui.UI.Forms.Tests
-      run: dotnet test Mapsui.UI.Forms.Tests/bin/Debug/net6.0-windows10.0.19041.0/Mapsui.UI.Forms.Tests.dll
+    - name: Run Mapsui.UI.Maui.Tests
+      run: dotnet test Tests/Mapsui.UI.Maui.Tests/bin/Debug/net6.0-windows10.0.19041.0/Mapsui.UI.Maui.Tests.dll
     # Release Build
     - name: Build nuget packages
       run: Scripts\buildpack $(git describe --tags)
