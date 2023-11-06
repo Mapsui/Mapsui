@@ -262,7 +262,7 @@ jobs:
     - name: Mapsui.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj
     - name: Mapsui.UI.Maui.Tests
-      run: dotnet build --configuration Debug Tests/Mapsui.UI.Maui.Tests/Mapsui.UI.Maui.Tests.csproj
+      run: dotnet build --no-restore --configuration Debug Tests/Mapsui.UI.Maui.Tests/Mapsui.UI.Maui.Tests.csproj
     # Test Run
     - name: Run Mapsui.Nts.Tests
       run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net6.0/Mapsui.Nts.Tests.dll
@@ -275,7 +275,7 @@ jobs:
     - name: Run Mapsui.Tests
       run: dotnet test Tests/Mapsui.Tests/bin/Debug/net6.0/Mapsui.Tests.dll
     - name: Run Mapsui.UI.Maui.Tests
-      run: dotnet test Tests/Mapsui.UI.Maui.Tests/bin/Debug/net6.0-windows10.0.19041.0/Mapsui.UI.Maui.Tests.dll
+      run: dotnet test Tests/Mapsui.UI.Maui.Tests/bin/Debug/net8.0-windows10.0.19041.0/Mapsui.UI.Maui.Tests.dll
     # Release Build
     - name: Build nuget packages
       run: Scripts\buildpack $(git describe --tags)
