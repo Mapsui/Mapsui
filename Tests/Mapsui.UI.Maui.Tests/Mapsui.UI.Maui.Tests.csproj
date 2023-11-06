@@ -6,10 +6,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="C:\code\github\mapsui1\/InitProperty.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\..\Mapsui.UI.Maui\Mapsui.UI.Maui.csproj" />
 	</ItemGroup>
 	
