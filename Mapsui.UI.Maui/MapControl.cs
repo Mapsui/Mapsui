@@ -11,17 +11,13 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Utilities;
 using Mapsui.Extensions;
-using Mapsui.UI.Maui.Extensions;
-using Microsoft.Maui;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Devices;
 using Microsoft.Maui.Graphics;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
-using Color = Microsoft.Maui.Graphics.Color;
 using Logger = Mapsui.Logging.Logger;
-using KnownColor = Mapsui.UI.Maui.KnownColor;
 
 namespace Mapsui.UI.Maui;
 
@@ -34,38 +30,24 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         try
         {
-#if __MAUI__
             Callout.DefaultTitleFontSize = 24;  // excplicit values from maui debugging
             Callout.DefaultSubtitleFontSize = 20; // excplicit values from maui debugging
-#else
-            Callout.DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
-            Callout.DefaultSubtitleFontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
-#endif
         }
         catch (Exception ex)
         {
             // Catch Xamarin Forms not initialized exception happens in unit tests.
             Logger.Log(LogLevel.Error, ex.Message, ex);
         }
-        
-#if __FORMS__
-        Callout.DefaultTitleFontName = Font.Default.FontFamily;
-        Callout.DefaultSubtitleFontName = Font.Default.FontFamily;
-#endif
-}
+    }
 
-#if __MAUI__
     // GPU does not work currently on MAUI
     // See https://github.com/mono/SkiaSharp/issues/1893
     // https://github.com/Mapsui/Mapsui/issues/1676
-    public static bool UseGPU = 
-        DeviceInfo.Platform != DevicePlatform.WinUI && 
-        DeviceInfo.Platform != DevicePlatform.macOS && 
+    public static bool UseGPU =
+        DeviceInfo.Platform != DevicePlatform.WinUI &&
+        DeviceInfo.Platform != DevicePlatform.macOS &&
         DeviceInfo.Platform != DevicePlatform.MacCatalyst &&
         DeviceInfo.Platform != DevicePlatform.Android;
-#else
-    public static bool UseGPU = true;
-#endif
 
     private class TouchEvent
     {
@@ -140,10 +122,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     public bool UseDoubleTap = true;
     public bool UseFling = true;
-#if __MAUI__
     private Size oldSize;
     private static List<WeakReference<MapControl>>? listeners;
-#endif
 
     private void Initialize()
     {
@@ -181,11 +161,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             view = _canvasView;
         }
 
-#if __MAUI__
         view.PropertyChanged += View_PropertyChanged;
-#else
-        view.SizeChanged += OnSizeChanged;
-#endif
 
         Content = view;
         BackgroundColor = KnownColor.White;
@@ -194,9 +170,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private static void InitTouchesReset(MapControl mapControl)
     {
-#if __MAUI__
-        try 
-        {   
+        try
+        {
             if (listeners == null)
             {
                 listeners = new List<WeakReference<MapControl>>();
@@ -215,7 +190,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     listeners.Remove(entry);
                 }
             }
-            
+
             // add control to listeners
             listeners.Add(new WeakReference<MapControl>(mapControl));
         }
@@ -223,16 +198,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             Logger.Log(LogLevel.Error, ex.Message, ex);
         }
-     
-#endif
     }
-
-#if __MAUI__    
+  
     private static void Shell_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         try
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case nameof(Shell.FlyoutIsPresented):
                     if (listeners != null)
@@ -275,7 +247,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 break;
         }
     }
-#endif
 
     private void OnSizeChanged(object? sender, EventArgs e)
     {
@@ -291,7 +262,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             var ticks = DateTime.Now.Ticks;
 
             var location = GetScreenPosition(e.Location);
-            
+
             if (HandleTouch(e, location))
             {
                 e.Handled = true;
@@ -442,7 +413,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             _ => false
         };
     }
-    
+
     public bool ShiftPessed { get; set; }
 
     private bool IsAround(TouchEvent releasedTouch)
@@ -513,16 +484,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <summary>
     /// TouchMove is called, when user move mouse over map (independent from mouse button state) or move finger on display
     /// </summary>
-#if __WPF__
-    public new event EventHandler<TouchedEventArgs>? TouchMove;
-#else
     public event EventHandler<TouchedEventArgs>? TouchMove;
 
     /// <summary>
     /// TouchAction is called, when user provoques a touch event
     /// </summary>
     public event EventHandler<SKTouchEventArgs>? TouchAction;
-#endif
 
     /// <summary>
     /// Hover is called, when user move mouse over map without pressing mouse button
@@ -874,11 +841,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     protected void RunOnUIThread(Action action)
     {
-#if __MAUI__ 
         Dispatcher.Dispatch(() => Catch.Exceptions(action));
-#else
-        Device.BeginInvokeOnMainThread(() => Catch.Exceptions(action));
-#endif
     }
 
     public void Dispose()
@@ -889,13 +852,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-#if __MAUI__
         var weakReference = listeners?.FirstOrDefault(f => f.TryGetTarget(out var control) && control == this);
         if (weakReference != null)
         {
             listeners?.Remove(weakReference);
         }
-#endif
 
         if (disposing)
         {
