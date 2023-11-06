@@ -11,7 +11,6 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Utilities;
 using Mapsui.Extensions;
-#if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
 using Microsoft.Maui.ApplicationModel;
@@ -20,22 +19,11 @@ using Microsoft.Maui.Devices;
 using Microsoft.Maui.Graphics;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
-
 using Color = Microsoft.Maui.Graphics.Color;
 using Logger = Mapsui.Logging.Logger;
 using KnownColor = Mapsui.UI.Maui.KnownColor;
-#else
-using SkiaSharp.Views.Forms;
-using Xamarin.Essentials;
-using Xamarin.Forms;
-using KnownColor = Xamarin.Forms.Color;
-#endif
 
-#if __MAUI__
 namespace Mapsui.UI.Maui;
-#else
-namespace Mapsui.UI.Forms;
-#endif
 
 /// <summary>
 /// Class, that uses the API of all other Mapsui MapControls
