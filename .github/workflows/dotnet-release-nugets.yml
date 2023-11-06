@@ -47,11 +47,6 @@ jobs:
     - name: Test
       run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
 
-    - name: Pack Uno UWP
-      run: |
-        msbuild Mapsui.UI.Uno/Mapsui.UI.Uno.csproj /t:restore /p:Configuration=Release 
-        msbuild Mapsui.UI.Uno/Mapsui.UI.Uno.csproj /t:pack /p:Configuration=Release /p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${{ github.workspace }}/nugets"
-
     - name: Pack Xamarin Forms
       run: |
         msbuild Mapsui.UI.Forms/Mapsui.UI.Forms.csproj /t:restore /p:Configuration=Release 
