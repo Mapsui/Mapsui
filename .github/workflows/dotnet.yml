@@ -51,7 +51,7 @@ jobs:
     #- name: Build Mapsui.Rendering.Skia.Tests
     #  run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
     - name: Build Mapsui.Tests
-      run: dotnet build --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj    
+      run: dotnet build  --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj    
     # Run Tests   
     #- name: Run Mapsui.Rendering.Skia.Tests
     #  run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net6.0/Mapsui.Rendering.Skia.Tests.dll    
@@ -262,7 +262,7 @@ jobs:
     - name: Mapsui.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj
     - name: Mapsui.UI.Maui.Tests
-      run: dotnet build --no-restore --configuration Debug Tests/Mapsui.UI.Maui.Tests/Mapsui.UI.Maui.Tests.csproj
+      run: dotnet build --configuration Debug Tests/Mapsui.UI.Maui.Tests/Mapsui.UI.Maui.Tests.csproj
     # Test Run
     - name: Run Mapsui.Nts.Tests
       run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net6.0/Mapsui.Nts.Tests.dll
