@@ -35,11 +35,7 @@
     <None Remove="Images\**" />
     <None Remove="Objects\**" />
   </ItemGroup>
-	
-  <ItemGroup>
-    <Compile Include="..\Mapsui.UI.Forms\MapControl.cs" Link="MapControl.cs" />
-  </ItemGroup>
-  
+ 
   <ItemGroup>
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="SkiaSharp.Views.Maui.Controls" />
