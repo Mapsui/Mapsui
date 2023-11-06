@@ -1,16 +1,7 @@
 ﻿using Mapsui.Widgets;
-
-#if __MAUI__
 using Microsoft.Maui;
-#else
-using Xamarin.Forms;
-#endif
 
-#if __MAUI__
 namespace Mapsui.UI.Maui.Extensions;
-#else
-namespace Mapsui.UI.Forms.Extensions;
-#endif
 
 public static class TextAlignmentExtensions
 {

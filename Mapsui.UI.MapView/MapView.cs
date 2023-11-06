@@ -15,7 +15,6 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using Mapsui.Logging;
 using Mapsui.Utilities;
-#if __MAUI__
 using Mapsui.UI.Maui.Utils;
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
@@ -25,19 +24,9 @@ using Microsoft.Maui.Layouts;
 using SkiaSharp.Views;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
-
 using Rectangle = Microsoft.Maui.Graphics.Rect;
-#else
-using Mapsui.UI.Forms.Utils;
-using Mapsui.UI.Forms.Extensions;
-using Xamarin.Forms;
-#endif
 
-#if __MAUI__
 namespace Mapsui.UI.Maui;
-#else
-namespace Mapsui.UI.Forms;
-#endif
 
 /// <summary>
 /// Class, that uses the API of the original Xamarin.Forms MapView
@@ -63,9 +52,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private readonly ObservableRangeCollection<Drawable> _drawables = new ObservableRangeCollection<Drawable>();
     private readonly ObservableRangeCollection<Callout> _callouts = new ObservableRangeCollection<Callout>();
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.MapView"/> class.
-    /// </summary>
     public MapView()
     {
         MyLocationFollow = false;

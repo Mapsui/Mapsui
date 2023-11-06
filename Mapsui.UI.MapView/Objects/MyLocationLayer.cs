@@ -1,26 +1,14 @@
 ﻿using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Styles;
-
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
 using Mapsui.Utilities;
 using Animation = Mapsui.Animations.Animation;
-
-#if __MAUI__
 using Mapsui.UI.Maui;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-#else
-using Mapsui.UI.Forms;
-using Xamarin.Forms;
-#endif
 
 namespace Mapsui.UI.Objects;
 

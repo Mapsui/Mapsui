@@ -1,10 +1,6 @@
 ﻿using System.Diagnostics;
 
-#if __MAUI__
 namespace Mapsui.UI.Maui;
-#else
-namespace Mapsui.UI.Forms;
-#endif
 
 /// <summary>
 /// Distance between to positions

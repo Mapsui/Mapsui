@@ -1,16 +1,7 @@
 ﻿using System;
-#if __MAUI__
-using Microsoft.Maui;
 using Microsoft.Maui.Graphics;
-#else
-using Xamarin.Forms;
-#endif
 
-#if __MAUI__
 namespace Mapsui.UI.Maui;
-#else
-namespace Mapsui.UI.Forms;
-#endif
 
 public sealed class CalloutClickedEventArgs : EventArgs
 {
