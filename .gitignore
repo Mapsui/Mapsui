@@ -51,7 +51,6 @@ project.lock.json
 
 Mapsui.UI.Android/Resources/Resource.Designer.cs
 Samples/Mapsui.Samples.Droid/Resources/Resource.Designer.cs
-Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Resources/Resource.designer.cs
 
 /Mapsui.UI.Uno/MapControl.cs
 /Mapsui.UI.Uno/ExtensionMethods/PointExtensions.cs

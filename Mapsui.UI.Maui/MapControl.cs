@@ -35,7 +35,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         }
         catch (Exception ex)
         {
-            // Catch Xamarin Forms not initialized exception happens in unit tests.
+            // Catch not initialized exception happens in unit tests.
             Logger.Log(LogLevel.Error, ex.Message, ex);
         }
     }

@@ -8,7 +8,7 @@ public static class PositionExtensions
     /// Convert Mapsui.Geometries.Point to Mapsui.UI.Maui.Position
     /// </summary>
     /// <param name="point">Point in Mapsui format</param>
-    /// <returns>Position in Xamarin.Forms.Maps format</returns>
+    /// <returns>Return a Position type</returns>
     public static Position ToMaui(this MPoint point)
     {
         return point.ToNative();

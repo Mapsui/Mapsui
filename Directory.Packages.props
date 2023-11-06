@@ -44,7 +44,6 @@
     <PackageVersion Include="Mapsui.Blazor" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Eto" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Extensions" Version="4.0.0-beta.8" />
-    <PackageVersion Include="Mapsui.Forms" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.iOS" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Maui" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Nts" Version="4.0.0-beta.8" />
@@ -120,8 +119,5 @@
     <PackageVersion Include="Uno.WinUI.RemoteControl" Version="[5.0.19,6.0.0)" />
     <PackageVersion Include="Uno.WinUI.WebAssembly" Version="[5.0.19,6.0.0)" />
     <PackageVersion Include="Xam.Plugin.Geolocator" Version="[5.0.0-beta,6.0.0)" />
-    <PackageVersion Include="Xamarin.Essentials" Version="[1.7.0,2.0.0)" />
-    <PackageVersion Include="Xamarin.Forms" Version="[5.0.0.2545,6.0.0.0)" />
-    <PackageVersion Include="Xamarin.Forms.Platform.WPF" Version="[5.0.0.2545,6.0.0.0)" />
   </ItemGroup>
 </Project>
