@@ -38,19 +38,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Skia.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Skia", "Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj", "{DEA6E9AE-2B6A-4E83-83B7-E9DF0E492301}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Forms", "Mapsui.UI.Forms\Mapsui.UI.Forms.csproj", "{06E3EBF5-49A2-4C71-948A-1720831213D4}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mapsui.Samples.Forms", "Mapsui.Samples.Forms", "{D425FA31-8775-4D44-8438-83F30CC86BFE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Forms.iOS", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.iOS\Mapsui.Samples.Forms.iOS.csproj", "{DE3B0CBF-CC20-4457-884B-2E5150B45A01}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Forms.Android", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Android\Mapsui.Samples.Forms.Android.csproj", "{E5B48712-D070-4D65-ADA0-0F7E5E3C29B9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Forms.Mac", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Mac\Mapsui.Samples.Forms.Mac.csproj", "{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.CustomWidget", "Samples\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj", "{AB12E84B-E58B-4DFA-8050-C9E69DE707B4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Forms.Shared", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.csproj", "{26CD18DB-016D-45E8-95F1-672C5DB13B76}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{12D153CE-AE3E-47B5-AB39-6DF8F2E6893E}"
 EndProject

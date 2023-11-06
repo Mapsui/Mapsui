@@ -10,7 +10,6 @@
       "Mapsui.UI.Android\\Mapsui.UI.Android.csproj",
       "Mapsui.UI.Avalonia\\Mapsui.UI.Avalonia.csproj",
       "Mapsui.UI.Eto\\Mapsui.UI.Eto.csproj",
-      "Mapsui.UI.Forms\\Mapsui.UI.Forms.csproj",
       "Mapsui.UI.MapView\\Mapsui.UI.MapView.shproj",
       "Mapsui.UI.Maui\\Mapsui.UI.Maui.csproj",
       "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
