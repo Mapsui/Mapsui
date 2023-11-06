@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers;
-using Mapsui.UI.Forms;
+using Mapsui.UI.Maui;
 using Mapsui.UI.Objects;
 using NUnit.Framework;
 

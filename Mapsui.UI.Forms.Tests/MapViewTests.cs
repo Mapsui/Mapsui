@@ -1,5 +1,5 @@
 using System;
-using Mapsui.UI.Forms;
+using Mapsui.UI.Maui;
 using NUnit.Framework;
 
 #pragma warning disable IDISP001 // Disposable object created
