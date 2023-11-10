@@ -192,10 +192,6 @@ jobs:
       uses: NuGet/setup-nuget@v1.1.1
       with:
         nuget-version: latest
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1.1
-      with:
-        vs-prerelease: true
     - name: install maui macos android ios maccatalyst wasm-tools
       run: Scripts/InstallDependencies.cmd
     #- name: uno-check install
@@ -254,7 +250,7 @@ jobs:
     - name: Mapsui.Samples.Maui.MapView
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Maui.MapView/Mapsui.Samples.Maui.MapView.csproj
     - name: Mapsui.Samples.WinUI
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug -p:Platform=x86 Samples\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI.csproj
+      run: dotnet build --no-restore --configuration Debug /p:Platform=x64 Samples/Mapsui.Samples.WinUI/Mapsui.Samples.WinUI/Mapsui.Samples.WinUI.csproj
     - name: Mapsui.Samples.Wpf
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf/Mapsui.Samples.Wpf.csproj  
     # Samples Uno WinUI
