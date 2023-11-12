@@ -15,7 +15,12 @@ public class Navigator
 {
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
-    private Action? _initialization = null;
+    private Action? _initialization;
+
+    public Navigator()
+    {
+        _initialization = () => ZoomToPanBounds();
+    }
 
     /// <summary>
     /// Called when a data refresh is needed. This directly after a non-animated viewport change
@@ -403,6 +408,7 @@ public class Navigator
     {
         ClearAnimations();
         SetViewportWithLimit(Viewport with { Width = width, Height = height });
+        Initialization();
         OnRefreshDataRequest();
     }
 
