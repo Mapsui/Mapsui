@@ -30,8 +30,9 @@ public class PolygonTestSample : ISample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.ZoomToPanBounds(MBoxFit.Fit)
         };
+
+        map.Navigator.ZoomToPanBounds(MBoxFit.Fit);
 
         map.Layers.Add(layer);
 

@@ -20,8 +20,9 @@ public class TilesSample : ISample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.ZoomToPanBounds()
         };
+
+        map.Navigator.ZoomToPanBounds();
 
         map.Layers.Add(layer);
 
