@@ -411,23 +411,22 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
         else if (e.PropertyName == nameof(Map.Extent))
         {
-            CallHomeIfNeeded();
+            CallInitializedIfNeeded();
             Refresh();
         }
         else if (e.PropertyName == nameof(Map.Layers))
         {
-            CallHomeIfNeeded();
+            CallInitializedIfNeeded();
             Refresh();
         }
     }
     // ReSharper restore RedundantNameQualifier
 
-    public void CallHomeIfNeeded()
+    public void CallInitializedIfNeeded()
     {
-        if (!Map.HomeIsCalledOnce && Map.Navigator.Viewport.HasSize() && Map?.Extent is not null)
+        if (!Map.Navigator.IsInitialized && Map.Navigator.Viewport.HasSize() && Map?.Extent is not null)
         {
-            Map.Home?.Invoke(Map.Navigator);
-            Map.HomeIsCalledOnce = true;
+            Map.Navigator.Initialization();
         }
     }
 
@@ -497,7 +496,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         map.Navigator.SetSize(ViewportWidth, ViewportHeight);
         SubscribeToMapEvents(map);
-        CallHomeIfNeeded();
+        CallInitializedIfNeeded();
         Refresh();
     }
 
@@ -583,7 +582,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var hadSize = Map.Navigator.Viewport.HasSize();
         Map.Navigator.SetSize(ViewportWidth, ViewportHeight);
         if (!hadSize && Map.Navigator.Viewport.HasSize()) Map.OnViewportSizeInitialized();
-        CallHomeIfNeeded();
+        CallInitializedIfNeeded();
         Refresh();
     }
 

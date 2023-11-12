@@ -15,7 +15,8 @@ public class Navigator
 {
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
-    
+    private Action? _initialization = null;
+
     /// <summary>
     /// Called when a data refresh is needed. This directly after a non-animated viewport change
     /// is made and after an animation has completed.
@@ -79,6 +80,18 @@ public class Navigator
         }
     }
 
+    public bool IsInitialized { get; private set; } = false;
+
+    public void Initialization()
+    {
+        if (_initialization is not null && !IsInitialized)
+        {
+            _initialization();
+            _initialization = null;
+            IsInitialized = true;
+        }
+    }
+
     /// <summary>
     /// List of resolutions that can be used when going to a new zoom level. In the most common
     /// case these resolutions correspond to the resolutions of the background layer of the map. 
@@ -93,7 +106,11 @@ public class Navigator
 
     public void MouseWheelZoom(int mouseWheelDelta, MPoint centerOfZoom)
     {
-        if (!Viewport.HasSize()) return;
+        if (!Viewport.HasSize())
+        {
+            _initialization = () => MouseWheelZoom(mouseWheelDelta, centerOfZoom);
+            return;
+        }
 
         // It is unexpected that this method uses the MouseWheelAnimation.Animation and Easing. 
         // At the moment this solution allows the user to change these fields, so I don't want
@@ -114,7 +131,12 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomToBox(MRect? box, MBoxFit boxFit = MBoxFit.Fit, long duration = -1, Easing? easing = default)
     {
-        if (!Viewport.HasSize()) return;
+        if (!Viewport.HasSize())
+        {
+            _initialization = () => ZoomToBox(box, boxFit, duration, easing);
+            return;
+        }
+
         if (box == null) return;
         if (box.Width <= 0 || box.Height <= 0) return;
 
@@ -132,7 +154,12 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomToPanBounds(MBoxFit boxFit = MBoxFit.Fill, long duration = -1, Easing? easing = default)
     {
-        if (!Viewport.HasSize()) return;
+        if (!Viewport.HasSize())
+        {
+            _initialization = () => ZoomToPanBounds(boxFit, duration, easing);
+            return;
+        }
+
         if (PanBounds is null)
         {
             Logger.Log(LogLevel.Warning, $"{nameof(ZoomToPanBounds)} was called but ${nameof(PanBounds)} was null");
@@ -186,7 +213,12 @@ public class Navigator
     /// <param name="easing">The easing of the animation when duration is > 0</param>
     public void ZoomTo(double resolution, MPoint centerOfZoomInScreenCoordinates, long duration = -1, Easing? easing = default)
     {
-        if (!Viewport.HasSize()) return;
+        if (!Viewport.HasSize())
+        {
+            _initialization = () => ZoomTo(resolution, centerOfZoomInScreenCoordinates, duration, easing);
+            return;
+        }
+
         if (ZoomLock) return;
 
         var (centerOfZoomX, centerOfZoomY) = Viewport.ScreenToWorldXY(centerOfZoomInScreenCoordinates.X, centerOfZoomInScreenCoordinates.Y);
