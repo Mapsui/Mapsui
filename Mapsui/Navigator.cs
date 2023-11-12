@@ -15,11 +15,14 @@ public class Navigator
 {
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
-    private Action? _initialization;
+    private List<Action>? _initialization;
 
     public Navigator()
     {
-        _initialization = () => ZoomToPanBounds();
+        _initialization = new List<Action>
+        {
+            () => ZoomToPanBounds()
+        };
     }
 
     /// <summary>
@@ -91,7 +94,12 @@ public class Navigator
     {
         if (_initialization is not null && !IsInitialized)
         {
-            _initialization();
+            foreach (var action in _initialization)
+            {
+                action();
+            }
+
+            _initialization.Clear();
             _initialization = null;
             IsInitialized = true;
         }
@@ -113,7 +121,7 @@ public class Navigator
     {
         if (!Viewport.HasSize())
         {
-            _initialization = () => MouseWheelZoom(mouseWheelDelta, centerOfZoom);
+            _initialization.Add(() => MouseWheelZoom(mouseWheelDelta, centerOfZoom));
             return;
         }
 
@@ -138,7 +146,7 @@ public class Navigator
     {
         if (!Viewport.HasSize())
         {
-            _initialization = () => ZoomToBox(box, boxFit, duration, easing);
+            _initialization.Add(() => ZoomToBox(box, boxFit, duration, easing));
             return;
         }
 
@@ -161,7 +169,7 @@ public class Navigator
     {
         if (!Viewport.HasSize())
         {
-            _initialization = () => ZoomToPanBounds(boxFit, duration, easing);
+            _initialization.Add(() => ZoomToPanBounds(boxFit, duration, easing));
             return;
         }
 
@@ -183,6 +191,12 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void CenterOnAndZoomTo(MPoint center, double resolution, long duration = -1, Easing? easing = default)
     {
+        if (!Viewport.HasSize())
+        {
+            _initialization.Add(() => CenterOnAndZoomTo(center, resolution, duration, easing));
+            return;
+        }
+
         if (PanLock) return;
         if (ZoomLock) return;
 
@@ -198,6 +212,12 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomTo(double resolution, long duration = -1, Easing? easing = default)
     {
+        if (!Viewport.HasSize())
+        {
+            _initialization.Add(() => ZoomTo(resolution, duration, easing));
+            return;
+        }
+
         if (ZoomLock) return;
 
         var newViewport = Viewport with { Resolution = resolution };
@@ -220,7 +240,7 @@ public class Navigator
     {
         if (!Viewport.HasSize())
         {
-            _initialization = () => ZoomTo(resolution, centerOfZoomInScreenCoordinates, duration, easing);
+            _initialization.Add(() => ZoomTo(resolution, centerOfZoomInScreenCoordinates, duration, easing));
             return;
         }
 
@@ -325,6 +345,12 @@ public class Navigator
     /// <param name="easing">Function for easing</param>
     public void CenterOn(MPoint center, long duration = -1, Easing? easing = default)
     {
+        if (!Viewport.HasSize())
+        {
+            _initialization.Add(() => CenterOn(center, duration, easing));
+            return;
+        }
+
         if (PanLock) return;
 
         var newViewport = Viewport with { CenterX = center.X, CenterY = center.Y };
@@ -350,6 +376,12 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void RotateTo(double rotation, long duration = -1, Easing? easing = default)
     {
+        if (!Viewport.HasSize())
+        {
+            _initialization.Add(() => RotateTo(rotation, duration, easing));
+            return;
+        }
+
         if (RotationLock) return;
 
         var newViewport = Viewport with { Rotation = rotation };
