@@ -15,7 +15,7 @@ public class Navigator
 {
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
-    private List<Action>? _initialization;
+    private List<Action> _initialization;
 
     public Navigator()
     {
@@ -100,7 +100,6 @@ public class Navigator
             }
 
             _initialization.Clear();
-            _initialization = null;
             IsInitialized = true;
         }
     }
@@ -119,12 +118,6 @@ public class Navigator
 
     public void MouseWheelZoom(int mouseWheelDelta, MPoint centerOfZoom)
     {
-        if (!Viewport.HasSize())
-        {
-            _initialization.Add(() => MouseWheelZoom(mouseWheelDelta, centerOfZoom));
-            return;
-        }
-
         // It is unexpected that this method uses the MouseWheelAnimation.Animation and Easing. 
         // At the moment this solution allows the user to change these fields, so I don't want
         // them to become hardcoded values in the MapControl. There should be a more general
@@ -144,12 +137,6 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomToBox(MRect? box, MBoxFit boxFit = MBoxFit.Fit, long duration = -1, Easing? easing = default)
     {
-        if (!Viewport.HasSize())
-        {
-            _initialization.Add(() => ZoomToBox(box, boxFit, duration, easing));
-            return;
-        }
-
         if (box == null) return;
         if (box.Width <= 0 || box.Height <= 0) return;
 
@@ -167,12 +154,6 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomToPanBounds(MBoxFit boxFit = MBoxFit.Fill, long duration = -1, Easing? easing = default)
     {
-        if (!Viewport.HasSize())
-        {
-            _initialization.Add(() => ZoomToPanBounds(boxFit, duration, easing));
-            return;
-        }
-
         if (PanBounds is null)
         {
             Logger.Log(LogLevel.Warning, $"{nameof(ZoomToPanBounds)} was called but ${nameof(PanBounds)} was null");
