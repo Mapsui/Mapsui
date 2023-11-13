@@ -820,7 +820,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (args.Handled)
             return true;
 
-            var infoToInvoke = await CreateMapInfoEventArgs(screenPosition, screenPosition, 1);
+        var infoToInvoke = CreateMapInfoEventArgs(screenPosition, screenPosition, 1);
 
         if (infoToInvoke?.Handled == true)
             return true;
