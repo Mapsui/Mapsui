@@ -12,6 +12,7 @@ public class NavigatorTests
     {
         // Arrange
         var navigator = new Navigator();
+        navigator.SetSize(100, 100);
         int navigatedCounter = 0;
         navigator.SetViewportAnimations(CreateAnimation());
         navigator.RefreshDataRequest += (s, e) => navigatedCounter++;
@@ -31,14 +32,15 @@ public class NavigatorTests
         return new List<AnimationEntry<Viewport>> { new AnimationEntry<Viewport>(new Viewport(), new Viewport()) };
     }
 
-    [TestCase(0.5, 15, 15)]
-    [TestCase(1, 20, 10)]
-    [TestCase(2, 30, 0)]
+    [TestCase(0.5, 15, 15)] // 80/20
+    [TestCase(1, 20, 10)] // 60/40
+    [TestCase(2, 30, 0)] // 20/80
     public void PinchWithDeltaResolution(double deltaResolution, double expectedCenterX, double expectedCenterY)
     {
         // Arrange
         var navigator = new Navigator();
-        navigator.CenterOn(10, 20);
+        navigator.SetSize(100, 100);
+        navigator.CenterOn(50, 50);
         var currentPinchCenter = new MPoint(10, 10);
         var previousPinchCenter = new MPoint(20, 20);
 
