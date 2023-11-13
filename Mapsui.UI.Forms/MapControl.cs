@@ -376,20 +376,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                         if (_numOfTaps > 1)
                         {
                             if (!e.Handled)
-                                Catch.Exceptions(async () =>
-                                {
-                                   e.Handled = await OnDoubleTappedAsync(location, _numOfTaps);
-                                });
-                                
+                                OnDoubleTapped(location, _numOfTaps, e);
                         }
                         else
                         {
                             if (!e.Handled)
                             {
-                                Catch.Exceptions(async () =>
-                                {
-                                    e.Handled = await OnSingleTappedAsync(location);
-                                });
+                                OnSingleTapped(location, e);
                             }
                         }
                         _numOfTaps = 1;
@@ -796,26 +789,36 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <param name="numOfTaps">Number of taps on map (2 is a double click/tap)</param>
     /// <param name="e">Sk Touch Event Args</param>
     /// <returns>True, if the event is handled</returns>
-    private async Task<bool> OnDoubleTappedAsync(MPoint screenPosition, int numOfTaps)
+    private async void OnDoubleTapped(MPoint screenPosition, int numOfTaps, SKTouchEventArgs e)
     {
-        var args = new TappedEventArgs(screenPosition, numOfTaps);
-
-        DoubleTap?.Invoke(this, args);
-
-        if (args.Handled)
+        try
         {
-            return true;
-        }
-    
-        var eventReturn = await CreateMapInfoEventArgsAsync(screenPosition, screenPosition, numOfTaps);
+            var args = new TappedEventArgs(screenPosition, numOfTaps);
 
-        if (eventReturn?.Handled == true)
+            DoubleTap?.Invoke(this, args);
+
+            if (args.Handled)
+            {
+                e.Handled = true;
+                return;
+            }
+        
+            var eventReturn = await CreateMapInfoEventArgsAsync(screenPosition, screenPosition, numOfTaps);
+
+            if (eventReturn?.Handled == true)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Double tap as zoom
+            e.Handled = OnZoomInOrOut(1, screenPosition); // mouseWheelDelta > 0 to zoom in
+        }
+        catch (Exception ex)
         {
-            return true;
+            Logger.Log(LogLevel.Error, ex.Message, ex);
         }
-
-        // Double tap as zoom
-        return OnZoomInOrOut(1, screenPosition); // mouseWheelDelta > 0 to zoom in
+       
     }
 
     /// <summary>
@@ -824,31 +827,38 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <param name="screenPosition">Clicked/touched position on screen</param>
     /// <param name="e">Sk Touch Event Args</param>
     /// <returns>True, if the event is handled</returns>
-    private async Task<bool> OnSingleTappedAsync(MPoint screenPosition)
+    private async void OnSingleTapped(MPoint screenPosition, SKTouchEventArgs e)
     {
-        var args = new TappedEventArgs(screenPosition, 1);
-
-        SingleTap?.Invoke(this, args);
-
-        if (args.Handled)
+        try
         {
-            return true;
+            var args = new TappedEventArgs(screenPosition, 1);
+
+            SingleTap?.Invoke(this, args);
+
+            if (args.Handled)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            var infoToInvoke = await CreateMapInfoEventArgsAsync(screenPosition, screenPosition, 1);
+
+            if (infoToInvoke?.Handled == true)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            OnInfo(infoToInvoke);
+            if (infoToInvoke?.Handled == true)
+            {
+                e.Handled = true;
+            }
         }
-
-        var infoToInvoke = await CreateMapInfoEventArgsAsync(screenPosition, screenPosition, 1);
-
-        if (infoToInvoke?.Handled == true)
+        catch (Exception ex)
         {
-            return true;
+            Logger.Log(LogLevel.Error, ex.Message, ex);
         }
-
-        OnInfo(infoToInvoke);
-        if (infoToInvoke?.Handled == true)
-        {
-            return true;
-        }
-
-        return false;
     }
 
     /// <summary>
