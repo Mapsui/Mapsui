@@ -628,18 +628,22 @@ public class Navigator
         // Save state when this function is originally called
         var panLock = PanLock;
         var zoomLock = ZoomLock;
+        var rotationLock = RotationLock;
         // Add action to initialization list
         _initialization.Add(() => {
             // Save current state of locks
             var savePanLock = PanLock;
             var saveZoomLock = ZoomLock;
+            var saveRotationLock = RotationLock;
             // Set locks like they were at the time the action was called
             PanLock = panLock;
             ZoomLock = zoomLock;
+            RotationLock = rotationLock;
             action();
             //Restore old settings of locks
             PanLock = savePanLock;
             ZoomLock = saveZoomLock;
+            RotationLock = saveRotationLock;
         });
     }
 
