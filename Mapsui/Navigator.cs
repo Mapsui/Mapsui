@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Limiting;
@@ -16,12 +15,7 @@ public class Navigator
 {
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
-    private List<Action> _initialization;
-
-    public Navigator()
-    {
-        _initialization = new List<Action>();
-    }
+    private List<Action> _initialization = new();
 
     /// <summary>
     /// Called when a data refresh is needed. This directly after a non-animated viewport change
@@ -90,7 +84,7 @@ public class Navigator
 
     public void Initialization()
     {
-        if (_initialization is not null && !IsInitialized)
+        if (!IsInitialized)
         {
             if (_initialization.Count == 0)
             {
