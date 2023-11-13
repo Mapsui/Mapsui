@@ -164,10 +164,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             return; 
         }
 
-        Catch.Exceptions(async () =>
-        {
-            OnInfo(await CreateMapInfoEventArgs(tabPosition, tabPosition, 1));
-        });
+        OnInfo(CreateMapInfoEventArgs(tabPosition, tabPosition, 1));
     }
 
     private static Rectangle CreateSelectRectangle()
