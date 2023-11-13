@@ -698,41 +698,38 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         }
     }
 
-    private async void HandlerTap(object? sender, TappedEventArgs e)
+    private void HandlerTap(object? sender, TappedEventArgs e)
     {
         e.Handled = false;
 
-        try
+        if (Map != null)
         {
-            if (Map != null)
+            // Check if we hit a drawable/pin/callout etc
+            var mapInfo = GetMapInfo(e.ScreenPosition);
+
+            var mapInfoEventArgs = new MapInfoEventArgs { MapInfo = mapInfo, Handled = e.Handled, NumTaps = e.NumOfTaps };
+
+            HandlerInfo(sender, mapInfoEventArgs);
+
+            e.Handled = mapInfoEventArgs.Handled;
+
+            if (!e.Handled)
             {
-                // Check if we hit a drawable/pin/callout etc
-                var mapInfo = await GetMapInfoAsync(e.ScreenPosition);
+                // if nothing else was hit, then we hit the map
+                var args = new MapClickedEventArgs(Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToNative(), e.NumOfTaps);
+                MapClicked?.Invoke(this, args);
 
-                var mapInfoEventArgs = new MapInfoEventArgs
-                    { MapInfo = mapInfo, Handled = e.Handled, NumTaps = e.NumOfTaps };
-
-                HandlerInfo(sender, mapInfoEventArgs);
-
-                e.Handled = mapInfoEventArgs.Handled;
-
-                if (!e.Handled)
+                if (args.Handled)
                 {
-                    // if nothing else was hit, then we hit the map
-                    var args = new MapClickedEventArgs(
-                        Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToNative(), e.NumOfTaps);
-                    MapClicked?.Invoke(this, args);
-
-                    if (args.Handled)
-                    {
-                        e.Handled = true;
-                    }
+                    e.Handled = true;
+                    return;
                 }
+
+                // Event isn't handled up to now.
+                // Than look, what we could do.
+
+                return;
             }
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
         }
     }
 

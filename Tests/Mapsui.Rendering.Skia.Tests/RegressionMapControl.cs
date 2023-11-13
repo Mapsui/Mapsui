@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.UI;
@@ -77,7 +76,7 @@ public class RegressionMapControl : IMapControl
         throw new NotImplementedException();
     }
 
-    public Task<MapInfo?> GetMapInfoAsync(MPoint screenPosition, int margin = 0)
+    public MapInfo? GetMapInfo(MPoint screenPosition, int margin = 0)
     {
         throw new NotImplementedException();
     }

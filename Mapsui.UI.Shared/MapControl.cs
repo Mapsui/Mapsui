@@ -532,12 +532,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     /// <inheritdoc />
-    public async Task<MapInfo?> GetMapInfoAsync(MPoint? screenPosition, int margin = 0)
+    public MapInfo? GetMapInfo(MPoint? screenPosition, int margin = 0)
     {
         if (screenPosition == null)
             return null;
 
-        return await Renderer.GetMapInfoAsync(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? new LayerCollection(), margin);
+        return Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? new LayerCollection(), margin);
     }
 
     /// <inheritdoc />
@@ -554,7 +554,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
     /// <param name="numTaps">Number of clickes/taps</param>
     /// <returns>True, if something done </returns>
-    private async Task<MapInfoEventArgs?> CreateMapInfoEventArgsAsync(
+    private MapInfoEventArgs? CreateMapInfoEventArgs(
         MPoint? screenPosition,
         MPoint? startScreenPosition, 
         int numTaps)
@@ -563,7 +563,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             return null;
 
         // Check which features in the map were tapped.
-        var mapInfo = await Renderer.GetMapInfoAsync(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? new LayerCollection());
+        var mapInfo = Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? new LayerCollection());
 
         if (mapInfo != null)
         {

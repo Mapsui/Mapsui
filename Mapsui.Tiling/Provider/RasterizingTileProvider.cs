@@ -263,7 +263,7 @@ public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
             layerRenderLayer
         };
 
-        var mapInfo = await renderer.GetMapInfoAsync(screenX, screenY, viewport, layers);
+        var mapInfo = renderer.GetMapInfo(screenX, screenY, viewport, layers);
         var infos = mapInfo?.MapInfoRecords;
         if (infos != null)
         {

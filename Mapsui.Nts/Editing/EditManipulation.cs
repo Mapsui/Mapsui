@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Nts.Extensions;
 using Mapsui.UI;
@@ -22,7 +21,7 @@ public class EditManipulation
 
     public static int MinPixelsMovedForDrag { get; set; } = 4;
 
-    public async Task<bool> Manipulate(MouseState mouseState, MPoint screenPosition,
+    public bool Manipulate(MouseState mouseState, MPoint screenPosition,
         EditManager editManager, IMapControl mapControl, bool isShiftDown)
     {
         switch (mouseState)
@@ -48,10 +47,10 @@ public class EditManipulation
                         if (isShiftDown)
                         {
                             return editManager.TryDeleteCoordinate(
-                                await mapControl.GetMapInfoAsync(screenPosition, editManager.VertexRadius), editManager.VertexRadius);
+                                mapControl.GetMapInfo(screenPosition, editManager.VertexRadius), editManager.VertexRadius);
                         }
                         return editManager.TryInsertCoordinate(
-                            await mapControl.GetMapInfoAsync(screenPosition, editManager.VertexRadius));
+                            mapControl.GetMapInfo(screenPosition, editManager.VertexRadius));
                     }
                     return editManager.AddVertex(mapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
                 }
@@ -61,7 +60,7 @@ public class EditManipulation
                     _mouseDownPosition = screenPosition;
                     // Take into account VertexRadius in feature select, because the objective
                     // is to select the vertex.
-                    var mapInfo = await mapControl.GetMapInfoAsync(screenPosition, editManager.VertexRadius);
+                    var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
                     if (editManager.EditMode == EditMode.Modify && mapInfo?.Feature != null)
                     {
                         return editManager.StartDragging(mapInfo, editManager.VertexRadius);
@@ -78,7 +77,7 @@ public class EditManipulation
                 }
             case MouseState.Dragging:
                 {
-                    var args = await mapControl.GetMapInfoAsync(screenPosition);
+                    var args = mapControl.GetMapInfo(screenPosition);
                     if (editManager.EditMode == EditMode.Modify)
                         return editManager.Dragging(args?.WorldPosition?.ToPoint());
                     if (editManager.EditMode == EditMode.Rotate)
@@ -89,7 +88,7 @@ public class EditManipulation
                     return false;
                 }
             case MouseState.Moving:
-                editManager.HoveringVertex(await mapControl.GetMapInfoAsync(screenPosition));
+                editManager.HoveringVertex(mapControl.GetMapInfo(screenPosition));
                 return false;
             case MouseState.DoubleClick:
                 _inDoubleClick = true;
