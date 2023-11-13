@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Limiting;
@@ -16,12 +15,11 @@ public class Navigator
 {
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
-    private List<Action> _initialization;
-
-    public Navigator()
-    {
-        _initialization = new List<Action>();
-    }
+    private List<Action> _initialization = new();
+    private MMinMax? _defaultZoomBounds;
+    private MRect? _defaultPanBounds;
+    private MMinMax? _overrideZoomBounds;
+    private MRect? _overridePanBounds;
 
     /// <summary>
     /// Called when a data refresh is needed. This directly after a non-animated viewport change
@@ -61,12 +59,28 @@ public class Navigator
     /// <summary>
     /// Overrides the default zoom bounds which are derived from the Map resolutions.
     /// </summary>
-    public MMinMax? OverrideZoomBounds { get; set; }
-    
+    public MMinMax? OverrideZoomBounds
+    {
+        get => _overrideZoomBounds;
+        set
+        {
+            _overrideZoomBounds = value;
+            InitializeIfNeeded();
+        }
+    }
+
     /// <summary>
     /// Overrides the default pan bounds which come from the Map extent.
     /// </summary>
-    public MRect? OverridePanBounds { get; set; }
+    public MRect? OverridePanBounds 
+    { 
+        get => _overridePanBounds;
+        set
+        {
+            _overridePanBounds = value;
+            InitializeIfNeeded();
+        }
+    }
 
     /// <summary>
     /// Overrides the default resolutions which are derived from the Map.Layers resolutions.
@@ -88,9 +102,9 @@ public class Navigator
 
     public bool IsInitialized { get; private set; } = false;
 
-    public void Initialization()
+    public void Initialize()
     {
-        if (_initialization is not null && !IsInitialized)
+        if (!IsInitialized)
         {
             if (_initialization.Count == 0)
             {
@@ -142,7 +156,7 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomToBox(MRect? box, MBoxFit boxFit = MBoxFit.Fit, long duration = -1, Easing? easing = default)
     {
-        if (!Viewport.HasSize())
+        if (!IsInitialized)
         {
             AddToInitialization(() => ZoomToBox(box, boxFit, duration, easing));
             return;
@@ -165,18 +179,12 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomToPanBounds(MBoxFit boxFit = MBoxFit.Fill, long duration = -1, Easing? easing = default)
     {
-        if (!Viewport.HasSize())
+        if (!IsInitialized)
         {
             AddToInitialization(() => ZoomToPanBounds(boxFit, duration, easing));
             return;
         }
 
-        if (PanBounds is null)
-        {
-            Logger.Log(LogLevel.Warning, $"{nameof(ZoomToPanBounds)} was called but ${nameof(PanBounds)} was null");
-            return;
-        }
-        
         ZoomToBox(PanBounds, boxFit, duration, easing);
     }
 
@@ -189,7 +197,7 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void CenterOnAndZoomTo(MPoint center, double resolution, long duration = -1, Easing? easing = default)
     {
-        if (!Viewport.HasSize())
+        if (!IsInitialized)
         {
             AddToInitialization(() => CenterOnAndZoomTo(center, resolution, duration, easing));
             return;
@@ -210,7 +218,7 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomTo(double resolution, long duration = -1, Easing? easing = default)
     {
-        if (!Viewport.HasSize())
+        if (!IsInitialized)
         {
             AddToInitialization(() => ZoomTo(resolution, duration, easing));
             return;
@@ -236,7 +244,7 @@ public class Navigator
     /// <param name="easing">The easing of the animation when duration is > 0</param>
     public void ZoomTo(double resolution, MPoint centerOfZoomInScreenCoordinates, long duration = -1, Easing? easing = default)
     {
-        if (!Viewport.HasSize())
+        if (!IsInitialized)
         {
             AddToInitialization(() => ZoomTo(resolution, centerOfZoomInScreenCoordinates, duration, easing));
             return;
@@ -261,7 +269,7 @@ public class Navigator
     }
 
     /// <summary>
-    /// Zoom in to the next resolutionin in the Navigator.Resolutions list.
+    /// Zoom in to the next resolution in the Navigator.Resolutions list.
     /// </summary>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
@@ -343,7 +351,7 @@ public class Navigator
     /// <param name="easing">Function for easing</param>
     public void CenterOn(MPoint center, long duration = -1, Easing? easing = default)
     {
-        if (!Viewport.HasSize())
+        if (!IsInitialized)
         {
             AddToInitialization(() => CenterOn(center, duration, easing));
             return;
@@ -374,7 +382,7 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void RotateTo(double rotation, long duration = -1, Easing? easing = default)
     {
-        if (!Viewport.HasSize())
+        if (!IsInitialized)
         {
             AddToInitialization(() => RotateTo(rotation, duration, easing));
             return;
@@ -438,8 +446,14 @@ public class Navigator
     {
         ClearAnimations();
         SetViewportWithLimit(Viewport with { Width = width, Height = height });
-        Initialization();
+        InitializeIfNeeded();
         OnRefreshDataRequest();
+    }
+
+    private void InitializeIfNeeded()
+    {
+        if (ShouldInitialize())
+            Initialize();
     }
 
     private void OnRefreshDataRequest()
@@ -557,18 +571,18 @@ public class Navigator
     {
         var limitedViewport = Limiter.Limit(goalViewport, PanBounds, ZoomBounds);
 
-        limitedViewport = LimitXYProportianalToResolution(Viewport, goalViewport, limitedViewport);
+        limitedViewport = LimitXYProportionalToResolution(Viewport, goalViewport, limitedViewport);
 
         return limitedViewport;
     }
 
-    private Viewport LimitXYProportianalToResolution(Viewport originalViewport, Viewport goalViewport, Viewport limitedViewport)
+    private Viewport LimitXYProportionalToResolution(Viewport originalViewport, Viewport goalViewport, Viewport limitedViewport)
     {
         // From a users experience perspective we want the x/y change to be limited to the same degree
         // as the resolution. This is to prevent the situation where you zoom out while hitting the zoom bounds
         // and you see no change in resolution, but you will see a change in pan.
 
-        var resolutionLimiting = CalculatResolutionLimiting(originalViewport.Resolution, goalViewport.Resolution, limitedViewport.Resolution);
+        var resolutionLimiting = CalculateResolutionLimiting(originalViewport.Resolution, goalViewport.Resolution, limitedViewport.Resolution);
 
         if (resolutionLimiting > 0)
         {
@@ -591,7 +605,7 @@ public class Navigator
     /// <param name="goalResolution"></param>
     /// <param name="limitedResolution"></param>
     /// <returns></returns>
-    private static double CalculatResolutionLimiting(double originalResolution, double goalResolution, double limitedResolution)
+    private static double CalculateResolutionLimiting(double originalResolution, double goalResolution, double limitedResolution)
     {
         var denominator = Math.Abs(goalResolution - originalResolution);
 
@@ -630,7 +644,8 @@ public class Navigator
         var zoomLock = ZoomLock;
         var rotationLock = RotationLock;
         // Add action to initialization list
-        _initialization.Add(() => {
+        _initialization.Add(() =>
+        {
             // Save current state of locks
             var savePanLock = PanLock;
             var saveZoomLock = ZoomLock;
@@ -647,14 +662,33 @@ public class Navigator
         });
     }
 
+    private bool ShouldInitialize() => !IsInitialized && CanInitialize();
+
+    private bool CanInitialize() => Viewport.HasSize() && PanBounds is not null; // Should we check on ZoomBounds as well?
+
     internal int GetAnimationsCount => _animations.Count();
-    
+
     /// <summary> Default Resolutions automatically set on Layers changed </summary>
-    internal IReadOnlyList<double> DefaultResolutions { get; set; }  = new List<double>();
-    
+    internal IReadOnlyList<double> DefaultResolutions { get; set; } = new List<double>();
+
     /// <summary> Default Zoom Bounds automatically set on Layers changed </summary>
-    internal MMinMax? DefaultZoomBounds { get; set; }
-    
+    internal MMinMax? DefaultZoomBounds 
+    { 
+        get => _defaultZoomBounds;
+        set { 
+            _defaultZoomBounds = value;
+            InitializeIfNeeded();
+        }
+    }
+
     /// <summary> Default Pan Bounds automatically set on Layers changed </summary>
-    internal MRect? DefaultPanBounds { get; set; }
+    internal MRect? DefaultPanBounds 
+    { 
+        get => _defaultPanBounds;
+        set
+        {
+            _defaultPanBounds = value;
+            InitializeIfNeeded();
+        }
+    }
 }
