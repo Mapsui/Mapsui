@@ -165,6 +165,12 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomToPanBounds(MBoxFit boxFit = MBoxFit.Fill, long duration = -1, Easing? easing = default)
     {
+        if (!Viewport.HasSize())
+        {
+            AddToInitialization(() => ZoomToPanBounds(boxFit, duration, easing));
+            return;
+        }
+
         if (PanBounds is null)
         {
             Logger.Log(LogLevel.Warning, $"{nameof(ZoomToPanBounds)} was called but ${nameof(PanBounds)} was null");
