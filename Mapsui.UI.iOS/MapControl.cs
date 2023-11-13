@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using CoreFoundation;
-using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.UI.iOS.Extensions;
 using Mapsui.Utilities;
@@ -132,19 +131,13 @@ public partial class MapControl : UIView, IMapControl
     private void OnDoubleTapped(UITapGestureRecognizer gesture)
     {
         var position = GetScreenPosition(gesture.LocationInView(this));
-        Catch.Exceptions(async () =>
-        {
-            OnInfo(await CreateMapInfoEventArgsAsync(position, position, 2));
-        });
+        OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 
     private void OnSingleTapped(UITapGestureRecognizer gesture)
     {
         var position = GetScreenPosition(gesture.LocationInView(this));
-        Catch.Exceptions(async () =>
-        {
-            OnInfo(await CreateMapInfoEventArgsAsync(position, position, 1));
-        });
+        OnInfo(CreateMapInfoEventArgs(position, position, 1));
     }
 
     private void OnPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
