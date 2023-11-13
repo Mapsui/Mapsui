@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Limiting;
@@ -19,10 +20,7 @@ public class Navigator
 
     public Navigator()
     {
-        _initialization = new List<Action>
-        {
-            () => ZoomToPanBounds()
-        };
+        _initialization = new List<Action>();
     }
 
     /// <summary>
@@ -94,6 +92,13 @@ public class Navigator
     {
         if (_initialization is not null && !IsInitialized)
         {
+            if (_initialization.Count == 0)
+            {
+                ZoomToPanBounds();
+                IsInitialized = true;
+                return;
+            }
+
             foreach (var action in _initialization)
             {
                 action();
@@ -137,6 +142,12 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomToBox(MRect? box, MBoxFit boxFit = MBoxFit.Fit, long duration = -1, Easing? easing = default)
     {
+        if (!Viewport.HasSize())
+        {
+            AddToInitialization(() => ZoomToBox(box, boxFit, duration, easing));
+            return;
+        }
+
         if (box == null) return;
         if (box.Width <= 0 || box.Height <= 0) return;
 
@@ -174,7 +185,7 @@ public class Navigator
     {
         if (!Viewport.HasSize())
         {
-            _initialization.Add(() => CenterOnAndZoomTo(center, resolution, duration, easing));
+            AddToInitialization(() => CenterOnAndZoomTo(center, resolution, duration, easing));
             return;
         }
 
@@ -195,7 +206,7 @@ public class Navigator
     {
         if (!Viewport.HasSize())
         {
-            _initialization.Add(() => ZoomTo(resolution, duration, easing));
+            AddToInitialization(() => ZoomTo(resolution, duration, easing));
             return;
         }
 
@@ -221,7 +232,7 @@ public class Navigator
     {
         if (!Viewport.HasSize())
         {
-            _initialization.Add(() => ZoomTo(resolution, centerOfZoomInScreenCoordinates, duration, easing));
+            AddToInitialization(() => ZoomTo(resolution, centerOfZoomInScreenCoordinates, duration, easing));
             return;
         }
 
@@ -328,7 +339,7 @@ public class Navigator
     {
         if (!Viewport.HasSize())
         {
-            _initialization.Add(() => CenterOn(center, duration, easing));
+            AddToInitialization(() => CenterOn(center, duration, easing));
             return;
         }
 
@@ -359,7 +370,7 @@ public class Navigator
     {
         if (!Viewport.HasSize())
         {
-            _initialization.Add(() => RotateTo(rotation, duration, easing));
+            AddToInitialization(() => RotateTo(rotation, duration, easing));
             return;
         }
 
@@ -600,6 +611,30 @@ public class Navigator
                 OnRefreshDataRequest();
             _animations = ViewportAnimation.Create(Viewport, viewport, duration, easing);
         }
+    }
+
+    /// <summary>
+    /// Add a call to a function called before initialization of Viewport to a list
+    /// </summary>
+    /// <param name="action">Function called before initialization</param>
+    private void AddToInitialization(Action action)
+    {
+        // Save state when this function is originally called
+        var panLock = PanLock;
+        var zoomLock = ZoomLock;
+        // Add action to initialization list
+        _initialization.Add(() => {
+            // Save current state of locks
+            var savePanLock = PanLock;
+            var saveZoomLock = ZoomLock;
+            // Set locks like they were at the time the action was called
+            PanLock = panLock;
+            ZoomLock = zoomLock;
+            action();
+            //Restore old settings of locks
+            PanLock = savePanLock;
+            ZoomLock = saveZoomLock;
+        });
     }
 
     internal int GetAnimationsCount => _animations.Count();
