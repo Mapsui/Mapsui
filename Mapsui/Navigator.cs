@@ -106,10 +106,11 @@ public class Navigator
     {
         if (!IsInitialized)
         {
+            IsInitialized = true;
+
             if (_initialization.Count == 0)
             {
                 ZoomToPanBounds();
-                IsInitialized = true;
                 return;
             }
 
@@ -119,7 +120,6 @@ public class Navigator
             }
 
             _initialization.Clear();
-            IsInitialized = true;
         }
     }
 
