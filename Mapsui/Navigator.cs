@@ -641,6 +641,11 @@ public class Navigator
         });
     }
 
+    public bool ShouldInitialize()
+    {
+        return !IsInitialized && Viewport.HasSize() && PanBounds is not null;
+    }
+
     internal int GetAnimationsCount => _animations.Count();
     
     /// <summary> Default Resolutions automatically set on Layers changed </summary>

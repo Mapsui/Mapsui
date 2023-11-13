@@ -424,7 +424,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public void CallInitializedIfNeeded()
     {
-        if (!Map.Navigator.IsInitialized && Map.Navigator.Viewport.HasSize() && Map.Navigator.PanBounds is not null)
+        if (Map.Navigator.ShouldInitialize())
         {
             Map.Navigator.Initialization();
         }
