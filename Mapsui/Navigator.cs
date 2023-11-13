@@ -34,12 +34,12 @@ public class Navigator
     public bool PanLock { get; set; }
 
     /// <summary>
-    /// When true the user an not rotate the map
+    /// When true the user an not zoom the map
     /// </summary>
     public bool ZoomLock { get; set; }
 
     /// <summary>
-    /// When true the user can not zoom into the map
+    /// When true the user can not rotate the map
     /// </summary>
     public bool RotationLock { get; set; }
 
