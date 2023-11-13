@@ -1,4 +1,5 @@
 ﻿using Mapsui.Animations;
+using Mapsui.Extensions;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -13,6 +14,7 @@ public class NavigatorTests
         // Arrange
         var navigator = new Navigator();
         navigator.SetSize(100, 100);
+        navigator.OverridePanBounds = new MRect(-100, -100, 100, 100);
         int navigatedCounter = 0;
         navigator.SetViewportAnimations(CreateAnimation());
         navigator.RefreshDataRequest += (s, e) => navigatedCounter++;
@@ -40,6 +42,7 @@ public class NavigatorTests
         // Arrange
         var navigator = new Navigator();
         navigator.SetSize(100, 100);
+        navigator.OverridePanBounds = new MRect(-100, -100, 100, 100);
         navigator.CenterOn(10, 20);
         var currentPinchCenter = new MPoint(10, 10);
         var previousPinchCenter = new MPoint(20, 20);
@@ -50,5 +53,20 @@ public class NavigatorTests
         // Assert
         Assert.AreEqual(expectedCenterX, navigator.Viewport.CenterX);
         Assert.AreEqual(expectedCenterY, navigator.Viewport.CenterY);
-    }  
+    }
+
+    [Test]
+    public void TestIfExtentCanNotChangeIfPanBoundsIsNotSet()
+    {
+        // Arrange
+        var navigator = new Navigator();
+        navigator.SetSize(100, 100);
+        var extentBefore = navigator.Viewport.ToExtent();
+
+        // Act
+        navigator.ZoomToBox(new MRect(100, 100, 200, 200));
+
+        // Assert
+        Assert.AreEqual(extentBefore, navigator.Viewport.ToExtent());
+    }
 }
