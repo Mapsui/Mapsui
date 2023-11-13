@@ -172,7 +172,7 @@ public class Navigator
     }
 
     /// <summary>
-    /// Navigate to the  <see cref="PanBounds" />.
+    /// Navigate to the <see cref="PanBounds" />.
     /// </summary>
     /// <param name="boxFit">Scale method to use to determine resolution</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
