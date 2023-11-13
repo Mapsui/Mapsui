@@ -56,7 +56,7 @@ public class Navigator
     /// Overrides the default zoom bounds which are derived from the Map resolutions.
     /// </summary>
     public MMinMax? OverrideZoomBounds { get; set; }
-    
+
     /// <summary>
     /// Overrides the default pan bounds which come from the Map extent.
     /// </summary>
@@ -82,7 +82,7 @@ public class Navigator
 
     public bool IsInitialized { get; private set; } = false;
 
-    public void Initialization()
+    public void Initialize()
     {
         if (!IsInitialized)
         {
@@ -170,7 +170,7 @@ public class Navigator
             Logger.Log(LogLevel.Warning, $"{nameof(ZoomToPanBounds)} was called but ${nameof(PanBounds)} was null");
             return;
         }
-        
+
         ZoomToBox(PanBounds, boxFit, duration, easing);
     }
 
@@ -432,7 +432,7 @@ public class Navigator
     {
         ClearAnimations();
         SetViewportWithLimit(Viewport with { Width = width, Height = height });
-        Initialization();
+        Initialize();
         OnRefreshDataRequest();
     }
 
@@ -551,18 +551,18 @@ public class Navigator
     {
         var limitedViewport = Limiter.Limit(goalViewport, PanBounds, ZoomBounds);
 
-        limitedViewport = LimitXYProportianalToResolution(Viewport, goalViewport, limitedViewport);
+        limitedViewport = LimitXYProportionalToResolution(Viewport, goalViewport, limitedViewport);
 
         return limitedViewport;
     }
 
-    private Viewport LimitXYProportianalToResolution(Viewport originalViewport, Viewport goalViewport, Viewport limitedViewport)
+    private Viewport LimitXYProportionalToResolution(Viewport originalViewport, Viewport goalViewport, Viewport limitedViewport)
     {
         // From a users experience perspective we want the x/y change to be limited to the same degree
         // as the resolution. This is to prevent the situation where you zoom out while hitting the zoom bounds
         // and you see no change in resolution, but you will see a change in pan.
 
-        var resolutionLimiting = CalculatResolutionLimiting(originalViewport.Resolution, goalViewport.Resolution, limitedViewport.Resolution);
+        var resolutionLimiting = CalculateResolutionLimiting(originalViewport.Resolution, goalViewport.Resolution, limitedViewport.Resolution);
 
         if (resolutionLimiting > 0)
         {
@@ -585,7 +585,7 @@ public class Navigator
     /// <param name="goalResolution"></param>
     /// <param name="limitedResolution"></param>
     /// <returns></returns>
-    private static double CalculatResolutionLimiting(double originalResolution, double goalResolution, double limitedResolution)
+    private static double CalculateResolutionLimiting(double originalResolution, double goalResolution, double limitedResolution)
     {
         var denominator = Math.Abs(goalResolution - originalResolution);
 
@@ -624,7 +624,8 @@ public class Navigator
         var zoomLock = ZoomLock;
         var rotationLock = RotationLock;
         // Add action to initialization list
-        _initialization.Add(() => {
+        _initialization.Add(() =>
+        {
             // Save current state of locks
             var savePanLock = PanLock;
             var saveZoomLock = ZoomLock;
@@ -641,19 +642,18 @@ public class Navigator
         });
     }
 
-    public bool ShouldInitialize()
-    {
-        return !IsInitialized && Viewport.HasSize() && PanBounds is not null;
-    }
+    public bool ShouldInitialize() => !IsInitialized && CanInitialize();
+
+    private bool CanInitialize() => Viewport.HasSize() && PanBounds is not null;
 
     internal int GetAnimationsCount => _animations.Count();
-    
+
     /// <summary> Default Resolutions automatically set on Layers changed </summary>
-    internal IReadOnlyList<double> DefaultResolutions { get; set; }  = new List<double>();
-    
+    internal IReadOnlyList<double> DefaultResolutions { get; set; } = new List<double>();
+
     /// <summary> Default Zoom Bounds automatically set on Layers changed </summary>
     internal MMinMax? DefaultZoomBounds { get; set; }
-    
+
     /// <summary> Default Pan Bounds automatically set on Layers changed </summary>
     internal MRect? DefaultPanBounds { get; set; }
 }

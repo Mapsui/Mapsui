@@ -426,7 +426,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (Map.Navigator.ShouldInitialize())
         {
-            Map.Navigator.Initialization();
+            Map.Navigator.Initialize();
         }
     }
 
