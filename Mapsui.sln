@@ -287,10 +287,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Avalonia.Des
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Avalonia.iOS", "Samples\Avalonia\Mapsui.Samples.Avalonia.iOS\Mapsui.Samples.Avalonia.iOS.csproj", "{A8808FA9-B3FC-4C13-8C22-22DC2C9A1EA7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Uno.Skia.Tizen", "Samples\Mapsui.Samples.Uno\Mapsui.Samples.Uno.Skia.Tizen\Mapsui.Samples.Uno.Skia.Tizen.csproj", "{D8352217-C2EE-4CF5-B2F1-F714CD83DBDA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Uno.UWP", "Samples\Mapsui.Samples.Uno\Mapsui.Samples.Uno.UWP\Mapsui.Samples.Uno.UWP.csproj", "{08ACB538-5B84-40BA-9653-A74EE6C2B18D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHubActions", "GitHubActions", "{7FE378C2-E555-4CF4-A230-63FD8321962B}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\dotnet-docs.yml = .github\workflows\dotnet-docs.yml
