@@ -32,7 +32,6 @@ public class RegressionMapControl : IMapControl
         {
             _map = value ?? throw new ArgumentNullException();
             _map.Navigator.SetSize(ScreenWidth, ScreenHeight);
-            TryToCallHomeAtStartup();
         }
     }
 
