@@ -16,13 +16,19 @@ internal static class PolygonExtensions
     /// <returns></returns>
     public static SKPath ToSkiaPath(this Polygon polygon, Viewport viewport, SKRect clipRect, float strokeWidth)
     {
-        // Reduce exterior ring to parts, that are visible in clipping rectangle
-        // Inflate clipRect, so that we could be sure, nothing of stroke is visible on screen
-        var exterior = ClippingFunctions.ReducePointsToClipRect(polygon.ExteriorRing?.Coordinates, viewport, SKRect.Inflate(clipRect, strokeWidth * 2, strokeWidth * 2));
-
         // Create path for exterior and interior parts
         var path = new SKPath();
 
+        if (polygon.ExteriorRing is null)
+            return path;
+
+        // Bring outer ring in CCW direction
+        var outerRing = (polygon.ExteriorRing.IsRing && ((LinearRing)polygon.ExteriorRing).IsCCW) ? polygon.ExteriorRing : polygon.ExteriorRing.Reverse();
+
+        // Reduce exterior ring to parts, that are visible in clipping rectangle
+        // Inflate clipRect, so that we could be sure, nothing of stroke is visible on screen
+        var exterior = ClippingFunctions.ReducePointsToClipRect(outerRing?.Coordinates, viewport, SKRect.Inflate(clipRect, strokeWidth * 2, strokeWidth * 2));
+        
         if (exterior.Count == 0)
             return path;
 
@@ -37,13 +43,19 @@ internal static class PolygonExtensions
 
         foreach (var interiorRing in polygon.InteriorRings)
         {
+            if (interiorRing is null)
+                continue;
+
             // note: For Skia inner rings need to be clockwise and outer rings
             // need to be counter clockwise (if this is the other way around it also
             // seems to work)
             // this is not a requirement of the OGC polygon.
 
+            // Bring inner ring in CW direction
+            var innerRing = (interiorRing.IsRing && ((LinearRing)interiorRing).IsCCW) ? interiorRing?.Reverse() : interiorRing;
+
             // Reduce interior ring to parts, that are visible in clipping rectangle
-            var interior = ClippingFunctions.ReducePointsToClipRect(interiorRing.Coordinates, viewport, SKRect.Inflate(clipRect, strokeWidth, strokeWidth));
+            var interior = ClippingFunctions.ReducePointsToClipRect(innerRing?.Coordinates, viewport, SKRect.Inflate(clipRect, strokeWidth, strokeWidth));
 
             if (interior.Count == 0)
                 continue;
