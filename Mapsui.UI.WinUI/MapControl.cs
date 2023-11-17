@@ -165,7 +165,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
     {
         var tabPosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouchingTouched(tabPosition, true, 1, ShiftPressed))
+        if (HandleTouchingTouched(tabPosition, _pointerDownPosition, true, 1, ShiftPressed))
         {
             e.Handled = true;
             return; 
