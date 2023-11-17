@@ -59,12 +59,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             // Catch Xamarin Forms not initialized exception happens in unit tests.
             Logger.Log(LogLevel.Error, ex.Message, ex);
         }
-        
+
 #if __FORMS__
         Callout.DefaultTitleFontName = Font.Default.FontFamily;
         Callout.DefaultSubtitleFontName = Font.Default.FontFamily;
 #endif
-}
+    }
 
 #if __MAUI__
     // GPU does not work currently on MAUI
@@ -303,7 +303,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             var ticks = DateTime.Now.Ticks;
 
             var location = GetScreenPosition(e.Location);
-            
+
             if (HandleTouch(e, location))
             {
                 e.Handled = true;
@@ -454,7 +454,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             _ => false
         };
     }
-    
+
     public bool ShiftPessed { get; set; }
 
     private bool IsAround(TouchEvent releasedTouch)
