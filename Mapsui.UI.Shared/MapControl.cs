@@ -616,11 +616,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool HandleTouchingTouched(MPoint position, bool leftButton, int clickCount, bool shift)
+    private bool HandleTouchingTouched(MPoint position, MPoint? startPosition, bool leftButton, int clickCount, bool shift)
     {
         bool result = HandleTouching(position, leftButton, clickCount, shift);
 
-        if (HandleTouched(position, _downMousePosition, leftButton, clickCount, shift))
+        if (HandleTouched(position, startPosition, leftButton, clickCount, shift))
         {
             result = true; 
         }

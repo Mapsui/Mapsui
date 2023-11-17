@@ -261,7 +261,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         // We have a new interaction with the screen, so stop all navigator animations
         var tapPosition = _mousePosition;
-        if (tapPosition != null && HandleTouchingTouched(tapPosition, true, 2, ShiftPressed))
+        if (tapPosition != null && HandleTouchingTouched(tapPosition, _downMousePosition, true, 2, ShiftPressed))
         {
             e.Handled = true;
             return;
