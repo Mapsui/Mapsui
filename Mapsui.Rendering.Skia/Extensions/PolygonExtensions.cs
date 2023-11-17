@@ -1,6 +1,7 @@
 ﻿using Mapsui.Rendering.Skia.Functions;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
+using System.Linq;
 
 namespace Mapsui.Rendering.Skia.Extensions;
 
@@ -23,8 +24,8 @@ internal static class PolygonExtensions
             return path;
 
         // Bring outer ring in CCW direction
-        var outerRing = (polygon.ExteriorRing.IsRing && ((LinearRing)polygon.ExteriorRing).IsCCW) ? polygon.ExteriorRing : polygon.ExteriorRing.Reverse();
-
+        var outerRing = (polygon.ExteriorRing.IsRing && ((LinearRing)polygon.ExteriorRing).IsCCW) ? polygon.ExteriorRing : (LineString)((Geometry)polygon.ExteriorRing).Reverse();
+        
         // Reduce exterior ring to parts, that are visible in clipping rectangle
         // Inflate clipRect, so that we could be sure, nothing of stroke is visible on screen
         var exterior = ClippingFunctions.ReducePointsToClipRect(outerRing?.Coordinates, viewport, SKRect.Inflate(clipRect, strokeWidth * 2, strokeWidth * 2));
@@ -52,8 +53,8 @@ internal static class PolygonExtensions
             // this is not a requirement of the OGC polygon.
 
             // Bring inner ring in CW direction
-            var innerRing = (interiorRing.IsRing && ((LinearRing)interiorRing).IsCCW) ? interiorRing?.Reverse() : interiorRing;
-
+            var innerRing = (interiorRing.IsRing && ((LinearRing)interiorRing).IsCCW) ? (LineString)((Geometry)interiorRing).Reverse() : interiorRing;
+            
             // Reduce interior ring to parts, that are visible in clipping rectangle
             var interior = ClippingFunctions.ReducePointsToClipRect(innerRing?.Coordinates, viewport, SKRect.Inflate(clipRect, strokeWidth, strokeWidth));
 
