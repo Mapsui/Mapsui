@@ -20,7 +20,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Android", "Mapsui
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB6CAC-1C30-42C9-B628-BACEBF790AB9}"
 	ProjectSection(SolutionItems) = preProject
-		Scripts\buildpack.bat = Scripts\buildpack.bat
 		Scripts\BuildSamplesDocumentation.ps1 = Scripts\BuildSamplesDocumentation.ps1
 		Scripts\BuildSamplesWebsite.ps1 = Scripts\BuildSamplesWebsite.ps1
 		Scripts\InstallDependencies.cmd = Scripts\InstallDependencies.cmd
@@ -37,11 +36,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 		Directory.Packages.props = Directory.Packages.props
 		global.json = global.json
-		InitProperty.cs = InitProperty.cs
 		LICENSE = LICENSE
 		Mapsui.sln.DotSettings = Mapsui.sln.DotSettings
 		Nuget.config = Nuget.config
-		Nullable.cs = Nullable.cs
 		README.md = README.md
 	EndProjectSection
 EndProject

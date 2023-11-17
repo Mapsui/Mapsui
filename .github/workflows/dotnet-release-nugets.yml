@@ -12,7 +12,7 @@ jobs:
   build:
 
     env:
-      SOLUTION: 'Mapsui.NoMSBuild.slnf'
+      SOLUTION: 'Mapsui.sln'
 
     runs-on: windows-latest
 
@@ -31,10 +31,7 @@ jobs:
          dotnet-version: |
            8.0.x
          include-prerelease: true
-      
-    - name: Setup msbuild
-      uses: microsoft/setup-msbuild@v1.1
-
+       
       # The version tag needs to be set before the release. If not if will fail on nuget publish.
     - name: Set VERSION_OF_RELEASE to last tag
       run: |

@@ -65,52 +65,7 @@ jobs:
       with:
         name: nupkg.linux
         path: Artifacts/*.nupkg
-
-  macBuildLegacy:  
-    # macos-latest is currently macos-13
-    runs-on: macos-12
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    # Cache Nugets
-    - uses: actions/cache@v3
-      with:
-        path: ~/.nuget/packages     
-        key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
-        restore-keys: |
-            ${{ runner.os }}-nuget15-
-    - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.1.1      
-      with:
-        nuget-version: latest
-    # .Net 7 update     
-    - name: Setup .NET 8 SDK
-      uses: actions/setup-dotnet@v3
-      with:
-         dotnet-version: |
-           8.0.x
-         include-prerelease: true
-    - name: Setup Xcode version 14.2
-      uses: maxim-lobanov/setup-xcode@v1.6.0
-      with:
-        xcode-version: '14.2'
-    # macos image needs Visual Studio for Mac installed
-    - name: Restore dependencies Legacy
-      run: nuget restore Mapsui.Mac.Legacy.sln                          
-    # Builds that need XCode 14.0
-    # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
-    - name: Setup Xcode version 14.0
-      uses: maxim-lobanov/setup-xcode@v1.6.0
-      with:
-        xcode-version: '14.0'
-    # Release Build
-    - name: Upload packages
-      uses: actions/upload-artifact@v3
-      with:
-        name: nupkg.mac
-        path: Artifacts/*.nupkg   
-
+  
   macBuild:  
     # macos-latest is currently macos-13
     runs-on: macos-13
@@ -148,9 +103,6 @@ jobs:
          include-prerelease: true
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
-    # macos image needs Visual Studio for Mac installed
-    #- name: Restore dependencies Legacy
-    #  run: nuget restore Mapsui.Mac.Legacy.sln   
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
     # Samples Build               
@@ -240,25 +192,19 @@ jobs:
       uses: NuGet/setup-nuget@v1.1.1
       with:
         nuget-version: latest
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1.1
-      with:
-        vs-prerelease: true
     - name: install maui macos android ios maccatalyst wasm-tools
       run: Scripts/InstallDependencies.cmd
     #- name: uno-check install
     #  run: dotnet tool install -g uno.check
     #- name: uno-check fix
     #  run: uno-check --fix --non-interactive
-    - name: Restore dependencies (nuget)
-      run: nuget restore Mapsui.MsBuild.slnf      
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.NoMsBuild.slnf  
-    # dotnet format whitespace
+      run: dotnet restore Mapsui.sln  
+    # dotnet format whitespace & style
     - name: check whitespace formatting
       run: |
-        dotnet format whitespace  Mapsui.sln --verbosity normal --verify-no-changes
-        dotnet format style  Mapsui.sln --verbosity normal --verify-no-changes
+        dotnet format whitespace Mapsui.sln --verbosity normal --verify-no-changes
+        dotnet format style Mapsui.sln --verbosity normal --verify-no-changes
         # The analyzers still have errors be we are close to fixing all of them
         # dotnet format  analyzers  Mapsui.sln --verbosity normal --verify-no-changes
     # Test Build
@@ -294,9 +240,7 @@ jobs:
       run: |
        ./Scripts/SamplesMapsuiNugetReferences.ps1 $(git describe --tags)       
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.NoMsBuild.slnf  
-    - name: Restore dependencies (nuget)
-      run: nuget restore Mapsui.MsBuild.slnf   
+      run: dotnet restore Mapsui.sln  
     # Samples Build 
     - name: Mapsui.Samples.Avalonia
       run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj
@@ -313,7 +257,7 @@ jobs:
     - name: Mapsui.Samples.Maui.MapView
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Maui.MapView/Mapsui.Samples.Maui.MapView.csproj
     - name: Mapsui.Samples.WinUI
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug -p:Platform=x86 Samples\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI.csproj
+      run: dotnet build --no-restore --configuration Debug /p:Platform=x64 Samples/Mapsui.Samples.WinUI/Mapsui.Samples.WinUI/Mapsui.Samples.WinUI.csproj
     - name: Mapsui.Samples.Wpf
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf/Mapsui.Samples.Wpf.csproj  
     # Samples Uno WinUI

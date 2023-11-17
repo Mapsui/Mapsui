@@ -45,11 +45,7 @@ public static class CacheExtensions
             {
                 if (response != null)
                 {
-#if NETSTANDARD2_0
-                    response.Dispose();
-#else                        
                     await response.DisposeAsync();
-#endif    
                 }
             }
 

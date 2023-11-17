@@ -1,20 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-    <TargetFrameworks Condition="'$(SolutionName)' != 'Mapsui.Mac.Legacy'">$(TargetFrameworks);net6.0</TargetFrameworks>
-    <Configurations>Release;Debug</Configurations>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <Description>Mapsui - Library for mapping</Description>
     <PackageTags>$(PackageTags) rendering skia</PackageTags>
 		<IsPackable>true</IsPackable>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="..\Nullable.cs" Link="Nullable.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="SkiaSharp" />
