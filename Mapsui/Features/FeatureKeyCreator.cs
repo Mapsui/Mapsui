@@ -9,7 +9,7 @@ public class FeatureKeyCreator<T> where T : notnull
 
     /// <summary> Number of Keys to be created </summary>
     /// <param name="numberOfKey">number of keys</param>
-    public FeatureKeyCreator(int numberOfKey = 100000)    
+    public FeatureKeyCreator(int numberOfKey = 100000)
     {
         _keys = new LruCache<T, uint>(numberOfKey);
     }

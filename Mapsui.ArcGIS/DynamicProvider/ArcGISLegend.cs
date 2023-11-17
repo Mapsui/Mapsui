@@ -81,11 +81,7 @@ public class ArcGisLegend
             stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
             data = StreamHelper.ReadFully(stream);
             _urlPersistentCache?.Add(uri, data);
-#if NET6_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER                    
             await stream.DisposeAsync();
-#else
-            stream.Dispose();
-#endif
         }
 
         stream = new MemoryStream(data);

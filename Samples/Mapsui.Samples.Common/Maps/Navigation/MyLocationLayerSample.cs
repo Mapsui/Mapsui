@@ -24,7 +24,7 @@ public class MyLocationLayerSample : ISample, IDisposable
 
         _myLocationLayer?.Dispose();
         _myLocationLayer = new MyLocationLayer(map)
-        { 
+        {
             IsCentered = false,
         };
 

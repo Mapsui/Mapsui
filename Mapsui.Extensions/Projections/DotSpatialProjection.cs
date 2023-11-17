@@ -13,7 +13,6 @@ using Mapsui.Nts;
 using Mapsui.Nts.Projections;
 using Mapsui.Projections;
 using NetTopologySuite.Geometries;
-using NetTopologySuite.Geometries.Utilities;
 
 namespace Mapsui.Extensions.Projections;
 
@@ -198,7 +197,7 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
             Projections[id] = result;
         }
 
-        return result; 
+        return result;
     }
 
     private static GeometryTransform? GetGeometryTransformation(int? fromId, int? toId)

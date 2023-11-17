@@ -31,7 +31,7 @@ public class KeepCenterInMapSample : ISample
 
         return Task.FromResult(map);
     }
-        
+
     private static MRect GetLimitsOfMadagaskar()
     {
         var (minX, minY) = SphericalMercator.FromLonLat(41.8, -27.2);

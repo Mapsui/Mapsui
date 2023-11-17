@@ -259,7 +259,7 @@ public class WFSProvider : IProvider, IDisposable
         ICredentials? credentials = null)
     {
         return await CreateAsync(
-            getCapabilitiesUri, 
+            getCapabilitiesUri,
             nsPrefix,
             featureType,
             GeometryTypeEnum.Unknown,
@@ -670,7 +670,7 @@ public class WFSProvider : IProvider, IDisposable
     /// </summary>
     private async Task GetFeatureTypeInfoAsync()
     {
-    
+
         _featureTypeInfo = new WfsFeatureTypeInfo();
         var config = new WFSClientHttpConfigurator(_textResources);
 
@@ -981,7 +981,7 @@ public class WFSProvider : IProvider, IDisposable
             GeometryName = geomName,
             GeometryType = geomType
         };
-        
+
     }
 
     private void ResolveFeatureType(string featureType)

@@ -78,7 +78,7 @@ public class CalloutSample : ISample
             Title = title,
             TitleFont = { FontFamily = null, Size = 15, Italic = false, Bold = true },
             TitleFontColor = Color.Black,
-            
+
             Subtitle = subtitle,
             SubtitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
             SubtitleFontColor = Color.Gray,

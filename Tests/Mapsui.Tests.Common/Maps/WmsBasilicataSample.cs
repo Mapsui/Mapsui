@@ -28,6 +28,7 @@ public class WmsBasilicataSample : ISample
         map.Navigator.RotationLock = true;
         map.Navigator.OverridePanBounds = panBounds;
         map.Navigator.ZoomToBox(panBounds);        
+
         return map;
     }
 
