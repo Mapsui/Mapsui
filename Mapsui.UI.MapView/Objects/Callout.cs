@@ -7,29 +7,13 @@ using Mapsui.Extensions;
 using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
-#if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
-
 using Color = Microsoft.Maui.Graphics.Color;
-using KnownColor = Mapsui.UI.Maui.KnownColor;
 using Point = Microsoft.Maui.Graphics.Point;
-#else
-using Mapsui.UI.Forms.Extensions;
-using Xamarin.Forms;
-using CalloutStyle = Mapsui.Styles.CalloutStyle;
 
-using Color = Xamarin.Forms.Color;
-using KnownColor = Xamarin.Forms.Color;
-using Point = Xamarin.Forms.Point;
-#endif
-
-#if __MAUI__
 namespace Mapsui.UI.Maui;
-#else
-namespace Mapsui.UI.Forms;
-#endif
 
 public class Callout : IFeatureProvider, IDisposable, INotifyPropertyChanged
 {

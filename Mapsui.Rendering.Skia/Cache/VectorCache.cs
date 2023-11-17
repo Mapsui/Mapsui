@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Reflection;
 using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Styles;
@@ -18,7 +17,7 @@ public class VectorCache : IVectorCache
     public VectorCache(ISymbolCache symbolCache, int capacity)
     {
         _pathParamCache = new(Math.Min(capacity, 1));
-        _pathCache = new (Math.Max(capacity, 1));
+        _pathCache = new(Math.Max(capacity, 1));
         _symbolCache = symbolCache;
     }
 
@@ -59,10 +58,10 @@ public class VectorCache : IVectorCache
 
     public TPath GetOrCreatePath<TPath, TFeature, TGeometry>(
         Viewport viewport,
-        TFeature feature, 
+        TFeature feature,
         TGeometry geometry,
-        float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath) 
-        where TPath : class 
+        float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath)
+        where TPath : class
         where TGeometry : class
         where TFeature : class, IFeature
     {

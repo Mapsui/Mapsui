@@ -24,8 +24,8 @@ public class ViewportExtensionsTests
 
     const double halfEpsilon = Constants.Epsilon * 0.5;
     [Test]
-    [TestCase(0, false)]    
-    
+    [TestCase(0, false)]
+
     [TestCase(1, true)]
     [TestCase(-1, true)]
 
@@ -56,7 +56,7 @@ public class ViewportExtensionsTests
     [TestCase(-360, false)]
     [TestCase(-540, true)]
     [TestCase(-720, false)]
-    [TestCase(-900, true)]    
+    [TestCase(-900, true)]
     [TestCase(-1080, false)]
     public void IsRotatedTest(double rotation, bool IsRotated)
     {

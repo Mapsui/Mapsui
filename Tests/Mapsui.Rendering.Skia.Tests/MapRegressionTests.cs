@@ -54,7 +54,7 @@ public class MapRegressionTests
 
     public static object[] RegressionSamples => _regressionSamples ??= AllSamples.GetSamples().Where(f => ExcludedSamples.All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName).ToArray();
 
-    public static object[] ExcludedSamples => _excludedSamples ??= new ISampleBase[] 
+    public static object[] ExcludedSamples => _excludedSamples ??= new ISampleBase[]
     {
         new AnimatedPointsSample()
     };
@@ -172,7 +172,7 @@ public class MapRegressionTests
     private static async Task<RegressionMapControl> InitMapAsync(ISampleBase sample)
     {
         var mapControl = new RegressionMapControl();
-        
+
         mapControl.SetSize(800, 600);
 
         if (sample is IPrepareSampleTest prepareTest)

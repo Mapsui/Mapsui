@@ -1,5 +1,4 @@
 ﻿using System;
-using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
@@ -55,10 +54,10 @@ public class RenderCache : IRenderCache
 
     public TPath GetOrCreatePath<TPath, TFeature, TGeometry>(
         Viewport viewport,
-        TFeature feature, 
+        TFeature feature,
         TGeometry geometry,
-        float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath) 
-        where TPath : class 
+        float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath)
+        where TPath : class
         where TGeometry : class
         where TFeature : class, IFeature
     {

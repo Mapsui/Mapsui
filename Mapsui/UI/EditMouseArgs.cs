@@ -8,7 +8,7 @@ public class EditMouseArgs
         LeftButton = leftButton;
         ClickCount = clickCount;
     }
-    
+
     public int ClickCount { get; }
     public bool Handled { get; set; }
     public MPoint ScreenPosition { get; }

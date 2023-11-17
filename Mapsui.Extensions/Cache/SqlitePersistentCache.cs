@@ -8,10 +8,6 @@ using Mapsui.Cache;
 using Mapsui.Logging;
 using SQLite;
 
-#if NETSTANDARD2_0
-using BrotliSharpLib;
-#endif
-
 namespace Mapsui.Extensions.Cache;
 
 public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCache
@@ -224,11 +220,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             try
             {
                 using var outputStream = new MemoryStream();
-#if NETSTANDARD2_0
-                using (var compressStream = new BrotliStream(outputStream, CompressionMode.Compress))
-#else
                 using (var compressStream = new BrotliStream(outputStream, CompressionLevel.Fastest))
-#endif
                 {
                     compressStream.Write(bytes, 0, bytes.Length);
                 }
@@ -255,7 +247,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 
         return (bytes, NoCompression);
     }
-    
+
     private byte[]? Decompress(byte[]? bytes, string? compression)
     {
         if (bytes == null || string.IsNullOrEmpty(compression) || string.Equals(compression, NoCompression, StringComparison.InvariantCultureIgnoreCase))

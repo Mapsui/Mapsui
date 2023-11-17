@@ -43,7 +43,7 @@ public partial class MapControl : ComponentBase, IMapControl
     public int ZoomModifier { get; set; } = Keys.Control;
     public string ElementId => _elementId;
     protected MapsuiJsInterop? Interop =>
-            _interop == null && JsRuntime != null 
+            _interop == null && JsRuntime != null
                 ? _interop ??= new MapsuiJsInterop(JsRuntime)
                 : _interop;
 
@@ -161,7 +161,7 @@ public partial class MapControl : ComponentBase, IMapControl
         await Interop.DisableTouchAsync(_elementId);
         _pixelDensityFromInterop = await Interop.GetPixelDensityAsync();
     }
-    
+
     private void OnSizeChanged()
     {
         SetViewportSize();
@@ -397,7 +397,7 @@ public partial class MapControl : ComponentBase, IMapControl
                 Map.Navigator.Drag(touchState.Center, _previousTouchState.Center);
         }
         _previousTouchState = touchState;
-   }
+    }
 
     public void OnTouchEnd(TouchEventArgs e)
     {

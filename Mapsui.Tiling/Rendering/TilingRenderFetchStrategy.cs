@@ -33,7 +33,7 @@ public class TilingRenderFetchStrategy : IRenderFetchStrategy
             var mRect = tileInfo.Extent.ToMRect();
             if (!result.Any(f => mRect.Equals(f.Extent)))
             {
-                var missingTile = _lastFetch?.FirstOrDefault(f =>  mRect.Equals(f.Extent));
+                var missingTile = _lastFetch?.FirstOrDefault(f => mRect.Equals(f.Extent));
                 if (missingTile != null)
                 {
                     missingFeatures.Add(missingTile);

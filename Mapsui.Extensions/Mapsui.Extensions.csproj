@@ -1,16 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-    <TargetFrameworks Condition="'$(SolutionName)' != 'Mapsui.Mac.Legacy'">$(TargetFrameworks);net6.0</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <description>Mapsui - Library for mapping Extensions</description>
     <PackageTags>$(PackageTags) arcgis geotiff cache projection</PackageTags>
 		<IsPackable>true</IsPackable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="..\Nullable.cs" Link="Nullable.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Nts\Mapsui.Nts.csproj" />
@@ -24,10 +19,6 @@
     <PackageReference Include="sqlite-net-pcl" />
     <PackageReference Include="SQLitePCLRaw.bundle_green" />
     <PackageReference Include="DotSpatial.Projections" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework)=='netstandard2.0' or $(TargetFramework)=='netstandard2.1' ">
-    <PackageReference Include="BrotliSharpLib" />
   </ItemGroup>
 
 </Project>
