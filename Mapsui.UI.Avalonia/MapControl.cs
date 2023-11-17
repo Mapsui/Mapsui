@@ -15,11 +15,11 @@ using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.UI.Avalonia.Extensions;
 using Mapsui.UI.Avalonia.Utils;
-using Mapsui.UI.Utils;
 using Mapsui.Utilities;
-using ReactiveUI;
+using Logger = Mapsui.Logging.Logger;
 
 namespace Mapsui.UI.Avalonia;
 
@@ -212,7 +212,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         _touches.TryRemove(e.Pointer.Id, out _);
 
         var leftButtonPressed = e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased;
-        if (HandleTouched(e.GetPosition(this).ToMapsui(), leftButtonPressed, 1, ShiftPressed))
+
+        if (HandleTouched(e.GetPosition(this).ToMapsui(), _downMousePosition,  leftButtonPressed, 1, ShiftPressed))
         {
             e.Handled = true;
             return;

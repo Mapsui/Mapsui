@@ -188,7 +188,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
         var mousePosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouched(mousePosition, true, e.ClickCount, ShiftPressed))
+        if (HandleTouched(mousePosition, _downMousePosition,true, e.ClickCount, ShiftPressed))
             return;
 
         if (_previousMousePosition != null)

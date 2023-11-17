@@ -449,7 +449,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         return e.ActionType switch
         {
             SKTouchAction.Pressed when HandleTouching(location, true, Math.Max(1, _numOfTaps), ShiftPessed) => true,
-            SKTouchAction.Released when HandleTouched(location, true, 0, ShiftPessed) => true,
+            SKTouchAction.Released when HandleTouched(location, _firstTouch, true, 0, ShiftPessed) => true,
             SKTouchAction.Moved when HandleMoving(location, true, Math.Max(1, _numOfTaps), ShiftPessed) => true,
             _ => false
         };

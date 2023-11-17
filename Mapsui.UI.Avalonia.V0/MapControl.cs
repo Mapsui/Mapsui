@@ -13,6 +13,7 @@ using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.UI.Avalonia.V0.Extensions;
 
 namespace Mapsui.UI.Avalonia.V0;
@@ -159,7 +160,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
         var leftButtonPressed = e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased;
-        if (HandleTouched(e.GetPosition(this).ToMapsui(), leftButtonPressed, 1, ShiftPressed))
+       
+        if (HandleTouched(e.GetPosition(this).ToMapsui(), _downMousePosition, leftButtonPressed, 1, ShiftPressed))
         {
             e.Handled = true;
             return;

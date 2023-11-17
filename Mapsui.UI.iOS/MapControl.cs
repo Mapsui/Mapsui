@@ -16,6 +16,7 @@ public partial class MapControl : UIView, IMapControl
     private SKCanvasView? _canvas;
     private double _virtualRotation;
     private bool _init;
+    private MPoint? _touchBeginPosition;
 
     public static bool UseGPU { get; set; } = true;
 
@@ -172,7 +173,7 @@ public partial class MapControl : UIView, IMapControl
 
         if (touches.AnyObject is UITouch touch)
         {
-            var position = touch.LocationInView(this).ToMapsui();
+            _touchBeginPosition = touch.LocationInView(this).ToMapsui();
             if (HandleTouching(position, true, 1, false))
             {
                 return;
@@ -229,7 +230,7 @@ public partial class MapControl : UIView, IMapControl
         if (touches.AnyObject is UITouch touch)
         {
             var position = touch.LocationInView(this).ToMapsui();
-            if (HandleTouched(position, true, 1, false))
+            if (HandleTouched(position, _touchBeginPosition, true, 1, false))
             {
                 return;
             }

@@ -282,7 +282,7 @@ public partial class MapControl : ViewGroup, IMapControl
         return action switch
         {
             MotionEventActions.Down when HandleTouching(location, true, Math.Max(1, 0), false) => true,
-            MotionEventActions.Up when HandleTouched(location, true, 0, false) => true,
+            MotionEventActions.Up when HandleTouched(location, _previousTouch, true, 0, false) => true,
             MotionEventActions.Move when HandleMoving(location, true, Math.Max(1, 0), false) => true,
             _ => false
         };
