@@ -64,7 +64,7 @@
     <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" VersionOverride="3.3.1" />
     <PackageReference Include="SkiaSharp.Views.Uno" />
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
-    <PackageReference Include="Microsoft.Windows.Compatibility" VersionOverride="6.0.0" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" VersionOverride="7.0.5" />
   </ItemGroup>
 
   <!--Harfbuzz Sharp references Workaround for this issue-->
