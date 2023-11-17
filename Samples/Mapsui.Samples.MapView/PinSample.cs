@@ -7,24 +7,12 @@ using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Styles;
 using Mapsui.UI;
-
-#if __MAUI__
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui;
 using Color = Microsoft.Maui.Graphics.Color;
-#else
-using Mapsui.UI.Forms;
-using Xamarin.Forms;
-using Color = Xamarin.Forms.Color;
-using Colors = Xamarin.Forms.Color;
-#endif
 
-#if __MAUI__
 namespace Mapsui.Samples.Maui;
-#else
-namespace Mapsui.Samples.Forms;
-#endif
 
 public class PinSample : IMapViewSample
 {
