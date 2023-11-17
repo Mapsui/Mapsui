@@ -189,8 +189,8 @@ public class Color
         { "YellowGreen".ToLower(), "#9ACD32" }
     };
 
-    public static Color Transparent => new() { A = 0, R = 255, G = 255, B = 255 };  
-    
+    public static Color Transparent => new() { A = 0, R = 255, G = 255, B = 255 };
+
     public static readonly Color AliceBlue = FromString("#F0F8FF");
     public static readonly Color AntiqueWhite = FromString("#FAEBD7");
     public static readonly Color Aqua = FromString("#00FFFF");

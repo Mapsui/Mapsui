@@ -5,7 +5,7 @@ using Mapsui.Widgets;
 namespace Mapsui.Nts.Widgets;
 public class EditingWidget : Widget, IWidgetExtended
 {
-    public  IMapControl MapControl { get; }
+    public IMapControl MapControl { get; }
     public EditManager EditManager { get; }
     public EditManipulation EditManipulation { get; }
 
@@ -43,7 +43,7 @@ public class EditingWidget : Widget, IWidgetExtended
     {
         if (!args.LeftButton)
             return false;
-        
+
         if (MapControl.Map == null)
             return false;
 
@@ -64,7 +64,7 @@ public class EditingWidget : Widget, IWidgetExtended
     {
         if (!args.LeftButton)
             return false;
-        
+
         if (MapControl.Map != null)
             MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(MouseState.Up,
                 position, EditManager, MapControl, args.Shift);

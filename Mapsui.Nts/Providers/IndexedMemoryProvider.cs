@@ -13,16 +13,16 @@ namespace Mapsui.Nts.Providers;
 public class IndexedMemoryProvider : IProvider
 {
     private readonly MRect? _boundingBox;
-    
+
     private STRtree<IFeature>? _index;
 
     private int _itemsIndexed;
     private int _itemsLookedUp;
-    
+
     // lock object
     private object _lock = new();
     private ConcurrentDictionary<string, Dictionary<object, IFeature>> _lookups = new();
-    
+
     /// <summary>
     /// Gets or sets the geometries this data source contains
     /// </summary>
@@ -39,7 +39,7 @@ public class IndexedMemoryProvider : IProvider
         {
             _index = null;
         }
-        
+
         if (_index == null)
         {
             lock (_lock)
@@ -97,11 +97,11 @@ public class IndexedMemoryProvider : IProvider
         if (fetchInfo.Extent == null) throw new ArgumentNullException(nameof(fetchInfo.Extent));
 
         var index = GetIndex();
-        
+
         fetchInfo = new FetchInfo(fetchInfo);
         // Use a larger extent so that symbols partially outside of the extent are included
         var biggerBox = fetchInfo.Extent?.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
-        
+
         var fetchExtent = biggerBox?.ToEnvelope();
         IEnumerable<IFeature> result = index.Query(fetchExtent);
         return Task.FromResult(result);
@@ -119,7 +119,7 @@ public class IndexedMemoryProvider : IProvider
         {
             return null;
         }
-        
+
         var lookup = GetLookup(fieldName);
         return lookup[value];
     }
@@ -130,7 +130,7 @@ public class IndexedMemoryProvider : IProvider
         {
             _lookups.Clear();
         }
-        
+
         if (!_lookups.TryGetValue(fieldName, out var lookup))
         {
             lookup = new Dictionary<object, IFeature>();

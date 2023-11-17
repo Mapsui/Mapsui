@@ -6,11 +6,7 @@ public static class IntArrayExtension
     /// <returns></returns>
     public static bool IsNaturalOrder(this int[] axisOrder)
     {
-#if NETSTANDARD2_0
-        if (axisOrder.Length == 2 && axisOrder[0] == 1 && axisOrder[1] == 1)
-#else
         if (axisOrder is [0, 1])
-#endif
         {
             return true;
         }

@@ -5,7 +5,6 @@ They should be run from the Mapsui base directory like this:
 (This cleans up all files that are generated during the build.)
 
 > Scripts/Mac/buildpack.sh 3.0.0-alpha.5
-(This updates the version to the one specified as argument,
-builds everything and creates nuget packages for Mapsui and Mapsui.Forms.)
+(This updates the version to the one specified as argument, builds everything and creates nuget packages)
 
 Not that the nuget packages created in this way will be missing WPF and UWP support.

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using NetTopologySuite.Geometries;
 
@@ -43,7 +42,7 @@ public static class CoordinateExtensions
             return new Polygon(coordinates.ToLinearRing());
         return new Polygon(coordinates.ToLinearRing(), holes.Select(h => h.ToLinearRing()).ToArray());
     }
-    
+
     public static void SetXY(this Coordinate? target, Coordinate? source)
     {
         if (target is null) return;

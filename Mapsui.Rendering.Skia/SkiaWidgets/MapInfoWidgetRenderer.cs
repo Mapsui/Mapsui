@@ -9,6 +9,6 @@ internal class MapInfoWidgetRenderer : TextBoxWidgetRenderer
         base.Draw(canvas, viewport, widget, layerOpacity);
 
         // The MapInfoWidget should should listen to info event from all over the map
-        widget.Envelope = new MRect(0, 0, viewport.Width, viewport.Height);        
+        widget.Envelope = new MRect(0, 0, viewport.Width, viewport.Height);
     }
 }

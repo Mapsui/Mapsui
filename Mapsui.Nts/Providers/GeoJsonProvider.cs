@@ -124,11 +124,11 @@ public class GeoJsonProvider : IProvider, IProviderExtended
                                         geometryFeature = new GeometryFeature();
                                         break;
                                     default:
-                                    {
-                                        string str = optionalId as string ?? optionalId.ToString() ?? string.Empty;
-                                        geometryFeature = new GeometryFeature(FeatureId.CreateId(Id, str, FeatureKeyCreator.GetKey));
-                                        break;
-                                    }
+                                        {
+                                            string str = optionalId as string ?? optionalId.ToString() ?? string.Empty;
+                                            geometryFeature = new GeometryFeature(FeatureId.CreateId(Id, str, FeatureKeyCreator.GetKey));
+                                            break;
+                                        }
                                 }
 
                                 geometryFeature.Geometry = feature.Geometry;

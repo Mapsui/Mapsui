@@ -10,25 +10,12 @@ using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 using Mapsui.Widgets.PerformanceWidget;
-#if __MAUI__
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Graphics;
-using Mapsui.UI.Maui.Utils;
 using Color = Microsoft.Maui.Graphics.Color;
 using KnownColor = Mapsui.UI.Maui.KnownColor;
-#else
-using Mapsui.UI.Forms;
-using Xamarin.Forms;
-using Mapsui.UI.Forms.Utils;
-using Color = Xamarin.Forms.Color;
-using KnownColor = Xamarin.Forms.Color;
-#endif
 
-#if __MAUI__
 namespace Mapsui.Samples.Maui;
-#else
-namespace Mapsui.Samples.Forms;
-#endif
 
 public class ManyPinsSample : IMapViewSample
 {
