@@ -61,7 +61,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Uno.Resizetizer" />
-		<PackageReference Include="Microsoft.Windows.Compatibility" VersionOverride="8.0.0-rc.2.23479.10" />
+		<PackageReference Include="Microsoft.Windows.Compatibility" VersionOverride="8.0.0" />
 		<PackageReference Include="Uno.Wasm.Bootstrap" />
 		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" />
 		<PackageReference Include="Uno.WinUI.WebAssembly" />
