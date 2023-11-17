@@ -48,5 +48,5 @@ public class NavigatorTests
         // Assert
         Assert.AreEqual(expectedCenterX, navigator.Viewport.CenterX);
         Assert.AreEqual(expectedCenterY, navigator.Viewport.CenterY);
-    }  
+    }
 }

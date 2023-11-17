@@ -126,7 +126,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (HandleTouchingTouched(tapPosition, true, 2, ShiftPressed))
         {
             e.Handled = true;
-            return; 
+            return;
         }
 
         OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
@@ -140,7 +140,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (HandleTouchingTouched(tabPosition, true, 1, ShiftPressed))
         {
             e.Handled = true;
-            return; 
+            return;
         }
 
         OnInfo(CreateMapInfoEventArgs(tabPosition, tabPosition, 1));

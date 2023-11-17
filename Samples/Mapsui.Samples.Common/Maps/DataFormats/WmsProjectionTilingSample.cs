@@ -52,7 +52,7 @@ public class WmsProjectionTilingSample : ISample
         {
             CRS = "EPSG:3857"
         };
-        
+
         var imageLayer = new ImageLayer("mainmap")
         {
             DataSource = dataSource,

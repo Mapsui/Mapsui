@@ -17,7 +17,7 @@ public class Circle : Drawable
     private Distance _radius = Distance.FromMeters(1);
     private double _quality = 3.0;
     private Color _fillColor = KnownColor.DarkGray;
-    
+
     public Circle()
     {
         CreateFeature();

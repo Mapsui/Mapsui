@@ -54,7 +54,7 @@ public class ImageDataSample : ISample
         var data = CreateSquareImageData(250, 250, (x, y) => GetColorForSquareDataPoint(x, y));
         // var data = CreateSquareImageDataFast(250, 250, (x, y) => GetColorForSquareDataPoint(x, y));
         // var data = CreatePolarImageData(500, 50, 6, (r, a) => GetColorForPolarDataPoint(r, a));
-        
+
         // Place the PNG image on map
         var rect = new MRect(center.X - halfSizeOfSquare, center.Y - halfSizeOfSquare, center.X + halfSizeOfSquare, center.Y + halfSizeOfSquare);
         var raster = new MRaster(data, rect);
@@ -64,9 +64,9 @@ public class ImageDataSample : ISample
 
         var memoryLayer = new MemoryLayer("ImageData");
         var features = new List<RasterFeature> { rasterFeature };
-        
+
         memoryLayer.Features = features;
-        
+
         return memoryLayer;
     }
 
@@ -139,29 +139,29 @@ public class ImageDataSample : ISample
                         var outerRect = new SKRect(center.X - outerRadius, center.Y - outerRadius, center.X + outerRadius, center.Y + outerRadius);
 
                         using (var path = new SKPath())
-                            using (var paint = new SKPaint { IsStroke = false, StrokeWidth = 2 })
-                            {
-                                var startPoint = ConvertPolarToCartesian(radius, angle - stepAngle / 2) + center;
+                        using (var paint = new SKPaint { IsStroke = false, StrokeWidth = 2 })
+                        {
+                            var startPoint = ConvertPolarToCartesian(radius, angle - stepAngle / 2) + center;
 
-                                // Fill path
-                                path.MoveTo(startPoint);
-                                path.ArcTo(outerRect, angle - stepAngle / 2, stepAngle, false);
-                                path.ArcTo(innerRect, angle + stepAngle / 2, -stepAngle, false);
-                                path.Close();
+                            // Fill path
+                            path.MoveTo(startPoint);
+                            path.ArcTo(outerRect, angle - stepAngle / 2, stepAngle, false);
+                            path.ArcTo(innerRect, angle + stepAngle / 2, -stepAngle, false);
+                            path.Close();
 
-                                paint.IsStroke = false;
-                                paint.Color = getColorForDataPoint(radius, angle);
+                            paint.IsStroke = false;
+                            paint.Color = getColorForDataPoint(radius, angle);
 
-                                canvas.DrawPath(path, paint);
+                            canvas.DrawPath(path, paint);
 
-                                // Outline path
-                                // Remove comments, if you want to have lines between the fields
-                                //paint.IsStroke = true;
-                                //paint.StrokeWidth = 2;
-                                //paint.Color = SKColors.White;
+                            // Outline path
+                            // Remove comments, if you want to have lines between the fields
+                            //paint.IsStroke = true;
+                            //paint.StrokeWidth = 2;
+                            //paint.Color = SKColors.White;
 
-                                //canvas.DrawPath(path, paint);
-                            }
+                            //canvas.DrawPath(path, paint);
+                        }
                     }
 
                 using (var data = bitmap.Encode(SKEncodedImageFormat.Png, 100))
@@ -176,7 +176,7 @@ public class ImageDataSample : ISample
     {
         var x = radius * Math.Cos(angle * Math.PI / 180.0);
         var y = radius * Math.Sin(angle * Math.PI / 180.0);
-        
+
         return new SKPoint((float)x, (float)y);
     }
 
@@ -188,8 +188,8 @@ public class ImageDataSample : ISample
     {
         var value = _random.NextDouble();
 
-        if (value < 0.3) 
-        { 
+        if (value < 0.3)
+        {
             // Transparent
             return SKColors.White.WithAlpha(0);
         }
