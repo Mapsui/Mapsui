@@ -495,7 +495,7 @@ public class XPathQueryManager : IXPathQueryManager
                     }
                 }
             }
-                
+
         }
 
         /// <summary>

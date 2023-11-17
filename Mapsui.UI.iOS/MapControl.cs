@@ -191,7 +191,7 @@ public partial class MapControl : UIView, IMapControl
                 var position = touch.LocationInView(this).ToMapsui();
                 if (HandleMoving(position, true, 0, false))
                     return;
-                
+
                 var previousPosition = touch.PreviousLocationInView(this).ToMapsui();
                 Map.Navigator.Drag(position, previousPosition);
                 _virtualRotation = Map.Navigator.Viewport.Rotation;

@@ -53,7 +53,7 @@ public class MyLocationLayer : BaseLayer
     }
 
     private Position _myLocation = new(0, 0);
-    private readonly ConcurrentHashSet<AnimationEntry<MapView>> _animations = new ();
+    private readonly ConcurrentHashSet<AnimationEntry<MapView>> _animations = new();
     private readonly List<IFeature> _features;
     private AnimationEntry<MapView>? _animationMyDirection;
     private AnimationEntry<MapView>? _animationMyViewDirection;
@@ -269,7 +269,7 @@ public class MyLocationLayer : BaseLayer
                                 if (mapView.MyLocationEnabled)
                                     mapView.Refresh();
                             }
-                            
+
                             return new AnimationResult<MapView>(mapView, false);
                         });
 
@@ -365,7 +365,7 @@ public class MyLocationLayer : BaseLayer
                             _locStyle.SymbolRotation = endRotation;
                             mapView.Refresh();
                         }
-                      
+
                         return new AnimationResult<MapView>(mapView, false);
                     });
 
