@@ -21,7 +21,7 @@ public static class ClippingFunctions
     {
         var output = WorldToScreen(viewport, points);
 
-         // Do this for the 4 edges (left, top, right, bottom) of clipping rectangle
+        // Do this for the 4 edges (left, top, right, bottom) of clipping rectangle
         for (var j = 0; j < 4; j++)
         {
             // If there aren't any points to reduce

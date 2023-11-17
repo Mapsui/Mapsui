@@ -31,14 +31,14 @@ public class ButtonSample : ISample
             };
         map.Widgets.Add(clickMeButton);
 
-        map.Widgets.Add(CreateButtonWithImage(VerticalAlignment.Top, HorizontalAlignment.Right));        
+        map.Widgets.Add(CreateButtonWithImage(VerticalAlignment.Top, HorizontalAlignment.Right));
         map.Widgets.Add(CreateButton("Button with text", VerticalAlignment.Bottom, HorizontalAlignment.Right));
         map.Widgets.Add(CreateButtonWithImage(VerticalAlignment.Bottom, HorizontalAlignment.Left));
 
         return Task.FromResult(map);
     }
 
-    private static ButtonWidget CreateButton(string text, 
+    private static ButtonWidget CreateButton(string text,
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
     {
         return new ButtonWidget()
@@ -77,7 +77,7 @@ public class ButtonSample : ISample
     static string LoadSomeSvgAsString()
     {
         Assembly assembly = typeof(Map).Assembly ?? throw new ArgumentNullException("assembly");
-        using (Stream stream = assembly.GetManifestResourceStream(assembly.GetFullName("Resources.Images.MyLocationStill.svg")) 
+        using (Stream stream = assembly.GetManifestResourceStream(assembly.GetFullName("Resources.Images.MyLocationStill.svg"))
             ?? throw new Exception("Can not find embedded resource"))
         using (StreamReader reader = new StreamReader(stream))
             return reader.ReadToEnd();

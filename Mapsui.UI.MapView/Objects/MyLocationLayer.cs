@@ -1,26 +1,14 @@
 ﻿using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Styles;
-
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
 using Mapsui.Utilities;
 using Animation = Mapsui.Animations.Animation;
-
-#if __MAUI__
 using Mapsui.UI.Maui;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-#else
-using Mapsui.UI.Forms;
-using Xamarin.Forms;
-#endif
 
 namespace Mapsui.UI.Objects;
 
@@ -65,7 +53,7 @@ public class MyLocationLayer : BaseLayer
     }
 
     private Position _myLocation = new(0, 0);
-    private readonly ConcurrentHashSet<AnimationEntry<MapView>> _animations = new ();
+    private readonly ConcurrentHashSet<AnimationEntry<MapView>> _animations = new();
     private readonly List<IFeature> _features;
     private AnimationEntry<MapView>? _animationMyDirection;
     private AnimationEntry<MapView>? _animationMyViewDirection;
@@ -281,7 +269,7 @@ public class MyLocationLayer : BaseLayer
                                 if (mapView.MyLocationEnabled)
                                     mapView.Refresh();
                             }
-                            
+
                             return new AnimationResult<MapView>(mapView, false);
                         });
 
@@ -377,7 +365,7 @@ public class MyLocationLayer : BaseLayer
                             _locStyle.SymbolRotation = endRotation;
                             mapView.Refresh();
                         }
-                      
+
                         return new AnimationResult<MapView>(mapView, false);
                     });
 

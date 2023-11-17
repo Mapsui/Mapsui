@@ -14,13 +14,7 @@ public interface IFeature : IDisposable
     MRect? Extent { get; }
     public IDictionary<IStyle, object> RenderedGeometry { get; }
     void CoordinateVisitor(Action<double, double, CoordinateSetter> visit);
-#if NETSTANDARD2_0
-    long Id { get; }
-    void Modified();
-    void ClearRenderedGeometry();
-#else
     long Id => 0;
     void Modified() { } // default implementation
     void ClearRenderedGeometry() { } // default implementation
-#endif
 }

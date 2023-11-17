@@ -42,7 +42,7 @@ public class WfsPointsSample : ISample
 
             map.Navigator.OverridePanBounds = bbox;
             map.Navigator.PanLock = true;
-            map.Navigator.ZoomToPanBounds(); 
+            map.Navigator.ZoomToPanBounds();
 
             return map;
 
@@ -69,11 +69,11 @@ public class WfsPointsSample : ISample
         var provider = await WFSProvider.CreateAsync(
             "https://vogis.cnv.at/geoserver/vogis/laser_2002_04_punkte/ows",
             "vogis",
-            "laser_2002_04_punkte", 
+            "laser_2002_04_punkte",
             WFSProvider.WFSVersionEnum.WFS_1_1_0);
 
         provider.CRS = crs;
-        provider.AxisOrder = new []{0,1};
+        provider.AxisOrder = new[] { 0, 1 };
 
         await provider.InitAsync();
 

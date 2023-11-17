@@ -187,7 +187,7 @@ public class EditManager
                             _dragInfo.DraggingFeature = true;
                         }
                     }
-                  
+
                     return true; // to indicate start of drag
                 }
             }
@@ -401,5 +401,4 @@ public class EditManager
             _scaleInfo.Feature = null;
         }
     }
-
 }

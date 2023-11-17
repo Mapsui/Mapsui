@@ -48,8 +48,8 @@ public sealed class MainPage : ContentPage, IDisposable
                         {
                             categoryPicker,
                             collectionView
-                        }                        
-                    } 
+                        }
+                    }
                 }.Column(0).Padding(10),
                 mapControl.Column(1)
             }

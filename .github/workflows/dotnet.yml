@@ -43,9 +43,6 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj    
     - name: Build Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                       
-    # Samples Forms    
-    - name: Build Mapsui.Samples.Forms.Shared
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj        
     # Samples Uno WinUI    
     - name: Mapsui.Samples.Uno.WinUI.Skia.Gtk
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Gtk/Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj    
@@ -54,7 +51,7 @@ jobs:
     #- name: Build Mapsui.Rendering.Skia.Tests
     #  run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
     - name: Build Mapsui.Tests
-      run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj    
+      run: dotnet build  --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj    
     # Run Tests   
     #- name: Run Mapsui.Rendering.Skia.Tests
     #  run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net6.0/Mapsui.Rendering.Skia.Tests.dll    
@@ -68,63 +65,7 @@ jobs:
       with:
         name: nupkg.linux
         path: Artifacts/*.nupkg
-
-  macBuildLegacy:  
-    # macos-latest is currently macos-13
-    runs-on: macos-12
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    # Cache Nugets
-    - uses: actions/cache@v3
-      with:
-        path: ~/.nuget/packages     
-        key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
-        restore-keys: |
-            ${{ runner.os }}-nuget15-
-    - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.1.1      
-      with:
-        nuget-version: latest
-    # .Net 7 update     
-    - name: Setup .NET 8 SDK
-      uses: actions/setup-dotnet@v3
-      with:
-         dotnet-version: |
-           8.0.x
-         include-prerelease: true
-    - name: Setup Xcode version 14.2
-      uses: maxim-lobanov/setup-xcode@v1.6.0
-      with:
-        xcode-version: '14.2'
-    # macos image needs Visual Studio for Mac installed
-    - name: Restore dependencies Legacy
-      run: nuget restore Mapsui.Mac.Legacy.sln                          
-    # Samples Forms    
-    - name: Build Mapsui.Samples.Forms.Shared
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj    
-    - name: Build Mapsui.Samples.Forms.Android
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj     
-    - name: Build Mapsui.Samples.Forms.iOS
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj         
-    # Builds that need XCode 14.0
-    # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
-    - name: Setup Xcode version 14.0
-      uses: maxim-lobanov/setup-xcode@v1.6.0
-      with:
-        xcode-version: '14.0'
-    - name: Build Mapsui.Samples.Forms.Mac
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj        
-    # Release Build
-    - name: Build Mapsui.UI.Forms
-      run: msbuild /t:Pack /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj /p:PackageOutputPath="../Artifacts" -p:PackageVersion=$(git describe --tags)
-    - name: Upload packages
-      uses: actions/upload-artifact@v3
-      with:
-        name: nupkg.mac
-        path: Artifacts/*.nupkg   
-
+  
   macBuild:  
     # macos-latest is currently macos-13
     runs-on: macos-13
@@ -162,9 +103,6 @@ jobs:
          include-prerelease: true
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
-    # macos image needs Visual Studio for Mac installed
-    #- name: Restore dependencies Legacy
-    #  run: nuget restore Mapsui.Mac.Legacy.sln   
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
     # Samples Build               
@@ -172,13 +110,6 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj
     - name: Build Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                       
-    # Samples Forms    
-    - name: Build Mapsui.Samples.Forms.Shared
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj    
-    #- name: Build Mapsui.Samples.Forms.Android
-    #  run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj     
-    #- name: Build Mapsui.Samples.Forms.iOS
-    #  run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj         
     - name: Build Mapsui.Samples.iOS
       run: dotnet build --no-restore --configuration Debug -r iossimulator-x64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
     # Samples Uno WinUI
@@ -200,8 +131,6 @@ jobs:
     #  uses: maxim-lobanov/setup-xcode@v1.6.0
     #  with:
     #    xcode-version: '14.0'
-    #- name: Build Mapsui.Samples.Forms.Mac
-    #  run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj        
     # Test Build    
     - name: Build Mapsui.Rendering.Skia.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
@@ -229,9 +158,6 @@ jobs:
       run: dotnet pack --no-restore --configuration Release Mapsui.UI.Android/Mapsui.UI.Android.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
     - name: Build Mapsui.UI.iOS
       run: dotnet pack --no-restore --configuration Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-   # run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj   
-   # - name: Build Mapsui.UI.Forms
-   #   run: msbuild /t:Pack /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj /p:PackageOutputPath="../Artifacts" -p:PackageVersion=$(git describe --tags)
     - name: Upload packages
       uses: actions/upload-artifact@v3
       with:
@@ -266,20 +192,21 @@ jobs:
       uses: NuGet/setup-nuget@v1.1.1
       with:
         nuget-version: latest
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1.1
-      with:
-        vs-prerelease: true
     - name: install maui macos android ios maccatalyst wasm-tools
       run: Scripts/InstallDependencies.cmd
     #- name: uno-check install
     #  run: dotnet tool install -g uno.check
     #- name: uno-check fix
     #  run: uno-check --fix --non-interactive
-    - name: Restore dependencies (nuget)
-      run: nuget restore Mapsui.MsBuild.slnf      
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.NoMsBuild.slnf  
+      run: dotnet restore Mapsui.sln  
+    # dotnet format whitespace & style
+    - name: check whitespace formatting
+      run: |
+        dotnet format whitespace Mapsui.sln --verbosity normal --verify-no-changes
+        dotnet format style Mapsui.sln --verbosity normal --verify-no-changes
+        # The analyzers still have errors be we are close to fixing all of them
+        # dotnet format  analyzers  Mapsui.sln --verbosity normal --verify-no-changes
     # Test Build
     - name: Mapsui.Nts.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Nts.Tests/Mapsui.Nts.Tests.csproj
@@ -287,8 +214,8 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
     - name: Mapsui.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj
-    - name: Mapsui.UI.Forms.Tests
-      run: dotnet build --no-restore --configuration Debug Mapsui.UI.Forms.Tests\Mapsui.UI.Forms.Tests.csproj
+    - name: Mapsui.UI.Maui.Tests
+      run: dotnet build --no-restore --configuration Debug Tests/Mapsui.UI.Maui.Tests/Mapsui.UI.Maui.Tests.csproj
     # Test Run
     - name: Run Mapsui.Nts.Tests
       run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net6.0/Mapsui.Nts.Tests.dll
@@ -300,8 +227,8 @@ jobs:
         command: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net6.0/Mapsui.Rendering.Skia.Tests.dll    
     - name: Run Mapsui.Tests
       run: dotnet test Tests/Mapsui.Tests/bin/Debug/net6.0/Mapsui.Tests.dll
-    - name: Run Mapsui.UI.Forms.Tests
-      run: dotnet test Mapsui.UI.Forms.Tests/bin/Debug/net6.0-windows10.0.19041.0/Mapsui.UI.Forms.Tests.dll
+    - name: Run Mapsui.UI.Maui.Tests
+      run: dotnet test Tests/Mapsui.UI.Maui.Tests/bin/Debug/net8.0-windows10.0.19041.0/Mapsui.UI.Maui.Tests.dll
     # Release Build
     - name: Build nuget packages
       run: Scripts\buildpack $(git describe --tags)
@@ -313,9 +240,7 @@ jobs:
       run: |
        ./Scripts/SamplesMapsuiNugetReferences.ps1 $(git describe --tags)       
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.NoMsBuild.slnf  
-    - name: Restore dependencies (nuget)
-      run: nuget restore Mapsui.MsBuild.slnf   
+      run: dotnet restore Mapsui.sln  
     # Samples Build 
     - name: Mapsui.Samples.Avalonia
       run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj
@@ -332,33 +257,22 @@ jobs:
     - name: Mapsui.Samples.Maui.MapView
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Maui.MapView/Mapsui.Samples.Maui.MapView.csproj
     - name: Mapsui.Samples.WinUI
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug -p:Platform=x86 Samples\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI.csproj
+      run: dotnet build --no-restore --configuration Debug /p:Platform=x64 Samples/Mapsui.Samples.WinUI/Mapsui.Samples.WinUI/Mapsui.Samples.WinUI.csproj
     - name: Mapsui.Samples.Wpf
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf/Mapsui.Samples.Wpf.csproj  
-    # Samples Forms
-    - name: Mapsui.Samples.Forms.Android
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj
-    - name: Mapsui.Samples.Forms.iOS
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj
-    - name: Mapsui.Samples.Forms.Mac
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj
-    - name: Mapsui.Samples.Forms.UWP
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.UWP/Mapsui.Samples.Forms.UWP.csproj
-    - name: Mapsui.Samples.Forms.WPF
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.WPF/Mapsui.Samples.Forms.WPF.csproj
     # Samples Uno WinUI
-    - name: Mapsui.Samples.Uno.WinUI.Mobile
-      run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Mobile\Mapsui.Samples.Uno.WinUI.Mobile.csproj
-    - name: Mapsui.Samples.Uno.WinUI.Skia.Gtk
-      run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Skia.Gtk\Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj
+    # - name: Mapsui.Samples.Uno.WinUI.Mobile
+    #   run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Mobile\Mapsui.Samples.Uno.WinUI.Mobile.csproj
+    # - name: Mapsui.Samples.Uno.WinUI.Skia.Gtk
+    #   run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Skia.Gtk\Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj
     #- name: Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer
     #  run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer\Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer.csproj
     #- name: Mapsui.Samples.Uno.WinUI.Skia.WPF
     #  run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Skia.WPF\Mapsui.Samples.Uno.WinUI.Skia.WPF.csproj
-    - name: Mapsui.Samples.Uno.WinUI.Wasm
-      run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Wasm\Mapsui.Samples.Uno.WinUI.Wasm.csproj
-    - name: Mapsui.Samples.Uno.WinUI.Windows
-      run: dotnet build --no-restore --configuration Debug /p:Platform=x64 Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Windows\Mapsui.Samples.Uno.WinUI.Windows.csproj
+    # - name: Mapsui.Samples.Uno.WinUI.Wasm
+    #   run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Wasm\Mapsui.Samples.Uno.WinUI.Wasm.csproj
+    # - name: Mapsui.Samples.Uno.WinUI.Windows
+    #   run: dotnet build --no-restore --configuration Debug /p:Platform=x64 Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Windows\Mapsui.Samples.Uno.WinUI.Windows.csproj
     # Publishing  
     - name: Upload packages
       uses: actions/upload-artifact@v3

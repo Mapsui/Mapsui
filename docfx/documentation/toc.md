@@ -23,7 +23,6 @@
 ## [v4.0 Upgrade Guide](v4.0-upgrade-guide.md)
 
 # How Things Work
-## [Mapsui.Forms](mapsui-forms.md)
 ## [Mapsui Components](mapsui-components.md)
 ## [Asynchronous Data Fetching](async-fetching.md)
 ## [Resolution](resolution.md)

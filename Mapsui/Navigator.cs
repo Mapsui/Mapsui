@@ -55,7 +55,7 @@ public class Navigator
     /// Overrides the default zoom bounds which are derived from the Map resolutions.
     /// </summary>
     public MMinMax? OverrideZoomBounds { get; set; }
-    
+
     /// <summary>
     /// Overrides the default pan bounds which come from the Map extent.
     /// </summary>
@@ -139,7 +139,7 @@ public class Navigator
             Logger.Log(LogLevel.Warning, $"{nameof(ZoomToPanBounds)} was called but ${nameof(PanBounds)} was null");
             return;
         }
-        
+
         ZoomToBox(PanBounds, boxFit, duration, easing);
     }
 
@@ -553,13 +553,13 @@ public class Navigator
     }
 
     internal int GetAnimationsCount => _animations.Count();
-    
+
     /// <summary> Default Resolutions automatically set on Layers changed </summary>
-    internal IReadOnlyList<double> DefaultResolutions { get; set; }  = new List<double>();
-    
+    internal IReadOnlyList<double> DefaultResolutions { get; set; } = new List<double>();
+
     /// <summary> Default Zoom Bounds automatically set on Layers changed </summary>
     internal MMinMax? DefaultZoomBounds { get; set; }
-    
+
     /// <summary> Default Pan Bounds automatically set on Layers changed </summary>
     internal MRect? DefaultPanBounds { get; set; }
 }

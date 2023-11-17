@@ -12,7 +12,7 @@ jobs:
   build:
 
     env:
-      SOLUTION: 'Mapsui.NoMSBuild.slnf'
+      SOLUTION: 'Mapsui.sln'
 
     runs-on: windows-latest
 
@@ -31,10 +31,7 @@ jobs:
          dotnet-version: |
            8.0.x
          include-prerelease: true
-      
-    - name: Setup msbuild
-      uses: microsoft/setup-msbuild@v1.1
-
+       
       # The version tag needs to be set before the release. If not if will fail on nuget publish.
     - name: Set VERSION_OF_RELEASE to last tag
       run: |
@@ -47,11 +44,6 @@ jobs:
     - name: Test
       run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
 
-    - name: Pack Xamarin Forms
-      run: |
-        msbuild Mapsui.UI.Forms/Mapsui.UI.Forms.csproj /t:restore /p:Configuration=Release 
-        msbuild Mapsui.UI.Forms/Mapsui.UI.Forms.csproj /t:pack /p:Configuration=Release /p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${{ github.workspace }}/nugets"
-     
     - name: Pack
       # The dlls and nupkgs will be built 'inputs.release_version' as version, overriding the version number in the Directory.Build.props.
       run: dotnet pack ${{ env.SOLUTION }} --configuration Release /p:Version=${{ env.VERSION_OF_RELEASE }} -o nugets

@@ -46,14 +46,11 @@ Release/
 
 project.lock.json
 *.nuget.props
-/Mapsui.UI.Forms/Images/Pin.svg.bak
-/Samples/Mapsui.Samples.Uwp/AppPackages/Mapsui.Samples.Uwp_1.0.0.0_x86_Test
 /Artifacts
 *.appx
 
 Mapsui.UI.Android/Resources/Resource.Designer.cs
 Samples/Mapsui.Samples.Droid/Resources/Resource.Designer.cs
-Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Resources/Resource.designer.cs
 
 AppPackages/
 *.nupkg

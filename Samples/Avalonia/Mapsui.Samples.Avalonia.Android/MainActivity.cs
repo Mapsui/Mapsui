@@ -19,10 +19,10 @@ public class MainActivity : AvaloniaMainActivity<App>
     {
         return base.CustomizeAppBuilder(builder)
              .With(new AndroidPlatformOptions
-            {
-                // Only use Software Rendering
-                RenderingMode = new ReadOnlyCollection<AndroidRenderingMode>(new[]{AndroidRenderingMode.Software}),
-            })
+             {
+                 // Only use Software Rendering
+                 RenderingMode = new ReadOnlyCollection<AndroidRenderingMode>(new[] { AndroidRenderingMode.Software }),
+             })
             .WithInterFont()
             .UseReactiveUI();
     }

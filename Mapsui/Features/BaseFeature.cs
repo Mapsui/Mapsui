@@ -55,7 +55,7 @@ public abstract class BaseFeature : IDisposable
 
     public virtual object? this[string key]
     {
-        get => _dictionary.ContainsKey(key) ? _dictionary[key] : null;
+        get => _dictionary.TryGetValue(key, out var value) ? value : null;
         set => _dictionary[key] = value;
     }
 

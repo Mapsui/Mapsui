@@ -6,28 +6,10 @@ using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using NetTopologySuite.Geometries;
-
-#if __MAUI__
 using Mapsui.UI.Maui.Extensions;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-using Mapsui.UI.Maui;
-
 using Color = Microsoft.Maui.Graphics.Color;
-using KnownColor = Mapsui.UI.Maui.KnownColor;
-#else
-using Xamarin.Forms;
-using Mapsui.UI.Forms.Extensions;
 
-using Color = Xamarin.Forms.Color;
-using KnownColor = Xamarin.Forms.Color;
-#endif
-
-#if __MAUI__
 namespace Mapsui.UI.Maui;
-#else
-namespace Mapsui.UI.Forms;
-#endif
 
 public class Circle : Drawable
 {
@@ -35,7 +17,7 @@ public class Circle : Drawable
     private Distance _radius = Distance.FromMeters(1);
     private double _quality = 3.0;
     private Color _fillColor = KnownColor.DarkGray;
-    
+
     public Circle()
     {
         CreateFeature();
