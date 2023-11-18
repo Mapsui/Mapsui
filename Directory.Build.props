@@ -37,20 +37,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <!--<Compile Include="$(MSBuildThisFileDirectory)/Nullable.cs" />-->
-	  <Compile Include="$(MSBuildThisFileDirectory)/InitProperty.cs" />
-  </ItemGroup>
-
-	<!--<ItemGroup Condition="'$(SolutionName)'=='Mapsui.Mac.Legacy'" >-->
-	<ItemGroup>
-		<!--Specify Compiler for Mac Builds-->
-		<PackageReference Include="Microsoft.Net.Compilers.Toolset" VersionOverride="4.8.0-2.final">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
-
-  <ItemGroup>
     <!--Disposable Analyzer-->
     <PackageReference Include="IDisposableAnalyzers">
         <PrivateAssets>all</PrivateAssets>

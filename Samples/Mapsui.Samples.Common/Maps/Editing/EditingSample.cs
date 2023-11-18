@@ -355,7 +355,7 @@ public class EditingSample : IMapControlSample
         {
             _editManager.EditMode = EditMode.Rotate;
             e.Handled = true;
-            
+
         };
         map.Widgets.Add(rotate);
         var scale = new ButtonWidget

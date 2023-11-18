@@ -1,23 +1,14 @@
 ﻿using Mapsui.Widgets;
-
-#if __MAUI__
 using Microsoft.Maui;
-#else
-using Xamarin.Forms;
-#endif
 
-#if __MAUI__
 namespace Mapsui.UI.Maui.Extensions;
-#else
-namespace Mapsui.UI.Forms.Extensions;
-#endif
 
 public static class TextAlignmentExtensions
 {
     /// <summary>
-    /// Convert Xamarin.Forms.TextAlignment to Mapsui/RichTextKit.Styles.Color
+    /// Convert Microsoft.Maui.TextAlignment to Mapsui/RichTextKit.Styles.Color
     /// </summary>
-    /// <param name="textAlignment">TextAlignment in Xamarin.Forms format</param>
+    /// <param name="textAlignment">TextAlignment in Microsoft.Maui format</param>
     /// <returns>TextAlignment in Mapsui/RichTextKit format</returns>
     public static Alignment ToMapsui(this TextAlignment textAlignment)
     {

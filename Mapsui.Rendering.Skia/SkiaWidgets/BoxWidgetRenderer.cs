@@ -14,7 +14,7 @@ public class BoxWidgetRenderer : ISkiaWidgetRenderer
         // The textRect has an offset which can be confusing. 
         // This is because DrawText's origin is the baseline of the text, not the bottom.
         // Read more here: https://developer.xamarin.com/guides/xamarin-forms/advanced/skiasharp/basics/text/
-    
+
         // The backRect is straight forward. It is leading for our purpose.
         var backRect = new SKRect(0, 0,
             boxWidget.Width,

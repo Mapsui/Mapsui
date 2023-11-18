@@ -8,27 +8,11 @@ using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using Mapsui.Utilities;
 using SkiaSharp;
-#if __MAUI__
-using Microsoft.Maui;
 using Microsoft.Maui.Graphics;
-using Microsoft.Maui.Controls;
 using SkiaSharp.Views.Maui;
-
 using Color = Microsoft.Maui.Graphics.Color;
-using KnownColor = Mapsui.UI.Maui.KnownColor;
-#else
-using SkiaSharp.Views.Forms;
-using Xamarin.Forms;
 
-using Color = Xamarin.Forms.Color;
-using KnownColor = Xamarin.Forms.Color;
-#endif
-
-#if __MAUI__
 namespace Mapsui.UI.Maui;
-#else
-namespace Mapsui.UI.Forms;
-#endif
 
 public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
 {
@@ -631,7 +615,7 @@ public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-         switch (propertyName)
+        switch (propertyName)
         {
             case nameof(Position):
                 if (Feature != null)

@@ -21,13 +21,13 @@ internal record TouchState(MPoint Center, double Radius, double Angle, TouchMode
                 angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
             }
         }
-        return new TouchState(new MPoint(centerX, centerY), radius, angle,  ToTouchMode(locations));
+        return new TouchState(new MPoint(centerX, centerY), radius, angle, ToTouchMode(locations));
     }
 
     public static TouchMode ToTouchMode(List<MPoint> locations)
     {
         if (locations.Count == 0) return TouchMode.None;
         if (locations.Count == 2) return TouchMode.Zooming;
-        return TouchMode.Dragging;        
+        return TouchMode.Dragging;
     }
 }

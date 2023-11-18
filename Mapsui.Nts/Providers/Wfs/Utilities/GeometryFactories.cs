@@ -12,7 +12,6 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
-using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
@@ -274,7 +273,7 @@ internal abstract class GeometryFactory : IDisposable
                                                  (NameTable)XmlReader!.NameTable);
         IPathNode posListNode = new PathNode("http://www.opengis.net/gml", "posList",
                                              (NameTable)XmlReader.NameTable);
-        IPathNode posNode = new PathNode("http://www.opengis.net/gml", "pos", 
+        IPathNode posNode = new PathNode("http://www.opengis.net/gml", "pos",
             (NameTable)XmlReader.NameTable);
         IPathNode ogcServiceExceptionNode = new PathNode("http://www.opengis.net/ogc", "ServiceException",
                                                          (NameTable)XmlReader.NameTable);

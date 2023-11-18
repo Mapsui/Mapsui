@@ -308,7 +308,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         }
 
         _currentMousePosition = e.GetPosition(this).ToMapsui();
-        
+
         if (_mouseDown)
         {
             if (_previousMousePosition == null)

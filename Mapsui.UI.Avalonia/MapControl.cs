@@ -109,7 +109,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
                 // size changed
                 MapControlSizeChanged();
                 break;
-        } 
+        }
     }
 
     private void MapControl_PointerPressed(object? sender, PointerPressedEventArgs e)

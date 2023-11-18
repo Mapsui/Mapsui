@@ -14,7 +14,7 @@ public class ViewportLimiterTests
         // viewport.Center is (0, 0) at this point
         var limiter = new ViewportLimiter();
         var panBounds = new MRect(20, 40, 120, 140);  // Minimal X value is 20, Minimal Y value is 40
-        
+
         // act 
         var result = limiter.Limit(viewport, panBounds, null);
 

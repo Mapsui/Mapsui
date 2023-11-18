@@ -65,7 +65,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     public static async Task<WmsProvider> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
     {
         var client = await Client.CreateAsync(url, wmsVersion, getStreamAsync, persistentCache: persistentCache ?? DefaultCache, userAgent);
-        var provider = new WmsProvider(client, persistentCache: persistentCache?? DefaultCache)
+        var provider = new WmsProvider(client, persistentCache: persistentCache ?? DefaultCache)
         {
             UserAgent = userAgent
         };
@@ -440,7 +440,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
             var transVal = Transparent.Value ? "true" : "false";
             strReq.Append($"&TRANSPARENT={transVal}");
         }
-        
+
         strReq.Append("&Styles=");
         if (StylesList != null && StylesList.Count > 0)
         {
@@ -585,7 +585,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         {
             // Ignore not supported exception (fixes blazor)
         }
-           
+
         var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
         client.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent ?? "If you use Mapsui please specify a user-agent specific to your app");
         var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type?.ToUpper() ?? "GET"), url);

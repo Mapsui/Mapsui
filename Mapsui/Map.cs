@@ -167,7 +167,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Handles all manipulations of the map viewport
     /// </summary>
-    public Navigator Navigator { get; private set; } =  new Navigator();
+    public Navigator Navigator { get; private set; } = new Navigator();
 
     private void Navigator_RefreshDataRequest(object? sender, EventArgs e)
     {
