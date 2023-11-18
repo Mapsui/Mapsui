@@ -129,7 +129,7 @@ public partial class MapControl : UIView, IMapControl
     }
 
 
-    private void OnDoubleTapped(UITapGestureRecognizer gesture)
+        private void OnDoubleTapped(UITapGestureRecognizer gesture)
     {
         var position = GetScreenPosition(gesture.LocationInView(this));
         OnInfo(CreateMapInfoEventArgs(position, position, 2));
@@ -174,7 +174,7 @@ public partial class MapControl : UIView, IMapControl
         if (touches.AnyObject is UITouch touch)
         {
             _touchBeginPosition = touch.LocationInView(this).ToMapsui();
-            if (HandleTouching(position, true, 1, false))
+            if (HandleTouching(_touchBeginPosition, true, 1, false))
             {
                 return;
             }
