@@ -59,7 +59,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
     private double _virtualRotation;
-    private MPoint _pointerDownPosition;
+    private MPoint? _pointerDownPosition;
 
     public MapControl()
     {
