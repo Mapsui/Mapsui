@@ -656,7 +656,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (startPosition is null)
         {
-            Logger.Log(LogLevel.Error, $"The {startPosition} is null on release. This is not expected");
+            Logger.Log(LogLevel.Error, $"The '{nameof(startPosition)}' is null on release. This is not expected");
             return false;
         }
 
