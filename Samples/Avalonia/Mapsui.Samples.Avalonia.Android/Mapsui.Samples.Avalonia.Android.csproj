@@ -3,7 +3,6 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0-android</TargetFramework>
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
-    <Nullable>enable</Nullable>
     <ApplicationId>com.CompanyName.Mapsui.Samples.Avalonia</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
