@@ -168,8 +168,8 @@ jobs:
          dotnet-version: |
            7.0.x
          include-prerelease: false
-    - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net7
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net7
+    - name: install maui macos android ios maccatalyst wasm-tools
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     # macos image needs Visual Studio for Mac installed
     #- name: Restore dependencies Legacy
     #  run: nuget restore Mapsui.Mac.Legacy.sln   
