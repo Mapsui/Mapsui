@@ -114,7 +114,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private double _virtualRotation;
     private readonly ConcurrentDictionary<long, TouchEvent> _touches = new();
-    private MPoint? _firstTouch;
+    private MPoint? _pointerDownPosition;
     private bool _waitingForDoubleTap;
     private int _numOfTaps;
     private readonly FlingTracker _flingTracker = new();
@@ -306,7 +306,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             var ticks = DateTime.Now.Ticks;
 
             var location = GetScreenPosition(e.Location);
-            
+
+            if (e.ActionType == SKTouchAction.Pressed && _touches.Count == 0)
+            {
+                _pointerDownPosition = location;
+                _pointerDownTicks = DateTime.UtcNow.Ticks;
+            }
+
             if (HandleTouch(e, location))
             {
                 e.Handled = true;
@@ -319,13 +325,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
             if (e.ActionType == SKTouchAction.Pressed)
             {
-                _firstTouch = location;
-
-                if (_touches.Count == 0)
-                {
-                    _pointerDownTicks = DateTime.UtcNow.Ticks;
-                }
-
                 _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
 
                 _flingTracker.Clear();
@@ -459,7 +458,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         return e.ActionType switch
         {
             SKTouchAction.Pressed when HandleTouching(location, true, Math.Max(1, _numOfTaps), ShiftPessed) => true,
-            SKTouchAction.Released when HandleTouched(location, true, 0, ShiftPessed) => true,
+            SKTouchAction.Released when HandleTouched(location, _pointerDownPosition, true, 0, ShiftPessed) => true,
             SKTouchAction.Moved when HandleMoving(location, true, Math.Max(1, _numOfTaps), ShiftPessed) => true,
             _ => false
         };
@@ -469,9 +468,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private bool IsAround(TouchEvent releasedTouch)
     {
-        if (_firstTouch == null) { return false; }
+        if (_pointerDownPosition == null) { return false; }
         if (releasedTouch.Location == null) { return false; }
-        return _firstTouch != null && Utilities.Algorithms.Distance(releasedTouch.Location, _firstTouch) < TouchSlop;
+        return _pointerDownPosition != null && Utilities.Algorithms.Distance(releasedTouch.Location, _pointerDownPosition) < TouchSlop;
     }
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)

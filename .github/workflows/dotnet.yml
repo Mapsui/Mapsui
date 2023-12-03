@@ -2,7 +2,10 @@ name: Build
 
 on:
   push:
-    branches: [ master ]
+    branches:  
+      - master   
+      - develop/4.1
+
   pull_request:
     branches: [ '**' ]
   # Allows you to run this workflow manually from the Actions tab
