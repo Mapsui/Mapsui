@@ -315,6 +315,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Avalonia.Des
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Avalonia.iOS", "Samples\Avalonia\Mapsui.Samples.Avalonia.iOS\Mapsui.Samples.Avalonia.iOS.csproj", "{A8808FA9-B3FC-4C13-8C22-22DC2C9A1EA7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHubActions", "GitHubActions", "{FE8C331E-F70C-4BC0-8566-A1FF0A8422A7}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet-docs.yml = .github\workflows\dotnet-docs.yml
+		.github\workflows\dotnet-release-nugets.yml = .github\workflows\dotnet-release-nugets.yml
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|AnyCPU = Ad-Hoc|AnyCPU
