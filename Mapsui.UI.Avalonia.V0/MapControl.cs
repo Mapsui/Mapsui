@@ -13,6 +13,7 @@ using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.UI.Avalonia.V0.Extensions;
 
 namespace Mapsui.UI.Avalonia.V0;
@@ -22,7 +23,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private MPoint? _mousePosition;
     private MapsuiCustomDrawOp? _drawOp;
     private MPoint? _currentMousePosition;
-    private MPoint? _downMousePosition;
+    private MPoint? _pointerDownPosition;
     private bool _mouseDown;
     private MPoint? _previousMousePosition;
     private double _mouseWheelPos = 0.0;
@@ -78,16 +79,19 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        var leftButtonPressed = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
-        if (HandleTouching(e.GetPosition(this).ToMapsui(), leftButtonPressed, e.ClickCount, ShiftPressed))
+        _pointerDownPosition = e.GetPosition(this).ToMapsui();
+
+        _mouseDown = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
+        if (HandleTouching(_pointerDownPosition, _mouseDown, e.ClickCount, ShiftPressed))
         {
             e.Handled = true;
             return;
         }
 
-        if (leftButtonPressed)
+        if (_mouseDown)
         {
-            MapControlMouseLeftButtonDown(e);
+            _previousMousePosition = _pointerDownPosition;
+            e.Pointer.Capture(this);
         }
     }
 
@@ -105,24 +109,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Map.Navigator.MouseWheelZoom(delta, _currentMousePosition);
     }
 
-    private void MapControlMouseLeftButtonDown(PointerPressedEventArgs e)
-    {
-        var touchPosition = e.GetPosition(this).ToMapsui();
-        _previousMousePosition = touchPosition;
-        _downMousePosition = touchPosition;
-        _mouseDown = true;
-        e.Pointer.Capture(this);
-    }
-
     private void HandleFeatureInfo(PointerReleasedEventArgs e)
     {
         if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
 
-        if (Map != null && _downMousePosition == e.GetPosition(this).ToMapsui())
+        if (Map != null && _pointerDownPosition == e.GetPosition(this).ToMapsui())
             foreach (var layer in Map.Layers)
             {
                 // ReSharper disable once SuspiciousTypeConversion.Global
-                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.Viewport, _downMousePosition.X, _downMousePosition.Y,
+                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.Viewport, _pointerDownPosition.X, _pointerDownPosition.Y,
                     OnFeatureInfo);
             }
     }
@@ -159,7 +154,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
         var leftButtonPressed = e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased;
-        if (HandleTouched(e.GetPosition(this).ToMapsui(), leftButtonPressed, 1, ShiftPressed))
+       
+        if (HandleTouched(e.GetPosition(this).ToMapsui(), _pointerDownPosition, leftButtonPressed, 1, ShiftPressed))
         {
             e.Handled = true;
             return;
@@ -178,7 +174,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         _previousMousePosition = null;
         e.Pointer.Capture(null);
 
-        if (IsClick(_currentMousePosition, _downMousePosition))
+        if (IsClick(_currentMousePosition, _pointerDownPosition))
         {
             HandleFeatureInfo(e);
             OnInfo(CreateMapInfoEventArgs(_mousePosition, _mousePosition, 1));
@@ -209,7 +205,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         // We have a new interaction with the screen, so stop all navigator animations
         var tapPosition = _mousePosition;
-        if (tapPosition != null && HandleTouchingTouched(tapPosition, true, 2, ShiftPressed))
+        if (tapPosition != null && HandleTouchingTouched(tapPosition, _pointerDownPosition, true, 2, ShiftPressed))
         {
             e.Handled = true;
             return;
