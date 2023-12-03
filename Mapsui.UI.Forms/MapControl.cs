@@ -132,6 +132,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private TouchMode _mode;
 
+    private long _pointerDownTicks;
+    private long _pointerUpTicks;
+
     public MapControl()
     {
         CommonInitialize();
@@ -318,6 +321,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             {
                 _firstTouch = location;
 
+                if (_touches.Count == 0)
+                {
+                    _pointerDownTicks = DateTime.UtcNow.Ticks;
+                }
+
                 _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
 
                 _flingTracker.Clear();
@@ -339,6 +347,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             {
                 if (_touches.Count == 0)
                 {
+                    _pointerUpTicks = DateTime.UtcNow.Ticks;
+
                     // Is this a fling?
                     if (UseFling)
                     {
@@ -368,7 +378,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     // If touch start and end is in the same area and the touch time is shorter
                     // than longTap, than we have a tap.
-                    if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? ShortClick : longTap) * 10000)
+                    if (isAround && (_pointerUpTicks - _pointerDownTicks) < (e.DeviceType == SKTouchDeviceType.Mouse ? ShortClick : longTap) * 10000)
                     {
                         _waitingForDoubleTap = true;
                         if (UseDoubleTap) { await Task.Delay(DelayTap); }
@@ -391,7 +401,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                             _waitingForDoubleTap = false; ;
                         }
                     }
-                    else if (isAround && (ticks - releasedTouch.Tick) >= longTap * 10000)
+                    else if (isAround && (_pointerUpTicks - _pointerDownTicks) >= longTap * 10000)
                     {
                         if (!e.Handled)
                             e.Handled = OnLongTapped(location);
