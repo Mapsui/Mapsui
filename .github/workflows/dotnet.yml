@@ -234,8 +234,8 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
       with:
         vs-prerelease: true
-    - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net7
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net7
+    - name: install workloads
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6 wasm-tools-net7
     #- name: uno-check install
     #  run: dotnet tool install -g uno.check
     #- name: uno-check fix
