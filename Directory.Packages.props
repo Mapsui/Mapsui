@@ -66,6 +66,7 @@
     <PackageVersion Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="[6.2.14,7.0.0)" />
     <PackageVersion Include="Microsoft.UI.Xaml" Version="[2.6.2,3.0.0)" />
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="[17.6.40,18.0.0)" />
+    <PackageVersion Include="Microsoft.Windows.Compatibility" Version="7.0.5" />
     <PackageVersion Include="Microsoft.Windows.CsWin32" Version="[0.1.588-beta,1.0.0)" />
     <PackageVersion Include="Microsoft.Windows.CsWinRT" Version="[2.0.0,3.0.0)" />
     <PackageVersion Include="NeoSmart.AsyncLock" Version="[3.2.1,4.0.0)" />
