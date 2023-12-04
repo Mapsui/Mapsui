@@ -160,12 +160,31 @@ jobs:
     # macos image needs Visual Studio for Mac installed
     #- name: Restore dependencies Legacy
     #  run: nuget restore Mapsui.Mac.Legacy.sln   
-    - name: Restore Mapsui.Mac.slnf
-      run: dotnet restore Mapsui.Mac.slnf      
-    - name: Build Mapsui.Mac.slnf
-      run: dotnet build Mapsui.Mac.slnf --configuration Release
-    - name: Test Mapsui.Mac.slnf
-      run: dotnet test Mapsui.Mac.slnf --configuration Release
+    - name: Restore dependencies Mapsui.Mac
+      run: dotnet restore Mapsui.Mac.slnf       
+    # Samples Build               
+    - name: Mapsui.Samples.Avalonia
+      run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj
+    - name: Build Mapsui.Samples.Droid
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                       
+    # Samples Forms    
+    - name: Build Mapsui.Samples.Forms.Shared
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj    
+    - name: Build Mapsui.Samples.iOS
+      run: dotnet build --no-restore --configuration Debug -r iossimulator-x64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
+    # Samples Uno
+    - name: Mapsui.Samples.Uno.Mobile
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Mobile/Mapsui.Samples.Uno.Mobile.csproj
+    # Test Build    
+    - name: Build Mapsui.Rendering.Skia.Tests
+      run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
+    - name: Build Mapsui.Tests
+      run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj    
+    # Run Tests   
+    - name: Run Mapsui.Rendering.Skia.Tests
+      run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net6.0/Mapsui.Rendering.Skia.Tests.dll    
+    - name: Run Mapsui.Tests
+      run: dotnet test Tests/Mapsui.Tests/bin/Debug/net6.0/Mapsui.Tests.dll    
     # Release Build
     - name: Build Mapsui
       run: dotnet pack --no-restore --configuration Release Mapsui/Mapsui.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
@@ -196,16 +215,16 @@ jobs:
       with:
         fetch-depth: 0
     # # Cache Nugets
-    # - uses: actions/cache@v3
-    #   with:
-    #     path: |
-    #       ~/.nuget/packages/Microsoft*
-    #       ~/.nuget/packages/SkiaSharp* 
-    #       ~/.nuget/packages/System*
-    #       ~/.nuget/packages/Xamarin*
-    #     key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
-    #     restore-keys: |
-    #         ${{ runner.os }}-nuget15-
+    - uses: actions/cache@v3
+      with:
+        path: |
+          ~/.nuget/packages/Microsoft*
+          ~/.nuget/packages/SkiaSharp* 
+          ~/.nuget/packages/System*
+          ~/.nuget/packages/Xamarin*
+        key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
+        restore-keys: |
+            ${{ runner.os }}-nuget15-
     # .Net 7 update     
     - name: Setup .NET 7 SDK
       uses: actions/setup-dotnet@v3
