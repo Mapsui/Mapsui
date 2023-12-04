@@ -39,7 +39,7 @@ jobs:
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v1.1
 
-      # The version tag needs to be set before the release. If not if will fail on nuget publish.
+    # The version tag needs to be set before the release. If not if will fail on nuget publish.
     - name: Set VERSION_OF_RELEASE to last tag
       run: |
         echo ("VERSION_OF_RELEASE=" + $(git describe --tags --abbrev=0)) >> $env:GITHUB_ENV
@@ -48,9 +48,15 @@ jobs:
     - name: install workloads
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6 wasm-tools-net7
 
+    - name: Restore
+      run: dotnet restore ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
+
+    - name: Build
+      run: dotnet build ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
+
     - name: Test
       run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
-
+      
     - name: Pack Uno UWP
       run: |
         msbuild Mapsui.UI.Uno/Mapsui.UI.Uno.csproj /t:restore /p:Configuration=Release 
