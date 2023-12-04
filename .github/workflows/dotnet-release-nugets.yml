@@ -26,7 +26,9 @@ jobs:
         java-version: '17'
 
     - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.5
+      uses: NuGet/setup-nuget@v1.1.1
+      with:
+        nuget-version: latest
 
     # .Net 7 update     
     - name: Setup .NET 7 SDK
@@ -38,6 +40,8 @@ jobs:
       
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v1.1
+      with:
+        vs-prerelease: true
 
     # The version tag needs to be set before the release. If not if will fail on nuget publish.
     - name: Set VERSION_OF_RELEASE to last tag
@@ -47,7 +51,7 @@ jobs:
 
     - name: install workloads
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6 wasm-tools-net7
-
+      
     - name: Restore
       run: dotnet restore ${{ env.SOLUTION }}
 
