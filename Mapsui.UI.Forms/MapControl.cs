@@ -59,20 +59,20 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             // Catch Xamarin Forms not initialized exception happens in unit tests.
             Logger.Log(LogLevel.Error, ex.Message, ex);
         }
-        
+
 #if __FORMS__
         Callout.DefaultTitleFontName = Font.Default.FontFamily;
         Callout.DefaultSubtitleFontName = Font.Default.FontFamily;
 #endif
-}
+    }
 
 #if __MAUI__
     // GPU does not work currently on MAUI
     // See https://github.com/mono/SkiaSharp/issues/1893
     // https://github.com/Mapsui/Mapsui/issues/1676
-    public static bool UseGPU = 
-        DeviceInfo.Platform != DevicePlatform.WinUI && 
-        DeviceInfo.Platform != DevicePlatform.macOS && 
+    public static bool UseGPU =
+        DeviceInfo.Platform != DevicePlatform.WinUI &&
+        DeviceInfo.Platform != DevicePlatform.macOS &&
         DeviceInfo.Platform != DevicePlatform.MacCatalyst &&
         DeviceInfo.Platform != DevicePlatform.Android;
 #else
@@ -131,6 +131,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private double _previousRadius = 1f;
 
     private TouchMode _mode;
+
+    private long _pointerDownTicks;
+    private long _pointerUpTicks;
 
     public MapControl()
     {
@@ -207,8 +210,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private static void InitTouchesReset(MapControl mapControl)
     {
 #if __MAUI__
-        try 
-        {   
+        try
+        {
             if (listeners == null)
             {
                 listeners = new List<WeakReference<MapControl>>();
@@ -227,7 +230,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     listeners.Remove(entry);
                 }
             }
-            
+
             // add control to listeners
             listeners.Add(new WeakReference<MapControl>(mapControl));
         }
@@ -235,7 +238,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             Logger.Log(LogLevel.Error, ex.Message, ex);
         }
-     
+
 #endif
     }
 
@@ -244,7 +247,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         try
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case nameof(Shell.FlyoutIsPresented):
                     if (listeners != null)
@@ -304,8 +307,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
             var location = GetScreenPosition(e.Location);
 
-            if (e.ActionType == SKTouchAction.Pressed)
+            if (e.ActionType == SKTouchAction.Pressed && _touches.Count == 0)
+            {
                 _pointerDownPosition = location;
+                _pointerDownTicks = DateTime.UtcNow.Ticks;
+            }
 
             if (HandleTouch(e, location))
             {
@@ -340,6 +346,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             {
                 if (_touches.Count == 0)
                 {
+                    _pointerUpTicks = DateTime.UtcNow.Ticks;
+
                     // Is this a fling?
                     if (UseFling)
                     {
@@ -369,7 +377,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     // If touch start and end is in the same area and the touch time is shorter
                     // than longTap, than we have a tap.
-                    if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? ShortClick : longTap) * 10000)
+                    if (isAround && (_pointerUpTicks - _pointerDownTicks) < (e.DeviceType == SKTouchDeviceType.Mouse ? ShortClick : longTap) * 10000)
                     {
                         _waitingForDoubleTap = true;
                         if (UseDoubleTap) { await Task.Delay(DelayTap); }
@@ -392,7 +400,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                             _waitingForDoubleTap = false; ;
                         }
                     }
-                    else if (isAround && (ticks - releasedTouch.Tick) >= longTap * 10000)
+                    else if (isAround && (_pointerUpTicks - _pointerDownTicks) >= longTap * 10000)
                     {
                         if (!e.Handled)
                             e.Handled = OnLongTapped(location);
@@ -455,7 +463,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             _ => false
         };
     }
-    
+
     public bool ShiftPessed { get; set; }
 
     private bool IsAround(TouchEvent releasedTouch)
