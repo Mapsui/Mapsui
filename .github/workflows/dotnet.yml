@@ -49,18 +49,10 @@ jobs:
     # Samples Forms    
     - name: Build Mapsui.Samples.Forms.Shared
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj        
-    # Samples Uno WinUI    
-    - name: Mapsui.Samples.Uno.WinUI.Skia.Gtk
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Gtk/Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj    
     # Build Tests      
-    # tests that depend on skia seem not work because of missing dependencies on linux.
-    #- name: Build Mapsui.Rendering.Skia.Tests
-    #  run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
     - name: Build Mapsui.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj    
     # Run Tests   
-    #- name: Run Mapsui.Rendering.Skia.Tests
-    #  run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net6.0/Mapsui.Rendering.Skia.Tests.dll    
     - name: Run Mapsui.Tests
       run: dotnet test Tests/Mapsui.Tests/bin/Debug/net6.0/Mapsui.Tests.dll
     # Release Build
