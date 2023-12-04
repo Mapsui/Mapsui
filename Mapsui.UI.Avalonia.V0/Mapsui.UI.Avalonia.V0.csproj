@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <PackageId>Mapsui.Avalonia.V0</PackageId>
     <Description>Avalonia map components based on the Mapsui library. This package supports the 0.x versions. For higher versions look for Mapsui.Avalonia.</Description>
     <PackageTags>$(PackageTags) avalonia</PackageTags>
