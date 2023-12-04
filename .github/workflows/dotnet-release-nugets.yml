@@ -20,6 +20,10 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0 # Prevent a shallow clone to allow git describe --tags
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
 
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.5
