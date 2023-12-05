@@ -119,12 +119,12 @@
     <PackageVersion Include="Uno.UI.WebAssembly" Version="[4.9.20,5.0.0)" />
     <PackageVersion Include="Uno.Wasm.Bootstrap" Version="[7.0.24,8.0.0)" />
     <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="[7.0.24,8.0.0)" />
-    <PackageVersion Include="Uno.WinUI" Version="[4.9.20,5.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="[4.9.20,5.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="[4.9.20,5.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Wpf" Version="[4.9.20,5.0.0)" />
-    <PackageVersion Include="Uno.WinUI.RemoteControl" Version="[4.9.20,5.0.0)" />
-    <PackageVersion Include="Uno.WinUI.WebAssembly" Version="[4.9.20,5.0.0)" />
+    <PackageVersion Include="Uno.WinUI" Version="[4.9.20,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="[4.9.20,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="[4.9.20,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.Skia.Wpf" Version="[4.9.20,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.RemoteControl" Version="[4.9.20,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.WebAssembly" Version="[4.9.20,6.0.0)" />
     <PackageVersion Include="Xam.Plugin.Geolocator" Version="[5.0.0-beta,6.0.0)" />
     <PackageVersion Include="Xamarin.Essentials" Version="[1.7.0,2.0.0)" />
     <PackageVersion Include="Xamarin.Forms" Version="[5.0.0.2545,6.0.0.0)" />
