@@ -39,7 +39,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         Navigator.ViewportChanged += Navigator_ViewportChanged;
     }
 
-    private void Navigator_ViewportChanged(object? sender, PropertyChangedEventArgs e)
+    private void Navigator_ViewportChanged(object? sender, ViewportChangedEventArgs e)
     {
         RefreshGraphics();
     }

@@ -467,7 +467,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// </summary>
     /// <param name="sender">Viewport of this event</param>
     /// <param name="e">Event arguments containing what changed</param>
-    private void HandlerViewportChanged(object? sender, PropertyChangedEventArgs e)
+    private void HandlerViewportChanged(object? sender, ViewportChangedEventArgs e)
     {
         if (e.PropertyName?.Equals(nameof(Navigator.Viewport.Rotation)) ?? false)
         {
