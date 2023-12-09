@@ -105,7 +105,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         switch (change.Property.Name)
         {
             case nameof(Bounds):
-                // size changed
+                // Size changed
                 MapControlSizeChanged();
                 break;
         } 
