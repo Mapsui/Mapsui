@@ -183,7 +183,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleTouching(e.ToLocation(_clientRect), e.Button == 0, 2, ShiftPressed))
+            if (HandleWidgetPointerDown(e.ToLocation(_clientRect), e.Button == 0, 2, ShiftPressed))
                 return;
         }
         catch (Exception ex)
@@ -201,7 +201,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
             _pointerDownPosition = e.ToLocation(_clientRect);
 
-            if (HandleTouching(_pointerDownPosition, e.Button == 0, 1, ShiftPressed))
+            if (HandleWidgetPointerDown(_pointerDownPosition, e.Button == 0, 1, ShiftPressed))
                 return;
 
             IsInBoxZoomMode = e.Button == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
@@ -249,7 +249,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleTouched(e.ToLocation(_clientRect), _pointerDownPosition, e.Button == 0, 1, ShiftPressed))
+            if (HandleWidgetPointerUp(e.ToLocation(_clientRect), _pointerDownPosition, e.Button == 0, 1, ShiftPressed))
                 return;
 
             if (IsInBoxZoomMode)
@@ -300,7 +300,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleMoving(e.ToLocation(_clientRect), e.Button == 0, 0, ShiftPressed))
+            if (HandleWidgetPointerMove(e.ToLocation(_clientRect), e.Button == 0, 0, ShiftPressed))
                 return;
 
             if (_previousMousePosition != null)
