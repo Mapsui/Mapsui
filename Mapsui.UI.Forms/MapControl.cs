@@ -75,7 +75,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         DeviceInfo.Platform != DevicePlatform.MacCatalyst &&
         DeviceInfo.Platform != DevicePlatform.Android;
 #else
-    public static bool UseGPU = false;
+    public static bool UseGPU = true;
 #endif
 
     private class TouchEvent
