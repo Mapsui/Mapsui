@@ -49,4 +49,42 @@ public class NavigatorTests
         Assert.AreEqual(expectedCenterX, navigator.Viewport.CenterX);
         Assert.AreEqual(expectedCenterY, navigator.Viewport.CenterY);
     }
+
+    [Test]
+    public void ViewportChangedTest()
+    {
+        Viewport oldViewport = new();
+
+        var navigator = new Navigator();
+
+        // Save changes to old viewport
+        navigator.ViewportChanged += (sender, args) =>
+        {
+            oldViewport = args.OldViewport;
+        };
+
+        // Test size change
+        var viewport = navigator.Viewport;
+        navigator.SetSize(100, 100);
+        Assert.AreEqual(oldViewport, viewport);
+        Assert.AreNotEqual(oldViewport, navigator.Viewport);
+
+        // Test center change
+        viewport = navigator.Viewport;
+        navigator.CenterOn(10, 20);
+        Assert.AreEqual(oldViewport, viewport);
+        Assert.AreNotEqual(oldViewport, navigator.Viewport);
+
+        // Test resolution change
+        viewport = navigator.Viewport;
+        navigator.ZoomTo(10);
+        Assert.AreEqual(oldViewport, viewport);
+        Assert.AreNotEqual(oldViewport, navigator.Viewport);
+
+        // Test rotation change
+        viewport = navigator.Viewport;
+        navigator.RotateTo(10);
+        Assert.AreEqual(oldViewport, viewport);
+        Assert.AreNotEqual(oldViewport, navigator.Viewport);
+    }
 }
