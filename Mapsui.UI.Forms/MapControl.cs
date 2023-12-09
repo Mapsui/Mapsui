@@ -11,6 +11,7 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Utilities;
 using Mapsui.Extensions;
+using Logger = Mapsui.Logging.Logger;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
@@ -20,9 +21,7 @@ using Microsoft.Maui.Devices;
 using Microsoft.Maui.Graphics;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
-
 using Color = Microsoft.Maui.Graphics.Color;
-using Logger = Mapsui.Logging.Logger;
 using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using SkiaSharp.Views.Forms;
@@ -134,6 +133,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private long _pointerDownTicks;
     private long _pointerUpTicks;
+    private bool _widgetPointerDown;
 
     public MapControl()
     {
@@ -306,26 +306,29 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             var ticks = DateTime.Now.Ticks;
 
             var location = GetScreenPosition(e.Location);
-
-            if (e.ActionType == SKTouchAction.Pressed && _touches.Count == 0)
-            {
-                _pointerDownPosition = location;
-                _pointerDownTicks = DateTime.UtcNow.Ticks;
-            }
-
-            if (HandleTouch(e, location))
-            {
-                e.Handled = true;
-                return;
-            }
-
+           
             // if user handles action by his own return
             TouchAction?.Invoke(sender, e);
             if (e.Handled) return;
 
             if (e.ActionType == SKTouchAction.Pressed)
             {
+                _widgetPointerDown = false;
                 _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
+
+                if (_touches.Count == 1)
+                {
+                    // In case of touch we need to check if another finger was not already touching.
+                    _pointerDownPosition = location;
+                    _pointerDownTicks = DateTime.UtcNow.Ticks;
+                }
+
+                if (HandleWidgetPointerDown(location, true, Math.Max(1, _numOfTaps), ShiftPessed))
+                {
+                    e.Handled = true;
+                    _widgetPointerDown = true;
+                    return;
+                }
 
                 _flingTracker.Clear();
 
@@ -344,6 +347,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             // Delete e.Id from _touches, because finger is released
             else if (e.ActionType == SKTouchAction.Released && _touches.TryRemove(e.Id, out var releasedTouch))
             {
+                if (HandleWidgetPointerUp(location, _pointerDownPosition, true, 0, ShiftPessed))
+                {
+                    e.Handled = true;
+                    return;
+                }
+
                 if (_touches.Count == 0)
                 {
                     _pointerUpTicks = DateTime.UtcNow.Ticks;
@@ -419,12 +428,18 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             }
             else if (e.ActionType == SKTouchAction.Moved)
             {
+                if (HandleWidgetPointerMove(location, true, Math.Max(1, _numOfTaps), ShiftPessed))
+                {
+                    e.Handled = true;
+                    return;
+                }
+
                 _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
 
                 if (e.InContact)
                     _flingTracker.AddEvent(e.Id, location, ticks);
 
-                if (e.InContact && !e.Handled)
+                if (e.InContact && !e.Handled && !_widgetPointerDown)
                     e.Handled = OnTouchMove(_touches.Select(t => t.Value.Location).ToList());
                 else
                     e.Handled = OnHovered(_touches.Select(t => t.Value.Location).FirstOrDefault());
@@ -451,17 +466,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             Logger.Log(LogLevel.Error, ex.Message, ex);
         }
-    }
-
-    private bool HandleTouch(SKTouchEventArgs e, MPoint location)
-    {
-        return e.ActionType switch
-        {
-            SKTouchAction.Pressed when HandleTouching(location, true, Math.Max(1, _numOfTaps), ShiftPessed) => true,
-            SKTouchAction.Released when HandleTouched(location, _pointerDownPosition, true, 0, ShiftPessed) => true,
-            SKTouchAction.Moved when HandleMoving(location, true, Math.Max(1, _numOfTaps), ShiftPessed) => true,
-            _ => false
-        };
     }
 
     public bool ShiftPessed { get; set; }
@@ -882,7 +886,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     public void OpenBrowser(string url)
     {
+#if __MAUI__
         Launcher.OpenAsync(new Uri(url));
+#else
+        Logger.Log(LogLevel.Error, "OpenBrowser is not implemented for Hyperlink Xamarin.Forms. Use Hyperlink.Touched instead.");
+#endif
     }
 
     /// <summary>
@@ -895,7 +903,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     protected void RunOnUIThread(Action action)
     {
-#if __MAUI__ 
+#if __MAUI__
         Dispatcher.Dispatch(() => Catch.Exceptions(action));
 #else
         Device.BeginInvokeOnMainThread(() => Catch.Exceptions(action));

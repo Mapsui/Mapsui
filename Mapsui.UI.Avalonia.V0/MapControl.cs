@@ -82,7 +82,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         _pointerDownPosition = e.GetPosition(this).ToMapsui();
 
         _mouseDown = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
-        if (HandleTouching(_pointerDownPosition, _mouseDown, e.ClickCount, ShiftPressed))
+        if (HandleWidgetPointerDown(_pointerDownPosition, _mouseDown, e.ClickCount, ShiftPressed))
         {
             e.Handled = true;
             return;
@@ -155,7 +155,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var leftButtonPressed = e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased;
        
-        if (HandleTouched(e.GetPosition(this).ToMapsui(), _pointerDownPosition, leftButtonPressed, 1, ShiftPressed))
+        if (HandleWidgetPointerUp(e.GetPosition(this).ToMapsui(), _pointerDownPosition, leftButtonPressed, 1, ShiftPressed))
         {
             e.Handled = true;
             return;
@@ -195,7 +195,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         base.OnPointerMoved(e);
         _mousePosition = e.GetPosition(this).ToMapsui();
-        if (HandleMoving(_mousePosition, true, 0, ShiftPressed))
+        if (HandleWidgetPointerMove(_mousePosition, true, 0, ShiftPressed))
             e.Handled = true;
     }
 
