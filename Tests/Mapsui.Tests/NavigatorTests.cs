@@ -61,6 +61,9 @@ public class NavigatorTests
         Viewport oldViewport = new();
 
         var navigator = new Navigator();
+        // Set PanBound and Size so that the viewport is initialized before the test.
+        navigator.DefaultPanBounds = new MRect(-10, -10, 10, 10);
+        navigator.SetSize(10, 10);
 
         // Save changes to old viewport
         navigator.ViewportChanged += (sender, args) =>
