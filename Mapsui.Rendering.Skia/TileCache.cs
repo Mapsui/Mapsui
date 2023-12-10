@@ -10,7 +10,7 @@ namespace Mapsui.Rendering.Skia;
 public class TileCache : ITileCache
 {
     private const int TilesToKeepMultiplier = 3;
-    private const int MinimumTilesToKeep = 128; // in RasterStyle it was 32, I quadrupled it because now a tile Layers have one Cache
+    private const int MinimumTilesToKeep = 128; // in RasterStyle it was 32, I quadrupled it because now all tile Layers have one Cache
     private long _lastIteration;
     
     private readonly IDictionary<object, IBitmapInfo?> _tileCache = 
