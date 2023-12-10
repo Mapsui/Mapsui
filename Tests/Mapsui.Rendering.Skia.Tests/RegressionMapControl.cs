@@ -76,7 +76,7 @@ public class RegressionMapControl : IMapControl
         throw new NotImplementedException();
     }
 
-    public MapInfo? GetMapInfo(MPoint screenPosition, int margin = 0)
+    public MapInfoBase? GetMapInfo(MPoint screenPosition, int margin = 0)
     {
         throw new NotImplementedException();
     }

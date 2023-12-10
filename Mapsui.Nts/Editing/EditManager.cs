@@ -73,7 +73,7 @@ public class EditManager
         return false;
     }
 
-    public void HoveringVertex(MapInfo? mapInfo)
+    public void HoveringVertex(MapInfoBase? mapInfo)
     {
         if (_addInfo.Vertex != null)
         {
@@ -153,7 +153,7 @@ public class EditManager
         return false;
     }
 
-    private static Coordinate? FindVertexTouched(MapInfo mapInfo, IEnumerable<Coordinate> vertices, double screenDistance)
+    private static Coordinate? FindVertexTouched(MapInfoBase mapInfo, IEnumerable<Coordinate> vertices, double screenDistance)
     {
         if (mapInfo.WorldPosition == null)
             return null;
@@ -162,7 +162,7 @@ public class EditManager
             .FirstOrDefault(v => v.Distance(mapInfo.WorldPosition.ToCoordinate()) < mapInfo.Resolution * screenDistance);
     }
 
-    public bool StartDragging(MapInfo mapInfo, double screenDistance)
+    public bool StartDragging(MapInfoBase mapInfo, double screenDistance)
     {
         if (EditMode == EditMode.Modify)
         {
@@ -266,7 +266,7 @@ public class EditManager
         }
     }
 
-    public bool TryDeleteCoordinate(MapInfo? mapInfo, double screenDistance)
+    public bool TryDeleteCoordinate(MapInfoBase? mapInfo, double screenDistance)
     {
         if (mapInfo?.Feature is GeometryFeature geometryFeature)
         {
@@ -287,7 +287,7 @@ public class EditManager
         return false;
     }
 
-    public bool TryInsertCoordinate(MapInfo? mapInfo)
+    public bool TryInsertCoordinate(MapInfoBase? mapInfo)
     {
         if (mapInfo?.WorldPosition is null) return false;
 
@@ -306,7 +306,7 @@ public class EditManager
         return false;
     }
 
-    public bool StartRotating(MapInfo mapInfo)
+    public bool StartRotating(MapInfoBase mapInfo)
     {
         if (mapInfo.Feature is GeometryFeature geometryFeature)
         {
@@ -359,7 +359,7 @@ public class EditManager
         return Math.Atan2(sin, cos) * (180 / Math.PI);
     }
 
-    public bool StartScaling(MapInfo mapInfo)
+    public bool StartScaling(MapInfoBase mapInfo)
     {
         if (mapInfo.Feature is GeometryFeature geometryFeature)
         {

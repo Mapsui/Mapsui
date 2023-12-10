@@ -530,7 +530,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     /// <inheritdoc />
-    public MapInfo? GetMapInfo(MPoint? screenPosition, int margin = 0)
+    public MapInfoBase? GetMapInfo(MPoint? screenPosition, int margin = 0)
     {
         if (screenPosition == null)
             return null;
