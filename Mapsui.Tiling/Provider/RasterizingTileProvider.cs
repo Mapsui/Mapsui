@@ -263,13 +263,17 @@ public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
             layerRenderLayer
         };
 
-        var mapInfo = renderer.GetMapInfo(screenX, screenY, viewport, layers);
-        var infos = mapInfo?.MapInfoRecords;
-        if (infos != null)
+        var info = renderer.GetMapInfo(screenX, screenY, viewport, layers);
+        if (info != null)
         {
-            foreach (var group in infos.GroupBy(f => f.Layer.Name))
+            var mapInfo = await info.GetMapInfoAsync();
+            var infos = mapInfo?.MapInfoRecords;
+            if (infos != null)
             {
-                result[group.Key] = group.Select(f => f.Feature).ToArray();
+                foreach (var group in infos.GroupBy(f => f.Layer.Name))
+                {
+                    result[group.Key] = group.Select(f => f.Feature).ToArray();
+                }
             }
         }
 
