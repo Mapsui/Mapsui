@@ -181,13 +181,18 @@ jobs:
         key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
             ${{ runner.os }}-nuget15-
-    # .Net 7 update     
+    # .Net 8 update     
     - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
            8.0.x
          include-prerelease: true
+    # Java Sdk install 11
+    - uses: actions/setup-java@v4
+      with:
+        distribution: 'microsoft' # open jdk
+        java-version: '11'
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.1.1
       with:
