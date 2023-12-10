@@ -202,7 +202,7 @@ public class MapRenderer : IRenderer
         // todo: We will need to select on style instead of layer
 
         var mapInfoLayers = layers
-            .Select(l => (l is ISourceLayer sl) ? sl.SourceLayer : l)
+            .Select(l => l is ISourceLayer sl and not ILayerFeatureInfo ? sl.SourceLayer : l)
             .Where(l => l.IsMapInfoLayer)
             .ToList();
 
