@@ -4,7 +4,7 @@ namespace Mapsui;
 
 public class MapInfoEventArgs : EventArgs
 {
-    public MapInfoBase? MapInfo { get; set; }
+    public MapInfo? MapInfo { get; set; }
 
     /// <summary>
     /// Number of times the user tapped the location

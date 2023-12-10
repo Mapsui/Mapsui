@@ -28,6 +28,20 @@ public class MapInfoWidget : TextBox
     {
         Text = FeatureToText(a.MapInfo?.Feature);
         _map.RefreshGraphics();
+        if (a.MapInfo != null)
+        {
+            // see If I can load Async Data
+            Catch.Exceptions(async () =>
+            {
+                var info = await a.MapInfo.GetMapInfoAsync();
+                var featureText = FeatureToText(info.Feature);
+                if (Text != featureText)
+                {
+                    Text = featureText;
+                    _map.RefreshGraphics();
+                }
+            });
+        }
     }
 
     public Func<IFeature?, string> FeatureToText { get; set; } = (f) =>

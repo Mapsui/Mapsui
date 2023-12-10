@@ -196,7 +196,7 @@ public class MapRenderer : IRenderer
         WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
     }
 
-    public MapInfoBase? GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+    public MapInfo? GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
     {
         // todo: use margin to increase the pixel area
         // todo: We will need to select on style instead of layer
