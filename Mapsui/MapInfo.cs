@@ -7,13 +7,13 @@ namespace Mapsui;
 public class MapInfo : MapInfoBase
 {
     private readonly Task? _task;
-    
+
     public MapInfo(MPoint screenPosition,
         MPoint worldPosition,
         double resolution) : base(screenPosition, worldPosition, resolution, new List<MapInfoRecord>())
     {
     }
-    
+
     public MapInfo(MPoint screenPosition,
         MPoint worldPosition,
         double resolution,
@@ -29,7 +29,7 @@ public class MapInfo : MapInfoBase
     {
         _task = task;
     }
-    
+
     public MapInfo(MapInfoBase mapInfoBase,
         IEnumerable<MapInfoRecord> records,
         Task task) : base(mapInfoBase.ScreenPosition, mapInfoBase.WorldPosition, mapInfoBase.Resolution, records)
@@ -49,5 +49,5 @@ public class MapInfo : MapInfoBase
         return this;
     }
 
-    
+
 }

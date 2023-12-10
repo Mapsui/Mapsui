@@ -238,7 +238,7 @@ public class MapRenderer : IRenderer
 
                 for (var index = 0; index < mapInfoLayers.Count; index++)
                 {
-                    var currentIndex = mapInfoLayers.Count - index -1; // for having copy of index for thread safe access and reverse order.
+                    var currentIndex = mapInfoLayers.Count - index - 1; // for having copy of index for thread safe access and reverse order.
                     var mapList = list[currentIndex] = new List<MapInfoRecord>();
                     var infoLayer = mapInfoLayers[index];
                     if (infoLayer is ILayerFeatureInfo layerFeatureInfo)

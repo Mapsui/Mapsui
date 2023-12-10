@@ -18,22 +18,22 @@ namespace Mapsui.Samples.Common.Maps.Animations;
 internal sealed class BusPointProvider : MemoryProvider, IDynamic, IDisposable
 {
     public event DataChangedEventHandler? DataChanged;
-        
+
     private readonly PeriodicTimer _timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
 
     public BusPointProvider()
-    {            
+    {
         Catch.TaskRun(RunTimerAsync);
     }
 
     private (double Lon, double Lat) _prevCoords = (24.945831, 60.192059);
     private async Task RunTimerAsync()
     {
-        while(true)
+        while (true)
         {
             await _timer.WaitForNextTickAsync();
-                
-            _prevCoords = (_prevCoords.Lon + 0.00005, _prevCoords.Lat + 0.00005);                                
+
+            _prevCoords = (_prevCoords.Lon + 0.00005, _prevCoords.Lat + 0.00005);
 
             OnDataChanged();
         }
@@ -48,7 +48,7 @@ internal sealed class BusPointProvider : MemoryProvider, IDynamic, IDisposable
     {
         DataChanged?.Invoke(this, new DataChangedEventArgs(null, false, null));
     }
-        
+
     public override Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var busFeature = new PointFeature(SphericalMercator.FromLonLat(_prevCoords.Lon, _prevCoords.Lat).ToMPoint());

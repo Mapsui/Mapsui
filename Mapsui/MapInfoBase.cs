@@ -49,14 +49,14 @@ public class MapInfoBase
     /// <summary>
     /// Screen position of the place the user touched
     /// </summary>
-    public MPoint ScreenPosition { get;  }
+    public MPoint ScreenPosition { get; }
 
     /// <summary>
     /// The resolution at which the info was retrieved. This can
     /// be useful to calculate screen distances, which are needed
     /// for editing functionality.
     /// </summary>
-    public double Resolution { get;  }
+    public double Resolution { get; }
 
     /// <summary> List of MapInfo Records </summary>
     public List<MapInfoRecord> MapInfoRecords => _mapInfoRecords ??= _records.ToList();

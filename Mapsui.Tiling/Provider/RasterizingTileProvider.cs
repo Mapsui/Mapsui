@@ -244,7 +244,7 @@ public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
     {
         var result = new Dictionary<string, IEnumerable<IFeature>>();
         var renderer = GetRenderer();
-        
+
         var tileInfos = Schema.GetTileInfos(viewport.ToExtent().ToExtent(), viewport.Resolution);
         var (worldX, worldY) = viewport.ScreenToWorldXY(screenX, screenY);
         var tileInfo = tileInfos.FirstOrDefault(f =>

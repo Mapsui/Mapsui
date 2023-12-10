@@ -628,7 +628,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         var maxPoint = viewport.ScreenToWorld(screenX + halfSymbolSize, screenY + halfSymbolSize);
 
         var extent = new MRect(minPoint.X, minPoint.Y, maxPoint.X, maxPoint.Y);
-        var featureInfo = await getFeatureInfo.RequestAsync(resource.OnlineResource!, wmsVersion!, infoFormat, srs!, layer!,extent.MinX,extent.MinY,extent.MaxX,extent.MaxY, (int)screenX, (int)screenY, (int)viewport.Width, (int)viewport.Height).ConfigureAwait(false);
+        var featureInfo = await getFeatureInfo.RequestAsync(resource.OnlineResource!, wmsVersion!, infoFormat, srs!, layer!, extent.MinX, extent.MinY, extent.MaxX, extent.MaxY, (int)screenX, (int)screenY, (int)viewport.Width, (int)viewport.Height).ConfigureAwait(false);
         if (featureInfo != null)
         {
             if (featureInfo.LayerName != null)
@@ -647,7 +647,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
 
                 result[featureInfo.LayerName] = new List<IFeature>() { feature };
             }
-         
+
         }
 
 
@@ -657,7 +657,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     private string GetFeatureInfoFormat()
     {
         var result = _wmsClient?.GetFeatureInfoOutputFormats?.FirstOrDefault(f => f.Equals(GetFeatureInfo.ApplicationVndOGCGml, StringComparison.InvariantCultureIgnoreCase)) ??
-                     _wmsClient?.GetFeatureInfoOutputFormats?.FirstOrDefault(f => f.Equals(GetFeatureInfo.TextXmlSubtypeGml, StringComparison.InvariantCultureIgnoreCase)) ?? 
+                     _wmsClient?.GetFeatureInfoOutputFormats?.FirstOrDefault(f => f.Equals(GetFeatureInfo.TextXmlSubtypeGml, StringComparison.InvariantCultureIgnoreCase)) ??
                      _wmsClient?.GetFeatureInfoOutputFormats?.FirstOrDefault(f => f.Equals(GetFeatureInfo.TextXml, StringComparison.InvariantCultureIgnoreCase));
 
         result ??= "text/xml";
