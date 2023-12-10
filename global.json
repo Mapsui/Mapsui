@@ -1,11 +1,11 @@
 {
   "sdk": {
-    "allowPrerelease": true,
+    "allowPrerelease": false,
     "version": "8.0.100",
     "rollForward": "latestMajor"
   },
   "tools": {
-    "allowPrerelease": true,
+    "allowPrerelease": false,
     "dotnet": "8.0.100",
     "rollForward": "latestMajor"
   }  
