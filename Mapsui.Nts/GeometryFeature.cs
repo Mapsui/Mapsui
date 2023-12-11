@@ -5,7 +5,7 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Nts;
 
-public class GeometryFeature : BaseFeature, IFeature, IDisposable
+public class GeometryFeature : BaseFeature, IFeature
 {
     private bool _disposed;
 
@@ -35,13 +35,6 @@ public class GeometryFeature : BaseFeature, IFeature, IDisposable
     public Geometry? Geometry { get; set; }
 
     public MRect? Extent => Geometry?.EnvelopeInternal.ToMRect();
-
-    public override void Dispose()
-    {
-        if (_disposed) return;
-        base.Dispose();
-        _disposed = true;
-    }
 
     public void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
     {

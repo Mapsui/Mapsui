@@ -15,7 +15,7 @@ using Point = Microsoft.Maui.Graphics.Point;
 
 namespace Mapsui.UI.Maui;
 
-public class Callout : IFeatureProvider, IDisposable, INotifyPropertyChanged
+public class Callout : IFeatureProvider, INotifyPropertyChanged
 {
     private readonly Pin _pin;
 
@@ -600,11 +600,6 @@ public class Callout : IFeatureProvider, IDisposable, INotifyPropertyChanged
     {
         UpdateContent();
         UpdateCalloutStyle();
-    }
-
-    public virtual void Dispose()
-    {
-        Feature.Dispose();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

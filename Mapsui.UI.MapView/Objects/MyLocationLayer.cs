@@ -16,7 +16,7 @@ namespace Mapsui.UI.Objects;
 /// A layer to display a symbol for own location
 /// </summary>
 /// <remarks>
-/// There are two different symbols for own loaction: one is used when there isn't a change in position (still),
+/// There are two different symbols for own location: one is used when there isn't a change in position (still),
 /// and one is used, if the position changes (moving).
 /// </remarks>
 public class MyLocationLayer : BaseLayer
@@ -483,16 +483,6 @@ public class MyLocationLayer : BaseLayer
                 _mapView.Refresh();
             }
         }
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            _feature.Dispose();
-        }
-
-        base.Dispose(disposing);
     }
 
     private bool InternalUpdateMyLocation(Position newLocation)

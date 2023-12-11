@@ -14,7 +14,7 @@ using Color = Microsoft.Maui.Graphics.Color;
 
 namespace Mapsui.UI.Maui;
 
-public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
+public class Pin : IFeatureProvider, INotifyPropertyChanged
 {
     // Cache for used bitmaps
     private static readonly Dictionary<string, int> _bitmapIds = new Dictionary<string, int>();
@@ -57,7 +57,6 @@ public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
                     _mapView?.RemoveCallout(_callout);
                 }
 
-                Feature?.Dispose();
                 Feature = null;
                 _mapView = value;
 
@@ -601,12 +600,6 @@ public class Pin : IFeatureProvider, IDisposable, INotifyPropertyChanged
                 });
             }
         }
-    }
-
-    public virtual void Dispose()
-    {
-        _callout?.Dispose();
-        Feature?.Dispose();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

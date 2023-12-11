@@ -452,8 +452,7 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
     {
         if (FilterDelegate != null) //Apply filtering
         {
-            using var fdr = GetFeature(oid);
-            return fdr?.Geometry;
+            return GetFeature(oid)?.Geometry;
         }
 
         return ReadGeometry(oid);

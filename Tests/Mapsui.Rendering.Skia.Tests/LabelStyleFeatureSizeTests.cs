@@ -25,7 +25,7 @@ public class LabelStyleFeatureSizeTests
             LabelColumn = "test",
         };
 
-        using var feature = new PointFeature(new MPoint(0, 0));
+        var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
         using var skPaint = new SKPaint();
@@ -44,7 +44,7 @@ public class LabelStyleFeatureSizeTests
 
         labelStyle.Font.Size *= 2;
 
-        using var feature = new PointFeature(new MPoint(0, 0));
+        var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
         using var skPaint = new SKPaint();
@@ -70,7 +70,7 @@ public class LabelStyleFeatureSizeTests
             Offset = new Offset(2, 0),
         };
 
-        using var feature = new PointFeature(new MPoint(0, 0));
+        var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
         using var skPaint = new SKPaint();
@@ -88,7 +88,7 @@ public class LabelStyleFeatureSizeTests
             Offset = new Offset(0, 2),
         };
 
-        using var feature = new PointFeature(new MPoint(0, 0));
+        var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
         using var skPaint = new SKPaint();
@@ -106,7 +106,7 @@ public class LabelStyleFeatureSizeTests
             Offset = new Offset(2, 2),
         };
 
-        using var feature = new PointFeature(new MPoint(0, 0));
+        var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
         using var skPaint = new SKPaint();
