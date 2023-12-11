@@ -4,8 +4,11 @@ using Mapsui.Projections;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Styles;
+using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.LoggingWidget;
+using Mapsui.Widgets.ScaleBar;
+using Mapsui.Widgets.Zoom;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
@@ -18,8 +21,11 @@ public class LoggingWidgetSample : ISample
 
     public Task<Map> CreateMapAsync()
     {
-        //I like bing Hybrid
-        var map = BingSample.CreateMap(BingHybrid.DefaultCache, BruTile.Predefined.KnownTileSource.BingHybrid);
+        var map = new Map
+        {
+            CRS = "EPSG:3857"
+        };
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
         var widget = new LoggingWidget(map)
         {
