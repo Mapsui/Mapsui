@@ -1,16 +1,12 @@
-﻿using System;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Logging;
-using Mapsui.Rendering.Skia.SkiaWidgets;
+using Mapsui.Projections;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Styles;
-using Mapsui.UI;
 using Mapsui.Widgets;
-using Mapsui.Widgets.PerformanceWidget;
-using System.Threading;
+using Mapsui.Widgets.LoggingWidget;
 using System.Threading.Tasks;
-using Mapsui.Projections;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
 

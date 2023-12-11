@@ -1,12 +1,11 @@
 ﻿using Mapsui.Logging;
 using Mapsui.Styles;
-using Mapsui.UI;
 using System;
 using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Mapsui.Widgets.PerformanceWidget;
+namespace Mapsui.Widgets.LoggingWidget;
 
 /// <summary>
 /// Widget which shows the drawing performance
