@@ -72,7 +72,7 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
         } 
     }
 
-    private float _opacity = 0.8f;
+    private float _opacity = 0.0f;
 
     /// <summary>
     /// Opacity of background, frame and signs
