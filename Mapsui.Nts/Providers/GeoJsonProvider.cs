@@ -81,9 +81,9 @@ public class GeoJsonProvider : IProvider, IProviderExtended
         if (string.IsNullOrWhiteSpace(_geoJson))
             return false;
 
-        return (_geoJson.Contains("{", StringComparison.CurrentCulture) 
-            && _geoJson.Contains("}", StringComparison.CurrentCulture)) 
-            || (_geoJson.Contains("[", StringComparison.CurrentCulture) 
+        return (_geoJson.Contains("{", StringComparison.CurrentCulture)
+            && _geoJson.Contains("}", StringComparison.CurrentCulture))
+            || (_geoJson.Contains("[", StringComparison.CurrentCulture)
             && _geoJson.Contains("]", StringComparison.CurrentCulture));
     }
 

@@ -410,7 +410,7 @@ public class Client
     /// <param name="nsmgr">NameSpace Manager</param>
     private void ParseCapability(XmlNode xnCapability, XmlNamespaceManager nsmgr)
     {
-        var xnRequest = xnCapability.SelectSingleNode("sm:Request", nsmgr) 
+        var xnRequest = xnCapability.SelectSingleNode("sm:Request", nsmgr)
             ?? throw new Exception("Request parameter not specified in Service Description");
 
         ParseRequest(xnRequest);
@@ -433,7 +433,7 @@ public class Client
         }
         else
         {
-            var xnLayer = xnCapability.SelectSingleNode("sm:Layer", nsmgr) 
+            var xnLayer = xnCapability.SelectSingleNode("sm:Layer", nsmgr)
                 ?? throw new Exception("No layer tag found in Service Description");
             _layer = ParseLayer(xnLayer);
         }
