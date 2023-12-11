@@ -61,6 +61,7 @@ public class MapRenderer : IRenderer
         WidgetRenders[typeof(MouseCoordinatesWidget)] = new MouseCoordinatesWidgetRenderer();
         WidgetRenders[typeof(EditingWidget)] = new EditingWidgetRenderer();
         WidgetRenders[typeof(MapInfoWidget)] = new MapInfoWidgetRenderer();
+        WidgetRenders[typeof(LoggingWidget)] = new LoggingWidgetRenderer();
     }
 
     public MapRenderer() : this(new RenderCache())

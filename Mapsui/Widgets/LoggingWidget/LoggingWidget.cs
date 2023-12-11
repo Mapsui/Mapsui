@@ -1,4 +1,6 @@
 ﻿using Mapsui.Logging;
+using Mapsui.Styles;
+using Mapsui.UI;
 using System;
 using System.Collections.Concurrent;
 using System.ComponentModel;
@@ -83,6 +85,108 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
             if (_opacity == value)
                 return;
             _opacity = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private int _textSize = 12;
+
+    /// <summary>
+    /// Size of text for log entries
+    /// </summary>
+    public int TextSize
+    {
+        get => _textSize;
+        set
+        {
+            if (_textSize == value)
+                return;
+            _textSize = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private int _margin = 2;
+
+    /// <summary>
+    /// Size of text for log entries
+    /// </summary>
+    public int Margin
+    {
+        get => _margin;
+        set
+        {
+            if (_margin == value)
+                return;
+            _margin = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private Color _backgroundColor = Color.White;
+
+    /// <summary>
+    /// Opacity of background, frame and signs
+    /// </summary>
+    public Color BackgroundColor
+    {
+        get => _backgroundColor;
+        set
+        {
+            if (_backgroundColor == value)
+                return;
+            _backgroundColor = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private Color _errorTextColor = Color.Red;
+
+    /// <summary>
+    /// Color for errors
+    /// </summary>
+    public Color ErrorTextColor
+    {
+        get => _errorTextColor;
+        set
+        {
+            if (_errorTextColor == value)
+                return;
+            _errorTextColor = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private Color _warningTextColor = Color.Orange;
+
+    /// <summary>
+    /// Color for warnings
+    /// </summary>
+    public Color WarningTextColor
+    {
+        get => _warningTextColor;
+        set
+        {
+            if (_warningTextColor == value)
+                return;
+            _warningTextColor = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private Color _informationTextColor = Color.Black;
+
+    /// <summary>
+    /// Color for information text
+    /// </summary>
+    public Color InformationTextColor
+    {
+        get => _informationTextColor;
+        set
+        {
+            if (_informationTextColor == value)
+                return;
+            _informationTextColor = value;
             OnPropertyChanged();
         }
     }
