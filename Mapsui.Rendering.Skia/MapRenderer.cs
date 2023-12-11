@@ -16,6 +16,7 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidget;
 using Mapsui.Widgets.ButtonWidget;
 using Mapsui.Widgets.MouseCoordinatesWidget;
+using Mapsui.Widgets.LoggingWidget;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using SkiaSharp;
@@ -60,6 +61,7 @@ public class MapRenderer : IRenderer
         WidgetRenders[typeof(MouseCoordinatesWidget)] = new MouseCoordinatesWidgetRenderer();
         WidgetRenders[typeof(EditingWidget)] = new EditingWidgetRenderer();
         WidgetRenders[typeof(MapInfoWidget)] = new MapInfoWidgetRenderer();
+        WidgetRenders[typeof(LoggingWidget)] = new LoggingWidgetRenderer();
     }
 
     public MapRenderer() : this(new RenderCache())
