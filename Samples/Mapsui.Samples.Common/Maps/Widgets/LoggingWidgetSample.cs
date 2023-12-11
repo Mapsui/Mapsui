@@ -62,13 +62,13 @@ public class LoggingWidgetSample : ISample
 
     public void OnClick(object? sender, WidgetTouchedEventArgs args)
     {
-        args.Handled = true;
-
         if (sender == null)
             return;
 
         var widget = (LoggingWidget)sender;
 
         widget.Clear();
+
+        args.Handled = true;
     }
 }
