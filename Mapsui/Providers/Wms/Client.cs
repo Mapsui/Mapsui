@@ -12,8 +12,6 @@ using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Styles;
 
-#pragma warning disable VSTHRD003
-
 namespace Mapsui.Providers.Wms;
 
 /// <summary>
@@ -152,7 +150,7 @@ public class Client
 
 
 
-    private Func<string, Task<Stream>> _getStreamAsync;
+    private readonly Func<string, Task<Stream>> _getStreamAsync;
     private string[]? _exceptionFormats;
     private Capabilities.WmsServiceDescription _serviceDescription;
     private readonly IUrlPersistentCache? _persistentCache;
@@ -216,10 +214,10 @@ public class Client
         var client = new Client(getStreamAsync, persistentCache, userAgent);
 
         var strReq = new StringBuilder(url);
-        if (!url.Contains("?"))
-            strReq.Append("?");
-        if (!strReq.ToString().EndsWith("&") && !strReq.ToString().EndsWith("?"))
-            strReq.Append("&");
+        if (!url.Contains('?'))
+            strReq.Append('?');
+        if (!strReq.ToString().EndsWith("&") && !strReq.ToString().EndsWith('?'))
+            strReq.Append('&');
         if (!url.ToLower().Contains("service=wms"))
             strReq.AppendFormat("SERVICE=WMS&");
         if (!url.ToLower().Contains("request=getcapabilities"))
@@ -297,11 +295,9 @@ public class Client
 
             using (var task = await _getStreamAsync(url))
             {
-                using (var stReader = new StreamReader(task))
-                {
-                    using var r = new XmlTextReader(url, stReader) { XmlResolver = null };
-                    doc.Load(r);
-                }
+                using var stReader = new StreamReader(task);
+                using var r = new XmlTextReader(url, stReader) { XmlResolver = null };
+                doc.Load(r);
             }
 
             _nsmgr = new XmlNamespaceManager(doc.NameTable);
@@ -414,9 +410,9 @@ public class Client
     /// <param name="nsmgr">NameSpace Manager</param>
     private void ParseCapability(XmlNode xnCapability, XmlNamespaceManager nsmgr)
     {
-        var xnRequest = xnCapability.SelectSingleNode("sm:Request", nsmgr);
-        if (xnRequest == null)
-            throw new Exception("Request parameter not specified in Service Description");
+        var xnRequest = xnCapability.SelectSingleNode("sm:Request", nsmgr) 
+            ?? throw new Exception("Request parameter not specified in Service Description");
+
         ParseRequest(xnRequest);
 
         // Workaround for some WMS servers that have returning more than one root layer
@@ -437,9 +433,8 @@ public class Client
         }
         else
         {
-            var xnLayer = xnCapability.SelectSingleNode("sm:Layer", nsmgr);
-            if (xnLayer == null)
-                throw new Exception("No layer tag found in Service Description");
+            var xnLayer = xnCapability.SelectSingleNode("sm:Layer", nsmgr) 
+                ?? throw new Exception("No layer tag found in Service Description");
             _layer = ParseLayer(xnLayer);
         }
 
