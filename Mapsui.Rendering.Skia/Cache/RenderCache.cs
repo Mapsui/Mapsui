@@ -9,6 +9,7 @@ public class RenderCache : IRenderCache
     {
         SymbolCache = new SymbolCache();
         VectorCache = new VectorCache(SymbolCache, capacity);
+        TileCache = new TileCache();
     }
 
     public ILabelCache LabelCache { get; set; } = new LabelCache();
@@ -16,6 +17,8 @@ public class RenderCache : IRenderCache
     public ISymbolCache SymbolCache { get; set; }
 
     public IVectorCache? VectorCache { get; set; }
+    
+    public ITileCache TileCache { get; set; }
 
     public Size? GetSize(int bitmapId)
     {
@@ -62,5 +65,15 @@ public class RenderCache : IRenderCache
         where TFeature : class, IFeature
     {
         return VectorCache == null ? toPath(geometry, viewport, lineWidth) : VectorCache.GetOrCreatePath(viewport, feature, geometry, lineWidth, toPath);
+    }
+
+    public IBitmapInfo? GetOrCreate(MRaster raster, long currentIteration)
+    {
+        return TileCache.GetOrCreate(raster, currentIteration);
+    }
+
+    public void UpdateCache(long iteration)
+    {
+        TileCache.UpdateCache(iteration);
     }
 }
