@@ -33,6 +33,9 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
     {
         var loggingWidget = (LoggingWidget)widget;
 
+        if (!loggingWidget.IsVisible)
+            return;
+
         UpdateSettings(loggingWidget);
 
         var rect = loggingWidget.Envelope?.ToSkia() ?? new SKRect(0, 0, 100, 100);

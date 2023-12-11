@@ -74,6 +74,31 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
         } 
     }
 
+#if DEBUG
+    private bool _isVisible = true;
+#else
+    private bool _isVisible = false;
+#endif
+
+    /// <summary>
+    /// Set the visibility of widget
+    /// </summary>
+    public bool IsVisible
+    { 
+        get => _isVisible;
+        set
+        {
+            if (_isVisible == value)
+                return;
+            _isVisible = value;
+            if (_isVisible)
+                Logger.LogDelegate += Log;
+            else
+                Logger.LogDelegate -= Log;
+            OnPropertyChanged();
+        }
+    }
+
     private float _opacity = 0.0f;
 
     /// <summary>
