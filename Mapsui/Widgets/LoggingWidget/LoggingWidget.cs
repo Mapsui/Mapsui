@@ -29,6 +29,9 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
         _maxNumOfLogEntries = maxNumOfLogEntries;
 
         _listOfLogEntries = new ConcurrentQueue<LogEntry>();
+
+        // Add event handle, so that LoggingWidget gets all logs
+        Logger.LogDelegate += Log;
     }
 
     /// <summary>

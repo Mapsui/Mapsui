@@ -33,9 +33,6 @@ public class LoggingWidgetSample : ISample
             Margin = 2
         };
 
-        // Add event handle, so that LoggingWidget gets all logs
-        Logger.LogDelegate += widget.Log;
-
         widget.WidgetTouched += OnClick;
 
         map.Widgets.Add(widget);
