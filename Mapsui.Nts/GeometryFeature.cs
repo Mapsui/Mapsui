@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using NetTopologySuite.Geometries;

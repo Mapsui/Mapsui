@@ -19,15 +19,15 @@ namespace Mapsui.Nts.Providers;
 public class GeoJsonProvider : IProvider, IProviderExtended
 {
     private static ReadOnlySpan<byte> Utf8Bom => new byte[] { 0xEF, 0xBB, 0xBF };
-    private string _geoJson;
-    private object _lock = new();
+    private readonly string _geoJson;
+    private readonly object _lock = new();
     private STRtree<GeometryFeature>? _index;
     private MRect? _extent;
     private FeatureKeyCreator<string>? _featureKeyCreator;
 
-    public GeoJsonProvider(string geojson)
+    public GeoJsonProvider(string geoJson)
     {
-        _geoJson = geojson;
+        _geoJson = geoJson;
     }
 
     public int Id { get; } = BaseLayer.NextId();
@@ -75,13 +75,16 @@ public class GeoJsonProvider : IProvider, IProviderExtended
     }
 
     /// <summary> Is Geo Json Content </summary>
-    /// <returns>true if it contains geojson {} or []</returns>
+    /// <returns>true if it contains geoJson {} or []</returns>
     private bool IsGeoJsonContent()
     {
         if (string.IsNullOrWhiteSpace(_geoJson))
             return false;
 
-        return (_geoJson.IndexOf("{") >= 0 && _geoJson.IndexOf("}") >= 0) || (_geoJson.IndexOf("[") >= 0 && _geoJson.IndexOf("]") >= 0);
+        return (_geoJson.Contains("{", StringComparison.CurrentCulture) 
+            && _geoJson.Contains("}", StringComparison.CurrentCulture)) 
+            || (_geoJson.Contains("[", StringComparison.CurrentCulture) 
+            && _geoJson.Contains("]", StringComparison.CurrentCulture));
     }
 
     public FeatureKeyCreator<string> FeatureKeyCreator
@@ -90,8 +93,6 @@ public class GeoJsonProvider : IProvider, IProviderExtended
         set => _featureKeyCreator = value;
     }
 
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "Data is kept")]
     private STRtree<GeometryFeature> FeatureCollection
     {
         get
@@ -171,8 +172,6 @@ public class GeoJsonProvider : IProvider, IProviderExtended
     public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var fetchExtent = fetchInfo.Extent.ToEnvelope();
-        var list = new List<IFeature>();
-
         IEnumerable<IFeature> result = FeatureCollection.Query(fetchExtent);
         return Task.FromResult(result);
     }
@@ -187,9 +186,9 @@ public class GeoJsonProvider : IProvider, IProviderExtended
         }
     }
 
-    private object? Decode(object? value)
+    private static object? Decode(object? value)
     {
-        // somehow there exist geojson documents with %C3%A9 characters (url encoded utf8 symbols)
+        // somehow there exist geoJson documents with %C3%A9 characters (url encoded utf8 symbols)
         if (value is string str)
         {
             return WebUtility.UrlDecode(str);

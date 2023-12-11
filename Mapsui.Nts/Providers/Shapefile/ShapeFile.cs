@@ -880,7 +880,7 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
     {
         if (_dbaseFile != null)
         {
-            var dr = _dbaseFile.GetFeature(rowId, dt ?? new List<GeometryFeature>());
+            var dr = _dbaseFile.GetFeature(rowId);
             if (dr != null)
             {
                 dr.Geometry = ReadGeometry(rowId);
@@ -907,7 +907,7 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
 
                 foreach (var index in objectList)
                 {
-                    var feature = _dbaseFile?.GetFeature(index, features);
+                    var feature = _dbaseFile?.GetFeature(index);
                     if (feature != null)
                     {
                         feature.Geometry = ReadGeometry(index);

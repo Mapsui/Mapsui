@@ -5,7 +5,7 @@ namespace Mapsui.Layers.AnimationLayers;
 
 internal class AnimatedPointFeature : PointFeature
 {
-    long startTime;
+    long _startTime;
 
     public AnimatedPointFeature(double x, double y) : base(x, y)
     {
@@ -24,15 +24,15 @@ internal class AnimatedPointFeature : PointFeature
         Point.X = Start.X;
         Point.Y = Start.Y;
 
-        startTime = Environment.TickCount;
+        _startTime = Environment.TickCount;
     }
 
     public bool UpdateAnimation(int duration, Easing easing, double distanceThreshold)
     {
-        var progress = CalculateProgress(startTime, duration, easing);
+        var progress = CalculateProgress(_startTime, duration, easing);
         if (progress >= 1) return false;
 
-        // This is a solution to a situator where some vehicle was not updated for a long time 
+        // This is a solution to a situation where some vehicle was not updated for a long time 
         // and then at some point was updated again. This caused a huge jump in the animation.
         // In that case it was better to just show the vehicle on the new position.
         // Not sure how important this is, and perhaps there is a better solution, like checking
