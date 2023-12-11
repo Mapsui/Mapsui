@@ -49,7 +49,7 @@ public class ProjectionTests
         // arrange
         var multiPolygon = (MultiPolygon)_wktReader.Read("MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 10 30, 10 10, 30 5, 45 20, 20 35), (30 20, 20 15, 20 25, 30 20)))");
         var projectedMultiPolygon = multiPolygon.Copy();
-        using var feature = new GeometryFeature(projectedMultiPolygon);
+        var feature = new GeometryFeature(projectedMultiPolygon);
         var projection = new Projection();
 
         // act
@@ -72,7 +72,7 @@ public class ProjectionTests
         // arrange
         var multiPolygon = (MultiPolygon)_wktReader.Read("MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 10 30, 10 10, 30 5, 45 20, 20 35), (30 20, 20 15, 20 25, 30 20)))");
         var projectedMultiPolygon = multiPolygon.Copy();
-        using var feature = new GeometryFeature(projectedMultiPolygon);
+        var feature = new GeometryFeature(projectedMultiPolygon);
         var projection = new DotSpatialProjection();
 
         // act
