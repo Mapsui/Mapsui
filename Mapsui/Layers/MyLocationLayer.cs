@@ -490,16 +490,6 @@ public class MyLocationLayer : BaseLayer, IDisposable
         return _features;
     }
 
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            _feature.Dispose();
-        }
-
-        base.Dispose(disposing);
-    }
-
     private bool InternalUpdateMyLocation(MPoint newLocation)
     {
         var modified = false;

@@ -18,7 +18,6 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     private bool _busy;
     private MSection? _currentSection;
     private bool _modified;
-    private IEnumerable<IFeature>? _previousFeatures;
     private readonly IRenderer _rasterizer = DefaultRendererFactory.Create();
     private FetchInfo? _fetchInfo;
     public Delayer Delayer { get; } = new();
@@ -95,8 +94,6 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
                 using var bitmapStream = _rasterizer.RenderToBitmapStream(ToViewport(_currentSection),
                     new[] { _layer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
 
-                RemoveExistingFeatures();
-
                 _cache.Clear();
                 var features = new RasterFeature[1];
                 features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), _currentSection.Extent));
@@ -113,24 +110,6 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
             {
                 _busy = false;
             }
-        }
-    }
-
-    private void RemoveExistingFeatures()
-    {
-        var features = _cache.ToArray();
-        _cache.Clear(); // clear before dispose to prevent possible null disposed exception on render
-
-        // Disposing previous and storing current in the previous field to prevent dispose during rendering.
-        if (_previousFeatures != null) DisposeRenderedGeometries(_previousFeatures);
-        _previousFeatures = features;
-    }
-
-    private static void DisposeRenderedGeometries(IEnumerable<IFeature> features)
-    {
-        foreach (var feature in features.Cast<RasterFeature>())
-        {
-            feature.ClearRenderedGeometry();
         }
     }
 
