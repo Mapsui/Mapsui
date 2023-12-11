@@ -1,6 +1,6 @@
 ﻿using Mapsui.Logging;
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -27,7 +27,7 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
         _map = map;
         _maxNumOfLogEntries = maxNumOfLogEntries;
 
-        _listOfLogEntries = new List<LogEntry>(_maxNumOfLogEntries);
+        _listOfLogEntries = new ConcurrentQueue<LogEntry>();
     }
 
     /// <summary>
@@ -45,15 +45,14 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
     /// </summary>
     public void Log(LogLevel level, string description, Exception? exception)
     {
-        if (_listOfLogEntries.Count >= _maxNumOfLogEntries) 
-        { 
-            // List is full, so delete the last one
-            _listOfLogEntries.RemoveAt(_maxNumOfLogEntries - 1);
-        }
-
         var entry = new LogEntry { LogLevel = level, Description = description, Exception = exception };
 
-        _listOfLogEntries.Insert(0, entry);
+        _listOfLogEntries.Enqueue(entry);
+
+        while (_listOfLogEntries.Count > _maxNumOfLogEntries)
+        {
+            _listOfLogEntries.TryDequeue(out var outObj);
+        }
 
         _map.RefreshGraphics();
     }
@@ -61,9 +60,9 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
     private Map _map;
     private int _maxNumOfLogEntries;
 
-    private List<LogEntry> _listOfLogEntries;
+    private ConcurrentQueue<LogEntry> _listOfLogEntries;
 
-    public List<LogEntry> ListOfLogEntries 
+    public ConcurrentQueue<LogEntry> ListOfLogEntries 
     { 
         get 
         { 
