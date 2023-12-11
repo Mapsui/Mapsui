@@ -121,6 +121,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         };
     }
 
+    [Obsolete("Use Info and ILayerFeatureInfo")]
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo; // todo: Remove and add sample for alternative
 
     internal void InvalidateCanvas()
@@ -201,7 +202,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             }
             else if (_downMousePosition != null && IsClick(mousePosition, _downMousePosition))
             {
+#pragma warning disable CS0612 // Type or member is obsolete
                 HandleFeatureInfo(e);
+#pragma warning restore CS0612 // Type or member is obsolete
                 OnInfo(CreateMapInfoEventArgs(mousePosition, _downMousePosition, e.ClickCount));
             }
         }
@@ -273,6 +276,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         });
     }
 
+    [Obsolete]
     private void HandleFeatureInfo(MouseButtonEventArgs e)
     {
         if (FeatureInfo == null) return; // don't fetch if you the call back is not set.

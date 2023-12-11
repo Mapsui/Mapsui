@@ -228,5 +228,13 @@ public class MRect : IEquatable<MRect>
         }
     }
 
+    public static bool operator ==(MRect? left, MRect? right)
+    {
+        return Equals(left, right);
+    }
 
+    public static bool operator !=(MRect? left, MRect? right)
+    {
+        return !Equals(left, right);
+    }
 }
