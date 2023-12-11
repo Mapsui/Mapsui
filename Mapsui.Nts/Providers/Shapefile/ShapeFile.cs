@@ -603,7 +603,7 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
     ///</summary>
     /// <param name="i">Integer to swap</param>
     /// <returns>Byte Order swapped int32</returns>
-    private int SwapByteOrder(int i)
+    private static int SwapByteOrder(int i)
     {
         var buffer = BitConverter.GetBytes(i);
         Array.Reverse(buffer, 0, buffer.Length);

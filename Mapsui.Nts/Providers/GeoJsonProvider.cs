@@ -176,7 +176,7 @@ public class GeoJsonProvider : IProvider, IProviderExtended
         return Task.FromResult(result);
     }
 
-    private void FillFields(GeometryFeature geometryFeature, IAttributesTable featureAttributes)
+    private static void FillFields(GeometryFeature geometryFeature, IAttributesTable featureAttributes)
     {
         foreach (var attribute in featureAttributes.GetNames())
         {
