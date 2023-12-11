@@ -11,8 +11,6 @@ using Mapsui.Providers;
 
 #pragma warning disable IDISP001 // Dispose Created
 
-#if NET6_0_OR_GREATER
-
 namespace Mapsui.Samples.Common.Maps.Animations;
 
 internal sealed class BusPointProvider : MemoryProvider, IDynamic, IDisposable
