@@ -23,6 +23,7 @@ public class LoggingWidgetSample : ISample
 
         var widget = new LoggingWidget(map)
         {
+            LogLevelFilter = LogLevel.Trace,
             TextSize = 11,
             BackgroundColor = Color.White,
             Opacity = 0.8f,
@@ -53,6 +54,8 @@ public class LoggingWidgetSample : ISample
         Logger.Log(LogLevel.Information, "Information test with an extra long text", null);
         Logger.Log(LogLevel.Warning, "Warning test", null);
         Logger.Log(LogLevel.Error, "Error test", null);
+
+        widget.LogLevelFilter = LogLevel.Information;
 
         return Task.FromResult(map);
     }

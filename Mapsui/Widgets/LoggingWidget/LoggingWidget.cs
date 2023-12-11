@@ -3,6 +3,7 @@ using Mapsui.Styles;
 using System;
 using System.Collections.Concurrent;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Mapsui.Widgets.LoggingWidget;
@@ -56,6 +57,9 @@ public event PropertyChangedEventHandler? PropertyChanged;
     /// </summary>
     public void Log(LogLevel level, string description, Exception? exception)
     {
+        if (level > LogLevelFilter)
+            return;
+
         var entry = new LogEntry { LogLevel = level, Description = description, Exception = exception };
 
         _listOfLogEntries.Enqueue(entry);
@@ -89,6 +93,24 @@ public event PropertyChangedEventHandler? PropertyChanged;
         { 
             return _listOfLogEntries; 
         } 
+    }
+
+    private LogLevel _logLevelFilter = LogLevel.Information;
+
+    /// <summary>
+    /// Filter for LogLevel
+    /// Only this or higher levels are printed
+    /// </summary>
+    public LogLevel LogLevelFilter
+    {
+        get => _logLevelFilter;
+        set
+        {
+            if (_logLevelFilter == value)
+                return;
+            _logLevelFilter = value;
+            OnPropertyChanged();
+        }
     }
 
     private float _opacity = 0.0f;
@@ -284,6 +306,31 @@ public event PropertyChangedEventHandler? PropertyChanged;
         _map.RefreshGraphics();
     }
 
+    private void UpdateLogEntries()
+    {
+        var entries = _listOfLogEntries.ToList<LogEntry>();
+        var pos = 0;
+
+        while (pos < entries.Count)
+        {
+            if (entries[pos].LogLevel > LogLevelFilter)
+            {
+                entries.Remove(entries[pos]);
+            }
+            else
+            {
+                pos++;
+            }
+        }
+
+        Clear();
+
+        foreach (var entry in entries)
+        {
+            _listOfLogEntries.Enqueue(entry);
+        }
+    }
+
     internal void OnPropertyChanged([CallerMemberName] string name = "")
     {
         if (name == nameof(TextSize) || name == nameof(PaddingY) || name == nameof(Height))
@@ -295,6 +342,11 @@ public event PropertyChangedEventHandler? PropertyChanged;
                 Logger.LogDelegate += Log;
             else
                 Logger.LogDelegate -= Log;
+        }
+
+        if (name == nameof(LogLevelFilter))
+        {
+            UpdateLogEntries();
         }
 
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
