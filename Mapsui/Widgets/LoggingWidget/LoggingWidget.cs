@@ -33,12 +33,18 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
 
         // Add event handle, so that LoggingWidget gets all logs
         Logger.LogDelegate += Log;
-    }
 
-    /// <summary>
-    /// Event handler which is called, when a property changes
-    /// </summary>
-    public event PropertyChangedEventHandler? PropertyChanged;
+#if DEBUG
+        Enabled = true;
+#else
+        Enabled = false;
+#endif
+}
+
+/// <summary>
+/// Event handler which is called, when a property changes
+/// </summary>
+public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
     /// Event handler which is called, when the widget is touched
@@ -83,31 +89,6 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
         { 
             return _listOfLogEntries; 
         } 
-    }
-
-#if DEBUG
-    private bool _isVisible = true;
-#else
-    private bool _isVisible = false;
-#endif
-
-    /// <summary>
-    /// Set the visibility of widget
-    /// </summary>
-    public bool IsVisible
-    { 
-        get => _isVisible;
-        set
-        {
-            if (_isVisible == value)
-                return;
-            _isVisible = value;
-            if (_isVisible)
-                Logger.LogDelegate += Log;
-            else
-                Logger.LogDelegate -= Log;
-            OnPropertyChanged();
-        }
     }
 
     private float _opacity = 0.0f;
@@ -307,6 +288,14 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
     {
         if (name == nameof(TextSize) || name == nameof(PaddingY) || name == nameof(Height))
             UpdateNumOfLogEntries();
+
+        if (name == nameof(Enabled))
+        {
+            if (Enabled)
+                Logger.LogDelegate += Log;
+            else
+                Logger.LogDelegate -= Log;
+        }
 
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }

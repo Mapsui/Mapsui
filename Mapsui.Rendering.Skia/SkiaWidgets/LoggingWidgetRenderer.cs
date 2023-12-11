@@ -33,7 +33,7 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
     {
         var loggingWidget = (LoggingWidget)widget;
 
-        if (!loggingWidget.IsVisible)
+        if (!loggingWidget.Enabled)
             return;
 
         UpdateSettings(loggingWidget);
