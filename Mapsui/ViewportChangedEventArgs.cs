@@ -4,7 +4,7 @@ namespace Mapsui;
 
 public class ViewportChangedEventArgs : PropertyChangedEventArgs
 {
-    public ViewportChangedEventArgs(Viewport oldViewport) : base(nameof(Viewport)) 
+    public ViewportChangedEventArgs(Viewport oldViewport) : base(nameof(Viewport))
     {
         OldViewport = oldViewport;
     }

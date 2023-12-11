@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net8.0-ios</TargetFramework>
     <OutputType>Exe</OutputType>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
     <OptimizePNGs>False</OptimizePNGs>
     <MtouchUseLlvm>False</MtouchUseLlvm>

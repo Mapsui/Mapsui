@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using BruTile.Cache;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
@@ -14,7 +16,7 @@ namespace Mapsui.Tiling.Layers;
 /// Rasterizing Tile Layer. A Layer that Rasterizes and Tiles the Layer. For Faster Performance.
 /// It recreates the Tiles if Data is changed.
 /// </summary>
-public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher
+public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher, ILayerFeatureInfo
 {
     private MRect? _currentExtent;
     private double? _currentResolution;
@@ -76,4 +78,9 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher
     }
 
     public ILayer SourceLayer { get; }
+    private RasterizingTileProvider RasterizingTileProvider => ((RasterizingTileProvider)TileSource);
+    public Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, double screenX, double screenY)
+    {
+        return RasterizingTileProvider.GetFeatureInfoAsync(viewport, screenX, screenY);
+    }
 }

@@ -1,8 +1,4 @@
-
-namespace Mapsui.UI.Eto;
-
 using System;
-using Mapsui.Utilities;
 using Mapsui.Rendering.Skia;
 using Mapsui.UI.Eto.Extensions;
 using global::Eto.SkiaDraw;
@@ -10,7 +6,8 @@ using global::Eto.Drawing;
 using global::Eto.Forms;
 using System.Diagnostics;
 using Mapsui.Extensions;
-using NetTopologySuite.GeometriesGraph;
+
+namespace Mapsui.UI.Eto;
 
 public partial class MapControl : SkiaDrawable, IMapControl
 {

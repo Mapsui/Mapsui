@@ -147,4 +147,14 @@ public class MQuad : IEquatable<MQuad>
         return $"BL: {BottomLeft}  TL: {TopLeft}  " +
                $"TR: {TopRight}  BR: {BottomRight}";
     }
+
+    public static bool operator ==(MQuad? left, MQuad? right)
+    {
+        return Equals(left, right);
+    }
+
+    public static bool operator !=(MQuad? left, MQuad? right)
+    {
+        return !Equals(left, right);
+    }
 }

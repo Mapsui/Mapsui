@@ -44,16 +44,16 @@ public sealed class AnimatedMyLocationSample : IMapViewSample, IDisposable
     public bool UpdateLocation => false;
     public bool OnClick(object? sender, EventArgs args)
     {
-        return true; 
+        return true;
     }
 
     private async Task RunTimerAsync()
     {
-        while(true)
+        while (true)
         {
             await _timer.WaitForNextTickAsync();
 
-            _newLocation = new (_newLocation.Latitude + 0.00005, _newLocation.Longitude + 0.00005);                                
+            _newLocation = new(_newLocation.Latitude + 0.00005, _newLocation.Longitude + 0.00005);
 
             _mapView?.MyLocationLayer.UpdateMyLocation(_newLocation, true);
             _mapView?.MyLocationLayer.UpdateMyDirection(_mapView.MyLocationLayer.Direction + 10, 0, true);

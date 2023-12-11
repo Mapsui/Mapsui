@@ -2,7 +2,6 @@
 
   <PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
@@ -14,6 +13,9 @@
 
   <ItemGroup>
     <PackageReference Include="SkiaSharp.Views.Blazor" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" VersionOverride="8.0.0-rc.2.23480.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" VersionOverride="8.0.0-rc.2.23480.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" VersionOverride="8.0.0-rc.2.23480.2" PrivateAssets="all"/>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" VersionOverride="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" VersionOverride="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" VersionOverride="8.0.0" PrivateAssets="all"/>

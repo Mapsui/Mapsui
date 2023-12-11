@@ -35,7 +35,7 @@ public class GeometryFeature : BaseFeature, IFeature, IDisposable
 
     public Geometry? Geometry { get; set; }
 
-    public MRect? Extent => Geometry?.EnvelopeInternal.ToMRect(); // Todo: Make not-nullable
+    public MRect? Extent => Geometry?.EnvelopeInternal.ToMRect();
 
     public override void Dispose()
     {

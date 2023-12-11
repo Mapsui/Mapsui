@@ -5,8 +5,6 @@ using Mapsui.UI.iOS.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp.Views.iOS;
 
-#nullable enable
-
 namespace Mapsui.UI.iOS;
 
 [Register("MapControl"), DesignTimeVisible(true)]

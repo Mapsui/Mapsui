@@ -10,6 +10,8 @@ using Mapsui.Samples.CustomWidget;
 using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
+using Mapsui.UI.Wpf;
+using System.Windows.Threading;
 
 namespace Mapsui.Samples.Wpf;
 
@@ -26,8 +28,6 @@ public partial class Window1
         InitializeComponent();
 
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-        MapControl.FeatureInfo += MapControlFeatureInfo;
         MapControl.Map.Navigator.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
@@ -116,11 +116,6 @@ public partial class Window1
         }
 
         return result.ToString();
-    }
-
-    private static void MapControlFeatureInfo(object? sender, FeatureInfoEventArgs e)
-    {
-        MessageBox.Show(e.FeatureInfo?.ToDisplayText());
     }
 
     private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
