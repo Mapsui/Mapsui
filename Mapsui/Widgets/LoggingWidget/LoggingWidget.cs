@@ -336,6 +336,9 @@ public event PropertyChangedEventHandler? PropertyChanged;
         if (name == nameof(TextSize) || name == nameof(PaddingY) || name == nameof(Height))
             UpdateNumOfLogEntries();
 
+        if (name == nameof(MarginX) || name == nameof(MarginY) || name == nameof(Width) || name == nameof(Height))
+            Envelope = new MRect(MarginX, MarginY, MarginX + Width, MarginY + Height);
+
         if (name == nameof(Enabled))
         {
             if (Enabled)
@@ -345,9 +348,7 @@ public event PropertyChangedEventHandler? PropertyChanged;
         }
 
         if (name == nameof(LogLevelFilter))
-        {
             UpdateLogEntries();
-        }
 
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
