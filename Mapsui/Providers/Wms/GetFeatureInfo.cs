@@ -15,9 +15,16 @@ public delegate void StatusEventHandler(object sender, FeatureInfo? featureInfo)
 
 public class GetFeatureInfo
 {
+    public const string? TextXml = "text/xml";
+    public const string? ApplicationVndOGCGml = "application/vnd.ogc.gml";
+    public const string TextXmlSubtypeGml = "text/xml; subtype=gml/3.1.1";
     private string? _infoFormat;
     private string? _layerName;
+
+    [Obsolete("Use RequestAsync")]
     public event StatusEventHandler? IdentifyFinished;
+
+    [Obsolete("Use RequestAsync")]
     public event StatusEventHandler? IdentifyFailed;
     private readonly Func<string, Task<Stream>> _getStreamAsync;
 
@@ -55,6 +62,7 @@ public class GetFeatureInfo
     /// <param name="y">Coordinate in pixels y</param>
     /// <param name="mapWidth">Width of the map</param>
     /// <param name="mapHeight">Height of the map</param>
+    [Obsolete("Use RequestAsync")]
     public void Request(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, int x, int y, int mapWidth, int mapHeight)
     {
         _infoFormat = infoFormat;
@@ -84,12 +92,55 @@ public class GetFeatureInfo
         });
     }
 
+    /// <summary>
+    /// Request FeatureInfo for a WMS Server
+    /// </summary>
+    /// <param name="baseUrl">Base URL of the WMS server</param>
+    /// <param name="wmsVersion">WMS Version</param>
+    /// <param name="infoFormat">Format of response (text/xml, text/plain, etc)</param>
+    /// <param name="srs">EPSG Code of the coordinate system</param>
+    /// <param name="layer">Layer to get FeatureInfo From</param>
+    /// <param name="extendXmin"></param>
+    /// <param name="extendYmin"></param>
+    /// <param name="extendXmax"></param>
+    /// <param name="extendYmax"></param>
+    /// <param name="x">Coordinate in pixels x</param>
+    /// <param name="y">Coordinate in pixels y</param>
+    /// <param name="mapWidth">Width of the map</param>
+    /// <param name="mapHeight">Height of the map</param>
+    public async Task<FeatureInfo?> RequestAsync(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, int x, int y, int mapWidth, int mapHeight)
+    {
+        _infoFormat = infoFormat;
+        var requestUrl = CreateRequestUrl(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight);
+
+        using var task = await _getStreamAsync(requestUrl).ConfigureAwait(false);
+        try
+        {
+            var parser = GetParserFromFormat(_infoFormat);
+
+            if (parser == null)
+            {
+                return null;
+            }
+
+            var featureInfo = parser.ParseWMSResult(_layerName, task);
+            return featureInfo;
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
+
+        return null;
+    }
+
     private async Task<Stream> GetStreamAsync(string url)
     {
         var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
         var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
+        client.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent ?? "If you use Mapsui please specify a user-agent specific to your app");
         var req = new HttpRequestMessage(HttpMethod.Get, url);
-        var response = await client.SendAsync(req);
+        var response = await client.SendAsync(req).ConfigureAwait(false);
 
         if (!response.IsSuccessStatusCode)
         {
@@ -98,6 +149,8 @@ public class GetFeatureInfo
 
         return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
     }
+
+    public string? UserAgent { get; set; }
 
     private string CreateRequestUrl(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double x, double y, double mapWidth, double mapHeight)
     {
@@ -160,11 +213,11 @@ public class GetFeatureInfo
     /// <param name="format">Output format of the service</param>
     private static IGetFeatureInfoParser? GetParserFromFormat(string format)
     {
-        if (format.Equals("application/vnd.ogc.gml"))
+        if (format.Equals(ApplicationVndOGCGml))
             return new GmlGetFeatureInfoParser();
-        if (format.Equals("text/xml; subtype=gml/3.1.1"))
+        if (format.Equals(TextXmlSubtypeGml))
             return new GmlGetFeatureInfoParser();
-        if (format.Equals("text/xml"))
+        if (format.Equals(TextXml))
             return new XmlGetFeatureInfoParser();
         if (format.Equals("text/html")) // Not supported
             return null;

@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Mapsui.Layers;
 
@@ -7,8 +8,7 @@ namespace Mapsui.Layers;
 /// Some data source like WMS allow request for feature info. 
 /// This is information not available in the primary response such as the WMS image.
 /// </summary>
-[Obsolete("Use ILayerFeatureInfo")]
-public interface IFeatureInfo
+public interface ILayerFeatureInfo
 {
-    void GetFeatureInfo(Viewport viewport, double x, double y, Action<IDictionary<string, IEnumerable<IFeature>>> callback);
+    Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, double screenX, double screenY);
 }
