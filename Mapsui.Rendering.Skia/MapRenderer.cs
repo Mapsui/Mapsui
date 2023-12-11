@@ -16,7 +16,7 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidget;
 using Mapsui.Widgets.ButtonWidget;
 using Mapsui.Widgets.MouseCoordinatesWidget;
-using Mapsui.Widgets.PerformanceWidget;
+using Mapsui.Widgets.LoggingWidget;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using SkiaSharp;

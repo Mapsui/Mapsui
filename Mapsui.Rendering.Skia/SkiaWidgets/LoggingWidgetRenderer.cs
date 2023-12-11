@@ -1,7 +1,7 @@
 ﻿using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
-using Mapsui.Widgets.PerformanceWidget;
+using Mapsui.Widgets.LoggingWidget;
 using SkiaSharp;
 using System;
 
