@@ -14,7 +14,7 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
 {
     private readonly IProvider _dataSource;
     private FetchInfo? _fetchInfo;
-    private List<AnimatedPointFeature> _features = new();
+    private readonly List<AnimatedPointFeature> _features = new();
 
     public AnimatedPointLayer(IProvider dataSource)
     {

@@ -32,7 +32,7 @@ public partial class MapControl : ComponentBase, IMapControl
     private bool _isInBoxZoomMode;
     private TouchState? _previousTouchState;
     double _pixelDensityFromInterop = 1;
-    BoundingClientRect _clientRect = new BoundingClientRect();
+    BoundingClientRect _clientRect = new();
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
     private MapsuiJsInterop? _interop;
 
@@ -222,17 +222,13 @@ public partial class MapControl : ComponentBase, IMapControl
 
     private bool ModifierPressed(int modifier)
     {
-        switch (modifier)
+        return modifier switch
         {
-            case Keys.Alt:
-                return _pressedKeys.Contains("Alt");
-            case Keys.Control:
-                return _pressedKeys.Contains("Control");
-            case Keys.ShiftLeft:
-                return _pressedKeys.Contains("ShiftLeft") || _pressedKeys.Contains("ShiftRight") || _pressedKeys.Contains("Shift");
-        }
-
-        return false;
+            Keys.Alt => _pressedKeys.Contains("Alt"),
+            Keys.Control => _pressedKeys.Contains("Control"),
+            Keys.ShiftLeft => _pressedKeys.Contains("ShiftLeft") || _pressedKeys.Contains("ShiftRight") || _pressedKeys.Contains("Shift"),
+            _ => false,
+        };
     }
 
     private bool IsInBoxZoomMode

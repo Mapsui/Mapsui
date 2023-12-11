@@ -75,7 +75,7 @@ public class WFSProvider : IProvider, IDisposable
     private string? _sridOverride;
     private string? _proxyUrl;
     private ICredentials? _credentials;
-    private CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
+    private readonly CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
 
     // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
     // It helps to accelerate the rendering process significantly.
@@ -314,22 +314,6 @@ public class WFSProvider : IProvider, IDisposable
     public async Task InitAsync()
     {
         await GetFeatureTypeInfoAsync();
-    }
-
-    /// <summary>
-    /// Use this constructor for initializing this dataprovider with all necessary
-    /// parameters to gather metadata from 'GetCapabilities' contract.
-    /// </summary>
-    /// <param name="getCapabilitiesUri">The URL for the 'GetCapabilities' request.</param>
-    /// <param name="nsPrefix">
-    /// Use an empty string or 'null', if there is no prefix for the featuretype.
-    /// </param>
-    /// <param name="featureType">The name of the feature type</param>
-    /// <param name="wfsVersion">The desired WFS Server version.</param>
-    /// <param name="persistentCache">persistent Cache Interface</param>
-    private WFSProvider(string getCapabilitiesUri, string nsPrefix, string featureType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
-        : this(getCapabilitiesUri, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion, persistentCache: persistentCache)
-    {
     }
 
     /// <summary>

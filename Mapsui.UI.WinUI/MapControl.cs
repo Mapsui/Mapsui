@@ -8,16 +8,12 @@
 #pragma warning disable IDISP002 // Dispose member.
 
 using System;
-using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.System;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Utilities;
-using NetTopologySuite.GeometriesGraph;
-using Windows.Graphics.Display;
-using System.Runtime.Versioning;
 using Mapsui.UI.WinUI.Extensions;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;

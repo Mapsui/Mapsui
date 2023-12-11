@@ -24,7 +24,7 @@ public class MapViewTests
         Assert.IsFalse(weak.IsAlive);
     }
 
-    private void Dispose(WeakReference weak)
+    private static void Dispose(WeakReference weak)
     {
         // the dispose needs to be made in a different method or else the target lives in a local variable.
         (weak.Target as IDisposable)?.Dispose();
