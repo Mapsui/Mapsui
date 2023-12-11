@@ -1,14 +1,10 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Projections;
-using Mapsui.Samples.Common.Maps.Demo;
-using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.LoggingWidget;
-using Mapsui.Widgets.ScaleBar;
-using Mapsui.Widgets.Zoom;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
