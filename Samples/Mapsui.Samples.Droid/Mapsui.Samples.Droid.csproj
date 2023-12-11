@@ -5,7 +5,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationId>com.companyname.MapsuiSamples</ApplicationId>
     <OutputType>Exe</OutputType>
-    <Nullable>enable</Nullable>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
   </PropertyGroup>

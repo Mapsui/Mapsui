@@ -7,8 +7,6 @@
 #pragma warning disable IDISP001 // Dispose created.
 #pragma warning disable IDISP002 // Dispose member.
 
-#nullable enable
-
 using System;
 using System.Threading.Tasks;
 using Windows.Devices.Sensors;
