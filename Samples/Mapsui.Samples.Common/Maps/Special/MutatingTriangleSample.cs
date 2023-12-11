@@ -98,8 +98,9 @@ public sealed class MutatingTriangleSample : ISample, ISampleTest, IDisposable
 
     public async Task InitializeTestAsync(IMapControl mapControl)
     {
-        if (_cancelationTokenSource is null) return;
-        await _cancelationTokenSource.CancelAsync();
+        var localCancelationTokenSource = _cancelationTokenSource;
+        if (localCancelationTokenSource is null) return;
+        await localCancelationTokenSource.CancelAsync();
     }
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]
