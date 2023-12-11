@@ -21,16 +21,20 @@ public class LoggingWidgetSample : ISample
         //I like bing Hybrid
         var map = BingSample.CreateMap(BingHybrid.DefaultCache, BruTile.Predefined.KnownTileSource.BingHybrid);
 
-        var widget = new LoggingWidget(map, 14)
+        var widget = new LoggingWidget(map)
         {
-            TextSize = 12,
+            TextSize = 11,
             BackgroundColor = Color.White,
             Opacity = 0.8f,
             ErrorTextColor = Color.Red,
             WarningTextColor = Color.Orange,
             InformationTextColor = Color.Black,
-            Envelope = new MRect(10, 10, 260, 210),
-            Margin = 2
+            MarginX = 10,
+            MarginY = 10,
+            Width = 250,
+            Height = 200,
+            PaddingX = 2,
+            PaddingY = 2
         };
 
         widget.WidgetTouched += OnClick;

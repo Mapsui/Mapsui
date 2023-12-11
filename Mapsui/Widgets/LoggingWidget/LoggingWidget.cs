@@ -8,11 +8,11 @@ using System.Runtime.CompilerServices;
 namespace Mapsui.Widgets.LoggingWidget;
 
 /// <summary>
-/// Widget which shows the drawing performance
+/// Widget which shows log entries
 /// </summary>
 /// <remarks>
-/// With this, the user could see the drawing performance on the screen.
-/// It shows always the values for the last draw before this draw.
+/// With this, the user could see the log entries on the screen.
+/// without saving them to a file or somewhere else.
 /// </remarks>
 public class LoggingWidget : Widget, INotifyPropertyChanged
 {
@@ -23,24 +23,25 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
         public Exception? Exception;
     }
 
-    public LoggingWidget(Map map, int maxNumOfLogEntries)
+    public LoggingWidget(Map map)
     {
         _map = map;
-        _maxNumOfLogEntries = maxNumOfLogEntries;
 
         _listOfLogEntries = new ConcurrentQueue<LogEntry>();
+
+        UpdateNumOfLogEntries();
 
         // Add event handle, so that LoggingWidget gets all logs
         Logger.LogDelegate += Log;
     }
 
     /// <summary>
-    /// Event handler which is called, when the button is touched
+    /// Event handler which is called, when a property changes
     /// </summary>
     public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
-    /// Event handler which is called, when the button is touched
+    /// Event handler which is called, when the widget is touched
     /// </summary>
     public event EventHandler<WidgetTouchedEventArgs>? WidgetTouched;
 
@@ -54,6 +55,16 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
         _listOfLogEntries.Enqueue(entry);
 
         while (_listOfLogEntries.Count > _maxNumOfLogEntries)
+        {
+            _listOfLogEntries.TryDequeue(out var outObj);
+        }
+
+        _map.RefreshGraphics();
+    }
+
+    public void Clear()
+    {
+        while (_listOfLogEntries.Count > 0)
         {
             _listOfLogEntries.TryDequeue(out var outObj);
         }
@@ -133,19 +144,70 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
         }
     }
 
-    private int _margin = 2;
+    private int _paddingX = 2;
 
     /// <summary>
-    /// Size of text for log entries
+    /// Space around text in X
     /// </summary>
-    public int Margin
+    public int PaddingX
     {
-        get => _margin;
+        get => _paddingX;
         set
         {
-            if (_margin == value)
+            if (_paddingX == value)
                 return;
-            _margin = value;
+            _paddingX = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private int _paddingY = 2;
+
+    /// <summary>
+    /// Space around text in Y
+    /// </summary>
+    public int PaddingY
+    {
+        get => _paddingY;
+        set
+        {
+            if (_paddingY == value)
+                return;
+            _paddingY = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private int _width = 250;
+
+    /// <summary>
+    /// Width of widget
+    /// </summary>
+    public int Width
+    {
+        get => _width;
+        set
+        {
+            if (_width == value)
+                return;
+            _width = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private int _height = 142;
+
+    /// <summary>
+    /// Height of widget
+    /// </summary>
+    public int Height
+    {
+        get => _height;
+        set
+        {
+            if (_height == value)
+                return;
+            _height = value;
             OnPropertyChanged();
         }
     }
@@ -227,18 +289,25 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
         return args.Handled;
     }
 
-    public void Clear()
+    private void UpdateNumOfLogEntries()
     {
-        while (_listOfLogEntries.Count > 0)
+        var newNumOfLogEntries = (int)((Height - PaddingY) / (TextSize + PaddingY));
+
+        while (_listOfLogEntries.Count > newNumOfLogEntries)
         {
             _listOfLogEntries.TryDequeue(out var outObj);
         }
+
+        _maxNumOfLogEntries = newNumOfLogEntries;
 
         _map.RefreshGraphics();
     }
 
     internal void OnPropertyChanged([CallerMemberName] string name = "")
     {
+        if (name == nameof(TextSize) || name == nameof(PaddingY) || name == nameof(Height))
+            UpdateNumOfLogEntries();
+
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

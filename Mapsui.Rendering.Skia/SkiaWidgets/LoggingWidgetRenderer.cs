@@ -38,18 +38,23 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
 
         UpdateSettings(loggingWidget);
 
-        var rect = loggingWidget.Envelope?.ToSkia() ?? new SKRect(0, 0, 100, 100);
-        var clipRect = rect;
-        var margin = loggingWidget.Margin;
+        var marginX = loggingWidget.MarginX;
+        var marginY = loggingWidget.MarginY;
+        var width = loggingWidget.Width;
+        var height = loggingWidget.Height;
+        var paddingX = loggingWidget.PaddingX;
+        var paddingY = loggingWidget.PaddingY;
 
-        clipRect.Inflate(-margin, -margin);
+        var rect = new SKRect(marginX, marginY, marginX + width, marginY + height);
 
         canvas.DrawRect(rect, _backgroundPaint);
+
+        rect.Inflate(-paddingX, -paddingY);
 
         var line = 0;
 
         canvas.Save();
-        canvas.ClipRect(clipRect);
+        canvas.ClipRect(rect);
 
         foreach (var entry in loggingWidget.ListOfLogEntries)
         {
@@ -60,8 +65,8 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
                 _ => _informationTextPaint,
             };
 
-            canvas.DrawText(entry.LogLevel.ToString(), rect.Left + margin, rect.Top + (margin * line) + loggingWidget.TextSize * (line + 1), paint);
-            canvas.DrawText(entry.Description, rect.Left + margin + _levelWidth + 2 * margin, rect.Top + (margin * line) + loggingWidget.TextSize * (line + 1), paint);
+            canvas.DrawText(entry.LogLevel.ToString(), marginX + paddingX, marginY + (paddingX * line) + loggingWidget.TextSize * (line + 1), paint);
+            canvas.DrawText(entry.Description, marginX + paddingX + _levelWidth + 2 * paddingX, marginY + (paddingY * line) + loggingWidget.TextSize * (line + 1), paint);
 
             line++;
         }
