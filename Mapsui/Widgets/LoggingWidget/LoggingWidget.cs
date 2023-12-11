@@ -200,6 +200,16 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
         return args.Handled;
     }
 
+    public void Clear()
+    {
+        while (_listOfLogEntries.Count > 0)
+        {
+            _listOfLogEntries.TryDequeue(out var outObj);
+        }
+
+        _map.RefreshGraphics();
+    }
+
     internal void OnPropertyChanged([CallerMemberName] string name = "")
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
