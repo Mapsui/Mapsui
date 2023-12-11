@@ -17,7 +17,7 @@ public sealed class MutatingTriangleSample : ISample, ISampleTest, IDisposable
     public string Name => "Mutating triangle";
     public string Category => "Special";
 
-    private static readonly Random Random = new(0);
+    private static readonly Random _random = new(0);
     private static CancellationTokenSource? _cancelationTokenSource;
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]
@@ -31,7 +31,7 @@ public sealed class MutatingTriangleSample : ISample, ISampleTest, IDisposable
         return Task.FromResult(map);
     }
 
-    private static ILayer CreateMutatingTriangleLayer(MRect? envelope)
+    private static MemoryLayer CreateMutatingTriangleLayer(MRect? envelope)
     {
         var layer = new MemoryLayer();
 
@@ -61,8 +61,8 @@ public sealed class MutatingTriangleSample : ISample, ISampleTest, IDisposable
         for (var i = 0; i < count; i++)
         {
             result.Add(new Coordinate(
-                Random.NextDouble() * envelope.Width + envelope.Left,
-                Random.NextDouble() * envelope.Height + envelope.Bottom));
+                _random.NextDouble() * envelope.Width + envelope.Left,
+                _random.NextDouble() * envelope.Height + envelope.Bottom));
         }
 
         result.Add(result[0].Copy()); // close polygon by adding start point.
@@ -96,10 +96,11 @@ public sealed class MutatingTriangleSample : ISample, ISampleTest, IDisposable
         }
     }
 
-    public Task InitializeTestAsync(IMapControl mapControl)
+    public async Task InitializeTestAsync(IMapControl mapControl)
     {
-        _cancelationTokenSource?.Cancel();
-        return Task.CompletedTask;
+        var localCancelationTokenSource = _cancelationTokenSource;
+        if (localCancelationTokenSource is null) return;
+        await localCancelationTokenSource.CancelAsync();
     }
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]

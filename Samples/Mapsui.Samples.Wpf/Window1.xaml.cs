@@ -15,6 +15,8 @@ using System.Windows.Threading;
 
 namespace Mapsui.Samples.Wpf;
 
+// Line below had to be added to suppress Warning CA1416 'Call site reachable by all platforms', although WPF only runs on Windows.
+[System.Runtime.Versioning.SupportedOSPlatform("windows")]
 public partial class Window1
 {
     static Window1()
@@ -72,7 +74,7 @@ public partial class Window1
         CategoryComboBox.SelectedIndex = 0;
     }
 
-    private UIElement CreateRadioButton(ISampleBase sample)
+    private RadioButton CreateRadioButton(ISampleBase sample)
     {
         var radioButton = new RadioButton
         {
@@ -96,7 +98,7 @@ public partial class Window1
         return radioButton;
     }
 
-    readonly LimitedQueue<LogModel> _logMessage = new LimitedQueue<LogModel>(6);
+    readonly LimitedQueue<LogModel> _logMessage = new(6);
 
     private void LogMethod(LogLevel logLevel, string? message, Exception? exception)
     {
@@ -104,7 +106,7 @@ public partial class Window1
         Dispatcher.BeginInvoke(() => LogTextBox.Text = ToMultiLineString(_logMessage));
     }
 
-    private string ToMultiLineString(LimitedQueue<LogModel> logMessages)
+    private static string ToMultiLineString(LimitedQueue<LogModel> logMessages)
     {
         var result = new StringBuilder();
 
