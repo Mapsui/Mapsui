@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Animations;
@@ -8,8 +7,6 @@ using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers.AnimationLayers;
 using Mapsui.Providers;
-
-#pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Layers.AnimatedLayers;
 
@@ -19,7 +16,6 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
     private FetchInfo? _fetchInfo;
     private List<AnimatedPointFeature> _features = new();
 
-    [SuppressMessage("Usage", "VSTHRD101:Avoid unsupported async delegates")]
     public AnimatedPointLayer(IProvider dataSource)
     {
         _dataSource = dataSource ?? throw new ArgumentException(nameof(dataSource));
@@ -46,7 +42,7 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
     public string IdField { get; set; }
 
     /// <summary>
-    /// The period of which the animaton should move from the previous position to the new position.
+    /// The period of which the animation should move from the previous position to the new position.
     /// The default is 1000 milliseconds.
     /// </summary>
     public int AnimationDuration { get; set; } = 1000;
@@ -70,18 +66,18 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
     {
         foreach (var target in targets)
         {
-            var animatedpointFeature = FindPrevious(_features, target, IdField);
-            if (animatedpointFeature is null)
+            var animatedPointFeature = FindPrevious(_features, target, IdField);
+            if (animatedPointFeature is null)
             {
-                animatedpointFeature = new AnimatedPointFeature(target.Point.X, target.Point.Y);
-                _features.Add(animatedpointFeature);
+                animatedPointFeature = new AnimatedPointFeature(target.Point.X, target.Point.Y);
+                _features.Add(animatedPointFeature);
             }
             else
             {
-                animatedpointFeature.SetAnimationTarget(target.Point);
+                animatedPointFeature.SetAnimationTarget(target.Point);
             }
             foreach (var field in target.Fields)
-                animatedpointFeature[field] = target[field];
+                animatedPointFeature[field] = target[field];
         }
     }
 

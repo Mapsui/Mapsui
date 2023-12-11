@@ -64,4 +64,3 @@ public sealed class AnimatedMyLocationSample : IMapViewSample, IDisposable
         _timer.Dispose();
     }
 }
-#endif

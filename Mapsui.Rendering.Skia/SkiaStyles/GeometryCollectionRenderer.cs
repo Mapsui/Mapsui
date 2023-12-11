@@ -1,12 +1,9 @@
 ﻿using System;
 using Mapsui.Layers;
-using Mapsui.Nts;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
-
-#pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Rendering.Skia.SkiaStyles;
 

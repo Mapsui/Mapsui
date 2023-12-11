@@ -92,7 +92,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         }
     }
 
-    private bool TableExists(SQLiteConnection connection, string table)
+    private static bool TableExists(SQLiteConnection connection, string table)
     {
         var tableExists = @$"SELECT name FROM sqlite_master
         WHERE type='table' AND name = '{table}'";
@@ -106,7 +106,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         return true;
     }
 
-    private bool ColumnExists(SQLiteConnection connection, string table, string column)
+    private static bool ColumnExists(SQLiteConnection connection, string table, string column)
     {
         var tableExists = @$"SELECT             
         p.name as column_name
@@ -116,8 +116,8 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             pragma_table_info(m.name) AS p
         WHERE m.name = '{table}' AND p.name = '{column}'";
         var command = connection.CreateCommand(tableExists);
-        var existigColumn = command.ExecuteScalar<string>();
-        if (string.IsNullOrEmpty(existigColumn))
+        var existingColumn = command.ExecuteScalar<string>();
+        if (string.IsNullOrEmpty(existingColumn))
         {
             return false;
         }
@@ -149,7 +149,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         connection.Table<Tile>().Delete(f => f.Level == index.Level && f.Col == index.Col && f.Row == index.Row);
     }
 
-    // Interface Definition in ITileCache is wrong TODO Fix interface in Brutile
+    // Interface Definition in ITileCache is wrong TODO Fix interface in BruTile
 #pragma warning disable CS8766
     public byte[]? Find(TileIndex index)
 #pragma warning restore CS8766
