@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Mapsui.Logging;
 
@@ -7,6 +8,7 @@ namespace Mapsui.Extensions;
 
 public static class Catch
 {
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Exceptions(Action action)
     {
         try
@@ -19,6 +21,7 @@ public static class Catch
         }
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static async void Exceptions(Func<Task> func)
     {
         try
@@ -32,6 +35,7 @@ public static class Catch
     }
 
     [SuppressMessage("Usage", "VSTHRD110:Observe result of async calls")]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void TaskRun(Action func)
     {
         Task.Run(() =>
@@ -48,6 +52,7 @@ public static class Catch
     }
 
     [SuppressMessage("Usage", "VSTHRD110:Observe result of async calls")]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void TaskRun(Func<Task> func)
     {
         Task.Run(async () =>

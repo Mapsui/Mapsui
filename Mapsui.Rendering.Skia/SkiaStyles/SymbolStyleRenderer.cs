@@ -167,8 +167,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var fillPaint = vectorCache.GetOrCreatePaint(symbolStyle.Fill, opacity, CreateFillPaint);
         var path = vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath);
 
-        if (fillPaint != null && fillPaint.Color.Alpha != 0) canvas.DrawPath(path, fillPaint);
-        if (linePaint != null && linePaint.Color.Alpha != 0) canvas.DrawPath(path, linePaint);
+        if (fillPaint != null && fillPaint.Color.Alpha != 0){ Catch.Exceptions(() => canvas.DrawPath(path, fillPaint));}
+        if (linePaint != null && linePaint.Color.Alpha != 0) Catch.Exceptions(() => canvas.DrawPath(path, linePaint)); 
 
         canvas.Restore();
 

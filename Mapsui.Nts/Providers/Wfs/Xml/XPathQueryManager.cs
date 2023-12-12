@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Providers.Wfs.Utilities;
 
@@ -355,7 +356,10 @@ public class XPathQueryManager : IXPathQueryManager
     {
         xPath?.SetContext(_paramContext!);
         if (xPath != null)
-            _xIter = _xNav?.Select(xPath);
+        {
+            Catch.Exceptions(() => _xIter = _xNav?.Select(xPath));
+        }
+            
         InitializeCustomContext(_paramContext);
     }
 
