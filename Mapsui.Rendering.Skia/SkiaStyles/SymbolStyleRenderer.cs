@@ -19,17 +19,17 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         switch (feature)
         {
             case PointFeature pointFeature:
-                DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, symbolStyle, renderCache, feature);
+                DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, symbolStyle, renderCache);
                 break;
             case GeometryFeature geometryFeature:
                 switch (geometryFeature.Geometry)
                 {
                     case GeometryCollection collection:
                         foreach (var point in GetPoints(collection))
-                            DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache, feature);
+                            DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache);
                         break;
                     case Point point:
-                        DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache, feature);
+                        DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache);
                         break;
                 }
                 break;
@@ -53,7 +53,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    private bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderCache renderCache, IFeature feature)
+    public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderCache renderCache)
     {
         if (symbolStyle.SymbolType == SymbolType.Image)
         {
@@ -142,7 +142,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    public static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IVectorCache vectorCache)
+    private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IVectorCache vectorCache)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
