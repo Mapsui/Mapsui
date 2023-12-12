@@ -2,6 +2,7 @@
 using Mapsui.Nts;
 using NetTopologySuite.Geometries;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -23,6 +24,6 @@ public class WritableLayerTests
         var extent = writableLayer.Extent;
 
         // assert
-        Assert.IsNull(extent);
+        ClassicAssert.IsNull(extent);
     }
 }

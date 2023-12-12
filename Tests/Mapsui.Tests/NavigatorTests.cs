@@ -1,6 +1,7 @@
 ﻿using Mapsui.Animations;
 using NUnit.Framework;
 using System.Collections.Generic;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests;
 
@@ -20,10 +21,10 @@ public class NavigatorTests
         navigator.CenterOn(10, 20);
 
         // Assert
-        Assert.AreEqual(10, navigator.Viewport.CenterX);
-        Assert.AreEqual(20, navigator.Viewport.CenterY);
-        Assert.AreEqual(1, navigatedCounter, "Navigated is called");
-        Assert.AreEqual(0, navigator.GetAnimationsCount, "Animations are cleared");
+        ClassicAssert.AreEqual(10, navigator.Viewport.CenterX);
+        ClassicAssert.AreEqual(20, navigator.Viewport.CenterY);
+        ClassicAssert.AreEqual(1, navigatedCounter, "Navigated is called");
+        ClassicAssert.AreEqual(0, navigator.GetAnimationsCount, "Animations are cleared");
     }
 
     private static List<AnimationEntry<Viewport>> CreateAnimation()
@@ -46,8 +47,8 @@ public class NavigatorTests
         navigator.Pinch(currentPinchCenter, previousPinchCenter, deltaResolution);
 
         // Assert
-        Assert.AreEqual(expectedCenterX, navigator.Viewport.CenterX);
-        Assert.AreEqual(expectedCenterY, navigator.Viewport.CenterY);
+        ClassicAssert.AreEqual(expectedCenterX, navigator.Viewport.CenterX);
+        ClassicAssert.AreEqual(expectedCenterY, navigator.Viewport.CenterY);
     }
 
     [Test]
@@ -66,25 +67,25 @@ public class NavigatorTests
         // Test size change
         var viewport = navigator.Viewport;
         navigator.SetSize(100, 100);
-        Assert.AreEqual(oldViewport, viewport);
-        Assert.AreNotEqual(oldViewport, navigator.Viewport);
+        ClassicAssert.AreEqual(oldViewport, viewport);
+        ClassicAssert.AreNotEqual(oldViewport, navigator.Viewport);
 
         // Test center change
         viewport = navigator.Viewport;
         navigator.CenterOn(10, 20);
-        Assert.AreEqual(oldViewport, viewport);
-        Assert.AreNotEqual(oldViewport, navigator.Viewport);
+        ClassicAssert.AreEqual(oldViewport, viewport);
+        ClassicAssert.AreNotEqual(oldViewport, navigator.Viewport);
 
         // Test resolution change
         viewport = navigator.Viewport;
         navigator.ZoomTo(10);
-        Assert.AreEqual(oldViewport, viewport);
-        Assert.AreNotEqual(oldViewport, navigator.Viewport);
+        ClassicAssert.AreEqual(oldViewport, viewport);
+        ClassicAssert.AreNotEqual(oldViewport, navigator.Viewport);
 
         // Test rotation change
         viewport = navigator.Viewport;
         navigator.RotateTo(10);
-        Assert.AreEqual(oldViewport, viewport);
-        Assert.AreNotEqual(oldViewport, navigator.Viewport);
+        ClassicAssert.AreEqual(oldViewport, viewport);
+        ClassicAssert.AreNotEqual(oldViewport, navigator.Viewport);
     }
 }

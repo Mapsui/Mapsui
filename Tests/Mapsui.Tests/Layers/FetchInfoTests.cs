@@ -1,5 +1,6 @@
 ﻿using Mapsui.Layers;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Layers;
 
@@ -18,6 +19,6 @@ internal class FetchInfoTests
         var grownFetchInfo = fetchInfo.Grow(amount);
 
         // Assert
-        Assert.AreEqual(expectedWidth, grownFetchInfo.Extent.Width);
+        ClassicAssert.AreEqual(expectedWidth, grownFetchInfo.Extent.Width);
     }
 }

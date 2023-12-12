@@ -5,6 +5,7 @@ using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Styles;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using NUnit.Framework.Internal;
 using SkiaSharp;
 using OSPlatform = System.Runtime.InteropServices.OSPlatform;
@@ -31,7 +32,7 @@ public class LabelStyleFeatureSizeTests
         using var skPaint = new SKPaint();
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new RenderCache());
 
-        Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize, 0));
+        ClassicAssert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize, 0));
     }
 
     [Test]
@@ -52,12 +53,12 @@ public class LabelStyleFeatureSizeTests
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize * 2, 0));
+            ClassicAssert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize * 2, 0));
         }
         else
         {
             // on macos it is not two times as big but almost two times with 3 less
-            Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize * 2 - 3, 0));
+            ClassicAssert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize * 2 - 3, 0));
         }
     }
 
@@ -76,7 +77,7 @@ public class LabelStyleFeatureSizeTests
         using var skPaint = new SKPaint();
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new RenderCache());
 
-        Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + 2 * 2, 0));
+        ClassicAssert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + 2 * 2, 0));
     }
 
     [Test]
@@ -94,7 +95,7 @@ public class LabelStyleFeatureSizeTests
         using var skPaint = new SKPaint();
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new RenderCache());
 
-        Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + 2 * 2, 0));
+        ClassicAssert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + 2 * 2, 0));
     }
 
     [Test]
@@ -112,6 +113,6 @@ public class LabelStyleFeatureSizeTests
         using var skPaint = new SKPaint();
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new RenderCache());
 
-        Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + Math.Sqrt(2 * 2 + 2 * 2) * 2, 0));
+        ClassicAssert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + Math.Sqrt(2 * 2 + 2 * 2) * 2, 0));
     }
 }

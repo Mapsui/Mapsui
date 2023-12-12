@@ -20,6 +20,7 @@ using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Rendering.Skia.Tests;
 
@@ -121,13 +122,13 @@ public class MapRegressionTests
                     }
                     else
                     {
-                        Assert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.99));
+                        ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.99));
                     }
                 }
                 else
                 {
                     // Don't compare images here because to unreliable
-                    Assert.True(true);
+                    ClassicAssert.True(true);
                 }
             }
         }

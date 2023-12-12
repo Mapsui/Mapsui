@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Mapsui.Cache;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Cache;
 
@@ -15,13 +16,13 @@ public class LruCacheUnitTest
 
         cache.Put(1, "One");
         cache.Put(2, "Two");
-        Assert.AreEqual("One", cache.Get(1));
+        ClassicAssert.AreEqual("One", cache.Get(1));
         cache.Put(3, "Three");
-        Assert.IsNull(cache.Get(2));
+        ClassicAssert.IsNull(cache.Get(2));
         cache.Put(4, "Four");
-        Assert.IsNull(cache.Get(1));
-        Assert.AreEqual("Three", cache.Get(3));
-        Assert.AreEqual("Four", cache.Get(4));
+        ClassicAssert.IsNull(cache.Get(1));
+        ClassicAssert.AreEqual("Three", cache.Get(3));
+        ClassicAssert.AreEqual("Four", cache.Get(4));
     }
 
     [Test]
@@ -39,7 +40,7 @@ public class LruCacheUnitTest
         cache.Put(3, item3);
 
         // Item 1 should be disposed
-        Assert.IsTrue(item1.Disposed);
+        ClassicAssert.IsTrue(item1.Disposed);
     }
 }
 

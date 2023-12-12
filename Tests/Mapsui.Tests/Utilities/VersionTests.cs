@@ -1,5 +1,6 @@
 ﻿using Mapsui.Utilities;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Utilities;
 
@@ -13,6 +14,6 @@ public class VersionTests
         var version = Version.GetCurrentVersion();
 
         // assert
-        Assert.True(version?.ToString().Length > 0);
+        ClassicAssert.True(version?.ToString().Length > 0);
     }
 }

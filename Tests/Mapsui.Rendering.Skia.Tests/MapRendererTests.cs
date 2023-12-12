@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Mapsui.Rendering.Skia.Tests.Extensions;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Tests;
@@ -27,7 +28,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -45,7 +46,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -63,7 +64,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -81,7 +82,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -99,7 +100,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -117,7 +118,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -135,7 +136,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -153,7 +154,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -171,7 +172,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
     }
 
     [Test]
@@ -189,7 +190,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
     }
 
     [Test]
@@ -207,7 +208,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -225,7 +226,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -243,7 +244,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -261,7 +262,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.995));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.995));
     }
 
     [Test]
@@ -279,7 +280,7 @@ internal class MapRendererTests
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     private static bool CompareColors(SKColor color1, SKColor color2, int allowedColorDistance)

@@ -5,6 +5,7 @@ using Mapsui.Layers;
 using Mapsui.Tiling.Extensions;
 using Mapsui.Tiling.Rendering;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Rendering;
 
@@ -26,7 +27,7 @@ public class RenderFetchStrategyTests
         var tiles = renderFetchStrategy.Get(box, resolution.UnitsPerPixel, schema, memoryCache);
 
         // assert
-        Assert.True(tiles.Count == 43);
+        ClassicAssert.True(tiles.Count == 43);
     }
 
     private static ITileCache<IFeature?> PopulateMemoryCache(GlobalSphericalMercator schema, MemoryCache<IFeature?> cache, int levelId)

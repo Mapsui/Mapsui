@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests;
 
@@ -26,6 +27,6 @@ public class MRectTests
         var result = rect1.Intersects(rect2);
 
         // Assert
-        Assert.AreEqual(intersect, result);
+        ClassicAssert.AreEqual(intersect, result);
     }
 }

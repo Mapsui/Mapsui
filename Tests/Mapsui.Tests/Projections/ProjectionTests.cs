@@ -7,6 +7,7 @@ using Mapsui.Projections;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Projections;
 
@@ -26,7 +27,7 @@ public class ProjectionTests
         var enumeration = geometry.Coordinates;
 
         // assert
-        Assert.AreEqual(expectedCoordinateCount, enumeration.Count());
+        ClassicAssert.AreEqual(expectedCoordinateCount, enumeration.Count());
     }
 
     [Test]
@@ -40,7 +41,7 @@ public class ProjectionTests
         var enumeration = geometry.Coordinates;
 
         // assert
-        Assert.AreEqual(expectedCoordinateCount, enumeration.Count());
+        ClassicAssert.AreEqual(expectedCoordinateCount, enumeration.Count());
     }
 
     [Test]
@@ -61,8 +62,8 @@ public class ProjectionTests
 
         for (var i = 0; i < coordinates.Count; i++)
         {
-            Assert.AreNotEqual(coordinates[i].X, projectedCoordinates[i].X);
-            Assert.AreNotEqual(coordinates[i].Y, projectedCoordinates[i].Y);
+            ClassicAssert.AreNotEqual(coordinates[i].X, projectedCoordinates[i].X);
+            ClassicAssert.AreNotEqual(coordinates[i].Y, projectedCoordinates[i].Y);
         }
     }
 
@@ -84,8 +85,8 @@ public class ProjectionTests
 
         for (var i = 0; i < coordinates.Count; i++)
         {
-            Assert.AreNotEqual(coordinates[i].X, projectedCoordinates[i].X);
-            Assert.AreNotEqual(coordinates[i].Y, projectedCoordinates[i].Y);
+            ClassicAssert.AreNotEqual(coordinates[i].X, projectedCoordinates[i].X);
+            ClassicAssert.AreNotEqual(coordinates[i].Y, projectedCoordinates[i].Y);
         }
     }
 
@@ -100,6 +101,6 @@ public class ProjectionTests
         using var shapeFile = new ShapeFile(countriesPath, false, true, new DotSpatialProjection());
 
         // assert
-        Assert.AreEqual(shapeFile.CRS, "EPSG:4326");
+        ClassicAssert.AreEqual(shapeFile.CRS, "EPSG:4326");
     }
 }

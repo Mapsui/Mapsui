@@ -1,5 +1,6 @@
 ﻿using Mapsui.Utilities;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Utilities;
 
@@ -17,7 +18,7 @@ internal class RotationCalculationTests
         var rotation = RotationCalculations.NormalizeRotation(inputRotation);
 
         // Assert
-        Assert.AreEqual(expectedRotation, rotation);
+        ClassicAssert.AreEqual(expectedRotation, rotation);
     }
 
     [TestCase(90, 180, 90)]
@@ -39,7 +40,7 @@ internal class RotationCalculationTests
         var distance = RotationCalculations.RotationShortestDistance(inputRotation1, inputRotation2);
 
         // Assert
-        Assert.AreEqual(expectedDistance, distance);
+        ClassicAssert.AreEqual(expectedDistance, distance);
     }
 
     [TestCase(15, 0, 20, 10, 0)] // Still snapped
@@ -57,6 +58,6 @@ internal class RotationCalculationTests
         var rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(virtualRotation, actualRotation, unSnapRotation, reSnapRotation);
 
         // Assert
-        Assert.AreEqual(expectedRotationDelta, rotationDelta);
+        ClassicAssert.AreEqual(expectedRotationDelta, rotationDelta);
     }
 }

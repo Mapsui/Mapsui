@@ -4,6 +4,7 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using NUnit.Framework;
 using System.Collections.Generic;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Rendering;
 
@@ -32,8 +33,8 @@ internal class VisibleFeatureIteratorTests
         });
 
         // Assert
-        Assert.IsTrue(result[feature].Contains(vectorStyle1));
-        Assert.IsTrue(result[feature].Contains(vectorStyle2));
+        ClassicAssert.IsTrue(result[feature].Contains(vectorStyle1));
+        ClassicAssert.IsTrue(result[feature].Contains(vectorStyle2));
     }
 
 
@@ -51,7 +52,7 @@ internal class VisibleFeatureIteratorTests
         VisibleFeatureIterator.IterateLayers(viewport, new[] { memoryLayer }, 0, (v, l, s, f, o, i) => isApplied = true);
 
         // Assert
-        Assert.AreEqual(isAppliedExpected, isApplied, assertMessage);
+        ClassicAssert.AreEqual(isAppliedExpected, isApplied, assertMessage);
     }
 
     [Test, TestCaseSource(nameof(StylesThatShouldBeAppliedOrNot)), TestCaseSource(nameof(FeatureStylesThatShouldBeAppliedOrNot))]
@@ -69,7 +70,7 @@ internal class VisibleFeatureIteratorTests
         VisibleFeatureIterator.IterateLayers(viewport, new[] { memoryLayer }, 0, (v, l, s, f, o, i) => isApplied = true);
 
         // Assert
-        Assert.AreEqual(isAppliedExpected, isApplied, assertMessage);
+        ClassicAssert.AreEqual(isAppliedExpected, isApplied, assertMessage);
     }
 
     public static IEnumerable<TestCaseData> StylesThatShouldBeAppliedOrNot
