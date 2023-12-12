@@ -13,7 +13,7 @@ public enum BitmapType
     Picture
 }
 
-public class BitmapInfo : IBitmapInfo
+public sealed class BitmapInfo : IBitmapInfo
 {
     private object? _data;
 

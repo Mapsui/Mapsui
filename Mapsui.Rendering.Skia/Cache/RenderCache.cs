@@ -2,6 +2,8 @@
 using Mapsui.Extensions;
 using Mapsui.Styles;
 
+#pragma warning disable IDISP008 // Don't assign member with injected and created disposables
+
 namespace Mapsui.Rendering.Skia.Cache;
 
 public sealed class RenderCache : IRenderCache
@@ -13,11 +15,12 @@ public sealed class RenderCache : IRenderCache
         SymbolCache = new SymbolCache();
         VectorCache = new VectorCache(SymbolCache, capacity);
         TileCache = new TileCache();
+        LabelCache = new LabelCache();
     }
 
-    public ILabelCache LabelCache { get; set; } = new LabelCache();
+    public ILabelCache LabelCache { get; set; } 
 
-    public ISymbolCache SymbolCache { get; set; }
+    public ISymbolCache SymbolCache { get; set }
 
     public IVectorCache? VectorCache
     {
