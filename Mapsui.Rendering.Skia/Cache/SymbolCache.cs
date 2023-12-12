@@ -35,10 +35,11 @@ public sealed class SymbolCache : ISymbolCache
 
     public void Dispose()
     {
-        foreach (var value in _cache.Values)
-        {
-            value.Dispose();
-        }
+        ////foreach (var value in _cache.Values)
+        ////{
+        ////    value.Dispose();
+        ////}
+        
         _cache.Clear();
     }
 }
