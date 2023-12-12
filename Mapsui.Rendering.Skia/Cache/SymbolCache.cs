@@ -12,7 +12,15 @@ public sealed class SymbolCache : ISymbolCache
 
     public IBitmapInfo GetOrCreate(int bitmapId)
     {
-        if (_cache.Keys.Contains(bitmapId)) return _cache[bitmapId];
+        if (_cache.Keys.Contains(bitmapId))
+        {
+            var result = _cache[bitmapId];
+            if (!BitmapHelper.InvalidBitmapInfo(result))
+            {
+                return result;
+            }
+        }
+        
         return _cache[bitmapId] = BitmapHelper.LoadBitmap(BitmapRegistry.Instance.Get(bitmapId)) ?? throw new ArgumentException(nameof(bitmapId));
     }
 

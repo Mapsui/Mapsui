@@ -125,6 +125,8 @@ public sealed class BitmapInfo : IBitmapInfo
         }
     }
 
+    public bool IsDisposed => _data == null;
+
     public void Dispose()
     {
         DisposableExtension.DisposeAndNullify(ref _data);

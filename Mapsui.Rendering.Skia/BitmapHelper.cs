@@ -76,6 +76,6 @@ public static class BitmapHelper
 
     public static bool InvalidBitmapInfo([NotNullWhen(false)] BitmapInfo? bitmapInfo)
     {
-        return bitmapInfo == null || (bitmapInfo.Bitmap == null && (bitmapInfo.Picture == null || bitmapInfo.Picture.IsDisposed()));
+        return bitmapInfo == null || bitmapInfo.IsDisposed || (bitmapInfo.Bitmap == null && (bitmapInfo.Picture == null || bitmapInfo.Picture.IsDisposed()));
     }
 }
