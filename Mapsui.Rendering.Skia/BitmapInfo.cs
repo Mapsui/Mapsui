@@ -1,4 +1,5 @@
-﻿using Mapsui.Styles;
+﻿using Mapsui.Extensions;
+using Mapsui.Styles;
 using SkiaSharp;
 using Svg.Skia;
 
@@ -122,5 +123,10 @@ public class BitmapInfo : IBitmapInfo
                     return 0;
             }
         }
+    }
+
+    public void Dispose()
+    {
+        DisposableExtension.DisposeAndNullify(ref _data);
     }
 }

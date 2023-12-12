@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using Mapsui.Extensions;
 using Mapsui.Styles;
 
-namespace Mapsui.Rendering.Skia;
+namespace Mapsui.Rendering.Skia.Cache;
 
-public class SymbolCache : ISymbolCache
+public sealed class SymbolCache : ISymbolCache
 {
     private readonly IDictionary<int, BitmapInfo> _cache = new ConcurrentDictionary<int, BitmapInfo>();
 
@@ -22,5 +23,14 @@ public class SymbolCache : ISymbolCache
             return null;
 
         return new Size(bitmap.Width, bitmap.Height);
+    }
+
+    public void Dispose()
+    {
+        foreach (var value in _cache.Values)
+        {
+            value.Dispose();
+        }
+        _cache.Clear();
     }
 }

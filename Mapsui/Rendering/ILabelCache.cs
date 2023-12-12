@@ -3,7 +3,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Rendering;
 
-public interface ILabelCache
+public interface ILabelCache : IDisposable
 {
     T GetOrCreateTypeface<T>(Font font, Func<Font, T> createTypeFace)
         where T : class;

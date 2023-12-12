@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Mapsui.Extensions;
 
 namespace Mapsui.Cache;
 
@@ -105,5 +106,19 @@ public class LruCache<TKey, TValue>
     {
         get => Get(key);
         set => Put(key, value);
+    }
+
+    public void Clear()
+    {
+        lock (_lock)
+        {
+            foreach (var value in _cache.Values)
+            {
+                value.Value.DisposeIfDisposable();
+            }
+
+            _cache.Clear();
+            _list.Clear();
+        }
     }
 }

@@ -1,10 +1,13 @@
 ﻿using System;
+using Mapsui.Extensions;
 using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public class RenderCache : IRenderCache
+public sealed class RenderCache : IRenderCache
 {
+    private IVectorCache? _vectorCache;
+
     public RenderCache(int capacity = 10000)
     {
         SymbolCache = new SymbolCache();
@@ -16,8 +19,12 @@ public class RenderCache : IRenderCache
 
     public ISymbolCache SymbolCache { get; set; }
 
-    public IVectorCache? VectorCache { get; set; }
-    
+    public IVectorCache? VectorCache
+    {
+        get => _vectorCache;
+        set => _vectorCache = value;
+    }
+
     public ITileCache TileCache { get; set; }
 
     public Size? GetSize(int bitmapId)
@@ -75,5 +82,13 @@ public class RenderCache : IRenderCache
     public void UpdateCache(long iteration)
     {
         TileCache.UpdateCache(iteration);
+    }
+
+    public void Dispose()
+    {
+        LabelCache.Dispose();
+        SymbolCache.Dispose();
+        DisposableExtension.DisposeAndNullify(ref _vectorCache);
+        TileCache.Dispose();
     }
 }

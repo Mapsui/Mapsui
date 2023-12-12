@@ -591,6 +591,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Unsubscribe();
             StopUpdates();
             _invalidateTimer?.Dispose();
+            _renderer.Dispose();
         }
         _invalidateTimer = null;
     }

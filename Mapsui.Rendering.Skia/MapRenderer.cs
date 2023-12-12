@@ -23,10 +23,11 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia;
 
-public class MapRenderer : IRenderer
+public class MapRenderer : IRenderer, IDisposable
 {
     private readonly IRenderCache _renderCache;
     private long _currentIteration;
+    private readonly bool _ownsRenderCache;
 
     public IRenderCache RenderCache => _renderCache;
 
@@ -66,6 +67,7 @@ public class MapRenderer : IRenderer
 
     public MapRenderer() : this(new RenderCache())
     {
+        _ownsRenderCache = true;
     }
 
     public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,
@@ -312,5 +314,13 @@ public class MapRenderer : IRenderer
         }
 
         return result;
+    }
+
+    public void Dispose()
+    {
+        if (_ownsRenderCache)
+        {
+            _renderCache.Dispose();    
+        }
     }
 }

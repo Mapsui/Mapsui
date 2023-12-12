@@ -5,21 +5,21 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Mapsui.Styles;
 
-namespace Mapsui.Rendering.Skia;
+namespace Mapsui.Rendering.Skia.Cache;
 
-public class TileCache : ITileCache
+public sealed class TileCache : ITileCache
 {
     private const int TilesToKeepMultiplier = 3;
     private const int MinimumTilesToKeep = 128; // in RasterStyle it was 32, I quadrupled it because now all tile Layers have one Cache
     private long _lastIteration;
-    
-    private readonly IDictionary<object, IBitmapInfo?> _tileCache = 
+
+    private readonly IDictionary<object, IBitmapInfo?> _tileCache =
         new ConcurrentDictionary<object, IBitmapInfo?>(new IdentityComparer<object>());
 
     public IBitmapInfo? GetOrCreate(MRaster raster, long currentIteration)
     {
         _tileCache.TryGetValue(raster, out var cachedBitmapInfo);
-        BitmapInfo? bitmapInfo = cachedBitmapInfo as BitmapInfo;
+        var bitmapInfo = cachedBitmapInfo as BitmapInfo;
         if (BitmapHelper.InvalidBitmapInfo(bitmapInfo))
         {
             bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
@@ -37,7 +37,7 @@ public class TileCache : ITileCache
 
         return bitmapInfo;
     }
-    
+
     public void UpdateCache(long iteration)
     {
         if (iteration > 0 && _lastIteration != iteration)
@@ -57,7 +57,7 @@ public class TileCache : ITileCache
 
         if (tilesToRemove > 0) RemoveOldBitmaps(_tileCache, tilesToRemove);
     }
-    
+
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]
     private static void RemoveOldBitmaps(IDictionary<object, IBitmapInfo?> tileCache, int numberToRemove)
     {
@@ -72,6 +72,17 @@ public class TileCache : ITileCache
                 textureInfoDisposable.Dispose();
             counter++;
         }
+    }
+
+
+    public void Dispose()
+    {
+        foreach (var bitmapInfo in _tileCache.Values)
+        {
+            bitmapInfo?.Dispose();
+        }
+
+        _tileCache.Clear();
     }
 }
 

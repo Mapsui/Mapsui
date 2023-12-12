@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using Mapsui.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.GeometriesGraph;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public class LabelCache : ILabelCache
+public sealed class LabelCache : ILabelCache
 {
     private readonly ConcurrentDictionary<Font, object> _cacheTypeface = new();
 
@@ -36,5 +37,21 @@ public class LabelCache : ILabelCache
         }
 
         return (T)info;
+    }
+
+    public void Dispose()
+    {
+        foreach (var item in _labelCache.Values)
+        {
+            item?.Dispose();
+        }
+        
+        _labelCache.Clear();
+
+        foreach (var item in _cacheTypeface.Values)
+        {
+            item.DisposeIfDisposable();
+        }
+        _cacheTypeface.Clear();
     }
 }
