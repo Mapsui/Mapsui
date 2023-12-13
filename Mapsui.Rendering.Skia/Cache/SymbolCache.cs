@@ -27,11 +27,6 @@ public sealed class SymbolCache : ISymbolCache
         var bitmapStream = BitmapRegistry.Instance.Get(bitmapId);
         bool ownsBitmap = bitmapStream is not IDisposable;
         var loadBitmap = BitmapHelper.LoadBitmap(bitmapStream, ownsBitmap) ?? throw new ArgumentException(nameof(bitmapId));
-        if (loadBitmap.Bitmap == bitmapStream || loadBitmap.Picture == bitmapStream)
-        {
-            Debug.WriteLine("test");
-        }
-        
         return _cache[bitmapId] = loadBitmap;
     }
 
