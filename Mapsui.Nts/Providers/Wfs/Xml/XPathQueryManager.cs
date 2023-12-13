@@ -193,8 +193,12 @@ public class XPathQueryManager : IXPathQueryManager
             _paramContext.AddParam(queryParameters);
         string? result = null;
         FindXPath(xPath);
-        if (_xIter?.MoveNext() ?? false)
-            result = _xIter?.Current?.Value;
+        Catch.Exceptions(() =>
+        {
+            if (_xIter?.MoveNext() ?? false)
+                result = _xIter?.Current?.Value;
+        });
+       
         return result;
     }
 

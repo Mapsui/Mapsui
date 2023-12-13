@@ -16,6 +16,17 @@ public enum BitmapType
 public sealed class BitmapInfo : IBitmapInfo
 {
     private object? _data;
+    private readonly bool _ownsBitmap;
+
+    public BitmapInfo()
+    {
+        _ownsBitmap = true;
+    }
+
+    public BitmapInfo(bool ownedBitmap)
+    {
+        _ownsBitmap = ownedBitmap;
+    }
 
     public BitmapType Type { get; private set; }
 
@@ -129,6 +140,9 @@ public sealed class BitmapInfo : IBitmapInfo
 
     public void Dispose()
     {
-        DisposableExtension.DisposeAndNullify(ref _data);
+        if (_ownsBitmap)
+        {
+            DisposableExtension.DisposeAndNullify(ref _data);    
+        }
     }
 }
