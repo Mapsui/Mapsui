@@ -14,7 +14,6 @@ public class Navigator
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
 
-<<<<<<<<< Temporary merge branch 1
     private List<Action> _initialization = new();
     private MMinMax? _defaultZoomBounds;
     private MRect? _defaultPanBounds;
