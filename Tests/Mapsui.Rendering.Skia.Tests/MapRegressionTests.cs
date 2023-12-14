@@ -87,7 +87,7 @@ public class MapRegressionTests
         Console.WriteLine(message);
     }
 
-    public async Task TestSampleAsync(ISampleBase sample, bool compareImages)
+    public static async Task TestSampleAsync(ISampleBase sample, bool compareImages)
     {
         try
         {
@@ -204,7 +204,7 @@ public class MapRegressionTests
         return mapControl;
     }
 
-    private async Task DisplayMapAsync(IMapControl mapControl)
+    private static async Task DisplayMapAsync(IMapControl mapControl)
     {
         await mapControl.WaitForLoadingAsync().ConfigureAwait(false);
 

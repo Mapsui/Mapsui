@@ -17,6 +17,7 @@
     <IsPackable>false</IsPackable> <!--Default to not packable and override in projects that do need to be packed.-->
     <!--Disable Run Api Compat Task causes Build failure on github actions with visual studio 2022 17.5 and .net Compilers Toolset 4.6-->
     <RunApiCompat>false</RunApiCompat>
+	<Nullable>enable</Nullable>
   </PropertyGroup>
 
 	<!--Package Icon Include -->
@@ -30,7 +31,6 @@
 	  <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
 	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 	  <LangVersion>11.0</LangVersion>
-	  <Nullable>enable</Nullable>
       <NoWarn>$(NoWarn);NU1008;NU1701</NoWarn>
       <!-- Enable Windows Targeting on non Windows platforms -->
       <EnableWindowsTargeting Condition="'$(OS)' != 'Windows_NT'">true</EnableWindowsTargeting>

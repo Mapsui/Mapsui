@@ -1,4 +1,9 @@
-﻿using Mapsui.Extensions;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Providers;
@@ -7,16 +12,11 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 // ReSharper disable once ClassNeverInstantiated.Local
 
-namespace Mapsui.Samples.Common.Maps.Callouts;
+namespace Mapsui.Samples.Common.Maps.Info;
 
 public class SingleCalloutSample : ISample
 {

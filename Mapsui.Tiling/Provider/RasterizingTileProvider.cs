@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
@@ -17,7 +18,7 @@ using Attribution = BruTile.Attribution;
 namespace Mapsui.Tiling.Provider;
 
 /// <summary> The rasterizing tile provider. Tiles the Layer for faster Rasterizing on Zoom and Move. </summary>
-public class RasterizingTileProvider : ITileSource
+public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
 {
     private readonly ConcurrentStack<IRenderer> _rasterizingLayers = new();
     private readonly IRenderer? _rasterizer;
@@ -237,5 +238,45 @@ public class RasterizingTileProvider : ITileSource
             0,
             section.ScreenWidth,
             section.ScreenHeight);
+    }
+
+    public async Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, double screenX, double screenY)
+    {
+        var result = new Dictionary<string, IEnumerable<IFeature>>();
+        var renderer = GetRenderer();
+
+        var tileInfos = Schema.GetTileInfos(viewport.ToExtent().ToExtent(), viewport.Resolution);
+        var (worldX, worldY) = viewport.ScreenToWorldXY(screenX, screenY);
+        var tileInfo = tileInfos.FirstOrDefault(f =>
+            f.Extent.MinX <= worldX && f.Extent.MaxX >= worldX && f.Extent.MinY <= worldY && f.Extent.MaxY >= worldY);
+
+        if (tileInfo == null)
+        {
+            return result;
+        }
+
+        var layer = await CreateRenderLayerAsync(tileInfo, renderer);
+        var layerRenderLayer = layer.RenderLayer;
+        layerRenderLayer.IsMapInfoLayer = true;
+        var layers = new List<ILayer>
+        {
+            layerRenderLayer
+        };
+
+        var info = renderer.GetMapInfo(screenX, screenY, viewport, layers);
+        if (info != null)
+        {
+            var mapInfo = await info.GetMapInfoAsync();
+            var infos = mapInfo?.MapInfoRecords;
+            if (infos != null)
+            {
+                foreach (var group in infos.GroupBy(f => f.Layer.Name))
+                {
+                    result[group.Key] = group.Select(f => f.Feature).ToArray();
+                }
+            }
+        }
+
+        return result;
     }
 }

@@ -16,7 +16,7 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidget;
 using Mapsui.Widgets.ButtonWidget;
 using Mapsui.Widgets.MouseCoordinatesWidget;
-using Mapsui.Widgets.PerformanceWidget;
+using Mapsui.Widgets.LoggingWidget;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using SkiaSharp;
@@ -61,6 +61,7 @@ public class MapRenderer : IRenderer
         WidgetRenders[typeof(MouseCoordinatesWidget)] = new MouseCoordinatesWidgetRenderer();
         WidgetRenders[typeof(EditingWidget)] = new EditingWidgetRenderer();
         WidgetRenders[typeof(MapInfoWidget)] = new MapInfoWidgetRenderer();
+        WidgetRenders[typeof(LoggingWidget)] = new LoggingWidgetRenderer();
     }
 
     public MapRenderer() : this(new RenderCache())
@@ -203,17 +204,14 @@ public class MapRenderer : IRenderer
         // todo: We will need to select on style instead of layer
 
         var mapInfoLayers = layers
-            .Select(l => (l is ISourceLayer sl) ? sl.SourceLayer : l)
+            .Select(l => l is ISourceLayer sl and not ILayerFeatureInfo ? sl.SourceLayer : l)
             .Where(l => l.IsMapInfoLayer)
             .ToList();
 
-        var list = new List<MapInfoRecord>();
-        var result = new MapInfo
-        {
-            ScreenPosition = new MPoint(x, y),
-            WorldPosition = viewport.ScreenToWorld(x, y),
-            Resolution = viewport.Resolution
-        };
+        var tasks = new List<Task>();
+
+        var list = new List<MapInfoRecord>[mapInfoLayers.Count];
+        var result = new MapInfo(new MPoint(x, y), viewport.ScreenToWorld(x, y), viewport.Resolution);
 
         if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return result;
 
@@ -240,42 +238,73 @@ public class MapRenderer : IRenderer
                 using var pixmap = surface.PeekPixels();
                 var color = pixmap.GetPixelColor(intX, intY);
 
-
-                VisibleFeatureIterator.IterateLayers(viewport, mapInfoLayers, 0, (v, layer, style, feature, opacity, iteration) =>
+                for (var index = 0; index < mapInfoLayers.Count; index++)
                 {
-                    try
+                    var currentIndex = mapInfoLayers.Count - index - 1; // for having copy of index for thread safe access and reverse order.
+                    var mapList = list[currentIndex] = new List<MapInfoRecord>();
+                    var infoLayer = mapInfoLayers[index];
+                    if (infoLayer is ILayerFeatureInfo layerFeatureInfo)
                     {
-                        // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
-                        surface.Canvas.Save();
-                        // 1) Clear the entire bitmap
-                        surface.Canvas.Clear(SKColors.Transparent);
-                        // 2) Render the feature to the clean canvas
-                        RenderFeature(surface.Canvas, v, layer, style, feature, opacity, 0);
-                        // 3) Check if the pixel has changed.
-                        if (color != pixmap.GetPixelColor(intX, intY))
-                            // 4) Add feature and style to result
-                            list.Add(new MapInfoRecord(feature, style, layer));
-                        surface.Canvas.Restore();
-                        // ReSharper restore AccessToDisposedClosure
+                        tasks.Add(Task.Run(async () =>
+                        {
+                            try
+                            {
+                                // creating new list to avoid multithreading problems
+                                mapList = new List<MapInfoRecord>();
+                                // get information from ILayer Feature Info
+                                var features = await layerFeatureInfo.GetFeatureInfoAsync(viewport, x, y);
+                                foreach (var it in features)
+                                {
+                                    foreach (var feature in it.Value)
+                                    {
+                                        mapList.Add(new MapInfoRecord(feature, infoLayer.Style!, infoLayer));
+                                    }
+                                }
+
+                                // atomic replace of new list is thread safe.a
+                                list[currentIndex] = mapList;
+                            }
+                            catch (Exception e)
+                            {
+                                Logger.Log(LogLevel.Error, e.Message, e);
+                            }
+                        }));
                     }
-                    catch (Exception exception)
+                    else
                     {
-                        Logger.Log(LogLevel.Error, "Unexpected error in the code detecting if a feature is clicked. This uses SkiaSharp.", exception);
+                        // get information from ILayer
+                        VisibleFeatureIterator.IterateLayers(viewport, new[] { infoLayer }, 0,
+                            (v, layer, style, feature, opacity, iteration) =>
+                            {
+                                try
+                                {
+                                    // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
+                                    surface.Canvas.Save();
+                                    // 1) Clear the entire bitmap
+                                    surface.Canvas.Clear(SKColors.Transparent);
+                                    // 2) Render the feature to the clean canvas
+                                    RenderFeature(surface.Canvas, v, layer, style, feature, opacity, 0);
+                                    // 3) Check if the pixel has changed.
+                                    if (color != pixmap.GetPixelColor(intX, intY))
+                                        // 4) Add feature and style to result
+                                        mapList.Add(new MapInfoRecord(feature, style, layer));
+                                    surface.Canvas.Restore();
+                                    // ReSharper restore AccessToDisposedClosure
+                                }
+                                catch (Exception exception)
+                                {
+                                    Logger.Log(LogLevel.Error,
+                                        "Unexpected error in the code detecting if a feature is clicked. This uses SkiaSharp.",
+                                        exception);
+                                }
+                            });
                     }
-                });
+                }
             }
 
-            if (list.Count == 0)
-                return result;
-
-            list.Reverse();
-            var itemDrawnOnTop = list.First();
-
-            result.Feature = itemDrawnOnTop.Feature;
-            result.Style = itemDrawnOnTop.Style;
-            result.Layer = itemDrawnOnTop.Layer;
-            result.MapInfoRecords = list;
-
+            var mapInfos = list.SelectMany(f => f);
+            var task = Task.WhenAll(tasks);
+            result = new MapInfo(result, mapInfos, task);
         }
         catch (Exception exception)
         {

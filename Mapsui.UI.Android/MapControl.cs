@@ -9,8 +9,6 @@ using Mapsui.Utilities;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
 
-#nullable enable
-
 namespace Mapsui.UI.Android;
 
 public enum SkiaRenderMode

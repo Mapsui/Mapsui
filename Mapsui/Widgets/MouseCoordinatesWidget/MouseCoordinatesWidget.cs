@@ -19,7 +19,6 @@ public class MouseCoordinatesWidget : TextBox, IWidgetExtended
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(position);
         // update the Mouse position
         Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
-        Map.RefreshGraphics();
         return false;
     }
 

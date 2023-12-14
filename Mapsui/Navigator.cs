@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using Mapsui.Animations;
+﻿using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Limiting;
 using Mapsui.Logging;
 using Mapsui.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Mapsui;
 
@@ -15,6 +13,8 @@ public class Navigator
 {
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
+
+    public delegate void ViewportChangedEventHandler(object sender, ViewportChangedEventArgs e);
 
     private List<Action> _initialization = new();
     private MMinMax? _defaultZoomBounds;
@@ -27,7 +27,7 @@ public class Navigator
     /// is made and after an animation has completed.
     /// </summary>
     public event EventHandler? RefreshDataRequest;
-    public event PropertyChangedEventHandler? ViewportChanged;
+    public event ViewportChangedEventHandler? ViewportChanged;
 
     /// <summary>
     /// When true the user can not pan (move) the map.
@@ -35,7 +35,7 @@ public class Navigator
     public bool PanLock { get; set; }
 
     /// <summary>
-    /// When true the user an not zoom the map
+    /// When true the user can not zoom the map
     /// </summary>
     public bool ZoomLock { get; set; }
 
@@ -97,8 +97,9 @@ public class Navigator
         private set
         {
             if (_viewport == value) return;
+            var oldViewport = _viewport;
             _viewport = value;
-            OnViewportChanged();
+            OnViewportChanged(oldViewport);
         }
     }
 
@@ -513,9 +514,9 @@ public class Navigator
     /// Property change event
     /// </summary>
     /// <param name="propertyName">Name of property that changed</param>
-    private void OnViewportChanged([CallerMemberName] string? propertyName = null)
+    private void OnViewportChanged(Viewport oldViewport)
     {
-        ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        ViewportChanged?.Invoke(this, new ViewportChangedEventArgs(oldViewport));
     }
 
     public bool UpdateAnimations()

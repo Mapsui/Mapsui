@@ -45,6 +45,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     // Touch Handling
     private readonly ConcurrentDictionary<long, TouchEvent> _touches = new();
 
+    [Obsolete("Use Info and ILayerFeatureInfo")]
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
 
     public MapControl()
@@ -155,6 +156,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         e.Pointer.Capture(this);
     }
 
+    [Obsolete]
     private void HandleFeatureInfo(PointerReleasedEventArgs e)
     {
         if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
@@ -233,7 +235,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
         if (IsClick(_currentMousePosition, _downMousePosition))
         {
+#pragma warning disable CS0612 // Type or member is obsolete
             HandleFeatureInfo(e);
+#pragma warning restore CS0612 // Type or member is obsolete
             OnInfo(CreateMapInfoEventArgs(_mousePosition, _mousePosition, 1));
         }
     }

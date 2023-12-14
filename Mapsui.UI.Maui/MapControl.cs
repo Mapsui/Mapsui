@@ -199,7 +199,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             Logger.Log(LogLevel.Error, ex.Message, ex);
         }
     }
-  
+
     private static void Shell_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         try

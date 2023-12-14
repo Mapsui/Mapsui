@@ -1,12 +1,11 @@
 using System;
-using System.Diagnostics;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using NetTopologySuite.Geometries;
 
 namespace Mapsui.Nts;
 
-public class GeometryFeature : BaseFeature, IFeature, IDisposable
+public class GeometryFeature : BaseFeature, IFeature
 {
     private bool _disposed;
 
@@ -35,14 +34,7 @@ public class GeometryFeature : BaseFeature, IFeature, IDisposable
 
     public Geometry? Geometry { get; set; }
 
-    public MRect? Extent => Geometry?.EnvelopeInternal.ToMRect(); // Todo: Make not-nullable
-
-    public override void Dispose()
-    {
-        if (_disposed) return;
-        base.Dispose();
-        _disposed = true;
-    }
+    public MRect? Extent => Geometry?.EnvelopeInternal.ToMRect();
 
     public void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
     {
