@@ -47,11 +47,6 @@ public class Map : INotifyPropertyChanged, IDisposable
     }
 
     /// <summary>
-    /// To register if the initial Home call has been done.
-    /// </summary>
-    public bool HomeIsCalledOnce { get; set; }
-
-    /// <summary>
     /// List of Widgets belonging to map
     /// </summary>
     public ConcurrentQueue<IWidget> Widgets { get; } = new();
@@ -346,8 +341,6 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         DataChanged?.Invoke(sender, e);
     }
-
-    public Action<Navigator> Home { get; set; } = n => n.ZoomToPanBounds();
 
     public IEnumerable<IWidget> GetWidgetsOfMapAndLayers()
     {
