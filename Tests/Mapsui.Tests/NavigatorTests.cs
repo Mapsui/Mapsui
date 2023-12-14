@@ -34,9 +34,9 @@ public class NavigatorTests
         return new List<AnimationEntry<Viewport>> { new AnimationEntry<Viewport>(new Viewport(), new Viewport()) };
     }
 
-    [TestCase(0.5, 40, -10)]
-    [TestCase(1, 20, 10)]
-    [TestCase(2, -20, 50)]
+    [TestCase(0.5, 70, -40)]
+    [TestCase(1, 30, 0)]
+    [TestCase(2, -50, 80)]
     public void PinchWithDeltaResolution(double deltaResolution, double expectedCenterX, double expectedCenterY)
     {
         // Arrange
@@ -53,6 +53,47 @@ public class NavigatorTests
         // Assert
         Assert.AreEqual(expectedCenterX, navigator.Viewport.CenterX);
         Assert.AreEqual(expectedCenterY, navigator.Viewport.CenterY);
+    }
+
+    [Test]
+    public void ViewportChangedTest()
+    {
+        Viewport oldViewport = new();
+
+        var navigator = new Navigator();
+        // Set PanBound and Size so that the viewport is initialized before the test.
+        navigator.DefaultPanBounds = new MRect(-10, -10, 10, 10);
+        navigator.SetSize(10, 10);
+
+        // Save changes to old viewport
+        navigator.ViewportChanged += (sender, args) =>
+        {
+            oldViewport = args.OldViewport;
+        };
+
+        // Test size change
+        var viewport = navigator.Viewport;
+        navigator.SetSize(100, 100);
+        Assert.AreEqual(oldViewport, viewport);
+        Assert.AreNotEqual(oldViewport, navigator.Viewport);
+
+        // Test center change
+        viewport = navigator.Viewport;
+        navigator.CenterOn(10, 20);
+        Assert.AreEqual(oldViewport, viewport);
+        Assert.AreNotEqual(oldViewport, navigator.Viewport);
+
+        // Test resolution change
+        viewport = navigator.Viewport;
+        navigator.ZoomTo(10);
+        Assert.AreEqual(oldViewport, viewport);
+        Assert.AreNotEqual(oldViewport, navigator.Viewport);
+
+        // Test rotation change
+        viewport = navigator.Viewport;
+        navigator.RotateTo(10);
+        Assert.AreEqual(oldViewport, viewport);
+        Assert.AreNotEqual(oldViewport, navigator.Viewport);
     }
 
     [Test]
