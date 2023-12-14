@@ -14,13 +14,14 @@ public class Navigator
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
     private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
 
-    public delegate void ViewportChangedEventHandler(object sender, ViewportChangedEventArgs e);
-
+<<<<<<<<< Temporary merge branch 1
     private List<Action> _initialization = new();
     private MMinMax? _defaultZoomBounds;
     private MRect? _defaultPanBounds;
     private MMinMax? _overrideZoomBounds;
     private MRect? _overridePanBounds;
+
+    public delegate void ViewportChangedEventHandler(object sender, ViewportChangedEventArgs e);
 
     /// <summary>
     /// Called when a data refresh is needed. This directly after a non-animated viewport change
