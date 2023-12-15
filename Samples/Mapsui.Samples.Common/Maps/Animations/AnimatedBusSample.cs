@@ -31,7 +31,7 @@ public class AnimatedBusSample : ISample
         });
 
         map.CRS = "EPSG:3857";
-        map.Home = n => n.CenterOnAndZoomTo(new MPoint(2776952, 8442653), n.Resolutions[18]);
+        map.Navigator.CenterOnAndZoomTo(new MPoint(2776952, 8442653), map.Navigator.Resolutions[18]);
 
         return Task.FromResult(map);
     }

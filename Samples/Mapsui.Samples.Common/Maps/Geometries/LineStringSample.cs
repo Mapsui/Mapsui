@@ -24,7 +24,7 @@ public class LineStringSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         var lineStringLayer = CreateLineStringLayer(CreateLineStringStyle());
         map.Layers.Add(lineStringLayer);
-        map.Home = n => n.CenterOnAndZoomTo(lineStringLayer.Extent!.Centroid, 200);
+        map.Navigator.CenterOnAndZoomTo(lineStringLayer.Extent!.Centroid, 200);
         return Task.FromResult(map);
     }
 

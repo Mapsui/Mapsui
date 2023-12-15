@@ -30,7 +30,7 @@
   <PropertyGroup>
 	  <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
 	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-	  <LangVersion>11.0</LangVersion>
+	  <LangVersion>12.0</LangVersion>
       <NoWarn>$(NoWarn);NU1008;NU1701</NoWarn>
       <!-- Enable Windows Targeting on non Windows platforms -->
       <EnableWindowsTargeting Condition="'$(OS)' != 'Windows_NT'">true</EnableWindowsTargeting>
