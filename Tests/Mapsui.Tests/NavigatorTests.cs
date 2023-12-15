@@ -109,6 +109,6 @@ public class NavigatorTests
         navigator.ZoomToBox(new MRect(100, 100, 200, 200));
 
         // Assert
-        Assert.AreEqual(extentBefore, navigator.Viewport.ToExtent());
+        ClassicAssert.AreEqual(extentBefore, navigator.Viewport.ToExtent());
     }
 }

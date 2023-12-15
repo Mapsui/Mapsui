@@ -37,4 +37,8 @@ public class NonCachingVectorCache : IVectorCache
     {
         return toPath(geometry, viewport, lineWidth);
     }
+
+    public void Dispose()
+    {
+    }
 }
