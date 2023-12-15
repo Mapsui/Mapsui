@@ -16,7 +16,7 @@ public class WmsSample : ISample
         var map = new Map { CRS = "EPSG:28992" };
         // The WMS request needs a CRS
         map.Layers.Add(await CreateLayerAsync());
-        map.Home = (n) => n.CenterOnAndZoomTo(new MPoint(155000, 463000), 500);
+        map.Navigator.CenterOnAndZoomTo(new MPoint(155000, 463000), 500);
         return map;
     }
 
