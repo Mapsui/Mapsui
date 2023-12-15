@@ -37,7 +37,7 @@ public class MyLocationLayerSample : ISample, IDisposable
         var sphericalMercatorCoordinate = SphericalMercator.FromLonLat(centerOfLondonOntario.X, centerOfLondonOntario.Y).ToMPoint();
         // Set the center of the viewport to the coordinate. The UI will refresh automatically
         // Additionally you might want to set the resolution, this could depend on your specific purpose
-        map.Home = n => n.CenterOnAndZoomTo(sphericalMercatorCoordinate, n.Resolutions[9]);
+        map.Navigator.CenterOnAndZoomTo(sphericalMercatorCoordinate, map.Navigator.Resolutions[9]);
 
         _myLocationLayer.UpdateMyLocation(sphericalMercatorCoordinate, true);
 

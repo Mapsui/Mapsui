@@ -39,7 +39,7 @@ public class ImageDataSample : ISample
         // Center is Hamburg, Germany
         var center = new MPoint(1113046, 7084790);
 
-        map.Home = (n) => { n.CenterOnAndZoomTo(center, 150); };
+        map.Navigator.CenterOnAndZoomTo(center, 150);
 
         // We have to calc the angle difference to the equator (angle = 0), 
         // because EPSG:3857 is only there 1 m. At other angles, we

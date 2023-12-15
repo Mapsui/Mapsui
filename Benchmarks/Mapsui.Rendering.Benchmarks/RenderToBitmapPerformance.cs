@@ -100,7 +100,7 @@ public class RenderToBitmapPerformance
         map.Layers.Add(layer);
 
         var extent = map.Layers[0].Extent!;
-        map.Home = n => n.ZoomToBox(extent);
+        map.Navigator.ZoomToBox(extent);
 
         return map;
     }

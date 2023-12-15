@@ -35,7 +35,7 @@ public class WfsSample : ISample
 
             map.Widgets.Add(new MapInfoWidget(map));
 
-            map.Home = n => n.CenterOnAndZoomTo(new MPoint(1270000.0, 5880000.0), n.Resolutions[9]);
+            map.Navigator.CenterOnAndZoomTo(new MPoint(1270000.0, 5880000.0), map.Navigator.Resolutions[9]);
 
             return map;
 

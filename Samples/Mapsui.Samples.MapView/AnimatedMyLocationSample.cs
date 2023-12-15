@@ -25,7 +25,7 @@ public sealed class AnimatedMyLocationSample : IMapViewSample, IDisposable
 
         _mapView = (MapView)mapControl;
         var map = OsmSample.CreateMap();
-        map.Home = n => n.CenterOnAndZoomTo(_newLocation.ToMapsui(), n.Resolutions[14]);
+        map.Navigator.CenterOnAndZoomTo(_newLocation.ToMapsui(), map.Navigator.Resolutions[14]);
         mapControl.Map = map;
 
         _mapView.MyLocationLayer.IsMoving = true;

@@ -21,7 +21,7 @@ public class RasterizingTileLayerWithPointsSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(new RasterizingTileLayer(CreateRandomPointLayer()));
         var extent = map.Layers[1].Extent!.Grow(map.Layers[1].Extent!.Width * 0.1);
-        map.Home = n => n.ZoomToBox(extent);
+        map.Navigator.ZoomToBox(extent);
         return Task.FromResult(map);
     }
 
