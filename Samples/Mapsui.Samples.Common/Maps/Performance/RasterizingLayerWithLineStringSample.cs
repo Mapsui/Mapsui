@@ -31,7 +31,7 @@ public class RasterizingLayerWithLineStringSample : IMapControlSample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(new RasterizingLayer(CreateLineStringLayer(), pixelDensity: pixelDensity));
         var extent = map.Layers[1].Extent!.Grow(map.Layers[1].Extent!.Width * 0.25);
-        map.Home = n => n.ZoomToBox(extent);
+        map.Navigator.ZoomToBox(extent);
 
         map.Widgets.Add(new MapInfoWidget(map));
 

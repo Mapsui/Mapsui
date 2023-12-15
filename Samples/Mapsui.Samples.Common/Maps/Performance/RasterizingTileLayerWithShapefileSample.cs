@@ -60,7 +60,7 @@ public class ShapefileTileSample : ISample
         map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(projectedCountrySource)));
         map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(projectedCitySource)));
         var home = Mercator.FromLonLat(15, 54);
-        map.Home = n => n.CenterOnAndZoomTo(home, n.Resolutions[5]);
+        map.Navigator.CenterOnAndZoomTo(home, map.Navigator.Resolutions[5]);
 
         return map;
     }

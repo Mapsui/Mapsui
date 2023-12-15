@@ -1,4 +1,5 @@
 ﻿using Mapsui.Animations;
+using Mapsui.Extensions;
 using NUnit.Framework;
 using System.Collections.Generic;
 using NUnit.Framework.Legacy;
@@ -13,6 +14,8 @@ public class NavigatorTests
     {
         // Arrange
         var navigator = new Navigator();
+        navigator.SetSize(100, 100);
+        navigator.OverridePanBounds = new MRect(-100, -100, 100, 100);
         int navigatedCounter = 0;
         navigator.SetViewportAnimations(CreateAnimation());
         navigator.RefreshDataRequest += (s, e) => navigatedCounter++;
@@ -32,13 +35,15 @@ public class NavigatorTests
         return new List<AnimationEntry<Viewport>> { new AnimationEntry<Viewport>(new Viewport(), new Viewport()) };
     }
 
-    [TestCase(0.5, 15, 15)]
-    [TestCase(1, 20, 10)]
-    [TestCase(2, 30, 0)]
+    [TestCase(0.5, 70, -40)]
+    [TestCase(1, 30, 0)]
+    [TestCase(2, -50, 80)]
     public void PinchWithDeltaResolution(double deltaResolution, double expectedCenterX, double expectedCenterY)
     {
         // Arrange
         var navigator = new Navigator();
+        navigator.SetSize(100, 100);
+        navigator.OverridePanBounds = new MRect(-100, -100, 100, 100);
         navigator.CenterOn(10, 20);
         var currentPinchCenter = new MPoint(10, 10);
         var previousPinchCenter = new MPoint(20, 20);
@@ -57,6 +62,9 @@ public class NavigatorTests
         Viewport oldViewport = new();
 
         var navigator = new Navigator();
+        // Set PanBound and Size so that the viewport is initialized before the test.
+        navigator.DefaultPanBounds = new MRect(-10, -10, 10, 10);
+        navigator.SetSize(10, 10);
 
         // Save changes to old viewport
         navigator.ViewportChanged += (sender, args) =>
@@ -87,5 +95,20 @@ public class NavigatorTests
         navigator.RotateTo(10);
         ClassicAssert.AreEqual(oldViewport, viewport);
         ClassicAssert.AreNotEqual(oldViewport, navigator.Viewport);
+    }
+
+    [Test]
+    public void TestIfExtentCanNotChangeIfPanBoundsIsNotSet()
+    {
+        // Arrange
+        var navigator = new Navigator();
+        navigator.SetSize(100, 100);
+        var extentBefore = navigator.Viewport.ToExtent();
+
+        // Act
+        navigator.ZoomToBox(new MRect(100, 100, 200, 200));
+
+        // Assert
+        Assert.AreEqual(extentBefore, navigator.Viewport.ToExtent());
     }
 }

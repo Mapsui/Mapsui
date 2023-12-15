@@ -18,8 +18,10 @@ public class EmptySample : ISample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.CenterOnAndZoomTo(new MPoint(0, 0), 1)
         };
+
+        map.Navigator.CenterOnAndZoomTo(new MPoint(0, 0), 1);
+
         return map;
     }
 }

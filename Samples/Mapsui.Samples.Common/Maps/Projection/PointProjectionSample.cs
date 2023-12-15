@@ -34,7 +34,7 @@ public class PointProjectionSample : ISample
         };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(geometryLayer);
-        map.Home = n => n.ZoomToBox(extent);
+        map.Navigator.ZoomToBox(extent);
 
         map.Widgets.Add(new MapInfoWidget(map));
 

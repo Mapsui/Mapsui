@@ -35,7 +35,7 @@ public class MultiPolygonProjectionSample : ISample
         };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(geometryLayer);
-        map.Home = n => n.ZoomToBox(extent);
+        map.Navigator.ZoomToBox(extent);
         return Task.FromResult(map);
     }
 

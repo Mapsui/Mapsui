@@ -19,7 +19,6 @@ public class StackedLabelsTestSample : ISample
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
-
     public static Map CreateMap()
     {
         var random = new Random(6);
@@ -30,8 +29,9 @@ public class StackedLabelsTestSample : ISample
         var map = new Map
         {
             BackColor = Color.FromString("WhiteSmoke"),
-            Home = n => n.ZoomToBox(layer.Extent!.Grow(layer.Extent.Width * 0.3))
         };
+
+        map.Navigator.ZoomToBox(layer.Extent!.Grow(layer.Extent.Width * 0.3));
 
         map.Layers.Add(stackedLabelLayer);
         map.Layers.Add(layer);

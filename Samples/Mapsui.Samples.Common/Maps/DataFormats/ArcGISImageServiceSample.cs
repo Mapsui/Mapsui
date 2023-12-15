@@ -38,11 +38,12 @@ public class ArcGISImageServiceSample : ISample
 
     public async Task<Map> CreateMapAsync()
     {
-        var map = new Map
-        {
-            Home = n => n.CenterOnAndZoomTo(new MPoint(1270000.0, 5880000.0), 10000)
-        };
+        var map = new Map();
+
+        map.Navigator.CenterOnAndZoomTo(new MPoint(1270000.0, 5880000.0), 10000);
+
         map.Layers.Add(await CreateLayerAsync());
+
         return map;
     }
 

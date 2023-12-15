@@ -9,9 +9,10 @@ public class EmptyMapSample : ISample
 
     public Task<Map> CreateMapAsync()
     {
-        return Task.FromResult(new Map
-        {
-            Home = n => n.ZoomToBox(new MRect(-180, -90, 180, 90))
-        });
+        var map = new Map();
+
+        map.Navigator.ZoomToBox(new MRect(-180, -90, 180, 90));
+
+        return Task.FromResult(map);
     }
 }
