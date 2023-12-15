@@ -2,7 +2,7 @@
 
 namespace Mapsui.Rendering.Benchmarks;
 
-public class NonCachingVectorCache : IVectorCache
+public sealed class NonCachingVectorCache : IVectorCache
 {
     private readonly ISymbolCache _symbolCache;
 
