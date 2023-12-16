@@ -6,7 +6,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.UI;
 
-public interface IMapControl
+public interface IMapControl : IDisposable
 {
     event EventHandler<MapInfoEventArgs> Info;
 

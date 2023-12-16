@@ -9,6 +9,8 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 
+#pragma warning disable IDISP001 // Dispose created
+
 namespace Mapsui.Rendering.Skia;
 
 public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize

@@ -14,7 +14,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Rendering.Skia.Tests;
 
-public class RegressionMapControl : IMapControl
+public sealed class RegressionMapControl : IMapControl
 {
     private Map _map;
 
@@ -94,5 +94,10 @@ public class RegressionMapControl : IMapControl
     {
         ScreenWidth = screenWidth;
         ScreenHeight = screenHeight;
+    }
+
+    public void Dispose()
+    {
+        Renderer.Dispose();
     }
 }

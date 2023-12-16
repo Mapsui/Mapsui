@@ -21,9 +21,11 @@ using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using SkiaSharp;
 
+#pragma warning disable IDISP008 // Don't assign member with injected created disposable
+
 namespace Mapsui.Rendering.Skia;
 
-public class MapRenderer : IRenderer, IDisposable
+public sealed class MapRenderer : IRenderer, IDisposable
 {
     private readonly IRenderCache _renderCache;
     private long _currentIteration;

@@ -93,7 +93,7 @@ public class MapRegressionTests
         try
         {
             var fileName = sample.GetType().Name + ".Regression.png";
-            var mapControl = await InitMapAsync(sample).ConfigureAwait(true);
+            using var mapControl = await InitMapAsync(sample).ConfigureAwait(true);
             var map = mapControl.Map;
             await DisplayMapAsync(mapControl).ConfigureAwait(false);
 

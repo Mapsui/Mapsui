@@ -6,6 +6,8 @@ using Mapsui.Styles;
 using SkiaSharp;
 using System;
 
+#pragma warning disable IDISP001 // Dispose created
+
 namespace Mapsui.Rendering.Skia;
 
 public class RasterStyleRenderer : ISkiaStyleRenderer
