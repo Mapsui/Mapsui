@@ -45,7 +45,7 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
     private double _rotation;
     private bool _rotateWithMap;
     private double _rectRadius;
-    private Thickness _padding = new Thickness(6);
+    private Thickness _padding = new(6);
     private double _spacing = 2;
     private double _maxWidth = 300.0;
     private bool _isClosableByClick = true;

@@ -18,10 +18,10 @@ namespace Mapsui.Layers;
 public class MyLocationLayer : BaseLayer, IDisposable
 {
     private readonly Map _map;
-    private PointFeature _feature;
-    private SymbolStyle _locStyle;  // style for the location indicator
-    private SymbolStyle _dirStyle;  // style for the view-direction indicator
-    private CalloutStyle _coStyle;  // style for the callout
+    private readonly PointFeature _feature;
+    private readonly SymbolStyle _locStyle;  // style for the location indicator
+    private readonly SymbolStyle _dirStyle;  // style for the view-direction indicator
+    private readonly CalloutStyle _coStyle;  // style for the callout
 
     private static int _bitmapMovingId = -1;
     private static int _bitmapStillId = -1;

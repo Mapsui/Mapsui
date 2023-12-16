@@ -14,8 +14,8 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 {
     private readonly string _file;
     private readonly TimeSpan _cacheExpireTime;
-    private const string NoCompression = "no";
-    private const string BrotliCompression = "br";
+    private const string _noCompression = "no";
+    private const string _brotliCompression = "br";
     private bool _compress;
 
     public SqlitePersistentCache(string name, TimeSpan? cacheExpireTime = null, string? folder = null, bool compress = true)
@@ -63,7 +63,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             if (!ColumnExists(connection, nameof(Tile), nameof(Tile.Compression)))
             {
                 var command = connection.CreateCommand(@$"Alter TABLE Tile 
-                Add Compression VARCHAR(2) NOT NULL Default ('{NoCompression}');");
+                Add Compression VARCHAR(2) NOT NULL Default ('{_noCompression}');");
                 command.ExecuteNonQuery();
             }
 
@@ -82,7 +82,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             if (!ColumnExists(connection, nameof(UrlCache), nameof(UrlCache.Compression)))
             {
                 var command = connection.CreateCommand(@$"Alter TABLE UrlCache 
-                Add Compression VARCHAR(2) NOT NULL Default ('{NoCompression}');");
+                Add Compression VARCHAR(2) NOT NULL Default ('{_noCompression}');");
                 command.ExecuteNonQuery();
             }
         }
@@ -92,7 +92,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         }
     }
 
-    private bool TableExists(SQLiteConnection connection, string table)
+    private static bool TableExists(SQLiteConnection connection, string table)
     {
         var tableExists = @$"SELECT name FROM sqlite_master
         WHERE type='table' AND name = '{table}'";
@@ -106,7 +106,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         return true;
     }
 
-    private bool ColumnExists(SQLiteConnection connection, string table, string column)
+    private static bool ColumnExists(SQLiteConnection connection, string table, string column)
     {
         var tableExists = @$"SELECT             
         p.name as column_name
@@ -116,8 +116,8 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             pragma_table_info(m.name) AS p
         WHERE m.name = '{table}' AND p.name = '{column}'";
         var command = connection.CreateCommand(tableExists);
-        var existigColumn = command.ExecuteScalar<string>();
-        if (string.IsNullOrEmpty(existigColumn))
+        var existingColumn = command.ExecuteScalar<string>();
+        if (string.IsNullOrEmpty(existingColumn))
         {
             return false;
         }
@@ -149,7 +149,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         connection.Table<Tile>().Delete(f => f.Level == index.Level && f.Col == index.Col && f.Row == index.Row);
     }
 
-    // Interface Definition in ITileCache is wrong TODO Fix interface in Brutile
+    // Interface Definition in ITileCache is wrong TODO Fix interface in BruTile
 #pragma warning disable CS8766
     public byte[]? Find(TileIndex index)
 #pragma warning restore CS8766
@@ -209,11 +209,11 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         return Decompress(tile?.Data, tile?.Compression);
     }
 
-    [return: NotNullIfNotNull("bytes")]
+    [return: NotNullIfNotNull(nameof(bytes))]
     private (byte[]? data, string Compression) Compress(byte[]? bytes)
     {
         if (bytes == null)
-            return (null, NoCompression);
+            return (null, _noCompression);
 
         if (_compress)
         {
@@ -229,7 +229,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 
                 if (result.Length < bytes.Length)
                 {
-                    return (result, BrotliCompression);
+                    return (result, _brotliCompression);
                 }
             }
             catch (PlatformNotSupportedException)
@@ -245,17 +245,17 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             }
         }
 
-        return (bytes, NoCompression);
+        return (bytes, _noCompression);
     }
 
     private byte[]? Decompress(byte[]? bytes, string? compression)
     {
-        if (bytes == null || string.IsNullOrEmpty(compression) || string.Equals(compression, NoCompression, StringComparison.InvariantCultureIgnoreCase))
+        if (bytes == null || string.IsNullOrEmpty(compression) || string.Equals(compression, _noCompression, StringComparison.InvariantCultureIgnoreCase))
             return bytes;
 
         switch (compression!.ToLower())
         {
-            case BrotliCompression:
+            case _brotliCompression:
                 {
                     try
                     {

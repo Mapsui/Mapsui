@@ -33,9 +33,9 @@ namespace Mapsui.UI.Maui;
 /// </summary>
 public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 {
-    private const string CalloutLayerName = "Callouts";
-    private const string PinLayerName = "Pins";
-    private const string DrawableLayerName = "Drawables";
+    private const string _calloutLayerName = "Callouts";
+    private const string _pinLayerName = "Pins";
+    private const string _drawableLayerName = "Drawables";
     private readonly ObservableMemoryLayer<Callout> _mapCalloutLayer;
     private readonly ObservableMemoryLayer<Pin> _mapPinLayer;
     private readonly ObservableMemoryLayer<Drawable> _mapDrawableLayer;
@@ -60,9 +60,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         UseDoubleTap = false;
 
         MyLocationLayer = new Objects.MyLocationLayer(this) { Enabled = true };
-        _mapCalloutLayer = new ObservableMemoryLayer<Callout>(f => f.Feature) { Name = CalloutLayerName, IsMapInfoLayer = true };
-        _mapPinLayer = new ObservableMemoryLayer<Pin>(f => f.Feature) { Name = PinLayerName, IsMapInfoLayer = true };
-        _mapDrawableLayer = new ObservableMemoryLayer<Drawable>(f => f.Feature) { Name = DrawableLayerName, IsMapInfoLayer = true };
+        _mapCalloutLayer = new ObservableMemoryLayer<Callout>(f => f.Feature) { Name = _calloutLayerName, IsMapInfoLayer = true };
+        _mapPinLayer = new ObservableMemoryLayer<Pin>(f => f.Feature) { Name = _pinLayerName, IsMapInfoLayer = true };
+        _mapDrawableLayer = new ObservableMemoryLayer<Drawable>(f => f.Feature) { Name = _drawableLayerName, IsMapInfoLayer = true };
 
         // Get defaults from MapControl
         RotationLock = Map.Navigator.RotationLock;

@@ -16,7 +16,7 @@ public static class SvgHelper
     /// <summary> Load Svg from String </summary>
     /// <param name="str">string</param>
     /// <returns>loaded svg image</returns>
-    [return: NotNullIfNotNull("str")]
+    [return: NotNullIfNotNull(nameof(str))]
     public static SKSvg? LoadSvg(this string? str)
     {
         if (str == null)
@@ -32,7 +32,7 @@ public static class SvgHelper
     /// <summary> Load Svg Picture from String </summary>
     /// <param name="str">string</param>
     /// <returns>loaded svg image</returns>
-    [return: NotNullIfNotNull("str")]
+    [return: NotNullIfNotNull(nameof(str))]
     public static SKPicture? LoadSvgPicture(this string? str)
     {
         return str.LoadSvg()?.Picture;
@@ -41,7 +41,7 @@ public static class SvgHelper
     /// <summary> Load Svg from String </summary>
     /// <param name="str">string</param>
     /// <returns>loaded svg image</returns>
-    [return: NotNullIfNotNull("str")]
+    [return: NotNullIfNotNull(nameof(str))]
     public static SKSvg? LoadSvg(this Stream? str)
     {
         if (str == null)
@@ -57,7 +57,7 @@ public static class SvgHelper
     /// <summary> Load Svg Picture from String </summary>
     /// <param name="str">string</param>
     /// <returns>loaded svg image</returns>
-    [return: NotNullIfNotNull("str")]
+    [return: NotNullIfNotNull(nameof(str))]
     public static SKPicture? LoadSvgPicture(this Stream? str)
     {
         return str.LoadSvg()?.Picture;

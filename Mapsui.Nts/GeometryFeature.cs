@@ -7,8 +7,6 @@ namespace Mapsui.Nts;
 
 public class GeometryFeature : BaseFeature, IFeature
 {
-    private bool _disposed;
-
     public GeometryFeature()
     {
     }

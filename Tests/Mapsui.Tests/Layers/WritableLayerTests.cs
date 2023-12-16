@@ -3,8 +3,6 @@ using Mapsui.Nts;
 using NetTopologySuite.Geometries;
 using NUnit.Framework;
 
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Tests.Layers;
 
 [TestFixture]
