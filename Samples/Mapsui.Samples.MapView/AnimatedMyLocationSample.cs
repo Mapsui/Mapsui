@@ -1,6 +1,4 @@
-﻿#if NET6_0_OR_GREATER
-
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
@@ -66,4 +64,3 @@ public sealed class AnimatedMyLocationSample : IMapViewSample, IDisposable
         _timer.Dispose();
     }
 }
-#endif
