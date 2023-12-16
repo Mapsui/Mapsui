@@ -22,13 +22,12 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
             if (raster == null)
                 return false;
 
-            if (!(style is RasterStyle))
+            if (style is not RasterStyle)
                 return false;
 
             renderCache.TileCache.UpdateCache(currentIteration);
 
-            var bitmapInfo = renderCache.TileCache.GetOrCreate(raster, currentIteration) as BitmapInfo;
-            if (bitmapInfo == null) 
+            if (renderCache.TileCache.GetOrCreate(raster, currentIteration) is not BitmapInfo bitmapInfo)
                 return false;
 
             var extent = feature.Extent;

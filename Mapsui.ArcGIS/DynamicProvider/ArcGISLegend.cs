@@ -113,7 +113,7 @@ public class ArcGisLegend
 
     private static string CreateRequestUrl(string serviceUrl)
     {
-        var trailing = serviceUrl.Contains("?") ? "&" : "?";
+        var trailing = serviceUrl.Contains('?') ? "&" : "?";
         var requestUrl = $"{serviceUrl}/legend{trailing}f=json";
         return requestUrl;
     }

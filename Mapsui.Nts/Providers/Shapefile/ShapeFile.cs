@@ -602,7 +602,7 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
     ///</summary>
     /// <param name="i">Integer to swap</param>
     /// <returns>Byte Order swapped int32</returns>
-    private int SwapByteOrder(int i)
+    private static int SwapByteOrder(int i)
     {
         var buffer = BitConverter.GetBytes(i);
         Array.Reverse(buffer, 0, buffer.Length);
@@ -879,7 +879,7 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
     {
         if (_dbaseFile != null)
         {
-            var dr = _dbaseFile.GetFeature(rowId, dt ?? new List<GeometryFeature>());
+            var dr = _dbaseFile.GetFeature(rowId);
             if (dr != null)
             {
                 dr.Geometry = ReadGeometry(rowId);
@@ -906,7 +906,7 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
 
                 foreach (var index in objectList)
                 {
-                    var feature = _dbaseFile?.GetFeature(index, features);
+                    var feature = _dbaseFile?.GetFeature(index);
                     if (feature != null)
                     {
                         feature.Geometry = ReadGeometry(index);
