@@ -193,11 +193,8 @@ public class XPathQueryManager : IXPathQueryManager
             _paramContext.AddParam(queryParameters);
         string? result = null;
         FindXPath(xPath);
-        Catch.Exceptions(() =>
-        {
             if (_xIter?.MoveNext() ?? false)
                 result = _xIter?.Current?.Value;
-        });
        
         return result;
     }
@@ -361,7 +358,7 @@ public class XPathQueryManager : IXPathQueryManager
         xPath?.SetContext(_paramContext!);
         if (xPath != null)
         {
-            Catch.Exceptions(() => _xIter = _xNav?.Select(xPath));
+            _xIter = _xNav?.Select(xPath);
         }
             
         InitializeCustomContext(_paramContext);
