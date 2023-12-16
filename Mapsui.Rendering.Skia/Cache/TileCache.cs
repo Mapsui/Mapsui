@@ -3,14 +3,13 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
 public sealed class TileCache : ITileCache
 {
-    private const int TilesToKeepMultiplier = 3;
-    private const int MinimumTilesToKeep = 128; // in RasterStyle it was 32, I quadrupled it because now all tile Layers have one Cache
+    private const int _tilesToKeepMultiplier = 3;
+    private const int _minimumTilesToKeep = 128; // in RasterStyle it was 32, I quadrupled it because now all tile Layers have one Cache
     private long _lastIteration;
 
     private readonly IDictionary<object, IBitmapInfo?> _tileCache =
@@ -51,8 +50,8 @@ public sealed class TileCache : ITileCache
     {
         var tilesUsedInCurrentIteration =
             _tileCache.Values.Count(i => i?.IterationUsed == _lastIteration);
-        var tilesToKeep = tilesUsedInCurrentIteration * TilesToKeepMultiplier;
-        tilesToKeep = Math.Max(tilesToKeep, MinimumTilesToKeep);
+        var tilesToKeep = tilesUsedInCurrentIteration * _tilesToKeepMultiplier;
+        tilesToKeep = Math.Max(tilesToKeep, _minimumTilesToKeep);
         var tilesToRemove = _tileCache.Keys.Count - tilesToKeep;
 
         if (tilesToRemove > 0) RemoveOldBitmaps(_tileCache, tilesToRemove);

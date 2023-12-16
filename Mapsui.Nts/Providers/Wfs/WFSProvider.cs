@@ -75,7 +75,7 @@ public class WFSProvider : IProvider, IDisposable
     private string? _sridOverride;
     private string? _proxyUrl;
     private ICredentials? _credentials;
-    private CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
+    private readonly CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
 
     // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
     // It helps to accelerate the rendering process significantly.
@@ -317,22 +317,6 @@ public class WFSProvider : IProvider, IDisposable
     }
 
     /// <summary>
-    /// Use this constructor for initializing this dataprovider with all necessary
-    /// parameters to gather metadata from 'GetCapabilities' contract.
-    /// </summary>
-    /// <param name="getCapabilitiesUri">The URL for the 'GetCapabilities' request.</param>
-    /// <param name="nsPrefix">
-    /// Use an empty string or 'null', if there is no prefix for the featuretype.
-    /// </param>
-    /// <param name="featureType">The name of the feature type</param>
-    /// <param name="wfsVersion">The desired WFS Server version.</param>
-    /// <param name="persistentCache">persistent Cache Interface</param>
-    private WFSProvider(string getCapabilitiesUri, string nsPrefix, string featureType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
-        : this(getCapabilitiesUri, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion, persistentCache: persistentCache)
-    {
-    }
-
-    /// <summary>
     /// Use this constructor for initializing this dataprovider with a 
     /// <see cref="WfsFeatureTypeInfo"/> object, 
     /// so that 'GetCapabilities' and 'DescribeFeatureType' can be bypassed.
@@ -374,7 +358,6 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="featureType">The name of the feature type</param>
     /// <param name="wfsVersion">The desired WFS Server version.</param>
     /// <param name="persistentCache">Persistent Cache</param>
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
     public WFSProvider(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType,
                string geometryName, GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
@@ -973,7 +956,7 @@ public class WFSProvider : IProvider, IDisposable
         geomType ??= string.Empty;
 
         // Remove prefix
-        if (geomType.Contains(":"))
+        if (geomType.Contains(':'))
             geomType = geomType.Substring(geomType.IndexOf(":", StringComparison.Ordinal) + 1);
 
         _featureTypeInfo.Geometry = new WfsFeatureTypeInfo.GeometryInfo
@@ -986,7 +969,7 @@ public class WFSProvider : IProvider, IDisposable
 
     private void ResolveFeatureType(string featureType)
     {
-        if (featureType.Contains(":"))
+        if (featureType.Contains(':'))
         {
             var split = featureType.Split(':');
             _nsPrefix = split[0];

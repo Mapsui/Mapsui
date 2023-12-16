@@ -21,7 +21,7 @@ public sealed class RenderCache : IRenderCache
     public ILabelCache LabelCache { get; set; } 
 
     public ISymbolCache SymbolCache { get; set; }
-
+    
     public IVectorCache? VectorCache
     {
         get => _vectorCache;

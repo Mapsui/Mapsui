@@ -87,10 +87,8 @@ public class EditManager
     {
         if (EditMode == EditMode.AddPoint)
         {
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
             Layer?.Add(new GeometryFeature { Geometry = worldPosition.ToMPoint().ToPoint() });
             Layer?.DataHasChanged();
-#pragma warning restore IDISP004 // Don't ignore created IDisposable
         }
         else if (EditMode == EditMode.AddLine)
         {
