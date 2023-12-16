@@ -248,37 +248,8 @@ jobs:
     - name: Restore dependencies (dotnet)
       run: dotnet restore Mapsui.sln  
     # Samples Build 
-    - name: Mapsui.Samples.Avalonia
-      run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj
-    - name: Mapsui.Samples.Blazor
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Blazor/Mapsui.Samples.Blazor.csproj
-    - name: Mapsui.Samples.Droid
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj
-    - name: Mapsui.Samples.Eto
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Eto/Mapsui.Samples.Eto.csproj
-    - name: Mapsui.Samples.iOS
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
-    - name: Mapsui.Samples.Maui
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Maui/Mapsui.Samples.Maui.csproj
-    - name: Mapsui.Samples.Maui.MapView
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Maui.MapView/Mapsui.Samples.Maui.MapView.csproj
-    - name: Mapsui.Samples.WinUI
-      run: dotnet build --no-restore --configuration Debug /p:Platform=x64 Samples/Mapsui.Samples.WinUI/Mapsui.Samples.WinUI/Mapsui.Samples.WinUI.csproj
-    - name: Mapsui.Samples.Wpf
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf/Mapsui.Samples.Wpf.csproj  
-    # Samples Uno WinUI
-    - name: Mapsui.Samples.Uno.WinUI.Mobile
-      run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Mobile\Mapsui.Samples.Uno.WinUI.Mobile.csproj
-    - name: Mapsui.Samples.Uno.WinUI.Skia.Gtk
-      run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Skia.Gtk\Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj
-    #- name: Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer
-    #  run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer\Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer.csproj
-    #- name: Mapsui.Samples.Uno.WinUI.Skia.WPF
-    #  run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Skia.WPF\Mapsui.Samples.Uno.WinUI.Skia.WPF.csproj
-    - name: Mapsui.Samples.Uno.WinUI.Wasm
-      run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Wasm\Mapsui.Samples.Uno.WinUI.Wasm.csproj
-    - name: Mapsui.Samples.Uno.WinUI.Windows
-      run: dotnet build --no-restore --configuration Debug /p:Platform=x64 Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Windows\Mapsui.Samples.Uno.WinUI.Windows.csproj
+    - name: Mapsui.Samples
+      run: dotnet build --no-restore --configuration Debug Mapsui.sln
     # Publishing  
     - name: Upload packages
       uses: actions/upload-artifact@v3
