@@ -14,11 +14,11 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
 {
     private readonly IProvider _dataSource;
     private FetchInfo? _fetchInfo;
-    private readonly List<AnimatedPointFeature> _features = new();
+    private readonly List<AnimatedPointFeature> _features = [];
 
     public AnimatedPointLayer(IProvider dataSource)
     {
-        _dataSource = dataSource ?? throw new ArgumentException(nameof(dataSource));
+        _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
         if (_dataSource is IDynamic dynamic)
             dynamic.DataChanged += (s, e) =>
             {

@@ -487,37 +487,36 @@ public class EditingSample : IMapControlSample
         };
     }
 
-    private static IStyle CreateEditLayerBasicStyle()
+    private static VectorStyle CreateEditLayerBasicStyle()
     {
         var editStyle = new VectorStyle
         {
-            Fill = new Brush(EditModeColor),
-            Line = new Pen(EditModeColor, 3),
-            Outline = new Pen(EditModeColor, 3)
+            Fill = new Brush(_editModeColor),
+            Line = new Pen(_editModeColor, 3),
+            Outline = new Pen(_editModeColor, 3)
         };
         return editStyle;
     }
 
-    private static readonly Color EditModeColor = new Color(124, 22, 111, 180);
-    private static readonly Color PointLayerColor = new Color(240, 240, 240, 240);
-    private static readonly Color LineLayerColor = new Color(150, 150, 150, 240);
-    private static readonly Color PolygonLayerColor = new Color(20, 20, 20, 240);
+    private static readonly Color _editModeColor = new(124, 22, 111, 180);
+    private static readonly Color _pointLayerColor = new(240, 240, 240, 240);
+    private static readonly Color _lineLayerColor = new(150, 150, 150, 240);
+    private static readonly Color _polygonLayerColor = new(20, 20, 20, 240);
 
-
-    private static readonly SymbolStyle? SelectedStyle = new SymbolStyle
+    private static readonly SymbolStyle? _selectedStyle = new()
     {
         Fill = null,
         Outline = new Pen(Color.Red, 3),
         Line = new Pen(Color.Red, 3)
     };
 
-    private static readonly SymbolStyle? DisableStyle = new SymbolStyle { Enabled = false };
+    private static readonly SymbolStyle? _disableStyle = new() { Enabled = false };
 
-    private static IStyle CreateSelectedStyle()
+    private static ThemeStyle CreateSelectedStyle()
     {
         // To show the selected style a ThemeStyle is used which switches on and off the SelectedStyle
         // depending on a "Selected" attribute.
-        return new ThemeStyle(f => (bool?)f["Selected"] == true ? SelectedStyle : DisableStyle);
+        return new ThemeStyle(f => (bool?)f["Selected"] == true ? _selectedStyle : _disableStyle);
     }
 
     private static WritableLayer CreatePointLayer()
@@ -558,32 +557,32 @@ public class EditingSample : IMapControlSample
         return polygonLayer;
     }
 
-    private static IStyle CreatePointStyle()
+    private static VectorStyle CreatePointStyle()
     {
         return new VectorStyle
         {
-            Fill = new Brush(PointLayerColor),
-            Line = new Pen(PointLayerColor, 3),
+            Fill = new Brush(_pointLayerColor),
+            Line = new Pen(_pointLayerColor, 3),
             Outline = new Pen(Color.Gray, 2)
         };
     }
 
-    private static IStyle CreateLineStyle()
+    private static VectorStyle CreateLineStyle()
     {
         return new VectorStyle
         {
-            Fill = new Brush(LineLayerColor),
-            Line = new Pen(LineLayerColor, 3),
-            Outline = new Pen(LineLayerColor, 3)
+            Fill = new Brush(_lineLayerColor),
+            Line = new Pen(_lineLayerColor, 3),
+            Outline = new Pen(_lineLayerColor, 3)
         };
     }
-    private static IStyle CreatePolygonStyle()
+    private static VectorStyle CreatePolygonStyle()
     {
         return new VectorStyle
         {
-            Fill = new Brush(new Color(PolygonLayerColor)),
-            Line = new Pen(PolygonLayerColor, 3),
-            Outline = new Pen(PolygonLayerColor, 3)
+            Fill = new Brush(new Color(_polygonLayerColor)),
+            Line = new Pen(_polygonLayerColor, 3),
+            Outline = new Pen(_polygonLayerColor, 3)
         };
     }
 }

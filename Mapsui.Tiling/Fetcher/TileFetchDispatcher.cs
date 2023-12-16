@@ -23,8 +23,8 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     private bool _viewportIsModified;
     private readonly ITileCache<IFeature?> _tileCache;
     private readonly IDataFetchStrategy _dataFetchStrategy;
-    private readonly ConcurrentQueue<TileInfo> _tilesToFetch = new();
-    private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new();
+    private readonly ConcurrentQueue<TileInfo> _tilesToFetch = [];
+    private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = [];
     private readonly ITileSchema? _tileSchema;
     private readonly FetchMachine _fetchMachine;
     private readonly Func<TileInfo, Task<IFeature?>> _fetchTileAsFeature;
@@ -70,14 +70,13 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
                 return true;
             }
 
-            Busy = _tilesInProgress.Count > 0 || _tilesToFetch.Count > 0;
+            Busy = _tilesInProgress.Count > 0 || !_tilesToFetch.IsEmpty;
             // else the queue is empty, we are done.
             method = null;
             return false;
         }
     }
 
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     private async Task FetchOnThreadAsync(TileInfo tileInfo)
     {
         try
@@ -109,7 +108,7 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
                 _tileCache.Add(tileInfo.Index, feature);
             _tilesInProgress.TryRemove(tileInfo.Index);
 
-            Busy = _tilesInProgress.Count > 0 || _tilesToFetch.Count > 0;
+            Busy = _tilesInProgress.Count > 0 || !_tilesToFetch.IsEmpty;
 
             DataChanged?.Invoke(this, new DataChangedEventArgs(exception, false, tileInfo));
         }
@@ -165,6 +164,6 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
 
         _tilesToFetch.Clear();
         _tilesToFetch.AddRange(tilesToFetch);
-        if (_tilesToFetch.Count > 0) Busy = true;
+        if (!_tilesToFetch.IsEmpty) Busy = true;
     }
 }

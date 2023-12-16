@@ -221,15 +221,15 @@ public class EditManager
             }
             else // NEW: try to drag the whole feature when the position of dragging is inside the geometry
             {
-                MPoint prevtx = _dragInfo.Vertex.ToMPoint(); // record the previous position
-                MPoint newvtx = worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex; // new position
+                MPoint previousVertex = _dragInfo.Vertex.ToMPoint(); // record the previous position
+                MPoint newVertex = worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex; // new position
 
                 if (_dragInfo.Feature.Geometry is Polygon polygon)
                 {
                     var vertices = polygon.ExteriorRing?.Coordinates ?? Array.Empty<Coordinate>();
                     foreach (Coordinate vtx in vertices) // modify every vertex on the ring
                     {
-                        vtx.SetXY(vtx.ToMPoint() + (newvtx - prevtx)); // adding the offset
+                        vtx.SetXY(vtx.ToMPoint() + (newVertex - previousVertex)); // adding the offset
                     }
                 }
                 else if (_dragInfo.Feature.Geometry is LineString lineString)
@@ -237,13 +237,13 @@ public class EditManager
                     var vertices = lineString.Coordinates ?? Array.Empty<Coordinate>();
                     foreach (Coordinate vtx in vertices) // modify every vertex on the line
                     {
-                        vtx.SetXY(vtx.ToMPoint() + (newvtx - prevtx)); // adding the offset
+                        vtx.SetXY(vtx.ToMPoint() + (newVertex - previousVertex)); // adding the offset
                     }
                 }
                 else if (_dragInfo.Feature.Geometry is Point point)
                 {
-                    var vertice = point.Coordinate;
-                    vertice.SetXY(vertice.ToMPoint() + (newvtx - prevtx)); // adding the offset
+                    var vertex = point.Coordinate;
+                    vertex.SetXY(vertex.ToMPoint() + (newVertex - previousVertex)); // adding the offset
                 }
 
                 _dragInfo.Vertex.SetXY(worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex);
