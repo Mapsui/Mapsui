@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.XPath;
 using Mapsui.Cache;
@@ -75,7 +76,8 @@ public class WFSProvider : IProvider, IDisposable
     private string? _sridOverride;
     private string? _proxyUrl;
     private ICredentials? _credentials;
-    private CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
+    private readonly CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
+    private static SemaphoreSlim _init = new(1, 1);
 
     // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
     // It helps to accelerate the rendering process significantly.
@@ -312,8 +314,16 @@ public class WFSProvider : IProvider, IDisposable
     /// <summary>Init Async</summary>
     /// <returns></returns>
     public async Task InitAsync()
-    {
-        await GetFeatureTypeInfoAsync();
+    { 
+        await _init.WaitAsync();
+        try
+        {
+            await GetFeatureTypeInfoAsync();
+        }
+        finally
+        {
+            _init.Release();
+        }
     }
 
     /// <summary>
