@@ -259,14 +259,16 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public float PixelDensity => GetPixelDensity();
 
-    private IRenderer _renderer = new MapRenderer();
+#pragma warning disable IDISP008
+    private IRenderer? _renderer;
+#pragma warning restore IDISP008
 
     /// <summary>
     /// Renderer that is used from this MapControl
     /// </summary>
     public IRenderer Renderer
     {
-        get => _renderer;
+        get => _renderer ??= new MapRenderer();
         set
         {
             if (value is null) throw new NullReferenceException(nameof(Renderer));
@@ -442,7 +444,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
 #else
 
-    private Map _map = new();
+#pragma warning disable IDISP008
+    private Map? _map;
+#pragma warning restore IDISP008
 
     /// <summary>
     /// Map holding data for which is shown in this MapControl
@@ -453,7 +457,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #endif
     public Map Map
     {
-        get => _map;
+        get => _map ??= new Map();
         set
         {
             if (value is null) throw new ArgumentNullException(nameof(value));
@@ -574,7 +578,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Unsubscribe();
             StopUpdates();
             _invalidateTimer?.Dispose();
-            _renderer.Dispose();
+            _renderer?.Dispose();
+            _renderer = null;
+            _map?.Dispose();
+            _map = null;
         }
         _invalidateTimer = null;
     }
