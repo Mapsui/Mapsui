@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
@@ -13,7 +14,7 @@ public class SamplesRegistryGenerator : ISourceGenerator
     public void Initialize(GeneratorInitializationContext context)
     {
         // Uncomment to debug SourceCode Generator
-        // System.Diagnostics.Debugger.Break();
+        // System.Diagnostics.Debugger.Launch();
     }
 
     public void Execute(GeneratorExecutionContext context)
@@ -58,6 +59,10 @@ namespace {{context.Compilation.Assembly.Name}}
                     if (alreadyRegistered.Add(sampleName))
                     {
                         sourceBuilder.AppendLine($@"            Mapsui.Samples.Common.AllSamples.Register(new {sampleName}());");    
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Duplicate");
                     }
                 }
               
