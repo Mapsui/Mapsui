@@ -25,8 +25,8 @@ public sealed partial class MainWindow : Window
 {
     static MainWindow()
     {
-        // todo: find proper way to load assembly
-        Tests.Common.Utilities.LoadAssembly();
+        Mapsui.Tests.Common.Samples.Register();
+        Mapsui.Samples.Common.Samples.Register();
     }
 
     public MainWindow()

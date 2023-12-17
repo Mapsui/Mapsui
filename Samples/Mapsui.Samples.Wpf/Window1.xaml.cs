@@ -21,8 +21,8 @@ public partial class Window1
 {
     static Window1()
     {
-        // todo: find proper way to load assembly
-        Tests.Common.Utilities.LoadAssembly();
+        Mapsui.Tests.Common.Samples.Register();
+        Mapsui.Samples.Common.Samples.Register();
     }
 
     public Window1()
@@ -62,8 +62,8 @@ public partial class Window1
 
     private void FillComboBoxWithCategories()
     {
-        // todo: find proper way to load assembly
-        Tests.Common.Utilities.LoadAssembly();
+        Mapsui.Tests.Common.Samples.Register();
+        Mapsui.Samples.Common.Samples.Register();
 
         var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
         foreach (var category in categories)

@@ -15,7 +15,6 @@ public partial class MainView : UserControl
 {
     static MainView()
     {
-        // todo: find proper way to load assembly
         Mapsui.Tests.Common.Samples.Register();
         Mapsui.Samples.Common.Samples.Register();
     }
