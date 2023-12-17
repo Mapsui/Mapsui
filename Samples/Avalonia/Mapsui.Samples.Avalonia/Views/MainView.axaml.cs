@@ -16,7 +16,8 @@ public partial class MainView : UserControl
     static MainView()
     {
         // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();
+        Mapsui.Tests.Common.Samples.Register();
+        Mapsui.Samples.Common.Samples.Register();
     }
 
     public MainView()
@@ -44,7 +45,8 @@ public partial class MainView : UserControl
 
     private void FillComboBoxWithCategories()
     {
-        Tests.Common.Utilities.LoadAssembly();
+        Common.Samples.Register();
+        Tests.Common.Samples.Register();
 
         var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c).ToArray();
 
