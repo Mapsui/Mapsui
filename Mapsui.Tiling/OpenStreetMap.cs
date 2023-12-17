@@ -12,7 +12,7 @@ namespace Mapsui.Tiling;
 
 public static class OpenStreetMap
 {
-    internal static IPersistentCache<byte[]>? DefaultCache;
+    public static IPersistentCache<byte[]>? DefaultCache;
 
     private static readonly BruTile.Attribution _openStreetMapAttribution = new(
         "© OpenStreetMap contributors", "https://www.openstreetmap.org/copyright");
