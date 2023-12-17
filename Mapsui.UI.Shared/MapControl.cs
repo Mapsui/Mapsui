@@ -14,7 +14,6 @@ using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 
-
 #if __MAUI__
 using Microsoft.Maui.Controls;
 namespace Mapsui.UI.Maui;
@@ -31,6 +30,8 @@ namespace Mapsui.UI.Avalonia;
 #elif __ETO_FORMS__
 namespace Mapsui.UI.Eto;
 #elif __BLAZOR__
+using System.Diagnostics.CodeAnalysis;
+
 namespace Mapsui.UI.Blazor;
 #else
 namespace Mapsui.UI.Wpf;
