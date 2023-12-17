@@ -68,5 +68,9 @@ public class FetchWorker : IDisposable // Todo: Make internal
             // cancellationTokenSource.Cancel() is called.
             // Logger.Log(LogLevel.Error, e.Message, e);
         }
+        catch (Exception e)
+        {
+            Logger.Log(LogLevel.Error, e.Message, e);
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Mapsui.Rendering.Benchmarks;
 
-public class NonCachingVectorCache : IVectorCache
+public sealed class NonCachingVectorCache : IVectorCache
 {
     private readonly ISymbolCache _symbolCache;
 
@@ -36,5 +36,9 @@ public class NonCachingVectorCache : IVectorCache
         where TFeature : class, IFeature
     {
         return toPath(geometry, viewport, lineWidth);
+    }
+
+    public void Dispose()
+    {
     }
 }

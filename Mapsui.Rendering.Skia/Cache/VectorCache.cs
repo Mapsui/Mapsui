@@ -6,7 +6,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public class VectorCache : IVectorCache
+public sealed class VectorCache : IVectorCache
 {
     private readonly ConcurrentDictionary<(object? Pen, float Opacity), object> _paintCache = new();
     private readonly ConcurrentDictionary<(Brush? Brush, float Opacity, double rotation), object> _fillCache = new();
@@ -73,5 +73,22 @@ public class VectorCache : IVectorCache
         }
 
         return (TPath)path;
+    }
+
+    public void Dispose()
+    {
+        _pathParamCache.Clear();
+        _pathCache.Clear();
+        foreach (var value in _fillCache.Values)
+        {
+            value.DisposeIfDisposable();
+        }
+        _fillCache.Clear();
+
+        foreach (var value in _paintCache.Values)
+        {
+            value.DisposeIfDisposable();
+        }
+        _pathCache.Clear();
     }
 }

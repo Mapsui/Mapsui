@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Mapsui.Rendering.Skia.Tests.Extensions;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Tests;
@@ -21,13 +22,14 @@ internal class MapRendererTests
         const string fileName = "vector_symbol.png";
 
         // act
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -39,13 +41,14 @@ internal class MapRendererTests
         const string fileName = "points_with_symbolstyle.png";
 
         // act
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -57,13 +60,14 @@ internal class MapRendererTests
         const string fileName = "points_with_symbolstyle.png"; // Todo: Do not reuse the png.
 
         // act
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -75,13 +79,14 @@ internal class MapRendererTests
         const string fileName = "points_with_svgsymbolstyle.png";
 
         // act
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -93,13 +98,14 @@ internal class MapRendererTests
         const string fileName = "bitmap_atlas.png";
 
         // act
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -111,13 +117,14 @@ internal class MapRendererTests
         const string fileName = "bitmap_symbol.png";
 
         // act
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -129,13 +136,14 @@ internal class MapRendererTests
         const string fileName = "vector_symbol_symboltype.png";
 
         // act
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -147,13 +155,14 @@ internal class MapRendererTests
         const string fileName = "vector_symbol_unittype.png";
 
         // act
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -165,13 +174,14 @@ internal class MapRendererTests
         const string fileName = "polygon.png";
 
         // act
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
     }
 
     [Test]
@@ -183,13 +193,14 @@ internal class MapRendererTests
         const string fileName = "line.png";
 
         // act
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
     }
 
     [Test]
@@ -201,13 +212,14 @@ internal class MapRendererTests
         const string fileName = "tilelayer.png";
 
         // act
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -219,13 +231,14 @@ internal class MapRendererTests
         const string fileName = "labels.png";
 
         // act
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -237,13 +250,14 @@ internal class MapRendererTests
         const string fileName = "projection.png";
 
         // act 
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
@@ -255,13 +269,14 @@ internal class MapRendererTests
         const string fileName = "stacked_labels.png";
 
         // act 
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.995));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.995));
     }
 
     [Test]
@@ -273,13 +288,14 @@ internal class MapRendererTests
         const string fileName = "widgets.png";
 
         // act
-        using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2, map.Widgets);
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2, map.Widgets);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
         // assert
-        Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     private static bool CompareColors(SKColor color1, SKColor color2, int allowedColorDistance)

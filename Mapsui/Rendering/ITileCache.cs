@@ -1,6 +1,8 @@
-﻿namespace Mapsui.Rendering;
+﻿using System;
 
-public interface ITileCache
+namespace Mapsui.Rendering;
+
+public interface ITileCache : IDisposable
 {
     IBitmapInfo? GetOrCreate(MRaster raster, long currentIteration);
     void UpdateCache(long iteration);

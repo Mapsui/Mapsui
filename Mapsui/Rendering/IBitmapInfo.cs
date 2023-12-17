@@ -1,6 +1,8 @@
-﻿namespace Mapsui.Rendering;
+﻿using System;
 
-public interface IBitmapInfo
+namespace Mapsui.Rendering;
+
+public interface IBitmapInfo : IDisposable
 {
     long IterationUsed { get; set; }
 }

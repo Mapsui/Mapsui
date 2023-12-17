@@ -10,7 +10,7 @@ namespace Mapsui.Rendering.Skia;
 
 public static class BitmapHelper
 {
-    public static BitmapInfo? LoadBitmap(object? bitmapStream)
+    public static BitmapInfo? LoadBitmap(object? bitmapStream, bool ownsBitmap = true)
     {
         // todo: Our BitmapRegistry stores not only bitmaps. Perhaps we should store a class in it
         // which has all information. So we should have a SymbolImageRegistry in which we store a
@@ -18,12 +18,12 @@ public static class BitmapHelper
 
         if (bitmapStream is SKImage skBitmap)
         {
-            return new BitmapInfo { Bitmap = skBitmap, };
+            return new BitmapInfo(ownsBitmap) { Bitmap = skBitmap, };
         }
 
         if (bitmapStream is SKPicture skPicture)
         {
-            return new BitmapInfo { Picture = skPicture };
+            return new BitmapInfo(ownsBitmap) { Picture = skPicture };
         }
 
         if (bitmapStream is string str)
@@ -76,6 +76,6 @@ public static class BitmapHelper
 
     public static bool InvalidBitmapInfo([NotNullWhen(false)] BitmapInfo? bitmapInfo)
     {
-        return bitmapInfo == null || (bitmapInfo.Bitmap == null && (bitmapInfo.Picture == null || bitmapInfo.Picture.IsDisposed()));
+        return bitmapInfo == null || bitmapInfo.IsDisposed || (bitmapInfo.Bitmap == null && (bitmapInfo.Picture == null || bitmapInfo.Picture.IsDisposed()));
     }
 }

@@ -2,6 +2,7 @@
 using Mapsui.Nts;
 using NetTopologySuite.Geometries;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Layers;
 
@@ -21,6 +22,6 @@ public class WritableLayerTests
         var extent = writableLayer.Extent;
 
         // assert
-        Assert.IsNull(extent);
+        ClassicAssert.IsNull(extent);
     }
 }
