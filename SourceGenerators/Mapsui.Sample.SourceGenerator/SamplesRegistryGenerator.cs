@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Mapsui.Sample.SourceGenerator;
@@ -49,23 +50,28 @@ namespace {{context.Compilation.Assembly.Name}}
         {
             var root = tree.GetRoot();
             var semanticModel = context.Compilation.GetSemanticModel(tree);
+            TypeDeclarationSyntax? syntaxClass = tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().FirstOrDefault();
 
-            foreach (var node in root.DescendantNodes())
+            if (syntaxClass != null)
             {
-                if (semanticModel.GetSymbolInfo(node).Symbol is ITypeSymbol { IsReferenceType: true, IsAbstract: false } symbol &&
-                    symbol.AllInterfaces.Any(f => sampleInterfaces.Contains(f.Name)))
+                ISymbol? semanticClass = semanticModel.GetDeclaredSymbol(syntaxClass);
+                if (semanticClass != null)
                 {
-                    var sampleName = $"{symbol.ContainingNamespace}.{symbol.Name}";
-                    if (alreadyRegistered.Add(sampleName))
+                    if (semanticClass is ITypeSymbol { IsReferenceType: true, IsAbstract: false } symbol &&
+                        symbol.AllInterfaces.Any(f => sampleInterfaces.Contains(f.Name)))
                     {
-                        sourceBuilder.AppendLine($@"            Mapsui.Samples.Common.AllSamples.Register(new {sampleName}());");    
-                    }
-                    else
-                    {
-                        Debug.WriteLine("Duplicate");
+                        var sampleName = $"{symbol.ContainingNamespace}.{symbol.Name}";
+                        if (alreadyRegistered.Add(sampleName))
+                        {
+                            sourceBuilder.AppendLine(
+                                $@"            Mapsui.Samples.Common.AllSamples.Register(new {sampleName}());");
+                        }
+                        else
+                        {
+                            Debug.WriteLine("Duplicate");
+                        }
                     }
                 }
-              
             }
         }
 
