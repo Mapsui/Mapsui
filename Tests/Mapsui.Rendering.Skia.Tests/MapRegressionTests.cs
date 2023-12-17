@@ -30,7 +30,8 @@ public class MapRegressionTests
     static MapRegressionTests()
     {
         // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();
+        Mapsui.Tests.Common.Samples.Register();
+        Mapsui.Samples.Common.Samples.Register();
     }
 
     private static ISampleBase[]? _excludedSamples;

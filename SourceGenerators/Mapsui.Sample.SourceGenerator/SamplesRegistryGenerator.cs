@@ -12,6 +12,8 @@ public class SamplesRegistryGenerator : ISourceGenerator
 {
     public void Initialize(GeneratorInitializationContext context)
     {
+        // Uncomment to debug SourceCode Generator
+        System.Diagnostics.Debugger.Break();
     }
 
     public void Execute(GeneratorExecutionContext context)
@@ -27,7 +29,7 @@ namespace {{context.Compilation.Assembly.Name}}
         {
 
 """);
-
+        
         // using the context, get a list of syntax trees in the users compilation
         var syntaxTrees = context.Compilation.SyntaxTrees;
 

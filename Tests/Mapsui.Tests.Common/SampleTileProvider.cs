@@ -34,7 +34,7 @@ public class SampleTileProvider : ITileProvider
     private static Stream GetTileStream(TileIndex index)
     {
         var path = $"Mapsui.Tests.Common.Resources.SampleTiles.{index.Level}_{index.Col}_{index.Row}.png";
-        var data = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(path);
+        var data = typeof(SampleTileProvider).GetTypeInfo().Assembly.GetManifestResourceStream(path);
         if (data == null) throw new Exception($"Resource could not be found: {path}");
         return data;
     }
