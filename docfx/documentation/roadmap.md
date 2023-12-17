@@ -20,7 +20,7 @@ Branch: [develop/4.1](https://github.com/Mapsui/Mapsui/tree/develop/4.1). Milest
 
 ## Mapsui 5
 
-Branch: [master](https://github.com/Mapsui/Mapsui/tree/master). Milestone: [v5.0](https://github.com/Mapsui/Mapsui/milestone/10). We are working on a series of preview releases.
+Branch: [main](https://github.com/Mapsui/Mapsui/tree/main). Milestone: [v5.0](https://github.com/Mapsui/Mapsui/milestone/10). We are working on a series of preview releases.
 
 - [ ] Everything to .NET 6
 - [ ] Cleanup:
@@ -32,6 +32,7 @@ Branch: [master](https://github.com/Mapsui/Mapsui/tree/master). Milestone: [v5.0
   - [ ] Remove the #if defines we do not need anymore.
   - [ ] Remove all scripts and configurations we do not use anymore.
   - [ ] Simplify the build scripts now that we do not need the workarounds.
+  - [x] Rename master to main.
 - [ ] Remove older frameworks:
   - [ ] Remove Xamarin.Forms (but not Mapsui.MAUI, Mapsui.iOS and Mapsui.Android).
   - [x] Remove Uno UWP (but not Mapsui.Uno.WinUI)
