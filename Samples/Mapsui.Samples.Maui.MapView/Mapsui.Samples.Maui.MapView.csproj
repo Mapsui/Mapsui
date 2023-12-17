@@ -31,6 +31,9 @@
 		<!-- Don't display nuget warnings -->
 		<NoWarn>NU1703</NoWarn>
 		<AndroidManifest>Platforms\Android\AndroidManifest.xml</AndroidManifest>
+    <!--For Debugging Source Generated Files uncomment the line below-->
+    <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>-->
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -79,6 +82,13 @@
 		<ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
 		<ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
 	</ItemGroup>
+
+  <!--Source Code Generators-->
+  <ItemGroup>
+    <ProjectReference Include="..\..\SourceGenerators\Mapsui.Sample.SourceGenerator\Mapsui.Sample.SourceGenerator.csproj" 
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false"  />
+  </ItemGroup>
 
 	<Import Project="..\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems" Label="Shared" />
 

@@ -13,7 +13,7 @@ public class SamplesRegistryGenerator : ISourceGenerator
     public void Initialize(GeneratorInitializationContext context)
     {
         // Uncomment to debug SourceCode Generator
-        System.Diagnostics.Debugger.Break();
+        // System.Diagnostics.Debugger.Break();
     }
 
     public void Execute(GeneratorExecutionContext context)
