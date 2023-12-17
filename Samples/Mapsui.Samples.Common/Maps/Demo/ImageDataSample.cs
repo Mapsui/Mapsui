@@ -66,7 +66,8 @@ public class ImageDataSample : ISample
         var features = new List<RasterFeature> { rasterFeature };
 
         memoryLayer.Features = features;
-
+        memoryLayer.Style = null;
+        
         return memoryLayer;
     }
 

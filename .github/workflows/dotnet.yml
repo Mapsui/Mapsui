@@ -226,7 +226,7 @@ jobs:
     - name: Run Mapsui.Nts.Tests
       run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net8.0/Mapsui.Nts.Tests.dll
     - name: Run Mapsui.Rendering.Skia.Tests
-      uses: nick-fields/retry@v2.8.3
+      uses: nick-fields/retry@v2
       with:
         timeout_minutes: 10
         max_attempts: 3        

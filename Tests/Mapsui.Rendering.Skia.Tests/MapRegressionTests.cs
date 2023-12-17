@@ -20,6 +20,7 @@ using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Rendering.Skia.Tests;
 
@@ -93,14 +94,15 @@ public class MapRegressionTests
         try
         {
             var fileName = sample.GetType().Name + ".Regression.png";
-            var mapControl = await InitMapAsync(sample).ConfigureAwait(true);
+            using var mapControl = await InitMapAsync(sample).ConfigureAwait(true);
             var map = mapControl.Map;
             await DisplayMapAsync(mapControl).ConfigureAwait(false);
 
             if (map != null)
             {
                 // act
-                using var bitmap = CreateMapRenderer(mapControl).RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
+                using var mapRenderer = CreateMapRenderer(mapControl);
+                using var bitmap = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
 
                 // aside
                 if (bitmap is { Length: > 0 })
@@ -122,13 +124,13 @@ public class MapRegressionTests
                     }
                     else
                     {
-                        Assert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.99));
+                        ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.99));
                     }
                 }
                 else
                 {
                     // Don't compare images here because to unreliable
-                    Assert.True(true);
+                    ClassicAssert.True(true);
                 }
             }
         }

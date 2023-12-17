@@ -4,7 +4,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Rendering;
 
-public interface IVectorCache
+public interface IVectorCache : IDisposable
 {
     [return: NotNullIfNotNull(nameof(pen))]
     T? GetOrCreatePaint<T, TPen>(TPen? pen, float opacity, Func<TPen?, float, T> toPaint)

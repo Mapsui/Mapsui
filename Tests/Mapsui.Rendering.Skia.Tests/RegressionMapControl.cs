@@ -10,10 +10,11 @@ using Mapsui.UI;
 using Mapsui.Utilities;
 
 #pragma warning disable CS0067 // The event is never used
+#pragma warning disable IDISP008 // Don't assign member with injected and created disposables
 
 namespace Mapsui.Rendering.Skia.Tests;
 
-public class RegressionMapControl : IMapControl
+public sealed class RegressionMapControl : IMapControl
 {
     private Map _map;
 
@@ -93,5 +94,10 @@ public class RegressionMapControl : IMapControl
     {
         ScreenWidth = screenWidth;
         ScreenHeight = screenHeight;
+    }
+
+    public void Dispose()
+    {
+        Renderer.Dispose();
     }
 }

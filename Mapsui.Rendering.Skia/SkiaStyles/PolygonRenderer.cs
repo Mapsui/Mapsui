@@ -10,6 +10,8 @@ using SkiaSharp;
 using static SkiaSharp.SKPath;
 using Topten.RichTextKit;
 
+#pragma warning disable IDISP001 // Dispose created
+
 namespace Mapsui.Rendering.Skia;
 
 internal static class PolygonRenderer

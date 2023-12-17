@@ -4,6 +4,7 @@ using Mapsui.Providers.Wms;
 using Mapsui.Tests.Utilities;
 using NUnit.Framework;
 using System.IO;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Wms;
 
@@ -21,7 +22,7 @@ public class ClientTests
         var client = new Client(capabilties);
 
         // assert
-        Assert.True(client != null);
+        ClassicAssert.True(client != null);
     }
 
     [Test]
@@ -35,6 +36,6 @@ public class ClientTests
         var client = new Client(capabilties);
 
         // assert
-        Assert.True(client != null);
+        ClassicAssert.True(client != null);
     }
 }
