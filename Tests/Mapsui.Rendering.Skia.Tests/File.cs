@@ -49,7 +49,7 @@ internal static class File
     {
         get
         {
-            var path = System.AppContext.BaseDirectory;
+            var path = Assembly.GetExecutingAssembly().Location;
             if (path == null)
                 throw new Exception($"Assembly.GetExecutingAssembly().Location was null");
 
