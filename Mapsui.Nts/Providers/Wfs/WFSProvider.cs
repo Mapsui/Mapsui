@@ -699,6 +699,7 @@ public class WFSProvider : IProvider, IDisposable
                 _sridOverride = _featureTypeInfo.SRID = value.Substring(CrsHelper.EpsgPrefix.Length);
             else
                 _sridOverride = value?.Substring(CrsHelper.EpsgPrefix.Length);
+            _initialized = false;
         }
     }
 
