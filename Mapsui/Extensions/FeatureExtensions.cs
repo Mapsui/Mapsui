@@ -36,7 +36,7 @@ public static class FeatureExtensions
 
         if (_copyFeature.TryGetValue(feature.GetType(), out var registeredCopy))
         {
-            registeredCopy(feature);
+            return registeredCopy(feature);
         }
         
         throw new NotImplementedException();
