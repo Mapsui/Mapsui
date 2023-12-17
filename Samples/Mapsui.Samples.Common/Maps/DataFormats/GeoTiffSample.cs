@@ -40,6 +40,7 @@ public class GeoTiffSample : ISample
         {
             Name = "GeoGif",
             DataSource = gifSource,
+            Style = null,
         };
     }
 }

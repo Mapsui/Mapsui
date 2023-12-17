@@ -1,7 +1,9 @@
 using System;
 using System.IO;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Styles;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Tests;
@@ -17,10 +19,10 @@ public class SymbolStyleFeatureSizeTests
             SymbolType = SymbolType.Rectangle,
         };
 
-        var symbolCache = new SymbolCache();
+        using var symbolCache = new SymbolCache();
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
 
-        Assert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1);
+        ClassicAssert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1);
     }
 
     [Test]
@@ -32,10 +34,10 @@ public class SymbolStyleFeatureSizeTests
             SymbolScale = 2,
         };
 
-        var symbolCache = new SymbolCache();
+        using var symbolCache = new SymbolCache();
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
 
-        Assert.AreEqual(size, (Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1) * 2);
+        ClassicAssert.AreEqual(size, (Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1) * 2);
     }
 
     [Test]
@@ -47,10 +49,10 @@ public class SymbolStyleFeatureSizeTests
             SymbolOffset = new Offset(2, 0),
         };
 
-        var symbolCache = new SymbolCache();
+        using var symbolCache = new SymbolCache();
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
 
-        Assert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 2 * 2 + 1);
+        ClassicAssert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 2 * 2 + 1);
     }
 
     [Test]
@@ -62,10 +64,10 @@ public class SymbolStyleFeatureSizeTests
             SymbolOffset = new Offset(0, 2),
         };
 
-        var symbolCache = new SymbolCache();
+        using var symbolCache = new SymbolCache();
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
 
-        Assert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 2 * 2 + 1);
+        ClassicAssert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 2 * 2 + 1);
     }
 
     [Test]
@@ -77,16 +79,16 @@ public class SymbolStyleFeatureSizeTests
             SymbolOffset = new Offset(2, 2),
         };
 
-        var symbolCache = new SymbolCache();
+        using var symbolCache = new SymbolCache();
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
 
-        Assert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1 + Math.Sqrt(2 * 2 + 2 * 2) * 2);
+        ClassicAssert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1 + Math.Sqrt(2 * 2 + 2 * 2) * 2);
     }
 
     [Test]
     public void BitmapInfoFeatureSize()
     {
-        var symbolCache = new SymbolCache();
+        using var symbolCache = new SymbolCache();
 
         var bitmapId = BitmapRegistry.Instance.Register(CreatePng(100, 100));
 
@@ -97,7 +99,7 @@ public class SymbolStyleFeatureSizeTests
 
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
 
-        Assert.AreEqual(size, 100);
+        ClassicAssert.AreEqual(size, 100);
     }
 
     private object CreatePng(int x, int y)

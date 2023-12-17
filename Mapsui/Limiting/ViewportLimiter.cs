@@ -7,7 +7,7 @@ public class ViewportLimiter : IViewportLimiter
         return LimitExtent(LimitResolution(viewport, zoomBounds), panBounds);
     }
 
-    private Viewport LimitResolution(Viewport viewport, MMinMax? zoomBounds)
+    private static Viewport LimitResolution(Viewport viewport, MMinMax? zoomBounds)
     {
         if (zoomBounds is null) return viewport;
 
@@ -17,7 +17,7 @@ public class ViewportLimiter : IViewportLimiter
         return viewport;
     }
 
-    private Viewport LimitExtent(Viewport viewport, MRect? panBounds)
+    private static Viewport LimitExtent(Viewport viewport, MRect? panBounds)
     {
         if (panBounds is null) return viewport;
 

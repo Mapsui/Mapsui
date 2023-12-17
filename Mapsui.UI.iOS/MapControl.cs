@@ -39,12 +39,12 @@ public partial class MapControl : UIView, IMapControl
             if (UseGPU)
             {
                 _glCanvas?.Dispose();
-                _glCanvas = new SKGLView();
+                _glCanvas = [];
             }
             else
             {
                 _canvas?.Dispose();
-                _canvas = new SKCanvasView();
+                _canvas = [];
             }
         }
     }
@@ -71,8 +71,8 @@ public partial class MapControl : UIView, IMapControl
             _glCanvas.PaintSurface += OnPaintSurface;
             AddSubview(_glCanvas);
 
-            AddConstraints(new[]
-            {
+            AddConstraints(
+            [
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _glCanvas,
                     NSLayoutAttribute.Leading, 1.0f, 0.0f),
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _glCanvas,
@@ -81,7 +81,7 @@ public partial class MapControl : UIView, IMapControl
                     NSLayoutAttribute.Top, 1.0f, 0.0f),
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _glCanvas,
                     NSLayoutAttribute.Bottom, 1.0f, 0.0f)
-            });
+            ]);
         }
         else
         {
@@ -90,8 +90,8 @@ public partial class MapControl : UIView, IMapControl
             _canvas.PaintSurface += OnPaintSurface;
             AddSubview(_canvas);
 
-            AddConstraints(new[]
-            {
+            AddConstraints(
+            [
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _canvas,
                     NSLayoutAttribute.Leading, 1.0f, 0.0f),
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _canvas,
@@ -100,7 +100,7 @@ public partial class MapControl : UIView, IMapControl
                     NSLayoutAttribute.Top, 1.0f, 0.0f),
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas,
                     NSLayoutAttribute.Bottom, 1.0f, 0.0f)
-            });
+            ]);
         }
 
         ClipsToBounds = true;
@@ -319,7 +319,7 @@ public partial class MapControl : UIView, IMapControl
     private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
     {
         if (locations.Count < 2)
-            throw new ArgumentException();
+            throw new ArgumentException($"Less than two locations were passed into {nameof(GetPinchValues)}");
 
         double centerX = 0;
         double centerY = 0;
@@ -330,8 +330,8 @@ public partial class MapControl : UIView, IMapControl
             centerY += location.Y;
         }
 
-        centerX = centerX / locations.Count;
-        centerY = centerY / locations.Count;
+        centerX /= locations.Count;
+        centerY /= locations.Count;
 
         var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
 

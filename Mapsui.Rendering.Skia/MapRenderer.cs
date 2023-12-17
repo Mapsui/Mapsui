@@ -21,12 +21,15 @@ using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using SkiaSharp;
 
+#pragma warning disable IDISP008 // Don't assign member with injected created disposable
+
 namespace Mapsui.Rendering.Skia;
 
-public class MapRenderer : IRenderer
+public sealed class MapRenderer : IRenderer, IDisposable
 {
     private readonly IRenderCache _renderCache;
     private long _currentIteration;
+    private readonly bool _ownsRenderCache;
 
     public IRenderCache RenderCache => _renderCache;
 
@@ -66,6 +69,7 @@ public class MapRenderer : IRenderer
 
     public MapRenderer() : this(new RenderCache())
     {
+        _ownsRenderCache = true;
     }
 
     public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,
@@ -235,8 +239,8 @@ public class MapRenderer : IRenderer
                 surface.Canvas.ClipRect(new SKRect((float)(x - 1), (float)(y - 1), (float)(x + 1), (float)(y + 1)));
                 surface.Canvas.Clear(SKColors.Transparent);
 
-                using var pixmap = surface.PeekPixels();
-                var color = pixmap.GetPixelColor(intX, intY);
+                using var pixMap = surface.PeekPixels();
+                var color = pixMap.GetPixelColor(intX, intY);
 
                 for (var index = 0; index < mapInfoLayers.Count; index++)
                 {
@@ -285,7 +289,7 @@ public class MapRenderer : IRenderer
                                     // 2) Render the feature to the clean canvas
                                     RenderFeature(surface.Canvas, v, layer, style, feature, opacity, 0);
                                     // 3) Check if the pixel has changed.
-                                    if (color != pixmap.GetPixelColor(intX, intY))
+                                    if (color != pixMap.GetPixelColor(intX, intY))
                                         // 4) Add feature and style to result
                                         mapList.Add(new MapInfoRecord(feature, style, layer));
                                     surface.Canvas.Restore();
@@ -312,5 +316,13 @@ public class MapRenderer : IRenderer
         }
 
         return result;
+    }
+
+    public void Dispose()
+    {
+        if (_ownsRenderCache)
+        {
+            _renderCache.Dispose();    
+        }
     }
 }

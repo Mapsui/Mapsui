@@ -4,13 +4,13 @@ using Mapsui.Styles;
 
 namespace Mapsui.Rendering;
 
-public interface IVectorCache
+public interface IVectorCache : IDisposable
 {
-    [return: NotNullIfNotNull("pen")]
+    [return: NotNullIfNotNull(nameof(pen))]
     T? GetOrCreatePaint<T, TPen>(TPen? pen, float opacity, Func<TPen?, float, T> toPaint)
         where T : class?;
 
-    [return: NotNullIfNotNull("brush")]
+    [return: NotNullIfNotNull(nameof(brush))]
     T? GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint)
         where T : class?;
 

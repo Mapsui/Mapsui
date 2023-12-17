@@ -1,8 +1,9 @@
+using System;
 using Mapsui.Styles;
 
 namespace Mapsui.Rendering;
 
-public interface IRenderCache : ILabelCache, ISymbolCache, IVectorCache, ITileCache
+public interface IRenderCache : ILabelCache, ISymbolCache, IVectorCache, ITileCache, IDisposable
 {
     IVectorCache? VectorCache { get; set; }
     ILabelCache LabelCache { get; set; }

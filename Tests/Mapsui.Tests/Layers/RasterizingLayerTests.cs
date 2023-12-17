@@ -12,6 +12,7 @@ using Mapsui.Tests.Common.TestTools;
 using Mapsui.Tiling.Extensions;
 using NetTopologySuite.Geometries;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Layers;
 
@@ -30,7 +31,7 @@ public class RasterizingLayerTests
         var resolution = schema.Resolutions.First().Value.UnitsPerPixel;
         using var waitHandle = new AutoResetEvent(false);
 
-        Assert.AreEqual(0, layer.GetFeatures(box, resolution).Count());
+        ClassicAssert.AreEqual(0, layer.GetFeatures(box, resolution).Count());
         layer.DataChanged += (_, _) =>
         {
             // assert
@@ -44,7 +45,7 @@ public class RasterizingLayerTests
 
         // assert
         waitHandle.WaitOne();
-        Assert.AreEqual(layer.GetFeatures(box, resolution).Count(), 1);
+        ClassicAssert.AreEqual(layer.GetFeatures(box, resolution).Count(), 1);
     }
 
     private static TestLayer CreatePointLayer()

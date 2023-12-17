@@ -1,4 +1,5 @@
-﻿using Mapsui.Styles;
+﻿using Mapsui.Extensions;
+using Mapsui.Styles;
 using SkiaSharp;
 using Svg.Skia;
 
@@ -12,9 +13,20 @@ public enum BitmapType
     Picture
 }
 
-public class BitmapInfo : IBitmapInfo
+public sealed class BitmapInfo : IBitmapInfo
 {
     private object? _data;
+    private readonly bool _ownsBitmap;
+
+    public BitmapInfo()
+    {
+        _ownsBitmap = true;
+    }
+
+    public BitmapInfo(bool ownedBitmap)
+    {
+        _ownsBitmap = ownedBitmap;
+    }
 
     public BitmapType Type { get; private set; }
 
@@ -121,6 +133,16 @@ public class BitmapInfo : IBitmapInfo
                 default:
                     return 0;
             }
+        }
+    }
+
+    public bool IsDisposed => _data == null;
+
+    public void Dispose()
+    {
+        if (_ownsBitmap)
+        {
+            DisposableExtension.DisposeAndNullify(ref _data);    
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Mapsui.Providers.Wfs.Utilities;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Providers.Wfs.Utilities;
 
@@ -17,7 +18,7 @@ public class UrlAppendQueryHelperTests
         var combinedUrl = url.AppendQuery(query);
 
         // Assert
-        Assert.AreEqual("www.test.de/test?query=test", combinedUrl);
+        ClassicAssert.AreEqual("www.test.de/test?query=test", combinedUrl);
     }
 
     [Test]
@@ -31,7 +32,7 @@ public class UrlAppendQueryHelperTests
         var combinedUrl = url.AppendQuery(query);
 
         // Assert
-        Assert.AreEqual("www.test.de/test?Service=WFS&query=test", combinedUrl);
+        ClassicAssert.AreEqual("www.test.de/test?Service=WFS&query=test", combinedUrl);
     }
 
     [Test]
@@ -45,7 +46,7 @@ public class UrlAppendQueryHelperTests
         var combinedUrl = url.AppendQuery(query);
 
         // Assert
-        Assert.AreEqual("www.test.de/test?Service=WFS&query=test", combinedUrl);
+        ClassicAssert.AreEqual("www.test.de/test?Service=WFS&query=test", combinedUrl);
     }
 
     [Test]
@@ -59,6 +60,6 @@ public class UrlAppendQueryHelperTests
         var combinedUrl = url.AppendQuery(query);
 
         // Assert
-        Assert.AreEqual("www.test.de/test?Service=WFS&query=test", combinedUrl);
+        ClassicAssert.AreEqual("www.test.de/test?Service=WFS&query=test", combinedUrl);
     }
 }

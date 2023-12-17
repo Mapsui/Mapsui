@@ -2,11 +2,9 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
@@ -15,10 +13,6 @@ using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
-
-#pragma warning disable IDISP008 // Don't assign member with injected and created disposables
-#pragma warning disable IDISP001 // Dispose created.
-#pragma warning disable IDISP002 // Dispose member.
 
 #if __MAUI__
 using Microsoft.Maui.Controls;
@@ -36,6 +30,8 @@ namespace Mapsui.UI.Avalonia;
 #elif __ETO_FORMS__
 namespace Mapsui.UI.Eto;
 #elif __BLAZOR__
+using System.Diagnostics.CodeAnalysis;
+
 namespace Mapsui.UI.Blazor;
 #else
 namespace Mapsui.UI.Wpf;
@@ -57,7 +53,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // Interval between two calls of the invalidate function in ms
     private int _updateInterval = 16;
     // Stopwatch for measuring drawing times
-    private readonly System.Diagnostics.Stopwatch _stopwatch = new System.Diagnostics.Stopwatch();
+    private readonly System.Diagnostics.Stopwatch _stopwatch = new();
     // saving list of extended Widgets
     private List<IWidgetExtended>? _extendedWidgets;
     // old widget Collection to compare if widget Collection was changed.
@@ -446,7 +442,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
 #else
 
-    private Map _map = new Map();
+    private Map _map = new();
 
     /// <summary>
     /// Map holding data for which is shown in this MapControl
@@ -522,13 +518,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (screenPosition == null)
             return null;
 
-        return Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? new LayerCollection(), margin);
+        return Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
     }
 
     /// <inheritdoc />
     public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null)
     {
-        using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? new LayerCollection(), pixelDensity: PixelDensity);
+        using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: PixelDensity);
         return stream.ToArray();
     }
 
@@ -548,7 +544,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             return null;
 
         // Check which features in the map were tapped.
-        var mapInfo = Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? new LayerCollection());
+        var mapInfo = Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? []);
 
         if (mapInfo != null)
         {
@@ -578,6 +574,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Unsubscribe();
             StopUpdates();
             _invalidateTimer?.Dispose();
+            _renderer.Dispose();
         }
         _invalidateTimer = null;
     }
@@ -671,7 +668,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (_updateWidget != Map.Widgets.Count || _extendedWidgets == null)
         {
             _updateWidget = Map.Widgets.Count;
-            _extendedWidgets = new List<IWidgetExtended>();
+            _extendedWidgets = [];
             var widgetsOfMapAndLayers = Map.GetWidgetsOfMapAndLayers().ToList();
             foreach (var widget in widgetsOfMapAndLayers)
             {
@@ -702,7 +699,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (_updateTouchableWidget != Map.Widgets.Count || _touchableWidgets == null)
         {
             _updateTouchableWidget = Map.Widgets.Count;
-            _touchableWidgets = new List<IWidget>();
+            _touchableWidgets = [];
             var touchableWidgets = Map.GetWidgetsOfMapAndLayers().ToList();
             foreach (var widget in touchableWidgets)
             {

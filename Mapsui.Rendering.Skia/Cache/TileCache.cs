@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace Mapsui.Rendering.Skia;
+namespace Mapsui.Rendering.Skia.Cache;
 
-public class TileCache : ITileCache
+public sealed class TileCache : ITileCache
 {
     private const int _tilesToKeepMultiplier = 3;
     private const int _minimumTilesToKeep = 128; // in RasterStyle it was 32, I quadrupled it because now all tile Layers have one Cache
@@ -18,7 +18,7 @@ public class TileCache : ITileCache
     public IBitmapInfo? GetOrCreate(MRaster raster, long currentIteration)
     {
         _tileCache.TryGetValue(raster, out var cachedBitmapInfo);
-        BitmapInfo? bitmapInfo = cachedBitmapInfo as BitmapInfo;
+        var bitmapInfo = cachedBitmapInfo as BitmapInfo;
         if (BitmapHelper.InvalidBitmapInfo(bitmapInfo))
         {
             bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
@@ -71,6 +71,17 @@ public class TileCache : ITileCache
                 textureInfoDisposable.Dispose();
             counter++;
         }
+    }
+
+
+    public void Dispose()
+    {
+        foreach (var bitmapInfo in _tileCache.Values)
+        {
+            bitmapInfo?.Dispose();
+        }
+
+        _tileCache.Clear();
     }
 }
 
