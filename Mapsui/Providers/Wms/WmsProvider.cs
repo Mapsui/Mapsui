@@ -44,7 +44,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     private Func<string, Task<Stream>>? _getStreamAsync;
     private readonly IUrlPersistentCache? _persistentCache;
     private static int[]? _axisOrder;
-    private CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
+    private readonly CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
 
     public static IUrlPersistentCache? DefaultCache { get; set; }
 
@@ -216,12 +216,12 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     /// <param name="layer"></param>
     /// <param name="name"></param>
     /// <returns></returns>
-    private bool LayerExists(Client.WmsServerLayer layer, string name)
+    private static bool LayerExists(Client.WmsServerLayer layer, string name)
     {
         return name == layer.Name || layer.ChildLayers.Any(childLayer => LayerExists(childLayer, name));
     }
 
-    private bool FindLayer(Client.WmsServerLayer layer, string name, out Client.WmsServerLayer result)
+    private static bool FindLayer(Client.WmsServerLayer layer, string name, out Client.WmsServerLayer result)
     {
         result = layer;
         if (name == layer.Name)
@@ -282,7 +282,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     /// <param name="layer">layer</param>
     /// <param name="name">name of style</param>
     /// <returns>True of style exists</returns>
-    private bool StyleExists(Client.WmsServerLayer layer, string name)
+    private static bool StyleExists(Client.WmsServerLayer layer, string name)
     {
         if (layer.Style.Any(style => name == style.Name)) return true;
         return layer.ChildLayers.Any(childLayer => StyleExists(childLayer, name));
@@ -388,10 +388,10 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     {
         var resource = GetPreferredMethod();
         var strReq = new StringBuilder(resource.OnlineResource);
-        if (!resource.OnlineResource?.Contains("?") ?? false)
-            strReq.Append("?");
+        if (!resource.OnlineResource?.Contains('?') ?? false)
+            strReq.Append('?');
         if (!strReq.ToString().EndsWith("&") && !strReq.ToString().EndsWith("?"))
-            strReq.Append("&");
+            strReq.Append('&');
         if (box != null)
         {
             var wmsVersion = "1.3.0";

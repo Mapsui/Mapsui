@@ -347,7 +347,7 @@ public class Color
 
     public override bool Equals(object? obj)
     {
-        if (!(obj is Color color))
+        if (obj is not Color color)
             return false;
         return Equals(color);
     }
@@ -408,13 +408,13 @@ public class Color
         {
             if (from.Length == 7)
             {
-                var color = int.Parse(from.Substring(1), NumberStyles.AllowHexSpecifier,
+                var color = int.Parse(from[1..], NumberStyles.AllowHexSpecifier,
                     CultureInfo.InvariantCulture);
                 result = new Color(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF);
             }
             else if (from.Length == 4)
             {
-                var color = int.Parse(from.Substring(1), NumberStyles.AllowHexSpecifier,
+                var color = int.Parse(from.AsSpan(1), NumberStyles.AllowHexSpecifier,
                     CultureInfo.InvariantCulture);
                 var r = (color >> 8 & 0xF) * 16 + (color >> 8 & 0xF);
                 var g = (color >> 4 & 0xF) * 16 + (color >> 4 & 0xF);
@@ -424,7 +424,7 @@ public class Color
         }
         else if (from.StartsWith("rgba"))
         {
-            var split = from.Substring(from.IndexOf('(') + 1).TrimEnd(')').Split(',');
+            var split = from[(from.IndexOf('(') + 1)..].TrimEnd(')').Split(',');
 
             if (split.Length != 4)
                 throw new ArgumentException($"color {from} isn't a valid color");
@@ -438,7 +438,7 @@ public class Color
         }
         else if (from.StartsWith("rgb"))
         {
-            var split = from.Substring(from.IndexOf('(') + 1).TrimEnd(')').Split(',');
+            var split = from[(from.IndexOf('(') + 1)..].TrimEnd(')').Split(',');
 
             if (split.Length != 3)
                 throw new ArgumentException($"color {from} isn't a valid color");
@@ -451,7 +451,7 @@ public class Color
         }
         else if (from.StartsWith("hsla"))
         {
-            var split = from.Substring(from.IndexOf('(') + 1).TrimEnd(')').Split(',');
+            var split = from[(from.IndexOf('(') + 1)..].TrimEnd(')').Split(',');
 
             if (split.Length != 4)
                 throw new ArgumentException($"color {from} isn't a valid color");
@@ -465,7 +465,7 @@ public class Color
         }
         else if (from.StartsWith("hsl"))
         {
-            var split = from.Substring(from.IndexOf('(') + 1).TrimEnd(')').Split(',');
+            var split = from[(from.IndexOf('(') + 1)..].TrimEnd(')').Split(',');
 
             if (split.Length != 3)
                 throw new ArgumentException($"color {from} isn't a valid color");

@@ -17,7 +17,7 @@ public class RenderCache : IRenderCache
     public ISymbolCache SymbolCache { get; set; }
 
     public IVectorCache? VectorCache { get; set; }
-    
+
     public ITileCache TileCache { get; set; }
 
     public Size? GetSize(int bitmapId)

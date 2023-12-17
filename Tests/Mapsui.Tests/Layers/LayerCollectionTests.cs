@@ -12,8 +12,8 @@ public class LayerCollectionTests
     {
         // arrange
         var layerCollection = new LayerCollection();
-        var layer1 = new MemoryLayer();
-        var layer2 = new MemoryLayer();
+        using var layer1 = new MemoryLayer();
+        using var layer2 = new MemoryLayer();
         layerCollection.Add(layer1);
         layerCollection.Add(layer2);
 
@@ -34,8 +34,8 @@ public class LayerCollectionTests
     {
         // arrange
         var layerCollection = new LayerCollection();
-        var layer1 = new MemoryLayer();
-        var layer2 = new MemoryLayer();
+        using var layer1 = new MemoryLayer();
+        using var layer2 = new MemoryLayer();
         layerCollection.Add(layer1);
         layerCollection.Add(layer2);
 
@@ -59,9 +59,9 @@ public class LayerCollectionTests
     {
         // arrange
         var layerCollection = new LayerCollection();
-        var layer1 = new MemoryLayer() { Name = "Layer1" };
-        var layer2 = new MemoryLayer() { Name = "Layer2" };
-        var layer3 = new MemoryLayer() { Name = "Layer3" };
+        using var layer1 = new MemoryLayer() { Name = "Layer1" };
+        using var layer2 = new MemoryLayer() { Name = "Layer2" };
+        using var layer3 = new MemoryLayer() { Name = "Layer3" };
         layerCollection.Add(layer1);
         layerCollection.Add(layer2);
 
@@ -84,9 +84,9 @@ public class LayerCollectionTests
     {
         // arrange
         var layerCollection = new LayerCollection();
-        var layer1 = new MemoryLayer() { Name = "Layer1" };
-        var layer2 = new MemoryLayer() { Name = "Layer2" };
-        var layer3 = new MemoryLayer() { Name = "Layer3" };
+        using var layer1 = new MemoryLayer() { Name = "Layer1" };
+        using var layer2 = new MemoryLayer() { Name = "Layer2" };
+        using var layer3 = new MemoryLayer() { Name = "Layer3" };
         layerCollection.Add(layer1);
         layerCollection.Add(layer2);
 
@@ -109,9 +109,9 @@ public class LayerCollectionTests
     {
         // arrange
         var layerCollection = new LayerCollection();
-        var layer1 = new MemoryLayer() { Name = "Layer1" };
-        var layer2 = new MemoryLayer() { Name = "Layer2" };
-        var layer3 = new MemoryLayer() { Name = "Layer3" };
+        using var layer1 = new MemoryLayer() { Name = "Layer1" };
+        using var layer2 = new MemoryLayer() { Name = "Layer2" };
+        using var layer3 = new MemoryLayer() { Name = "Layer3" };
         layerCollection.Add(layer1);
         layerCollection.Add(layer2);
         layerCollection.Add(layer3);
@@ -135,9 +135,9 @@ public class LayerCollectionTests
     {
         // arrange
         var layerCollection = new LayerCollection();
-        var layer1 = new MemoryLayer() { Name = "Layer1" };
-        var layer2 = new MemoryLayer() { Name = "Layer2" };
-        var layer3 = new MemoryLayer() { Name = "Layer3" };
+        using var layer1 = new MemoryLayer() { Name = "Layer1" };
+        using var layer2 = new MemoryLayer() { Name = "Layer2" };
+        using var layer3 = new MemoryLayer() { Name = "Layer3" };
         layerCollection.Add(layer1);
         layerCollection.Add(layer2);
         layerCollection.Add(layer3);
