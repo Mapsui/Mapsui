@@ -16,6 +16,8 @@ public static class AllSamples
         var assemblies = AppDomain.CurrentDomain.GetAssemblies()
             .Where(a => a.FullName?.StartsWith("Mapsui") ?? false) ?? Array.Empty<Assembly>();
 
+        HelloWorldGenerated.HelloWorld.SayHello();
+
         try
         {
             return (assemblies

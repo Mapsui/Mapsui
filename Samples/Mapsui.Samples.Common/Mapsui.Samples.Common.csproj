@@ -157,6 +157,13 @@
     <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
 
+  <!--Source Code Generators-->
+  <ItemGroup>
+    <ProjectReference Include="..\..\SourceGenerators\Mapsui.Sample.SourceGenerator\Mapsui.Sample.SourceGenerator.csproj" 
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false"  />
+  </ItemGroup>
+
   <ItemGroup>
     <Folder Include="GeoData\Cache\" />
   </ItemGroup>
