@@ -2,3 +2,4 @@
 // This is how I solved it while porting to dotnet core.
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Mapsui.Tests")]
+[assembly: InternalsVisibleTo("Mapsui.Rendering.Tests")]

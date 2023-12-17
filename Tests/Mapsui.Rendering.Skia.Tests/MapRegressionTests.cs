@@ -53,12 +53,13 @@ public class MapRegressionTests
         ArcGISImageServiceSample.DefaultCache ??= File.ReadFromCacheFolder("ArcGisImageServiceSample");
     }
 
-    public static object[] RegressionSamples => _regressionSamples ??= AllSamples.GetSamples().Where(f => ExcludedSamples.All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName).ToArray();
+    public static object[] RegressionSamples => _regressionSamples ??=
+    [
+        .. AllSamples.GetSamples().Where(f => ExcludedSamples
+            .All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName),
+    ];
 
-    public static object[] ExcludedSamples => _excludedSamples ??= new ISampleBase[]
-    {
-        new AnimatedPointsSample()
-    };
+    public static object[] ExcludedSamples => _excludedSamples ??=[new AnimatedPointsSample()];
 
     [Test]
     [Retry(5)]

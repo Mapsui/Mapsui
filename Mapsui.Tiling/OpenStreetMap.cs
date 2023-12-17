@@ -12,9 +12,9 @@ namespace Mapsui.Tiling;
 
 public static class OpenStreetMap
 {
-    public static IPersistentCache<byte[]>? DefaultCache = null;
+    public static IPersistentCache<byte[]>? DefaultCache;
 
-    private static readonly BruTile.Attribution OpenStreetMapAttribution = new(
+    private static readonly BruTile.Attribution _openStreetMapAttribution = new(
         "© OpenStreetMap contributors", "https://www.openstreetmap.org/copyright");
 
     public static TileLayer CreateTileLayer(string? userAgent = null)
@@ -29,6 +29,6 @@ public static class OpenStreetMap
         return new HttpTileSource(new GlobalSphericalMercator(),
             "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
             name: "OpenStreetMap",
-            attribution: OpenStreetMapAttribution, userAgent: userAgent, persistentCache: DefaultCache);
+            attribution: _openStreetMapAttribution, userAgent: userAgent, persistentCache: DefaultCache);
     }
 }
