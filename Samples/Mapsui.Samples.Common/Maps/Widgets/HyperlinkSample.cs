@@ -18,7 +18,7 @@ public class HyperlinkSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(CreateHyperlink("Open Mapsui FAQ", "https://mapsui.com/documentation/faq.html",
             VerticalAlignment.Top, HorizontalAlignment.Left));
-        map.Widgets.Add(CreateHyperlink("Open Mapsui readme.md", "https://github.com/Mapsui/Mapsui/blob/master/README.md",
+        map.Widgets.Add(CreateHyperlink("Open Mapsui readme.md", "https://github.com/Mapsui/Mapsui/blob/main/README.md",
             VerticalAlignment.Bottom, HorizontalAlignment.Right));
         map.Widgets.Add(CreateHyperlink("Open Mapsui releases page", "https://github.com/Mapsui/Mapsui/releases/",
             VerticalAlignment.Bottom, HorizontalAlignment.Left));

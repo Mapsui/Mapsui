@@ -20,7 +20,7 @@ Branch: [develop/4.1](https://github.com/Mapsui/Mapsui/tree/develop/4.1). Milest
 
 ## Mapsui 5
 
-Branch: [master](https://github.com/Mapsui/Mapsui/tree/master). Milestone: [v5.0](https://github.com/Mapsui/Mapsui/milestone/10). We are working on a series of preview releases.
+Branch: [main](https://github.com/Mapsui/Mapsui/tree/main). Milestone: [v5.0](https://github.com/Mapsui/Mapsui/milestone/10). We are working on a series of preview releases.
 
 - [ ] Everything to .NET 6
 - [ ] Cleanup:
