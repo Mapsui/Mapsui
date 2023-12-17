@@ -77,7 +77,7 @@ public class WFSProvider : IProvider, IDisposable
     private string? _proxyUrl;
     private ICredentials? _credentials;
     private readonly CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
-    private static SemaphoreSlim _init = new(1, 1);
+    private readonly SemaphoreSlim _init = new(1, 1);
 
     // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
     // It helps to accelerate the rendering process significantly.
