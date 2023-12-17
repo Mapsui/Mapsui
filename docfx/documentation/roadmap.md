@@ -32,6 +32,7 @@ Branch: [main](https://github.com/Mapsui/Mapsui/tree/main). Milestone: [v5.0](ht
   - [ ] Remove the #if defines we do not need anymore.
   - [ ] Remove all scripts and configurations we do not use anymore.
   - [ ] Simplify the build scripts now that we do not need the workarounds.
+  - [x] Rename master to main.
 - [ ] Remove older frameworks:
   - [ ] Remove Xamarin.Forms (but not Mapsui.MAUI, Mapsui.iOS and Mapsui.Android).
   - [x] Remove Uno UWP (but not Mapsui.Uno.WinUI)
