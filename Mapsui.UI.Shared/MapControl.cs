@@ -67,8 +67,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private protected void CommonInitialize()
     {
-        // Create map
-        Map = new Map();
         // Create timer for invalidating the control
         _invalidateTimer?.Dispose();
         _invalidateTimer = new System.Threading.Timer(InvalidateTimerCallback, null, System.Threading.Timeout.Infinite, 16);
@@ -438,7 +436,19 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public Map Map
     {
-        get => (Map)GetValue(MapProperty);
+        get
+        {
+            var map = GetValue(MapProperty) as Map;
+            if (map == null)
+            {
+                map = new Map();
+                SetValue(MapProperty, map);
+            }
+
+#pragma warning disable IDISP012
+            return map;
+#pragma warning restore IDISP012
+        }
         set => SetValue(MapProperty, value);
     }
 
@@ -580,8 +590,17 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             _invalidateTimer?.Dispose();
             _renderer?.Dispose();
             _renderer = null;
+#if __MAUI__
+            var map = GetValue(MapProperty) as Map;
+            if (map != null)
+            {
+                map.Dispose();
+                SetValue(MapProperty, null);
+            }
+ #else   
             _map?.Dispose();
             _map = null;
+#endif            
         }
         _invalidateTimer = null;
     }

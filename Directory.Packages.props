@@ -53,9 +53,6 @@
     <PackageVersion Include="Mapsui.WinUI" Version="4.0.0-beta.8" />
     <PackageVersion Include="Mapsui.Wpf" Version="4.0.0-beta.8" />
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="[8.0.0,9.0.0)" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.8.0" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="[17.8.0,18.0.0)" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="[8.0.0,9.0.0)" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="[17.8.0, 18.0.0)" />
