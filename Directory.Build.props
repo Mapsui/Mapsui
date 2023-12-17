@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <Version>4.0.0-beta.8</Version>
+    <Version>5.0.0-alpha.0</Version>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Copyright>Copyright © Mapsui Developers 2018-$([System.DateTime]::Now.ToString(yyyy))</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

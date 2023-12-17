@@ -235,8 +235,8 @@ public class MapRenderer : IRenderer
                 surface.Canvas.ClipRect(new SKRect((float)(x - 1), (float)(y - 1), (float)(x + 1), (float)(y + 1)));
                 surface.Canvas.Clear(SKColors.Transparent);
 
-                using var pixmap = surface.PeekPixels();
-                var color = pixmap.GetPixelColor(intX, intY);
+                using var pixMap = surface.PeekPixels();
+                var color = pixMap.GetPixelColor(intX, intY);
 
                 for (var index = 0; index < mapInfoLayers.Count; index++)
                 {
@@ -285,7 +285,7 @@ public class MapRenderer : IRenderer
                                     // 2) Render the feature to the clean canvas
                                     RenderFeature(surface.Canvas, v, layer, style, feature, opacity, 0);
                                     // 3) Check if the pixel has changed.
-                                    if (color != pixmap.GetPixelColor(intX, intY))
+                                    if (color != pixMap.GetPixelColor(intX, intY))
                                         // 4) Add feature and style to result
                                         mapList.Add(new MapInfoRecord(feature, style, layer));
                                     surface.Canvas.Restore();

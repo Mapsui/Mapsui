@@ -45,7 +45,7 @@ public abstract class BaseFeature
             this[field] = baseFeature[field];
     }
 
-    private readonly Dictionary<string, object?> _dictionary = new();
+    private readonly Dictionary<string, object?> _dictionary = [];
 
     public ICollection<IStyle> Styles { get; set; } = new Collection<IStyle>();
     public IEnumerable<string> Fields => _dictionary.Keys;
