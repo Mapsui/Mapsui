@@ -22,13 +22,13 @@ namespace Mapsui;
 /// Map class
 /// </summary>
 /// <remarks>
-/// Map holds all map related infos like the target CRS, layers, widgets and so on.
+/// Map holds all map related info like the target CRS, layers, widgets and so on.
 /// </remarks>
 public class Map : INotifyPropertyChanged, IDisposable
 {
-    private LayerCollection _layers = new();
+    private LayerCollection _layers = [];
     private Color _backColor = Color.White;
-    private IWidget[] oldWidgets = Array.Empty<IWidget>();
+    private IWidget[] _oldWidgets = [];
 
     /// <summary>
     /// Initializes a new map
@@ -36,7 +36,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     public Map()
     {
         BackColor = Color.White;
-        Layers = new LayerCollection();
+        Layers = [];
         Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
     }
@@ -49,7 +49,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// List of Widgets belonging to map
     /// </summary>
-    public ConcurrentQueue<IWidget> Widgets { get; } = new();
+    public ConcurrentQueue<IWidget> Widgets { get; } = [];
 
     /// <summary>
     /// Coordinate reference system (projection type of map).
@@ -81,9 +81,9 @@ public class Map : INotifyPropertyChanged, IDisposable
     private void AssureWidgetsConnected()
     {
         // it would be better if Widgets would be an observable collection then I wouldn't need this workaround
-        if (this.oldWidgets.Length != this.Widgets.Count)
+        if (_oldWidgets.Length != Widgets.Count)
         {
-            foreach (var widget in this.oldWidgets)
+            foreach (var widget in _oldWidgets)
             {
                 if (widget is INotifyPropertyChanged propertyChanged)
                 {
@@ -91,9 +91,9 @@ public class Map : INotifyPropertyChanged, IDisposable
                 }
             }
 
-            this.oldWidgets = this.Widgets.ToArray();
+            _oldWidgets = [.. Widgets];
 
-            foreach (var widget in this.Widgets)
+            foreach (var widget in Widgets)
             {
                 if (widget is INotifyPropertyChanged propertyChanged)
                 {
@@ -274,9 +274,9 @@ public class Map : INotifyPropertyChanged, IDisposable
         OnPropertyChanged(nameof(Layers));
     }
 
-    private MMinMax? GetMinMaxResolution(IEnumerable<double>? resolutions)
+    private static MMinMax? GetMinMaxResolution(IEnumerable<double>? resolutions)
     {
-        if (resolutions == null || resolutions.Count() == 0) return null;
+        if (resolutions == null || !resolutions.Any()) return null;
         resolutions = resolutions.OrderByDescending(r => r).ToList();
         var mostZoomedOut = resolutions.First();
         var mostZoomedIn = resolutions.Last() * 0.5; // Divide by two to allow one extra level to zoom-in
@@ -363,7 +363,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         foreach (var layer in Layers)
         {
-            // remove Event so that no memory leaks occour
+            // remove Event so that no memory leaks occur
             LayerRemoved(layer);
         }
 

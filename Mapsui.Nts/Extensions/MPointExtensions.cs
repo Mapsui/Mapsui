@@ -5,7 +5,7 @@ namespace Mapsui.Nts.Extensions;
 
 public static class MPointExtensions
 {
-    [return: NotNullIfNotNull("point")]
+    [return: NotNullIfNotNull(nameof(point))]
     public static Point? ToPoint(this MPoint? point)
     {
         if (point == null)
@@ -14,7 +14,7 @@ public static class MPointExtensions
         return new Point(point.X, point.Y);
     }
 
-    [return: NotNullIfNotNull("point")]
+    [return: NotNullIfNotNull(nameof(point))]
     public static Coordinate? ToCoordinate(this MPoint? point)
     {
         if (point == null)

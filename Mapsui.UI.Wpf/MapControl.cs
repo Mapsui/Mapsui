@@ -91,7 +91,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             StrokeThickness = 3,
             RadiusX = 0.5,
             RadiusY = 0.5,
-            StrokeDashArray = new DoubleCollection { 3.0 },
+            StrokeDashArray = [3.0],
             Opacity = 0.3,
             VerticalAlignment = VerticalAlignment.Top,
             HorizontalAlignment = HorizontalAlignment.Left,
@@ -303,7 +303,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         if (IsInBoxZoomMode())
         {
-            DrawBbox(e.GetPosition(this));
+            DrawRectangle(e.GetPosition(this));
             return;
         }
 
@@ -337,7 +337,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         RunOnUIThread(() => _selectRectangle.Visibility = Visibility.Collapsed);
     }
 
-    private void DrawBbox(Point newPos)
+    private void DrawRectangle(Point newPos)
     {
         if (_mouseDown)
         {
@@ -442,11 +442,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private float GetPixelDensity()
     {
-        var presentationSource = PresentationSource.FromVisual(this);
-        if (presentationSource == null) throw new Exception("PresentationSource is null");
-        var compositionTarget = presentationSource.CompositionTarget;
-        if (compositionTarget == null) throw new Exception("CompositionTarget is null");
-
+        var presentationSource = PresentationSource.FromVisual(this) 
+            ?? throw new Exception("PresentationSource is null");
+        var compositionTarget = presentationSource.CompositionTarget 
+            ?? throw new Exception("CompositionTarget is null");
         var matrix = compositionTarget.TransformToDevice;
 
         var dpiX = matrix.M11;
@@ -473,5 +472,5 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         GC.SuppressFinalize(this);
     }
 
-    public bool ShiftPressed => Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+    public static bool ShiftPressed => Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
 }
