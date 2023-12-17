@@ -59,7 +59,11 @@ public class FetchWorker : IDisposable // Todo: Make internal
                 if (_fetchDispatcher.TryTake(out var method))
                     await method().ConfigureAwait(false);
                 else
+#if NET8_0_OR_GREATER
+                    await cancellationTokenSource.CancelAsync();
+#else
                     cancellationTokenSource.Cancel();
+#endif
             }
         }
         catch (ObjectDisposedException)

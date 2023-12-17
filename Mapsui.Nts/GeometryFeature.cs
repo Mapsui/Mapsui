@@ -1,4 +1,5 @@
 using System;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using NetTopologySuite.Geometries;
@@ -7,6 +8,11 @@ namespace Mapsui.Nts;
 
 public class GeometryFeature : BaseFeature, IFeature
 {
+    static GeometryFeature()
+    {
+        FeatureExtensions.RegisterFeature<GeometryFeature>(f => new GeometryFeature((GeometryFeature)f));  
+    } 
+    
     public GeometryFeature()
     {
     }

@@ -3,24 +3,64 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Mapsui.Layers;
 
 namespace Mapsui.Extensions;
 
 public static class FeatureExtensions
 {
-    public static T Copy<T>(this T original) where T : IFeature
+    public static Func<IFeature, IFeature> DefaultCopy = StandardCopy;
+    private static readonly Dictionary<Type, Func<IFeature, IFeature>> _copyFeature = new();
+
+    public static void RegisterFeature<T>(Func<IFeature, IFeature> copy)
     {
-        return (T)Activator.CreateInstance(typeof(T), original)!;
+        _copyFeature[typeof(T)] = copy;
     }
 
-    public static IFeature Copy(this IFeature original)
+    public static IFeature StandardCopy(IFeature feature)
     {
-        return (IFeature)Activator.CreateInstance(original.GetType(), original)!;
+        if (feature is PointFeature pointFeature)
+        {
+            return new PointFeature(pointFeature);
+        }
+
+        if (feature is RectFeature rectFeature)
+        {
+            return new RectFeature(rectFeature);
+        }
+
+        if (feature is RasterFeature rasterFeature)
+        {
+            return new RasterFeature(rasterFeature);
+        }
+
+        if (_copyFeature.TryGetValue(feature.GetType(), out var registeredCopy))
+        {
+            registeredCopy(feature);
+        }
+        
+        throw new NotImplementedException();
     }
 
-    public static IEnumerable<IFeature> Copy(this IEnumerable<IFeature> original)
+    public static T Copy<T>(this T original, Func<T, T>? copy = null) where T : IFeature
     {
-        return original.Select(f => f.Copy()).ToList();
+        if (copy == null)
+        {
+            return (T)DefaultCopy(original);
+        }
+        
+        return copy(original);
+    }
+
+    public static IFeature Copy(this IFeature original, Func<IFeature, IFeature>? copy = null)
+    {
+        copy ??= DefaultCopy;
+        return copy(original);
+    }
+
+    public static IEnumerable<IFeature> Copy(this IEnumerable<IFeature> original, Func<IFeature, IFeature>? copy = null)
+    {
+        return original.Select(f => f.Copy(copy)).ToList();
     }
 
     public static string ToDisplayText(this IFeature feature)
@@ -58,7 +98,7 @@ public static class FeatureExtensions
 
 
     public static IEnumerable<IFeature> Project(this IEnumerable<IFeature> features, string? fromCRS,
-        string? toCRS, IProjection? projection = null)
+        string? toCRS, IProjection? projection = null, Func<IFeature, IFeature>? copy = null)
     {
         if (!CrsHelper.IsProjectionNeeded(fromCRS, toCRS))
             return features;
