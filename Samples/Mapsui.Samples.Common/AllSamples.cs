@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Mapsui.Samples.Common;
 
@@ -13,6 +14,6 @@ public static class AllSamples
     
     public static IEnumerable<ISampleBase> GetSamples()
     {
-        return _registeredSamples;
+        return _registeredSamples.OrderBy(f => f.Name);
     }
 }
