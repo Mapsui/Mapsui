@@ -78,6 +78,7 @@ public class WFSProvider : IProvider, IDisposable
     private ICredentials? _credentials;
     private readonly CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
     private readonly SemaphoreSlim _init = new(1, 1);
+    private bool _initialized;
 
     // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
     // It helps to accelerate the rendering process significantly.
@@ -93,7 +94,11 @@ public class WFSProvider : IProvider, IDisposable
     public IXPathQueryManager? GetCapabilitiesCache
     {
         get => _featureTypeInfoQueryManager;
-        set => _featureTypeInfoQueryManager = value;
+        set
+        {
+            _featureTypeInfoQueryManager = value;
+            _initialized = false;
+        }
     }
 
     /// <summary>
@@ -141,7 +146,11 @@ public class WFSProvider : IProvider, IDisposable
     public bool QuickGeometries
     {
         get => _quickGeometries;
-        set => _quickGeometries = value;
+        set
+        {
+            _quickGeometries = value;
+            _initialized = false;
+        }
     }
 
     /// <summary>
@@ -152,7 +161,11 @@ public class WFSProvider : IProvider, IDisposable
     public bool MultiGeometries
     {
         get => _multiGeometries;
-        set => _multiGeometries = value;
+        set
+        {
+            _multiGeometries = value;
+            _initialized = false;
+        }
     }
 
     /// <summary>
@@ -163,7 +176,11 @@ public class WFSProvider : IProvider, IDisposable
     public bool GetFeatureGetRequest
     {
         get => _getFeatureGetRequest;
-        set => _getFeatureGetRequest = value;
+        set
+        {
+            _getFeatureGetRequest = value;
+            _initialized = false;
+        }
     }
 
     /// <summary>
@@ -172,7 +189,11 @@ public class WFSProvider : IProvider, IDisposable
     public IFilter? OgcFilter
     {
         get => _ogcFilter;
-        set => _ogcFilter = value;
+        set
+        {
+            _ogcFilter = value;
+            _initialized = false;
+        }
     }
 
     /// <summary>
@@ -181,7 +202,11 @@ public class WFSProvider : IProvider, IDisposable
     public List<string> Labels
     {
         get => _labels;
-        set => _labels = value;
+        set
+        {
+            _labels = value;
+            _initialized = false;
+        }
     }
 
     /// <summary>
@@ -190,7 +215,11 @@ public class WFSProvider : IProvider, IDisposable
     public ICredentials? Credentials
     {
         get => _credentials;
-        set => _credentials = value;
+        set
+        {
+            _credentials = value;
+            _initialized = false;
+        }
     }
 
     /// <summary>
@@ -199,7 +228,11 @@ public class WFSProvider : IProvider, IDisposable
     public string? ProxyUrl
     {
         get => _proxyUrl;
-        set => _proxyUrl = value;
+        set
+        {
+            _proxyUrl = value;
+            _initialized = false;
+        }
     }
 
     /// <summary>
@@ -314,16 +347,25 @@ public class WFSProvider : IProvider, IDisposable
     /// <summary>Init Async</summary>
     /// <returns></returns>
     public async Task InitAsync()
-    { 
+    {
+        if (_initialized)
+            return;
+        
         await _init.WaitAsync();
         try
         {
+            // test again could be already initialized
+            if (_initialized)
+                return;
+            
             await GetFeatureTypeInfoAsync();
         }
         finally
         {
             _init.Release();
         }
+
+        _initialized = true;
     }
 
     /// <summary>
