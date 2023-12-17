@@ -25,8 +25,15 @@ namespace {{context.Compilation.Assembly.Name}}
 {
     public static class Samples
     {
+        // Avoid double registration
+        private static bool _registered;
+        
         public static void Register() 
         {
+            if (_registered)
+                return;
+                
+            _registered = true;
 
 """);
         
