@@ -4,6 +4,9 @@
     <TargetFrameworks>net8.0</TargetFrameworks>
     <Authors>Mapsui Contributers</Authors>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!--For Debugging Source Generated Files uncomment the line below-->
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

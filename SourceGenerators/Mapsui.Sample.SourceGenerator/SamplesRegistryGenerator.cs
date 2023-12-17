@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
@@ -15,25 +17,41 @@ public class SamplesRegistryGenerator : ISourceGenerator
     public void Execute(GeneratorExecutionContext context)
     {
         // begin creating the source we'll inject into the users compilation
-        var sourceBuilder = new StringBuilder(@"
+        var sourceBuilder = new StringBuilder($$"""
 using System;
-namespace HelloWorldGenerated
+namespace {{context.Compilation.Assembly.Name}}
 {
-    public static class HelloWorld
+    public static class Samples
     {
-        public static void SayHello() 
+        public static void Register() 
         {
-            Console.WriteLine(""Hello from generated code!"");
-            Console.WriteLine(""The following syntax trees existed in the compilation that created this program:"");
-");
+
+""");
 
         // using the context, get a list of syntax trees in the users compilation
         var syntaxTrees = context.Compilation.SyntaxTrees;
 
+        var alreadyRegistered = new HashSet<string>();
+        
         // add the filepath of each tree to the class we're building
         foreach (SyntaxTree tree in syntaxTrees)
         {
-            sourceBuilder.AppendLine($@"Console.WriteLine(@"" - {tree.FilePath}"");");
+            var root = tree.GetRoot();
+            var semanticModel = context.Compilation.GetSemanticModel(tree);
+
+            foreach (var node in root.DescendantNodes())
+            {
+                if (semanticModel.GetSymbolInfo(node).Symbol is ITypeSymbol { IsReferenceType: true, IsAbstract: false } symbol &&
+                    symbol.AllInterfaces.Any(f => f.Name == "ISampleBase"))
+                {
+                    var sampleName = $"{symbol.ContainingNamespace.ToString()}.{symbol.Name}";
+                    if (alreadyRegistered.Add(sampleName))
+                    {
+                        sourceBuilder.AppendLine($@"            Mapsui.Samples.Common.AllSamples.Register(new {sampleName}());");    
+                    }
+                }
+              
+            }
         }
 
         // finish creating the source to inject
@@ -43,6 +61,6 @@ namespace HelloWorldGenerated
 }");
 
         // inject the created source into the users compilation
-        context.AddSource("helloWorldGenerator", SourceText.From(sourceBuilder.ToString(), Encoding.UTF8));
+        context.AddSource("Samples.Designer", SourceText.From(sourceBuilder.ToString(), Encoding.UTF8));
     }
 }
