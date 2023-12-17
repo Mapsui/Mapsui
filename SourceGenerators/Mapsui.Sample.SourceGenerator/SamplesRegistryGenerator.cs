@@ -41,6 +41,7 @@ namespace {{context.Compilation.Assembly.Name}}
         var syntaxTrees = context.Compilation.SyntaxTrees;
 
         var alreadyRegistered = new HashSet<string>();
+        var sampleInterfaces = new HashSet<string>{ "ISampleBase", "ISample", "ISampleTest", "IMapViewSample" };
         
         // add the filepath of each tree to the class we're building
         foreach (SyntaxTree tree in syntaxTrees)
@@ -51,9 +52,9 @@ namespace {{context.Compilation.Assembly.Name}}
             foreach (var node in root.DescendantNodes())
             {
                 if (semanticModel.GetSymbolInfo(node).Symbol is ITypeSymbol { IsReferenceType: true, IsAbstract: false } symbol &&
-                    symbol.AllInterfaces.Any(f => f.Name == "ISampleBase"))
+                    symbol.AllInterfaces.Any(f => sampleInterfaces.Contains(f.Name)))
                 {
-                    var sampleName = $"{symbol.ContainingNamespace.ToString()}.{symbol.Name}";
+                    var sampleName = $"{symbol.ContainingNamespace}.{symbol.Name}";
                     if (alreadyRegistered.Add(sampleName))
                     {
                         sourceBuilder.AppendLine($@"            Mapsui.Samples.Common.AllSamples.Register(new {sampleName}());");    
