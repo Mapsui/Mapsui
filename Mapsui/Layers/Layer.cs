@@ -24,7 +24,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     private readonly FetchMachine _fetchMachine;
 
     public SymbolStyle? SymbolStyle { get; set; }
-    public List<Func<bool>> Animations { get; } = new List<Func<bool>>();
+    public List<Func<bool>> Animations { get; } = [];
     public Delayer Delayer { get; } = new();
 
     /// <summary>
