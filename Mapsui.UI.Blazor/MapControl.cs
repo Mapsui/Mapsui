@@ -114,7 +114,6 @@ public partial class MapControl : ComponentBase, IMapControl
         // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
         System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 
-        Renderer = new MapRenderer();
         RefreshGraphics();
     }
 

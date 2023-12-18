@@ -11,3 +11,6 @@ geoimpact
 gml'
 Mapsui
 iter
+Skia
+attrs
+Dbase
