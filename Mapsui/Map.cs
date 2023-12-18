@@ -13,8 +13,10 @@ using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Styles;
 using Mapsui.Widgets;
+using Mapsui.Widgets.LoggingWidget;
 
 namespace Mapsui;
 
@@ -29,6 +31,46 @@ public class Map : INotifyPropertyChanged, IDisposable
     private LayerCollection _layers = [];
     private Color _backColor = Color.White;
     private IWidget[] _oldWidgets = [];
+
+    public static Map Default()
+    {
+        var map = new Map
+        {
+            CRS = "EPSG:3857"
+        };
+
+#if DEBUG
+        var widget = new LoggingWidget(map)
+        {
+            LogLevelFilter = LogLevel.Trace,
+            TextSize = 11,
+            BackgroundColor = Color.White,
+            Opacity = 0.8f,
+            ErrorTextColor = Color.Red,
+            WarningTextColor = Color.Orange,
+            InformationTextColor = Color.Black,
+            MarginX = 10,
+            MarginY = 10,
+            Width = 250,
+            Height = 200,
+            PaddingX = 2,
+            PaddingY = 2
+        };
+
+        widget.WidgetTouched += (s, e) => {
+            if (!(s is LoggingWidget widget))
+                return;
+            widget.Clear();
+            // This makes trouble when map moving around. The event is marked
+            // as handled, even if we move into widget with pressed button.
+            // e.Handled = true;
+        };
+
+        map.Widgets.Add(widget);
+#endif
+
+        return map;
+    }
 
     /// <summary>
     /// Initializes a new map
