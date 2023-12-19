@@ -26,6 +26,8 @@ using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
 using Rectangle = Microsoft.Maui.Graphics.Rect;
 
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
 namespace Mapsui.UI.Maui;
 
 /// <summary>

@@ -37,6 +37,8 @@ namespace Mapsui.UI.Blazor;
 namespace Mapsui.UI.Wpf;
 #endif
 
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
 public partial class MapControl : INotifyPropertyChanged, IDisposable
 {
     private double _unSnapRotationDegrees;

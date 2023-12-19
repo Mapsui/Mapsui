@@ -19,6 +19,8 @@ using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
 using Logger = Mapsui.Logging.Logger;
 
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
 namespace Mapsui.UI.Maui;
 
 /// <summary>
@@ -118,7 +120,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private float ViewportHeight => ScreenHeight;
 
-    public IRenderCache RenderCache => _renderer.RenderCache;
+    public IRenderCache RenderCache => Renderer.RenderCache;
 
     public bool UseDoubleTap = true;
     public bool UseFling = true;
