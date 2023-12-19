@@ -441,7 +441,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             var map = GetValue(MapProperty) as Map;
             if (map == null)
             {
-                map = new Map();
+                _ownsMap = true;
+                _map = map = new Map();
                 SetValue(MapProperty, map);
             }
 
@@ -455,6 +456,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #else
 
 #pragma warning disable IDISP008
+    private bool _ownsMap;
     private Map? _map;
 #pragma warning restore IDISP008
 
@@ -467,12 +469,27 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #endif
     public Map Map
     {
-        get => _map ??= new Map();
+        get
+        {
+            if (_map == null)
+            {
+                _ownsMap = true;
+                _map = new Map();
+            }
+
+            return _map;
+        }
         set
         {
             if (value is null) throw new ArgumentNullException(nameof(value));
 
             BeforeSetMap();
+            if (_ownsMap)
+            {
+                _map?.Dispose();
+            }
+
+            _ownsMap = false;
             _map = value;
             AfterSetMap(_map);
             OnPropertyChanged();
@@ -569,6 +586,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 Handled = false
             };
         }
+        
 
         return null;
     }
@@ -590,17 +608,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             _invalidateTimer?.Dispose();
             _renderer?.Dispose();
             _renderer = null;
-#if __MAUI__
-            var map = GetValue(MapProperty) as Map;
-            if (map != null)
+            if (_ownsMap)
             {
-                map.Dispose();
-                SetValue(MapProperty, null);
+                _map?.Dispose();
+                _map = null;
             }
- #else   
-            _map?.Dispose();
-            _map = null;
-#endif            
         }
         _invalidateTimer = null;
     }
