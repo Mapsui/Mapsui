@@ -102,9 +102,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private TouchMode _mode;
 
-    private bool _ownsMap;
-    private Map? _map;
-
     public MapControl()
     {
         CommonInitialize();

@@ -412,6 +412,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
     }
     // ReSharper restore RedundantNameQualifier
+    
+#pragma warning disable IDISP008
+    private bool _ownsMap;
+    private Map? _map;
+#pragma warning restore IDISP008
 
 #if __MAUI__
 
@@ -454,12 +459,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
 #else
-
-#pragma warning disable IDISP008
-    private bool _ownsMap;
-    private Map? _map;
-#pragma warning restore IDISP008
-
     /// <summary>
     /// Map holding data for which is shown in this MapControl
     /// </summary>
