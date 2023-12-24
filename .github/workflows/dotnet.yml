@@ -34,8 +34,8 @@ jobs:
          dotnet-version: |
            8.0.x
          include-prerelease: true
-    - name: install android wasm-tools
-      run: dotnet workload install android wasm-tools
+    - name: Install workloads
+      run: dotnet workload install android wasm-tools maui-android
     - name: Restore dependencies Mapsui.Linux
       run: dotnet restore Mapsui.Linux.slnf       
     # Samples Build     
