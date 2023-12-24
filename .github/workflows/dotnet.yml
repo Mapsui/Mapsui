@@ -27,7 +27,6 @@ jobs:
       uses: NuGet/setup-nuget@v1.1.1      
       with:
         nuget-version: latest    
-    # .Net 7 update     
     - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
@@ -36,22 +35,13 @@ jobs:
          include-prerelease: true
     - name: Install workloads
       run: dotnet workload install android wasm-tools maui-android
-    - name: Restore dependencies Mapsui.Linux
-      run: dotnet restore Mapsui.Linux.slnf       
-    # Samples Build     
-    - name: Mapsui.Samples.Avalonia
-      run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj    
-    - name: Build Mapsui.Samples.Droid
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                       
+    - name: Restore dependencies
+      run: dotnet restore Mapsui.Linux.slnf
+    - name: Build Mapsui.Linux.slnf
+      run: dotnet build --no-restore --configuration Debug Mapsui.Linux.slnf
     # Samples Uno WinUI    
     - name: Mapsui.Samples.Uno.WinUI.Skia.Gtk
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Gtk/Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj    
-    # Build Tests      
-    # tests that depend on skia seem not work because of missing dependencies on linux.
-    #- name: Build Mapsui.Rendering.Skia.Tests
-    #  run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
-    - name: Build Mapsui.Tests
-      run: dotnet build  --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj    
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Gtk/Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj
     # Run Tests   
     #- name: Run Mapsui.Rendering.Skia.Tests
     #  run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net8.0/Mapsui.Rendering.Skia.Tests.dll    
