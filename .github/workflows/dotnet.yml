@@ -39,9 +39,6 @@ jobs:
       run: dotnet restore Mapsui.Linux.slnf
     - name: Build Mapsui.Linux.slnf
       run: dotnet build --no-restore --configuration Debug Mapsui.Linux.slnf
-    # Samples Uno WinUI    
-    - name: Mapsui.Samples.Uno.WinUI.Skia.Gtk
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Gtk/Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj
     # Run Tests   
     #- name: Run Mapsui.Rendering.Skia.Tests
     #  run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net8.0/Mapsui.Rendering.Skia.Tests.dll    
