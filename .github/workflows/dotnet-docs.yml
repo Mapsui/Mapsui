@@ -30,8 +30,7 @@ jobs:
         restore-keys: |
           mkdocs-material-
     - run: pip install mkdocs-material 
-    - run: mkdocs gh-deploy --force
-#Begin install mkdocs        
+#End install mkdocs        
 
     - name: Checkout
       uses: actions/checkout@v3
