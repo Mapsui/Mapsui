@@ -33,6 +33,9 @@
         "files": [
           "api/**.yml",
           "api/index.md",
+          "documentation/**.md",
+          "documentation/**/toc.md",
+          "documentation/**.png",
     		  "codesamples/**.md",
           "toc.yml",
           "*.md"
@@ -46,6 +49,7 @@
     "resource": [
       {
         "files": [
+          "documentation/images/**",
           "images/**"
         ],
         "exclude": [
