@@ -3,21 +3,37 @@ using Mapsui.Widgets;
 
 namespace Mapsui.Samples.CustomWidget;
 
-public class CustomWidget : IWidget
+public class CustomWidget : Widget, ITouchableWidget
 {
-    public HorizontalAlignment HorizontalAlignment { get; set; }
-    public VerticalAlignment VerticalAlignment { get; set; }
-    public float MarginX { get; set; } = 20;
-    public float MarginY { get; set; } = 20;
-    public MRect? Envelope { get; set; }
-    public bool HandleWidgetTouched(Navigator navigator, MPoint position)
+    private Color? _color = Color.Orange;
+
+    public Color? Color
+    {
+        get => _color;
+        set
+        {
+            if (_color == value)
+                return;
+            _color = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
+
+    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
         navigator.CenterOn(0, 0);
         return true;
     }
 
-    public Color? Color { get; set; }
-    public int Width { get; set; }
-    public int Height { get; set; }
-    public bool Enabled { get; set; } = true;
+    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        return false;
+    }
+
+    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        return false;
+    }
 }

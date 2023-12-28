@@ -2,20 +2,19 @@
 using Mapsui.Styles;
 using System;
 using System.Collections.Concurrent;
-using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace Mapsui.Widgets.LoggingWidget;
+namespace Mapsui.Widgets.InfoWidgets;
 
 /// <summary>
-/// Widget which shows log entries
+/// Widget that shows log entries
 /// </summary>
 /// <remarks>
 /// With this, the user could see the log entries on the screen.
 /// without saving them to a file or somewhere else.
 /// </remarks>
-public class LoggingWidget : Widget, INotifyPropertyChanged
+public class LoggingWidget : Widget
 {
     public struct LogEntry
     {
@@ -40,17 +39,7 @@ public class LoggingWidget : Widget, INotifyPropertyChanged
 #else
         Enabled = false;
 #endif
-}
-
-/// <summary>
-/// Event handler which is called, when a property changes
-/// </summary>
-public event PropertyChangedEventHandler? PropertyChanged;
-
-    /// <summary>
-    /// Event handler which is called, when the widget is touched
-    /// </summary>
-    public event EventHandler<WidgetTouchedEventArgs>? WidgetTouched;
+    }
 
     /// <summary>
     ///  Event handler for logging
@@ -181,40 +170,6 @@ public event PropertyChangedEventHandler? PropertyChanged;
         }
     }
 
-    private int _width = 250;
-
-    /// <summary>
-    /// Width of widget
-    /// </summary>
-    public int Width
-    {
-        get => _width;
-        set
-        {
-            if (_width == value)
-                return;
-            _width = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private int _height = 142;
-
-    /// <summary>
-    /// Height of widget
-    /// </summary>
-    public int Height
-    {
-        get => _height;
-        set
-        {
-            if (_height == value)
-                return;
-            _height = value;
-            OnPropertyChanged();
-        }
-    }
-
     private Color _backgroundColor = Color.White;
 
     /// <summary>
@@ -283,18 +238,11 @@ public event PropertyChangedEventHandler? PropertyChanged;
         }
     }
 
-    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
-    {
-        var args = new WidgetTouchedEventArgs(position);
-
-        WidgetTouched?.Invoke(this, args);
-
-        return args.Handled;
-    }
-
     private void UpdateNumOfLogEntries()
     {
-        var newNumOfLogEntries = (int)((Height - PaddingY) / (TextSize + PaddingY));
+        UpdateEnvelope(Width, Height, _map.Navigator.Viewport.Width, _map.Navigator.Viewport.Height);
+
+        var newNumOfLogEntries = (int)(((Envelope?.Height ?? Height) - PaddingY) / (TextSize + PaddingY));
 
         while (_listOfLogEntries.Count > newNumOfLogEntries)
         {
@@ -331,13 +279,10 @@ public event PropertyChangedEventHandler? PropertyChanged;
         }
     }
 
-    internal void OnPropertyChanged([CallerMemberName] string name = "")
+    public override void OnPropertyChanged([CallerMemberName] string name = "")
     {
-        if (name == nameof(TextSize) || name == nameof(PaddingY) || name == nameof(Height))
+        if (name == nameof(Envelope) || name == nameof(TextSize) || name == nameof(PaddingY) || name == nameof(Height))
             UpdateNumOfLogEntries();
-
-        if (name == nameof(MarginX) || name == nameof(MarginY) || name == nameof(Width) || name == nameof(Height))
-            Envelope = new MRect(MarginX, MarginY, MarginX + Width, MarginY + Height);
 
         if (name == nameof(Enabled))
         {
@@ -350,6 +295,6 @@ public event PropertyChangedEventHandler? PropertyChanged;
         if (name == nameof(LogLevelFilter))
             UpdateLogEntries();
 
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        base.OnPropertyChanged(name);
     }
 }

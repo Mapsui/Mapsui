@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Mapsui.Widgets.ButtonWidgets;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
-namespace Mapsui.Widgets.PerformanceWidget;
+namespace Mapsui.Widgets.InfoWidgets;
 
 /// <summary>
 /// Widget which shows the drawing performance
@@ -11,7 +10,7 @@ namespace Mapsui.Widgets.PerformanceWidget;
 /// With this, the user could see the drawing performance on the screen.
 /// It shows always the values for the last draw before this draw.
 /// </remarks>
-public class PerformanceWidget : Widget, INotifyPropertyChanged
+public class PerformanceWidget : TextButtonWidget, INotifyPropertyChanged
 {
     public PerformanceWidget(Utilities.Performance performance)
     {
@@ -22,16 +21,6 @@ public class PerformanceWidget : Widget, INotifyPropertyChanged
     /// Performance object which holds the values
     /// </summary>
     public Utilities.Performance Performance { get; }
-
-    /// <summary>
-    /// Event handler which is called, when the button is touched
-    /// </summary>
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    /// <summary>
-    /// Event handler which is called, when the button is touched
-    /// </summary>
-    public event EventHandler<WidgetTouchedEventArgs>? WidgetTouched;
 
     private float _opacity = 0.8f;
 
@@ -50,17 +39,20 @@ public class PerformanceWidget : Widget, INotifyPropertyChanged
         }
     }
 
-    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
+    private float _textSize = 12;
+
+    /// <summary>
+    /// TextSize for text
+    /// </summary>
+    public float TextSize
     {
-        var args = new WidgetTouchedEventArgs(position);
-
-        WidgetTouched?.Invoke(this, args);
-
-        return args.Handled;
-    }
-
-    internal void OnPropertyChanged([CallerMemberName] string name = "")
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        get => _textSize;
+        set
+        {
+            if (_textSize == value)
+                return;
+            _textSize = value;
+            OnPropertyChanged();
+        }
     }
 }

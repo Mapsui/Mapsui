@@ -60,14 +60,12 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
         VerticalAlignment = DefaultScaleBarVerticalAlignment;
 
         _maxWidth = 100;
-        _height = 100;
+        Height = 100;
         _textAlignment = DefaultScaleBarAlignment;
         _scaleBarMode = DefaultScaleBarMode;
 
         _unitConverter = MetricUnitConverter.Instance;
     }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
 
     private float _maxWidth;
 
@@ -85,26 +83,6 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
                 return;
 
             _maxWidth = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private float _height;
-
-    /// <summary>
-    /// Real height of scalebar. Depends on number of unit converters and text size.
-    /// Is calculated by renderer.
-    /// </summary>
-    public float Height
-    {
-        get => _height;
-        set
-        {
-            // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if (_height == value)
-                return;
-
-            _height = value;
             OnPropertyChanged();
         }
     }
@@ -316,15 +294,17 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
 
         var maxScaleBarLength = Math.Max(scaleBarLength1, scaleBarLength2);
 
-        var posX = CalculatePositionX(0, (int)viewport.Width, _maxWidth);
-        var posY = CalculatePositionY(0, (int)viewport.Height, _height);
+        UpdateEnvelope(_maxWidth, Height, viewport.Width, viewport.Height);
+
+        var posX = (float)(Envelope?.MinX ?? 0.0);
+        var posY = (float)(Envelope?.MinY ?? 0.0);
 
         var left = posX + stroke * 0.5f * Scale;
         var right = posX + _maxWidth - stroke * 0.5f * Scale;
         var center1 = posX + (_maxWidth - scaleBarLength1) / 2;
         var center2 = posX + (_maxWidth - scaleBarLength2) / 2;
         // Top position is Y in the middle of scale bar line
-        var top = posY + (drawNoSecondScaleBar ? _height - stroke * 0.5f * Scale : _height * 0.5f);
+        var top = posY + (drawNoSecondScaleBar ? Height - stroke * 0.5f * Scale : Height * 0.5f);
 
         switch (TextAlignment)
         {
@@ -423,14 +403,16 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
     {
         var drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
 
-        var posX = CalculatePositionX(0, (int)viewport.Width, _maxWidth);
-        var posY = CalculatePositionY(0, (int)viewport.Height, _height);
+        UpdateEnvelope(_maxWidth, Height, viewport.Width, viewport.Height);
+
+        var posX = (float)(Envelope?.MinX ?? 0.0);
+        var posY = (float)(Envelope?.MinY ?? 0.0);
 
         var left = posX + (stroke + TextMargin) * Scale;
         var right1 = posX + _maxWidth - (stroke + TextMargin) * Scale - (float)textSize1.Width;
         var right2 = posX + _maxWidth - (stroke + TextMargin) * Scale - (float)textSize2.Width;
         var top = posY;
-        var bottom = posY + _height - (float)textSize2.Height;
+        var bottom = posY + Height - (float)textSize2.Height;
 
         switch (TextAlignment)
         {
@@ -472,13 +454,6 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
         }
     }
 
-    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
-    {
-        return false;
-    }
-
-    public override bool Touchable => false;
-
     public bool CanProject()
     {
         if (_map?.CRS == null)
@@ -499,13 +474,6 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
             return false;
         }
         return true;
-    }
-
-
-    internal void OnPropertyChanged([CallerMemberName] string name = "")
-    {
-        var handler = PropertyChanged;
-        handler?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 
     /// Calculates the required length and value of a scalebar

@@ -1,37 +1,64 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Mapsui.Styles;
+﻿using Mapsui.Widgets.BoxWidgets;
+using System;
 
-namespace Mapsui.Widgets.ButtonWidget;
+namespace Mapsui.Widgets.ButtonWidgets;
 
 /// <summary>
-/// Widget which shows a buttons
+/// Widget that shows a button with an icon
 /// </summary>
 /// <remarks>
 /// With this, the user could add buttons with SVG icons to the map.
 /// 
 /// Usage
-/// To show a ButtonWidget, add a instance of the ButtonWidget to Map.Widgets by
+/// To show a IconButtonWidget, add a instance of the IconButtonWidget to Map.Widgets by
 /// 
-///   map.Widgets.Add(new ButtonWidget(map, picture));
+///   map.Widgets.Add(new IconButtonWidget(map, picture));
 ///   
 /// Customize
 /// Picture: SVG image to display for button
 /// Rotation: Value for rotation in degrees
 /// Opacity: Opacity of button
 /// </remarks>
-public class ButtonWidget : TextBox, INotifyPropertyChanged
+public class IconButtonWidget : BoxWidget, ITouchableWidget
 {
     /// <summary>
     /// Event handler which is called, when the button is touched
     /// </summary>
-    public event PropertyChangedEventHandler? PropertyChanged;
+    public event EventHandler<WidgetTouchedEventArgs>? Touched;
+
+    private int _paddingX = 0;
 
     /// <summary>
-    /// Event handler which is called, when the button is touched
+    /// Padding left and right for icon inside the Widget
     /// </summary>
-    public event EventHandler<WidgetTouchedEventArgs>? WidgetTouched;
+    public int PaddingX
+    {
+        get => _paddingX;
+        set
+        {
+            if (_paddingX == value)
+                return;
+            _paddingX = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private int _paddingY = 0;
+
+    /// <summary>
+    /// Padding left and right for icon inside the Widget
+    /// </summary>
+    public int PaddingY
+    {
+        get => _paddingY;
+        set
+        {
+            if (_paddingY == value)
+                return;
+            _paddingY = value;
+            OnPropertyChanged();
+        }
+    }
 
     private string? _svgImage;
 
@@ -101,19 +128,22 @@ public class ButtonWidget : TextBox, INotifyPropertyChanged
         }
     }
 
-    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
-    {
-        var args = new WidgetTouchedEventArgs(position);
+    public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
 
-        WidgetTouched?.Invoke(this, args);
+    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        Touched?.Invoke(this, args);
 
         return args.Handled;
     }
 
-    internal void OnPropertyChanged([CallerMemberName] string name = "")
+    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        return false;
     }
 
-    public override bool Touchable => true;
+    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        return false;
+    }
 }

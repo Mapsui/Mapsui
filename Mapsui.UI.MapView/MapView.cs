@@ -2,7 +2,7 @@
 using Mapsui.UI.Objects;
 using Mapsui.Widgets;
 using Mapsui.Extensions;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
 using SkiaSharp;
 using Svg.Skia;
 using System;
@@ -39,10 +39,10 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private readonly ObservableMemoryLayer<Callout> _mapCalloutLayer;
     private readonly ObservableMemoryLayer<Pin> _mapPinLayer;
     private readonly ObservableMemoryLayer<Drawable> _mapDrawableLayer;
-    private ButtonWidget? _mapZoomInButton;
-    private ButtonWidget? _mapZoomOutButton;
-    private ButtonWidget? _mapMyLocationButton;
-    private ButtonWidget? _mapNorthingButton;
+    private IconButtonWidget? _mapZoomInButton;
+    private IconButtonWidget? _mapZoomOutButton;
+    private IconButtonWidget? _mapMyLocationButton;
+    private IconButtonWidget? _mapNorthingButton;
     private readonly SKPicture _pictMyLocationNoCenter;
     private readonly SKPicture _pictMyLocationCenter;
     private readonly SKPicture _pictZoomIn;
@@ -842,16 +842,16 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         UpdateButtonPositions();
     }
 
-    private ButtonWidget CreateButton(float x, float y, SKPicture picture, Action<object?, WidgetTouchedEventArgs> action)
+    private IconButtonWidget CreateButton(float x, float y, SKPicture picture, Action<object?, WidgetTouchedEventArgs> action)
     {
-        var result = new ButtonWidget
+        var result = new IconButtonWidget
         {
             Picture = picture,
             Envelope = new MRect(x, y, x + ButtonSize, y + ButtonSize),
             Rotation = 0,
             Enabled = true,
         };
-        result.WidgetTouched += (s, e) => action(s, e);
+        result.Touched += (s, e) => action(s, e);
         result.PropertyChanged += (s, e) => RefreshGraphics();
 
         return result;

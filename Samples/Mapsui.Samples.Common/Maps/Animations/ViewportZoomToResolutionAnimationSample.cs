@@ -1,12 +1,11 @@
 ﻿using Mapsui.Animations;
 using Mapsui.Extensions;
+using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
 using Mapsui.Widgets.ScaleBar;
-using Mapsui.Widgets.Zoom;
 using System.Threading.Tasks;
-using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
@@ -28,11 +27,11 @@ public class ViewportZoomToResolutionAnimationSample : ISample
         map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
 
         var rotateButton = CreateButton("Zoom in", VerticalAlignment.Top);
-        rotateButton.WidgetTouched += (s, e) => map.Navigator.ZoomTo(map.Navigator.Viewport.Resolution * 0.5, 500, Easing.CubicOut);
+        rotateButton.Touched += (s, e) => map.Navigator.ZoomTo(map.Navigator.Viewport.Resolution * 0.5, 500, Easing.CubicOut);
         map.Widgets.Add(rotateButton);
 
         var rotateBackButton = CreateButton("Zoom out", VerticalAlignment.Bottom);
-        rotateBackButton.WidgetTouched += (s, e) => map.Navigator.ZoomTo(map.Navigator.Viewport.Resolution * 2, 500, Easing.CubicOut);
+        rotateBackButton.Touched += (s, e) => map.Navigator.ZoomTo(map.Navigator.Viewport.Resolution * 2, 500, Easing.CubicOut);
         map.Widgets.Add(rotateBackButton);
 
         return map;
@@ -45,7 +44,7 @@ public class ViewportZoomToResolutionAnimationSample : ISample
         VerticalAlignment = VerticalAlignment.Top
     };
 
-    private static ButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new ButtonWidget
+    private static TextButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new TextButtonWidget
     {
         Text = text,
         MarginX = 20,

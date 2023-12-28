@@ -1,10 +1,11 @@
 ﻿using Mapsui.Animations;
 using Mapsui.Extensions;
+using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
-using Mapsui.Widgets.Zoom;
+using Mapsui.Widgets.BoxWidgets;
+using Mapsui.Widgets.ButtonWidgets;
 using System.Threading.Tasks;
-using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
@@ -38,7 +39,7 @@ public class ViewportZoomAroundLocationAnimationSample : ISample
         return map;
     }
 
-    private static IWidget CreateTextBox(string text) => new TextBox()
+    private static IWidget CreateTextBox(string text) => new TextBoxWidget()
     {
         Text = text,
         VerticalAlignment = VerticalAlignment.Top,

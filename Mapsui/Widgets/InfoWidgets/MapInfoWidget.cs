@@ -1,10 +1,15 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Styles;
+using Mapsui.Widgets.BoxWidgets;
 using System;
 using System.Text;
 
-namespace Mapsui.Widgets;
-public class MapInfoWidget : TextBox
+namespace Mapsui.Widgets.InfoWidgets;
+
+/// <summary>
+/// Widget displaying infos about touched features
+/// </summary>
+public class MapInfoWidget : TextBoxWidget
 {
     private readonly Map _map;
 

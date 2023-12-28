@@ -1,6 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidgets;
 using Mapsui.Widgets.Zoom;
 using System.Threading.Tasks;
 

@@ -2,7 +2,7 @@
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
 using System;
 using System.IO;
 using System.Reflection;
@@ -24,9 +24,9 @@ public class ButtonSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
         var clickMeButton = CreateButton("Click me", VerticalAlignment.Top, HorizontalAlignment.Left);
-        clickMeButton.WidgetTouched += (s, a) =>
+        clickMeButton.Touched += (s, a) =>
             {
-                ((ButtonWidget?)s!).Text = $"Clicked {++clickCount} times";
+                ((TextButtonWidget?)s!).Text = $"Clicked {++clickCount} times";
                 map.RefreshGraphics();
             };
         map.Widgets.Add(clickMeButton);
@@ -38,10 +38,10 @@ public class ButtonSample : ISample
         return Task.FromResult(map);
     }
 
-    private static ButtonWidget CreateButton(string text,
+    private static TextButtonWidget CreateButton(string text,
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
     {
-        return new ButtonWidget()
+        return new TextButtonWidget()
         {
             Text = text,
             VerticalAlignment = verticalAlignment,
@@ -56,12 +56,11 @@ public class ButtonSample : ISample
         };
     }
 
-    private static ButtonWidget CreateButtonWithImage(
+    private static IconButtonWidget CreateButtonWithImage(
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
     {
-        return new ButtonWidget()
+        return new IconButtonWidget()
         {
-            Text = "hi", // This text is apparently needed to update to position of the button
             SvgImage = LoadSomeSvgAsString(),
             VerticalAlignment = verticalAlignment,
             HorizontalAlignment = horizontalAlignment,
@@ -70,7 +69,8 @@ public class ButtonSample : ISample
             PaddingX = 10,
             PaddingY = 8,
             CornerRadius = 8,
-            Envelope = new MRect(0, 0, 64, 64)
+            Width = 64,
+            Height = 64
         };
     }
 

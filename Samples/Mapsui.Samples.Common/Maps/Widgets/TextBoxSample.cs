@@ -2,6 +2,7 @@
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
+using Mapsui.Widgets.BoxWidgets;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
@@ -34,7 +35,7 @@ public class TextBoxSample : ISample
     private static IWidget CreateTextBox(string text,
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
     {
-        return new TextBox()
+        return new TextBoxWidget()
         {
             Text = text,
             VerticalAlignment = verticalAlignment,

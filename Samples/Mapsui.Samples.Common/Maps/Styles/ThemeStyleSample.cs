@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Nts.Providers.Shapefile;
@@ -9,9 +7,10 @@ using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using Mapsui.UI;
-using Mapsui.Widgets;
+using Mapsui.Widgets.InfoWidgets;
 using NetTopologySuite.Geometries;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 

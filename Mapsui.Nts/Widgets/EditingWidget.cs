@@ -3,7 +3,8 @@ using Mapsui.UI;
 using Mapsui.Widgets;
 
 namespace Mapsui.Nts.Widgets;
-public class EditingWidget : Widget, IWidgetExtended
+
+public class EditingWidget : TouchableWidget
 {
     public IMapControl MapControl { get; }
     public EditManager EditManager { get; }
@@ -16,12 +17,7 @@ public class EditingWidget : Widget, IWidgetExtended
         EditManipulation = editManipulation;
     }
 
-    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
-    {
-        return false;
-    }
-
-    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetArgs args)
+    public override bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
         var screenPosition = position;
 
@@ -39,7 +35,7 @@ public class EditingWidget : Widget, IWidgetExtended
         return false;
     }
 
-    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetArgs args)
+    public override bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
         if (!args.LeftButton)
             return false;
@@ -60,7 +56,7 @@ public class EditingWidget : Widget, IWidgetExtended
         return false;
     }
 
-    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetArgs args)
+    public override bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
         if (!args.LeftButton)
             return false;

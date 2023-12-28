@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using Mapsui.Nts.Providers;
 using Mapsui.Projections;
-using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Rendering.Skia.Cache;
@@ -13,8 +9,11 @@ using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 using Mapsui.Widgets;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
 using NetTopologySuite.Geometries;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 #pragma warning disable IDISP001 // Dispose created
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
@@ -41,13 +40,13 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
         _map.Layers.Add(new RasterizingTileLayer(CreatePolygonLayer()));
         var home = Mercator.FromLonLat(0, 0);
         _map.Navigator.CenterOnAndZoomTo(home, _map.Navigator.Resolutions[9]);
-        var buttonWidget = new ButtonWidget
+        var buttonWidget = new TextButtonWidget
         {
             Text = "Change Color",
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top
         };
-        buttonWidget.WidgetTouched += ChangeColor;
+        buttonWidget.Touched += ChangeColor;
         _map.Widgets.Enqueue(buttonWidget);
 
         return _map;

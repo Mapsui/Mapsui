@@ -2,7 +2,7 @@
 using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
 using System.Threading.Tasks;
 using Mapsui.Styles;
 
@@ -23,17 +23,17 @@ public class ViewportRotateAnimationSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
         var rotateButton = CreateButton("Click to rotate clockwise", VerticalAlignment.Top);
-        rotateButton.WidgetTouched += (s, e) => map.Navigator.RotateTo(map.Navigator.Viewport.Rotation + 45, 500, Easing.CubicIn);
+        rotateButton.Touched += (s, e) => map.Navigator.RotateTo(map.Navigator.Viewport.Rotation + 45, 500, Easing.CubicIn);
         map.Widgets.Add(rotateButton);
 
         var rotateBackButton = CreateButton("Click to rotate counterclockwise", VerticalAlignment.Bottom);
-        rotateBackButton.WidgetTouched += (s, e) => map.Navigator.RotateTo(map.Navigator.Viewport.Rotation - 45, 500, Easing.CubicIn);
+        rotateBackButton.Touched += (s, e) => map.Navigator.RotateTo(map.Navigator.Viewport.Rotation - 45, 500, Easing.CubicIn);
         map.Widgets.Add(rotateBackButton);
 
         return map;
     }
 
-    private static ButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new ButtonWidget
+    private static TextButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new TextButtonWidget
     {
         Text = text,
         MarginX = 20,

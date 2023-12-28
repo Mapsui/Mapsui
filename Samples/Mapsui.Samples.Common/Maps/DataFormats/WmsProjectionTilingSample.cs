@@ -1,20 +1,15 @@
-﻿using Mapsui.Cache;
-using Mapsui.Layers;
-using Mapsui.Providers.Wms;
-using System.Threading.Tasks;
-using Mapsui.Extensions.Cache;
-using Mapsui.Nts.Extensions;
-using Mapsui.Providers;
-using Mapsui.Styles;
-using NetTopologySuite.Geometries;
+﻿using Mapsui.Extensions.Cache;
 using Mapsui.Extensions.Projections;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Providers.Wms;
+using Mapsui.Samples.Common.Utilities;
+using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
 using Mapsui.Widgets;
-using NetTopologySuite.Utilities;
-using static System.Net.Mime.MediaTypeNames;
-using System.Resources;
-using Mapsui.Samples.Common.Utilities;
+using Mapsui.Widgets.ButtonWidgets;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 

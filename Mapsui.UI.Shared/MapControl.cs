@@ -12,7 +12,73 @@ using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
+
+/* Unmerged change from project 'Mapsui.UI.Maui (net6.0)'
+Before:
 using Mapsui.Widgets;
+
+#if __MAUI__
+After:
+using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidget;
+
+
+#if __MAUI__
+*/
+
+/* Unmerged change from project 'Mapsui.UI.Maui (net8.0)'
+Before:
+using Mapsui.Widgets;
+
+#if __MAUI__
+After:
+using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidget;
+
+
+#if __MAUI__
+*/
+
+/* Unmerged change from project 'Mapsui.UI.Maui (net7.0)'
+Before:
+using Mapsui.Widgets;
+
+#if __MAUI__
+After:
+using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidget;
+
+
+#if __MAUI__
+*/
+
+/* Unmerged change from project 'Mapsui.UI.Blazor (net7.0)'
+Before:
+using Mapsui.Widgets;
+
+#if __MAUI__
+After:
+using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidget;
+
+
+#if __MAUI__
+*/
+
+/* Unmerged change from project 'Mapsui.UI.Blazor (net8.0)'
+Before:
+using Mapsui.Widgets;
+
+#if __MAUI__
+After:
+using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidget;
+
+
+#if __MAUI__
+*/
+using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidgets;
 
 #if __MAUI__
 using Microsoft.Maui.Controls;
@@ -54,14 +120,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private int _updateInterval = 16;
     // Stopwatch for measuring drawing times
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
-    // saving list of extended Widgets
-    private List<IWidgetExtended>? _extendedWidgets;
     // old widget Collection to compare if widget Collection was changed.
     private ConcurrentQueue<IWidget>? _widgetCollection;
     // saving list of touchable Widgets
-    private List<IWidget>? _touchableWidgets;
-    // keeps track of the widgets count to see if i need to recalculate the extended widgets.
-    private int _updateWidget = 0;
+    private List<ITouchableWidget>? _touchableWidgets;
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
 
@@ -581,14 +643,18 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool HandleMoving(MPoint position, bool leftButton, int clickCount, bool shift)
     {
-        var extendedWidgets = GetExtendedWidgets();
-        if (extendedWidgets.Count == 0)
+        var touchableWidgets = GetTouchableWidgets();
+
+        if (touchableWidgets.Count == 0)
             return false;
 
-        var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
-        foreach (var extendedWidget in extendedWidgets)
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, position, touchableWidgets);
+
+        foreach (var widget in touchedWidgets)
         {
-            if (extendedWidget.HandleWidgetMoving(Map.Navigator, position, widgetArgs))
+            var args = new WidgetTouchedEventArgs(position, clickCount, leftButton, shift);
+
+            if (widget.HandleWidgetMoving(Map.Navigator, position, args))
                 return true;
         }
 
@@ -607,25 +673,21 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return result;
     }
 
-
     private bool HandleTouching(MPoint position, bool leftButton, int clickCount, bool shift)
     {
         var touchableWidgets = GetTouchableWidgets();
-        var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
+
+        if (touchableWidgets.Count == 0)
+            return false;
+
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, position, touchableWidgets);
 
         foreach (var widget in touchedWidgets)
         {
-            if (widget is IWidgetExtended extendedWidget)
-            {
-                var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
-                if (extendedWidget.HandleWidgetTouching(Map.Navigator, position, widgetArgs))
-                    return true;
-            }
-            else
-            {
-                // Handle the touched avoid duplicated touched events
+            var args = new WidgetTouchedEventArgs(position, clickCount, leftButton, shift);
+
+            if (widget.HandleWidgetTouching(Map.Navigator, position, args))
                 return true;
-            }
         }
 
         return false;
@@ -634,52 +696,30 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private bool HandleTouched(MPoint position, bool leftButton, int clickCount, bool shift)
     {
         var touchableWidgets = GetTouchableWidgets();
-        var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
+
+        if (touchableWidgets.Count == 0)
+            return false;
+
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, position, touchableWidgets);
 
         foreach (var widget in touchedWidgets)
         {
-            if (widget is IWidgetExtended extendedWidget)
+            if (widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {
-                var widgetArgs = new WidgetArgs(clickCount, leftButton, shift);
-                if (extendedWidget.HandleWidgetTouched(Map.Navigator, position, widgetArgs))
-                    return true;
+                // The HyperLink is a special case because we need platform specific code to open the
+                // link in a browswer. If the link is not handled within the widget we handle it
+                // here and return true to indicate this is handled.
+                OpenBrowser(hyperlink.Url!);
+                return true;
             }
-            else
-            {
-                if (widget.HandleWidgetTouched(Map.Navigator, position))
-                    return true;
-                else if (widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
-                {
-                    // The HyperLink is a special case because we need platform specific code to open the
-                    // link in a browswer. If the link is not handled within the widget we handle it
-                    // here and return true to indicate this is handled.
-                    OpenBrowser(hyperlink.Url!);
-                    return true;
-                }
-            }
+
+            var args = new WidgetTouchedEventArgs(position, clickCount, leftButton, shift);
+
+            if (widget.HandleWidgetTouched(Map.Navigator, position, args))
+                return true;
         }
 
         return false;
-    }
-
-    private List<IWidgetExtended> GetExtendedWidgets()
-    {
-        AssureWidgets();
-        if (_updateWidget != Map.Widgets.Count || _extendedWidgets == null)
-        {
-            _updateWidget = Map.Widgets.Count;
-            _extendedWidgets = [];
-            var widgetsOfMapAndLayers = Map.GetWidgetsOfMapAndLayers().ToList();
-            foreach (var widget in widgetsOfMapAndLayers)
-            {
-                if (widget is IWidgetExtended extendedWidget)
-                {
-                    _extendedWidgets.Add(extendedWidget);
-                }
-            }
-        }
-
-        return _extendedWidgets;
     }
 
     private void AssureWidgets()
@@ -687,13 +727,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (_widgetCollection != Map.Widgets)
         {
             // reset widgets
-            _extendedWidgets = null;
             _touchableWidgets = null;
             _widgetCollection = Map.Widgets;
         }
     }
 
-    private List<IWidget> GetTouchableWidgets()
+    private List<ITouchableWidget> GetTouchableWidgets()
     {
         AssureWidgets();
         if (_updateTouchableWidget != Map.Widgets.Count || _touchableWidgets == null)
@@ -703,9 +742,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             var touchableWidgets = Map.GetWidgetsOfMapAndLayers().ToList();
             foreach (var widget in touchableWidgets)
             {
-                if (widget is IWidgetTouchable { Touchable: false }) continue;
-
-                _touchableWidgets.Add(widget);
+                if (widget is ITouchableWidget)
+                    _touchableWidgets.Add((ITouchableWidget)widget);
             }
         }
 

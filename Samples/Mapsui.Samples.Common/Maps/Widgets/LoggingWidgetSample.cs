@@ -4,7 +4,7 @@ using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
-using Mapsui.Widgets.LoggingWidget;
+using Mapsui.Widgets.InfoWidgets;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
@@ -33,14 +33,15 @@ public class LoggingWidgetSample : ISample
             WarningTextColor = Color.Orange,
             InformationTextColor = Color.Black,
             MarginX = 10,
-            MarginY = 10,
+            MarginY = 20,
             Width = 250,
             Height = 200,
             PaddingX = 2,
-            PaddingY = 2
+            PaddingY = 2,
         };
 
-        widget.WidgetTouched += OnClick;
+        widget.HorizontalAlignment = HorizontalAlignment.Stretch;
+        widget.VerticalAlignment = VerticalAlignment.Stretch;
 
         map.Widgets.Add(widget);
 
@@ -60,17 +61,5 @@ public class LoggingWidgetSample : ISample
         widget.LogLevelFilter = LogLevel.Information;
 
         return Task.FromResult(map);
-    }
-
-    public void OnClick(object? sender, WidgetTouchedEventArgs args)
-    {
-        if (sender == null)
-            return;
-
-        var widget = (LoggingWidget)sender;
-
-        widget.Clear();
-
-        args.Handled = true;
     }
 }

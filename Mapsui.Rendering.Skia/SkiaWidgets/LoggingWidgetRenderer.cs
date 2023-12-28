@@ -1,7 +1,7 @@
 ﻿using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
-using Mapsui.Widgets.LoggingWidget;
+using Mapsui.Widgets.InfoWidgets;
 using SkiaSharp;
 using System;
 
@@ -37,13 +37,17 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
             return;
 
         UpdateSettings(loggingWidget);
+        loggingWidget.UpdateEnvelope(loggingWidget.Width, loggingWidget.Height, (float)viewport.Width, (float)viewport.Height);
 
-        var marginX = loggingWidget.MarginX;
-        var marginY = loggingWidget.MarginY;
-        var width = loggingWidget.Width;
-        var height = loggingWidget.Height;
-        var paddingX = loggingWidget.PaddingX;
-        var paddingY = loggingWidget.PaddingY;
+        if (loggingWidget.Envelope == null)
+            return;
+
+        var marginX = (float)loggingWidget.Envelope.Left;
+        var marginY = (float)loggingWidget.Envelope.Bottom;
+        var width = (float)loggingWidget.Envelope.Width;
+        var height = (float)loggingWidget.Envelope.Height;
+        var paddingX = (float)loggingWidget.PaddingX;
+        var paddingY = (float)loggingWidget.PaddingY;
 
         var rect = new SKRect(marginX, marginY, marginX + width, marginY + height);
 
