@@ -40,7 +40,6 @@ Add code to the constructor:
         public MainPage()
         {
             this.InitializeComponent();
-
             MyMap.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
         }
 

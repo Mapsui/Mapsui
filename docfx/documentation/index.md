@@ -17,9 +17,9 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks. Try th
 
         ```csharp
         builder
-        .UseMauiApp<App>()
-        .UseSkiaSharp(true)
-        .ConfigureFonts(fonts =>  
+            .UseMauiApp<App>()
+            .UseSkiaSharp(true)
+            .ConfigureFonts(fonts =>  
         ```
 
         and add namespace 'SkiaSharp.Views.Maui.Controls.Hosting':
@@ -87,7 +87,6 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks. Try th
         public MainPage()
         {
             this.InitializeComponent();
-
             MyMap.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
         }
         ```
@@ -230,9 +229,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks. Try th
 
         ```csharp
         var mapControl = new Mapsui.UI.Wpf.MapControl();
-
         mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-
         Content = mapControl;
         ```
 
@@ -274,7 +271,6 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks. Try th
         public MainPage()
         {
             this.InitializeComponent();
-
             MyMap.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
         }
         ```
@@ -291,7 +287,10 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks. Try th
         PM> Install-Package Mapsui.Forms
         ```
 
-        **Step 3:** Add this line to the xaml file: `xmlns:mapsui="clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms"` 
+        **Step 3:** Add this line to the xaml file: 
+        ```xml
+        xmlns:mapsui="clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms"
+        ```
 
         **Step 4:** Add the Mapsui.Forms view with
 
@@ -336,10 +335,12 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks. Try th
         };
 
         var tileLayer = OpenStreetMap.CreateTileLayer();
-
         map.Layers.Add(tileLayer);
-        map.Widgets.Add(new Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Widgets.Alignment.Center, HorizontalAlignment = Widgets.HorizontalAlignment.Left, VerticalAlignment = Widgets.VerticalAlignment.Bottom });
-
+        map.Widgets.Add(new Widgets.ScaleBar.ScaleBarWidget(map) { 
+            TextAlignment = Widgets.Alignment.Center, 
+            HorizontalAlignment = Widgets.HorizontalAlignment.Left, 
+            VerticalAlignment = Widgets.VerticalAlignment.Bottom 
+        });
         mapView.Map = map;
         ```
 
@@ -416,7 +417,6 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks. Try th
             SetContentView(Resource.Layout.Main);
 
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             mapControl.Map = map;
@@ -493,7 +493,6 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks. Try th
         public MainPage()
         {
             this.InitializeComponent();
-
             MyMap.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
         }
         ```
@@ -517,6 +516,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks. Try th
             </ItemGroup>
         </Target>
         ```
+        
         - System.MissingMethodException: Method not found:
         See for solution [here](https://github.com/unoplatform/uno/issues/9297).
         
