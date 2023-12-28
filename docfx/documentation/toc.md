@@ -7,7 +7,7 @@
 ## [Quickstart Uno WinUI](getting-started-uno-winui.md)
 ## [Quickstart Eto](getting-started-eto.md)
 ## [Quickstart Xamarin.Forms](getting-started-xamarin-forms.md)
-## [Quickstart Uno](getting-started-uno.html)
+## [Quickstart Uno](getting-started-uno.md)
 ## [Quickstart Android](getting-started-android.md)
 ## [Quickstart iOS](getting-started-ios.md)
 
