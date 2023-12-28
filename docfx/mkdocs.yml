@@ -1,5 +1,6 @@
 site_name: Mapsui Documentation
 docs_dir: documentation
+site_dir: _site/documentation
 theme:
   name: 'material'
   features:
