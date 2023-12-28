@@ -30,7 +30,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks:
         **Step 2:** In the package manager console type:
 
         ```console
-        PM> Install-Package Mapsui.Maui -pre
+        PM> Install-Package Mapsui.Maui
         ```
 
         **Step 3:** IMPORTANT: In MauiProgram.cs add **.UseSkiaSharp()** to the builder like this:
@@ -76,7 +76,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks:
         **Step 2:** In the package manager console type:
 
         ```console
-        PM> Install-Package Mapsui.Uno.WinUI -pre
+        PM> Install-Package Mapsui.Uno.WinUI
         ```
 
         Repeat this for all the targets you are using (Change the default Project in the Package Manager Console)
@@ -121,7 +121,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks:
 
         - Duplicate Attribute errors:
         Add following line to the ...Wpf.csproj.
-        
+
         ```xml
             <!-- Work around https://github.com/dotnet/wpf/issues/6792 -->
             <ItemGroup>
@@ -180,7 +180,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks:
         **Step 2:** In the package manager console type:
 
         ```console
-        PM> Install-Package Mapsui.Blazor -pre
+        PM> Install-Package Mapsui.Blazor
         ```
 
         **Step 3:** In Index.razor add this to the to Page.
@@ -243,7 +243,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks:
 
         **Step 2**: In the package manager console type:
         ```console
-        PM> Install-Package Mapsui.Wpf -pre
+        PM> Install-Package Mapsui.Wpf
         ```
 
         **Step 3**: In MainWindow.xaml.cs add in the constructor **after** InitializeComponent():
@@ -265,7 +265,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks:
         **Step 2:** In the package manager console type:
         
         ```console
-        PM> Install-Package Mapsui.WinUI -pre
+        PM> Install-Package Mapsui.WinUI
         ```
 
         **Step 3:** Open MainPage.xaml and add namespace:
@@ -308,7 +308,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks:
         **Step 2:** In the package manager console type:
 
         ```console
-        PM> Install-Package Mapsui.Forms -pre
+        PM> Install-Package Mapsui.Forms
         ```
 
         **Step 3:** Add this line to the xaml file: `xmlns:mapsui="clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms"` 
@@ -372,7 +372,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks:
         **Step 2:** In the package manager console type:
 
         ```console
-        PM> Install-Package Mapsui.iOS -pre
+        PM> Install-Package Mapsui.iOS
         ```
 
         **Step 3:** Open ViewController.cs and add namespaces:
@@ -407,7 +407,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks:
         **Step 2:** In the package manager console type:
 
         ```console
-        PM> Install-Package Mapsui.Android -pre
+        PM> Install-Package Mapsui.Android
         ```
 
         **Step 3:** In Resources/layout/Main.axml add Mapsui.UI.Android.MapControl:
@@ -460,7 +460,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks:
         **Step 2:** In the package manager console type:
 
         ```console
-        PM> Install-Package Mapsui.Eto -pre
+        PM> Install-Package Mapsui.Eto
         ```
 
         **Step 3:** In MainForm.cs add this to the class constructor:
@@ -482,7 +482,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks:
         **Step 2:** In the package manager console type:
 
         ```console
-        PM> Install-Package Mapsui.Uno -pre
+        PM> Install-Package Mapsui.Uno
         ```
 
         Repeat this for all the targets you are using (Change the default Project in the Package Manager Console)
