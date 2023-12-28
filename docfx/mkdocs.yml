@@ -1,0 +1,57 @@
+site_name: Mapsui Documentation
+docs_dir: documentation
+theme:
+  name: 'material'
+  features:
+    - content.action.edit
+    - content.tabs.link
+    - navigation.expand
+    - navigation.sections
+    - search.highlight
+    - search.share
+    - search.suggest
+nav:
+  - 'index.md'
+  - 'samples.md'
+  - 'logging.md'
+  - 'roadmap.md'
+  - 'faq.md'
+  - 'nuget-of-latest-build.md'
+
+  - Upgrade guides:
+    - 'v2.0-upgrade-guide.md'
+    - 'v4.0-upgrade-guide.md'
+
+  - How Things Work:
+    - 'mapsui-components.md'
+    - 'async-fetching.md'
+    - 'resolution.md'
+    - 'device-independent-units.md'
+    - 'projections.md'
+    - 'custom-style-renders.md'
+    - 'performance-widget.md'
+
+  - Contributing to Mapsui:
+    - 'contributors-guidelines.md'
+    - 'rendering-tests.md'
+    - 'documentation.md'
+
+repo_url: https://github.com/Mapsui/Mapsui/
+edit_uri: blob/master/mkdocs/documentation/
+plugins:
+  - glightbox
+  - search:
+      separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'  
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - admonition
+ 
