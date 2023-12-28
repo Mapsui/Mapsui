@@ -9,9 +9,9 @@ Mapsui.Logging.Logger.LogDelegate += (level, message, ex) =>
 };
 ```
 
-### Forward Mapsui logging to the often used Microsoft.Extensions.Logging.ILogger
+### Forward Mapsui logging to ILogger
 
-This is an example of how to forward it to ```Microsoft.Extensions.Logging.ILogger```. If you have configured a logger in your app, like serilog for instance, you would get Mapsui log messages in that log file.
+This is an example of how to forward Mapsui logging to the de facto standard ```Microsoft.Extensions.Logging.ILogger```. If you have configured a logger in your app, like serilog for instance, you would get Mapsui log messages in that log file.
 ```csharp
     public static void AttachMapsuiLogging(this IServiceProvider serviceProvider)
     {
