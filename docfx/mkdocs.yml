@@ -10,6 +10,8 @@ theme:
     - search.highlight
     - search.share
     - search.suggest
+    - content.code.copy
+    - content.code.select
 nav:
   - 'index.md'
   - 'samples.md'
@@ -45,13 +47,18 @@ plugins:
 markdown_extensions:
   - attr_list
   - md_in_html
-  - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.details
-  - pymdownx.superfences
   - def_list
   - pymdownx.tasklist:
       custom_checkbox: true
   - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
  
