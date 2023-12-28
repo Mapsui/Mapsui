@@ -24,19 +24,18 @@ Branch: [main](https://github.com/Mapsui/Mapsui/tree/main). Milestone: [v5.0](ht
 
 - [ ] Everything to .NET 6
 - [ ] Cleanup:
-  - [ ] Use `<Nullable>enable</Nullable>` everywhere (Add to Directory.Build.props) and go through the current suppressions to see if there is a better way.
-  - [ ] Fix the remaining warnings wrt IDispose.
-  - [ ] Run dotnet format (whitespace, style and analyzers) on the entire solution.
-  - [x] Always propagate async back to the caller.
-  - [ ] Remove nuget packages that we previously needed for things now supported in .NET 6. We may also have some code copies for things now in .NET 6.
-  - [ ] Remove the #if defines we do not need anymore.
-  - [ ] Remove all scripts and configurations we do not use anymore.
-  - [ ] Simplify the build scripts now that we do not need the workarounds.
-  - [x] Rename master to main.
+    * [ ] Fix the remaining warnings wrt IDispose.
+    * [ ] Run dotnet format (whitespace, style and analyzers) on the entire solution.
+    * [x] Always propagate async back to the caller.
+    * [ ] Remove nuget packages that we previously needed for things now supported in .NET 6. We may also have some code copies for things now in .NET 6.
+    * [ ] Remove the #if defines we do not need anymore.
+    * [ ] Remove all scripts and configurations we do not use anymore.
+    * [ ] Simplify the build scripts now that we do not need the workarounds.
+    * [x] Rename master to main.
 - [ ] Remove older frameworks:
-  - [ ] Remove Xamarin.Forms (but not Mapsui.MAUI, Mapsui.iOS and Mapsui.Android).
-  - [x] Remove Uno UWP (but not Mapsui.Uno.WinUI)
-  - [x] Remove Avalonia.V0 (but not Avalonia)
+    * [ ] Remove Xamarin.Forms (but not Mapsui.MAUI, Mapsui.iOS and Mapsui.Android).
+    * [x] Remove Uno UWP (but not Mapsui.Uno.WinUI)
+    * [x] Remove Avalonia.V0 (but not Avalonia)
 - [ ] Merge MapView functionality into MapControl. We need to work this out in more detail.
 
 ## Mapsui 6 and later
