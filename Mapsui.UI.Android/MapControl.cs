@@ -48,10 +48,10 @@ public partial class MapControl : ViewGroup, IMapControl
     /// <summary>
     /// Saver for center before last pinch movement
     /// </summary>
-    private MPoint _previousTouch = new MPoint();
+    private MPoint _previousTouch = new();
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
 
-    public MapControl(Context context, IAttributeSet attrs) :
+    public MapControl(Context context, IAttributeSet attrs) : 
         base(context, attrs)
     {
         CommonInitialize();
@@ -295,7 +295,7 @@ public partial class MapControl : ViewGroup, IMapControl
     private List<MPoint> GetScreenPositions(MotionEvent? motionEvent, View view)
     {
         if (motionEvent == null)
-            return new List<MPoint>();
+            return [];
 
         var result = new List<MPoint>();
         for (var i = 0; i < motionEvent.PointerCount; i++)
@@ -389,7 +389,7 @@ public partial class MapControl : ViewGroup, IMapControl
     private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
     {
         if (locations.Count < 2)
-            throw new ArgumentException();
+            throw new ArgumentOutOfRangeException(nameof(locations));
 
         double centerX = 0;
         double centerY = 0;
@@ -400,8 +400,8 @@ public partial class MapControl : ViewGroup, IMapControl
             centerY += location.Y;
         }
 
-        centerX = centerX / locations.Count;
-        centerY = centerY / locations.Count;
+        centerX /= locations.Count;
+        centerY /= locations.Count;
 
         var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
 
@@ -424,7 +424,7 @@ public partial class MapControl : ViewGroup, IMapControl
         return pixelCoordinate / PixelDensity;
     }
 
-    private View StartSoftwareRenderMode()
+    private SKCanvasView StartSoftwareRenderMode()
     {
         var canvas = new SKCanvasView(Context);
         canvas.PaintSurface += CanvasOnPaintSurface;
@@ -442,7 +442,7 @@ public partial class MapControl : ViewGroup, IMapControl
         }
     }
 
-    private View StartHardwareRenderMode()
+    private SKGLSurfaceView StartHardwareRenderMode()
     {
         var canvas = new SKGLSurfaceView(Context);
         canvas.PaintSurface += CanvasOnPaintSurfaceGL;

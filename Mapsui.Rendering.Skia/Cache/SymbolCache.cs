@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using Mapsui.Extensions;
 using Mapsui.Styles;
-using ShimSkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
@@ -15,7 +11,7 @@ public sealed class SymbolCache : ISymbolCache
 
     public IBitmapInfo GetOrCreate(int bitmapId)
     {
-        if (_cache.Keys.Contains(bitmapId))
+        if (_cache.ContainsKey(bitmapId))
         {
             var result = _cache[bitmapId];
             if (!BitmapHelper.InvalidBitmapInfo(result))
@@ -26,7 +22,7 @@ public sealed class SymbolCache : ISymbolCache
 
         var bitmapStream = BitmapRegistry.Instance.Get(bitmapId);
         bool ownsBitmap = bitmapStream is not IDisposable;
-        var loadBitmap = BitmapHelper.LoadBitmap(bitmapStream, ownsBitmap) ?? throw new ArgumentException(nameof(bitmapId));
+        var loadBitmap = BitmapHelper.LoadBitmap(bitmapStream, ownsBitmap) ?? throw new ArgumentNullException(nameof(bitmapId));
         return _cache[bitmapId] = loadBitmap;
     }
 
