@@ -136,7 +136,7 @@ public class ZoomInOutWidget : Widget, ITouchableWidget, INotifyPropertyChanged
         }
     }
 
-    public TouchableAreaType TouchableArea => throw new NotImplementedException();
+    public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
 
     public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
