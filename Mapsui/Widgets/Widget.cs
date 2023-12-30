@@ -186,7 +186,7 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 
-    private double CalculatePositionX(double left, double right, double width) => HorizontalAlignment switch
+    public double CalculatePositionX(double left, double right, double width) => HorizontalAlignment switch
     {
         HorizontalAlignment.Left => MarginX,
         HorizontalAlignment.Center => (right - left - width) / 2f,
@@ -194,7 +194,7 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
         _ => throw new ArgumentException("Unknown horizontal alignment: " + HorizontalAlignment)
     };
 
-    private double CalculatePositionY(double top, double bottom, double height) => VerticalAlignment switch
+    public double CalculatePositionY(double top, double bottom, double height) => VerticalAlignment switch
     {
         VerticalAlignment.Top => MarginY,
         VerticalAlignment.Bottom => bottom - top - height - MarginY,
