@@ -15,8 +15,8 @@ public static class GeometryCollectionRenderer
         if (vectorStyle == null)
             return;
 
-        var paint = vectorCache.GetOrCreatePaint<SKPaint, Pen>(vectorStyle.Outline, opacity, PolygonRenderer.CreateSkPaint);
-        var paintFill = vectorCache.GetOrCreatePaint<SKPaint>(vectorStyle.Fill, opacity, viewport.Rotation, PolygonRenderer.CreateSkPaint);
+        var paint = vectorCache.GetOrCreatePaint(vectorStyle.Outline, opacity, PolygonRenderer.CreateSkPaint);
+        var paintFill = vectorCache.GetOrCreatePaint(vectorStyle.Fill, opacity, viewport.Rotation, PolygonRenderer.CreateSkPaint);
 
         float lineWidth = Convert.ToSingle(vectorStyle.Outline?.Width ?? 1);
         var path = vectorCache.GetOrCreatePath(viewport, feature, collection, lineWidth,
