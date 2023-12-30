@@ -60,7 +60,7 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
         VerticalAlignment = DefaultScaleBarVerticalAlignment;
 
         _maxWidth = 100;
-        _height = 100;
+        Height = 100;
         _textAlignment = DefaultScaleBarAlignment;
         _scaleBarMode = DefaultScaleBarMode;
 
@@ -85,26 +85,6 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
                 return;
 
             _maxWidth = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private double _height;
-
-    /// <summary>
-    /// Real height of scalebar. Depends on number of unit converters and text size.
-    /// Is calculated by renderer.
-    /// </summary>
-    public double Height
-    {
-        get => _height;
-        set
-        {
-            // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if (_height == value)
-                return;
-
-            _height = value;
             OnPropertyChanged();
         }
     }
@@ -317,14 +297,14 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
         var maxScaleBarLength = Math.Max(scaleBarLength1, scaleBarLength2);
 
         var posX = CalculatePositionX(0, (int)viewport.Width, _maxWidth);
-        var posY = CalculatePositionY(0, (int)viewport.Height, _height);
+        var posY = CalculatePositionY(0, (int)viewport.Height, Height);
 
         var left = posX + stroke * 0.5f * Scale;
         var right = posX + _maxWidth - stroke * 0.5f * Scale;
         var center1 = posX + (_maxWidth - scaleBarLength1) / 2;
         var center2 = posX + (_maxWidth - scaleBarLength2) / 2;
         // Top position is Y in the middle of scale bar line
-        var top = posY + (drawNoSecondScaleBar ? _height - stroke * 0.5f * Scale : _height * 0.5f);
+        var top = posY + (drawNoSecondScaleBar ? Height - stroke * 0.5f * Scale : Height * 0.5f);
 
         switch (TextAlignment)
         {
@@ -424,13 +404,13 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
         var drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
 
         var posX = CalculatePositionX(0, (int)viewport.Width, _maxWidth);
-        var posY = CalculatePositionY(0, (int)viewport.Height, _height);
+        var posY = CalculatePositionY(0, (int)viewport.Height, Height);
 
         var left = posX + (stroke + TextMargin) * Scale;
         var right1 = posX + _maxWidth - (stroke + TextMargin) * Scale - textSize1.Width;
         var right2 = posX + _maxWidth - (stroke + TextMargin) * Scale - textSize2.Width;
         var top = posY;
-        var bottom = posY + _height - textSize2.Height;
+        var bottom = posY + Height - textSize2.Height;
 
         switch (TextAlignment)
         {

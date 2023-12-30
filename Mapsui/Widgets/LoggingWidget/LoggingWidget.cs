@@ -181,12 +181,12 @@ public event PropertyChangedEventHandler? PropertyChanged;
         }
     }
 
-    private int _width = 250;
+    private double _width = 250;
 
     /// <summary>
     /// Width of widget
     /// </summary>
-    public int Width
+    public override double Width
     {
         get => _width;
         set
@@ -198,12 +198,12 @@ public event PropertyChangedEventHandler? PropertyChanged;
         }
     }
 
-    private int _height = 142;
+    private double _height = 142;
 
     /// <summary>
     /// Height of widget
     /// </summary>
-    public int Height
+    public override double Height
     {
         get => _height;
         set

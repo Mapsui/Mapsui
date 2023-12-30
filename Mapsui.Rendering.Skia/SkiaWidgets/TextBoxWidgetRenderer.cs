@@ -28,14 +28,14 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
         var paddingX = textBox.PaddingX;
         var paddingY = textBox.PaddingY;
 
-        if (textBox.Width != null)
+        if (textBox.Width != 0)
         {
-            paddingX = (textBox.Width.Value - textRect.Width) / 2.0f;
+            paddingX = (textBox.Width - textRect.Width) / 2.0f;
         }
 
-        if (textBox.Height != null)
+        if (textBox.Height != 0)
         {
-            paddingY = (textBox.Height.Value - textPaint.TextSize) / 2.0f;
+            paddingY = (textBox.Height - textPaint.TextSize) / 2.0f;
         }
 
         var backRect = new SKRect(0, 0,

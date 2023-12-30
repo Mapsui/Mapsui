@@ -8,6 +8,10 @@ public abstract class Widget : IWidget, IWidgetTouchable
     public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Bottom;
     public double MarginX { get; set; } = 2;
     public double MarginY { get; set; } = 2;
+    public double PositionX { get; set; }
+    public double PositionY { get; set; }
+    public virtual double Width { get; set; }
+    public virtual double Height { get; set; }
     public MRect? Envelope { get; set; }
     public bool Enabled { get; set; } = true;
 

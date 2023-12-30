@@ -10,8 +10,6 @@ public class TextBox : Widget
     public string? Text { get; set; }
     public Color BackColor { get; set; } = new(255, 255, 255, 128);
     public Color TextColor { get; set; } = new(0, 0, 0);
-    public double? Width { get; set; }
-    public double? Height { get; set; }
     public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
     {
         // don has any action
