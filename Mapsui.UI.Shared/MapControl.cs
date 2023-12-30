@@ -586,9 +586,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         var widgetArgs = new WidgetTouchedEventArgs(position, clickCount, leftButton, shift);
 
-        foreach (var extendedWidget in touchableWidgets)
+        foreach (var widget in touchableWidgets)
         {
-            if (extendedWidget.HandleWidgetMoving(Map.Navigator, position, widgetArgs))
+            if (widget.HandleWidgetMoving(Map.Navigator, position, widgetArgs))
                 return true;
         }
 
