@@ -27,7 +27,7 @@ public class MouseCoordinatesWidgetSample : ISample
     private static MouseCoordinatesWidget CreateMouseCoordinatesWidget(Map map,
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
     {
-        return new MouseCoordinatesWidget(map)
+        return new MouseCoordinatesWidget()
         {
             VerticalAlignment = verticalAlignment,
             HorizontalAlignment = horizontalAlignment,

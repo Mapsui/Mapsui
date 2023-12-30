@@ -443,7 +443,7 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(delete);
 
         // Mouse Position Widget
-        map.Widgets.Add(new MouseCoordinatesWidget(map));
+        map.Widgets.Add(new MouseCoordinatesWidget());
 
     }
 
