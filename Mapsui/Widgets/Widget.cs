@@ -2,7 +2,7 @@
 
 namespace Mapsui.Widgets;
 
-public abstract class Widget : IWidget, IWidgetTouchable
+public abstract class Widget : IWidget
 {
     public HorizontalAlignment HorizontalAlignment { get; set; } = HorizontalAlignment.Right;
     public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Bottom;
@@ -48,8 +48,4 @@ public abstract class Widget : IWidget, IWidgetTouchable
 
         throw new ArgumentException("Unknown vertical alignment: " + VerticalAlignment);
     }
-
-    public abstract bool HandleWidgetTouched(Navigator navigator, MPoint position);
-
-    public virtual bool Touchable => true;
 }
