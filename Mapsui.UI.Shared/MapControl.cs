@@ -611,6 +611,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private bool HandleTouching(MPoint position, bool leftButton, int clickCount, bool shift)
     {
         var touchableWidgets = GetTouchableWidgets();
+
+        if (touchableWidgets.Count == 0)
+            return false;
+
         var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
 
         foreach (var widget in touchedWidgets)
@@ -626,6 +630,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private bool HandleTouched(MPoint position, bool leftButton, int clickCount, bool shift)
     {
         var touchableWidgets = GetTouchableWidgets();
+
+        if (touchableWidgets.Count == 0)
+            return false;
+
         var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
 
         foreach (var widget in touchedWidgets)
