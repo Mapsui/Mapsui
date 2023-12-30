@@ -452,13 +452,6 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
         }
     }
 
-    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
-    {
-        return false;
-    }
-
-    public override bool Touchable => false;
-
     public bool CanProject()
     {
         if (_map?.CRS == null)
