@@ -1,7 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Mapsui.Styles;
 
 namespace Mapsui.Widgets.ButtonWidget;
 
@@ -21,13 +18,8 @@ namespace Mapsui.Widgets.ButtonWidget;
 /// Rotation: Value for rotation in degrees
 /// Opacity: Opacity of button
 /// </remarks>
-public class ButtonWidget : TextBox, ITouchableWidget, INotifyPropertyChanged
+public class ButtonWidget : TextBox, ITouchableWidget
 {
-    /// <summary>
-    /// Event handler which is called, when the button is touched
-    /// </summary>
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     /// <summary>
     /// Event handler which is called, when the button is touched
     /// </summary>
@@ -119,9 +111,4 @@ public class ButtonWidget : TextBox, ITouchableWidget, INotifyPropertyChanged
     }
 
     public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
-
-    internal void OnPropertyChanged([CallerMemberName] string name = "")
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-    }
 }

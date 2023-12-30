@@ -2,7 +2,6 @@
 using Mapsui.Styles;
 using System;
 using System.Collections.Concurrent;
-using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -15,7 +14,7 @@ namespace Mapsui.Widgets.LoggingWidget;
 /// With this, the user could see the log entries on the screen.
 /// without saving them to a file or somewhere else.
 /// </remarks>
-public class LoggingWidget : Widget, ITouchableWidget, INotifyPropertyChanged
+public class LoggingWidget : Widget, ITouchableWidget
 {
     public struct LogEntry
     {
@@ -40,12 +39,10 @@ public class LoggingWidget : Widget, ITouchableWidget, INotifyPropertyChanged
 #else
         Enabled = false;
 #endif
-}
 
-/// <summary>
-/// Event handler which is called, when a property changes
-/// </summary>
-public event PropertyChangedEventHandler? PropertyChanged;
+        Width = 250;
+        Height = 142;
+    }
 
     /// <summary>
     /// Event handler which is called, when the widget is touched
@@ -181,40 +178,6 @@ public event PropertyChangedEventHandler? PropertyChanged;
         }
     }
 
-    private double _width = 250;
-
-    /// <summary>
-    /// Width of widget
-    /// </summary>
-    public override double Width
-    {
-        get => _width;
-        set
-        {
-            if (_width == value)
-                return;
-            _width = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private double _height = 142;
-
-    /// <summary>
-    /// Height of widget
-    /// </summary>
-    public override double Height
-    {
-        get => _height;
-        set
-        {
-            if (_height == value)
-                return;
-            _height = value;
-            OnPropertyChanged();
-        }
-    }
-
     private Color _backgroundColor = Color.White;
 
     /// <summary>
@@ -341,7 +304,7 @@ public event PropertyChangedEventHandler? PropertyChanged;
         }
     }
 
-    internal void OnPropertyChanged([CallerMemberName] string name = "")
+    public override void OnPropertyChanged([CallerMemberName] string name = "")
     {
         if (name == nameof(TextSize) || name == nameof(PaddingY) || name == nameof(Height))
             UpdateNumOfLogEntries();
@@ -360,6 +323,6 @@ public event PropertyChangedEventHandler? PropertyChanged;
         if (name == nameof(LogLevelFilter))
             UpdateLogEntries();
 
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        base.OnPropertyChanged(name);
     }
 }

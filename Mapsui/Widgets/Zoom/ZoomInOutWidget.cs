@@ -1,7 +1,5 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Mapsui.Styles;
+﻿using Mapsui.Styles;
+using System;
 
 namespace Mapsui.Widgets.Zoom;
 
@@ -23,10 +21,8 @@ namespace Mapsui.Widgets.Zoom;
 /// Opacity: Opacity of buttons
 /// ZoomFactor: Factor for changing Resolution. Default is 2;
 /// </summary>
-public class ZoomInOutWidget : Widget, ITouchableWidget, INotifyPropertyChanged
+public class ZoomInOutWidget : Widget, ITouchableWidget
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     /// <summary>
     /// Event handler which is called, when buttons are touched. If there
     /// isn't one, than the default handler is used, which change the Resolution
@@ -169,11 +165,5 @@ public class ZoomInOutWidget : Widget, ITouchableWidget, INotifyPropertyChanged
     public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
         return false;
-    }
-
-    internal void OnPropertyChanged([CallerMemberName] string name = "")
-    {
-        var handler = PropertyChanged;
-        handler?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }
