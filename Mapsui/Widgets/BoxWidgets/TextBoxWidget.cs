@@ -7,12 +7,12 @@ namespace Mapsui.Widgets.BoxWidgets;
 /// </summary>
 public class TextBoxWidget : BoxWidget
 {
-    private int _paddingX = 3;
+    private double _paddingX = 3;
 
     /// <summary>
     /// Padding left and right for icon inside the Widget
     /// </summary>
-    public int PaddingX
+    public double PaddingX
     {
         get => _paddingX;
         set
@@ -24,12 +24,12 @@ public class TextBoxWidget : BoxWidget
         }
     }
 
-    private int _paddingY = 3;
+    private double _paddingY = 3;
 
     /// <summary>
     /// Padding left and right for icon inside the Widget
     /// </summary>
-    public int PaddingY
+    public double PaddingY
     {
         get => _paddingY;
         set
