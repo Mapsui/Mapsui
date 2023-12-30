@@ -15,10 +15,10 @@ public static class WidgetTouch
     /// Returns the first Widget in the list that contains the screenPosition
     /// within it's Envelope. Returns null if there are none.
     /// </returns>
-    public static IEnumerable<IWidget> GetTouchedWidget(MPoint screenPosition, MPoint startScreenPosition,
-        IEnumerable<IWidget> widgets)
+    public static IEnumerable<ITouchableWidget> GetTouchedWidget(MPoint screenPosition, MPoint startScreenPosition,
+        IEnumerable<ITouchableWidget> widgets)
     {
-        var touchedWidgets = new List<IWidget>();
+        var touchedWidgets = new List<ITouchableWidget>();
 
         foreach (var widget in widgets.Reverse())
         {
