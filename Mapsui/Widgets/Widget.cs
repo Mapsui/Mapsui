@@ -40,12 +40,12 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
         }
     }
 
-    private float _marginX = 2;
+    private double _marginX = 2;
 
     /// <summary>
     /// Left, right or both margin depending on HorizontalAlignment
     /// </summary>
-    public float MarginX 
+    public double MarginX 
     { 
         get => _marginX;
         set
@@ -57,12 +57,12 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
         }
     }
 
-    private float _marginY = 2;
+    private double _marginY = 2;
 
     /// <summary>
     /// Top, bottom or both marging depending on VerticalAlignment
     /// </summary>
-    public float MarginY
+    public double MarginY
     {
         get => _marginY;
         set
@@ -74,12 +74,12 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
         }
     }
 
-    private float _positionX = 0;
+    private double _positionX = 0;
 
     /// <summary>
     /// Position in X direction of left side for absolute alignment
     /// </summary>
-    public float PositionX
+    public double PositionX
     {
         get => _positionX;
         set
@@ -91,12 +91,12 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
         }
     }
 
-    private float _positionY = 0;
+    private double _positionY = 0;
 
     /// <summary>
     /// Position in Y direction of left side for absolute alignment
     /// </summary>
-    public float PositionY
+    public double PositionY
     {
         get => _positionY;
         set
@@ -108,12 +108,12 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
         }
     }
 
-    private float _width;
+    private double _width;
 
     /// <summary>
     /// Width of Widget
     /// </summary>
-    public float Width
+    public double Width
     {
         get => _width;
         set
@@ -125,12 +125,12 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
         }
     }
 
-    private float _height;
+    private double _height;
 
     /// <summary>
     /// Height of Widget
     /// </summary>
-    public float Height
+    public double Height
     {
         get => _height;
         set

@@ -26,12 +26,12 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
     /// </summary>
     public event EventHandler<WidgetTouchedEventArgs>? Touched;
 
-    private int _paddingX = 0;
+    private double _paddingX = 0;
 
     /// <summary>
     /// Padding left and right for icon inside the Widget
     /// </summary>
-    public int PaddingX
+    public double PaddingX
     {
         get => _paddingX;
         set
@@ -43,12 +43,12 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
         }
     }
 
-    private int _paddingY = 0;
+    private double _paddingY = 0;
 
     /// <summary>
     /// Padding left and right for icon inside the Widget
     /// </summary>
-    public int PaddingY
+    public double PaddingY
     {
         get => _paddingY;
         set
@@ -93,12 +93,12 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
         }
     }
 
-    private float _rotation;
+    private double _rotation;
 
     /// <summary>
     /// Rotation of the SVG image
     /// </summary>
-    public float Rotation
+    public double Rotation
     {
         get => _rotation;
         set
@@ -110,13 +110,13 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
         }
     }
 
-    private float _opacity = 0.8f;
+    private double _opacity = 0.8f;
     private object? _picture;
 
     /// <summary>
     /// Opacity of background, frame and signs
     /// </summary>
-    public float Opacity
+    public double Opacity
     {
         get => _opacity;
         set

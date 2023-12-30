@@ -398,35 +398,35 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
     /// posX2 as left position of lower scalebar text
     /// posY2 as top position of lower scalebar text
     /// </returns>
-    public (float posX1, float posY1, float posX2, float posY2) GetScaleBarTextPositions(Viewport viewport,
+    public (double posX1, double posY1, double posX2, double posY2) GetScaleBarTextPositions(Viewport viewport,
         MRect textSize, MRect textSize1, MRect textSize2, float stroke)
     {
         var drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
 
         UpdateEnvelope(_maxWidth, Height, viewport.Width, viewport.Height);
 
-        var posX = (float)(Envelope?.MinX ?? 0.0);
-        var posY = (float)(Envelope?.MinY ?? 0.0);
+        var posX = Envelope?.MinX ?? 0.0;
+        var posY = Envelope?.MinY ?? 0.0;
 
         var left = posX + (stroke + TextMargin) * Scale;
-        var right1 = posX + _maxWidth - (stroke + TextMargin) * Scale - (float)textSize1.Width;
-        var right2 = posX + _maxWidth - (stroke + TextMargin) * Scale - (float)textSize2.Width;
+        var right1 = posX + _maxWidth - (stroke + TextMargin) * Scale - textSize1.Width;
+        var right2 = posX + _maxWidth - (stroke + TextMargin) * Scale - textSize2.Width;
         var top = posY;
-        var bottom = posY + Height - (float)textSize2.Height;
+        var bottom = posY + Height - textSize2.Height;
 
         switch (TextAlignment)
         {
             case Alignment.Center:
                 if (drawNoSecondScaleBar)
                 {
-                    return (posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - (float)textSize1.Width) / 2.0f,
+                    return (posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - textSize1.Width) / 2.0f,
                         top,
                         0,
                         0);
                 }
                 else
                 {
-                    return (posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - (float)textSize1.Width) / 2.0f,
+                    return (posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - textSize1.Width) / 2.0f,
                             top,
                             posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - (float)textSize2.Width) / 2.0f,
                             bottom);
