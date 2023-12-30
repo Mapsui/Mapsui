@@ -579,12 +579,14 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool HandleMoving(MPoint position, bool leftButton, int clickCount, bool shift)
     {
-        var extendedWidgets = GetTouchableWidgets();
-        if (extendedWidgets.Count == 0)
+        var touchableWidgets = GetTouchableWidgets();
+
+        if (touchableWidgets.Count == 0)
             return false;
 
         var widgetArgs = new WidgetTouchedEventArgs(position, clickCount, leftButton, shift);
-        foreach (var extendedWidget in extendedWidgets)
+
+        foreach (var extendedWidget in touchableWidgets)
         {
             if (extendedWidget.HandleWidgetMoving(Map.Navigator, position, widgetArgs))
                 return true;
