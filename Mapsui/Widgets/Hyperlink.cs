@@ -2,22 +2,32 @@
 
 namespace Mapsui.Widgets;
 
-public class Hyperlink : TextBox
+public class Hyperlink : TextBox, ITouchableWidget
 {
     public string? Url { get; set; }
 
+    public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
+
     public event EventHandler<HyperlinkWidgetArguments>? Touched;
 
-    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
+    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
-        var args = new HyperlinkWidgetArguments();
+        var arguments = new HyperlinkWidgetArguments();
 
-        Touched?.Invoke(this, args);
+        Touched?.Invoke(this, arguments);
 
         return args.Handled;
     }
 
-    public override bool Touchable => true;
+    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        return false;
+    }
+
+    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        return false;
+    }
 }
 
 public class HyperlinkWidgetArguments

@@ -11,7 +11,7 @@ namespace Mapsui.Widgets.PerformanceWidget;
 /// With this, the user could see the drawing performance on the screen.
 /// It shows always the values for the last draw before this draw.
 /// </remarks>
-public class PerformanceWidget : Widget, INotifyPropertyChanged
+public class PerformanceWidget : Widget, ITouchableWidget, INotifyPropertyChanged
 {
     public PerformanceWidget(Utilities.Performance performance)
     {
@@ -50,13 +50,23 @@ public class PerformanceWidget : Widget, INotifyPropertyChanged
         }
     }
 
-    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
-    {
-        var args = new WidgetTouchedEventArgs(position);
+    public TouchableAreaType TouchableArea => throw new NotImplementedException();
 
+    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
         WidgetTouched?.Invoke(this, args);
 
         return args.Handled;
+    }
+
+    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        return false;
+    }
+
+    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        return false;
     }
 
     internal void OnPropertyChanged([CallerMemberName] string name = "")

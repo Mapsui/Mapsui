@@ -23,7 +23,7 @@ namespace Mapsui.Widgets.Zoom;
 /// Opacity: Opacity of buttons
 /// ZoomFactor: Factor for changing Resolution. Default is 2;
 /// </summary>
-public class ZoomInOutWidget : Widget, INotifyPropertyChanged
+public class ZoomInOutWidget : Widget, ITouchableWidget, INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -136,16 +136,14 @@ public class ZoomInOutWidget : Widget, INotifyPropertyChanged
         }
     }
 
-    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
-    {
-        var handler = WidgetTouched;
+    public TouchableAreaType TouchableArea => throw new NotImplementedException();
 
-        if (handler != null)
-        {
-            var args = new WidgetTouchedEventArgs(position);
-            handler.Invoke(this, args);
-            return args.Handled;
-        }
+    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        WidgetTouched?.Invoke(this, args);
+
+        if (args.Handled)
+            return true;
 
         if (Envelope == null)
             return false;
@@ -161,6 +159,16 @@ public class ZoomInOutWidget : Widget, INotifyPropertyChanged
         }
 
         return true;
+    }
+
+    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        return false;
+    }
+
+    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        return false;
     }
 
     internal void OnPropertyChanged([CallerMemberName] string name = "")

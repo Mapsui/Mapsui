@@ -3,11 +3,13 @@ using Mapsui.UI;
 using Mapsui.Widgets;
 
 namespace Mapsui.Nts.Widgets;
-public class EditingWidget : Widget, IWidgetExtended
+public class EditingWidget : Widget, ITouchableWidget
 {
     public IMapControl MapControl { get; }
     public EditManager EditManager { get; }
     public EditManipulation EditManipulation { get; }
+
+    public TouchableAreaType TouchableArea => throw new System.NotImplementedException();
 
     public EditingWidget(IMapControl mapControl, EditManager editManager, EditManipulation editManipulation)
     {
@@ -16,30 +18,29 @@ public class EditingWidget : Widget, IWidgetExtended
         EditManipulation = editManipulation;
     }
 
-    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
+    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
+        if (!args.LeftButton)
+            return false;
+
+        if (MapControl.Map != null)
+            MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(MouseState.Up,
+                position, EditManager, MapControl, args.Shift);
+
+        if (EditManager.SelectMode)
+        {
+            var infoArgs = MapControl.GetMapInfo(position);
+            if (infoArgs?.Feature != null)
+            {
+                var currentValue = (bool?)infoArgs.Feature["Selected"] == true;
+                infoArgs.Feature["Selected"] = !currentValue; // invert current value
+            }
+        }
+
         return false;
     }
 
-    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetArgs args)
-    {
-        var screenPosition = position;
-
-        if (args.LeftButton)
-        {
-            EditManipulation.Manipulate(MouseState.Dragging, screenPosition,
-                EditManager, MapControl, args.Shift);
-        }
-        else
-        {
-            EditManipulation.Manipulate(MouseState.Moving, screenPosition,
-                EditManager, MapControl, args.Shift);
-        }
-
-        return false;
-    }
-
-    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetArgs args)
+    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
         if (!args.LeftButton)
             return false;
@@ -60,23 +61,19 @@ public class EditingWidget : Widget, IWidgetExtended
         return false;
     }
 
-    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetArgs args)
+    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
-        if (!args.LeftButton)
-            return false;
+        var screenPosition = position;
 
-        if (MapControl.Map != null)
-            MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(MouseState.Up,
-                position, EditManager, MapControl, args.Shift);
-
-        if (EditManager.SelectMode)
+        if (args.LeftButton)
         {
-            var infoArgs = MapControl.GetMapInfo(position);
-            if (infoArgs?.Feature != null)
-            {
-                var currentValue = (bool?)infoArgs.Feature["Selected"] == true;
-                infoArgs.Feature["Selected"] = !currentValue; // invert current value
-            }
+            EditManipulation.Manipulate(MouseState.Dragging, screenPosition,
+                EditManager, MapControl, args.Shift);
+        }
+        else
+        {
+            EditManipulation.Manipulate(MouseState.Moving, screenPosition,
+                EditManager, MapControl, args.Shift);
         }
 
         return false;

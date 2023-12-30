@@ -15,7 +15,7 @@ namespace Mapsui.Widgets.LoggingWidget;
 /// With this, the user could see the log entries on the screen.
 /// without saving them to a file or somewhere else.
 /// </remarks>
-public class LoggingWidget : Widget, INotifyPropertyChanged
+public class LoggingWidget : Widget, ITouchableWidget, INotifyPropertyChanged
 {
     public struct LogEntry
     {
@@ -283,13 +283,23 @@ public event PropertyChangedEventHandler? PropertyChanged;
         }
     }
 
-    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
-    {
-        var args = new WidgetTouchedEventArgs(position);
+    public TouchableAreaType TouchableArea => throw new NotImplementedException();
 
+    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
         WidgetTouched?.Invoke(this, args);
 
         return args.Handled;
+    }
+
+    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        return false;
+    }
+
+    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        return false;
     }
 
     private void UpdateNumOfLogEntries()

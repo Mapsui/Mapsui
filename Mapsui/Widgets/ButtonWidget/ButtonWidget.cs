@@ -21,7 +21,7 @@ namespace Mapsui.Widgets.ButtonWidget;
 /// Rotation: Value for rotation in degrees
 /// Opacity: Opacity of button
 /// </remarks>
-public class ButtonWidget : TextBox, INotifyPropertyChanged
+public class ButtonWidget : TextBox, ITouchableWidget, INotifyPropertyChanged
 {
     /// <summary>
     /// Event handler which is called, when the button is touched
@@ -101,19 +101,27 @@ public class ButtonWidget : TextBox, INotifyPropertyChanged
         }
     }
 
-    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
+    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
-        var args = new WidgetTouchedEventArgs(position);
-
         WidgetTouched?.Invoke(this, args);
 
         return args.Handled;
     }
 
+    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        return false;
+    }
+
+    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    {
+        return false;
+    }
+
+    public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
+
     internal void OnPropertyChanged([CallerMemberName] string name = "")
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
-
-    public override bool Touchable => true;
 }
