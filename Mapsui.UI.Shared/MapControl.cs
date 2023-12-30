@@ -628,10 +628,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         foreach (var widget in touchedWidgets)
         {
-            var widgetArgs = new WidgetTouchedEventArgs(position, clickCount, leftButton, shift);
-            if (widget.HandleWidgetTouched(Map.Navigator, position, widgetArgs))
-                return true;
-
             if (widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {
                 // The HyperLink is a special case because we need platform specific code to open the
@@ -640,6 +636,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 OpenBrowser(hyperlink.Url!);
                 return true;
             }
+
+            var args = new WidgetTouchedEventArgs(position, clickCount, leftButton, shift);
+
+            if (widget.HandleWidgetTouched(Map.Navigator, position, args))
+                return true;
         }
 
         return false;
