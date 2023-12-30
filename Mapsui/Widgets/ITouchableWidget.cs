@@ -23,7 +23,7 @@ public interface ITouchableWidget : IWidget
     /// <param name="position">Screen position</param>
     /// <param name="args">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args);
+    bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args);
 
     /// <summary>
     /// Function, which handles the widget moving event
@@ -32,5 +32,5 @@ public interface ITouchableWidget : IWidget
     /// <param name="position">Screen position</param>
     /// <param name="args">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args);
+    bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args);
 }
