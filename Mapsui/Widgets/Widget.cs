@@ -6,12 +6,12 @@ public abstract class Widget : IWidget, IWidgetTouchable
 {
     public HorizontalAlignment HorizontalAlignment { get; set; } = HorizontalAlignment.Right;
     public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Bottom;
-    public float MarginX { get; set; } = 2;
-    public float MarginY { get; set; } = 2;
+    public double MarginX { get; set; } = 2;
+    public double MarginY { get; set; } = 2;
     public MRect? Envelope { get; set; }
     public bool Enabled { get; set; } = true;
 
-    public float CalculatePositionX(float left, float right, float width)
+    public double CalculatePositionX(double left, double right, double width)
     {
         switch (HorizontalAlignment)
         {
@@ -28,7 +28,7 @@ public abstract class Widget : IWidget, IWidgetTouchable
         throw new ArgumentException("Unknown horizontal alignment: " + HorizontalAlignment);
     }
 
-    public float CalculatePositionY(float top, float bottom, float height)
+    public double CalculatePositionY(double top, double bottom, double height)
     {
         switch (VerticalAlignment)
         {

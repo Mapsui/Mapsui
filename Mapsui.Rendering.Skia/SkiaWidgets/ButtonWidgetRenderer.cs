@@ -28,14 +28,14 @@ public class ButtonWidgetRenderer : ISkiaWidgetRenderer
             return;
 
         // Get the scale for picture in each direction
-        var scaleX = (float)(button.Envelope.Width / picture.CullRect.Width);
-        var scaleY = (float)(button.Envelope.Height / picture.CullRect.Height);
+        var scaleX = button.Envelope.Width / picture.CullRect.Width;
+        var scaleY = button.Envelope.Height / picture.CullRect.Height;
 
         // Rotate picture
-        var matrix = SKMatrix.CreateRotationDegrees(button.Rotation, picture.CullRect.Width / 2f, picture.CullRect.Height / 2f);
+        var matrix = SKMatrix.CreateRotationDegrees((float)button.Rotation, picture.CullRect.Width / 2f, picture.CullRect.Height / 2f);
 
         // Create a scale matrix
-        matrix = matrix.PostConcat(SKMatrix.CreateScale(scaleX, scaleY));
+        matrix = matrix.PostConcat(SKMatrix.CreateScale((float)scaleX, (float)scaleY));
 
         // Translate picture to right place
         matrix = matrix.PostConcat(SKMatrix.CreateTranslation((float)button.Envelope.MinX, (float)button.Envelope.MinY));

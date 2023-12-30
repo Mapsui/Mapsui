@@ -17,12 +17,12 @@ public class BoxWidgetRenderer : ISkiaWidgetRenderer
 
         // The backRect is straight forward. It is leading for our purpose.
         var backRect = new SKRect(0, 0,
-            boxWidget.Width,
-            boxWidget.Height); // Use the font's TextSize for consistency
-        var offsetX = TextBoxWidgetRenderer.GetOffsetX(backRect.Width, boxWidget.MarginX, boxWidget.HorizontalAlignment, viewport.Width);
-        var offsetY = TextBoxWidgetRenderer.GetOffsetY(backRect.Height, boxWidget.MarginY, boxWidget.VerticalAlignment, viewport.Height);
-        backRect.Offset(offsetX, offsetY);
-        canvas.DrawRoundRect(backRect, boxWidget.CornerRadius, boxWidget.CornerRadius, backPaint);
+            (float)boxWidget.Width,
+            (float)boxWidget.Height); // Use the font's TextSize for consistency
+        var offsetX = TextBoxWidgetRenderer.GetOffsetX(backRect.Width, (float)boxWidget.MarginX, boxWidget.HorizontalAlignment, viewport.Width);
+        var offsetY = TextBoxWidgetRenderer.GetOffsetY(backRect.Height, (float)boxWidget.MarginY, boxWidget.VerticalAlignment, viewport.Height);
+        backRect.Offset((float)offsetX, (float)offsetY);
+        canvas.DrawRoundRect(backRect, (float)boxWidget.CornerRadius, (float)boxWidget.CornerRadius, backPaint);
         boxWidget.Envelope = backRect.ToMRect();
     }
 }

@@ -33,12 +33,12 @@ public class PerformanceWidget : Widget, INotifyPropertyChanged
     /// </summary>
     public event EventHandler<WidgetTouchedEventArgs>? WidgetTouched;
 
-    private float _opacity = 0.8f;
+    private double _opacity = 0.8f;
 
     /// <summary>
     /// Opacity of background, frame and signs
     /// </summary>
-    public float Opacity
+    public double Opacity
     {
         get => _opacity;
         set
