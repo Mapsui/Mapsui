@@ -27,21 +27,21 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
         textPaint.MeasureText(textBox.Text, ref textRect);
         // The backRect is straight forward. It is leading for our purpose.
 
-        float paddingX = textBox.PaddingX;
-        float paddingY = textBox.PaddingY;
+        var paddingX = textBox.PaddingX;
+        var paddingY = textBox.PaddingY;
 
         if (textBox.Width != 0)
         {
             // TextBox has a width, so use this
             paddingX = (textBox.Width - textRect.Width) / 2.0f;
-            textRect = new SKRect(textRect.Left, textRect.Top, textRect.Left + textBox.Width - paddingX * 2, textRect.Bottom);
+            textRect = new SKRect(textRect.Left, textRect.Top, (float)(textRect.Left + textBox.Width - paddingX * 2), textRect.Bottom);
         }
 
         if (textBox.Height != 0)
         {
             // TextBox has a height, so use this
             paddingY = (textBox.Height - textPaint.TextSize) / 2.0f;
-            textRect = new SKRect(textRect.Left, textRect.Top, textRect.Right, textRect.Top + textBox.Height - paddingY * 2);
+            textRect = new SKRect(textRect.Left, textRect.Top, textRect.Right, (float)(textRect.Top + textBox.Height - paddingY * 2));
         }
 
         // Calc Envelope by Width/Height or, if not set, by size of content
@@ -58,7 +58,7 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
 
         // To position the text within the backRect correct using the textRect's offset.
         canvas.DrawText(textBox.Text,
-            (float)textBox.Envelope.MinX - textRect.Left + paddingX,
-            (float)textBox.Envelope.MinY - textRect.Top + paddingY, textPaint);
+            (float)(textBox.Envelope.MinX - textRect.Left + paddingX),
+            (float)(textBox.Envelope.MinY - textRect.Top + paddingY), textPaint);
     }
 }

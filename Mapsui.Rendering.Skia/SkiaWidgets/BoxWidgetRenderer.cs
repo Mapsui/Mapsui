@@ -18,6 +18,6 @@ public class BoxWidgetRenderer : ISkiaWidgetRenderer
         // This is because DrawText's origin is the baseline of the text, not the bottom.
         // Read more here: https://developer.xamarin.com/guides/xamarin-forms/advanced/skiasharp/basics/text/
 
-        canvas.DrawRoundRect(boxWidget.Envelope?.ToSkia() ?? new SKRect(0, 0, boxWidget.Width, boxWidget.Height), boxWidget.CornerRadius, boxWidget.CornerRadius, backPaint);
+        canvas.DrawRoundRect(boxWidget.Envelope?.ToSkia() ?? new SKRect(0, 0, (float)boxWidget.Width, (float)boxWidget.Height), boxWidget.CornerRadius, boxWidget.CornerRadius, backPaint);
     }
 }

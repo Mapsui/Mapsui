@@ -36,17 +36,17 @@ public class IconButtonWidgetRenderer : ISkiaWidgetRenderer
         canvas.DrawRoundRect(button.Envelope.ToSkia(), button.CornerRadius, button.CornerRadius, backPaint);
 
         // Get the scale for picture in each direction
-        var scaleX = (float)((button.Envelope.Width - button.PaddingX * 2) / picture.CullRect.Width);
-        var scaleY = (float)((button.Envelope.Height - button.PaddingY * 2) / picture.CullRect.Height);
+        var scaleX = (button.Envelope.Width - button.PaddingX * 2) / picture.CullRect.Width;
+        var scaleY = (button.Envelope.Height - button.PaddingY * 2) / picture.CullRect.Height;
 
         // Rotate picture
-        var matrix = SKMatrix.CreateRotationDegrees(button.Rotation, picture.CullRect.Width / 2f, picture.CullRect.Height / 2f);
+        var matrix = SKMatrix.CreateRotationDegrees((float)button.Rotation, picture.CullRect.Width / 2f, picture.CullRect.Height / 2f);
 
         // Create a scale matrix
-        matrix = matrix.PostConcat(SKMatrix.CreateScale(scaleX, scaleY));
+        matrix = matrix.PostConcat(SKMatrix.CreateScale((float)scaleX, (float)scaleY));
 
         // Translate picture to right place
-        matrix = matrix.PostConcat(SKMatrix.CreateTranslation((float)button.Envelope.MinX + button.PaddingX, (float)button.Envelope.MinY + button.PaddingY));
+        matrix = matrix.PostConcat(SKMatrix.CreateTranslation((float)(button.Envelope.MinX + button.PaddingX), (float)(button.Envelope.MinY + button.PaddingY)));
 
         using var skPaint = new SKPaint { IsAntialias = true };
         canvas.DrawPicture(picture, ref matrix, skPaint);
