@@ -79,6 +79,8 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
         }
     }
 
+    private object? _picture;
+
     /// <summary>
     /// Object for prerendered image. For internal use only.
     /// </summary>
@@ -111,7 +113,6 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
     }
 
     private double _opacity = 0.8f;
-    private object? _picture;
 
     /// <summary>
     /// Opacity of background, frame and signs
