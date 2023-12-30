@@ -190,7 +190,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var mousePosition = e.GetPosition(this).ToMapsui();
         if (HandleTouched(mousePosition, true, e.ClickCount, ShiftPressed))
+        {
+            _mouseDown = false;
             return;
+        }
 
         if (_previousMousePosition != null)
         {
