@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Buffers;
-using System.Diagnostics.CodeAnalysis;
-using Mapsui.Layers;
-using Mapsui.Nts;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
-using static SkiaSharp.SKPath;
-using Topten.RichTextKit;
-
-#pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Rendering.Skia;
 
@@ -19,11 +11,10 @@ internal static class PolygonRenderer
     /// <summary>
     /// fill paint scale
     /// </summary>
-    private const float Scale = 10.0f;
+    private const float _scale = 10.0f;
 
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
-    public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle vectorStyle, IFeature feature,
-        Polygon polygon, float opacity, ISymbolCache symbolCache, IVectorCache vectorCache)
+    public static void Draw(SKCanvas canvas, Viewport viewport, VectorStyle vectorStyle, IFeature feature,
+        Polygon polygon, float opacity, IVectorCache vectorCache)
     {
         if (vectorStyle == null)
             return;
@@ -56,7 +47,7 @@ internal static class PolygonRenderer
                 canvas.ClipPath(path);
                 var bounds = path.Bounds;
                 // Make sure, that the brush starts with the correct position
-                var inflate = ((int)path.Bounds.Width * 0.3f / Scale) * Scale;
+                var inflate = ((int)path.Bounds.Width * 0.3f / _scale) * _scale;
                 bounds.Inflate(inflate, inflate);
                 // Draw rect with bigger size, which is clipped by path
                 canvas.DrawRect(bounds, paintFill);
@@ -96,47 +87,47 @@ internal static class PolygonRenderer
             paintFill.Shader = null;
             paintFill.Color = fillColor.ToSkia(opacity);
             using var fillPath = new SKPath();
-            var matrix = SKMatrix.CreateScale(Scale, Scale);
+            var matrix = SKMatrix.CreateScale(_scale, _scale);
 
             switch (brush?.FillStyle)
             {
                 case FillStyle.Cross:
-                    fillPath.MoveTo(Scale * 0.8f, Scale * 0.8f);
+                    fillPath.MoveTo(_scale * 0.8f, _scale * 0.8f);
                     fillPath.LineTo(0, 0);
-                    fillPath.MoveTo(0, Scale * 0.8f);
-                    fillPath.LineTo(Scale * 0.8f, 0);
+                    fillPath.MoveTo(0, _scale * 0.8f);
+                    fillPath.LineTo(_scale * 0.8f, 0);
                     paintFill.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
                     break;
                 case FillStyle.DiagonalCross:
-                    fillPath.MoveTo(Scale, Scale);
+                    fillPath.MoveTo(_scale, _scale);
                     fillPath.LineTo(0, 0);
-                    fillPath.MoveTo(0, Scale);
-                    fillPath.LineTo(Scale, 0);
+                    fillPath.MoveTo(0, _scale);
+                    fillPath.LineTo(_scale, 0);
                     paintFill.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
                     break;
                 case FillStyle.BackwardDiagonal:
-                    fillPath.MoveTo(0, Scale);
-                    fillPath.LineTo(Scale, 0);
+                    fillPath.MoveTo(0, _scale);
+                    fillPath.LineTo(_scale, 0);
                     paintFill.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
                     break;
                 case FillStyle.ForwardDiagonal:
-                    fillPath.MoveTo(Scale, Scale);
+                    fillPath.MoveTo(_scale, _scale);
                     fillPath.LineTo(0, 0);
                     paintFill.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
                     break;
                 case FillStyle.Dotted:
                     paintFill.Style = SKPaintStyle.StrokeAndFill;
-                    fillPath.AddCircle(Scale * 0.5f, Scale * 0.5f, Scale * 0.35f);
+                    fillPath.AddCircle(_scale * 0.5f, _scale * 0.5f, _scale * 0.35f);
                     paintFill.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
                     break;
                 case FillStyle.Horizontal:
-                    fillPath.MoveTo(0, Scale * 0.5f);
-                    fillPath.LineTo(Scale, Scale * 0.5f);
+                    fillPath.MoveTo(0, _scale * 0.5f);
+                    fillPath.LineTo(_scale, _scale * 0.5f);
                     paintFill.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
                     break;
                 case FillStyle.Vertical:
-                    fillPath.MoveTo(Scale * 0.5f, 0);
-                    fillPath.LineTo(Scale * 0.5f, Scale);
+                    fillPath.MoveTo(_scale * 0.5f, 0);
+                    fillPath.LineTo(_scale * 0.5f, _scale);
                     paintFill.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
                     break;
                 case FillStyle.Bitmap:

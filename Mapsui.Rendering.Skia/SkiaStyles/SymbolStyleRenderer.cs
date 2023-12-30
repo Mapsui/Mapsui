@@ -9,8 +9,6 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 
-#pragma warning disable IDISP001 // Dispose created
-
 namespace Mapsui.Rendering.Skia;
 
 public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
@@ -40,7 +38,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private IEnumerable<Point> GetPoints(GeometryCollection geometryCollection)
+    private static IEnumerable<Point> GetPoints(GeometryCollection geometryCollection)
     {
         foreach (var geometry in geometryCollection)
         {
@@ -196,7 +194,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 TrianglePath(skPath, 0, 0, width);
                 break;
             default: // Invalid value
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentException($"Unknown {nameof(SymbolType)} '{nameof(symbolType)}'");
         }
 
         return skPath;

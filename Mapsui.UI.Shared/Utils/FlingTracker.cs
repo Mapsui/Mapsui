@@ -11,34 +11,32 @@ public class FlingTracker
 
     public FlingTracker()
     {
-        _events = new Dictionary<long, Queue<(double x, double y, long time)>>();
+        _events = [];
     }
 
     public void AddEvent(long id, MPoint location, long ticks)
     {
         // Save event data
-        if (!_events.ContainsKey(id))
+        if (!_events.TryGetValue(id, out var value))
         {
-            _events.Add(id, new Queue<(double x, double y, long time)>());
+            value = new Queue<(double x, double y, long time)>();
+            _events.Add(id, value);
         }
 
-        _events[id].Enqueue((location.X, location.Y, ticks));
+        value.Enqueue((location.X, location.Y, ticks));
 
         // Check, if we at the end of array
-        if (_events[id].Count > 2)
+        if (value.Count > 2)
         {
-            while (_events[id].Count > _maxSize || _events[id].Peek().time < (ticks - _maxTicks))
-                _events[id].Dequeue();
+            while (value.Count > _maxSize || value.Peek().time < (ticks - _maxTicks))
+                value.Dequeue();
         }
     }
 
     // STOP TRACKING THIS ONE
     public void RemoveId(long id)
     {
-        if (_events.ContainsKey(id))
-        {
-            _events.Remove(id);
-        }
+        _events.Remove(id);
     }
 
     public void Clear()
@@ -51,10 +49,10 @@ public class FlingTracker
         double distanceX = 0;
         double distanceY = 0;
 
-        if (!_events.ContainsKey(id) || _events[id].Count < 2)
+        if (!_events.TryGetValue(id, out var eventItem) || eventItem.Count < 2)
             return (0d, 0d);
 
-        var eventQueue = _events[id];
+        var eventQueue = eventItem;
         var eventsArray = eventQueue.ToArray();
 
         (_, _, var firstTime) = eventsArray[0];

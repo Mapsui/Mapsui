@@ -67,7 +67,7 @@ public class WFSProvider : IProvider, IDisposable
     private IXPathQueryManager? _featureTypeInfoQueryManager;
     private string? _nsPrefix;
     private bool _getFeatureGetRequest;
-    private List<string> _labels = new();
+    private List<string> _labels = [];
     private bool _multiGeometries = true;
     private IFilter? _ogcFilter;
     private bool _quickGeometries;
@@ -118,7 +118,7 @@ public class WFSProvider : IProvider, IDisposable
         get =>
             //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
             _axisOrder ?? (_wfsVersion == WFSVersionEnum.WFS_1_0_0
-                ? new[] { 0, 1 }
+                ? [0, 1]
                 : _crsAxisOrderRegistry[CRS ?? throw new ArgumentException("CRS needs to be set")]);
         set
         {
@@ -376,7 +376,6 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="featureTypeInfo">The featureTypeInfo Instance</param>
     /// <param name="wfsVersion">The desired WFS Server version.</param>
     /// <param name="persistentCache">Persistent Cache</param>
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
     public WFSProvider(WfsFeatureTypeInfo featureTypeInfo, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
         _persistentCache = persistentCache ?? DefaultCache;
@@ -466,7 +465,6 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="featureType">The name of the feature type</param>
     /// <param name="wfsVersion">The desired WFS Server version.</param>
     /// <param name="persistentCache">persistent Cache</param>
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
     public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
                GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
@@ -656,7 +654,6 @@ public class WFSProvider : IProvider, IDisposable
         return httpClientUtil;
     }
 
-    [SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits")]
     public MRect? GetExtent()
     {
         if (_featureTypeInfo == null)
@@ -668,7 +665,6 @@ public class WFSProvider : IProvider, IDisposable
             _featureTypeInfo.BBox.MaxLat);
     }
 
-    [SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits")]
     public string? CRS
     {
         get
@@ -679,9 +675,9 @@ public class WFSProvider : IProvider, IDisposable
         set
         {
             if (_featureTypeInfo != null && value != null)
-                _sridOverride = _featureTypeInfo.SRID = value.Substring(CrsHelper.EpsgPrefix.Length);
+                _sridOverride = _featureTypeInfo.SRID = value[CrsHelper.EpsgPrefix.Length..];
             else
-                _sridOverride = value?.Substring(CrsHelper.EpsgPrefix.Length);
+                _sridOverride = value?[CrsHelper.EpsgPrefix.Length..];
             _initialized = false;
         }
     }
@@ -755,15 +751,15 @@ public class WFSProvider : IProvider, IDisposable
 
         /* Spatial reference ID */
         var srid = _featureTypeInfoQueryManager.GetValueFromNode
-            (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_SRS), new[] { new DictionaryEntry("_param1", featureQueryName) });
+            (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_SRS), [new DictionaryEntry("_param1", featureQueryName)]);
         /* If no SRID could be found, try '4326' by default */
-        srid = (srid == null) ? "4326" : srid.Substring(srid.LastIndexOf(":", StringComparison.Ordinal) + 1);
+        srid = (srid == null) ? "4326" : srid[(srid.LastIndexOf(":", StringComparison.Ordinal) + 1)..];
         _featureTypeInfo.SRID = _sridOverride ?? srid; // override the srid
 
         /* Bounding Box */
         var bboxQuery = _featureTypeInfoQueryManager.GetXPathQueryManagerInContext(
             _featureTypeInfoQueryManager.Compile(_textResources.XPATH_BBOX),
-            new[] { new DictionaryEntry("_param1", featureQueryName) });
+            [new DictionaryEntry("_param1", featureQueryName)]);
 
         if (bboxQuery != null)
         {
@@ -785,7 +781,7 @@ public class WFSProvider : IProvider, IDisposable
                         (bboxVal =
                          bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
                         null
-                            ? bboxVal.Substring(bboxVal.IndexOf(' ') + 1)
+                            ? bboxVal[(bboxVal.IndexOf(' ') + 1)..]
                             : "0.0", formatInfo);
 
             if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
@@ -802,7 +798,7 @@ public class WFSProvider : IProvider, IDisposable
                         (bboxVal =
                          bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
                         null
-                            ? bboxVal.Substring(bboxVal.IndexOf(' ') + 1)
+                            ? bboxVal[(bboxVal.IndexOf(' ') + 1)..]
                             : "0.0", formatInfo);
 
             if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
@@ -819,7 +815,7 @@ public class WFSProvider : IProvider, IDisposable
                         (bboxVal =
                          bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
                         null
-                            ? bboxVal.Substring(0, bboxVal.IndexOf(' ') + 1)
+                            ? bboxVal[..(bboxVal.IndexOf(' ') + 1)]
                             : "0.0", formatInfo);
 
             if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
@@ -836,7 +832,7 @@ public class WFSProvider : IProvider, IDisposable
                         (bboxVal =
                          bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
                         null
-                            ? bboxVal.Substring(0, bboxVal.IndexOf(' ') + 1)
+                            ? bboxVal[..(bboxVal.IndexOf(' ') + 1)]
                             : "0.0", formatInfo);
 
             _featureTypeInfo.BBox = bbox;
@@ -924,18 +920,11 @@ public class WFSProvider : IProvider, IDisposable
                     geomName =
                         describeFeatureTypeQueryManager.GetValueFromNode(
                             describeFeatureTypeQueryManager.Compile(
-                                _textResources.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY), new[]
-                                                                                          {
-                                                                                              new DictionaryEntry
-                                                                                                  ("_param1",
-                                                                                                   _featureTypeInfo
-                                                                                                       .
-                                                                                                       FeatureTypeNamespace)
-                                                                                              ,
-                                                                                              new DictionaryEntry
-                                                                                                  ("_param2",
-                                                                                                   geomComplexTypeName)
-                                                                                          });
+                                _textResources.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY),
+                                [
+                                    new DictionaryEntry("_param1", _featureTypeInfo.FeatureTypeNamespace),
+                                    new DictionaryEntry("_param2", geomComplexTypeName)
+                                ]);
                 }
                 else
                 {
@@ -1010,7 +999,7 @@ public class WFSProvider : IProvider, IDisposable
 
         // Remove prefix
         if (geomType.Contains(':'))
-            geomType = geomType.Substring(geomType.IndexOf(":", StringComparison.Ordinal) + 1);
+            geomType = geomType[(geomType.IndexOf(":", StringComparison.Ordinal) + 1)..];
 
         _featureTypeInfo.Geometry = new WfsFeatureTypeInfo.GeometryInfo
         {
