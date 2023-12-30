@@ -51,12 +51,4 @@ public interface IWidget
     /// Is Widget visible on screen
     /// </summary>
     bool Enabled { get; set; }
-
-    /// <summary>
-    /// Function, which is called, when a Widget is hidden
-    /// </summary>
-    /// <param name="navigator">Navigator of MapControl</param>
-    /// <param name="position">Screen position</param>
-    /// <returns>True, if the Widget had handled the touch event</returns>
-    bool HandleWidgetTouched(Navigator navigator, MPoint position);
 }
