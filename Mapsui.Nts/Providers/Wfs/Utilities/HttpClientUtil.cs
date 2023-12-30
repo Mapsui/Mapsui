@@ -6,12 +6,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Security;
 using System.Threading.Tasks;
 using Mapsui.Cache;
@@ -74,7 +71,7 @@ public class HttpClientUtil : IDisposable
     public HttpClientUtil(IUrlPersistentCache? persistentCache = null)
     {
         _persistentCache = persistentCache;
-        _requestHeaders = new Dictionary<string, string?>();
+        _requestHeaders = [];
     }
 
 
@@ -90,7 +87,7 @@ public class HttpClientUtil : IDisposable
     }
 
     /// <summary>
-    /// Performs a HTTP-GET or HTTP-POST request and returns a datastream for reading.
+    /// Performs a HTTP-GET or HTTP-POST request and returns a data stream for reading.
     /// </summary>
     public async Task<Stream?> GetDataStreamAsync()
     {
@@ -102,9 +99,6 @@ public class HttpClientUtil : IDisposable
         {
             return new MemoryStream(bytes);
         }
-
-        // Free all resources of the previous request, if it hasn't been done yet...
-        Close();
 
         // Now create a client handler which uses that proxy
         var httpClientHandler = new HttpClientHandler();
@@ -128,11 +122,12 @@ public class HttpClientUtil : IDisposable
             httpClientHandler.Credentials = Credentials;
         }
 
+        // To do: Dispose:
         HttpClient httpClient;
 
         try
         {
-            httpClient = new HttpClient(httpClientHandler);
+            httpClient = new HttpClient(httpClientHandler);            
         }
         catch (SecurityException ex)
         {
@@ -200,14 +195,8 @@ public class HttpClientUtil : IDisposable
         _requestHeaders.Clear();
     }
 
-    /// <summary>
-    /// This method closes the WebResponse object.
-    /// </summary>
-    public void Close() //This class should implement dispose instead.
-    {
-    }
-
     public virtual void Dispose()
     {
+
     }
 }

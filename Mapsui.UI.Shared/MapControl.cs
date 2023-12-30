@@ -67,7 +67,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
 
-    private protected void CommonInitialize()
+    private void CommonInitialize()
     {
         // Create timer for invalidating the control
         _invalidateTimer?.Dispose();

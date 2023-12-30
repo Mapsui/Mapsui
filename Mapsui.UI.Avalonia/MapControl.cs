@@ -135,8 +135,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlMouseWheel(object? sender, PointerWheelEventArgs e)
     {
-        // In Avalonia the touchpad can trigger the mousewheel event. In that case there are more events and the Delta.Y is a double value, 
-        // which is usually smaller than 1.0. In the code below the deltas are accumelated until they are larger than 1.0. Only then 
+        // In Avalonia the touchpad can trigger the mouse wheel event. In that case there are more events and the Delta.Y is a double value, 
+        // which is usually smaller than 1.0. In the code below the deltas are accumulated until they are larger than 1.0. Only then 
         // MouseWheelZoom is called.
         _mouseWheelPos += e.Delta.Y;
         if (Math.Abs(_mouseWheelPos) < 1.0) return; // Ignore the mouse wheel event if the accumulated delta is still too small
@@ -289,7 +289,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         SetViewportSize();
     }
 
-    private void RunOnUIThread(Action action)
+    private static void RunOnUIThread(Action action)
     {
         Catch.TaskRun(() => Dispatcher.UIThread.InvokeAsync(action));
     }
@@ -358,7 +358,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
     {
         if (locations.Count < 2)
-            throw new ArgumentException();
+            throw new ArgumentOutOfRangeException(nameof(locations));
 
         double centerX = 0;
         double centerY = 0;
@@ -369,8 +369,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             centerY += location.Y;
         }
 
-        centerX = centerX / locations.Count;
-        centerY = centerY / locations.Count;
+        centerX /= locations.Count;
+        centerY /= locations.Count;
 
         var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
 
@@ -379,16 +379,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         return (new MPoint(centerX, centerY), radius, angle);
     }
 
-    private sealed class MapsuiCustomDrawOp : ICustomDrawOperation
+    private sealed class MapsuiCustomDrawOp(Rect bounds, MapControl mapControl) : ICustomDrawOperation
     {
-        private readonly MapControl _mapControl;
-
-        public MapsuiCustomDrawOp(Rect bounds, MapControl mapControl)
-        {
-            Bounds = bounds;
-            _mapControl = mapControl;
-        }
-
         public void Dispose()
         {
             // No-op
@@ -402,11 +394,11 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             using var lease = leaseFeature.Lease();
             var canvas = lease.SkCanvas;
             canvas.Save();
-            _mapControl.CommonDrawControl(canvas);
+            mapControl.CommonDrawControl(canvas);
             canvas.Restore();
         }
 
-        public Rect Bounds { get; set; }
+        public Rect Bounds { get; set; } = bounds;
 
         public bool HitTest(Point p)
         {
