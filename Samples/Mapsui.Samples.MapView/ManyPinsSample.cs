@@ -130,7 +130,7 @@ public class ManyPinsSample : IMapViewSample
         };
 
         mapControl.Map.Widgets.Add(widget);
-        mapControl.Renderer.WidgetRenders[typeof(PerformanceWidget)] = new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer(10, 10, 12, SkiaSharp.SKColors.Black, SkiaSharp.SKColors.White);
+        mapControl.Renderer.WidgetRenders[typeof(PerformanceWidget)] = new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer();
 
         ((MapView)mapControl).UseDoubleTap = true;
         ((MapView)mapControl).UniqueCallout = true;
