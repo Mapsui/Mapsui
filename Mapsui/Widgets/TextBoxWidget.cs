@@ -1,11 +1,11 @@
 ﻿using Mapsui.Styles;
 
-namespace Mapsui.Widgets.BoxWidget;
+namespace Mapsui.Widgets;
 
 /// <summary>
 /// Widget displaying text in a box
 /// </summary>
-public class TextBoxWidget : BoxWidget
+public class TextBoxWidget : BoxWidget.BoxWidget
 {
     private double _paddingX = 3;
 
