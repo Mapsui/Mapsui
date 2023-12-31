@@ -58,6 +58,23 @@ public class TextBoxWidget : BoxWidget.BoxWidget
         }
     }
 
+    private double _textSize = 12.0;
+
+    /// <summary>
+    /// Font size of text inside of box
+    /// </summary>
+    public double TextSize
+    {
+        get => _textSize;
+        set
+        {
+            if (_textSize == value)
+                return;
+            _textSize = value;
+            OnPropertyChanged();
+        }
+    }
+
     private Color _textColor = new(0, 0, 0);
 
     /// <summary>
