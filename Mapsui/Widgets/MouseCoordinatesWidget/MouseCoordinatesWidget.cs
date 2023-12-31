@@ -1,4 +1,5 @@
 ﻿using Mapsui.Extensions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Mapsui.Widgets.MouseCoordinatesWidget;
 
@@ -18,7 +19,12 @@ public class MouseCoordinatesWidget : TextBox, IWidgetExtended
     {
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(position);
         // update the Mouse position
-        Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
+        var newText = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
+        if (newText != Text)
+        {
+            Text = newText;
+            Map.RefreshGraphics();
+        }
         return false;
     }
 
