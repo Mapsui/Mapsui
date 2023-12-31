@@ -615,7 +615,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (touchableWidgets.Count == 0)
             return false;
 
-        var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, position, touchableWidgets);
 
         foreach (var widget in touchedWidgets)
         {
@@ -634,7 +634,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (touchableWidgets.Count == 0)
             return false;
 
-        var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, position, touchableWidgets);
 
         foreach (var widget in touchedWidgets)
         {

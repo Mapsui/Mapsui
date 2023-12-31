@@ -6,7 +6,7 @@ namespace Mapsui.Widgets;
 public static class WidgetTouch
 {
     /// <summary>
-    /// Gets the widget selected by touch positions
+    /// Gets the widgets selected by a touched positions
     /// </summary>
     /// <param name="screenPosition">The screen position in device independent units (or DIP or DP)</param>
     /// <param name="startScreenPosition">The start screen position in device independent units (or DIP or DP)</param>
@@ -15,7 +15,7 @@ public static class WidgetTouch
     /// Returns the Widgets in the list that contain the screenPosition
     /// within it's Envelope. Returns null if there are none.
     /// </returns>
-    public static IEnumerable<ITouchableWidget> GetTouchedWidget(MPoint screenPosition, MPoint startScreenPosition,
+    public static IEnumerable<ITouchableWidget> GetTouchedWidgets(MPoint screenPosition, MPoint startScreenPosition,
         IEnumerable<ITouchableWidget> widgets)
     {
         var touchedWidgets = new List<ITouchableWidget>();
