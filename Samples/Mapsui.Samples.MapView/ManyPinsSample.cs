@@ -9,11 +9,11 @@ using Mapsui.Extensions;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Styles;
 using Mapsui.Utilities;
-using Mapsui.Widgets.PerformanceWidget;
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Graphics;
 using Color = Microsoft.Maui.Graphics.Color;
 using KnownColor = Mapsui.UI.Maui.KnownColor;
+using Mapsui.Widgets.InfoWidget;
 
 namespace Mapsui.Samples.Maui;
 

@@ -15,11 +15,10 @@ using Mapsui.Styles;
 using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidget;
 using Mapsui.Widgets.ButtonWidget;
-using Mapsui.Widgets.MouseCoordinatesWidget;
-using Mapsui.Widgets.LoggingWidget;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using SkiaSharp;
+using Mapsui.Widgets.InfoWidget;
 
 #pragma warning disable IDISP008 // Don't assign member with injected created disposable
 

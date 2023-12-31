@@ -14,7 +14,7 @@ using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidget;
 using Mapsui.Widgets.ButtonWidget;
-using Mapsui.Widgets.MouseCoordinatesWidget;
+using Mapsui.Widgets.InfoWidget;
 using NetTopologySuite.IO;
 
 #pragma warning disable IDISP001 // Dispose created

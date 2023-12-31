@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers.Wms;
 using Mapsui.Styles;
-using Mapsui.Widgets;
+using Mapsui.Widgets.InfoWidget;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Info;
 

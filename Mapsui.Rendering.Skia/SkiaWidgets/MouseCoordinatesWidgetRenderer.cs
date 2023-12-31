@@ -1,5 +1,5 @@
 ﻿using Mapsui.Widgets;
-using Mapsui.Widgets.MouseCoordinatesWidget;
+using Mapsui.Widgets.InfoWidget;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets;

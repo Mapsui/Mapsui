@@ -5,7 +5,7 @@ using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Widgets;
-using Mapsui.Widgets.PerformanceWidget;
+using Mapsui.Widgets.InfoWidget;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
 

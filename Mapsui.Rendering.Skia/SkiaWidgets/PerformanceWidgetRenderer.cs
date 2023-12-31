@@ -1,6 +1,6 @@
 ﻿using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
-using Mapsui.Widgets.PerformanceWidget;
+using Mapsui.Widgets.InfoWidget;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets;

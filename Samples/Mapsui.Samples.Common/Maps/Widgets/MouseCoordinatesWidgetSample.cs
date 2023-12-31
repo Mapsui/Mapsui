@@ -1,7 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
-using Mapsui.Widgets.MouseCoordinatesWidget;
+using Mapsui.Widgets.InfoWidget;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
