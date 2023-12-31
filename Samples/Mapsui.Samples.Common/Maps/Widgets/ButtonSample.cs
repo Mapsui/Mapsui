@@ -24,7 +24,7 @@ public class ButtonSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
         var clickMeButton = CreateButton("Click me", VerticalAlignment.Top, HorizontalAlignment.Left);
-        clickMeButton.WidgetTouched += (s, a) =>
+        clickMeButton.Touched += (s, a) =>
             {
                 ((ButtonWidget?)s!).Text = $"Clicked {++clickCount} times";
                 map.RefreshGraphics();

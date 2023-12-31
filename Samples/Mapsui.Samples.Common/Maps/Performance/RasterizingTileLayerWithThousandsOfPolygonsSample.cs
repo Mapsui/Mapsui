@@ -47,7 +47,7 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top
         };
-        buttonWidget.WidgetTouched += ChangeColor;
+        buttonWidget.Touched += ChangeColor;
         _map.Widgets.Enqueue(buttonWidget);
 
         return _map;

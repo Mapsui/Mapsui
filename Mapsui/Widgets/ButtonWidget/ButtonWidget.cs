@@ -23,7 +23,7 @@ public class ButtonWidget : TextBoxWidget, ITouchableWidget
     /// <summary>
     /// Event handler which is called, when the button is touched
     /// </summary>
-    public event EventHandler<WidgetTouchedEventArgs>? WidgetTouched;
+    public event EventHandler<WidgetTouchedEventArgs>? Touched;
 
     private string? _svgImage;
 
@@ -95,7 +95,7 @@ public class ButtonWidget : TextBoxWidget, ITouchableWidget
 
     public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
-        WidgetTouched?.Invoke(this, args);
+        Touched?.Invoke(this, args);
 
         return args.Handled;
     }

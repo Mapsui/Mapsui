@@ -24,7 +24,7 @@ public class PerformanceWidget : TextBoxWidget, ITouchableWidget
     /// <summary>
     /// Event handler which is called, when the button is touched
     /// </summary>
-    public event EventHandler<WidgetTouchedEventArgs>? WidgetTouched;
+    public event EventHandler<WidgetTouchedEventArgs>? Touched;
 
     private double _opacity = 0.8f;
 
@@ -47,7 +47,7 @@ public class PerformanceWidget : TextBoxWidget, ITouchableWidget
 
     public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
-        WidgetTouched?.Invoke(this, args);
+        Touched?.Invoke(this, args);
 
         return args.Handled;
     }

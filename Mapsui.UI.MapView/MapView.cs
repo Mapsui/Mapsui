@@ -851,7 +851,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             Rotation = 0,
             Enabled = true,
         };
-        result.WidgetTouched += (s, e) => action(s, e);
+        result.Touched += (s, e) => action(s, e);
         result.PropertyChanged += (s, e) => RefreshGraphics();
 
         return result;

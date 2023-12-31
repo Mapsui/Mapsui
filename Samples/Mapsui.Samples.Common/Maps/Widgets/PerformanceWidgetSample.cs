@@ -44,7 +44,7 @@ public class PerformanceWidgetSample : IMapControlSample
             BackColor = Color.White
         };
 
-        widget.WidgetTouched += OnClick;
+        widget.Touched += OnClick;
 
         mapControl.Map.Widgets.Add(widget);
         mapControl.Performance = _performance;

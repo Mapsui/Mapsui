@@ -121,7 +121,7 @@ public class ManyPinsSample : IMapViewSample
 
         var widget = new PerformanceWidget(mapControl.Performance);
 
-        widget.WidgetTouched += (sender, args) =>
+        widget.Touched += (sender, args) =>
         {
             mapControl?.Performance.Clear();
             mapControl?.RefreshGraphics();

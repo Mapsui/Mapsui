@@ -40,7 +40,7 @@ public class LoggingWidgetSample : ISample
             PaddingY = 2
         };
 
-        widget.WidgetTouched += OnClick;
+        widget.Touched += OnClick;
 
         map.Widgets.Add(widget);
 

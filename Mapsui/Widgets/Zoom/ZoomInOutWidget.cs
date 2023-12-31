@@ -28,7 +28,7 @@ public class ZoomInOutWidget : Widget, ITouchableWidget
     /// isn't one, than the default handler is used, which change the Resolution
     /// of Viewport.
     /// </summary>
-    public event EventHandler<WidgetTouchedEventArgs>? WidgetTouched;
+    public event EventHandler<WidgetTouchedEventArgs>? Touched;
 
     private double _size = 40;
 
@@ -136,7 +136,7 @@ public class ZoomInOutWidget : Widget, ITouchableWidget
 
     public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
-        WidgetTouched?.Invoke(this, args);
+        Touched?.Invoke(this, args);
 
         if (args.Handled)
             return true;

@@ -101,7 +101,7 @@ public class EditingSample : IMapControlSample
             Text = "Layer 1",
             BackColor = Color.LightGray,
         };
-        layer1.WidgetTouched += (_, e) =>
+        layer1.Touched += (_, e) =>
         {
             _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 1") as WritableLayer;
             e.Handled = true;
@@ -120,7 +120,7 @@ public class EditingSample : IMapControlSample
             Text = "Layer 2",
             BackColor = Color.LightGray,
         };
-        layer2.WidgetTouched += (_, e) =>
+        layer2.Touched += (_, e) =>
         {
             _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 2") as WritableLayer;
             e.Handled = true;
@@ -138,7 +138,7 @@ public class EditingSample : IMapControlSample
             Text = "Layer 3",
             BackColor = Color.LightGray,
         };
-        layer3.WidgetTouched += (_, e) =>
+        layer3.Touched += (_, e) =>
         {
             _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 3") as WritableLayer;
             e.Handled = true;
@@ -157,7 +157,7 @@ public class EditingSample : IMapControlSample
             Text = "Save",
             BackColor = Color.LightGray,
         };
-        save.WidgetTouched += (_, e) =>
+        save.Touched += (_, e) =>
         {
             _targetLayer?.AddRange(_editManager.Layer?.GetFeatures().Copy() ?? new List<IFeature>());
             _editManager.Layer?.Clear();
@@ -178,7 +178,7 @@ public class EditingSample : IMapControlSample
             Text = "Load",
             BackColor = Color.LightGray,
         };
-        load.WidgetTouched += (_, e) =>
+        load.Touched += (_, e) =>
         {
             var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
 
@@ -208,7 +208,7 @@ public class EditingSample : IMapControlSample
             Text = "Cancel",
             BackColor = Color.LightGray,
         };
-        cancel.WidgetTouched += (_, e) =>
+        cancel.Touched += (_, e) =>
         {
             if (_targetLayer != null && _tempFeatures != null)
             {
@@ -249,7 +249,7 @@ public class EditingSample : IMapControlSample
             Text = "Add Point",
             BackColor = Color.LightGray,
         };
-        addPoint.WidgetTouched += (_, e) =>
+        addPoint.Touched += (_, e) =>
         {
             var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
 
@@ -276,7 +276,7 @@ public class EditingSample : IMapControlSample
             Text = "Add Line",
             BackColor = Color.LightGray,
         };
-        addLine.WidgetTouched += (_, e) =>
+        addLine.Touched += (_, e) =>
         {
             var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
 
@@ -303,7 +303,7 @@ public class EditingSample : IMapControlSample
             Text = "Add Polygon",
             BackColor = Color.LightGray,
         };
-        addPolygon.WidgetTouched += (_, e) =>
+        addPolygon.Touched += (_, e) =>
         {
             var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
 
@@ -330,7 +330,7 @@ public class EditingSample : IMapControlSample
             Text = "Modify",
             BackColor = Color.LightGray,
         };
-        modify.WidgetTouched += (_, e) =>
+        modify.Touched += (_, e) =>
         {
             _editManager.EditMode = EditMode.Modify;
             e.Handled = true;
@@ -348,7 +348,7 @@ public class EditingSample : IMapControlSample
             Text = "Rotate",
             BackColor = Color.LightGray,
         };
-        rotate.WidgetTouched += (_, e) =>
+        rotate.Touched += (_, e) =>
         {
             _editManager.EditMode = EditMode.Rotate;
             e.Handled = true;
@@ -367,7 +367,7 @@ public class EditingSample : IMapControlSample
             Text = "Scale",
             BackColor = Color.LightGray,
         };
-        scale.WidgetTouched += (_, e) =>
+        scale.Touched += (_, e) =>
         {
             _editManager.EditMode = EditMode.Scale;
             e.Handled = true;
@@ -385,7 +385,7 @@ public class EditingSample : IMapControlSample
             Text = "None",
             BackColor = Color.LightGray,
         };
-        none.WidgetTouched += (_, e) =>
+        none.Touched += (_, e) =>
         {
             _editManager.EditMode = EditMode.None;
             e.Handled = true;
@@ -405,7 +405,7 @@ public class EditingSample : IMapControlSample
             Text = "Select (for delete)",
             BackColor = Color.LightGray,
         };
-        selectForDelete.WidgetTouched += (_, e) =>
+        selectForDelete.Touched += (_, e) =>
         {
             _editManager.SelectMode = !_editManager.SelectMode;
             e.Handled = true;
@@ -423,7 +423,7 @@ public class EditingSample : IMapControlSample
             Text = "Delete",
             BackColor = Color.LightGray,
         };
-        delete.WidgetTouched += (_, e) =>
+        delete.Touched += (_, e) =>
         {
             if (_editManager.SelectMode)
             {

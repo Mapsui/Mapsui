@@ -47,7 +47,7 @@ public class LoggingWidget : Widget, ITouchableWidget
     /// <summary>
     /// Event handler which is called, when the widget is touched
     /// </summary>
-    public event EventHandler<WidgetTouchedEventArgs>? WidgetTouched;
+    public event EventHandler<WidgetTouchedEventArgs>? Touched;
 
     /// <summary>
     ///  Event handler for logging
@@ -250,7 +250,7 @@ public class LoggingWidget : Widget, ITouchableWidget
 
     public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
-        WidgetTouched?.Invoke(this, args);
+        Touched?.Invoke(this, args);
 
         return args.Handled;
     }
