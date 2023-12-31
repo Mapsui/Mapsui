@@ -9,7 +9,7 @@ public class EditingWidget : Widget, ITouchableWidget
     public EditManager EditManager { get; }
     public EditManipulation EditManipulation { get; }
 
-    public TouchableAreaType TouchableArea => throw new System.NotImplementedException();
+    public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
 
     public EditingWidget(IMapControl mapControl, EditManager editManager, EditManipulation editManipulation)
     {
