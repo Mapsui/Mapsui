@@ -1,7 +1,7 @@
 ﻿using Mapsui.Styles;
 using System;
 
-namespace Mapsui.Widgets.Zoom;
+namespace Mapsui.Widgets.ButtonWidget;
 
 /// <summary>
 /// Widget which shows two buttons (horizontal or vertical) with a "+" and a "-" sign.

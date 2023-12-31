@@ -1,7 +1,7 @@
 ﻿using Mapsui.Widgets.BoxWidget;
 using System;
 
-namespace Mapsui.Widgets;
+namespace Mapsui.Widgets.ButtonWidget;
 
 public class Hyperlink : TextBoxWidget, ITouchableWidget
 {
