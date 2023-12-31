@@ -1,7 +1,7 @@
 ﻿using Mapsui.Widgets.BoxWidget;
 using System;
 
-namespace Mapsui.Widgets.ButtonWidgets;
+namespace Mapsui.Widgets.ButtonWidget;
 
 public class TextButtonWidget : TextBoxWidget, ITouchableWidget
 {
