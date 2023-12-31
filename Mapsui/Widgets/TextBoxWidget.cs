@@ -2,7 +2,7 @@
 
 namespace Mapsui.Widgets;
 
-public class TextBox : Widget
+public class TextBoxWidget : Widget
 {
     public double PaddingX { get; set; } = 3;
     public double PaddingY { get; set; } = 1;

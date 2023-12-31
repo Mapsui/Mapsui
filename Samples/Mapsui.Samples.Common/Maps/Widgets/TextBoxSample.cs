@@ -34,7 +34,7 @@ public class TextBoxSample : ISample
     private static IWidget CreateTextBox(string text,
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
     {
-        return new TextBox()
+        return new TextBoxWidget()
         {
             Text = text,
             VerticalAlignment = verticalAlignment,

@@ -78,7 +78,7 @@ public class EditingSample : IMapControlSample
             VerticalAlignment = VerticalAlignment.Top,
         });
 
-        map.Widgets.Add(new TextBox
+        map.Widgets.Add(new TextBoxWidget
         {
             MarginY = 0,
             MarginX = 5,
@@ -228,7 +228,7 @@ public class EditingSample : IMapControlSample
         };
         map.Widgets.Add(cancel);
 
-        map.Widgets.Add(new TextBox
+        map.Widgets.Add(new TextBoxWidget
         {
             MarginY = 150,
             HorizontalAlignment = HorizontalAlignment.Left,

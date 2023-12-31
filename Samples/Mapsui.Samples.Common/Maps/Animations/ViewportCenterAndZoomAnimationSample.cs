@@ -36,7 +36,7 @@ public class ViewportCenterAndZoomAnimationSample : ISample
         return map;
     }
 
-    private static IWidget CreateTextBox(string text) => new TextBox()
+    private static IWidget CreateTextBox(string text) => new TextBoxWidget()
     {
         Text = text,
         VerticalAlignment = VerticalAlignment.Top,

@@ -13,7 +13,7 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
 
     public static void DrawText(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
     {
-        var textBox = (TextBox)widget;
+        var textBox = (TextBoxWidget)widget;
 
         if (string.IsNullOrEmpty(textBox.Text)) return;
 

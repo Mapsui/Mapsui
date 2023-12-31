@@ -2,7 +2,7 @@
 
 namespace Mapsui.Widgets;
 
-public class Hyperlink : TextBox, ITouchableWidget
+public class Hyperlink : TextBoxWidget, ITouchableWidget
 {
     public string? Url { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace Mapsui.Widgets.MouseCoordinatesWidget;
 
-public class MouseCoordinatesWidget : TextBox, ITouchableWidget
+public class MouseCoordinatesWidget : TextBoxWidget, ITouchableWidget
 {
     public TouchableAreaType TouchableArea => TouchableAreaType.Viewport;
 
