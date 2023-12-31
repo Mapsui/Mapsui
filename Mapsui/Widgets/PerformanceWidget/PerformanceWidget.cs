@@ -9,7 +9,7 @@ namespace Mapsui.Widgets.PerformanceWidget;
 /// With this, the user could see the drawing performance on the screen.
 /// It shows always the values for the last draw before this draw.
 /// </remarks>
-public class PerformanceWidget : Widget, ITouchableWidget
+public class PerformanceWidget : TextBoxWidget, ITouchableWidget
 {
     public PerformanceWidget(Utilities.Performance performance)
     {

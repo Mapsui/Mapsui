@@ -15,7 +15,7 @@ public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
         var performanceWidget = (PerformanceWidget)widget;
         var textSize = performanceWidget.TextSize;
 
-        using var textPaint = new SKPaint { Color = performanceWidget.TextColor.ToSkia(), TextSize = textSize, };
+        using var textPaint = new SKPaint { Color = performanceWidget.TextColor.ToSkia(), TextSize = (float)textSize, };
         using var backgroundPaint = new SKPaint { Color = performanceWidget.BackColor.ToSkia().WithAlpha((byte)(255.0f * performanceWidget.Opacity)), Style = SKPaintStyle.Fill, };
 
         var widthHeader = 0f;
@@ -42,8 +42,8 @@ public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
 
         for (var i = 0; i < _textHeader.Length; i++)
         {
-            canvas.DrawText(_textHeader[i], rect.Left + 2, rect.Top + 2 * i + textSize * (i + 1), textPaint);
-            canvas.DrawText(_text[i], rect.Right - 2 - textPaint.MeasureText(_text[i]), rect.Top + (2 + textSize) * (i + 1), textPaint);
+            canvas.DrawText(_textHeader[i], (float)(rect.Left + 2), (float)(rect.Top + 2 * i + textSize * (i + 1)), textPaint);
+            canvas.DrawText(_text[i], (float)(rect.Right - 2 - textPaint.MeasureText(_text[i])), (float)(rect.Top + (2 + textSize) * (i + 1)), textPaint);
         }
     }
 }
