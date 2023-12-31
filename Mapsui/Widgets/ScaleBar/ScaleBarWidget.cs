@@ -292,8 +292,10 @@ public class ScaleBarWidget : Widget
 
         var maxScaleBarLength = Math.Max(scaleBarLength1, scaleBarLength2);
 
-        var posX = CalculatePositionX(0, (int)viewport.Width, _maxWidth);
-        var posY = CalculatePositionY(0, (int)viewport.Height, Height);
+        UpdateEnvelope(_maxWidth, Height, viewport.Width, viewport.Height);
+
+        var posX = (float)(Envelope?.MinX ?? 0.0);
+        var posY = (float)(Envelope?.MinY ?? 0.0);
 
         var left = posX + stroke * 0.5f * Scale;
         var right = posX + _maxWidth - stroke * 0.5f * Scale;
@@ -399,8 +401,10 @@ public class ScaleBarWidget : Widget
     {
         var drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
 
-        var posX = CalculatePositionX(0, (int)viewport.Width, _maxWidth);
-        var posY = CalculatePositionY(0, (int)viewport.Height, Height);
+        UpdateEnvelope(_maxWidth, Height, viewport.Width, viewport.Height);
+
+        var posX = (float)(Envelope?.MinX ?? 0.0);
+        var posY = (float)(Envelope?.MinY ?? 0.0);
 
         var left = posX + (stroke + TextMargin) * Scale;
         var right1 = posX + _maxWidth - (stroke + TextMargin) * Scale - textSize1.Width;
