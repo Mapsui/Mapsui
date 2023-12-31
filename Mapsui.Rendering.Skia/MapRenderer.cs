@@ -16,7 +16,6 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidget;
 using Mapsui.Widgets.ButtonWidget;
 using Mapsui.Widgets.ScaleBar;
-using Mapsui.Widgets.Zoom;
 using SkiaSharp;
 using Mapsui.Widgets.InfoWidget;
 

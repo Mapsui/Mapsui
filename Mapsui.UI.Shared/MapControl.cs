@@ -13,6 +13,7 @@ using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidget;
 
 #if __MAUI__
 using Microsoft.Maui.Controls;

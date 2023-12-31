@@ -6,7 +6,7 @@ using System.Threading;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Styles;
-using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidget;
 
 namespace Mapsui.Layers;
 

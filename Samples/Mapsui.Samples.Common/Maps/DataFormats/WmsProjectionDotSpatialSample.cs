@@ -1,14 +1,11 @@
-﻿using Mapsui.Cache;
+﻿using Mapsui.Extensions.Projections;
 using Mapsui.Layers;
-using Mapsui.Providers.Wms;
-using System.Threading.Tasks;
-using Mapsui.Nts.Extensions;
 using Mapsui.Providers;
+using Mapsui.Providers.Wms;
 using Mapsui.Styles;
-using NetTopologySuite.Geometries;
-using Mapsui.Extensions.Projections;
 using Mapsui.Widgets;
-using NetTopologySuite.Utilities;
+using Mapsui.Widgets.ButtonWidget;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 

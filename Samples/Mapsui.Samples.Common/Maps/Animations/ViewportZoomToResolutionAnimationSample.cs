@@ -4,7 +4,6 @@ using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidget;
 using Mapsui.Widgets.ScaleBar;
-using Mapsui.Widgets.Zoom;
 using System.Threading.Tasks;
 using Mapsui.Styles;
 
