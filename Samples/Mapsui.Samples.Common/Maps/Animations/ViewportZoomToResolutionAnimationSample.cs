@@ -44,7 +44,7 @@ public class ViewportZoomToResolutionAnimationSample : ISample
         VerticalAlignment = VerticalAlignment.Top
     };
 
-    private static ButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new ButtonWidget
+    private static TextButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new TextButtonWidget
     {
         Text = text,
         MarginX = 20,

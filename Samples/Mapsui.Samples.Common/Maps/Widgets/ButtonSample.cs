@@ -26,7 +26,7 @@ public class ButtonSample : ISample
         var clickMeButton = CreateButton("Click me", VerticalAlignment.Top, HorizontalAlignment.Left);
         clickMeButton.Touched += (s, a) =>
             {
-                ((ButtonWidget?)s!).Text = $"Clicked {++clickCount} times";
+                ((TextButtonWidget?)s!).Text = $"Clicked {++clickCount} times";
                 map.RefreshGraphics();
             };
         map.Widgets.Add(clickMeButton);
@@ -38,10 +38,10 @@ public class ButtonSample : ISample
         return Task.FromResult(map);
     }
 
-    private static ButtonWidget CreateButton(string text,
+    private static TextButtonWidget CreateButton(string text,
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
     {
-        return new ButtonWidget()
+        return new TextButtonWidget()
         {
             Text = text,
             VerticalAlignment = verticalAlignment,
@@ -56,12 +56,11 @@ public class ButtonSample : ISample
         };
     }
 
-    private static ButtonWidget CreateButtonWithImage(
+    private static IconButtonWidget CreateButtonWithImage(
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
     {
-        return new ButtonWidget()
+        return new IconButtonWidget()
         {
-            Text = "hi", // This text is apparently needed to update to position of the button
             SvgImage = LoadSomeSvgAsString(),
             VerticalAlignment = verticalAlignment,
             HorizontalAlignment = horizontalAlignment,

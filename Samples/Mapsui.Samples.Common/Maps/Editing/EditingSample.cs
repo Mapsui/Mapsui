@@ -89,7 +89,7 @@ public class EditingSample : IMapControlSample
         });
 
         // Layers
-        var layer1 = new ButtonWidget
+        var layer1 = new TextButtonWidget
         {
             MarginY = 20,
             MarginX = 5,
@@ -108,7 +108,7 @@ public class EditingSample : IMapControlSample
         };
 
         map.Widgets.Add(layer1);
-        var layer2 = new ButtonWidget
+        var layer2 = new TextButtonWidget
         {
             MarginY = 40,
             MarginX = 5,
@@ -126,7 +126,7 @@ public class EditingSample : IMapControlSample
             e.Handled = true;
         };
         map.Widgets.Add(layer2);
-        var layer3 = new ButtonWidget
+        var layer3 = new TextButtonWidget
         {
             MarginY = 60,
             MarginX = 5,
@@ -145,7 +145,7 @@ public class EditingSample : IMapControlSample
         };
         map.Widgets.Add(layer3);
         // Persistence
-        var save = new ButtonWidget
+        var save = new TextButtonWidget
         {
             MarginY = 80,
             MarginX = 5,
@@ -166,7 +166,7 @@ public class EditingSample : IMapControlSample
             e.Handled = true;
         };
         map.Widgets.Add(save);
-        var load = new ButtonWidget
+        var load = new TextButtonWidget
         {
             MarginY = 100,
             MarginX = 5,
@@ -196,7 +196,7 @@ public class EditingSample : IMapControlSample
             e.Handled = true;
         };
         map.Widgets.Add(load);
-        var cancel = new ButtonWidget
+        var cancel = new TextButtonWidget
         {
             MarginY = 120,
             MarginX = 5,
@@ -237,7 +237,7 @@ public class EditingSample : IMapControlSample
             BackColor = Color.Transparent,
         });
         // Editing Modes
-        var addPoint = new ButtonWidget
+        var addPoint = new TextButtonWidget
         {
             MarginY = 170,
             MarginX = 5,
@@ -264,7 +264,7 @@ public class EditingSample : IMapControlSample
             e.Handled = true;
         };
         map.Widgets.Add(addPoint);
-        var addLine = new ButtonWidget
+        var addLine = new TextButtonWidget
         {
             MarginY = 190,
             MarginX = 5,
@@ -291,7 +291,7 @@ public class EditingSample : IMapControlSample
             e.Handled = true;
         };
         map.Widgets.Add(addLine);
-        var addPolygon = new ButtonWidget
+        var addPolygon = new TextButtonWidget
         {
             MarginY = 210,
             MarginX = 5,
@@ -318,7 +318,7 @@ public class EditingSample : IMapControlSample
             e.Handled = true;
         };
         map.Widgets.Add(addPolygon);
-        var modify = new ButtonWidget
+        var modify = new TextButtonWidget
         {
             MarginY = 230,
             MarginX = 5,
@@ -336,7 +336,7 @@ public class EditingSample : IMapControlSample
             e.Handled = true;
         };
         map.Widgets.Add(modify);
-        var rotate = new ButtonWidget
+        var rotate = new TextButtonWidget
         {
             MarginY = 250,
             MarginX = 5,
@@ -355,7 +355,7 @@ public class EditingSample : IMapControlSample
 
         };
         map.Widgets.Add(rotate);
-        var scale = new ButtonWidget
+        var scale = new TextButtonWidget
         {
             MarginY = 270,
             MarginX = 5,
@@ -373,7 +373,7 @@ public class EditingSample : IMapControlSample
             e.Handled = true;
         };
         map.Widgets.Add(scale);
-        var none = new ButtonWidget
+        var none = new TextButtonWidget
         {
             MarginY = 290,
             MarginX = 5,
@@ -393,7 +393,7 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(none);
 
         // Deletion
-        var selectForDelete = new ButtonWidget
+        var selectForDelete = new TextButtonWidget
         {
             MarginY = 320,
             MarginX = 5,
@@ -411,7 +411,7 @@ public class EditingSample : IMapControlSample
             e.Handled = true;
         };
         map.Widgets.Add(selectForDelete);
-        var delete = new ButtonWidget
+        var delete = new TextButtonWidget
         {
             MarginY = 340,
             MarginX = 5,
