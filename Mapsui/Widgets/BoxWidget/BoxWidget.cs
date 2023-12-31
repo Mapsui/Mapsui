@@ -7,12 +7,12 @@ namespace Mapsui.Widgets.BoxWidget;
 /// </summary>
 public class BoxWidget : Widget
 {
-    private int _cornerRadius = 8;
+    private double _cornerRadius = 8;
 
     /// <summary>
     /// Corner radius of box
     /// </summary>
-    public int CornerRadius
+    public double CornerRadius
     {
         get => _cornerRadius;
         set
