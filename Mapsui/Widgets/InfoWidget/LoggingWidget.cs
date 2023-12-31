@@ -5,7 +5,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace Mapsui.Widgets.LoggingWidget;
+namespace Mapsui.Widgets.InfoWidget;
 
 /// <summary>
 /// Widget which shows log entries
@@ -84,12 +84,12 @@ public class LoggingWidget : Widget, ITouchableWidget
 
     private ConcurrentQueue<LogEntry> _listOfLogEntries;
 
-    public ConcurrentQueue<LogEntry> ListOfLogEntries 
-    { 
-        get 
-        { 
-            return _listOfLogEntries; 
-        } 
+    public ConcurrentQueue<LogEntry> ListOfLogEntries
+    {
+        get
+        {
+            return _listOfLogEntries;
+        }
     }
 
     private LogLevel _logLevelFilter = LogLevel.Information;
@@ -281,7 +281,7 @@ public class LoggingWidget : Widget, ITouchableWidget
 
     private void UpdateLogEntries()
     {
-        var entries = _listOfLogEntries.ToList<LogEntry>();
+        var entries = _listOfLogEntries.ToList();
         var pos = 0;
 
         while (pos < entries.Count)
