@@ -1,17 +1,17 @@
 ﻿using System;
 
-namespace Mapsui.Widgets.ButtonWidget;
+namespace Mapsui.Widgets.ButtonWidgets;
 
 /// <summary>
-/// Widget which shows a buttons
+/// Widget that shows a button with an icon
 /// </summary>
 /// <remarks>
 /// With this, the user could add buttons with SVG icons to the map.
 /// 
 /// Usage
-/// To show a ButtonWidget, add a instance of the ButtonWidget to Map.Widgets by
+/// To show a IconButtonWidget, add a instance of the IconButtonWidget to Map.Widgets by
 /// 
-///   map.Widgets.Add(new ButtonWidget(map, picture));
+///   map.Widgets.Add(new IconButtonWidget(map, picture));
 ///   
 /// Customize
 /// Picture: SVG image to display for button
@@ -24,6 +24,40 @@ public class IconButtonWidget : BoxWidget.BoxWidget, ITouchableWidget
     /// Event handler which is called, when the button is touched
     /// </summary>
     public event EventHandler<WidgetTouchedEventArgs>? Touched;
+
+    private double _paddingX = 0;
+
+    /// <summary>
+    /// Padding left and right for icon inside the Widget
+    /// </summary>
+    public double PaddingX
+    {
+        get => _paddingX;
+        set
+        {
+            if (_paddingX == value)
+                return;
+            _paddingX = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private double _paddingY = 0;
+
+    /// <summary>
+    /// Padding left and right for icon inside the Widget
+    /// </summary>
+    public double PaddingY
+    {
+        get => _paddingY;
+        set
+        {
+            if (_paddingY == value)
+                return;
+            _paddingY = value;
+            OnPropertyChanged();
+        }
+    }
 
     private string? _svgImage;
 
@@ -43,6 +77,8 @@ public class IconButtonWidget : BoxWidget.BoxWidget, ITouchableWidget
             OnPropertyChanged();
         }
     }
+
+    private object? _picture;
 
     /// <summary>
     /// Object for prerendered image. For internal use only.
@@ -75,13 +111,12 @@ public class IconButtonWidget : BoxWidget.BoxWidget, ITouchableWidget
         }
     }
 
-    private float _opacity = 0.8f;
-    private object? _picture;
+    private double _opacity = 0.8f;
 
     /// <summary>
     /// Opacity of background, frame and signs
     /// </summary>
-    public float Opacity
+    public double Opacity
     {
         get => _opacity;
         set
@@ -92,6 +127,8 @@ public class IconButtonWidget : BoxWidget.BoxWidget, ITouchableWidget
             OnPropertyChanged();
         }
     }
+
+    public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
 
     public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
@@ -109,6 +146,4 @@ public class IconButtonWidget : BoxWidget.BoxWidget, ITouchableWidget
     {
         return false;
     }
-
-    public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
 }
