@@ -72,7 +72,7 @@ public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
             using var stream = renderer.RenderToBitmapStream(ToViewport(section), new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
             _rasterizingLayers.Push(renderer);
             result = stream?.ToArray();
-            PersistentCache?.Add(index, result ?? Array.Empty<byte>());
+            PersistentCache?.Add(index, result ?? []);
         }
 
         return result;
@@ -137,7 +137,7 @@ public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
         return additionalSearchSize;
     }
 
-    private TileInfo CreateTileInfo(TileInfo tileInfo, int col, int row)
+    private static TileInfo CreateTileInfo(TileInfo tileInfo, int col, int row)
     {
         var tileIndex = new TileIndex(tileInfo.Index.Col + col, tileInfo.Index.Row + row, tileInfo.Index.Level);
         var tileExtent = new Extent(
@@ -188,7 +188,7 @@ public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
         return result;
     }
 
-    private double ConvertToCoordinates(double tempSize, double resolution)
+    private static double ConvertToCoordinates(double tempSize, double resolution)
     {
         return tempSize * resolution * 0.5; // I need to load half the Size more of the Features
     }
