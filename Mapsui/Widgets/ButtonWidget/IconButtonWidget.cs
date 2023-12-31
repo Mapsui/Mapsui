@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mapsui.Widgets.ButtonWidgets;
+namespace Mapsui.Widgets.ButtonWidget;
 
 /// <summary>
 /// Widget that shows a button with an icon
