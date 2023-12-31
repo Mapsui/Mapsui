@@ -1,4 +1,5 @@
 ﻿using Mapsui.Extensions;
+using Mapsui.Widgets.BoxWidget;
 
 namespace Mapsui.Widgets.MouseCoordinatesWidget;
 

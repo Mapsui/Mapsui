@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapsui.Widgets.BoxWidget;
+using System;
 
 namespace Mapsui.Widgets.PerformanceWidget;
 

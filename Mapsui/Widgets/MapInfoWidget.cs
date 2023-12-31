@@ -1,5 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Styles;
+using Mapsui.Widgets.BoxWidget;
 using System;
 using System.Text;
 

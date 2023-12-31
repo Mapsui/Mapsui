@@ -4,6 +4,7 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.Zoom;
 using System.Threading.Tasks;
 using Mapsui.Styles;
+using Mapsui.Widgets.BoxWidget;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 

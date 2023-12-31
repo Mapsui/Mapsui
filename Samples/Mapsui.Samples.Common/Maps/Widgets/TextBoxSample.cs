@@ -2,6 +2,7 @@
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
+using Mapsui.Widgets.BoxWidget;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
