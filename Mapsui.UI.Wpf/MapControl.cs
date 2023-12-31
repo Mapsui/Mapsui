@@ -78,7 +78,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         WpfCanvas.Visibility = Visibility.Collapsed;
         SkiaCanvas.Visibility = Visibility.Visible;
-        Renderer = new MapRenderer();
         RefreshGraphics();
     }
 
