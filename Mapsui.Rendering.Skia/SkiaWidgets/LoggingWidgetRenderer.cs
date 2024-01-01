@@ -53,7 +53,7 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
 
         canvas.DrawRect(rect, _backgroundPaint);
 
-        rect.Inflate(-paddingX, -paddingY);
+        rect.Inflate((float)-paddingX, (float)-paddingY);
 
         var line = 0;
 
@@ -88,13 +88,13 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
 
     private void UpdateSettings(LoggingWidget loggingWidget)
     {
-        _backgroundPaint.Color = loggingWidget.BackgroundColor.ToSkia().WithAlpha((byte)(255.0f * loggingWidget.Opacity));
+        _backgroundPaint.Color = loggingWidget.BackColor.ToSkia().WithAlpha((byte)(255.0f * loggingWidget.Opacity));
         _errorTextPaint.Color = loggingWidget.ErrorTextColor.ToSkia();
-        _errorTextPaint.TextSize = loggingWidget.TextSize;
+        _errorTextPaint.TextSize = (float)loggingWidget.TextSize;
         _warningTextPaint.Color = loggingWidget.WarningTextColor.ToSkia();
-        _warningTextPaint.TextSize = loggingWidget.TextSize;
+        _warningTextPaint.TextSize = (float)loggingWidget.TextSize;
         _informationTextPaint.Color = loggingWidget.InformationTextColor.ToSkia();
-        _informationTextPaint.TextSize = loggingWidget.TextSize;
+        _informationTextPaint.TextSize = (float)loggingWidget.TextSize;
 
         _levelWidth = _informationTextPaint.MeasureText(LogLevel.Information.ToString());
     }
