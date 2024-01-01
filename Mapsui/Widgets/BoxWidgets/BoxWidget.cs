@@ -1,6 +1,6 @@
 ﻿using Mapsui.Styles;
 
-namespace Mapsui.Widgets.BoxWidget;
+namespace Mapsui.Widgets.BoxWidgets;
 
 /// <summary>
 /// Widget displaying a box
