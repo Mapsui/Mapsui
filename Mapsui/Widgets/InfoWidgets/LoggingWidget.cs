@@ -46,11 +46,6 @@ public class LoggingWidget : TextBoxWidget
     }
 
     /// <summary>
-    /// Event handler which is called, when the widget is touched
-    /// </summary>
-    public event EventHandler<WidgetTouchedEventArgs>? Touched;
-
-    /// <summary>
     ///  Event handler for logging
     /// </summary>
     public void Log(LogLevel level, string description, Exception? exception)
