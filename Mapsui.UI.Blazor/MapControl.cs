@@ -246,7 +246,12 @@ public partial class MapControl : ComponentBase, IMapControl
         try
         {
             if (HandleTouched(e.ToLocation(_clientRect), e.Button == 0, 1, ShiftPressed))
+            {
+                _downMousePosition = null;
+                _previousMousePosition = null;
+
                 return;
+            }
 
             if (IsInBoxZoomMode)
             {
