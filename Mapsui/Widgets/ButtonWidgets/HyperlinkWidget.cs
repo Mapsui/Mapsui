@@ -3,7 +3,7 @@ using System;
 
 namespace Mapsui.Widgets.ButtonWidgets;
 
-public class Hyperlink : TextBoxWidget, ITouchableWidget
+public class HyperlinkWidget : TextBoxWidget, ITouchableWidget
 {
     public string? Url { get; set; }
 

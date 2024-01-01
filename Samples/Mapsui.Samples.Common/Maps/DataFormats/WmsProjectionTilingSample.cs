@@ -52,7 +52,7 @@ public class WmsProjectionTilingSample : ISample
         {
             DataSource = dataSource,
             Style = new RasterStyle(),
-            Attribution = new Hyperlink()
+            Attribution = new HyperlinkWidget()
             {
                 Text = "@Agenzia delle Entrate 2023",
                 VerticalAlignment = VerticalAlignment.Bottom,

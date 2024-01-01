@@ -175,7 +175,7 @@ public abstract class BaseLayer : ILayer
     }
 
     /// <inheritdoc />
-    public Hyperlink Attribution { get; set; } = new();
+    public HyperlinkWidget Attribution { get; set; } = new();
 
     /// <inheritdoc />
     public virtual IReadOnlyList<double> Resolutions { get; } = new List<double>();

@@ -8,6 +8,6 @@ public class HyperlinkWidgetRenderer : ISkiaWidgetRenderer
 {
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
     {
-        TextBoxWidgetRenderer.DrawText(canvas, viewport, (Hyperlink)widget, layerOpacity);
+        TextBoxWidgetRenderer.DrawText(canvas, viewport, (HyperlinkWidget)widget, layerOpacity);
     }
 }

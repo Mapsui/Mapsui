@@ -32,7 +32,7 @@ public class HyperlinkSample : ISample
     private static IWidget CreateHyperlink(string text, string url,
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
     {
-        return new Hyperlink()
+        return new HyperlinkWidget()
         {
             Text = text,
             Url = url,

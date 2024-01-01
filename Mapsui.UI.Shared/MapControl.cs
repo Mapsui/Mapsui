@@ -639,7 +639,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         foreach (var widget in touchedWidgets)
         {
-            if (widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
+            if (widget is HyperlinkWidget hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {
                 // The HyperLink is a special case because we need platform specific code to open the
                 // link in a browswer. If the link is not handled within the widget we handle it

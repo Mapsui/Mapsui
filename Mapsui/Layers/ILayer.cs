@@ -80,7 +80,7 @@ public interface ILayer : IAnimatable, INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Attribution for layer
     /// </summary>
-    Hyperlink Attribution { get; }
+    HyperlinkWidget Attribution { get; }
 
     /// <summary>
     /// List of native resolutions

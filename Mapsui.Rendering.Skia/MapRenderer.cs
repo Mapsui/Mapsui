@@ -54,7 +54,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         StyleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
 
         WidgetRenders[typeof(TextBoxWidget)] = new TextBoxWidgetRenderer();
-        WidgetRenders[typeof(Hyperlink)] = new HyperlinkWidgetRenderer();
+        WidgetRenders[typeof(HyperlinkWidget)] = new HyperlinkWidgetRenderer();
         WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
         WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
         WidgetRenders[typeof(IconButtonWidget)] = new IconButtonWidgetRenderer();
