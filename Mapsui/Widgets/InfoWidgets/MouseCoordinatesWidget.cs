@@ -3,6 +3,9 @@ using Mapsui.Widgets.BoxWidgets;
 
 namespace Mapsui.Widgets.InfoWidgets;
 
+/// <summary>
+/// Widget that shows actual mouse coordinates in a TextBox
+/// </summary>
 public class MouseCoordinatesWidget : TextBoxWidget, ITouchableWidget
 {
     public TouchableAreaType TouchableArea => TouchableAreaType.Viewport;
