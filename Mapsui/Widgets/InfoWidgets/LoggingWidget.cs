@@ -1,5 +1,6 @@
 ﻿using Mapsui.Logging;
 using Mapsui.Styles;
+using Mapsui.Widgets.BoxWidgets;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Mapsui.Widgets.InfoWidgets;
 /// With this, the user could see the log entries on the screen.
 /// without saving them to a file or somewhere else.
 /// </remarks>
-public class LoggingWidget : Widget, ITouchableWidget
+public class LoggingWidget : TextBoxWidget
 {
     public struct LogEntry
     {
@@ -110,91 +111,6 @@ public class LoggingWidget : Widget, ITouchableWidget
         }
     }
 
-    private double _opacity = 0.0f;
-
-    /// <summary>
-    /// Opacity of background, frame and signs
-    /// </summary>
-    public double Opacity
-    {
-        get => _opacity;
-        set
-        {
-            if (_opacity == value)
-                return;
-            _opacity = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private int _textSize = 12;
-
-    /// <summary>
-    /// Size of text for log entries
-    /// </summary>
-    public int TextSize
-    {
-        get => _textSize;
-        set
-        {
-            if (_textSize == value)
-                return;
-            _textSize = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private int _paddingX = 2;
-
-    /// <summary>
-    /// Space around text in X
-    /// </summary>
-    public int PaddingX
-    {
-        get => _paddingX;
-        set
-        {
-            if (_paddingX == value)
-                return;
-            _paddingX = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private int _paddingY = 2;
-
-    /// <summary>
-    /// Space around text in Y
-    /// </summary>
-    public int PaddingY
-    {
-        get => _paddingY;
-        set
-        {
-            if (_paddingY == value)
-                return;
-            _paddingY = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private Color _backgroundColor = Color.White;
-
-    /// <summary>
-    /// Opacity of background, frame and signs
-    /// </summary>
-    public Color BackgroundColor
-    {
-        get => _backgroundColor;
-        set
-        {
-            if (_backgroundColor == value)
-                return;
-            _backgroundColor = value;
-            OnPropertyChanged();
-        }
-    }
-
     private Color _errorTextColor = Color.Red;
 
     /// <summary>
@@ -245,26 +161,6 @@ public class LoggingWidget : Widget, ITouchableWidget
             OnPropertyChanged();
         }
     }
-
-    public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
-
-    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
-    {
-        Touched?.Invoke(this, args);
-
-        return args.Handled;
-    }
-
-    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
-    {
-        return false;
-    }
-
-    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
-    {
-        return false;
-    }
-
     private void UpdateNumOfLogEntries()
     {
         var newNumOfLogEntries = (int)((Height - PaddingY) / (TextSize + PaddingY));
