@@ -5,7 +5,7 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidget;
 using System.Threading.Tasks;
 using Mapsui.Styles;
-using Mapsui.Widgets.BoxWidget;
+using Mapsui.Widgets.BoxWidgets;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 

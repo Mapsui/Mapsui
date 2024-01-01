@@ -1,4 +1,4 @@
-﻿using Mapsui.Widgets.BoxWidget;
+﻿using Mapsui.Widgets.BoxWidgets;
 using System;
 
 namespace Mapsui.Widgets.InfoWidget;

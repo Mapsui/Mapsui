@@ -1,5 +1,5 @@
 ﻿using Mapsui.Extensions;
-using Mapsui.Widgets.BoxWidget;
+using Mapsui.Widgets.BoxWidgets;
 
 namespace Mapsui.Widgets.InfoWidget;
 

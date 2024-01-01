@@ -1,6 +1,6 @@
 ﻿using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
-using Mapsui.Widgets.BoxWidget;
+using Mapsui.Widgets.BoxWidgets;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets;

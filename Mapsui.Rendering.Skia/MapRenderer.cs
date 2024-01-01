@@ -13,7 +13,7 @@ using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Styles;
 using Mapsui.Widgets;
-using Mapsui.Widgets.BoxWidget;
+using Mapsui.Widgets.BoxWidgets;
 using Mapsui.Widgets.ButtonWidget;
 using Mapsui.Widgets.ScaleBar;
 using SkiaSharp;

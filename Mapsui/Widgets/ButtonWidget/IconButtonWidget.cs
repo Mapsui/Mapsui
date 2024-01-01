@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapsui.Widgets.BoxWidgets;
+using System;
 
 namespace Mapsui.Widgets.ButtonWidget;
 
@@ -18,7 +19,7 @@ namespace Mapsui.Widgets.ButtonWidget;
 /// Rotation: Value for rotation in degrees
 /// Opacity: Opacity of button
 /// </remarks>
-public class IconButtonWidget : BoxWidget.BoxWidget, ITouchableWidget
+public class IconButtonWidget : BoxWidget, ITouchableWidget
 {
     /// <summary>
     /// Event handler which is called, when the button is touched
