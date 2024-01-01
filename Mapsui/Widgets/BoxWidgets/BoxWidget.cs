@@ -40,4 +40,21 @@ public class BoxWidget : Widget
             OnPropertyChanged();
         }
     }
+
+    private double _opacity = 0.8f;
+
+    /// <summary>
+    /// Opacity of background, frame and signs
+    /// </summary>
+    public double Opacity
+    {
+        get => _opacity;
+        set
+        {
+            if (_opacity == value)
+                return;
+            _opacity = value;
+            OnPropertyChanged();
+        }
+    }
 }
