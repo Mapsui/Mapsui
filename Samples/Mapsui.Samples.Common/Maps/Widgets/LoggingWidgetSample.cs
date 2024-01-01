@@ -34,14 +34,11 @@ public class LoggingWidgetSample : ISample
             InformationTextColor = Color.Black,
             MarginX = 10,
             MarginY = 20,
-            Width = 250,
-            Height = 200,
             PaddingX = 2,
             PaddingY = 2,
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            VerticalAlignment = VerticalAlignment.Stretch
         };
-
-        widget.HorizontalAlignment = HorizontalAlignment.Stretch;
-        widget.VerticalAlignment = VerticalAlignment.Stretch;
 
         map.Widgets.Add(widget);
 
