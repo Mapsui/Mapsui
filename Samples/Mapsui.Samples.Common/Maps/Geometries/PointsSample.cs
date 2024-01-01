@@ -3,7 +3,7 @@ using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.Widgets.InfoWidget;
+using Mapsui.Widgets.InfoWidgets;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

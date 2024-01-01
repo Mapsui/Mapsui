@@ -2,7 +2,7 @@
 using Mapsui.Layers;
 using Mapsui.Providers.Wms;
 using Mapsui.Styles;
-using Mapsui.Widgets.InfoWidget;
+using Mapsui.Widgets.InfoWidgets;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Info;

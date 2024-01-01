@@ -7,7 +7,7 @@ using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using Mapsui.Widgets.InfoWidget;
+using Mapsui.Widgets.InfoWidgets;
 using NetTopologySuite.Geometries;
 using System.IO;
 using System.Threading.Tasks;

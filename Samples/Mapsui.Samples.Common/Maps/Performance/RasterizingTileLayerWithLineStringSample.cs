@@ -5,7 +5,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Tiling.Layers;
 using Mapsui.UI;
-using Mapsui.Widgets.InfoWidget;
+using Mapsui.Widgets.InfoWidgets;
 using NetTopologySuite.Geometries;
 using System.Collections.Generic;
 

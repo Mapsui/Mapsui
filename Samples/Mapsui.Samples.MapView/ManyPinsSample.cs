@@ -1,19 +1,18 @@
-﻿using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps;
+﻿using Mapsui.Extensions;
+using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Maps.Demo;
+using Mapsui.Styles;
 using Mapsui.UI;
+using Mapsui.UI.Maui;
+using Mapsui.Utilities;
+using Mapsui.Widgets.InfoWidgets;
+using Microsoft.Maui.Graphics;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using Mapsui.Extensions;
-using Mapsui.Samples.Common.Maps.Demo;
-using Mapsui.Styles;
-using Mapsui.Utilities;
-using Mapsui.UI.Maui;
-using Microsoft.Maui.Graphics;
 using Color = Microsoft.Maui.Graphics.Color;
 using KnownColor = Mapsui.UI.Maui.KnownColor;
-using Mapsui.Widgets.InfoWidget;
 
 namespace Mapsui.Samples.Maui;
 
