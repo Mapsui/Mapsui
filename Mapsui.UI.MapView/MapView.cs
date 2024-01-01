@@ -1,10 +1,15 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Logging;
+using Mapsui.UI.Maui.Extensions;
 using Mapsui.UI.Objects;
+using Mapsui.Utilities;
 using Mapsui.Widgets;
-using Mapsui.Extensions;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Graphics;
 using SkiaSharp;
-using Svg.Skia;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,18 +18,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
-using Mapsui.Logging;
-using Mapsui.Utilities;
-using Mapsui.UI.Maui.Utils;
-using Mapsui.UI.Maui.Extensions;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Graphics;
-using Microsoft.Maui.Layouts;
-using SkiaSharp.Views;
-using SkiaSharp.Views.Maui;
-using SkiaSharp.Views.Maui.Controls;
-using Rectangle = Microsoft.Maui.Graphics.Rect;
 
 namespace Mapsui.UI.Maui;
 
