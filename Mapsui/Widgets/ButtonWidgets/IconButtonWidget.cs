@@ -112,23 +112,6 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
         }
     }
 
-    private double _opacity = 0.8f;
-
-    /// <summary>
-    /// Opacity of background, frame and signs
-    /// </summary>
-    public double Opacity
-    {
-        get => _opacity;
-        set
-        {
-            if (_opacity == value)
-                return;
-            _opacity = value;
-            OnPropertyChanged();
-        }
-    }
-
     public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
 
     public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
