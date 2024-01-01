@@ -24,10 +24,8 @@ public class LoggingWidget : TextBoxWidget
         public Exception? Exception;
     }
 
-    public LoggingWidget(Map map)
+    public LoggingWidget()
     {
-        _map = map;
-
         _listOfLogEntries = new ConcurrentQueue<LogEntry>();
 
         UpdateNumOfLogEntries();
@@ -62,7 +60,7 @@ public class LoggingWidget : TextBoxWidget
             _listOfLogEntries.TryDequeue(out var outObj);
         }
 
-        _map.RefreshGraphics();
+        OnPropertyChanged(nameof(Text));
     }
 
     public void Clear()
@@ -72,10 +70,9 @@ public class LoggingWidget : TextBoxWidget
             _listOfLogEntries.TryDequeue(out var outObj);
         }
 
-        _map.RefreshGraphics();
+        OnPropertyChanged(nameof(Text));
     }
 
-    private Map _map;
     private int _maxNumOfLogEntries;
 
     private ConcurrentQueue<LogEntry> _listOfLogEntries;
@@ -167,7 +164,7 @@ public class LoggingWidget : TextBoxWidget
 
         _maxNumOfLogEntries = newNumOfLogEntries;
 
-        _map.RefreshGraphics();
+        OnPropertyChanged(nameof(Text));
     }
 
     private void UpdateLogEntries()
