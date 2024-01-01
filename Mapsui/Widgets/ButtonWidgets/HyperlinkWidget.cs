@@ -1,37 +1,24 @@
-﻿using Mapsui.Widgets.BoxWidgets;
-using System;
+﻿namespace Mapsui.Widgets.ButtonWidgets;
 
-namespace Mapsui.Widgets.ButtonWidgets;
-
-public class HyperlinkWidget : TextBoxWidget, ITouchableWidget
+/// <summary>
+/// Widget displaying a clickable hyperlink
+/// </summary>
+public class HyperlinkWidget : TextButtonWidget
 {
-    public string? Url { get; set; }
+    private string _url = string.Empty;
 
-    public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
-
-    public event EventHandler<HyperlinkWidgetArguments>? Touched;
-
-    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    /// <summary>
+    /// URL to open when Widget is clicked
+    /// </summary>
+    public string Url
     {
-        var arguments = new HyperlinkWidgetArguments();
-
-        Touched?.Invoke(this, arguments);
-
-        return args.Handled;
+        get => _url;
+        set
+        {
+            if (_url == value)
+                return;
+            _url = value ?? string.Empty;
+            OnPropertyChanged();
+        }
     }
-
-    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
-    {
-        return false;
-    }
-
-    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
-    {
-        return false;
-    }
-}
-
-public class HyperlinkWidgetArguments
-{
-    public bool Handled = false;
 }
