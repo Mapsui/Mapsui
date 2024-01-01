@@ -28,8 +28,6 @@ public class LoggingWidget : TextBoxWidget
     {
         _listOfLogEntries = new ConcurrentQueue<LogEntry>();
 
-        UpdateNumOfLogEntries();
-
         // Add event handle, so that LoggingWidget gets all logs
         Logger.LogDelegate += Log;
 
@@ -73,17 +71,14 @@ public class LoggingWidget : TextBoxWidget
         OnPropertyChanged(nameof(Text));
     }
 
-    private int _maxNumOfLogEntries;
+    // Set start value for number of log entries to use, before the widget is
+    // draw the first time. Then the number is calculated depending on the size
+    // of widget.
+    private int _maxNumOfLogEntries = 100;
 
     private ConcurrentQueue<LogEntry> _listOfLogEntries;
 
-    public ConcurrentQueue<LogEntry> ListOfLogEntries
-    {
-        get
-        {
-            return _listOfLogEntries;
-        }
-    }
+    public ConcurrentQueue<LogEntry> ListOfLogEntries => _listOfLogEntries;
 
     private LogLevel _logLevelFilter = LogLevel.Information;
 
@@ -153,9 +148,9 @@ public class LoggingWidget : TextBoxWidget
             OnPropertyChanged();
         }
     }
-    private void UpdateNumOfLogEntries()
+    public void UpdateNumOfLogEntries()
     {
-        var newNumOfLogEntries = (int)((Height - PaddingY) / (TextSize + PaddingY));
+        var newNumOfLogEntries = (int)(((Envelope?.Height ?? Height) - PaddingY) / (TextSize + PaddingY));
 
         while (_listOfLogEntries.Count > newNumOfLogEntries)
         {
@@ -163,8 +158,6 @@ public class LoggingWidget : TextBoxWidget
         }
 
         _maxNumOfLogEntries = newNumOfLogEntries;
-
-        OnPropertyChanged(nameof(Text));
     }
 
     private void UpdateLogEntries()
@@ -194,12 +187,6 @@ public class LoggingWidget : TextBoxWidget
 
     public override void OnPropertyChanged([CallerMemberName] string name = "")
     {
-        if (name == nameof(TextSize) || name == nameof(PaddingY) || name == nameof(Height))
-            UpdateNumOfLogEntries();
-
-        if (name == nameof(MarginX) || name == nameof(MarginY) || name == nameof(Width) || name == nameof(Height))
-            Envelope = new MRect(MarginX, MarginY, MarginX + Width, MarginY + Height);
-
         if (name == nameof(Enabled))
         {
             if (Enabled)

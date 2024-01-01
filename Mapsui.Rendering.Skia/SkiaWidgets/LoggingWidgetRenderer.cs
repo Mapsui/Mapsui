@@ -38,9 +38,11 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
 
         UpdateSettings(loggingWidget);
         loggingWidget.UpdateEnvelope(loggingWidget.Width, loggingWidget.Height, viewport.Width, viewport.Height);
-
-        if (loggingWidget.Envelope == null)
+        
+        if (loggingWidget.Envelope == null || loggingWidget.Envelope.Width == 0 || loggingWidget.Envelope.Height == 0)
             return;
+
+        loggingWidget.UpdateNumOfLogEntries();
 
         var marginX = loggingWidget.Envelope.Left;
         var marginY = loggingWidget.Envelope.Bottom;
