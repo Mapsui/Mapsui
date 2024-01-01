@@ -1,7 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Widgets.BoxWidgets;
 
-namespace Mapsui.Widgets.InfoWidget;
+namespace Mapsui.Widgets.InfoWidgets;
 
 public class MouseCoordinatesWidget : TextBoxWidget, ITouchableWidget
 {

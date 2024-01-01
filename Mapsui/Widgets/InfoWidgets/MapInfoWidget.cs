@@ -4,7 +4,7 @@ using Mapsui.Widgets.BoxWidgets;
 using System;
 using System.Text;
 
-namespace Mapsui.Widgets.InfoWidget;
+namespace Mapsui.Widgets.InfoWidgets;
 public class MapInfoWidget : TextBoxWidget
 {
     private readonly Map _map;

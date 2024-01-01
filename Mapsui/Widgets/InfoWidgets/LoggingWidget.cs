@@ -5,7 +5,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace Mapsui.Widgets.InfoWidget;
+namespace Mapsui.Widgets.InfoWidgets;
 
 /// <summary>
 /// Widget which shows log entries

@@ -1,7 +1,7 @@
 ﻿using Mapsui.Widgets.BoxWidgets;
 using System;
 
-namespace Mapsui.Widgets.InfoWidget;
+namespace Mapsui.Widgets.InfoWidgets;
 
 /// <summary>
 /// Widget which shows the drawing performance
