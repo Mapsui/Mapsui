@@ -54,15 +54,11 @@ public sealed class MapRenderer : IRenderer, IDisposable
         StyleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
 
         WidgetRenders[typeof(TextBoxWidget)] = new TextBoxWidgetRenderer();
-        WidgetRenders[typeof(HyperlinkWidget)] = new HyperlinkWidgetRenderer();
         WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
         WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
         WidgetRenders[typeof(IconButtonWidget)] = new IconButtonWidgetRenderer();
-        WidgetRenders[typeof(TextButtonWidget)] = new TextBoxWidgetRenderer();
         WidgetRenders[typeof(BoxWidget)] = new BoxWidgetRenderer();
-        WidgetRenders[typeof(MouseCoordinatesWidget)] = new TextBoxWidgetRenderer();
         WidgetRenders[typeof(EditingWidget)] = new EditingWidgetRenderer();
-        WidgetRenders[typeof(MapInfoWidget)] = new MapInfoWidgetRenderer();
         WidgetRenders[typeof(LoggingWidget)] = new LoggingWidgetRenderer();
     }
 
