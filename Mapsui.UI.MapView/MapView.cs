@@ -774,21 +774,25 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
         if (IsZoomButtonVisible)
         {
-            _mapZoomInButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+            _mapZoomInButton!.PositionX = newX;
+            _mapZoomInButton!.PositionY = newY;
             newY += ButtonSize;
-            _mapZoomOutButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+            _mapZoomOutButton!.PositionX = newX;
+            _mapZoomOutButton!.PositionY = newY;
             newY += ButtonSize + ButtonSpacing;
         }
 
         if (IsMyLocationButtonVisible)
         {
-            _mapMyLocationButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+            _mapMyLocationButton!.PositionX = newX;
+            _mapMyLocationButton!.PositionY = newY;
             newY += ButtonSize + ButtonSpacing;
         }
 
         if (IsNorthingButtonVisible)
         {
-            _mapNorthingButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+            _mapNorthingButton!.PositionX = newX;
+            _mapNorthingButton!.PositionY = newY;
         }
 
         RefreshGraphics();
@@ -840,7 +844,12 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         var result = new IconButtonWidget
         {
             Picture = picture,
-            Envelope = new MRect(x, y, x + ButtonSize, y + ButtonSize),
+            HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,
+            VerticalAlignment = Widgets.VerticalAlignment.Absolute,
+            PositionX = x,
+            PositionY = y,
+            Width = ButtonSize,
+            Height = ButtonSize,
             Rotation = 0,
             Enabled = true,
         };
