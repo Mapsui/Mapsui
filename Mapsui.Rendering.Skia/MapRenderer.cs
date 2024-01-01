@@ -60,7 +60,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         WidgetRenders[typeof(IconButtonWidget)] = new IconButtonWidgetRenderer();
         WidgetRenders[typeof(TextButtonWidget)] = new TextBoxWidgetRenderer();
         WidgetRenders[typeof(BoxWidget)] = new BoxWidgetRenderer();
-        WidgetRenders[typeof(MouseCoordinatesWidget)] = new MouseCoordinatesWidgetRenderer();
+        WidgetRenders[typeof(MouseCoordinatesWidget)] = new TextBoxWidgetRenderer();
         WidgetRenders[typeof(EditingWidget)] = new EditingWidgetRenderer();
         WidgetRenders[typeof(MapInfoWidget)] = new MapInfoWidgetRenderer();
         WidgetRenders[typeof(LoggingWidget)] = new LoggingWidgetRenderer();
