@@ -13,7 +13,7 @@ using Mapsui.Tiling;
 using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidgets;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
 using Mapsui.Widgets.InfoWidget;
 using NetTopologySuite.IO;
 

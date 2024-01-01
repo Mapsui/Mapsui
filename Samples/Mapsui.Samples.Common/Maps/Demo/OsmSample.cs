@@ -2,7 +2,7 @@
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Demo;

@@ -1,12 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Styles;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading;
 
 namespace Mapsui.Layers;
 

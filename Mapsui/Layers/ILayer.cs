@@ -10,7 +10,7 @@ using System.ComponentModel;
 using Mapsui.Animations;
 using Mapsui.Fetcher;
 using Mapsui.Styles;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
 
 namespace Mapsui.Layers;
 

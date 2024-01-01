@@ -13,7 +13,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 using Mapsui.Widgets;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
 using NetTopologySuite.Geometries;
 
 #pragma warning disable IDISP001 // Dispose created

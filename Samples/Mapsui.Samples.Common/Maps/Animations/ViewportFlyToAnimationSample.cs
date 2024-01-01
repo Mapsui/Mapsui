@@ -1,7 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
 using System.Threading.Tasks;
 using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
