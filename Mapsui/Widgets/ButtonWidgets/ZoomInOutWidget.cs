@@ -1,5 +1,4 @@
 ﻿using Mapsui.Styles;
-using System;
 
 namespace Mapsui.Widgets.ButtonWidgets;
 
@@ -21,15 +20,8 @@ namespace Mapsui.Widgets.ButtonWidgets;
 /// Opacity: Opacity of buttons
 /// ZoomFactor: Factor for changing Resolution. Default is 2;
 /// </summary>
-public class ZoomInOutWidget : Widget, ITouchableWidget
+public class ZoomInOutWidget : TouchableWidget
 {
-    /// <summary>
-    /// Event handler which is called, when buttons are touched. If there
-    /// isn't one, than the default handler is used, which change the Resolution
-    /// of Viewport.
-    /// </summary>
-    public event EventHandler<WidgetTouchedEventArgs>? Touched;
-
     private double _size = 40;
 
     /// <summary>
@@ -132,11 +124,9 @@ public class ZoomInOutWidget : Widget, ITouchableWidget
         }
     }
 
-    public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
-
-    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public override bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
-        Touched?.Invoke(this, args);
+        base.HandleWidgetTouched(navigator, position, args);
 
         if (args.Handled)
             return true;
@@ -155,15 +145,5 @@ public class ZoomInOutWidget : Widget, ITouchableWidget
         }
 
         return true;
-    }
-
-    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
-    {
-        return false;
-    }
-
-    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
-    {
-        return false;
     }
 }
