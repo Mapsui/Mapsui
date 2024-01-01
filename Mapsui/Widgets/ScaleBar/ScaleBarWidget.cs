@@ -403,8 +403,8 @@ public class ScaleBarWidget : Widget
 
         UpdateEnvelope(_maxWidth, Height, viewport.Width, viewport.Height);
 
-        var posX = (float)(Envelope?.MinX ?? 0.0);
-        var posY = (float)(Envelope?.MinY ?? 0.0);
+        var posX = Envelope?.MinX ?? 0.0;
+        var posY = Envelope?.MinY ?? 0.0;
 
         var left = posX + (stroke + TextMargin) * Scale;
         var right1 = posX + _maxWidth - (stroke + TextMargin) * Scale - textSize1.Width;
