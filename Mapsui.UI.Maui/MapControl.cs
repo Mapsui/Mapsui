@@ -1,23 +1,22 @@
+using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.UI.Utils;
+using Mapsui.Utilities;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Devices;
+using Microsoft.Maui.Graphics;
 using SkiaSharp;
+using SkiaSharp.Views.Maui;
+using SkiaSharp.Views.Maui.Controls;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Mapsui.Layers;
-using Mapsui.Logging;
-using Mapsui.Utilities;
-using Mapsui.Extensions;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Devices;
-using Microsoft.Maui.Graphics;
-using SkiaSharp.Views.Maui;
-using SkiaSharp.Views.Maui.Controls;
-using Logger = Mapsui.Logging.Logger;
 
 namespace Mapsui.UI.Maui;
 

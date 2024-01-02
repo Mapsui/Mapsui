@@ -15,3 +15,5 @@ attrs
 Dbase
 maui
 Mapsui
+Dulk
+Geodan

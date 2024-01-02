@@ -1,6 +1,5 @@
 using Mapsui.Extensions;
 using Mapsui.Logging;
-using Mapsui.Rendering.Skia;
 using Mapsui.UI.Blazor.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
@@ -172,7 +171,7 @@ public partial class MapControl : ComponentBase, IMapControl
         _clientRect = await BoundingClientRectAsync();
     }
 
-    private protected void RunOnUIThread(Action action)
+    private protected static void RunOnUIThread(Action action)
     {
         // Only one thread is active in WebAssembly.
         action();
@@ -339,7 +338,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
     private void ClearBBoxDrawing()
     {
-        RunOnUIThread(() => IsInBoxZoomMode = false);
+        MapControl.RunOnUIThread(() => IsInBoxZoomMode = false);
     }
 
     private protected float GetPixelDensity()

@@ -1,9 +1,9 @@
-using System.ComponentModel;
 using CoreFoundation;
 using Mapsui.Logging;
 using Mapsui.UI.iOS.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp.Views.iOS;
+using System.ComponentModel;
 
 namespace Mapsui.UI.iOS;
 
@@ -56,7 +56,7 @@ public partial class MapControl : UIView, IMapControl
 
         _invalidate = () =>
         {
-            RunOnUIThread(() =>
+            MapControl.RunOnUIThread(() =>
             {
                 SetNeedsDisplay();
                 _glCanvas?.SetNeedsDisplay();
@@ -240,12 +240,12 @@ public partial class MapControl : UIView, IMapControl
     /// </summary>
     /// <param name="point"></param>
     /// <returns></returns>
-    private MPoint GetScreenPosition(CGPoint point)
+    private static MPoint GetScreenPosition(CGPoint point)
     {
         return new MPoint(point.X, point.Y);
     }
 
-    private void RunOnUIThread(Action action)
+    private static void RunOnUIThread(Action action)
     {
         DispatchQueue.MainQueue.DispatchAsync(action);
     }

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Net;
-using System.Runtime.CompilerServices;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -13,6 +6,13 @@ using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Net;
+using System.Runtime.CompilerServices;
 
 #if __MAUI__
 using Microsoft.Maui.Controls;

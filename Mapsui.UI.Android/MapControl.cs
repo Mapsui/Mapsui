@@ -7,7 +7,6 @@ using Mapsui.Logging;
 using Mapsui.UI.Android.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp.Views.Android;
-using Math = System.Math;
 
 namespace Mapsui.UI.Android;
 
@@ -330,7 +329,7 @@ public partial class MapControl : ViewGroup, IMapControl
         catch (ObjectDisposedException e)
         {
             // See issue: https://github.com/Mapsui/Mapsui/issues/433
-            // What seems to be happening. The Activity is Disposed. Appently it's children get Disposed
+            // What seems to be happening. The Activity is Disposed. Apparently it's children get Disposed
             // explicitly by something in Xamarin. During this Dispose the MessageCenter, which is itself
             // not disposed gets another notification to call RefreshGraphics.
             Logger.Log(LogLevel.Warning, "This can happen when the parent Activity is disposing.", e);

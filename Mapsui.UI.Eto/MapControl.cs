@@ -1,11 +1,10 @@
-using System;
-using Mapsui.Rendering.Skia;
-using Mapsui.UI.Eto.Extensions;
-using global::Eto.SkiaDraw;
-using global::Eto.Drawing;
-using global::Eto.Forms;
-using System.Diagnostics;
+using Eto.Drawing;
+using Eto.Forms;
+using Eto.SkiaDraw;
 using Mapsui.Extensions;
+using Mapsui.UI.Eto.Extensions;
+using System;
+using System.Diagnostics;
 
 namespace Mapsui.UI.Eto;
 

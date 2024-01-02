@@ -1,3 +1,10 @@
+using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.UI.Utils;
+using Mapsui.UI.Wpf.Extensions;
+using Mapsui.Utilities;
+using SkiaSharp.Views.Desktop;
+using SkiaSharp.Views.WPF;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,18 +13,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Mapsui.Extensions;
-using Mapsui.Layers;
-using Mapsui.Rendering.Skia;
-using Mapsui.UI.Utils;
-using Mapsui.UI.Wpf.Extensions;
-using Mapsui.Utilities;
-using SkiaSharp.Views.Desktop;
-using SkiaSharp.Views.WPF;
-using HorizontalAlignment = System.Windows.HorizontalAlignment;
-using Point = System.Windows.Point;
-using VerticalAlignment = System.Windows.VerticalAlignment;
-using XamlVector = System.Windows.Vector;
 
 namespace Mapsui.UI.Wpf;
 
@@ -406,7 +401,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         e.Handled = true;
     }
 
-    private double GetDeltaScale(XamlVector scale)
+    private double GetDeltaScale(Vector scale)
     {
         if (Map.Navigator.ZoomLock) return 1;
         var deltaScale = (scale.X + scale.Y) / 2;
