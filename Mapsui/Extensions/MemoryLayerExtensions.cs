@@ -1,5 +1,6 @@
 ﻿using Mapsui.Features;
 using Mapsui.Layers;
+using Mapsui.Styles;
 using Mapsui.Widgets.ScaleBar;
 using System.Collections.Concurrent;
 using System.Drawing;
@@ -18,15 +19,16 @@ public static class MemoryLayerExtensions
     /// <param name="layer">Layer to use</param>
     /// <param name="x">X position</param>
     /// <param name="y">Y position</param>
-    public static MemoryLayer AddMarker(this MemoryLayer layer, double x, double y, MarkerType type = MarkerType.Pin, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0)
+    public static MemoryLayer AddMarker(this MemoryLayer layer, double x, double y, MarkerType type = MarkerType.Pin, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? offset = null)
     {
         var marker = new Marker(x, y);
 
         marker.MarkerType = type;
         marker.Scale = scale;
+        if (offset != null) marker.Offset = offset;
         if (color != null) marker.Color = color;
-        if (icon != null) marker.Icon = icon;
-        if (svg != null) marker.Svg = svg;
+        if (icon != null) { marker.MarkerType = MarkerType.Icon; marker.Icon = icon; }
+        if (svg != null) { marker.MarkerType = MarkerType.Svg; marker.Svg = svg; }
 
         ((ConcurrentBag<IFeature>)layer.Features).Add(marker);
 

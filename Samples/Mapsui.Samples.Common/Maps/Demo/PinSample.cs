@@ -6,6 +6,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,10 +37,20 @@ public class PinSample : ISample
         if (layer == null)
             return map;
 
+        // Read demo SVG
+        using var stream = typeof(PinSample).Assembly.GetManifestResourceStream(typeof(PinSample).Assembly.GetFullName("Images.Ghostscript_Tiger.svg"));
+        if (stream == null) return map;
+        using var reader = new StreamReader(stream);
+
+        var tiger = reader.ReadToEnd();
+
+        // Add markers
         layer.AddMarker(SphericalMercator.FromLonLat(9.0, 48.0))
             .AddMarker(SphericalMercator.FromLonLat(9.1, 48.1), color: Color.Green, scale: 0.75)
-            .AddMarker(SphericalMercator.FromLonLat(9.0, 48.1), color: Color.Blue, scale: 0.5);
+            .AddMarker(SphericalMercator.FromLonLat(9.0, 48.1), color: Color.Blue, scale: 0.5)
+            .AddMarker(SphericalMercator.FromLonLat(9.1, 48.0), svg: tiger, scale: 0.1);
 
+        // Zoom and center map
         var center = layer.Extent?.Centroid ?? new MPoint(SphericalMercator.FromLonLat(9.05, 48.05));
         var extent = layer.Extent?.Grow(2000) ?? new MRect(SphericalMercator.FromLonLat(8.95, 47.95), SphericalMercator.FromLonLat(9.15, 48.15));
 
