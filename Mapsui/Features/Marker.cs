@@ -41,16 +41,64 @@ internal class Marker : PointFeature
         get => _markerType;
         set
         {
-            if (_markerType == value)
-                return;
+            if (_markerType == value) return;
             _markerType = value;
+            UpdateMarker();
+        }
+    }
+
+    private byte[]? _icon = null;
+
+    /// <summary>
+    /// Byte[] holding the bitmap informations
+    /// </summary>
+    public byte[]? Icon
+    {
+        get => _icon;
+        set
+        {
+            if (Equals(value, _icon)) return;
+            _icon = value;
+            UpdateMarker();
+        }
+    }
+
+    private string? _svg = string.Empty;
+
+    /// <summary>
+    /// String holding the Svg image informations
+    /// </summary>
+    public string? Svg
+    {
+        get => _svg;
+        set
+        {
+            if (value == _svg) return;
+            _svg = value;
+            UpdateMarker();
+        }
+    }
+
+    private double _scale = 1.0;
+
+    /// <summary>
+    /// Scaling of marker
+    /// </summary>
+    public double Scale
+    {
+        get => _scale;
+        set
+        {
+            if (value.Equals(_scale)) return;
+            _scale = value;
+            _style.SymbolScale = _scale;
         }
     }
 
     private Color _color = Color.Red;
     
     /// <summary>
-    /// Color for pin
+    /// Color for pin (not used for Icon or Svg)
     /// </summary>
     public Color Color
     { 
@@ -60,13 +108,14 @@ internal class Marker : PointFeature
             if (_color == value)
                 return;
             _color = value;
+            UpdateMarker();
         }
     }
 
     /// <summary>
     /// Initialize marker
     /// </summary>
-    /// <param name="type"></param>
+    /// <param name="type">Type of marker</param>
     private void InitMarker(MarkerType type)
     {
         AssertDefaultPin();
@@ -78,25 +127,32 @@ internal class Marker : PointFeature
         _style.Enabled = true;
         _style.SymbolType = SymbolType.Image;
         _style.SymbolOffset = new Offset(0.0, 0.5, true);
-        _style.BitmapId = GetPinId();
+        _style.SymbolScale = _scale;
+
+        UpdateMarker();
 
         // Add style to Styles for this feature
         Styles.Add(_style);
     }
 
-    private int GetPinId()
+    private void UpdateMarker()
     {
-        return GetPinWithColor(Color);
-    }
+        BitmapRegistry.Instance.Unregister(_style.BitmapId);
 
-    private int GetIconId() 
-    {
-        return 0;
-    }
-
-    private int GetSvgId() 
-    {
-        return 0;
+        switch (_markerType)
+        {
+            case MarkerType.Icon:
+                if (Icon == null) return;
+                _style.BitmapId = BitmapRegistry.Instance.Register(Icon);
+                return;
+            case MarkerType.Svg:
+                if (string.IsNullOrEmpty(Svg)) return;
+                _style.BitmapId = BitmapRegistry.Instance.Register(Svg);
+                return;
+            default:
+                _style.BitmapId = GetPinWithColor(_color);
+                return;
+        }
     }
 
     private int GetPinWithColor(Color color)
@@ -113,8 +169,6 @@ internal class Marker : PointFeature
         if (_defaultPin == null)
         {
             // Load SVG for Pin
-            var assembly = typeof(Marker).Assembly;
-
             using (var s = new StreamReader(EmbeddedResourceLoader.Load(@"Resources.Images.Pin.svg", typeof(Marker))))
             {
                 _defaultPin = s.ReadToEnd();
