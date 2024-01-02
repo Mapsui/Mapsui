@@ -30,8 +30,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         try
         {
-            Callout.DefaultTitleFontSize = 24;  // excplicit values from maui debugging
-            Callout.DefaultSubtitleFontSize = 20; // excplicit values from maui debugging
+            Callout.DefaultTitleFontSize = 24;  // explicit values from maui debugging
+            Callout.DefaultSubtitleFontSize = 20; // explicit values from maui debugging
         }
         catch (Exception ex)
         {
@@ -101,7 +101,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private double _previousRadius = 1f;
 
     private TouchMode _mode;
-
+    private long _pointerDownTicks;
+    private long _pointerUpTicks;
     private bool _widgetPointerDown;
 
     public MapControl()
@@ -269,15 +270,16 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             TouchAction?.Invoke(sender, e);
             if (e.Handled) return;
 
-            if (e.ActionType == SKTouchAction.Pressed)
+            if (e.ActionType == SKTouchAction.Pressed && _touches.Count == 0)
             {
                 _widgetPointerDown = false;
-                _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
+                _pointerDownTicks = DateTime.UtcNow.Ticks;
 
                 if (_touches.Count == 1)
                 {
                     // In case of touch we need to check if another finger was not already touching.
-                    _pointerDownPosition = location;                    
+                    _pointerDownPosition = location;
+                    _pointerDownTicks = DateTime.UtcNow.Ticks;
                 }
 
                 if (HandleWidgetPointerDown(location, true, Math.Max(1, _numOfTaps), ShiftPessed))
@@ -312,6 +314,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                 if (_touches.Count == 0)
                 {
+                    _pointerUpTicks = DateTime.UtcNow.Ticks;
+
                     // Is this a fling?
                     if (UseFling)
                     {
@@ -341,7 +345,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     // If touch start and end is in the same area and the touch time is shorter
                     // than longTap, than we have a tap.
-                    if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? ShortClick : longTap) * 10000)
+                    if (isAround && (_pointerUpTicks - _pointerDownTicks) < (e.DeviceType == SKTouchDeviceType.Mouse ? ShortClick : longTap) * 10000)
                     {
                         _waitingForDoubleTap = true;
                         if (UseDoubleTap) { await Task.Delay(DelayTap); }
@@ -364,7 +368,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                             _waitingForDoubleTap = false; ;
                         }
                     }
-                    else if (isAround && (ticks - releasedTouch.Tick) >= longTap * 10000)
+                    else if (isAround && (_pointerUpTicks - _pointerDownTicks) >= longTap * 10000)
                     {
                         if (!e.Handled)
                             e.Handled = OnLongTapped(location);
