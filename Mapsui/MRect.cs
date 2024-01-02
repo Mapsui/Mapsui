@@ -12,6 +12,13 @@ public class MRect : IEquatable<MRect>
         SwapMinAndMaxIfNeeded();
     }
 
+    public MRect((double x, double y) min, (double x, double y) max)
+    {
+        Min = new MPoint(min.x, min.y);
+        Max = new MPoint(max.x, max.y);
+        SwapMinAndMaxIfNeeded();
+    }
+
     public MRect(MRect rect) : this(rect.Min.X, rect.Min.Y, rect.Max.X, rect.Max.Y) { }
 
     public MRect(IEnumerable<MRect> rects)
