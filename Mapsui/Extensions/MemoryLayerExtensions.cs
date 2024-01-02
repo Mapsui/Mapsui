@@ -15,9 +15,11 @@ public static class MemoryLayerExtensions
     /// <param name="layer">Layer to use</param>
     /// <param name="x">X position</param>
     /// <param name="y">Y position</param>
-    public static void AddMarker(this MemoryLayer layer, double x, double y)
+    public static MemoryLayer AddMarker(this MemoryLayer layer, double x, double y)
     {
         ((ConcurrentBag<IFeature>)layer.Features).Add(new Marker(x, y));
+
+        return layer;
     }
 
     /// <summary>
@@ -26,9 +28,11 @@ public static class MemoryLayerExtensions
     /// <param name="layer">Layer to use</param>
     /// <param name="x">X position</param>
     /// <param name="y">Y position</param>
-    public static void AddMarker(this MemoryLayer layer, (double x, double y) position)
+    public static MemoryLayer AddMarker(this MemoryLayer layer, (double x, double y) position)
     {
         ((ConcurrentBag<IFeature>)layer.Features).Add(new Marker(position));
+
+        return layer;
     }
 
     /// <summary>
