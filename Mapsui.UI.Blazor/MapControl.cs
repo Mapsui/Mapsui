@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using SkiaSharp;
 using SkiaSharp.Views.Blazor;
-using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Mapsui.UI.Blazor;
@@ -15,7 +14,7 @@ public partial class MapControl : ComponentBase, IMapControl
     public static bool UseGPU { get; set; } = false;
 
     private readonly SKCanvasView? _viewCpu;
-    private readonly SKGLView? _viewGpu;
+    protected readonly SKGLView? _viewGpu;
 
     [Inject]
     private IJSRuntime? JsRuntime { get; set; }
@@ -31,7 +30,7 @@ public partial class MapControl : ComponentBase, IMapControl
     private TouchState? _previousTouchState;
     double _pixelDensityFromInterop = 1;
     BoundingClientRect _clientRect = new();
-    private readonly string _elementId = Guid.NewGuid().ToString("N");
+    protected readonly string _elementId = Guid.NewGuid().ToString("N");
     private MapsuiJsInterop? _interop;
 
     public string MoveCursor { get; set; } = Cursors.Move;
@@ -52,12 +51,12 @@ public partial class MapControl : ComponentBase, IMapControl
         base.OnInitialized();
     }
 
-    private void OnKeyDown(KeyboardEventArgs e)
+    protected void OnKeyDown(KeyboardEventArgs e)
     {
         _pressedKeys.Add(e.Code);
     }
 
-    private void OnKeyUp(KeyboardEventArgs e)
+    protected void OnKeyUp(KeyboardEventArgs e)
     {
         _pressedKeys.Remove(e.Code);
     }
@@ -336,7 +335,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
     private void ClearBBoxDrawing()
     {
-        MapControl.RunOnUIThread(() => IsInBoxZoomMode = false);
+        RunOnUIThread(() => IsInBoxZoomMode = false);
     }
 
     private protected float GetPixelDensity()
