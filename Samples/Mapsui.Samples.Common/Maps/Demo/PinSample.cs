@@ -1,5 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Nts.Extensions;
 using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Tiling;
@@ -38,6 +39,12 @@ public class PinSample : ISample
         layer.AddMarker(SphericalMercator.FromLonLat(9.0, 48.0))
             .AddMarker(SphericalMercator.FromLonLat(9.1, 48.1), color: Color.Green, scale: 0.75)
             .AddMarker(SphericalMercator.FromLonLat(9.0, 48.1), color: Color.Blue, scale: 0.5);
+
+        var center = layer.Extent?.Centroid ?? new MPoint(SphericalMercator.FromLonLat(9.05, 48.05));
+        var extent = layer.Extent?.Grow(2000) ?? new MRect(SphericalMercator.FromLonLat(8.95, 47.95), SphericalMercator.FromLonLat(9.15, 48.15));
+
+        map.Navigator.CenterOn(center);
+        map.Navigator.ZoomToBox(extent);
 
         return map;
     }
