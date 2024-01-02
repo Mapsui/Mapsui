@@ -97,7 +97,10 @@ internal class Marker : PointFeature
         }
     }
 
-    private Offset _anchor = new Offset(0, 0);
+    private static Offset _defaultAnchor = new Offset(0.0, 0.0, true);
+    private static Offset _defaultPinAnchor = new Offset(0.0, 0.5, true);
+
+    private Offset _anchor = new Offset(0.0, 0.5, true);
 
     /// <summary>
     /// Anchor of bitmap in pixel
@@ -165,13 +168,16 @@ internal class Marker : PointFeature
             case MarkerType.Icon:
                 if (Icon == null) return;
                 _style.BitmapId = BitmapRegistry.Instance.Register(Icon);
+                _style.SymbolOffset = _defaultAnchor;
                 return;
             case MarkerType.Svg:
                 if (string.IsNullOrEmpty(Svg)) return;
                 _style.BitmapId = BitmapRegistry.Instance.Register(Svg);
+                _style.SymbolOffset = _defaultAnchor;
                 return;
             default:
                 _style.BitmapId = GetPinWithColor(_color);
+                _style.SymbolOffset = _defaultPinAnchor;
                 return;
         }
     }
