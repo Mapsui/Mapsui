@@ -340,7 +340,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                     VerticalAlignment = Widgets.VerticalAlignment.Top,
                     HorizontalAlignment = Widgets.HorizontalAlignment.Left,
                     BackgroundColor = Color.Transparent,
-                    Opacity = 0.8f,
+                    Opacity = 0.0f,
                     LogLevelFilter = LogLevel.Trace,
                 };
 
