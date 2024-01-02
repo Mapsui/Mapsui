@@ -116,7 +116,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControl_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         _pointerDownPosition = e.GetPosition(this).ToMapsui();
-
         _mouseDown = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
         // Save time, when the event occurs
         var ticks = DateTime.Now.Ticks;
