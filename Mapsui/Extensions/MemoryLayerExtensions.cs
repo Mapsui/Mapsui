@@ -1,6 +1,9 @@
 ﻿using Mapsui.Features;
 using Mapsui.Layers;
+using Mapsui.Widgets.ScaleBar;
 using System.Collections.Concurrent;
+using System.Drawing;
+using System.Reflection.Metadata;
 
 namespace Mapsui.Extensions;
 
@@ -15,9 +18,17 @@ public static class MemoryLayerExtensions
     /// <param name="layer">Layer to use</param>
     /// <param name="x">X position</param>
     /// <param name="y">Y position</param>
-    public static MemoryLayer AddMarker(this MemoryLayer layer, double x, double y)
+    public static MemoryLayer AddMarker(this MemoryLayer layer, double x, double y, MarkerType type = MarkerType.Pin, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0)
     {
-        ((ConcurrentBag<IFeature>)layer.Features).Add(new Marker(x, y));
+        var marker = new Marker(x, y);
+
+        marker.MarkerType = type;
+        marker.Scale = scale;
+        if (color != null) marker.Color = color;
+        if (icon != null) marker.Icon = icon;
+        if (svg != null) marker.Svg = svg;
+
+        ((ConcurrentBag<IFeature>)layer.Features).Add(marker);
 
         return layer;
     }
@@ -28,11 +39,9 @@ public static class MemoryLayerExtensions
     /// <param name="layer">Layer to use</param>
     /// <param name="x">X position</param>
     /// <param name="y">Y position</param>
-    public static MemoryLayer AddMarker(this MemoryLayer layer, (double x, double y) position)
+    public static MemoryLayer AddMarker(this MemoryLayer layer, (double x, double y) position, MarkerType type = MarkerType.Pin, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0)
     {
-        ((ConcurrentBag<IFeature>)layer.Features).Add(new Marker(position));
-
-        return layer;
+        return AddMarker(layer, position.x, position.y, type, color, icon, svg, scale);
     }
 
     /// <summary>
@@ -40,9 +49,8 @@ public static class MemoryLayerExtensions
     /// </summary>
     /// <param name="layer">Layer to use</param>
     /// <param name="point">Point for position</param>
-    public static void AddMarker(this MemoryLayer layer, MPoint position)
+    public static MemoryLayer AddMarker(this MemoryLayer layer, MPoint position, MarkerType type = MarkerType.Pin, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0)
     {
-        ((ConcurrentBag<IFeature>)layer.Features).Add(new Marker(position));
+        return AddMarker(layer, position.X, position.Y, type, color, icon, svg, scale);
     }
-
 }
