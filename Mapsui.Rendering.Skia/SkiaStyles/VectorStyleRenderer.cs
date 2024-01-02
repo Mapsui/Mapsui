@@ -23,7 +23,7 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             {
                 case RectFeature rectFeature:
                     if (rectFeature.Rect != null)
-                        PolygonRenderer.Draw(canvas, viewport, layer, vectorStyle, rectFeature, rectFeature.Rect.ToPolygon(), opacity, renderCache, renderCache);
+                        PolygonRenderer.Draw(canvas, viewport, vectorStyle, rectFeature, rectFeature.Rect.ToPolygon(), opacity, renderCache);
                     break;
                 case PointFeature pointFeature:
                     SymbolStyleRenderer.DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, CreateSymbolStyle(vectorStyle), renderCache);
@@ -38,7 +38,7 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                             SymbolStyleRenderer.DrawXY(canvas, viewport, layer, point.X, point.Y, CreateSymbolStyle(vectorStyle), renderCache);
                             break;
                         case Polygon polygon:
-                            PolygonRenderer.Draw(canvas, viewport, layer, vectorStyle, feature, polygon, opacity, renderCache, renderCache);
+                            PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderCache);
                             break;
                         case LineString lineString:
                             LineStringRenderer.Draw(canvas, viewport, layer, vectorStyle, feature, lineString, opacity, renderCache);

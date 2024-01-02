@@ -27,18 +27,18 @@ public enum GeometryTypeEnum
 public class WfsFeatureTypeInfo
 {
 
-    private BoundingBox _boundingBox = new BoundingBox();
+    private BoundingBox _boundingBox = new();
     private string _cs = ",";
     private string _decimalDel = ".";
     private string _featureTypeNamespace = string.Empty;
-    private GeometryInfo _geometry = new GeometryInfo();
+    private GeometryInfo _geometry = new();
     private string _name = string.Empty;
 
     private string? _prefix = string.Empty;
     private string? _serviceUri = string.Empty;
     private string _srid = "4326";
     private string _ts = " ";
-    private readonly List<ElementInfo> _elements = new List<ElementInfo>();
+    private readonly List<ElementInfo> _elements = [];
 
     /// <summary>
     /// Gets the elements associated to the feature.
@@ -252,8 +252,8 @@ public class WfsFeatureTypeInfo
     {
         public ElementInfo(string name, string dataType)
         {
-            Name = name ?? throw new ArgumentNullException("name");
-            DataType = dataType ?? throw new ArgumentNullException("dataType");
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+            DataType = dataType ?? throw new ArgumentNullException(nameof(dataType));
         }
 
         /// <summary>

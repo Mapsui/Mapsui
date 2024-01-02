@@ -1,14 +1,11 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
 using Topten.RichTextKit;
-
-#pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Rendering.Skia;
 
@@ -27,7 +24,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         var calloutStyle = (CalloutStyle)style;
 
         // Todo: Use opacity
-        var opacity = (float)(layer.Opacity * style.Opacity);
+        // var opacity = (float)(layer.Opacity * style.Opacity);
 
         var (x, y) = viewport.WorldToScreenXY(centroid.X, centroid.Y);
 
@@ -240,25 +237,23 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         textBlockTitle.Layout();
         textBlockSubtitle.Layout();
         // Create bitmap from TextBlock
-        using (var rec = new SKPictureRecorder())
-        using (var canvas = rec.BeginRecording(new SKRect(0, 0, width, height)))
+        using var rec = new SKPictureRecorder();
+        using var canvas = rec.BeginRecording(new SKRect(0, 0, width, height));
+        // Draw text to canvas
+        textBlockTitle.Paint(canvas, new TextPaintOptions() { Edging = SKFontEdging.Antialias });
+        if (callout.Type == CalloutType.Detail)
+            textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
+        // Create a SKPicture from canvas
+        var picture = rec.EndRecording();
+        if (callout.InternalContent >= 0)
         {
-            // Draw text to canvas
-            textBlockTitle.Paint(canvas, new TextPaintOptions() { Edging = SKFontEdging.Antialias });
-            if (callout.Type == CalloutType.Detail)
-                textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
-            // Create a SKPicture from canvas
-            var picture = rec.EndRecording();
-            if (callout.InternalContent >= 0)
-            {
-                BitmapRegistry.Instance.Set(callout.InternalContent, picture);
-            }
-            else
-            {
-                callout.InternalContent = BitmapRegistry.Instance.Register(picture);
-            }
-            callout.Content = callout.InternalContent;
+            BitmapRegistry.Instance.Set(callout.InternalContent, picture);
         }
+        else
+        {
+            callout.InternalContent = BitmapRegistry.Instance.Register(picture);
+        }
+        callout.Content = callout.InternalContent;
     }
 
     private static void DrawContent(CalloutStyle callout, SKCanvas canvas, ISymbolCache symbolCache)

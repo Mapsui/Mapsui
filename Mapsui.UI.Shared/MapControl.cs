@@ -65,7 +65,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
 
-    private protected void CommonInitialize()
+    private void CommonInitialize()
     {
         // Create map
         Map = new Map();
@@ -264,19 +264,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Renderer that is used from this MapControl
     /// </summary>
-    public IRenderer Renderer
-    {
-        get => _renderer;
-        set
-        {
-            if (value is null) throw new NullReferenceException(nameof(Renderer));
-            if (_renderer != value)
-            {
-                _renderer = value;
-                OnPropertyChanged();
-            }
-        }
-    }
+    public IRenderer Renderer => _renderer;
 
     /// <summary>
     /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in

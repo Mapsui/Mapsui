@@ -16,7 +16,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
-    private readonly SKPaint Paint = new()
+    private readonly SKPaint _paint = new()
     {
         IsAntialias = true,
         IsStroke = false,
@@ -87,9 +87,9 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     private BitmapInfo CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, ILabelCache labelCache)
     {
-        UpdatePaint(style, layerOpacity, Paint, labelCache);
+        UpdatePaint(style, layerOpacity, _paint, labelCache);
 
-        var bitmap = CreateLabelAsBitmap(style, text, Paint, layerOpacity);
+        var bitmap = CreateLabelAsBitmap(style, text, _paint, layerOpacity);
         return new BitmapInfo
         {
             Bitmap = bitmap,
@@ -118,7 +118,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, ILabelCache labelCache)
     {
-        UpdatePaint(style, layerOpacity, Paint, labelCache);
+        UpdatePaint(style, layerOpacity, _paint, labelCache);
 
         var rect = new SKRect();
 
@@ -126,17 +126,17 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         float emHeight = 0;
         float maxWidth = 0;
-        var hasNewline = text?.Contains("\n") ?? false; // There could be a multi line text by newline
+        var hasNewline = text?.Contains('\n') ?? false; // There could be a multi line text by newline
 
         // Get default values for unit em
         if (style.MaxWidth > 0 || hasNewline)
         {
-            Paint.MeasureText("M", ref rect);
-            emHeight = Paint.FontSpacing;
+            _paint.MeasureText("M", ref rect);
+            emHeight = _paint.FontSpacing;
             maxWidth = (float)style.MaxWidth * rect.Width;
         }
 
-        Paint.MeasureText(text, ref rect);
+        _paint.MeasureText(text, ref rect);
 
         var baseline = -rect.Top;  // Distance from top to baseline of text
 
@@ -147,7 +147,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             // Text has a line feed or should be shorten by character wrap
             if (hasNewline || style.WordWrap == LabelStyle.LineBreakMode.CharacterWrap)
             {
-                lines = SplitLines(text, Paint, hasNewline ? drawRect.Width : maxWidth, string.Empty);
+                lines = SplitLines(text, _paint, hasNewline ? drawRect.Width : maxWidth, string.Empty);
                 var width = 0f;
                 for (var i = 0; i < lines.Length; i++)
                 {
@@ -161,7 +161,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             // Text is to long, so wrap it by words
             if (style.WordWrap == LabelStyle.LineBreakMode.WordWrap)
             {
-                lines = SplitLines(text, Paint, maxWidth, " ");
+                lines = SplitLines(text, _paint, maxWidth, " ");
                 var width = 0f;
                 for (var i = 0; i < lines.Length; i++)
                 {
@@ -175,39 +175,39 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             // Shorten it at beginning
             if (style.WordWrap == LabelStyle.LineBreakMode.HeadTruncation)
             {
-                var result = text?.Substring(text.Length - (int)style.MaxWidth - 2);
-                while (result?.Length > 1 && Paint.MeasureText("..." + result) > maxWidth)
-                    result = result.Substring(1);
+                var result = text?[(text.Length - (int)style.MaxWidth - 2)..];
+                while (result?.Length > 1 && _paint.MeasureText("..." + result) > maxWidth)
+                    result = result[1..];
                 text = "..." + result;
-                Paint.MeasureText(text, ref rect);
+                _paint.MeasureText(text, ref rect);
                 drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
             }
 
             // Shorten it at end
             if (style.WordWrap == LabelStyle.LineBreakMode.TailTruncation)
             {
-                var result = text?.Substring(0, (int)style.MaxWidth + 2);
-                while (result?.Length > 1 && Paint.MeasureText(result + "...") > maxWidth)
-                    result = result.Substring(0, result.Length - 1);
+                var result = text?[..((int)style.MaxWidth + 2)];
+                while (result?.Length > 1 && _paint.MeasureText(result + "...") > maxWidth)
+                    result = result[..^1];
                 text = result + "...";
-                Paint.MeasureText(text, ref rect);
+                _paint.MeasureText(text, ref rect);
                 drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
             }
 
             // Shorten it in the middle
             if (style.WordWrap == LabelStyle.LineBreakMode.MiddleTruncation)
             {
-                var result1 = text?.Substring(0, (int)(style.MaxWidth / 2) + 1);
-                var result2 = text?.Substring(text.Length - (int)(style.MaxWidth / 2) - 1);
+                var result1 = text?[..((int)(style.MaxWidth / 2) + 1)];
+                var result2 = text?[(text.Length - (int)(style.MaxWidth / 2) - 1)..];
                 while (result1?.Length > 1 && result2?.Length > 1 &&
-                       Paint.MeasureText(result1 + "..." + result2) > maxWidth)
+                       _paint.MeasureText(result1 + "..." + result2) > maxWidth)
                 {
-                    result1 = result1.Substring(0, result1.Length - 1);
-                    result2 = result2.Substring(1);
+                    result1 = result1[..^1];
+                    result2 = result2[1..];
                 }
 
                 text = result1 + "..." + result2;
-                Paint.MeasureText(text, ref rect);
+                _paint.MeasureText(text, ref rect);
                 drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
             }
         }
@@ -233,10 +233,10 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         // If style has a halo value, than draw halo text
         if (style.Halo != null)
         {
-            UpdatePaint(style, layerOpacity, Paint, labelCache);
-            Paint.Style = SKPaintStyle.StrokeAndFill;
-            Paint.Color = style.Halo.Color.ToSkia(layerOpacity);
-            Paint.StrokeWidth = (float)style.Halo.Width * 2;
+            UpdatePaint(style, layerOpacity, _paint, labelCache);
+            _paint.Style = SKPaintStyle.StrokeAndFill;
+            _paint.Color = style.Halo.Color.ToSkia(layerOpacity);
+            _paint.StrokeWidth = (float)style.Halo.Width * 2;
 
             if (lines != null)
             {
@@ -244,18 +244,18 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 foreach (var line in lines)
                 {
                     if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Center)
-                        target.DrawText(line.Value, (float)(left + (drawRect.Width - line.Width) * 0.5), drawRect.Top + line.Baseline, Paint);
+                        target.DrawText(line.Value, (float)(left + (drawRect.Width - line.Width) * 0.5), drawRect.Top + line.Baseline, _paint);
                     else if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right)
-                        target.DrawText(line.Value, left + drawRect.Width - line.Width, drawRect.Top + line.Baseline, Paint);
+                        target.DrawText(line.Value, left + drawRect.Width - line.Width, drawRect.Top + line.Baseline, _paint);
                     else
-                        target.DrawText(line.Value, left, drawRect.Top + line.Baseline, Paint);
+                        target.DrawText(line.Value, left, drawRect.Top + line.Baseline, _paint);
                 }
             }
             else
-                target.DrawText(text, drawRect.Left, drawRect.Top + baseline, Paint);
+                target.DrawText(text, drawRect.Left, drawRect.Top + baseline, _paint);
         }
 
-        UpdatePaint(style, layerOpacity, Paint, labelCache);
+        UpdatePaint(style, layerOpacity, _paint, labelCache);
 
         if (lines != null)
         {
@@ -263,15 +263,15 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             foreach (var line in lines)
             {
                 if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Center)
-                    target.DrawText(line.Value, (float)(left + (drawRect.Width - line.Width) * 0.5), drawRect.Top + line.Baseline, Paint);
+                    target.DrawText(line.Value, (float)(left + (drawRect.Width - line.Width) * 0.5), drawRect.Top + line.Baseline, _paint);
                 else if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right)
-                    target.DrawText(line.Value, left + drawRect.Width - line.Width, drawRect.Top + line.Baseline, Paint);
+                    target.DrawText(line.Value, left + drawRect.Width - line.Width, drawRect.Top + line.Baseline, _paint);
                 else
-                    target.DrawText(line.Value, left, drawRect.Top + line.Baseline, Paint);
+                    target.DrawText(line.Value, left, drawRect.Top + line.Baseline, _paint);
             }
         }
         else
-            target.DrawText(text, drawRect.Left, drawRect.Top + baseline, Paint);
+            target.DrawText(text, drawRect.Left, drawRect.Top + baseline, _paint);
     }
 
     private static float CalcHorizontalAlignment(LabelStyle.HorizontalAlignmentEnum horizontalAlignment)
@@ -279,7 +279,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Center) return 0.5f;
         if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Left) return 0f;
         if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right) return 1f;
-        throw new ArgumentException();
+        throw new ArgumentException($"Unknown {nameof(LabelStyle.HorizontalAlignmentEnum)} type '{nameof(horizontalAlignment)}");
     }
 
     private static float CalcVerticalAlignment(LabelStyle.VerticalAlignmentEnum verticalAlignment)
@@ -287,7 +287,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Center) return 0.5f;
         if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Top) return 0f;
         if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Bottom) return 1f;
-        throw new ArgumentException();
+        throw new ArgumentException($"Unknown {nameof(LabelStyle.VerticalAlignmentEnum)} type '{nameof(verticalAlignment)}");
     }
 
     private static void DrawBackground(LabelStyle style, SKRect rect, SKCanvas target, float layerOpacity)
@@ -333,7 +333,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     private static Line[] SplitLines(string? text, SKPaint paint, float maxWidth, string splitCharacter)
     {
         if (text == null)
-            return Array.Empty<Line>();
+            return [];
 
         var spaceWidth = paint.MeasureText(" ");
         var lines = text.Split('\n');
@@ -388,7 +388,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         if (style is LabelStyle labelStyle)
         {
-            return FeatureSize(feature, labelStyle, Paint, renderingCache);
+            return FeatureSize(feature, labelStyle, _paint, renderingCache);
         }
 
         return 0;
