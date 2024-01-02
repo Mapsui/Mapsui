@@ -1,9 +1,9 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Nts.Extensions;
 using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using System.IO;
@@ -38,17 +38,17 @@ public class PinSample : ISample
             return map;
 
         // Read demo SVG
-        using var stream = typeof(PinSample).Assembly.GetManifestResourceStream(typeof(PinSample).Assembly.GetFullName("Images.Ghostscript_Tiger.svg"));
-        if (stream == null) return map;
-        using var reader = new StreamReader(stream);
+        var tiger = GetSvgFromResources("Images.Ghostscript_Tiger.svg");
 
-        var tiger = reader.ReadToEnd();
+        // Read demo Icon
+        var icon = GetIconFromResources("Images.icon.png");
 
         // Add markers
         layer.AddMarker(SphericalMercator.FromLonLat(9.0, 48.0))
             .AddMarker(SphericalMercator.FromLonLat(9.1, 48.1), color: Color.Green, scale: 0.75)
             .AddMarker(SphericalMercator.FromLonLat(9.0, 48.1), color: Color.Blue, scale: 0.5)
-            .AddMarker(SphericalMercator.FromLonLat(9.1, 48.0), svg: tiger, scale: 0.1, anchor: new Offset(0.3, -0.8, true)); // Set center point to 30 % in x and -80 % in y direction
+            .AddMarker(SphericalMercator.FromLonLat(9.1, 48.0), svg: tiger, scale: 0.1, anchor: new Offset(0.3, -0.8, true)) // Set center point to 30 % in x and -80 % in y direction
+            .AddMarker(SphericalMercator.FromLonLat(9.05, 48.05), icon: icon, anchor: new Offset(0.5, 0.5, true));
 
         // Zoom and center map
         var center = layer.Extent?.Centroid ?? new MPoint(SphericalMercator.FromLonLat(9.05, 48.05));
@@ -58,5 +58,24 @@ public class PinSample : ISample
         map.Navigator.ZoomToBox(extent);
 
         return map;
+    }
+
+    private static string GetSvgFromResources(string name)
+    {
+        using var stream = typeof(PinSample).Assembly.GetManifestResourceStream(typeof(PinSample).Assembly.GetFullName(name));
+        if (stream == null) return string.Empty;
+        using var reader = new StreamReader(stream);
+
+        return reader.ReadToEnd();
+    }
+
+    private static byte[]? GetIconFromResources(string name)
+    {
+        using var stream2 = EmbeddedResourceLoader.Load(name, typeof(PinSample));
+        if (stream2 == null) return null;
+        using var reader2 = new MemoryStream();
+        stream2.CopyTo(reader2);
+
+        return reader2.ToArray();
     }
 }
