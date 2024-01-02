@@ -19,9 +19,6 @@ public class MouseCoordinatesWidget : TextBoxWidget, ITouchableWidget
 
     public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
-        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(position);
-        // update the Mouse position
-        Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
         return false;
     }
 
