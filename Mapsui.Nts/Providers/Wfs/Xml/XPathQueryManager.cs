@@ -280,10 +280,6 @@ public class XPathQueryManager : IXPathQueryManager
         {
             Logger.Log(LogLevel.Error, e.Message, e);
         }
-        finally
-        {
-            httpClientUtil.Close();
-        }
     }
 
     /// <summary>
