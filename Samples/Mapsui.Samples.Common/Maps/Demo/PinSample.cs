@@ -34,8 +34,9 @@ public class PinSample : ISample
         if (layer == null)
             return map;
 
-        layer.AddMarker(SphericalMercator.FromLonLat(9, 48));
-        layer.AddMarker(SphericalMercator.FromLonLat(9.1, 48.1));
+        layer.AddMarker(SphericalMercator.FromLonLat(9.0, 48.0))
+            .AddMarker(SphericalMercator.FromLonLat(9.1, 48.1))
+            .AddMarker(SphericalMercator.FromLonLat(9.0, 48.1));
 
         return map;
     }
