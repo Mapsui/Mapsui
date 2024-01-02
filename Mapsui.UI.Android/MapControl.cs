@@ -49,6 +49,7 @@ public partial class MapControl : ViewGroup, IMapControl
     /// Saver for center before last pinch movement
     /// </summary>
     private MPoint _previousTouch = new();
+    private MPoint? _pointerDownPosition;
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
 
     public MapControl(Context context, IAttributeSet attrs) : 
@@ -181,16 +182,12 @@ public partial class MapControl : ViewGroup, IMapControl
 
         var touchPoints = GetScreenPositions(args.Event, this);
 
-        if (touchPoints.Count > 0 && HandleTouch(args, touchPoints.First()))
-        {
-            return;
-        }
-
         switch (args.Event?.Action)
         {
             case MotionEventActions.Up:
                 Refresh();
                 _mode = TouchMode.None;
+                HandleWidgetPointerUp(touchPoints.First(), _pointerDownPosition, true, 0, false);
                 break;
             case MotionEventActions.Down:
             case MotionEventActions.Pointer1Down:
@@ -204,8 +201,12 @@ public partial class MapControl : ViewGroup, IMapControl
                 }
                 else
                 {
-                    _mode = TouchMode.Dragging;
                     _previousTouch = touchPoints.First();
+                    _pointerDownPosition = touchPoints.First();
+
+                    if (HandleWidgetPointerDown(_pointerDownPosition, true, 1, false))
+                        return;
+                    _mode = TouchMode.Dragging;
                 }
                 break;
             case MotionEventActions.Pointer1Up:
@@ -231,6 +232,8 @@ public partial class MapControl : ViewGroup, IMapControl
             case MotionEventActions.Move:
                 switch (_mode)
                 {
+                    // There is no widget move handling in Mapsui.Android so the edit widget will not work.
+                    // If this is added there should be testing of editing and all existing functionality.
                     case TouchMode.Dragging:
                         {
                             if (touchPoints.Count != 1)
@@ -272,18 +275,6 @@ public partial class MapControl : ViewGroup, IMapControl
                 }
                 break;
         }
-    }
-
-    private bool HandleTouch(TouchEventArgs e, MPoint location)
-    {
-        var action = e.Event?.Action;
-        return action switch
-        {
-            MotionEventActions.Down when HandleTouching(location, true, Math.Max(1, 0), false) => true,
-            MotionEventActions.Up when HandleTouched(location, true, 0, false) => true,
-            MotionEventActions.Move when HandleMoving(location, true, Math.Max(1, 0), false) => true,
-            _ => false
-        };
     }
 
     /// <summary>

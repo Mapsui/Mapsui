@@ -32,6 +32,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
     private double _virtualRotation;
+    private MPoint? _pointerDownPosition;
 
     public MapControl()
     {
@@ -70,6 +71,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         ManipulationInertiaStarting += OnManipulationInertiaStarting;
 
         Tapped += OnSingleTapped;
+        PointerPressed += MapControl_PointerDown;
         DoubleTapped += OnDoubleTapped;
         PointerMoved += MapControl_PointerMoved;
         KeyDown += MapControl_KeyDown;
@@ -107,17 +109,22 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         _virtualRotation = Map.Navigator.Viewport.Rotation;
     }
 
+    private void MapControl_PointerDown(object sender, PointerRoutedEventArgs e)
+    {
+        _pointerDownPosition = e.GetCurrentPoint(this).Position.ToMapsui();
+    }
+
     private void MapControl_PointerMoved(object sender, PointerRoutedEventArgs e)
     {
         var position = e.GetCurrentPoint(this).Position.ToMapsui();
-        if (HandleMoving(position, true, 0, e.KeyModifiers == VirtualKeyModifiers.Shift))
+        if (HandleWidgetPointerMove(position, true, 0, e.KeyModifiers == VirtualKeyModifiers.Shift))
             e.Handled = true;
     }
 
     private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
     {
         var tapPosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouchingTouched(tapPosition, true, 2, ShiftPressed))
+        if (HandleTouchingTouched(tapPosition, _pointerDownPosition, true, 2, ShiftPressed))
         {
             e.Handled = true;
             return;
@@ -131,7 +138,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
     {
         var tabPosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouchingTouched(tabPosition, true, 1, ShiftPressed))
+        if (HandleTouchingTouched(tabPosition, _pointerDownPosition, true, 1, ShiftPressed))
         {
             e.Handled = true;
             return;

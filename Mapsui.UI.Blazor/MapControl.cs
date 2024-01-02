@@ -25,7 +25,7 @@ public partial class MapControl : ComponentBase, IMapControl
     private SKImageInfo? _canvasSize;
     private bool _onLoaded;
     private MRect? _selectRectangle;
-    private MPoint? _downMousePosition;
+    private MPoint? _pointerDownPosition;
     private MPoint? _previousMousePosition;
     private string? _defaultCursor = Cursors.Default;
     private readonly HashSet<string> _pressedKeys = new();
@@ -182,7 +182,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleTouching(e.ToLocation(_clientRect), e.Button == 0, 2, ShiftPressed))
+            if (HandleWidgetPointerDown(e.ToLocation(_clientRect), e.Button == 0, 2, ShiftPressed))
                 return;
         }
         catch (Exception ex)
@@ -198,7 +198,8 @@ public partial class MapControl : ComponentBase, IMapControl
             // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
             _ = UpdateBoundingRectAsync();
 
-            if (HandleTouching(e.ToLocation(_clientRect), e.Button == 0, 1, ShiftPressed))
+            _pointerDownPosition = e.ToLocation(_clientRect);
+            if (HandleWidgetPointerDown(_pointerDownPosition, e.Button == 0, 1, ShiftPressed))
                 return;
 
             IsInBoxZoomMode = e.Button == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
@@ -209,9 +210,7 @@ public partial class MapControl : ComponentBase, IMapControl
                 _defaultCursor = Cursor;
 
             if (moveMode || IsInBoxZoomMode)
-                _previousMousePosition = e.ToLocation(_clientRect);
-
-            _downMousePosition = e.ToLocation(_clientRect);
+                _previousMousePosition = _pointerDownPosition;
         }
         catch (Exception ex)
         {
@@ -244,7 +243,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleTouched(e.ToLocation(_clientRect), e.Button == 0, 1, ShiftPressed))
+            if (HandleWidgetPointerUp(e.ToLocation(_clientRect), _pointerDownPosition, e.Button == 0, 1, ShiftPressed))
                 return;
 
             if (IsInBoxZoomMode)
@@ -257,14 +256,14 @@ public partial class MapControl : ComponentBase, IMapControl
                     ZoomToBox(previous, current);
                 }
             }
-            else if (_downMousePosition != null)
+            else if (_pointerDownPosition != null)
             {
                 var location = e.ToLocation(_clientRect);
-                if (IsClick(location, _downMousePosition))
-                    OnInfo(CreateMapInfoEventArgs(location, _downMousePosition, 1));
+                if (IsClick(location, _pointerDownPosition))
+                    OnInfo(CreateMapInfoEventArgs(location, _pointerDownPosition, 1));
             }
 
-            _downMousePosition = null;
+            _pointerDownPosition = null;
             _previousMousePosition = null;
 
             Cursor = _defaultCursor;
@@ -295,7 +294,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleMoving(e.ToLocation(_clientRect), e.Button == 0, 0, ShiftPressed))
+            if (HandleWidgetPointerMove(e.ToLocation(_clientRect), e.Button == 0, 0, ShiftPressed))
                 return;
 
             if (_previousMousePosition != null)
@@ -303,9 +302,9 @@ public partial class MapControl : ComponentBase, IMapControl
                 if (IsInBoxZoomMode)
                 {
                     var x = e.ToLocation(_clientRect);
-                    if (_downMousePosition != null)
+                    if (_pointerDownPosition != null)
                     {
-                        var y = _downMousePosition;
+                        var y = _pointerDownPosition;
                         _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X),
                             Math.Max(x.Y, y.Y));
                         if (_invalidate != null)
@@ -322,7 +321,7 @@ public partial class MapControl : ComponentBase, IMapControl
                 }
 
                 // cleanout down mouse position because it is now a move
-                _downMousePosition = null;
+                _pointerDownPosition = null;
             }
         }
         catch (Exception ex)

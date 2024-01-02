@@ -30,8 +30,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         try
         {
-            Callout.DefaultTitleFontSize = 24;  // excplicit values from maui debugging
-            Callout.DefaultSubtitleFontSize = 20; // excplicit values from maui debugging
+            Callout.DefaultTitleFontSize = 24;  // explicit values from maui debugging
+            Callout.DefaultSubtitleFontSize = 20; // explicit values from maui debugging
         }
         catch (Exception ex)
         {
@@ -84,7 +84,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private double _virtualRotation;
     private readonly ConcurrentDictionary<long, TouchEvent> _touches = new();
-    private MPoint? _firstTouch;
+    private MPoint? _pointerDownPosition;
     private bool _waitingForDoubleTap;
     private int _numOfTaps;
     private readonly FlingTracker _flingTracker = new();
@@ -101,6 +101,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private double _previousRadius = 1f;
 
     private TouchMode _mode;
+    private long _pointerDownTicks;
+    private long _pointerUpTicks;
+    private bool _widgetPointerDown;
 
     public MapControl()
     {
@@ -263,21 +266,28 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
             var location = GetScreenPosition(e.Location);
 
-            if (HandleTouch(e, location))
-            {
-                e.Handled = true;
-                return;
-            }
-
             // if user handles action by his own return
             TouchAction?.Invoke(sender, e);
             if (e.Handled) return;
 
-            if (e.ActionType == SKTouchAction.Pressed)
+            if (e.ActionType == SKTouchAction.Pressed && _touches.Count == 0)
             {
-                _firstTouch = location;
+                _widgetPointerDown = false;
+                _pointerDownTicks = DateTime.UtcNow.Ticks;
 
-                _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
+                if (_touches.Count == 1)
+                {
+                    // In case of touch we need to check if another finger was not already touching.
+                    _pointerDownPosition = location;
+                    _pointerDownTicks = DateTime.UtcNow.Ticks;
+                }
+
+                if (HandleWidgetPointerDown(location, true, Math.Max(1, _numOfTaps), ShiftPessed))
+                {
+                    e.Handled = true;
+                    _widgetPointerDown = true;
+                    return;
+                }
 
                 _flingTracker.Clear();
 
@@ -296,8 +306,16 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             // Delete e.Id from _touches, because finger is released
             else if (e.ActionType == SKTouchAction.Released && _touches.TryRemove(e.Id, out var releasedTouch))
             {
+                if (HandleWidgetPointerUp(location, _pointerDownPosition, true, 0, ShiftPessed))
+                {
+                    e.Handled = true;
+                    return;
+                }
+
                 if (_touches.Count == 0)
                 {
+                    _pointerUpTicks = DateTime.UtcNow.Ticks;
+
                     // Is this a fling?
                     if (UseFling)
                     {
@@ -327,7 +345,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     // If touch start and end is in the same area and the touch time is shorter
                     // than longTap, than we have a tap.
-                    if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? ShortClick : longTap) * 10000)
+                    if (isAround && (_pointerUpTicks - _pointerDownTicks) < (e.DeviceType == SKTouchDeviceType.Mouse ? ShortClick : longTap) * 10000)
                     {
                         _waitingForDoubleTap = true;
                         if (UseDoubleTap) { await Task.Delay(DelayTap); }
@@ -350,7 +368,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                             _waitingForDoubleTap = false; ;
                         }
                     }
-                    else if (isAround && (ticks - releasedTouch.Tick) >= longTap * 10000)
+                    else if (isAround && (_pointerUpTicks - _pointerDownTicks) >= longTap * 10000)
                     {
                         if (!e.Handled)
                             e.Handled = OnLongTapped(location);
@@ -369,12 +387,18 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             }
             else if (e.ActionType == SKTouchAction.Moved)
             {
+                if (HandleWidgetPointerMove(location, true, Math.Max(1, _numOfTaps), ShiftPessed))
+                {
+                    e.Handled = true;
+                    return;
+                }
+
                 _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
 
                 if (e.InContact)
                     _flingTracker.AddEvent(e.Id, location, ticks);
 
-                if (e.InContact && !e.Handled)
+                if (e.InContact && !e.Handled && !_widgetPointerDown)
                     e.Handled = OnTouchMove(_touches.Select(t => t.Value.Location).ToList());
                 else
                     e.Handled = OnHovered(_touches.Select(t => t.Value.Location).FirstOrDefault());
@@ -403,24 +427,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         }
     }
 
-    private bool HandleTouch(SKTouchEventArgs e, MPoint location)
-    {
-        return e.ActionType switch
-        {
-            SKTouchAction.Pressed when HandleTouching(location, true, Math.Max(1, _numOfTaps), ShiftPessed) => true,
-            SKTouchAction.Released when HandleTouched(location, true, 0, ShiftPessed) => true,
-            SKTouchAction.Moved when HandleMoving(location, true, Math.Max(1, _numOfTaps), ShiftPessed) => true,
-            _ => false
-        };
-    }
-
     public bool ShiftPessed { get; set; }
 
     private bool IsAround(TouchEvent releasedTouch)
     {
-        if (_firstTouch == null) { return false; }
+        if (_pointerDownPosition == null) { return false; }
         if (releasedTouch.Location == null) { return false; }
-        return _firstTouch != null && Utilities.Algorithms.Distance(releasedTouch.Location, _firstTouch) < TouchSlop;
+        return _pointerDownPosition != null && Utilities.Algorithms.Distance(releasedTouch.Location, _pointerDownPosition) < TouchSlop;
     }
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)

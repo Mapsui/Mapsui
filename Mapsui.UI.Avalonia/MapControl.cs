@@ -20,6 +20,7 @@ using Mapsui.UI.Avalonia.Utils;
 using Mapsui.UI.Utils;
 using Mapsui.Utilities;
 using ReactiveUI;
+using Mapsui.Logging;
 
 namespace Mapsui.UI.Avalonia;
 
@@ -28,7 +29,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private MPoint? _mousePosition;
     private MapsuiCustomDrawOp? _drawOp;
     private MPoint? _currentMousePosition;
-    private MPoint? _downMousePosition;
+    private MPoint? _pointerDownPosition;
     private bool _mouseDown;
     private MPoint? _previousMousePosition;
     private double _mouseWheelPos = 0.0;
@@ -106,7 +107,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         switch (change.Property.Name)
         {
             case nameof(Bounds):
-                // size changed
+                // Size changed
                 MapControlSizeChanged();
                 break;
         }
@@ -114,22 +115,23 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControl_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        var leftButtonPressed = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
-        var location = e.GetPosition(this).ToMapsui();
+        _pointerDownPosition = e.GetPosition(this).ToMapsui();
+        _mouseDown = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
         // Save time, when the event occurs
         var ticks = DateTime.Now.Ticks;
-        _touches[e.Pointer.Id] = new TouchEvent(e.Pointer.Id, location, ticks);
+        _touches[e.Pointer.Id] = new TouchEvent(e.Pointer.Id, _pointerDownPosition, ticks);
         OnPinchStart(_touches.Select(t => t.Value.Location).ToList());
 
-        if (HandleTouching(location, leftButtonPressed, e.ClickCount, ShiftPressed))
+        if (HandleWidgetPointerDown(_pointerDownPosition, _mouseDown, e.ClickCount, ShiftPressed))
         {
             e.Handled = true;
             return;
         }
 
-        if (leftButtonPressed)
+        if (_mouseDown)
         {
-            MapControlMouseLeftButtonDown(e);
+            _previousMousePosition = _pointerDownPosition;
+            e.Pointer.Capture(this);
         }
     }
 
@@ -147,25 +149,16 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         Map.Navigator.MouseWheelZoom(delta, _currentMousePosition);
     }
 
-    private void MapControlMouseLeftButtonDown(PointerPressedEventArgs e)
-    {
-        var touchPosition = e.GetPosition(this).ToMapsui();
-        _previousMousePosition = touchPosition;
-        _downMousePosition = touchPosition;
-        _mouseDown = true;
-        e.Pointer.Capture(this);
-    }
-
     [Obsolete]
     private void HandleFeatureInfo(PointerReleasedEventArgs e)
     {
         if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
 
-        if (Map != null && _downMousePosition == e.GetPosition(this).ToMapsui())
+        if (Map != null && _pointerDownPosition == e.GetPosition(this).ToMapsui())
             foreach (var layer in Map.Layers)
             {
                 // ReSharper disable once SuspiciousTypeConversion.Global
-                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.Viewport, _downMousePosition.X, _downMousePosition.Y,
+                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.Viewport, _pointerDownPosition.X, _pointerDownPosition.Y,
                     OnFeatureInfo);
             }
     }
@@ -188,25 +181,20 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         _currentMousePosition = e.GetPosition(this).ToMapsui(); // Needed for both MouseMove and MouseWheel event
         _touches[e.Pointer.Id] = new TouchEvent(e.Pointer.Id, _currentMousePosition, ticks);
 
-        if (_mouseDown)
+        if (_previousMousePosition is null)
+            return;
+
+        if (!_mouseDown)
+            return;
+
+        if (OnPinchMove(_touches.Select(t => t.Value.Location).ToList()))
         {
-            if (_previousMousePosition == null)
-            {
-                // Usually MapControlMouseLeftButton down initializes _previousMousePosition but in some
-                // situations it can be null. So far I could only reproduce this in debug mode when putting
-                // a breakpoint and continuing.
-                return;
-            }
-
-            if (OnPinchMove(_touches.Select(t => t.Value.Location).ToList()))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            Map.Navigator.Drag(_currentMousePosition, _previousMousePosition);
-            _previousMousePosition = _currentMousePosition;
+            e.Handled = true;
+            return;
         }
+
+        Map.Navigator.Drag(_currentMousePosition, _previousMousePosition);
+        _previousMousePosition = _currentMousePosition;
     }
 
     private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
@@ -214,7 +202,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         _touches.TryRemove(e.Pointer.Id, out _);
 
         var leftButtonPressed = e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased;
-        if (HandleTouched(e.GetPosition(this).ToMapsui(), leftButtonPressed, 1, ShiftPressed))
+        if (HandleWidgetPointerUp(e.GetPosition(this).ToMapsui(), _pointerDownPosition, leftButtonPressed, 1, ShiftPressed))
         {
             e.Handled = true;
             return;
@@ -224,16 +212,16 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         {
             MapControlMouseLeftButtonUp(e);
         }
+        _mouseDown = false;
+        _previousMousePosition = null;
+        e.Pointer.Capture(null);
     }
 
     private void MapControlMouseLeftButtonUp(PointerReleasedEventArgs e)
     {
         RefreshData();
-        _mouseDown = false;
-        _previousMousePosition = null;
-        e.Pointer.Capture(null);
 
-        if (IsClick(_currentMousePosition, _downMousePosition))
+        if (IsClick(_currentMousePosition, _pointerDownPosition))
         {
 #pragma warning disable CS0612 // Type or member is obsolete
             HandleFeatureInfo(e);
@@ -256,7 +244,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         base.OnPointerMoved(e);
         _mousePosition = e.GetPosition(this).ToMapsui();
-        if (HandleMoving(_mousePosition, true, 0, ShiftPressed))
+        if (HandleWidgetPointerMove(_mousePosition, true, 0, ShiftPressed))
             e.Handled = true;
     }
 
@@ -264,7 +252,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         // We have a new interaction with the screen, so stop all navigator animations
         var tapPosition = _mousePosition;
-        if (tapPosition != null && HandleTouchingTouched(tapPosition, true, 2, ShiftPressed))
+        if (tapPosition != null && HandleTouchingTouched(tapPosition, _pointerDownPosition, true, 2, ShiftPressed))
         {
             e.Handled = true;
             return;

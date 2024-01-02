@@ -567,7 +567,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidateTimer = null;
     }
 
-    private bool HandleMoving(MPoint position, bool leftButton, int clickCount, bool shift)
+    private bool HandleWidgetPointerMove(MPoint position, bool leftButton, int clickCount, bool shift)
     {
         var extendedWidgets = GetExtendedWidgets();
         if (extendedWidgets.Count == 0)
@@ -583,11 +583,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool HandleTouchingTouched(MPoint position, bool leftButton, int clickCount, bool shift)
+    private bool HandleTouchingTouched(MPoint position, MPoint? startPosition, bool leftButton, int clickCount, bool shift)
     {
-        bool result = HandleTouching(position, leftButton, clickCount, shift);
+        bool result = HandleWidgetPointerDown(position, leftButton, clickCount, shift);
 
-        if (HandleTouched(position, leftButton, clickCount, shift))
+        if (HandleWidgetPointerUp(position, startPosition, leftButton, clickCount, shift))
         {
             result = true;
         }
@@ -596,7 +596,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
 
-    private bool HandleTouching(MPoint position, bool leftButton, int clickCount, bool shift)
+    private bool HandleWidgetPointerDown(MPoint position, bool leftButton, int clickCount, bool shift)
     {
         var touchableWidgets = GetTouchableWidgets();
         var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
@@ -619,10 +619,15 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool HandleTouched(MPoint position, bool leftButton, int clickCount, bool shift)
+    private bool HandleWidgetPointerUp(MPoint position, MPoint? startPosition, bool leftButton, int clickCount, bool shift)
     {
+        if (startPosition is null)
+        {
+            Logger.Log(LogLevel.Error, $"The '{nameof(startPosition)}' is null on release. This is not expected");
+            return false;
+        }
         var touchableWidgets = GetTouchableWidgets();
-        var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
+        var touchedWidgets = WidgetTouch.GetTouchedWidget(position, startPosition, touchableWidgets);
 
         foreach (var widget in touchedWidgets)
         {
@@ -639,7 +644,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 else if (widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
                 {
                     // The HyperLink is a special case because we need platform specific code to open the
-                    // link in a browswer. If the link is not handled within the widget we handle it
+                    // link in a browser. If the link is not handled within the widget we handle it
                     // here and return true to indicate this is handled.
                     OpenBrowser(hyperlink.Url!);
                     return true;
