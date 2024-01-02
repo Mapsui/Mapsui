@@ -1,7 +1,9 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Utilities;
+using System.Drawing;
 using System.IO;
+using Color = Mapsui.Styles.Color;
 
 namespace Mapsui.Features;
 
@@ -92,6 +94,22 @@ internal class Marker : PointFeature
             if (value.Equals(_scale)) return;
             _scale = value;
             _style.SymbolScale = _scale;
+        }
+    }
+
+    private Offset _anchor = new Offset(0, 0);
+
+    /// <summary>
+    /// Anchor of bitmap in pixel
+    /// </summary>
+    public Offset Anchor
+    {
+        get => _anchor;
+        set
+        {
+            if (value.Equals(_anchor)) return;
+            _anchor = value;
+            _style.SymbolOffset = _anchor;
         }
     }
 
