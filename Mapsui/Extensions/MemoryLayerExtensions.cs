@@ -40,7 +40,7 @@ public static class MemoryLayerExtensions
     /// <param name="y">Y position</param>
     public static MemoryLayer AddMarker(this MemoryLayer layer, (double x, double y) position, MarkerType type = MarkerType.Pin, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? anchor = null)
     {
-        return AddMarker(layer, position.x, position.y, type, color, icon, svg, scale);
+        return AddMarker(layer, position.x, position.y, type, color, icon, svg, scale, anchor);
     }
 
     /// <summary>
@@ -50,6 +50,6 @@ public static class MemoryLayerExtensions
     /// <param name="point">Point for position</param>
     public static MemoryLayer AddMarker(this MemoryLayer layer, MPoint position, MarkerType type = MarkerType.Pin, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? anchor = null)
     {
-        return AddMarker(layer, position.X, position.Y, type, color, icon, svg, scale);
+        return AddMarker(layer, position.X, position.Y, type, color, icon, svg, scale, anchor);
     }
 }
