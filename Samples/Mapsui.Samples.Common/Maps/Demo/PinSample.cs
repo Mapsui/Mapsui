@@ -48,7 +48,7 @@ public class PinSample : ISample
         layer.AddMarker(SphericalMercator.FromLonLat(9.0, 48.0))
             .AddMarker(SphericalMercator.FromLonLat(9.1, 48.1), color: Color.Green, scale: 0.75)
             .AddMarker(SphericalMercator.FromLonLat(9.0, 48.1), color: Color.Blue, scale: 0.5)
-            .AddMarker(SphericalMercator.FromLonLat(9.1, 48.0), svg: tiger, scale: 0.1, anchor: new Offset(0.3, 0.8, true));
+            .AddMarker(SphericalMercator.FromLonLat(9.1, 48.0), svg: tiger, scale: 0.1, anchor: new Offset(0.3, -0.8, true)); // Set center point to 30 % in x and -80 % in y direction
 
         // Zoom and center map
         var center = layer.Extent?.Centroid ?? new MPoint(SphericalMercator.FromLonLat(9.05, 48.05));
