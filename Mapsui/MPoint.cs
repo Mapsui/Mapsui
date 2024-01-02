@@ -13,6 +13,12 @@ public class MPoint : IEquatable<MPoint>
         Y = y;
     }
 
+    public MPoint((double x, double y) position)
+    {
+        X = position.x; 
+        Y = position.y;
+    }
+
     public MPoint(MPoint point)
     {
         X = point.X;
