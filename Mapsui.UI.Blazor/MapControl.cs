@@ -336,12 +336,12 @@ public partial class MapControl : ComponentBase, IMapControl
 
     private void ClearBBoxDrawing()
     {
-        MapControl.RunOnUIThread(() => IsInBoxZoomMode = false);
+        RunOnUIThread(() => IsInBoxZoomMode = false);
     }
 
-    private protected float GetPixelDensity()
+    private double GetPixelDensity()
     {
-        return (float)_pixelDensityFromInterop;
+        return _pixelDensityFromInterop;
     }
 
 
@@ -359,8 +359,8 @@ public partial class MapControl : ComponentBase, IMapControl
         }
     }
 
-    public float ViewportWidth => _canvasSize?.Width ?? 0;
-    public float ViewportHeight => _canvasSize?.Height ?? 0;
+    private double ViewportWidth => _canvasSize?.Width ?? 0;
+    private double ViewportHeight => _canvasSize?.Height ?? 0;
 
     // TODO: Implement Setting of Mouse
     public string? Cursor { get; set; }

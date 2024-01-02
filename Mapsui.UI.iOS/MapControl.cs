@@ -56,7 +56,7 @@ public partial class MapControl : UIView, IMapControl
 
         _invalidate = () =>
         {
-            MapControl.RunOnUIThread(() =>
+            RunOnUIThread(() =>
             {
                 SetNeedsDisplay();
                 _glCanvas?.SetNeedsDisplay();
@@ -125,7 +125,6 @@ public partial class MapControl : UIView, IMapControl
 
         Map.Navigator.SetSize(ViewportWidth, ViewportHeight);
     }
-
 
     private void OnDoubleTapped(UITapGestureRecognizer gesture)
     {
@@ -344,44 +343,33 @@ public partial class MapControl : UIView, IMapControl
         return (new MPoint(centerX, centerY), radius, angle);
     }
 
-    private float ViewportWidth
+    private double ViewportWidth
     {
         get
         {
             InitCanvas();
-            if (UseGPU)
-            {
-                return (float)_glCanvas!.Frame.Width;
-            }
-
-            return (float)_canvas!.Frame.Width;
-            // todo: check if we need _canvas
+            return UseGPU 
+                ? _glCanvas!.Frame.Width 
+                : _canvas!.Frame.Width;
         }
     }
 
-    private float ViewportHeight
+    private double ViewportHeight
     {
         get
         {
             InitCanvas();
-            if (UseGPU)
-            {
-                return (float)_glCanvas!.Frame.Height;
-            }
-
-            return (float)_canvas!.Frame.Height;
-            // todo: check if we need _canvas
+            return UseGPU 
+                ? _glCanvas!.Frame.Height 
+                : _canvas!.Frame.Height;
         }
     }
 
-    private float GetPixelDensity()
+    private double GetPixelDensity()
     {
         InitCanvas();
-        if (UseGPU)
-        {
-            return (float)_glCanvas!.ContentScaleFactor; // todo: Check if I need canvas    
-        }
-
-        return (float)_canvas!.ContentScaleFactor; // todo: Check if I need canvas
+        return UseGPU 
+            ? (double)_glCanvas!.ContentScaleFactor 
+            : (double)_canvas!.ContentScaleFactor;
     }
 }
