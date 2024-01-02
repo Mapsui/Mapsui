@@ -151,6 +151,9 @@ internal class Marker : PointFeature
 
         // Add style to Styles for this feature
         Styles.Add(_style);
+
+        // TODO: Remove when ready, only for test
+        Styles.Add(new SymbolStyle { SymbolType = SymbolType.Ellipse, SymbolScale = 0.3, Fill = new Brush(Color.Yellow), Outline = new Pen(Color.Pink, 10) });
     }
 
     private void UpdateMarker()
