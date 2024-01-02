@@ -48,28 +48,21 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         DeviceInfo.Platform != DevicePlatform.MacCatalyst &&
         DeviceInfo.Platform != DevicePlatform.Android;
 
-    private class TouchEvent
+    private class TouchEvent(long id, MPoint screenPosition, long tick)
     {
-        public long Id { get; }
-        public MPoint Location { get; }
-        public long Tick { get; }
-
-        public TouchEvent(long id, MPoint screenPosition, long tick)
-        {
-            Id = id;
-            Location = screenPosition;
-            Tick = tick;
-        }
+        public long Id { get; } = id;
+        public MPoint Location { get; } = screenPosition;
+        public long Tick { get; } = tick;
     }
 
     private SKGLView? _glView;
     private SKCanvasView? _canvasView;
 
     // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
-    private const int ShortTap = 125;
-    private const int ShortClick = 250;
-    private const int DelayTap = 200;
-    private const int longTap = 500;
+    private const int _shortTap = 125;
+    private const int _shortClick = 250;
+    private const int _delayTap = 200;
+    private const int _longTap = 500;
 
     /// <summary>
     /// If a finger touches down and up it counts as a tap if the distance between the down and up location is smaller
@@ -77,7 +70,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// The slob is initialized at 8. How did we get to 8? Well you could read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
     /// We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
     /// </summary>
-    private const int TouchSlop = 8;
+    private const int _touchSlop = 8;
 
     protected readonly bool _initialized;
 
@@ -124,8 +117,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     public bool UseDoubleTap = true;
     public bool UseFling = true;
-    private Size oldSize;
-    private static List<WeakReference<MapControl>>? listeners;
+    private Size _oldSize;
+    private static List<WeakReference<MapControl>>? _listeners;
 
     private void Initialize()
     {
@@ -174,9 +167,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         try
         {
-            if (listeners == null)
+            if (_listeners == null)
             {
-                listeners = new List<WeakReference<MapControl>>();
+                _listeners = [];
                 if (Shell.Current != null)
                 {
                     Shell.Current.PropertyChanged -= Shell_PropertyChanged;
@@ -185,16 +178,16 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             }
 
             // remove dead references
-            foreach (var entry in listeners.ToArray())
+            foreach (var entry in _listeners.ToArray())
             {
                 if (!entry.TryGetTarget(out _))
                 {
-                    listeners.Remove(entry);
+                    _listeners.Remove(entry);
                 }
             }
 
             // add control to listeners
-            listeners.Add(new WeakReference<MapControl>(mapControl));
+            _listeners.Add(new WeakReference<MapControl>(mapControl));
         }
         catch (Exception ex)
         {
@@ -209,8 +202,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             switch (e.PropertyName)
             {
                 case nameof(Shell.FlyoutIsPresented):
-                    if (listeners != null)
-                        foreach (var entry in listeners.ToArray())
+                    if (_listeners != null)
+                        foreach (var entry in _listeners.ToArray())
                         {
                             if (entry.TryGetTarget(out var control))
                             {
@@ -218,7 +211,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                             }
                             else
                             {
-                                listeners.Remove(entry);
+                                _listeners.Remove(entry);
                             }
                         }
                     break;
@@ -238,9 +231,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             case nameof(Height):
                 var newSize = new Size(Width, Height);
 
-                if (newSize.Width > 0 && newSize.Height > 0 && oldSize != newSize)
+                if (newSize.Width > 0 && newSize.Height > 0 && _oldSize != newSize)
                 {
-                    oldSize = newSize;
+                    _oldSize = newSize;
                     // Maui Workaround because the OnSizeChanged Events don't fire.
                     // Maybe this is a Bug and will be fixed in later versions.
                     OnSizeChanged(this, EventArgs.Empty);
@@ -269,7 +262,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             TouchAction?.Invoke(sender, e);
             if (e.Handled) return;
 
-            if (e.ActionType == SKTouchAction.Pressed && _touches.Count == 0)
+            if (e.ActionType == SKTouchAction.Pressed && _touches.IsEmpty)
             {
                 _widgetPointerDown = false;
                 _pointerDownTicks = DateTime.UtcNow.Ticks;
@@ -281,7 +274,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     _pointerDownTicks = DateTime.UtcNow.Ticks;
                 }
 
-                if (HandleWidgetPointerDown(location, true, Math.Max(1, _numOfTaps), ShiftPessed))
+                if (HandleWidgetPointerDown(location, true, Math.Max(1, _numOfTaps), ShiftPressed))
                 {
                     e.Handled = true;
                     _widgetPointerDown = true;
@@ -305,13 +298,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             // Delete e.Id from _touches, because finger is released
             else if (e.ActionType == SKTouchAction.Released && _touches.TryRemove(e.Id, out var releasedTouch))
             {
-                if (HandleWidgetPointerUp(location, _pointerDownPosition, true, 0, ShiftPessed))
+                if (HandleWidgetPointerUp(location, _pointerDownPosition, true, 0, ShiftPressed))
                 {
                     e.Handled = true;
                     return;
                 }
 
-                if (_touches.Count == 0)
+                if (_touches.IsEmpty)
                 {
                     _pointerUpTicks = DateTime.UtcNow.Ticks;
 
@@ -344,10 +337,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     // If touch start and end is in the same area and the touch time is shorter
                     // than longTap, than we have a tap.
-                    if (isAround && (_pointerUpTicks - _pointerDownTicks) < (e.DeviceType == SKTouchDeviceType.Mouse ? ShortClick : longTap) * 10000)
+                    if (isAround && (_pointerUpTicks - _pointerDownTicks) < (e.DeviceType == SKTouchDeviceType.Mouse ? _shortClick : _longTap) * 10000)
                     {
                         _waitingForDoubleTap = true;
-                        if (UseDoubleTap) { await Task.Delay(DelayTap); }
+                        if (UseDoubleTap) { await Task.Delay(_delayTap); }
 
                         if (_numOfTaps > 1)
                         {
@@ -367,7 +360,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                             _waitingForDoubleTap = false; ;
                         }
                     }
-                    else if (isAround && (_pointerUpTicks - _pointerDownTicks) >= longTap * 10000)
+                    else if (isAround && (_pointerUpTicks - _pointerDownTicks) >= _longTap * 10000)
                     {
                         if (!e.Handled)
                             e.Handled = OnLongTapped(location);
@@ -382,11 +375,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 }
 
                 if (!e.Handled)
-                    e.Handled = OnTouchEnd(_touches.Select(t => t.Value.Location).ToList(), releasedTouch.Location);
+                    e.Handled = OnTouchEnd(_touches.Select(t => t.Value.Location).ToList());
             }
             else if (e.ActionType == SKTouchAction.Moved)
             {
-                if (HandleWidgetPointerMove(location, true, Math.Max(1, _numOfTaps), ShiftPessed))
+                if (HandleWidgetPointerMove(location, true, Math.Max(1, _numOfTaps), ShiftPressed))
                 {
                     e.Handled = true;
                     return;
@@ -409,7 +402,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             }
             else if (e.ActionType == SKTouchAction.Exited && _touches.TryRemove(e.Id, out var exitedTouch))
             {
-                e.Handled = OnTouchExited(_touches.Select(t => t.Value.Location).ToList(), exitedTouch.Location);
+                e.Handled = OnTouchExited(_touches.Select(t => t.Value.Location).ToList());
             }
             else if (e.ActionType == SKTouchAction.Entered)
             {
@@ -426,13 +419,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         }
     }
 
-    public bool ShiftPessed { get; set; }
+    public bool ShiftPressed { get; set; }
 
     private bool IsAround(TouchEvent releasedTouch)
     {
         if (_pointerDownPosition == null) { return false; }
         if (releasedTouch.Location == null) { return false; }
-        return _pointerDownPosition != null && Utilities.Algorithms.Distance(releasedTouch.Location, _pointerDownPosition) < TouchSlop;
+        return _pointerDownPosition != null && Algorithms.Distance(releasedTouch.Location, _pointerDownPosition) < _touchSlop;
     }
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
@@ -624,7 +617,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// </summary>
     /// <param name="touchPoints">List of all touched points</param>
     /// <param name="releasedPoint">Released point, which was touched before</param>
-    private bool OnTouchEnd(List<MPoint> touchPoints, MPoint releasedPoint)
+    private bool OnTouchEnd(List<MPoint> touchPoints)
     {
         var args = new TouchedEventArgs(touchPoints);
 
@@ -668,7 +661,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// </summary>
     /// <param name="touchPoints">List of all touched points</param>
     /// <param name="releasedPoint">Released point, which was touched before</param>
-    private bool OnTouchExited(List<MPoint> touchPoints, MPoint releasedPoint)
+    private bool OnTouchExited(List<MPoint> touchPoints)
     {
         var args = new TouchedEventArgs(touchPoints);
 
@@ -812,8 +805,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
     {
-        if (locations.Count < 2)
-            throw new ArgumentException();
+        if (locations.Count != 2) 
+            throw new ArgumentOutOfRangeException(nameof(locations), locations.Count, "Value should be two");
 
         double centerX = 0;
         double centerY = 0;
@@ -824,8 +817,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             centerY += location.Y;
         }
 
-        centerX = centerX / locations.Count;
-        centerY = centerY / locations.Count;
+        centerX /= locations.Count;
+        centerY /= locations.Count;
 
         var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
 
@@ -864,10 +857,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-        var weakReference = listeners?.FirstOrDefault(f => f.TryGetTarget(out var control) && control == this);
+        var weakReference = _listeners?.FirstOrDefault(f => f.TryGetTarget(out var control) && control == this);
         if (weakReference != null)
         {
-            listeners?.Remove(weakReference);
+            _listeners?.Remove(weakReference);
         }
 
         if (disposing)

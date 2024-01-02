@@ -81,7 +81,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         SetViewportSize();
     }
 
-    private void RunOnUIThread(Action action)
+    private static void RunOnUIThread(Action action)
     {
         Application.Instance.AsyncInvoke(action);
     }

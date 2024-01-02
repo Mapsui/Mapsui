@@ -192,7 +192,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         set
         {
             if (value <= 0)
-                throw new ArgumentOutOfRangeException($"{nameof(UpdateInterval)} must be greater than 0");
+                throw new ArgumentOutOfRangeException(nameof(UpdateInterval), value, "Parameter must be greater than zero");
 
             if (_updateInterval != value)
             {
@@ -259,7 +259,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public float PixelDensity => GetPixelDensity();
 
-    private IRenderer _renderer = new MapRenderer();
+    private readonly IRenderer _renderer = new MapRenderer();
 
     /// <summary>
     /// Renderer that is used from this MapControl
@@ -492,7 +492,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         Map.RefreshData(changeType);
     }
 
-    private protected void OnInfo(MapInfoEventArgs? mapInfoEventArgs)
+    private void OnInfo(MapInfoEventArgs? mapInfoEventArgs)
     {
         if (mapInfoEventArgs == null) return;
 
@@ -547,7 +547,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return null;
     }
 
-    private protected void SetViewportSize()
+    private void SetViewportSize()
     {
         var hadSize = Map.Navigator.Viewport.HasSize();
         Map.Navigator.SetSize(ViewportWidth, ViewportHeight);
@@ -555,7 +555,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         Refresh();
     }
 
-    private protected void CommonDispose(bool disposing)
+    private void CommonDispose(bool disposing)
     {
         if (disposing)
         {

@@ -294,14 +294,17 @@ public partial class MapControl : UIView, IMapControl
 
     public new void Dispose()
     {
-        IosCommonDispose(true);
-        base.Dispose();
+        Dispose(true);
+        GC.SuppressFinalize(this);
     }
 
-    protected override void Dispose(bool disposing)
+    protected new virtual void Dispose(bool disposing)
     {
-        IosCommonDispose(disposing);
-        base.Dispose(disposing);
+        if (disposing)
+        {
+            IosCommonDispose(disposing);
+            base.Dispose(disposing);
+        }
     }
 
     private void IosCommonDispose(bool disposing)

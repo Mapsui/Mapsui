@@ -4,9 +4,6 @@
 
 // This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
 
-#pragma warning disable IDISP001 // Dispose created.
-#pragma warning disable IDISP002 // Dispose member.
-
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.UI.WinUI.Extensions;
@@ -262,7 +259,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         return (float)(XamlRoot?.RasterizationScale ?? 1f);
     }
 
-#pragma warning disable IDISP023 // Don't use reference types in finalizer context
 #if __ANDROID__ 
     protected override void Dispose(bool disposing)
 #elif __IOS__ || __MACOS__
@@ -273,7 +269,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (disposing)
         {
-#if HAS_UNO           
+#if HAS_UNO   
+#if  __WINUI__
+#pragma warning disable IDISP023 // Don't use reference types in finalizer context
+#endif
+
             _canvas?.Dispose();
             _selectRectangle?.Dispose();
 #endif

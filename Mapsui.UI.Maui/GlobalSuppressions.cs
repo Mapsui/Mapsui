@@ -13,3 +13,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(System.Double,System.Double,System.Boolean)")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation(Mapsui.UI.Maui.Position,System.Boolean)")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Maui.Pin.CreateFeature")]
+[assembly: SuppressMessage("Usage", "CA2211:Non-constant fields should not be visible", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.Maui.MapControl.UseGPU")]
