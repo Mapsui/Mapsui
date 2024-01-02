@@ -117,7 +117,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControl_PointerMoved(object sender, PointerRoutedEventArgs e)
     {
         var position = e.GetCurrentPoint(this).Position.ToMapsui();
-        if (HandleMoving(position, true, 0, e.KeyModifiers == VirtualKeyModifiers.Shift))
+        if (HandleWidgetPointerMove(position, true, 0, e.KeyModifiers == VirtualKeyModifiers.Shift))
             e.Handled = true;
     }
 

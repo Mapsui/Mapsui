@@ -567,7 +567,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidateTimer = null;
     }
 
-    private bool HandleMoving(MPoint position, bool leftButton, int clickCount, bool shift)
+    private bool HandleWidgetPointerMove(MPoint position, bool leftButton, int clickCount, bool shift)
     {
         var extendedWidgets = GetExtendedWidgets();
         if (extendedWidgets.Count == 0)
@@ -585,9 +585,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool HandleTouchingTouched(MPoint position, MPoint? startPosition, bool leftButton, int clickCount, bool shift)
     {
-        bool result = HandleTouching(position, leftButton, clickCount, shift);
+        bool result = HandleWidgetPointerDown(position, leftButton, clickCount, shift);
 
-        if (HandleTouched(position, startPosition, leftButton, clickCount, shift))
+        if (HandleWidgetPointerUp(position, startPosition, leftButton, clickCount, shift))
         {
             result = true;
         }
@@ -596,7 +596,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
 
-    private bool HandleTouching(MPoint position, bool leftButton, int clickCount, bool shift)
+    private bool HandleWidgetPointerDown(MPoint position, bool leftButton, int clickCount, bool shift)
     {
         var touchableWidgets = GetTouchableWidgets();
         var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
@@ -619,7 +619,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool HandleTouched(MPoint position, MPoint? startPosition, bool leftButton, int clickCount, bool shift)
+    private bool HandleWidgetPointerUp(MPoint position, MPoint? startPosition, bool leftButton, int clickCount, bool shift)
     {
         if (startPosition is null)
         {
