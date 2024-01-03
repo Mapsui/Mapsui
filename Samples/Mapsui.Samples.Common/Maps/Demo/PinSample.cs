@@ -24,15 +24,16 @@ public class PinSample : ISample
 
     public static Map CreateMap()
     {
+        const string markerLayerName = "Markers";
+
         var map = new Map
         {
             CRS = "EPSG:3857"
         };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(new MemoryLayer("Markers") { Style = null, });
         map.Widgets.Add(new ScaleBarWidget(map) { TextAlignment = Alignment.Center, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Top });
 
-        var layer = (MemoryLayer)map.Layers.Where(l => l.Name.Equals("Markers")).First();
+        using var layer = map.AddMarkerLayer(markerLayerName);
 
         if (layer == null)
             return map;
@@ -44,11 +45,11 @@ public class PinSample : ISample
         var icon = GetIconFromResources("Images.icon.png");
 
         // Add markers
-        layer.AddMarker(SphericalMercator.FromLonLat(9.0, 48.0))
-            .AddMarker(SphericalMercator.FromLonLat(9.1, 48.1), color: Color.Green, scale: 0.75)
-            .AddMarker(SphericalMercator.FromLonLat(9.0, 48.1), color: Color.Blue, scale: 0.5)
-            .AddMarker(SphericalMercator.FromLonLat(9.1, 48.0), svg: tiger, scale: 0.1, anchor: new Offset(0.3, -0.8, true)) // Set center point to 30 % in x and -80 % in y direction
-            .AddMarker(SphericalMercator.FromLonLat(9.05, 48.05), icon: icon, anchor: new Offset(0.5, 0.5, true));
+        layer.AddMarker(SphericalMercator.FromLonLat(9.0, 48.0), title: "New York")
+            .AddMarker(SphericalMercator.FromLonLat(9.1, 48.1), color: Color.Green, scale: 0.75, title: "Amsterdam")
+            .AddMarker(SphericalMercator.FromLonLat(9.0, 48.1), color: Color.Blue, scale: 0.5, title: "Berlin")
+            .AddMarker(SphericalMercator.FromLonLat(9.1, 48.0), title: "Madrid", svg: tiger, scale: 0.1, anchor: new Offset(0.3, -0.8, true)) // Set center point to 30 % in x and -80 % in y direction
+            .AddMarker(SphericalMercator.FromLonLat(9.05, 48.05), title: "San Fransisco", icon: icon, anchor: new Offset(0.5, 0.5, true));
 
         // Zoom and center map
         var center = layer.Extent?.Centroid ?? new MPoint(SphericalMercator.FromLonLat(9.05, 48.05));
