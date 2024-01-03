@@ -254,7 +254,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private double ViewportWidth => ActualWidth;
     private double ViewportHeight => ActualHeight;
 
-    private double GetPixelDensity() => XamlRoot?.RasterizationScale ?? 1f;
+    private double GetPixelDensity() => XamlRoot?.RasterizationScale ?? 1d;
     
 #if __ANDROID__ 
     protected override void Dispose(bool disposing)
