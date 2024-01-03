@@ -134,7 +134,6 @@ public class GradientTheme : Style, IThemeStyle
     {
         if (style is null)
             return;
-
         var fraction = Fraction(value);
         style.Enabled = fraction > 0.5 ? min?.Enabled ?? false : max?.Enabled ?? false;
         if (FillColorBlend != null)
@@ -178,7 +177,7 @@ public class GradientTheme : Style, IThemeStyle
 
         style.ForeColor = TextColorBlend == null ?
             InterpolateColor(min?.ForeColor, max?.ForeColor, value) :
-            TextColorBlend.GetColor(Convert.ToSingle(Fraction(value)));
+            TextColorBlend.GetColor(Fraction(value));
 
         if (min?.Halo != null && max?.Halo != null)
             style.Halo = InterpolatePen(min.Halo, max.Halo, value);
