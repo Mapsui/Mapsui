@@ -13,8 +13,8 @@ public partial class MapControl : ComponentBase, IMapControl
 {
     public static bool UseGPU { get; set; } = false;
 
-    private readonly SKCanvasView? _viewCpu;
-    protected readonly SKGLView? _viewGpu;
+    private SKCanvasView? _viewCpu;
+    protected SKGLView? _viewGpu;
 
     [Inject]
     private IJSRuntime? JsRuntime { get; set; }
