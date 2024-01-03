@@ -12,6 +12,7 @@ internal class Marker : PointFeature
     private static string? _defaultPin;
 
     private readonly SymbolStyle _style = new SymbolStyle();
+    private readonly CalloutStyle _calloutStyle = new CalloutStyle();
 
     public Marker(double x, double y, MarkerType type = MarkerType.Pin) : base(x, y)
     {
@@ -133,6 +134,40 @@ internal class Marker : PointFeature
         }
     }
 
+    public string? Title
+    {
+        get => _calloutStyle.Title;
+        set 
+        { 
+            if (_calloutStyle.Title == value) 
+                return;
+            _calloutStyle.Title = value;
+        }
+    }
+    /// <summary>
+    /// True if the callout is visible
+    /// </summary>
+    public bool HasCallout => _calloutStyle.Enabled;
+
+    private static Offset _defaultCalloutOffset = new Offset(0.0, 1.0, true);
+
+    /// <summary>
+    /// Show callout with <c ref="Title" /> as text
+    /// </summary>
+    public void ShowCallout()
+    {
+        if (_calloutStyle == null) return;
+
+        _calloutStyle.Enabled = true;
+    }
+
+    public void HideCallout()
+    {
+        if (_calloutStyle == null) return;
+
+        _calloutStyle.Enabled = false;
+    }
+
     /// <summary>
     /// Initialize marker
     /// </summary>
@@ -147,13 +182,30 @@ internal class Marker : PointFeature
         // Set default values for style
         _style.Enabled = true;
         _style.SymbolType = SymbolType.Image;
-        _style.SymbolOffset = new Offset(0.0, 0.5, true);
+        _style.SymbolOffset = _defaultPinAnchor;
         _style.SymbolScale = _scale;
 
         UpdateMarker();
 
         // Add style to Styles for this feature
         Styles.Add(_style);
+
+        // Set default values for callout style
+        _calloutStyle.Enabled = false;
+        _calloutStyle.Type = CalloutType.Single;
+        _calloutStyle.ArrowPosition = 0.5f;
+        _calloutStyle.ArrowAlignment = ArrowAlignment.Bottom;
+        _calloutStyle.SymbolOffset = _defaultCalloutOffset;
+        _calloutStyle.Padding = new MRect(10, 5, 10, 5);
+        _calloutStyle.Color = Color.Black;
+        _calloutStyle.BackgroundColor = Color.White;
+        _calloutStyle.MaxWidth = 200;
+        _calloutStyle.TitleFontColor = Color.Black;
+        _calloutStyle.TitleFont.Size = 16;
+        _calloutStyle.TitleTextAlignment = Widgets.Alignment.Center;
+
+        // Add CalloutStyle for this feature
+        Styles.Add(_calloutStyle);
 
         // TODO: Remove when ready, only for test
         Styles.Add(new SymbolStyle { SymbolType = SymbolType.Ellipse, SymbolScale = 0.3, Fill = new Brush(Color.Yellow), Outline = new Pen(Color.Pink, 10) });
@@ -178,6 +230,7 @@ internal class Marker : PointFeature
             default:
                 _style.BitmapId = GetPinWithColor(_color);
                 _style.SymbolOffset = _defaultPinAnchor;
+                _calloutStyle.SymbolOffset = _defaultCalloutOffset;
                 return;
         }
     }
