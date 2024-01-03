@@ -15,3 +15,7 @@ attrs
 Dbase
 maui
 Mapsui
+Dulk
+Geodan
+drawables
+pict

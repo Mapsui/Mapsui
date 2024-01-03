@@ -4,17 +4,10 @@
 
 // This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
 
-#pragma warning disable IDISP001 // Dispose created.
-#pragma warning disable IDISP002 // Dispose member.
-
-using System;
-using Windows.Devices.Sensors;
-using Windows.Foundation;
-using Windows.System;
 using Mapsui.Extensions;
 using Mapsui.Logging;
-using Mapsui.Utilities;
 using Mapsui.UI.WinUI.Extensions;
+using Mapsui.Utilities;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -22,8 +15,10 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 using SkiaSharp.Views.Windows;
-using HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment;
-using VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment;
+using System;
+using Windows.Devices.Sensors;
+using Windows.Foundation;
+using Windows.System;
 
 namespace Mapsui.UI.WinUI;
 
@@ -86,7 +81,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (e.Key == VirtualKey.Shift)
         {
-            this.ShiftPressed = true;
+            ShiftPressed = true;
         }
     }
 
@@ -94,7 +89,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (e.Key == VirtualKey.Shift)
         {
-            this.ShiftPressed = false;
+            ShiftPressed = false;
         }
     }
 
@@ -156,7 +151,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             StrokeThickness = 3,
             RadiusX = 0.5,
             RadiusY = 0.5,
-            StrokeDashArray = new DoubleCollection { 3.0 },
+            StrokeDashArray = [3.0],
             Opacity = 0.3,
             VerticalAlignment = VerticalAlignment.Top,
             HorizontalAlignment = HorizontalAlignment.Left,
@@ -264,7 +259,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         return (float)(XamlRoot?.RasterizationScale ?? 1f);
     }
 
-#pragma warning disable IDISP023 // Don't use reference types in finalizer context
 #if __ANDROID__ 
     protected override void Dispose(bool disposing)
 #elif __IOS__ || __MACOS__
@@ -275,7 +269,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (disposing)
         {
-#if HAS_UNO           
+#if HAS_UNO   
+#if  __WINUI__
+#pragma warning disable IDISP023 // Don't use reference types in finalizer context
+#endif
+
             _canvas?.Dispose();
             _selectRectangle?.Dispose();
 #endif

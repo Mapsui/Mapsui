@@ -1,14 +1,11 @@
 using Mapsui.Extensions;
 using Mapsui.Logging;
-using Mapsui.Rendering.Skia;
 using Mapsui.UI.Blazor.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using SkiaSharp;
 using SkiaSharp.Views.Blazor;
 using System.Diagnostics.CodeAnalysis;
-
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.UI.Blazor;
 
@@ -28,7 +25,7 @@ public partial class MapControl : ComponentBase, IMapControl
     private MPoint? _pointerDownPosition;
     private MPoint? _previousMousePosition;
     private string? _defaultCursor = Cursors.Default;
-    private readonly HashSet<string> _pressedKeys = new();
+    private readonly HashSet<string> _pressedKeys = [];
     private bool _isInBoxZoomMode;
     private TouchState? _previousTouchState;
     double _pixelDensityFromInterop = 1;
@@ -42,7 +39,7 @@ public partial class MapControl : ComponentBase, IMapControl
     public int ZoomButton { get; set; } = MouseButtons.Primary;
     public int ZoomModifier { get; set; } = Keys.Control;
     public string ElementId => _elementId;
-    protected MapsuiJsInterop? Interop =>
+    private MapsuiJsInterop? Interop =>
             _interop == null && JsRuntime != null
                 ? _interop ??= new MapsuiJsInterop(JsRuntime)
                 : _interop;
@@ -172,7 +169,7 @@ public partial class MapControl : ComponentBase, IMapControl
         _clientRect = await BoundingClientRectAsync();
     }
 
-    private protected void RunOnUIThread(Action action)
+    private protected static void RunOnUIThread(Action action)
     {
         // Only one thread is active in WebAssembly.
         action();
@@ -307,8 +304,7 @@ public partial class MapControl : ComponentBase, IMapControl
                         var y = _pointerDownPosition;
                         _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X),
                             Math.Max(x.Y, y.Y));
-                        if (_invalidate != null)
-                            _invalidate();
+                        _invalidate?.Invoke();
                     }
                 }
                 else // drag/pan - mode
@@ -347,9 +343,19 @@ public partial class MapControl : ComponentBase, IMapControl
         return (float)_pixelDensityFromInterop;
     }
 
-    public virtual void Dispose()
+
+    public void Dispose()
     {
-        CommonDispose(true);
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            CommonDispose(true);
+        }
     }
 
     public float ViewportWidth => _canvasSize?.Width ?? 0;
@@ -363,7 +369,7 @@ public partial class MapControl : ComponentBase, IMapControl
         try
         {
             if (JsRuntime != null)
-                await JsRuntime.InvokeAsync<object>("open", new object?[] { url, "_blank" });
+                await JsRuntime.InvokeAsync<object>("open", [url, "_blank"]);
         }
         catch (Exception ex)
         {
