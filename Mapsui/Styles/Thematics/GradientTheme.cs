@@ -132,20 +132,20 @@ public class GradientTheme : Style, IThemeStyle
 
     private void CalculateVectorStyle(VectorStyle? style, VectorStyle? min, VectorStyle? max, double value)
     {
-        if (style == null)
+        if (style is null)
             return;
-        var dFrac = Fraction(value);
-        double fFrac = Convert.ToSingle(dFrac);
-        style.Enabled = (dFrac > 0.5 ? min?.Enabled ?? false : max?.Enabled ?? false);
+
+        var fraction = Fraction(value);
+        style.Enabled = fraction > 0.5 ? min?.Enabled ?? false : max?.Enabled ?? false;
         if (FillColorBlend != null)
-            style.Fill = new Brush { Color = FillColorBlend.GetColor(fFrac) };
+            style.Fill = new Brush { Color = FillColorBlend.GetColor(fraction) };
         else if (min?.Fill != null && max?.Fill != null)
             style.Fill = InterpolateBrush(min.Fill, max.Fill, value);
 
         if (min?.Line != null && max?.Line != null)
             style.Line = InterpolatePen(min.Line, max.Line, value);
         if (LineColorBlend != null && style.Line != null)
-            style.Line.Color = LineColorBlend.GetColor(fFrac);
+            style.Line.Color = LineColorBlend.GetColor(fraction);
 
         if (min?.Outline != null && max?.Outline != null)
             style.Outline = InterpolatePen(min.Outline, max.Outline, value);
