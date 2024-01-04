@@ -181,8 +181,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
         RunOnUIThread(() => IsInBoxZoomMode = false);
     }
 
-    private float ViewportWidth => Width;
-    private float ViewportHeight => Height;
+    private double ViewportWidth => Width;
+    private double ViewportHeight => Height;
 
     protected override void OnPaint(SKPaintEventArgs e)
     {
@@ -196,7 +196,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         CommonDrawControl(canvas);
     }
 
-    private float GetPixelDensity()
+    private double GetPixelDensity()
     {
         var center = PointToScreen(Location + Size / 2);
 

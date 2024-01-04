@@ -360,8 +360,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         }
     }
 
-    private float ViewportWidth => (float)ActualWidth;
-    private float ViewportHeight => (float)ActualHeight;
+    private double ViewportWidth => ActualWidth;
+    private double ViewportHeight => ActualHeight;
 
     private static void OnManipulationInertiaStarting(object? sender, ManipulationInertiaStartingEventArgs e)
     {
@@ -433,7 +433,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         CommonDrawControl(WpfCanvas);
     }
 
-    private float GetPixelDensity()
+    private double GetPixelDensity()
     {
         var presentationSource = PresentationSource.FromVisual(this) 
             ?? throw new Exception("PresentationSource is null");
@@ -446,7 +446,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         if (dpiX != dpiY) throw new ArgumentException();
 
-        return (float)dpiX;
+        return dpiX;
     }
 
     protected virtual void Dispose(bool disposing)

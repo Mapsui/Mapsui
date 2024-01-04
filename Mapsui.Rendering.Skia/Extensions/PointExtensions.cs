@@ -23,7 +23,7 @@ public static class PointExtensions
         var transformed = points[0];
 
         var skPath = new SKPath();
-        skPath.AddCircle(Convert.ToSingle(transformed.X), Convert.ToSingle(transformed.Y), halfWidth);
+        skPath.AddCircle(transformed.X, transformed.Y, halfWidth);
 
         return skPath;
     }

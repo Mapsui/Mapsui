@@ -290,17 +290,12 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         })) { }
     }
 
-    private float ViewportWidth => Convert.ToSingle(Bounds.Width);
-    private float ViewportHeight => Convert.ToSingle(Bounds.Height);
+    private double ViewportWidth => Bounds.Width;
+    private double ViewportHeight => Bounds.Height;
 
-    private float GetPixelDensity()
+    private double GetPixelDensity()
     {
-        if (VisualRoot != null)
-        {
-            return Convert.ToSingle(VisualRoot.RenderScaling);
-        }
-
-        return 1f;
+        return VisualRoot?.RenderScaling ?? 1d;
     }
 
     private bool OnPinchMove(List<MPoint> touchPoints)

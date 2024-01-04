@@ -251,14 +251,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Catch.TaskRun(async () => await Launcher.LaunchUriAsync(new Uri(url)));
     }
 
-    private float ViewportWidth => (float)ActualWidth;
-    private float ViewportHeight => (float)ActualHeight;
+    private double ViewportWidth => ActualWidth;
+    private double ViewportHeight => ActualHeight;
 
-    private float GetPixelDensity()
-    {
-        return (float)(XamlRoot?.RasterizationScale ?? 1f);
-    }
-
+    private double GetPixelDensity() => XamlRoot?.RasterizationScale ?? 1d;
+    
 #if __ANDROID__ 
     protected override void Dispose(bool disposing)
 #elif __IOS__ || __MACOS__
