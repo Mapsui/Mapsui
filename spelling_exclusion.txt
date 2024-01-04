@@ -19,3 +19,6 @@ Dulk
 Geodan
 drawables
 pict
+iter
+Thematics
+Flinged

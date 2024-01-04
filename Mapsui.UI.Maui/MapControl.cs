@@ -471,7 +471,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     public event EventHandler<TouchedEventArgs>? TouchMove;
 
     /// <summary>
-    /// TouchAction is called, when user provoques a touch event
+    /// TouchAction is called, when user provokes a touch event
     /// </summary>
     public event EventHandler<SKTouchEventArgs>? TouchAction;
 
