@@ -34,13 +34,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         DeviceInfo.Platform != DevicePlatform.MacCatalyst &&
         DeviceInfo.Platform != DevicePlatform.Android;
 
-    private class TouchEvent(long id, MPoint screenPosition, long tick)
-    {
-        public long Id { get; } = id;
-        public MPoint Location { get; } = screenPosition;
-        public long Tick { get; } = tick;
-    }
-
     private SKGLView? _glView;
     private SKCanvasView? _canvasView;
 
@@ -61,7 +54,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     protected readonly bool _initialized;
 
     private double _virtualRotation;
-    private readonly ConcurrentDictionary<long, TouchEvent> _touches = new();
+    private readonly ConcurrentDictionary<long, MPoint> _touches = new();
     private MPoint? _pointerDownPosition;
     private bool _waitingForDoubleTap;
     private int _numOfTaps;
@@ -279,7 +272,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 else
                     _numOfTaps = 1;
 
-                e.Handled = OnTouchStart(_touches.Select(t => t.Value.Location).ToList());
+                e.Handled = OnTouchStart(_touches.Select(t => t.Value).ToList());
             }
             // Delete e.Id from _touches, because finger is released
             else if (e.ActionType == SKTouchAction.Released && _touches.TryRemove(e.Id, out var releasedTouch))
@@ -357,11 +350,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                 if (_touches.Count == 1)
                 {
-                    e.Handled = OnTouchStart(_touches.Select(t => t.Value.Location).ToList());
+                    e.Handled = OnTouchStart(_touches.Select(t => t.Value).ToList());
                 }
 
                 if (!e.Handled)
-                    e.Handled = OnTouchEnd(_touches.Select(t => t.Value.Location).ToList());
+                    e.Handled = OnTouchEnd(_touches.Select(t => t.Value).ToList());
             }
             else if (e.ActionType == SKTouchAction.Moved)
             {
@@ -371,15 +364,15 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     return;
                 }
 
-                _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
+                _touches[e.Id] = location;
 
                 if (e.InContact)
                     _flingTracker.AddEvent(e.Id, location, ticks);
 
                 if (e.InContact && !e.Handled && !_widgetPointerDown)
-                    e.Handled = OnTouchMove(_touches.Select(t => t.Value.Location).ToList());
+                    e.Handled = OnTouchMove(_touches.Select(t => t.Value).ToList());
                 else
-                    e.Handled = OnHovered(_touches.Select(t => t.Value.Location).FirstOrDefault());
+                    e.Handled = OnHovered(_touches.Select(t => t.Value).FirstOrDefault());
             }
             else if (e.ActionType == SKTouchAction.Cancelled)
             {
@@ -388,11 +381,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             }
             else if (e.ActionType == SKTouchAction.Exited && _touches.TryRemove(e.Id, out var exitedTouch))
             {
-                e.Handled = OnTouchExited(_touches.Select(t => t.Value.Location).ToList());
+                e.Handled = OnTouchExited(_touches.Select(t => t.Value).ToList());
             }
             else if (e.ActionType == SKTouchAction.Entered)
             {
-                e.Handled = OnTouchEntered(_touches.Select(t => t.Value.Location).ToList());
+                e.Handled = OnTouchEntered(_touches.Select(t => t.Value).ToList());
             }
             else if (e.ActionType == SKTouchAction.WheelChanged)
             {
@@ -407,11 +400,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     public bool ShiftPressed { get; set; }
 
-    private bool IsAround(TouchEvent releasedTouch)
+    private bool IsAround(MPoint releasedTouch)
     {
         if (_pointerDownPosition == null) { return false; }
-        if (releasedTouch.Location == null) { return false; }
-        return _pointerDownPosition != null && Algorithms.Distance(releasedTouch.Location, _pointerDownPosition) < _touchSlop;
+        if (releasedTouch == null) { return false; }
+        return _pointerDownPosition != null && Algorithms.Distance(releasedTouch, _pointerDownPosition) < _touchSlop;
     }
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
