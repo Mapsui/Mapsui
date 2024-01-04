@@ -41,7 +41,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private double _previousRadius = 1f;
 
     // Touch Handling
-    private readonly ConcurrentDictionary<long, TouchEvent> _touches = new();
+    private readonly ConcurrentDictionary<long, MPoint> _touches = new();
 
     [Obsolete("Use Info and ILayerFeatureInfo")]
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
@@ -114,8 +114,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         _pointerDownPosition = e.GetPosition(this).ToMapsui();
         _mouseDown = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
-        _touches[e.Pointer.Id] = new TouchEvent(_pointerDownPosition);
-        OnPinchStart(_touches.Select(t => t.Value.Location).ToList());
+        _touches[e.Pointer.Id] = _pointerDownPosition;
+        OnPinchStart(_touches.Select(t => t.Value).ToList());
 
         if (HandleWidgetPointerDown(_pointerDownPosition, _mouseDown, e.ClickCount, ShiftPressed))
         {
@@ -172,7 +172,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControlMouseMove(object? sender, PointerEventArgs e)
     {
         _currentMousePosition = e.GetPosition(this).ToMapsui(); // Needed for both MouseMove and MouseWheel event
-        _touches[e.Pointer.Id] = new TouchEvent(_currentMousePosition);
+        _touches[e.Pointer.Id] = _currentMousePosition;
 
         if (_previousMousePosition is null)
             return;
@@ -180,7 +180,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (!_mouseDown)
             return;
 
-        if (OnPinchMove(_touches.Select(t => t.Value.Location).ToList()))
+        if (OnPinchMove(_touches.Select(t => t.Value).ToList()))
         {
             e.Handled = true;
             return;
