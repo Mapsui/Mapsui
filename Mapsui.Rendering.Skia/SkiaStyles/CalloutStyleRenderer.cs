@@ -49,10 +49,11 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
         // Calc offset (relative or absolute)
         MPoint symbolOffset = calloutStyle.SymbolOffset.ToPoint();
-        if (calloutStyle.SymbolOffset.IsRelative)
+        if (calloutStyle.SymbolOffset.IsRelative && calloutStyle.BelongsTo != null && calloutStyle.BelongsTo.BitmapId >= 0)
         {
-            symbolOffset.X *= picture.CullRect.Width;
-            symbolOffset.Y *= picture.CullRect.Height;
+            var bitmap = (BitmapInfo)renderCache.SymbolCache.GetOrCreate(calloutStyle.BelongsTo.BitmapId);
+            symbolOffset.X *= bitmap.Width * calloutStyle.BelongsTo.SymbolScale;
+            symbolOffset.Y *= bitmap.Height * calloutStyle.BelongsTo.SymbolScale;
         }
 
         var rotation = (float)calloutStyle.SymbolRotation;
