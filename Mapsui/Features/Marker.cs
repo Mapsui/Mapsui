@@ -1,7 +1,8 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Utilities;
-using System.Drawing;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using Color = Mapsui.Styles.Color;
 
@@ -9,7 +10,7 @@ namespace Mapsui.Features;
 
 internal class Marker : PointFeature
 {
-    private static string? _defaultPin;
+    private readonly static Dictionary<MarkerType, string> _defaultPins = new();
 
     private readonly SymbolStyle _style = new SymbolStyle();
     private readonly CalloutStyle _calloutStyle = new CalloutStyle();
@@ -174,7 +175,7 @@ internal class Marker : PointFeature
     /// <param name="type">Type of marker</param>
     private void InitMarker(MarkerType type)
     {
-        AssertDefaultPin();
+        AssertDefaultPins();
 
         // Remove all existing styles
         Styles.Clear();
@@ -209,12 +210,13 @@ internal class Marker : PointFeature
         Styles.Add(_calloutStyle);
 
         // TODO: Remove when ready, only for test
-        Styles.Add(new SymbolStyle { SymbolType = SymbolType.Ellipse, SymbolScale = 0.3, Fill = new Brush(Color.Yellow), Outline = new Pen(Color.Pink, 10) });
+        //Styles.Add(new SymbolStyle { SymbolType = SymbolType.Ellipse, SymbolScale = 0.3, Outline = new Pen(Color.Pink, 10) });
     }
 
     private void UpdateMarker()
     {
-        BitmapRegistry.Instance.Unregister(_style.BitmapId);
+        // BitmapRegistry.Instance.Unregister(_style.BitmapId);
+        // _style.BitmapId = -1;
 
         switch (_markerType)
         {
@@ -229,31 +231,47 @@ internal class Marker : PointFeature
                 _style.SymbolOffset = _defaultAnchor;
                 return;
             default:
-                _style.BitmapId = GetPinWithColor(_color);
+                _style.BitmapId = GetPinWithColor();
                 _style.SymbolOffset = _defaultPinAnchor;
                 _calloutStyle.SymbolOffset = _defaultCalloutOffset;
                 return;
         }
     }
 
-    private int GetPinWithColor(Color color)
+    private int GetPinWithColor()
     {
+        if (MarkerType == MarkerType.Icon || MarkerType == MarkerType.Svg)
+            return -1;
+
         var colorInHex = $"{Color.R:X2}{Color.G:X2}{Color.B:X2}";
-        var pinWithColor = _defaultPin?.Replace("#000000", $"#{colorInHex}") ?? "Default";
+        var pinName = MarkerType.ToString();
 
-        return BitmapRegistry.Instance.Register(pinWithColor, $"Pin.{colorInHex}");
+        if (BitmapRegistry.Instance.TryGetBitmapId($"Marker_{pinName}_{colorInHex}", out int bitmapId))
+            return bitmapId;
 
+        if (!_defaultPins.TryGetValue(MarkerType, out var svg))
+            return -1;
+
+        svg = svg.Replace("red", $"#{colorInHex}");
+
+        return BitmapRegistry.Instance.Register(svg, $"Marker_{pinName}_{colorInHex}");
     }
 
-    private void AssertDefaultPin()
+    private void AssertDefaultPins()
     {
-        if (_defaultPin == null)
+        if (_defaultPins.Count == 0)
         {
-            // Load SVG for Pin
-            using (var s = new StreamReader(EmbeddedResourceLoader.Load(@"Resources.Images.Pin.svg", typeof(Marker))))
+            foreach (MarkerType type in Enum.GetValues(typeof(MarkerType)))
             {
-                _defaultPin = s.ReadToEnd();
-                BitmapRegistry.Instance.Register(_defaultPin, "Pin.Default");
+                if (type == MarkerType.Icon || type == MarkerType.Svg)
+                    continue;
+
+                // Load SVGs for Pins
+                using (var s = new StreamReader(EmbeddedResourceLoader.Load($"Resources.Images.{type.ToString()}.svg", typeof(Marker))))
+                {
+                    var svg = s.ReadToEnd();
+                    _defaultPins.Add(type, svg);
+                }
             }
         }
     }
