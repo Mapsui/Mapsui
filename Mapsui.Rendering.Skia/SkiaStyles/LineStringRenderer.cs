@@ -21,7 +21,7 @@ public static class LineStringRenderer
 
         SKPaint? paint;
         SKPath path;
-        var lineWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1);
+        var lineWidth = (float)(vectorStyle.Line?.Width ?? 1f);
         if (vectorCache == null)
         {
             paint = CreateSkPaint(vectorStyle.Line, opacity);

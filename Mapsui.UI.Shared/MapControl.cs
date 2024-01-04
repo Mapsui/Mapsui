@@ -257,7 +257,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
     }
 
-    public float PixelDensity => GetPixelDensity();
+    public float PixelDensity => (float)GetPixelDensity();
 
     private readonly IRenderer _renderer = new MapRenderer();
 
@@ -521,7 +521,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </summary>
     /// <param name="screenPosition">Screen position to check for widgets and features</param>
     /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
-    /// <param name="numTaps">Number of clickes/taps</param>
+    /// <param name="numTaps">Number of clicks/taps</param>
     /// <returns>True, if something done </returns>
     private MapInfoEventArgs? CreateMapInfoEventArgs(
         MPoint? screenPosition,

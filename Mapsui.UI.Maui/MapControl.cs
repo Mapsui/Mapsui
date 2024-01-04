@@ -84,13 +84,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         _initialized = true;
     }
 
-    public float ScreenWidth => (float)Width;
-
-    public float ScreenHeight => (float)Height;
-
-    private float ViewportWidth => ScreenWidth;
-
-    private float ViewportHeight => ScreenHeight;
+    private double ViewportWidth => Width;
+    private double ViewportHeight => Height;
 
     public IRenderCache RenderCache => _renderer.RenderCache;
 
@@ -854,12 +849,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Dispose(false);
     }
 
-    private float GetPixelDensity()
+    private double GetPixelDensity()
     {
         if (Width <= 0) return 0;
-        if (UseGPU)
-            return (float)(_glView!.CanvasSize.Width / Width);
-        else
-            return (float)(_canvasView!.CanvasSize.Width / Width);
+
+        return UseGPU 
+            ? _glView!.CanvasSize.Width / Width 
+            : _canvasView!.CanvasSize.Width / Width;
     }
 }

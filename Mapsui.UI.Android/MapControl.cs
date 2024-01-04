@@ -397,8 +397,8 @@ public partial class MapControl : ViewGroup, IMapControl
         return (new MPoint(centerX, centerY), radius, angle);
     }
 
-    private float ViewportWidth => ToDeviceIndependentUnits(Width);
-    private float ViewportHeight => ToDeviceIndependentUnits(Height);
+    private double ViewportWidth => ToDeviceIndependentUnits(Width);
+    private double ViewportHeight => ToDeviceIndependentUnits(Height);
 
     /// <summary>
     /// In native Android touch positions are in pixels whereas the canvas needs
@@ -406,7 +406,7 @@ public partial class MapControl : ViewGroup, IMapControl
     /// and symbols will be too small). This method converts pixels to device independent units.
     /// </summary>
     /// <returns>The pixels given as input translated to device independent units.</returns>
-    private float ToDeviceIndependentUnits(float pixelCoordinate)
+    private double ToDeviceIndependentUnits(int pixelCoordinate)
     {
         return pixelCoordinate / PixelDensity;
     }
@@ -447,8 +447,8 @@ public partial class MapControl : ViewGroup, IMapControl
         }
     }
 
-    private float GetPixelDensity()
+    private double GetPixelDensity()
     {
-        return Resources?.DisplayMetrics?.Density ?? 0;
+        return Resources?.DisplayMetrics?.Density ?? 0d;
     }
 }
