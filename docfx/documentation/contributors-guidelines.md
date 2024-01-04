@@ -18,6 +18,24 @@ At all times:
 - The unit tests should succeed
 - All samples should run properly
 
+## Keep the core code reliable and deal with potential problems on the surface
+Code depends on other code. In a hierarchy it is better to have the most reliable code in the core. You don't want potential problems to be propagated from the core to all other code because everything would becomee problematic. Potential problems are:
+- IDisposable objects. You don't want callers to have to deal that. You don't want other code to have to decide about disposing or not.
+- Code that is async/await. Synchronous code is simpler. Calls are async/await because of long lasting calls which is often because of calls to external services. Those depend on network which could be slow or missing and the size of the data which could be bigger than expected.
+- Code that could throw an exception, so the caller has to catch it, or perhaps it should not need to catch it (it is better if you do not have to decide).
+- Fields that are nullable. Check for null early on the surface before passing it along to the core.
+
+An examples of the kind thing we want to avoid is the layering in: DataSource <- Fetcher <- Layer <- Map <- MapControl. In our current code all those objects become IDisposable because of the design.
+
+This may come down to this simple general advice: **Prefer pure functions**. Perhaps this seems like a very local thing to do but sometimes you need to reorganize your global architecture to make it possible to have more pure functions.
+
+## Prefer pure functions
+
+## Keep IDisposable on the surface
+
+## Keep async/await on the surface.
+
+
 ## Extension methods
 - Extension methods should always be in an 'Extensions' folder. 
 - They should be in a class that has the name '{ClassItExtends}Extensions'. 
