@@ -2,14 +2,10 @@
 
 internal class TouchEvent
 {
-    public long Id { get; }
     public MPoint Location { get; }
-    public long Tick { get; }
 
-    public TouchEvent(long id, MPoint screenPosition, long tick)
+    public TouchEvent(MPoint screenPosition)
     {
-        Id = id;
         Location = screenPosition;
-        Tick = tick;
     }
 }

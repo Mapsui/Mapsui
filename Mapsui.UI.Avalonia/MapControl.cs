@@ -114,9 +114,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         _pointerDownPosition = e.GetPosition(this).ToMapsui();
         _mouseDown = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
-        // Save time, when the event occurs
-        var ticks = DateTime.Now.Ticks;
-        _touches[e.Pointer.Id] = new TouchEvent(e.Pointer.Id, _pointerDownPosition, ticks);
+        _touches[e.Pointer.Id] = new TouchEvent(_pointerDownPosition);
         OnPinchStart(_touches.Select(t => t.Value.Location).ToList());
 
         if (HandleWidgetPointerDown(_pointerDownPosition, _mouseDown, e.ClickCount, ShiftPressed))
@@ -173,10 +171,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlMouseMove(object? sender, PointerEventArgs e)
     {
-        // Save time, when the event occurs
-        var ticks = DateTime.Now.Ticks;
         _currentMousePosition = e.GetPosition(this).ToMapsui(); // Needed for both MouseMove and MouseWheel event
-        _touches[e.Pointer.Id] = new TouchEvent(e.Pointer.Id, _currentMousePosition, ticks);
+        _touches[e.Pointer.Id] = new TouchEvent(_currentMousePosition);
 
         if (_previousMousePosition is null)
             return;
