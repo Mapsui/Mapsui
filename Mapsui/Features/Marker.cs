@@ -191,6 +191,7 @@ internal class Marker : PointFeature
         Styles.Add(_style);
 
         // Set default values for callout style
+        _calloutStyle.BelongsTo = _style;
         _calloutStyle.Enabled = false;
         _calloutStyle.Type = CalloutType.Single;
         _calloutStyle.ArrowPosition = 0.5f;
