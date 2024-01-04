@@ -25,20 +25,6 @@ namespace Mapsui.UI.Maui;
 /// </summary>
 public partial class MapControl : ContentView, IMapControl, IDisposable
 {
-    static MapControl()
-    {
-        try
-        {
-            Callout.DefaultTitleFontSize = 24;  // explicit values from maui debugging
-            Callout.DefaultSubtitleFontSize = 20; // explicit values from maui debugging
-        }
-        catch (Exception ex)
-        {
-            // Catch not initialized exception happens in unit tests.
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
-    }
-
     // GPU does not work currently on MAUI
     // See https://github.com/mono/SkiaSharp/issues/1893
     // https://github.com/Mapsui/Mapsui/issues/1676
