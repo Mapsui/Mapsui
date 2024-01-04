@@ -46,7 +46,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             else RunOnUIThread(InvalidateCanvas);
         };
 
-        Children.Add(WpfCanvas);
         Children.Add(SkiaCanvas);
         Children.Add(_selectRectangle);
 
@@ -71,7 +70,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         IsManipulationEnabled = true;
 
-        WpfCanvas.Visibility = Visibility.Collapsed;
         SkiaCanvas.Visibility = Visibility.Visible;
         RefreshGraphics();
     }
@@ -93,18 +91,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         };
     }
 
-    public Canvas WpfCanvas { get; } = CreateWpfRenderCanvas();
-
     private SKElement SkiaCanvas { get; } = CreateSkiaRenderElement();
-
-    private static Canvas CreateWpfRenderCanvas()
-    {
-        return new Canvas
-        {
-            VerticalAlignment = VerticalAlignment.Stretch,
-            HorizontalAlignment = HorizontalAlignment.Stretch
-        };
-    }
 
     private static SKElement CreateSkiaRenderElement()
     {
@@ -426,11 +413,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         canvas.Scale(PixelDensity, PixelDensity);
 
         CommonDrawControl(canvas);
-    }
-
-    private void PaintWpf()
-    {
-        CommonDrawControl(WpfCanvas);
     }
 
     private float GetPixelDensity()
