@@ -49,7 +49,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // Action to call for a redraw of the control
     private protected Action? _invalidate;
     // Timer for loop to invalidating the control
-    private System.Threading.Timer? _invalidateTimer;
+    private Timer? _invalidateTimer;
     // Interval between two calls of the invalidate function in ms
     private int _updateInterval = 16;
     // Stopwatch for measuring drawing times
@@ -71,7 +71,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         Map = new Map();
         // Create timer for invalidating the control
         _invalidateTimer?.Dispose();
-        _invalidateTimer = new System.Threading.Timer(InvalidateTimerCallback, null, System.Threading.Timeout.Infinite, 16);
+        _invalidateTimer = new Timer(InvalidateTimerCallback, null, Timeout.Infinite, 16);
         // Start the invalidation timer
         StartUpdates(false);
     }
@@ -168,7 +168,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </remarks>
     public void StopUpdates()
     {
-        _invalidateTimer?.Change(System.Threading.Timeout.Infinite, System.Threading.Timeout.Infinite);
+        _invalidateTimer?.Change(Timeout.Infinite, Timeout.Infinite);
     }
 
     /// <summary>
