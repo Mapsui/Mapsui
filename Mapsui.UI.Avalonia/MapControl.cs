@@ -42,7 +42,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     // Touch Handling
     private readonly ConcurrentDictionary<long, MPoint> _touches = new();
 
-    [Obsolete("Use Info and ILayerFeatureInfo")]
+    [Obsolete("Use Info and ILayerFeatureInfo", true)]
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
 
     public MapControl()
