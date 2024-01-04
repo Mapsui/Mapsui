@@ -8,7 +8,6 @@ using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Extensions;
-using Mapsui.Layers;
 using Mapsui.UI.Avalonia.Extensions;
 using Mapsui.Utilities;
 using System;
@@ -143,25 +142,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         Map.Navigator.MouseWheelZoom(delta, _currentMousePosition);
     }
 
-    [Obsolete]
-    private void HandleFeatureInfo(PointerReleasedEventArgs e)
-    {
-        if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
-
-        if (Map != null && _pointerDownPosition == e.GetPosition(this).ToMapsui())
-            foreach (var layer in Map.Layers)
-            {
-                // ReSharper disable once SuspiciousTypeConversion.Global
-                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.Viewport, _pointerDownPosition.X, _pointerDownPosition.Y,
-                    OnFeatureInfo);
-            }
-    }
-
-    private void OnFeatureInfo(IDictionary<string, IEnumerable<IFeature>> features)
-    {
-        FeatureInfo?.Invoke(this, new FeatureInfoEventArgs { FeatureInfo = features });
-    }
-
     private void MapControlMouseLeave(object? sender, PointerEventArgs e)
     {
         _previousMousePosition = null;
@@ -215,9 +195,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
         if (IsClick(_currentMousePosition, _pointerDownPosition))
         {
-#pragma warning disable CS0612 // Type or member is obsolete
-            HandleFeatureInfo(e);
-#pragma warning restore CS0612 // Type or member is obsolete
             OnInfo(CreateMapInfoEventArgs(_mousePosition, _mousePosition, 1));
         }
     }
@@ -330,7 +307,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         }
     }
 
-    private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
+    private static (MPoint center, double radius, double angle) GetPinchValues(List<MPoint> locations)
     {
         if (locations.Count < 2)
             throw new ArgumentOutOfRangeException(nameof(locations));

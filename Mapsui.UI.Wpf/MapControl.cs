@@ -253,11 +253,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         });
     }
 
-    private void OnFeatureInfo(IDictionary<string, IEnumerable<IFeature>> features)
-    {
-        FeatureInfo?.Invoke(this, new FeatureInfoEventArgs { FeatureInfo = features });
-    }
-
     private void MapControlMouseMove(object sender, MouseEventArgs e)
     {
         if (HandleWidgetPointerMove(e.GetPosition(this).ToMapsui(), e.LeftButton == MouseButtonState.Pressed, 0, ShiftPressed))
