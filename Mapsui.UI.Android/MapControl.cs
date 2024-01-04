@@ -44,9 +44,6 @@ public partial class MapControl : ViewGroup, IMapControl
     private double _previousRadius = 1f;
     private TouchMode _mode = TouchMode.None;
     private Handler? _mainLooperHandler;
-    /// <summary>
-    /// Saver for center before last pinch movement
-    /// </summary>
     private MPoint _previousTouch = new();
     private MPoint? _pointerDownPosition;
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
