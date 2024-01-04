@@ -298,6 +298,15 @@ public class CalloutStyle : SymbolStyle
     }
 
     /// <summary>
+    /// SymbolStyle to which this Callout belongs
+    /// </summary>
+    /// <remarks>
+    /// The callout is positioned relative to this symbol. 
+    /// This is needed for calculation of relative SymbolOffset. 
+    /// </remarks>
+    public SymbolStyle? BelongsTo { get; set; }
+
+    /// <summary>
     /// Content of Callout
     /// </summary>
     /// <remarks>
