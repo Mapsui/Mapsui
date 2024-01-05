@@ -4,17 +4,10 @@
 
 // This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
 
-#pragma warning disable IDISP001 // Dispose created.
-#pragma warning disable IDISP002 // Dispose member.
-
-using System;
-using Windows.Devices.Sensors;
-using Windows.Foundation;
-using Windows.System;
 using Mapsui.Extensions;
 using Mapsui.Logging;
-using Mapsui.Utilities;
 using Mapsui.UI.WinUI.Extensions;
+using Mapsui.Utilities;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -22,8 +15,10 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 using SkiaSharp.Views.Windows;
-using HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment;
-using VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment;
+using System;
+using Windows.Devices.Sensors;
+using Windows.Foundation;
+using Windows.System;
 
 namespace Mapsui.UI.WinUI;
 
@@ -32,6 +27,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
     private double _virtualRotation;
+    private MPoint? _pointerDownPosition;
 
     public MapControl()
     {
@@ -70,6 +66,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         ManipulationInertiaStarting += OnManipulationInertiaStarting;
 
         Tapped += OnSingleTapped;
+        PointerPressed += MapControl_PointerDown;
         DoubleTapped += OnDoubleTapped;
         PointerMoved += MapControl_PointerMoved;
         KeyDown += MapControl_KeyDown;
@@ -84,7 +81,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (e.Key == VirtualKey.Shift)
         {
-            this.ShiftPressed = true;
+            ShiftPressed = true;
         }
     }
 
@@ -92,7 +89,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (e.Key == VirtualKey.Shift)
         {
-            this.ShiftPressed = false;
+            ShiftPressed = false;
         }
     }
 
@@ -107,17 +104,22 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         _virtualRotation = Map.Navigator.Viewport.Rotation;
     }
 
+    private void MapControl_PointerDown(object sender, PointerRoutedEventArgs e)
+    {
+        _pointerDownPosition = e.GetCurrentPoint(this).Position.ToMapsui();
+    }
+
     private void MapControl_PointerMoved(object sender, PointerRoutedEventArgs e)
     {
         var position = e.GetCurrentPoint(this).Position.ToMapsui();
-        if (HandleMoving(position, true, 0, e.KeyModifiers == VirtualKeyModifiers.Shift))
+        if (HandleWidgetPointerMove(position, true, 0, e.KeyModifiers == VirtualKeyModifiers.Shift))
             e.Handled = true;
     }
 
     private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
     {
         var tapPosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouchingTouched(tapPosition, true, 2, ShiftPressed))
+        if (HandleTouchingTouched(tapPosition, _pointerDownPosition, true, 2, ShiftPressed))
         {
             e.Handled = true;
             return;
@@ -131,7 +133,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
     {
         var tabPosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouchingTouched(tabPosition, true, 1, ShiftPressed))
+        if (HandleTouchingTouched(tabPosition, _pointerDownPosition, true, 1, ShiftPressed))
         {
             e.Handled = true;
             return;
@@ -149,7 +151,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             StrokeThickness = 3,
             RadiusX = 0.5,
             RadiusY = 0.5,
-            StrokeDashArray = new DoubleCollection { 3.0 },
+            StrokeDashArray = [3.0],
             Opacity = 0.3,
             VerticalAlignment = VerticalAlignment.Top,
             HorizontalAlignment = HorizontalAlignment.Left,
@@ -249,15 +251,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Catch.TaskRun(async () => await Launcher.LaunchUriAsync(new Uri(url)));
     }
 
-    private float ViewportWidth => (float)ActualWidth;
-    private float ViewportHeight => (float)ActualHeight;
+    private double ViewportWidth => ActualWidth;
+    private double ViewportHeight => ActualHeight;
 
-    private float GetPixelDensity()
-    {
-        return (float)(XamlRoot?.RasterizationScale ?? 1f);
-    }
-
-#pragma warning disable IDISP023 // Don't use reference types in finalizer context
+    private double GetPixelDensity() => XamlRoot?.RasterizationScale ?? 1d;
+    
 #if __ANDROID__ 
     protected override void Dispose(bool disposing)
 #elif __IOS__ || __MACOS__
@@ -268,7 +266,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (disposing)
         {
-#if HAS_UNO           
+#if HAS_UNO   
+#if  __WINUI__
+#pragma warning disable IDISP023 // Don't use reference types in finalizer context
+#endif
+
             _canvas?.Dispose();
             _selectRectangle?.Dispose();
 #endif
