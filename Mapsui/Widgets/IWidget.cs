@@ -13,14 +13,9 @@ public interface IWidget
     VerticalAlignment VerticalAlignment { get; set; }
 
     /// <summary>
-    /// Left, right or both margin depending on HorizontalAlignment
+    /// Margin outside of the widget
     /// </summary>
-    double MarginX { get; set; }
-
-    /// <summary>
-    /// Top, bottom or both marging depending on VerticalAlignment
-    /// </summary>
-    double MarginY { get; set; }
+    MRect Margin { get; set; }
 
     /// <summary>
     /// Position in X direction of left side for absolute alignment
