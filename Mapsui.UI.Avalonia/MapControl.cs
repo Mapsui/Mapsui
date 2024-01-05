@@ -8,9 +8,7 @@ using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Extensions;
-using Mapsui.Layers;
 using Mapsui.UI.Avalonia.Extensions;
-using Mapsui.UI.Avalonia.Utils;
 using Mapsui.Utilities;
 using System;
 using System.Collections.Concurrent;
@@ -41,9 +39,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private double _previousRadius = 1f;
 
     // Touch Handling
-    private readonly ConcurrentDictionary<long, TouchEvent> _touches = new();
+    private readonly ConcurrentDictionary<long, MPoint> _touches = new();
 
-    [Obsolete("Use Info and ILayerFeatureInfo")]
+    [Obsolete("Use Info and ILayerFeatureInfo", true)]
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
 
     public MapControl()
@@ -114,10 +112,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         _pointerDownPosition = e.GetPosition(this).ToMapsui();
         _mouseDown = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
-        // Save time, when the event occurs
-        var ticks = DateTime.Now.Ticks;
-        _touches[e.Pointer.Id] = new TouchEvent(e.Pointer.Id, _pointerDownPosition, ticks);
-        OnPinchStart(_touches.Select(t => t.Value.Location).ToList());
+        _touches[e.Pointer.Id] = _pointerDownPosition;
+        OnPinchStart(_touches.Select(t => t.Value).ToList());
 
         if (HandleWidgetPointerDown(_pointerDownPosition, _mouseDown, e.ClickCount, ShiftPressed))
         {
@@ -146,25 +142,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         Map.Navigator.MouseWheelZoom(delta, _currentMousePosition);
     }
 
-    [Obsolete]
-    private void HandleFeatureInfo(PointerReleasedEventArgs e)
-    {
-        if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
-
-        if (Map != null && _pointerDownPosition == e.GetPosition(this).ToMapsui())
-            foreach (var layer in Map.Layers)
-            {
-                // ReSharper disable once SuspiciousTypeConversion.Global
-                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.Viewport, _pointerDownPosition.X, _pointerDownPosition.Y,
-                    OnFeatureInfo);
-            }
-    }
-
-    private void OnFeatureInfo(IDictionary<string, IEnumerable<IFeature>> features)
-    {
-        FeatureInfo?.Invoke(this, new FeatureInfoEventArgs { FeatureInfo = features });
-    }
-
     private void MapControlMouseLeave(object? sender, PointerEventArgs e)
     {
         _previousMousePosition = null;
@@ -173,10 +150,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlMouseMove(object? sender, PointerEventArgs e)
     {
-        // Save time, when the event occurs
-        var ticks = DateTime.Now.Ticks;
         _currentMousePosition = e.GetPosition(this).ToMapsui(); // Needed for both MouseMove and MouseWheel event
-        _touches[e.Pointer.Id] = new TouchEvent(e.Pointer.Id, _currentMousePosition, ticks);
+        _touches[e.Pointer.Id] = _currentMousePosition;
 
         if (_previousMousePosition is null)
             return;
@@ -184,7 +159,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (!_mouseDown)
             return;
 
-        if (OnPinchMove(_touches.Select(t => t.Value.Location).ToList()))
+        if (OnPinchMove(_touches.Select(t => t.Value).ToList()))
         {
             e.Handled = true;
             return;
@@ -220,9 +195,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
         if (IsClick(_currentMousePosition, _pointerDownPosition))
         {
-#pragma warning disable CS0612 // Type or member is obsolete
-            HandleFeatureInfo(e);
-#pragma warning restore CS0612 // Type or member is obsolete
             OnInfo(CreateMapInfoEventArgs(_mousePosition, _mousePosition, 1));
         }
     }
@@ -335,7 +307,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         }
     }
 
-    private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
+    private static (MPoint center, double radius, double angle) GetPinchValues(List<MPoint> locations)
     {
         if (locations.Count < 2)
             throw new ArgumentOutOfRangeException(nameof(locations));

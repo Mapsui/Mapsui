@@ -15,6 +15,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 #if __MAUI__
 using Microsoft.Maui.Controls;
@@ -53,7 +54,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // Action to call for a redraw of the control
     private protected Action? _invalidate;
     // Timer for loop to invalidating the control
-    private System.Threading.Timer? _invalidateTimer;
+    private Timer? _invalidateTimer;
     // Interval between two calls of the invalidate function in ms
     private int _updateInterval = 16;
     // Stopwatch for measuring drawing times
@@ -75,7 +76,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         // Create timer for invalidating the control
         _invalidateTimer?.Dispose();
-        _invalidateTimer = new System.Threading.Timer(InvalidateTimerCallback, null, System.Threading.Timeout.Infinite, 16);
+        _invalidateTimer = new Timer(InvalidateTimerCallback, null, Timeout.Infinite, 16);
         // Start the invalidation timer
         StartUpdates(false);
     }
@@ -172,7 +173,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </remarks>
     public void StopUpdates()
     {
-        _invalidateTimer?.Change(System.Threading.Timeout.Infinite, System.Threading.Timeout.Infinite);
+        _invalidateTimer?.Change(Timeout.Infinite, Timeout.Infinite);
     }
 
     /// <summary>
@@ -293,7 +294,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Called whenever a property is changed
     /// </summary>
-#if __MAUI__ || __AVALONIA__ || __AVALONIA_V0__
+#if __MAUI__ || __AVALONIA__
     public new event PropertyChangedEventHandler? PropertyChanged;
 #else
     public event PropertyChangedEventHandler? PropertyChanged;
