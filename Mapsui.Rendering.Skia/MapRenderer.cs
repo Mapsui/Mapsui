@@ -110,7 +110,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                 case RenderFormat.Skp:
                     {
                         using var pictureRecorder = new SKPictureRecorder();
-                        using var skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, Convert.ToSingle(width), Convert.ToSingle(height)));
+                        using var skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, (float)width, (float)height));
                         RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas);
                         using var skPicture = pictureRecorder.EndRecording();
                         skPicture?.Serialize(memoryStream);

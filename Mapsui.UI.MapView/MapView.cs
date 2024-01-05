@@ -50,9 +50,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private readonly SKPicture _pictZoomIn;
     private readonly SKPicture _pictZoomOut;
     private readonly SKPicture _pictNorthing;
-    private readonly ObservableRangeCollection<Pin> _pins = new ObservableRangeCollection<Pin>();
-    private readonly ObservableRangeCollection<Drawable> _drawables = new ObservableRangeCollection<Drawable>();
-    private readonly ObservableRangeCollection<Callout> _callouts = new ObservableRangeCollection<Callout>();
+    private readonly ObservableRangeCollection<Pin> _pins = [];
+    private readonly ObservableRangeCollection<Drawable> _drawables = [];
+    private readonly ObservableRangeCollection<Callout> _callouts = [];
 
     public MapView()
     {
@@ -90,14 +90,12 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         // Add some events to _mapControl.Map.Layers
         Map.Layers.Changed += HandleLayersChanged;
 
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
         _pictMyLocationNoCenter = EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.LocationNoCenter.svg");
         _pictMyLocationCenter = EmbeddedResourceLoader.Load("Images.LocationCenter.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.LocationCenter.svg");
 
         _pictZoomIn = EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.ZoomIn.svg");
         _pictZoomOut = EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.ZoomOut.svg");
         _pictNorthing = EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.RotationZero.svg");
-#pragma warning restore IDISP001
         CreateButtons();
 
         _pins.CollectionChanged += HandlerPinsOnCollectionChanged;
@@ -482,9 +480,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void HandleLayersChanged(object? sender, LayerCollectionChangedEventArgs args)
     {
-        var localRemovedLayers = args.RemovedLayers?.ToList() ?? new List<ILayer>();
-        var localAddedLayers = args.AddedLayers?.ToList() ?? new List<ILayer>();
-        var movedLayers = args.MovedLayers?.ToList() ?? new List<ILayer>();
+        var localRemovedLayers = args.RemovedLayers?.ToList() ?? [];
+        var localAddedLayers = args.AddedLayers?.ToList() ?? [];
+        var movedLayers = args.MovedLayers?.ToList() ?? [];
 
         if (localRemovedLayers.Contains(MyLocationLayer) || localRemovedLayers.Contains(_mapDrawableLayer) || localRemovedLayers.Contains(_mapPinLayer) || localRemovedLayers.Contains(_mapCalloutLayer) ||
             localAddedLayers.Contains(MyLocationLayer) || localAddedLayers.Contains(_mapDrawableLayer) || localAddedLayers.Contains(_mapPinLayer) || localAddedLayers.Contains(_mapCalloutLayer) ||
@@ -821,22 +819,22 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void CreateButtons()
     {
-        _mapZoomInButton = _mapZoomInButton ?? CreateButton(0, 0, _pictZoomIn, (s, e) => { Map.Navigator.ZoomIn(); e.Handled = true; });
+        _mapZoomInButton ??= CreateButton(0, 0, _pictZoomIn, (s, e) => { Map.Navigator.ZoomIn(); e.Handled = true; });
         _mapZoomInButton.Picture = _pictZoomIn;
         _mapZoomInButton.Enabled = IsZoomButtonVisible;
         Map!.Widgets.Add(_mapZoomInButton);
 
-        _mapZoomOutButton = _mapZoomOutButton ?? CreateButton(0, 40, _pictZoomOut, (s, e) => { Map.Navigator.ZoomOut(); e.Handled = true; });
+        _mapZoomOutButton ??= CreateButton(0, 40, _pictZoomOut, (s, e) => { Map.Navigator.ZoomOut(); e.Handled = true; });
         _mapZoomOutButton.Picture = _pictZoomOut;
         _mapZoomOutButton.Enabled = IsZoomButtonVisible;
         Map!.Widgets.Add(_mapZoomOutButton);
 
-        _mapMyLocationButton = _mapMyLocationButton ?? CreateButton(0, 88, _pictMyLocationNoCenter, (s, e) => { MyLocationFollow = true; e.Handled = true; });
+        _mapMyLocationButton ??= CreateButton(0, 88, _pictMyLocationNoCenter, (s, e) => { MyLocationFollow = true; e.Handled = true; });
         _mapMyLocationButton.Picture = _pictMyLocationNoCenter;
         _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
         Map!.Widgets.Add(_mapMyLocationButton);
 
-        _mapNorthingButton = _mapNorthingButton ?? CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Map.Navigator.RotateTo(0)); e.Handled = true; });
+        _mapNorthingButton ??= CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Map.Navigator.RotateTo(0)); e.Handled = true; });
         _mapNorthingButton.Picture = _pictNorthing;
         _mapNorthingButton.Enabled = IsNorthingButtonVisible;
         Map!.Widgets.Add(_mapNorthingButton);

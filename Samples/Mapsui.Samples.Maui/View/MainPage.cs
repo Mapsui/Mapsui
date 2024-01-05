@@ -15,6 +15,10 @@ public sealed class MainPage : ContentPage, IDisposable
 
     public MainPage(MainViewModel mainViewModel)
     {
+        mapControl.Map.Navigator.RotationLock = false;
+        mapControl.UnSnapRotationDegrees = 30;
+        mapControl.ReSnapRotationDegrees = 5;
+
         categoryPicker = CreatePicker(mainViewModel);
         collectionView = CreateCollectionView(mainViewModel);
 
