@@ -46,14 +46,17 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         var marginY = loggingWidget.Envelope.Bottom;
         var width = loggingWidget.Envelope.Width;
         var height = loggingWidget.Envelope.Height;
-        var paddingX = loggingWidget.PaddingX;
-        var paddingY = loggingWidget.PaddingY;
+        var paddingX = loggingWidget.Padding.Left;
+        var paddingY = loggingWidget.Padding.Top;
 
         var rect = new SKRect((float)marginX, (float)marginY, (float)(marginX + width), (float)(marginY + height));
 
         canvas.DrawRect(rect, _backgroundPaint);
 
-        rect.Inflate((float)-paddingX, (float)-paddingY);
+        rect = new SKRect((float)(rect.Left + loggingWidget.Padding.Left),
+            (float)(rect.Top + loggingWidget.Padding.Top),
+            (float)(rect.Right - loggingWidget.Padding.Right),
+            (float)(rect.Bottom - loggingWidget.Padding.Bottom));
 
         var line = 0;
 

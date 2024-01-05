@@ -37,8 +37,7 @@ public class ViewportRotateAnimationSample : ISample
     {
         Text = text,
         Margin = new MRect(20),
-        PaddingX = 10,
-        PaddingY = 10,
+        Padding = new MRect(10),
         HorizontalAlignment = HorizontalAlignment.Left,
         VerticalAlignment = verticalAlignment,
         BackColor = new Color(0, 123, 255),

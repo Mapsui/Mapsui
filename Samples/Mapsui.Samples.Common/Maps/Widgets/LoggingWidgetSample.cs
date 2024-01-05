@@ -33,8 +33,7 @@ public class LoggingWidgetSample : ISample
             WarningTextColor = Color.Orange,
             InformationTextColor = Color.Black,
             Margin = new MRect(10, 20),
-            PaddingX = 2,
-            PaddingY = 2,
+            Padding = new MRect(2),
             HorizontalAlignment = HorizontalAlignment.Stretch,
             VerticalAlignment = VerticalAlignment.Stretch
         };

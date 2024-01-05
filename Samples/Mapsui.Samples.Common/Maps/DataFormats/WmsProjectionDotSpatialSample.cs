@@ -49,8 +49,7 @@ public class WmsProjectionDotSpatialSample : ISample
                 VerticalAlignment = VerticalAlignment.Bottom,
                 HorizontalAlignment = HorizontalAlignment.Left,
                 Margin = new MRect(10),
-                PaddingX = 4,
-                PaddingY = 4,
+                Padding = new MRect(4),
                 BackColor = Color.LightGray,
             }
         };

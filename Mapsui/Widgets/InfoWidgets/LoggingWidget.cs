@@ -150,7 +150,7 @@ public class LoggingWidget : TextBoxWidget
     }
     public void UpdateNumOfLogEntries()
     {
-        var newNumOfLogEntries = (int)(((Envelope?.Height ?? Height) - PaddingY) / (TextSize + PaddingY));
+        var newNumOfLogEntries = (int)(((Envelope?.Height ?? Height) - Padding.Top) / (TextSize + Padding.Top));
 
         while (_listOfLogEntries.Count > newNumOfLogEntries)
         {

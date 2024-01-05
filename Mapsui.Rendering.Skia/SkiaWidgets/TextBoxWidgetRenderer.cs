@@ -27,8 +27,8 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
         textPaint.MeasureText(textBox.Text, ref textRect);
         // The backRect is straight forward. It is leading for our purpose.
 
-        var paddingX = textBox.PaddingX;
-        var paddingY = textBox.PaddingY;
+        var paddingX = textBox.Padding.Left;
+        var paddingY = textBox.Padding.Top;
 
         if (textBox.Width != 0)
         {
@@ -46,8 +46,8 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
 
         // Calc Envelope by Width/Height or, if not set, by size of content
         textBox.UpdateEnvelope(
-            textBox.Width != 0 ? textBox.Width : textRect.Width + textBox.PaddingX * 2,
-            textBox.Height != 0 ? textBox.Height : textRect.Height + textBox.PaddingY * 2,
+            textBox.Width != 0 ? textBox.Width : textRect.Width + textBox.Padding.Left + textBox.Padding.Right,
+            textBox.Height != 0 ? textBox.Height : textRect.Height + textBox.Padding.Top + textBox.Padding.Bottom,
             viewport.Width,
             viewport.Height);
 
