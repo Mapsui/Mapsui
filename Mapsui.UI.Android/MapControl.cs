@@ -44,9 +44,6 @@ public partial class MapControl : ViewGroup, IMapControl
     private double _previousRadius = 1f;
     private TouchMode _mode = TouchMode.None;
     private Handler? _mainLooperHandler;
-    /// <summary>
-    /// Saver for center before last pinch movement
-    /// </summary>
     private MPoint _previousTouch = new();
     private MPoint? _pointerDownPosition;
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
@@ -77,7 +74,7 @@ public partial class MapControl : ViewGroup, IMapControl
 
         SetViewportSize(); // todo: check if size is available, perhaps we need a load event
 
-        Touch += MapView_Touch;
+        Touch += MapControl_Touch;
 
         var listener = new MapControlGestureListener();
 
@@ -174,7 +171,7 @@ public partial class MapControl : ViewGroup, IMapControl
         Map.Navigator.Fling(args.VelocityX / 10, args.VelocityY / 10, 1000);
     }
 
-    public void MapView_Touch(object? sender, TouchEventArgs args)
+    public void MapControl_Touch(object? sender, TouchEventArgs args)
     {
         if (args.Event != null && (_gestureDetector?.OnTouchEvent(args.Event) ?? false))
             return;

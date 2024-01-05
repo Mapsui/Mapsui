@@ -46,7 +46,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             else RunOnUIThread(InvalidateCanvas);
         };
 
-        Children.Add(WpfCanvas);
         Children.Add(SkiaCanvas);
         Children.Add(_selectRectangle);
 
@@ -71,7 +70,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         IsManipulationEnabled = true;
 
-        WpfCanvas.Visibility = Visibility.Collapsed;
         SkiaCanvas.Visibility = Visibility.Visible;
         RefreshGraphics();
     }
@@ -93,18 +91,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         };
     }
 
-    public Canvas WpfCanvas { get; } = CreateWpfRenderCanvas();
-
     private SKElement SkiaCanvas { get; } = CreateSkiaRenderElement();
-
-    private static Canvas CreateWpfRenderCanvas()
-    {
-        return new Canvas
-        {
-            VerticalAlignment = VerticalAlignment.Stretch,
-            HorizontalAlignment = HorizontalAlignment.Stretch
-        };
-    }
 
     private static SKElement CreateSkiaRenderElement()
     {
@@ -115,7 +102,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         };
     }
 
-    [Obsolete("Use Info and ILayerFeatureInfo")]
+    [Obsolete("Use Info and ILayerFeatureInfo", true)]
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo; // todo: Remove and add sample for alternative
 
     internal void InvalidateCanvas()
@@ -195,9 +182,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             }
             else if (_pointerDownPosition != null && IsClick(mousePosition, _pointerDownPosition))
             {
-#pragma warning disable CS0612 // Type or member is obsolete
-                HandleFeatureInfo(e);
-#pragma warning restore CS0612 // Type or member is obsolete
                 OnInfo(CreateMapInfoEventArgs(mousePosition, _pointerDownPosition, e.ClickCount));
             }
         }
@@ -267,26 +251,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             // The default for this has changed in .net core, you have to explicitly set if to true for it to work.
             UseShellExecute = true
         });
-    }
-
-    [Obsolete]
-    private void HandleFeatureInfo(MouseButtonEventArgs e)
-    {
-        if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
-
-        if (_pointerDownPosition == e.GetPosition(this).ToMapsui())
-            foreach (var layer in Map.Layers)
-            {
-                // ReSharper disable once SuspiciousTypeConversion.Global
-                (layer as IFeatureInfo)?.GetFeatureInfo(Map.Navigator.Viewport, _pointerDownPosition.X, _pointerDownPosition.Y,
-                    OnFeatureInfo);
-            }
-
-    }
-
-    private void OnFeatureInfo(IDictionary<string, IEnumerable<IFeature>> features)
-    {
-        FeatureInfo?.Invoke(this, new FeatureInfoEventArgs { FeatureInfo = features });
     }
 
     private void MapControlMouseMove(object sender, MouseEventArgs e)
@@ -426,11 +390,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         canvas.Scale(PixelDensity, PixelDensity);
 
         CommonDrawControl(canvas);
-    }
-
-    private void PaintWpf()
-    {
-        CommonDrawControl(WpfCanvas);
     }
 
     private double GetPixelDensity()

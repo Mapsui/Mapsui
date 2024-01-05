@@ -259,7 +259,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     }
 
     /// <summary>
-    /// Enable paning
+    /// Enable panning
     /// </summary>
     public bool PanLock
     {
@@ -653,7 +653,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 }
             }
         }
-        // Check for clicked mylocation
+        // Check for clicked myLocation
         else if (e.MapInfo?.Layer == MyLocationLayer)
         {
             if (e.MapInfo!.ScreenPosition == null)
