@@ -8,7 +8,7 @@ namespace Mapsui.Extensions;
 /// <summary>
 /// Extensions for MemoryLayer
 /// </summary>
-public static class MemoryLayerExtensions
+public static class MarkerLayerExtensions
 {
     /// <summary>
     /// Add a <see cref="Marker"/> to the layer
@@ -16,7 +16,7 @@ public static class MemoryLayerExtensions
     /// <param name="layer">Layer to use</param>
     /// <param name="x">X position</param>
     /// <param name="y">Y position</param>
-    public static MemoryLayer AddMarker(this MemoryLayer layer, double x, double y, MarkerType type = MarkerType.Pin, string? title = null, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? anchor = null)
+    public static MarkerLayer AddMarker(this MarkerLayer layer, double x, double y, MarkerType type = MarkerType.Pin, string? title = null, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? anchor = null)
     {
         var marker = new Marker(x, y);
 
@@ -39,7 +39,7 @@ public static class MemoryLayerExtensions
     /// <param name="layer">Layer to use</param>
     /// <param name="x">X position</param>
     /// <param name="y">Y position</param>
-    public static MemoryLayer AddMarker(this MemoryLayer layer, (double x, double y) position, MarkerType type = MarkerType.Pin, string? title = null, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? anchor = null)
+    public static MarkerLayer AddMarker(this MarkerLayer layer, (double x, double y) position, MarkerType type = MarkerType.Pin, string? title = null, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? anchor = null)
     {
         return AddMarker(layer, position.x, position.y, type, title, color, icon, svg, scale, anchor);
     }
@@ -49,7 +49,7 @@ public static class MemoryLayerExtensions
     /// </summary>
     /// <param name="layer">Layer to use</param>
     /// <param name="point">Point for position</param>
-    public static MemoryLayer AddMarker(this MemoryLayer layer, MPoint position, MarkerType type = MarkerType.Pin, string? title = null, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? anchor = null)
+    public static MarkerLayer AddMarker(this MarkerLayer layer, MPoint position, MarkerType type = MarkerType.Pin, string? title = null, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? anchor = null)
     {
         return AddMarker(layer, position.X, position.Y, type, title, color, icon, svg, scale, anchor);
     }
