@@ -7,36 +7,19 @@ namespace Mapsui.Widgets.BoxWidgets;
 /// </summary>
 public class TextBoxWidget : BoxWidget
 {
-    private double _paddingX = 3;
+    private MRect _padding = new MRect(3);
 
     /// <summary>
-    /// Padding left and right for icon inside the Widget
+    /// Padding for left, top, right and bottom for text inside the Widget
     /// </summary>
-    public double PaddingX
+    public MRect Padding
     {
-        get => _paddingX;
+        get => _padding;
         set
         {
-            if (_paddingX == value)
+            if (_padding == value)
                 return;
-            _paddingX = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private double _paddingY = 3;
-
-    /// <summary>
-    /// Padding left and right for icon inside the Widget
-    /// </summary>
-    public double PaddingY
-    {
-        get => _paddingY;
-        set
-        {
-            if (_paddingY == value)
-                return;
-            _paddingY = value;
+            _padding = value;
             OnPropertyChanged();
         }
     }
