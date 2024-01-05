@@ -1,12 +1,10 @@
-﻿using Mapsui.Features;
-using Mapsui.Layers;
-using System.Linq;
+﻿using Mapsui.Layers;
 
 namespace Mapsui.Extensions;
 
 public static  class MapExtensions
 {
-    public static MemoryLayer AddMarkerLayer(this Map map, string name)
+    public static MarkerLayer AddMarkerLayer(this Map map, string name)
     {
         // Create layer
         var layer = new MarkerLayer(name);
