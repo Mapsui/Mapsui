@@ -23,7 +23,7 @@ internal static class PolygonRenderer
         var paint = vectorCache.GetOrCreatePaint(vectorStyle.Outline, opacity, CreateSkPaint);
         var fillPaint = vectorCache.GetOrCreatePaint(vectorStyle.Fill, opacity, viewport.Rotation, CreateSkPaint);
 
-        float lineWidth = Convert.ToSingle(vectorStyle.Outline?.Width ?? 1);
+        float lineWidth = (float)(vectorStyle.Outline?.Width ?? 1);
         var path = vectorCache.GetOrCreatePath(viewport, feature, polygon, lineWidth, (polygon, viewport, lineWidth) =>
         {
             var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
@@ -167,7 +167,7 @@ internal static class PolygonRenderer
 
         if (pen != null)
         {
-            lineWidth = Convert.ToSingle(pen.Width);
+            lineWidth = (float)pen.Width;
             lineColor = pen.Color;
             strokeCap = pen.PenStrokeCap;
             strokeJoin = pen.StrokeJoin;

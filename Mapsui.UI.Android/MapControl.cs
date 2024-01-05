@@ -7,7 +7,6 @@ using Mapsui.Logging;
 using Mapsui.UI.Android.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp.Views.Android;
-using Math = System.Math;
 
 namespace Mapsui.UI.Android;
 
@@ -45,10 +44,8 @@ public partial class MapControl : ViewGroup, IMapControl
     private double _previousRadius = 1f;
     private TouchMode _mode = TouchMode.None;
     private Handler? _mainLooperHandler;
-    /// <summary>
-    /// Saver for center before last pinch movement
-    /// </summary>
     private MPoint _previousTouch = new();
+    private MPoint? _pointerDownPosition;
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
 
     public MapControl(Context context, IAttributeSet attrs) : 
@@ -77,7 +74,7 @@ public partial class MapControl : ViewGroup, IMapControl
 
         SetViewportSize(); // todo: check if size is available, perhaps we need a load event
 
-        Touch += MapView_Touch;
+        Touch += MapControl_Touch;
 
         var listener = new MapControlGestureListener();
 
@@ -174,23 +171,19 @@ public partial class MapControl : ViewGroup, IMapControl
         Map.Navigator.Fling(args.VelocityX / 10, args.VelocityY / 10, 1000);
     }
 
-    public void MapView_Touch(object? sender, TouchEventArgs args)
+    public void MapControl_Touch(object? sender, TouchEventArgs args)
     {
         if (args.Event != null && (_gestureDetector?.OnTouchEvent(args.Event) ?? false))
             return;
 
         var touchPoints = GetScreenPositions(args.Event, this);
 
-        if (touchPoints.Count > 0 && HandleTouch(args, touchPoints.First()))
-        {
-            return;
-        }
-
         switch (args.Event?.Action)
         {
             case MotionEventActions.Up:
                 Refresh();
                 _mode = TouchMode.None;
+                HandleWidgetPointerUp(touchPoints.First(), _pointerDownPosition, true, 0, false);
                 break;
             case MotionEventActions.Down:
             case MotionEventActions.Pointer1Down:
@@ -204,8 +197,12 @@ public partial class MapControl : ViewGroup, IMapControl
                 }
                 else
                 {
-                    _mode = TouchMode.Dragging;
                     _previousTouch = touchPoints.First();
+                    _pointerDownPosition = touchPoints.First();
+
+                    if (HandleWidgetPointerDown(_pointerDownPosition, true, 1, false))
+                        return;
+                    _mode = TouchMode.Dragging;
                 }
                 break;
             case MotionEventActions.Pointer1Up:
@@ -231,6 +228,8 @@ public partial class MapControl : ViewGroup, IMapControl
             case MotionEventActions.Move:
                 switch (_mode)
                 {
+                    // There is no widget move handling in Mapsui.Android so the edit widget will not work.
+                    // If this is added there should be testing of editing and all existing functionality.
                     case TouchMode.Dragging:
                         {
                             if (touchPoints.Count != 1)
@@ -272,18 +271,6 @@ public partial class MapControl : ViewGroup, IMapControl
                 }
                 break;
         }
-    }
-
-    private bool HandleTouch(TouchEventArgs e, MPoint location)
-    {
-        var action = e.Event?.Action;
-        return action switch
-        {
-            MotionEventActions.Down when HandleTouching(location, true, Math.Max(1, 0), false) => true,
-            MotionEventActions.Up when HandleTouched(location, true, 0, false) => true,
-            MotionEventActions.Move when HandleMoving(location, true, Math.Max(1, 0), false) => true,
-            _ => false
-        };
     }
 
     /// <summary>
@@ -339,7 +326,7 @@ public partial class MapControl : ViewGroup, IMapControl
         catch (ObjectDisposedException e)
         {
             // See issue: https://github.com/Mapsui/Mapsui/issues/433
-            // What seems to be happening. The Activity is Disposed. Appently it's children get Disposed
+            // What seems to be happening. The Activity is Disposed. Apparently it's children get Disposed
             // explicitly by something in Xamarin. During this Dispose the MessageCenter, which is itself
             // not disposed gets another notification to call RefreshGraphics.
             Logger.Log(LogLevel.Warning, "This can happen when the parent Activity is disposing.", e);
@@ -410,8 +397,8 @@ public partial class MapControl : ViewGroup, IMapControl
         return (new MPoint(centerX, centerY), radius, angle);
     }
 
-    private float ViewportWidth => ToDeviceIndependentUnits(Width);
-    private float ViewportHeight => ToDeviceIndependentUnits(Height);
+    private double ViewportWidth => ToDeviceIndependentUnits(Width);
+    private double ViewportHeight => ToDeviceIndependentUnits(Height);
 
     /// <summary>
     /// In native Android touch positions are in pixels whereas the canvas needs
@@ -419,7 +406,7 @@ public partial class MapControl : ViewGroup, IMapControl
     /// and symbols will be too small). This method converts pixels to device independent units.
     /// </summary>
     /// <returns>The pixels given as input translated to device independent units.</returns>
-    private float ToDeviceIndependentUnits(float pixelCoordinate)
+    private double ToDeviceIndependentUnits(int pixelCoordinate)
     {
         return pixelCoordinate / PixelDensity;
     }
@@ -460,8 +447,8 @@ public partial class MapControl : ViewGroup, IMapControl
         }
     }
 
-    private float GetPixelDensity()
+    private double GetPixelDensity()
     {
-        return Resources?.DisplayMetrics?.Density ?? 0;
+        return Resources?.DisplayMetrics?.Density ?? 0d;
     }
 }

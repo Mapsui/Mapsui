@@ -1,18 +1,17 @@
-using System;
-using Mapsui.Rendering.Skia;
-using Mapsui.UI.Eto.Extensions;
-using global::Eto.SkiaDraw;
-using global::Eto.Drawing;
-using global::Eto.Forms;
-using System.Diagnostics;
+using Eto.Drawing;
+using Eto.Forms;
+using Eto.SkiaDraw;
 using Mapsui.Extensions;
+using Mapsui.UI.Eto.Extensions;
+using System;
+using System.Diagnostics;
 
 namespace Mapsui.UI.Eto;
 
 public partial class MapControl : SkiaDrawable, IMapControl
 {
     private RectangleF _selectRectangle = new();
-    private PointF? _downMousePosition;
+    private PointF? _pointerDownPosition;
     private Cursor _defaultCursor = Cursors.Default;
     public Cursor MoveCursor { get; set; } = Cursors.Move;
     public MouseButtons MoveButton { get; set; } = MouseButtons.Primary;
@@ -82,7 +81,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         SetViewportSize();
     }
 
-    private void RunOnUIThread(Action action)
+    private static void RunOnUIThread(Action action)
     {
         Application.Instance.AsyncInvoke(action);
     }
@@ -99,7 +98,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
             _defaultCursor = Cursor;
 
         if (move_mode || IsInBoxZoomMode)
-            _downMousePosition = e.Location;
+            _pointerDownPosition = e.Location;
     }
 
     private bool IsInBoxZoomMode
@@ -121,13 +120,13 @@ public partial class MapControl : SkiaDrawable, IMapControl
             var current = Map.Navigator.Viewport.ScreenToWorld(_selectRectangle.BottomRight.X, _selectRectangle.BottomRight.Y);
             ZoomToBox(previous, current);
         }
-        else if (_downMousePosition.HasValue)
+        else if (_pointerDownPosition.HasValue)
         {
-            if (IsClick(e.Location, _downMousePosition.Value))
-                OnInfo(CreateMapInfoEventArgs(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui(), 1));
+            if (IsClick(e.Location, _pointerDownPosition.Value))
+                OnInfo(CreateMapInfoEventArgs(e.Location.ToMapsui(), _pointerDownPosition.Value.ToMapsui(), 1));
         }
 
-        _downMousePosition = null;
+        _pointerDownPosition = null;
 
         Cursor = _defaultCursor;
 
@@ -152,20 +151,20 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnMouseMove(e);
 
-        if (_downMousePosition.HasValue)
+        if (_pointerDownPosition.HasValue)
         {
             if (IsInBoxZoomMode)
             {
-                _selectRectangle.TopLeft = PointF.Min(e.Location, _downMousePosition.Value);
-                _selectRectangle.BottomRight = PointF.Max(e.Location, _downMousePosition.Value);
+                _selectRectangle.TopLeft = PointF.Min(e.Location, _pointerDownPosition.Value);
+                _selectRectangle.BottomRight = PointF.Max(e.Location, _pointerDownPosition.Value);
                 Content.Invalidate();
             }
             else // drag/pan - mode
             {
                 Cursor = MoveCursor;
 
-                Map.Navigator.Drag(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui());
-                _downMousePosition = e.Location;
+                Map.Navigator.Drag(e.Location.ToMapsui(), _pointerDownPosition.Value.ToMapsui());
+                _pointerDownPosition = e.Location;
             }
         }
     }
@@ -182,8 +181,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
         RunOnUIThread(() => IsInBoxZoomMode = false);
     }
 
-    private float ViewportWidth => Width;
-    private float ViewportHeight => Height;
+    private double ViewportWidth => Width;
+    private double ViewportHeight => Height;
 
     protected override void OnPaint(SKPaintEventArgs e)
     {
@@ -197,7 +196,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         CommonDrawControl(canvas);
     }
 
-    private float GetPixelDensity()
+    private double GetPixelDensity()
     {
         var center = PointToScreen(Location + Size / 2);
 

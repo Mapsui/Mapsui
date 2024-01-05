@@ -15,6 +15,5 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP008:Don't assign member with injected and created disposables.", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.Uwp.MapControl._map")]
 [assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Uwp.MapControl.RunOnUIThread(System.Action)")]
 [assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Uwp.MapControl.OpenBrowser(System.String)")]
-[assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Timer.#ctor(Mapsui.UI.TimerCallback,System.Object,System.Int32,System.Int32)")]
 [assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.WinUI.MapControl.OpenBrowser(System.String)")]
 [assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.WinUI.MapControl.RunOnUIThread(System.Action)")]
