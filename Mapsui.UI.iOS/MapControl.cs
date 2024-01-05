@@ -1,9 +1,9 @@
-using System.ComponentModel;
 using CoreFoundation;
 using Mapsui.Logging;
 using Mapsui.UI.iOS.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp.Views.iOS;
+using System.ComponentModel;
 
 namespace Mapsui.UI.iOS;
 
@@ -14,6 +14,7 @@ public partial class MapControl : UIView, IMapControl
     private SKCanvasView? _canvas;
     private double _virtualRotation;
     private bool _init;
+    private MPoint? _pointerDownPosition;
 
     public static bool UseGPU { get; set; } = true;
 
@@ -125,7 +126,6 @@ public partial class MapControl : UIView, IMapControl
         Map.Navigator.SetSize(ViewportWidth, ViewportHeight);
     }
 
-
     private void OnDoubleTapped(UITapGestureRecognizer gesture)
     {
         var position = GetScreenPosition(gesture.LocationInView(this));
@@ -170,8 +170,8 @@ public partial class MapControl : UIView, IMapControl
 
         if (touches.AnyObject is UITouch touch)
         {
-            var position = touch.LocationInView(this).ToMapsui();
-            if (HandleTouching(position, true, 1, false))
+            _pointerDownPosition = touch.LocationInView(this).ToMapsui();
+            if (HandleWidgetPointerDown(_pointerDownPosition, true, 1, false))
             {
                 return;
             }
@@ -187,7 +187,7 @@ public partial class MapControl : UIView, IMapControl
             if (touches.AnyObject is UITouch touch)
             {
                 var position = touch.LocationInView(this).ToMapsui();
-                if (HandleMoving(position, true, 0, false))
+                if (HandleWidgetPointerMove(position, true, 0, false))
                     return;
 
                 var previousPosition = touch.PreviousLocationInView(this).ToMapsui();
@@ -227,7 +227,7 @@ public partial class MapControl : UIView, IMapControl
         if (touches.AnyObject is UITouch touch)
         {
             var position = touch.LocationInView(this).ToMapsui();
-            if (HandleTouched(position, true, 1, false))
+            if (HandleWidgetPointerUp(position, _pointerDownPosition, true, 1, false))
             {
                 return;
             }
@@ -239,12 +239,12 @@ public partial class MapControl : UIView, IMapControl
     /// </summary>
     /// <param name="point"></param>
     /// <returns></returns>
-    private MPoint GetScreenPosition(CGPoint point)
+    private static MPoint GetScreenPosition(CGPoint point)
     {
         return new MPoint(point.X, point.Y);
     }
 
-    private void RunOnUIThread(Action action)
+    private static void RunOnUIThread(Action action)
     {
         DispatchQueue.MainQueue.DispatchAsync(action);
     }
@@ -293,14 +293,17 @@ public partial class MapControl : UIView, IMapControl
 
     public new void Dispose()
     {
-        IosCommonDispose(true);
-        base.Dispose();
+        Dispose(true);
+        GC.SuppressFinalize(this);
     }
 
-    protected override void Dispose(bool disposing)
+    protected new virtual void Dispose(bool disposing)
     {
-        IosCommonDispose(disposing);
-        base.Dispose(disposing);
+        if (disposing)
+        {
+            IosCommonDispose(disposing);
+            base.Dispose(disposing);
+        }
     }
 
     private void IosCommonDispose(bool disposing)
@@ -340,44 +343,33 @@ public partial class MapControl : UIView, IMapControl
         return (new MPoint(centerX, centerY), radius, angle);
     }
 
-    private float ViewportWidth
+    private double ViewportWidth
     {
         get
         {
             InitCanvas();
-            if (UseGPU)
-            {
-                return (float)_glCanvas!.Frame.Width;
-            }
-
-            return (float)_canvas!.Frame.Width;
-            // todo: check if we need _canvas
+            return UseGPU 
+                ? _glCanvas!.Frame.Width 
+                : _canvas!.Frame.Width;
         }
     }
 
-    private float ViewportHeight
+    private double ViewportHeight
     {
         get
         {
             InitCanvas();
-            if (UseGPU)
-            {
-                return (float)_glCanvas!.Frame.Height;
-            }
-
-            return (float)_canvas!.Frame.Height;
-            // todo: check if we need _canvas
+            return UseGPU 
+                ? _glCanvas!.Frame.Height 
+                : _canvas!.Frame.Height;
         }
     }
 
-    private float GetPixelDensity()
+    private double GetPixelDensity()
     {
         InitCanvas();
-        if (UseGPU)
-        {
-            return (float)_glCanvas!.ContentScaleFactor; // todo: Check if I need canvas    
-        }
-
-        return (float)_canvas!.ContentScaleFactor; // todo: Check if I need canvas
+        return UseGPU 
+            ? (double)_glCanvas!.ContentScaleFactor 
+            : (double)_canvas!.ContentScaleFactor;
     }
 }
