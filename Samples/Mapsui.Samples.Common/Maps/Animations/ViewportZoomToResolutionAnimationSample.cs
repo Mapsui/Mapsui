@@ -24,7 +24,7 @@ public class ViewportZoomToResolutionAnimationSample : ISample
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(CreateScaleBar(map));
-        map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+        map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
 
         var rotateButton = CreateButton("Zoom in", VerticalAlignment.Top);
         rotateButton.Touched += (s, e) => map.Navigator.ZoomTo(map.Navigator.Viewport.Resolution * 0.5, 500, Easing.CubicOut);
@@ -47,8 +47,7 @@ public class ViewportZoomToResolutionAnimationSample : ISample
     private static TextButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new TextButtonWidget
     {
         Text = text,
-        MarginX = 20,
-        MarginY = 20,
+        Margin = new MRect(20),
         PaddingX = 10,
         PaddingY = 10,
         HorizontalAlignment = HorizontalAlignment.Left,

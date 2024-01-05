@@ -31,8 +31,7 @@ public class MouseCoordinatesWidgetSample : ISample
         {
             VerticalAlignment = verticalAlignment,
             HorizontalAlignment = horizontalAlignment,
-            MarginX = 20,
-            MarginY = 20,
+            Margin = new MRect(20),
         };
     }
 }

@@ -16,8 +16,7 @@ public class MapInfoWidget : TextBoxWidget
 
         VerticalAlignment = VerticalAlignment.Bottom;
         HorizontalAlignment = HorizontalAlignment.Left;
-        MarginX = 16;
-        MarginY = 16;
+        Margin = new MRect(16, 16, 16, 16);
         PaddingX = 10;
         PaddingY = 10;
         CornerRadius = 4;

@@ -73,17 +73,20 @@ public class EditingSample : IMapControlSample
         {
             Width = 130,
             Height = 370,
-            MarginY = 0,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            PositionX = 2,
+            PositionY = 0,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
         });
 
         map.Widgets.Add(new TextBoxWidget
         {
-            MarginY = 0,
-            MarginX = 5,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            PositionX = 0,
+            PositionY = 5,
+            Width = 120,
+            Height = 18,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Select Layer To Edit:",
             BackColor = Color.Transparent,
         });
@@ -91,13 +94,13 @@ public class EditingSample : IMapControlSample
         // Layers
         var layer1 = new TextButtonWidget
         {
-            MarginY = 20,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 20,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Layer 1",
             BackColor = Color.LightGray,
         };
@@ -110,13 +113,13 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(layer1);
         var layer2 = new TextButtonWidget
         {
-            MarginY = 40,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 40,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Layer 2",
             BackColor = Color.LightGray,
         };
@@ -128,13 +131,13 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(layer2);
         var layer3 = new TextButtonWidget
         {
-            MarginY = 60,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 60,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Layer 3",
             BackColor = Color.LightGray,
         };
@@ -147,13 +150,13 @@ public class EditingSample : IMapControlSample
         // Persistence
         var save = new TextButtonWidget
         {
-            MarginY = 80,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 80,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Save",
             BackColor = Color.LightGray,
         };
@@ -168,13 +171,13 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(save);
         var load = new TextButtonWidget
         {
-            MarginY = 100,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 100,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Load",
             BackColor = Color.LightGray,
         };
@@ -198,13 +201,13 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(load);
         var cancel = new TextButtonWidget
         {
-            MarginY = 120,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 120,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Cancel",
             BackColor = Color.LightGray,
         };
@@ -230,22 +233,23 @@ public class EditingSample : IMapControlSample
 
         map.Widgets.Add(new TextBoxWidget
         {
-            MarginY = 150,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            PositionX = 5,
+            PositionY = 150,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Editing Modes:",
             BackColor = Color.Transparent,
         });
         // Editing Modes
         var addPoint = new TextButtonWidget
         {
-            MarginY = 170,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 170,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Add Point",
             BackColor = Color.LightGray,
         };
@@ -266,13 +270,13 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(addPoint);
         var addLine = new TextButtonWidget
         {
-            MarginY = 190,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 190,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Add Line",
             BackColor = Color.LightGray,
         };
@@ -293,13 +297,13 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(addLine);
         var addPolygon = new TextButtonWidget
         {
-            MarginY = 210,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 210,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Add Polygon",
             BackColor = Color.LightGray,
         };
@@ -320,13 +324,13 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(addPolygon);
         var modify = new TextButtonWidget
         {
-            MarginY = 230,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 230,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Modify",
             BackColor = Color.LightGray,
         };
@@ -338,13 +342,13 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(modify);
         var rotate = new TextButtonWidget
         {
-            MarginY = 250,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 250,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Rotate",
             BackColor = Color.LightGray,
         };
@@ -357,13 +361,13 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(rotate);
         var scale = new TextButtonWidget
         {
-            MarginY = 270,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 270,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Scale",
             BackColor = Color.LightGray,
         };
@@ -375,13 +379,13 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(scale);
         var none = new TextButtonWidget
         {
-            MarginY = 290,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 290,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "None",
             BackColor = Color.LightGray,
         };
@@ -395,13 +399,13 @@ public class EditingSample : IMapControlSample
         // Deletion
         var selectForDelete = new TextButtonWidget
         {
-            MarginY = 320,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 320,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Select (for delete)",
             BackColor = Color.LightGray,
         };
@@ -413,13 +417,13 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(selectForDelete);
         var delete = new TextButtonWidget
         {
-            MarginY = 340,
-            MarginX = 5,
+            PositionX = 5,
+            PositionY = 340,
             Height = 18,
             Width = 120,
             CornerRadius = 2,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
+            HorizontalAlignment = HorizontalAlignment.Absolute,
+            VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Delete",
             BackColor = Color.LightGray,
         };

@@ -32,8 +32,7 @@ public class ZoomInOutWidgetSample : ISample
             Orientation = orientation,
             VerticalAlignment = verticalAlignment,
             HorizontalAlignment = horizontalAlignment,
-            MarginX = 20,
-            MarginY = 20,
+            Margin = new MRect(20),
         };
     }
 }

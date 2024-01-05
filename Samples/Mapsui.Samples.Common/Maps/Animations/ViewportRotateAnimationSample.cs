@@ -36,8 +36,7 @@ public class ViewportRotateAnimationSample : ISample
     private static TextButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new TextButtonWidget
     {
         Text = text,
-        MarginX = 20,
-        MarginY = 20,
+        Margin = new MRect(20),
         PaddingX = 10,
         PaddingY = 10,
         HorizontalAlignment = HorizontalAlignment.Left,

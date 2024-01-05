@@ -37,8 +37,7 @@ public class PerformanceWidgetSample : IMapControlSample
         {
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
-            MarginX = 10,
-            MarginY = 10,
+            Margin = new MRect(10),
             TextSize = 12,
             TextColor = Color.Black,
             BackColor = Color.White

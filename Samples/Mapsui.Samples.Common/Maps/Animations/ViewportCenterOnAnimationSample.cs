@@ -24,7 +24,7 @@ public class ViewportCenterOnAnimationSample : ISample
 
         var map = new Map { CRS = "EPSG:3857" };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+        map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
 
         map.Widgets.Add(CreateTextBox(instructions));
 
@@ -44,8 +44,7 @@ public class ViewportCenterOnAnimationSample : ISample
         Text = text,
         VerticalAlignment = VerticalAlignment.Top,
         HorizontalAlignment = HorizontalAlignment.Left,
-        MarginX = 10,
-        MarginY = 10,
+        Margin = new MRect(10),
         PaddingX = 8,
         PaddingY = 8,
         CornerRadius = 4,

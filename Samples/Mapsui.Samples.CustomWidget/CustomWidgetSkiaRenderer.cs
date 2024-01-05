@@ -23,8 +23,8 @@ public class CustomWidgetSkiaRenderer : ISkiaWidgetRenderer
     private static MRect ToEnvelope(CustomWidget customWidget)
     {
         // A better implementation would take into account widget alignment
-        return new MRect(customWidget.MarginX, customWidget.MarginY,
-            customWidget.MarginX + customWidget.Width,
-            customWidget.MarginY + customWidget.Height);
+        return new MRect(customWidget.Margin.Left, customWidget.Margin.Top,
+            customWidget.Margin.Left + customWidget.Width,
+            customWidget.Margin.Top + customWidget.Height);
     }
 }
