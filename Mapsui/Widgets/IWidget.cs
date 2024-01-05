@@ -18,14 +18,9 @@ public interface IWidget
     MRect Margin { get; set; }
 
     /// <summary>
-    /// Position in X direction of left side for absolute alignment
+    /// Position for absolute alignment
     /// </summary>
-    double PositionX { get; set; }
-
-    /// <summary>
-    /// Position in Y direction of top side for absolute alignment
-    /// </summary>
-    double PositionY { get; set; }
+    MPoint Position { get; set; }
 
     /// <summary>
     /// Width of Widget

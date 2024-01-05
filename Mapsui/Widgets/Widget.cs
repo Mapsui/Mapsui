@@ -57,36 +57,19 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
         }
     }
 
-    private double _positionX = 0;
+    private MPoint _position = new MPoint(0, 0);
 
     /// <summary>
-    /// Position in X direction of left side for absolute alignment
+    /// Position for absolute alignment
     /// </summary>
-    public double PositionX
+    public MPoint Position
     {
-        get => _positionX;
+        get => _position;
         set
         {
-            if (_positionX == value)
+            if (_position.Equals(value))
                 return;
-            _positionX = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private double _positionY = 0;
-
-    /// <summary>
-    /// Position in Y direction of left side for absolute alignment
-    /// </summary>
-    public double PositionY
-    {
-        get => _positionY;
-        set
-        {
-            if (_positionY == value)
-                return;
-            _positionY = value;
+            _position = value;
             OnPropertyChanged();
         }
     }
@@ -185,7 +168,7 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
         HorizontalAlignment.Center => (right - left - width) / 2f,
         HorizontalAlignment.Right => right - left - width - Margin.Right,
         HorizontalAlignment.Stretch => Margin.Left,
-        HorizontalAlignment.Absolute => PositionX,
+        HorizontalAlignment.Absolute => Position.X,
         _ => throw new ArgumentException("Unknown horizontal alignment: " + HorizontalAlignment)
     };
 
@@ -195,7 +178,7 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
         VerticalAlignment.Bottom => bottom - top - height - Margin.Bottom,
         VerticalAlignment.Center => (bottom - top - height) / 2f,
         VerticalAlignment.Stretch => Margin.Top,
-        VerticalAlignment.Absolute => PositionY,
+        VerticalAlignment.Absolute => Position.Y,
         _ => throw new ArgumentException("Unknown vertical alignment: " + VerticalAlignment)
     };
 }
