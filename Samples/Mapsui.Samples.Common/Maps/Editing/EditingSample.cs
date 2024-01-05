@@ -73,16 +73,14 @@ public class EditingSample : IMapControlSample
         {
             Width = 130,
             Height = 370,
-            PositionX = 2,
-            PositionY = 0,
+            Position = new MPoint(2, 0),
             HorizontalAlignment = HorizontalAlignment.Absolute,
             VerticalAlignment = VerticalAlignment.Absolute,
         });
 
         map.Widgets.Add(new TextBoxWidget
         {
-            PositionX = 0,
-            PositionY = 5,
+            Position = new MPoint(0, 5),
             Width = 120,
             Height = 18,
             HorizontalAlignment = HorizontalAlignment.Absolute,
@@ -94,8 +92,7 @@ public class EditingSample : IMapControlSample
         // Layers
         var layer1 = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 20,
+            Position = new MPoint(5, 20),
             Height = 18,
             Width = 120,
             CornerRadius = 2,
@@ -113,8 +110,7 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(layer1);
         var layer2 = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 40,
+            Position = new MPoint(5, 40),
             Height = 18,
             Width = 120,
             CornerRadius = 2,
@@ -131,8 +127,7 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(layer2);
         var layer3 = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 60,
+            Position = new MPoint(5, 60),
             Height = 18,
             Width = 120,
             CornerRadius = 2,
@@ -150,8 +145,7 @@ public class EditingSample : IMapControlSample
         // Persistence
         var save = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 80,
+            Position = new MPoint(5, 80),
             Height = 18,
             Width = 120,
             CornerRadius = 2,
@@ -171,8 +165,7 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(save);
         var load = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 100,
+            Position = new MPoint(5, 100),
             Height = 18,
             Width = 120,
             CornerRadius = 2,
@@ -201,8 +194,7 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(load);
         var cancel = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 120,
+            Position = new MPoint(5, 120),
             Height = 18,
             Width = 120,
             CornerRadius = 2,
@@ -233,8 +225,7 @@ public class EditingSample : IMapControlSample
 
         map.Widgets.Add(new TextBoxWidget
         {
-            PositionX = 5,
-            PositionY = 150,
+            Position = new MPoint(5, 150),
             HorizontalAlignment = HorizontalAlignment.Absolute,
             VerticalAlignment = VerticalAlignment.Absolute,
             Text = "Editing Modes:",
@@ -243,8 +234,7 @@ public class EditingSample : IMapControlSample
         // Editing Modes
         var addPoint = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 170,
+            Position = new MPoint(5, 170),
             Height = 18,
             Width = 120,
             CornerRadius = 2,
@@ -270,8 +260,7 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(addPoint);
         var addLine = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 190,
+            Position = new MPoint(5, 190),
             Height = 18,
             Width = 120,
             CornerRadius = 2,
@@ -297,8 +286,7 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(addLine);
         var addPolygon = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 210,
+            Position = new MPoint(5, 210),
             Height = 18,
             Width = 120,
             CornerRadius = 2,
@@ -324,8 +312,7 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(addPolygon);
         var modify = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 230,
+            Position = new MPoint(5, 230),
             Height = 18,
             Width = 120,
             CornerRadius = 2,
@@ -342,8 +329,7 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(modify);
         var rotate = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 250,
+            Position = new MPoint(5, 250),
             Height = 18,
             Width = 120,
             CornerRadius = 2,
@@ -361,8 +347,7 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(rotate);
         var scale = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 270,
+            Position = new MPoint(5, 270),
             Height = 18,
             Width = 120,
             CornerRadius = 2,
@@ -379,8 +364,7 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(scale);
         var none = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 290,
+            Position = new MPoint(5, 290),
             Height = 18,
             Width = 120,
             CornerRadius = 2,
@@ -399,8 +383,7 @@ public class EditingSample : IMapControlSample
         // Deletion
         var selectForDelete = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 320,
+            Position = new MPoint(5, 320),
             Height = 18,
             Width = 120,
             CornerRadius = 2,
@@ -417,8 +400,7 @@ public class EditingSample : IMapControlSample
         map.Widgets.Add(selectForDelete);
         var delete = new TextButtonWidget
         {
-            PositionX = 5,
-            PositionY = 340,
+            Position = new MPoint(5, 340),
             Height = 18,
             Width = 120,
             CornerRadius = 2,

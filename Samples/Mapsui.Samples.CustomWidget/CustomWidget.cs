@@ -16,8 +16,7 @@ public class CustomWidget : IWidget
     }
 
     public Color? Color { get; set; }
-    public double PositionX { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public double PositionY { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public MPoint Position { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public double Width { get; set; }
     public double Height { get; set; }
     public bool Enabled { get; set; } = true;

@@ -774,25 +774,21 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
         if (IsZoomButtonVisible)
         {
-            _mapZoomInButton!.PositionX = newX;
-            _mapZoomInButton!.PositionY = newY;
+            _mapZoomInButton!.Position = new MPoint(newX, newY);
             newY += ButtonSize;
-            _mapZoomOutButton!.PositionX = newX;
-            _mapZoomOutButton!.PositionY = newY;
+            _mapZoomOutButton!.Position = new MPoint(newX, newY);
             newY += ButtonSize + ButtonSpacing;
         }
 
         if (IsMyLocationButtonVisible)
         {
-            _mapMyLocationButton!.PositionX = newX;
-            _mapMyLocationButton!.PositionY = newY;
+            _mapMyLocationButton!.Position = new MPoint(newX, newY);
             newY += ButtonSize + ButtonSpacing;
         }
 
         if (IsNorthingButtonVisible)
         {
-            _mapNorthingButton!.PositionX = newX;
-            _mapNorthingButton!.PositionY = newY;
+            _mapNorthingButton!.Position = new MPoint(newX, newY);
         }
 
         RefreshGraphics();
@@ -846,8 +842,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             Picture = picture,
             HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,
             VerticalAlignment = Widgets.VerticalAlignment.Absolute,
-            PositionX = x,
-            PositionY = y,
+            Position = new MPoint(x, y),
             Width = ButtonSize,
             Height = ButtonSize,
             Rotation = 0,
