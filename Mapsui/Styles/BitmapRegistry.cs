@@ -46,6 +46,15 @@ public class BitmapRegistry
     {
         _register.TryGetValue(id, out var val);
         _register.Remove(id);
+
+        KeyValuePair<string, int>[] temp = new KeyValuePair<string, int>[_lookup.Count];
+
+        _lookup.CopyTo(temp, 0);
+
+        foreach (var entry in temp)
+            if (entry.Value == id)
+                _lookup.Remove(entry.Key);
+
         return val;
     }
 
