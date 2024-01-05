@@ -8,6 +8,7 @@ using Mapsui.Styles;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
+using Mapsui.Widgets.InfoWidgets;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -332,13 +333,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             // Is there already a LoggingWidget we used for an earlier map ...
             if (_loggingWidget == null)
                 // no, then create one
-                _loggingWidget = new LoggingWidget(map)
+                _loggingWidget = new LoggingWidget()
                 {
-                    MarginX = 10,
-                    MarginY = 10,
+                    Margin = new MRect(10),
                     VerticalAlignment = Widgets.VerticalAlignment.Top,
                     HorizontalAlignment = Widgets.HorizontalAlignment.Left,
-                    BackgroundColor = Color.Transparent,
+                    BackColor = Color.Transparent,
                     Opacity = 0.0f,
                     LogLevelFilter = LogLevel.Trace,
                 };
