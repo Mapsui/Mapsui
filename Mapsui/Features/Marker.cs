@@ -99,10 +99,12 @@ internal class Marker : PointFeature
         }
     }
 
-    private static Offset _defaultAnchor = new Offset(0.0, 0.0, true);
+    // Default offsets for all other markers except pin (center/center)
+    private static Offset _defaultAnchor = new Offset(0.0, 0.0);
+    // Default offsets for all pin markers (center/bottom)
     private static Offset _defaultPinAnchor = new Offset(0.0, 0.5, true);
 
-    private Offset _anchor = new Offset(0.0, 0.5, true);
+    private Offset _anchor = new Offset(0.0, 0.0);
 
     /// <summary>
     /// Anchor of bitmap in pixel
@@ -150,7 +152,10 @@ internal class Marker : PointFeature
     /// </summary>
     public bool HasCallout => _calloutStyle.Enabled;
 
-    private static Offset _defaultCalloutOffset = new Offset(0.0, 1.0, true);
+    // Default offsets for callout for all other markers except pin (center/top)
+    private static Offset _defaultCalloutOffset = new Offset(0.0, 0.5, true);
+    // Default offsets for callout for all pin markers (center/top too, but anchor of pin is center/bottom not center/center)
+    private static Offset _defaultPinCalloutOffset = new Offset(0.0, 1.0, true);
 
     /// <summary>
     /// Show callout with <c ref="Title" /> as text
@@ -210,11 +215,12 @@ internal class Marker : PointFeature
         Styles.Add(_calloutStyle);
 
         // TODO: Remove when ready, only for test
-        //Styles.Add(new SymbolStyle { SymbolType = SymbolType.Ellipse, SymbolScale = 0.3, Outline = new Pen(Color.Pink, 10) });
+        //Styles.Add(new SymbolStyle { SymbolType = SymbolType.Ellipse, SymbolScale = 0.3, Outline = new Pen(Color.Red, 5), Fill = new Brush(Color.Transparent) });
     }
 
     private void UpdateMarker()
     {
+        // TODO: Don't do this, because BitmapRegistry doesn't count the number of usages of a bitmap
         // BitmapRegistry.Instance.Unregister(_style.BitmapId);
         // _style.BitmapId = -1;
 
@@ -224,16 +230,18 @@ internal class Marker : PointFeature
                 if (Icon == null) return;
                 _style.BitmapId = BitmapRegistry.Instance.Register(Icon);
                 _style.SymbolOffset = _defaultAnchor;
+                _calloutStyle.SymbolOffset = _defaultCalloutOffset;
                 return;
             case MarkerType.Svg:
                 if (string.IsNullOrEmpty(Svg)) return;
                 _style.BitmapId = BitmapRegistry.Instance.Register(Svg);
                 _style.SymbolOffset = _defaultAnchor;
+                _calloutStyle.SymbolOffset = _defaultCalloutOffset;
                 return;
             default:
                 _style.BitmapId = GetPinWithColor();
                 _style.SymbolOffset = _defaultPinAnchor;
-                _calloutStyle.SymbolOffset = _defaultCalloutOffset;
+                _calloutStyle.SymbolOffset = _defaultPinCalloutOffset;
                 return;
         }
     }
