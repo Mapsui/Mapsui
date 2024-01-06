@@ -16,7 +16,17 @@ internal class FeatureSyntaxReceiver : ISyntaxReceiver
             return;
         }
 
-        if (classDeclaration.BaseList?.Types.Any(t => t.Type.ToString() == "IFeature") == true)
+        if (classDeclaration.BaseList == null)
+        {
+            return;
+        }
+
+        if (classDeclaration.BaseList.Types.Count == 0)
+        {
+            return;
+        }
+
+        if (classDeclaration.BaseList.Types.Any(t => t.Type.ToString() == "IFeature") == true)
         {
             FeatureClasses.Add(classDeclaration);
         }

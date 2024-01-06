@@ -26,13 +26,21 @@ public class FeatureInitializerGenerator : ISourceGenerator
 
         foreach (var classDeclaration in receiver.FeatureClasses)
         {
-            if (!SyntaxNodeHelper.TryGetParentSyntax(classDeclaration, out NamespaceDeclarationSyntax? namespaceDeclarationSyntax))
+            string namespaceName;
+            if (SyntaxNodeHelper.TryGetParentSyntax(classDeclaration, out NamespaceDeclarationSyntax? namespaceDeclarationSyntax))
+            {
+                
+                namespaceName = namespaceDeclarationSyntax!.Name.ToString();
+            }
+            else if (SyntaxNodeHelper.TryGetParentSyntax(classDeclaration, out FileScopedNamespaceDeclarationSyntax? fileScopedNamespaceDeclarationSyntax))
+            {
+                namespaceName = fileScopedNamespaceDeclarationSyntax!.Name.ToString();
+            }
+            else
             {
                 // Handle the scenario where no namespace is found
                 return;
             }
-
-            var namespaceName = namespaceDeclarationSyntax!.Name.ToString();
 
             // Generate static initializer for each class
             var initializerCode = $@"
@@ -42,7 +50,7 @@ public class FeatureInitializerGenerator : ISourceGenerator
                     static {classDeclaration.Identifier.Text}()
                     {{
                         // Register the Copy
-                        FeatureExtensions.RegisterFeature<{classDeclaration.Identifier.Text}>(f => new {classDeclaration.Identifier.Text}(({classDeclaration.Identifier.Text})f));
+                        Mapsui.Extensions.FeatureExtensions.RegisterFeature<{classDeclaration.Identifier.Text}>(f => new {classDeclaration.Identifier.Text}(({classDeclaration.Identifier.Text})f));
                     }}
                 }}
             ";
