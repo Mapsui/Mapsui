@@ -5,6 +5,9 @@
 		<Description>Mapsui - Library for mapping</Description>
 		<PackageTags>$(PackageTags) nts</PackageTags>
 		<IsPackable>true</IsPackable>
+    <!--For Debugging Source Generated Files uncomment the line below-->
+    <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>-->
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -15,5 +18,12 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Mapsui\Mapsui.csproj" />
 	</ItemGroup>
+
+  <!--Source Code Generators-->
+  <ItemGroup>
+    <ProjectReference Include="..\SourceGenerators\Mapsui.SourceGenerator\Mapsui.SourceGenerator.csproj" 
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false"  />
+  </ItemGroup>
 
 </Project>
