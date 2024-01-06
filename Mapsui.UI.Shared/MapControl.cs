@@ -67,6 +67,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private int _updateWidget = 0;
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
+    // Default LoggingWidget when the debugger is attached
+    private LoggingWidget _loggingWidget;
 
     private void CommonInitialize()
     {
@@ -329,19 +331,21 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 // ... then return;
                 return;
 
-            // no, then create one
-            var loggingWidget = new LoggingWidget(map)
-            {
-                MarginX = 10,
-                MarginY = 10,
-                VerticalAlignment = Widgets.VerticalAlignment.Top,
-                HorizontalAlignment = Widgets.HorizontalAlignment.Left,
-                BackgroundColor = Color.Transparent,
-                Opacity = 0.0f,
-                LogLevelFilter = LogLevel.Trace,
-            };
+            // Is there already a LoggingWidget we used for an earlier map ...
+            if (_loggingWidget == null)
+                // no, then create one
+                _loggingWidget = new LoggingWidget(map)
+                {
+                    MarginX = 10,
+                    MarginY = 10,
+                    VerticalAlignment = Widgets.VerticalAlignment.Top,
+                    HorizontalAlignment = Widgets.HorizontalAlignment.Left,
+                    BackgroundColor = Color.Transparent,
+                    Opacity = 0.0f,
+                    LogLevelFilter = LogLevel.Trace,
+                };
 
-            map.Widgets.Add(loggingWidget);
+            map.Widgets.Add(_loggingWidget);
         }
     }
 
