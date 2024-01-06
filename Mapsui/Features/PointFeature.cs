@@ -2,7 +2,7 @@
 
 namespace Mapsui.Layers;
 
-public class PointFeature : BaseFeature, IFeature
+public partial class PointFeature : BaseFeature, IFeature
 {
     public PointFeature(PointFeature pointFeature) : base(pointFeature)
     {

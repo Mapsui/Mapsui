@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mapsui.Layers;
 
 namespace Mapsui.Extensions;
 
@@ -19,27 +18,14 @@ public static class FeatureExtensions
 
     public static IFeature StandardCopy(IFeature feature)
     {
-        if (feature is PointFeature pointFeature)
-        {
-            return new PointFeature(pointFeature);
-        }
-
-        if (feature is RectFeature rectFeature)
-        {
-            return new RectFeature(rectFeature);
-        }
-
-        if (feature is RasterFeature rasterFeature)
-        {
-            return new RasterFeature(rasterFeature);
-        }
-
         if (_copyFeature.TryGetValue(feature.GetType(), out var registeredCopy))
         {
             return registeredCopy(feature);
         }
         
-        throw new NotImplementedException();
+        // Fall Back if Type is not registered
+        var type = feature.GetType();
+        return (IFeature)Activator.CreateInstance(type, feature)!;
     }
 
     public static T Copy<T>(this T original, Func<T, T>? copy = null) where T : IFeature

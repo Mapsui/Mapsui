@@ -3,7 +3,7 @@ using System;
 
 namespace Mapsui.Layers;
 
-public class RasterFeature : BaseFeature, IFeature
+public partial class RasterFeature : BaseFeature, IFeature
 {
     public MRaster? Raster { get; }
     public MRect? Extent => Raster;

@@ -2,7 +2,7 @@
 
 namespace Mapsui.Layers;
 
-public class RectFeature : BaseFeature, IFeature
+public partial class RectFeature : BaseFeature, IFeature
 {
     public MRect? Rect { get; set; }
     public MRect? Extent => Rect;
