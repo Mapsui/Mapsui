@@ -630,9 +630,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Unsubscribe();
             StopUpdates();
             _invalidateTimer?.Dispose();
+            _invalidateTimer = null;
             _renderer?.Dispose();
             _renderer = null;
             _map?.Dispose();
+            _map = null;
         }
         _invalidateTimer = null;
     }
