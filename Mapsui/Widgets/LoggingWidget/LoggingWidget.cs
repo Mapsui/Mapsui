@@ -283,6 +283,15 @@ public event PropertyChangedEventHandler? PropertyChanged;
         }
     }
 
+    public Map Map
+    {
+        get => _map;
+        set
+        {
+            _map = value;
+        }
+    }
+
     public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
     {
         var args = new WidgetTouchedEventArgs(position);
