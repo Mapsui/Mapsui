@@ -12,7 +12,7 @@ public class FeatureInitializerGenerator : ISourceGenerator
     {
         // Uncomment to debug SourceCode Generator
         // System.Diagnostics.Debugger.Launch();
-        
+
         // Register a syntax receiver
         context.RegisterForSyntaxNotifications(() => new FeatureSyntaxReceiver());
     }
@@ -20,17 +20,20 @@ public class FeatureInitializerGenerator : ISourceGenerator
     public void Execute(GeneratorExecutionContext context)
     {
         if (context.SyntaxReceiver is not FeatureSyntaxReceiver receiver)
+        {
             return;
+        }
 
         foreach (var classDeclaration in receiver.FeatureClasses)
         {
-            if (!SyntaxNodeHelper.TryGetParentSyntax(classDeclaration, out NamespaceDeclarationSyntax namespaceDeclarationSyntax))
+            if (!SyntaxNodeHelper.TryGetParentSyntax(classDeclaration, out NamespaceDeclarationSyntax? namespaceDeclarationSyntax))
             {
                 // Handle the scenario where no namespace is found
                 return;
             }
-            var namespaceName = namespaceDeclarationSyntax.Name.ToString();
-            
+
+            var namespaceName = namespaceDeclarationSyntax!.Name.ToString();
+
             // Generate static initializer for each class
             var initializerCode = $@"
                 namespace {namespaceName};
@@ -45,7 +48,8 @@ public class FeatureInitializerGenerator : ISourceGenerator
             ";
 
             // Add the generated code to the compilation
-            context.AddSource($"{classDeclaration.Identifier.Text}.Initializer", SourceText.From(initializerCode, Encoding.UTF8));
+            context.AddSource($"{classDeclaration.Identifier.Text}.Initializer",
+                SourceText.From(initializerCode, Encoding.UTF8));
         }
     }
 }

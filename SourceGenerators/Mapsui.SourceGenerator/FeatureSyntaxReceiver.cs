@@ -18,7 +18,7 @@ internal class FeatureSyntaxReceiver : ISyntaxReceiver
 
         if (classDeclaration.BaseList?.Types.Any(t => t.Type.ToString() == "IFeature") == true)
         {
-            FeatureClasses.Add(classDeclaration);    
+            FeatureClasses.Add(classDeclaration);
         }
     }
 }
