@@ -16,6 +16,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using Mapsui.Disposing;
 
 #if __MAUI__
 using Microsoft.Maui.Controls;
@@ -450,12 +451,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Refresh();
         }
     }
-    // ReSharper restore RedundantNameQualifier
     
-#pragma warning disable IDISP008
-    private bool _ownsMap;
-    private Map? _map;
-#pragma warning restore IDISP008
+    // ReSharper restore RedundantNameQualifier
+    private DisposableWrapper<Map>? _map;
 
 #if __MAUI__
 
@@ -482,17 +480,14 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         get
         {
-            var map = GetValue(MapProperty) as Map;
-            if (map == null)
+            if (GetValue(MapProperty) is not Map map)
             {
-                _ownsMap = true;
-                _map = map = new Map();
+                _map ??= new DisposableWrapper<Map>(new Map(), true);
+                map = _map.WrappedObject;
                 SetValue(MapProperty, map);
             }
 
-#pragma warning disable IDISP012
             return map;
-#pragma warning restore IDISP012
         }
         set => SetValue(MapProperty, value);
     }
@@ -509,27 +504,17 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         get
         {
-            if (_map == null)
-            {
-                _ownsMap = true;
-                _map = new Map();
-            }
-
-            return _map;
+            _map ??= new DisposableWrapper<Map>(new Map(), true);
+            return _map.WrappedObject;
         }
         set
         {
             if (value is null) throw new ArgumentNullException(nameof(value));
 
             BeforeSetMap();
-            if (_ownsMap)
-            {
-                _map?.Dispose();
-            }
-
-            _ownsMap = false;
-            _map = value;
-            AfterSetMap(_map);
+            _map?.Dispose();
+            _map = new DisposableWrapper<Map>(value, false);
+            AfterSetMap(value);
             OnPropertyChanged();
         }
     }
@@ -647,11 +632,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             _invalidateTimer?.Dispose();
             _renderer?.Dispose();
             _renderer = null;
-            if (_ownsMap)
-            {
-                _map?.Dispose();
-                _map = null;
-            }
+            _map?.Dispose();
         }
         _invalidateTimer = null;
     }

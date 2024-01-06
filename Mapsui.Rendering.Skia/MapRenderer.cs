@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Mapsui.Disposing;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -27,11 +28,10 @@ namespace Mapsui.Rendering.Skia;
 
 public sealed class MapRenderer : IRenderer, IDisposable
 {
-    private readonly IRenderCache _renderCache;
+    private readonly DisposableWrapper<IRenderCache> _renderCache;
     private long _currentIteration;
-    private readonly bool _ownsRenderCache;
 
-    public IRenderCache RenderCache => _renderCache;
+    public IRenderCache RenderCache => _renderCache.WrappedObject;
 
     public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
 
@@ -48,7 +48,12 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public MapRenderer(IRenderCache renderer)
     {
-        _renderCache = renderer;
+        _renderCache = new DisposableWrapper<IRenderCache>(renderer, false);
+        InitRenderer();
+    }
+
+    private void InitRenderer()
+    {
         StyleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
         StyleRenderers[typeof(VectorStyle)] = new VectorStyleRenderer();
         StyleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
@@ -67,9 +72,10 @@ public sealed class MapRenderer : IRenderer, IDisposable
         WidgetRenders[typeof(LoggingWidget)] = new LoggingWidgetRenderer();
     }
 
-    public MapRenderer() : this(new RenderCache())
+    public MapRenderer()
     {
-        _ownsRenderCache = true;
+        _renderCache = new DisposableWrapper<IRenderCache>(new RenderCache(), true);
+        InitRenderer();
     }
 
     public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,
@@ -187,7 +193,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
             canvas.Save();
             // We have a special renderer, so try, if it could draw this
             var styleRenderer = (ISkiaStyleRenderer)renderer;
-            var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, _renderCache, iteration);
+            var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, RenderCache, iteration);
             // Restore old canvas
             canvas.Restore();
             // Was it drawn?
@@ -320,9 +326,6 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public void Dispose()
     {
-        if (_ownsRenderCache)
-        {
-            _renderCache.Dispose();    
-        }
+        _renderCache.Dispose();    
     }
 }
