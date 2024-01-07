@@ -102,7 +102,7 @@ internal class Marker : PointFeature
     // Default offsets for all other markers except pin (center/center)
     private static Offset _defaultAnchor = new Offset(0.0, 0.0);
     // Default offsets for all pin markers (center/bottom)
-    private static Offset _defaultPinAnchor = new Offset(0.0, 0.5, true);
+    private static Offset _defaultPinAnchor = new RelativeOffset(0.0, 0.5);
 
     /// <summary>
     /// Anchor of bitmap in pixel
@@ -150,9 +150,9 @@ internal class Marker : PointFeature
     public bool HasCallout => _calloutStyle.Enabled;
 
     // Default offsets for callout for all other markers except pin (center/top)
-    private static Offset _defaultCalloutAnchor = new Offset(0.0, 0.5, true);
+    private static Offset _defaultCalloutAnchor = new RelativeOffset(0.0, 0.5);
     // Default offsets for callout for all pin markers (center/top too, but anchor of pin is center/bottom not center/center)
-    private static Offset _defaultPinCalloutAnchor = new Offset(0.0, 1.0, true);
+    private static Offset _defaultPinCalloutAnchor = new RelativeOffset(0.0, 1.0);
 
     /// <summary>
     /// Anchor of bitmap in pixel
