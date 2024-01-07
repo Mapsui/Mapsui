@@ -179,7 +179,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleWidgetPointerDown(e.ToLocation(_clientRect), e.Button == 0, 2, ShiftPressed))
+            if (HandleWidgetPointerDown(e.ToLocation(_clientRect), e.Button == 0, 2, GetShiftPressed()))
                 return;
         }
         catch (Exception ex)
@@ -196,7 +196,7 @@ public partial class MapControl : ComponentBase, IMapControl
             _ = UpdateBoundingRectAsync();
 
             _pointerDownPosition = e.ToLocation(_clientRect);
-            if (HandleWidgetPointerDown(_pointerDownPosition, e.Button == 0, 1, ShiftPressed))
+            if (HandleWidgetPointerDown(_pointerDownPosition, e.Button == 0, 1, GetShiftPressed()))
                 return;
 
             IsInBoxZoomMode = e.Button == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
@@ -240,7 +240,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleWidgetPointerUp(e.ToLocation(_clientRect), _pointerDownPosition, e.Button == 0, 1, ShiftPressed))
+            if (HandleWidgetPointerUp(e.ToLocation(_clientRect), _pointerDownPosition, e.Button == 0, 1, GetShiftPressed()))
                 return;
 
             if (IsInBoxZoomMode)
@@ -291,7 +291,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            if (HandleWidgetPointerMove(e.ToLocation(_clientRect), e.Button == 0, 0, ShiftPressed))
+            if (HandleWidgetPointerMove(e.ToLocation(_clientRect), e.Button == 0, 0, GetShiftPressed()))
                 return;
 
             if (_previousMousePosition != null)
@@ -378,7 +378,10 @@ public partial class MapControl : ComponentBase, IMapControl
 
     }
 
-    public bool ShiftPressed => _pressedKeys.Contains("ShiftLeft") || _pressedKeys.Contains("ShiftRight") || _pressedKeys.Contains("Shift");
+    private bool GetShiftPressed()
+    {
+        return _pressedKeys.Contains("ShiftLeft") || _pressedKeys.Contains("ShiftRight") || _pressedKeys.Contains("Shift");
+    }
 
     public void OnTouchStart(TouchEventArgs e)
     {

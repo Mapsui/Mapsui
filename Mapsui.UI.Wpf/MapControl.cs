@@ -152,7 +152,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         _pointerDownPosition = e.GetPosition(this).ToMapsui();
 
-        if (HandleWidgetPointerDown(_pointerDownPosition, true, e.ClickCount, ShiftPressed))
+        if (HandleWidgetPointerDown(_pointerDownPosition, true, e.ClickCount, GetShiftPressed()))
             return;
 
         _previousMousePosition = _pointerDownPosition;
@@ -169,7 +169,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
         var mousePosition = e.GetPosition(this).ToMapsui();
-        if (HandleWidgetPointerUp(mousePosition, _pointerDownPosition, true, e.ClickCount, ShiftPressed))
+        if (HandleWidgetPointerUp(mousePosition, _pointerDownPosition, true, e.ClickCount, GetShiftPressed()))
             return;
 
         if (_previousMousePosition != null)
@@ -255,7 +255,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseMove(object sender, MouseEventArgs e)
     {
-        if (HandleWidgetPointerMove(e.GetPosition(this).ToMapsui(), e.LeftButton == MouseButtonState.Pressed, 0, ShiftPressed))
+        if (HandleWidgetPointerMove(e.GetPosition(this).ToMapsui(), e.LeftButton == MouseButtonState.Pressed, 0, GetShiftPressed()))
             return;
 
         if (IsInBoxZoomMode())
@@ -394,9 +394,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private double GetPixelDensity()
     {
-        var presentationSource = PresentationSource.FromVisual(this) 
+        var presentationSource = PresentationSource.FromVisual(this)
             ?? throw new Exception("PresentationSource is null");
-        var compositionTarget = presentationSource.CompositionTarget 
+        var compositionTarget = presentationSource.CompositionTarget
             ?? throw new Exception("CompositionTarget is null");
         var matrix = compositionTarget.TransformToDevice;
 
@@ -424,5 +424,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         GC.SuppressFinalize(this);
     }
 
-    public static bool ShiftPressed => Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+    private static bool GetShiftPressed()
+    {
+        return Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+    }
 }

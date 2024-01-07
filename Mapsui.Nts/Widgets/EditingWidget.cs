@@ -3,6 +3,7 @@ using Mapsui.UI;
 using Mapsui.Widgets;
 
 namespace Mapsui.Nts.Widgets;
+
 public class EditingWidget : Widget, IWidgetExtended
 {
     public IMapControl MapControl { get; }
@@ -27,12 +28,12 @@ public class EditingWidget : Widget, IWidgetExtended
 
         if (args.LeftButton)
         {
-            EditManipulation.Manipulate(MouseState.Dragging, screenPosition,
+            EditManipulation.Manipulate(PointerState.Dragging, screenPosition,
                 EditManager, MapControl, args.Shift);
         }
         else
         {
-            EditManipulation.Manipulate(MouseState.Moving, screenPosition,
+            EditManipulation.Manipulate(PointerState.Hovering, screenPosition,
                 EditManager, MapControl, args.Shift);
         }
 
@@ -47,14 +48,7 @@ public class EditingWidget : Widget, IWidgetExtended
         if (MapControl.Map == null)
             return false;
 
-        if (args.ClickCount > 1)
-        {
-            MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(MouseState.DoubleClick,
-                position, EditManager, MapControl, args.Shift);
-            return true;
-        }
-
-        MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(MouseState.Down,
+        MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(PointerState.Down,
             position, EditManager, MapControl, args.Shift);
 
         return false;
@@ -66,7 +60,7 @@ public class EditingWidget : Widget, IWidgetExtended
             return false;
 
         if (MapControl.Map != null)
-            MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(MouseState.Up,
+            MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(PointerState.Up,
                 position, EditManager, MapControl, args.Shift);
 
         if (EditManager.SelectMode)

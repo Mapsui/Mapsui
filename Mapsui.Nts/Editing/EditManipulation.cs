@@ -5,13 +5,12 @@ using Mapsui.UI;
 
 namespace Mapsui.Nts.Editing;
 
-public enum MouseState
+public enum PointerState
 {
     Down,
     Up,
-    Dragging, // moving with mouse down
-    Moving, // moving with mouse up
-    DoubleClick
+    Dragging, // Moving with pointer down
+    Hovering, // Moving with pointer up. Will not occur on touch which should not be a problem because it is only used as preview.
 }
 
 public class EditManipulation
@@ -21,12 +20,12 @@ public class EditManipulation
 
     public static int MinPixelsMovedForDrag { get; set; } = 4;
 
-    public bool Manipulate(MouseState mouseState, MPoint screenPosition,
+    public bool Manipulate(PointerState mouseState, MPoint screenPosition,
         EditManager editManager, IMapControl mapControl, bool isShiftDown)
     {
         switch (mouseState)
         {
-            case MouseState.Up:
+            case PointerState.Up:
                 if (_inDoubleClick) // Workaround to prevent that after a double click the 'up' event will immediately add a new geometry.
                 {
                     _inDoubleClick = false;
@@ -52,10 +51,17 @@ public class EditManipulation
                         return editManager.TryInsertCoordinate(
                             mapControl.GetMapInfo(screenPosition, editManager.VertexRadius));
                     }
+                    else if (editManager.EditMode == EditMode.DrawingPolygon || editManager.EditMode == EditMode.DrawingLine)
+                    {
+                        if (isShiftDown)
+                        {
+                            return editManager.EndEdit();
+                        }
+                    }
                     return editManager.AddVertex(mapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
                 }
                 return false;
-            case MouseState.Down:
+            case PointerState.Down:
                 {
                     _mouseDownPosition = screenPosition;
                     // Take into account VertexRadius in feature select, because the objective
@@ -75,7 +81,7 @@ public class EditManipulation
                     }
                     return false;
                 }
-            case MouseState.Dragging:
+            case PointerState.Dragging:
                 {
                     var args = mapControl.GetMapInfo(screenPosition);
                     if (editManager.EditMode == EditMode.Modify)
@@ -87,13 +93,8 @@ public class EditManipulation
 
                     return false;
                 }
-            case MouseState.Moving:
+            case PointerState.Hovering:
                 editManager.HoveringVertex(mapControl.GetMapInfo(screenPosition));
-                return false;
-            case MouseState.DoubleClick:
-                _inDoubleClick = true;
-                if (editManager.EditMode != EditMode.Modify)
-                    return editManager.EndEdit();
                 return false;
             default:
                 throw new Exception();
