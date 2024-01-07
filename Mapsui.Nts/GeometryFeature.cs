@@ -50,4 +50,10 @@ public class GeometryFeature : BaseFeature, IFeature
         // Recalculate the Envelope
         Geometry.GeometryChangedAction();
     }
+
+    override public void Modified()
+    {
+        base.Modified();
+        Geometry?.GeometryChanged();
+    }
 }
