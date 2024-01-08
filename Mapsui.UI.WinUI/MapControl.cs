@@ -57,19 +57,19 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         SizeChanged += MapControlSizeChanged;
 
-        PointerWheelChanged += MapControl_PointerWheelChanged;
-
         ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY | ManipulationModes.Rotate;
+
+        // Pointer events        
         ManipulationStarted += OnManipulationStarted;
         ManipulationDelta += OnManipulationDelta;
         ManipulationCompleted += OnManipulationCompleted;
-
         ManipulationInertiaStarting += OnManipulationInertiaStarting;
-
         Tapped += OnSingleTapped;
         PointerPressed += MapControl_PointerDown;
         DoubleTapped += OnDoubleTapped;
         PointerMoved += MapControl_PointerMoved;
+        PointerWheelChanged += MapControl_PointerWheelChanged;
+
         KeyDown += MapControl_KeyDown;
         KeyUp += MapControl_KeyUp;
 

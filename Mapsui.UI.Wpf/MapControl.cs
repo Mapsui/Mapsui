@@ -51,22 +51,21 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         SkiaCanvas.PaintSurface += SKElementOnPaintSurface;
 
-        Loaded += MapControlLoaded;
+        // Pointer events
         MouseLeftButtonDown += MapControlMouseLeftButtonDown;
         MouseLeftButtonUp += MapControlMouseLeftButtonUp;
-
-        TouchUp += MapControlTouchUp;
-
         MouseMove += MapControlMouseMove;
         MouseLeave += MapControlMouseLeave;
         MouseWheel += MapControlMouseWheel;
-
-        SizeChanged += MapControlSizeChanged;
-
+        TouchUp += MapControlTouchUp;
         ManipulationStarted += OnManipulationStarted;
         ManipulationDelta += OnManipulationDelta;
         ManipulationCompleted += OnManipulationCompleted;
         ManipulationInertiaStarting += OnManipulationInertiaStarting;
+
+        Loaded += MapControlLoaded;
+
+        SizeChanged += MapControlSizeChanged;
 
         IsManipulationEnabled = true;
 

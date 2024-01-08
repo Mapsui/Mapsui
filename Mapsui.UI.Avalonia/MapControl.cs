@@ -65,14 +65,13 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
         Initialized += MapControlInitialized;
 
+        // Pointer events
         PointerPressed += MapControl_PointerPressed;
         PointerReleased += MapControl_PointerReleased;
         PointerMoved += MapControlMouseMove;
         PointerExited += MapControlMouseLeave;
         PointerCaptureLost += MapControlPointerCaptureLost;
-
         PointerWheelChanged += MapControlMouseWheel;
-
         DoubleTapped += OnDoubleTapped;
 
         // Needed to track the state of _shiftPressed because DoubleTapped does not have KeyModifiers.
