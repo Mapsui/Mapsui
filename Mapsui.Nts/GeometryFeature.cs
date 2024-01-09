@@ -46,7 +46,7 @@ public class GeometryFeature : BaseFeature, IFeature
     /// <summary>
     /// Order of feature
     /// </summary>
-    public int ZOrder => throw new NotImplementedException();
+    public int ZOrder { get; set; } = 0;
 
     /// <summary>
     /// Implementation of visitor pattern for coordinates

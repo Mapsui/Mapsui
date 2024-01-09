@@ -40,7 +40,7 @@ public class PointFeature : BaseFeature, IFeature
     /// <summary>
     /// Order of feature
     /// </summary>
-    public int ZOrder { get; set; }
+    public int ZOrder { get; set; } = 0;
 
     /// <summary>
     /// Implementation of visitor pattern for coordinates
