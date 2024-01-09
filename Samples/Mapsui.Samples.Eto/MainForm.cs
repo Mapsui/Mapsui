@@ -27,7 +27,6 @@ public class MainForm : Form
     DropDown CategoryComboBox = new() { Width = 200 };
     StackLayout SampleList = new();
     MapControl MapControl = new();
-    Label LogTextBox = new(); // 'information time'
     StackLayout LayerList = new() { HorizontalContentAlignment = HorizontalAlignment.Right };
     Slider RotationSlider = new() { Width = 200 };
     public MainForm()
@@ -48,8 +47,6 @@ public class MainForm : Form
         MapControl.ZoomButton = MouseButtons.Alternate;
         MapControl.ZoomModifier = Keys.None;
 
-        Logger.LogDelegate += LogMethod;
-
         CategoryComboBox.SelectedValueChanged += CategoryComboBox_SelectedValueChanged;
 
         FillComboBoxWithCategories();
@@ -63,7 +60,6 @@ public class MainForm : Form
         map_layout.SizeChanged += MapLayoutSizeChanged;
         map_layout.Add(MapControl, Point.Empty);
         map_layout.Add(LayerList, Point.Empty);
-        map_layout.Add(LogTextBox, Point.Empty);
 
         Content = new DynamicLayout(new DynamicRow(sample_layout, map_layout)) { Spacing = new Size(4, 4) };
     }
@@ -73,8 +69,6 @@ public class MainForm : Form
         {
             MapControl.Size = layout.Size;
             layout.Move(LayerList, layout.Width - LayerList.Width, 0);
-            var logtext_box_height = LogTextBox.Height * _logMessage.Limit;
-            layout.Move(LogTextBox, 0, layout.Height - logtext_box_height);
         }
     }
 
@@ -133,25 +127,6 @@ public class MainForm : Form
         return radioButton;
     }
 
-    readonly LimitedQueue<LogModel> _logMessage = new(6);
-    private void LogMethod(LogLevel logLevel, string? message, Exception? exception)
-    {
-        _logMessage.Enqueue(new LogModel { Exception = exception, LogLevel = logLevel, Message = message });
-        Application.Instance.AsyncInvoke(() => LogTextBox.Text = ToMultiLineString(_logMessage));
-    }
-    private string ToMultiLineString(LimitedQueue<LogModel> logMessages)
-    {
-        var result = new StringBuilder();
-
-        var copy = logMessages.ToList();
-        foreach (var logMessage in copy)
-        {
-            if (logMessage == null) continue;
-            result.Append($"{logMessage.LogLevel} {logMessage.Message}{Environment.NewLine}");
-        }
-
-        return result.ToString();
-    }
     private void RotationSliderChanged(object? sender, EventArgs e)
     {
         var percent = (double)RotationSlider.Value / (RotationSlider.MaxValue - RotationSlider.MinValue);
