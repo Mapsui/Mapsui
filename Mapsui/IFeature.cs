@@ -26,6 +26,13 @@ public interface IFeature
     /// </summary>
     IEnumerable<string> Fields { get; }
     /// <summary>
+    /// Order of features retrieved from GetFeatures() 
+    /// </summary>
+    /// <remarks>
+    /// Smaller values are retrieved later
+    /// </remarks>
+    int ZOrder { get; }
+    /// <summary>
     /// <cref="Extent"/> of feature
     /// </summary>
     MRect? Extent { get; }
