@@ -22,6 +22,11 @@ public class PointFeature : BaseFeature, IFeature
         Point = new MPoint(x, y);
     }
 
+    public PointFeature((double x, double y) point)
+    {
+        Point = new MPoint(point.x, point.y);
+    }
+
     /// <summary>
     /// Point of <cref="Map"/>
     /// </summary>
