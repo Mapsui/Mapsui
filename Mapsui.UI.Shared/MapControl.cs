@@ -68,7 +68,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
     // Default LoggingWidget when the debugger is attached
-    private LoggingWidget _loggingWidget;
+    private LoggingWidget? _loggingWidget;
 
     private void CommonInitialize()
     {
@@ -344,6 +344,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                     Opacity = 0.0f,
                     LogLevelFilter = LogLevel.Trace,
                 };
+            else
+                _loggingWidget.Map = map; 
 
             map.Widgets.Add(_loggingWidget);
         }
