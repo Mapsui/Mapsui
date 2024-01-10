@@ -9,27 +9,41 @@ public class Offset
     /// </summary>
     public Offset() { }
 
-    public Offset(double x, double y, bool isRelative = false)
+    public Offset(double x, double y)
     {
         X = x;
         Y = y;
-        IsRelative = isRelative;
     }
 
-    public Offset(Offset offset, bool isRelative = false)
+    public Offset(Offset offset)
     {
         X = offset.X;
         Y = offset.Y;
-        IsRelative = isRelative;
+    }
+
+    public Offset(MPoint point)
+    {
+        X = point.X;
+        Y = point.Y;
     }
 
     public double X { get; set; }
     public double Y { get; set; }
-    public bool IsRelative { get; set; }
 
     public MPoint ToPoint()
     {
         return new MPoint(X, Y);
+    }
+
+    /// <summary>
+    /// Calculate the real offset respecting width and height
+    /// </summary>
+    /// <param name="width">Width of the symbol</param>
+    /// <param name="height">Height of the symbol</param>
+    /// <returns>Calculated offset</returns>
+    public virtual Offset CalcOffset(double width, double height)
+    {
+        return this;
     }
 
     public override bool Equals(object? obj)
@@ -48,13 +62,12 @@ public class Offset
         if (X != offset.X) return false;
         // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (Y != offset.Y) return false;
-        if (IsRelative != offset.IsRelative) return false;
         return true;
     }
 
     public override int GetHashCode()
     {
-        return X.GetHashCode() ^ Y.GetHashCode() ^ IsRelative.GetHashCode();
+        return X.GetHashCode() ^ Y.GetHashCode();
     }
 
     public static bool operator ==(Offset? offset1, Offset? offset2)
