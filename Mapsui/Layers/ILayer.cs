@@ -4,13 +4,12 @@
 
 // This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 
+using Mapsui.Animations;
+using Mapsui.Styles;
+using Mapsui.Widgets;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Mapsui.Animations;
-using Mapsui.Fetcher;
-using Mapsui.Styles;
-using Mapsui.Widgets;
 
 namespace Mapsui.Layers;
 
@@ -55,7 +54,7 @@ public interface ILayer : IAnimatable, INotifyPropertyChanged, IDisposable
     MRect? Extent { get; }
 
     /// <summary>
-    /// Gets or sets rendering style of layer
+    /// Gets or sets rendering style of layer belonging to all its features
     /// </summary>
     IStyle? Style { get; set; }
 
@@ -91,17 +90,4 @@ public interface ILayer : IAnimatable, INotifyPropertyChanged, IDisposable
     /// Indicates if the layer should be taken into account for the GetMapInfo request
     /// </summary>
     bool IsMapInfoLayer { get; set; }
-
-    /// <summary>
-    /// Event called when the data within the layer has changed allowing
-    /// listeners to react to this.
-    /// </summary>
-    event DataChangedEventHandler DataChanged;
-
-    /// <summary>
-    /// To indicate the data withing the layer has changed. This triggers a DataChanged event.
-    /// This is necessary for situations where the layer can not know about changes to it's data
-    /// as in the case of editing of a geometry.
-    /// </summary>
-    void DataHasChanged();
 }
