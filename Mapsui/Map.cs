@@ -256,8 +256,8 @@ public class Map : INotifyPropertyChanged, IDisposable
 
     private void LayerAdded(ILayer layer)
     {
-        layer.DataChanged += LayerDataChanged;
-        layer.PropertyChanged += LayerPropertyChanged;
+        if (layer is IDynamicLayer dynamicLayer) dynamicLayer.DataChanged += LayerDataChanged;
+        if (layer is INotifyPropertyChanged propertyLayer) propertyLayer.PropertyChanged += LayerPropertyChanged;
     }
 
     private void LayerRemoved(ILayer layer)
@@ -265,8 +265,8 @@ public class Map : INotifyPropertyChanged, IDisposable
         if (layer is IAsyncDataFetcher asyncLayer)
             asyncLayer.AbortFetch();
 
-        layer.DataChanged -= LayerDataChanged;
-        layer.PropertyChanged -= LayerPropertyChanged;
+        if (layer is IDynamicLayer dynamicLayer) dynamicLayer.DataChanged -= LayerDataChanged;
+        if (layer is INotifyPropertyChanged propertyLayer) propertyLayer.PropertyChanged -= LayerPropertyChanged;
     }
 
     private void LayersChanged()

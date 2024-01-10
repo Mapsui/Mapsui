@@ -43,7 +43,7 @@ public class SingleCalloutSample : ISample
         if (calloutStyle != null)
         {
             calloutStyle.Enabled = !calloutStyle.Enabled;
-            e.MapInfo?.Layer?.DataHasChanged(); // To trigger a refresh of graphics.
+            if (e.MapInfo?.Layer is IDynamicLayer dynamicLayer) dynamicLayer.DataHasChanged(); // To trigger a refresh of graphics.
         }
     }
 

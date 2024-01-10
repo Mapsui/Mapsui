@@ -50,7 +50,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
         if (rasterizer != null) _rasterizer = rasterizer;
         _cache = new ConcurrentStack<RasterFeature>();
         _pixelDensity = pixelDensity;
-        _layer.DataChanged += LayerOnDataChanged;
+        if (_layer is IDynamicLayer dynamicLayer) dynamicLayer.DataChanged += LayerOnDataChanged;
         Delayer.StartWithDelay = true;
         Delayer.MillisecondsToWait = delayBeforeRasterize;
         Style = new RasterStyle(); // default raster style

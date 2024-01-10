@@ -59,7 +59,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher, 
     {
         SourceLayer = layer;
         Name = layer.Name;
-        SourceLayer.DataChanged += (s, e) =>
+        if (SourceLayer is IDynamicLayer dynamicLayer) dynamicLayer.DataChanged += (s, e) =>
         {
             ClearCache();
             DataHasChanged();
