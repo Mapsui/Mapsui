@@ -10,7 +10,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
-internal sealed class BusPointProvider : MemoryProvider, IDynamic, IDisposable
+internal sealed class BusPointProvider : MemoryProvider, IDynamicLayer, IDisposable
 {
     public event DataChangedEventHandler? DataChanged;
 
@@ -34,7 +34,7 @@ internal sealed class BusPointProvider : MemoryProvider, IDynamic, IDisposable
         }
     }
 
-    void IDynamic.DataHasChanged()
+    void IDynamicLayer.DataHasChanged()
     {
         OnDataChanged();
     }

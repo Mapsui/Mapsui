@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
-internal class AnimatedPointsSampleProvider : MemoryProvider, IDynamic, IDisposable
+internal class AnimatedPointsSampleProvider : MemoryProvider, IDynamicLayer, IDisposable
 {
     // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
     // ReSharper disable once NotAccessedField.Local
