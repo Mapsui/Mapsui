@@ -79,8 +79,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             return false;
 
         // Calc offset (relative or absolute)
-        var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
-        var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
+        var offset = symbolStyle.SymbolOffset.CalcOffset(bitmap.Width, bitmap.Height);
 
         var rotation = (float)symbolStyle.SymbolRotation;
         if (symbolStyle.RotateWithMap) rotation += (float)viewport.Rotation;
@@ -94,7 +93,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 BitmapRenderer.Draw(canvas, bitmap.Bitmap,
                     (float)destX, (float)destY,
                     rotation,
-                    (float)offsetX, (float)offsetY,
+                    (float)offset.X, (float)offset.Y,
                     opacity: opacity, scale: (float)symbolStyle.SymbolScale);
                 break;
             case BitmapType.Picture:
@@ -104,7 +103,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 PictureRenderer.Draw(canvas, bitmap.Picture,
                     (float)destX, (float)destY,
                     rotation,
-                    (float)offsetX, (float)offsetY,
+                    (float)offset.X, (float)offset.Y,
                     opacity: opacity, scale: (float)symbolStyle.SymbolScale, blendModeColor: symbolStyle.BlendModeColor);
                 break;
             case BitmapType.Svg:
@@ -116,7 +115,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 SvgRenderer.Draw(canvas, bitmap.Svg,
                     (float)destX, (float)destY,
                     rotation,
-                    (float)offsetX, (float)offsetY,
+                    (float)offset.X, (float)offset.Y,
                     opacity: opacity, scale: (float)symbolStyle.SymbolScale);
                 break;
             case BitmapType.Sprite:
@@ -134,7 +133,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     BitmapRenderer.Draw(canvas, skImage,
                         (float)destX, (float)destY,
                         rotation,
-                        (float)offsetX, (float)offsetY,
+                        (float)offset.X, (float)offset.Y,
                         opacity: opacity, scale: (float)symbolStyle.SymbolScale);
                 break;
         }
@@ -152,10 +151,11 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         canvas.Translate((float)destX, (float)destY);
         canvas.Scale((float)symbolStyle.SymbolScale, (float)symbolStyle.SymbolScale);
-        if (symbolStyle.SymbolOffset.IsRelative)
-            canvas.Translate((float)(SymbolStyle.DefaultWidth * symbolStyle.SymbolOffset.X), (float)(-SymbolStyle.DefaultWidth * symbolStyle.SymbolOffset.Y));
-        else
-            canvas.Translate((float)symbolStyle.SymbolOffset.X, (float)-symbolStyle.SymbolOffset.Y);
+
+        var offset = symbolStyle.SymbolOffset.CalcOffset(SymbolStyle.DefaultWidth, SymbolStyle.DefaultWidth);
+
+        canvas.Translate((float)offset.X, (float)-offset.Y);
+
         if (symbolStyle.SymbolRotation != 0)
         {
             var rotation = symbolStyle.SymbolRotation;
@@ -289,18 +289,13 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         size = Math.Max(size, SymbolStyle.DefaultWidth); // if defaultWith is larger take this.
 
         // Calc offset (relative or absolute)
-        var offsetX = symbolStyle.SymbolOffset.IsRelative
-            ? symbolSize.Width * symbolStyle.SymbolOffset.X
-            : symbolStyle.SymbolOffset.X;
-        var offsetY = symbolStyle.SymbolOffset.IsRelative
-            ? symbolSize.Height * symbolStyle.SymbolOffset.Y
-            : symbolStyle.SymbolOffset.Y;
+        var offset = symbolStyle.SymbolOffset.CalcOffset(symbolSize.Width, symbolSize.Height);
 
         // Pythagoras for maximal distance
-        var offset = Math.Sqrt(offsetX * offsetX + offsetY * offsetY);
+        var length = Math.Sqrt(offset.X * offset.X + offset.Y * offset.Y);
 
-        // add offset to size multiplied by two because the total size increased by the offset
-        size += (offset * 2);
+        // add length to size multiplied by two because the total size increased by the offset
+        size += (length * 2);
 
         return size;
     }
