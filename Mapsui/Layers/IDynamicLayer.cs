@@ -6,7 +6,11 @@ using Mapsui.Fetcher;
 
 namespace Mapsui.Layers;
 
-public interface IDynamic
+/// <summary>
+/// Interface for layers, that have dynamic data and because of that should 
+/// inform others about changes
+/// </summary>
+public interface IDynamicLayer
 {
     /// <summary>
     /// Event called when the data within the layer has changed allowing
