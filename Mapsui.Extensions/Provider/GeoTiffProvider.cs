@@ -105,10 +105,33 @@ public class GeoTiffProvider : IProvider, IDisposable
         }
     }
 
+    private const TiffTag TIFFTAG_ModelPixelScaleTag = (TiffTag)33550;
+    private const TiffTag TIFFTAG_ModelTiepointTag = (TiffTag)33922;
+
+    private static Tiff.TiffExtendProc? _parentExtender;
+
+    public static void TagExtender(Tiff tif)
+    {
+        TiffFieldInfo[] tiffFieldInfo =
+        {
+                new TiffFieldInfo(TIFFTAG_ModelPixelScaleTag, 3, 3, TiffType.DOUBLE, FieldBit.Custom, true, false, "ModelPixelScaleTag"),
+                new TiffFieldInfo(TIFFTAG_ModelTiepointTag, 6, 6, TiffType.DOUBLE, FieldBit.Custom, false, true, "ModelTiepointTag"),
+            };
+
+        tif.MergeFieldInfo(tiffFieldInfo, tiffFieldInfo.Length);
+
+        if (_parentExtender != null)
+            _parentExtender(tif);
+    }
+
     private static TiffProperties LoadTiff(string location)
     {
         TiffProperties tiffFileProperties;
 
+        // Register the custom tag handler
+        Tiff.TiffExtendProc extender = TagExtender;
+        _parentExtender = Tiff.SetTagExtender(extender);
+        
         using var tif = Tiff.Open(location, "r4") ?? Tiff.Open(location, "r8"); // read big tiff if normal tiff fails.
 
         FieldValue[] value = tif.GetField(TiffTag.IMAGEWIDTH);
