@@ -12,7 +12,7 @@
     <PackageReference Include="Uno.UI.RemoteControl" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
     <PackageReference Include="SkiaSharp.Views.Uno" />
-    <packageReference Include="System.Drawing.Common" VersionOverride="8.0.0-preview.7.23375.5"/>
+    <packageReference Include="System.Drawing.Common" VersionOverride="8.0.0"/>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Fonts\uno-fluentui-assets.ttf" />
