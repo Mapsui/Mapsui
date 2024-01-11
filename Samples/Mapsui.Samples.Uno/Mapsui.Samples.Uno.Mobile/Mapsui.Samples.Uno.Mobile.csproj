@@ -37,6 +37,9 @@
   </ItemGroup>
   <Choose>
     <When Condition="'$(TargetFramework)'=='net8.0-android'">
+      <PropertyGroup>
+        <PublishTrimmed>false</PublishTrimmed>
+      </PropertyGroup>
       <ItemGroup>
         <PackageReference Include="Xamarin.Google.Android.Material" VersionOverride="1.4.0.4" />
         <PackageReference Include="Uno.UniversalImageLoader" />
