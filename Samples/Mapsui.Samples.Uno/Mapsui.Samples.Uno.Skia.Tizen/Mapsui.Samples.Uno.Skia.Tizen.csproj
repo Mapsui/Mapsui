@@ -22,8 +22,9 @@
 
   <ItemGroup>
     <PackageReference Include="SkiaSharp.Views" />
-    <PackageReference Include="Uno.UI.Skia.Tizen" />
-    <PackageReference Include="Uno.UI.RemoteControl" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI" VersionOverride="4.10.26" />
+    <PackageReference Include="Uno.UI.Skia.Tizen" VersionOverride="4.10.26" />
+    <PackageReference Include="Uno.UI.RemoteControl" Condition="'$(Configuration)'=='Debug'" VersionOverride="4.10.26" />
     <PackageReference Include="SkiaSharp.Views.Uno" />
   </ItemGroup>
 
