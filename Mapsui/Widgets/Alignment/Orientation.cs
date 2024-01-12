@@ -1,4 +1,4 @@
-﻿namespace Mapsui.Widgets.Zoom;
+﻿namespace Mapsui.Widgets;
 
 public enum Orientation
 {

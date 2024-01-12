@@ -7,8 +7,7 @@ public class CustomWidget : IWidget
 {
     public HorizontalAlignment HorizontalAlignment { get; set; }
     public VerticalAlignment VerticalAlignment { get; set; }
-    public double MarginX { get; set; } = 20;
-    public double MarginY { get; set; } = 20;
+    public MRect Margin { get; set; } = new MRect(20);
     public MRect? Envelope { get; set; }
     public bool HandleWidgetTouched(Navigator navigator, MPoint position)
     {
@@ -17,6 +16,7 @@ public class CustomWidget : IWidget
     }
 
     public Color? Color { get; set; }
+    public MPoint Position { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public double Width { get; set; }
     public double Height { get; set; }
     public bool Enabled { get; set; } = true;

@@ -4,7 +4,7 @@ using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Utilities;
-using Mapsui.Widgets;
+using Mapsui.Widgets.InfoWidgets;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
