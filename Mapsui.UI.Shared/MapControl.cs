@@ -66,8 +66,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private int _updateWidget = 0;
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
-    // Default LoggingWidget when the debugger is attached
-    private LoggingWidget _loggingWidget;
 
     private void CommonInitialize()
     {
@@ -316,37 +314,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         map.RefreshGraphicsRequest += Map_RefreshGraphicsRequest;
     }
 
-    /// <summary>
-    /// Check, if a debugger is attached and, if yes, add a default LoggingWidget
-    /// </summary>
-    /// <param name="map">Map, to which LoggingWidget should add</param>
-    private void CheckForLoggingWidget(Map map)
-    {
-        // If in debug mode ...
-        if (System.Diagnostics.Debugger.IsAttached)
-        {
-            // Is there already a LoggingWidget ...
-            if (map.Widgets.Where(w => w.GetType() == typeof(LoggingWidget)).Count() > 0)
-                // ... then return;
-                return;
-
-            // Is there already a LoggingWidget we used for an earlier map ...
-            if (_loggingWidget == null)
-                // no, then create one
-                _loggingWidget = new LoggingWidget()
-                {
-                    Margin = new MRect(10),
-                    VerticalAlignment = Widgets.VerticalAlignment.Top,
-                    HorizontalAlignment = Widgets.HorizontalAlignment.Left,
-                    BackColor = Color.Transparent,
-                    Opacity = 0.0f,
-                    LogLevelFilter = LogLevel.Trace,
-                };
-
-            map.Widgets.Add(_loggingWidget);
-        }
-    }
-
     private void Map_RefreshGraphicsRequest(object? sender, EventArgs e)
     {
         RefreshGraphics();
@@ -502,7 +469,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         map.Navigator.SetSize(ViewportWidth, ViewportHeight);
         SubscribeToMapEvents(map);
-        CheckForLoggingWidget(map);
         Refresh();
     }
 

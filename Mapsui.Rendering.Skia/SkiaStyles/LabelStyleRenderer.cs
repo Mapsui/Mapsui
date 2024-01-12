@@ -29,8 +29,8 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var text = style.GetLabelText(feature);
 
         var info = labelCache.GetOrCreateLabel(text, style, layerOpacity, CreateLabelAsBitmap);
-        var offsetX = style.Offset.IsRelative ? info.Width * style.Offset.X : style.Offset.X;
-        var offsetY = style.Offset.IsRelative ? info.Height * style.Offset.Y : style.Offset.Y;
+        var offsetX = style.Offset is RelativeOffset ? info.Width * style.Offset.X : style.Offset.X;
+        var offsetY = style.Offset is RelativeOffset ? info.Height * style.Offset.Y : style.Offset.Y;
 
         BitmapRenderer.Draw(canvas, info.Bitmap, (int)Math.Round(x), (int)Math.Round(y),
             offsetX: (float)offsetX, offsetY: (float)-offsetY,
@@ -215,8 +215,8 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var horizontalAlign = CalcHorizontalAlignment(style.HorizontalAlignment);
         var verticalAlign = CalcVerticalAlignment(style.VerticalAlignment);
 
-        var offsetX = style.Offset.IsRelative ? drawRect.Width * style.Offset.X : style.Offset.X;
-        var offsetY = style.Offset.IsRelative ? drawRect.Height * style.Offset.Y : style.Offset.Y;
+        var offsetX = style.Offset is RelativeOffset ? drawRect.Width * style.Offset.X : style.Offset.X;
+        var offsetY = style.Offset is RelativeOffset ? drawRect.Height * style.Offset.Y : style.Offset.Y;
 
         drawRect.Offset(
             x - drawRect.Width * horizontalAlign + (float)offsetX,
@@ -410,14 +410,13 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         var drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
 
-        var offsetX = labelStyle.Offset.IsRelative ? drawRect.Width * labelStyle.Offset.X : labelStyle.Offset.X;
-        var offsetY = labelStyle.Offset.IsRelative ? drawRect.Height * labelStyle.Offset.Y : labelStyle.Offset.Y;
+        var offset = labelStyle.Offset.CalcOffset(drawRect.Width, drawRect.Height);
 
         // Pythagoras for maximal distance
-        var offset = Math.Sqrt(offsetX * offsetX + offsetY * offsetY);
+        var length = Math.Sqrt(offset.X * offset.X + offset.Y * offset.Y);
 
         // add offset to size multiplied by two because the total size increased by the offset
-        size += (offset * 2);
+        size += (length * 2);
 
         return size;
     }
