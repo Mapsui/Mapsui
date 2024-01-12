@@ -45,7 +45,7 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         var paddingX = loggingWidget.PaddingX;
         var paddingY = loggingWidget.PaddingY;
 
-        var rect = new SKRect(marginX, marginY, marginX + width, marginY + height);
+        var rect = new SKRect((float)marginX, (float)marginY, (float)(marginX + width), (float)(marginY + height));
 
         canvas.DrawRect(rect, _backgroundPaint);
 
@@ -65,8 +65,8 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
                 _ => _informationTextPaint,
             };
 
-            canvas.DrawText(entry.LogLevel.ToString(), marginX + paddingX, marginY + (paddingX * line) + loggingWidget.TextSize * (line + 1), paint);
-            canvas.DrawText(entry.Description, marginX + paddingX + _levelWidth + 2 * paddingX, marginY + (paddingY * line) + loggingWidget.TextSize * (line + 1), paint);
+            canvas.DrawText(entry.LogLevel.ToString(), (float)(marginX + paddingX), (float)(marginY + (paddingX * line) + loggingWidget.TextSize * (line + 1)), paint);
+            canvas.DrawText(entry.Description, (float)(marginX + paddingX + _levelWidth + 2 * paddingX), (float)(marginY + (paddingY * line) + loggingWidget.TextSize * (line + 1)), paint);
 
             line++;
         }

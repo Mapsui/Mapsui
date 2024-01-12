@@ -1,10 +1,13 @@
-using System;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using NetTopologySuite.Geometries;
+using System;
 
 namespace Mapsui.Nts;
 
+/// <summary>
+/// Feature representing a NTS geometry on the <cref="Map"/>
+/// </summary>
 public partial class GeometryFeature : BaseFeature, IFeature
 {
     public GeometryFeature()
@@ -30,10 +33,25 @@ public partial class GeometryFeature : BaseFeature, IFeature
         Geometry = geometry;
     }
 
+    /// <summary>
+    /// Geometry for this feature
+    /// </summary>
     public Geometry? Geometry { get; set; }
 
+    /// <summary>
+    /// Extent of feature
+    /// </summary>
     public MRect? Extent => Geometry?.EnvelopeInternal.ToMRect();
 
+    /// <summary>
+    /// Order of feature
+    /// </summary>
+    public int ZOrder { get; set; } = 0;
+
+    /// <summary>
+    /// Implementation of visitor pattern for coordinates
+    /// </summary>
+    /// <param name="visit"></param>
     public void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
     {
         if (Geometry is null) return;
