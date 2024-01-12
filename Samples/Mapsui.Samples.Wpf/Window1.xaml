@@ -35,10 +35,6 @@
                         <Slider x:Name="RotationSlider" MinWidth="140" ValueChanged="RotationSliderChanged" />
                     </StackPanel>
                 </Border>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="32"
-                                HorizontalAlignment="Stretch" IsHitTestVisible="False">
-                    <TextBlock Name="LogTextBox" Foreground="#a0000000" />
-                </StackPanel>
             </Grid>
         </DockPanel>
     </Grid>
