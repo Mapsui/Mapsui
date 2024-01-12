@@ -1,6 +1,6 @@
 ﻿using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
-using Mapsui.Widgets.Zoom;
+using Mapsui.Widgets.ButtonWidgets;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets;
@@ -39,8 +39,10 @@ public class ZoomInOutWidgetRenderer : ISkiaWidgetRenderer
             _paintText.Color = zoomInOut.TextColor.ToSkia((float)zoomInOut.Opacity);
         }
 
-        var posX = zoomInOut.CalculatePositionX(0, (float)viewport.Width, zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size : zoomInOut.Size * 2 - Stroke);
-        var posY = zoomInOut.CalculatePositionY(0, (float)viewport.Height, zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size * 2 - Stroke : zoomInOut.Size);
+        zoomInOut.UpdateEnvelope(zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size : zoomInOut.Size * 2 - Stroke, zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size * 2 - Stroke : zoomInOut.Size, viewport.Width, viewport.Height);
+
+        var posX = (float)(zoomInOut.Envelope?.MinX ?? 0.0);
+        var posY = (float)(zoomInOut.Envelope?.MinY ?? 0.0);
 
         // Draw a rect for zoom in button
         SKRect rect;

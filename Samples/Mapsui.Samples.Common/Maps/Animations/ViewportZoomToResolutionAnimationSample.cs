@@ -2,9 +2,8 @@
 using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
 using Mapsui.Widgets.ScaleBar;
-using Mapsui.Widgets.Zoom;
 using System.Threading.Tasks;
 using Mapsui.Styles;
 
@@ -25,14 +24,14 @@ public class ViewportZoomToResolutionAnimationSample : ISample
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(CreateScaleBar(map));
-        map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+        map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
 
         var rotateButton = CreateButton("Zoom in", VerticalAlignment.Top);
-        rotateButton.WidgetTouched += (s, e) => map.Navigator.ZoomTo(map.Navigator.Viewport.Resolution * 0.5, 500, Easing.CubicOut);
+        rotateButton.Touched += (s, e) => map.Navigator.ZoomTo(map.Navigator.Viewport.Resolution * 0.5, 500, Easing.CubicOut);
         map.Widgets.Add(rotateButton);
 
         var rotateBackButton = CreateButton("Zoom out", VerticalAlignment.Bottom);
-        rotateBackButton.WidgetTouched += (s, e) => map.Navigator.ZoomTo(map.Navigator.Viewport.Resolution * 2, 500, Easing.CubicOut);
+        rotateBackButton.Touched += (s, e) => map.Navigator.ZoomTo(map.Navigator.Viewport.Resolution * 2, 500, Easing.CubicOut);
         map.Widgets.Add(rotateBackButton);
 
         return map;
@@ -45,13 +44,11 @@ public class ViewportZoomToResolutionAnimationSample : ISample
         VerticalAlignment = VerticalAlignment.Top
     };
 
-    private static ButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new ButtonWidget
+    private static TextButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new TextButtonWidget
     {
         Text = text,
-        MarginX = 20,
-        MarginY = 20,
-        PaddingX = 10,
-        PaddingY = 10,
+        Margin = new MRect(20),
+        Padding = new MRect(10),
         HorizontalAlignment = HorizontalAlignment.Left,
         VerticalAlignment = verticalAlignment,
         BackColor = new Color(0, 123, 255),

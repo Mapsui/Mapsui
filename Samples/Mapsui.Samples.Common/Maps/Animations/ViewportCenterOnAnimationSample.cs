@@ -2,9 +2,10 @@
 using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
-using Mapsui.Widgets.Zoom;
+using Mapsui.Widgets.ButtonWidgets;
 using System.Threading.Tasks;
 using Mapsui.Styles;
+using Mapsui.Widgets.BoxWidgets;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
@@ -23,7 +24,7 @@ public class ViewportCenterOnAnimationSample : ISample
 
         var map = new Map { CRS = "EPSG:3857" };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+        map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
 
         map.Widgets.Add(CreateTextBox(instructions));
 
@@ -38,15 +39,13 @@ public class ViewportCenterOnAnimationSample : ISample
         return map;
     }
 
-    private static IWidget CreateTextBox(string text) => new TextBox()
+    private static IWidget CreateTextBox(string text) => new TextBoxWidget()
     {
         Text = text,
         VerticalAlignment = VerticalAlignment.Top,
         HorizontalAlignment = HorizontalAlignment.Left,
-        MarginX = 10,
-        MarginY = 10,
-        PaddingX = 8,
-        PaddingY = 8,
+        Margin = new MRect(10),
+        Padding = new MRect(8),
         CornerRadius = 4,
         BackColor = new Color(108, 117, 125, 128),
         TextColor = Color.White,
