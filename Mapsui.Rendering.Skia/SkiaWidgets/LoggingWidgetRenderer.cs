@@ -65,6 +65,14 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
 
         foreach (var entry in loggingWidget.ListOfLogEntries)
         {
+            if (entry.LogLevel > loggingWidget.LogLevelFilter)
+                continue;
+
+            var top = marginY + (paddingY * line) + loggingWidget.TextSize * (line + 1);
+            
+            if (top >= loggingWidget.Envelope.Height)
+                break;
+
             var paint = entry.LogLevel switch
             {
                 LogLevel.Error => _errorTextPaint,
