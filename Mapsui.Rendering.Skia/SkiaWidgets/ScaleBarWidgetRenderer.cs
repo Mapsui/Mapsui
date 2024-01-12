@@ -32,23 +32,23 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
 
         // Update paints with new values
         _paintScaleBar.Color = scaleBar.TextColor.ToSkia(layerOpacity);
-        _paintScaleBar.StrokeWidth = scaleBar.StrokeWidth * scaleBar.Scale;
+        _paintScaleBar.StrokeWidth = (float)(scaleBar.StrokeWidth * scaleBar.Scale);
         _paintScaleBarStroke!.Color = scaleBar.Halo.ToSkia(layerOpacity);
-        _paintScaleBarStroke.StrokeWidth = scaleBar.StrokeWidthHalo * scaleBar.Scale;
+        _paintScaleBarStroke.StrokeWidth = (float)(scaleBar.StrokeWidthHalo * scaleBar.Scale);
         _paintScaleText!.Color = scaleBar.TextColor.ToSkia(layerOpacity);
-        _paintScaleText.StrokeWidth = scaleBar.StrokeWidth * scaleBar.Scale;
+        _paintScaleText.StrokeWidth = (float)(scaleBar.StrokeWidth * scaleBar.Scale);
         _paintScaleText.Typeface = SKTypeface.FromFamilyName(scaleBar.Font?.FontFamily,
             SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
-        _paintScaleText.TextSize = (float)(scaleBar.Font?.Size ?? 10) * scaleBar.Scale;
+        _paintScaleText.TextSize = (float)((scaleBar.Font?.Size ?? 10) * scaleBar.Scale);
         _paintScaleTextStroke!.Color = scaleBar.Halo.ToSkia(layerOpacity);
-        _paintScaleTextStroke.StrokeWidth = scaleBar.StrokeWidthHalo / 2 * scaleBar.Scale;
+        _paintScaleTextStroke.StrokeWidth = (float)(scaleBar.StrokeWidthHalo / 2 * scaleBar.Scale);
         _paintScaleTextStroke.Typeface = SKTypeface.FromFamilyName(scaleBar.Font?.FontFamily,
             SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
-        _paintScaleTextStroke.TextSize = (float)(scaleBar.Font?.Size ?? 10) * scaleBar.Scale;
+        _paintScaleTextStroke.TextSize = (float)((scaleBar.Font?.Size ?? 10) * scaleBar.Scale);
 
-        float scaleBarLength1;
+        double scaleBarLength1;
         string? scaleBarText1;
-        float scaleBarLength2;
+        double scaleBarLength2;
         string? scaleBarText2;
 
         (scaleBarLength1, scaleBarText1, scaleBarLength2, scaleBarText2) = scaleBar.GetScaleBarLengthAndText(viewport);
@@ -113,16 +113,16 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, textSize.ToMRect(), textSize1.ToMRect(), textSize2.ToMRect(), scaleBar.StrokeWidthHalo);
 
         // Now draw text
-        canvas.DrawText(scaleBarText1, posX1, posY1 - textSize1.Top, _paintScaleTextStroke);
-        canvas.DrawText(scaleBarText1, posX1, posY1 - textSize1.Top, _paintScaleText);
+        canvas.DrawText(scaleBarText1, (float)posX1, (float)(posY1 - textSize1.Top), _paintScaleTextStroke);
+        canvas.DrawText(scaleBarText1, (float)posX1, (float)(posY1 - textSize1.Top), _paintScaleText);
 
         envelop = envelop?.Join(new MRect(posX1, posY1, posX1 + textSize1.Width, posY1 + textSize1.Height));
 
         if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
         {
             // Now draw second text
-            canvas.DrawText(scaleBarText2, posX2, posY2 - textSize2.Top, _paintScaleTextStroke);
-            canvas.DrawText(scaleBarText2, posX2, posY2 - textSize2.Top, _paintScaleText);
+            canvas.DrawText(scaleBarText2, (float)posX2, (float)(posY2 - textSize2.Top), _paintScaleTextStroke);
+            canvas.DrawText(scaleBarText2, (float)posX2, (float)(posY2 - textSize2.Top), _paintScaleText);
 
             envelop = envelop?.Join(new MRect(posX2, posY2, posX2 + textSize2.Width, posY2 + textSize2.Height));
         }
