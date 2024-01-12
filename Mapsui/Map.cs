@@ -401,13 +401,12 @@ public class Map : INotifyPropertyChanged, IDisposable
                 // ... then return;
                 return;
 
-            var loggingWidget = new LoggingWidget(this)
+            var loggingWidget = new LoggingWidget()
             {
-                MarginX = 10,
-                MarginY = 10,
+                Margin = new MRect(10),
                 VerticalAlignment = VerticalAlignment.Top,
                 HorizontalAlignment = HorizontalAlignment.Left,
-                BackgroundColor = Color.Transparent,
+                BackColor = Color.Transparent,
                 Opacity = 0.0f,
                 LogLevelFilter = LogLevel.Trace,
             };
