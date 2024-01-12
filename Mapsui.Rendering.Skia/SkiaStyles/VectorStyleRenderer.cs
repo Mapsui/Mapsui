@@ -21,10 +21,6 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
             switch (feature)
             {
-                case RectFeature rectFeature:
-                    if (rectFeature.Rect != null)
-                        PolygonRenderer.Draw(canvas, viewport, vectorStyle, rectFeature, rectFeature.Rect.ToPolygon(), opacity, renderCache);
-                    break;
                 case PointFeature pointFeature:
                     SymbolStyleRenderer.DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, CreateSymbolStyle(vectorStyle), renderCache);
                     break;

@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Net;
-using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
+using Mapsui.Styles;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
+using Mapsui.Widgets.LoggingWidget;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Net;
+using System.Runtime.CompilerServices;
+using System.Threading;
 
 #if __MAUI__
 using Microsoft.Maui.Controls;
@@ -49,7 +52,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // Action to call for a redraw of the control
     private protected Action? _invalidate;
     // Timer for loop to invalidating the control
-    private System.Threading.Timer? _invalidateTimer;
+    private Timer? _invalidateTimer;
     // Interval between two calls of the invalidate function in ms
     private int _updateInterval = 16;
     // Stopwatch for measuring drawing times
@@ -71,7 +74,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         Map = new Map();
         // Create timer for invalidating the control
         _invalidateTimer?.Dispose();
-        _invalidateTimer = new System.Threading.Timer(InvalidateTimerCallback, null, System.Threading.Timeout.Infinite, 16);
+        _invalidateTimer = new Timer(InvalidateTimerCallback, null, Timeout.Infinite, 16);
         // Start the invalidation timer
         StartUpdates(false);
     }
@@ -168,7 +171,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </remarks>
     public void StopUpdates()
     {
-        _invalidateTimer?.Change(System.Threading.Timeout.Infinite, System.Threading.Timeout.Infinite);
+        _invalidateTimer?.Change(Timeout.Infinite, Timeout.Infinite);
     }
 
     /// <summary>
@@ -192,7 +195,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         set
         {
             if (value <= 0)
-                throw new ArgumentOutOfRangeException($"{nameof(UpdateInterval)} must be greater than 0");
+                throw new ArgumentOutOfRangeException(nameof(UpdateInterval), value, "Parameter must be greater than zero");
 
             if (_updateInterval != value)
             {
@@ -257,9 +260,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
     }
 
-    public float PixelDensity => GetPixelDensity();
+    public float PixelDensity => (float)GetPixelDensity();
 
-    private IRenderer _renderer = new MapRenderer();
+    private readonly IRenderer _renderer = new MapRenderer();
 
     /// <summary>
     /// Renderer that is used from this MapControl
@@ -275,7 +278,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Called whenever a property is changed
     /// </summary>
-#if __MAUI__ || __AVALONIA__ || __AVALONIA_V0__
+#if __MAUI__ || __AVALONIA__
     public new event PropertyChangedEventHandler? PropertyChanged;
 #else
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -492,7 +495,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         Map.RefreshData(changeType);
     }
 
-    private protected void OnInfo(MapInfoEventArgs? mapInfoEventArgs)
+    private void OnInfo(MapInfoEventArgs? mapInfoEventArgs)
     {
         if (mapInfoEventArgs == null) return;
 
@@ -521,7 +524,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </summary>
     /// <param name="screenPosition">Screen position to check for widgets and features</param>
     /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
-    /// <param name="numTaps">Number of clickes/taps</param>
+    /// <param name="numTaps">Number of clicks/taps</param>
     /// <returns>True, if something done </returns>
     private MapInfoEventArgs? CreateMapInfoEventArgs(
         MPoint? screenPosition,
@@ -547,7 +550,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return null;
     }
 
-    private protected void SetViewportSize()
+    private void SetViewportSize()
     {
         var hadSize = Map.Navigator.Viewport.HasSize();
         Map.Navigator.SetSize(ViewportWidth, ViewportHeight);
@@ -555,7 +558,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         Refresh();
     }
 
-    private protected void CommonDispose(bool disposing)
+    private void CommonDispose(bool disposing)
     {
         if (disposing)
         {
@@ -567,7 +570,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidateTimer = null;
     }
 
-    private bool HandleMoving(MPoint position, bool leftButton, int clickCount, bool shift)
+    private bool HandleWidgetPointerMove(MPoint position, bool leftButton, int clickCount, bool shift)
     {
         var extendedWidgets = GetExtendedWidgets();
         if (extendedWidgets.Count == 0)
@@ -583,11 +586,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool HandleTouchingTouched(MPoint position, bool leftButton, int clickCount, bool shift)
+    private bool HandleTouchingTouched(MPoint position, MPoint? startPosition, bool leftButton, int clickCount, bool shift)
     {
-        bool result = HandleTouching(position, leftButton, clickCount, shift);
+        bool result = HandleWidgetPointerDown(position, leftButton, clickCount, shift);
 
-        if (HandleTouched(position, leftButton, clickCount, shift))
+        if (HandleWidgetPointerUp(position, startPosition, leftButton, clickCount, shift))
         {
             result = true;
         }
@@ -596,7 +599,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
 
-    private bool HandleTouching(MPoint position, bool leftButton, int clickCount, bool shift)
+    private bool HandleWidgetPointerDown(MPoint position, bool leftButton, int clickCount, bool shift)
     {
         var touchableWidgets = GetTouchableWidgets();
         var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
@@ -619,10 +622,15 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool HandleTouched(MPoint position, bool leftButton, int clickCount, bool shift)
+    private bool HandleWidgetPointerUp(MPoint position, MPoint? startPosition, bool leftButton, int clickCount, bool shift)
     {
+        if (startPosition is null)
+        {
+            Logger.Log(LogLevel.Error, $"The '{nameof(startPosition)}' is null on release. This is not expected");
+            return false;
+        }
         var touchableWidgets = GetTouchableWidgets();
-        var touchedWidgets = WidgetTouch.GetTouchedWidget(position, position, touchableWidgets);
+        var touchedWidgets = WidgetTouch.GetTouchedWidget(position, startPosition, touchableWidgets);
 
         foreach (var widget in touchedWidgets)
         {
@@ -639,7 +647,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 else if (widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
                 {
                     // The HyperLink is a special case because we need platform specific code to open the
-                    // link in a browswer. If the link is not handled within the widget we handle it
+                    // link in a browser. If the link is not handled within the widget we handle it
                     // here and return true to indicate this is handled.
                     OpenBrowser(hyperlink.Url!);
                     return true;

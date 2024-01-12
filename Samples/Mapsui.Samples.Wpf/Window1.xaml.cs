@@ -35,8 +35,6 @@ public partial class Window1
         MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-        Logger.LogDelegate += LogMethod;
-
         CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
 
         FillComboBoxWithCategories();
@@ -96,14 +94,6 @@ public partial class Window1
             });
         };
         return radioButton;
-    }
-
-    readonly LimitedQueue<LogModel> _logMessage = new(6);
-
-    private void LogMethod(LogLevel logLevel, string? message, Exception? exception)
-    {
-        _logMessage.Enqueue(new LogModel { Exception = exception, LogLevel = logLevel, Message = message });
-        Dispatcher.BeginInvoke(() => LogTextBox.Text = ToMultiLineString(_logMessage));
     }
 
     private static string ToMultiLineString(LimitedQueue<LogModel> logMessages)
