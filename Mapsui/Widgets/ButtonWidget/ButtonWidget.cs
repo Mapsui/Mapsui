@@ -66,12 +66,12 @@ public class ButtonWidget : TextBox, INotifyPropertyChanged
         }
     }
 
-    private float _rotation;
+    private double _rotation;
 
     /// <summary>
     /// Rotation of the SVG image
     /// </summary>
-    public float Rotation
+    public double Rotation
     {
         get => _rotation;
         set
