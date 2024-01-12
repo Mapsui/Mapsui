@@ -34,12 +34,12 @@ public class ZoomInOutWidget : Widget, INotifyPropertyChanged
     /// </summary>
     public event EventHandler<WidgetTouchedEventArgs>? WidgetTouched;
 
-    private float _size = 40;
+    private double _size = 40;
 
     /// <summary>
     /// Width and height of buttons
     /// </summary>
-    public float Size
+    public double Size
     {
         get => _size;
         set
@@ -119,12 +119,12 @@ public class ZoomInOutWidget : Widget, INotifyPropertyChanged
         }
     }
 
-    private float _opacity = 0.8f;
+    private double _opacity = 0.8f;
 
     /// <summary>
     /// Opacity of background, frame and signs
     /// </summary>
-    public float Opacity
+    public double Opacity
     {
         get => _opacity;
         set

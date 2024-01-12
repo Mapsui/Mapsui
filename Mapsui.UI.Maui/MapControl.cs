@@ -1,23 +1,22 @@
+using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.UI.Utils;
+using Mapsui.Utilities;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Devices;
+using Microsoft.Maui.Graphics;
 using SkiaSharp;
+using SkiaSharp.Views.Maui;
+using SkiaSharp.Views.Maui.Controls;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Mapsui.Layers;
-using Mapsui.Logging;
-using Mapsui.Utilities;
-using Mapsui.Extensions;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Devices;
-using Microsoft.Maui.Graphics;
-using SkiaSharp.Views.Maui;
-using SkiaSharp.Views.Maui.Controls;
-using Logger = Mapsui.Logging.Logger;
 
 namespace Mapsui.UI.Maui;
 
@@ -26,20 +25,6 @@ namespace Mapsui.UI.Maui;
 /// </summary>
 public partial class MapControl : ContentView, IMapControl, IDisposable
 {
-    static MapControl()
-    {
-        try
-        {
-            Callout.DefaultTitleFontSize = 24;  // excplicit values from maui debugging
-            Callout.DefaultSubtitleFontSize = 20; // excplicit values from maui debugging
-        }
-        catch (Exception ex)
-        {
-            // Catch not initialized exception happens in unit tests.
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
-    }
-
     // GPU does not work currently on MAUI
     // See https://github.com/mono/SkiaSharp/issues/1893
     // https://github.com/Mapsui/Mapsui/issues/1676
@@ -49,28 +34,14 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         DeviceInfo.Platform != DevicePlatform.MacCatalyst &&
         DeviceInfo.Platform != DevicePlatform.Android;
 
-    private class TouchEvent
-    {
-        public long Id { get; }
-        public MPoint Location { get; }
-        public long Tick { get; }
-
-        public TouchEvent(long id, MPoint screenPosition, long tick)
-        {
-            Id = id;
-            Location = screenPosition;
-            Tick = tick;
-        }
-    }
-
     private SKGLView? _glView;
     private SKCanvasView? _canvasView;
 
     // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
-    private const int ShortTap = 125;
-    private const int ShortClick = 250;
-    private const int DelayTap = 200;
-    private const int longTap = 500;
+    private const int _shortTap = 125;
+    private const int _shortClick = 250;
+    private const int _delayTap = 200;
+    private const int _longTap = 500;
 
     /// <summary>
     /// If a finger touches down and up it counts as a tap if the distance between the down and up location is smaller
@@ -78,13 +49,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// The slob is initialized at 8. How did we get to 8? Well you could read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
     /// We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
     /// </summary>
-    private const int TouchSlop = 8;
+    private const int _touchSlop = 8;
 
     protected readonly bool _initialized;
 
     private double _virtualRotation;
-    private readonly ConcurrentDictionary<long, TouchEvent> _touches = new();
-    private MPoint? _firstTouch;
+    private readonly ConcurrentDictionary<long, MPoint> _touches = new();
+    private MPoint? _pointerDownPosition;
     private bool _waitingForDoubleTap;
     private int _numOfTaps;
     private readonly FlingTracker _flingTracker = new();
@@ -101,6 +72,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private double _previousRadius = 1f;
 
     private TouchMode _mode;
+    private long _pointerDownTicks;
+    private long _pointerUpTicks;
+    private bool _widgetPointerDown;
 
     public MapControl()
     {
@@ -110,20 +84,15 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         _initialized = true;
     }
 
-    public float ScreenWidth => (float)Width;
-
-    public float ScreenHeight => (float)Height;
-
-    private float ViewportWidth => ScreenWidth;
-
-    private float ViewportHeight => ScreenHeight;
+    private double ViewportWidth => Width;
+    private double ViewportHeight => Height;
 
     public IRenderCache RenderCache => _renderer.RenderCache;
 
     public bool UseDoubleTap = true;
     public bool UseFling = true;
-    private Size oldSize;
-    private static List<WeakReference<MapControl>>? listeners;
+    private Size _oldSize;
+    private static List<WeakReference<MapControl>>? _listeners;
 
     private void Initialize()
     {
@@ -172,9 +141,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         try
         {
-            if (listeners == null)
+            if (_listeners == null)
             {
-                listeners = new List<WeakReference<MapControl>>();
+                _listeners = [];
                 if (Shell.Current != null)
                 {
                     Shell.Current.PropertyChanged -= Shell_PropertyChanged;
@@ -183,16 +152,16 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             }
 
             // remove dead references
-            foreach (var entry in listeners.ToArray())
+            foreach (var entry in _listeners.ToArray())
             {
                 if (!entry.TryGetTarget(out _))
                 {
-                    listeners.Remove(entry);
+                    _listeners.Remove(entry);
                 }
             }
 
             // add control to listeners
-            listeners.Add(new WeakReference<MapControl>(mapControl));
+            _listeners.Add(new WeakReference<MapControl>(mapControl));
         }
         catch (Exception ex)
         {
@@ -207,8 +176,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             switch (e.PropertyName)
             {
                 case nameof(Shell.FlyoutIsPresented):
-                    if (listeners != null)
-                        foreach (var entry in listeners.ToArray())
+                    if (_listeners != null)
+                        foreach (var entry in _listeners.ToArray())
                         {
                             if (entry.TryGetTarget(out var control))
                             {
@@ -216,7 +185,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                             }
                             else
                             {
-                                listeners.Remove(entry);
+                                _listeners.Remove(entry);
                             }
                         }
                     break;
@@ -236,9 +205,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             case nameof(Height):
                 var newSize = new Size(Width, Height);
 
-                if (newSize.Width > 0 && newSize.Height > 0 && oldSize != newSize)
+                if (newSize.Width > 0 && newSize.Height > 0 && _oldSize != newSize)
                 {
-                    oldSize = newSize;
+                    _oldSize = newSize;
                     // Maui Workaround because the OnSizeChanged Events don't fire.
                     // Maybe this is a Bug and will be fixed in later versions.
                     OnSizeChanged(this, EventArgs.Empty);
@@ -263,21 +232,28 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
             var location = GetScreenPosition(e.Location);
 
-            if (HandleTouch(e, location))
-            {
-                e.Handled = true;
-                return;
-            }
-
             // if user handles action by his own return
             TouchAction?.Invoke(sender, e);
             if (e.Handled) return;
 
-            if (e.ActionType == SKTouchAction.Pressed)
+            if (e.ActionType == SKTouchAction.Pressed && _touches.IsEmpty)
             {
-                _firstTouch = location;
+                _widgetPointerDown = false;
+                _pointerDownTicks = DateTime.UtcNow.Ticks;
 
-                _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
+                if (_touches.Count == 1)
+                {
+                    // In case of touch we need to check if another finger was not already touching.
+                    _pointerDownPosition = location;
+                    _pointerDownTicks = DateTime.UtcNow.Ticks;
+                }
+
+                if (HandleWidgetPointerDown(location, true, Math.Max(1, _numOfTaps), ShiftPressed))
+                {
+                    e.Handled = true;
+                    _widgetPointerDown = true;
+                    return;
+                }
 
                 _flingTracker.Clear();
 
@@ -291,13 +267,21 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 else
                     _numOfTaps = 1;
 
-                e.Handled = OnTouchStart(_touches.Select(t => t.Value.Location).ToList());
+                e.Handled = OnTouchStart(_touches.Select(t => t.Value).ToList());
             }
             // Delete e.Id from _touches, because finger is released
             else if (e.ActionType == SKTouchAction.Released && _touches.TryRemove(e.Id, out var releasedTouch))
             {
-                if (_touches.Count == 0)
+                if (HandleWidgetPointerUp(location, _pointerDownPosition, true, 0, ShiftPressed))
                 {
+                    e.Handled = true;
+                    return;
+                }
+
+                if (_touches.IsEmpty)
+                {
+                    _pointerUpTicks = DateTime.UtcNow.Ticks;
+
                     // Is this a fling?
                     if (UseFling)
                     {
@@ -327,10 +311,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     // If touch start and end is in the same area and the touch time is shorter
                     // than longTap, than we have a tap.
-                    if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? ShortClick : longTap) * 10000)
+                    if (isAround && (_pointerUpTicks - _pointerDownTicks) < (e.DeviceType == SKTouchDeviceType.Mouse ? _shortClick : _longTap) * 10000)
                     {
                         _waitingForDoubleTap = true;
-                        if (UseDoubleTap) { await Task.Delay(DelayTap); }
+                        if (UseDoubleTap) { await Task.Delay(_delayTap); }
 
                         if (_numOfTaps > 1)
                         {
@@ -350,7 +334,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                             _waitingForDoubleTap = false; ;
                         }
                     }
-                    else if (isAround && (ticks - releasedTouch.Tick) >= longTap * 10000)
+                    else if (isAround && (_pointerUpTicks - _pointerDownTicks) >= _longTap * 10000)
                     {
                         if (!e.Handled)
                             e.Handled = OnLongTapped(location);
@@ -361,23 +345,29 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                 if (_touches.Count == 1)
                 {
-                    e.Handled = OnTouchStart(_touches.Select(t => t.Value.Location).ToList());
+                    e.Handled = OnTouchStart(_touches.Select(t => t.Value).ToList());
                 }
 
                 if (!e.Handled)
-                    e.Handled = OnTouchEnd(_touches.Select(t => t.Value.Location).ToList(), releasedTouch.Location);
+                    e.Handled = OnTouchEnd(_touches.Select(t => t.Value).ToList());
             }
             else if (e.ActionType == SKTouchAction.Moved)
             {
-                _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
+                if (HandleWidgetPointerMove(location, true, Math.Max(1, _numOfTaps), ShiftPressed))
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                _touches[e.Id] = location;
 
                 if (e.InContact)
                     _flingTracker.AddEvent(e.Id, location, ticks);
 
-                if (e.InContact && !e.Handled)
-                    e.Handled = OnTouchMove(_touches.Select(t => t.Value.Location).ToList());
+                if (e.InContact && !e.Handled && !_widgetPointerDown)
+                    e.Handled = OnTouchMove(_touches.Select(t => t.Value).ToList());
                 else
-                    e.Handled = OnHovered(_touches.Select(t => t.Value.Location).FirstOrDefault());
+                    e.Handled = OnHovered(_touches.Select(t => t.Value).FirstOrDefault());
             }
             else if (e.ActionType == SKTouchAction.Cancelled)
             {
@@ -386,11 +376,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             }
             else if (e.ActionType == SKTouchAction.Exited && _touches.TryRemove(e.Id, out var exitedTouch))
             {
-                e.Handled = OnTouchExited(_touches.Select(t => t.Value.Location).ToList(), exitedTouch.Location);
+                e.Handled = OnTouchExited(_touches.Select(t => t.Value).ToList());
             }
             else if (e.ActionType == SKTouchAction.Entered)
             {
-                e.Handled = OnTouchEntered(_touches.Select(t => t.Value.Location).ToList());
+                e.Handled = OnTouchEntered(_touches.Select(t => t.Value).ToList());
             }
             else if (e.ActionType == SKTouchAction.WheelChanged)
             {
@@ -403,24 +393,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         }
     }
 
-    private bool HandleTouch(SKTouchEventArgs e, MPoint location)
-    {
-        return e.ActionType switch
-        {
-            SKTouchAction.Pressed when HandleTouching(location, true, Math.Max(1, _numOfTaps), ShiftPessed) => true,
-            SKTouchAction.Released when HandleTouched(location, true, 0, ShiftPessed) => true,
-            SKTouchAction.Moved when HandleMoving(location, true, Math.Max(1, _numOfTaps), ShiftPessed) => true,
-            _ => false
-        };
-    }
+    public bool ShiftPressed { get; set; }
 
-    public bool ShiftPessed { get; set; }
-
-    private bool IsAround(TouchEvent releasedTouch)
+    private bool IsAround(MPoint releasedTouch)
     {
-        if (_firstTouch == null) { return false; }
-        if (releasedTouch.Location == null) { return false; }
-        return _firstTouch != null && Utilities.Algorithms.Distance(releasedTouch.Location, _firstTouch) < TouchSlop;
+        if (_pointerDownPosition == null) { return false; }
+        if (releasedTouch == null) { return false; }
+        return _pointerDownPosition != null && Algorithms.Distance(releasedTouch, _pointerDownPosition) < _touchSlop;
     }
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
@@ -487,7 +466,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     public event EventHandler<TouchedEventArgs>? TouchMove;
 
     /// <summary>
-    /// TouchAction is called, when user provoques a touch event
+    /// TouchAction is called, when user provokes a touch event
     /// </summary>
     public event EventHandler<SKTouchEventArgs>? TouchAction;
 
@@ -612,7 +591,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// </summary>
     /// <param name="touchPoints">List of all touched points</param>
     /// <param name="releasedPoint">Released point, which was touched before</param>
-    private bool OnTouchEnd(List<MPoint> touchPoints, MPoint releasedPoint)
+    private bool OnTouchEnd(List<MPoint> touchPoints)
     {
         var args = new TouchedEventArgs(touchPoints);
 
@@ -656,7 +635,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// </summary>
     /// <param name="touchPoints">List of all touched points</param>
     /// <param name="releasedPoint">Released point, which was touched before</param>
-    private bool OnTouchExited(List<MPoint> touchPoints, MPoint releasedPoint)
+    private bool OnTouchExited(List<MPoint> touchPoints)
     {
         var args = new TouchedEventArgs(touchPoints);
 
@@ -800,8 +779,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
     {
-        if (locations.Count < 2)
-            throw new ArgumentException();
+        if (locations.Count != 2) 
+            throw new ArgumentOutOfRangeException(nameof(locations), locations.Count, "Value should be two");
 
         double centerX = 0;
         double centerY = 0;
@@ -812,8 +791,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             centerY += location.Y;
         }
 
-        centerX = centerX / locations.Count;
-        centerY = centerY / locations.Count;
+        centerX /= locations.Count;
+        centerY /= locations.Count;
 
         var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
 
@@ -852,10 +831,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-        var weakReference = listeners?.FirstOrDefault(f => f.TryGetTarget(out var control) && control == this);
+        var weakReference = _listeners?.FirstOrDefault(f => f.TryGetTarget(out var control) && control == this);
         if (weakReference != null)
         {
-            listeners?.Remove(weakReference);
+            _listeners?.Remove(weakReference);
         }
 
         if (disposing)
@@ -870,12 +849,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Dispose(false);
     }
 
-    private float GetPixelDensity()
+    private double GetPixelDensity()
     {
         if (Width <= 0) return 0;
-        if (UseGPU)
-            return (float)(_glView!.CanvasSize.Width / Width);
-        else
-            return (float)(_canvasView!.CanvasSize.Width / Width);
+
+        return UseGPU 
+            ? _glView!.CanvasSize.Width / Width 
+            : _canvasView!.CanvasSize.Width / Width;
     }
 }

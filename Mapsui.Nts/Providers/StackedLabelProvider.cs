@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
+using Mapsui.Nts;
+using Mapsui.Nts.Extensions;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Mapsui.Providers;
 
@@ -117,7 +119,7 @@ public class StackedLabelProvider : IProvider
     private static IFeature CreateBoxFeature(double resolution, Cluster cluster, Pen line,
         Brush? fill)
     {
-        return new RectFeature(GrowBox(cluster.Box, resolution))
+        return new GeometryFeature(GrowBox(cluster.Box, resolution).ToPolygon())
         {
             Styles = new[]
             {

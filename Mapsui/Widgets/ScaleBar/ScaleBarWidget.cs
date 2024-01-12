@@ -69,13 +69,13 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    private float _maxWidth;
+    private double _maxWidth;
 
     /// <summary>
     /// Maximum usable width for scalebar. The real used width could be less, because we 
     /// want only integers as text.
     /// </summary>
-    public float MaxWidth
+    public double MaxWidth
     {
         get => _maxWidth;
         set
@@ -89,13 +89,13 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
         }
     }
 
-    private float _height;
+    private double _height;
 
     /// <summary>
     /// Real height of scalebar. Depends on number of unit converters and text size.
     /// Is calculated by renderer.
     /// </summary>
-    public float Height
+    public double Height
     {
         get => _height;
         set
@@ -143,22 +143,22 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
         }
     }
 
-    public float Scale { get; } = 1;
+    public double Scale { get; } = 1;
 
     /// <summary>
     /// Stroke width for lines
     /// </summary>
-    public float StrokeWidth { get; set; } = 2;
+    public double StrokeWidth { get; set; } = 2;
 
     /// <summary>
     /// Stroke width for halo of lines
     /// </summary>
-    public float StrokeWidthHalo { get; set; } = 4;
+    public double StrokeWidthHalo { get; set; } = 4;
 
     /// <summary>
     /// Length of the ticks
     /// </summary>
-    public float TickLength { get; set; } = 3;
+    public double TickLength { get; set; } = 3;
 
     private Alignment _textAlignment;
 
@@ -181,7 +181,7 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
     /// <summary>
     /// Margin between end of tick and text
     /// </summary>
-    public float TextMargin => 1;
+    public double TextMargin => 1;
 
     private Font? _font = DefaultFont;
 
@@ -279,17 +279,17 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
     /// Length of lower scalebar
     /// Text of lower scalebar
     /// </returns>
-    public (float scaleBarLength1, string? scaleBarText1, float scaleBarLength2, string? scaleBarText2)
+    public (double scaleBarLength1, string? scaleBarText1, double scaleBarLength2, string? scaleBarText2)
         GetScaleBarLengthAndText(Viewport viewport)
     {
         if (_map?.CRS == null) return (0, null, 0, null);
 
-        float length1;
+        double length1;
         string text1;
 
         (length1, text1) = CalculateScaleBarLengthAndValue(_map.CRS, Projection, viewport, MaxWidth, UnitConverter);
 
-        float length2;
+        double length2;
         string? text2;
 
         if (SecondaryUnitConverter != null)
@@ -308,7 +308,7 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
     /// <param name="scaleBarLength2">Length of lower scalebar</param>
     /// <param name="stroke">Width of line</param>
     /// <returns>Array with pairs of Points. First is always the start point, the second is the end point.</returns>
-    public IReadOnlyList<MPoint> GetScaleBarLinePositions(Viewport viewport, float scaleBarLength1, float scaleBarLength2, float stroke)
+    public IReadOnlyList<MPoint> GetScaleBarLinePositions(Viewport viewport, double scaleBarLength1, double scaleBarLength2, double stroke)
     {
         var points = new List<MPoint>();
 
@@ -418,8 +418,8 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
     /// posX2 as left position of lower scalebar text
     /// posY2 as top position of lower scalebar text
     /// </returns>
-    public (float posX1, float posY1, float posX2, float posY2) GetScaleBarTextPositions(Viewport viewport,
-        MRect textSize, MRect textSize1, MRect textSize2, float stroke)
+    public (double posX1, double posY1, double posX2, double posY2) GetScaleBarTextPositions(Viewport viewport,
+        MRect textSize, MRect textSize1, MRect textSize2, double stroke)
     {
         var drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
 
@@ -427,26 +427,26 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
         var posY = CalculatePositionY(0, (int)viewport.Height, _height);
 
         var left = posX + (stroke + TextMargin) * Scale;
-        var right1 = posX + _maxWidth - (stroke + TextMargin) * Scale - (float)textSize1.Width;
-        var right2 = posX + _maxWidth - (stroke + TextMargin) * Scale - (float)textSize2.Width;
+        var right1 = posX + _maxWidth - (stroke + TextMargin) * Scale - textSize1.Width;
+        var right2 = posX + _maxWidth - (stroke + TextMargin) * Scale - textSize2.Width;
         var top = posY;
-        var bottom = posY + _height - (float)textSize2.Height;
+        var bottom = posY + _height - textSize2.Height;
 
         switch (TextAlignment)
         {
             case Alignment.Center:
                 if (drawNoSecondScaleBar)
                 {
-                    return (posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - (float)textSize1.Width) / 2.0f,
+                    return (posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - textSize1.Width) / 2.0f,
                         top,
                         0,
                         0);
                 }
                 else
                 {
-                    return (posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - (float)textSize1.Width) / 2.0f,
+                    return (posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - textSize1.Width) / 2.0f,
                             top,
-                            posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - (float)textSize2.Width) / 2.0f,
+                            posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - textSize2.Width) / 2.0f,
                             bottom);
                 }
             case Alignment.Left:
@@ -514,8 +514,8 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
     /// @param width of the scale bar in pixel to calculate for
     /// @param unitConverter the DistanceUnitConverter to calculate for
     /// @return scaleBarLength and scaleBarText
-    private static (float scaleBarLength, string scaleBarText) CalculateScaleBarLengthAndValue(
-        string CRS, IProjection projection, Viewport viewport, float width, IUnitConverter unitConverter)
+    private static (double scaleBarLength, string scaleBarText) CalculateScaleBarLengthAndValue(
+        string CRS, IProjection projection, Viewport viewport, double width, IUnitConverter unitConverter)
     {
         // We have to calc the angle difference to the equator (angle = 0), 
         // because EPSG:3857 is only there 1 m. At other angles, we
@@ -531,13 +531,13 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
 
         var scaleBarValues = unitConverter.ScaleBarValues;
 
-        float scaleBarLength = 0;
+        double scaleBarLength = 0;
         var scaleBarValue = 0;
 
         foreach (var value in scaleBarValues)
         {
             scaleBarValue = value;
-            scaleBarLength = (float)(scaleBarValue / groundResolution);
+            scaleBarLength = scaleBarValue / groundResolution;
             if (scaleBarLength < width - 10)
             {
                 break;
