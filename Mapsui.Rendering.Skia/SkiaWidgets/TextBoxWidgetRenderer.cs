@@ -25,8 +25,8 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
         textPaint.MeasureText(textBox.Text, ref textRect);
         // The backRect is straight forward. It is leading for our purpose.
 
-        float paddingX = textBox.PaddingX;
-        float paddingY = textBox.PaddingY;
+        var paddingX = textBox.PaddingX;
+        var paddingY = textBox.PaddingY;
 
         if (textBox.Width != null)
         {
@@ -39,32 +39,32 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
         }
 
         var backRect = new SKRect(0, 0,
-            textRect.Width + paddingX * 2,
-            textPaint.TextSize + paddingY * 2); // Use the font's TextSize for consistency
-        var offsetX = GetOffsetX(backRect.Width, textBox.MarginX, textBox.HorizontalAlignment, viewport.Width);
-        var offsetY = GetOffsetY(backRect.Height, textBox.MarginY, textBox.VerticalAlignment, viewport.Height);
-        backRect.Offset(offsetX, offsetY);
-        canvas.DrawRoundRect(backRect, textBox.CornerRadius, textBox.CornerRadius, backPaint);
+            (float)(textRect.Width + paddingX * 2),
+            (float)(textPaint.TextSize + paddingY * 2)); // Use the font's TextSize for consistency
+        var offsetX = GetOffsetX(backRect.Width, (float)textBox.MarginX, textBox.HorizontalAlignment, viewport.Width);
+        var offsetY = GetOffsetY(backRect.Height, (float)textBox.MarginY, textBox.VerticalAlignment, viewport.Height);
+        backRect.Offset((float)offsetX, (float)offsetY);
+        canvas.DrawRoundRect(backRect, (float)textBox.CornerRadius, (float)textBox.CornerRadius, backPaint);
         textBox.Envelope = backRect.ToMRect();
         // To position the text within the backRect correct using the textRect's offset.
         canvas.DrawText(textBox.Text,
-            offsetX - textRect.Left + paddingX,
-            offsetY - textRect.Top + paddingY, textPaint);
+            (float)(offsetX - textRect.Left + paddingX),
+            (float)(offsetY - textRect.Top + paddingY), textPaint);
     }
 
-    public static float GetOffsetX(float width, float offsetX, HorizontalAlignment horizontalAlignment, double screenWidth)
+    public static double GetOffsetX(double width, double offsetX, HorizontalAlignment horizontalAlignment, double screenWidth)
     {
         if (horizontalAlignment == HorizontalAlignment.Left) return offsetX;
-        if (horizontalAlignment == HorizontalAlignment.Right) return (float)(screenWidth - width - offsetX);
-        if (horizontalAlignment == HorizontalAlignment.Center) return (float)(screenWidth * 0.5 - width * 0.5); // ignore offset
+        if (horizontalAlignment == HorizontalAlignment.Right) return screenWidth - width - offsetX;
+        if (horizontalAlignment == HorizontalAlignment.Center) return screenWidth * 0.5 - width * 0.5; // ignore offset
         throw new Exception($"Unknown {nameof(HorizontalAlignment)} type");
     }
 
-    public static float GetOffsetY(float height, float offsetY, VerticalAlignment verticalAlignment, double screenHeight)
+    public static double GetOffsetY(double height, double offsetY, VerticalAlignment verticalAlignment, double screenHeight)
     {
         if (verticalAlignment == VerticalAlignment.Top) return offsetY;
-        if (verticalAlignment == VerticalAlignment.Bottom) return (float)(screenHeight - height - offsetY);
-        if (verticalAlignment == VerticalAlignment.Center) return (float)(screenHeight * 0.5 - height * 0.5); // ignore offset
+        if (verticalAlignment == VerticalAlignment.Bottom) return screenHeight - height - offsetY;
+        if (verticalAlignment == VerticalAlignment.Center) return screenHeight * 0.5 - height * 0.5; // ignore offset
         throw new Exception($"Unknown {nameof(VerticalAlignment)} type");
     }
 }

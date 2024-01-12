@@ -68,4 +68,14 @@ public class GeometryFeature : BaseFeature, IFeature
         // Recalculate the Envelope
         Geometry.GeometryChangedAction();
     }
+
+    override public void Modified()
+    {
+        base.Modified();
+
+        // Recalculate Geometry Values (for example in Polygons).
+        Geometry?.GeometryChanged();
+        // Recalculate the Envelope
+        Geometry?.GeometryChangedAction();
+    }
 }

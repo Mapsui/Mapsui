@@ -113,12 +113,12 @@ public event PropertyChangedEventHandler? PropertyChanged;
         }
     }
 
-    private float _opacity = 0.0f;
+    private double _opacity = 0.0f;
 
     /// <summary>
     /// Opacity of background, frame and signs
     /// </summary>
-    public float Opacity
+    public double Opacity
     {
         get => _opacity;
         set
@@ -280,6 +280,15 @@ public event PropertyChangedEventHandler? PropertyChanged;
                 return;
             _informationTextColor = value;
             OnPropertyChanged();
+        }
+    }
+
+    public Map Map
+    {
+        get => _map;
+        set
+        {
+            _map = value;
         }
     }
 

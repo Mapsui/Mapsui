@@ -48,12 +48,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         var picture = (SKPicture)BitmapRegistry.Instance.Get(calloutStyle.BitmapId);
 
         // Calc offset (relative or absolute)
-        MPoint symbolOffset = calloutStyle.SymbolOffset.ToPoint();
-        if (calloutStyle.SymbolOffset.IsRelative)
-        {
-            symbolOffset.X *= picture.CullRect.Width;
-            symbolOffset.Y *= picture.CullRect.Height;
-        }
+        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(picture.CullRect.Width, picture.CullRect.Height);
 
         var rotation = (float)calloutStyle.SymbolRotation;
 
@@ -62,7 +57,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             if (calloutStyle.RotateWithMap)
                 rotation += (float)viewport.Rotation;
             if (calloutStyle.SymbolOffsetRotatesWithMap)
-                symbolOffset = symbolOffset.Rotate(-viewport.Rotation);
+                symbolOffset = new Offset(symbolOffset.ToPoint().Rotate(-viewport.Rotation));
         }
 
         // Save state of the canvas, so we could move and rotate the canvas
