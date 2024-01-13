@@ -26,36 +26,19 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
     /// </summary>
     public event EventHandler<WidgetTouchedEventArgs>? Touched;
 
-    private double _paddingX = 0;
+    private MRect _padding = new MRect(0);
 
     /// <summary>
     /// Padding left and right for icon inside the Widget
     /// </summary>
-    public double PaddingX
+    public MRect Padding
     {
-        get => _paddingX;
+        get => _padding;
         set
         {
-            if (_paddingX == value)
+            if (_padding == value)
                 return;
-            _paddingX = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private double _paddingY = 0;
-
-    /// <summary>
-    /// Padding left and right for icon inside the Widget
-    /// </summary>
-    public double PaddingY
-    {
-        get => _paddingY;
-        set
-        {
-            if (_paddingY == value)
-                return;
-            _paddingY = value;
+            _padding = value;
             OnPropertyChanged();
         }
     }
