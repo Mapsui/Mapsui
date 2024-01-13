@@ -1,9 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Mapsui.Styles;
+﻿using Mapsui.Styles;
 
-namespace Mapsui.Widgets.Zoom;
+namespace Mapsui.Widgets.ButtonWidgets;
 
 /// <summary>
 /// Widget which shows two buttons (horizontal or vertical) with a "+" and a "-" sign.
@@ -23,17 +20,8 @@ namespace Mapsui.Widgets.Zoom;
 /// Opacity: Opacity of buttons
 /// ZoomFactor: Factor for changing Resolution. Default is 2;
 /// </summary>
-public class ZoomInOutWidget : Widget, INotifyPropertyChanged
+public class ZoomInOutWidget : TouchableWidget
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    /// <summary>
-    /// Event handler which is called, when buttons are touched. If there
-    /// isn't one, than the default handler is used, which change the Resolution
-    /// of Viewport.
-    /// </summary>
-    public event EventHandler<WidgetTouchedEventArgs>? WidgetTouched;
-
     private double _size = 40;
 
     /// <summary>
@@ -136,16 +124,12 @@ public class ZoomInOutWidget : Widget, INotifyPropertyChanged
         }
     }
 
-    public override bool HandleWidgetTouched(Navigator navigator, MPoint position)
+    public override bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
-        var handler = WidgetTouched;
+        base.HandleWidgetTouched(navigator, position, args);
 
-        if (handler != null)
-        {
-            var args = new WidgetTouchedEventArgs(position);
-            handler.Invoke(this, args);
-            return args.Handled;
-        }
+        if (args.Handled)
+            return true;
 
         if (Envelope == null)
             return false;
@@ -161,11 +145,5 @@ public class ZoomInOutWidget : Widget, INotifyPropertyChanged
         }
 
         return true;
-    }
-
-    internal void OnPropertyChanged([CallerMemberName] string name = "")
-    {
-        var handler = PropertyChanged;
-        handler?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

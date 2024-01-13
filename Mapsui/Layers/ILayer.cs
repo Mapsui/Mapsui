@@ -10,6 +10,7 @@ using Mapsui.Widgets;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Mapsui.Widgets.ButtonWidgets;
 
 namespace Mapsui.Layers;
 
@@ -79,7 +80,7 @@ public interface ILayer : IAnimatable, INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Attribution for layer
     /// </summary>
-    Hyperlink Attribution { get; }
+    HyperlinkWidget Attribution { get; }
 
     /// <summary>
     /// List of native resolutions

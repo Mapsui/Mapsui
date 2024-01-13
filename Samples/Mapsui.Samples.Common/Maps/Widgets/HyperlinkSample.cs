@@ -2,6 +2,7 @@
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidgets;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
@@ -31,16 +32,14 @@ public class HyperlinkSample : ISample
     private static IWidget CreateHyperlink(string text, string url,
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
     {
-        return new Hyperlink()
+        return new HyperlinkWidget()
         {
             Text = text,
             Url = url,
             VerticalAlignment = verticalAlignment,
             HorizontalAlignment = horizontalAlignment,
-            MarginX = 30,
-            MarginY = 30,
-            PaddingX = 4,
-            PaddingY = 4,
+            Margin = new MRect(30),
+            Padding = new MRect(4),
             CornerRadius = 4,
             BackColor = new Color(23, 162, 184),
             TextColor = Color.White,

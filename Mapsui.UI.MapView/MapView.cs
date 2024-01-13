@@ -1,10 +1,15 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Logging;
+using Mapsui.UI.Maui.Extensions;
 using Mapsui.UI.Objects;
+using Mapsui.Utilities;
 using Mapsui.Widgets;
-using Mapsui.Extensions;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Graphics;
 using SkiaSharp;
-using Svg.Skia;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,18 +18,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
-using Mapsui.Logging;
-using Mapsui.Utilities;
-using Mapsui.UI.Maui.Utils;
-using Mapsui.UI.Maui.Extensions;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Graphics;
-using Microsoft.Maui.Layouts;
-using SkiaSharp.Views;
-using SkiaSharp.Views.Maui;
-using SkiaSharp.Views.Maui.Controls;
-using Rectangle = Microsoft.Maui.Graphics.Rect;
 
 namespace Mapsui.UI.Maui;
 
@@ -39,10 +32,10 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private readonly ObservableMemoryLayer<Callout> _mapCalloutLayer;
     private readonly ObservableMemoryLayer<Pin> _mapPinLayer;
     private readonly ObservableMemoryLayer<Drawable> _mapDrawableLayer;
-    private ButtonWidget? _mapZoomInButton;
-    private ButtonWidget? _mapZoomOutButton;
-    private ButtonWidget? _mapMyLocationButton;
-    private ButtonWidget? _mapNorthingButton;
+    private IconButtonWidget? _mapZoomInButton;
+    private IconButtonWidget? _mapZoomOutButton;
+    private IconButtonWidget? _mapMyLocationButton;
+    private IconButtonWidget? _mapNorthingButton;
     private readonly SKPicture _pictMyLocationNoCenter;
     private readonly SKPicture _pictMyLocationCenter;
     private readonly SKPicture _pictZoomIn;
@@ -779,21 +772,21 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
         if (IsZoomButtonVisible)
         {
-            _mapZoomInButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+            _mapZoomInButton!.Position = new MPoint(newX, newY);
             newY += ButtonSize;
-            _mapZoomOutButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+            _mapZoomOutButton!.Position = new MPoint(newX, newY);
             newY += ButtonSize + ButtonSpacing;
         }
 
         if (IsMyLocationButtonVisible)
         {
-            _mapMyLocationButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+            _mapMyLocationButton!.Position = new MPoint(newX, newY);
             newY += ButtonSize + ButtonSpacing;
         }
 
         if (IsNorthingButtonVisible)
         {
-            _mapNorthingButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+            _mapNorthingButton!.Position = new MPoint(newX, newY);
         }
 
         RefreshGraphics();
@@ -840,16 +833,20 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         UpdateButtonPositions();
     }
 
-    private ButtonWidget CreateButton(float x, float y, SKPicture picture, Action<object?, WidgetTouchedEventArgs> action)
+    private IconButtonWidget CreateButton(float x, float y, SKPicture picture, Action<object?, WidgetTouchedEventArgs> action)
     {
-        var result = new ButtonWidget
+        var result = new IconButtonWidget
         {
             Picture = picture,
-            Envelope = new MRect(x, y, x + ButtonSize, y + ButtonSize),
+            HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,
+            VerticalAlignment = Widgets.VerticalAlignment.Absolute,
+            Position = new MPoint(x, y),
+            Width = ButtonSize,
+            Height = ButtonSize,
             Rotation = 0,
             Enabled = true,
         };
-        result.WidgetTouched += (s, e) => action(s, e);
+        result.Touched += (s, e) => action(s, e);
         result.PropertyChanged += (s, e) => RefreshGraphics();
 
         return result;
