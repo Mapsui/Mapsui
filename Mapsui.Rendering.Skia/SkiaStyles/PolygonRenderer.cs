@@ -30,31 +30,17 @@ internal static class PolygonRenderer
             return polygon.ToSkiaPath(viewport, skRect, lineWidth);
         });
 
-        DrawPath(canvas, vectorStyle, path, fillPaint, paint);
+        DrawPath(canvas, path, fillPaint, paint);
     }
 
-    internal static void DrawPath(SKCanvas canvas, VectorStyle vectorStyle, SKPath path, SKPaint? paintFill, SKPaint? paint)
+    internal static void DrawPath(SKCanvas canvas, SKPath path, SKPaint? paintFill, SKPaint? paint)
     {
-        if (vectorStyle?.Fill?.FillStyle == FillStyle.Solid)
+        if (paintFill != null)
         {
             canvas.DrawPath(path, paintFill);
         }
-        else
-        {
-            // Do this, because if not, path isn't filled complete
-            using (new SKAutoCanvasRestore(canvas))
-            {
-                canvas.ClipPath(path);
-                var bounds = path.Bounds;
-                // Make sure, that the brush starts with the correct position
-                var inflate = ((int)path.Bounds.Width * 0.3f / _scale) * _scale;
-                bounds.Inflate(inflate, inflate);
-                // Draw rect with bigger size, which is clipped by path
-                canvas.DrawRect(bounds, paintFill);
-            }
-        }
 
-        if (vectorStyle?.Outline != null)
+        if (paint != null)
         {
             canvas.DrawPath(path, paint);
         }

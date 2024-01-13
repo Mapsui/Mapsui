@@ -26,6 +26,6 @@ public static class GeometryCollectionRenderer
             return collection.ToSkiaPath(viewport, skRect, lineWidth);
         });
 
-        PolygonRenderer.DrawPath(canvas, vectorStyle, path, paintFill, paint);
+        PolygonRenderer.DrawPath(canvas, path, paintFill, paint);
     }
 }
