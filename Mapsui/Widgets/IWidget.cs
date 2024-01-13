@@ -45,5 +45,5 @@ public interface IWidget
     /// <summary>
     /// Flag for redrawing widget in the next drawing cycle
     /// </summary>
-    bool NeedsRedraw { get; }
+    bool NeedsRedraw { get; set; }
 }
