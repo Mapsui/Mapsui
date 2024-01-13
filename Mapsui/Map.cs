@@ -403,8 +403,8 @@ public class Map : INotifyPropertyChanged, IDisposable
             var loggingWidget = new LoggingWidget()
             {
                 Margin = new MRect(10),
-                VerticalAlignment = VerticalAlignment.Top,
-                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
                 BackColor = Color.Transparent,
                 Opacity = 0.0f,
                 LogLevelFilter = LogLevel.Trace,
