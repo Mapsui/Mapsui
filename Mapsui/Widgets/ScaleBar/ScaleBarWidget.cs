@@ -81,7 +81,7 @@ public class ScaleBarWidget : Widget
                 return;
 
             _maxWidth = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -98,7 +98,7 @@ public class ScaleBarWidget : Widget
             if (_textColor == value)
                 return;
             _textColor = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -115,7 +115,7 @@ public class ScaleBarWidget : Widget
             if (_haloColor == value)
                 return;
             _haloColor = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -150,7 +150,7 @@ public class ScaleBarWidget : Widget
                 return;
 
             _textAlignment = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -173,7 +173,7 @@ public class ScaleBarWidget : Widget
                 return;
 
             _font = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -197,7 +197,7 @@ public class ScaleBarWidget : Widget
             }
 
             _unitConverter = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -217,7 +217,7 @@ public class ScaleBarWidget : Widget
             }
 
             _secondaryUnitConverter = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -237,7 +237,7 @@ public class ScaleBarWidget : Widget
             }
 
             _scaleBarMode = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
