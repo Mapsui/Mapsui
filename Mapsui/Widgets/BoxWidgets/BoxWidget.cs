@@ -24,7 +24,7 @@ public class BoxWidget : Widget
         }
     }
 
-    private Color? _backColor = new(255, 255, 255, 128);
+    private Color? _backColor = Color.Transparent;
 
     /// <summary>
     /// Background color of box
@@ -41,7 +41,7 @@ public class BoxWidget : Widget
         }
     }
 
-    private double _opacity = 0.8f;
+    private double _opacity = 0.0f;
 
     /// <summary>
     /// Opacity of background, frame and signs
