@@ -165,18 +165,27 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         var linePaint = vectorCache.GetOrCreatePaint(symbolStyle.Outline, opacity, CreateLinePaint);
         var fillPaint = vectorCache.GetOrCreatePaint(symbolStyle.Fill, opacity, CreateFillPaint);
-        var path = vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath);
 
-        if (fillPaint != null && fillPaint.Color.Alpha != 0) canvas.DrawPath(path, fillPaint);
-        if (linePaint != null && linePaint.Color.Alpha != 0) canvas.DrawPath(path, linePaint);
+        if (fillPaint != null && fillPaint.Color.Alpha != 0)
+        {
+            var path = vectorCache.GetOrCreatePath((symbolStyle.SymbolType, x, y, EPathType.Fill), CreatePath);
+            canvas.DrawPath(path, fillPaint);
+        }
+
+        if (linePaint != null && linePaint.Color.Alpha != 0)
+        {
+            var path = vectorCache.GetOrCreatePath((symbolStyle.SymbolType, x, y, EPathType.Outline), CreatePath);
+            canvas.DrawPath(path, linePaint);
+        }
 
         canvas.Restore();
 
         return true;
     }
 
-    private static SKPath CreatePath(SymbolType symbolType)
+    private static SKPath CreatePath((SymbolType SymbolType, double x, double y, EPathType Fill) valueTuple)
     {
+        var symbolType = valueTuple.SymbolType;
         var width = (float)SymbolStyle.DefaultWidth;
         var halfWidth = width / 2;
         var halfHeight = (float)SymbolStyle.DefaultHeight / 2;
@@ -299,4 +308,10 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         return size;
     }
+}
+
+internal enum EPathType
+{
+    Fill,
+    Outline
 }
