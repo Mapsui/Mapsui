@@ -143,6 +143,11 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
     }
 
     /// <summary>
+    /// Flag for redrawing widget in the next drawing cycle
+    /// </summary>
+    public bool NeedsRedraw { get; set; } = false;
+
+    /// <summary>
     /// Event handler which is called, when a property changes
     /// </summary>
     public event PropertyChangedEventHandler? PropertyChanged;
