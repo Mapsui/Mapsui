@@ -1,4 +1,5 @@
-﻿using Mapsui.Widgets.BoxWidgets;
+﻿using Mapsui.Styles;
+using Mapsui.Widgets.BoxWidgets;
 using System;
 
 namespace Mapsui.Widgets.ButtonWidgets;
@@ -21,6 +22,11 @@ namespace Mapsui.Widgets.ButtonWidgets;
 /// </remarks>
 public class IconButtonWidget : BoxWidget, ITouchableWidget
 {
+    public IconButtonWidget() : base()
+    {
+        BackColor = Color.Transparent;
+    }
+
     /// <summary>
     /// Event handler which is called, when the button is touched
     /// </summary>
