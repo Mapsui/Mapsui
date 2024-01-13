@@ -46,8 +46,7 @@ public class WidgetsSample : ISample
         {
             ScaleBarMode = ScaleBarMode.Both,
             SecondaryUnitConverter = ImperialUnitConverter.Instance,
-            MarginX = 10,
-            MarginY = 30,
+            Margin = new MRect(10, 30),
             MaxWidth = 200,
             Halo = Color.White,
             HorizontalAlignment = horizontalAlignment,
