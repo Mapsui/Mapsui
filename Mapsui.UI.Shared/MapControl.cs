@@ -125,7 +125,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 _refresh = true;
 
             // Check if widgets need refresh
-            if (!_refresh && Map.Widgets.Any(w => w.NeedsRedraw))
+            if (!_refresh && (Map?.Widgets?.Any(w => w.NeedsRedraw) ?? false))
                 _refresh = true;
 
             if (!_refresh)
