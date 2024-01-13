@@ -41,4 +41,9 @@ public interface IWidget
     /// Is Widget visible on screen
     /// </summary>
     bool Enabled { get; set; }
+
+    /// <summary>
+    /// Flag for redrawing widget in the next drawing cycle
+    /// </summary>
+    bool NeedsRedraw { get; }
 }
