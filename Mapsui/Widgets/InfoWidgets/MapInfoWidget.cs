@@ -1,10 +1,11 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Styles;
+using Mapsui.Widgets.BoxWidgets;
 using System;
 using System.Text;
 
-namespace Mapsui.Widgets;
-public class MapInfoWidget : TextBox
+namespace Mapsui.Widgets.InfoWidgets;
+public class MapInfoWidget : TextBoxWidget
 {
     private readonly Map _map;
 
@@ -15,10 +16,8 @@ public class MapInfoWidget : TextBox
 
         VerticalAlignment = VerticalAlignment.Bottom;
         HorizontalAlignment = HorizontalAlignment.Left;
-        MarginX = 16;
-        MarginY = 16;
-        PaddingX = 10;
-        PaddingY = 10;
+        Margin = new MRect(16);
+        Padding = new MRect(10);
         CornerRadius = 4;
         BackColor = new Color(108, 117, 125);
         TextColor = Color.White;

@@ -1,7 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
-using Mapsui.Widgets.MouseCoordinatesWidget;
+using Mapsui.Widgets.InfoWidgets;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
@@ -27,12 +27,11 @@ public class MouseCoordinatesWidgetSample : ISample
     private static MouseCoordinatesWidget CreateMouseCoordinatesWidget(Map map,
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
     {
-        return new MouseCoordinatesWidget(map)
+        return new MouseCoordinatesWidget()
         {
             VerticalAlignment = verticalAlignment,
             HorizontalAlignment = horizontalAlignment,
-            MarginX = 20,
-            MarginY = 20,
+            Margin = new MRect(20),
         };
     }
 }

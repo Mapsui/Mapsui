@@ -1,14 +1,11 @@
-﻿using Mapsui.Cache;
+﻿using Mapsui.Extensions.Projections;
 using Mapsui.Layers;
-using Mapsui.Providers.Wms;
-using System.Threading.Tasks;
-using Mapsui.Nts.Extensions;
 using Mapsui.Providers;
+using Mapsui.Providers.Wms;
 using Mapsui.Styles;
-using NetTopologySuite.Geometries;
-using Mapsui.Extensions.Projections;
 using Mapsui.Widgets;
-using NetTopologySuite.Utilities;
+using Mapsui.Widgets.ButtonWidgets;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
@@ -46,15 +43,13 @@ public class WmsProjectionDotSpatialSample : ISample
         {
             DataSource = dataSource,
             Style = new RasterStyle(),
-            Attribution = new Hyperlink()
+            Attribution = new HyperlinkWidget()
             {
                 Text = "@Agenzia delle Entrate 2023",
                 VerticalAlignment = VerticalAlignment.Bottom,
                 HorizontalAlignment = HorizontalAlignment.Left,
-                MarginX = 10,
-                MarginY = 10,
-                PaddingX = 4,
-                PaddingY = 4,
+                Margin = new MRect(10),
+                Padding = new MRect(4),
                 BackColor = Color.LightGray,
             }
         };
