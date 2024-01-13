@@ -24,14 +24,16 @@ Branch: [main](https://github.com/Mapsui/Mapsui/tree/main). Milestone: [v5.0](ht
 
 - [ ] Everything to .NET 6
 - [ ] Cleanup:
-    * [ ] Fix the remaining warnings wrt IDispose.
-    * [ ] Run dotnet format (whitespace, style and analyzers) on the entire solution.
-    * [x] Always propagate async back to the caller.
-    * [ ] Remove nuget packages that we previously needed for things now supported in .NET 6. We may also have some code copies for things now in .NET 6.
-    * [ ] Remove the #if defines we do not need anymore.
-    * [ ] Remove all scripts and configurations we do not use anymore.
-    * [ ] Simplify the build scripts now that we do not need the workarounds.
-    * [x] Rename master to main.
+  - [ ] Use `<Nullable>enable</Nullable>` everywhere (Add to Directory.Build.props) and go through the current suppressions to see if there is a better way.
+  - [ ] Fix the remaining warnings wrt IDispose.
+  - [ ] Run dotnet format (whitespace, style and analyzers) on the entire solution.
+  - [x] Always propagate async back to the caller.
+  - [x] Remove nuget packages that we previously needed for things now supported in .NET 6.
+  - [ ] Remove code copies of things now in .NET 6 (in the past we copied some .NET Core things which were not in .NET standard).
+  - [ ] Remove the #if defines we do not need anymore.
+  - [ ] Remove all scripts and configurations we do not use anymore.
+  - [ ] Simplify the build scripts now that we do not need the workarounds.
+  - [x] Rename master to main.
 - [ ] Remove older frameworks:
     * [ ] Remove Xamarin.Forms (but not Mapsui.MAUI, Mapsui.iOS and Mapsui.Android).
     * [x] Remove Uno UWP (but not Mapsui.Uno.WinUI)
@@ -40,7 +42,7 @@ Branch: [main](https://github.com/Mapsui/Mapsui/tree/main). Milestone: [v5.0](ht
 
 ## Mapsui 6 and later
 
-This is mostly speculation. You could browse through the ['design/roadmap' tags](https://github.com/Mapsui/Mapsui/labels/design%2Froadmap) to get an impression of the options.
+This is mostly speculation. You could browse through the ['design discussion' tags](https://github.com/Mapsui/Mapsui/labels/design%20discussion) to get an impression of the options.
 
 - [ ] Two step rendering. In the draw loop only draw skia object, create skia object in an earlier step https://github.com/Mapsui/Mapsui/issues/1448
 - [ ] World wrap https://github.com/Mapsui/Mapsui/issues/518

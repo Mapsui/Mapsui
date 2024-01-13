@@ -2,6 +2,7 @@
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
+using Mapsui.Widgets.BoxWidgets;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
@@ -34,15 +35,13 @@ public class TextBoxSample : ISample
     private static IWidget CreateTextBox(string text,
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
     {
-        return new TextBox()
+        return new TextBoxWidget()
         {
             Text = text,
             VerticalAlignment = verticalAlignment,
             HorizontalAlignment = horizontalAlignment,
-            MarginX = 10,
-            MarginY = 10,
-            PaddingX = 4,
-            PaddingY = 4,
+            Margin = new MRect(10),
+            Padding = new MRect(4),
             CornerRadius = 4,
             BackColor = new Color(108, 117, 125),
             TextColor = Color.White,

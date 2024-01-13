@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Mapsui.Cache;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers.Wfs;
 using Mapsui.Styles;
+using Mapsui.Widgets.InfoWidgets;
 using System.Net;
 using System.Threading.Tasks;
-using Mapsui.Limiting;
-using Mapsui.Nts;
-using Mapsui.Widgets;
-using Mapsui.Extensions;
 
 #pragma warning disable IDISP001 // Dispose created
 

@@ -1,13 +1,13 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
-using Mapsui.Widgets;
+using Mapsui.Widgets.InfoWidgets;
+using System.IO;
+using System.Threading.Tasks;
 
 #pragma warning disable IDISP001 // Dispose created
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
