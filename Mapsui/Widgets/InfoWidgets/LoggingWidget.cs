@@ -3,7 +3,6 @@ using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
 using System;
 using System.Collections.Concurrent;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Mapsui.Widgets.InfoWidgets;
@@ -46,14 +45,11 @@ public class LoggingWidget : TextBoxWidget
     /// </summary>
     public void Log(LogLevel level, string description, Exception? exception)
     {
-        if (level > LogLevelFilter)
-            return;
-
         var entry = new LogEntry { LogLevel = level, Description = description, Exception = exception };
 
         _listOfLogEntries.Enqueue(entry);
 
-        while (_listOfLogEntries.Count > _maxNumOfLogEntries)
+        while (_listOfLogEntries.Count > _maxNumberOfLogEntriesToKeep)
         {
             _listOfLogEntries.TryDequeue(out var outObj);
         }
@@ -70,11 +66,6 @@ public class LoggingWidget : TextBoxWidget
 
         OnPropertyChanged(nameof(Text));
     }
-
-    // Set start value for number of log entries to use, before the widget is
-    // draw the first time. Then the number is calculated depending on the size
-    // of widget.
-    private int _maxNumOfLogEntries = 100;
 
     private ConcurrentQueue<LogEntry> _listOfLogEntries;
 
@@ -94,6 +85,20 @@ public class LoggingWidget : TextBoxWidget
             if (_logLevelFilter == value)
                 return;
             _logLevelFilter = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private int _maxNumberOfLogEntriesToKeep = 100;
+
+    public int MaxNumberOfLogEntriesToKeep
+    {
+        get => _maxNumberOfLogEntriesToKeep;
+        set
+        {
+            if (_maxNumberOfLogEntriesToKeep == value)
+                return;
+            _maxNumberOfLogEntriesToKeep = value;
             OnPropertyChanged();
         }
     }
@@ -148,42 +153,6 @@ public class LoggingWidget : TextBoxWidget
             OnPropertyChanged();
         }
     }
-    public void UpdateNumOfLogEntries()
-    {
-        var newNumOfLogEntries = (int)(((Envelope?.Height ?? Height) - Padding.Top) / (TextSize + Padding.Top));
-
-        while (_listOfLogEntries.Count > newNumOfLogEntries)
-        {
-            _listOfLogEntries.TryDequeue(out var outObj);
-        }
-
-        _maxNumOfLogEntries = newNumOfLogEntries;
-    }
-
-    private void UpdateLogEntries()
-    {
-        var entries = _listOfLogEntries.ToList();
-        var pos = 0;
-
-        while (pos < entries.Count)
-        {
-            if (entries[pos].LogLevel > LogLevelFilter)
-            {
-                entries.Remove(entries[pos]);
-            }
-            else
-            {
-                pos++;
-            }
-        }
-
-        Clear();
-
-        foreach (var entry in entries)
-        {
-            _listOfLogEntries.Enqueue(entry);
-        }
-    }
 
     public override void OnPropertyChanged([CallerMemberName] string name = "")
     {
@@ -194,9 +163,6 @@ public class LoggingWidget : TextBoxWidget
             else
                 Logger.LogDelegate -= Log;
         }
-
-        if (name == nameof(LogLevelFilter))
-            UpdateLogEntries();
 
         base.OnPropertyChanged(name);
     }
