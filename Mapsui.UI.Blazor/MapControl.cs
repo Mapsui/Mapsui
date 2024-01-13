@@ -242,7 +242,7 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             if (HandleWidgetPointerUp(e.ToLocation(_clientRect), _pointerDownPosition, e.Button == 0, 1, ShiftPressed))
             {
-                _downMousePosition = null;
+                _pointerDownPosition = null;
                 _previousMousePosition = null;
 
                 return;
