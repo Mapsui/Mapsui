@@ -121,7 +121,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 _refresh = true;
 
             // seems that this could be null sometimes
-            if (!_refresh && (Map?.Navigator?.UpdateAnimations() ?? false))
+            if (Map?.Navigator?.UpdateAnimations() ?? false)
                 _refresh = true;
 
             // Check if widgets need refresh
