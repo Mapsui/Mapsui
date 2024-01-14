@@ -11,8 +11,8 @@ public static class GeometryCollectionRenderer
 {
     public static void Draw(
         SKCanvas canvas,
-        Viewport viewport, 
-        VectorStyle? vectorStyle, 
+        Viewport viewport,
+        VectorStyle? vectorStyle,
         IFeature feature,
         GeometryCollection collection,
         float opacity,
@@ -25,7 +25,7 @@ public static class GeometryCollectionRenderer
             _ = result.Bounds;
             return result;
         }
-        
+
         if (vectorStyle == null)
             return;
 
@@ -34,14 +34,14 @@ public static class GeometryCollectionRenderer
         if (vectorStyle.Fill.IsVisible())
         {
             var paintFill = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), PolygonRenderer.CreateSkPaint);
-            path = vectorCache.GetOrCreatePath((collection, feature, viewport, lineWidth), ToPath); 
+            path = vectorCache.GetOrCreatePath((collection, feature, viewport, lineWidth), ToPath);
             canvas.DrawPath(path, paintFill);
         }
 
         if (vectorStyle.Outline.IsVisible())
         {
             var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), PolygonRenderer.CreateSkPaint);
-            path ??= vectorCache.GetOrCreatePath((collection, feature, viewport, lineWidth), ToPath); 
+            path ??= vectorCache.GetOrCreatePath((collection, feature, viewport, lineWidth), ToPath);
             canvas.DrawPath(path, paint);
         }
     }

@@ -9,12 +9,12 @@ public static class PenExtensions
         {
             return false;
         }
-        
+
         if (pen.Color.A == 0)
         {
             return false;
         }
-        
+
         return true;
-    }    
+    }
 }

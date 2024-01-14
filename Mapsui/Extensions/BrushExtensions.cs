@@ -9,12 +9,12 @@ public static class BrushExtensions
         {
             return false;
         }
-        
+
         if (brush.Color?.A == 0)
         {
             return false;
         }
-        
+
         return true;
     }
 }

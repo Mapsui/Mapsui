@@ -212,7 +212,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         var outline = valueTuple.outline;
         var opacity = valueTuple.opacity;
-        
+
         if (outline is null) return null;
 
         return new SKPaint
@@ -230,7 +230,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         var fill = valueTuple.fill;
         var opacity = valueTuple.opacity;
-        
+
         if (fill is null) return null;
 
         return new SKPaint

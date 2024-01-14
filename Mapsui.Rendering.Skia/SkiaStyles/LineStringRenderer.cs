@@ -32,7 +32,7 @@ public static class LineStringRenderer
     {
         var pen = valueTuple.pen;
         var opacity = valueTuple.opacity;
-        
+
         float lineWidth = 1;
         var lineColor = new Color();
 

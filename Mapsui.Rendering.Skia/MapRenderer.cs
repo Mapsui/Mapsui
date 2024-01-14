@@ -166,7 +166,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
             lock (_renderLock)
             {
-                VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => { RenderFeature(canvas, v, l, s, f, o, i); });    
+                VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => { RenderFeature(canvas, v, l, s, f, o, i); });
             }
 
             _currentIteration++;
@@ -324,7 +324,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
     {
         if (_ownsRenderCache)
         {
-            _renderCache.Dispose();    
+            _renderCache.Dispose();
         }
     }
 }

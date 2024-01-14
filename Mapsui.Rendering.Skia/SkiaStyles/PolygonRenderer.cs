@@ -23,7 +23,7 @@ internal static class PolygonRenderer
         SKPath ToPath((long featureId, MRect extent, double rotation, float lineWidth) valueTuple)
         {
             var skRect = vectorCache.GetOrCreatePath(viewport, Extensions.ViewportExtensions.ToSkiaRect);
-            var result = polygon.ToSkiaPath(viewport, skRect, valueTuple.lineWidth); 
+            var result = polygon.ToSkiaPath(viewport, skRect, valueTuple.lineWidth);
             _ = result.Bounds;
             return result;
         }

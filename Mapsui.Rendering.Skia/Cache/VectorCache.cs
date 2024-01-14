@@ -9,13 +9,13 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
     private readonly LruCache<object, object> _pathParamCache = new(Math.Min(capacity, 1));
     private readonly LruCache<(MRect? Rect, double Resolution, object Geometry, float lineWidth), object> _pathCache = new(Math.Max(capacity, 1));
 
-    public T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, T> toPaint) 
-        where T : class? 
+    public T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, T> toPaint)
+        where T : class?
     {
         return _paintCache.GetOrCreateValue(param!, toPaint);
     }
 
-    public T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, ISymbolCache, T> toPaint) 
+    public T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, ISymbolCache, T> toPaint)
         where T : class?
     {
         return _paintCache.GetOrCreateValue(param!, f => toPaint(f, symbolCache));

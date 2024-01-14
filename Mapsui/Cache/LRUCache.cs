@@ -78,7 +78,7 @@ public class LruCache<TKey, TValue>(int capacity)
         }
     }
 
-    public TResult? GetOrCreateValue<TParam, TResult>(TParam key, Func<TParam, TResult> func) 
+    public TResult? GetOrCreateValue<TParam, TResult>(TParam key, Func<TParam, TResult> func)
         where TParam : TKey
         where TResult : TValue
     {
