@@ -23,6 +23,7 @@ public static class GeometryCollectionRenderer
             var skRect = vectorCache.GetOrCreatePath(valueTuple.viewport, Extensions.ViewportExtensions.ToSkiaRect);
             var result = collection.ToSkiaPath(valueTuple.viewport, skRect, valueTuple.lineWidth);
             _ = result.Bounds;
+            _ = result.TightBounds;
             return result;
         }
 
