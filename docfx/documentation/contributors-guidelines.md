@@ -9,6 +9,12 @@ Note: Below are some contributor guidelines. Items were added when we felt it wa
 ## Issues first
 Submit an issue before a pull request so we can discuss the possible solutions to the problem.
 
+## Create small PRs that are about one topic
+To be able to review a PR it helps if it is a small change which covers only one topic. For the reviewer it is important to understand the purpose. Take the reviewer along in your own thinking steps. There was a problem, you considered solutions, and there was a reason why you came to this solution. The diff shows what has changed. What should be clear from the PR desciption, commits and code comments is the 'why'.
+
+### For bigger changes work with PR dependencies
+If you create a PR and want to make additional changes based on the earlier changes you should create a new PR that depends and the previous PR. Mention in the description that it depends on the other PR. Once the previous PR was merged you can update the next one with `git pull origin main` on the commend line. If you do not really need PR dependencies (because the changes are not really related) then it is preferred to create independent PRs.
+
 ## Formatting
 We use [.editorconfig](https://editorconfig.org) in our repository and the code should comply to this. To apply specifc rules in Visual Studio you can select a project | context menu | Analyze and Code Cleanup | Run Code Cleanup (Profile 1 of 2). You can configure which rules to apply in these profiles. Alternatively you can use the [dotnet format](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-format) command.
 
