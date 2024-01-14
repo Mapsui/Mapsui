@@ -1,4 +1,5 @@
 ﻿using System;
+using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -19,26 +20,26 @@ public static class GeometryCollectionRenderer
     {
         SKPath ToPath((GeometryCollection collection, IFeature feature, Viewport viewport, float lineWidth) valueTuple)
         {
-            var skRect = vectorCache.GetOrCreatePath(valueTuple.viewport, ViewportExtensions.ToSkiaRect);
+            var skRect = vectorCache.GetOrCreatePath(valueTuple.viewport, Extensions.ViewportExtensions.ToSkiaRect);
             return collection.ToSkiaPath(valueTuple.viewport, skRect, valueTuple.lineWidth);
         }
         
         if (vectorStyle == null)
             return;
 
-        var paintFill = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), PolygonRenderer.CreateSkPaint);
         float lineWidth = (float)(vectorStyle.Outline?.Width ?? 1f);
-        if (paintFill.IsVisible())
+        if (vectorStyle.Fill.IsVisible())
         {
+            var paintFill = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), PolygonRenderer.CreateSkPaint);
             var path = vectorCache.GetOrCreatePath((collection, feature, viewport, lineWidth), ToPath); 
             canvas.DrawPath(path, paintFill);
         }
 
-        var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), PolygonRenderer.CreateSkPaint);
-        if (paint.IsVisible())
+        if (vectorStyle.Outline.IsVisible())
         {
+            var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), PolygonRenderer.CreateSkPaint);
             var path = vectorCache.GetOrCreatePath((collection, feature, viewport, lineWidth), ToPath); 
-            canvas.DrawPath(path, paintFill);
+            canvas.DrawPath(path, paint);
         }
     }
 }

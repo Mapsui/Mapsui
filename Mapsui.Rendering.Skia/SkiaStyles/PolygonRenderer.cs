@@ -2,6 +2,7 @@
 using System.IO;
 using System.Security.Authentication.ExtendedProtection;
 using System.Threading;
+using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -21,7 +22,7 @@ internal static class PolygonRenderer
     {
         SKPath ToPath((long featureId, MRect extent, double rotation, float lineWidth, EPathType pathType) valueTuple)
         {
-            var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
+            var skRect = vectorCache.GetOrCreatePath(viewport, Extensions.ViewportExtensions.ToSkiaRect);
             var result = polygon.ToSkiaPath(viewport, skRect, valueTuple.lineWidth); 
             result.Close();
             _ = result.Bounds;
@@ -32,19 +33,19 @@ internal static class PolygonRenderer
         if (vectorStyle == null)
             return;
 
-        var extent = Mapsui.Extensions.ViewportExtensions.ToExtent(viewport);
+        var extent = viewport.ToExtent();
         var rotation = viewport.Rotation;
-        var fillPaint = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), CreateSkPaint);
         float lineWidth = (float)(vectorStyle.Outline?.Width ?? 1);
-        if (fillPaint.IsVisible())
+        if (vectorStyle.Fill.IsVisible())
         {
+            var fillPaint = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), CreateSkPaint);
             var pathFill = vectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth, EPathType.Fill), ToPath);
             canvas.DrawPath(pathFill, fillPaint);
         }
 
-        var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), CreateSkPaint);
-        if (paint.IsVisible())
+        if (vectorStyle.Outline.IsVisible())
         {
+            var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), CreateSkPaint);
             var path = vectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth, EPathType.Line), ToPath);
             canvas.DrawPath(path, paint);
         }
