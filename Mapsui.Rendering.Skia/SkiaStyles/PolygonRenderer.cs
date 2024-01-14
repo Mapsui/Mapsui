@@ -20,7 +20,7 @@ internal static class PolygonRenderer
     public static void Draw(SKCanvas canvas, Viewport viewport, VectorStyle vectorStyle, IFeature feature,
         Polygon polygon, float opacity, IVectorCache vectorCache)
     {
-        SKPath ToPath((long featureId, MRect extent, double rotation, float lineWidth, EPathType pathType) valueTuple)
+        SKPath ToPath((long featureId, MRect extent, double rotation, float lineWidth) valueTuple)
         {
             var skRect = vectorCache.GetOrCreatePath(viewport, Extensions.ViewportExtensions.ToSkiaRect);
             var result = polygon.ToSkiaPath(viewport, skRect, valueTuple.lineWidth); 
@@ -34,17 +34,18 @@ internal static class PolygonRenderer
         var extent = viewport.ToExtent();
         var rotation = viewport.Rotation;
         float lineWidth = (float)(vectorStyle.Outline?.Width ?? 1);
+        SKPath? path = null;
         if (vectorStyle.Fill.IsVisible())
         {
             var fillPaint = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), CreateSkPaint);
-            var pathFill = vectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth, EPathType.Fill), ToPath);
-            canvas.DrawPath(pathFill, fillPaint);
+            path = vectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth), ToPath);
+            canvas.DrawPath(path, fillPaint);
         }
 
         if (vectorStyle.Outline.IsVisible())
         {
             var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), CreateSkPaint);
-            var path = vectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth, EPathType.Line), ToPath);
+            path ??= vectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth), ToPath);
             canvas.DrawPath(path, paint);
         }
     }

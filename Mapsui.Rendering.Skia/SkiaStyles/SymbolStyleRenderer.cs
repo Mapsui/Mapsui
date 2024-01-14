@@ -313,9 +313,3 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return size;
     }
 }
-
-internal enum EPathType
-{
-    Fill,
-    Line
-}
