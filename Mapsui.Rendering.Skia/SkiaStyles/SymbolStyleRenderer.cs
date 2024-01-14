@@ -163,8 +163,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             canvas.RotateDegrees((float)rotation);
         }
 
-        var linePaint = vectorCache.GetOrCreatePaint(symbolStyle.Outline, opacity, CreateLinePaint);
-        var fillPaint = vectorCache.GetOrCreatePaint(symbolStyle.Fill, opacity, CreateFillPaint);
+        var linePaint = vectorCache.GetOrCreatePaint((symbolStyle.Outline, opacity), CreateLinePaint);
+        var fillPaint = vectorCache.GetOrCreatePaint((symbolStyle.Fill, opacity), CreateFillPaint);
 
         if (fillPaint != null && fillPaint.Color.Alpha != 0)
         {
@@ -174,7 +174,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         if (linePaint != null && linePaint.Color.Alpha != 0)
         {
-            var path = vectorCache.GetOrCreatePath((symbolStyle.SymbolType, x, y, EPathType.Outline), CreatePath);
+            var path = vectorCache.GetOrCreatePath((symbolStyle.SymbolType, x, y, Outline: EPathType.Line), CreatePath);
             canvas.DrawPath(path, linePaint);
         }
 
@@ -209,8 +209,11 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return skPath;
     }
 
-    private static SKPaint? CreateLinePaint(Pen? outline, float opacity)
+    private static SKPaint? CreateLinePaint((Pen? outline, float opacity) valueTuple)
     {
+        var outline = valueTuple.outline;
+        var opacity = valueTuple.opacity;
+        
         if (outline is null) return null;
 
         return new SKPaint
@@ -224,8 +227,11 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         };
     }
 
-    private static SKPaint? CreateFillPaint(Brush? fill, float opacity)
+    private static SKPaint? CreateFillPaint((Brush? fill, float opacity) valueTuple)
     {
+        var fill = valueTuple.fill;
+        var opacity = valueTuple.opacity;
+        
         if (fill is null) return null;
 
         return new SKPaint
@@ -313,5 +319,5 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 internal enum EPathType
 {
     Fill,
-    Outline
+    Line
 }

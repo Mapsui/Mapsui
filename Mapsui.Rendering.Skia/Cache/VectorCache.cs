@@ -1,45 +1,31 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using Mapsui.Cache;
-using Mapsui.Extensions;
-using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class VectorCache : IVectorCache
+public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVectorCache
 {
-    private readonly ConcurrentDictionary<(object? Pen, float Opacity), object> _paintCache = new();
-    private readonly ConcurrentDictionary<(Brush? Brush, float Opacity, double rotation), object> _fillCache = new();
-    private readonly LruCache<object, object> _pathParamCache;
-    private readonly LruCache<(MRect? Rect, double Resolution, object Geometry, float lineWidth), object> _pathCache;
-    private readonly ISymbolCache _symbolCache;
+    private readonly LruCache<object, object> _paintCache = new(Math.Min(capacity, 1));
+    private readonly LruCache<object, object> _pathParamCache = new(Math.Min(capacity, 1));
+    private readonly LruCache<(MRect? Rect, double Resolution, object Geometry, float lineWidth), object> _pathCache = new(Math.Max(capacity, 1));
 
-    public VectorCache(ISymbolCache symbolCache, int capacity)
+    public T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, T> toPaint) where T : class?
     {
-        _pathParamCache = new(Math.Min(capacity, 1));
-        _pathCache = new(Math.Max(capacity, 1));
-        _symbolCache = symbolCache;
-    }
-
-    public T? GetOrCreatePaint<T, TPen>(TPen? pen, float opacity, Func<TPen?, float, T> toPaint) where T : class?
-    {
-        var key = (pen, opacity);
-        if (!_paintCache.TryGetValue(key, out var paint))
+        if (!_paintCache.TryGetValue(param!, out var paint))
         {
-            paint = toPaint(pen, opacity);
-            _paintCache[key] = paint!;
+            paint = toPaint(param);
+            _paintCache[param!] = paint!;
         }
 
         return (T?)paint;
     }
 
-    public T? GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint) where T : class?
+    public T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, ISymbolCache, T> toPaint) where T : class?
     {
-        var key = (pen: brush, opacity, rotation);
-        if (!_fillCache.TryGetValue(key, out var paint))
+        if (!_paintCache.TryGetValue(param!, out var paint))
         {
-            paint = toPaint(brush, opacity, rotation, _symbolCache);
-            _fillCache[key] = paint!;
+            paint = toPaint(param, symbolCache);
+            _paintCache[param!] = paint!;
         }
 
         return (T?)paint;
@@ -56,39 +42,10 @@ public sealed class VectorCache : IVectorCache
         return (T)rect!;
     }
 
-    public TPath GetOrCreatePath<TPath, TFeature, TGeometry>(
-        Viewport viewport,
-        TFeature feature,
-        TGeometry geometry,
-        float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath)
-        where TPath : class
-        where TGeometry : class
-        where TFeature : class, IFeature
-    {
-        var key = (viewport.ToExtent(), viewport.Rotation, feature.Id, lineWidth);
-        if (!_pathCache.TryGetValue(key, out var path))
-        {
-            path = toPath(geometry, viewport, lineWidth);
-            _pathCache[key] = path;
-        }
-
-        return (TPath)path;
-    }
-
     public void Dispose()
     {
         _pathParamCache.Clear();
         _pathCache.Clear();
-        foreach (var value in _fillCache.Values)
-        {
-            value.DisposeIfDisposable();
-        }
-        _fillCache.Clear();
-
-        foreach (var value in _paintCache.Values)
-        {
-            value.DisposeIfDisposable();
-        }
-        _pathCache.Clear();
+        _paintCache.Clear();
     }
 }

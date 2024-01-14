@@ -1,44 +1,35 @@
-using System;
-using System.Diagnostics.CodeAnalysis;
+using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Nts;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
-using ViewportExtensions = Mapsui.Rendering.Skia.Extensions.ViewportExtensions;
 
 namespace Mapsui.Rendering.Skia;
 
 public static class LineStringRenderer
 {
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle? vectorStyle,
-        IFeature feature, LineString lineString, float opacity, IVectorCache? vectorCache)
+        IFeature feature, LineString lineString, float opacity, IRenderCache renderCache)
     {
         if (vectorStyle == null)
             return;
 
-        SKPaint? paint;
-        SKPath path;
         var lineWidth = (float)(vectorStyle.Line?.Width ?? 1f);
-        if (vectorCache == null)
-        {
-            paint = CreateSkPaint(vectorStyle.Line, opacity);
-            path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds, lineWidth);
-        }
-        else
-        {
-            paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
-            path = vectorCache.GetOrCreatePath(viewport, feature, lineString, lineWidth,
-                (geometry, vp, _) => geometry.ToSkiaPath(vp, vp.ToSkiaRect(), lineWidth));
-        }
+        var extent = viewport.ToExtent();
+        var rotation = viewport.Rotation;
+        var paint = renderCache.GetOrCreatePaint((vectorStyle.Line, opacity), CreateSkPaint);
+        var path = renderCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth),
+            f => lineString.ToSkiaPath(viewport, viewport.ToSkiaRect(), lineWidth));
 
         canvas.DrawPath(path, paint);
     }
 
-    private static SKPaint CreateSkPaint(Pen? pen, float opacity)
+    private static SKPaint CreateSkPaint((Pen? pen, float opacity) valueTuple)
     {
+        var pen = valueTuple.pen;
+        var opacity = valueTuple.opacity;
+        
         float lineWidth = 1;
         var lineColor = new Color();
 

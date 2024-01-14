@@ -28,7 +28,7 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     switch (geometryFeature.Geometry)
                     {
                         case GeometryCollection collection:
-                            GeometryCollectionRenderer.Draw(canvas, viewport, layer, vectorStyle, feature, collection, opacity, renderCache);
+                            GeometryCollectionRenderer.Draw(canvas, viewport, vectorStyle, feature, collection, opacity, renderCache);
                             break;
                         case Point point:
                             SymbolStyleRenderer.DrawXY(canvas, viewport, layer, point.X, point.Y, CreateSymbolStyle(vectorStyle), renderCache);

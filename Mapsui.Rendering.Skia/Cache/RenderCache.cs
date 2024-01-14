@@ -50,31 +50,19 @@ public sealed class RenderCache : IRenderCache
         return LabelCache.GetOrCreateLabel(text, style, opacity, createLabelAsBitmap);
     }
 
-    public T? GetOrCreatePaint<T, TPen>(TPen? pen, float opacity, Func<TPen?, float, T> toPaint) where T : class?
+    public T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, T> toPaint) where T : class?
     {
-        return VectorCache == null ? toPaint(pen, opacity) : VectorCache.GetOrCreatePaint(pen, opacity, toPaint);
+        return VectorCache == null ? toPaint(param) : VectorCache.GetOrCreatePaint(param, toPaint);
     }
 
-    public T? GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint) where T : class?
+    public T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, ISymbolCache, T> toPaint) where T : class?
     {
-        return VectorCache == null ? toPaint(brush, opacity, rotation, SymbolCache) : VectorCache.GetOrCreatePaint(brush, opacity, rotation, toPaint);
+        return VectorCache == null ? toPaint(param, SymbolCache) : VectorCache.GetOrCreatePaint(param, toPaint);
     }
 
     public T GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toSkRect)
     {
         return VectorCache == null ? toSkRect(param) : VectorCache.GetOrCreatePath(param, toSkRect);
-    }
-
-    public TPath GetOrCreatePath<TPath, TFeature, TGeometry>(
-        Viewport viewport,
-        TFeature feature,
-        TGeometry geometry,
-        float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath)
-        where TPath : class
-        where TGeometry : class
-        where TFeature : class, IFeature
-    {
-        return VectorCache == null ? toPath(geometry, viewport, lineWidth) : VectorCache.GetOrCreatePath(viewport, feature, geometry, lineWidth, toPath);
     }
 
     public IBitmapInfo? GetOrCreate(MRaster raster, long currentIteration)
