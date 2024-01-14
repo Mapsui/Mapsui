@@ -21,7 +21,9 @@ public static class GeometryCollectionRenderer
         SKPath ToPath((GeometryCollection collection, IFeature feature, Viewport viewport, float lineWidth) valueTuple)
         {
             var skRect = vectorCache.GetOrCreatePath(valueTuple.viewport, Extensions.ViewportExtensions.ToSkiaRect);
-            return collection.ToSkiaPath(valueTuple.viewport, skRect, valueTuple.lineWidth);
+            var result = collection.ToSkiaPath(valueTuple.viewport, skRect, valueTuple.lineWidth);
+            _ = result.Bounds;
+            return result;
         }
         
         if (vectorStyle == null)
