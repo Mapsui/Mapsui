@@ -26,8 +26,8 @@ public static class GeometryCollectionRenderer
         if (vectorStyle == null)
             return;
 
-        var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity, feature.Id), PolygonRenderer.CreateSkPaint);
-        var paintFill = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation, feature.Id), PolygonRenderer.CreateSkPaint);
+        var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), PolygonRenderer.CreateSkPaint);
+        var paintFill = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), PolygonRenderer.CreateSkPaint);
 
         float lineWidth = (float)(vectorStyle.Outline?.Width ?? 1f);
         
