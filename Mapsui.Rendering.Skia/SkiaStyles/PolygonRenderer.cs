@@ -24,6 +24,7 @@ internal static class PolygonRenderer
         {
             var skRect = vectorCache.GetOrCreatePath(viewport, Extensions.ViewportExtensions.ToSkiaRect);
             var result = polygon.ToSkiaPath(viewport, skRect, valueTuple.lineWidth);
+            result.Close();
             _ = result.Bounds;
             _ = result.TightBounds;
             return result;

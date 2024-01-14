@@ -1,5 +1,4 @@
 using Mapsui.Extensions;
-using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -9,21 +8,27 @@ namespace Mapsui.Rendering.Skia;
 
 public static class LineStringRenderer
 {
-    public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle? vectorStyle,
+    public static void Draw(SKCanvas canvas, Viewport viewport, VectorStyle? vectorStyle,
         IFeature feature, LineString lineString, float opacity, IRenderCache renderCache)
     {
         if (vectorStyle == null)
             return;
+        
+        SKPath ToPath((long featureId, MRect extent, double rotation, float lineWidth) valueTuple)
+        {
+            var result = lineString.ToSkiaPath(viewport, viewport.ToSkiaRect(), valueTuple.lineWidth);
+            _ = result.Bounds;
+            _ = result.TightBounds;
+            return result;
+        }
 
-        var lineWidth = (float)(vectorStyle.Line?.Width ?? 1f);
         var extent = viewport.ToExtent();
         var rotation = viewport.Rotation;
+        var lineWidth = (float)(vectorStyle.Line?.Width ?? 1f);
         if (vectorStyle.Line.IsVisible())
         {
             var paint = renderCache.GetOrCreatePaint((vectorStyle.Line, opacity), CreateSkPaint);
-            var path = renderCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth),
-                f => lineString.ToSkiaPath(viewport, viewport.ToSkiaRect(), lineWidth));
-
+            var path = renderCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth),ToPath);
             canvas.DrawPath(path, paint);
         }
     }
