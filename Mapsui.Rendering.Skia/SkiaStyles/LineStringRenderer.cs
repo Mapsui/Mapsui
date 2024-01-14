@@ -18,11 +18,14 @@ public static class LineStringRenderer
         var lineWidth = (float)(vectorStyle.Line?.Width ?? 1f);
         var extent = viewport.ToExtent();
         var rotation = viewport.Rotation;
-        var paint = renderCache.GetOrCreatePaint((vectorStyle.Line, opacity), CreateSkPaint);
-        var path = renderCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth),
-            f => lineString.ToSkiaPath(viewport, viewport.ToSkiaRect(), lineWidth));
+        if (vectorStyle.Line.IsVisible())
+        {
+            var paint = renderCache.GetOrCreatePaint((vectorStyle.Line, opacity), CreateSkPaint);
+            var path = renderCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth),
+                f => lineString.ToSkiaPath(viewport, viewport.ToSkiaRect(), lineWidth));
 
-        canvas.DrawPath(path, paint);
+            canvas.DrawPath(path, paint);
+        }
     }
 
     private static SKPaint CreateSkPaint((Pen? pen, float opacity) valueTuple)
