@@ -34,7 +34,6 @@ internal static class PolygonRenderer
 
         var extent = Mapsui.Extensions.ViewportExtensions.ToExtent(viewport);
         var rotation = viewport.Rotation;
-        var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), CreateSkPaint);
         var fillPaint = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), CreateSkPaint);
         float lineWidth = (float)(vectorStyle.Outline?.Width ?? 1);
         if (fillPaint.IsVisible())
@@ -43,6 +42,7 @@ internal static class PolygonRenderer
             canvas.DrawPath(pathFill, fillPaint);
         }
 
+        var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), CreateSkPaint);
         if (paint.IsVisible())
         {
             var path = vectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth, EPathType.Line), ToPath);
