@@ -6,20 +6,12 @@ using Mapsui.Extensions;
 namespace Mapsui.Cache;
 
 /// <summary>/// LRU Cache with disposing of disposable values. </summary>
-public class LruCache<TKey, TValue>
+public class LruCache<TKey, TValue>(int capacity)
     where TKey : notnull
 {
-    private readonly int _capacity;
-    private readonly Dictionary<TKey, (LinkedListNode<TKey> Node, TValue Value)> _cache;
-    private readonly LinkedList<TKey> _list;
+    private readonly Dictionary<TKey, (LinkedListNode<TKey> Node, TValue Value)> _cache = new(capacity);
+    private readonly LinkedList<TKey> _list = new();
     private readonly object _lock = new object();
-
-    public LruCache(int capacity)
-    {
-        _capacity = capacity;
-        _cache = new(capacity);
-        _list = new LinkedList<TKey>();
-    }
 
     public void Put(TKey key, TValue value)
     {
@@ -43,7 +35,7 @@ public class LruCache<TKey, TValue>
             }
             else
             {
-                if (_cache.Count >= _capacity) // Cache full.
+                if (_cache.Count >= capacity) // Cache full.
                 {
                     var removeKey = _list.Last!.Value;
                     _cache.TryGetValue(removeKey, out var old);
