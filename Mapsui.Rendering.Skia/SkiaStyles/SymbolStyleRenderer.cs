@@ -166,14 +166,14 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (symbolStyle.Fill.IsVisible())
         {
             var fillPaint = vectorCache.GetOrCreatePaint((symbolStyle.Fill, opacity), CreateFillPaint);
-            var path = vectorCache.GetOrCreatePath((symbolStyle.SymbolType, x, y, EPathType.Fill), CreatePath);
+            var path = vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath);
             canvas.DrawPath(path, fillPaint);
         }
 
         if (symbolStyle.Outline.IsVisible())
         {
             var linePaint = vectorCache.GetOrCreatePaint((symbolStyle.Outline, opacity), CreateLinePaint);
-            var path = vectorCache.GetOrCreatePath((symbolStyle.SymbolType, x, y, Outline: EPathType.Line), CreatePath);
+            var path = vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath);
             canvas.DrawPath(path, linePaint);
         }
 
@@ -182,9 +182,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private static SKPath CreatePath((SymbolType SymbolType, double x, double y, EPathType Fill) valueTuple)
+    private static SKPath CreatePath(SymbolType symbolType)
     {
-        var symbolType = valueTuple.SymbolType;
         var width = (float)SymbolStyle.DefaultWidth;
         var halfWidth = width / 2;
         var halfHeight = (float)SymbolStyle.DefaultHeight / 2;
