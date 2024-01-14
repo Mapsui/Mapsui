@@ -9,37 +9,21 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
     private readonly LruCache<object, object> _pathParamCache = new(Math.Min(capacity, 1));
     private readonly LruCache<(MRect? Rect, double Resolution, object Geometry, float lineWidth), object> _pathCache = new(Math.Max(capacity, 1));
 
-    public T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, T> toPaint) where T : class?
+    public T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, T> toPaint) 
+        where T : class? 
     {
-        if (!_paintCache.TryGetValue(param!, out var paint))
-        {
-            paint = toPaint(param);
-            _paintCache[param!] = paint!;
-        }
-
-        return (T?)paint;
+        return _paintCache.GetOrCreateValue(param!, toPaint);
     }
 
-    public T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, ISymbolCache, T> toPaint) where T : class?
+    public T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, ISymbolCache, T> toPaint) 
+        where T : class?
     {
-        if (!_paintCache.TryGetValue(param!, out var paint))
-        {
-            paint = toPaint(param, symbolCache);
-            _paintCache[param!] = paint!;
-        }
-
-        return (T?)paint;
+        return _paintCache.GetOrCreateValue(param!, f => toPaint(f, symbolCache));
     }
 
     public T GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toSkRect)
     {
-        if (!_pathParamCache.TryGetValue(param!, out var rect))
-        {
-            rect = toSkRect(param);
-            _pathParamCache[param!] = rect!;
-        }
-
-        return (T)rect!;
+        return _pathParamCache.GetOrCreateValue(param!, toSkRect);
     }
 
     public void Dispose()
