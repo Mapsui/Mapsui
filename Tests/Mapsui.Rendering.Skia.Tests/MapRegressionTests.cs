@@ -72,10 +72,10 @@ public class MapRegressionTests
             Logger.LogDelegate = ConsoleLog;
             ConsoleLog(LogLevel.Debug, $"Start MapRegressionTest {sample.GetType().Name}", null);
             await TestSampleAsync(sample, true).ConfigureAwait(false);
-            ConsoleLog(LogLevel.Debug, $"End MapRegressionTest {sample.GetType().Name}", null);
         }
         finally
         {
+            ConsoleLog(LogLevel.Debug, $"End MapRegressionTest {sample.GetType().Name}", null);
             Logger.LogDelegate = original;
         }
     }
@@ -89,6 +89,7 @@ public class MapRegressionTests
         }
 
         Console.WriteLine(message);
+        Console.Out.Flush();
     }
 
     public static async Task TestSampleAsync(ISampleBase sample, bool compareImages)

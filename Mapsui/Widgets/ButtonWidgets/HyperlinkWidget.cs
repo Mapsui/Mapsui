@@ -18,7 +18,7 @@ public class HyperlinkWidget : TextButtonWidget
             if (_url == value)
                 return;
             _url = value ?? string.Empty;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 }
