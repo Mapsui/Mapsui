@@ -20,4 +20,5 @@ public class CustomWidget : IWidget
     public double Width { get; set; }
     public double Height { get; set; }
     public bool Enabled { get; set; } = true;
+    public bool NeedsRedraw { get; set; }
 }

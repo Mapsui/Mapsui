@@ -38,7 +38,7 @@ public abstract class TouchableWidget : Widget, ITouchableWidget
             if (_touchableArea == value)
                 return;
             _touchableArea = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
