@@ -23,6 +23,8 @@ If after code changes there are expected changes in the generated files they sho
     
 This can be done with a script: ```scripts\test-image-copier.cmd```. 
 
+Note, only commit changes to git if the file that is modified relates to a failed test. There are many tiny changes in the files which are ignored by the tests. In that case we do not want to alter the file to avoid too many changes and avoid growth in size of the repository.
+
 ## 2. Visual inspection
 
 There tests can be inspected in two ways. 
