@@ -37,9 +37,10 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
         set
         {
             if (_padding == value)
-                return;
+              return;
+            
             _padding = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -58,7 +59,7 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
 
             _svgImage = value;
             Picture = null;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -74,7 +75,7 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
         {
             if (Equals(value, _picture)) return;
             _picture = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -91,7 +92,7 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
             if (_rotation == value)
                 return;
             _rotation = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
