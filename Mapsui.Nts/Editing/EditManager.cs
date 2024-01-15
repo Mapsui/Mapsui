@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
+using NetTopologySuite.Features;
 using NetTopologySuite.Geometries;
 
 namespace Mapsui.Nts.Editing;
@@ -34,6 +35,50 @@ public class EditManager
     public int VertexRadius { get; set; } = 12;
     public bool SelectMode { get; set; }
 
+    /// <summary>
+    /// Invoked after a new vertex is added.
+    /// Derived classes can override this method, to perform custom actions on the newly-added vertex.
+    /// </summary>
+    /// <param name="geometryFeature">The geometry feature.</param>
+    /// <param name="geometry">The geometry.</param>
+    /// <param name="newVertex">The newly-added vertex.</param>
+    protected virtual void VertexAdded(GeometryFeature geometryFeature, Geometry geometry, Coordinate newVertex)
+    {
+    }
+
+    /// <summary>
+    /// Invoked after a polygon is drawn.
+    /// Derived classes can override this method, to perform custom actions on the newly-drawn polygon.
+    /// </summary>
+    /// <param name="geometryFeature">The geometry feature.</param>
+    /// <param name="polygon">The newly-drawn polygon.</param>
+    protected virtual void PolygonDrawn(GeometryFeature geometryFeature, Polygon polygon)
+    {
+    }
+
+    /// <summary>
+    /// Invoked after a coordinate is deleted.
+    /// Derived classes can override this method, to perform custom actions, according to the deleted coordinate.
+    /// </summary>
+    /// <param name="geometryFeature">The geometry feature.</param>
+    /// <param name="oldGeometry">The old geometry.</param>
+    /// <param name="deletedCoordinate">The deleted coordinate.</param>
+    /// <param name="index">The index.</param>
+    protected virtual void CoordinateDeleted(GeometryFeature geometryFeature, Geometry? oldGeometry, Coordinate deletedCoordinate, int index)
+    {
+    }
+
+    /// <summary>
+    /// Invoked after a new coordinate is inserted.
+    /// Derived classes can override this method, to perform custom actions, according to the deleted coordinate.
+    /// </summary>
+    /// <param name="geometryFeature">The geometry feature.</param>
+    /// <param name="newGeometry">The geometry, after the coordinate has been inserted.</param>
+    /// <param name="insertedCoordinate">The inserted coordinate.</param>
+    protected virtual void CoordinateInserted(GeometryFeature geometryFeature, Geometry? newGeometry, Coordinate insertedCoordinate)
+    {
+    }
+
     public bool EndEdit()
     {
         if (_addInfo.Feature is null) return false;
@@ -61,12 +106,15 @@ public class EditManager
 
             var linearRing = _addInfo.Vertices.ToList();
             linearRing.Add(linearRing[0].Copy()); // Add first coordinate at end to close the ring.
-            _addInfo.Feature.Geometry = new Polygon(new LinearRing(linearRing.ToArray()));
+            var geometry = new Polygon(new LinearRing(linearRing.ToArray()));
+            var feature = _addInfo.Feature;
+            _addInfo.Feature.Geometry = geometry;
 
             _addInfo.Feature.Modified(); // You need to clear the cache to see changes.
             _addInfo.Feature = null;
             _addInfo.Vertex = null;
             EditMode = EditMode.AddPolygon;
+            PolygonDrawn(feature, geometry);
             Layer?.DataHasChanged();
         }
 
@@ -87,7 +135,10 @@ public class EditManager
     {
         if (EditMode == EditMode.AddPoint)
         {
-            Layer?.Add(new GeometryFeature { Geometry = worldPosition.ToMPoint().ToPoint() });
+            var geometry = worldPosition.ToMPoint().ToPoint();
+            var newGeometryFeature = new GeometryFeature { Geometry = geometry };
+            Layer?.Add(newGeometryFeature);
+            VertexAdded(newGeometryFeature, geometry, worldPosition);
             Layer?.DataHasChanged();
         }
         else if (EditMode == EditMode.AddLine)
@@ -96,9 +147,12 @@ public class EditManager
             // Add a second point right away. The second one will be the 'hover' vertex
             var secondPoint = worldPosition.Copy();
             _addInfo.Vertex = secondPoint;
-            _addInfo.Feature = new GeometryFeature { Geometry = new LineString(new[] { firstPoint, secondPoint }) };
+            var geometry = new LineString(new[] { firstPoint, secondPoint });
+            var newGeometryFeature = new GeometryFeature { Geometry = geometry };
+            _addInfo.Feature = newGeometryFeature;
             _addInfo.Vertices = _addInfo.Feature.Geometry.MainCoordinates();
             Layer?.Add(_addInfo.Feature);
+            VertexAdded(newGeometryFeature, geometry, worldPosition);
             Layer?.DataHasChanged();
             EditMode = EditMode.DrawingLine;
         }
@@ -111,8 +165,10 @@ public class EditManager
             _addInfo.Vertex.SetXY(worldPosition);
             _addInfo.Vertex = worldPosition.Copy(); // and create a new hover vertex
             _addInfo.Vertices.Add(_addInfo.Vertex);
-            _addInfo.Feature.Geometry = new LineString(_addInfo.Vertices.ToArray());
+            var geometry = new LineString(_addInfo.Vertices.ToArray());
+            _addInfo.Feature.Geometry = geometry;
             _addInfo.Feature?.Modified();
+            VertexAdded(_addInfo.Feature!, geometry, worldPosition);
             Layer?.DataHasChanged();
         }
         else if (EditMode == EditMode.AddPolygon)
@@ -123,11 +179,14 @@ public class EditManager
             _addInfo.Vertex = secondPoint;
             _addInfo.Vertices = new List<Coordinate>(new[] { firstPoint, secondPoint });
 
-            _addInfo.Feature = new GeometryFeature
+            var geometry = new Polygon(new LinearRing(new[] { firstPoint, secondPoint, firstPoint })); // A LinearRing needs at least three coordinates
+            var feature = new GeometryFeature()
             {
-                Geometry = new Polygon(new LinearRing(new[] { firstPoint, secondPoint, firstPoint })) // A LinearRing needs at least three coordinates
+                Geometry = geometry
             };
+            _addInfo.Feature = feature;
             Layer?.Add(_addInfo.Feature);
+            VertexAdded(feature, geometry, worldPosition);
             Layer?.DataHasChanged();
             EditMode = EditMode.DrawingPolygon;
         }
@@ -143,9 +202,11 @@ public class EditManager
 
             var linearRing = _addInfo.Vertices.ToList();
             linearRing.Add(linearRing[0]); // Add first coordinate at end to close the ring.
-            _addInfo.Feature.Geometry = new Polygon(new LinearRing(linearRing.ToArray()));
+            var geometry = new Polygon(new LinearRing(linearRing.ToArray()));
+            _addInfo.Feature.Geometry = geometry;
 
             _addInfo.Feature?.Modified();
+            VertexAdded(_addInfo.Feature!, geometry, worldPosition);
             Layer?.DataHasChanged();
         }
         return false;
@@ -275,8 +336,10 @@ public class EditManager
                 var index = vertices.IndexOf(vertexTouched);
                 if (index >= 0)
                 {
-                    geometryFeature.Geometry = geometryFeature.Geometry.DeleteCoordinate(index);
+                    var oldGeometry = geometryFeature.Geometry;
+                    geometryFeature.Geometry = oldGeometry.DeleteCoordinate(index);
                     geometryFeature.Modified();
+                    CoordinateDeleted(geometryFeature, oldGeometry, vertexTouched, index);
                     Layer?.DataHasChanged();
                 }
             }
@@ -296,8 +359,10 @@ public class EditManager
             var vertices = geometryFeature.Geometry.MainCoordinates();
             if (EditHelper.ShouldInsert(mapInfo.WorldPosition, mapInfo.Resolution, vertices, VertexRadius, out var segment))
             {
-                geometryFeature.Geometry = geometryFeature.Geometry.InsertCoordinate(mapInfo.WorldPosition.ToCoordinate(), segment);
+                var coordinate = mapInfo.WorldPosition.ToCoordinate();
+                geometryFeature.Geometry = geometryFeature.Geometry.InsertCoordinate(coordinate, segment);
                 geometryFeature.Modified();
+                CoordinateInserted(geometryFeature, geometryFeature.Geometry, coordinate);
                 Layer?.DataHasChanged();
             }
         }
