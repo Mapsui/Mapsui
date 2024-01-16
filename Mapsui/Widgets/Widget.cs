@@ -46,7 +46,7 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
     /// Margin outside of the widget
     /// </summary>
     public MRect Margin
-    { 
+    {
         get => _margin;
         set
         {

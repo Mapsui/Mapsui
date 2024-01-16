@@ -127,7 +127,7 @@ public class HttpClientUtil : IDisposable
 
         try
         {
-            httpClient = new HttpClient(httpClientHandler);            
+            httpClient = new HttpClient(httpClientHandler);
         }
         catch (SecurityException ex)
         {
