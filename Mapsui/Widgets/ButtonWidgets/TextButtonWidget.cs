@@ -22,19 +22,19 @@ public class TextButtonWidget : TextBoxWidget, ITouchableWidget
     /// <param name="position">Position of touch</param>
     /// <param name="args">Arguments for widget event</param>
     /// <returns>True, if touch is handled</returns>
-    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public virtual bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
         Touched?.Invoke(this, args);
 
         return args.Handled;
     }
 
-    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public virtual bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
         return false;
     }
 
-    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public virtual bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
         return false;
     }
