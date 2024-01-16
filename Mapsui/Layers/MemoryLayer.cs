@@ -36,7 +36,7 @@ public class MemoryLayer : BaseLayer
                 SymbolStyle.DefaultWidth * 2 * resolution,
                 SymbolStyle.DefaultHeight * 2 * resolution);
 
-        return Features.Where(f => f.Extent?.Intersects(biggerRect) == true).OrderBy(f => f.ZOrder).ThenBy(f => f.Id);
+        return Features.Where(f => f.Extent?.Intersects(biggerRect) == true);
     }
 
     public override MRect? Extent => Features.GetExtent();
