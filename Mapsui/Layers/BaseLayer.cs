@@ -186,6 +186,9 @@ public abstract class BaseLayer : ILayer
     /// <inheritdoc />
     public abstract IEnumerable<IFeature> GetFeatures(MRect box, double resolution);
 
+    /// <inheritdoc/>
+    public virtual Func<IEnumerable<IFeature>, IEnumerable<IFeature>> SortFeatures => (feature) => feature;
+
     public void DataHasChanged()
     {
         DataChanged?.Invoke(this, new DataChangedEventArgs());
