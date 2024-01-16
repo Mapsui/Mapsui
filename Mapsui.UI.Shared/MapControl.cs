@@ -124,6 +124,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             if (Map?.Navigator?.UpdateAnimations() ?? false)
                 _refresh = true;
 
+            // Check if widgets need refresh
+            if (!_refresh && (Map?.Widgets?.Any(w => w.NeedsRedraw) ?? false))
+                _refresh = true;
+
             if (!_refresh)
                 return;
 
