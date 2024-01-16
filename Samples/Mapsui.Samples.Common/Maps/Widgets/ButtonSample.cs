@@ -1,10 +1,12 @@
 ﻿using Mapsui.Extensions;
+using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -34,6 +36,8 @@ public class ButtonSample : ISample
         map.Widgets.Add(CreateButtonWithImage(VerticalAlignment.Top, HorizontalAlignment.Right));
         map.Widgets.Add(CreateButton("Button with text", VerticalAlignment.Bottom, HorizontalAlignment.Right));
         map.Widgets.Add(CreateButtonWithImage(VerticalAlignment.Bottom, HorizontalAlignment.Left));
+
+        map.Widgets.Add(CreateOnOffButton(map.Layers.FindLayer("OpenStreetMap").First()));
 
         return Task.FromResult(map);
     }
@@ -70,6 +74,25 @@ public class ButtonSample : ISample
         };
     }
 
+    private static OnOffButtonWidget CreateOnOffButton(ILayer layer)
+    {
+        var button = new OnOffButtonWidget()
+        {
+            Text = "Layer for OSM map",
+            Status = true,
+            OnColor = Color.LightGreen,
+            OffColor = Color.LightGray,
+            Padding = new MRect(20,10),
+            CornerRadius = 2,
+            VerticalAlignment = VerticalAlignment.Center,
+            HorizontalAlignment = HorizontalAlignment.Center,
+        };
+
+        if (layer != null)
+            button.Touched += (s, e) => layer.Enabled = button.Status;
+
+        return button;
+    }
     static string LoadSomeSvgAsString()
     {
         Assembly assembly = typeof(Map).Assembly ?? throw new ArgumentNullException("assembly");
