@@ -28,7 +28,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
     private readonly IRenderCache _renderCache;
     private long _currentIteration;
     private readonly bool _ownsRenderCache;
-    private object _renderLock = new object();
+    private static object _renderLock = new object();
 
     public IRenderCache RenderCache => _renderCache;
 
