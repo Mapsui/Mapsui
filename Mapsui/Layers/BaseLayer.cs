@@ -187,7 +187,7 @@ public abstract class BaseLayer : ILayer
     public abstract IEnumerable<IFeature> GetFeatures(MRect box, double resolution);
 
     /// <inheritdoc/>
-    public virtual Func<IEnumerable<IFeature>, IEnumerable<IFeature>> SortFeatures => (feature) => feature;
+    public virtual Func<IEnumerable<IFeature>, IEnumerable<IFeature>> SortFeatures { get; set; } = (feature) => feature;
 
     public void DataHasChanged()
     {
