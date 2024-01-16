@@ -30,7 +30,7 @@ public static class VisibleFeatureIterator
         var extent = viewport.ToExtent();
         if (extent is null) return;
 
-        var features = layer.GetFeatures(extent, viewport.Resolution).ToList();
+        var features = layer.GetFeatures(extent, viewport.Resolution).OrderBy(f => f.ZOrder).ThenBy(f => f.Id).ToList();
 
         // Part 1. Styles on the layer
         var layerStyles = layer.Style.GetStylesToApply(viewport.Resolution);
