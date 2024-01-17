@@ -22,7 +22,7 @@ public class InfoLayersSample : ISample, ISampleTest
     private const string PolygonLayerName = "Polygon Layer";
     private const string LineLayerName = "Line Layer";
 
-    public string Name => "2 Map Info";
+    public string Name => "Map Info";
     public string Category => "Demo";
 
     public static Map CreateMap()

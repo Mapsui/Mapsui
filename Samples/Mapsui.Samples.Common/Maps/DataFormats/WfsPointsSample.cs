@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Common.Maps.DataFormats;
 
 public class WfsPointsSample : ISample
 {
-    public string Name => " 7 WFS Points";
+    public string Name => "WFS Points";
     public string Category => "Data Formats";
 
     private const string crs = "EPSG:31254";

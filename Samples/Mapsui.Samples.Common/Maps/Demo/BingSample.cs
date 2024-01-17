@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps.Demo;
 
 public class BingSample : ISample
 {
-    public string Name => "3 Virtual Earth";
+    public string Name => "Virtual Earth";
     public string Category => "Demo";
     public Task<Map> CreateMapAsync()
     {
