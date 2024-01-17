@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps.Demo;
 
 public class ImageDataSample : ISample
 {
-    public string Name => "5 Image over Map Sample";
+    public string Name => "Image over Map Sample";
     public string Category => "Demo";
 
     public Task<Map> CreateMapAsync()
@@ -67,7 +67,7 @@ public class ImageDataSample : ISample
 
         memoryLayer.Features = features;
         memoryLayer.Style = null;
-        
+
         return memoryLayer;
     }
 

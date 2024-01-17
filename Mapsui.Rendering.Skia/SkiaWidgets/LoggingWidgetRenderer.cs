@@ -1,7 +1,7 @@
 ﻿using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
-using Mapsui.Widgets.LoggingWidget;
+using Mapsui.Widgets.InfoWidgets;
 using SkiaSharp;
 using System;
 
@@ -37,19 +37,26 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
             return;
 
         UpdateSettings(loggingWidget);
+        loggingWidget.UpdateEnvelope(loggingWidget.Width, loggingWidget.Height, viewport.Width, viewport.Height);
 
-        var marginX = loggingWidget.MarginX;
-        var marginY = loggingWidget.MarginY;
-        var width = loggingWidget.Width;
-        var height = loggingWidget.Height;
-        var paddingX = loggingWidget.PaddingX;
-        var paddingY = loggingWidget.PaddingY;
+        if (loggingWidget.Envelope == null || loggingWidget.Envelope.Width == 0 || loggingWidget.Envelope.Height == 0)
+            return;
+
+        var marginX = loggingWidget.Envelope.Left;
+        var marginY = loggingWidget.Envelope.Bottom;
+        var width = loggingWidget.Envelope.Width;
+        var height = loggingWidget.Envelope.Height;
+        var paddingX = loggingWidget.Padding.Left;
+        var paddingY = loggingWidget.Padding.Top;
 
         var rect = new SKRect((float)marginX, (float)marginY, (float)(marginX + width), (float)(marginY + height));
 
         canvas.DrawRect(rect, _backgroundPaint);
 
-        rect.Inflate(-paddingX, -paddingY);
+        rect = new SKRect((float)(rect.Left + loggingWidget.Padding.Left),
+            (float)(rect.Top + loggingWidget.Padding.Top),
+            (float)(rect.Right - loggingWidget.Padding.Right),
+            (float)(rect.Bottom - loggingWidget.Padding.Bottom));
 
         var line = 0;
 
@@ -58,6 +65,14 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
 
         foreach (var entry in loggingWidget.ListOfLogEntries)
         {
+            if (entry.LogLevel > loggingWidget.LogLevelFilter)
+                continue;
+
+            var top = marginY + (paddingY * line) + loggingWidget.TextSize * (line + 1);
+
+            if (top >= loggingWidget.Envelope.Height)
+                break;
+
             var paint = entry.LogLevel switch
             {
                 LogLevel.Error => _errorTextPaint,
@@ -84,13 +99,13 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
 
     private void UpdateSettings(LoggingWidget loggingWidget)
     {
-        _backgroundPaint.Color = loggingWidget.BackgroundColor.ToSkia().WithAlpha((byte)(255.0f * loggingWidget.Opacity));
+        _backgroundPaint.Color = loggingWidget.BackColor.ToSkia().WithAlpha((byte)(255.0f * loggingWidget.Opacity));
         _errorTextPaint.Color = loggingWidget.ErrorTextColor.ToSkia();
-        _errorTextPaint.TextSize = loggingWidget.TextSize;
+        _errorTextPaint.TextSize = (float)loggingWidget.TextSize;
         _warningTextPaint.Color = loggingWidget.WarningTextColor.ToSkia();
-        _warningTextPaint.TextSize = loggingWidget.TextSize;
+        _warningTextPaint.TextSize = (float)loggingWidget.TextSize;
         _informationTextPaint.Color = loggingWidget.InformationTextColor.ToSkia();
-        _informationTextPaint.TextSize = loggingWidget.TextSize;
+        _informationTextPaint.TextSize = (float)loggingWidget.TextSize;
 
         _levelWidth = _informationTextPaint.MeasureText(LogLevel.Information.ToString());
     }

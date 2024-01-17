@@ -4,19 +4,18 @@
 
 // This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 
-using System;
-using System.Collections;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Styles;
 using Mapsui.Widgets;
-using Mapsui.Widgets.LoggingWidget;
+using Mapsui.Widgets.InfoWidgets;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 
 namespace Mapsui;
 
@@ -401,13 +400,12 @@ public class Map : INotifyPropertyChanged, IDisposable
                 // ... then return;
                 return;
 
-            var loggingWidget = new LoggingWidget(this)
+            var loggingWidget = new LoggingWidget()
             {
-                MarginX = 10,
-                MarginY = 10,
-                VerticalAlignment = VerticalAlignment.Top,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                BackgroundColor = Color.Transparent,
+                Margin = new MRect(10),
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                BackColor = Color.Transparent,
                 Opacity = 0.0f,
                 LogLevelFilter = LogLevel.Trace,
             };

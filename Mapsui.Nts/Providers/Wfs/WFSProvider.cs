@@ -350,14 +350,14 @@ public class WFSProvider : IProvider, IDisposable
     {
         if (_initialized)
             return;
-        
+
         await _init.WaitAsync();
         try
         {
             // test again could be already initialized
             if (_initialized)
                 return;
-            
+
             await GetFeatureTypeInfoAsync();
         }
         finally

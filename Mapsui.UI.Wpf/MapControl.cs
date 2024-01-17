@@ -169,8 +169,13 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
         var mousePosition = e.GetPosition(this).ToMapsui();
+
         if (HandleWidgetPointerUp(mousePosition, _pointerDownPosition, true, e.ClickCount, ShiftPressed))
+        {
+            _mouseDown = false;
+
             return;
+        }
 
         if (_previousMousePosition != null)
         {
@@ -394,9 +399,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private double GetPixelDensity()
     {
-        var presentationSource = PresentationSource.FromVisual(this) 
+        var presentationSource = PresentationSource.FromVisual(this)
             ?? throw new Exception("PresentationSource is null");
-        var compositionTarget = presentationSource.CompositionTarget 
+        var compositionTarget = presentationSource.CompositionTarget
             ?? throw new Exception("CompositionTarget is null");
         var matrix = compositionTarget.TransformToDevice;
 

@@ -27,7 +27,7 @@ public class WmsOpenSeaSample : ISample
         map.Navigator.Limiter = new ViewportLimiterKeepWithinExtent();
         map.Navigator.RotationLock = true;
         map.Navigator.OverridePanBounds = panBounds;
-        map.Navigator.ZoomToBox(panBounds);     
+        map.Navigator.ZoomToBox(panBounds);
 
         return map;
     }

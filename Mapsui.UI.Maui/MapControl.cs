@@ -781,7 +781,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
     {
-        if (locations.Count != 2) 
+        if (locations.Count != 2)
             throw new ArgumentOutOfRangeException(nameof(locations), locations.Count, "Value should be two");
 
         double centerX = 0;
@@ -855,8 +855,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         if (Width <= 0) return 0;
 
-        return UseGPU 
-            ? _glView!.CanvasSize.Width / Width 
+        return UseGPU
+            ? _glView!.CanvasSize.Width / Width
             : _canvasView!.CanvasSize.Width / Width;
     }
 }

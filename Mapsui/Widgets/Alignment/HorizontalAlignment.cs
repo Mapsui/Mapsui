@@ -4,6 +4,7 @@ public enum HorizontalAlignment
 {
     Left,
     Center,
-    Right
-
+    Right,
+    Stretch,
+    Absolute
 }

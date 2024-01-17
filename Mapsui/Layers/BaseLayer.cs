@@ -1,12 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Styles;
-using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidgets;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading;
 
 namespace Mapsui.Layers;
 
@@ -176,7 +175,7 @@ public abstract class BaseLayer : ILayer
     }
 
     /// <inheritdoc />
-    public Hyperlink Attribution { get; set; } = new();
+    public HyperlinkWidget Attribution { get; set; } = new();
 
     /// <inheritdoc />
     public virtual IReadOnlyList<double> Resolutions { get; } = new List<double>();
@@ -186,6 +185,9 @@ public abstract class BaseLayer : ILayer
 
     /// <inheritdoc />
     public abstract IEnumerable<IFeature> GetFeatures(MRect box, double resolution);
+
+    /// <inheritdoc/>
+    public virtual Func<IEnumerable<IFeature>, IEnumerable<IFeature>> SortFeatures { get; set; } = (feature) => feature;
 
     public void DataHasChanged()
     {
