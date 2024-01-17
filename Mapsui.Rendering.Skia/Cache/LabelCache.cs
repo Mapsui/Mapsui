@@ -45,7 +45,7 @@ public sealed class LabelCache : ILabelCache
         {
             item?.Dispose();
         }
-        
+
         _labelCache.Clear();
 
         foreach (var item in _cacheTypeface.Values)

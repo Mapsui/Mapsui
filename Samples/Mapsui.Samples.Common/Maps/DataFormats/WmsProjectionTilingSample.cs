@@ -20,7 +20,7 @@ public class WmsProjectionTilingSample : ISample
         CacheDeployer.CopyEmbeddedResourceToFile("WmsSample.sqlite");
     }
 
-    public string Name => " 6 WMS Projection Tiling";
+    public string Name => "WMS Projection Tiling";
     public string Category => "Data Formats";
 
     public async Task<Map> CreateMapAsync()

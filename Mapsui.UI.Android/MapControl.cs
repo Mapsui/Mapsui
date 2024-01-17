@@ -48,7 +48,7 @@ public partial class MapControl : ViewGroup, IMapControl
     private MPoint? _pointerDownPosition;
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
 
-    public MapControl(Context context, IAttributeSet attrs) : 
+    public MapControl(Context context, IAttributeSet attrs) :
         base(context, attrs)
     {
         CommonInitialize();

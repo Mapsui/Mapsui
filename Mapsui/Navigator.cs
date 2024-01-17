@@ -74,8 +74,8 @@ public class Navigator
     /// <summary>
     /// Overrides the default pan bounds which come from the Map extent.
     /// </summary>
-    public MRect? OverridePanBounds 
-    { 
+    public MRect? OverridePanBounds
+    {
         get => _overridePanBounds;
         set
         {
@@ -676,18 +676,19 @@ public class Navigator
 
     /// <summary> Default Zoom Bounds automatically set on Layers changed </summary>
 
-    internal MMinMax? DefaultZoomBounds 
-    { 
+    internal MMinMax? DefaultZoomBounds
+    {
         get => _defaultZoomBounds;
-        set { 
+        set
+        {
             _defaultZoomBounds = value;
             InitializeIfNeeded();
         }
     }
 
     /// <summary> Default Pan Bounds automatically set on Layers changed </summary>
-    internal MRect? DefaultPanBounds 
-    { 
+    internal MRect? DefaultPanBounds
+    {
         get => _defaultPanBounds;
         set
         {

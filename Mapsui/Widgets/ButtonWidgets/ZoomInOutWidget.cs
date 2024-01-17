@@ -35,7 +35,7 @@ public class ZoomInOutWidget : TouchableWidget
             if (_size == value)
                 return;
             _size = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -52,7 +52,7 @@ public class ZoomInOutWidget : TouchableWidget
             if (_orientation == value)
                 return;
             _orientation = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -69,7 +69,7 @@ public class ZoomInOutWidget : TouchableWidget
             if (_strokeColor == value)
                 return;
             _strokeColor = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -86,7 +86,7 @@ public class ZoomInOutWidget : TouchableWidget
             if (_textColor == value)
                 return;
             _textColor = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -103,7 +103,7 @@ public class ZoomInOutWidget : TouchableWidget
             if (_backColor == value)
                 return;
             _backColor = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -120,7 +120,7 @@ public class ZoomInOutWidget : TouchableWidget
             if (_opacity == value)
                 return;
             _opacity = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 

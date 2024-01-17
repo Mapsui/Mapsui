@@ -20,7 +20,7 @@ public class TextBoxWidget : BoxWidget
             if (_padding == value)
                 return;
             _padding = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -37,7 +37,7 @@ public class TextBoxWidget : BoxWidget
             if (_text == value)
                 return;
             _text = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -54,7 +54,7 @@ public class TextBoxWidget : BoxWidget
             if (_textSize == value)
                 return;
             _textSize = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -71,7 +71,7 @@ public class TextBoxWidget : BoxWidget
             if (_textColor == value)
                 return;
             _textColor = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 }

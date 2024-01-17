@@ -20,7 +20,7 @@ public class BoxWidget : Widget
             if (_cornerRadius == value)
                 return;
             _cornerRadius = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -37,7 +37,7 @@ public class BoxWidget : Widget
             if (_backColor == value)
                 return;
             _backColor = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -54,7 +54,7 @@ public class BoxWidget : Widget
             if (_opacity == value)
                 return;
             _opacity = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 }
