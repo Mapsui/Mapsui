@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.DataFormats;
 
 public class WmsProjectionSample : ISample
 {
-    public string Name => " 6 WMS Projection";
+    public string Name => "WMS Projection";
     public string Category => "Data Formats";
 
     public async Task<Map> CreateMapAsync()

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace Mapsui.Widgets;
 
-public abstract class Widget : IWidget, INotifyPropertyChanged
+public abstract class Widget : IWidget
 {
     private HorizontalAlignment _horizontalAlignment = HorizontalAlignment.Right;
 
@@ -19,7 +19,7 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
             if (_horizontalAlignment == value)
                 return;
             _horizontalAlignment = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -36,7 +36,7 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
             if (_verticalAlignment == value)
                 return;
             _verticalAlignment = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -46,14 +46,14 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
     /// Margin outside of the widget
     /// </summary>
     public MRect Margin
-    { 
+    {
         get => _margin;
         set
         {
             if (_margin == value)
                 return;
             _margin = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -70,7 +70,7 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
             if (_position.Equals(value))
                 return;
             _position = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -87,7 +87,7 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
             if (_width == value)
                 return;
             _width = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -104,7 +104,7 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
             if (_height == value)
                 return;
             _height = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -121,7 +121,7 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
             if (_envelope == value)
                 return;
             _envelope = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -138,14 +138,14 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
             if (_enabled == value)
                 return;
             _enabled = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
     /// <summary>
-    /// Event handler which is called, when a property changes
+    /// Flag for redrawing widget in the next drawing cycle
     /// </summary>
-    public event PropertyChangedEventHandler? PropertyChanged;
+    public bool NeedsRedraw { get; set; } = false;
 
     public void UpdateEnvelope(double maxWidth, double maxHeight, double screenWidth, double screenHeight)
     {
@@ -157,9 +157,9 @@ public abstract class Widget : IWidget, INotifyPropertyChanged
         Envelope = new MRect(minX, minY, maxX, maxY);
     }
 
-    public virtual void OnPropertyChanged([CallerMemberName] string name = "")
+    public virtual void Invalidate([CallerMemberName] string name = "")
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        NeedsRedraw = true;
     }
 
     private double CalculatePositionX(double left, double right, double width) => HorizontalAlignment switch

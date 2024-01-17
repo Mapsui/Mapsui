@@ -14,7 +14,7 @@ public class MbTilesSample : ISample
         MbTilesDeployer.CopyEmbeddedResourceToFile("world.mbtiles");
     }
 
-    public string Name => " 1 MbTiles";
+    public string Name => "MbTiles";
     public string Category => "Data Formats";
 
     public static Map CreateMap()

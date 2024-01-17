@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.DataFormats;
 
 public class WmsProjectionDotSpatialSample : ISample
 {
-    public string Name => " 6 WMS Projection DotSpatial";
+    public string Name => "WMS Projection DotSpatial";
     public string Category => "Data Formats";
 
     public async Task<Map> CreateMapAsync()
