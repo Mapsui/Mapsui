@@ -21,7 +21,7 @@ public class GeoJsonInfoSample : ISample
         GeoJsonDeployer.CopyEmbeddedResourceToFile("cities.geojson");
     }
 
-    public string Name => "3 GeoJson Info";
+    public string Name => "GeoJson Info";
     public string Category => "Info";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

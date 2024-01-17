@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Common.Maps.Info;
 
 public class WmsInfoSample : ISample
 {
-    public string Name => "4 Wms Info";
+    public string Name => "Wms Info";
     public string Category => "Info";
 
     public async Task<Map> CreateMapAsync()

@@ -54,7 +54,7 @@ public class LoggingWidget : TextBoxWidget
             _listOfLogEntries.TryDequeue(out var outObj);
         }
 
-        OnPropertyChanged(nameof(Text));
+        Invalidate(nameof(Text));
     }
 
     public void Clear()
@@ -64,7 +64,7 @@ public class LoggingWidget : TextBoxWidget
             _listOfLogEntries.TryDequeue(out var outObj);
         }
 
-        OnPropertyChanged(nameof(Text));
+        Invalidate(nameof(Text));
     }
 
     private ConcurrentQueue<LogEntry> _listOfLogEntries;
@@ -85,7 +85,7 @@ public class LoggingWidget : TextBoxWidget
             if (_logLevelFilter == value)
                 return;
             _logLevelFilter = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -99,7 +99,7 @@ public class LoggingWidget : TextBoxWidget
             if (_maxNumberOfLogEntriesToKeep == value)
                 return;
             _maxNumberOfLogEntriesToKeep = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -116,7 +116,7 @@ public class LoggingWidget : TextBoxWidget
             if (_errorTextColor == value)
                 return;
             _errorTextColor = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -133,7 +133,7 @@ public class LoggingWidget : TextBoxWidget
             if (_warningTextColor == value)
                 return;
             _warningTextColor = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
@@ -150,11 +150,11 @@ public class LoggingWidget : TextBoxWidget
             if (_informationTextColor == value)
                 return;
             _informationTextColor = value;
-            OnPropertyChanged();
+            Invalidate();
         }
     }
 
-    public override void OnPropertyChanged([CallerMemberName] string name = "")
+    public override void Invalidate([CallerMemberName] string name = "")
     {
         if (name == nameof(Enabled))
         {
@@ -164,6 +164,6 @@ public class LoggingWidget : TextBoxWidget
                 Logger.LogDelegate -= Log;
         }
 
-        base.OnPropertyChanged(name);
+        base.Invalidate(name);
     }
 }
