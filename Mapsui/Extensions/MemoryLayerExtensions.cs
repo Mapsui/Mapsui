@@ -1,6 +1,7 @@
 ﻿using Mapsui.Features;
 using Mapsui.Layers;
 using Mapsui.Styles;
+using System.Collections.Concurrent;
 
 namespace Mapsui.Extensions;
 
