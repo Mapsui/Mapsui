@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Common.Maps.DataFormats;
 
 public class WfsSample : ISample
 {
-    public string Name => " 7 WFS";
+    public string Name => "WFS";
     public string Category => "Data Formats";
 
     private const string wfsUri = "https://geoservices1.civis.bz.it/geoserver/p_bz-AdministrativeUnits/ows";

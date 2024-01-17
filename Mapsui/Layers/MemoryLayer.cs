@@ -1,10 +1,9 @@
+using Mapsui.Extensions;
+using Mapsui.Styles;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Extensions;
-using Mapsui.Providers;
-using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
@@ -36,8 +35,10 @@ public class MemoryLayer : BaseLayer
                 SymbolStyle.DefaultWidth * 2 * resolution,
                 SymbolStyle.DefaultHeight * 2 * resolution);
 
-        return Features.Where(f => f.Extent?.Intersects(biggerRect) == true).OrderBy(f => f.ZOrder).ThenBy(f => f.Id);
+        return Features.Where(f => f.Extent?.Intersects(biggerRect) == true);
     }
+
+    public override Func<IEnumerable<IFeature>, IEnumerable<IFeature>> SortFeatures { get; set; } = (features) => features.OrderBy(f => f.ZOrder).ThenBy(f => f.Id);
 
     public override MRect? Extent => Features.GetExtent();
 }

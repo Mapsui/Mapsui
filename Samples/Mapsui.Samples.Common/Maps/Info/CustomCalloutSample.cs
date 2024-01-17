@@ -25,7 +25,7 @@ public class CustomCalloutSample : ISample
 {
     private static readonly Random Random = new(1);
 
-    public string Name => "2 Custom Callout";
+    public string Name => "Custom Callout";
     public string Category => "Info";
 
     public Task<Map> CreateMapAsync()

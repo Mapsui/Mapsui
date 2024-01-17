@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Common.Maps.Info;
 
 public class SingleCalloutSample : ISample
 {
-    public string Name => "1 Single Callout";
+    public string Name => "Single Callout";
     public string Category => "Info";
 
     public Task<Map> CreateMapAsync()

@@ -38,7 +38,7 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
 
         UpdateSettings(loggingWidget);
         loggingWidget.UpdateEnvelope(loggingWidget.Width, loggingWidget.Height, viewport.Width, viewport.Height);
-        
+
         if (loggingWidget.Envelope == null || loggingWidget.Envelope.Width == 0 || loggingWidget.Envelope.Height == 0)
             return;
 
@@ -69,7 +69,7 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
                 continue;
 
             var top = marginY + (paddingY * line) + loggingWidget.TextSize * (line + 1);
-            
+
             if (top >= loggingWidget.Envelope.Height)
                 break;
 

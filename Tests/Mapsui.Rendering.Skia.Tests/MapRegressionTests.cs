@@ -59,7 +59,7 @@ public class MapRegressionTests
             .All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName),
     ];
 
-    public static object[] ExcludedSamples => _excludedSamples ??=[new AnimatedPointsSample()];
+    public static object[] ExcludedSamples => _excludedSamples ??= [new AnimatedPointsSample()];
 
     [Test]
     [Retry(5)]
@@ -70,10 +70,12 @@ public class MapRegressionTests
         try
         {
             Logger.LogDelegate = ConsoleLog;
+            ConsoleLog(LogLevel.Debug, $"Start MapRegressionTest {sample.GetType().Name}", null);
             await TestSampleAsync(sample, true).ConfigureAwait(false);
         }
         finally
         {
+            ConsoleLog(LogLevel.Debug, $"End MapRegressionTest {sample.GetType().Name}", null);
             Logger.LogDelegate = original;
         }
     }
@@ -87,6 +89,7 @@ public class MapRegressionTests
         }
 
         Console.WriteLine(message);
+        Console.Out.Flush();
     }
 
     public static async Task TestSampleAsync(ISampleBase sample, bool compareImages)

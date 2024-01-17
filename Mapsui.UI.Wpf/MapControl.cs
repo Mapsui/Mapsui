@@ -399,9 +399,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private double GetPixelDensity()
     {
-        var presentationSource = PresentationSource.FromVisual(this) 
+        var presentationSource = PresentationSource.FromVisual(this)
             ?? throw new Exception("PresentationSource is null");
-        var compositionTarget = presentationSource.CompositionTarget 
+        var compositionTarget = presentationSource.CompositionTarget
             ?? throw new Exception("CompositionTarget is null");
         var matrix = compositionTarget.TransformToDevice;
 

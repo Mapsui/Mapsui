@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.Demo;
 
 public class WriteToLayerSample : ISample
 {
-    public string Name => "4 Add Pins";
+    public string Name => "Add Pins";
     public string Category => "Demo";
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
