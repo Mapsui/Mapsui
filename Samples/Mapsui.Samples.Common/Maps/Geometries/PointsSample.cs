@@ -18,7 +18,7 @@ namespace Mapsui.Samples.Common.Maps.Geometries;
 
 public class PointsSample : ISample
 {
-    public string Name => "1 Points";
+    public string Name => "Points";
     public string Category => "Geometries";
 
     public Task<Map> CreateMapAsync()

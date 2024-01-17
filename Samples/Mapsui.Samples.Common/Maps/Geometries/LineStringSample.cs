@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps.Geometries;
 
 public class LineStringSample : ISample
 {
-    public string Name => "2 LineStrings";
+    public string Name => "LineStrings";
     public string Category => "Geometries";
 
     public Task<Map> CreateMapAsync()

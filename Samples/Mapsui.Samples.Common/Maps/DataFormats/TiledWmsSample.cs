@@ -16,7 +16,7 @@ namespace Mapsui.Samples.Common.Maps.DataFormats;
 /// </summary>
 public class TiledWmsSample : ISample
 {
-    public string Name => " 4 WMS called tiled";
+    public string Name => "WMS called tiled";
     public string Category => "Data Formats";
     public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 

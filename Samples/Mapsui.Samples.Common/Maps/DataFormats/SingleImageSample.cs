@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.Demo;
 
 public class SingleImageSample : ISample
 {
-    public string Name => "14 Single Image";
+    public string Name => "Single Image";
     public string Category => "Data Formats";
 
     static SingleImageSample()

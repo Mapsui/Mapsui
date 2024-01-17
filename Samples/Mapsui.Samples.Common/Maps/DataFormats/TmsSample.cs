@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Common.Maps.DataFormats;
 
 public class TmsSample : ISample
 {
-    public string Name => " 8 TMS openbasiskaart";
+    public string Name => "TMS openbasiskaart";
     public string Category => "Data Formats";
     public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 
