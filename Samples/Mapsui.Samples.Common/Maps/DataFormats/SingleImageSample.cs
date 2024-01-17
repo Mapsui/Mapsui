@@ -47,8 +47,8 @@ public class SingleImageSample : ISample
         var rasterFeature = new RasterFeature(new MRaster(bytes, extent)) { Styles = { new RasterStyle() } };
         return new MemoryLayer()
         {
-            Features = new List<RasterFeature> { rasterFeature }, 
-            Name = "Raster Image", 
+            Features = new List<RasterFeature> { rasterFeature },
+            Name = "Raster Image",
             Opacity = 0.9,
             Style = null,
         };

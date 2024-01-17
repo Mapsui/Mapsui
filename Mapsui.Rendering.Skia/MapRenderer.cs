@@ -317,7 +317,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
     {
         if (_ownsRenderCache)
         {
-            _renderCache.Dispose();    
+            _renderCache.Dispose();
         }
     }
 }

@@ -348,8 +348,8 @@ public partial class MapControl : UIView, IMapControl
         get
         {
             InitCanvas();
-            return UseGPU 
-                ? _glCanvas!.Frame.Width 
+            return UseGPU
+                ? _glCanvas!.Frame.Width
                 : _canvas!.Frame.Width;
         }
     }
@@ -359,8 +359,8 @@ public partial class MapControl : UIView, IMapControl
         get
         {
             InitCanvas();
-            return UseGPU 
-                ? _glCanvas!.Frame.Height 
+            return UseGPU
+                ? _glCanvas!.Frame.Height
                 : _canvas!.Frame.Height;
         }
     }
@@ -368,8 +368,8 @@ public partial class MapControl : UIView, IMapControl
     private double GetPixelDensity()
     {
         InitCanvas();
-        return UseGPU 
-            ? (double)_glCanvas!.ContentScaleFactor 
+        return UseGPU
+            ? (double)_glCanvas!.ContentScaleFactor
             : (double)_canvas!.ContentScaleFactor;
     }
 }

@@ -59,7 +59,7 @@ public class MapRegressionTests
             .All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName),
     ];
 
-    public static object[] ExcludedSamples => _excludedSamples ??=[new AnimatedPointsSample()];
+    public static object[] ExcludedSamples => _excludedSamples ??= [new AnimatedPointsSample()];
 
     [Test]
     [Retry(5)]
