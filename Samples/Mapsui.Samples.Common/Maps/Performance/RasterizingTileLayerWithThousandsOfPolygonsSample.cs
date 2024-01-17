@@ -13,7 +13,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 using Mapsui.Widgets;
-using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Widgets.ButtonWidgets;
 using NetTopologySuite.Geometries;
 
 #pragma warning disable IDISP001 // Dispose created
@@ -41,13 +41,13 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
         _map.Layers.Add(new RasterizingTileLayer(CreatePolygonLayer()));
         var home = Mercator.FromLonLat(0, 0);
         _map.Navigator.CenterOnAndZoomTo(home, _map.Navigator.Resolutions[9]);
-        var buttonWidget = new ButtonWidget
+        var buttonWidget = new TextButtonWidget
         {
             Text = "Change Color",
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top
         };
-        buttonWidget.WidgetTouched += ChangeColor;
+        buttonWidget.Touched += ChangeColor;
         _map.Widgets.Enqueue(buttonWidget);
 
         return _map;

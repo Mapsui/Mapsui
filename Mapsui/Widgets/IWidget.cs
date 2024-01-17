@@ -2,10 +2,35 @@
 
 public interface IWidget
 {
+    /// <summary>
+    /// Horizontal alignment of Widget
+    /// </summary>
     HorizontalAlignment HorizontalAlignment { get; set; }
+
+    /// <summary>
+    /// Vertical alignment of Widget
+    /// </summary>
     VerticalAlignment VerticalAlignment { get; set; }
-    float MarginX { get; set; }
-    float MarginY { get; set; }
+
+    /// <summary>
+    /// Margin outside of the widget
+    /// </summary>
+    MRect Margin { get; set; }
+
+    /// <summary>
+    /// Position for absolute alignment
+    /// </summary>
+    MPoint Position { get; set; }
+
+    /// <summary>
+    /// Width of Widget
+    /// </summary>
+    double Width { get; set; }
+
+    /// <summary>
+    /// Height of Widget
+    /// </summary>
+    double Height { get; set; }
 
     /// <summary>
     /// The hit box of the widget. This needs to be updated from the widget renderer.
@@ -13,12 +38,12 @@ public interface IWidget
     MRect? Envelope { get; set; }
 
     /// <summary>
-    /// Function, which is called, when a Widget is hidden
+    /// Is Widget visible on screen
     /// </summary>
-    /// <param name="navigator">Navigator of MapControl</param>
-    /// <param name="position">Screen position</param>
-    /// <returns>True, if the Widget had handled the touch event</returns>
-    bool HandleWidgetTouched(Navigator navigator, MPoint position);
-
     bool Enabled { get; set; }
+
+    /// <summary>
+    /// Flag for redrawing widget in the next drawing cycle
+    /// </summary>
+    bool NeedsRedraw { get; set; }
 }

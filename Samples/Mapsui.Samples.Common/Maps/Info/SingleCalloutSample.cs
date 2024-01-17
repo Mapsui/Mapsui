@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.Widgets;
+using Mapsui.Widgets.InfoWidgets;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 // ReSharper disable once ClassNeverInstantiated.Local
@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Common.Maps.Info;
 
 public class SingleCalloutSample : ISample
 {
-    public string Name => "1 Single Callout";
+    public string Name => "Single Callout";
     public string Category => "Info";
 
     public Task<Map> CreateMapAsync()

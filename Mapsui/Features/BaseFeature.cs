@@ -56,7 +56,7 @@ public abstract class BaseFeature
         set => _dictionary[key] = value;
     }
 
-    public void Modified()
+    virtual public void Modified()
     {
         // is modified needs a new id.
         Id = NextId();

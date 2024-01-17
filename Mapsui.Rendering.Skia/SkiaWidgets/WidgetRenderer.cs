@@ -16,7 +16,34 @@ public static class WidgetRenderer
         {
             if (!widget.Enabled) continue;
 
-            ((ISkiaWidgetRenderer)renders[widget.GetType()]).Draw(canvas, viewport, widget, layerOpacity);
+            // Check if a renderer exists for this type of widget
+            if (!renders.TryGetValue(widget.GetType(), out var renderer))
+            {
+                var type = widget.GetType();
+
+                // Get BaseType of type until we there is no more BaseType or we found a renderer
+                while (type != null && !renders.ContainsKey(type))
+                    type = type.BaseType;
+
+                // Did we find a renderer ...
+                if (type == null)
+                {
+                    // ... no, so log an error and continue
+                    Logging.Logger.Log(Logging.LogLevel.Error, $"Renderer for Widgets of type {widget.GetType()} not found");
+                    continue;
+                }
+
+                // We found a BaseType with a renderer, so use this one
+                renders[widget.GetType()] = renders[type];
+
+                // Use this as renderer
+                renderer = renders[widget.GetType()];
+            }
+
+            ((ISkiaWidgetRenderer)renderer).Draw(canvas, viewport, widget, layerOpacity);
+
+            // Widget is redrawn
+            widget.NeedsRedraw = false;
         }
     }
 }

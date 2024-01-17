@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -13,13 +8,16 @@ using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Styles;
 using Mapsui.Widgets;
-using Mapsui.Widgets.BoxWidget;
-using Mapsui.Widgets.ButtonWidget;
-using Mapsui.Widgets.MouseCoordinatesWidget;
-using Mapsui.Widgets.LoggingWidget;
+using Mapsui.Widgets.BoxWidgets;
+using Mapsui.Widgets.ButtonWidgets;
+using Mapsui.Widgets.InfoWidgets;
 using Mapsui.Widgets.ScaleBar;
-using Mapsui.Widgets.Zoom;
 using SkiaSharp;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 #pragma warning disable IDISP008 // Don't assign member with injected created disposable
 
@@ -55,15 +53,12 @@ public sealed class MapRenderer : IRenderer, IDisposable
         StyleRenderers[typeof(SymbolStyle)] = new SymbolStyleRenderer();
         StyleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
 
-        WidgetRenders[typeof(TextBox)] = new TextBoxWidgetRenderer();
-        WidgetRenders[typeof(Hyperlink)] = new HyperlinkWidgetRenderer();
+        WidgetRenders[typeof(TextBoxWidget)] = new TextBoxWidgetRenderer();
         WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
         WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
-        WidgetRenders[typeof(ButtonWidget)] = new ButtonWidgetRenderer();
+        WidgetRenders[typeof(IconButtonWidget)] = new IconButtonWidgetRenderer();
         WidgetRenders[typeof(BoxWidget)] = new BoxWidgetRenderer();
-        WidgetRenders[typeof(MouseCoordinatesWidget)] = new MouseCoordinatesWidgetRenderer();
         WidgetRenders[typeof(EditingWidget)] = new EditingWidgetRenderer();
-        WidgetRenders[typeof(MapInfoWidget)] = new MapInfoWidgetRenderer();
         WidgetRenders[typeof(LoggingWidget)] = new LoggingWidgetRenderer();
     }
 
@@ -322,7 +317,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
     {
         if (_ownsRenderCache)
         {
-            _renderCache.Dispose();    
+            _renderCache.Dispose();
         }
     }
 }

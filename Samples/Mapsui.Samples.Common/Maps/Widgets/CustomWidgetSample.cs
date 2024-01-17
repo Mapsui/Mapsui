@@ -18,8 +18,7 @@ public class CustomWidgetSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(new CustomWidget.CustomWidget
         {
-            MarginX = 20,
-            MarginY = 20,
+            Margin = new MRect(20),
             Width = 100,
             Height = 20,
             Color = Color.GoldenRod

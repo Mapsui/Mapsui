@@ -1,6 +1,6 @@
 ﻿using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
-using Mapsui.Widgets.Zoom;
+using Mapsui.Widgets.ButtonWidgets;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets;
@@ -34,38 +34,40 @@ public class ZoomInOutWidgetRenderer : ISkiaWidgetRenderer
         else
         {
             // Update paints with new values
-            _paintStroke.Color = zoomInOut.StrokeColor.ToSkia(zoomInOut.Opacity);
-            _paintBackground.Color = zoomInOut.BackColor.ToSkia(zoomInOut.Opacity);
-            _paintText.Color = zoomInOut.TextColor.ToSkia(zoomInOut.Opacity);
+            _paintStroke.Color = zoomInOut.StrokeColor.ToSkia((float)zoomInOut.Opacity);
+            _paintBackground.Color = zoomInOut.BackColor.ToSkia((float)zoomInOut.Opacity);
+            _paintText.Color = zoomInOut.TextColor.ToSkia((float)zoomInOut.Opacity);
         }
 
-        var posX = zoomInOut.CalculatePositionX(0, (float)viewport.Width, zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size : zoomInOut.Size * 2 - Stroke);
-        var posY = zoomInOut.CalculatePositionY(0, (float)viewport.Height, zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size * 2 - Stroke : zoomInOut.Size);
+        zoomInOut.UpdateEnvelope(zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size : zoomInOut.Size * 2 - Stroke, zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size * 2 - Stroke : zoomInOut.Size, viewport.Width, viewport.Height);
+
+        var posX = (float)(zoomInOut.Envelope?.MinX ?? 0.0);
+        var posY = (float)(zoomInOut.Envelope?.MinY ?? 0.0);
 
         // Draw a rect for zoom in button
         SKRect rect;
 
-        rect = new SKRect(posX, posY, posX + zoomInOut.Size, posY + zoomInOut.Size);
+        rect = new SKRect((float)posX, (float)posY, (float)(posX + zoomInOut.Size), (float)(posY + zoomInOut.Size));
         canvas.DrawRoundRect(rect, 2, 2, _paintBackground);
         canvas.DrawRoundRect(rect, 2, 2, _paintStroke);
 
         // Draw rect for zoom out button
         if (zoomInOut.Orientation == Orientation.Vertical)
-            rect = new SKRect(posX, posY + zoomInOut.Size, posX + zoomInOut.Size, posY + zoomInOut.Size * 2 - Stroke);
+            rect = new SKRect((float)posX, (float)(posY + zoomInOut.Size), (float)(posX + zoomInOut.Size), (float)(posY + zoomInOut.Size * 2 - Stroke));
         else
-            rect = new SKRect(posX + zoomInOut.Size, posY, posX + zoomInOut.Size * 2 - Stroke, posY + zoomInOut.Size);
+            rect = new SKRect((float)(posX + zoomInOut.Size), (float)posY, (float)(posX + zoomInOut.Size * 2 - Stroke), (float)(posY + zoomInOut.Size));
         canvas.DrawRoundRect(rect, 2, 2, _paintBackground);
         canvas.DrawRoundRect(rect, 2, 2, _paintStroke);
 
         // Draw +
-        canvas.DrawLine(posX + zoomInOut.Size * 0.3f, posY + zoomInOut.Size * 0.5f, posX + zoomInOut.Size * 0.7f, posY + zoomInOut.Size * 0.5f, _paintText);
-        canvas.DrawLine(posX + zoomInOut.Size * 0.5f, posY + zoomInOut.Size * 0.3f, posX + zoomInOut.Size * 0.5f, posY + zoomInOut.Size * 0.7f, _paintText);
+        canvas.DrawLine((float)(posX + zoomInOut.Size * 0.3f), (float)(posY + zoomInOut.Size * 0.5f), (float)(posX + zoomInOut.Size * 0.7f), (float)(posY + zoomInOut.Size * 0.5f), _paintText);
+        canvas.DrawLine((float)(posX + zoomInOut.Size * 0.5f), (float)(posY + zoomInOut.Size * 0.3f), (float)(posX + zoomInOut.Size * 0.5f), (float)(posY + zoomInOut.Size * 0.7f), _paintText);
 
         // Draw -
         if (zoomInOut.Orientation == Orientation.Vertical)
-            canvas.DrawLine(posX + zoomInOut.Size * 0.3f, posY - Stroke + zoomInOut.Size * 1.5f, posX + zoomInOut.Size * 0.7f, posY - Stroke + zoomInOut.Size * 1.5f, _paintText);
+            canvas.DrawLine((float)(posX + zoomInOut.Size * 0.3f), (float)(posY - Stroke + zoomInOut.Size * 1.5f), (float)(posX + zoomInOut.Size * 0.7f), (float)(posY - Stroke + zoomInOut.Size * 1.5f), _paintText);
         else
-            canvas.DrawLine(posX - Stroke + zoomInOut.Size * 1.3f, posY + zoomInOut.Size * 0.5f, posX - Stroke + zoomInOut.Size * 1.7f, posY + zoomInOut.Size * 0.5f, _paintText);
+            canvas.DrawLine((float)(posX - Stroke + zoomInOut.Size * 1.3f), (float)(posY + zoomInOut.Size * 0.5f), (float)(posX - Stroke + zoomInOut.Size * 1.7f), (float)(posY + zoomInOut.Size * 0.5f), _paintText);
 
         // Perhaps we should resize the Envelop about half of stroke, because of Skia rendering have of line outside
         if (zoomInOut.Orientation == Orientation.Vertical)

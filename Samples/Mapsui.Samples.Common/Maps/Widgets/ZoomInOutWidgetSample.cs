@@ -1,7 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
-using Mapsui.Widgets.Zoom;
+using Mapsui.Widgets.ButtonWidgets;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
@@ -32,8 +32,7 @@ public class ZoomInOutWidgetSample : ISample
             Orientation = orientation,
             VerticalAlignment = verticalAlignment,
             HorizontalAlignment = horizontalAlignment,
-            MarginX = 20,
-            MarginY = 20,
+            Margin = new MRect(20),
         };
     }
 }

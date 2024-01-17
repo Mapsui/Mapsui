@@ -48,12 +48,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         var picture = (SKPicture)BitmapRegistry.Instance.Get(calloutStyle.BitmapId);
 
         // Calc offset (relative or absolute)
-        var symbolOffset = calloutStyle.SymbolOffset;
-        if (calloutStyle.BelongsTo != null && calloutStyle.BelongsTo.BitmapId >= 0)
-        {
-            var bitmap = (BitmapInfo)renderCache.SymbolCache.GetOrCreate(calloutStyle.BelongsTo.BitmapId);
-            symbolOffset = symbolOffset.CalcOffset(bitmap.Width * calloutStyle.BelongsTo.SymbolScale, bitmap.Height * calloutStyle.BelongsTo.SymbolScale);
-        }
+        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(picture.CullRect.Width, picture.CullRect.Height);
 
         var rotation = (float)calloutStyle.SymbolRotation;
 
