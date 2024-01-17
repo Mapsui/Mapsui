@@ -1,6 +1,6 @@
-﻿using System;
-using Mapsui.Rendering.Skia.Extensions;
+﻿using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
+using Mapsui.Widgets.BoxWidgets;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets;
@@ -14,9 +14,11 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
 
     public static void DrawText(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
     {
-        var textBox = (TextBox)widget;
+        var textBox = (TextBoxWidget)widget;
+
         if (string.IsNullOrEmpty(textBox.Text)) return;
-        using var textPaint = new SKPaint { Color = textBox.TextColor.ToSkia(layerOpacity), IsAntialias = true };
+
+        using var textPaint = new SKPaint { TextSize = (float)textBox.TextSize, Color = textBox.TextColor.ToSkia(layerOpacity), IsAntialias = true };
         using var backPaint = new SKPaint { Color = textBox.BackColor.ToSkia(layerOpacity), IsAntialias = true };
         // The textRect has an offset which can be confusing. 
         // This is because DrawText's origin is the baseline of the text, not the bottom.
@@ -25,46 +27,38 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
         textPaint.MeasureText(textBox.Text, ref textRect);
         // The backRect is straight forward. It is leading for our purpose.
 
-        float paddingX = textBox.PaddingX;
-        float paddingY = textBox.PaddingY;
+        var paddingX = textBox.Padding.Left;
+        var paddingY = textBox.Padding.Top;
 
-        if (textBox.Width != null)
+        if (textBox.Width != 0)
         {
-            paddingX = (textBox.Width.Value - textRect.Width) / 2.0f;
+            // TextBox has a width, so use this
+            paddingX = (textBox.Width - textRect.Width) / 2.0f;
+            textRect = new SKRect(textRect.Left, textRect.Top, (float)(textRect.Left + textBox.Width - paddingX * 2), textRect.Bottom);
         }
 
-        if (textBox.Height != null)
+        if (textBox.Height != 0)
         {
-            paddingY = (textBox.Height.Value - textPaint.TextSize) / 2.0f;
+            // TextBox has a height, so use this
+            paddingY = (textBox.Height - textPaint.TextSize) / 2.0f;
+            textRect = new SKRect(textRect.Left, textRect.Top, textRect.Right, (float)(textRect.Top + textBox.Height - paddingY * 2));
         }
 
-        var backRect = new SKRect(0, 0,
-            textRect.Width + paddingX * 2,
-            textPaint.TextSize + paddingY * 2); // Use the font's TextSize for consistency
-        var offsetX = GetOffsetX(backRect.Width, textBox.MarginX, textBox.HorizontalAlignment, viewport.Width);
-        var offsetY = GetOffsetY(backRect.Height, textBox.MarginY, textBox.VerticalAlignment, viewport.Height);
-        backRect.Offset(offsetX, offsetY);
-        canvas.DrawRoundRect(backRect, textBox.CornerRadius, textBox.CornerRadius, backPaint);
-        textBox.Envelope = backRect.ToMRect();
+        // Calc Envelope by Width/Height or, if not set, by size of content
+        textBox.UpdateEnvelope(
+            textBox.Width != 0 ? textBox.Width : textRect.Width + textBox.Padding.Left + textBox.Padding.Right,
+            textBox.Height != 0 ? textBox.Height : textRect.Height + textBox.Padding.Top + textBox.Padding.Bottom,
+            viewport.Width,
+            viewport.Height);
+
+        if (textBox.Envelope == null)
+            return;
+
+        canvas.DrawRoundRect(textBox.Envelope.ToSkia(), (float)textBox.CornerRadius, (float)textBox.CornerRadius, backPaint);
+
         // To position the text within the backRect correct using the textRect's offset.
         canvas.DrawText(textBox.Text,
-            offsetX - textRect.Left + paddingX,
-            offsetY - textRect.Top + paddingY, textPaint);
-    }
-
-    public static float GetOffsetX(float width, float offsetX, HorizontalAlignment horizontalAlignment, double screenWidth)
-    {
-        if (horizontalAlignment == HorizontalAlignment.Left) return offsetX;
-        if (horizontalAlignment == HorizontalAlignment.Right) return (float)(screenWidth - width - offsetX);
-        if (horizontalAlignment == HorizontalAlignment.Center) return (float)(screenWidth * 0.5 - width * 0.5); // ignore offset
-        throw new Exception($"Unknown {nameof(HorizontalAlignment)} type");
-    }
-
-    public static float GetOffsetY(float height, float offsetY, VerticalAlignment verticalAlignment, double screenHeight)
-    {
-        if (verticalAlignment == VerticalAlignment.Top) return offsetY;
-        if (verticalAlignment == VerticalAlignment.Bottom) return (float)(screenHeight - height - offsetY);
-        if (verticalAlignment == VerticalAlignment.Center) return (float)(screenHeight * 0.5 - height * 0.5); // ignore offset
-        throw new Exception($"Unknown {nameof(VerticalAlignment)} type");
+            (float)(textBox.Envelope.MinX - textRect.Left + paddingX),
+            (float)(textBox.Envelope.MinY - textRect.Top + paddingY), textPaint);
     }
 }

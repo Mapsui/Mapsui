@@ -1,16 +1,15 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Extensions;
+using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.UI;
+using Mapsui.Widgets.InfoWidgets;
 using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Mapsui.UI;
-using Mapsui.Widgets;
-using Mapsui.Extensions;
-using Mapsui.Widgets.Zoom;
 
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
@@ -23,7 +22,7 @@ public class InfoLayersSample : ISample, ISampleTest
     private const string PolygonLayerName = "Polygon Layer";
     private const string LineLayerName = "Line Layer";
 
-    public string Name => "2 Map Info";
+    public string Name => "Map Info";
     public string Category => "Demo";
 
     public static Map CreateMap()

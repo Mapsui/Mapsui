@@ -4,7 +4,7 @@ using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Utilities;
-using Mapsui.Widgets;
+using Mapsui.Widgets.InfoWidgets;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -55,6 +55,6 @@ public class SvgSample : ISample
     private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
     {
         var bitmapId = typeof(SvgSample).LoadSvgId(embeddedResourcePath);
-        return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0.0, 0.5, true) };
+        return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new RelativeOffset(0.0, 0.5) };
     }
 }

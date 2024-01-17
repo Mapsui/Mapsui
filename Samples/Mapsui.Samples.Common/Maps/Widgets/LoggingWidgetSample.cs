@@ -4,7 +4,7 @@ using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
-using Mapsui.Widgets.LoggingWidget;
+using Mapsui.Widgets.InfoWidgets;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
@@ -23,24 +23,20 @@ public class LoggingWidgetSample : ISample
         };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
-        var widget = new LoggingWidget(map)
+        var widget = new LoggingWidget()
         {
             LogLevelFilter = LogLevel.Trace,
             TextSize = 11,
-            BackgroundColor = Color.White,
+            BackColor = Color.White,
             Opacity = 0.8f,
             ErrorTextColor = Color.Red,
             WarningTextColor = Color.Orange,
             InformationTextColor = Color.Black,
-            MarginX = 10,
-            MarginY = 10,
-            Width = 250,
-            Height = 200,
-            PaddingX = 2,
-            PaddingY = 2
+            Margin = new MRect(10, 20),
+            Padding = new MRect(2),
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            VerticalAlignment = VerticalAlignment.Stretch
         };
-
-        widget.WidgetTouched += OnClick;
 
         map.Widgets.Add(widget);
 
@@ -60,17 +56,5 @@ public class LoggingWidgetSample : ISample
         widget.LogLevelFilter = LogLevel.Information;
 
         return Task.FromResult(map);
-    }
-
-    public void OnClick(object? sender, WidgetTouchedEventArgs args)
-    {
-        if (sender == null)
-            return;
-
-        var widget = (LoggingWidget)sender;
-
-        widget.Clear();
-
-        args.Handled = true;
     }
 }

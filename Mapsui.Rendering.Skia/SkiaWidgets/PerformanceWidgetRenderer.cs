@@ -1,49 +1,32 @@
-﻿using System;
+﻿using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
-using Mapsui.Widgets.PerformanceWidget;
+using Mapsui.Widgets.InfoWidgets;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets;
 
-public class PerformanceWidgetRenderer : ISkiaWidgetRenderer, IDisposable
+public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
 {
-    private readonly SKPaint _textPaint;
-    private readonly SKPaint _backgroundPaint;
-    private readonly int _textSize;
-    private readonly float _widthHeader;
     private readonly string[] _textHeader = { "Last", "Mean", "Frames", "Min", "Max", "Count", "Dropped" };
     private readonly string[] _text = new string[7];
-    private readonly SKRect _rect;
-    private readonly MRect _envelope;
-
-    /// <summary>
-    /// Renderer for PerformanceWidget
-    /// </summary>
-    /// <param name="x">X position of widget on screen</param>
-    /// <param name="y">Y position of widget on screen</param>
-    /// <param name="textSize">Size of text</param>
-    /// <param name="textColor">Color for text</param>
-    /// <param name="backgroundColor">Color for background</param>
-    public PerformanceWidgetRenderer(float x, float y, int textSize, SKColor textColor, SKColor backgroundColor)
-    {
-        _textSize = textSize;
-
-        _textPaint = new SKPaint { Color = textColor, TextSize = textSize, };
-        _backgroundPaint = new SKPaint { Color = backgroundColor, Style = SKPaintStyle.Fill, };
-
-        for (var i = 0; i < _textHeader.Length; i++)
-            _widthHeader = System.Math.Max(_widthHeader, _textPaint.MeasureText(_textHeader[5]));
-
-        var width = _widthHeader + 20 + _textPaint.MeasureText("0000.000");
-
-        _rect = new SKRect(x, y, x + width + 4, y + _textHeader.Length * (textSize + 2) - 2 + 4);
-
-        _envelope = new MRect(_rect.Left, _rect.Top, _rect.Right, _rect.Bottom);
-    }
 
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
     {
         var performanceWidget = (PerformanceWidget)widget;
+        var textSize = performanceWidget.TextSize;
+
+        using var textPaint = new SKPaint { Color = performanceWidget.TextColor.ToSkia(), TextSize = (float)textSize, };
+        using var backgroundPaint = new SKPaint { Color = performanceWidget.BackColor.ToSkia().WithAlpha((byte)(255.0f * performanceWidget.Opacity)), Style = SKPaintStyle.Fill, };
+
+        var widthHeader = 0f;
+
+        for (var i = 0; i < _textHeader.Length; i++)
+            widthHeader = System.Math.Max(widthHeader, textPaint.MeasureText(_textHeader[5]));
+
+        var width = widthHeader + 20 + textPaint.MeasureText("0000.000") + 4;
+        var height = _textHeader.Length * (performanceWidget.TextSize + 2) - 2 + 4;
+
+        performanceWidget.UpdateEnvelope(width, height, viewport.Width, viewport.Height);
 
         _text[0] = performanceWidget.Performance.LastDrawingTime.ToString("0.000 ms");
         _text[1] = performanceWidget.Performance.Mean.ToString("0.000 ms");
@@ -53,23 +36,14 @@ public class PerformanceWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         _text[5] = performanceWidget.Performance.Count.ToString("0");
         _text[6] = performanceWidget.Performance.Dropped.ToString("0");
 
-        var paint = _backgroundPaint;
-        paint.Color = _backgroundPaint.Color.WithAlpha((byte)(255.0f * performanceWidget.Opacity));
+        var rect = performanceWidget.Envelope?.ToSkia() ?? canvas.DeviceClipBounds;
 
-        canvas.DrawRect(_rect, paint);
+        canvas.DrawRect(rect, backgroundPaint);
 
         for (var i = 0; i < _textHeader.Length; i++)
         {
-            canvas.DrawText(_textHeader[i], _rect.Left + 2, _rect.Top + 2 * i + _textSize * (i + 1), _textPaint);
-            canvas.DrawText(_text[i], _rect.Right - 2 - _textPaint.MeasureText(_text[i]), _rect.Top + (2 + _textSize) * (i + 1), _textPaint);
+            canvas.DrawText(_textHeader[i], (float)(rect.Left + 2), (float)(rect.Top + 2 * i + textSize * (i + 1)), textPaint);
+            canvas.DrawText(_text[i], (float)(rect.Right - 2 - textPaint.MeasureText(_text[i])), (float)(rect.Top + (2 + textSize) * (i + 1)), textPaint);
         }
-
-        widget.Envelope = _envelope;
-    }
-
-    public virtual void Dispose()
-    {
-        _textPaint.Dispose();
-        _backgroundPaint.Dispose();
     }
 }

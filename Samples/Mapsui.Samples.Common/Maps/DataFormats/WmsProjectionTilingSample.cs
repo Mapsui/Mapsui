@@ -1,20 +1,15 @@
-﻿using Mapsui.Cache;
-using Mapsui.Layers;
-using Mapsui.Providers.Wms;
-using System.Threading.Tasks;
-using Mapsui.Extensions.Cache;
-using Mapsui.Nts.Extensions;
-using Mapsui.Providers;
-using Mapsui.Styles;
-using NetTopologySuite.Geometries;
+﻿using Mapsui.Extensions.Cache;
 using Mapsui.Extensions.Projections;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Providers.Wms;
+using Mapsui.Samples.Common.Utilities;
+using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
 using Mapsui.Widgets;
-using NetTopologySuite.Utilities;
-using static System.Net.Mime.MediaTypeNames;
-using System.Resources;
-using Mapsui.Samples.Common.Utilities;
+using Mapsui.Widgets.ButtonWidgets;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
@@ -25,7 +20,7 @@ public class WmsProjectionTilingSample : ISample
         CacheDeployer.CopyEmbeddedResourceToFile("WmsSample.sqlite");
     }
 
-    public string Name => " 6 WMS Projection Tiling";
+    public string Name => "WMS Projection Tiling";
     public string Category => "Data Formats";
 
     public async Task<Map> CreateMapAsync()
@@ -57,15 +52,13 @@ public class WmsProjectionTilingSample : ISample
         {
             DataSource = dataSource,
             Style = new RasterStyle(),
-            Attribution = new Hyperlink()
+            Attribution = new HyperlinkWidget()
             {
                 Text = "@Agenzia delle Entrate 2023",
                 VerticalAlignment = VerticalAlignment.Bottom,
                 HorizontalAlignment = HorizontalAlignment.Left,
-                MarginX = 10,
-                MarginY = 10,
-                PaddingX = 4,
-                PaddingY = 4,
+                Margin = new MRect(10),
+                Padding = new MRect(4),
                 BackColor = Color.LightGray,
             }
         };

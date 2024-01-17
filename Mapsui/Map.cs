@@ -4,17 +4,18 @@
 
 // This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 
+using Mapsui.Extensions;
+using Mapsui.Fetcher;
+using Mapsui.Layers;
+using Mapsui.Logging;
+using Mapsui.Styles;
+using Mapsui.Widgets;
+using Mapsui.Widgets.InfoWidgets;
 using System;
-using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Mapsui.Extensions;
-using Mapsui.Fetcher;
-using Mapsui.Layers;
-using Mapsui.Styles;
-using Mapsui.Widgets;
 
 namespace Mapsui;
 
@@ -37,6 +38,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = [];
+        CheckForLoggingWidget();
         Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
     }
@@ -382,5 +384,33 @@ public class Map : INotifyPropertyChanged, IDisposable
         }
 
         return areAnimationsRunning;
+    }
+
+    /// <summary>
+    /// Check, if a debugger is attached and, if yes, add a default LoggingWidget
+    /// </summary>
+    /// <param name="map">Map, to which LoggingWidget should add</param>
+    private void CheckForLoggingWidget()
+    {
+        // If in debug mode ...
+        if (System.Diagnostics.Debugger.IsAttached)
+        {
+            // Is there already a LoggingWidget ...
+            if (Widgets.Where(w => w.GetType() == typeof(LoggingWidget)).Count() > 0)
+                // ... then return;
+                return;
+
+            var loggingWidget = new LoggingWidget()
+            {
+                Margin = new MRect(10),
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                BackColor = Color.Transparent,
+                Opacity = 0.0f,
+                LogLevelFilter = LogLevel.Trace,
+            };
+
+            Widgets.Add(loggingWidget);
+        }
     }
 }

@@ -283,7 +283,8 @@ internal abstract class GeometryFactory : IDisposable
         ServiceExceptionNode = new AlternativePathNodesCollection(ogcServiceExceptionNode, exceptionTextNode,
             serviceExceptionNode);
         FeatureNode = new PathNode(FeatureTypeInfo.FeatureTypeNamespace, FeatureTypeInfo.Name,
-            (NameTable)XmlReader.NameTable);}
+            (NameTable)XmlReader.NameTable);
+    }
 
     /// <summary>
     /// This method initializes separator variables for parsing coordinates.
