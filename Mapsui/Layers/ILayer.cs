@@ -78,6 +78,11 @@ public interface ILayer : IAnimatable, INotifyPropertyChanged, IDisposable
     IEnumerable<IFeature> GetFeatures(MRect extent, double resolution);
 
     /// <summary>
+    /// Function to sort order of features for drawing
+    /// </summary>
+    Func<IEnumerable<IFeature>, IEnumerable<IFeature>> SortFeatures { get; }
+
+    /// <summary>
     /// Attribution for layer
     /// </summary>
     HyperlinkWidget Attribution { get; }
