@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.Geometries;
 
 public class PolygonGeometrySample : ISample
 {
-    public string Name => "3 Polygons";
+    public string Name => "Polygons";
     public string Category => "Geometries";
 
     public Task<Map> CreateMapAsync()
