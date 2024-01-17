@@ -1,4 +1,6 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Features;
+using Mapsui.Layers;
+using System.Linq;
 
 namespace Mapsui.Extensions;
 
@@ -14,7 +16,7 @@ public static  class MapExtensions
         };
 
         // Set function for sort order
-        layer.SortFeatures = (features) => features.OrderBy((f) => f.ZOrder).ThenBy((f) => f.Id);
+        layer.SortFeatures = (features) => features.OrderBy((f) => f is Marker && ((Marker)f).HasCallout).ThenBy((f) => f.ZOrder).ThenBy((f) => f.Id);
 
         // Add handling of touches
         map.Info += (object? sender, MapInfoEventArgs args) =>
@@ -23,13 +25,13 @@ public static  class MapExtensions
 
             var hasCallout = marker.HasCallout;
 
-            foreach (var m in Features.Where(f => f is Marker && ((Marker)f).HasCallout))
+            foreach (var m in layer.Features.Where(f => f is Marker && ((Marker)f).HasCallout))
                 ((Marker)m).HideCallout();
 
             if (!hasCallout)
                 marker.ShowCallout();
 
-            DataHasChanged();
+            layer.DataHasChanged();
         };
         
         // Add layer to map
