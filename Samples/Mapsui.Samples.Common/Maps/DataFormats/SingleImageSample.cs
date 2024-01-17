@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.Demo;
 
 public class SingleImageSample : ISample
 {
-    public string Name => "14 Single Image";
+    public string Name => "Single Image";
     public string Category => "Data Formats";
 
     static SingleImageSample()
@@ -47,8 +47,8 @@ public class SingleImageSample : ISample
         var rasterFeature = new RasterFeature(new MRaster(bytes, extent)) { Styles = { new RasterStyle() } };
         return new MemoryLayer()
         {
-            Features = new List<RasterFeature> { rasterFeature }, 
-            Name = "Raster Image", 
+            Features = new List<RasterFeature> { rasterFeature },
+            Name = "Raster Image",
             Opacity = 0.9,
             Style = null,
         };
