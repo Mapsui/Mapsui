@@ -67,7 +67,7 @@ public class ImageDataSample : ISample
 
         memoryLayer.Features = features;
         memoryLayer.Style = null;
-        
+
         return memoryLayer;
     }
 

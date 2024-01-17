@@ -142,7 +142,7 @@ public sealed class BitmapInfo : IBitmapInfo
     {
         if (_ownsBitmap)
         {
-            DisposableExtension.DisposeAndNullify(ref _data);    
+            DisposableExtension.DisposeAndNullify(ref _data);
         }
     }
 }

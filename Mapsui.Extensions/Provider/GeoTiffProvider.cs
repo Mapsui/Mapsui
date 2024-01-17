@@ -131,7 +131,7 @@ public class GeoTiffProvider : IProvider, IDisposable
         // Register the custom tag handler
         Tiff.TiffExtendProc extender = TagExtender;
         _parentExtender = Tiff.SetTagExtender(extender);
-        
+
         using var tif = Tiff.Open(location, "r4") ?? Tiff.Open(location, "r8"); // read big tiff if normal tiff fails.
 
         FieldValue[] value = tif.GetField(TiffTag.IMAGEWIDTH);
