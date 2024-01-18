@@ -1,5 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
@@ -46,9 +47,10 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             return false;
 
         var picture = (SKPicture)BitmapRegistry.Instance.Get(calloutStyle.BitmapId);
+        var belongsTo = (BitmapInfo)renderCache.GetOrCreate(calloutStyle.BelongsTo?.BitmapId ?? -1);
 
         // Calc offset (relative or absolute)
-        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(picture.CullRect.Width, picture.CullRect.Height);
+        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(belongsTo.Width * calloutStyle.BelongsTo?.SymbolScale ?? 1, belongsTo.Height * calloutStyle.BelongsTo?.SymbolScale ?? 1);
 
         var rotation = (float)calloutStyle.SymbolRotation;
 
