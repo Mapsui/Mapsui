@@ -16,13 +16,14 @@ public static class MemoryLayerExtensions
     /// <param name="layer">Layer to use</param>
     /// <param name="x">X position</param>
     /// <param name="y">Y position</param>
-    public static MemoryLayer AddMarker(this MemoryLayer layer, double x, double y, MarkerType type = MarkerType.Pin, string? title = null, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? anchor = null, Offset? calloutAnchor = null)
+    public static MemoryLayer AddMarker(this MemoryLayer layer, double x, double y, MarkerType type = MarkerType.Pin, string? title = null, string? subtitle = null, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? anchor = null, Offset? calloutAnchor = null)
     {
         var marker = new Marker(x, y);
 
         marker.MarkerType = type;
         marker.Scale = scale;
         marker.Title = title;
+        marker.Subtitle = subtitle;
         if (anchor != null) marker.Anchor = anchor;
         if (calloutAnchor != null) marker.CalloutAnchor = calloutAnchor;
         if (color != null) marker.Color = color;
@@ -40,9 +41,9 @@ public static class MemoryLayerExtensions
     /// <param name="layer">Layer to use</param>
     /// <param name="x">X position</param>
     /// <param name="y">Y position</param>
-    public static MemoryLayer AddMarker(this MemoryLayer layer, (double x, double y) position, MarkerType type = MarkerType.Pin, string? title = null, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? anchor = null, Offset? calloutAnchor = null)
+    public static MemoryLayer AddMarker(this MemoryLayer layer, (double x, double y) position, MarkerType type = MarkerType.Pin, string? title = null, string? subtitle = null, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? anchor = null, Offset? calloutAnchor = null)
     {
-        return AddMarker(layer, position.x, position.y, type, title, color, icon, svg, scale, anchor, calloutAnchor);
+        return AddMarker(layer, position.x, position.y, type, title, subtitle, color, icon, svg, scale, anchor, calloutAnchor);
     }
 
     /// <summary>
@@ -50,8 +51,8 @@ public static class MemoryLayerExtensions
     /// </summary>
     /// <param name="layer">Layer to use</param>
     /// <param name="point">Point for position</param>
-    public static MemoryLayer AddMarker(this MemoryLayer layer, MPoint position, MarkerType type = MarkerType.Pin, string? title = null, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? anchor = null, Offset? calloutAnchor = null)
+    public static MemoryLayer AddMarker(this MemoryLayer layer, MPoint position, MarkerType type = MarkerType.Pin, string? title = null, string? subtitle = null, Styles.Color? color = null, byte[]? icon = null, string? svg = null, double scale = 1.0, Offset? anchor = null, Offset? calloutAnchor = null)
     {
-        return AddMarker(layer, position.X, position.Y, type, title, color, icon, svg, scale, anchor, calloutAnchor);
+        return AddMarker(layer, position.X, position.Y, type, title, subtitle, color, icon, svg, scale, anchor, calloutAnchor);
     }
 }

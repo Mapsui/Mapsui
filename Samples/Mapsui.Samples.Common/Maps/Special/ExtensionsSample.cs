@@ -47,9 +47,9 @@ public class ExtensionsSample : ISample
         var icon = GetIconFromResources("Images.icon.png");
 
         // Add markers
-        layer.AddMarker(SphericalMercator.FromLonLat(9.0, 48.025), title: "New York", type: MarkerType.Pin)
-            .AddMarker(SphericalMercator.FromLonLat(9.1, 48.0), title: "Ghostscript Tiger", svg: tiger, scale: 0.1, anchor: new RelativeOffset(0.3, -0.8), calloutAnchor: new RelativeOffset(-0.3, -0.3)) // Set center point to 30 % in x and -80 % in y direction
-            .AddMarker(SphericalMercator.FromLonLat(9.05, 48.0), title: "San Fransisco", icon: icon, anchor: new RelativeOffset(0.5, 0.5), calloutAnchor: new RelativeOffset(-0.5, 1.0));
+        layer.AddMarker(SphericalMercator.FromLonLat(9.0, 48.025), title: "New York", subtitle: "City", type: MarkerType.Pin)
+            .AddMarker(SphericalMercator.FromLonLat(9.1, 48.0), title: "Tiger", subtitle: "Ghostscript", svg: tiger, scale: 0.1, anchor: new RelativeOffset(0.3, -0.8), calloutAnchor: new RelativeOffset(-0.3, -0.3)) // Set center point to 30 % in x and -80 % in y direction
+            .AddMarker(SphericalMercator.FromLonLat(9.05, 48.0), title: "San Fransisco", subtitle: "City", icon: icon, anchor: new RelativeOffset(0.5, 0.5), calloutAnchor: new RelativeOffset(-0.5, 1.0));
 
         for (var i = 0; i < 10; i++)
             layer.AddMarker(SphericalMercator.FromLonLat(9.0 + i * 0.015, 48.07), type: MarkerType.Pin_0 + i, title: (MarkerType.Pin_0 + i).ToString(), color: DemoColor());

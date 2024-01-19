@@ -134,6 +134,9 @@ internal class Marker : PointFeature
         }
     }
 
+    /// <summary>
+    /// Title of callout
+    /// </summary>
     public string? Title
     {
         get => _calloutStyle.Title;
@@ -142,8 +145,25 @@ internal class Marker : PointFeature
             if (_calloutStyle.Title == value) 
                 return;
             _calloutStyle.Title = value;
+            _calloutStyle.Type = string.IsNullOrEmpty(value) ? CalloutType.Single : CalloutType.Detail;
         }
     }
+
+    /// <summary>
+    /// Subtitle of callout
+    /// </summary>
+    public string? Subtitle
+    {
+        get => _calloutStyle.Subtitle;
+        set
+        {
+            if (_calloutStyle.Subtitle == value)
+                return;
+            _calloutStyle.Subtitle = value;
+            _calloutStyle.Type = string.IsNullOrEmpty(value) ? CalloutType.Single : CalloutType.Detail;
+        }
+    }
+
     /// <summary>
     /// True if the callout is visible
     /// </summary>
@@ -162,13 +182,14 @@ internal class Marker : PointFeature
         get => _calloutStyle.SymbolOffset;
         set
         {
-            if (value.Equals(_calloutStyle.SymbolOffset)) return;
+            if (value.Equals(_calloutStyle.SymbolOffset)) 
+                return;
             _calloutStyle.SymbolOffset = value;
         }
     }
 
     /// <summary>
-    /// Show callout with <c ref="Title" /> as text
+    /// Show callout with <c ref="Title" /> and <c ref="Subtitle" /> as text
     /// </summary>
     public void ShowCallout()
     {
@@ -177,6 +198,9 @@ internal class Marker : PointFeature
         _calloutStyle.Enabled = true;
     }
 
+    /// <summary>
+    /// Hide callout
+    /// </summary>
     public void HideCallout()
     {
         if (_calloutStyle == null) return;
@@ -220,6 +244,9 @@ internal class Marker : PointFeature
         _calloutStyle.TitleFontColor = Color.Black;
         _calloutStyle.TitleFont.Size = 16;
         _calloutStyle.TitleTextAlignment = Widgets.Alignment.Center;
+        _calloutStyle.SubtitleFontColor = Color.Black;
+        _calloutStyle.SubtitleFont.Size = 12;
+        _calloutStyle.SubtitleTextAlignment = Widgets.Alignment.Center;
 
         // Add CalloutStyle for this feature
         Styles.Add(_calloutStyle);
