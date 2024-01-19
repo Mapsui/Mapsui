@@ -76,10 +76,10 @@ jobs:
       uses: NuGet/setup-nuget@v1.1.1      
       with:
         nuget-version: latest
-    - name: Setup Xcode version 15.0
+    - name: Setup Xcode version 15.1
       uses: maxim-lobanov/setup-xcode@v1.6.0
       with:
-        xcode-version: '15.0' 
+        xcode-version: '15.1' 
     - name: Setup .NET 6 SDK
       uses: actions/setup-dotnet@v3
       with:
