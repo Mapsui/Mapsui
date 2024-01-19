@@ -543,16 +543,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         if (mapInfo != null)
         {
-            var result = new List<MapInfoRecord>(mapInfo.MapInfoRecords.Count);
-
-            foreach (var layer in mapInfo.MapInfoRecords.Select((mi) => mi.Layer).Distinct())
-            {
-                result.AddRange(mapInfo.MapInfoRecords.Where((mi) => mi.Layer == layer).Reverse());
-            }
-
-            mapInfo.MapInfoRecords.Clear();
-            mapInfo.MapInfoRecords.AddRange(result);
-
             return new MapInfoEventArgs
             {
                 MapInfo = mapInfo,
