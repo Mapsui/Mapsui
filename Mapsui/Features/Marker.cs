@@ -51,38 +51,6 @@ internal class Marker : PointFeature
         }
     }
 
-    private byte[]? _icon = null;
-
-    /// <summary>
-    /// Byte[] holding the bitmap informations
-    /// </summary>
-    public byte[]? Icon
-    {
-        get => _icon;
-        set
-        {
-            if (Equals(value, _icon)) return;
-            _icon = value;
-            UpdateMarker();
-        }
-    }
-
-    private string? _svg = string.Empty;
-
-    /// <summary>
-    /// String holding the Svg image informations
-    /// </summary>
-    public string? Svg
-    {
-        get => _svg;
-        set
-        {
-            if (value == _svg) return;
-            _svg = value;
-            UpdateMarker();
-        }
-    }
-
     private double _scale = 1.0;
 
     /// <summary>
@@ -261,29 +229,13 @@ internal class Marker : PointFeature
         // BitmapRegistry.Instance.Unregister(_style.BitmapId);
         // _style.BitmapId = -1;
 
-        switch (_markerType)
-        {
-            case MarkerType.Icon:
-                if (Icon == null) return;
-                _style.BitmapId = BitmapRegistry.Instance.Register(Icon);
-                return;
-            case MarkerType.Svg:
-                if (string.IsNullOrEmpty(Svg)) return;
-                _style.BitmapId = BitmapRegistry.Instance.Register(Svg);
-                return;
-            default:
-                _style.BitmapId = GetPinWithColor();
-                _style.SymbolOffset = _defaultPinAnchor;
-                _calloutStyle.SymbolOffset = _defaultPinCalloutAnchor;
-                return;
-        }
+        _style.BitmapId = GetPinWithColor();
+        _style.SymbolOffset = _defaultPinAnchor;
+        _calloutStyle.SymbolOffset = _defaultPinCalloutAnchor;
     }
 
     private int GetPinWithColor()
     {
-        if (MarkerType == MarkerType.Icon || MarkerType == MarkerType.Svg)
-            return -1;
-
         var colorInHex = $"{Color.R:X2}{Color.G:X2}{Color.B:X2}";
         var pinName = MarkerType.ToString();
 
@@ -304,9 +256,6 @@ internal class Marker : PointFeature
         {
             foreach (MarkerType type in Enum.GetValues(typeof(MarkerType)))
             {
-                if (type == MarkerType.Icon || type == MarkerType.Svg)
-                    continue;
-
                 // Load SVGs for Pins
                 using (var s = new StreamReader(EmbeddedResourceLoader.Load($"Resources.Images.{type.ToString()}.svg", typeof(Marker))))
                 {

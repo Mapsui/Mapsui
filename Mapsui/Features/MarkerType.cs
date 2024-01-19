@@ -2,17 +2,6 @@
 
 public enum MarkerType
 {
-
-    /// <summary>
-    /// Pin as icon image
-    /// </summary>
-    Icon,
-
-    /// <summary>
-    /// Pin as Svg image
-    /// </summary>
-    Svg,
-
     /// <summary>
     /// Pin could change color
     /// </summary>
