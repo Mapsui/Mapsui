@@ -67,8 +67,6 @@ internal class Marker : PointFeature
         }
     }
 
-    // Default offsets for all other markers except pin (center/center)
-    private static Offset _defaultAnchor = new Offset(0.0, 0.0);
     // Default offsets for all pin markers (center/bottom)
     private static Offset _defaultPinAnchor = new RelativeOffset(0.0, 0.5);
 
@@ -88,7 +86,7 @@ internal class Marker : PointFeature
     private Color _color = Color.Red;
     
     /// <summary>
-    /// Color for pin (not used for Icon or Svg)
+    /// Color for pin
     /// </summary>
     public Color Color
     { 
@@ -137,8 +135,6 @@ internal class Marker : PointFeature
     /// </summary>
     public bool HasCallout => _calloutStyle.Enabled;
 
-    // Default offsets for callout for all other markers except pin (center/top)
-    private static Offset _defaultCalloutAnchor = new RelativeOffset(0.0, 0.5);
     // Default offsets for callout for all pin markers (center/top too, but anchor of pin is center/bottom not center/center)
     private static Offset _defaultPinCalloutAnchor = new RelativeOffset(0.0, 1.0);
 
@@ -157,7 +153,7 @@ internal class Marker : PointFeature
     }
 
     /// <summary>
-    /// Show callout with <c ref="Title" /> and <c ref="Subtitle" /> as text
+    /// Show callout with <see cref="Title" /> and <see cref="Subtitle" /> as text
     /// </summary>
     public void ShowCallout()
     {
