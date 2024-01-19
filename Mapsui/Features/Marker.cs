@@ -218,10 +218,9 @@ internal class Marker : PointFeature
 
     private void UpdateMarker()
     {
-        // TODO: Don't do this, because BitmapRegistry doesn't count the number of usages of a bitmap
-        // BitmapRegistry.Instance.Unregister(_style.BitmapId);
-        // _style.BitmapId = -1;
-
+        // TODO
+        // If color changes, create a new bitmap.
+        // Could be getting problematic over time.
         _style.BitmapId = GetPinWithColor();
         _style.SymbolOffset = _defaultPinAnchor;
         _calloutStyle.SymbolOffset = _defaultPinCalloutAnchor;
