@@ -210,6 +210,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         var tasks = new List<Task>();
 
         var list = new List<MapInfoRecord>[mapInfoLayers.Count];
+        var currentIndex = 0;
         var result = new MapInfo(new MPoint(x, y), viewport.ScreenToWorld(x, y), viewport.Resolution);
 
         if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return result;
@@ -237,11 +238,9 @@ public sealed class MapRenderer : IRenderer, IDisposable
                 using var pixMap = surface.PeekPixels();
                 var color = pixMap.GetPixelColor(intX, intY);
 
-                for (var index = 0; index < mapInfoLayers.Count; index++)
+                foreach (var infoLayer in mapInfoLayers)
                 {
-                    var currentIndex = mapInfoLayers.Count - index - 1; // for having copy of index for thread safe access and reverse order.
                     var mapList = list[currentIndex] = new List<MapInfoRecord>();
-                    var infoLayer = mapInfoLayers[index];
                     if (infoLayer is ILayerFeatureInfo layerFeatureInfo)
                     {
                         tasks.Add(Task.Run(async () =>
@@ -252,7 +251,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                                 mapList = new List<MapInfoRecord>();
                                 // get information from ILayer Feature Info
                                 var features = await layerFeatureInfo.GetFeatureInfoAsync(viewport, x, y);
-                                foreach (var it in features.Reverse())
+                                foreach (var it in features)
                                 {
                                     foreach (var feature in it.Value)
                                     {
@@ -298,12 +297,14 @@ public sealed class MapRenderer : IRenderer, IDisposable
                                 }
                             });
                     }
+
+                    currentIndex++;
                 }
             }
 
             var mapInfos = list.SelectMany(f => f);
             var task = Task.WhenAll(tasks);
-            result = new MapInfo(result, mapInfos, task);
+            result = new MapInfo(result, mapInfos.Reverse(), task);
         }
         catch (Exception exception)
         {
