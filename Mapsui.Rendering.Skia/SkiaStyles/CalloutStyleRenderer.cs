@@ -47,10 +47,18 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             return false;
 
         var picture = (SKPicture)BitmapRegistry.Instance.Get(calloutStyle.BitmapId);
-        var belongsTo = (BitmapInfo)renderCache.GetOrCreate(calloutStyle.BelongsTo?.BitmapId ?? -1);
+
+        double belongsToWidth = 0;
+        double belongsToHeight = 0;
+
+        if (calloutStyle.BelongsTo != null)
+        {
+            var belongsTo = (BitmapInfo)renderCache.GetOrCreate(calloutStyle.BelongsTo?.BitmapId ?? -1);
+            (belongsToWidth, belongsToHeight) = (belongsTo.Width, belongsTo.Height);
+        }
 
         // Calc offset (relative or absolute)
-        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(belongsTo.Width * calloutStyle.BelongsTo?.SymbolScale ?? 1, belongsTo.Height * calloutStyle.BelongsTo?.SymbolScale ?? 1);
+        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(belongsToWidth * calloutStyle.BelongsTo?.SymbolScale ?? 1, belongsToHeight * calloutStyle.BelongsTo?.SymbolScale ?? 1);
 
         var rotation = (float)calloutStyle.SymbolRotation;
 
