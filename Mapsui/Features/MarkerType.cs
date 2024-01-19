@@ -1,11 +1,14 @@
-﻿namespace Mapsui.Features;
+﻿using System.ComponentModel;
 
+namespace Mapsui.Features;
+
+[DefaultValue(Pin_Circle)]
 public enum MarkerType
 {
     /// <summary>
     /// Pin could change color
     /// </summary>
-    Pin,
+    Pin_Circle,
 
     /// <summary>
     /// Pin with an 0

@@ -15,27 +15,27 @@ internal class Marker : PointFeature
     private readonly SymbolStyle _style = new SymbolStyle();
     private readonly CalloutStyle _calloutStyle = new CalloutStyle();
 
-    public Marker(double x, double y, MarkerType type = MarkerType.Pin) : base(x, y)
+    public Marker(double x, double y, MarkerType type) : base(x, y)
     {
         InitMarker(type);
     }
 
-    public Marker((double x, double y) position, MarkerType type = MarkerType.Pin) : base(position.x, position.y)
+    public Marker((double x, double y) position, MarkerType type) : base(position.x, position.y)
     {
         InitMarker(type);
     }
 
-    public Marker(MPoint point, MarkerType type = MarkerType.Pin) : base(point)
+    public Marker(MPoint point, MarkerType type) : base(point)
     {
         InitMarker(type);
     }
 
-    public Marker(PointFeature pointFeature, MarkerType type = MarkerType.Pin) : base(pointFeature)
+    public Marker(PointFeature pointFeature, MarkerType type) : base(pointFeature)
     {
         InitMarker(type);
     }
 
-    private MarkerType _markerType = MarkerType.Pin;
+    private MarkerType _markerType;
 
     /// <summary>
     /// Type of marker
