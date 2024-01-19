@@ -47,7 +47,7 @@ public class ExtensionsSample : ISample
         var icon = GetIconFromResources("Images.icon.png");
 
         // Add markers
-        layer.AddMarker(SphericalMercator.FromLonLat(9.0, 48.025), title: "New York", subtitle: "City", type: MarkerType.Pin);
+        layer.AddMarker(SphericalMercator.FromLonLat(9.0, 48.025), title: "New York", subtitle: "City");
 
         for (var i = 0; i < 10; i++)
             layer.AddMarker(SphericalMercator.FromLonLat(9.0 + i * 0.015, 48.07), type: MarkerType.Pin_0 + i, title: (MarkerType.Pin_0 + i).ToString(), color: DemoColor());
