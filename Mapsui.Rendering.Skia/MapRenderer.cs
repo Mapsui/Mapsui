@@ -252,7 +252,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                                 mapList = new List<MapInfoRecord>();
                                 // get information from ILayer Feature Info
                                 var features = await layerFeatureInfo.GetFeatureInfoAsync(viewport, x, y);
-                                foreach (var it in features)
+                                foreach (var it in features.Reverse())
                                 {
                                     foreach (var feature in it.Value)
                                     {
