@@ -214,9 +214,6 @@ internal class Marker : PointFeature
 
         // Add CalloutStyle for this feature
         Styles.Add(_calloutStyle);
-
-        // TODO: Remove when ready, only for test
-        Styles.Add(new SymbolStyle { SymbolType = SymbolType.Ellipse, SymbolScale = 0.3, Outline = new Pen(Color.Red, 5), Fill = new Brush(Color.Transparent) });
     }
 
     private void UpdateMarker()
