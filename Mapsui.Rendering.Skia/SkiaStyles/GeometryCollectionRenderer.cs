@@ -29,17 +29,16 @@ public static class GeometryCollectionRenderer
             return;
 
         float lineWidth = (float)(vectorStyle.Outline?.Width ?? 1f);
+        using var path = vectorCache.GetOrCreatePath((collection, feature, viewport, lineWidth), ToPath);
         if (vectorStyle.Fill.IsVisible())
         {
             using var paintFill = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), PolygonRenderer.CreateSkPaint);
-            using var path = vectorCache.GetOrCreatePath((collection, feature, viewport, lineWidth), ToPath);
             PolygonRenderer.DrawPath(canvas, vectorStyle, path, paintFill);
         }
 
         if (vectorStyle.Outline.IsVisible())
         {
             using var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), PolygonRenderer.CreateSkPaint);
-            using var path = vectorCache.GetOrCreatePath((collection, feature, viewport, lineWidth), ToPath);
             canvas.DrawPath(path, paint);
         }
     }
