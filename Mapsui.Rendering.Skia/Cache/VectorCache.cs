@@ -19,7 +19,8 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
         
         if (!holder.TryGet<T>(out var result))
         {
-            result = new CacheTracker<T>(holder, toPaint(param));
+            // current instance in use create a new one
+            result = new CacheTracker<T>(toPaint(param));
         };
 
         return result.Value;
@@ -35,7 +36,8 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
         
         if (!holder.TryGet<T>(out var result))
         {
-            result = new CacheTracker<T>(holder, toPaint(param, symbolCache));
+            // current instance in use create a new one
+            result = new CacheTracker<T>(toPaint(param, symbolCache));
         };
 
         return result.Value;
@@ -51,7 +53,8 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
         
         if (!holder.TryGet<T>(out var result))
         {
-            result = new CacheTracker<T>(holder, toPath(param));
+            // current instance in use create a new one
+            result = new CacheTracker<T>(toPath(param));
         };
 
         return result.Value;

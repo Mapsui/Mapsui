@@ -3,10 +3,10 @@ using Mapsui.Extensions;
 
 namespace Mapsui.Rendering;
 
-public struct CacheTracker<T> : IDisposable
+public readonly struct CacheTracker<T> : IDisposable
 {
     private readonly ICacheHolder? _holder;
-    private T _instance;
+    private readonly T _instance;
 
     public CacheTracker(T instance)
     {
