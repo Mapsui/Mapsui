@@ -7,6 +7,7 @@ namespace Mapsui.Rendering;
 public sealed class CacheHolder<T>: ICacheHolder, IDisposable
 {
     private T? _instance;
+    private object _lock = new();
 
     public CacheHolder(T instance)
     {
@@ -22,11 +23,14 @@ public sealed class CacheHolder<T>: ICacheHolder, IDisposable
     public bool TryGet<TResult>([NotNullWhen(true)] out CacheTracker<TResult>? result)
         where TResult : T
     {
-        if (_instance != null)
+        lock (_lock)
         {
-            result = new CacheTracker<TResult>((TResult)_instance);
-            _instance = default;
-            return true;
+            if (_instance != null)
+            {
+                result = new CacheTracker<TResult>((TResult)_instance);
+                _instance = default;
+                return true;
+            }
         }
 
         result = null;
