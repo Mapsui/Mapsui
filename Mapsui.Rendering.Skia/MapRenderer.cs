@@ -327,9 +327,6 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public void Dispose()
     {
-        if (_ownsRenderCache)
-        {
-            _renderCache.Dispose();
-        }
+        _renderCache.Dispose();
     }
 }
