@@ -28,7 +28,6 @@ public sealed class MapRenderer : IRenderer, IDisposable
     private readonly IRenderCache _renderCache;
     private long _currentIteration;
     private readonly bool _ownsRenderCache;
-    private static object _renderLock = new object();
 
     public IRenderCache RenderCache => _renderCache;
 
@@ -164,10 +163,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         {
             layers = layers.ToList();
 
-            lock (_renderLock)
-            {
-                VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => { RenderFeature(canvas, v, l, s, f, o, i); });
-            }
+            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => { RenderFeature(canvas, v, l, s, f, o, i); });
 
             _currentIteration++;
         }
@@ -274,35 +270,32 @@ public sealed class MapRenderer : IRenderer, IDisposable
                     }
                     else
                     {
-                        lock (_renderLock)
-                        {
-                            // get information from ILayer
-                            VisibleFeatureIterator.IterateLayers(viewport, new[] { infoLayer }, 0,
-                                (v, layer, style, feature, opacity, iteration) =>
+                        // get information from ILayer
+                        VisibleFeatureIterator.IterateLayers(viewport, new[] { infoLayer }, 0,
+                            (v, layer, style, feature, opacity, iteration) =>
+                            {
+                                try
                                 {
-                                    try
-                                    {
-                                        // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
-                                        surface.Canvas.Save();
-                                        // 1) Clear the entire bitmap
-                                        surface.Canvas.Clear(SKColors.Transparent);
-                                        // 2) Render the feature to the clean canvas
-                                        RenderFeature(surface.Canvas, v, layer, style, feature, opacity, 0);
-                                        // 3) Check if the pixel has changed.
-                                        if (color != pixMap.GetPixelColor(intX, intY))
-                                            // 4) Add feature and style to result
-                                            mapList.Add(new MapInfoRecord(feature, style, layer));
-                                        surface.Canvas.Restore();
-                                        // ReSharper restore AccessToDisposedClosure
-                                    }
-                                    catch (Exception exception)
-                                    {
-                                        Logger.Log(LogLevel.Error,
-                                            "Unexpected error in the code detecting if a feature is clicked. This uses SkiaSharp.",
-                                            exception);
-                                    }
-                                });
-                        }
+                                    // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
+                                    surface.Canvas.Save();
+                                    // 1) Clear the entire bitmap
+                                    surface.Canvas.Clear(SKColors.Transparent);
+                                    // 2) Render the feature to the clean canvas
+                                    RenderFeature(surface.Canvas, v, layer, style, feature, opacity, 0);
+                                    // 3) Check if the pixel has changed.
+                                    if (color != pixMap.GetPixelColor(intX, intY))
+                                        // 4) Add feature and style to result
+                                        mapList.Add(new MapInfoRecord(feature, style, layer));
+                                    surface.Canvas.Restore();
+                                    // ReSharper restore AccessToDisposedClosure
+                                }
+                                catch (Exception exception)
+                                {
+                                    Logger.Log(LogLevel.Error,
+                                        "Unexpected error in the code detecting if a feature is clicked. This uses SkiaSharp.",
+                                        exception);
+                                }
+                            });
                     }
                 }
             }
