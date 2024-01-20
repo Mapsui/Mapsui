@@ -17,7 +17,7 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
             return paint != null ? new CacheHolder<object>(paint) : null;
         });
         
-        if (holder.TryGet<T>(out var result))
+        if (!holder.TryGet<T>(out var result))
         {
             result = new CacheTracker<T>(holder, toPaint(param));
         };
@@ -33,7 +33,7 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
             return paint != null ? new CacheHolder<object>(paint) : null;
         });
         
-        if (holder.TryGet<T>(out var result))
+        if (!holder.TryGet<T>(out var result))
         {
             result = new CacheTracker<T>(holder, toPaint(param, symbolCache));
         };
@@ -49,7 +49,7 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
             return paint != null ? new CacheHolder<object>(paint) : null;
         });
         
-        if (holder.TryGet<T>(out var result))
+        if (!holder.TryGet<T>(out var result))
         {
             result = new CacheTracker<T>(holder, toPath(param));
         };
