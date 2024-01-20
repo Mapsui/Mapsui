@@ -27,13 +27,25 @@ public sealed class CacheHolder<T>: ICacheHolder, IDisposable
     {
         if (_instance != null)
         {
-            result = new CacheTracker<TResult>(this, (TResult)_instance!);
+            result = new CacheTracker<TResult>((TResult)_instance);
             _instance = default;
-            _instances = new ConcurrentBag<T>();
             return true;
         }
 
+        if (_instances != null)
+        {
+            if (_instances.TryTake(out var ins))
+            {
+                result = new CacheTracker<TResult>((TResult)ins!);
+                return true;
+            }
+
+            result = null;
+            return false;
+        }
+
         result = null;
+        _instances = new();
         return false;
     }
 
