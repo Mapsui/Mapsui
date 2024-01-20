@@ -8,7 +8,7 @@ using Color = Mapsui.Styles.Color;
 
 namespace Mapsui.Features;
 
-internal class Marker : PointFeature
+public class Marker : PointFeature
 {
     private readonly static Dictionary<MarkerType, string> _defaultPins = new();
 
@@ -129,6 +129,11 @@ internal class Marker : PointFeature
             _calloutStyle.Type = string.IsNullOrEmpty(value) ? CalloutType.Single : CalloutType.Detail;
         }
     }
+
+    /// <summary>
+    /// Action called when marker is touched
+    /// </summary>
+    public Action<ILayer, Marker, MapInfoEventArgs>? Touched = null;
 
     /// <summary>
     /// True if the callout is visible
