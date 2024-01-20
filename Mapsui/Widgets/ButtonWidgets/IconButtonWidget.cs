@@ -1,4 +1,5 @@
-﻿using Mapsui.Widgets.BoxWidgets;
+﻿using Mapsui.Styles;
+using Mapsui.Widgets.BoxWidgets;
 using System;
 
 namespace Mapsui.Widgets.ButtonWidgets;
@@ -21,41 +22,30 @@ namespace Mapsui.Widgets.ButtonWidgets;
 /// </remarks>
 public class IconButtonWidget : BoxWidget, ITouchableWidget
 {
+    public IconButtonWidget() : base()
+    {
+        BackColor = Color.Transparent;
+    }
+
     /// <summary>
     /// Event handler which is called, when the button is touched
     /// </summary>
     public event EventHandler<WidgetTouchedEventArgs>? Touched;
 
-    private double _paddingX = 0;
+    private MRect _padding = new MRect(0);
 
     /// <summary>
     /// Padding left and right for icon inside the Widget
     /// </summary>
-    public double PaddingX
+    public MRect Padding
     {
-        get => _paddingX;
+        get => _padding;
         set
         {
-            if (_paddingX == value)
-                return;
-            _paddingX = value;
-            Invalidate();
-        }
-    }
-
-    private double _paddingY = 0;
-
-    /// <summary>
-    /// Padding left and right for icon inside the Widget
-    /// </summary>
-    public double PaddingY
-    {
-        get => _paddingY;
-        set
-        {
-            if (_paddingY == value)
-                return;
-            _paddingY = value;
+            if (_padding == value)
+              return;
+            
+            _padding = value;
             Invalidate();
         }
     }
