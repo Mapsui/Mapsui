@@ -27,8 +27,8 @@ public static class LineStringRenderer
         var lineWidth = (float)(vectorStyle.Line?.Width ?? 1f);
         if (vectorStyle.Line.IsVisible())
         {
-            var paint = renderCache.GetOrCreatePaint((vectorStyle.Line, opacity), CreateSkPaint);
-            var path = renderCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth),ToPath);
+            using var paint = renderCache.GetOrCreatePaint((vectorStyle.Line, opacity), CreateSkPaint);
+            using var path = renderCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth),ToPath);
             canvas.DrawPath(path, paint);
         }
     }

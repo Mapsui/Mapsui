@@ -7,11 +7,10 @@ namespace Mapsui.Rendering;
 public interface IVectorCache : IDisposable
 {
     [return: NotNullIfNotNull(nameof(param))]
-    T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, T> toPaint)
-        where T : class?;
+    CacheTracker<T> GetOrCreatePaint<T, TParam>(TParam param, Func<TParam, T> toPaint);
 
-    T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, ISymbolCache, T> toPaint)
-        where T : class?;
+    [return: NotNullIfNotNull(nameof(param))]
+    CacheTracker<T> GetOrCreatePaint<T, TParam>(TParam param, Func<TParam, ISymbolCache, T> toPaint);
 
-    T GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toSkRect);
+    CacheTracker<T> GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toPath);
 }

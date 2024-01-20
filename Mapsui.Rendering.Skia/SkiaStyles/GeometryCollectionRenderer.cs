@@ -21,10 +21,7 @@ public static class GeometryCollectionRenderer
         SKPath ToPath((GeometryCollection collection, IFeature feature, Viewport viewport, float lineWidth) valueTuple)
         {
             var skRect = vectorCache.GetOrCreatePath(valueTuple.viewport, Extensions.ViewportExtensions.ToSkiaRect);
-            var result = collection.ToSkiaPath(valueTuple.viewport, skRect, valueTuple.lineWidth);
-            result.Close();
-            _ = result.Bounds;
-            _ = result.TightBounds;
+            var result = collection.ToSkiaPath(valueTuple.viewport, skRect.Instance, valueTuple.lineWidth);
             return result;
         }
 
@@ -32,18 +29,17 @@ public static class GeometryCollectionRenderer
             return;
 
         float lineWidth = (float)(vectorStyle.Outline?.Width ?? 1f);
-        SKPath? path = null;
         if (vectorStyle.Fill.IsVisible())
         {
-            var paintFill = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), PolygonRenderer.CreateSkPaint);
-            path = vectorCache.GetOrCreatePath((collection, feature, viewport, lineWidth), ToPath);
+            using var paintFill = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), PolygonRenderer.CreateSkPaint);
+            using var path = vectorCache.GetOrCreatePath((collection, feature, viewport, lineWidth), ToPath);
             PolygonRenderer.DrawPath(canvas, vectorStyle, path, paintFill);
         }
 
         if (vectorStyle.Outline.IsVisible())
         {
-            var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), PolygonRenderer.CreateSkPaint);
-            path ??= vectorCache.GetOrCreatePath((collection, feature, viewport, lineWidth), ToPath);
+            using var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), PolygonRenderer.CreateSkPaint);
+            using var path = vectorCache.GetOrCreatePath((collection, feature, viewport, lineWidth), ToPath);
             canvas.DrawPath(path, paint);
         }
     }

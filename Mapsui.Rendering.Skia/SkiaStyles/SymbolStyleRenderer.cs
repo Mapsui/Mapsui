@@ -8,6 +8,7 @@ using NetTopologySuite.Geometries;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -163,19 +164,18 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             canvas.RotateDegrees((float)rotation);
         }
 
-        SKPath? path = null;
         if (symbolStyle.Fill.IsVisible())
         {
-            var fillPaint = vectorCache.GetOrCreatePaint((symbolStyle.Fill, opacity), CreateFillPaint);
-            path = vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath);
-            canvas.DrawPath(path, fillPaint);
+            using var fillPaint = vectorCache.GetOrCreatePaint((symbolStyle.Fill, opacity), CreateFillPaint);
+            using var path = vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath);
+            canvas.DrawPath(path, fillPaint!);
         }
 
         if (symbolStyle.Outline.IsVisible())
         {
-            var linePaint = vectorCache.GetOrCreatePaint((symbolStyle.Outline, opacity), CreateLinePaint);
-            path ??= vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath);
-            canvas.DrawPath(path, linePaint);
+            using var linePaint = vectorCache.GetOrCreatePaint((symbolStyle.Outline, opacity), CreateLinePaint);
+            using var path = vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath);
+            canvas.DrawPath(path, linePaint!);
         }
 
         canvas.Restore();

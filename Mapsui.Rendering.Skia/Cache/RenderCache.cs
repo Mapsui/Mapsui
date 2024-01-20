@@ -1,6 +1,7 @@
 ﻿using System;
 using Mapsui.Extensions;
 using Mapsui.Styles;
+using SkiaSharp;
 
 #pragma warning disable IDISP008 // Don't assign member with injected and created disposables
 
@@ -8,7 +9,7 @@ namespace Mapsui.Rendering.Skia.Cache;
 
 public sealed class RenderCache : IRenderCache
 {
-    private IVectorCache? _vectorCache;
+    private IVectorCache _vectorCache;
 
     public RenderCache(int capacity = 10000)
     {
@@ -22,10 +23,10 @@ public sealed class RenderCache : IRenderCache
 
     public ISymbolCache SymbolCache { get; set; }
 
-    public IVectorCache? VectorCache
+    public IVectorCache VectorCache
     {
         get => _vectorCache;
-        set => _vectorCache = value;
+        set => _vectorCache = value ?? throw new NullReferenceException();
     }
 
     public ITileCache TileCache { get; set; }
@@ -50,19 +51,19 @@ public sealed class RenderCache : IRenderCache
         return LabelCache.GetOrCreateLabel(text, style, opacity, createLabelAsBitmap);
     }
 
-    public T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, T> toPaint) where T : class?
+    public CacheTracker<T> GetOrCreatePaint<T, TParam>(TParam param, Func<TParam, T> toPaint)
     {
-        return VectorCache == null ? toPaint(param) : VectorCache.GetOrCreatePaint(param, toPaint);
+        return VectorCache.GetOrCreatePaint(param, toPaint);
     }
 
-    public T? GetOrCreatePaint<TParam, T>(TParam param, Func<TParam, ISymbolCache, T> toPaint) where T : class?
+    public CacheTracker<T> GetOrCreatePaint<T, TParam>(TParam param, Func<TParam, ISymbolCache, T> toPaint)
     {
-        return VectorCache == null ? toPaint(param, SymbolCache) : VectorCache.GetOrCreatePaint(param, toPaint);
+        return VectorCache.GetOrCreatePaint(param, toPaint);
     }
 
-    public T GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toSkRect)
+    public CacheTracker<T> GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toSkRect)
     {
-        return VectorCache == null ? toSkRect(param) : VectorCache.GetOrCreatePath(param, toSkRect);
+        return VectorCache.GetOrCreatePath(param, toSkRect);
     }
 
     public IBitmapInfo? GetOrCreate(MRaster raster, long currentIteration)
@@ -79,7 +80,7 @@ public sealed class RenderCache : IRenderCache
     {
         LabelCache.Dispose();
         SymbolCache.Dispose();
-        DisposableExtension.DisposeAndNullify(ref _vectorCache);
+        VectorCache.Dispose();
         TileCache.Dispose();
     }
 }
