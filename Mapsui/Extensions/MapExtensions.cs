@@ -33,13 +33,28 @@ public static  class MapExtensions
         {
             if (args.MapInfo?.Feature == null || args.MapInfo.Feature is not Marker marker) return;
 
+            // Has the marker an own action to call when it is touched?
+            if (marker.Touched != null)
+            {
+                marker.Touched(layer, marker, args);
+
+                // When action handled 
+                if (args.Handled)
+                {
+                    layer.DataHasChanged();
+
+                    return;
+                }
+            }
+
             var hasCallout = marker.HasCallout;
 
-            foreach (var m in layer.Features.Where(f => f is Marker && ((Marker)f).HasCallout))
-                ((Marker)m).HideCallout();
+            layer.HideAllCallouts();
 
             if (!hasCallout)
                 marker.ShowCallout();
+
+            args.Handled = true;
 
             layer.DataHasChanged();
         };
