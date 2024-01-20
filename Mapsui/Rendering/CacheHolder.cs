@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using Mapsui.Extensions;
 
 namespace Mapsui.Rendering;
 
 public sealed class CacheHolder<T>: ICacheHolder, IDisposable
+    where T : class
 {
     private T? _instance;
     private object _lock = new();
@@ -23,16 +25,16 @@ public sealed class CacheHolder<T>: ICacheHolder, IDisposable
     public bool TryGet<TResult>([NotNullWhen(true)] out CacheTracker<TResult>? result)
         where TResult : T
     {
-        lock (_lock)
+        if (_instance != null)
         {
-            if (_instance != null)
+            var temp = Interlocked.Exchange(ref _instance, null);
+            if (temp != null)
             {
-                result = new CacheTracker<TResult>((TResult)_instance);
-                _instance = default;
+                result = new CacheTracker<TResult>((TResult)temp);
                 return true;
             }
         }
-
+        
         result = null;
         return false;
     }
@@ -44,6 +46,6 @@ public sealed class CacheHolder<T>: ICacheHolder, IDisposable
     
     public void SetInstance(T instance)
     {
-        _instance = instance;    
+        Interlocked.Exchange(ref _instance, instance);
     }
 }
