@@ -67,8 +67,7 @@ public class ButtonSample : ISample
             VerticalAlignment = verticalAlignment,
             HorizontalAlignment = horizontalAlignment,
             Margin = new MRect(30),
-            PaddingX = 10,
-            PaddingY = 8,
+            Padding = new MRect(10, 8),
             CornerRadius = 8,
             Envelope = new MRect(0, 0, 64, 64)
         };
