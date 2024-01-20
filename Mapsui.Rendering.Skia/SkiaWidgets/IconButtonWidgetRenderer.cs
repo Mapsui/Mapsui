@@ -24,9 +24,10 @@ public class IconButtonWidgetRenderer : ISkiaWidgetRenderer
 
         // Calc Envelope by Width/Height or, if not set, by size of content
         button.UpdateEnvelope(
-            button.Width != 0 ? button.Width : picture.CullRect.Width + button.PaddingX * 2,
-            button.Height != 0 ? button.Height : picture.CullRect.Height + button.PaddingY * 2,
-            viewport.Width,
+            button.Width != 0 ? button.Width : picture.CullRect.Width + button.Padding.Left + button.Padding.Right,
+            button.Height != 0 ? button.Height : picture.CullRect.Height + button.Padding.Top + button.Padding .Bottom,
+            viewport.Width, 
+
             viewport.Height);
 
         if (button.Envelope == null)
@@ -36,8 +37,8 @@ public class IconButtonWidgetRenderer : ISkiaWidgetRenderer
         canvas.DrawRoundRect(button.Envelope.ToSkia(), (float)button.CornerRadius, (float)button.CornerRadius, backPaint);
 
         // Get the scale for picture in each direction
-        var scaleX = (button.Envelope.Width - button.PaddingX * 2) / picture.CullRect.Width;
-        var scaleY = (button.Envelope.Height - button.PaddingY * 2) / picture.CullRect.Height;
+        var scaleX = (button.Envelope.Width - button.Padding.Left - button.Padding.Right) / picture.CullRect.Width;
+        var scaleY = (button.Envelope.Height - button.Padding.Top - button.Padding.Bottom) / picture.CullRect.Height;
 
         // Rotate picture
         var matrix = SKMatrix.CreateRotationDegrees((float)button.Rotation, picture.CullRect.Width / 2f, picture.CullRect.Height / 2f);
@@ -46,7 +47,7 @@ public class IconButtonWidgetRenderer : ISkiaWidgetRenderer
         matrix = matrix.PostConcat(SKMatrix.CreateScale((float)scaleX, (float)scaleY));
 
         // Translate picture to right place
-        matrix = matrix.PostConcat(SKMatrix.CreateTranslation((float)(button.Envelope.MinX + button.PaddingX), (float)(button.Envelope.MinY + button.PaddingY)));
+        matrix = matrix.PostConcat(SKMatrix.CreateTranslation((float)(button.Envelope.MinX + button.Padding.Left), (float)(button.Envelope.MinY + button.Padding.Top)));
 
         using var skPaint = new SKPaint { IsAntialias = true };
         canvas.DrawPicture(picture, ref matrix, skPaint);
