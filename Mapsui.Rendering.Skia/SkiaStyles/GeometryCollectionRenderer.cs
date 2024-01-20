@@ -37,7 +37,7 @@ public static class GeometryCollectionRenderer
         {
             var paintFill = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), PolygonRenderer.CreateSkPaint);
             path = vectorCache.GetOrCreatePath((collection, feature, viewport, lineWidth), ToPath);
-            canvas.DrawPath(path, paintFill);
+            PolygonRenderer.DrawPath(canvas, vectorStyle, path, paintFill);
         }
 
         if (vectorStyle.Outline.IsVisible())

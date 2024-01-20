@@ -41,7 +41,7 @@ internal static class PolygonRenderer
         {
             var fillPaint = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), CreateSkPaint);
             path = vectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth), ToPath);
-            canvas.DrawPath(path, fillPaint);
+            DrawPath(canvas, vectorStyle, path, fillPaint);
         }
 
         if (vectorStyle.Outline.IsVisible())
@@ -49,6 +49,28 @@ internal static class PolygonRenderer
             var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), CreateSkPaint);
             path ??= vectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth), ToPath);
             canvas.DrawPath(path, paint);
+        }
+    }
+
+    internal static void DrawPath(SKCanvas canvas, VectorStyle vectorStyle, SKPath path, SKPaint? paintFill)
+    {
+        if (vectorStyle?.Fill?.FillStyle == FillStyle.Solid)
+        {
+            canvas.DrawPath(path, paintFill);
+        }
+        else
+        {
+            // Do this, because if not, path isn't filled complete
+            using (new SKAutoCanvasRestore(canvas))
+            {
+                canvas.ClipPath(path);
+                var bounds = path.Bounds;
+                // Make sure, that the brush starts with the correct position
+                var inflate = ((int)path.Bounds.Width * 0.3f / _scale) * _scale;
+                bounds.Inflate(inflate, inflate);
+                // Draw rect with bigger size, which is clipped by path
+                canvas.DrawRect(bounds, paintFill);
+            }
         }
     }
 
