@@ -1,5 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Features;
+using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Tiling;
@@ -8,6 +9,7 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Special;
@@ -47,7 +49,26 @@ public class ExtensionsSample : ISample
         var icon = GetIconFromResources("Images.icon.png");
 
         // Add markers
-        layer.AddMarker(SphericalMercator.FromLonLat(9.0, 48.025), title: "New York", subtitle: "City");
+        layer.AddMarker(
+            SphericalMercator.FromLonLat(9.0, 48.025), 
+            title: "New York", 
+            subtitle: "City", 
+            touched: (layer, marker, args) => {
+                marker.MarkerType = marker.MarkerType >= MarkerType.Pin_9 ? 
+                MarkerType.Pin_Circle : 
+                marker.MarkerType + 1;
+            });
+        layer.AddMarker(
+            SphericalMercator.FromLonLat(9.00, 48.00), 
+            title: "Atlanta", 
+            subtitle: "City", 
+            touched: (layer, marker, args) => { 
+                marker.Color = DemoColor(); 
+                marker.Subtitle = $"R:{marker.Color.R} G:{marker.Color.G} B:{marker.Color.B}";
+                if (layer is MemoryLayer memoryLayer) memoryLayer.HideAllCallouts();
+                marker.ShowCallout();
+                args.Handled = true; 
+            });
 
         for (var i = 0; i < 10; i++)
             layer.AddMarker(SphericalMercator.FromLonLat(9.0 + i * 0.015, 48.07), type: MarkerType.Pin_0 + i, title: (MarkerType.Pin_0 + i).ToString(), color: DemoColor());
