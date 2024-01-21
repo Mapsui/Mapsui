@@ -21,21 +21,19 @@ public sealed class CacheHolder<T>: ICacheHolder, IDisposable
         _instance = default;
     }
 
-    public bool TryGet<TResult>([NotNullWhen(true)] out CacheTracker<TResult>? result)
-        where TResult : T
+    public CacheTracker<TResult>? Get<TResult>()
+        where TResult : T?
     {
         if (_instance != null)
         {
             var temp = Interlocked.Exchange(ref _instance, null);
             if (temp != null)
             {
-                result = new CacheTracker<TResult>((TResult)temp);
-                return true;
+                return new CacheTracker<TResult>((TResult)temp);    
             }
         }
-        
-        result = null;
-        return false;
+
+        return null;
     }
 
     void ICacheHolder.SetInstance(object instance)

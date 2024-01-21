@@ -17,14 +17,8 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
             var paint = toPaint(f);
             return paint != null ? new CacheHolder<object>(paint) : null;
         });
-        
-        if (!holder.TryGet<T>(out var result))
-        {
-            // current instance in use create a new one
-            result = new CacheTracker<T>(toPaint(param));
-        };
 
-        return result.Value;
+        return holder?.Get<T>() ?? new CacheTracker<T>(toPaint(param));
     }
 
     public CacheTracker<T> GetOrCreatePaint<T, TParam>(TParam param, Func<TParam, ISymbolCache, T> toPaint)
@@ -36,13 +30,7 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
             return paint != null ? new CacheHolder<object>(paint) : null;
         });
         
-        if (!holder.TryGet<T>(out var result))
-        {
-            // current instance in use create a new one
-            result = new CacheTracker<T>(toPaint(param, symbolCache));
-        };
-
-        return result.Value;
+        return holder?.Get<T>() ?? new CacheTracker<T>(toPaint(param, symbolCache));
     }
 
     public CacheTracker<T> GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toPath)
@@ -54,13 +42,7 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
             return paint != null ? new CacheHolder<object>(paint) : null;
         });
         
-        if (!holder.TryGet<T>(out var result))
-        {
-            // current instance in use create a new one
-            result = new CacheTracker<T>(toPath(param));
-        };
-
-        return result.Value;
+        return holder?.Get<T>() ?? new CacheTracker<T>(toPath(param));
     }
 
     public void Dispose()
