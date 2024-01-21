@@ -14,7 +14,7 @@ public sealed class RenderCache : IRenderCache
     public RenderCache(int capacity = 10000)
     {
         SymbolCache = new SymbolCache();
-        VectorCache = new VectorCache(SymbolCache, capacity);
+        _vectorCache = new VectorCache(SymbolCache, capacity);
         TileCache = new TileCache();
         LabelCache = new LabelCache();
     }
