@@ -9,7 +9,6 @@ public sealed class CacheHolder<T>: ICacheHolder, IDisposable
     where T : class
 {
     private T? _instance;
-    private object _lock = new();
 
     public CacheHolder(T instance)
     {
