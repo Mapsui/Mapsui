@@ -26,7 +26,13 @@ public static class MarkerExtensions
         using (var s = new StreamReader(EmbeddedResourceLoader.Load($"Resources.Images.Pin.svg", typeof(MarkerExtensions))))
         {
             markerImage = s.ReadToEnd();
-            markerImageHeight = extractHeight.Matches(markerImage).FirstOrDefault() == null ? 0 : double.Parse(extractHeight.Matches(markerImage)?.FirstOrDefault()?.Value ?? "");
+
+            var result = extractHeight.Matches(markerImage);
+
+            if (result.Count < 1)
+                return;
+
+            markerImageHeight = result[0].Success ? double.Parse(result[0].Groups[1].Value ?? "") : 0;
         }
     }
 
