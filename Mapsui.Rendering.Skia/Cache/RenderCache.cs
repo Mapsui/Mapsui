@@ -30,6 +30,12 @@ public sealed class RenderCache : IRenderCache<SKPath, SKPaint>
     }
 
     public ITileCache TileCache { get; set; }
+    
+    IVectorCache IRenderCache.VectorCache
+    {
+        get => VectorCache;
+        set => VectorCache = (IVectorCache<SKPath, SKPaint>)value;
+    }
 
     public Size? GetSize(int bitmapId)
     {

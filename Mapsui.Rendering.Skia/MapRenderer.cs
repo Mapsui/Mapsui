@@ -29,7 +29,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
     private long _currentIteration;
     private readonly bool _ownsRenderCache;
 
-    public IRenderCache<SKPath,SKPaint> RenderCache => _renderCache;
+    public IRenderCache RenderCache => _renderCache;
 
     public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
 
@@ -46,7 +46,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public MapRenderer(IRenderCache renderer)
     {
-        _renderCache = renderer;
+        _renderCache = (IRenderCache<SKPath, SKPaint>)renderer;
         StyleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
         StyleRenderers[typeof(VectorStyle)] = new VectorStyleRenderer();
         StyleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
