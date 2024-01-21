@@ -131,7 +131,7 @@ public static class MarkerExtensions
             m.Styles.First(s => s is CalloutStyle).Enabled = false;
     }
 
-    private static int GetPinWithColor(Color color)
+    public static int GetPinWithColor(Color color)
     {
         var colorInHex = $"{color.R:X2}{color.G:X2}{color.B:X2}";
 
