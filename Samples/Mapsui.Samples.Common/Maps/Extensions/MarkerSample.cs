@@ -1,10 +1,11 @@
 ﻿using Mapsui.Extensions;
+using Mapsui.Projections;
+using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
-using Mapsui.Widgets.ButtonWidgets;
+using System;
 using System.Threading.Tasks;
-using Mapsui.Projections;
 
 namespace Mapsui.Samples.Common.Maps.Demo;
 
@@ -29,8 +30,15 @@ public class MarkerSample : ISample
         map.Widgets.Add(new ScaleBarWidget(map) { TextAlignment = Alignment.Center, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Top });
 
         map.AddMarkerLayer("Marker")
-            .AddMarker(SphericalMercator.FromLonLat(-73.935242, 40.730610), DemoColor(), 1.0, "New York", "City");
+            .AddMarker(SphericalMercator.FromLonLat(-73.935242, 40.730610), DemoColor(), 1.0, "New York City");
 
         return map;
+    }
+
+    private static Random _rand = new(1);
+
+    private static Color DemoColor()
+    {
+        return new Color(_rand.Next(128, 256), _rand.Next(128, 256), _rand.Next(128, 256));
     }
 }
