@@ -168,14 +168,14 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         using var path = vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath);
         if (symbolStyle.Fill.IsVisible())
         {
-            using var fillPaint = vectorCache.GetOrCreatePaint((symbolStyle.Fill, opacity), CreateFillPaint);
-            canvas.DrawPath(path, fillPaint!);
+            using var fillPaint = vectorCache.GetOrCreatePaint((symbolStyle.Fill!, opacity), CreateFillPaint);
+            canvas.DrawPath(path, fillPaint);
         }
 
         if (symbolStyle.Outline.IsVisible())
         {
-            using var linePaint = vectorCache.GetOrCreatePaint((symbolStyle.Outline, opacity), CreateLinePaint);
-            canvas.DrawPath(path, linePaint!);
+            using var linePaint = vectorCache.GetOrCreatePaint((symbolStyle.Outline!, opacity), CreateLinePaint);
+            canvas.DrawPath(path, linePaint);
         }
 
         canvas.Restore();

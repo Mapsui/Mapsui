@@ -1,9 +1,10 @@
-﻿using Mapsui.Styles;
+﻿using System.Diagnostics.CodeAnalysis;
+using Mapsui.Styles;
 
 namespace Mapsui.Extensions;
 public static class PenExtensions
 {
-    public static bool IsVisible(this Pen? pen)
+    public static bool IsVisible([NotNullWhen(true)] this Pen? pen)
     {
         if (pen == null)
         {
