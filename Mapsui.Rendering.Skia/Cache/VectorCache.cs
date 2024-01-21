@@ -26,7 +26,7 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
     {
         var holder = _paintCache.GetOrCreateValue(param!, f =>
         {
-            var paint =toPaint(f, symbolCache);
+            var paint = toPaint(f, symbolCache);
             return paint != null ? new CacheHolder<object>(paint) : null;
         });
         
@@ -38,7 +38,7 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
     {
         var holder = _paintCache.GetOrCreateValue(param!, f =>
         {
-            var paint =toPath(f);
+            var paint = toPath(f);
             return paint != null ? new CacheHolder<object>(paint) : null;
         });
         
