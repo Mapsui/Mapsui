@@ -11,6 +11,7 @@ namespace Mapsui.Rendering;
 
 public static class VisibleFeatureIterator
 {
+    private static object _iterationLock = new();
     public static void IterateLayers(Viewport viewport, IEnumerable<ILayer> layers, long iteration,
         Action<Viewport, ILayer, IStyle, IFeature, float, long> callback)
     {
@@ -20,7 +21,10 @@ public static class VisibleFeatureIterator
             if (layer.MinVisible > viewport.Resolution) continue;
             if (layer.MaxVisible < viewport.Resolution) continue;
 
-            IterateLayer(viewport, layer, iteration, callback);
+            lock (_iterationLock)
+            {
+                IterateLayer(viewport, layer, iteration, callback);    
+            }
         }
     }
 
