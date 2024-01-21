@@ -138,7 +138,7 @@ public static class MarkerExtensions
         if (BitmapRegistry.Instance.TryGetBitmapId($"{MarkerKey}_{colorInHex}", out int bitmapId))
             return bitmapId;
 
-        var svg = markerImage.Replace("red", $"#{colorInHex}");
+        var svg = markerImage.Replace("#000000", $"#{colorInHex}");
 
         return BitmapRegistry.Instance.Register(svg, $"{MarkerKey}_{colorInHex}");
     }
