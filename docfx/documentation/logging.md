@@ -4,7 +4,7 @@ Sooner or later there comes a time where you are struggling with a bug. You can 
 ```csharp
 Mapsui.Logging.Logger.LogDelegate += (level, message, ex) =>
 {
-    Console.WriteLine(message); // <-- Put a break point here, most UI platforms do not show the console logging.
+    Console.WriteLine($"{message} {ex?.Message}"); // <-- Put a break point here, most UI platforms do not show the console logging.
     // todo: Forward to your own logger
 };
 ```
