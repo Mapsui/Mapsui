@@ -46,7 +46,7 @@ public class IndexedMemoryProvider : IProvider
             {
                 if (_index == null)
                 {
-                    var index = new STRtree<IFeature>();
+                    var index = new STRtree<IFeature>(Math.Max(Features.Count, 1));
                     foreach (var feature in Features)
                     {
                         var envelope = feature.Extent?.ToEnvelope();
