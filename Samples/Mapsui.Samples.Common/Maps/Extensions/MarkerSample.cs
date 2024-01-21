@@ -8,7 +8,7 @@ using Mapsui.Widgets.ScaleBar;
 using System;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Demo;
+namespace Mapsui.Samples.Common.Maps.Extensions;
 
 public class MarkerSample : ISample
 {
