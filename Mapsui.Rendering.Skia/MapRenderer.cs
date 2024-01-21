@@ -239,8 +239,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
                 for (var index = 0; index < mapInfoLayers.Count; index++)
                 {
-                    var currentIndex = mapInfoLayers.Count - index - 1; // for having copy of index for thread safe access and reverse order.
-                    var mapList = list[currentIndex] = new List<MapInfoRecord>();
+                    var mapList = list[index] = new List<MapInfoRecord>();
                     var infoLayer = mapInfoLayers[index];
                     if (infoLayer is ILayerFeatureInfo layerFeatureInfo)
                     {
@@ -261,7 +260,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                                 }
 
                                 // atomic replace of new list is thread safe.a
-                                list[currentIndex] = mapList;
+                                list[index] = mapList;
                             }
                             catch (Exception e)
                             {
@@ -301,7 +300,9 @@ public sealed class MapRenderer : IRenderer, IDisposable
                 }
             }
 
-            var mapInfos = list.SelectMany(f => f);
+            // The VisibleFeatureIterator is intended for drawing and puts the bottom features first. In the MapInfo request
+            // we want the top feature first. So, we reverse it here.
+            var mapInfos = list.SelectMany(f => f).Reverse();
             var task = Task.WhenAll(tasks);
             result = new MapInfo(result, mapInfos, task);
         }
