@@ -16,12 +16,11 @@ public static class GeometryCollectionRenderer
         IFeature feature,
         GeometryCollection collection,
         float opacity,
-        IVectorCache vectorCache)
+        IVectorCache<SKPath, SKPaint> vectorCache)
     {
         SKPath ToPath((GeometryCollection collection, IFeature feature, Viewport viewport, float lineWidth) valueTuple)
         {
-            var skRect = vectorCache.GetOrCreatePath(valueTuple.viewport, Extensions.ViewportExtensions.ToSkiaRect);
-            var result = collection.ToSkiaPath(valueTuple.viewport, skRect.Instance, valueTuple.lineWidth);
+            var result = collection.ToSkiaPath(valueTuple.viewport, valueTuple.viewport.ToSkiaRect(), valueTuple.lineWidth);
             return result;
         }
 

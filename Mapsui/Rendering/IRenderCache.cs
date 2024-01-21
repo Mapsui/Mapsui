@@ -5,8 +5,12 @@ namespace Mapsui.Rendering;
 
 public interface IRenderCache : ILabelCache, ISymbolCache, IVectorCache, ITileCache, IDisposable 
 {
-    IVectorCache? VectorCache { get; set; }
     ILabelCache LabelCache { get; set; }
     ISymbolCache SymbolCache { get; set; }
     ITileCache TileCache { get; set; }
+}
+
+public interface IRenderCache<TPath, TPaint> : IRenderCache, IVectorCache<TPath, TPaint>
+{
+    IVectorCache<TPath, TPaint> VectorCache { get; set; }
 }

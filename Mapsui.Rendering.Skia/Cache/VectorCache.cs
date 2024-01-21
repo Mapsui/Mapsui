@@ -4,45 +4,45 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVectorCache
+public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVectorCache<SKPath, SKPaint>
 {
-    private readonly LruCache<object, CacheHolder<object>> _paintCache = new(Math.Min(capacity, 1));
-    private readonly LruCache<object, CacheHolder<object>> _pathParamCache = new(Math.Min(capacity, 1));
+    private readonly LruCache<object, CacheHolder<SKPaint>> _paintCache = new(Math.Min(capacity, 1));
+    private readonly LruCache<object, CacheHolder<SKPath>> _pathParamCache = new(Math.Min(capacity, 1));
 
-    public CacheTracker<T> GetOrCreatePaint<T, TParam>(TParam param, Func<TParam, T> toPaint)
+    public CacheTracker<SKPaint> GetOrCreatePaint<TParam>(TParam param, Func<TParam, SKPaint> toPaint)
         where TParam : notnull
     {
         var holder = _paintCache.GetOrCreateValue(param, f =>
         {
             var paint = toPaint(f);
-            return paint != null ? new CacheHolder<object>(paint) : null;
+            return new CacheHolder<SKPaint>(paint);
         });
 
-        return holder?.Get<T>() ?? new CacheTracker<T>(toPaint(param));
+        return holder?.Get<SKPaint>() ?? new CacheTracker<SKPaint>(toPaint(param));
     }
 
-    public CacheTracker<T> GetOrCreatePaint<T, TParam>(TParam param, Func<TParam, ISymbolCache, T> toPaint)
+    public CacheTracker<SKPaint> GetOrCreatePaint<TParam>(TParam param, Func<TParam, ISymbolCache, SKPaint> toPaint)
         where TParam : notnull
     {
-        var holder = _paintCache.GetOrCreateValue(param!, f =>
+        var holder = _paintCache.GetOrCreateValue(param, f =>
         {
             var paint = toPaint(f, symbolCache);
-            return paint != null ? new CacheHolder<object>(paint) : null;
+            return new CacheHolder<SKPaint>(paint);
         });
         
-        return holder?.Get<T>() ?? new CacheTracker<T>(toPaint(param, symbolCache));
+        return holder?.Get<SKPaint>() ?? new CacheTracker<SKPaint>(toPaint(param, symbolCache));
     }
 
-    public CacheTracker<T> GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toPath)
+    public CacheTracker<SKPath> GetOrCreatePath<TParam>(TParam param, Func<TParam, SKPath> toPath)
         where TParam : notnull
     {
-        var holder = _paintCache.GetOrCreateValue(param!, f =>
+        var holder = _pathParamCache.GetOrCreateValue(param, f =>
         {
-            var paint = toPath(f);
-            return paint != null ? new CacheHolder<object>(paint) : null;
+            var path = toPath(f);
+            return new CacheHolder<SKPath>(path);
         });
         
-        return holder?.Get<T>() ?? new CacheTracker<T>(toPath(param));
+        return holder?.Get<SKPath>() ?? new CacheTracker<SKPath>(toPath(param));
     }
 
     public void Dispose()

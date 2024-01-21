@@ -7,9 +7,9 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class RenderCache : IRenderCache
+public sealed class RenderCache : IRenderCache<SKPath, SKPaint>
 {
-    private IVectorCache _vectorCache;
+    private IVectorCache<SKPath, SKPaint> _vectorCache;
 
     public RenderCache(int capacity = 10000)
     {
@@ -23,7 +23,7 @@ public sealed class RenderCache : IRenderCache
 
     public ISymbolCache SymbolCache { get; set; }
 
-    public IVectorCache VectorCache
+    public IVectorCache<SKPath,SKPaint> VectorCache
     {
         get => _vectorCache;
         set => _vectorCache = value ?? throw new NullReferenceException();
@@ -51,19 +51,19 @@ public sealed class RenderCache : IRenderCache
         return LabelCache.GetOrCreateLabel(text, style, opacity, createLabelAsBitmap);
     }
 
-    public CacheTracker<T> GetOrCreatePaint<T, TParam>(TParam param, Func<TParam, T> toPaint)
+    public CacheTracker<SKPaint> GetOrCreatePaint<TParam>(TParam param, Func<TParam, SKPaint> toPaint)
         where TParam : notnull
     {
         return VectorCache.GetOrCreatePaint(param, toPaint);
     }
 
-    public CacheTracker<T> GetOrCreatePaint<T, TParam>(TParam param, Func<TParam, ISymbolCache, T> toPaint)
+    public CacheTracker<SKPaint> GetOrCreatePaint<TParam>(TParam param, Func<TParam, ISymbolCache, SKPaint> toPaint)
         where TParam : notnull
     {
         return VectorCache.GetOrCreatePaint(param, toPaint);
     }
 
-    public CacheTracker<T> GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toSkRect)
+    public CacheTracker<SKPath> GetOrCreatePath<TParam>(TParam param, Func<TParam, SKPath> toSkRect)
         where TParam : notnull
     {
         return VectorCache.GetOrCreatePath(param, toSkRect);

@@ -16,21 +16,22 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
     public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
     {
+        var cache = (IRenderCache<SKPath, SKPaint>)renderCache;
         var symbolStyle = (SymbolStyle)style;
         switch (feature)
         {
             case PointFeature pointFeature:
-                DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, symbolStyle, renderCache);
+                DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, symbolStyle, cache);
                 break;
             case GeometryFeature geometryFeature:
                 switch (geometryFeature.Geometry)
                 {
                     case GeometryCollection collection:
                         foreach (var point in GetPoints(collection))
-                            DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache);
+                            DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, cache);
                         break;
                     case Point point:
-                        DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache);
+                        DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, cache);
                         break;
                 }
                 break;
@@ -54,7 +55,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderCache renderCache)
+    public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderCache<SKPath,SKPaint> renderCache)
     {
         if (symbolStyle.SymbolType == SymbolType.Image)
         {
@@ -142,7 +143,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IVectorCache vectorCache)
+    private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IVectorCache<SKPath, SKPaint> vectorCache)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 

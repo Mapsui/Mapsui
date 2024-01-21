@@ -25,11 +25,11 @@ namespace Mapsui.Rendering.Skia;
 
 public sealed class MapRenderer : IRenderer, IDisposable
 {
-    private readonly IRenderCache _renderCache;
+    private readonly IRenderCache<SKPath, SKPaint> _renderCache;
     private long _currentIteration;
     private readonly bool _ownsRenderCache;
 
-    public IRenderCache RenderCache => _renderCache;
+    public IRenderCache<SKPath,SKPaint> RenderCache => _renderCache;
 
     public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
 

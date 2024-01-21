@@ -11,7 +11,7 @@ public class LruCache<TKey, TValue>(int capacity)
 {
     private readonly Dictionary<TKey, (LinkedListNode<TKey> Node, TValue Value)> _cache = new(capacity);
     private readonly LinkedList<TKey> _list = new();
-    private readonly object _lock = new object();
+    private readonly object _lock = new();
 
     public void Put(TKey key, TValue value)
     {
