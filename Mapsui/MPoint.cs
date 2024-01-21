@@ -1,8 +1,11 @@
-﻿using System;
-using Mapsui.Utilities;
+﻿using Mapsui.Utilities;
+using System;
 
 namespace Mapsui;
 
+/// <summary>
+/// Class for a point in Mapsui
+/// </summary>
 public class MPoint : IEquatable<MPoint>
 {
     public MPoint() : this(0, 0) { }
@@ -13,6 +16,12 @@ public class MPoint : IEquatable<MPoint>
         Y = y;
     }
 
+    public MPoint((double x, double y) position)
+    {
+        X = position.x;
+        Y = position.y;
+    }
+
     public MPoint(MPoint point)
     {
         X = point.X;
@@ -21,6 +30,7 @@ public class MPoint : IEquatable<MPoint>
 
     public double X { get; set; }
     public double Y { get; set; }
+
     public MRect MRect => new MRect(X, Y, X, Y);
 
     public MPoint Copy()
@@ -28,6 +38,11 @@ public class MPoint : IEquatable<MPoint>
         return new MPoint(X, Y);
     }
 
+    /// <summary>
+    /// Calculate distance to a given point
+    /// </summary>
+    /// <param name="point">Point for calculating distance</param>
+    /// <returns>Distance between this and given point</returns>
     public double Distance(MPoint point)
     {
         return Algorithms.Distance(X, Y, point.X, point.Y);
@@ -49,13 +64,19 @@ public class MPoint : IEquatable<MPoint>
         }
     }
 
+    /// <summary>
+    /// Create a new MPoint with an offset (x, y) to the original one
+    /// </summary>
+    /// <param name="offsetX">Offset in X direction</param>
+    /// <param name="offsetY">Offset in Y direction</param>
+    /// <returns></returns>
     public MPoint Offset(double offsetX, double offsetY)
     {
         return new MPoint(X + offsetX, Y + offsetY);
     }
 
     /// <summary>
-    ///     Calculates a new point by rotating this point clockwise about the specified center point
+    /// Calculates a new point by rotating this point clockwise about the specified center point
     /// </summary>
     /// <param name="degrees">Angle to rotate clockwise (degrees)</param>
     /// <param name="centerX">X coordinate of point about which to rotate</param>
@@ -99,12 +120,12 @@ public class MPoint : IEquatable<MPoint>
         return Algorithms.RotateClockwiseDegrees(X, Y, degrees);
     }
 
+    public override string ToString() => $"(X={X},Y={Y})";
+
     public static MPoint operator +(MPoint point1, MPoint point2)
     {
         return new MPoint(point1.X + point2.X, point1.Y + point2.Y);
     }
-
-    public override string ToString() => $"(X={X},Y={Y})";
 
     public static MPoint operator -(MPoint point1, MPoint point2)
     {
