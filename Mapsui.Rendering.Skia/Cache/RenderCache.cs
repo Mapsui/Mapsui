@@ -52,16 +52,19 @@ public sealed class RenderCache : IRenderCache
     }
 
     public CacheTracker<T> GetOrCreatePaint<T, TParam>(TParam param, Func<TParam, T> toPaint)
+        where TParam : notnull
     {
         return VectorCache.GetOrCreatePaint(param, toPaint);
     }
 
     public CacheTracker<T> GetOrCreatePaint<T, TParam>(TParam param, Func<TParam, ISymbolCache, T> toPaint)
+        where TParam : notnull
     {
         return VectorCache.GetOrCreatePaint(param, toPaint);
     }
 
     public CacheTracker<T> GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toSkRect)
+        where TParam : notnull
     {
         return VectorCache.GetOrCreatePath(param, toSkRect);
     }
