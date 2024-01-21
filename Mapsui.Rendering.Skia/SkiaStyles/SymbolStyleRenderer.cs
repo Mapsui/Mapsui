@@ -208,12 +208,10 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return skPath;
     }
 
-    private static SKPaint? CreateLinePaint((Pen? outline, float opacity) valueTuple)
+    private static SKPaint CreateLinePaint((Pen outline, float opacity) valueTuple)
     {
         var outline = valueTuple.outline;
         var opacity = valueTuple.opacity;
-
-        if (outline is null) return null;
 
         return new SKPaint
         {
