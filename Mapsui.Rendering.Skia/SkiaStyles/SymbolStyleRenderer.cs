@@ -224,12 +224,10 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         };
     }
 
-    private static SKPaint? CreateFillPaint((Brush? fill, float opacity) valueTuple)
+    private static SKPaint CreateFillPaint((Brush fill, float opacity) valueTuple)
     {
         var fill = valueTuple.fill;
         var opacity = valueTuple.opacity;
-
-        if (fill is null) return null;
 
         return new SKPaint
         {
