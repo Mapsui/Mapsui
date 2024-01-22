@@ -1,44 +1,43 @@
-using System;
-using System.Diagnostics.CodeAnalysis;
-using Mapsui.Layers;
-using Mapsui.Nts;
+using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
-using ViewportExtensions = Mapsui.Rendering.Skia.Extensions.ViewportExtensions;
 
 namespace Mapsui.Rendering.Skia;
 
 public static class LineStringRenderer
 {
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
-    public static void Draw(SKCanvas canvas, Viewport viewport, ILayer layer, VectorStyle? vectorStyle,
-        IFeature feature, LineString lineString, float opacity, IVectorCache? vectorCache)
+    public static void Draw(SKCanvas canvas, Viewport viewport, VectorStyle? vectorStyle,
+        IFeature feature, LineString lineString, float opacity, IRenderCache<SKPath, SKPaint> renderCache)
     {
         if (vectorStyle == null)
             return;
+        
+        SKPath ToPath((long featureId, MRect extent, double rotation, float lineWidth) valueTuple)
+        {
+            var result = lineString.ToSkiaPath(viewport, viewport.ToSkiaRect(), valueTuple.lineWidth);
+            _ = result.Bounds;
+            _ = result.TightBounds;
+            return result;
+        }
 
-        SKPaint? paint;
-        SKPath path;
+        var extent = viewport.ToExtent();
+        var rotation = viewport.Rotation;
         var lineWidth = (float)(vectorStyle.Line?.Width ?? 1f);
-        if (vectorCache == null)
+        if (vectorStyle.Line.IsVisible())
         {
-            paint = CreateSkPaint(vectorStyle.Line, opacity);
-            path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds, lineWidth);
+            using var paint = renderCache.GetOrCreatePaint((vectorStyle.Line, opacity), CreateSkPaint);
+            using var path = renderCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth),ToPath);
+            canvas.DrawPath(path, paint);
         }
-        else
-        {
-            paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
-            path = vectorCache.GetOrCreatePath(viewport, feature, lineString, lineWidth,
-                (geometry, vp, _) => geometry.ToSkiaPath(vp, vp.ToSkiaRect(), lineWidth));
-        }
-
-        canvas.DrawPath(path, paint);
     }
 
-    private static SKPaint CreateSkPaint(Pen? pen, float opacity)
+    private static SKPaint CreateSkPaint((Pen? pen, float opacity) valueTuple)
     {
+        var pen = valueTuple.pen;
+        var opacity = valueTuple.opacity;
+
         float lineWidth = 1;
         var lineColor = new Color();
 
