@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Mapsui.Logging;
 
 namespace Mapsui.Extensions;
 
@@ -22,10 +23,18 @@ public static class FeatureExtensions
         {
             return registeredCopy(feature);
         }
-        
-        // Fall Back if Type is not registered
-        var type = feature.GetType();
-        return (IFeature)Activator.CreateInstance(type, feature)!;
+
+        try
+        {
+            // Fall Back if Type is not registered
+            var type = feature.GetType();
+            return (IFeature)Activator.CreateInstance(type, feature)!;
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+            throw new NotSupportedException($"Register {feature.GetType().Name} so that it works in AOT Mode");
+        }
     }
 
     public static T Copy<T>(this T original, Func<T, T>? copy = null) where T : IFeature
