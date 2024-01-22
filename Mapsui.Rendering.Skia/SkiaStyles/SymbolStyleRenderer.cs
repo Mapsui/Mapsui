@@ -8,6 +8,7 @@ using NetTopologySuite.Geometries;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -15,21 +16,22 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
     public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
     {
+        var cache = (IRenderCache<SKPath, SKPaint>)renderCache;
         var symbolStyle = (SymbolStyle)style;
         switch (feature)
         {
             case PointFeature pointFeature:
-                DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, symbolStyle, renderCache);
+                DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, symbolStyle, cache);
                 break;
             case GeometryFeature geometryFeature:
                 switch (geometryFeature.Geometry)
                 {
                     case GeometryCollection collection:
                         foreach (var point in GetPoints(collection))
-                            DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache);
+                            DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, cache);
                         break;
                     case Point point:
-                        DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache);
+                        DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, cache);
                         break;
                 }
                 break;
@@ -53,7 +55,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderCache renderCache)
+    public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderCache<SKPath,SKPaint> renderCache)
     {
         if (symbolStyle.SymbolType == SymbolType.Image)
         {
@@ -141,7 +143,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IVectorCache vectorCache)
+    private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IVectorCache<SKPath, SKPaint> vectorCache)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
@@ -163,12 +165,18 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             canvas.RotateDegrees((float)rotation);
         }
 
-        var linePaint = vectorCache.GetOrCreatePaint(symbolStyle.Outline, opacity, CreateLinePaint);
-        var fillPaint = vectorCache.GetOrCreatePaint(symbolStyle.Fill, opacity, CreateFillPaint);
-        var path = vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath);
+        using var path = vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath);
+        if (symbolStyle.Fill.IsVisible())
+        {
+            using var fillPaint = vectorCache.GetOrCreatePaint((symbolStyle.Fill!, opacity), CreateFillPaint);
+            canvas.DrawPath(path, fillPaint);
+        }
 
-        if (fillPaint != null && fillPaint.Color.Alpha != 0) canvas.DrawPath(path, fillPaint);
-        if (linePaint != null && linePaint.Color.Alpha != 0) canvas.DrawPath(path, linePaint);
+        if (symbolStyle.Outline.IsVisible())
+        {
+            using var linePaint = vectorCache.GetOrCreatePaint((symbolStyle.Outline!, opacity), CreateLinePaint);
+            canvas.DrawPath(path, linePaint);
+        }
 
         canvas.Restore();
 
@@ -200,9 +208,10 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return skPath;
     }
 
-    private static SKPaint? CreateLinePaint(Pen? outline, float opacity)
+    private static SKPaint CreateLinePaint((Pen outline, float opacity) valueTuple)
     {
-        if (outline is null) return null;
+        var outline = valueTuple.outline;
+        var opacity = valueTuple.opacity;
 
         return new SKPaint
         {
@@ -215,9 +224,10 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         };
     }
 
-    private static SKPaint? CreateFillPaint(Brush? fill, float opacity)
+    private static SKPaint CreateFillPaint((Brush fill, float opacity) valueTuple)
     {
-        if (fill is null) return null;
+        var fill = valueTuple.fill;
+        var opacity = valueTuple.opacity;
 
         return new SKPaint
         {
