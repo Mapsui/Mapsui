@@ -81,4 +81,21 @@ public static class FeatureExtensions
         }
         return result;
     }
+
+    /// <summary>
+    /// Get an information from this feature in the right class
+    /// </summary>
+    /// <typeparam name="T">Class to convert to</typeparam>
+    /// <param name="feature">Feature to use</param>
+    /// <param name="key">Key for entry in informations</param>
+    /// <returns>Information content as object of type T</returns>
+    public static T? Get<T>(this IFeature feature, string key) where T : class
+    {
+        var result = feature[key];
+
+        if (result == null)
+            return null;
+
+        return (T)result;
+    }
 }
