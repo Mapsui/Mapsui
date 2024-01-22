@@ -1,61 +1,61 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
-    <!--Windows does not work because of this https://github.com/dotnet/maui/issues/6529-->
-	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks)</TargetFrameworks>
-    <UseMaui>true</UseMaui>
-    <SingleProject>true</SingleProject>
-    <DefineConstants>__MAUI__</DefineConstants>
-    <NoWarn>NU1703</NoWarn>
-    <PackageId>Mapsui.Maui</PackageId>
-    <Description>Mapsui.Maui - Library for mapping for Maui</Description>
-    <PackageTags>$(PackageTags) maui</PackageTags>
+	<PropertyGroup>
+		<TargetFrameworks>net7.0</TargetFrameworks>
+		<!--Windows does not work because of this https://github.com/dotnet/maui/issues/6529-->
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks)</TargetFrameworks>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<DefineConstants>__MAUI__</DefineConstants>
+		<NoWarn>NU1703</NoWarn>
+		<PackageId>Mapsui.Maui</PackageId>
+		<Description>Mapsui.Maui - Library for mapping for Maui</Description>
+		<PackageTags>$(PackageTags) maui</PackageTags>
 		<IsPackable>true</IsPackable>
-  </PropertyGroup>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="EventArgs\**" />
-    <Compile Remove="Extensions\**" />
-    <Compile Remove="Images\**" />
-    <Compile Remove="Objects\**" />
-    <EmbeddedResource Remove="EventArgs\**" />
-    <EmbeddedResource Remove="Extensions\**" />
-    <EmbeddedResource Remove="Images\**" />
-    <EmbeddedResource Remove="Objects\**" />
-    <MauiCss Remove="EventArgs\**" />
-    <MauiCss Remove="Extensions\**" />
-    <MauiCss Remove="Images\**" />
-    <MauiCss Remove="Objects\**" />
-    <MauiXaml Remove="EventArgs\**" />
-    <MauiXaml Remove="Extensions\**" />
-    <MauiXaml Remove="Images\**" />
-    <MauiXaml Remove="Objects\**" />
-    <None Remove="EventArgs\**" />
-    <None Remove="Extensions\**" />
-    <None Remove="Images\**" />
-    <None Remove="Objects\**" />
-  </ItemGroup>
-	
-  <ItemGroup>
-    <Compile Include="..\Mapsui.UI.Forms\MapControl.cs" Link="MapControl.cs" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="SkiaSharp" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="EventArgs\**" />
+		<Compile Remove="Extensions\**" />
+		<Compile Remove="Images\**" />
+		<Compile Remove="Objects\**" />
+		<EmbeddedResource Remove="EventArgs\**" />
+		<EmbeddedResource Remove="Extensions\**" />
+		<EmbeddedResource Remove="Images\**" />
+		<EmbeddedResource Remove="Objects\**" />
+		<MauiCss Remove="EventArgs\**" />
+		<MauiCss Remove="Extensions\**" />
+		<MauiCss Remove="Images\**" />
+		<MauiCss Remove="Objects\**" />
+		<MauiXaml Remove="EventArgs\**" />
+		<MauiXaml Remove="Extensions\**" />
+		<MauiXaml Remove="Images\**" />
+		<MauiXaml Remove="Objects\**" />
+		<None Remove="EventArgs\**" />
+		<None Remove="Extensions\**" />
+		<None Remove="Images\**" />
+		<None Remove="Objects\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Mapsui.Nts\Mapsui.Nts.csproj" />
-    <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
-    <ProjectReference Include="..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
-    <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Include="..\Mapsui.UI.Forms\MapControl.cs" Link="MapControl.cs" />
+	</ItemGroup>
 
-  <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
+	<ItemGroup>
+		<PackageReference Include="SkiaSharp" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" />
+	</ItemGroup>
 
-  <Import Project="..\Mapsui.UI.MapView\Mapsui.UI.MapView.projitems" Label="Shared" />
+	<ItemGroup>
+		<ProjectReference Include="..\Mapsui.Nts\Mapsui.Nts.csproj" />
+		<ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
+		<ProjectReference Include="..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
+		<ProjectReference Include="..\Mapsui\Mapsui.csproj" />
+	</ItemGroup>
+
+	<Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
+
+	<Import Project="..\Mapsui.UI.MapView\Mapsui.UI.MapView.projitems" Label="Shared" />
 
 </Project>
