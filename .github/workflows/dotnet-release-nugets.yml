@@ -37,7 +37,13 @@ jobs:
          dotnet-version: |
            7.0.x
          include-prerelease: false
-      
+
+    # Android SDK Install
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v3
+      with:
+        cmdline-tools-version: '8512546'
+
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v1.1
       with:
