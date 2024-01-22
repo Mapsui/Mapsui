@@ -6,61 +6,58 @@ using Mapsui.Extensions;
 namespace Mapsui.Cache;
 
 /// <summary>/// LRU Cache with disposing of disposable values. </summary>
-public class LruCache<TKey, TValue>
+public class LruCache<TKey, TValue>(int capacity)
     where TKey : notnull
 {
-    private readonly int _capacity;
-    private readonly Dictionary<TKey, (LinkedListNode<TKey> Node, TValue Value)> _cache;
-    private readonly LinkedList<TKey> _list;
-    private readonly object _lock = new object();
-
-    public LruCache(int capacity)
-    {
-        _capacity = capacity;
-        _cache = new(capacity);
-        _list = new LinkedList<TKey>();
-    }
+    private readonly Dictionary<TKey, (LinkedListNode<TKey> Node, TValue Value)> _cache = new(capacity);
+    private readonly LinkedList<TKey> _list = new();
+    private readonly object _lock = new();
 
     public void Put(TKey key, TValue value)
     {
         lock (_lock)
         {
-            if (_cache.ContainsKey(key)) // Key already exists.
+            InternalPut(key, value);
+        }
+    }
+
+    private void InternalPut(TKey key, TValue value)
+    {
+        if (_cache.ContainsKey(key)) // Key already exists.
+        {
+            var node = _cache[key];
+            // dispose disposable values
+            if (node.Value is IDisposable disposable)
             {
-                var node = _cache[key];
-                // dispose disposable values
-                if (node.Value is IDisposable disposable)
+#pragma warning disable IDISP007 // Don't dispose injected                    
+                disposable.Dispose();
+#pragma warning restore IDISP007                    
+            }
+
+            _list.Remove(node.Node);
+            _list.AddFirst(node.Node);
+
+            _cache[key] = (node.Node, value);
+        }
+        else
+        {
+            if (_cache.Count >= capacity) // Cache full.
+            {
+                var removeKey = _list.Last!.Value;
+                _cache.TryGetValue(removeKey, out var old);
+                if (old.Value is IDisposable disposable)
                 {
 #pragma warning disable IDISP007 // Don't dispose injected                    
                     disposable.Dispose();
-#pragma warning restore IDISP007                    
-                }
-
-                _list.Remove(node.Node);
-                _list.AddFirst(node.Node);
-
-                _cache[key] = (node.Node, value);
-            }
-            else
-            {
-                if (_cache.Count >= _capacity) // Cache full.
-                {
-                    var removeKey = _list.Last!.Value;
-                    _cache.TryGetValue(removeKey, out var old);
-                    if (old.Value is IDisposable disposable)
-                    {
-#pragma warning disable IDISP007 // Don't dispose injected                    
-                        disposable.Dispose();
 #pragma warning restore IDISP007
-                    }
-
-                    _cache.Remove(removeKey);
-                    _list.RemoveLast();
                 }
 
-                // add cache
-                _cache.Add(key, (_list.AddFirst(key), value));
+                _cache.Remove(removeKey);
+                _list.RemoveLast();
             }
+
+            // add cache
+            _cache.Add(key, (_list.AddFirst(key), value));
         }
     }
 
@@ -81,24 +78,44 @@ public class LruCache<TKey, TValue>
         }
     }
 
+    public TResult? GetOrCreateValue<TParam, TResult>(TParam key, Func<TParam, TResult> func)
+        where TParam : TKey
+        where TResult : TValue
+    {
+        lock (_lock)
+        {
+            if (!InternalTryGetValue(key, out var value))
+            {
+                value = func(key);
+                InternalPut(key, value);
+            }
+
+            return (TResult?)value;
+        }
+    }
+
     public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value)
     {
         lock (_lock)
         {
-
-            if (!_cache.ContainsKey(key))
-            {
-                value = default;
-                return false;
-            }
-
-            var node = _cache[key];
-            _list.Remove(node.Node);
-            _list.AddFirst(node.Node);
-
-            value = node.Value;
-            return true;
+            return InternalTryGetValue(key, out value);
         }
+    }
+
+    private bool InternalTryGetValue(TKey key, out TValue? value)
+    {
+        if (!_cache.ContainsKey(key))
+        {
+            value = default;
+            return false;
+        }
+
+        var node = _cache[key];
+        _list.Remove(node.Node);
+        _list.AddFirst(node.Node);
+
+        value = node.Value;
+        return true;
     }
 
     [MaybeNull]

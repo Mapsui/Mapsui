@@ -25,7 +25,7 @@ namespace Mapsui.Rendering.Skia;
 
 public sealed class MapRenderer : IRenderer, IDisposable
 {
-    private readonly IRenderCache _renderCache;
+    private readonly IRenderCache<SKPath, SKPaint> _renderCache;
     private long _currentIteration;
     private readonly bool _ownsRenderCache;
 
@@ -46,7 +46,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public MapRenderer(IRenderCache renderer)
     {
-        _renderCache = renderer;
+        _renderCache = (IRenderCache<SKPath, SKPaint>)renderer;
         StyleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
         StyleRenderers[typeof(VectorStyle)] = new VectorStyleRenderer();
         StyleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
@@ -163,7 +163,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         {
             layers = layers.ToList();
 
-            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => { RenderFeature(canvas, v, l, s, f, o, i); });
+            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => { RenderFeature(canvas, v, l, s, f, o, i); });    
 
             _currentIteration++;
         }
