@@ -46,14 +46,15 @@ public class IndexedMemoryProvider : IProvider
             {
                 if (_index == null)
                 {
-                    _index = new();
+                    var index = new STRtree<IFeature>(Math.Max(Features.Count, 1));
                     foreach (var feature in Features)
                     {
                         var envelope = feature.Extent?.ToEnvelope();
-                        _index.Insert(envelope, feature);
+                        index.Insert(envelope, feature);
                     }
 
                     _itemsIndexed = Features.Count;
+                    _index = index;
                 }
             }
         }
