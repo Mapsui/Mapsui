@@ -30,12 +30,12 @@ jobs:
       uses: NuGet/setup-nuget@v1.1.1      
       with:
         nuget-version: latest    
-    # .Net 7 update     
-    - name: Setup .NET 7 SDK
+    # .Net 8 update     
+    - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
+           8.0.x
          include-prerelease: false
     # Android SDK Install
     - name: Set up Android SDK
@@ -87,12 +87,12 @@ jobs:
       uses: NuGet/setup-nuget@v1.1.1      
       with:
         nuget-version: latest
-    # .Net 7 update     
-    - name: Setup .NET 7 SDK
+    # .Net 8 update     
+    - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
+           8.0.x
          include-prerelease: false
     - name: Setup Xcode version 14.2
       uses: maxim-lobanov/setup-xcode@v1.5.1
@@ -153,12 +153,12 @@ jobs:
          dotnet-version: |
            6.0.x
          include-prerelease: false
-    # .Net 7 update     
-    - name: Setup .NET 7 SDK
+    # .Net 8 update     
+    - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
+           8.0.x
          include-prerelease: false
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
@@ -230,12 +230,12 @@ jobs:
         key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
             ${{ runner.os }}-nuget15-
-    # .Net 7 update     
-    - name: Setup .NET 7 SDK
+    # .Net 8 update     
+    - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           7.0.x
+           8.0.x
          include-prerelease: false
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.1.1
