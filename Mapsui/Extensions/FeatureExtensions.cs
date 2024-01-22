@@ -89,12 +89,12 @@ public static class FeatureExtensions
     /// <param name="feature">Feature to use</param>
     /// <param name="key">Key for entry in informations</param>
     /// <returns>Information content as object of type T</returns>
-    public static T? Get<T>(this IFeature feature, string key) where T : class
+    public static T? Get<T>(this IFeature feature, string key)
     {
         var result = feature[key];
 
         if (result == null)
-            return null;
+            return default(T);
 
         return (T)result;
     }
