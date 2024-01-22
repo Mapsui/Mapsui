@@ -2,13 +2,13 @@
 using Mapsui.Styles;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mapsui.Extensions;
 
+/// <summary>
+/// Extensions for MemoryLayer
+/// </summary>
 public static class MemoryLayerExtensions
 {
     /// <summary>
@@ -18,15 +18,16 @@ public static class MemoryLayerExtensions
     /// <param name="x">X position</param>
     /// <param name="y">Y position</param>
     /// <param name="color">Color of marker</param>
+    /// <param name="opacity">Opacity of marker</param>
     /// <param name="scale">Scale of marker</param>
     /// <param name="title">Title for callout</param>
     /// <param name="subtitle">Subtitle for callout</param>
     /// <param name="touched">Action called when marker is touched</param>
-    public static MemoryLayer AddMarker(this MemoryLayer layer, double x, double y, Color? color = null, double scale = 1.0, string? title = null, string? subtitle = null, Action<ILayer, IFeature, MapInfoEventArgs>? touched = null)
+    public static MemoryLayer AddMarker(this MemoryLayer layer, double x, double y, Color? color = null, double opacity = 1.0, double scale = 1.0, string? title = null, string? subtitle = null, Action<ILayer, IFeature, MapInfoEventArgs>? touched = null)
     {
         var marker = new PointFeature(x, y);
 
-        marker.InitMarker(color, scale, title, subtitle, touched);
+        marker.InitMarker(color, opacity, scale, title, subtitle, touched);
 
         ((ConcurrentBag<IFeature>)layer.Features).Add(marker);
 
@@ -40,13 +41,14 @@ public static class MemoryLayerExtensions
     /// <param name="x">X position</param>
     /// <param name="y">Y position</param>
     /// <param name="color">Color of marker</param>
+    /// <param name="opacity">Opacity of marker</param>
     /// <param name="scale">Scale of marker</param>
     /// <param name="title">Title for callout</param>
     /// <param name="subtitle">Subtitle for callout</param>
     /// <param name="touched">Action called when marker is touched</param>
-    public static MemoryLayer AddMarker(this MemoryLayer layer, (double x, double y) position, Color? color = null, double scale = 1.0, string? title = null, string? subtitle = null, Action<ILayer, IFeature, MapInfoEventArgs>? touched = null)
+    public static MemoryLayer AddMarker(this MemoryLayer layer, (double x, double y) position, Color? color = null, double opacity = 1.0, double scale = 1.0, string? title = null, string? subtitle = null, Action<ILayer, IFeature, MapInfoEventArgs>? touched = null)
     {
-        return AddMarker(layer, position.x, position.y, color, scale, title, subtitle, touched);
+        return AddMarker(layer, position.x, position.y, color, opacity, scale, title, subtitle, touched);
     }
 
     /// <summary>
@@ -55,13 +57,14 @@ public static class MemoryLayerExtensions
     /// <param name="layer">Layer to use</param>
     /// <param name="position">Point for position</param>
     /// <param name="color">Color of marker</param>
+    /// <param name="opacity">Opacity of marker</param>
     /// <param name="scale">Scale of marker</param>
     /// <param name="title">Title for callout</param>
     /// <param name="subtitle">Subtitle for callout</param>
     /// <param name="touched">Action called when marker is touched</param>
-    public static MemoryLayer AddMarker(this MemoryLayer layer, MPoint position, Color? color = null, double scale = 1.0, string? title = null, string? subtitle = null, Action<ILayer, IFeature, MapInfoEventArgs>? touched = null)
+    public static MemoryLayer AddMarker(this MemoryLayer layer, MPoint position, Color? color = null, double opacity = 1.0, double scale = 1.0, string? title = null, string? subtitle = null, Action<ILayer, IFeature, MapInfoEventArgs>? touched = null)
     {
-        return AddMarker(layer, position.X, position.Y, color, scale, title, subtitle, touched);
+        return AddMarker(layer, position.X, position.Y, color, opacity, scale, title, subtitle, touched);
     }
 
     /// <summary>
