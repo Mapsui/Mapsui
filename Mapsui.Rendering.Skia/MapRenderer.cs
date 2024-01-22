@@ -31,7 +31,7 @@ namespace Mapsui.Rendering.Skia;
 
 public sealed class MapRenderer : IRenderer, IDisposable
 {
-    private readonly DisposableWrapper<IRenderCache> _renderCache;
+    private readonly DisposableWrapper<IRenderCache<SKPath, SKPaint>> _renderCache;
     private long _currentIteration;
 
     public IRenderCache RenderCache => _renderCache.WrappedObject;
@@ -51,7 +51,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public MapRenderer(IRenderCache renderer)
     {
-        _renderCache = new DisposableWrapper<IRenderCache>(renderer, false);
+        _renderCache = new DisposableWrapper<IRenderCache<SKPath, SKPaint>>((IRenderCache<SKPath, SKPaint>)renderer, false);
         InitRenderer();
     }
 
@@ -74,7 +74,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public MapRenderer()
     {
-        _renderCache = new DisposableWrapper<IRenderCache>(new RenderCache(), true);
+        _renderCache = new DisposableWrapper<IRenderCache<SKPath, SKPaint>>(new RenderCache(), true);
         InitRenderer();
     }
 
@@ -174,7 +174,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         {
             layers = layers.ToList();
 
-            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => { RenderFeature(canvas, v, l, s, f, o, i); });
+            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => { RenderFeature(canvas, v, l, s, f, o, i); });    
 
             _currentIteration++;
         }

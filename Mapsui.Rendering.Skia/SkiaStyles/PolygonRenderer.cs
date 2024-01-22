@@ -1,4 +1,8 @@
 ﻿using System;
+using System.IO;
+using System.Security.Authentication.ExtendedProtection;
+using System.Threading;
+using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -14,26 +18,36 @@ internal static class PolygonRenderer
     private const float _scale = 10.0f;
 
     public static void Draw(SKCanvas canvas, Viewport viewport, VectorStyle vectorStyle, IFeature feature,
-        Polygon polygon, float opacity, IVectorCache vectorCache)
+        Polygon polygon, float opacity, IVectorCache<SKPath, SKPaint> vectorCache)
     {
+        SKPath ToPath((long featureId, MRect extent, double rotation, float lineWidth) valueTuple)
+        {
+            var result = polygon.ToSkiaPath(viewport, viewport.ToSkiaRect(), valueTuple.lineWidth);
+            return result;
+        }
+
         if (vectorStyle == null)
             return;
 
-
-        var paint = vectorCache.GetOrCreatePaint(vectorStyle.Outline, opacity, CreateSkPaint);
-        var fillPaint = vectorCache.GetOrCreatePaint(vectorStyle.Fill, opacity, viewport.Rotation, CreateSkPaint);
-
+        var extent = viewport.ToExtent();
+        var rotation = viewport.Rotation;
         float lineWidth = (float)(vectorStyle.Outline?.Width ?? 1);
-        var path = vectorCache.GetOrCreatePath(viewport, feature, polygon, lineWidth, (polygon, viewport, lineWidth) =>
+        
+        using var path = vectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth), ToPath);
+        if (vectorStyle.Fill.IsVisible())
         {
-            var skRect = vectorCache.GetOrCreatePath(viewport, ViewportExtensions.ToSkiaRect);
-            return polygon.ToSkiaPath(viewport, skRect, lineWidth);
-        });
+            using var fillPaint = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), CreateSkPaint);
+            DrawPath(canvas, vectorStyle, path, fillPaint);
+        }
 
-        DrawPath(canvas, vectorStyle, path, fillPaint, paint);
+        if (vectorStyle.Outline.IsVisible())
+        {
+            using var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), CreateSkPaint);
+            canvas.DrawPath(path, paint);
+        }
     }
 
-    internal static void DrawPath(SKCanvas canvas, VectorStyle vectorStyle, SKPath path, SKPaint? paintFill, SKPaint? paint)
+    internal static void DrawPath(SKCanvas canvas, VectorStyle vectorStyle, CacheTracker<SKPath> path, CacheTracker<SKPaint> paintFill)
     {
         if (vectorStyle?.Fill?.FillStyle == FillStyle.Solid)
         {
@@ -44,24 +58,23 @@ internal static class PolygonRenderer
             // Do this, because if not, path isn't filled complete
             using (new SKAutoCanvasRestore(canvas))
             {
-                canvas.ClipPath(path);
-                var bounds = path.Bounds;
+                var skPath = path.Instance;
+                canvas.ClipPath(skPath);
+                var bounds = skPath.Bounds;
                 // Make sure, that the brush starts with the correct position
-                var inflate = ((int)path.Bounds.Width * 0.3f / _scale) * _scale;
+                var inflate = ((int)skPath.Bounds.Width * 0.3f / _scale) * _scale;
                 bounds.Inflate(inflate, inflate);
                 // Draw rect with bigger size, which is clipped by path
                 canvas.DrawRect(bounds, paintFill);
             }
         }
-
-        if (vectorStyle?.Outline != null)
-        {
-            canvas.DrawPath(path, paint);
-        }
     }
 
-    internal static SKPaint CreateSkPaint(Brush? brush, float opacity, double rotation, ISymbolCache? symbolCache)
+    internal static SKPaint CreateSkPaint((Brush? brush, float opacity, double rotation) valueTuple, ISymbolCache? symbolCache)
     {
+        var brush = valueTuple.brush;
+        var opacity = valueTuple.opacity;
+        var rotation = valueTuple.rotation;
         var fillColor = Color.Gray; // default
 
         var paintFill = new SKPaint { IsAntialias = true };
@@ -154,8 +167,10 @@ internal static class PolygonRenderer
         return paintFill;
     }
 
-    internal static SKPaint CreateSkPaint(Pen? pen, float opacity)
+    internal static SKPaint CreateSkPaint((Pen? pen, float opacity) valueTuple)
     {
+        var pen = valueTuple.pen;
+        var opacity = valueTuple.opacity;
         float lineWidth = 1;
         var lineColor = Color.Black; // default
         var strokeCap = PenStrokeCap.Butt; // default
