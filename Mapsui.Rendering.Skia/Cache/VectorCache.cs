@@ -1,94 +1,53 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using Mapsui.Cache;
-using Mapsui.Extensions;
-using Mapsui.Styles;
+using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class VectorCache : IVectorCache
+public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVectorCache<SKPath, SKPaint>
 {
-    private readonly ConcurrentDictionary<(object? Pen, float Opacity), object> _paintCache = new();
-    private readonly ConcurrentDictionary<(Brush? Brush, float Opacity, double rotation), object> _fillCache = new();
-    private readonly LruCache<object, object> _pathParamCache;
-    private readonly LruCache<(MRect? Rect, double Resolution, object Geometry, float lineWidth), object> _pathCache;
-    private readonly ISymbolCache _symbolCache;
+    private readonly LruCache<object, CacheHolder<SKPaint>> _paintCache = new(Math.Min(capacity, 1));
+    private readonly LruCache<object, CacheHolder<SKPath>> _pathParamCache = new(Math.Min(capacity, 1));
 
-    public VectorCache(ISymbolCache symbolCache, int capacity)
+    public CacheTracker<SKPaint> GetOrCreatePaint<TParam>(TParam param, Func<TParam, SKPaint> toPaint)
+        where TParam : notnull
     {
-        _pathParamCache = new(Math.Min(capacity, 1));
-        _pathCache = new(Math.Max(capacity, 1));
-        _symbolCache = symbolCache;
+        var holder = _paintCache.GetOrCreateValue(param, f =>
+        {
+            var paint = toPaint(f);
+            return new CacheHolder<SKPaint>(paint);
+        });
+
+        return holder?.Get<SKPaint>() ?? new CacheTracker<SKPaint>(toPaint(param));
     }
 
-    public T? GetOrCreatePaint<T, TPen>(TPen? pen, float opacity, Func<TPen?, float, T> toPaint) where T : class?
+    public CacheTracker<SKPaint> GetOrCreatePaint<TParam>(TParam param, Func<TParam, ISymbolCache, SKPaint> toPaint)
+        where TParam : notnull
     {
-        var key = (pen, opacity);
-        if (!_paintCache.TryGetValue(key, out var paint))
+        var holder = _paintCache.GetOrCreateValue(param, f =>
         {
-            paint = toPaint(pen, opacity);
-            _paintCache[key] = paint!;
-        }
-
-        return (T?)paint;
+            var paint = toPaint(f, symbolCache);
+            return new CacheHolder<SKPaint>(paint);
+        });
+        
+        return holder?.Get<SKPaint>() ?? new CacheTracker<SKPaint>(toPaint(param, symbolCache));
     }
 
-    public T? GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint) where T : class?
+    public CacheTracker<SKPath> GetOrCreatePath<TParam>(TParam param, Func<TParam, SKPath> toPath)
+        where TParam : notnull
     {
-        var key = (pen: brush, opacity, rotation);
-        if (!_fillCache.TryGetValue(key, out var paint))
+        var holder = _pathParamCache.GetOrCreateValue(param, f =>
         {
-            paint = toPaint(brush, opacity, rotation, _symbolCache);
-            _fillCache[key] = paint!;
-        }
-
-        return (T?)paint;
-    }
-
-    public T GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toSkRect)
-    {
-        if (!_pathParamCache.TryGetValue(param!, out var rect))
-        {
-            rect = toSkRect(param);
-            _pathParamCache[param!] = rect!;
-        }
-
-        return (T)rect!;
-    }
-
-    public TPath GetOrCreatePath<TPath, TFeature, TGeometry>(
-        Viewport viewport,
-        TFeature feature,
-        TGeometry geometry,
-        float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath)
-        where TPath : class
-        where TGeometry : class
-        where TFeature : class, IFeature
-    {
-        var key = (viewport.ToExtent(), viewport.Rotation, feature.Id, lineWidth);
-        if (!_pathCache.TryGetValue(key, out var path))
-        {
-            path = toPath(geometry, viewport, lineWidth);
-            _pathCache[key] = path;
-        }
-
-        return (TPath)path;
+            var path = toPath(f);
+            return new CacheHolder<SKPath>(path);
+        });
+        
+        return holder?.Get<SKPath>() ?? new CacheTracker<SKPath>(toPath(param));
     }
 
     public void Dispose()
     {
         _pathParamCache.Clear();
-        _pathCache.Clear();
-        foreach (var value in _fillCache.Values)
-        {
-            value.DisposeIfDisposable();
-        }
-        _fillCache.Clear();
-
-        foreach (var value in _paintCache.Values)
-        {
-            value.DisposeIfDisposable();
-        }
-        _pathCache.Clear();
+        _paintCache.Clear();
     }
 }

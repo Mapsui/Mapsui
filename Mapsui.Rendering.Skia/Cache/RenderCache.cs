@@ -1,19 +1,20 @@
 ﻿using System;
 using Mapsui.Extensions;
 using Mapsui.Styles;
+using SkiaSharp;
 
 #pragma warning disable IDISP008 // Don't assign member with injected and created disposables
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class RenderCache : IRenderCache
+public sealed class RenderCache : IRenderCache<SKPath, SKPaint>
 {
-    private IVectorCache? _vectorCache;
+    private IVectorCache<SKPath, SKPaint> _vectorCache;
 
     public RenderCache(int capacity = 10000)
     {
         SymbolCache = new SymbolCache();
-        VectorCache = new VectorCache(SymbolCache, capacity);
+        _vectorCache = new VectorCache(SymbolCache, capacity);
         TileCache = new TileCache();
         LabelCache = new LabelCache();
     }
@@ -22,13 +23,19 @@ public sealed class RenderCache : IRenderCache
 
     public ISymbolCache SymbolCache { get; set; }
 
-    public IVectorCache? VectorCache
+    public IVectorCache<SKPath,SKPaint> VectorCache
     {
         get => _vectorCache;
-        set => _vectorCache = value;
+        set => _vectorCache = value ?? throw new NullReferenceException();
     }
 
     public ITileCache TileCache { get; set; }
+    
+    IVectorCache IRenderCache.VectorCache
+    {
+        get => VectorCache;
+        set => VectorCache = (IVectorCache<SKPath, SKPaint>)value;
+    }
 
     public Size? GetSize(int bitmapId)
     {
@@ -50,31 +57,22 @@ public sealed class RenderCache : IRenderCache
         return LabelCache.GetOrCreateLabel(text, style, opacity, createLabelAsBitmap);
     }
 
-    public T? GetOrCreatePaint<T, TPen>(TPen? pen, float opacity, Func<TPen?, float, T> toPaint) where T : class?
+    public CacheTracker<SKPaint> GetOrCreatePaint<TParam>(TParam param, Func<TParam, SKPaint> toPaint)
+        where TParam : notnull
     {
-        return VectorCache == null ? toPaint(pen, opacity) : VectorCache.GetOrCreatePaint(pen, opacity, toPaint);
+        return VectorCache.GetOrCreatePaint(param, toPaint);
     }
 
-    public T? GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint) where T : class?
+    public CacheTracker<SKPaint> GetOrCreatePaint<TParam>(TParam param, Func<TParam, ISymbolCache, SKPaint> toPaint)
+        where TParam : notnull
     {
-        return VectorCache == null ? toPaint(brush, opacity, rotation, SymbolCache) : VectorCache.GetOrCreatePaint(brush, opacity, rotation, toPaint);
+        return VectorCache.GetOrCreatePaint(param, toPaint);
     }
 
-    public T GetOrCreatePath<T, TParam>(TParam param, Func<TParam, T> toSkRect)
+    public CacheTracker<SKPath> GetOrCreatePath<TParam>(TParam param, Func<TParam, SKPath> toSkRect)
+        where TParam : notnull
     {
-        return VectorCache == null ? toSkRect(param) : VectorCache.GetOrCreatePath(param, toSkRect);
-    }
-
-    public TPath GetOrCreatePath<TPath, TFeature, TGeometry>(
-        Viewport viewport,
-        TFeature feature,
-        TGeometry geometry,
-        float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath)
-        where TPath : class
-        where TGeometry : class
-        where TFeature : class, IFeature
-    {
-        return VectorCache == null ? toPath(geometry, viewport, lineWidth) : VectorCache.GetOrCreatePath(viewport, feature, geometry, lineWidth, toPath);
+        return VectorCache.GetOrCreatePath(param, toSkRect);
     }
 
     public IBitmapInfo? GetOrCreate(MRaster raster, long currentIteration)
@@ -91,7 +89,7 @@ public sealed class RenderCache : IRenderCache
     {
         LabelCache.Dispose();
         SymbolCache.Dispose();
-        DisposableExtension.DisposeAndNullify(ref _vectorCache);
+        VectorCache.Dispose();
         TileCache.Dispose();
     }
 }
