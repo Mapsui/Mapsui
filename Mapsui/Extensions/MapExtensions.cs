@@ -5,13 +5,16 @@ using System.Linq;
 
 namespace Mapsui.Extensions;
 
+/// <summary>
+/// Extensions for Map
+/// </summary>
 public static  class MapExtensions
 {
     /// <summary>
     /// Add a layer for markers
     /// </summary>
     /// <remarks>
-    /// This layer should be the topmost <see cref="Layer"> in a <see cref="Map">, so that the <see cref="Callouts">
+    /// This layer should be the topmost <see cref="Layer"> in a <see cref="Map">, so that the <see cref="CalloutStyle">
     /// are always on top.
     /// </remarks>
     /// <param name="map">Map to add this layer too</param>
@@ -32,11 +35,12 @@ public static  class MapExtensions
         // Add handling of touches
         map.Info += (object? sender, MapInfoEventArgs args) =>
         {
-            if (args.MapInfo?.Feature == null || args.MapInfo.Feature is not PointFeature || args.MapInfo.Feature[MarkerExtensions.MarkerKey] == null) return;
+            if (args.MapInfo?.Feature == null || args.MapInfo.Feature is not PointFeature || !((PointFeature)args.MapInfo.Feature).IsMarker()) 
+                return;
 
             // Has the marker an own action to call when it is touched?
             var marker = (PointFeature)args.MapInfo.Feature;
-            var action = (Action<ILayer, IFeature, MapInfoEventArgs>?)marker[MarkerExtensions.MarkerKey + ".Touched"];
+            var action = (Action<ILayer, IFeature, MapInfoEventArgs>?)marker[PointFeatureExtensions.MarkerTouchedKey];
 
             if (action != null)
             {
