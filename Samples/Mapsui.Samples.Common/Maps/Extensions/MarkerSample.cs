@@ -1,6 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projections;
+using Mapsui.Samples.Common.Maps.Styles;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
@@ -34,12 +35,20 @@ public class MarkerSample : ISample
         // Create layer for markers
         using var markerLayer = map.AddMarkerLayer("Marker")
             // Create marker for NYC
-            .AddMarker(SphericalMercator.FromLonLat(-73.935242, 40.730610), Color.Red, 1.0, "New York City")
+            .AddMarker(SphericalMercator.FromLonLat(-73.935242, 40.730610), 
+                Color.Red, 
+                scale: 1.0, 
+                title: "New York City")
             // Create marker for Boston
-            .AddMarker(SphericalMercator.FromLonLat(-71.057083, 42.361145), Color.LightGreen, 0.8, "Boston", "MA")
+            .AddMarker(SphericalMercator.FromLonLat(-71.057083, 42.361145), 
+                Color.LightGreen, 
+                scale: 0.8, 
+                title: "Boston", 
+                subtitle: "MA")
             // Create marker for Washington DC
             .AddMarker(SphericalMercator.FromLonLat(-77.03637, 38.89511),
                 color: DemoColor(),
+                opacity: 0.7,
                 scale: 1.5,
                 title: "Washington DC",
                 touched: MarkerTouched);
@@ -74,7 +83,9 @@ public class MarkerSample : ISample
 
         // Change color of marker
         marker.SetColor(DemoColor())
+            // Increase subtitle by one
             .SetSubtitle(String.IsNullOrEmpty(marker.GetSubtitle()) ? "0" : (int.Parse(marker.GetSubtitle()) + 1).ToString())
+            // Make callout visible
             .ShowCallout(layer);
 
         // We handled this event, so there isn't the default handling (show callout) needed
