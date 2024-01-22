@@ -54,7 +54,7 @@ public class MarkerSample : ISample
                 touched: MarkerTouched);
 
         // Zoom map, so that all markers are visible
-        map.Navigator.ZoomToBox(markerLayer.Extent);
+        map.Navigator.ZoomToBox(markerLayer.Extent?.Grow(50000));
 
         return map;
     }
