@@ -21,6 +21,7 @@
 # Upgrade guides
 ## [v2.0 Upgrade Guide](v2.0-upgrade-guide.md)
 ## [v4.0 Upgrade Guide](v4.0-upgrade-guide.md)
+## [v5.0 Upgrade Guide](v5.0-upgrade-guide.md)
 
 # How Things Work
 ## [Mapsui Components](mapsui-components.md)
