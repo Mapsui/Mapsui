@@ -1,12 +1,10 @@
 using Mapsui.Extensions;
-using Mapsui.Layers;
 using Mapsui.UI.Utils;
 using Mapsui.UI.Wpf.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
