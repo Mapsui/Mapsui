@@ -12,4 +12,3 @@ Here are some things to take into account when creating a PR:
 - Perhaps the documentation should be updated but documentation as code comments in the sample are preferred because they are less likely to get outdated.
 - Add a reference image of the sample so that it will automatically be included in the [regression tests](https://mapsui.com/documentation/rendering-tests.html). 
 - Consider to add a unit test, especially if there is no sample.
-
