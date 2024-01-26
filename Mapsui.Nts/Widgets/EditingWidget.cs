@@ -48,10 +48,8 @@ public class EditingWidget : Widget, ITouchableWidget
         if (MapControl.Map == null)
             return false;
 
-        MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(
+        return EditManipulation.Manipulate(
             PointerState.Down, position, EditManager, MapControl, args.ClickCount > 1);
-
-        return false;
     }
 
     public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
@@ -60,8 +58,8 @@ public class EditingWidget : Widget, ITouchableWidget
 
         if (args.LeftButton)
         {
-            EditManipulation.Manipulate
-                (PointerState.Dragging, screenPosition, EditManager, MapControl, args.ClickCount > 1);
+            EditManipulation.Manipulate(
+                PointerState.Dragging, screenPosition, EditManager, MapControl, args.ClickCount > 1);
         }
         else
         {
