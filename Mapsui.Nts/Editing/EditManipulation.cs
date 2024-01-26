@@ -21,7 +21,7 @@ public class EditManipulation
     public static int MinPixelsMovedForDrag { get; set; } = 4;
 
     public bool Manipulate(PointerState mouseState, MPoint screenPosition,
-        EditManager editManager, IMapControl mapControl, bool isDoubleClicked)
+        EditManager editManager, IMapControl mapControl, bool isShiftDown)
     {
         switch (mouseState)
         {
@@ -43,7 +43,7 @@ public class EditManipulation
                 {
                     if (editManager.EditMode == EditMode.Modify)
                     {
-                        if (isDoubleClicked)
+                        if (isShiftDown)
                         {
                             return editManager.TryDeleteCoordinate(
                                 mapControl.GetMapInfo(screenPosition, editManager.VertexRadius), editManager.VertexRadius);
@@ -53,7 +53,7 @@ public class EditManipulation
                     }
                     else if (editManager.EditMode == EditMode.DrawingPolygon || editManager.EditMode == EditMode.DrawingLine)
                     {
-                        if (isDoubleClicked)
+                        if (isShiftDown)
                         {
                             return editManager.EndEdit();
                         }
