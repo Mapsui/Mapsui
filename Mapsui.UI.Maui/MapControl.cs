@@ -248,7 +248,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     _pointerDownTicks = DateTime.UtcNow.Ticks;
                 }
 
-                if (HandleWidgetPointerDown(location, true, Math.Max(1, _numOfTaps), ShiftPressed))
+                if (HandleWidgetPointerDown(location, true, Math.Max(1, _numOfTaps), false))
                 {
                     e.Handled = true;
                     _widgetPointerDown = true;
@@ -272,7 +272,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             // Delete e.Id from _touches, because finger is released
             else if (e.ActionType == SKTouchAction.Released && _touches.TryRemove(e.Id, out var releasedTouch))
             {
-                if (HandleWidgetPointerUp(location, _pointerDownPosition, true, 0, ShiftPressed))
+                if (HandleWidgetPointerUp(location, _pointerDownPosition, true, _numOfTaps, false))
                 {
                     e.Handled = true;
                     return;
@@ -353,7 +353,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             }
             else if (e.ActionType == SKTouchAction.Moved)
             {
-                if (HandleWidgetPointerMove(location, true, Math.Max(1, _numOfTaps), ShiftPressed))
+                if (HandleWidgetPointerMove(location, true, Math.Max(1, _numOfTaps), false))
                 {
                     e.Handled = true;
                     return;
