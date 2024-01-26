@@ -236,10 +236,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             TouchAction?.Invoke(sender, e);
             if (e.Handled) return;
 
-            if (e.ActionType == SKTouchAction.Pressed && _touches.IsEmpty)
+            if (e.ActionType == SKTouchAction.Pressed)
             {
                 _widgetPointerDown = false;
-                _pointerDownTicks = DateTime.UtcNow.Ticks;
+                _touches[e.Id] = location;
 
                 if (_touches.Count == 1)
                 {
