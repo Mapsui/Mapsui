@@ -74,10 +74,9 @@ public partial class MapControl : ViewGroup, IMapControl
 
         SetViewportSize(); // todo: check if size is available, perhaps we need a load event
 
+        // Pointer events
         Touch += MapControl_Touch;
-
-        var listener = new MapControlGestureListener();
-
+        var listener = new MapControlGestureListener(); // Todo: Find out if/why we need this custom gesture detector. Why not the _gestureDetector?
         listener.Fling += OnFling;
         _gestureDetector?.Dispose();
         _gestureDetector = new GestureDetector(Context, listener);

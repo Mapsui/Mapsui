@@ -44,6 +44,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     [Obsolete("Use Info and ILayerFeatureInfo", true)]
     public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
 
+    private bool _shiftPressed;
+
     public MapControl()
     {
         ClipToBounds = true;
@@ -63,30 +65,26 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
         Initialized += MapControlInitialized;
 
+        // Pointer events
         PointerPressed += MapControl_PointerPressed;
         PointerReleased += MapControl_PointerReleased;
         PointerMoved += MapControlMouseMove;
         PointerExited += MapControlMouseLeave;
         PointerCaptureLost += MapControlPointerCaptureLost;
-
         PointerWheelChanged += MapControlMouseWheel;
-
         DoubleTapped += OnDoubleTapped;
 
-        KeyDown += MapControl_KeyDown;
-        KeyUp += MapControl_KeyUp;
+        // Needed to track the state of _shiftPressed because DoubleTapped does not have KeyModifiers.
+        KeyDown += (s, e) => _shiftPressed = GetShiftPressed(e.KeyModifiers);
+        KeyUp += (s, e) => _shiftPressed = GetShiftPressed(e.KeyModifiers);
     }
 
-    private void MapControl_KeyUp(object? sender, KeyEventArgs e)
-    {
-        ShiftPressed = (e.KeyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
-    }
 
-    public bool ShiftPressed { get; set; }
-
-    private void MapControl_KeyDown(object? sender, KeyEventArgs e)
+    private static bool GetShiftPressed(KeyModifiers keyModifiers)
     {
-        ShiftPressed = (e.KeyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
+        
+
+        return (keyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
     }
 
     private void MapControlPointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
@@ -115,7 +113,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         _touches[e.Pointer.Id] = _pointerDownPosition;
         OnPinchStart(_touches.Select(t => t.Value).ToList());
 
-        if (HandleWidgetPointerDown(_pointerDownPosition, _mouseDown, e.ClickCount, ShiftPressed))
+        if (HandleWidgetPointerDown(_pointerDownPosition, _mouseDown, e.ClickCount, _shiftPressed))
         {
             e.Handled = true;
             return;
@@ -174,7 +172,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         _touches.TryRemove(e.Pointer.Id, out _);
 
         var leftButtonPressed = e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased;
-        if (HandleWidgetPointerUp(e.GetPosition(this).ToMapsui(), _pointerDownPosition, leftButtonPressed, 1, ShiftPressed))
+        if (HandleWidgetPointerUp(e.GetPosition(this).ToMapsui(), _pointerDownPosition, leftButtonPressed, 1, _shiftPressed))
         {
             e.Handled = true;
             return;
@@ -213,7 +211,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         base.OnPointerMoved(e);
         _mousePosition = e.GetPosition(this).ToMapsui();
-        if (HandleWidgetPointerMove(_mousePosition, true, 0, ShiftPressed))
+        if (HandleWidgetPointerMove(_mousePosition, true, 0, _shiftPressed))
             e.Handled = true;
     }
 
@@ -221,7 +219,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         // We have a new interaction with the screen, so stop all navigator animations
         var tapPosition = _mousePosition;
-        if (tapPosition != null && HandleTouchingTouched(tapPosition, _pointerDownPosition, true, 2, ShiftPressed))
+        if (tapPosition != null && HandleTouchingTouched(tapPosition, _pointerDownPosition, true, 2, _shiftPressed))
         {
             e.Handled = true;
             return;
