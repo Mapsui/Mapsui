@@ -272,7 +272,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             // Delete e.Id from _touches, because finger is released
             else if (e.ActionType == SKTouchAction.Released && _touches.TryRemove(e.Id, out var releasedTouch))
             {
-                if (HandleWidgetPointerUp(location, _pointerDownPosition, true, 0, ShiftPressed))
+                if (HandleWidgetPointerUp(location, _pointerDownPosition, true, 0, false))
                 {
                     e.Handled = true;
                     return;

@@ -24,8 +24,8 @@ public class EditingWidget : Widget, ITouchableWidget
             return false;
 
         if (MapControl.Map != null)
-            MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(MouseState.Up,
-                position, EditManager, MapControl, args.Shift);
+            MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(
+                PointerState.Up, position, EditManager, MapControl, args.Shift);
 
         if (EditManager.SelectMode)
         {
@@ -48,17 +48,8 @@ public class EditingWidget : Widget, ITouchableWidget
         if (MapControl.Map == null)
             return false;
 
-        if (args.ClickCount > 1)
-        {
-            MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(MouseState.DoubleClick,
-                position, EditManager, MapControl, args.Shift);
-            return true;
-        }
-
-        MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(MouseState.Down,
-            position, EditManager, MapControl, args.Shift);
-
-        return false;
+        return EditManipulation.Manipulate(
+            PointerState.Down, position, EditManager, MapControl, args.Shift);
     }
 
     public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
@@ -67,13 +58,13 @@ public class EditingWidget : Widget, ITouchableWidget
 
         if (args.LeftButton)
         {
-            EditManipulation.Manipulate(MouseState.Dragging, screenPosition,
-                EditManager, MapControl, args.Shift);
+            EditManipulation.Manipulate(
+                PointerState.Dragging, screenPosition, EditManager, MapControl, args.Shift);
         }
         else
         {
-            EditManipulation.Manipulate(MouseState.Moving, screenPosition,
-                EditManager, MapControl, args.Shift);
+            EditManipulation.Manipulate(
+                PointerState.Hovering, screenPosition, EditManager, MapControl, args.Shift);
         }
 
         return false;
