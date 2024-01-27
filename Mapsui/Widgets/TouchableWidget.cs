@@ -1,10 +1,27 @@
-﻿namespace Mapsui.Widgets;
+﻿using System;
+
+namespace Mapsui.Widgets;
 
 /// <summary>
 /// Widget that gets touch events
 /// </summary>
 public abstract class TouchableWidget : Widget, ITouchableWidget
 {
+    /// <summary>
+    /// Event which is called if widget is touched
+    /// </summary>
+    public event EventHandler<WidgetTouchedEventArgs>? Touched;
+
+    /// <summary>
+    /// Event which is called if touching around in the widget
+    /// </summary>
+    public event EventHandler<WidgetTouchedEventArgs>? Touching;
+
+    /// <summary>
+    /// Event which is called if moving inside of widget
+    /// </summary>
+    public event EventHandler<WidgetTouchedEventArgs>? Moving;
+
     /// <summary>
     /// Type of area to use for touch events
     /// </summary>
@@ -34,6 +51,8 @@ public abstract class TouchableWidget : Widget, ITouchableWidget
     /// <returns>True, if the Widget had handled the touch event</returns>
     public virtual bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
+        Touched?.Invoke(this, args);
+
         return args.Handled;
     }
 
@@ -46,6 +65,8 @@ public abstract class TouchableWidget : Widget, ITouchableWidget
     /// <returns>True, if the Widget had handled the touch event</returns>
     public virtual bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
+        Touching?.Invoke(this, args);
+
         return args.Handled;
     }
 
@@ -58,6 +79,8 @@ public abstract class TouchableWidget : Widget, ITouchableWidget
     /// <returns>True, if the Widget had handled the touch event</returns>
     public virtual bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
     {
+        Moving?.Invoke(this, args);
+
         return args.Handled;
     }
 
