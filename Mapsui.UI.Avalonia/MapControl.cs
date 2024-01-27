@@ -285,7 +285,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? url : "open",
             Arguments = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? $"-e {url}" : "",
             CreateNoWindow = true,
-            UseShellExecute = !RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+            UseShellExecute = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
         })) { }
     }
 
