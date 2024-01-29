@@ -366,7 +366,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (disposing)
         {
             _drawOp?.Dispose();
-            _map?.Dispose();
+            Map?.Dispose();
         }
 
         CommonDispose(disposing);
