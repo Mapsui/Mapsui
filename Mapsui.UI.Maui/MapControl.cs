@@ -87,8 +87,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     public IRenderCache RenderCache => _renderer.RenderCache;
 
-    public bool UseDoubleTap = true;
-    public bool UseFling = true;
+    public bool UseDoubleTap { get; set; } = true;
+    public bool UseFling { get; set; } = true;
     private Size _oldSize;
     private static List<WeakReference<MapControl>>? _listeners;
 
