@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 namespace Mapsui.UI.Maui;
 
 /// <summary>
-/// Class, that uses the API of all other Mapsui MapControls
+/// UI component that displays an interactive map 
 /// </summary>
 public partial class MapControl : ContentView, IMapControl, IDisposable
 {
