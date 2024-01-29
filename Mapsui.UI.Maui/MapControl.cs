@@ -40,16 +40,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
     private const int _shortClick = 250;
     private const int _delayTap = 200;
-
     // If a finger touches down and up it counts as a tap if the distance
     // between the down and up location is smaller then the touch slob.
     // The slob is initialized at 8. How did we get to 8? Well you could
     // read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
     // We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
     private const int _touchSlop = 8;
-
     protected readonly bool _initialized;
-
     private double _virtualRotation;
     private readonly ConcurrentDictionary<long, MPoint> _touches = new();
     private MPoint? _pointerDownPosition;
@@ -59,7 +56,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private MPoint? _previousCenter;
     private double _previousAngle; // To save the angle before last pinch movement
     private double _previousRadius = 1f; // To save the radius before last pinch movement
-
     private TouchMode _mode;
     private long _pointerDownTicks;
     private long _pointerUpTicks;
@@ -75,13 +71,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         _initialized = true;
     }
 
-    private double ViewportWidth => Width; // Used in shared code
-    private double ViewportHeight => Height; // Used in shared code
-
     public IRenderCache RenderCache => _renderer.RenderCache;
-
     public bool UseDoubleTap { get; set; } = true;
     public bool UseFling { get; set; } = true;
+    private double ViewportWidth => Width; // Used in shared code
+    private double ViewportHeight => Height; // Used in shared code
     
     private void Initialize()
     {
