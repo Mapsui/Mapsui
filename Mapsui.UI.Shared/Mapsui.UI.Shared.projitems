@@ -14,7 +14,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs\HoveredEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs\SwipedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs\TappedEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\TouchedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs\ZoomedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\FlingTracker.cs" />
