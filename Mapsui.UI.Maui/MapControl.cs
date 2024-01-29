@@ -73,6 +73,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private long _pointerDownTicks;
     private long _pointerUpTicks;
     private bool _widgetPointerDown;
+    private Size _oldSize;
+    private static List<WeakReference<MapControl>>? _listeners;
+
 
     public MapControl()
     {
@@ -89,9 +92,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     public bool UseDoubleTap { get; set; } = true;
     public bool UseFling { get; set; } = true;
-    private Size _oldSize;
-    private static List<WeakReference<MapControl>>? _listeners;
-
+    
     private void Initialize()
     {
         View view;
