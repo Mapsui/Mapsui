@@ -82,8 +82,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         _initialized = true;
     }
 
-    private double ViewportWidth => Width;
-    private double ViewportHeight => Height;
+    private double ViewportWidth => Width; // Used in shared code
+    private double ViewportHeight => Height; // Used in shared code
 
     public IRenderCache RenderCache => _renderer.RenderCache;
 
