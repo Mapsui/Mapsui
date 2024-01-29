@@ -41,12 +41,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private const int _shortClick = 250;
     private const int _delayTap = 200;
 
-    /// <summary>
-    /// If a finger touches down and up it counts as a tap if the distance between the down and up location is smaller
-    /// then the touch slob.
-    /// The slob is initialized at 8. How did we get to 8? Well you could read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
-    /// We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
-    /// </summary>
+    // If a finger touches down and up it counts as a tap if the distance
+    // between the down and up location is smaller then the touch slob.
+    // The slob is initialized at 8. How did we get to 8? Well you could
+    // read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
+    // We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
     private const int _touchSlop = 8;
 
     protected readonly bool _initialized;
@@ -58,16 +57,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private int _numOfTaps;
     private readonly FlingTracker _flingTracker = new();
     private MPoint? _previousCenter;
-
-    /// <summary>
-    /// Saver for angle before last pinch movement
-    /// </summary>
-    private double _previousAngle;
-
-    /// <summary>
-    /// Saver for radius before last pinch movement
-    /// </summary>
-    private double _previousRadius = 1f;
+    private double _previousAngle; // To save the angle before last pinch movement
+    private double _previousRadius = 1f; // To save the radius before last pinch movement
 
     private TouchMode _mode;
     private long _pointerDownTicks;
@@ -75,7 +66,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private bool _widgetPointerDown;
     private Size _oldSize;
     private static List<WeakReference<MapControl>>? _listeners;
-
 
     public MapControl()
     {
