@@ -30,6 +30,7 @@ namespace Mapsui.UI.iOS;
 #elif __WINUI__
 namespace Mapsui.UI.WinUI;
 #elif __AVALONIA__
+using Avalonia;
 namespace Mapsui.UI.Avalonia;
 #elif __ETO_FORMS__
 namespace Mapsui.UI.Eto;
@@ -433,6 +434,32 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         get => (Map)GetValue(MapProperty);
         set => SetValue(MapProperty, value);
+    }
+
+#elif __AVALONIA__
+
+    public static readonly StyledProperty<Map> MapProperty =
+        AvaloniaProperty.Register<MapControl, Map>(nameof(Map));
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable")]
+    static MapControl()
+    {
+        MapProperty.Changed.AddClassHandler<MapControl>((o, e) =>
+        {
+            if (e.NewValue != null)
+                o.AfterSetMap((Map)e.NewValue);
+        });
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable")]
+    public Map Map
+    {
+        get => GetValue(MapProperty);
+        set
+        {
+            BeforeSetMap();
+            SetValue(MapProperty, value);
+        }
     }
 
 #else
