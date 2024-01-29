@@ -412,4 +412,24 @@ public partial class MapControl : ComponentBase, IMapControl
         _previousTouchState = TouchState.FromLocations(e.TargetTouches.ToLocations(_clientRect));
         RefreshData();
     }
+
+    #region Map Property
+    [Parameter]
+    [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties")]
+    ///<inheritdoc/>
+    public Map Map
+    {
+        get => _map;
+        set
+        {
+            if (value is null) throw new ArgumentNullException(nameof(value));
+
+            BeforeSetMap();
+            _map = value;
+            AfterSetMap(_map);
+            OnPropertyChanged();
+        }
+    }
+    private Map _map = new();
+    #endregion
 }

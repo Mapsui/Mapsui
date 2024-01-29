@@ -372,4 +372,22 @@ public partial class MapControl : UIView, IMapControl
             ? (double)_glCanvas!.ContentScaleFactor
             : (double)_canvas!.ContentScaleFactor;
     }
+
+    #region Map property
+    /// <inheritdoc />
+    public Map Map
+    {
+        get => _map;
+        set
+        {
+            if (value is null) throw new ArgumentNullException(nameof(value));
+
+            BeforeSetMap();
+            _map = value;
+            AfterSetMap(_map);
+            OnPropertyChanged();
+        }
+    }
+    private Map _map = new();
+    #endregion
 }

@@ -363,8 +363,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         }
     }
 
-    public bool ShiftPressed { get; set; }
-
     private bool IsAround(MPoint releasedTouch)
     {
         if (_pointerDownPosition == null) { return false; }
@@ -661,4 +659,30 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             ? _glView!.CanvasSize.Width / Width
             : _canvasView!.CanvasSize.Width / Width;
     }
+
+    #region Map property
+    public static readonly BindableProperty MapProperty = BindableProperty.Create(nameof(Map),
+    typeof(Map), typeof(MapControl), default(Map), defaultBindingMode: BindingMode.TwoWay,
+    propertyChanged: MapPropertyChanged, propertyChanging: MapPropertyChanging);
+
+    private static void MapPropertyChanging(BindableObject bindable,
+        object oldValue, object newValue)
+    {
+        var mapControl = (MapControl)bindable;
+        mapControl.BeforeSetMap();
+    }
+
+    private static void MapPropertyChanged(BindableObject bindable,
+        object oldValue, object newValue)
+    {
+        var mapControl = (MapControl)bindable;
+        mapControl.AfterSetMap((Map)newValue);
+    }
+
+    public Map Map
+    {
+        get => (Map)GetValue(MapProperty);
+        set => SetValue(MapProperty, value);
+    }
+    #endregion
 }

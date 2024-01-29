@@ -10,6 +10,8 @@ public interface IMapControl : IDisposable
 {
     event EventHandler<MapInfoEventArgs> Info;
 
+    // The Map property is the main entry point to control the MapControl.
+    // It can be used for configuration, manipulation and contains all data.
     Map Map { get; set; }
 
     void RefreshGraphics();
