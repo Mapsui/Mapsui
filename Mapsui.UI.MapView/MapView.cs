@@ -64,16 +64,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
         // Add some events to _mapControl
         Map.Navigator.ViewportChanged += HandlerViewportChanged;
-        Info += HandlerInfo;
-        SingleTap += HandlerTap;
-        DoubleTap += HandlerTap;
-        LongTap += HandlerLongTap;
+        Info += (s, e) => HandlerInfo(e);
         SizeChanged += HandlerSizeChanged;
 
-        TouchMove += (s, e) =>
-        {
-            RunOnUIThread(() => MyLocationFollow = false);
-        };
 
         // Add MapView layers to Map
         AddLayers();
@@ -118,11 +111,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// Occurs when map clicked
     /// </summary>
     public event EventHandler<MapClickedEventArgs>? MapClicked;
-
-    /// <summary>
-    /// Occurs when map long clicked
-    /// </summary>
-    public event EventHandler<MapLongClickedEventArgs>? MapLongClicked;
 
     #endregion
 
@@ -446,7 +434,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
                 // Add event handlers
                 Map.Navigator.ViewportChanged += HandlerViewportChanged;
-                Info += HandlerInfo;
+                Info += (s, e) => HandlerInfo(e);
             }
         }
     }
@@ -551,7 +539,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         Refresh();
     }
 
-    private void HandlerInfo(object? sender, MapInfoEventArgs e)
+    private void HandlerInfo(MapInfoEventArgs e)
     {
         // Click on pin?
         if (e.MapInfo?.Layer == _mapPinLayer)
@@ -664,18 +652,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         }
     }
 
-    private void HandlerLongTap(object? sender, TappedEventArgs e)
-    {
-        var args = new MapLongClickedEventArgs(Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToNative());
-        MapLongClicked?.Invoke(this, args);
-
-        if (args.Handled)
-        {
-            e.Handled = true;
-        }
-    }
-
-    private void HandlerTap(object? sender, TappedEventArgs e)
+    private void HandlerTap(TappedEventArgs e)
     {
         e.Handled = false;
 
@@ -686,7 +663,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
             var mapInfoEventArgs = new MapInfoEventArgs { MapInfo = mapInfo, Handled = e.Handled, NumTaps = e.NumOfTaps };
 
-            HandlerInfo(sender, mapInfoEventArgs);
+            HandlerInfo(mapInfoEventArgs);
 
             e.Handled = mapInfoEventArgs.Handled;
 
@@ -873,5 +850,23 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         Pins.Clear();
         Drawables.Clear();
         HideCallouts();
+    }
+
+    protected override bool OnSingleTapped(MPoint screenPosition)
+    {
+        HandlerTap(new TappedEventArgs(screenPosition, 1));
+        return base.OnSingleTapped(screenPosition);
+    }
+
+    protected override bool OnDoubleTapped(MPoint screenPosition, int numOfTaps)
+    {
+        HandlerTap(new TappedEventArgs(screenPosition, numOfTaps));
+        return base.OnDoubleTapped(screenPosition, numOfTaps);
+    }
+
+    protected override bool OnTouchMove(List<MPoint> touchPoints)
+    {
+        RunOnUIThread(() => MyLocationFollow = false);
+        return base.OnTouchMove(touchPoints);
     }
 }
