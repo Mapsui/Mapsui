@@ -412,10 +412,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <param name="currentMousePosition">Center of zoom out event</param>
     private bool OnZoomInOrOut(int mouseWheelDelta, MPoint currentMousePosition)
     {
-        var args = new ZoomedEventArgs(currentMousePosition, mouseWheelDelta > 0 ? ZoomDirection.ZoomIn : ZoomDirection.ZoomOut);
-        if (args.Handled)
-            return true;
-
         Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
 
         return true;
@@ -428,11 +424,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <param name="velocityY">Velocity in y direction in pixel/second</param>
     private bool OnFlinged(double velocityX, double velocityY)
     {
-        var args = new SwipedEventArgs(velocityX, velocityY);
-
-        if (args.Handled)
-            return true;
-
         Map.Navigator.Fling(velocityX, velocityY, 1000);
 
         return true;
@@ -447,11 +438,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         // Sanity check
         if (touchPoints.Count == 0)
             return false;
-
-        var args = new TouchedEventArgs(touchPoints);
-
-        if (args.Handled)
-            return true;
 
         if (touchPoints.Count == 2)
         {
@@ -475,8 +461,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <param name="releasedPoint">Released point, which was touched before</param>
     private bool OnTouchEnd(List<MPoint> touchPoints)
     {
-        var args = new TouchedEventArgs(touchPoints);
-
         // Last touch released
         if (touchPoints.Count == 0)
         {
@@ -487,7 +471,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             }
         }
 
-        return args.Handled;
+        return false;
     }
 
     /// <summary>
@@ -497,8 +481,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <param name="releasedPoint">Released point, which was touched before</param>
     private bool OnTouchExited(List<MPoint> touchPoints)
     {
-        var args = new TouchedEventArgs(touchPoints);
-
         // Last touch released
         if (touchPoints.Count == 0)
         {
@@ -508,8 +490,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 Map?.RefreshData(new FetchInfo(Map.Navigator.Viewport.ToSection(), Map?.CRS, ChangeType.Discrete));
             }
         }
-
-        return args.Handled;
+        return false;
     }
 
     /// <summary>
@@ -518,11 +499,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <param name="touchPoints">List of all touched points</param>
     protected virtual bool OnTouchMove(List<MPoint> touchPoints)
     {
-        var args = new TouchedEventArgs(touchPoints);
-
-        if (args.Handled)
-            return true;
-
         switch (_mode)
         {
             case TouchMode.Dragging:
@@ -580,11 +556,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <returns>True, if the event is handled</returns>
     protected virtual bool OnDoubleTapped(MPoint screenPosition, int numOfTaps)
     {
-        var args = new TappedEventArgs(screenPosition, numOfTaps);
-
-        if (args.Handled)
-            return true;
-
         var eventReturn = CreateMapInfoEventArgs(screenPosition, screenPosition, numOfTaps);
 
         if (eventReturn?.Handled == true)
@@ -601,11 +572,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <returns>True, if the event is handled</returns>
     protected virtual bool OnSingleTapped(MPoint screenPosition)
     {
-        var args = new TappedEventArgs(screenPosition, 1);
-
-        if (args.Handled)
-            return true;
-
         var infoToInvoke = CreateMapInfoEventArgs(screenPosition, screenPosition, 1);
 
         if (infoToInvoke?.Handled == true)
