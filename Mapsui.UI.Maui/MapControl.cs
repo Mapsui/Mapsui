@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 namespace Mapsui.UI.Maui;
 
 /// <summary>
-/// Class, that uses the API of all other Mapsui MapControls
+/// UI component that displays an interactive map 
 /// </summary>
 public partial class MapControl : ContentView, IMapControl, IDisposable
 {
@@ -38,21 +38,15 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private SKCanvasView? _canvasView;
 
     // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
-    private const int _shortTap = 125;
     private const int _shortClick = 250;
     private const int _delayTap = 200;
-    private const int _longTap = 500;
-
-    /// <summary>
-    /// If a finger touches down and up it counts as a tap if the distance between the down and up location is smaller
-    /// then the touch slob.
-    /// The slob is initialized at 8. How did we get to 8? Well you could read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
-    /// We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
-    /// </summary>
+    // If a finger touches down and up it counts as a tap if the distance
+    // between the down and up location is smaller then the touch slob.
+    // The slob is initialized at 8. How did we get to 8? Well you could
+    // read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
+    // We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
     private const int _touchSlop = 8;
-
     protected readonly bool _initialized;
-
     private double _virtualRotation;
     private readonly ConcurrentDictionary<long, MPoint> _touches = new();
     private MPoint? _pointerDownPosition;
@@ -60,21 +54,14 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private int _numOfTaps;
     private readonly FlingTracker _flingTracker = new();
     private MPoint? _previousCenter;
-
-    /// <summary>
-    /// Saver for angle before last pinch movement
-    /// </summary>
-    private double _previousAngle;
-
-    /// <summary>
-    /// Saver for radius before last pinch movement
-    /// </summary>
-    private double _previousRadius = 1f;
-
+    private double _previousAngle; // To save the angle before last pinch movement
+    private double _previousRadius = 1f; // To save the radius before last pinch movement
     private TouchMode _mode;
     private long _pointerDownTicks;
     private long _pointerUpTicks;
     private bool _widgetPointerDown;
+    private Size _oldSize;
+    private static List<WeakReference<MapControl>>? _listeners;
 
     public MapControl()
     {
@@ -84,16 +71,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         _initialized = true;
     }
 
-    private double ViewportWidth => Width;
-    private double ViewportHeight => Height;
-
     public IRenderCache RenderCache => _renderer.RenderCache;
-
-    public bool UseDoubleTap = true;
-    public bool UseFling = true;
-    private Size _oldSize;
-    private static List<WeakReference<MapControl>>? _listeners;
-
+    public bool UseDoubleTap { get; set; } = true;
+    public bool UseFling { get; set; } = true;
+    private double ViewportWidth => Width; // Used in shared code
+    private double ViewportHeight => Height; // Used in shared code
+    
     private void Initialize()
     {
         View view;
@@ -232,8 +215,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
             var location = GetScreenPosition(e.Location);
 
-            // if user handles action by his own return
-            TouchAction?.Invoke(sender, e);
             if (e.Handled) return;
 
             if (e.ActionType == SKTouchAction.Pressed)
@@ -272,7 +253,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             // Delete e.Id from _touches, because finger is released
             else if (e.ActionType == SKTouchAction.Released && _touches.TryRemove(e.Id, out var releasedTouch))
             {
-                if (HandleWidgetPointerUp(location, _pointerDownPosition, true, _numOfTaps, false))
+                if (HandleWidgetPointerUp(location, _pointerDownPosition, true, 0, false))
                 {
                     e.Handled = true;
                     return;
@@ -311,7 +292,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     // If touch start and end is in the same area and the touch time is shorter
                     // than longTap, than we have a tap.
-                    if (isAround && (_pointerUpTicks - _pointerDownTicks) < (e.DeviceType == SKTouchDeviceType.Mouse ? _shortClick : _longTap) * 10000)
+                    if (isAround)
                     {
                         _waitingForDoubleTap = true;
                         if (UseDoubleTap) { await Task.Delay(_delayTap); }
@@ -333,11 +314,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                         {
                             _waitingForDoubleTap = false; ;
                         }
-                    }
-                    else if (isAround && (_pointerUpTicks - _pointerDownTicks) >= _longTap * 10000)
-                    {
-                        if (!e.Handled)
-                            e.Handled = OnLongTapped(location);
                     }
                 }
 
@@ -366,8 +342,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                 if (e.InContact && !e.Handled && !_widgetPointerDown)
                     e.Handled = OnTouchMove(_touches.Select(t => t.Value).ToList());
-                else
-                    e.Handled = OnHovered(_touches.Select(t => t.Value).FirstOrDefault());
             }
             else if (e.ActionType == SKTouchAction.Cancelled)
             {
@@ -377,10 +351,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             else if (e.ActionType == SKTouchAction.Exited && _touches.TryRemove(e.Id, out var exitedTouch))
             {
                 e.Handled = OnTouchExited(_touches.Select(t => t.Value).ToList());
-            }
-            else if (e.ActionType == SKTouchAction.Entered)
-            {
-                e.Handled = OnTouchEntered(_touches.Select(t => t.Value).ToList());
             }
             else if (e.ActionType == SKTouchAction.WheelChanged)
             {
@@ -435,101 +405,16 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         return new MPoint(point.X / PixelDensity, point.Y / PixelDensity);
     }
-
+        
     /// <summary>
-    /// Event handlers
-    /// </summary>
-
-    /// <summary>
-    /// TouchStart is called, when user press a mouse button or touch the display
-    /// </summary>
-    public event EventHandler<TouchedEventArgs>? TouchStarted;
-
-    /// <summary>
-    /// TouchEnd is called, when user release a mouse button or doesn't touch display anymore
-    /// </summary>
-    public event EventHandler<TouchedEventArgs>? TouchEnded;
-
-    /// <summary>
-    /// TouchEntered is called, when user moves an active touch onto the view
-    /// </summary>
-    public event EventHandler<TouchedEventArgs>? TouchEntered;
-
-    /// <summary>
-    /// TouchExited is called, when user moves an active touch off the view
-    /// </summary>
-    public event EventHandler<TouchedEventArgs>? TouchExited;
-
-    /// <summary>
-    /// TouchMove is called, when user move mouse over map (independent from mouse button state) or move finger on display
-    /// </summary>
-    public event EventHandler<TouchedEventArgs>? TouchMove;
-
-    /// <summary>
-    /// TouchAction is called, when user provokes a touch event
-    /// </summary>
-    public event EventHandler<SKTouchEventArgs>? TouchAction;
-
-    /// <summary>
-    /// Hover is called, when user move mouse over map without pressing mouse button
-    /// </summary>
-    public event EventHandler<HoveredEventArgs>? Hovered;
-
-    /// <summary>
-    /// Fling is called, when user release mouse button or lift finger while moving with a certain speed
-    /// </summary>
-    public event EventHandler<SwipedEventArgs>? Fling;
-
-    /// <summary>
-    /// SingleTap is called, when user clicks with a mouse button or tap with a finger on map 
-    /// </summary>
-    public event EventHandler<TappedEventArgs>? SingleTap;
-
-    /// <summary>
-    /// LongTap is called, when user clicks with a mouse button or tap with a finger on map for 500 ms
-    /// </summary>
-    public event EventHandler<TappedEventArgs>? LongTap;
-
-    /// <summary>
-    /// DoubleTap is called, when user clicks with a mouse button or tap with a finger two or more times on map
-    /// </summary>
-    public event EventHandler<TappedEventArgs>? DoubleTap;
-
-    /// <summary>
-    /// Zoom is called, when map should be zoomed
-    /// </summary>
-    public event EventHandler<ZoomedEventArgs>? Zoomed;
-
-    /// <summary>
-    /// Called, when map should zoom in or out
+        /// Called, when map should zoom in or out
     /// </summary>
     /// <param name="currentMousePosition">Center of zoom out event</param>
     private bool OnZoomInOrOut(int mouseWheelDelta, MPoint currentMousePosition)
     {
-        var args = new ZoomedEventArgs(currentMousePosition, mouseWheelDelta > 0 ? ZoomDirection.ZoomIn : ZoomDirection.ZoomOut);
-        Zoomed?.Invoke(this, args);
-
-        if (args.Handled)
-            return true;
-
         Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
 
         return true;
-    }
-
-    /// <summary>
-    /// Called, when mouse/finger/pen hovers around
-    /// </summary>
-    /// <param name="screenPosition">Actual position of mouse/finger/pen</param>
-    private bool OnHovered(MPoint? screenPosition)
-    {
-        if (screenPosition == null)
-            return false;
-        var args = new HoveredEventArgs(screenPosition);
-
-        Hovered?.Invoke(this, args);
-
-        return args.Handled;
     }
 
     /// <summary>
@@ -539,16 +424,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <param name="velocityY">Velocity in y direction in pixel/second</param>
     private bool OnFlinged(double velocityX, double velocityY)
     {
-        var args = new SwipedEventArgs(velocityX, velocityY);
-
-        Fling?.Invoke(this, args);
-
-        // TODO
-        // Perform standard behavior
-
-        if (args.Handled)
-            return true;
-
         Map.Navigator.Fling(velocityX, velocityY, 1000);
 
         return true;
@@ -563,13 +438,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         // Sanity check
         if (touchPoints.Count == 0)
             return false;
-
-        var args = new TouchedEventArgs(touchPoints);
-
-        TouchStarted?.Invoke(this, args);
-
-        if (args.Handled)
-            return true;
 
         if (touchPoints.Count == 2)
         {
@@ -593,10 +461,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <param name="releasedPoint">Released point, which was touched before</param>
     private bool OnTouchEnd(List<MPoint> touchPoints)
     {
-        var args = new TouchedEventArgs(touchPoints);
-
-        TouchEnded?.Invoke(this, args);
-
         // Last touch released
         if (touchPoints.Count == 0)
         {
@@ -607,27 +471,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             }
         }
 
-        return args.Handled;
-    }
-
-    /// <summary>
-    /// Called when touch enters map
-    /// </summary>
-    /// <param name="touchPoints">List of all touched points</param>
-    private bool OnTouchEntered(List<MPoint> touchPoints)
-    {
-        // Sanity check
-        if (touchPoints.Count == 0)
-            return false;
-
-        var args = new TouchedEventArgs(touchPoints);
-
-        TouchEntered?.Invoke(this, args);
-
-        if (args.Handled)
-            return true;
-
-        return true;
+        return false;
     }
 
     /// <summary>
@@ -637,10 +481,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <param name="releasedPoint">Released point, which was touched before</param>
     private bool OnTouchExited(List<MPoint> touchPoints)
     {
-        var args = new TouchedEventArgs(touchPoints);
-
-        TouchExited?.Invoke(this, args);
-
         // Last touch released
         if (touchPoints.Count == 0)
         {
@@ -650,23 +490,15 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 Map?.RefreshData(new FetchInfo(Map.Navigator.Viewport.ToSection(), Map?.CRS, ChangeType.Discrete));
             }
         }
-
-        return args.Handled;
+        return false;
     }
 
     /// <summary>
     /// Called, when mouse/finger/pen moves over map
     /// </summary>
     /// <param name="touchPoints">List of all touched points</param>
-    private bool OnTouchMove(List<MPoint> touchPoints)
+    protected virtual bool OnTouchMove(List<MPoint> touchPoints)
     {
-        var args = new TouchedEventArgs(touchPoints);
-
-        TouchMove?.Invoke(this, args);
-
-        if (args.Handled)
-            return true;
-
         switch (_mode)
         {
             case TouchMode.Dragging:
@@ -722,15 +554,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <param name="screenPosition">First clicked/touched position on screen</param>
     /// <param name="numOfTaps">Number of taps on map (2 is a double click/tap)</param>
     /// <returns>True, if the event is handled</returns>
-    private bool OnDoubleTapped(MPoint screenPosition, int numOfTaps)
+    protected virtual bool OnDoubleTapped(MPoint screenPosition, int numOfTaps)
     {
-        var args = new TappedEventArgs(screenPosition, numOfTaps);
-
-        DoubleTap?.Invoke(this, args);
-
-        if (args.Handled)
-            return true;
-
         var eventReturn = CreateMapInfoEventArgs(screenPosition, screenPosition, numOfTaps);
 
         if (eventReturn?.Handled == true)
@@ -745,15 +570,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// </summary>
     /// <param name="screenPosition">Clicked/touched position on screen</param>
     /// <returns>True, if the event is handled</returns>
-    private bool OnSingleTapped(MPoint screenPosition)
+    protected virtual bool OnSingleTapped(MPoint screenPosition)
     {
-        var args = new TappedEventArgs(screenPosition, 1);
-
-        SingleTap?.Invoke(this, args);
-
-        if (args.Handled)
-            return true;
-
         var infoToInvoke = CreateMapInfoEventArgs(screenPosition, screenPosition, 1);
 
         if (infoToInvoke?.Handled == true)
@@ -761,20 +579,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
         OnInfo(infoToInvoke);
         return infoToInvoke?.Handled ?? false;
-    }
-
-    /// <summary>
-    /// Called, when mouse/finger/pen tapped long on map
-    /// </summary>
-    /// <param name="screenPosition">Clicked/touched position on screen</param>
-    /// <returns>True, if the event is handled</returns>
-    private bool OnLongTapped(MPoint screenPosition)
-    {
-        var args = new TappedEventArgs(screenPosition, 1);
-
-        LongTap?.Invoke(this, args);
-
-        return args.Handled;
     }
 
     private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
