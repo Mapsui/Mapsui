@@ -436,32 +436,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         set => SetValue(MapProperty, value);
     }
 
-#elif __AVALONIA__
-
-    public static readonly StyledProperty<Map> MapProperty =
-        AvaloniaProperty.Register<MapControl, Map>(nameof(Map));
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable")]
-    static MapControl()
-    {
-        MapProperty.Changed.AddClassHandler<MapControl>((o, e) =>
-        {
-            if (e.NewValue != null)
-                o.AfterSetMap((Map)e.NewValue);
-        });
-    }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable")]
-    public Map Map
-    {
-        get => GetValue(MapProperty);
-        set
-        {
-            BeforeSetMap();
-            SetValue(MapProperty, value);
-        }
-    }
-
 #else
 
     private Map _map = new();

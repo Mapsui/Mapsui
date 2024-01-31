@@ -46,6 +46,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private bool _shiftPressed;
 
+    public static readonly DirectProperty<MapControl, Map> MapProperty =
+    AvaloniaProperty.RegisterDirect<MapControl, Map>(nameof(Map), o => o.Map, (o, v) => o.Map = v);
+
     public MapControl()
     {
         ClipToBounds = true;
