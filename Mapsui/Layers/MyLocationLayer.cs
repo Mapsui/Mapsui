@@ -60,7 +60,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer, IDisposable
     /// MyLocation is always in the center of the map
     /// </summary>
     public bool IsCentered
-    { 
+    {
         get => _isCentered;
         set
         {
@@ -250,9 +250,6 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer, IDisposable
 
                 if (_map.Navigator.Viewport.ToExtent() is not null)
                 {
-                    // Refresh the destination viewport at the start of the animation so it has time to load.
-                    _map.RefreshData(CreateDestinationFetchInfo(_map, _animationMyLocationEnd));
-
                     var fetchInfo = new FetchInfo(_map.Navigator.Viewport.ToSection(), _map?.CRS, ChangeType.Discrete);
                     _animationMyLocation = new AnimationEntry<Map>(
                         MyLocation,
@@ -357,7 +354,7 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer, IDisposable
                             _locStyle.SymbolRotation = endRotation;
                             map.Refresh();
                         }
-                      
+
                         return new AnimationResult<Map>(map, false);
                     });
 
@@ -524,11 +521,5 @@ public class MyLocationLayer : BaseLayer, IModifyFeatureLayer, IDisposable
         {
             Clicked?.Invoke(this, e);
         }
-    }
-
-    private static FetchInfo CreateDestinationFetchInfo(Map map, MPoint destination)
-    {
-        var destinationViewport = map.Navigator.Viewport with { CenterX = destination.X, CenterY = destination.Y };
-        return new FetchInfo(destinationViewport.ToSection(), map.CRS, ChangeType.Discrete);
     }
 }
