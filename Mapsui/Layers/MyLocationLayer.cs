@@ -250,7 +250,9 @@ public class MyLocationLayer : BaseLayer, IDisposable
 
                 if (_map.Navigator.Viewport.ToExtent() is not null)
                 {
-                    var fetchInfo = new FetchInfo(_map.Navigator.Viewport.ToSection(), _map?.CRS, ChangeType.Discrete);
+                    // Refresh the destination viewport at the start of the animation so it has time to load.
+                    _map.RefreshData(CreateDestinationFetchInfo(_map, _animationMyLocationEnd));
+
                     _animationMyLocation = new AnimationEntry<Map>(
                         MyLocation,
                         newLocation,
@@ -263,7 +265,6 @@ public class MyLocationLayer : BaseLayer, IDisposable
                         },
                         final: (map, entry) =>
                         {
-                            map.RefreshData(fetchInfo);
                             if (!MyLocation.Equals(_animationMyLocationEnd))
                             {
                                 InternalUpdateMyLocation(_animationMyLocationEnd);
@@ -293,6 +294,12 @@ public class MyLocationLayer : BaseLayer, IDisposable
                 }
             }
         }
+    }
+
+    private static FetchInfo CreateDestinationFetchInfo(Map map, MPoint destination)
+    {
+        var destinationViewport = map.Navigator.Viewport with { CenterX = destination.X, CenterY = destination.Y };
+        return new FetchInfo(destinationViewport.ToSection(), map.CRS, ChangeType.Discrete);
     }
 
     /// <summary>
