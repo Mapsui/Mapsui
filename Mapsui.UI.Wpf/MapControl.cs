@@ -347,7 +347,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         var angle = e.DeltaManipulation.Rotation;
         var previousCenter = e.ManipulationOrigin.ToMapsui();
         var previousRadius = 1f;
-        var prevAngle = 0f;
+        var previousAngle = 0f;
 
         _hasBeenManipulated |= Math.Abs(e.DeltaManipulation.Translation.X) > SystemParameters.MinimumHorizontalDragDistance
                  || Math.Abs(e.DeltaManipulation.Translation.Y) > SystemParameters.MinimumVerticalDragDistance;
@@ -356,7 +356,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         if (Map.Navigator.RotationLock == false)
         {
-            RotationSnapper.VirtualRotation += angle - prevAngle;
+            RotationSnapper.VirtualRotation += angle - previousAngle;
             rotationDelta = RotationSnapper.CalculateRotationDeltaWithSnapping(Map.Navigator.Viewport.Rotation);
         }
 

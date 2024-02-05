@@ -520,20 +520,19 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     if (touchPoints.Count != 2)
                         return false;
 
-                    var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
+                    var (previousCenter, previousRadius, previousAngle) = (_previousCenter, _previousRadius, _previousAngle);
                     var (center, radius, angle) = GetPinchValues(touchPoints);
 
                     double rotationDelta = 0;
 
                     if (Map.Navigator.RotationLock == false)
                     {
-                        var deltaRotation = angle - prevAngle;
-                        RotationSnapper.VirtualRotation += deltaRotation;
+                        RotationSnapper.VirtualRotation += angle - previousAngle;
                         rotationDelta = RotationSnapper.CalculateRotationDeltaWithSnapping(Map.Navigator.Viewport.Rotation);
                     }
 
-                    if (prevCenter != null)
-                        Map.Navigator.Pinch(center, prevCenter, radius / prevRadius, rotationDelta);
+                    if (previousCenter != null)
+                        Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
 
                     (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
 

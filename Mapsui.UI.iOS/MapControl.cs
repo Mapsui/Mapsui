@@ -212,6 +212,7 @@ public partial class MapControl : UIView, IMapControl
                 RotationSnapper.VirtualRotation += angle - previousAngle;
                 rotationDelta = RotationSnapper.CalculateRotationDeltaWithSnapping(Map.Navigator.Viewport.Rotation);
             }
+
             Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
         }
     }
