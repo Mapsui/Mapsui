@@ -15,33 +15,7 @@ public class Rotator
     public double ReSnapRotationDegrees { get; set; } = 5;
 
     public double VirtualRotation { get; set; }
-
-    public static double NormalizeRotation(double rotation)
-    {
-        rotation %= 360;
-
-        if (rotation < 0)
-        {
-            rotation += 360;
-        }
-        return rotation;
-    }
-
-    public static double RotationShortestDistance(double rotation1, double rotation2)
-    {
-        rotation1 = NormalizeRotation(rotation1);
-        rotation2 = NormalizeRotation(rotation2);
-
-        if (rotation1 > rotation2)
-        {
-            return Math.Min(Math.Abs(rotation1 - rotation2), Math.Abs(rotation2 + 360 - rotation1));
-        }
-        else
-        {
-            return Math.Min(Math.Abs(rotation2 - rotation1), Math.Abs(rotation1 + 360 - rotation2));
-        }
-    }
-
+     
     /// <summary>
     /// Calculates the rotation delta taking into account the snapping parameters. 
     /// </summary>
@@ -66,5 +40,30 @@ public class Rotator
             else
                 return virtualRotation - actualRotation; // Still unsnapped. Calculate delta.
         }
+    }
+    public static double RotationShortestDistance(double rotation1, double rotation2)
+    {
+        rotation1 = NormalizeRotation(rotation1);
+        rotation2 = NormalizeRotation(rotation2);
+
+        if (rotation1 > rotation2)
+        {
+            return Math.Min(Math.Abs(rotation1 - rotation2), Math.Abs(rotation2 + 360 - rotation1));
+        }
+        else
+        {
+            return Math.Min(Math.Abs(rotation2 - rotation1), Math.Abs(rotation1 + 360 - rotation2));
+        }
+    }
+
+    public static double NormalizeRotation(double rotation)
+    {
+        rotation %= 360;
+
+        if (rotation < 0)
+        {
+            rotation += 360;
+        }
+        return rotation;
     }
 }
