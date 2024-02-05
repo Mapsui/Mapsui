@@ -211,7 +211,7 @@ public partial class MapControl : UIView, IMapControl
             {
                 Rotator.VirtualRotation += angle - previousAngle;
 
-                rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
+                rotationDelta = Rotator.CalculateRotationDeltaWithSnapping(
                     Rotator.VirtualRotation, Map.Navigator.Viewport.Rotation, Rotator.UnSnapRotationDegrees, Rotator.ReSnapRotationDegrees);
             }
 

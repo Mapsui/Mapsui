@@ -236,7 +236,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         {
             Rotator.VirtualRotation += rotation;
 
-            rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
+            rotationDelta = Rotator.CalculateRotationDeltaWithSnapping(
                 Rotator.VirtualRotation, Map.Navigator.Viewport.Rotation, Rotator.UnSnapRotationDegrees, Rotator.ReSnapRotationDegrees);
         }
 
