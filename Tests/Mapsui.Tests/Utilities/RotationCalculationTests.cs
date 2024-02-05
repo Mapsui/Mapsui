@@ -58,8 +58,8 @@ internal class RotationCalculationTests
         var rotator = new Rotator
         {
             VirtualRotation = virtualRotation,
-            UnSnapRotationDegrees = unSnapRotation,
-            ReSnapRotationDegrees = reSnapRotation
+            UnSnapRotation = unSnapRotation,
+            ReSnapRotation = reSnapRotation
         };
 
         // Act
