@@ -42,7 +42,6 @@ namespace Mapsui.UI.Wpf;
 
 public partial class MapControl : INotifyPropertyChanged, IDisposable
 {
-    public Rotator Rotator { get; } = new Rotator();
     // Flag indicating if a drawing process is running
     private bool _drawing;
     // Flag indicating if the control has to be redrawn
@@ -65,6 +64,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private int _updateWidget = 0;
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
+
+    public RotationSnapper RotationSnapper { get; } = new RotationSnapper();
 
     private void CommonInitialize()
     {

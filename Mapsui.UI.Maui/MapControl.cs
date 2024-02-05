@@ -442,7 +442,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
             _mode = TouchMode.Zooming;
-            Rotator.VirtualRotation = Map.Navigator.Viewport.Rotation;
+            RotationSnapper.VirtualRotation = Map.Navigator.Viewport.Rotation;
         }
         else
         {
@@ -528,8 +528,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     if (Map.Navigator.RotationLock == false)
                     {
                         var deltaRotation = angle - prevAngle;
-                        Rotator.VirtualRotation += deltaRotation;
-                        rotationDelta = Rotator.CalculateRotationDeltaWithSnapping(Map.Navigator.Viewport.Rotation);
+                        RotationSnapper.VirtualRotation += deltaRotation;
+                        rotationDelta = RotationSnapper.CalculateRotationDeltaWithSnapping(Map.Navigator.Viewport.Rotation);
                     }
 
                     if (prevCenter != null)

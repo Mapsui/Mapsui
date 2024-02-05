@@ -101,7 +101,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
     {
-        Rotator.VirtualRotation = Map.Navigator.Viewport.Rotation;
+        RotationSnapper.VirtualRotation = Map.Navigator.Viewport.Rotation;
     }
 
     private void MapControl_PointerDown(object sender, PointerRoutedEventArgs e)
@@ -234,8 +234,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         if (Map.Navigator.RotationLock == false)
         {
-            Rotator.VirtualRotation += rotation;
-            rotationDelta = Rotator.CalculateRotationDeltaWithSnapping(Map.Navigator.Viewport.Rotation);
+            RotationSnapper.VirtualRotation += rotation;
+            rotationDelta = RotationSnapper.CalculateRotationDeltaWithSnapping(Map.Navigator.Viewport.Rotation);
         }
 
         Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);

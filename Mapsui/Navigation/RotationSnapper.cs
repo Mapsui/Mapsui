@@ -2,7 +2,7 @@
 
 namespace Mapsui;
 
-public class Rotator
+public class RotationSnapper
 {
     /// <summary>
     /// After how many degrees start rotation to take place

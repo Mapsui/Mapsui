@@ -15,7 +15,7 @@ internal class RotationCalculationTests
     public static void TestNormalizeRotation(double inputRotation, double expectedRotation)
     {
         // Act
-        var rotation = Rotator.NormalizeRotation(inputRotation);
+        var rotation = RotationSnapper.NormalizeRotation(inputRotation);
 
         // Assert
         ClassicAssert.AreEqual(expectedRotation, rotation);
@@ -37,7 +37,7 @@ internal class RotationCalculationTests
     public static void TestRotationShortestDistance(double inputRotation1, double inputRotation2, double expectedDistance)
     {
         // Act
-        var distance = Rotator.RotationShortestDistance(inputRotation1, inputRotation2);
+        var distance = RotationSnapper.RotationShortestDistance(inputRotation1, inputRotation2);
 
         // Assert
         ClassicAssert.AreEqual(expectedDistance, distance);
@@ -55,7 +55,7 @@ internal class RotationCalculationTests
     public static void TestCalculateRotationDeltaUsingSnapping(double virtualRotation, double actualRotation, double unSnapRotation, double reSnapRotation, double expectedRotationDelta)
     {
         // Arrange
-        var rotator = new Rotator
+        var rotationSnapper = new RotationSnapper
         {
             VirtualRotation = virtualRotation,
             UnSnapRotation = unSnapRotation,
@@ -63,7 +63,7 @@ internal class RotationCalculationTests
         };
 
         // Act
-        var rotationDelta = rotator.CalculateRotationDeltaWithSnapping(actualRotation);
+        var rotationDelta = rotationSnapper.CalculateRotationDeltaWithSnapping(actualRotation);
 
         // Assert
         ClassicAssert.AreEqual(expectedRotationDelta, rotationDelta);
