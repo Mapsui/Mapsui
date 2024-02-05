@@ -235,9 +235,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (Map.Navigator.RotationLock == false)
         {
             Rotator.VirtualRotation += rotation;
-
-            rotationDelta = Rotator.CalculateRotationDeltaWithSnapping(
-                Rotator.VirtualRotation, Map.Navigator.Viewport.Rotation, Rotator.UnSnapRotationDegrees, Rotator.ReSnapRotationDegrees);
+            rotationDelta = Rotator.CalculateRotationDeltaWithSnapping(Map.Navigator.Viewport.Rotation);
         }
 
         Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);

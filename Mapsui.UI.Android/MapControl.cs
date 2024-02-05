@@ -254,9 +254,7 @@ public partial class MapControl : ViewGroup, IMapControl
                             if (Map.Navigator.RotationLock is false)
                             {
                                 Rotator.VirtualRotation += angle - previousAngle; // Todo: could this move to Rotator?
-
-                                rotationDelta = Rotator.CalculateRotationDeltaWithSnapping(
-                                    Rotator.VirtualRotation, Map.Navigator.Viewport.Rotation, Rotator.UnSnapRotationDegrees, Rotator.ReSnapRotationDegrees);
+                                rotationDelta = Rotator.CalculateRotationDeltaWithSnapping(Map.Navigator.Viewport.Rotation);
                             }
 
                             Map.Navigator.Pinch(touch, previousTouch, radius / previousRadius, rotationDelta);

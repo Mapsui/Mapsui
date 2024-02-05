@@ -283,9 +283,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         {
             var deltaRotation = angle - prevAngle;
             Rotator.VirtualRotation += deltaRotation;
-
-            rotationDelta = Rotator.CalculateRotationDeltaWithSnapping(
-                Rotator.VirtualRotation, Map.Navigator.Viewport.Rotation, Rotator.UnSnapRotationDegrees, Rotator.ReSnapRotationDegrees);
+            rotationDelta = Rotator.CalculateRotationDeltaWithSnapping(Map.Navigator.Viewport.Rotation);
         }
 
         if (prevCenter != null)

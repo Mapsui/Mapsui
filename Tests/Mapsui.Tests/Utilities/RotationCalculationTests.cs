@@ -54,8 +54,16 @@ internal class RotationCalculationTests
 
     public static void TestCalculateRotationDeltaUsingSnapping(double virtualRotation, double actualRotation, double unSnapRotation, double reSnapRotation, double expectedRotationDelta)
     {
+        // Arrange
+        var rotator = new Rotator
+        {
+            VirtualRotation = virtualRotation,
+            UnSnapRotationDegrees = unSnapRotation,
+            ReSnapRotationDegrees = reSnapRotation
+        };
+
         // Act
-        var rotationDelta = Rotator.CalculateRotationDeltaWithSnapping(virtualRotation, actualRotation, unSnapRotation, reSnapRotation);
+        var rotationDelta = rotator.CalculateRotationDeltaWithSnapping(actualRotation);
 
         // Assert
         ClassicAssert.AreEqual(expectedRotationDelta, rotationDelta);
