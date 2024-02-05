@@ -18,10 +18,8 @@ public interface IMapControl : IDisposable
 
     void Refresh(ChangeType changeType = ChangeType.Discrete);
 
-    double UnSnapRotationDegrees { get; set; }
-
-    double ReSnapRotationDegrees { get; set; }
-
+    Rotator Rotator { get; }
+    
     void Unsubscribe();
 
     IRenderer Renderer { get; }

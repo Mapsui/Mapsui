@@ -39,8 +39,6 @@ public sealed partial class MapPage : ContentPage, IDisposable
         var test1 = info ?? throw new InvalidOperationException();
 
         mapView!.RotationLock = false;
-        mapView.UnSnapRotationDegrees = 20;
-        mapView.ReSnapRotationDegrees = 5;
 
         mapView.PinClicked += OnPinClicked;
         mapView.MapClicked += OnMapClicked;

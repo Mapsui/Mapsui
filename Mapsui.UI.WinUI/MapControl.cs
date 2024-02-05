@@ -26,7 +26,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 {
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
-    private double _virtualRotation;
     private MPoint? _pointerDownPosition;
     bool _shiftPressed;
 
@@ -102,7 +101,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
     {
-        _virtualRotation = Map.Navigator.Viewport.Rotation;
+        Rotator.VirtualRotation = Map.Navigator.Viewport.Rotation;
     }
 
     private void MapControl_PointerDown(object sender, PointerRoutedEventArgs e)
@@ -235,10 +234,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         if (Map.Navigator.RotationLock == false)
         {
-            _virtualRotation += rotation;
+            Rotator.VirtualRotation += rotation;
 
             rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                Rotator.VirtualRotation, Map.Navigator.Viewport.Rotation, Rotator.UnSnapRotationDegrees, Rotator.ReSnapRotationDegrees);
         }
 
         Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);

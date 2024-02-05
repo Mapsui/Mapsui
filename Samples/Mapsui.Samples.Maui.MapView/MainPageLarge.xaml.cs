@@ -47,8 +47,6 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         picker.SelectedItem = "Forms";
 
         mapView!.RotationLock = false;
-        mapView.UnSnapRotationDegrees = 30;
-        mapView.ReSnapRotationDegrees = 5;
 
         mapView.PinClicked += OnPinClicked;
         mapView.MapClicked += OnMapClicked;

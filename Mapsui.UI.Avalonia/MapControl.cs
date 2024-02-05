@@ -29,8 +29,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private MPoint? _previousMousePosition;
     private double _mouseWheelPos = 0.0;
 
-    /// <summary> Virtual Rotation </summary>
-    private double _virtualRotation;
     /// <summary> Previous Center for Pinch </summary>
     private MPoint? _previousCenter;
     /// <summary> Saver for angle before last pinch movement </summary>
@@ -284,10 +282,10 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (Map.Navigator.RotationLock == false)
         {
             var deltaRotation = angle - prevAngle;
-            _virtualRotation += deltaRotation;
+            Rotator.VirtualRotation += deltaRotation;
 
             rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                Rotator.VirtualRotation, Map.Navigator.Viewport.Rotation, Rotator.UnSnapRotationDegrees, Rotator.ReSnapRotationDegrees);
         }
 
         if (prevCenter != null)
@@ -304,7 +302,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (touchPoints.Count == 2)
         {
             (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
-            _virtualRotation = Map.Navigator.Viewport.Rotation;
+            Rotator.VirtualRotation = Map.Navigator.Viewport.Rotation;
         }
     }
 

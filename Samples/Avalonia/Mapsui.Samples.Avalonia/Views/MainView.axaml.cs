@@ -30,8 +30,6 @@ public partial class MainView : UserControl
 
         MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
         MapControl.Map.Navigator.RotationLock = false;
-        MapControl.UnSnapRotationDegrees = 30;
-        MapControl.ReSnapRotationDegrees = 5;
         MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
         RotationSlider.PointerMoved += RotationSliderOnPointerMoved;

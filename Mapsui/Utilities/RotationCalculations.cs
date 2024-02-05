@@ -43,7 +43,7 @@ public static class RotationCalculations
         if (Math.Abs(actualRotation) < double.Epsilon) // There is no rotation
         {
             if (RotationShortestDistance(virtualRotation, 0) >= unSnapRotation)
-                return virtualRotation; // Unsnap. The vitualRotation can be applied.
+                return virtualRotation; // Unsnap. The virtualRotation can be applied.
             else
                 return 0; // Still snapped. No delta.
         }

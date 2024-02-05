@@ -21,7 +21,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private bool _mouseDown;
     private MPoint? _previousMousePosition;
     private bool _hasBeenManipulated;
-    private double _virtualRotation;
     private readonly FlingTracker _flingTracker = new();
     private MPoint? _currentMousePosition;
 
@@ -337,7 +336,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnManipulationStarted(object? sender, ManipulationStartedEventArgs e)
     {
         _hasBeenManipulated = false;
-        _virtualRotation = Map.Navigator.Viewport.Rotation;
+        Rotator.VirtualRotation = Map.Navigator.Viewport.Rotation;
     }
 
     private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
@@ -357,10 +356,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         if (Map.Navigator.RotationLock == false)
         {
-            _virtualRotation += angle - prevAngle;
+            Rotator.VirtualRotation += angle - prevAngle;
 
             rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                Rotator.VirtualRotation, Map.Navigator.Viewport.Rotation, Rotator.UnSnapRotationDegrees, Rotator.ReSnapRotationDegrees);
         }
 
         Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);

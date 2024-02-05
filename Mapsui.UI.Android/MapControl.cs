@@ -38,7 +38,6 @@ internal class MapControlGestureListener : GestureDetector.SimpleOnGestureListen
 public partial class MapControl : ViewGroup, IMapControl
 {
     private View? _canvas;
-    private double _virtualRotation;
     private GestureDetector? _gestureDetector;
     private double _previousAngle;
     private double _previousRadius = 1f;
@@ -192,7 +191,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 {
                     (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                     _mode = TouchMode.Zooming;
-                    _virtualRotation = Map.Navigator.Viewport.Rotation;
+                    Rotator.VirtualRotation = Map.Navigator.Viewport.Rotation;
                 }
                 else
                 {
@@ -215,7 +214,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 {
                     (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                     _mode = TouchMode.Zooming;
-                    _virtualRotation = Map.Navigator.Viewport.Rotation;
+                    Rotator.VirtualRotation = Map.Navigator.Viewport.Rotation;
                 }
                 else
                 {
@@ -254,10 +253,10 @@ public partial class MapControl : ViewGroup, IMapControl
 
                             if (Map.Navigator.RotationLock is false)
                             {
-                                _virtualRotation += angle - previousAngle;
+                                Rotator.VirtualRotation += angle - previousAngle; // Todo: could this move to Rotator?
 
                                 rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                                    _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                                    Rotator.VirtualRotation, Map.Navigator.Viewport.Rotation, Rotator.UnSnapRotationDegrees, Rotator.ReSnapRotationDegrees);
                             }
 
                             Map.Navigator.Pinch(touch, previousTouch, radius / previousRadius, rotationDelta);

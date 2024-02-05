@@ -47,7 +47,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     // We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
     private const int _touchSlop = 8;
     protected readonly bool _initialized;
-    private double _virtualRotation;
     private readonly ConcurrentDictionary<long, MPoint> _touches = new();
     private MPoint? _pointerDownPosition;
     private bool _waitingForDoubleTap;
@@ -443,7 +442,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
             _mode = TouchMode.Zooming;
-            _virtualRotation = Map.Navigator.Viewport.Rotation;
+            Rotator.VirtualRotation = Map.Navigator.Viewport.Rotation;
         }
         else
         {
@@ -529,10 +528,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     if (Map.Navigator.RotationLock == false)
                     {
                         var deltaRotation = angle - prevAngle;
-                        _virtualRotation += deltaRotation;
+                        Rotator.VirtualRotation += deltaRotation;
 
                         rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                            _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                            Rotator.VirtualRotation, Map.Navigator.Viewport.Rotation, Rotator.UnSnapRotationDegrees, Rotator.ReSnapRotationDegrees);
                     }
 
                     if (prevCenter != null)
