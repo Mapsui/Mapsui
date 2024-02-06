@@ -334,7 +334,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationStarted(object? sender, ManipulationStartedEventArgs e)
     {
-        RotationSnapper.VirtualRotation = Map.Navigator.Viewport.Rotation;
+        RotationSnapper.PinchRotation = 0;
     }
 
     private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
@@ -349,7 +349,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         var previousRadius = 1f;
         var previousAngle = 0f;
 
-        RotationSnapper.VirtualRotation += angle - previousAngle;
+        RotationSnapper.PinchRotation += angle - previousAngle;
         var rotationDelta = RotationSnapper.CalculateRotationDelta(
             Map.Navigator.Viewport.Rotation, Map.Navigator.RotationLock);
 

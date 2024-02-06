@@ -15,9 +15,10 @@ public class RotationSnapper
     public double ReSnapRotation { get; set; } = 5;
 
     /// <summary>
-    /// The virtual rotation that is determined by the users rotating pinch behavior.
+    /// The rotation in degrees of the current pinch gesture. Note that this does not say
+    /// anything about the map rotation. 
     /// </summary>
-    public double VirtualRotation { get; set; }
+    public double PinchRotation { get; set; }
      
     /// <summary>
     /// Calculates the rotation delta taking into account the snapping parameters. 
@@ -31,17 +32,17 @@ public class RotationSnapper
 
         if (Math.Abs(rotation) < double.Epsilon) // There is no rotation
         {
-            if (RotationShortestDistance(VirtualRotation, 0) >= UnSnapRotation)
-                return VirtualRotation; // Unsnap. The virtualRotation can be applied.
+            if (RotationShortestDistance(PinchRotation, 0) >= UnSnapRotation)
+                return PinchRotation; // Unsnap. The virtualRotation can be applied.
             else
                 return 0; // Still snapped. No delta.
         }
         else // There is rotation
         {
-            if (RotationShortestDistance(VirtualRotation, 0) <= ReSnapRotation)
+            if (RotationShortestDistance(rotation + PinchRotation, 0) <= ReSnapRotation)
                 return -rotation; // Resnap. Undo the actual rotation by returning the inverse as delta. 
             else
-                return VirtualRotation - rotation; // Still unsnapped. Calculate delta.
+                return PinchRotation; // Still unsnapped. Calculate delta.
         }
     }
     public static double RotationShortestDistance(double rotation1, double rotation2)

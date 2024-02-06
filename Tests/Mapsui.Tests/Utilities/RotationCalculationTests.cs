@@ -43,21 +43,21 @@ internal class RotationCalculationTests
         ClassicAssert.AreEqual(expectedDistance, distance);
     }
 
-    [TestCase(15, 0, 20, 10, 0)] // Still snapped
-    [TestCase(-15, 0, 20, 10, 0)] // Still snapped
-    [TestCase(25, 0, 20, 10, 25)] // Unsnap
-    [TestCase(-25, 0, 20, 10, -25)] // Unsnap
-    [TestCase(30, 25, 20, 10, 5)] // Still unsnapped
-    [TestCase(-30, -25, 20, 10, -5)] // Still unsnapped
-    [TestCase(5, 15, 20, 10, -15)] // Resnap
-    [TestCase(-5, -15, 20, 10, 15)] // Resnap
+    [TestCase(15, 0, 20, 10, 0, "Still snapped")] 
+    [TestCase(-15, 0, 20, 10, 0, "Still snapped")]
+    [TestCase(25, 0, 20, 10, 25, "Unsnap")]
+    [TestCase(-25, 0, 20, 10, -25, "Unsnap")]
+    [TestCase(5, 25, 20, 10, 5, "Still unsnapped")]
+    [TestCase(-5, -25, 20, 10, -5, "Still unsnapped")]
+    [TestCase(-10, 15, 20, 10, -15, "Resnap")]
+    [TestCase(10, -15, 20, 10, 15, "Resnap")]
 
-    public static void TestCalculateRotationDeltaUsingSnapping(double virtualRotation, double actualRotation, double unSnapRotation, double reSnapRotation, double expectedRotationDelta)
+    public static void TestCalculateRotationDeltaUsingSnapping(double pinchRotation, double actualRotation, double unSnapRotation, double reSnapRotation, double expectedRotationDelta, string message)
     {
         // Arrange
         var rotationSnapper = new RotationSnapper
         {
-            VirtualRotation = virtualRotation,
+            PinchRotation = pinchRotation,
             UnSnapRotation = unSnapRotation,
             ReSnapRotation = reSnapRotation
         };
@@ -66,6 +66,6 @@ internal class RotationCalculationTests
         var rotationDelta = rotationSnapper.CalculateRotationDelta(actualRotation, false);
 
         // Assert
-        ClassicAssert.AreEqual(expectedRotationDelta, rotationDelta);
+        ClassicAssert.AreEqual(expectedRotationDelta, rotationDelta, message);
     }
 }

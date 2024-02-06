@@ -165,7 +165,7 @@ public partial class MapControl : UIView, IMapControl
     {
         base.TouchesBegan(touches, evt);
 
-        RotationSnapper.VirtualRotation = Map.Navigator.Viewport.Rotation;
+        RotationSnapper.PinchRotation = 0;
 
         if (touches.AnyObject is UITouch touch)
         {
@@ -191,7 +191,7 @@ public partial class MapControl : UIView, IMapControl
 
                 var previousPosition = touch.PreviousLocationInView(this).ToMapsui();
                 Map.Navigator.Drag(position, previousPosition);
-                RotationSnapper.VirtualRotation = Map.Navigator.Viewport.Rotation;
+                RotationSnapper.PinchRotation = 0;
             }
         }
         else if (evt?.AllTouches.Count >= 2)
@@ -205,7 +205,7 @@ public partial class MapControl : UIView, IMapControl
             var (previousCenter, previousRadius, previousAngle) = GetPinchValues(previousLocations);
             var (center, radius, angle) = GetPinchValues(locations);
 
-            RotationSnapper.VirtualRotation += angle - previousAngle;
+            RotationSnapper.PinchRotation += angle - previousAngle;
             var rotationDelta = RotationSnapper.CalculateRotationDelta(
                 Map.Navigator.Viewport.Rotation, Map.Navigator.RotationLock);
 

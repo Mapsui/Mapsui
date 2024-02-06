@@ -277,7 +277,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         var (previousCenter, previousRadius, previousAngel) = (_previousCenter, _previousRadius, _previousAngle);
         var (center, radius, angle) = GetPinchValues(touchPoints);
 
-        RotationSnapper.VirtualRotation += angle - previousAngel;
+        RotationSnapper.PinchRotation += angle - previousAngel;
         var rotationDelta = RotationSnapper.CalculateRotationDelta(
             Map.Navigator.Viewport.Rotation, Map.Navigator.RotationLock);
 
@@ -294,7 +294,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (touchPoints.Count == 2)
         {
             (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
-            RotationSnapper.VirtualRotation = Map.Navigator.Viewport.Rotation;
+            RotationSnapper.PinchRotation = 0;
         }
     }
 

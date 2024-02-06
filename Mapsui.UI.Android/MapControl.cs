@@ -191,7 +191,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 {
                     (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                     _mode = TouchMode.Zooming;
-                    RotationSnapper.VirtualRotation = Map.Navigator.Viewport.Rotation;
+                    RotationSnapper.PinchRotation = 0;
                 }
                 else
                 {
@@ -214,7 +214,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 {
                     (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                     _mode = TouchMode.Zooming;
-                    RotationSnapper.VirtualRotation = Map.Navigator.Viewport.Rotation;
+                    RotationSnapper.PinchRotation = 0;
                 }
                 else
                 {
@@ -249,7 +249,7 @@ public partial class MapControl : ViewGroup, IMapControl
                             var (previousTouch, previousRadius, previousAngle) = (_previousTouch, _previousRadius, _previousAngle);
                             var (touch, radius, angle) = GetPinchValues(touchPoints);
 
-                            RotationSnapper.VirtualRotation += angle - previousAngle;
+                            RotationSnapper.PinchRotation += angle - previousAngle;
                             var rotationDelta = RotationSnapper.CalculateRotationDelta(
                                 Map.Navigator.Viewport.Rotation, Map.Navigator.RotationLock);
 
