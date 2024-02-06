@@ -43,7 +43,7 @@ public partial class MapControl : ViewGroup, IMapControl
     private double _previousRadius = 1f;
     private TouchMode _mode = TouchMode.None;
     private Handler? _mainLooperHandler;
-    private MPoint _previousTouch = new();
+    private MPoint? _previousTouch;
     private MPoint? _pointerDownPosition;
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
 
@@ -249,19 +249,13 @@ public partial class MapControl : ViewGroup, IMapControl
                             var (previousTouch, previousRadius, previousAngle) = (_previousTouch, _previousRadius, _previousAngle);
                             var (touch, radius, angle) = GetPinchValues(touchPoints);
 
-                            double rotationDelta = 0;
-
-                            if (Map.Navigator.RotationLock is false)
-                            {
-                                RotationSnapper.VirtualRotation += angle - previousAngle; // Todo: could this move to Rotator?
-                                rotationDelta = RotationSnapper.CalculateRotationDeltaWithSnapping(Map.Navigator.Viewport.Rotation);
-                            }
+                            RotationSnapper.VirtualRotation += angle - previousAngle;
+                            var rotationDelta = RotationSnapper.CalculateRotationDelta(
+                                Map.Navigator.Viewport.Rotation, Map.Navigator.RotationLock);
 
                             Map.Navigator.Pinch(touch, previousTouch, radius / previousRadius, rotationDelta);
 
                             (_previousTouch, _previousRadius, _previousAngle) = (touch, radius, angle);
-
-
                         }
                         break;
                 }

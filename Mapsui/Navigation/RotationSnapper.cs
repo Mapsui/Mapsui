@@ -24,8 +24,11 @@ public class RotationSnapper
     /// </summary>
     /// <param name="rotation">The rotation of the viewport of the map. This rotation is visible in the map.</param>
     /// <returns></returns>
-    public double CalculateRotationDeltaWithSnapping(double rotation)
+    public double CalculateRotationDelta(double rotation, bool rotationLock)
     {
+        if (rotationLock) 
+            return 0;
+
         if (Math.Abs(rotation) < double.Epsilon) // There is no rotation
         {
             if (RotationShortestDistance(VirtualRotation, 0) >= UnSnapRotation)

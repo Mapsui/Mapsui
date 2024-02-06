@@ -20,7 +20,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private MPoint? _pointerDownPosition;
     private bool _mouseDown;
     private MPoint? _previousMousePosition;
-    private bool _hasBeenManipulated;
     private readonly FlingTracker _flingTracker = new();
     private MPoint? _currentMousePosition;
 
@@ -225,8 +224,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         return true;
     }
 
-    private static bool IsClick(MPoint currentPosition, MPoint previousPosition)
+    private static bool IsClick(MPoint currentPosition, MPoint? previousPosition)
     {
+        if (previousPosition is null)
+            return false;
+
         return
             Math.Abs(currentPosition.X - previousPosition.X) < SystemParameters.MinimumHorizontalDragDistance &&
             Math.Abs(currentPosition.Y - previousPosition.Y) < SystemParameters.MinimumVerticalDragDistance;
@@ -234,12 +236,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlTouchUp(object? sender, TouchEventArgs e)
     {
-        if (!_hasBeenManipulated)
+        var touchPosition = e.GetTouchPoint(this).Position.ToMapsui();
+        if (IsClick(touchPosition, _pointerDownPosition))
         {
-            var touchPosition = e.GetTouchPoint(this).Position.ToMapsui();
-            // todo: Pass the touchDown position. It needs to be set at touch down.
-
-            // todo: Figure out how to do a number of taps for WPF
             OnInfo(CreateMapInfoEventArgs(touchPosition, touchPosition, 1));
         }
     }
@@ -335,32 +334,27 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationStarted(object? sender, ManipulationStartedEventArgs e)
     {
-        _hasBeenManipulated = false;
         RotationSnapper.VirtualRotation = Map.Navigator.Viewport.Rotation;
     }
 
     private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
     {
         var translation = e.DeltaManipulation.Translation;
+
         var center = e.ManipulationOrigin.ToMapsui().Offset(translation.X, translation.Y);
         var radius = GetDeltaScale(e.DeltaManipulation.Scale);
         var angle = e.DeltaManipulation.Rotation;
+        
         var previousCenter = e.ManipulationOrigin.ToMapsui();
         var previousRadius = 1f;
         var previousAngle = 0f;
 
-        _hasBeenManipulated |= Math.Abs(e.DeltaManipulation.Translation.X) > SystemParameters.MinimumHorizontalDragDistance
-                 || Math.Abs(e.DeltaManipulation.Translation.Y) > SystemParameters.MinimumVerticalDragDistance;
-
-        double rotationDelta = 0;
-
-        if (Map.Navigator.RotationLock == false)
-        {
-            RotationSnapper.VirtualRotation += angle - previousAngle;
-            rotationDelta = RotationSnapper.CalculateRotationDeltaWithSnapping(Map.Navigator.Viewport.Rotation);
-        }
+        RotationSnapper.VirtualRotation += angle - previousAngle;
+        var rotationDelta = RotationSnapper.CalculateRotationDelta(
+            Map.Navigator.Viewport.Rotation, Map.Navigator.RotationLock);
 
         Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
+
         e.Handled = true;
     }
 

@@ -523,16 +523,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     var (previousCenter, previousRadius, previousAngle) = (_previousCenter, _previousRadius, _previousAngle);
                     var (center, radius, angle) = GetPinchValues(touchPoints);
 
-                    double rotationDelta = 0;
+                    RotationSnapper.VirtualRotation += angle - previousAngle;
+                    var rotationDelta = RotationSnapper.CalculateRotationDelta(
+                        Map.Navigator.Viewport.Rotation, Map.Navigator.RotationLock);
 
-                    if (Map.Navigator.RotationLock == false)
-                    {
-                        RotationSnapper.VirtualRotation += angle - previousAngle;
-                        rotationDelta = RotationSnapper.CalculateRotationDeltaWithSnapping(Map.Navigator.Viewport.Rotation);
-                    }
-
-                    if (previousCenter != null)
-                        Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
+                    Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
 
                     (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
 

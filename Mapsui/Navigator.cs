@@ -421,7 +421,7 @@ public class Navigator
     /// <param name="previousPositionScreen">Previous position of the dragging mouse or finger.</param>
     public void Drag(MPoint positionScreen, MPoint previousPositionScreen)
     {
-        Pinch(positionScreen, previousPositionScreen, 1);
+        Pinch(positionScreen, previousPositionScreen, 1, 0);
     }
 
     /// <summary>
@@ -433,8 +433,11 @@ public class Navigator
     /// <param name="previousPinchCenter">The previous center of the current position of touch positions.</param>
     /// <param name="deltaResolution">The change in resolution cause by moving the fingers together or further apart.</param>
     /// <param name="deltaRotation">The change in rotation of the finger positions.</param>
-    public void Pinch(MPoint currentPinchCenter, MPoint previousPinchCenter, double deltaResolution, double deltaRotation = 0)
+    public void Pinch(MPoint currentPinchCenter, MPoint? previousPinchCenter, double deltaResolution, double deltaRotation)
     {
+        if (previousPinchCenter is null) 
+            return;
+        
         if (ZoomLock) deltaResolution = 1;
         if (PanLock) currentPinchCenter = previousPinchCenter;
         if (RotationLock) deltaRotation = 0;

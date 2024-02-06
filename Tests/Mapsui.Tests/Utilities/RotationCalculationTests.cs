@@ -63,7 +63,7 @@ internal class RotationCalculationTests
         };
 
         // Act
-        var rotationDelta = rotationSnapper.CalculateRotationDeltaWithSnapping(actualRotation);
+        var rotationDelta = rotationSnapper.CalculateRotationDelta(actualRotation, false);
 
         // Assert
         ClassicAssert.AreEqual(expectedRotationDelta, rotationDelta);

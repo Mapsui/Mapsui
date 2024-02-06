@@ -7,7 +7,6 @@
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.UI.WinUI.Extensions;
-using Mapsui.Utilities;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -230,15 +229,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         var previousCenter = e.Position.ToMapsui().Offset(-e.Delta.Translation.X, -e.Delta.Translation.Y);
         var previousRadius = 1f;
 
-        double rotationDelta = 0;
-
-        if (Map.Navigator.RotationLock == false)
-        {
-            RotationSnapper.VirtualRotation += rotation;
-            rotationDelta = RotationSnapper.CalculateRotationDeltaWithSnapping(Map.Navigator.Viewport.Rotation);
-        }
+        RotationSnapper.VirtualRotation += rotation;
+        var rotationDelta = RotationSnapper.CalculateRotationDelta(
+            Map.Navigator.Viewport.Rotation, Map.Navigator.RotationLock);
 
         Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
+
         e.Handled = true;
     }
 
