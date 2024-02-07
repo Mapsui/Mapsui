@@ -1,7 +1,6 @@
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Nts;
-using Mapsui.Nts.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;

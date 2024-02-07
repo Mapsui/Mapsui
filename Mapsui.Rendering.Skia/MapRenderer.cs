@@ -19,11 +19,6 @@ using Mapsui.Widgets.ButtonWidgets;
 using Mapsui.Widgets.InfoWidgets;
 using Mapsui.Widgets.ScaleBar;
 using SkiaSharp;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 #pragma warning disable IDISP008 // Don't assign member with injected created disposable
 
