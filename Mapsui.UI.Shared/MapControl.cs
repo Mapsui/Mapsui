@@ -66,8 +66,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private ConcurrentQueue<IWidget>? _widgetCollection;
     // saving list of touchable Widgets
     private List<ITouchableWidget>? _touchableWidgets;
-    // keeps track of the widgets count to see if i need to recalculate the extended widgets.
-    private int _updateWidget = 0;
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
 
