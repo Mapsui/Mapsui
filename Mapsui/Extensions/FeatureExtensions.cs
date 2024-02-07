@@ -9,53 +9,14 @@ namespace Mapsui.Extensions;
 
 public static class FeatureExtensions
 {
-    public static Func<IFeature, IFeature> DefaultCopy = StandardCopy;
-    private static readonly Dictionary<Type, Func<IFeature, IFeature>> _copyFeature = new();
-
-    public static void RegisterFeature<T>(Func<IFeature, IFeature> copy)
+    public static T Copy<T>(this T original) where T : IFeature
     {
-        _copyFeature[typeof(T)] = copy;
+        return (T)original.Clone();
     }
 
-    public static IFeature StandardCopy(IFeature feature)
+    public static IEnumerable<IFeature> Copy(this IEnumerable<IFeature> original)
     {
-        if (_copyFeature.TryGetValue(feature.GetType(), out var registeredCopy))
-        {
-            return registeredCopy(feature);
-        }
-
-        try
-        {
-            // Fall Back if Type is not registered
-            var type = feature.GetType();
-            return (IFeature)Activator.CreateInstance(type, feature)!;
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-            throw new NotSupportedException($"Register {feature.GetType().Name} so that it works in AOT Mode");
-        }
-    }
-
-    public static T Copy<T>(this T original, Func<T, T>? copy = null) where T : IFeature
-    {
-        if (copy == null)
-        {
-            return (T)DefaultCopy(original);
-        }
-        
-        return copy(original);
-    }
-
-    public static IFeature Copy(this IFeature original, Func<IFeature, IFeature>? copy = null)
-    {
-        copy ??= DefaultCopy;
-        return copy(original);
-    }
-
-    public static IEnumerable<IFeature> Copy(this IEnumerable<IFeature> original, Func<IFeature, IFeature>? copy = null)
-    {
-        return original.Select(f => f.Copy(copy)).ToList();
+        return original.Select(Copy).ToList();
     }
 
     public static string ToDisplayText(this IFeature feature)

@@ -5,7 +5,7 @@ namespace Mapsui.Layers;
 /// <summary>
 /// Feature representing a point on the <cref="Map"/>
 /// </summary>
-public partial class PointFeature : BaseFeature, IFeature
+public class PointFeature : BaseFeature, IFeature
 {
     public PointFeature(PointFeature pointFeature) : base(pointFeature)
     {
@@ -53,5 +53,10 @@ public partial class PointFeature : BaseFeature, IFeature
             Point.X = x;
             Point.Y = y;
         });
+    }
+
+    public virtual object Clone()
+    {
+        return new PointFeature(this);
     }
 }

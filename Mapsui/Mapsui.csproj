@@ -28,11 +28,6 @@
   </ItemGroup>
 
   <!--Source Code Generators-->
-  <ItemGroup>
-    <ProjectReference Include="..\SourceGenerators\Mapsui.SourceGenerator\Mapsui.SourceGenerator.csproj" 
-                      OutputItemType="Analyzer"
-                      ReferenceOutputAssembly="false"  />
-  </ItemGroup>
 
   <PropertyGroup>
     <DebugType>portable</DebugType>
