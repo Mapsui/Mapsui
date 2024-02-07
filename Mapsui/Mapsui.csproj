@@ -5,9 +5,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Description>Mapsui - Library for mapping</Description>
 		<IsPackable>true</IsPackable>
-    <!--For Debugging Source Generated Files uncomment the line below-->
-    <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-    <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>-->
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,12 +19,6 @@
     <EmbeddedResource Include="Resources\Images\MyLocationStill.svg" />
     <EmbeddedResource Include="Resources\Images\Pin.svg" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Include="$(ProjectDir)..\SourceGenerators\Mapsui.SourceGenerator\bin\$(Configuration)\netstandard2.0\Mapsui.SourceGenerator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-  </ItemGroup>
-
-  <!--Source Code Generators-->
 
   <PropertyGroup>
     <DebugType>portable</DebugType>
