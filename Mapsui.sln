@@ -70,7 +70,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentat
 		docfx\documentation\Async-Fetching.md = docfx\documentation\Async-Fetching.md
 		docfx\documentation\Contributors-Guidelines.md = docfx\documentation\Contributors-Guidelines.md
 		docfx\documentation\custom-style-renders.md = docfx\documentation\custom-style-renders.md
-		docfx\documentation\Development-constraints.md = docfx\documentation\Development-constraints.md
 		docfx\documentation\documentation.md = docfx\documentation\documentation.md
 		docfx\documentation\getting-started-android.md = docfx\documentation\getting-started-android.md
 		docfx\documentation\getting-started-avalonia.md = docfx\documentation\getting-started-avalonia.md
@@ -85,17 +84,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentat
 		docfx\documentation\getting-started-xamarin-forms.md = docfx\documentation\getting-started-xamarin-forms.md
 		docfx\documentation\Home.md = docfx\documentation\Home.md
 		docfx\documentation\How-to-work-with-Mapsui.md = docfx\documentation\How-to-work-with-Mapsui.md
-		docfx\documentation\Mapsui-2.0.md = docfx\documentation\Mapsui-2.0.md
 		docfx\documentation\Mapsui-Components.md = docfx\documentation\Mapsui-Components.md
 		docfx\documentation\NuGet-of-latest-build.md = docfx\documentation\NuGet-of-latest-build.md
-		PerformanceWidget.md = PerformanceWidget.md
+		docfx\documentation\performance-widget.md = docfx\documentation\performance-widget.md
 		docfx\documentation\projections.md = docfx\documentation\projections.md
-		docfx\documentation\Renderers.md = docfx\documentation\Renderers.md
-		docfx\documentation\Rendering-Tests.md = docfx\documentation\Rendering-Tests.md
+		docfx\documentation\rendering-tests.md = docfx\documentation\rendering-tests.md
 		docfx\documentation\Roadmap.md = docfx\documentation\Roadmap.md
 		docfx\documentation\samples.md = docfx\documentation\samples.md
-		docfx\documentation\skia-scale.md = docfx\documentation\skia-scale.md
 		docfx\documentation\toc.md = docfx\documentation\toc.md
+		docfx\documentation\v2.0-upgrade-guide.md = docfx\documentation\v2.0-upgrade-guide.md
+		docfx\documentation\v4.0-upgrade-guide.md = docfx\documentation\v4.0-upgrade-guide.md
+		docfx\documentation\v5.0-upgrade-guide.md = docfx\documentation\v5.0-upgrade-guide.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{52C84C7C-1D60-454E-804A-1F9691BD61A3}"
@@ -281,6 +280,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Sample.SourceGenerator", "SourceGenerators\Mapsui.Sample.SourceGenerator\Mapsui.Sample.SourceGenerator.csproj", "{AE094043-B696-49D4-8F58-2523047A6210}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.SourceGenerator", "SourceGenerators\Mapsui.SourceGenerator\Mapsui.SourceGenerator.csproj", "{E891ACB9-96FB-4690-9155-C6383BE32F71}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHubTemplates", "GitHubTemplates", "{EAE45293-F2CF-45CD-A35A-F5B15833D3CD}"
+	ProjectSection(SolutionItems) = preProject
+		.github\ISSUE_TEMPLATE\bug_report.md = .github\ISSUE_TEMPLATE\bug_report.md
+		.github\ISSUE_TEMPLATE\feature_request.md = .github\ISSUE_TEMPLATE\feature_request.md
+		.github\ISSUE_TEMPLATE\pull_request_template.md = .github\ISSUE_TEMPLATE\pull_request_template.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -28,6 +28,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
     private double _virtualRotation;
     private MPoint? _pointerDownPosition;
+    bool _shiftPressed;
 
     public MapControl()
     {
@@ -56,19 +57,19 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         SizeChanged += MapControlSizeChanged;
 
-        PointerWheelChanged += MapControl_PointerWheelChanged;
-
         ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY | ManipulationModes.Rotate;
+
+        // Pointer events        
         ManipulationStarted += OnManipulationStarted;
         ManipulationDelta += OnManipulationDelta;
         ManipulationCompleted += OnManipulationCompleted;
-
         ManipulationInertiaStarting += OnManipulationInertiaStarting;
-
         Tapped += OnSingleTapped;
         PointerPressed += MapControl_PointerDown;
         DoubleTapped += OnDoubleTapped;
         PointerMoved += MapControl_PointerMoved;
+        PointerWheelChanged += MapControl_PointerWheelChanged;
+
         KeyDown += MapControl_KeyDown;
         KeyUp += MapControl_KeyUp;
 
@@ -81,7 +82,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (e.Key == VirtualKey.Shift)
         {
-            ShiftPressed = true;
+            _shiftPressed = true;
         }
     }
 
@@ -89,7 +90,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (e.Key == VirtualKey.Shift)
         {
-            ShiftPressed = false;
+            _shiftPressed = false;
         }
     }
 
@@ -119,7 +120,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
     {
         var tapPosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouchingTouched(tapPosition, _pointerDownPosition, true, 2, ShiftPressed))
+        if (HandleTouchingTouched(tapPosition, _pointerDownPosition, true, 2, _shiftPressed))
         {
             e.Handled = true;
             return;
@@ -128,12 +129,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
     }
 
-    public bool ShiftPressed { get; set; }
-
     private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
     {
         var tabPosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouchingTouched(tabPosition, _pointerDownPosition, true, 1, ShiftPressed))
+        if (HandleTouchingTouched(tabPosition, _pointerDownPosition, true, 1, _shiftPressed))
         {
             e.Handled = true;
             return;

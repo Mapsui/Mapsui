@@ -1,12 +1,10 @@
 using Mapsui.Extensions;
-using Mapsui.Layers;
 using Mapsui.UI.Utils;
 using Mapsui.UI.Wpf.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -51,22 +49,21 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         SkiaCanvas.PaintSurface += SKElementOnPaintSurface;
 
-        Loaded += MapControlLoaded;
+        // Pointer events
         MouseLeftButtonDown += MapControlMouseLeftButtonDown;
         MouseLeftButtonUp += MapControlMouseLeftButtonUp;
-
-        TouchUp += MapControlTouchUp;
-
         MouseMove += MapControlMouseMove;
         MouseLeave += MapControlMouseLeave;
         MouseWheel += MapControlMouseWheel;
-
-        SizeChanged += MapControlSizeChanged;
-
+        TouchUp += MapControlTouchUp;
         ManipulationStarted += OnManipulationStarted;
         ManipulationDelta += OnManipulationDelta;
         ManipulationCompleted += OnManipulationCompleted;
         ManipulationInertiaStarting += OnManipulationInertiaStarting;
+
+        Loaded += MapControlLoaded;
+
+        SizeChanged += MapControlSizeChanged;
 
         IsManipulationEnabled = true;
 
@@ -152,7 +149,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         _pointerDownPosition = e.GetPosition(this).ToMapsui();
 
-        if (HandleWidgetPointerDown(_pointerDownPosition, true, e.ClickCount, ShiftPressed))
+        if (HandleWidgetPointerDown(_pointerDownPosition, true, e.ClickCount, GetShiftPressed()))
             return;
 
         _previousMousePosition = _pointerDownPosition;
@@ -170,7 +167,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var mousePosition = e.GetPosition(this).ToMapsui();
 
-        if (HandleWidgetPointerUp(mousePosition, _pointerDownPosition, true, e.ClickCount, ShiftPressed))
+        if (HandleWidgetPointerUp(mousePosition, _pointerDownPosition, true, e.ClickCount, GetShiftPressed()))
         {
             _mouseDown = false;
 
@@ -260,7 +257,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseMove(object sender, MouseEventArgs e)
     {
-        if (HandleWidgetPointerMove(e.GetPosition(this).ToMapsui(), e.LeftButton == MouseButtonState.Pressed, 0, ShiftPressed))
+        if (HandleWidgetPointerMove(e.GetPosition(this).ToMapsui(), e.LeftButton == MouseButtonState.Pressed, 0, GetShiftPressed()))
             return;
 
         if (IsInBoxZoomMode())
@@ -429,5 +426,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         GC.SuppressFinalize(this);
     }
 
-    public static bool ShiftPressed => Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+    private static bool GetShiftPressed()
+    {
+        return Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+    }
 }
