@@ -19,7 +19,7 @@ public class Navigator
     private MRect? _defaultPanBounds;
     private MMinMax? _overrideZoomBounds;
     private MRect? _overridePanBounds;
-    private double? _startPinchAngle; // Set at the start of the pinch gesture to calculate snapping
+    private double _totalRotationDelta; // We need this to calculate snapping
     private PinchState? _previousPinchState;
 
 
@@ -481,12 +481,11 @@ public class Navigator
         if (PanLock) pinchState = pinchState with { Center = previousPinchState.Center };
         if (RotationLock) pinchState = pinchState with { Angle = previousPinchState.Angle };
 
-        if (_startPinchAngle is null)
-            _startPinchAngle = previousPinchState.Angle;
+        _totalRotationDelta += pinchState.Angle - previousPinchState.Angle;
 
         ClearAnimations();
 
-        var viewport = TransformState(Viewport, pinchState, previousPinchState, _startPinchAngle.Value);
+        var viewport = TransformState(Viewport, pinchState, previousPinchState, _totalRotationDelta);
         SetViewportWithLimit(viewport);
     }
 
@@ -515,11 +514,11 @@ public class Navigator
     /// </summary>
     public void ClearPinchState()
     {
-        _startPinchAngle = null; // Reset the pinch angle, it will be set on the first pinch update
+        _totalRotationDelta = 0; // Reset the total. It will incremented in each Pinch call
         _previousPinchState = null;
     }
 
-    private Viewport TransformState(Viewport viewport, PinchState pinchState, PinchState previousPinchState, double startPinchAngle)
+    private Viewport TransformState(Viewport viewport, PinchState pinchState, PinchState previousPinchState, double totalRotationDelta)
     {
         var previous = viewport.ScreenToWorld(previousPinchState.Center.X, previousPinchState.Center.Y);
         var current = viewport.ScreenToWorld(pinchState.Center.X, pinchState.Center.Y);
@@ -529,7 +528,6 @@ public class Navigator
 
         if (!RotationLock)
         {
-            var totalRotationDelta = pinchState.Angle - startPinchAngle;
             double virtualRotation = Viewport.Rotation + totalRotationDelta; ;
             rotationDelta = RotationSnapper.AdjustRotationDeltaForSnapping(rotationDelta, viewport.Rotation, virtualRotation, UnSnapRotation, ReSnapRotation);
         }
