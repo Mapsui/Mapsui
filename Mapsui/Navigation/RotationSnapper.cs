@@ -1,27 +1,32 @@
-﻿using System;
+﻿using Mapsui.Logging;
+using System;
 
 namespace Mapsui;
 
 public static class RotationSnapper
 {
     /// <summary>
-    /// Calculates the rotation delta taking into account the snapping parameters. 
+    /// Adjusts te rotation delta in case snapping applies.
     /// </summary>
-    /// <param name="rotation">The rotation of the viewport of the map. This rotation is visible in the map.</param>
-    /// <returns></returns>
     public static double AdjustRotationDeltaForSnapping(double rotationDelta, double currentRotation, double virtualRotation, double unSnapRotation, double reSnapRotation)
     {
         if (Math.Abs(currentRotation) < double.Epsilon) // There is no rotation
         {
             if (RotationShortestDistance(virtualRotation, 0) >= unSnapRotation)
+            {
+                Logger.Log(LogLevel.Information, "Unsnap rotation");
                 return virtualRotation; // Unsnap. The virtualRotation can be applied.
+            }
             else
                 return 0; // Still snapped. No delta.
         }
         else // There is rotation
         {
             if (RotationShortestDistance(virtualRotation, 0) <= reSnapRotation)
+            {
+                Logger.Log(LogLevel.Information, "Resnap rotation");
                 return -currentRotation; // Resnap. Undo the actual rotation by returning the inverse as delta. 
+            }
             else
                 return rotationDelta; // Still unsnapped. Return the rotationDelta unaltered.
         }
