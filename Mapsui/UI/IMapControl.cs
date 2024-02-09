@@ -17,9 +17,7 @@ public interface IMapControl : IDisposable
     void RefreshData(ChangeType changeType = ChangeType.Discrete);
 
     void Refresh(ChangeType changeType = ChangeType.Discrete);
-
-    RotationSnapper RotationSnapper { get; }
-    
+       
     void Unsubscribe();
 
     IRenderer Renderer { get; }

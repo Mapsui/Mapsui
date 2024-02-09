@@ -36,8 +36,6 @@ public sealed class RegressionMapControl : IMapControl
         }
     }
 
-    public RotationSnapper RotationSnapper => new();
-
     public event EventHandler? ViewportInitialized;
     public void RefreshGraphics()
     {

@@ -100,7 +100,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
     {
-        RotationSnapper.PinchRotation = 0;
+        Map.Navigator.ClearPinchState();
     }
 
     private void MapControl_PointerDown(object sender, PointerRoutedEventArgs e)
@@ -222,20 +222,17 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
+        Map.Navigator.Pinch(GetPinchState(e));
+        e.Handled = true;
+    }
+
+    private static PinchState GetPinchState(ManipulationDeltaRoutedEventArgs e)
+    {
         var center = e.Position.ToMapsui();
         var radius = e.Delta.Scale;
         var rotation = e.Delta.Rotation;
 
-        var previousCenter = e.Position.ToMapsui().Offset(-e.Delta.Translation.X, -e.Delta.Translation.Y);
-        var previousRadius = 1f;
-
-        RotationSnapper.PinchRotation += rotation;
-        var rotationDelta = RotationSnapper.CalculateRotationDelta(
-            Map.Navigator.Viewport.Rotation, Map.Navigator.RotationLock);
-
-        Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
-
-        e.Handled = true;
+        return new PinchState(center, radius, rotation);
     }
 
     public void OpenBrowser(string url)

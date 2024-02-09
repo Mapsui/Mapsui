@@ -29,13 +29,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private MPoint? _previousMousePosition;
     private double _mouseWheelPos = 0.0;
 
-    /// <summary> Previous Center for Pinch </summary>
-    private MPoint? _previousCenter;
-    /// <summary> Saver for angle before last pinch movement </summary>
-    private double _previousAngle;
-    /// <summary> Saver for radius before last pinch movement </summary>
-    private double _previousRadius = 1f;
-
     // Touch Handling
     private readonly ConcurrentDictionary<long, MPoint> _touches = new();
 
@@ -274,16 +267,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (touchPoints.Count != 2)
             return false;
 
-        var (previousCenter, previousRadius, previousAngel) = (_previousCenter, _previousRadius, _previousAngle);
-        var (center, radius, angle) = GetPinchValues(touchPoints);
-
-        RotationSnapper.PinchRotation += angle - previousAngel;
-        var rotationDelta = RotationSnapper.CalculateRotationDelta(
-            Map.Navigator.Viewport.Rotation, Map.Navigator.RotationLock);
-
-        Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
-
-        (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
+        Map.Navigator.Pinch(GetPinchState(touchPoints));
 
         RefreshGraphics();
         return true;
@@ -293,12 +277,12 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         if (touchPoints.Count == 2)
         {
-            (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
-            RotationSnapper.PinchRotation = 0;
+            Map.Navigator.ClearPinchState();
+            Map.Navigator.Pinch(GetPinchState(touchPoints));
         }
     }
 
-    private static (MPoint center, double radius, double angle) GetPinchValues(List<MPoint> locations)
+    private static PinchState GetPinchState(List<MPoint> locations)
     {
         if (locations.Count < 2)
             throw new ArgumentOutOfRangeException(nameof(locations));
@@ -319,7 +303,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
         var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
 
-        return (new MPoint(centerX, centerY), radius, angle);
+        return new PinchState(new MPoint(centerX, centerY), radius, angle);
     }
 
     private sealed class MapsuiCustomDrawOp(Rect bounds, MapControl mapControl) : ICustomDrawOperation

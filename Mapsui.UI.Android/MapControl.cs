@@ -39,8 +39,6 @@ public partial class MapControl : ViewGroup, IMapControl
 {
     private View? _canvas;
     private GestureDetector? _gestureDetector;
-    private double _previousAngle;
-    private double _previousRadius = 1f;
     private TouchMode _mode = TouchMode.None;
     private Handler? _mainLooperHandler;
     private MPoint? _previousTouch;
@@ -189,9 +187,10 @@ public partial class MapControl : ViewGroup, IMapControl
             case MotionEventActions.Pointer3Down:
                 if (touchPoints.Count >= 2)
                 {
-                    (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                     _mode = TouchMode.Zooming;
-                    RotationSnapper.PinchRotation = 0;
+
+                    Map.Navigator.ClearPinchState();
+                    Map.Navigator.Pinch(GetPinchState(touchPoints));
                 }
                 else
                 {
@@ -212,9 +211,10 @@ public partial class MapControl : ViewGroup, IMapControl
 
                 if (touchPoints.Count >= 2)
                 {
-                    (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                     _mode = TouchMode.Zooming;
-                    RotationSnapper.PinchRotation = 0;
+
+                    Map.Navigator.ClearPinchState();
+                    Map.Navigator.Pinch(GetPinchState(touchPoints));
                 }
                 else
                 {
@@ -246,16 +246,7 @@ public partial class MapControl : ViewGroup, IMapControl
                             if (touchPoints.Count < 2)
                                 return;
 
-                            var (previousTouch, previousRadius, previousAngle) = (_previousTouch, _previousRadius, _previousAngle);
-                            var (touch, radius, angle) = GetPinchValues(touchPoints);
-
-                            RotationSnapper.PinchRotation += angle - previousAngle;
-                            var rotationDelta = RotationSnapper.CalculateRotationDelta(
-                                Map.Navigator.Viewport.Rotation, Map.Navigator.RotationLock);
-
-                            Map.Navigator.Pinch(touch, previousTouch, radius / previousRadius, rotationDelta);
-
-                            (_previousTouch, _previousRadius, _previousAngle) = (touch, radius, angle);
+                            Map.Navigator.Pinch(GetPinchState(touchPoints));
                         }
                         break;
                 }
@@ -363,7 +354,7 @@ public partial class MapControl : ViewGroup, IMapControl
         base.Dispose(disposing);
     }
 
-    private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
+    private static PinchState GetPinchState(List<MPoint> locations)
     {
         if (locations.Count < 2)
             throw new ArgumentOutOfRangeException(nameof(locations));
@@ -384,7 +375,7 @@ public partial class MapControl : ViewGroup, IMapControl
 
         var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
 
-        return (new MPoint(centerX, centerY), radius, angle);
+        return new PinchState(new MPoint(centerX, centerY), radius, angle);
     }
 
     private double ViewportWidth => ToDeviceIndependentUnits(Width);

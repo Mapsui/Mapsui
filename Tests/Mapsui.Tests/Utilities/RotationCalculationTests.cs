@@ -43,29 +43,25 @@ internal class RotationCalculationTests
         ClassicAssert.AreEqual(expectedDistance, distance);
     }
 
-    [TestCase(15, 0, 20, 10, 0, "Still snapped")] 
-    [TestCase(-15, 0, 20, 10, 0, "Still snapped")]
-    [TestCase(25, 0, 20, 10, 25, "Unsnap")]
-    [TestCase(-25, 0, 20, 10, -25, "Unsnap")]
-    [TestCase(5, 25, 20, 10, 5, "Still unsnapped")]
-    [TestCase(-5, -25, 20, 10, -5, "Still unsnapped")]
-    [TestCase(-10, 15, 20, 10, -15, "Resnap")]
-    [TestCase(10, -15, 20, 10, 15, "Resnap")]
+    [TestCase(0, 15, 5, 0, "Still snapped")] 
+    [TestCase(0, -15, -5, 0, "Still snapped")]
+    [TestCase(0, 25, 5, 25, "Unsnap")]
+    [TestCase(0, -25, -5, -25, "Unsnap")]
+    [TestCase(25, 30, 5, 5, "Still unsnapped")]
+    [TestCase(-25, -30, -5, -5, "Still unsnapped")]
+    [TestCase(15, 5, -10, -15, "Resnap")]
+    [TestCase(-15, -5, 10, 15, "Resnap")]
 
-    public static void TestCalculateRotationDeltaUsingSnapping(double pinchRotation, double actualRotation, double unSnapRotation, double reSnapRotation, double expectedRotationDelta, string message)
+    public static void TestCalculateRotationDeltaUsingSnapping(double currentRotation, double virtualRotation, double rotationDelta, double expectedRotationDelta, string message)
     {
         // Arrange
-        var rotationSnapper = new RotationSnapper
-        {
-            PinchRotation = pinchRotation,
-            UnSnapRotation = unSnapRotation,
-            ReSnapRotation = reSnapRotation
-        };
+        double unSnapRotation = 20;
+        double reSnapRotation = 10;
 
         // Act
-        var rotationDelta = rotationSnapper.CalculateRotationDelta(actualRotation, false);
+        var adjustedRotationDelta = RotationSnapper.AdjustRotationDeltaForSnapping(rotationDelta, currentRotation, virtualRotation, unSnapRotation, reSnapRotation);
 
         // Assert
-        ClassicAssert.AreEqual(expectedRotationDelta, rotationDelta, message);
+        ClassicAssert.AreEqual(expectedRotationDelta, adjustedRotationDelta, message);
     }
 }

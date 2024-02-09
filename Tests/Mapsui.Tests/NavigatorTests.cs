@@ -49,7 +49,7 @@ public class NavigatorTests
         var previousPinchCenter = new MPoint(20, 20);
 
         // Act
-        navigator.Pinch(currentPinchCenter, previousPinchCenter, deltaResolution, 0);
+        navigator.Pinch(new PinchState(currentPinchCenter, deltaResolution, 0), new PinchState(previousPinchCenter, 1, 0));
 
         // Assert
         ClassicAssert.AreEqual(expectedCenterX, navigator.Viewport.CenterX);

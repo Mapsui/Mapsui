@@ -2,49 +2,31 @@
 
 namespace Mapsui;
 
-public class RotationSnapper
+public static class RotationSnapper
 {
-    /// <summary>
-    /// After how many degrees start rotation to take place
-    /// </summary>
-    public double UnSnapRotation { get; set; } = 30;
-
-    /// <summary>
-    /// With how many degrees from 0 should map snap to 0 degrees
-    /// </summary>
-    public double ReSnapRotation { get; set; } = 5;
-
-    /// <summary>
-    /// The rotation in degrees of the current pinch gesture. Note that this does not say
-    /// anything about the map rotation. 
-    /// </summary>
-    public double PinchRotation { get; set; }
-     
     /// <summary>
     /// Calculates the rotation delta taking into account the snapping parameters. 
     /// </summary>
     /// <param name="rotation">The rotation of the viewport of the map. This rotation is visible in the map.</param>
     /// <returns></returns>
-    public double CalculateRotationDelta(double rotation, bool rotationLock)
+    public static double AdjustRotationDeltaForSnapping(double rotationDelta, double currentRotation, double virtualRotation, double unSnapRotation, double reSnapRotation)
     {
-        if (rotationLock) 
-            return 0;
-
-        if (Math.Abs(rotation) < double.Epsilon) // There is no rotation
+        if (Math.Abs(currentRotation) < double.Epsilon) // There is no rotation
         {
-            if (RotationShortestDistance(PinchRotation, 0) >= UnSnapRotation)
-                return PinchRotation; // Unsnap. The virtualRotation can be applied.
+            if (RotationShortestDistance(virtualRotation, 0) >= unSnapRotation)
+                return virtualRotation; // Unsnap. The virtualRotation can be applied.
             else
                 return 0; // Still snapped. No delta.
         }
         else // There is rotation
         {
-            if (RotationShortestDistance(rotation + PinchRotation, 0) <= ReSnapRotation)
-                return -rotation; // Resnap. Undo the actual rotation by returning the inverse as delta. 
+            if (RotationShortestDistance(virtualRotation, 0) <= reSnapRotation)
+                return -currentRotation; // Resnap. Undo the actual rotation by returning the inverse as delta. 
             else
-                return PinchRotation; // Still unsnapped. Calculate delta.
+                return rotationDelta; // Still unsnapped. Return the rotationDelta unaltered.
         }
     }
+
     public static double RotationShortestDistance(double rotation1, double rotation2)
     {
         rotation1 = NormalizeRotation(rotation1);

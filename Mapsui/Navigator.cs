@@ -19,6 +19,9 @@ public class Navigator
     private MRect? _defaultPanBounds;
     private MMinMax? _overrideZoomBounds;
     private MRect? _overridePanBounds;
+    private double? _startPinchAngle; // Set at the start of the pinch gesture to calculate snapping
+    private PinchState? _previousPinchState;
+
 
     public delegate void ViewportChangedEventHandler(object sender, ViewportChangedEventArgs e);
 
@@ -60,6 +63,16 @@ public class Navigator
     /// <summary>
     /// Overrides the default zoom bounds which are derived from the Map resolutions.
     /// </summary>
+
+    /// <summary>
+    /// After how many degrees start rotation to take place
+    /// </summary>
+    public double UnSnapRotation { get; set; } = 30;
+
+    /// <summary>
+    /// With how many degrees from 0 should map snap to 0 degrees
+    /// </summary>
+    public double ReSnapRotation { get; set; } = 5;
 
     public MMinMax? OverrideZoomBounds
     {
@@ -421,30 +434,47 @@ public class Navigator
     /// <param name="previousPositionScreen">Previous position of the dragging mouse or finger.</param>
     public void Drag(MPoint positionScreen, MPoint previousPositionScreen)
     {
-        Pinch(positionScreen, previousPositionScreen, 1, 0);
+        Pinch(new PinchState(positionScreen, 0, 0), new PinchState(previousPositionScreen, 0, 0));
     }
 
     /// <summary>
     /// To change the map viewport when using multiple fingers. This method is called from
-    /// the MapControl and is usually not called from user code. This method does not call
-    /// Navigated. So, Navigated needs to be called from the MapControl on mouse/touch up.
+    /// the MapControl and is usually not called from user code. This method does not refresh
+    /// graphics, so this needs to be done from the MapControl on mouse/touch up.
     /// </summary>
-    /// <param name="currentPinchCenter">The center of the current position of touch positions.</param>
-    /// <param name="previousPinchCenter">The previous center of the current position of touch positions.</param>
-    /// <param name="deltaResolution">The change in resolution cause by moving the fingers together or further apart.</param>
-    /// <param name="deltaRotation">The change in rotation of the finger positions.</param>
-    public void Pinch(MPoint currentPinchCenter, MPoint? previousPinchCenter, double deltaResolution, double deltaRotation)
+    /// <param name="pinchState">The current pinch state.</param>
+    public void Pinch(PinchState pinchState)
     {
-        if (previousPinchCenter is null) 
+        if (_previousPinchState is null)
+        {
+            _previousPinchState = pinchState with { };
             return;
-        
-        if (ZoomLock) deltaResolution = 1;
-        if (PanLock) currentPinchCenter = previousPinchCenter;
-        if (RotationLock) deltaRotation = 0;
+        }
+
+        Pinch(pinchState, _previousPinchState);
+
+        _previousPinchState = pinchState with { };
+    }
+
+    /// <summary>
+    /// To change the map viewport when using multiple fingers. This method is called from
+    /// the MapControl and is usually not called from user code. This method does not refresh
+    /// graphics, so this needs to be done from the MapControl on mouse/touch up.
+    /// </summary>
+    /// <param name="pinchState">The current pinch state.</param>
+    /// <param name="previousPinchState">The previous pinch state.</param>
+    public void Pinch(PinchState pinchState, PinchState previousPinchState)
+    {        
+        if (ZoomLock) pinchState = pinchState with { Radius = previousPinchState.Radius };
+        if (PanLock) pinchState = pinchState with { Center = previousPinchState.Center };
+        if (RotationLock) pinchState = pinchState with { Angle = previousPinchState.Angle };
+
+        if (_startPinchAngle is null)
+            _startPinchAngle = previousPinchState.Angle;
 
         ClearAnimations();
 
-        var viewport = TransformState(Viewport, currentPinchCenter, previousPinchCenter, deltaResolution, deltaRotation);
+        var viewport = TransformState(Viewport, pinchState, previousPinchState, _startPinchAngle.Value);
         SetViewportWithLimit(viewport);
     }
 
@@ -467,26 +497,46 @@ public class Navigator
         RefreshDataRequest?.Invoke(this, EventArgs.Empty);
     }
 
-    private static Viewport TransformState(Viewport viewport, MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution, double deltaRotation)
+    /// <summary>
+    /// Call this method before the first Pinch call. The Pinch method tracks the start pinch angle which is needed to for 
+    /// rotation snapping and the previous pinch state.
+    /// </summary>
+    public void ClearPinchState()
     {
-        var previous = viewport.ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
-        var current = viewport.ScreenToWorld(positionScreen.X, positionScreen.Y);
+        _startPinchAngle = null; // Reset the pinch angle, it will be set on the first pinch update
+        _previousPinchState = null; 
+    }
+
+    private Viewport TransformState(Viewport viewport, PinchState pinchState, PinchState previousPinchState, double startPinchAngle)
+    {
+        var previous = viewport.ScreenToWorld(previousPinchState.Center.X, previousPinchState.Center.Y);
+        var current = viewport.ScreenToWorld(pinchState.Center.X, pinchState.Center.Y);
+
+        var resolutionDelta = pinchState.Radius / previousPinchState.Radius;
+        var rotationDelta = pinchState.Angle - previousPinchState.Angle;
+
+        if (!RotationLock)
+        {
+            var totalRotationDelta = pinchState.Angle - startPinchAngle;
+            double virtualRotation = Viewport.Rotation + totalRotationDelta; ;
+            rotationDelta = RotationSnapper.AdjustRotationDeltaForSnapping(rotationDelta, viewport.Rotation, virtualRotation, UnSnapRotation, ReSnapRotation);
+        } 
 
         var newX = viewport.CenterX + previous.X - current.X;
         var newY = viewport.CenterY + previous.Y - current.Y;
 
-        if (deltaResolution == 1 && deltaRotation == 0 && viewport.CenterX == newX && viewport.CenterY == newY)
+        if (resolutionDelta == 1 && rotationDelta == 0 && viewport.CenterX == newX && viewport.CenterY == newY)
             return viewport;
 
-        if (deltaResolution != 1)
+        if (resolutionDelta != 1)
         {
-            viewport = viewport with { Resolution = viewport.Resolution / deltaResolution };
+            viewport = viewport with { Resolution = viewport.Resolution / resolutionDelta };
 
             // Calculate current position again with adjusted resolution
             // Zooming should be centered on the place where the map is touched.
             // This is done with the scale correction.
-            var scaleCorrectionX = (1 - deltaResolution) * (current.X - viewport.CenterX);
-            var scaleCorrectionY = (1 - deltaResolution) * (current.Y - viewport.CenterY);
+            var scaleCorrectionX = (1 - resolutionDelta) * (current.X - viewport.CenterX);
+            var scaleCorrectionY = (1 - resolutionDelta) * (current.Y - viewport.CenterY);
 
             newX -= scaleCorrectionX;
             newY -= scaleCorrectionY;
@@ -494,11 +544,11 @@ public class Navigator
 
         viewport = viewport with { CenterX = newX, CenterY = newY };
 
-        if (deltaRotation != 0)
+        if (rotationDelta != 0)
         {
-            current = viewport.ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
-            viewport = viewport with { Rotation = viewport.Rotation + deltaRotation };
-            var postRotation = viewport.ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
+            current = viewport.ScreenToWorld(pinchState.Center.X, pinchState.Center.Y); // calculate current position again with adjusted resolution
+            viewport = viewport with { Rotation = viewport.Rotation + rotationDelta };
+            var postRotation = viewport.ScreenToWorld(pinchState.Center.X, pinchState.Center.Y); // calculate current position again with adjusted resolution
             viewport = viewport with { CenterX = viewport.CenterX - (postRotation.X - current.X), CenterY = viewport.CenterY - (postRotation.Y - current.Y) };
         }
 

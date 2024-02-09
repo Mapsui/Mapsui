@@ -65,8 +65,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
 
-    public RotationSnapper RotationSnapper { get; } = new RotationSnapper();
-
     private void CommonInitialize()
     {
         // Create map

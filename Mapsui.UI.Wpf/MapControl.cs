@@ -334,28 +334,24 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationStarted(object? sender, ManipulationStartedEventArgs e)
     {
-        RotationSnapper.PinchRotation = 0;
+        Map.Navigator.ClearPinchState();
     }
 
     private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
+    {
+        Map.Navigator.Pinch(GetPinchState(e));
+        e.Handled = true;
+    }
+
+    private PinchState GetPinchState(ManipulationDeltaEventArgs e)
     {
         var translation = e.DeltaManipulation.Translation;
 
         var center = e.ManipulationOrigin.ToMapsui().Offset(translation.X, translation.Y);
         var radius = GetDeltaScale(e.DeltaManipulation.Scale);
         var angle = e.DeltaManipulation.Rotation;
-        
-        var previousCenter = e.ManipulationOrigin.ToMapsui();
-        var previousRadius = 1f;
-        var previousAngle = 0f;
 
-        RotationSnapper.PinchRotation += angle - previousAngle;
-        var rotationDelta = RotationSnapper.CalculateRotationDelta(
-            Map.Navigator.Viewport.Rotation, Map.Navigator.RotationLock);
-
-        Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
-
-        e.Handled = true;
+        return new PinchState(center, radius, angle);
     }
 
     private double GetDeltaScale(Vector scale)
