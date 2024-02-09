@@ -228,14 +228,17 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private PinchState GetPreviousPinchState(ManipulationDeltaRoutedEventArgs e)
     {
-        return new PinchState(e.Position.ToMapsui(), 1, 0);
+        var relativePosition = TransformToVisual(null).Inverse.TransformPoint(e.Position);
+        return new PinchState(relativePosition.ToMapsui(), 1, 0);
     }
 
     private PinchState GetPinchState(ManipulationDeltaRoutedEventArgs e)
     {
-        // Todo: Get center relative the MapControl. The center is a application wide location. If the MapControl is not
-        // on the top left this will malfunction.
-        var position = e.Position.ToMapsui().Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
+        // Get position relative to the MapControl.
+        // Not sure if this is supposed to work like this, could be a bug: 
+        // https://github.com/unoplatform/uno/discussions/15421#discussioncomment-8420650
+        var relativePosition = TransformToVisual(null).Inverse.TransformPoint(e.Position);
+        var position = relativePosition.ToMapsui().Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
         return new PinchState(position, e.Delta.Scale, e.Delta.Rotation);
     }
 
