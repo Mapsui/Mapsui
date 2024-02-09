@@ -434,7 +434,19 @@ public class Navigator
     /// <param name="previousPositionScreen">Previous position of the dragging mouse or finger.</param>
     public void Drag(MPoint positionScreen, MPoint previousPositionScreen)
     {
-        Pinch(new PinchState(positionScreen, 0, 0), new PinchState(previousPositionScreen, 0, 0));
+        Viewport = Drag(positionScreen, previousPositionScreen, Viewport);
+    }
+
+    private static Viewport Drag(MPoint positionScreen, MPoint previousPositionScreen, Viewport viewport)
+    {
+        var previous = viewport.ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
+        var current = viewport.ScreenToWorld(positionScreen.X, positionScreen.Y);
+
+        return viewport with 
+        {
+            CenterX = viewport.CenterX + previous.X - current.X, 
+            CenterY = viewport.CenterY + previous.Y - current.Y 
+        };
     }
 
     /// <summary>
