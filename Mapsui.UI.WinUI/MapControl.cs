@@ -98,9 +98,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Console.WriteLine(Guid.NewGuid());
     }
 
+    double _totalPinchRotation;
+
     private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
     {
         Map.Navigator.ClearPinchState();
+        _totalPinchRotation = 0;
     }
 
     private void MapControl_PointerDown(object sender, PointerRoutedEventArgs e)
@@ -222,17 +225,22 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
-        Map.Navigator.Pinch(GetPinchState(e));
+        Map.Navigator.Pinch(GetPinchState(e), GetPreviousPinchState(e));
+        _totalPinchRotation += e.Delta.Rotation;
         e.Handled = true;
     }
 
-    private static PinchState GetPinchState(ManipulationDeltaRoutedEventArgs e)
+    private PinchState GetPreviousPinchState(ManipulationDeltaRoutedEventArgs e)
     {
-        var center = e.Position.ToMapsui();
-        var radius = e.Delta.Scale;
-        var rotation = e.Delta.Rotation;
+        return new PinchState(e.Position.ToMapsui(), 1, _totalPinchRotation);
+    }
 
-        return new PinchState(center, radius, rotation);
+    private PinchState GetPinchState(ManipulationDeltaRoutedEventArgs e)
+    {
+        // Todo: Get center relative the MapControl. The center is a application wide location. If the MapControl is not
+        // on the top left this will malfunction.
+        var position = e.Position.ToMapsui().Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
+        return new PinchState(position, e.Delta.Scale, _totalPinchRotation + e.Delta.Rotation);
     }
 
     public void OpenBrowser(string url)
