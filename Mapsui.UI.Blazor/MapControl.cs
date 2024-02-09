@@ -400,8 +400,11 @@ public partial class MapControl : ComponentBase, IMapControl
         if (_previousTouchState is not null) // Should not happen but we do not control the events of the framework so just checking.
         {
             if (touchState.Mode == TouchMode.Zooming && _previousTouchState.Mode == TouchMode.Zooming)
-                Map.Navigator.Pinch(touchState.Center, _previousTouchState.Center, touchState.Radius / _previousTouchState.Radius, 0);
+                Map.Navigator.Pinch(
+                    new PinchState(touchState.Center, touchState.Radius, touchState.Angle), 
+                    new PinchState(_previousTouchState.Center, _previousTouchState.Radius, _previousTouchState.Angle));
             else if (touchState.Mode == TouchMode.Dragging && _previousTouchState.Mode != TouchMode.None)
+
                 Map.Navigator.Drag(touchState.Center, _previousTouchState.Center);
         }
         _previousTouchState = touchState;
