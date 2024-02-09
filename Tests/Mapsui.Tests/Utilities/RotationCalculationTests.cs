@@ -1,5 +1,4 @@
-﻿using Mapsui.Utilities;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Utilities;
@@ -43,7 +42,7 @@ internal class RotationCalculationTests
         ClassicAssert.AreEqual(expectedDistance, distance);
     }
 
-    [TestCase(0, 15, 5, 0, "Still snapped")] 
+    [TestCase(0, 15, 5, 0, "Still snapped")]
     [TestCase(0, -15, -5, 0, "Still snapped")]
     [TestCase(0, 25, 5, 25, "Unsnap")]
     [TestCase(0, -25, -5, -25, "Unsnap")]

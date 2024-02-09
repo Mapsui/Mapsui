@@ -464,7 +464,7 @@ public class Navigator
     /// <param name="pinchState">The current pinch state.</param>
     /// <param name="previousPinchState">The previous pinch state.</param>
     public void Pinch(PinchState pinchState, PinchState previousPinchState)
-    {        
+    {
         if (ZoomLock) pinchState = pinchState with { Radius = previousPinchState.Radius };
         if (PanLock) pinchState = pinchState with { Center = previousPinchState.Center };
         if (RotationLock) pinchState = pinchState with { Angle = previousPinchState.Angle };
@@ -504,7 +504,7 @@ public class Navigator
     public void ClearPinchState()
     {
         _startPinchAngle = null; // Reset the pinch angle, it will be set on the first pinch update
-        _previousPinchState = null; 
+        _previousPinchState = null;
     }
 
     private Viewport TransformState(Viewport viewport, PinchState pinchState, PinchState previousPinchState, double startPinchAngle)
@@ -520,7 +520,7 @@ public class Navigator
             var totalRotationDelta = pinchState.Angle - startPinchAngle;
             double virtualRotation = Viewport.Rotation + totalRotationDelta; ;
             rotationDelta = RotationSnapper.AdjustRotationDeltaForSnapping(rotationDelta, viewport.Rotation, virtualRotation, UnSnapRotation, ReSnapRotation);
-        } 
+        }
 
         var newX = viewport.CenterX + previous.X - current.X;
         var newY = viewport.CenterY + previous.Y - current.Y;

@@ -76,7 +76,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private static bool GetShiftPressed(KeyModifiers keyModifiers)
     {
-        
+
 
         return (keyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
     }

@@ -73,7 +73,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     public bool UseFling { get; set; } = true;
     private double ViewportWidth => Width; // Used in shared code
     private double ViewportHeight => Height; // Used in shared code
-    
+
     private void Initialize()
     {
         View view;
@@ -402,9 +402,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         return new MPoint(point.X / PixelDensity, point.Y / PixelDensity);
     }
-        
+
     /// <summary>
-        /// Called, when map should zoom in or out
+    /// Called, when map should zoom in or out
     /// </summary>
     /// <param name="currentMousePosition">Center of zoom out event</param>
     private bool OnZoomInOrOut(int mouseWheelDelta, MPoint currentMousePosition)
@@ -518,7 +518,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 {
                     if (touchPoints.Count != 2)
                         return false;
-                                        
+
                     Map.Navigator.Pinch(GetPinchState(touchPoints));
 
                     RefreshGraphics();

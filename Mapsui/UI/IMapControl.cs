@@ -17,7 +17,7 @@ public interface IMapControl : IDisposable
     void RefreshData(ChangeType changeType = ChangeType.Discrete);
 
     void Refresh(ChangeType changeType = ChangeType.Discrete);
-       
+
     void Unsubscribe();
 
     IRenderer Renderer { get; }
