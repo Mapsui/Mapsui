@@ -41,10 +41,10 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     // Touch Handling
     private readonly ConcurrentDictionary<long, MPoint> _touches = new();
 
-    [Obsolete("Use Info and ILayerFeatureInfo", true)]
-    public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
-
     private bool _shiftPressed;
+
+    public static readonly DirectProperty<MapControl, Map> MapProperty =
+    AvaloniaProperty.RegisterDirect<MapControl, Map>(nameof(Map), o => o.Map, (o, v) => o.Map = v);
 
     public MapControl()
     {

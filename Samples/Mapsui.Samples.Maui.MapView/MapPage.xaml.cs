@@ -19,7 +19,7 @@ namespace Mapsui.Samples.Maui;
 public sealed partial class MapPage : ContentPage, IDisposable
 {
     private CancellationTokenSource? gpsCancelation;
-    public Func<MapView?, MapClickedEventArgs, bool>? Clicker { get; set; }
+    public Func<UI.Maui.MapView?, MapClickedEventArgs, bool>? Clicker { get; set; }
 
     public MapPage()
     {
@@ -30,7 +30,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
         var test1 = info ?? throw new InvalidOperationException();
     }
 
-    public MapPage(ISampleBase sample, Func<MapView?, MapClickedEventArgs, bool>? c = null)
+    public MapPage(ISampleBase sample, Func<UI.Maui.MapView?, MapClickedEventArgs, bool>? c = null)
     {
         InitializeComponent();
 
@@ -97,7 +97,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
 
     private void OnMapClicked(object? sender, MapClickedEventArgs e)
     {
-        e.Handled = Clicker?.Invoke(sender as MapView, e) ?? false;
+        e.Handled = Clicker?.Invoke(sender as UI.Maui.MapView, e) ?? false;
         //Samples.SetPins(mapView, e);
         //Samples.DrawPolylines(mapView, e);
     }

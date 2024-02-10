@@ -17,11 +17,12 @@
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.Wasm\\Mapsui.Samples.Uno.WinUI.Wasm.csproj",
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.Windows\\Mapsui.Samples.Uno.WinUI.Windows.csproj",
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.csproj",
-      "Tests\\Mapsui.UI.Maui.Tests\\Mapsui.UI.Maui.Tests.csproj",
+      "SourceGenerators\\Mapsui.Sample.SourceGenerator\\Mapsui.Sample.SourceGenerator.csproj",
       "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
       "Tests\\Mapsui.Rendering.Skia.Tests\\Mapsui.Rendering.Skia.Tests.csproj",
       "Tests\\Mapsui.Tests.Common\\Mapsui.Tests.Common.csproj",
-      "Tests\\Mapsui.Tests\\Mapsui.Tests.csproj"
+      "Tests\\Mapsui.Tests\\Mapsui.Tests.csproj",
+      "Tests\\Mapsui.UI.Maui.Tests\\Mapsui.UI.Maui.Tests.csproj"
     ]
   }
 }

@@ -20,8 +20,8 @@ public class MainForm : Form
 {
     static MainForm()
     {
-        // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();
+        Mapsui.Tests.Common.Samples.Register();
+        Mapsui.Samples.Common.Samples.Register();
     }
 
     DropDown CategoryComboBox = new() { Width = 200 };
@@ -90,8 +90,8 @@ public class MainForm : Form
     }
     private void FillComboBoxWithCategories()
     {
-        // todo: find proper way to load assembly
-        Tests.Common.Utilities.LoadAssembly();
+        Mapsui.Tests.Common.Samples.Register();
+        Mapsui.Samples.Common.Samples.Register();
 
         var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
         foreach (var category in categories)

@@ -9,7 +9,7 @@ public delegate void CoordinateSetter(double x, double y);
 /// <summary>
 /// Interface for a feature which could be displayed on the <cref="Map"/>
 /// </summary>
-public interface IFeature
+public interface IFeature : ICloneable
 {
     /// <summary>
     /// Styles used for this feature

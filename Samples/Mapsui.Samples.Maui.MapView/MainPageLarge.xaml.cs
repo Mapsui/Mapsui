@@ -22,8 +22,9 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
 {
     static MainPageLarge()
     {
-        // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();
+        Mapsui.Tests.Common.Samples.Register();
+        Mapsui.Samples.Common.Samples.Register();
+        Mapsui.Samples.Maui.MapView.Samples.Register();
     }
 
     readonly IEnumerable<ISampleBase> _allSamples;
@@ -104,7 +105,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
 
     private void OnMapClicked(object? sender, MapClickedEventArgs e)
     {
-        e.Handled = _clicker?.Invoke(sender as MapView, e) ?? false;
+        e.Handled = _clicker?.Invoke(sender as UI.Maui.MapView, e) ?? false;
     }
 
     void OnSelection(object sender, SelectedItemChangedEventArgs e)

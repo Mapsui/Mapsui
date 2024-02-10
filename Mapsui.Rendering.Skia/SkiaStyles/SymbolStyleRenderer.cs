@@ -8,7 +8,6 @@ using NetTopologySuite.Geometries;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace Mapsui.Rendering.Skia;
 
