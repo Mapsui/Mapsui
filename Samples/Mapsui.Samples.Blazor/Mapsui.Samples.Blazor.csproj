@@ -13,7 +13,7 @@
 
   <!--Release enable all Performance-->
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <RunAOTCompilation>true</RunAOTCompilation>
+    <!--<RunAOTCompilation>true</RunAOTCompilation>-->
     <!--<WasmStripILAfterAOT>true</WasmStripILAfterAOT>-->
   </PropertyGroup>
 
