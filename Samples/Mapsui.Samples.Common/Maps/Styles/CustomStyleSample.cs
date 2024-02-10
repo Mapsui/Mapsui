@@ -19,6 +19,10 @@ public class CustomStyle : IStyle
     public double MaxVisible { get; set; } = double.MaxValue;
     public bool Enabled { get; set; } = true;
     public float Opacity { get; set; } = 0.7f;
+    public IStyle CreateInstance()
+    {
+        return new CustomStyle();
+    }
 }
 
 public class SkiaCustomStyleRenderer : ISkiaStyleRenderer
