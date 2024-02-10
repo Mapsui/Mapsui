@@ -29,7 +29,7 @@ public class ManyPinsSample : IMapViewSample
 
     public bool OnClick(object? sender, EventArgs args)
     {
-        var mapView = sender as MapView;
+        var mapView = sender as UI.Maui.MapView;
         var e = args as MapClickedEventArgs;
 
         if (mapView == null)
@@ -131,8 +131,8 @@ public class ManyPinsSample : IMapViewSample
         mapControl.Map.Widgets.Add(widget);
         mapControl.Renderer.WidgetRenders[typeof(PerformanceWidget)] = new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer();
 
-        ((MapView)mapControl).UseDoubleTap = true;
-        ((MapView)mapControl).UniqueCallout = true;
+        ((UI.Maui.MapView)mapControl).UseDoubleTap = true;
+        ((UI.Maui.MapView)mapControl).UniqueCallout = true;
 
         var sw = new Stopwatch();
         sw.Start();
@@ -146,7 +146,7 @@ public class ManyPinsSample : IMapViewSample
 
         var timePart1 = sw.Elapsed;
 
-        ((ObservableRangeCollection<Pin>)((MapView)mapControl).Pins).AddRange(list);
+        ((ObservableRangeCollection<Pin>)((UI.Maui.MapView)mapControl).Pins).AddRange(list);
 
         var timePart2 = sw.Elapsed;
 

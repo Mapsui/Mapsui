@@ -23,8 +23,8 @@ public class MainActivity : AppCompatActivity
 {
     static MainActivity()
     {
-        // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();
+        Mapsui.Tests.Common.Samples.Register();
+        Mapsui.Samples.Common.Samples.Register();
     }
 
     private MapControl? _mapControl;

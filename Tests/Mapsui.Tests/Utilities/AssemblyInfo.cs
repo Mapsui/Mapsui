@@ -10,7 +10,7 @@ public static class AssemblyInfo
     {
         get
         {
-            var path = Assembly.GetExecutingAssembly().Location;
+            var path = System.AppContext.BaseDirectory;
             return Path.GetDirectoryName(path)!;
         }
     }

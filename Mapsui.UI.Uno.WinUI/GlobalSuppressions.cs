@@ -17,3 +17,8 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Uwp.MapControl.OpenBrowser(System.String)")]
 [assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.WinUI.MapControl.OpenBrowser(System.String)")]
 [assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.WinUI.MapControl.RunOnUIThread(System.Action)")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP002:Dispose member", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.WinUI.MapControl._invalidateTimer")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP002:Dispose member", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.WinUI.MapControl._selectRectangle")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP002:Dispose member", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.WinUI.MapControl._canvas")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP023:Don't use reference types in finalizer context", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.WinUI.MapControl.Dispose(System.Boolean)")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP002:Dispose member", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.WinUI.MapControl._map")]
