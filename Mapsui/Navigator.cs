@@ -157,8 +157,9 @@ public class Navigator
         // At the moment this solution allows the user to change these fields, so I don't want
         // them to become hardcoded values in the MapControl. There should be a more general
         // way to control the animation parameters.
-        var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, Viewport.Resolution, ZoomBounds, Resolutions);
-        if (resolution == Viewport.Resolution) return; // Don even start a animation if are already at the goalResolution.
+        var resolution = MouseWheelAnimation.GetResolution(
+            mouseWheelDelta, Viewport.Resolution, ZoomBounds, Resolutions);
+        if (resolution == Viewport.Resolution) return; // Do not start an animation when at the goal resolution.
         ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
     }
 
@@ -250,7 +251,7 @@ public class Navigator
     /// Zoom to a given resolution with a given point as center
     /// </summary>
     /// <param name="resolution">Resolution to zoom</param>
-    /// <param name="centerOfZoomInScreenCoordinates">Center of zoom in screen coordinates. This is the one point in the map that 
+    /// <param name="centerOfZoomScreen">Center of zoom in screen coordinates. This is the one point in the map that 
     /// stays on the same location while zooming in. 
     /// For instance, in mouse wheel zoom animation the position 
     /// of the mouse pointer can be the center of zoom. Note, that the centerOfZoom is in screen coordinates not 
@@ -258,17 +259,18 @@ public class Navigator
     /// position as center.</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The easing of the animation when duration is > 0</param>
-    public void ZoomTo(double resolution, MPoint centerOfZoomInScreenCoordinates, long duration = -1, Easing? easing = default)
+    public void ZoomTo(double resolution, MPoint centerOfZoomScreen, long duration = -1, Easing? easing = default)
     {
         if (!IsInitialized)
         {
-            AddToInitialization(() => ZoomTo(resolution, centerOfZoomInScreenCoordinates, duration, easing));
+            AddToInitialization(() => ZoomTo(resolution, centerOfZoomScreen, duration, easing));
             return;
         }
 
         if (ZoomLock) return;
 
-        var (centerOfZoomX, centerOfZoomY) = Viewport.ScreenToWorldXY(centerOfZoomInScreenCoordinates.X, centerOfZoomInScreenCoordinates.Y);
+        var (centerOfZoomX, centerOfZoomY) = Viewport.ScreenToWorldXY(
+            centerOfZoomScreen.X, centerOfZoomScreen.Y);
 
         if (PanLock)
         {
@@ -309,8 +311,9 @@ public class Navigator
     /// <summary>
     /// Zoom in to a given point
     /// </summary>
-    /// <param name="centerOfZoom">Center of zoom. This is the one point in the map that stays on the same location while zooming in.
-    /// For instance, in mouse wheel zoom animation the position of the mouse pointer can be the center of zoom.</param>
+    /// <param name="centerOfZoom">Center of zoom. This is the one point in the map that stays on the same location 
+    /// while zooming in.For instance, in mouse wheel zoom animation the position of the mouse pointer can be the 
+    /// center of zoom.</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomIn(MPoint centerOfZoom, long duration = -1, Easing? easing = default)
@@ -322,8 +325,9 @@ public class Navigator
     /// <summary>
     /// Zoom out to a given point
     /// </summary>
-    /// <param name="centerOfZoom">Center of zoom. This is the one point in the map that stays on the same location while zooming in.
-    /// For instance, in mouse wheel zoom animation the position of the mouse pointer can be the center of zoom.</param>
+    /// <param name="centerOfZoom">Center of zoom. This is the one point in the map that stays on the same location 
+    /// while zooming in. For instance, in mouse wheel zoom animation the position of the mouse pointer can be the 
+    /// center of zoom.</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomOut(MPoint centerOfZoom, long duration = -1, Easing? easing = default)
@@ -509,8 +513,8 @@ public class Navigator
     }
 
     /// <summary>
-    /// Call this method before the first Pinch call. The Pinch method tracks the start pinch angle which is needed to for 
-    /// rotation snapping and the previous pinch state.
+    /// Call this method before the first Pinch call. The Pinch method tracks the start pinch angle which is needed 
+    /// to for rotation snapping and the previous pinch state.
     /// </summary>
     public void ClearPinchState()
     {
@@ -518,7 +522,8 @@ public class Navigator
         _previousPinchState = null;
     }
 
-    private Viewport TransformState(Viewport viewport, PinchState pinchState, PinchState previousPinchState, double totalRotationDelta)
+    private Viewport TransformState(
+        Viewport viewport, PinchState pinchState, PinchState previousPinchState, double totalRotationDelta)
     {
         var previous = viewport.ScreenToWorld(previousPinchState.Center.X, previousPinchState.Center.Y);
         var current = viewport.ScreenToWorld(pinchState.Center.X, pinchState.Center.Y);
@@ -529,7 +534,8 @@ public class Navigator
         if (!RotationLock)
         {
             double virtualRotation = Viewport.Rotation + totalRotationDelta; ;
-            rotationDelta = RotationSnapper.AdjustRotationDeltaForSnapping(rotationDelta, viewport.Rotation, virtualRotation, UnSnapRotation, ReSnapRotation);
+            rotationDelta = RotationSnapper.AdjustRotationDeltaForSnapping(
+                rotationDelta, viewport.Rotation, virtualRotation, UnSnapRotation, ReSnapRotation);
         }
 
         var newX = viewport.CenterX + previous.X - current.X;
@@ -556,10 +562,15 @@ public class Navigator
 
         if (rotationDelta != 0)
         {
-            current = viewport.ScreenToWorld(pinchState.Center.X, pinchState.Center.Y); // calculate current position again with adjusted resolution
+            // calculate current position again with adjusted resolution
+            current = viewport.ScreenToWorld(pinchState.Center.X, pinchState.Center.Y); 
             viewport = viewport with { Rotation = viewport.Rotation + rotationDelta };
-            var postRotation = viewport.ScreenToWorld(pinchState.Center.X, pinchState.Center.Y); // calculate current position again with adjusted resolution
-            viewport = viewport with { CenterX = viewport.CenterX - (postRotation.X - current.X), CenterY = viewport.CenterY - (postRotation.Y - current.Y) };
+            // calculate current position again with adjusted resolution
+            var postRotation = viewport.ScreenToWorld(pinchState.Center.X, pinchState.Center.Y); 
+            viewport = viewport with { 
+                CenterX = viewport.CenterX - (postRotation.X - current.X), 
+                CenterY = viewport.CenterY - (postRotation.Y - current.Y) 
+            };
         }
 
         return viewport;
@@ -642,13 +653,15 @@ public class Navigator
         return limitedViewport;
     }
 
-    private Viewport LimitXYProportionalToResolution(Viewport originalViewport, Viewport goalViewport, Viewport limitedViewport)
+    private Viewport LimitXYProportionalToResolution(
+        Viewport originalViewport, Viewport goalViewport, Viewport limitedViewport)
     {
         // From a users experience perspective we want the x/y change to be limited to the same degree
         // as the resolution. This is to prevent the situation where you zoom out while hitting the zoom bounds
         // and you see no change in resolution, but you will see a change in pan.
 
-        var resolutionLimiting = CalculateResolutionLimiting(originalViewport.Resolution, goalViewport.Resolution, limitedViewport.Resolution);
+        var resolutionLimiting = CalculateResolutionLimiting(
+            originalViewport.Resolution, goalViewport.Resolution, limitedViewport.Resolution);
 
         if (resolutionLimiting > 0)
         {
@@ -671,7 +684,8 @@ public class Navigator
     /// <param name="goalResolution"></param>
     /// <param name="limitedResolution"></param>
     /// <returns></returns>
-    private static double CalculateResolutionLimiting(double originalResolution, double goalResolution, double limitedResolution)
+    private static double CalculateResolutionLimiting(
+        double originalResolution, double goalResolution, double limitedResolution)
     {
         var denominator = Math.Abs(goalResolution - originalResolution);
 
@@ -730,7 +744,7 @@ public class Navigator
 
     private bool ShouldInitialize() => !IsInitialized && CanInitialize();
 
-    private bool CanInitialize() => Viewport.HasSize() && PanBounds is not null; // Should we check on ZoomBounds as well?
+    private bool CanInitialize() => Viewport.HasSize() && PanBounds is not null; // Should we check on ZoomBounds too?
 
     internal int GetAnimationsCount => _animations.Count();
 
