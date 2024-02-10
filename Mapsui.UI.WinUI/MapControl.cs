@@ -223,8 +223,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
         // Because we do not have an absolute pinch state in WinUI but only the delta, we can not
-        // use the Pinch method with a single parameter, which store the previous one to compare against. 
-        // To make this identical on all platforms perhaps they should all use a delta pinch state.
+        // use the Pinch method with a single parameter, which stores the previous pinch state to compare
+        // against in the next call. To make this identical on all platforms perhaps they should all use a delta pinch state.
         // but this would mean other platforms need to start tracking the previous pinch state to 
         // calculate the delta. So, perhaps this is just the best solution.
         Map.Navigator.Pinch(GetPinchState(e), GetPreviousPinchState(e));
