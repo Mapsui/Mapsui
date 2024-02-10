@@ -473,4 +473,9 @@ public class CalloutStyle : SymbolStyle
             SubtitleFont.Invalidated = value;
         }
     }
+
+    public override IStyle CreateInstance()
+    {
+        return new SymbolStyle();
+    }
 }

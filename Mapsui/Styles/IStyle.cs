@@ -30,4 +30,8 @@ public interface IStyle
     /// Gets or sets the objects overall opacity
     /// </summary>
     float Opacity { get; set; }
+
+    /// <summary> Creates an Empty Instance For Gradient Style Calculation </summary>
+    /// <returns></returns>
+    IStyle CreateInstance();
 }

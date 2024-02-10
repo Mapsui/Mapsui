@@ -13,4 +13,8 @@ public class RasterStyle : IStyle
     public double MaxVisible { get; set; } = double.MaxValue;
     public bool Enabled { get; set; } = true;
     public float Opacity { get; set; } = 1.0f;
+    public IStyle CreateInstance()
+    {
+        return new RasterStyle();
+    }
 }

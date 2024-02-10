@@ -40,6 +40,11 @@ public class Style : IStyle
     /// </summary>
     public float Opacity { get; set; }
 
+    public virtual IStyle CreateInstance()
+    {
+        return new Style();
+    }
+
     public override bool Equals(object? obj)
     {
         if (!(obj is Style style))

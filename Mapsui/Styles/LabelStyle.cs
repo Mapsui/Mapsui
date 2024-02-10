@@ -209,5 +209,9 @@ public class LabelStyle : Style
         return Text;
     }
 
-
+    /// <inheritdoc/>
+    public override IStyle CreateInstance()
+    {
+        return new LabelStyle();
+    }
 }

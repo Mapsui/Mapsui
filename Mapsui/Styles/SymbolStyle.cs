@@ -150,4 +150,9 @@ public class SymbolStyle : VectorStyle
     {
         return !Equals(symbolStyle1, symbolStyle2);
     }
+
+    public override IStyle CreateInstance()
+    {
+        return new VectorStyle();
+    }
 }

@@ -8,5 +8,10 @@ public class StyleCollection : IStyle
     public double MaxVisible { get; set; } = double.MaxValue;
     public bool Enabled { get; set; } = true;
     public float Opacity { get; set; } = 1f;
+    public IStyle CreateInstance()
+    {
+        return new StyleCollection();
+    }
+
     public Collection<IStyle> Styles { get; set; } = new Collection<IStyle>();
 }

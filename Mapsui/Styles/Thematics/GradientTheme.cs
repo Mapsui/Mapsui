@@ -120,7 +120,7 @@ public class GradientTheme : Style, IThemeStyle
             throw new ArgumentException("MinStyle and MaxStyle must be of the same type");
 
 
-        var style = (IStyle)Activator.CreateInstance(MinStyle.GetType())!;
+        var style = MinStyle.CreateInstance();
         if (MinStyle is LabelStyle && MaxStyle is LabelStyle)
             CalculateLabelStyle(style as LabelStyle, MinStyle as LabelStyle, MaxStyle as LabelStyle, attr);
         if (MinStyle is VectorStyle && MaxStyle is VectorStyle)
@@ -249,5 +249,11 @@ public class GradientTheme : Style, IThemeStyle
         if (a > 255) a = 255;
 
         return Color.FromArgb((int)a, (int)r, (int)g, (int)b);
+    }
+
+    /// <inheritdoc/>
+    public override IStyle CreateInstance()
+    {
+        return new GradientTheme(ColumnName,Min,Max,MinStyle,MaxStyle);
     }
 }

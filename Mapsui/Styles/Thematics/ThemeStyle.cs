@@ -15,4 +15,9 @@ public class ThemeStyle : Style, IThemeStyle
     {
         return _method(attribute);
     }
+
+    public override IStyle CreateInstance()
+    {
+        return new ThemeStyle(_method);
+    }
 }
