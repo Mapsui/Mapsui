@@ -18,6 +18,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
 namespace Mapsui.UI.Maui;
 
 /// <summary>
@@ -70,7 +72,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
         _initialized = true;
     }
-
+    
     public IRenderCache RenderCache => _renderer.RenderCache;
     public bool UseDoubleTap { get; set; } = true;
     public bool UseFling { get; set; } = true;

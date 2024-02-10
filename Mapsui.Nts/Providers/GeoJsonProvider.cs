@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -45,7 +46,7 @@ public class GeoJsonProvider : IProvider, IProviderExtended
         }
     }
 
-    private FeatureCollection DeserializContent(string geoJson, JsonSerializerOptions options)
+    private FeatureCollection DeserializeContent(string geoJson, JsonSerializerOptions options)
     {
         var b = new ReadOnlySpan<byte>(Encoding.UTF8.GetBytes(geoJson));
         return Deserialize(b, options);
@@ -106,7 +107,7 @@ public class GeoJsonProvider : IProvider, IProviderExtended
                     {
                         // maybe it has GeoJson Content.
                         var featureCollection = IsGeoJsonContent()
-                            ? DeserializContent(_geoJson, DefaultOptions)
+                            ? DeserializeContent(_geoJson, DefaultOptions)
                             : DeserializeFile(_geoJson, DefaultOptions);
                         _index = new();
                         foreach (var feature in featureCollection)

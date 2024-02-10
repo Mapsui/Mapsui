@@ -17,6 +17,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using Mapsui.Disposing;
 
 #if __MAUI__
 using Microsoft.Maui.Controls;
@@ -42,6 +43,8 @@ namespace Mapsui.UI.Blazor;
 namespace Mapsui.UI.Wpf;
 #endif
 
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
 public partial class MapControl : INotifyPropertyChanged, IDisposable
 {
     private double _unSnapRotationDegrees;
@@ -63,15 +66,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private ConcurrentQueue<IWidget>? _widgetCollection;
     // saving list of touchable Widgets
     private List<ITouchableWidget>? _touchableWidgets;
-    // keeps track of the widgets count to see if i need to recalculate the extended widgets.
-    private int _updateWidget = 0;
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
 
     private void CommonInitialize()
     {
-        // Create map
-        Map = new Map();
         // Create timer for invalidating the control
         _invalidateTimer?.Dispose();
         _invalidateTimer = new Timer(InvalidateTimerCallback, null, Timeout.Infinite, 16);
@@ -265,13 +264,27 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     public float PixelDensity => (float)GetPixelDensity();
-
-    private readonly IRenderer _renderer = new MapRenderer();
+    
+#pragma warning disable IDISP008
+    private IRenderer? _renderer;
+#pragma warning restore IDISP008
 
     /// <summary>
     /// Renderer that is used from this MapControl
     /// </summary>
-    public IRenderer Renderer => _renderer;
+    public IRenderer Renderer
+    {
+        get => _renderer ??= new MapRenderer();
+        set
+        {
+            if (value is null) throw new NullReferenceException(nameof(Renderer));
+            if (_renderer != value)
+            {
+                _renderer = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     /// <summary>
     /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
@@ -407,7 +420,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Refresh();
         }
     }
+    
     // ReSharper restore RedundantNameQualifier
+    private DisposableWrapper<Map>? _map;
 
 #if __MAUI__
 
@@ -432,14 +447,21 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public Map Map
     {
-        get => (Map)GetValue(MapProperty);
+        get
+        {
+            if (GetValue(MapProperty) is not Map map)
+            {
+                _map ??= new DisposableWrapper<Map>(new Map(), true);
+                map = _map.WrappedObject;
+                SetValue(MapProperty, map);
+            }
+
+            return map;
+        }
         set => SetValue(MapProperty, value);
     }
 
 #else
-
-    private Map _map = new();
-
     /// <summary>
     /// Map holding data for which is shown in this MapControl
     /// </summary>
@@ -449,14 +471,19 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #endif
     public Map Map
     {
-        get => _map;
+        get
+        {
+            _map ??= new DisposableWrapper<Map>(new Map(), true);
+            return _map.WrappedObject;
+        }
         set
         {
             if (value is null) throw new ArgumentNullException(nameof(value));
 
             BeforeSetMap();
-            _map = value;
-            AfterSetMap(_map);
+            _map?.Dispose();
+            _map = new DisposableWrapper<Map>(value, false);
+            AfterSetMap(value);
             OnPropertyChanged();
         }
     }
@@ -551,6 +578,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 Handled = false
             };
         }
+        
 
         return null;
     }
@@ -570,7 +598,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Unsubscribe();
             StopUpdates();
             _invalidateTimer?.Dispose();
-            _renderer.Dispose();
+            _invalidateTimer = null;
+            _renderer?.Dispose();
+            _renderer = null;
+            _map?.Dispose();
+            _map = null;
         }
         _invalidateTimer = null;
     }

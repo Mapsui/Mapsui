@@ -94,7 +94,7 @@ public class ProjectionTests
     public void ShapeFileReadTest()
     {
         // arrange
-        var directory = Path.GetDirectoryName(typeof(ProjectionTests).Assembly.Location);
+        var directory = Path.GetDirectoryName(System.AppContext.BaseDirectory);
         var countriesPath = Path.Combine(directory!, "GeoData", "World", "countries.shp");
 
         // act
