@@ -19,6 +19,8 @@ using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
 
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
 namespace Mapsui.UI.Maui;
 
 /// <summary>
