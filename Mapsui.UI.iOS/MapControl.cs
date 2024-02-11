@@ -14,6 +14,7 @@ public partial class MapControl : UIView, IMapControl
     private SKCanvasView? _canvas;
     private bool _init;
     private MPoint? _pointerDownPosition;
+    private readonly PinchTracker _pinchTracker = new();
 
     public static bool UseGPU { get; set; } = true;
 
@@ -165,7 +166,8 @@ public partial class MapControl : UIView, IMapControl
     {
         base.TouchesBegan(touches, evt);
 
-        Map.Navigator.ClearPinchState();
+        if (evt?.AllTouches.Count >= 2)
+            _pinchTracker.Restart(GetPinchState(GetLocations(evt)));
 
         if (touches.AnyObject is UITouch touch)
         {
@@ -191,26 +193,18 @@ public partial class MapControl : UIView, IMapControl
 
                 var previousPosition = touch.PreviousLocationInView(this).ToMapsui();
                 Map.Navigator.Drag(position, previousPosition);
-                Map.Navigator.ClearPinchState();
             }
         }
         else if (evt?.AllTouches.Count >= 2)
         {
-            Map.Navigator.Pinch(GetPinchState(GetLocations(evt)));
+            _pinchTracker.Update(GetPinchState(GetLocations(evt)));
+            Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
         }
     }
 
-    private List<MPoint> GetPreviousLocations(UIEvent evt)
-    {
-        return evt.AllTouches.Select(t => ((UITouch)t).PreviousLocationInView(this))
-                        .Select(p => new MPoint(p.X, p.Y)).ToList();
-    }
-
-    private List<MPoint> GetLocations(UIEvent evt)
-    {
-        return evt.AllTouches.Select(t => ((UITouch)t).LocationInView(this))
-            .Select(p => new MPoint(p.X, p.Y)).ToList();
-    }
+    private List<MPoint> GetLocations(UIEvent evt)    
+        => evt.AllTouches.Select(t => ((UITouch)t).LocationInView(this)).Select(p => new MPoint(p.X, p.Y)).ToList();
+    
 
     public override void TouchesEnded(NSSet touches, UIEvent? e)
     {
