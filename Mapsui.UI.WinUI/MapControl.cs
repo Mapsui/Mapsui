@@ -7,7 +7,6 @@
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.UI.WinUI.Extensions;
-using Mapsui.Utilities;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -26,7 +25,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 {
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
-    private double _virtualRotation;
     private MPoint? _pointerDownPosition;
     bool _shiftPressed;
 
@@ -102,7 +100,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
     {
-        _virtualRotation = Map.Navigator.Viewport.Rotation;
+        Map.Navigator.ClearPinchState();
     }
 
     private void MapControl_PointerDown(object sender, PointerRoutedEventArgs e)
@@ -224,25 +222,29 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
-        var center = e.Position.ToMapsui();
-        var radius = e.Delta.Scale;
-        var rotation = e.Delta.Rotation;
-
-        var previousCenter = e.Position.ToMapsui().Offset(-e.Delta.Translation.X, -e.Delta.Translation.Y);
-        var previousRadius = 1f;
-
-        double rotationDelta = 0;
-
-        if (Map.Navigator.RotationLock == false)
-        {
-            _virtualRotation += rotation;
-
-            rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                _virtualRotation, Map.Navigator.Viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
-        }
-
-        Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
+        // Because we do not have an absolute pinch state in WinUI but only the delta, we can not
+        // use the Pinch method with a single parameter, which stores the previous pinch state to compare
+        // against in the next call. To make this identical on all platforms perhaps they should all use a delta pinch state.
+        // but this would mean other platforms need to start tracking the previous pinch state to 
+        // calculate the delta. So, perhaps this is just the best solution.
+        Map.Navigator.Pinch(GetPinchState(e), GetPreviousPinchState(e));
         e.Handled = true;
+    }
+
+    private PinchState GetPreviousPinchState(ManipulationDeltaRoutedEventArgs e)
+    {
+        var relativePosition = TransformToVisual(null).Inverse.TransformPoint(e.Position);
+        return new PinchState(relativePosition.ToMapsui(), 1, 0);
+    }
+
+    private PinchState GetPinchState(ManipulationDeltaRoutedEventArgs e)
+    {
+        // Get position relative to the MapControl.
+        // Not sure if this is supposed to work like this, could be a bug: 
+        // https://github.com/unoplatform/uno/discussions/15421#discussioncomment-8420650
+        var relativePosition = TransformToVisual(null).Inverse.TransformPoint(e.Position);
+        var position = relativePosition.ToMapsui().Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
+        return new PinchState(position, e.Delta.Scale, e.Delta.Rotation);
     }
 
     public void OpenBrowser(string url)

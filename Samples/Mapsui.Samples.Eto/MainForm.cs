@@ -40,8 +40,6 @@ public class MainForm : Form
         Title = $"Mapsui SampleApp - {eto_platform} - {os_platform}";
 
         MapControl.Map.Navigator.RotationLock = false;
-        MapControl.UnSnapRotationDegrees = 30;
-        MapControl.ReSnapRotationDegrees = 5;
         RotationSlider.ValueChanged += RotationSliderChanged;
 
         MapControl.ZoomButton = MouseButtons.Alternate;

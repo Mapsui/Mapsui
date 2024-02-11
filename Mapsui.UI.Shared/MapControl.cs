@@ -4,11 +4,9 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
-using Mapsui.Styles;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
-using Mapsui.Widgets.InfoWidgets;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -47,7 +45,6 @@ namespace Mapsui.UI.Wpf;
 
 public partial class MapControl : INotifyPropertyChanged, IDisposable
 {
-    private double _unSnapRotationDegrees;
     // Flag indicating if a drawing process is running
     private bool _drawing;
     // Flag indicating if the control has to be redrawn
@@ -224,40 +221,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             if (_performance != value)
             {
                 _performance = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-
-    /// <summary>
-    /// After how many degrees start rotation to take place
-    /// </summary>
-    public double UnSnapRotationDegrees
-    {
-        get => _unSnapRotationDegrees;
-        set
-        {
-            if (_unSnapRotationDegrees != value)
-            {
-                _unSnapRotationDegrees = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-
-    private double _reSnapRotationDegrees;
-
-    /// <summary>
-    /// With how many degrees from 0 should map snap to 0 degrees
-    /// </summary>
-    public double ReSnapRotationDegrees
-    {
-        get => _reSnapRotationDegrees;
-        set
-        {
-            if (_reSnapRotationDegrees != value)
-            {
-                _reSnapRotationDegrees = value;
                 OnPropertyChanged();
             }
         }
