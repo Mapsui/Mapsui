@@ -17,7 +17,7 @@ public static class GeometryCollectionRenderer
         IFeature feature,
         GeometryCollection collection,
         float opacity,
-        IVectorCache<SKPath, SKPaint> vectorCache)
+        IVectorCache vectorCache)
     {
         SKPath ToPath((GeometryCollection collection, IFeature feature, Viewport viewport, float lineWidth) valueTuple)
         {
