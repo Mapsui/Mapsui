@@ -65,6 +65,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private List<ITouchableWidget>? _touchableWidgets;
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
+    private IRenderer _renderer = new MapRenderer();
 
     private void CommonInitialize()
     {
@@ -235,19 +236,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Renderer that is used from this MapControl
     /// </summary>
-    public IRenderer Renderer
-    {
-        get => _renderer ??= new MapRenderer();
-        set
-        {
-            if (value is null) throw new NullReferenceException(nameof(Renderer));
-            if (_renderer != value)
-            {
-                _renderer = value;
-                OnPropertyChanged();
-            }
-        }
-    }
+    public IRenderer Renderer => _renderer;
 
     /// <summary>
     /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
@@ -385,7 +374,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
     
     // ReSharper restore RedundantNameQualifier
-    private Map? _map;
+    private DisposableWrapper<Map>? _map;
 
 #if __MAUI__
 
@@ -414,7 +403,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         {
             if (GetValue(MapProperty) is not Map map)
             {
-                map = new Map();
+                _map ??= new DisposableWrapper<Map>(new Map(), true);
+                map = _map.WrappedObject;
                 SetValue(MapProperty, map);
             }
 
@@ -435,15 +425,16 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         get
         {
-            _map ??= new Map();
-            return _map;
+            _map ??= new DisposableWrapper<Map>(new Map(), true);
+            return _map.WrappedObject;
         }
         set
         {
             if (value is null) throw new ArgumentNullException(nameof(value));
 
             BeforeSetMap();
-            _map = value;
+            _map?.Dispose();
+            _map = new DisposableWrapper<Map>(value, false);
             AfterSetMap(value);
             OnPropertyChanged();
         }
@@ -562,6 +553,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             _invalidateTimer = null;
             _renderer?.Dispose();
             _renderer = null;
+            _map?.Dispose();
+            _map = null;
         }
         _invalidateTimer = null;
     }
