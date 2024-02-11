@@ -16,80 +16,46 @@ public class GradientTheme : Style, IThemeStyle
     /// <summary>
     /// Gets or sets the column name from where to get the attribute value
     /// </summary>
-    public string ColumnName { get; set; }
+    public string ColumnName { get; init; }
 
     /// <summary>
     /// Gets or sets the minimum value of the gradient
     /// </summary>
-    public double Min { get; set; }
+    public double Min { get; init; }
 
     /// <summary>
     /// Gets or sets the maximum value of the gradient
     /// </summary>
-    public double Max { get; set; }
+    public double Max { get; init; }
 
     /// <summary>
-    /// Gets or sets the <see cref="Mapsui.Styles.IStyle">style</see> for the minimum value
+    /// Gets or sets the <see cref="IStyle">style</see> for the minimum value
     /// </summary>
-    public IStyle MinStyle { get; set; }
+    public IStyle MinStyle { get; init; }
 
     /// <summary>
-    /// Gets or sets the <see cref="Mapsui.Styles.IStyle">style</see> for the maximum value
+    /// Gets or sets the <see cref="IStyle">style</see> for the maximum value
     /// </summary>
-    public IStyle MaxStyle { get; set; }
+    public IStyle MaxStyle { get; init; }
 
     /// <summary>
-    /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used on labels
+    /// Gets or sets the <see cref="ColorBlend"/> used on labels
     /// </summary>
-    public ColorBlend? TextColorBlend { get; set; }
+    public ColorBlend? TextColorBlend { get; init; }
 
     /// <summary>
-    /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used on lines
+    /// Gets or sets the <see cref="ColorBlend"/> used on lines
     /// </summary>
-    public ColorBlend? LineColorBlend { get; set; }
+    public ColorBlend? LineColorBlend { get; init; }
 
     /// <summary>
-    /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used as Fill
+    /// Gets or sets the <see cref="ColorBlend"/> used as Fill
     /// </summary>
-    public ColorBlend? FillColorBlend { get; set; }
+    public ColorBlend? FillColorBlend { get; init; }
 
     /// <summary>
     /// Initializes a new instance of the GradientTheme class
     /// </summary>
-    /// <remarks>
-    /// <para>The gradient theme interpolates linearly between two styles based on a numerical attribute in the data source.
-    /// This is useful for scaling symbols, line widths, line and fill colors from numerical attributes.</para>
-    /// <para>Colors are interpolated between two colors, but if you want to interpolate through more colors (fx. a rainbow),
-    /// set the <see cref="TextColorBlend"/>, <see cref="LineColorBlend"/> and <see cref="FillColorBlend"/> properties
-    /// to a custom <see cref="ColorBlend"/>.
-    /// </para>
-    /// <para>The following properties are scaled (properties not mentioned here are not interpolated):
-    /// <list type="table">
-    ///        <listheader><term>Property</term><description>Remarks</description></listheader>
-    ///        <item><term><see cref="Color"/></term><description>Red, Green, Blue and Alpha values are linearly interpolated.</description></item>
-    ///        <item><term><see cref="Pen"/></term><description>The color, width, color of pens are interpolated. MiterLimit,StartCap,EndCap,LineJoin,DashStyle,DashPattern,DashOffset,DashCap,CompoundArray, and Alignment are switched in the middle of the min/max values.</description></item>
-    ///        <item><term><see cref="Brush"/></term><description>Brush color are interpolated. Other brushes are not supported.</description></item>
-    ///        <item><term><see cref="Mapsui.Styles.VectorStyle"/></term><description>MaxVisible, MinVisible, Line, Outline, Fill and SymbolScale are scaled linearly. Symbol, EnableOutline and Enabled switch in the middle of the min/max values.</description></item>
-    ///        <item><term><see cref="Mapsui.Styles.LabelStyle"/></term><description>FontSize, BackColor, ForeColor, MaxVisible, MinVisible, Offset are scaled linearly. All other properties use min-style.</description></item>
-    /// </list>
-    /// </para>
-    /// <example>
-    /// Creating a rainbow color blend showing colors from red, through yellow, green and blue depicting 
-    /// the population density of a country.
-    /// <code lang="C#">
-    /// //Create two vector styles to interpolate between
-    /// Mapsui.Styles.VectorStyle min = new Mapsui.Styles.VectorStyle();
-    /// Mapsui.Styles.VectorStyle max = new Mapsui.Styles.VectorStyle();
-    /// min.Outline.Width = 1f; //Outline width of the minimum value
-    /// max.Outline.Width = 3f; //Outline width of the maximum value
-    /// //Create a theme interpolating population density between 0 and 400
-    /// Mapsui.Rendering.Thematics.GradientTheme popdens = new Mapsui.Rendering.Thematics.GradientTheme("POPDENS", 0, 400, min, max);
-    /// //Set the fill-style colors to be a rainbow blend from red to blue.
-    /// popdens.FillColorBlend = Mapsui.Rendering.Thematics.ColorBlend.Rainbow5;
-    /// myVectorLayer.Styles.Add(popdens);
-    /// </code>
-    /// </example>
-    /// </remarks>
     /// <param name="columnName">Name of column to extract the attribute</param>
     /// <param name="minValue">Minimum value</param>
     /// <param name="maxValue">Maximum value</param>
@@ -104,13 +70,12 @@ public class GradientTheme : Style, IThemeStyle
         MinStyle = minStyle;
     }
 
-
     /// <summary>
     /// Returns the style based on a numeric DataColumn, where style
     /// properties are linearly interpolated between max and min values.
     /// </summary>
     /// <param name="row">Feature</param>
-    /// <returns><see cref="Mapsui.Styles.IStyle">Style</see> calculated by a linear interpolation between the min/max styles</returns>
+    /// <returns><see cref=IStyle">Style</see> calculated by a linear interpolation between the min/max styles</returns>
     public IStyle? GetStyle(IFeature row)
     {
         double attr;
@@ -119,130 +84,125 @@ public class GradientTheme : Style, IThemeStyle
         if (MinStyle.GetType() != MaxStyle.GetType())
             throw new ArgumentException("MinStyle and MaxStyle must be of the same type");
 
-
-        var style = (IStyle)Activator.CreateInstance(MinStyle.GetType())!;
-        if (MinStyle is LabelStyle && MaxStyle is LabelStyle)
-            CalculateLabelStyle(style as LabelStyle, MinStyle as LabelStyle, MaxStyle as LabelStyle, attr);
-        if (MinStyle is VectorStyle && MaxStyle is VectorStyle)
-            CalculateVectorStyle(style as VectorStyle, MinStyle as VectorStyle, MaxStyle as VectorStyle, attr);
-        if (MinStyle is SymbolStyle && MaxStyle is SymbolStyle)
-            CalculateSymbolStyle(style as SymbolStyle, MinStyle as SymbolStyle, MaxStyle as SymbolStyle, attr);
-        return style;
-    }
-
-    private void CalculateVectorStyle(VectorStyle? style, VectorStyle? min, VectorStyle? max, double value)
-    {
-        if (style is null)
-            return;
-        var fraction = Fraction(value);
-        style.Enabled = fraction > 0.5 ? min?.Enabled ?? false : max?.Enabled ?? false;
-        if (FillColorBlend != null)
-            style.Fill = new Brush { Color = FillColorBlend.GetColor(fraction) };
-        else if (min?.Fill != null && max?.Fill != null)
-            style.Fill = InterpolateBrush(min.Fill, max.Fill, value);
-
-        if (min?.Line != null && max?.Line != null)
-            style.Line = InterpolatePen(min.Line, max.Line, value);
-        if (LineColorBlend != null && style.Line != null)
-            style.Line.Color = LineColorBlend.GetColor(fraction);
-
-        if (min?.Outline != null && max?.Outline != null)
-            style.Outline = InterpolatePen(min.Outline, max.Outline, value);
-    }
-
-    private void CalculateSymbolStyle(SymbolStyle? style, SymbolStyle? min, SymbolStyle? max, double value)
-    {
-        if (style == null)
-            return;
-        var dFrac = Fraction(value);
-        style.BitmapId = (dFrac > 0.5) ? min?.BitmapId ?? 0 : max?.BitmapId ?? 0;
-        style.SymbolOffset = (dFrac > 0.5 ? min?.SymbolOffset ?? new Offset() : max?.SymbolOffset ?? new Offset());
-        //We don't interpolate the offset but let it follow the symbol instead
-        style.SymbolScale = InterpolateDouble(min?.SymbolScale, max?.SymbolScale, value);
-    }
-
-    private void CalculateLabelStyle(LabelStyle? style, LabelStyle? min, LabelStyle? max, double value)
-    {
-        if (style == null)
-            return;
-        style.CollisionDetection = min?.CollisionDetection ?? false;
-        style.Enabled = InterpolateBool(min?.Enabled ?? false, max?.Enabled ?? false, value);
-        style.LabelColumn = InterpolateString(min?.LabelColumn, max?.LabelColumn, value);
-
-        var fontSize = InterpolateDouble(min?.Font.Size, max?.Font.Size, value);
-        style.Font = new Font { FontFamily = min?.Font.FontFamily, Size = fontSize };
-
-        if (min?.BackColor != null && max?.BackColor != null)
-            style.BackColor = InterpolateBrush(min.BackColor, max.BackColor, value);
-
-        style.ForeColor = TextColorBlend == null ?
-            InterpolateColor(min?.ForeColor, max?.ForeColor, value) :
-            TextColorBlend.GetColor(Fraction(value));
-
-        if (min?.Halo != null && max?.Halo != null)
-            style.Halo = InterpolatePen(min.Halo, max.Halo, value);
-
-        var x = InterpolateDouble(min?.Offset.X, max?.Offset.X, value);
-        var y = InterpolateDouble(min?.Offset.Y, max?.Offset.Y, value);
-        style.Offset = new Offset { X = x, Y = y };
-        style.LabelColumn = min?.LabelColumn;
-    }
-
-    private double Fraction(double attr)
-    {
-        if (attr < Min) return 0;
-        if (attr > Max) return 1;
-        return (attr - Min) / (Max - Min);
-    }
-
-    private bool InterpolateBool(bool min, bool max, double attr)
-    {
-        var frac = Fraction(attr);
-        return frac > 0.5 ? max : min;
-    }
-
-    private string? InterpolateString(string? min, string? max, double attr)
-    {
-        var frac = Fraction(attr);
-        return frac > 0.5 ? max : min;
-    }
-
-    private double InterpolateDouble(double? min, double? max, double attr)
-    {
-        min ??= 0;
-        max ??= 0;
-        return (max.Value - min.Value) * Fraction(attr) + min.Value;
-    }
-
-    private Brush InterpolateBrush(Brush min, Brush max, double attr)
-    {
-        return new Brush { Color = InterpolateColor(min.Color, max.Color, attr) };
-    }
-
-    private Pen InterpolatePen(Pen min, Pen max, double attr)
-    {
-        return new Pen
+        return (MinStyle, MaxStyle) switch
         {
-            Color = InterpolateColor(min.Color, max.Color, attr),
-            Width = InterpolateDouble(min.Width, max.Width, attr)
+            (LabelStyle minLabelStyle, LabelStyle maxLabelStyle) 
+                => ToInterpolatedLabelStyle(minLabelStyle, maxLabelStyle, attr, this),
+            (SymbolStyle minSymbolStyle, SymbolStyle maxSymbolStyle) 
+                => ToInterpolatedSymbolStyle(minSymbolStyle, maxSymbolStyle, attr, this),
+            (VectorStyle minVectorStyle, VectorStyle maxVectorStyle) 
+                => ToInterpolatedVectorStyle(minVectorStyle, maxVectorStyle, attr, this),
+            _ => throw new NotSupportedException($"Style type '{MinStyle.GetType()}' and/or '{MinStyle.GetType()}' can not be used in the GradientTheme")
         };
     }
 
-    private Color InterpolateColor(Color? minCol, Color? maxCol, double attr)
+    private static VectorStyle ToInterpolatedVectorStyle(VectorStyle min, VectorStyle max, double value, GradientTheme instance)
     {
-        minCol ??= Color.Transparent;
-        maxCol ??= Color.Transparent;
+        var result = new VectorStyle();
 
-        var frac = Fraction(attr);
-        if (Math.Abs(frac - 1) < Utilities.Constants.Epsilon)
-            return maxCol;
-        if (Math.Abs(frac - 0) < Utilities.Constants.Epsilon)
-            return minCol;
+        var fraction = Fraction(value, instance.Min, instance.Max);
 
-        var r = (maxCol.R - minCol.R) * frac + minCol.R;
-        var g = (maxCol.G - minCol.G) * frac + minCol.G;
-        var b = (maxCol.B - minCol.B) * frac + minCol.B;
-        var a = (maxCol.A - minCol.A) * frac + minCol.A;
+        result.Enabled = fraction > 0.5 ? min.Enabled : max.Enabled;
+        if (instance.FillColorBlend != null)
+            result.Fill = new Brush { Color = instance.FillColorBlend.GetColor(fraction) };
+        else if (min.Fill != null && max.Fill != null)
+            result.Fill = InterpolateBrush(min.Fill, max.Fill, fraction);
+
+        if (min.Line != null && max.Line != null)
+            result.Line = InterpolatePen(min.Line, max.Line, fraction);
+        if (instance.LineColorBlend != null && result.Line != null)
+            result.Line.Color = instance.LineColorBlend.GetColor(fraction);
+
+        if (min.Outline != null && max.Outline != null)
+            result.Outline = InterpolatePen(min.Outline, max.Outline, fraction);
+
+        return result;
+    }
+
+    private static SymbolStyle ToInterpolatedSymbolStyle(SymbolStyle min, SymbolStyle max, double value, GradientTheme instance)
+    {
+        var result = new SymbolStyle();
+
+        var fraction = Fraction(value, instance.Min, instance.Max);
+
+        result.BitmapId = (fraction > 0.5) ? min.BitmapId : max.BitmapId;
+        result.SymbolOffset = fraction > 0.5 ? min.SymbolOffset ?? new Offset() : max.SymbolOffset ?? new Offset();
+        // We don't interpolate the offset but let it follow the symbol instead
+        result.SymbolScale = InterpolateDouble(min.SymbolScale, max.SymbolScale, fraction);
+
+        return result;
+    }
+
+    private LabelStyle ToInterpolatedLabelStyle(LabelStyle min, LabelStyle max, double value, GradientTheme instance)
+    {
+        var result = new LabelStyle();
+
+        var fraction = Fraction(value, instance.Min, instance.Max);
+
+        result.CollisionDetection = min.CollisionDetection;
+        result.Enabled = InterpolateBool(min.Enabled, max.Enabled, fraction);
+        result.LabelColumn = InterpolateString(min.LabelColumn, max.LabelColumn, fraction);
+
+        var fontSize = InterpolateDouble(min.Font.Size, max.Font.Size, fraction);
+        result.Font = new Font { FontFamily = min.Font.FontFamily, Size = fontSize };
+
+        if (min.BackColor != null && max.BackColor != null)
+            result.BackColor = InterpolateBrush(min.BackColor, max.BackColor, fraction);
+
+        result.ForeColor = TextColorBlend == null ?
+            InterpolateColor(min.ForeColor, max.ForeColor, fraction) :
+            TextColorBlend.GetColor(fraction);
+
+        if (min.Halo != null && max.Halo != null)
+            result.Halo = InterpolatePen(min.Halo, max.Halo, fraction);
+
+        var x = InterpolateDouble(min.Offset.X, max.Offset.X, fraction);
+        var y = InterpolateDouble(min.Offset.Y, max.Offset.Y, fraction);
+        result.Offset = new Offset { X = x, Y = y };
+        result.LabelColumn = min.LabelColumn;
+
+        return result;
+    }
+
+    private static double Fraction(double attr, double min, double max)
+    {
+        if (attr < min) return 0;
+        if (attr > max) return 1;
+
+        return (attr - min) / (max - min);
+    }
+
+    private static bool InterpolateBool(bool min, bool max, double fraction) => fraction > 0.5 ? max : min;
+
+    private static string? InterpolateString(string? min, string? max, double fraction) => fraction > 0.5 ? max : min;
+
+    private static double InterpolateDouble(double min, double max, double fraction) => (max - min) * fraction + min;
+
+    private static Brush InterpolateBrush(Brush min, Brush max, double fraction)
+        => new()
+        {
+            Color = InterpolateColor(min.Color ?? Color.Transparent, max.Color ?? Color.Transparent, fraction)
+        };
+
+    private static Pen InterpolatePen(Pen min, Pen max, double fraction)
+        => new()
+        {
+            Color = InterpolateColor(min.Color, max.Color, fraction),
+            Width = InterpolateDouble(min.Width, max.Width, fraction)
+        };
+
+    private static Color InterpolateColor(Color minColor, Color maxColor, double fraction)
+    {
+        if (Math.Abs(fraction - 1) < Utilities.Constants.Epsilon)
+            return maxColor;
+        if (Math.Abs(fraction - 0) < Utilities.Constants.Epsilon)
+            return minColor;
+
+        var r = (maxColor.R - minColor.R) * fraction + minColor.R;
+        var g = (maxColor.G - minColor.G) * fraction + minColor.G;
+        var b = (maxColor.B - minColor.B) * fraction + minColor.B;
+        var a = (maxColor.A - minColor.A) * fraction + minColor.A;
+
         if (r > 255) r = 255;
         if (g > 255) g = 255;
         if (b > 255) b = 255;
