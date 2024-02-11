@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using Mapsui.Extensions;
 using Mapsui.Styles;
-using NetTopologySuite.GeometriesGraph;
-using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
