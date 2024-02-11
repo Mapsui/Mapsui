@@ -228,10 +228,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     public float PixelDensity => (float)GetPixelDensity();
-    
-#pragma warning disable IDISP008
-    private IRenderer? _renderer;
-#pragma warning restore IDISP008
 
     /// <summary>
     /// Renderer that is used from this MapControl
@@ -374,7 +370,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
     
     // ReSharper restore RedundantNameQualifier
-    private DisposableWrapper<Map>? _map;
+    private Map? _map;
 
 #if __MAUI__
 
@@ -425,16 +421,15 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         get
         {
-            _map ??= new DisposableWrapper<Map>(new Map(), true);
-            return _map.WrappedObject;
+            return _map ??= new Map();
         }
+        
         set
         {
             if (value is null) throw new ArgumentNullException(nameof(value));
 
             BeforeSetMap();
-            _map?.Dispose();
-            _map = new DisposableWrapper<Map>(value, false);
+            _map = value;
             AfterSetMap(value);
             OnPropertyChanged();
         }
@@ -552,9 +547,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             _invalidateTimer?.Dispose();
             _invalidateTimer = null;
             _renderer?.Dispose();
-            _renderer = null;
-            _map?.Dispose();
-            _map = null;
         }
         _invalidateTimer = null;
     }
