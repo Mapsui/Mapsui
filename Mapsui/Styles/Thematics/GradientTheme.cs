@@ -86,29 +86,32 @@ public class GradientTheme : Style, IThemeStyle
 
         return (MinStyle, MaxStyle) switch
         {
-            (LabelStyle minLabelStyle, LabelStyle maxLabelStyle) => ToInterpolatedLabelStyle(minLabelStyle, maxLabelStyle, attr),
-            (SymbolStyle minSymbolStyle, SymbolStyle maxSymbolStyle) => ToInterpolatedSymbolStyle(minSymbolStyle, maxSymbolStyle, attr),
-            (VectorStyle minVectorStyle, VectorStyle maxVectorStyle) => ToInterpolatedVectorStyle(minVectorStyle, maxVectorStyle, attr),
+            (LabelStyle minLabelStyle, LabelStyle maxLabelStyle) 
+                => ToInterpolatedLabelStyle(minLabelStyle, maxLabelStyle, attr, this),
+            (SymbolStyle minSymbolStyle, SymbolStyle maxSymbolStyle) 
+                => ToInterpolatedSymbolStyle(minSymbolStyle, maxSymbolStyle, attr, this),
+            (VectorStyle minVectorStyle, VectorStyle maxVectorStyle) 
+                => ToInterpolatedVectorStyle(minVectorStyle, maxVectorStyle, attr, this),
             _ => throw new NotSupportedException($"Style type '{MinStyle.GetType()}' and/or '{MinStyle.GetType()}' can not be used in the GradientTheme")
         };
     }
 
-    private VectorStyle ToInterpolatedVectorStyle(VectorStyle min, VectorStyle max, double value)
+    private static VectorStyle ToInterpolatedVectorStyle(VectorStyle min, VectorStyle max, double value, GradientTheme instance)
     {
         var result = new VectorStyle();
 
-        var fraction = Fraction(value, Min, Max);
+        var fraction = Fraction(value, instance.Min, instance.Max);
 
         result.Enabled = fraction > 0.5 ? min.Enabled : max.Enabled;
-        if (FillColorBlend != null)
-            result.Fill = new Brush { Color = FillColorBlend.GetColor(fraction) };
+        if (instance.FillColorBlend != null)
+            result.Fill = new Brush { Color = instance.FillColorBlend.GetColor(fraction) };
         else if (min.Fill != null && max.Fill != null)
             result.Fill = InterpolateBrush(min.Fill, max.Fill, fraction);
 
         if (min.Line != null && max.Line != null)
             result.Line = InterpolatePen(min.Line, max.Line, fraction);
-        if (LineColorBlend != null && result.Line != null)
-            result.Line.Color = LineColorBlend.GetColor(fraction);
+        if (instance.LineColorBlend != null && result.Line != null)
+            result.Line.Color = instance.LineColorBlend.GetColor(fraction);
 
         if (min.Outline != null && max.Outline != null)
             result.Outline = InterpolatePen(min.Outline, max.Outline, fraction);
@@ -116,11 +119,11 @@ public class GradientTheme : Style, IThemeStyle
         return result;
     }
 
-    private SymbolStyle ToInterpolatedSymbolStyle(SymbolStyle min, SymbolStyle max, double value)
+    private static SymbolStyle ToInterpolatedSymbolStyle(SymbolStyle min, SymbolStyle max, double value, GradientTheme instance)
     {
         var result = new SymbolStyle();
 
-        var fraction = Fraction(value, Min, Max);
+        var fraction = Fraction(value, instance.Min, instance.Max);
 
         result.BitmapId = (fraction > 0.5) ? min.BitmapId : max.BitmapId;
         result.SymbolOffset = fraction > 0.5 ? min.SymbolOffset ?? new Offset() : max.SymbolOffset ?? new Offset();
@@ -130,11 +133,11 @@ public class GradientTheme : Style, IThemeStyle
         return result;
     }
 
-    private LabelStyle ToInterpolatedLabelStyle(LabelStyle min, LabelStyle max, double value)
+    private LabelStyle ToInterpolatedLabelStyle(LabelStyle min, LabelStyle max, double value, GradientTheme instance)
     {
         var result = new LabelStyle();
 
-        var fraction = Fraction(value, Min, Max);
+        var fraction = Fraction(value, instance.Min, instance.Max);
 
         result.CollisionDetection = min.CollisionDetection;
         result.Enabled = InterpolateBool(min.Enabled, max.Enabled, fraction);
