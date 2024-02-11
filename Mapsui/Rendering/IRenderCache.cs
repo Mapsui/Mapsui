@@ -12,8 +12,3 @@ public interface IRenderCache : ILabelCache, ISymbolCache, IVectorCache, ITileCa
     ITileCache TileCache { get; set; }
     IVectorCache VectorCache { get; set; }
 }
-
-public interface IRenderCache<TPath, TPaint> : IRenderCache, IVectorCache<TPath, TPaint>
-{
-    new IVectorCache<TPath, TPaint> VectorCache { get; set; }
-}
