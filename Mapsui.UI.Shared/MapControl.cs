@@ -562,7 +562,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             _invalidateTimer = null;
             _renderer?.Dispose();
             _renderer = null;
-            _map = null;
         }
         _invalidateTimer = null;
     }
