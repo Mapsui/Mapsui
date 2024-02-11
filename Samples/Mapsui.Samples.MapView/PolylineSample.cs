@@ -17,7 +17,7 @@ public class PolylineSample : IMapViewSample
 
     public bool OnClick(object? sender, EventArgs args)
     {
-        var mapView = sender as MapView;
+        var mapView = sender as UI.Maui.MapView;
         var e = args as MapClickedEventArgs;
 
         if (mapView == null)
@@ -53,6 +53,6 @@ public class PolylineSample : IMapViewSample
     {
         mapControl.Map = OsmSample.CreateMap();
 
-        ((MapView)mapControl).UseDoubleTap = false;
+        ((UI.Maui.MapView)mapControl).UseDoubleTap = false;
     }
 }

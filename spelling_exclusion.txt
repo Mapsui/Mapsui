@@ -22,3 +22,5 @@ pict
 iter
 Thematics
 Flinged
+Resnap
+openstreetmap

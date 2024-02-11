@@ -11,6 +11,14 @@
 		<EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
 	</PropertyGroup>
 
+  <!--Release enable all Performance-->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <RunAOTCompilation>false</RunAOTCompilation>
+    <WasmStripILAfterAOT>false</WasmStripILAfterAOT>
+    <!--<RunAOTCompilation>true</RunAOTCompilation>-->
+    <!--<WasmStripILAfterAOT>true</WasmStripILAfterAOT>-->
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="SkiaSharp.Views.Blazor" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" VersionOverride="8.0.0" />

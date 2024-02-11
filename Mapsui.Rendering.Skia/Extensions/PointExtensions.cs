@@ -1,5 +1,4 @@
-﻿using System;
-using NetTopologySuite.Geometries;
+﻿using NetTopologySuite.Geometries;
 using Mapsui.Rendering.Skia.Functions;
 using Mapsui.Styles;
 using SkiaSharp;

@@ -1,5 +1,4 @@
-﻿using Mapsui.Utilities;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Utilities;
@@ -15,7 +14,7 @@ internal class RotationCalculationTests
     public static void TestNormalizeRotation(double inputRotation, double expectedRotation)
     {
         // Act
-        var rotation = RotationCalculations.NormalizeRotation(inputRotation);
+        var rotation = RotationSnapper.NormalizeRotation(inputRotation);
 
         // Assert
         ClassicAssert.AreEqual(expectedRotation, rotation);
@@ -37,27 +36,31 @@ internal class RotationCalculationTests
     public static void TestRotationShortestDistance(double inputRotation1, double inputRotation2, double expectedDistance)
     {
         // Act
-        var distance = RotationCalculations.RotationShortestDistance(inputRotation1, inputRotation2);
+        var distance = RotationSnapper.RotationShortestDistance(inputRotation1, inputRotation2);
 
         // Assert
         ClassicAssert.AreEqual(expectedDistance, distance);
     }
 
-    [TestCase(15, 0, 20, 10, 0)] // Still snapped
-    [TestCase(-15, 0, 20, 10, 0)] // Still snapped
-    [TestCase(25, 0, 20, 10, 25)] // Unsnap
-    [TestCase(-25, 0, 20, 10, -25)] // Unsnap
-    [TestCase(30, 25, 20, 10, 5)] // Still unsnapped
-    [TestCase(-30, -25, 20, 10, -5)] // Still unsnapped
-    [TestCase(5, 15, 20, 10, -15)] // Resnap
-    [TestCase(-5, -15, 20, 10, 15)] // Resnap
+    [TestCase(0, 15, 5, 0, "Still snapped")]
+    [TestCase(0, -15, -5, 0, "Still snapped")]
+    [TestCase(0, 25, 5, 25, "Unsnap")]
+    [TestCase(0, -25, -5, -25, "Unsnap")]
+    [TestCase(25, 30, 5, 5, "Still unsnapped")]
+    [TestCase(-25, -30, -5, -5, "Still unsnapped")]
+    [TestCase(15, 5, -10, -15, "Resnap")]
+    [TestCase(-15, -5, 10, 15, "Resnap")]
 
-    public static void TestCalculateRotationDeltaUsingSnapping(double virtualRotation, double actualRotation, double unSnapRotation, double reSnapRotation, double expectedRotationDelta)
+    public static void TestCalculateRotationDeltaUsingSnapping(double currentRotation, double virtualRotation, double rotationDelta, double expectedRotationDelta, string message)
     {
+        // Arrange
+        double unSnapRotation = 20;
+        double reSnapRotation = 10;
+
         // Act
-        var rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(virtualRotation, actualRotation, unSnapRotation, reSnapRotation);
+        var adjustedRotationDelta = RotationSnapper.AdjustRotationDeltaForSnapping(rotationDelta, currentRotation, virtualRotation, unSnapRotation, reSnapRotation);
 
         // Assert
-        ClassicAssert.AreEqual(expectedRotationDelta, rotationDelta);
+        ClassicAssert.AreEqual(expectedRotationDelta, adjustedRotationDelta, message);
     }
 }

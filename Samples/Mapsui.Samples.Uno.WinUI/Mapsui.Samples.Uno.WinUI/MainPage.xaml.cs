@@ -19,8 +19,8 @@ public sealed partial class MainPage : Page
 {
     static MainPage()
     {
-        // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();
+        Mapsui.Tests.Common.Samples.Register();
+        Mapsui.Samples.Common.Samples.Register();
     }
 
     public MainPage()

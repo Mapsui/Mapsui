@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFrameworks>net8.0</TargetFrameworks>
+    <!--For Debugging Source Generated Files uncomment the line below-->
+    <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>-->
   </PropertyGroup>
 
   <ItemGroup>
@@ -40,6 +43,14 @@
     <ProjectReference Include="..\..\Samples\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
     <ProjectReference Include="..\..\Samples\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
+
+  <!--Source Code Generators-->
+  <ItemGroup>
+    <ProjectReference Include="..\..\SourceGenerators\Mapsui.Sample.SourceGenerator\Mapsui.Sample.SourceGenerator.csproj" 
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false"  />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="BruTile" />

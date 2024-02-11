@@ -78,4 +78,9 @@ public class GeometryFeature : BaseFeature, IFeature
         // Recalculate the Envelope
         Geometry?.GeometryChangedAction();
     }
+
+    public virtual object Clone()
+    {
+        return new GeometryFeature(this);
+    }
 }
