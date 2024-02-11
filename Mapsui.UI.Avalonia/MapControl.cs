@@ -28,14 +28,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private bool _mouseDown;
     private MPoint? _previousMousePosition;
     private double _mouseWheelPos = 0.0;
-
-    // Touch Handling
     private readonly ConcurrentDictionary<long, MPoint> _touches = new();
-
     private bool _shiftPressed;
-
-    public static readonly DirectProperty<MapControl, Map> MapProperty =
-    AvaloniaProperty.RegisterDirect<MapControl, Map>(nameof(Map), o => o.Map, (o, v) => o.Map = v);
+    private readonly PinchTracker _pinchTracker = new ();
 
     public MapControl()
     {
@@ -43,6 +38,10 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         CommonInitialize();
         Initialize();
     }
+
+
+    public static readonly DirectProperty<MapControl, Map> MapProperty =
+    AvaloniaProperty.RegisterDirect<MapControl, Map>(nameof(Map), o => o.Map, (o, v) => o.Map = v);
 
     /// <summary> Clears the Touch State </summary>
     public void ClearTouchState()
@@ -264,7 +263,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (touchPoints.Count != 2)
             return false;
 
-        Map.Navigator.Pinch(GetPinchState(touchPoints));
+        _pinchTracker.Update(GetPinchState(touchPoints));
+        Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
 
         RefreshGraphics();
         return true;
@@ -274,8 +274,11 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         if (touchPoints.Count == 2)
         {
-            Map.Navigator.ClearPinchState();
-            Map.Navigator.Pinch(GetPinchState(touchPoints));
+            //Map.Navigator.ClearPinchState();
+            //Map.Navigator.Pinch(GetPinchState(touchPoints));
+
+            _pinchTracker.Restart(GetPinchState(touchPoints));
+            Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
         }
     }
 

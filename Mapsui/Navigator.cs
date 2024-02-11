@@ -472,6 +472,19 @@ public class Navigator
         _previousPinchState = pinchState with { };
     }
 
+
+    public void Pinch(PinchManipulation pinchManipulation)
+    {
+        if (RotationLock) pinchManipulation = pinchManipulation with { RotationChange = 0 };
+        if (ZoomLock) pinchManipulation = pinchManipulation with { ResolutionChange = 0 };
+        if (PanLock) pinchManipulation = pinchManipulation with { Center = pinchManipulation.PreviousCenter };
+
+        ClearAnimations();
+
+        var viewport = TransformState(Viewport, pinchManipulation);
+        SetViewportWithLimit(viewport);
+    }
+
     /// <summary>
     /// To change the map viewport when using multiple fingers. This method is called from
     /// the MapControl and is usually not called from user code. This method does not refresh
@@ -492,6 +505,61 @@ public class Navigator
         var viewport = TransformState(Viewport, pinchState, previousPinchState, _totalRotationDelta);
         SetViewportWithLimit(viewport);
     }
+
+    private Viewport TransformState(Viewport viewport, PinchManipulation pinchManipulation)
+    {
+        var previous = viewport.ScreenToWorld(pinchManipulation.PreviousCenter.X, pinchManipulation.PreviousCenter.Y);
+        var current = viewport.ScreenToWorld(pinchManipulation.Center.X, pinchManipulation.Center.Y);
+
+        var resolutionChange = pinchManipulation.ResolutionChange;
+        var rotationChange = pinchManipulation.RotationChange;
+
+        if (!RotationLock)
+        {
+            double virtualRotation = Viewport.Rotation + pinchManipulation.totalRotationChange;
+            rotationChange = RotationSnapper.AdjustRotationDeltaForSnapping(
+                pinchManipulation.RotationChange, viewport.Rotation, virtualRotation, UnSnapRotation, ReSnapRotation);
+        }
+
+        var newX = viewport.CenterX + previous.X - current.X;
+        var newY = viewport.CenterY + previous.Y - current.Y;
+
+        if (resolutionChange == 1 && rotationChange == 0 && viewport.CenterX == newX && viewport.CenterY == newY)
+            return viewport;
+
+        if (resolutionChange != 1)
+        {
+            viewport = viewport with { Resolution = viewport.Resolution / resolutionChange };
+
+            // Calculate current position again with adjusted resolution
+            // Zooming should be centered on the place where the map is touched.
+            // This is done with the scale correction.
+            var scaleCorrectionX = (1 - resolutionChange) * (current.X - viewport.CenterX);
+            var scaleCorrectionY = (1 - resolutionChange) * (current.Y - viewport.CenterY);
+
+            newX -= scaleCorrectionX;
+            newY -= scaleCorrectionY;
+        }
+
+        viewport = viewport with { CenterX = newX, CenterY = newY };
+
+        if (rotationChange != 0)
+        {
+            // calculate current position again with adjusted resolution
+            current = viewport.ScreenToWorld(pinchManipulation.Center.X, pinchManipulation.Center.Y);
+            viewport = viewport with { Rotation = viewport.Rotation + rotationChange };
+            // calculate current position again with adjusted resolution
+            var postRotation = viewport.ScreenToWorld(pinchManipulation.Center.X, pinchManipulation.Center.Y);
+            viewport = viewport with
+            {
+                CenterX = viewport.CenterX - (postRotation.X - current.X),
+                CenterY = viewport.CenterY - (postRotation.Y - current.Y)
+            };
+        }
+
+        return viewport;
+    }
+
 
     public void SetSize(double width, double height)
     {
