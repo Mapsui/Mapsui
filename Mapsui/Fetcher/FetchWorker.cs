@@ -59,7 +59,7 @@ public class FetchWorker : IDisposable // Todo: Make internal
                 if (_fetchDispatcher.TryTake(out var method))
                     await method().ConfigureAwait(false);
                 else
-                    cancellationTokenSource.Cancel();
+                    await cancellationTokenSource.CancelAsync();
             }
         }
         catch (ObjectDisposedException)

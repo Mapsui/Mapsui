@@ -7,6 +7,13 @@ internal class AnimatedPointFeature : PointFeature
 {
     long _startTime;
 
+    public AnimatedPointFeature(AnimatedPointFeature animatedPointFeature) : base(animatedPointFeature)
+    {
+        _startTime = animatedPointFeature._startTime;
+        Start = animatedPointFeature.Start;
+        End = animatedPointFeature.End;
+    }
+
     public AnimatedPointFeature(double x, double y) : base(x, y)
     {
         Start = new MPoint(x, y);
@@ -50,5 +57,10 @@ internal class AnimatedPointFeature : PointFeature
         var currentTime = Environment.TickCount;
         var elapsedTime = currentTime - startTime;
         return easing.Ease(elapsedTime / (float)animationDuration);
+    }
+
+    public override object Clone()
+    {
+        return new AnimatedPointFeature(this);
     }
 }

@@ -54,4 +54,9 @@ public class PointFeature : BaseFeature, IFeature
             Point.Y = y;
         });
     }
+
+    public virtual object Clone()
+    {
+        return new PointFeature(this);
+    }
 }

@@ -29,18 +29,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private MPoint? _previousMousePosition;
     private double _mouseWheelPos = 0.0;
 
-    /// <summary> Previous Center for Pinch </summary>
-    private MPoint? _previousCenter;
-    /// <summary> Saver for angle before last pinch movement </summary>
-    private double _previousAngle;
-    /// <summary> Saver for radius before last pinch movement </summary>
-    private double _previousRadius = 1f;
-
     // Touch Handling
     private readonly ConcurrentDictionary<long, MPoint> _touches = new();
-
-    [Obsolete("Use Info and ILayerFeatureInfo", true)]
-    public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
 
     private bool _shiftPressed;
 
@@ -83,7 +73,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private static bool GetShiftPressed(KeyModifiers keyModifiers)
     {
-        
+
 
         return (keyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
     }
@@ -274,24 +264,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (touchPoints.Count != 2)
             return false;
 
-        var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
-        var (center, radius, angle) = GetPinchValues(touchPoints);
-
-        double rotationDelta = 0;
-
-        if (Map.Navigator.RotationLock == false)
-        {
-            var deltaRotation = angle - prevAngle;
-            Rotator.VirtualRotation += deltaRotation;
-
-            rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                Rotator.VirtualRotation, Map.Navigator.Viewport.Rotation, Rotator.UnSnapRotationDegrees, Rotator.ReSnapRotationDegrees);
-        }
-
-        if (prevCenter != null)
-            Map.Navigator.Pinch(center, prevCenter, radius / prevRadius, rotationDelta);
-
-        (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
+        Map.Navigator.Pinch(GetPinchState(touchPoints));
 
         RefreshGraphics();
         return true;
@@ -301,12 +274,12 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         if (touchPoints.Count == 2)
         {
-            (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
-            Rotator.VirtualRotation = Map.Navigator.Viewport.Rotation;
+            Map.Navigator.ClearPinchState();
+            Map.Navigator.Pinch(GetPinchState(touchPoints));
         }
     }
 
-    private static (MPoint center, double radius, double angle) GetPinchValues(List<MPoint> locations)
+    private static PinchState GetPinchState(List<MPoint> locations)
     {
         if (locations.Count < 2)
             throw new ArgumentOutOfRangeException(nameof(locations));
@@ -327,7 +300,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
         var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
 
-        return (new MPoint(centerX, centerY), radius, angle);
+        return new PinchState(new MPoint(centerX, centerY), radius, angle);
     }
 
     private sealed class MapsuiCustomDrawOp(Rect bounds, MapControl mapControl) : ICustomDrawOperation

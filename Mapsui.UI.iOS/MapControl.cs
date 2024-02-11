@@ -165,7 +165,7 @@ public partial class MapControl : UIView, IMapControl
     {
         base.TouchesBegan(touches, evt);
 
-        Rotator.VirtualRotation = Map.Navigator.Viewport.Rotation;
+        Map.Navigator.ClearPinchState();
 
         if (touches.AnyObject is UITouch touch)
         {
@@ -191,32 +191,25 @@ public partial class MapControl : UIView, IMapControl
 
                 var previousPosition = touch.PreviousLocationInView(this).ToMapsui();
                 Map.Navigator.Drag(position, previousPosition);
-                Rotator.VirtualRotation = Map.Navigator.Viewport.Rotation;
+                Map.Navigator.ClearPinchState();
             }
         }
         else if (evt?.AllTouches.Count >= 2)
         {
-            var previousLocation = evt.AllTouches.Select(t => ((UITouch)t).PreviousLocationInView(this))
-                .Select(p => new MPoint(p.X, p.Y)).ToList();
-
-            var locations = evt.AllTouches.Select(t => ((UITouch)t).LocationInView(this))
-                .Select(p => new MPoint(p.X, p.Y)).ToList();
-
-            var (previousCenter, previousRadius, previousAngle) = GetPinchValues(previousLocation);
-            var (center, radius, angle) = GetPinchValues(locations);
-
-            double rotationDelta = 0;
-
-            if (Map.Navigator.RotationLock == false)
-            {
-                Rotator.VirtualRotation += angle - previousAngle;
-
-                rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                    Rotator.VirtualRotation, Map.Navigator.Viewport.Rotation, Rotator.UnSnapRotationDegrees, Rotator.ReSnapRotationDegrees);
-            }
-
-            Map.Navigator.Pinch(center, previousCenter, radius / previousRadius, rotationDelta);
+            Map.Navigator.Pinch(GetPinchState(GetLocations(evt)));
         }
+    }
+
+    private List<MPoint> GetPreviousLocations(UIEvent evt)
+    {
+        return evt.AllTouches.Select(t => ((UITouch)t).PreviousLocationInView(this))
+                        .Select(p => new MPoint(p.X, p.Y)).ToList();
+    }
+
+    private List<MPoint> GetLocations(UIEvent evt)
+    {
+        return evt.AllTouches.Select(t => ((UITouch)t).LocationInView(this))
+            .Select(p => new MPoint(p.X, p.Y)).ToList();
     }
 
     public override void TouchesEnded(NSSet touches, UIEvent? e)
@@ -318,10 +311,10 @@ public partial class MapControl : UIView, IMapControl
         CommonDispose(disposing);
     }
 
-    private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
+    private static PinchState GetPinchState(List<MPoint> locations)
     {
         if (locations.Count < 2)
-            throw new ArgumentException($"Less than two locations were passed into {nameof(GetPinchValues)}");
+            throw new ArgumentException($"Less than two locations were passed into {nameof(GetPinchState)}");
 
         double centerX = 0;
         double centerY = 0;
@@ -339,7 +332,7 @@ public partial class MapControl : UIView, IMapControl
 
         var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
 
-        return (new MPoint(centerX, centerY), radius, angle);
+        return new PinchState(new MPoint(centerX, centerY), radius, angle);
     }
 
     private double ViewportWidth
