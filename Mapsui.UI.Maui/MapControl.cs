@@ -1,7 +1,6 @@
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Rendering;
 using Mapsui.UI.Utils;
 using Mapsui.Utilities;
 using Microsoft.Maui.ApplicationModel;
@@ -70,7 +69,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         _initialized = true;
     }
     
-    public IRenderCache RenderCache => _renderer.RenderCache;
     public bool UseDoubleTap { get; set; } = true;
     public bool UseFling { get; set; } = true;
     private double ViewportWidth => Width; // Used in shared code

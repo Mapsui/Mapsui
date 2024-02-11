@@ -65,6 +65,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private List<ITouchableWidget>? _touchableWidgets;
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
+    private IRenderer _renderer = new MapRenderer();
 
     private void CommonInitialize()
     {
@@ -227,27 +228,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     public float PixelDensity => (float)GetPixelDensity();
-    
-#pragma warning disable IDISP008
-    private IRenderer? _renderer;
-#pragma warning restore IDISP008
 
     /// <summary>
     /// Renderer that is used from this MapControl
     /// </summary>
-    public IRenderer Renderer
-    {
-        get => _renderer ??= new MapRenderer();
-        set
-        {
-            if (value is null) throw new NullReferenceException(nameof(Renderer));
-            if (_renderer != value)
-            {
-                _renderer = value;
-                OnPropertyChanged();
-            }
-        }
-    }
+    public IRenderer Renderer => _renderer;
 
     /// <summary>
     /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
@@ -562,8 +547,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             StopUpdates();
             _invalidateTimer?.Dispose();
             _invalidateTimer = null;
-            _renderer?.Dispose();
-            _renderer = null;
+            _renderer.Dispose();
             _map?.Dispose();
             _map = null;
         }
