@@ -47,7 +47,7 @@ public class WeakEventManagerTests
     }
 
     [Test]
-    public void RemoveEventWorks_PropertyChanged()
+    public void RemoveEventWorks_DataChanged()
     {
         TestDataChanged dataChanged = new();
         _changed = false;
@@ -60,7 +60,7 @@ public class WeakEventManagerTests
     }
     
     [Test]
-    public void RemoveEventWorks_PropertyChanged_DifferentMethods()
+    public void RemoveEventWorks_DataChanged_DifferentMethods()
     {
         TestDataChanged dataChanged = new();
         _changed = false;
