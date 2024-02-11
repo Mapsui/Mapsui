@@ -32,6 +32,7 @@ public partial class MapControl : ComponentBase, IMapControl
     BoundingClientRect _clientRect = new();
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
     private MapsuiJsInterop? _interop;
+    private readonly PinchTracker _pinchTracker = new();
 
     public string MoveCursor { get; set; } = Cursors.Move;
     public int MoveButton { get; set; } = MouseButtons.Primary;
@@ -391,6 +392,9 @@ public partial class MapControl : ComponentBase, IMapControl
     public void OnTouchStart(TouchEventArgs e)
     {
         _previousTouchState = TouchState.FromLocations(e.TargetTouches.ToLocations(_clientRect));
+        // The pinch solution in Blazor is still a bit awkward because the TouchState logic deals with both drag and pinch.
+        // Perhaps we should replace the pinch tracker with a manipulation tracker to deal with both
+        _pinchTracker.Restart(PinchTracker.GetPinchState(e.TargetTouches.ToLocations(_clientRect)));
     }
 
     public void OnTouchMove(TouchEventArgs e)
@@ -400,9 +404,10 @@ public partial class MapControl : ComponentBase, IMapControl
         if (_previousTouchState is not null) // Should not happen but we do not control the events of the framework so just checking.
         {
             if (touchState.Mode == TouchMode.Zooming && _previousTouchState.Mode == TouchMode.Zooming)
-                Map.Navigator.Pinch(
-                    new PinchState(touchState.Center, touchState.Radius, touchState.Angle), 
-                    new PinchState(_previousTouchState.Center, _previousTouchState.Radius, _previousTouchState.Angle));
+            {
+                _pinchTracker.Update(new PinchState(touchState.Center, touchState.Radius, touchState.Angle));
+                Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
+            }
             else if (touchState.Mode == TouchMode.Dragging && _previousTouchState.Mode != TouchMode.None)
 
                 Map.Navigator.Drag(touchState.Center, _previousTouchState.Center);

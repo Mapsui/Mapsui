@@ -167,7 +167,7 @@ public partial class MapControl : UIView, IMapControl
         base.TouchesBegan(touches, evt);
 
         if (evt?.AllTouches.Count >= 2)
-            _pinchTracker.Restart(GetPinchState(GetLocations(evt)));
+            _pinchTracker.Restart(PinchTracker.GetPinchState(GetLocations(evt)));
 
         if (touches.AnyObject is UITouch touch)
         {
@@ -197,7 +197,7 @@ public partial class MapControl : UIView, IMapControl
         }
         else if (evt?.AllTouches.Count >= 2)
         {
-            _pinchTracker.Update(GetPinchState(GetLocations(evt)));
+            _pinchTracker.Update(PinchTracker.GetPinchState(GetLocations(evt)));
             Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
         }
     }
@@ -303,30 +303,6 @@ public partial class MapControl : UIView, IMapControl
         }
 
         CommonDispose(disposing);
-    }
-
-    private static PinchState GetPinchState(List<MPoint> locations)
-    {
-        if (locations.Count < 2)
-            throw new ArgumentException($"Less than two locations were passed into {nameof(GetPinchState)}");
-
-        double centerX = 0;
-        double centerY = 0;
-
-        foreach (var location in locations)
-        {
-            centerX += location.X;
-            centerY += location.Y;
-        }
-
-        centerX /= locations.Count;
-        centerY /= locations.Count;
-
-        var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
-
-        var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
-
-        return new PinchState(new MPoint(centerX, centerY), radius, angle);
     }
 
     private double ViewportWidth
