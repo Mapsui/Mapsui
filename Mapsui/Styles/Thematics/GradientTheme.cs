@@ -98,11 +98,12 @@ public class GradientTheme : Style, IThemeStyle
         var result = new VectorStyle();
 
         var fraction = Fraction(value, Min, Max);
+
         result.Enabled = fraction > 0.5 ? min.Enabled : max.Enabled;
         if (FillColorBlend != null)
             result.Fill = new Brush { Color = FillColorBlend.GetColor(fraction) };
         else if (min.Fill != null && max.Fill != null)
-            result.Fill = InterpolateBrush(min.Fill, max.Fill, value);
+            result.Fill = InterpolateBrush(min.Fill, max.Fill, fraction);
 
         if (min.Line != null && max.Line != null)
             result.Line = InterpolatePen(min.Line, max.Line, fraction);
@@ -120,10 +121,11 @@ public class GradientTheme : Style, IThemeStyle
         var result = new SymbolStyle();
 
         var fraction = Fraction(value, Min, Max);
+
         result.BitmapId = (fraction > 0.5) ? min.BitmapId : max.BitmapId;
         result.SymbolOffset = fraction > 0.5 ? min.SymbolOffset ?? new Offset() : max.SymbolOffset ?? new Offset();
         // We don't interpolate the offset but let it follow the symbol instead
-        result.SymbolScale = InterpolateDouble(min.SymbolScale, max.SymbolScale, value);
+        result.SymbolScale = InterpolateDouble(min.SymbolScale, max.SymbolScale, fraction);
 
         return result;
     }
@@ -132,25 +134,27 @@ public class GradientTheme : Style, IThemeStyle
     {
         var result = new LabelStyle();
 
-        result.CollisionDetection = min.CollisionDetection;
-        result.Enabled = InterpolateBool(min.Enabled, max.Enabled, Fraction(value, Min, Max));
-        result.LabelColumn = InterpolateString(min.LabelColumn, max.LabelColumn, Fraction(value, Min, Max));
+        var fraction = Fraction(value, Min, Max);
 
-        var fontSize = InterpolateDouble(min.Font.Size, max.Font.Size, value);
+        result.CollisionDetection = min.CollisionDetection;
+        result.Enabled = InterpolateBool(min.Enabled, max.Enabled, fraction);
+        result.LabelColumn = InterpolateString(min.LabelColumn, max.LabelColumn, fraction);
+
+        var fontSize = InterpolateDouble(min.Font.Size, max.Font.Size, fraction);
         result.Font = new Font { FontFamily = min.Font.FontFamily, Size = fontSize };
 
         if (min.BackColor != null && max.BackColor != null)
-            result.BackColor = InterpolateBrush(min.BackColor, max.BackColor, value);
+            result.BackColor = InterpolateBrush(min.BackColor, max.BackColor, fraction);
 
         result.ForeColor = TextColorBlend == null ?
-            InterpolateColor(min.ForeColor, max.ForeColor, value) :
-            TextColorBlend.GetColor(Fraction(value, Min, Max));
+            InterpolateColor(min.ForeColor, max.ForeColor, fraction) :
+            TextColorBlend.GetColor(fraction);
 
         if (min.Halo != null && max.Halo != null)
-            result.Halo = InterpolatePen(min.Halo, max.Halo, value);
+            result.Halo = InterpolatePen(min.Halo, max.Halo, fraction);
 
-        var x = InterpolateDouble(min.Offset.X, max.Offset.X, value);
-        var y = InterpolateDouble(min.Offset.Y, max.Offset.Y, value);
+        var x = InterpolateDouble(min.Offset.X, max.Offset.X, fraction);
+        var y = InterpolateDouble(min.Offset.Y, max.Offset.Y, fraction);
         result.Offset = new Offset { X = x, Y = y };
         result.LabelColumn = min.LabelColumn;
 
@@ -171,10 +175,10 @@ public class GradientTheme : Style, IThemeStyle
 
     private static double InterpolateDouble(double min, double max, double fraction) => (max - min) * fraction + min;
 
-    private static Brush InterpolateBrush(Brush min, Brush max, double attr)
+    private static Brush InterpolateBrush(Brush min, Brush max, double fraction)
         => new()
         {
-            Color = InterpolateColor(min.Color ?? Color.Transparent, max.Color ?? Color.Transparent, attr)
+            Color = InterpolateColor(min.Color ?? Color.Transparent, max.Color ?? Color.Transparent, fraction)
         };
 
     private static Pen InterpolatePen(Pen min, Pen max, double fraction)
