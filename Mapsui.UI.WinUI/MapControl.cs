@@ -278,7 +278,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #if HAS_UNO || __WINUI__
             _invalidateTimer?.Dispose();
 #endif
-            _map?.Dispose();
 
         }
         CommonDispose(disposing);

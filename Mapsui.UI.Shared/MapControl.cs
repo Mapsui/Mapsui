@@ -414,8 +414,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         {
             if (GetValue(MapProperty) is not Map map)
             {
-                _map ??= new DisposableWrapper<Map>(new Map(), true);
-                map = _map.WrappedObject;
+                map = new Map();
                 SetValue(MapProperty, map);
             }
 

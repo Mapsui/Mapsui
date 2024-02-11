@@ -624,10 +624,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             _listeners?.Remove(weakReference);
         }
 
-        if (disposing)
-        {
-            Map?.Dispose();
-        }
         CommonDispose(disposing);
     }
 

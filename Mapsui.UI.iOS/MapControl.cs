@@ -302,7 +302,6 @@ public partial class MapControl : UIView, IMapControl
     {
         if (disposing)
         {
-            _map?.Dispose();
             Unsubscribe();
             _glCanvas?.Dispose();
             _canvas?.Dispose();
