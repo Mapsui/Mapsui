@@ -21,7 +21,7 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapControlSample, IDisposable
+public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapControlSample
 {
     private Map? _map;
     public string Name => "RasterizingTileLayer with Thousands of Polygons";
@@ -35,7 +35,6 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
     public Map CreateMap()
     {
         DefaultRendererFactory.Create = () => new MapRenderer(new RenderCache(900000));
-        _map?.Dispose();
         _map = new Map();
         _map.Layers.Add(Tiling.OpenStreetMap.CreateTileLayer());
         _map.Layers.Add(new RasterizingTileLayer(CreatePolygonLayer()));
@@ -100,10 +99,5 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
             result.Add(polygon1);
         }
         return result;
-    }
-
-    public void Dispose()
-    {
-        _map?.Dispose();
     }
 }

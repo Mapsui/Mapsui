@@ -16,6 +16,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Mapsui.UI;
 
 namespace Mapsui;
 
@@ -25,8 +26,9 @@ namespace Mapsui;
 /// <remarks>
 /// Map holds all map related info like the target CRS, layers, widgets and so on.
 /// </remarks>
-public class Map : INotifyPropertyChanged, IDisposable
+public class Map : INotifyPropertyChanged
 {
+    private PropertyChangedWeakEventManager? _eventMangerPropertyChanged;
     private LayerCollection _layers = [];
     private Color _backColor = Color.White;
     private IWidget[] _oldWidgets = [];
@@ -146,7 +148,15 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Called whenever a property changed
     /// </summary>
-    public event PropertyChangedEventHandler? PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged
+    {
+        add
+        {
+            _eventMangerPropertyChanged ??= new();
+            _eventMangerPropertyChanged.AddListener(this, value);
+        }
+        remove => _eventMangerPropertyChanged?.RemoveListener(this, value);
+    }
 
     /// <summary>
     /// DataChanged should be triggered by any data changes of any of the child layers
@@ -326,7 +336,7 @@ public class Map : INotifyPropertyChanged, IDisposable
 
     private void OnPropertyChanged(object? sender, string? propertyName)
     {
-        PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(propertyName));
+        _eventMangerPropertyChanged?.RaiseEvent(this, sender, new PropertyChangedEventArgs(propertyName));
     }
 
     private void OnPropertyChanged(string name)
@@ -359,18 +369,6 @@ public class Map : INotifyPropertyChanged, IDisposable
         if (mapInfoEventArgs == null) return;
 
         Info?.Invoke(this, mapInfoEventArgs);
-    }
-
-    public virtual void Dispose()
-    {
-        foreach (var layer in Layers)
-        {
-            // remove Event so that no memory leaks occur
-            LayerRemoved(layer);
-        }
-
-        // clear the layers
-        Layers.Clear();
     }
 
     public bool UpdateAnimations()

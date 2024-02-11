@@ -11,12 +11,15 @@ using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Tiling.Extensions;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Tiling.Fetcher;
 
 public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
 {
+    private PropertyChangedWeakEventManager? _eventMangerPropertyChanged;
+    private DataChangedWeakEventManager? _eventMangerDataChanged;
     private FetchInfo? _fetchInfo;
     private readonly object _lockRoot = new();
     private bool _busy;
@@ -42,8 +45,30 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
         _fetchMachine = new FetchMachine(this);
     }
 
-    public event DataChangedEventHandler? DataChanged;
-    public event PropertyChangedEventHandler? PropertyChanged;
+    /// <summary>
+    /// Called whenever a property changed
+    /// </summary>
+    public event PropertyChangedEventHandler? PropertyChanged
+    {
+        add
+        {
+            _eventMangerPropertyChanged ??= new();
+            _eventMangerPropertyChanged.AddListener(this, value);
+        }
+        remove => _eventMangerPropertyChanged?.RemoveListener(this, value);
+    }
+
+    /// <inheritdoc />
+    public event DataChangedEventHandler? DataChanged
+    {
+        add
+        {
+            _eventMangerDataChanged ??= new();
+            _eventMangerDataChanged.AddListener(this, value);
+        }
+        remove => _eventMangerDataChanged?.RemoveListener(this, value);
+    }
+    
     public int NumberTilesNeeded { get; private set; }
 
     public static int MaxTilesInOneRequest { get; set; } = 128;
@@ -110,7 +135,7 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
 
             Busy = _tilesInProgress.Count > 0 || !_tilesToFetch.IsEmpty;
 
-            DataChanged?.Invoke(this, new DataChangedEventArgs(exception, false, tileInfo));
+            _eventMangerDataChanged?.RaiseEvent(this, new DataChangedEventArgs(exception, false, tileInfo));
         }
     }
 
@@ -137,7 +162,7 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
 
     private void OnPropertyChanged(string propertyName)
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        _eventMangerPropertyChanged?.RaiseEvent(this, new PropertyChangedEventArgs(propertyName));
     }
 
     private void UpdateTilesToFetchForViewportChange()

@@ -35,7 +35,7 @@ public class ImageLayerTests
         // arrange
         var provider = new FakeProvider();
         using var imageLayer = new ImageLayer("imageLayer") { DataSource = provider };
-        using var map = new Map();
+        var map = new Map();
         map.Layers.Add(imageLayer);
         using var waitHandle = new AutoResetEvent(false);
         Exception? exception = null;
