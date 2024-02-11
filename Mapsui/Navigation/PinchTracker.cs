@@ -44,8 +44,8 @@ public class PinchTracker
 
     public static PinchState GetPinchState(List<MPoint> locations)
     {
-        if (locations.Count < 2)
-            throw new ArgumentException($"Less than two locations were passed into {nameof(GetPinchState)}");
+        if (locations.Count != 2)
+            throw new ArgumentOutOfRangeException(nameof(locations), locations.Count, "Value should be two");
 
         double centerX = 0;
         double centerY = 0;

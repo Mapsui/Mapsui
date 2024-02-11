@@ -562,30 +562,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         return infoToInvoke?.Handled ?? false;
     }
 
-    private static PinchState GetPinchState(List<MPoint> locations)
-    {
-        if (locations.Count != 2)
-            throw new ArgumentOutOfRangeException(nameof(locations), locations.Count, "Value should be two");
-
-        double centerX = 0;
-        double centerY = 0;
-
-        foreach (var location in locations)
-        {
-            centerX += location.X;
-            centerY += location.Y;
-        }
-
-        centerX /= locations.Count;
-        centerY /= locations.Count;
-
-        var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
-
-        var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
-
-        return new PinchState(new MPoint(centerX, centerY), radius, angle);
-    }
-
     /// <summary>
     /// Public functions
     /// </summary>
