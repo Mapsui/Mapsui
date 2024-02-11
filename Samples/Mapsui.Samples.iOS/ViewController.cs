@@ -21,9 +21,7 @@ public partial class ViewController : UIViewController
     {
         return new MapControl(bounds)
         {
-            Map = InfoLayersSample.CreateMap(),
-            UnSnapRotationDegrees = 30,
-            ReSnapRotationDegrees = 5
+            Map = InfoLayersSample.CreateMap()
         };
     }
 }

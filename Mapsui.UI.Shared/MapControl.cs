@@ -4,11 +4,9 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
-using Mapsui.Styles;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
-using Mapsui.Widgets.InfoWidgets;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -47,7 +45,6 @@ namespace Mapsui.UI.Wpf;
 
 public partial class MapControl : INotifyPropertyChanged, IDisposable
 {
-    private double _unSnapRotationDegrees;
     // Flag indicating if a drawing process is running
     private bool _drawing;
     // Flag indicating if the control has to be redrawn
@@ -68,6 +65,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private List<ITouchableWidget>? _touchableWidgets;
     // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
     private int _updateTouchableWidget;
+    private IRenderer _renderer = new MapRenderer();
 
     private void CommonInitialize()
     {
@@ -229,62 +227,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
     }
 
-    /// <summary>
-    /// After how many degrees start rotation to take place
-    /// </summary>
-    public double UnSnapRotationDegrees
-    {
-        get => _unSnapRotationDegrees;
-        set
-        {
-            if (_unSnapRotationDegrees != value)
-            {
-                _unSnapRotationDegrees = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-
-    private double _reSnapRotationDegrees;
-
-    /// <summary>
-    /// With how many degrees from 0 should map snap to 0 degrees
-    /// </summary>
-    public double ReSnapRotationDegrees
-    {
-        get => _reSnapRotationDegrees;
-        set
-        {
-            if (_reSnapRotationDegrees != value)
-            {
-                _reSnapRotationDegrees = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-
     public float PixelDensity => (float)GetPixelDensity();
-    
-#pragma warning disable IDISP008
-    private IRenderer? _renderer;
-#pragma warning restore IDISP008
 
     /// <summary>
     /// Renderer that is used from this MapControl
     /// </summary>
-    public IRenderer Renderer
-    {
-        get => _renderer ??= new MapRenderer();
-        set
-        {
-            if (value is null) throw new NullReferenceException(nameof(Renderer));
-            if (_renderer != value)
-            {
-                _renderer = value;
-                OnPropertyChanged();
-            }
-        }
-    }
+    public IRenderer Renderer => _renderer;
 
     /// <summary>
     /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
@@ -599,8 +547,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             StopUpdates();
             _invalidateTimer?.Dispose();
             _invalidateTimer = null;
-            _renderer?.Dispose();
-            _renderer = null;
+            _renderer.Dispose();
             _map?.Dispose();
             _map = null;
         }

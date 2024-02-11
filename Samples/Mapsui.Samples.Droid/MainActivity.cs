@@ -41,8 +41,6 @@ public class MainActivity : AppCompatActivity
         _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol) ?? throw new NullReferenceException();
         _mapControl.Map = MbTilesSample.CreateMap();
         _mapControl.Map.Navigator.RotationLock = true;
-        _mapControl.UnSnapRotationDegrees = 20;
-        _mapControl.ReSnapRotationDegrees = 5;
         _mapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
         var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout) ?? throw new NullReferenceException(); ;
