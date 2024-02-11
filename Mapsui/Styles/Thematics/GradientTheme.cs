@@ -29,27 +29,27 @@ public class GradientTheme : Style, IThemeStyle
     public double Max { get; init; }
 
     /// <summary>
-    /// Gets or sets the <see cref="Mapsui.Styles.IStyle">style</see> for the minimum value
+    /// Gets or sets the <see cref="IStyle">style</see> for the minimum value
     /// </summary>
     public IStyle MinStyle { get; init ; }
 
     /// <summary>
-    /// Gets or sets the <see cref="Mapsui.Styles.IStyle">style</see> for the maximum value
+    /// Gets or sets the <see cref="IStyle">style</see> for the maximum value
     /// </summary>
     public IStyle MaxStyle { get; init; }
 
     /// <summary>
-    /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used on labels
+    /// Gets or sets the <see cref="ColorBlend"/> used on labels
     /// </summary>
     public ColorBlend? TextColorBlend { get; init; }
 
     /// <summary>
-    /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used on lines
+    /// Gets or sets the <see cref="ColorBlend"/> used on lines
     /// </summary>
     public ColorBlend? LineColorBlend { get; init; }
 
     /// <summary>
-    /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used as Fill
+    /// Gets or sets the <see cref="ColorBlend"/> used as Fill
     /// </summary>
     public ColorBlend? FillColorBlend { get; init; }
 
@@ -70,13 +70,12 @@ public class GradientTheme : Style, IThemeStyle
         MinStyle = minStyle;
     }
 
-
     /// <summary>
     /// Returns the style based on a numeric DataColumn, where style
     /// properties are linearly interpolated between max and min values.
     /// </summary>
     /// <param name="row">Feature</param>
-    /// <returns><see cref="Mapsui.Styles.IStyle">Style</see> calculated by a linear interpolation between the min/max styles</returns>
+    /// <returns><see cref=IStyle">Style</see> calculated by a linear interpolation between the min/max styles</returns>
     public IStyle? GetStyle(IFeature row)
     {
         double attr;
@@ -122,7 +121,7 @@ public class GradientTheme : Style, IThemeStyle
 
         var fraction = Fraction(value, Min, Max);
         result.BitmapId = (fraction > 0.5) ? min.BitmapId : max.BitmapId;
-        result.SymbolOffset = (fraction > 0.5 ? min.SymbolOffset ?? new Offset() : max.SymbolOffset ?? new Offset());
+        result.SymbolOffset = fraction > 0.5 ? min.SymbolOffset ?? new Offset() : max.SymbolOffset ?? new Offset();
         // We don't interpolate the offset but let it follow the symbol instead
         result.SymbolScale = InterpolateDouble(min.SymbolScale, max.SymbolScale, value);
 
@@ -173,13 +172,13 @@ public class GradientTheme : Style, IThemeStyle
     private static double InterpolateDouble(double min, double max, double fraction) => (max- min) * fraction + min;
 
     private static Brush InterpolateBrush(Brush min, Brush max, double attr)
-        => new Brush 
+        => new()
         { 
             Color = InterpolateColor(min.Color ?? Color.Transparent, max.Color ?? Color.Transparent, attr) 
         };
     
     private static Pen InterpolatePen(Pen min, Pen max, double fraction)
-        => new Pen
+        => new()
         {
             Color = InterpolateColor(min.Color, max.Color, fraction),
             Width = InterpolateDouble(min.Width, max.Width, fraction)
