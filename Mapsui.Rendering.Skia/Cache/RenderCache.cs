@@ -6,9 +6,9 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class RenderCache : IRenderCache<SKPath, SKPaint>
+public sealed class RenderCache : IRenderCache
 {
-    private IVectorCache<SKPath, SKPaint> _vectorCache;
+    private IVectorCache _vectorCache;
 
     public RenderCache(int capacity = 10000)
     {
@@ -22,19 +22,13 @@ public sealed class RenderCache : IRenderCache<SKPath, SKPaint>
 
     public ISymbolCache SymbolCache { get; set; }
 
-    public IVectorCache<SKPath,SKPaint> VectorCache
+    public IVectorCache VectorCache
     {
         get => _vectorCache;
         set => _vectorCache = value ?? throw new NullReferenceException();
     }
 
     public ITileCache TileCache { get; set; }
-    
-    IVectorCache IRenderCache.VectorCache
-    {
-        get => VectorCache;
-        set => VectorCache = (IVectorCache<SKPath, SKPaint>)value;
-    }
 
     public Size? GetSize(int bitmapId)
     {
@@ -56,20 +50,23 @@ public sealed class RenderCache : IRenderCache<SKPath, SKPaint>
         return LabelCache.GetOrCreateLabel(text, style, opacity, createLabelAsBitmap);
     }
 
-    public CacheTracker<SKPaint> GetOrCreatePaint<TParam>(TParam param, Func<TParam, SKPaint> toPaint)
-        where TParam : notnull
+    public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, TPaint> toPaint)
+        where TParam : notnull 
+        where TPaint : class
     {
         return VectorCache.GetOrCreatePaint(param, toPaint);
     }
 
-    public CacheTracker<SKPaint> GetOrCreatePaint<TParam>(TParam param, Func<TParam, ISymbolCache, SKPaint> toPaint)
+    public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, ISymbolCache, TPaint> toPaint)
         where TParam : notnull
+        where TPaint : class
     {
         return VectorCache.GetOrCreatePaint(param, toPaint);
     }
 
-    public CacheTracker<SKPath> GetOrCreatePath<TParam>(TParam param, Func<TParam, SKPath> toSkRect)
+    public CacheTracker<TPath> GetOrCreatePath<TParam, TPath>(TParam param, Func<TParam, TPath> toSkRect)
         where TParam : notnull
+        where TPath : class
     {
         return VectorCache.GetOrCreatePath(param, toSkRect);
     }
