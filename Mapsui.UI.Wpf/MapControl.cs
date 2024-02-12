@@ -54,7 +54,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         MouseLeave += MapControlMouseLeave;
         MouseWheel += MapControlMouseWheel;
         TouchUp += MapControlTouchUp;
-        ManipulationStarted += OnManipulationStarted;
         ManipulationDelta += OnManipulationDelta;
         ManipulationCompleted += OnManipulationCompleted;
         ManipulationInertiaStarting += OnManipulationInertiaStarting;
@@ -332,15 +331,21 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
     }
 
-    private void OnManipulationStarted(object? sender, ManipulationStartedEventArgs e)
-    {
-        Map.Navigator.ClearPinchState();
-    }
-
     private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
     {
-        Map.Navigator.Pinch(GetPinchState(e));
-        e.Handled = true;
+        Map.Navigator.Pinch(ToPinchManipulation(e));
+    }
+
+    private PinchManipulation ToPinchManipulation(ManipulationDeltaEventArgs e)
+    {
+        var translation = e.DeltaManipulation.Translation;
+
+        var previousPosition = e.ManipulationOrigin.ToMapsui();
+        var position = previousPosition.Offset(translation.X, translation.Y);
+        var radius = GetDeltaScale(e.DeltaManipulation.Scale);
+        var angle = e.DeltaManipulation.Rotation;
+
+        return new PinchManipulation(position, previousPosition, radius, angle, e.CumulativeManipulation.Rotation);
     }
 
     private PinchState GetPinchState(ManipulationDeltaEventArgs e)
