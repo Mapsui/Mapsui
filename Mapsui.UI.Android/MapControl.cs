@@ -189,7 +189,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 if (touchPoints.Count >= 2)
                 {
                     _mode = TouchMode.Zooming;
-                    _pinchTracker.Restart(GetPinchState(touchPoints));
+                    _pinchTracker.Restart(PinchTracker.GetPinchState(touchPoints));
                 }
                 else
                 {
@@ -211,8 +211,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 if (touchPoints.Count >= 2)
                 {
                     _mode = TouchMode.Zooming;
-
-                    _pinchTracker.Restart(GetPinchState(touchPoints));
+                    _pinchTracker.Restart(PinchTracker.GetPinchState(touchPoints));
                 }
                 else
                 {
@@ -244,7 +243,7 @@ public partial class MapControl : ViewGroup, IMapControl
                             if (touchPoints.Count < 2)
                                 return;
 
-                            _pinchTracker.Update(GetPinchState(touchPoints));
+                            _pinchTracker.Update(PinchTracker.GetPinchState(touchPoints));
                             Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
                         }
                         break;
@@ -351,30 +350,6 @@ public partial class MapControl : ViewGroup, IMapControl
         CommonDispose(disposing);
 
         base.Dispose(disposing);
-    }
-
-    private static PinchState GetPinchState(List<MPoint> locations)
-    {
-        if (locations.Count < 2)
-            throw new ArgumentOutOfRangeException(nameof(locations));
-
-        double centerX = 0;
-        double centerY = 0;
-
-        foreach (var location in locations)
-        {
-            centerX += location.X;
-            centerY += location.Y;
-        }
-
-        centerX /= locations.Count;
-        centerY /= locations.Count;
-
-        var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
-
-        var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
-
-        return new PinchState(new MPoint(centerX, centerY), radius, angle);
     }
 
     private double ViewportWidth => ToDeviceIndependentUnits(Width);
