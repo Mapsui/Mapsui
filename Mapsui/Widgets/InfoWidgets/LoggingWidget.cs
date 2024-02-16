@@ -7,6 +7,13 @@ using System.Runtime.CompilerServices;
 
 namespace Mapsui.Widgets.InfoWidgets;
 
+public enum ShowLoggingInMap
+{
+    Always,
+    WhenDebuggerIsAttached,
+    Never,
+}
+
 /// <summary>
 /// Widget which shows log entries
 /// </summary>
@@ -30,12 +37,6 @@ public class LoggingWidget : TextBoxWidget
         // Add event handle, so that LoggingWidget gets all logs
         Logger.LogDelegate += Log;
 
-#if DEBUG
-        Enabled = true;
-#else
-        Enabled = false;
-#endif
-
         Width = 250;
         Height = 142;
     }
@@ -51,7 +52,7 @@ public class LoggingWidget : TextBoxWidget
 
         while (_listOfLogEntries.Count > _maxNumberOfLogEntriesToKeep)
         {
-            _listOfLogEntries.TryDequeue(out var outObj);
+            _listOfLogEntries.TryDequeue(out var _);
         }
 
         Invalidate(nameof(Text));
@@ -61,13 +62,13 @@ public class LoggingWidget : TextBoxWidget
     {
         while (_listOfLogEntries.Count > 0)
         {
-            _listOfLogEntries.TryDequeue(out var outObj);
+            _listOfLogEntries.TryDequeue(out var _);
         }
 
         Invalidate(nameof(Text));
     }
 
-    private ConcurrentQueue<LogEntry> _listOfLogEntries;
+    private readonly ConcurrentQueue<LogEntry> _listOfLogEntries;
 
     public ConcurrentQueue<LogEntry> ListOfLogEntries => _listOfLogEntries;
 

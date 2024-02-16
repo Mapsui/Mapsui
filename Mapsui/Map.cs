@@ -30,6 +30,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     private LayerCollection _layers = [];
     private Color _backColor = Color.White;
     private IWidget[] _oldWidgets = [];
+    private ShowLoggingInMap _showLoggingInMap = ShowLoggingInMap.WhenDebuggerIsAttached;
 
     /// <summary>
     /// Initializes a new map
@@ -38,7 +39,8 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = [];
-        CheckForLoggingWidget();
+        ShowLoggingInMap = ShowLoggingInMap.Always;
+        AddLoggingWidgetIfNeeded();
         Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
     }
@@ -59,6 +61,29 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </summary>
     public string? CRS { get; set; } = "EPSG:3857";
 
+    /// <summary>
+    /// To write log messages on top of the map. This is only for debugging. The default is 'WhenDebuggerIsAttached' 
+    /// which also shows the log messages if the user debugs Mapsui with a release compile of Mapsui. 
+    /// </summary>
+    public ShowLoggingInMap ShowLoggingInMap
+    {
+        get
+        {
+            return _showLoggingInMap;
+        }
+        set
+        {
+            _showLoggingInMap = value;
+
+            // If setter is called after the LoggingWidget was added:
+            var loggingWidget = GetLoggingWidget();
+            if (loggingWidget is not null) 
+                loggingWidget.Enabled = IsLoggingInMapEnabled(_showLoggingInMap);
+        }
+    }
+
+    private LoggingWidget? GetLoggingWidget() => Widgets.OfType<LoggingWidget>().SingleOrDefault();
+    
     /// <summary>
     /// A collection of layers. The first layer in the list is drawn first, the last one on top.
     /// </summary>
@@ -390,27 +415,33 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// Check, if a debugger is attached and, if yes, add a default LoggingWidget
     /// </summary>
     /// <param name="map">Map, to which LoggingWidget should add</param>
-    private void CheckForLoggingWidget()
+    private void AddLoggingWidgetIfNeeded()
     {
-        // If in debug mode ...
-        if (System.Diagnostics.Debugger.IsAttached)
-        {
-            // Is there already a LoggingWidget ...
-            if (Widgets.Where(w => w.GetType() == typeof(LoggingWidget)).Count() > 0)
-                // ... then return;
-                return;
+        if (Widgets.Any(w => w is LoggingWidget)) // Do not add a second one
+            return;
 
-            var loggingWidget = new LoggingWidget()
-            {
-                Margin = new MRect(10),
-                VerticalAlignment = VerticalAlignment.Stretch,
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                BackColor = Color.Transparent,
-                Opacity = 0.0f,
-                LogLevelFilter = LogLevel.Trace,
-            };
-
-            Widgets.Add(loggingWidget);
-        }
+        Widgets.Add(CreateLoggingWidget(ShowLoggingInMap));
     }
+
+    private static bool IsLoggingInMapEnabled(ShowLoggingInMap showLoggingInMap)
+    {
+        if (showLoggingInMap == ShowLoggingInMap.WhenDebuggerIsAttached)
+            return System.Diagnostics.Debugger.IsAttached; // If the debugger is attached later this should be called again.
+        if (showLoggingInMap == ShowLoggingInMap.Always)
+            return true;
+        if (showLoggingInMap == ShowLoggingInMap.Never) 
+            return false;
+        throw new NotSupportedException(nameof(ShowLoggingInMap));        
+    }
+
+    private static LoggingWidget CreateLoggingWidget(ShowLoggingInMap showLoggingInMap) => new()
+    {
+        Enabled = IsLoggingInMapEnabled(showLoggingInMap),
+        Margin = new MRect(10),
+        VerticalAlignment = VerticalAlignment.Stretch,
+        HorizontalAlignment = HorizontalAlignment.Stretch,
+        BackColor = Color.Transparent,
+        Opacity = 0.0f,
+        LogLevelFilter = LogLevel.Trace,
+    };    
 }
