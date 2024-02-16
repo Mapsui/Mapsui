@@ -12,6 +12,12 @@
 </head>
 
 <body>
+    <script type="text/javascript">
+    caches.delete("blazor-resources-/").then(function (e) {
+        console.log("'blazor-resources-/' cache deleted");
+    });
+    </script>
+
     <div id="app">
         <div style="position:absolute; top:30vh; width:100%; text-align:center">
             <h1>Mapsui samples</h1>
