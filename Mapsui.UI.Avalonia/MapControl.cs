@@ -263,7 +263,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (touchPoints.Count != 2)
             return false;
 
-        _pinchTracker.Update(PinchTracker.GetPinchState(touchPoints));
+        _pinchTracker.Update(touchPoints);
         Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
 
         RefreshGraphics();
@@ -274,7 +274,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         if (touchPoints.Count == 2)
         {
-            _pinchTracker.Restart(PinchTracker.GetPinchState(touchPoints));
+            _pinchTracker.Restart(touchPoints);
             Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
         }
     }

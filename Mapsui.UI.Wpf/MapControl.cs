@@ -348,17 +348,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         return new PinchManipulation(position, previousPosition, radius, angle, e.CumulativeManipulation.Rotation);
     }
 
-    private PinchState GetPinchState(ManipulationDeltaEventArgs e)
-    {
-        var translation = e.DeltaManipulation.Translation;
-
-        var center = e.ManipulationOrigin.ToMapsui().Offset(translation.X, translation.Y);
-        var radius = GetDeltaScale(e.DeltaManipulation.Scale);
-        var angle = e.DeltaManipulation.Rotation;
-
-        return new PinchState(center, radius, angle);
-    }
-
     private double GetDeltaScale(Vector scale)
     {
         if (Map.Navigator.ZoomLock) return 1;

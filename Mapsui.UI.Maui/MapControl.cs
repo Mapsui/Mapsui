@@ -440,7 +440,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (touchPoints.Count == 2)
         {
             _mode = TouchMode.Zooming;
-            _pinchTracker.Restart(PinchTracker.GetPinchState(touchPoints));    
+            _pinchTracker.Restart(touchPoints);    
         }
         else
         {
@@ -518,7 +518,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     if (touchPoints.Count != 2)
                         return false;
 
-                    _pinchTracker.Update(PinchTracker.GetPinchState(touchPoints));
+                    _pinchTracker.Update(touchPoints);
                     Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
 
                     RefreshGraphics();

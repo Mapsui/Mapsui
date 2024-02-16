@@ -27,7 +27,6 @@ public partial class MapControl : ComponentBase, IMapControl
     private string? _defaultCursor = Cursors.Default;
     private readonly HashSet<string> _pressedKeys = [];
     private bool _isInBoxZoomMode;
-    private TouchState? _previousTouchState;
     double _pixelDensityFromInterop = 1;
     BoundingClientRect _clientRect = new();
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
@@ -391,33 +390,41 @@ public partial class MapControl : ComponentBase, IMapControl
 
     public void OnTouchStart(TouchEventArgs e)
     {
-        _previousTouchState = TouchState.FromLocations(e.TargetTouches.ToLocations(_clientRect));
-        // The pinch solution in Blazor is still a bit awkward because the TouchState logic deals with both drag and pinch.
-        // Perhaps we should replace the pinch tracker with a manipulation tracker to deal with both
-        _pinchTracker.Restart(PinchTracker.GetPinchState(e.TargetTouches.ToLocations(_clientRect)));
+        try
+        {
+            Logger.Log(LogLevel.Information, "OnTouchStart");
+            var locations = e.TargetTouches.ToLocations(_clientRect);
+            if (locations.Count >= 1)
+            {
+                _pinchTracker.Restart(locations);
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message);
+        }
     }
 
     public void OnTouchMove(TouchEventArgs e)
     {
-        var touchState = TouchState.FromLocations(e.TargetTouches.ToLocations(_clientRect));
-
-        if (_previousTouchState is not null) // Should not happen but we do not control the events of the framework so just checking.
+        try
         {
-            if (touchState.Mode == TouchMode.Zooming && _previousTouchState.Mode == TouchMode.Zooming)
+            Logger.Log(LogLevel.Information, "OnTouchMove");
+            var locations = e.TargetTouches.ToLocations(_clientRect);
+            if (locations.Count >= 1)
             {
-                _pinchTracker.Update(new PinchState(touchState.Center, touchState.Radius, touchState.Angle));
+                _pinchTracker.Update(locations);
                 Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
             }
-            else if (touchState.Mode == TouchMode.Dragging && _previousTouchState.Mode != TouchMode.None)
-
-                Map.Navigator.Drag(touchState.Center, _previousTouchState.Center);
         }
-        _previousTouchState = touchState;
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message);
+        }
     }
 
     public void OnTouchEnd(TouchEventArgs e)
     {
-        _previousTouchState = TouchState.FromLocations(e.TargetTouches.ToLocations(_clientRect));
         RefreshData();
     }
 }

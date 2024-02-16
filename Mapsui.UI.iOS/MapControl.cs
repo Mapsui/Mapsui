@@ -167,7 +167,7 @@ public partial class MapControl : UIView, IMapControl
         base.TouchesBegan(touches, evt);
 
         if (evt?.AllTouches.Count >= 2)
-            _pinchTracker.Restart(PinchTracker.GetPinchState(GetLocations(evt)));
+            _pinchTracker.Restart(GetLocations(evt));
 
         if (touches.AnyObject is UITouch touch)
         {
@@ -197,7 +197,7 @@ public partial class MapControl : UIView, IMapControl
         }
         else if (evt?.AllTouches.Count >= 2)
         {
-            _pinchTracker.Update(PinchTracker.GetPinchState(GetLocations(evt)));
+            _pinchTracker.Update(GetLocations(evt));
             Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
         }
     }
