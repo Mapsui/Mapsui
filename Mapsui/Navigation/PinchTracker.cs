@@ -77,9 +77,9 @@ public class PinchTracker
             // If the finger count changes this is considered a reset.
             _totalRotationDelta = 0;
             _previousPinchState = null;
-            // Note. tThere is the unlikely change that one finger is lifted exactly when 
+            // Note, there is the unlikely change that one finger is lifted exactly when 
             // another is touched down. This should also be ignored, but we can only
-            // do that if we had touch ids. We just accept it. It will not crash the system.
+            // do that if we had the touch ids. We accept this problem. It will not crash the system.
             return;
         }
 
