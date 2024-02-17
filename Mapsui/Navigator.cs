@@ -449,8 +449,9 @@ public class Navigator
         };
     }
 
-    public void Pinch(PinchManipulation pinchManipulation)
+    public void Pinch(PinchManipulation? pinchManipulation)
     {
+        if (pinchManipulation is null) return;
         if (RotationLock) pinchManipulation = pinchManipulation with { RotationChange = 0 };
         if (ZoomLock) pinchManipulation = pinchManipulation with { ResolutionChange = 0 };
         if (PanLock) pinchManipulation = pinchManipulation with { Center = pinchManipulation.PreviousCenter };

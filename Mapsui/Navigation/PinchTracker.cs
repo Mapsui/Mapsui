@@ -18,12 +18,13 @@ public class PinchTracker
 
     public void Update(List<MPoint> touches) => Update(GetPinchState(touches));     
 
-    public PinchManipulation GetPinchManipulation()
+    public PinchManipulation? GetPinchManipulation()
     {
-        ArgumentNullException.ThrowIfNull(_pinchState);
+        if (_pinchState is null)
+            return null;
 
         if (_previousPinchState is null)
-            return new PinchManipulation(_pinchState.Center, _pinchState.Center, 1, 0, 0);
+            return null; // There is a touch but no previous touch so no manipulation.
         
         var scaleChange = _pinchState.GetRadiusChange(_previousPinchState);
         var rotationChange = _pinchState.GetRotationChange(_previousPinchState);
