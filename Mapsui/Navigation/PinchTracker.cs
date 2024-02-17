@@ -16,7 +16,7 @@ public class PinchTracker
     /// </summary>
     public void Restart(List<MPoint> touches) => Restart(GetPinchState(touches));
 
-    public void Update(List<MPoint> touches) => Update(GetPinchState(touches));     
+    public void Update(List<MPoint> touches) => Update(GetPinchState(touches));
 
     public PinchManipulation? GetPinchManipulation()
     {
@@ -25,39 +25,39 @@ public class PinchTracker
 
         if (_previousPinchState is null)
             return null; // There is a touch but no previous touch so no manipulation.
-        
+
         var scaleChange = _pinchState.GetRadiusChange(_previousPinchState);
         var rotationChange = _pinchState.GetRotationChange(_previousPinchState);
 
         return new PinchManipulation(_pinchState.Center, _previousPinchState.Center, scaleChange, rotationChange, _totalRotationDelta);
     }
 
-    private static PinchState? GetPinchState(List<MPoint> locations)
+    private static PinchState? GetPinchState(List<MPoint> touches)
     {
-        if (locations.Count == 0)
+        if (touches.Count == 0)
             return null;
-        if (locations.Count == 1)
+        if (touches.Count == 1)
         {
-            return new PinchState(locations[0], null, null);
+            return new PinchState(touches[0], null, null, touches);
         }
 
         double centerX = 0;
         double centerY = 0;
 
-        foreach (var location in locations)
+        foreach (var location in touches)
         {
             centerX += location.X;
             centerY += location.Y;
         }
 
-        centerX /= locations.Count;
-        centerY /= locations.Count;
+        centerX /= touches.Count;
+        centerY /= touches.Count;
 
-        var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
+        var radius = Algorithms.Distance(centerX, centerY, touches[0].X, touches[0].Y);
 
-        var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
+        var angle = Math.Atan2(touches[1].Y - touches[0].Y, touches[1].X - touches[0].X) * 180.0 / Math.PI;
 
-        return new PinchState(new MPoint(centerX, centerY), radius, angle);
+        return new PinchState(new MPoint(centerX, centerY), radius, angle, touches);
     }
 
     private void Restart(PinchState? pinchState)
@@ -71,6 +71,18 @@ public class PinchTracker
     {
         _previousPinchState = _pinchState;
         _pinchState = pinchState;
+
+        if (!(pinchState?.Touches.Count == _previousPinchState?.Touches.Count))
+        {
+            // If the finger count changes this is considered a reset.
+            _totalRotationDelta = 0;
+            _previousPinchState = null;
+            // Note. tThere is the unlikely change that one finger is lifted exactly when 
+            // another is touched down. This should also be ignored, but we can only
+            // do that if we had touch ids. We just accept it. It will not crash the system.
+            return;
+        }
+
         if (pinchState is null)
             _totalRotationDelta = 0;
 
@@ -78,7 +90,7 @@ public class PinchTracker
             _totalRotationDelta += pinchState.GetRotationChange(_previousPinchState);
     }
 
-    private record PinchState(MPoint Center, double? Radius, double? Angle)
+    private record PinchState(MPoint Center, double? Radius, double? Angle, List<MPoint> Touches)
     {
         public PinchManipulation GetPinchManipulation(PinchState previousPinchState, double totalPinchRotation)
             => new PinchManipulation(Center, previousPinchState.Center, GetRadiusChange(previousPinchState), GetRotationChange(previousPinchState), totalPinchRotation);
