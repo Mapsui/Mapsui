@@ -29,6 +29,9 @@ public class PinchTracker
         var scaleChange = _pinchState.GetRadiusChange(_previousPinchState);
         var rotationChange = _pinchState.GetRotationChange(_previousPinchState);
 
+        if (_pinchState.Equals(_previousPinchState))
+            return null; // The default will not change anything so don't return a manipulation.
+
         return new PinchManipulation(_pinchState.Center, _previousPinchState.Center, scaleChange, rotationChange, _totalRotationDelta);
     }
 
@@ -38,13 +41,13 @@ public class PinchTracker
             return null;
 
         if (touches.Count == 1)
-            return new PinchState(touches[0], null, null, touches);
+            return new PinchState(touches[0], null, null, touches.Count);
         
         var (centerX, centerY) = GetCenter(touches);
         var radius = Algorithms.Distance(centerX, centerY, touches[0].X, touches[0].Y);
         var angle = Math.Atan2(touches[1].Y - touches[0].Y, touches[1].X - touches[0].X) * 180.0 / Math.PI;
 
-        return new PinchState(new MPoint(centerX, centerY), radius, angle, touches);
+        return new PinchState(new MPoint(centerX, centerY), radius, angle, touches.Count);
     }
 
     private static (double centerX, double centerY) GetCenter(List<MPoint> touches)
@@ -76,7 +79,7 @@ public class PinchTracker
         _previousPinchState = _pinchState;
         _pinchState = pinchState;
 
-        if (!(pinchState?.Touches.Count == _previousPinchState?.Touches.Count))
+        if (!(pinchState?.FingerCount == _previousPinchState?.FingerCount))
         {
             // If the finger count changes this is considered a reset.
             _totalRotationDelta = 0;
@@ -94,7 +97,7 @@ public class PinchTracker
             _totalRotationDelta += pinchState.GetRotationChange(_previousPinchState);
     }
 
-    private record PinchState(MPoint Center, double? Radius, double? Angle, List<MPoint> Touches)
+    private record PinchState(MPoint Center, double? Radius, double? Angle, int FingerCount)
     {
         public PinchManipulation GetPinchManipulation(PinchState previousPinchState, double totalPinchRotation)
             => new PinchManipulation(Center, previousPinchState.Center, GetRadiusChange(previousPinchState), GetRotationChange(previousPinchState), totalPinchRotation);

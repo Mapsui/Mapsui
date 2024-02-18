@@ -9,7 +9,7 @@ public class PinchTrackerTests
     record Input(List<MPoint> Touches, PinchManipulation? PinchManipulation, string Message);
 
     [Test]
-    public void ManipulationSequence()
+    public void ManipulationSequenceTests()
     {
         // Arrange
         var inputs = new List<Input>
@@ -22,6 +22,7 @@ public class PinchTrackerTests
             new([new(1, 1)], new PinchManipulation(new MPoint(1, 1), new MPoint(0, 0), 1, 0, 0), "Move one finger. The positions change but nothing else."),
             new([], null, "Lift the remaining finger. There is no manipulation."),
             new([new(2, 2)], null, "Put finger down. There is still no manipulation."),
+            new([new(2, 2)], null, "Nothing changes. This should be handled as no manipulation."),
         };
 
         var pinchTracker = new PinchTracker();
