@@ -11,8 +11,8 @@ public class TouchTracker
     private TouchState? _previousTouchState;
 
     /// <summary>
-    /// Call this method before the first Pinch call. The Pinch method tracks the start pinch angle which is needed 
-    /// to for rotation snapping and the previous pinch state.
+    /// Call this method before the first Update call. The Update method tracks the start touch angle which is needed 
+    /// to for rotation snapping and the previous touch state.
     /// </summary>
     public void Restart(List<MPoint> touches) => Restart(GetTouchState(touches));
 
@@ -69,7 +69,7 @@ public class TouchTracker
 
     private void Restart(TouchState? touchState)
     {
-        _totalRotationDelta = 0; // Reset the total. It will incremented in each Pinch call
+        _totalRotationDelta = 0; // Reset the total. It will incremented in each Update call
         _touchState = touchState;
         _previousTouchState = null;
     }
