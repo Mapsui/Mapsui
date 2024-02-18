@@ -15,6 +15,7 @@ public class PinchTrackerTests
         var inputs = new List<Input>
         {
             new([], null, "No touches and no previous input."),
+            new([], null, "Still no touches and so no manipulation."),
             new([new(0, 0), new(1, 0)], null, "First touch but no previous input so no manipulation."),
             new([new(0, 0), new(0, 1)], new PinchManipulation(new MPoint(0, 0.5), new MPoint(0.5, 0), 1, 90, 90), "Rotate 90 degrees."),
             new([new(0, 0), new(0, 2)], new PinchManipulation(new MPoint(0, 1), new MPoint(0, 0.5), 2, 0, 90), "Move one finger to the outside to scale a factor of 2."),
@@ -23,6 +24,13 @@ public class PinchTrackerTests
             new([], null, "Lift the remaining finger. There is no manipulation."),
             new([new(2, 2)], null, "Put finger down. There is still no manipulation."),
             new([new(2, 2)], null, "Nothing changes. This should be handled as no manipulation."),
+            new([new(0, 0), new(4, 4)], null, "No change in PinchState so no manipulation. Internally the rotation is now stored which will show in the next update."),
+            new([new(0, 4), new(4, 0)], new PinchManipulation(new MPoint(2, 2), new MPoint(2, 2), 1, -90, -90), "Same center but rotation has changed."),
+            new([new(1, 3), new(3, 1)], new PinchManipulation(new MPoint(2, 2), new MPoint(2, 2), 0.5, 0, -90), "Same center but scale decreases. Total rotation is still preserved."),
+            new([new(0, 4), new(4, 0)], new PinchManipulation(new MPoint(2, 2), new MPoint(2, 2), 2, 0, -90), "Same center but scale increases. Total rotation is still preserved."),
+            new([new(4, 4), new(0, 0)], new PinchManipulation(new MPoint(2, 2), new MPoint(2, 2), 1, -90, -180), "Same center. Total rotation increases."),
+            new([new(0, 4), new(4, 0), new (0, 0), new(4, 4)], null, "Same center but reset because of finger count changes."),
+
         };
 
         var pinchTracker = new PinchTracker();
