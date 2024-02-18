@@ -23,11 +23,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private readonly FlingTracker _flingTracker = new();
     private MPoint? _currentMousePosition;
 
-    /// <summary>
-    /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
-    /// </summary>
-    public event EventHandler<SwipedEventArgs>? Fling;
-
     public MapControl()
     {
         CommonInitialize();
