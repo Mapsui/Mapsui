@@ -472,7 +472,7 @@ public class Navigator
 
         if (!RotationLock)
         {
-            double virtualRotation = Viewport.Rotation + pinchManipulation.totalRotationChange;
+            double virtualRotation = Viewport.Rotation + pinchManipulation.TotalRotationChange;
             rotationChange = RotationSnapper.AdjustRotationDeltaForSnapping(
                 pinchManipulation.RotationChange, viewport.Rotation, virtualRotation, UnSnapRotation, ReSnapRotation);
         }
