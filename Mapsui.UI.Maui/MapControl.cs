@@ -519,7 +519,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                         return false;
 
                     _pinchTracker.Update(touchPoints);
-                    Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
+                    Map.Navigator.Pinch(_pinchTracker.GetTouchManipulation());
 
                     RefreshGraphics();
                 }

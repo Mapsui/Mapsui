@@ -244,7 +244,7 @@ public partial class MapControl : ViewGroup, IMapControl
                                 return;
 
                             _pinchTracker.Update(touchPoints);
-                            Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
+                            Map.Navigator.Pinch(_pinchTracker.GetTouchManipulation());
                         }
                         break;
                 }

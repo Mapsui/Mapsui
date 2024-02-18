@@ -6,7 +6,7 @@ namespace Mapsui.Tests.Navigation;
 [TestFixture]
 public class PinchTrackerTests
 {
-    record Input(List<MPoint> Touches, PinchManipulation? PinchManipulation, string Message);
+    record Input(List<MPoint> Touches, TouchManipulation? TouchManipulation, string Message);
 
     [Test]
     public void ManipulationSequenceTests()
@@ -17,33 +17,33 @@ public class PinchTrackerTests
             new([], null, "No touches and no previous input."),
             new([], null, "Still no touches and so no manipulation."),
             new([new(0, 0), new(1, 0)], null, "First touch but no previous input so no manipulation."),
-            new([new(0, 0), new(0, 1)], new PinchManipulation(new MPoint(0, 0.5), new MPoint(0.5, 0), 1, 90, 90), "Rotate 90 degrees."),
-            new([new(0, 0), new(0, 2)], new PinchManipulation(new MPoint(0, 1), new MPoint(0, 0.5), 2, 0, 90), "Move one finger to the outside to scale a factor of 2."),
+            new([new(0, 0), new(0, 1)], new TouchManipulation(new MPoint(0, 0.5), new MPoint(0.5, 0), 1, 90, 90), "Rotate 90 degrees."),
+            new([new(0, 0), new(0, 2)], new TouchManipulation(new MPoint(0, 1), new MPoint(0, 0.5), 2, 0, 90), "Move one finger to the outside to scale a factor of 2."),
             new([new(0, 0)], null, "Lift one finger. This is considered a restart because we cannot compare centers, scale or rotation."),
-            new([new(1, 1)], new PinchManipulation(new MPoint(1, 1), new MPoint(0, 0), 1, 0, 0), "Move one finger. The positions change but nothing else."),
+            new([new(1, 1)], new TouchManipulation(new MPoint(1, 1), new MPoint(0, 0), 1, 0, 0), "Move one finger. The positions change but nothing else."),
             new([], null, "Lift the remaining finger. There is no manipulation."),
             new([new(2, 2)], null, "Put finger down. There is still no manipulation."),
             new([new(2, 2)], null, "Nothing changes. This should be handled as no manipulation."),
-            new([new(3, 3)], new PinchManipulation(new MPoint(3, 3), new MPoint(2, 2), 1, 0, 0), "Ordinary drag operation."),
-            new([new(2, 2)], new PinchManipulation(new MPoint(2, 2), new MPoint(3, 3), 1, 0, 0), "Drag back again."),
+            new([new(3, 3)], new TouchManipulation(new MPoint(3, 3), new MPoint(2, 2), 1, 0, 0), "Ordinary drag operation."),
+            new([new(2, 2)], new TouchManipulation(new MPoint(2, 2), new MPoint(3, 3), 1, 0, 0), "Drag back again."),
             new([new(0, 0), new(4, 4)], null, "No change in PinchState so no manipulation. Internally the angle is now stored which will show in the next update."),
-            new([new(0, 4), new(4, 0)], new PinchManipulation(new MPoint(2, 2), new MPoint(2, 2), 1, -90, -90), "Same center but rotation has changed."),
-            new([new(1, 3), new(3, 1)], new PinchManipulation(new MPoint(2, 2), new MPoint(2, 2), 0.5, 0, -90), "Same center but scale decreases. Total rotation is still preserved."),
-            new([new(0, 4), new(4, 0)], new PinchManipulation(new MPoint(2, 2), new MPoint(2, 2), 2, 0, -90), "Same center but scale increases. Total rotation is still preserved."),
-            new([new(4, 4), new(0, 0)], new PinchManipulation(new MPoint(2, 2), new MPoint(2, 2), 1, -90, -180), "Same center. Total rotation increases."),
+            new([new(0, 4), new(4, 0)], new TouchManipulation(new MPoint(2, 2), new MPoint(2, 2), 1, -90, -90), "Same center but rotation has changed."),
+            new([new(1, 3), new(3, 1)], new TouchManipulation(new MPoint(2, 2), new MPoint(2, 2), 0.5, 0, -90), "Same center but scale decreases. Total rotation is still preserved."),
+            new([new(0, 4), new(4, 0)], new TouchManipulation(new MPoint(2, 2), new MPoint(2, 2), 2, 0, -90), "Same center but scale increases. Total rotation is still preserved."),
+            new([new(4, 4), new(0, 0)], new TouchManipulation(new MPoint(2, 2), new MPoint(2, 2), 1, -90, -180), "Same center. Total rotation increases."),
             new([new(0, 4), new(4, 0), new (0, 0), new(4, 4)], null, "Same center but reset because the finger count changed."),
         };
 
-        var pinchTracker = new PinchTracker();
+        var touchTracker = new PinchTracker();
 
         foreach (var input in inputs)
         {
             // Act
-            pinchTracker.Update(input.Touches);
-            var pinchManipulation = pinchTracker.GetPinchManipulation();
+            touchTracker.Update(input.Touches);
+            var touchManipulation = touchTracker.GetTouchManipulation();
 
             // Assert
-            Assert.That(pinchManipulation, Is.EqualTo(input.PinchManipulation), input.Message);            
+            Assert.That(touchManipulation, Is.EqualTo(input.TouchManipulation), input.Message);            
         }
     }
 }

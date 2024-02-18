@@ -18,7 +18,7 @@ public class PinchTracker
 
     public void Update(List<MPoint> touches) => Update(GetPinchState(touches));
 
-    public PinchManipulation? GetPinchManipulation()
+    public TouchManipulation? GetTouchManipulation()
     {
         if (_pinchState is null)
             return null;
@@ -32,7 +32,7 @@ public class PinchTracker
         if (_pinchState.Equals(_previousPinchState))
             return null; // The default will not change anything so don't return a manipulation.
 
-        return new PinchManipulation(_pinchState.Center, _previousPinchState.Center, scaleChange, rotationChange, _totalRotationDelta);
+        return new TouchManipulation(_pinchState.Center, _previousPinchState.Center, scaleChange, rotationChange, _totalRotationDelta);
     }
 
     private static PinchState? GetPinchState(List<MPoint> touches)
@@ -99,9 +99,6 @@ public class PinchTracker
 
     private record PinchState(MPoint Center, double? Radius, double? Angle, int FingerCount)
     {
-        public PinchManipulation GetPinchManipulation(PinchState previousPinchState, double totalPinchRotation)
-            => new PinchManipulation(Center, previousPinchState.Center, GetRadiusChange(previousPinchState), GetRotationChange(previousPinchState), totalPinchRotation);
-
         public double GetRotationChange(PinchState previousPinchState)
         {
             if (Angle is null)

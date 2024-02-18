@@ -198,7 +198,7 @@ public partial class MapControl : UIView, IMapControl
         else if (evt?.AllTouches.Count >= 2)
         {
             _pinchTracker.Update(GetLocations(evt));
-            Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
+            Map.Navigator.Pinch(_pinchTracker.GetTouchManipulation());
         }
     }
 

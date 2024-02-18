@@ -414,7 +414,7 @@ public partial class MapControl : ComponentBase, IMapControl
             if (locations.Count >= 1)
             {
                 _pinchTracker.Update(locations);
-                Map.Navigator.Pinch(_pinchTracker.GetPinchManipulation());
+                Map.Navigator.Pinch(_pinchTracker.GetTouchManipulation());
             }
         }
         catch (Exception ex)

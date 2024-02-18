@@ -449,32 +449,32 @@ public class Navigator
         };
     }
 
-    public void Pinch(PinchManipulation? pinchManipulation)
+    public void Pinch(TouchManipulation? touchManipulation)
     {
-        if (pinchManipulation is null) return;
-        if (RotationLock) pinchManipulation = pinchManipulation with { RotationChange = 0 };
-        if (ZoomLock) pinchManipulation = pinchManipulation with { ResolutionChange = 0 };
-        if (PanLock) pinchManipulation = pinchManipulation with { Center = pinchManipulation.PreviousCenter };
+        if (touchManipulation is null) return;
+        if (RotationLock) touchManipulation = touchManipulation with { RotationChange = 0 };
+        if (ZoomLock) touchManipulation = touchManipulation with { ResolutionChange = 0 };
+        if (PanLock) touchManipulation = touchManipulation with { Center = touchManipulation.PreviousCenter };
 
         ClearAnimations();
 
-        var viewport = TransformState(Viewport, pinchManipulation);
+        var viewport = TransformState(Viewport, touchManipulation);
         SetViewportWithLimit(viewport);
     }
 
-    private Viewport TransformState(Viewport viewport, PinchManipulation pinchManipulation)
+    private Viewport TransformState(Viewport viewport, TouchManipulation touchManipulation)
     {
-        var previous = viewport.ScreenToWorld(pinchManipulation.PreviousCenter.X, pinchManipulation.PreviousCenter.Y);
-        var current = viewport.ScreenToWorld(pinchManipulation.Center.X, pinchManipulation.Center.Y);
+        var previous = viewport.ScreenToWorld(touchManipulation.PreviousCenter.X, touchManipulation.PreviousCenter.Y);
+        var current = viewport.ScreenToWorld(touchManipulation.Center.X, touchManipulation.Center.Y);
 
-        var resolutionChange = pinchManipulation.ResolutionChange;
-        var rotationChange = pinchManipulation.RotationChange;
+        var resolutionChange = touchManipulation.ResolutionChange;
+        var rotationChange = touchManipulation.RotationChange;
 
         if (!RotationLock)
         {
-            double virtualRotation = Viewport.Rotation + pinchManipulation.TotalRotationChange;
+            double virtualRotation = Viewport.Rotation + touchManipulation.TotalRotationChange;
             rotationChange = RotationSnapper.AdjustRotationDeltaForSnapping(
-                pinchManipulation.RotationChange, viewport.Rotation, virtualRotation, UnSnapRotation, ReSnapRotation);
+                touchManipulation.RotationChange, viewport.Rotation, virtualRotation, UnSnapRotation, ReSnapRotation);
         }
 
         var newX = viewport.CenterX + previous.X - current.X;
@@ -502,10 +502,10 @@ public class Navigator
         if (rotationChange != 0)
         {
             // calculate current position again with adjusted resolution
-            current = viewport.ScreenToWorld(pinchManipulation.Center.X, pinchManipulation.Center.Y);
+            current = viewport.ScreenToWorld(touchManipulation.Center.X, touchManipulation.Center.Y);
             viewport = viewport with { Rotation = viewport.Rotation + rotationChange };
             // calculate current position again with adjusted resolution
-            var postRotation = viewport.ScreenToWorld(pinchManipulation.Center.X, pinchManipulation.Center.Y);
+            var postRotation = viewport.ScreenToWorld(touchManipulation.Center.X, touchManipulation.Center.Y);
             viewport = viewport with
             {
                 CenterX = viewport.CenterX - (postRotation.X - current.X),

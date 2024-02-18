@@ -49,7 +49,7 @@ public class NavigatorTests
         var previousPinchCenter = new MPoint(20, 20);
 
         // Act
-        navigator.Pinch(new PinchManipulation(currentPinchCenter, previousPinchCenter, deltaResolution, 0, 0));
+        navigator.Pinch(new TouchManipulation(currentPinchCenter, previousPinchCenter, deltaResolution, 0, 0));
 
         // Assert
         ClassicAssert.AreEqual(expectedCenterX, navigator.Viewport.CenterX);

@@ -310,10 +310,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
     {
-        Map.Navigator.Pinch(ToPinchManipulation(e));
+        Map.Navigator.Pinch(ToTouchManipulation(e));
     }
 
-    private PinchManipulation ToPinchManipulation(ManipulationDeltaEventArgs e)
+    private static TouchManipulation ToTouchManipulation(ManipulationDeltaEventArgs e)
     {
         var translation = e.DeltaManipulation.Translation;
 
@@ -322,12 +322,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         var radius = GetDeltaScale(e.DeltaManipulation.Scale);
         var angle = e.DeltaManipulation.Rotation;
 
-        return new PinchManipulation(position, previousPosition, radius, angle, e.CumulativeManipulation.Rotation);
+        return new TouchManipulation(position, previousPosition, radius, angle, e.CumulativeManipulation.Rotation);
     }
 
-    private double GetDeltaScale(Vector scale)
+    private static double GetDeltaScale(Vector scale)
     {
-        if (Map.Navigator.ZoomLock) return 1;
         var deltaScale = (scale.X + scale.Y) / 2;
         if (Math.Abs(deltaScale) < Constants.Epsilon)
             return 1; // If there is no scaling the deltaScale will be 0.0 in Windows Phone (while it is 1.0 in wpf)
