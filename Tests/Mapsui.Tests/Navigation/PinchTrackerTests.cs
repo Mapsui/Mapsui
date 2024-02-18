@@ -26,7 +26,7 @@ public class PinchTrackerTests
             new([new(2, 2)], null, "Nothing changes. This should be handled as no manipulation."),
             new([new(3, 3)], new TouchManipulation(new MPoint(3, 3), new MPoint(2, 2), 1, 0, 0), "Ordinary drag operation."),
             new([new(2, 2)], new TouchManipulation(new MPoint(2, 2), new MPoint(3, 3), 1, 0, 0), "Drag back again."),
-            new([new(0, 0), new(4, 4)], null, "No change in PinchState so no manipulation. Internally the angle is now stored which will show in the next update."),
+            new([new(0, 0), new(4, 4)], null, "No change in TouchState so no manipulation. Internally the angle is now stored which will show in the next update."),
             new([new(0, 4), new(4, 0)], new TouchManipulation(new MPoint(2, 2), new MPoint(2, 2), 1, -90, -90), "Same center but rotation has changed."),
             new([new(1, 3), new(3, 1)], new TouchManipulation(new MPoint(2, 2), new MPoint(2, 2), 0.5, 0, -90), "Same center but scale decreases. Total rotation is still preserved."),
             new([new(0, 4), new(4, 0)], new TouchManipulation(new MPoint(2, 2), new MPoint(2, 2), 2, 0, -90), "Same center but scale increases. Total rotation is still preserved."),
