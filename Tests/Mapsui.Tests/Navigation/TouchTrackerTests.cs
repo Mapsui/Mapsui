@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Mapsui.Tests.Navigation;
 
 [TestFixture]
-public class PinchTrackerTests
+public class TouchTrackerTests
 {
     record Input(List<MPoint> Touches, TouchManipulation? TouchManipulation, string Message);
 
