@@ -36,11 +36,19 @@ public class PinchTracker
     {
         if (touches.Count == 0)
             return null;
-        if (touches.Count == 1)
-        {
-            return new PinchState(touches[0], null, null, touches);
-        }
 
+        if (touches.Count == 1)
+            return new PinchState(touches[0], null, null, touches);
+        
+        var (centerX, centerY) = GetCenter(touches);
+        var radius = Algorithms.Distance(centerX, centerY, touches[0].X, touches[0].Y);
+        var angle = Math.Atan2(touches[1].Y - touches[0].Y, touches[1].X - touches[0].X) * 180.0 / Math.PI;
+
+        return new PinchState(new MPoint(centerX, centerY), radius, angle, touches);
+    }
+
+    private static (double centerX, double centerY) GetCenter(List<MPoint> touches)
+    {
         double centerX = 0;
         double centerY = 0;
 
@@ -53,11 +61,7 @@ public class PinchTracker
         centerX /= touches.Count;
         centerY /= touches.Count;
 
-        var radius = Algorithms.Distance(centerX, centerY, touches[0].X, touches[0].Y);
-
-        var angle = Math.Atan2(touches[1].Y - touches[0].Y, touches[1].X - touches[0].X) * 180.0 / Math.PI;
-
-        return new PinchState(new MPoint(centerX, centerY), radius, angle, touches);
+        return (centerX, centerY);
     }
 
     private void Restart(PinchState? pinchState)
