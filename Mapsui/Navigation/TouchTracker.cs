@@ -7,7 +7,7 @@ namespace Mapsui;
 public class TouchTracker
 {
     private double _totalRotationDelta; // We need this to calculate snapping
-    private TouchState? _touchState;`
+    private TouchState? _touchState;
     private TouchState? _previousTouchState;
 
     /// <summary>
