@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace Mapsui;
 
-public class PinchTracker
+public class TouchTracker
 {
     private double _totalRotationDelta; // We need this to calculate snapping
-    private PinchState? _pinchState;
+    private PinchState? _pinchState;`
     private PinchState? _previousPinchState;
 
     /// <summary>

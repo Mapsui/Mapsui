@@ -34,7 +34,7 @@ public class PinchTrackerTests
             new([new(0, 4), new(4, 0), new (0, 0), new(4, 4)], null, "Same center but reset because the finger count changed."),
         };
 
-        var touchTracker = new PinchTracker();
+        var touchTracker = new TouchTracker();
 
         foreach (var input in inputs)
         {

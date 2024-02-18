@@ -31,7 +31,7 @@ public partial class MapControl : ComponentBase, IMapControl
     BoundingClientRect _clientRect = new();
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
     private MapsuiJsInterop? _interop;
-    private readonly PinchTracker _pinchTracker = new();
+    private readonly TouchTracker _touchTracker = new();
 
     public string MoveCursor { get; set; } = Cursors.Move;
     public int MoveButton { get; set; } = MouseButtons.Primary;
@@ -396,7 +396,7 @@ public partial class MapControl : ComponentBase, IMapControl
             var locations = e.TargetTouches.ToLocations(_clientRect);
             if (locations.Count >= 1)
             {
-                _pinchTracker.Restart(locations);
+                _touchTracker.Restart(locations);
             }
         }
         catch (Exception ex)
@@ -413,8 +413,8 @@ public partial class MapControl : ComponentBase, IMapControl
             var locations = e.TargetTouches.ToLocations(_clientRect);
             if (locations.Count >= 1)
             {
-                _pinchTracker.Update(locations);
-                Map.Navigator.Pinch(_pinchTracker.GetTouchManipulation());
+                _touchTracker.Update(locations);
+                Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
             }
         }
         catch (Exception ex)

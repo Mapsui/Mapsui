@@ -14,7 +14,7 @@ public partial class MapControl : UIView, IMapControl
     private SKCanvasView? _canvas;
     private bool _init;
     private MPoint? _pointerDownPosition;
-    private readonly PinchTracker _pinchTracker = new();
+    private readonly TouchTracker _touchTracker = new();
 
     public static bool UseGPU { get; set; } = true;
 
@@ -167,7 +167,7 @@ public partial class MapControl : UIView, IMapControl
         base.TouchesBegan(touches, evt);
 
         if (evt?.AllTouches.Count >= 2)
-            _pinchTracker.Restart(GetLocations(evt));
+            _touchTracker.Restart(GetLocations(evt));
 
         if (touches.AnyObject is UITouch touch)
         {
@@ -197,8 +197,8 @@ public partial class MapControl : UIView, IMapControl
         }
         else if (evt?.AllTouches.Count >= 2)
         {
-            _pinchTracker.Update(GetLocations(evt));
-            Map.Navigator.Pinch(_pinchTracker.GetTouchManipulation());
+            _touchTracker.Update(GetLocations(evt));
+            Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
         }
     }
 

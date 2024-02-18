@@ -25,7 +25,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private double _mouseWheelPos = 0.0;
     private readonly ConcurrentDictionary<long, MPoint> _touches = new();
     private bool _shiftPressed;
-    private readonly PinchTracker _pinchTracker = new ();
+    private readonly TouchTracker _touchTracker = new ();
 
     public MapControl()
     {
@@ -106,8 +106,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         var mouseDown = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
         _touches[e.Pointer.Id] = _pointerDownPosition;
         
-        _pinchTracker.Restart(_touches.Select(t => t.Value).ToList());
-        Map.Navigator.Pinch(_pinchTracker.GetTouchManipulation());
+        _touchTracker.Restart(_touches.Select(t => t.Value).ToList());
+        Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
 
         if (HandleWidgetPointerDown(_pointerDownPosition, mouseDown, e.ClickCount, _shiftPressed))
         {
@@ -150,8 +150,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
         _touches[e.Pointer.Id] = e.GetPosition(this).ToMapsui();
 
-        _pinchTracker.Update(_touches.Select(t => t.Value).ToList());
-        Map.Navigator.Pinch(_pinchTracker.GetTouchManipulation());
+        _touchTracker.Update(_touches.Select(t => t.Value).ToList());
+        Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
         RefreshGraphics();
     }
 

@@ -44,7 +44,7 @@ public partial class MapControl : ViewGroup, IMapControl
     private MPoint? _previousTouch;
     private MPoint? _pointerDownPosition;
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
-    private readonly PinchTracker _pinchTracker = new();
+    private readonly TouchTracker _touchTracker = new();
 
     public MapControl(Context context, IAttributeSet attrs) :
         base(context, attrs)
@@ -189,7 +189,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 if (touchPoints.Count >= 2)
                 {
                     _mode = TouchMode.Zooming;
-                    _pinchTracker.Restart(touchPoints);
+                    _touchTracker.Restart(touchPoints);
                 }
                 else
                 {
@@ -211,7 +211,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 if (touchPoints.Count >= 2)
                 {
                     _mode = TouchMode.Zooming;
-                    _pinchTracker.Restart(touchPoints);
+                    _touchTracker.Restart(touchPoints);
                 }
                 else
                 {
@@ -243,8 +243,8 @@ public partial class MapControl : ViewGroup, IMapControl
                             if (touchPoints.Count < 2)
                                 return;
 
-                            _pinchTracker.Update(touchPoints);
-                            Map.Navigator.Pinch(_pinchTracker.GetTouchManipulation());
+                            _touchTracker.Update(touchPoints);
+                            Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
                         }
                         break;
                 }

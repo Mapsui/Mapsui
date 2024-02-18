@@ -60,7 +60,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private bool _widgetPointerDown;
     private Size _oldSize;
     private static List<WeakReference<MapControl>>? _listeners;
-    private readonly PinchTracker _pinchTracker = new();
+    private readonly TouchTracker _touchTracker = new();
 
     public MapControl()
     {
@@ -440,7 +440,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (touchPoints.Count == 2)
         {
             _mode = TouchMode.Zooming;
-            _pinchTracker.Restart(touchPoints);    
+            _touchTracker.Restart(touchPoints);    
         }
         else
         {
@@ -518,8 +518,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     if (touchPoints.Count != 2)
                         return false;
 
-                    _pinchTracker.Update(touchPoints);
-                    Map.Navigator.Pinch(_pinchTracker.GetTouchManipulation());
+                    _touchTracker.Update(touchPoints);
+                    Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
 
                     RefreshGraphics();
                 }
