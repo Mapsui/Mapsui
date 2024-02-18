@@ -196,31 +196,13 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
         {
             // This was the last finger on screen, so this is a fling
-            e.Handled = OnFlinged(velocityX, velocityY);
+            Map.Navigator.Fling(velocityX, velocityY, 1000);
+            e.Handled = true;
         }
         _flingTracker.RemoveId(1);
 
         _previousMousePosition = new MPoint();
         ReleaseMouseCapture();
-    }
-
-    /// <summary>
-    /// Called, when mouse/finger/pen flinged over map
-    /// </summary>
-    /// <param name="velocityX">Velocity in x direction in pixel/second</param>
-    /// <param name="velocityY">Velocity in y direction in pixel/second</param>
-    private bool OnFlinged(double velocityX, double velocityY)
-    {
-        var args = new SwipedEventArgs(velocityX, velocityY);
-
-        Fling?.Invoke(this, args);
-
-        if (args.Handled)
-            return true;
-
-        Map.Navigator.Fling(velocityX, velocityY, 1000);
-
-        return true;
     }
 
     private static bool IsClick(MPoint currentPosition, MPoint? previousPosition)

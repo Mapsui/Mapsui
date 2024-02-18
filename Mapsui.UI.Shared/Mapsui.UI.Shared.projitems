@@ -11,10 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Enums\TouchMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\ZoomDirection.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\HoveredEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\SwipedEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\TappedEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\ZoomedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\FlingTracker.cs" />
   </ItemGroup>
