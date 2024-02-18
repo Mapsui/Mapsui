@@ -7,47 +7,47 @@ namespace Mapsui;
 public class TouchTracker
 {
     private double _totalRotationDelta; // We need this to calculate snapping
-    private PinchState? _pinchState;`
-    private PinchState? _previousPinchState;
+    private TouchState? _touchState;`
+    private TouchState? _previousTouchState;
 
     /// <summary>
     /// Call this method before the first Pinch call. The Pinch method tracks the start pinch angle which is needed 
     /// to for rotation snapping and the previous pinch state.
     /// </summary>
-    public void Restart(List<MPoint> touches) => Restart(GetPinchState(touches));
+    public void Restart(List<MPoint> touches) => Restart(GetTouchState(touches));
 
-    public void Update(List<MPoint> touches) => Update(GetPinchState(touches));
+    public void Update(List<MPoint> touches) => Update(GetTouchState(touches));
 
     public TouchManipulation? GetTouchManipulation()
     {
-        if (_pinchState is null)
+        if (_touchState is null)
             return null;
 
-        if (_previousPinchState is null)
+        if (_previousTouchState is null)
             return null; // There is a touch but no previous touch so no manipulation.
 
-        var scaleChange = _pinchState.GetRadiusChange(_previousPinchState);
-        var rotationChange = _pinchState.GetRotationChange(_previousPinchState);
+        var scaleChange = _touchState.GetRadiusChange(_previousTouchState);
+        var rotationChange = _touchState.GetRotationChange(_previousTouchState);
 
-        if (_pinchState.Equals(_previousPinchState))
+        if (_touchState.Equals(_previousTouchState))
             return null; // The default will not change anything so don't return a manipulation.
 
-        return new TouchManipulation(_pinchState.Center, _previousPinchState.Center, scaleChange, rotationChange, _totalRotationDelta);
+        return new TouchManipulation(_touchState.Center, _previousTouchState.Center, scaleChange, rotationChange, _totalRotationDelta);
     }
 
-    private static PinchState? GetPinchState(List<MPoint> touches)
+    private static TouchState? GetTouchState(List<MPoint> touches)
     {
         if (touches.Count == 0)
             return null;
 
         if (touches.Count == 1)
-            return new PinchState(touches[0], null, null, touches.Count);
+            return new TouchState(touches[0], null, null, touches.Count);
         
         var (centerX, centerY) = GetCenter(touches);
         var radius = Algorithms.Distance(centerX, centerY, touches[0].X, touches[0].Y);
         var angle = Math.Atan2(touches[1].Y - touches[0].Y, touches[1].X - touches[0].X) * 180.0 / Math.PI;
 
-        return new PinchState(new MPoint(centerX, centerY), radius, angle, touches.Count);
+        return new TouchState(new MPoint(centerX, centerY), radius, angle, touches.Count);
     }
 
     private static (double centerX, double centerY) GetCenter(List<MPoint> touches)
@@ -67,54 +67,54 @@ public class TouchTracker
         return (centerX, centerY);
     }
 
-    private void Restart(PinchState? pinchState)
+    private void Restart(TouchState? touchState)
     {
         _totalRotationDelta = 0; // Reset the total. It will incremented in each Pinch call
-        _pinchState = pinchState;
-        _previousPinchState = null;
+        _touchState = touchState;
+        _previousTouchState = null;
     }
 
-    private void Update(PinchState? pinchState)
+    private void Update(TouchState? touchState)
     {
-        _previousPinchState = _pinchState;
-        _pinchState = pinchState;
+        _previousTouchState = _touchState;
+        _touchState = touchState;
 
-        if (!(pinchState?.FingerCount == _previousPinchState?.FingerCount))
+        if (!(touchState?.FingerCount == _previousTouchState?.FingerCount))
         {
             // If the finger count changes this is considered a reset.
             _totalRotationDelta = 0;
-            _previousPinchState = null;
+            _previousTouchState = null;
             // Note, there is the unlikely change that one finger is lifted exactly when 
             // another is touched down. This should also be ignored, but we can only
             // do that if we had the touch ids. We accept this problem. It will not crash the system.
             return;
         }
 
-        if (pinchState is null)
+        if (touchState is null)
             _totalRotationDelta = 0;
 
-        if (pinchState is not null && _previousPinchState is not null)
-            _totalRotationDelta += pinchState.GetRotationChange(_previousPinchState);
+        if (touchState is not null && _previousTouchState is not null)
+            _totalRotationDelta += touchState.GetRotationChange(_previousTouchState);
     }
 
-    private record PinchState(MPoint Center, double? Radius, double? Angle, int FingerCount)
+    private record TouchState(MPoint Center, double? Radius, double? Angle, int FingerCount)
     {
-        public double GetRotationChange(PinchState previousPinchState)
+        public double GetRotationChange(TouchState previousTouchState)
         {
             if (Angle is null)
                 return 0;
-            if (previousPinchState.Angle is null)
+            if (previousTouchState.Angle is null)
                 return 0;
-            return Angle.Value - previousPinchState.Angle.Value;
+            return Angle.Value - previousTouchState.Angle.Value;
         }
 
-        public double GetRadiusChange(PinchState previousPinchState)
+        public double GetRadiusChange(TouchState previousTouchState)
         {
             if (Radius is null)
                 return 1;
-            if (previousPinchState.Radius is null)
+            if (previousTouchState.Radius is null)
                 return 1;
-            return Radius.Value / previousPinchState.Radius.Value;
+            return Radius.Value / previousTouchState.Radius.Value;
         }
     }
 }
