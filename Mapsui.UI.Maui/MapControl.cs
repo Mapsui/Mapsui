@@ -339,7 +339,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     _flingTracker.AddEvent(e.Id, location, ticks);
 
                 if (e.InContact && !e.Handled && !_widgetPointerDown)
-                    e.Handled = OnTouchMove(_touches.Select(t => t.Value).ToList());
+                    e.Handled = OnTouchMove(_touches.Select(t => t.Value).ToArray());
             }
             else if (e.ActionType == SKTouchAction.Cancelled)
             {
@@ -494,16 +494,16 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// Called, when mouse/finger/pen moves over map
     /// </summary>
     /// <param name="touchLocations">List of all touched points</param>
-    protected virtual bool OnTouchMove(List<MPoint> touchLocations)
+    protected virtual bool OnTouchMove(ReadOnlySpan<MPoint> touchLocations)
     {
         switch (_mode)
         {
             case TouchMode.Dragging:
                 {
-                    if (touchLocations.Count != 1)
+                    if (touchLocations.Length != 1)
                         return false;
 
-                    var touchPosition = touchLocations.First();
+                    var touchPosition = touchLocations[0];
 
                     if (_previousCenter != null)
                     {
@@ -515,10 +515,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 break;
             case TouchMode.Zooming:
                 {
-                    if (touchLocations.Count != 2)
+                    if (touchLocations.Length != 2)
                         return false;
 
-                    _touchTracker.Update(touchLocations.ToArray());
+                    _touchTracker.Update(touchLocations);
                     Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
 
                     RefreshGraphics();

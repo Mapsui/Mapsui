@@ -866,7 +866,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         return base.OnDoubleTapped(screenPosition, numOfTaps);
     }
 
-    protected override bool OnTouchMove(List<MPoint> touchPoints)
+    protected override bool OnTouchMove(ReadOnlySpan<MPoint> touchPoints)
     {
         RunOnUIThread(() => MyLocationFollow = false);
         return base.OnTouchMove(touchPoints);

@@ -8,8 +8,8 @@ public static class TouchPointExtensions
         return new MPoint(touchPoint.ClientX - clientRect.Left, touchPoint.ClientY - clientRect.Top);
     }
 
-    public static List<MPoint> ToTouchLocations(this IEnumerable<TouchPoint> touchPoints, BoundingClientRect clientRect)
+    public static ReadOnlySpan<MPoint> ToTouchLocations(this IEnumerable<TouchPoint> touchPoints, BoundingClientRect clientRect)
     {
-        return touchPoints.Select(p => p.ToTouchLocation(clientRect)).ToList();
+        return touchPoints.Select(p => p.ToTouchLocation(clientRect)).ToArray();
     }
 }

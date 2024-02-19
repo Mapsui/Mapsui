@@ -196,13 +196,13 @@ public partial class MapControl : UIView, IMapControl
         }
         else if (evt?.AllTouches.Count >= 2)
         {
-            _touchTracker.Update(GetTouchLocations(evt, this).ToArray());
+            _touchTracker.Update(GetTouchLocations(evt, this));
             Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
         }
     }
 
-    private static List<MPoint> GetTouchLocations(UIEvent uiEvent, UIView uiView)    
-        => uiEvent.AllTouches.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new MPoint(p.X, p.Y)).ToList();
+    private static ReadOnlySpan<MPoint> GetTouchLocations(UIEvent uiEvent, UIView uiView)    
+        => uiEvent.AllTouches.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new MPoint(p.X, p.Y)).ToArray();
     
 
     public override void TouchesEnded(NSSet touches, UIEvent? e)
