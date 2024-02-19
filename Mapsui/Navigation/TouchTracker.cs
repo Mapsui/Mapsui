@@ -4,7 +4,7 @@ namespace Mapsui;
 
 public class TouchTracker
 {
-    private double _totalRotationDelta; // We need this to calculate snapping
+    private double _totalRotationChange; // We need this to calculate snapping
     private TouchState? _touchState;
     private TouchState? _previousTouchState;
 
@@ -24,13 +24,13 @@ public class TouchTracker
         if (_previousTouchState is null)
             return null; // There is a touch but no previous touch so no manipulation.
 
-        var scaleChange = _touchState.GetRadiusChange(_previousTouchState);
+        var scaleFactor = _touchState.GetScaleFactor(_previousTouchState);
         var rotationChange = _touchState.GetRotationChange(_previousTouchState);
 
         if (_touchState.Equals(_previousTouchState))
             return null; // The default will not change anything so don't return a manipulation.
 
-        return new TouchManipulation(_touchState.Center, _previousTouchState.Center, scaleChange, rotationChange, _totalRotationDelta);
+        return new TouchManipulation(_touchState.Center, _previousTouchState.Center, scaleFactor, rotationChange, _totalRotationChange);
     }
 
     private static TouchState? GetTouchState(ReadOnlySpan<MPoint> touchLocations)
@@ -70,7 +70,7 @@ public class TouchTracker
 
     private void Restart(TouchState? touchState)
     {
-        _totalRotationDelta = 0; // Reset the total. It will incremented in each Update call
+        _totalRotationChange = 0; // Reset the total. It will incremented in each Update call
         _touchState = touchState;
         _previousTouchState = null;
     }
@@ -80,10 +80,10 @@ public class TouchTracker
         _previousTouchState = _touchState;
         _touchState = touchState;
 
-        if (!(touchState?.FingerCount == _previousTouchState?.FingerCount))
+        if (!(touchState?.TouchLocationsLength== _previousTouchState?.TouchLocationsLength))
         {
             // If the finger count changes this is considered a reset.
-            _totalRotationDelta = 0;
+            _totalRotationChange = 0;
             _previousTouchState = null;
             // Note, there is the unlikely change that one finger is lifted exactly when 
             // another is touched down. This should also be ignored, but we can only
@@ -92,10 +92,10 @@ public class TouchTracker
         }
 
         if (touchState is null)
-            _totalRotationDelta = 0;
+            _totalRotationChange = 0;
 
         if (touchState is not null && _previousTouchState is not null)
-            _totalRotationDelta += touchState.GetRotationChange(_previousTouchState);
+            _totalRotationChange += touchState.GetRotationChange(_previousTouchState);
     }
 
     private record TouchState(MPoint Center, double? Radius, double? Angle, int TouchLocationsLength)
@@ -109,7 +109,7 @@ public class TouchTracker
             return Angle.Value - previousTouchState.Angle.Value;
         }
 
-        public double GetRadiusChange(TouchState previousTouchState)
+        public double GetScaleFactor(TouchState previousTouchState)
         {
             if (Radius is null)
                 return 1;
@@ -120,4 +120,4 @@ public class TouchTracker
     }
 }
 
-public record TouchManipulation(MPoint Center, MPoint PreviousCenter, double ResolutionChange, double RotationChange, double TotalRotationChange);
+public record TouchManipulation(MPoint Center, MPoint PreviousCenter, double ScaleFactor, double RotationChange, double TotalRotationChange);

@@ -38,18 +38,18 @@ public class NavigatorTests
     [TestCase(0.5, 70, -40)]
     [TestCase(1, 30, 0)]
     [TestCase(2, -50, 80)]
-    public void PinchWithDeltaResolution(double deltaResolution, double expectedCenterX, double expectedCenterY)
+    public void PinchWithDeltaResolution(double scaleFactor, double expectedCenterX, double expectedCenterY)
     {
         // Arrange
         var navigator = new Navigator();
         navigator.SetSize(100, 100);
         navigator.OverridePanBounds = new MRect(-100, -100, 100, 100);
         navigator.CenterOn(10, 20);
-        var currentPinchCenter = new MPoint(10, 10);
-        var previousPinchCenter = new MPoint(20, 20);
+        var currentTouchCenter = new MPoint(10, 10);
+        var previousTouchCenter = new MPoint(20, 20);
 
         // Act
-        navigator.Pinch(new TouchManipulation(currentPinchCenter, previousPinchCenter, deltaResolution, 0, 0));
+        navigator.Pinch(new TouchManipulation(currentTouchCenter, previousTouchCenter, scaleFactor, 0, 0));
 
         // Assert
         ClassicAssert.AreEqual(expectedCenterX, navigator.Viewport.CenterX);

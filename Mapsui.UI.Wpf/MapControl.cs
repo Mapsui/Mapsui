@@ -317,15 +317,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var translation = e.DeltaManipulation.Translation;
 
-        var previousPosition = e.ManipulationOrigin.ToMapsui();
-        var position = previousPosition.Offset(translation.X, translation.Y);
-        var radius = GetDeltaScale(e.DeltaManipulation.Scale);
-        var angle = e.DeltaManipulation.Rotation;
+        var previousCenter = e.ManipulationOrigin.ToMapsui();
+        var center = previousCenter.Offset(translation.X, translation.Y);
+        var scaleFactor = GetScaleFactor(e.DeltaManipulation.Scale);
+        var rotationChange = e.DeltaManipulation.Rotation;
 
-        return new TouchManipulation(position, previousPosition, radius, angle, e.CumulativeManipulation.Rotation);
+        return new TouchManipulation(center, previousCenter, scaleFactor, rotationChange, e.CumulativeManipulation.Rotation);
     }
 
-    private static double GetDeltaScale(Vector scale)
+    private static double GetScaleFactor(Vector scale)
     {
         var deltaScale = (scale.X + scale.Y) / 2;
         if (Math.Abs(deltaScale) < Constants.Epsilon)

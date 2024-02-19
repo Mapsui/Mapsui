@@ -221,9 +221,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private TouchManipulation ToTouchManipulation(ManipulationDeltaRoutedEventArgs e)
     {
-        var relativePosition = TransformToVisual(null).Inverse.TransformPoint(e.Position).ToMapsui();
-        var position = relativePosition.Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
-        return new TouchManipulation(position, relativePosition, e.Delta.Scale, e.Delta.Rotation, e.Cumulative.Rotation);
+        var previousCenter = TransformToVisual(null).Inverse.TransformPoint(e.Position).ToMapsui();
+        var center = previousCenter.Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
+        return new TouchManipulation(center, previousCenter, e.Delta.Scale, e.Delta.Rotation, e.Cumulative.Rotation);
     }
 
     public void OpenBrowser(string url)
