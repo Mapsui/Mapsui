@@ -1,5 +1,4 @@
-﻿using Mapsui.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Mapsui;
@@ -44,11 +43,14 @@ public class TouchTracker
             return new TouchState(touches[0], null, null, touches.Count);
         
         var (centerX, centerY) = GetCenter(touches);
-        var radius = Algorithms.Distance(centerX, centerY, touches[0].X, touches[0].Y);
+        var radius = Distance(centerX, centerY, touches[0].X, touches[0].Y);
         var angle = Math.Atan2(touches[1].Y - touches[0].Y, touches[1].X - touches[0].X) * 180.0 / Math.PI;
 
         return new TouchState(new MPoint(centerX, centerY), radius, angle, touches.Count);
     }
+
+    private static double Distance(double x1, double y1, double x2, double y2) 
+        => Math.Sqrt(Math.Pow(x1 - x2, 2.0) + Math.Pow(y1 - y2, 2.0));
 
     private static (double centerX, double centerY) GetCenter(List<MPoint> touches)
     {
