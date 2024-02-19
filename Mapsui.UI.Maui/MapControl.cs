@@ -493,17 +493,17 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <summary>
     /// Called, when mouse/finger/pen moves over map
     /// </summary>
-    /// <param name="touchPoints">List of all touched points</param>
-    protected virtual bool OnTouchMove(List<MPoint> touchPoints)
+    /// <param name="touchLocations">List of all touched points</param>
+    protected virtual bool OnTouchMove(List<MPoint> touchLocations)
     {
         switch (_mode)
         {
             case TouchMode.Dragging:
                 {
-                    if (touchPoints.Count != 1)
+                    if (touchLocations.Count != 1)
                         return false;
 
-                    var touchPosition = touchPoints.First();
+                    var touchPosition = touchLocations.First();
 
                     if (_previousCenter != null)
                     {
@@ -515,10 +515,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 break;
             case TouchMode.Zooming:
                 {
-                    if (touchPoints.Count != 2)
+                    if (touchLocations.Count != 2)
                         return false;
 
-                    _touchTracker.Update(touchPoints.ToArray());
+                    _touchTracker.Update(touchLocations.ToArray());
                     Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
 
                     RefreshGraphics();

@@ -366,7 +366,6 @@ public partial class MapControl : ComponentBase, IMapControl
     private double ViewportWidth => _canvasSize?.Width ?? 0;
     private double ViewportHeight => _canvasSize?.Height ?? 0;
 
-    // TODO: Implement Setting of Mouse
     public string? Cursor { get; set; }
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     public async void OpenBrowser(string url)
@@ -380,7 +379,6 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             Logger.Log(LogLevel.Error, ex.Message, ex);
         }
-
     }
 
     private bool GetShiftPressed()
@@ -392,12 +390,8 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            Logger.Log(LogLevel.Information, "OnTouchStart");
-            var locations = e.TargetTouches.ToLocations(_clientRect);
-            if (locations.Count >= 1)
-            {
-                _touchTracker.Restart(locations.ToArray());
-            }
+            var touchLocations = e.TargetTouches.ToTouchLocations(_clientRect);
+            _touchTracker.Restart(touchLocations.ToArray());
         }
         catch (Exception ex)
         {
@@ -409,11 +403,10 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         try
         {
-            Logger.Log(LogLevel.Information, "OnTouchMove");
-            var locations = e.TargetTouches.ToLocations(_clientRect);
-            if (locations.Count >= 1)
+            var touchLocations = e.TargetTouches.ToTouchLocations(_clientRect);
+            if (touchLocations.Count >= 1)
             {
-                _touchTracker.Update(locations.ToArray());
+                _touchTracker.Update(touchLocations.ToArray());
                 Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
             }
         }

@@ -173,28 +173,28 @@ public partial class MapControl : ViewGroup, IMapControl
         if (args.Event != null && (_gestureDetector?.OnTouchEvent(args.Event) ?? false))
             return;
 
-        var touchPoints = GetScreenPositions(args.Event, this, PixelDensity);
+        var touchLocations = GetTouchLocations(args.Event, this, PixelDensity);
 
         switch (args.Event?.Action)
         {
             case MotionEventActions.Up:
                 Refresh();
                 _mode = TouchMode.None;
-                HandleWidgetPointerUp(touchPoints.First(), _pointerDownPosition, true, 0, false);
+                HandleWidgetPointerUp(touchLocations.First(), _pointerDownPosition, true, 0, false);
                 break;
             case MotionEventActions.Down:
             case MotionEventActions.Pointer1Down:
             case MotionEventActions.Pointer2Down:
             case MotionEventActions.Pointer3Down:
-                if (touchPoints.Count >= 2)
+                if (touchLocations.Count >= 2)
                 {
                     _mode = TouchMode.Zooming;
-                    _touchTracker.Restart(touchPoints.ToArray());
+                    _touchTracker.Restart(touchLocations.ToArray());
                 }
                 else
                 {
-                    _previousTouch = touchPoints.First();
-                    _pointerDownPosition = touchPoints.First();
+                    _previousTouch = touchLocations.First();
+                    _pointerDownPosition = touchLocations.First();
 
                     if (HandleWidgetPointerDown(_pointerDownPosition, true, 1, false))
                         return;
@@ -206,17 +206,17 @@ public partial class MapControl : ViewGroup, IMapControl
             case MotionEventActions.Pointer3Up:
                 // Remove the touchPoint that was released from the locations to reset the
                 // starting points of the move and rotation
-                touchPoints.RemoveAt(args.Event.ActionIndex);
+                touchLocations.RemoveAt(args.Event.ActionIndex);
 
-                if (touchPoints.Count >= 2)
+                if (touchLocations.Count >= 2)
                 {
                     _mode = TouchMode.Zooming;
-                    _touchTracker.Restart(touchPoints.ToArray());
+                    _touchTracker.Restart(touchLocations.ToArray());
                 }
                 else
                 {
                     _mode = TouchMode.Dragging;
-                    _previousTouch = touchPoints.First();
+                    _previousTouch = touchLocations.First();
                 }
                 Refresh();
                 break;
@@ -227,10 +227,10 @@ public partial class MapControl : ViewGroup, IMapControl
                     // If this is added there should be testing of editing and all existing functionality.
                     case TouchMode.Dragging:
                         {
-                            if (touchPoints.Count != 1)
+                            if (touchLocations.Count != 1)
                                 return;
 
-                            var touch = touchPoints.First();
+                            var touch = touchLocations.First();
                             if (_previousTouch != null)
                             {
                                 Map.Navigator.Drag(touch, _previousTouch);
@@ -240,10 +240,10 @@ public partial class MapControl : ViewGroup, IMapControl
                         break;
                     case TouchMode.Zooming:
                         {
-                            if (touchPoints.Count < 2)
+                            if (touchLocations.Count < 2)
                                 return;
 
-                            _touchTracker.Update(touchPoints.ToArray());
+                            _touchTracker.Update(touchLocations.ToArray());
                             Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
                         }
                         break;
@@ -258,7 +258,7 @@ public partial class MapControl : ViewGroup, IMapControl
     /// <param name="motionEvent"></param>
     /// <param name="view"></param>
     /// <returns></returns>
-    private static List<MPoint> GetScreenPositions(MotionEvent? motionEvent, View view, double pixelDensity)
+    private static List<MPoint> GetTouchLocations(MotionEvent? motionEvent, View view, double pixelDensity)
     {
         var result = new List<MPoint>();
         

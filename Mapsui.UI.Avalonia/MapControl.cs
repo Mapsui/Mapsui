@@ -23,7 +23,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private MapsuiCustomDrawOp? _drawOp;
     private MPoint? _pointerDownPosition;
     private double _mouseWheelPos = 0.0;
-    private readonly ConcurrentDictionary<long, MPoint> _touches = new();
+    private readonly ConcurrentDictionary<long, MPoint> _touchLocations = new();
     private bool _shiftPressed;
     private readonly TouchTracker _touchTracker = new ();
 
@@ -40,7 +40,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     /// <summary> Clears the Touch State </summary>
     public void ClearTouchState()
     {
-        _touches.Clear();
+        _touchLocations.Clear();
     }
 
     private void Initialize()
@@ -104,9 +104,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         _pointerDownPosition = e.GetPosition(this).ToMapsui();
         var mouseDown = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
-        _touches[e.Pointer.Id] = _pointerDownPosition;
+        _touchLocations[e.Pointer.Id] = _pointerDownPosition;
         
-        _touchTracker.Restart(_touches.Select(t => t.Value).ToArray());
+        _touchTracker.Restart(_touchLocations.Values.ToArray());
         Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
 
         if (HandleWidgetPointerDown(_pointerDownPosition, mouseDown, e.ClickCount, _shiftPressed))
@@ -148,16 +148,16 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (e.Pointer.Type == PointerType.Mouse && !e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
             return;
 
-        _touches[e.Pointer.Id] = e.GetPosition(this).ToMapsui();
+        _touchLocations[e.Pointer.Id] = e.GetPosition(this).ToMapsui();
 
-        _touchTracker.Update(_touches.Select(t => t.Value).ToArray());
+        _touchTracker.Update(_touchLocations.Values.ToArray());
         Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
         RefreshGraphics();
     }
 
     private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        _touches.TryRemove(e.Pointer.Id, out _);
+        _touchLocations.TryRemove(e.Pointer.Id, out _);
         e.Pointer.Capture(null);
     }
 
