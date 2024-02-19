@@ -453,7 +453,7 @@ public class Navigator
     {
         if (touchManipulation is null) return;
         if (RotationLock) touchManipulation = touchManipulation with { RotationChange = 0 };
-        if (ZoomLock) touchManipulation = touchManipulation with { ResolutionChange = 0 };
+        if (ZoomLock) touchManipulation = touchManipulation with { ScaleFactor = 0 };
         if (PanLock) touchManipulation = touchManipulation with { Center = touchManipulation.PreviousCenter };
 
         ClearAnimations();
@@ -467,7 +467,7 @@ public class Navigator
         var previous = viewport.ScreenToWorld(touchManipulation.PreviousCenter.X, touchManipulation.PreviousCenter.Y);
         var current = viewport.ScreenToWorld(touchManipulation.Center.X, touchManipulation.Center.Y);
 
-        var resolutionChange = touchManipulation.ResolutionChange;
+        var scaleFactor = touchManipulation.ScaleFactor;
         var rotationChange = touchManipulation.RotationChange;
 
         if (!RotationLock)
@@ -480,18 +480,18 @@ public class Navigator
         var newX = viewport.CenterX + previous.X - current.X;
         var newY = viewport.CenterY + previous.Y - current.Y;
 
-        if (resolutionChange == 1 && rotationChange == 0 && viewport.CenterX == newX && viewport.CenterY == newY)
+        if (scaleFactor == 1 && rotationChange == 0 && viewport.CenterX == newX && viewport.CenterY == newY)
             return viewport;
 
-        if (resolutionChange != 1)
+        if (scaleFactor != 1)
         {
-            viewport = viewport with { Resolution = viewport.Resolution / resolutionChange };
+            viewport = viewport with { Resolution = viewport.Resolution / scaleFactor };
 
             // Calculate current position again with adjusted resolution
             // Zooming should be centered on the place where the map is touched.
             // This is done with the scale correction.
-            var scaleCorrectionX = (1 - resolutionChange) * (current.X - viewport.CenterX);
-            var scaleCorrectionY = (1 - resolutionChange) * (current.Y - viewport.CenterY);
+            var scaleCorrectionX = (1 - scaleFactor) * (current.X - viewport.CenterX);
+            var scaleCorrectionY = (1 - scaleFactor) * (current.Y - viewport.CenterY);
 
             newX -= scaleCorrectionX;
             newY -= scaleCorrectionY;

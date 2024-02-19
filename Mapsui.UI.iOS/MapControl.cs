@@ -1,7 +1,6 @@
 using CoreFoundation;
 using Mapsui.Logging;
 using Mapsui.UI.iOS.Extensions;
-using Mapsui.Utilities;
 using SkiaSharp.Views.iOS;
 using System.ComponentModel;
 
