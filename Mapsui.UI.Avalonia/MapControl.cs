@@ -106,7 +106,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         var mouseDown = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
         _touches[e.Pointer.Id] = _pointerDownPosition;
         
-        _touchTracker.Restart(_touches.Select(t => t.Value).ToList());
+        _touchTracker.Restart(_touches.Select(t => t.Value).ToArray());
         Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
 
         if (HandleWidgetPointerDown(_pointerDownPosition, mouseDown, e.ClickCount, _shiftPressed))
@@ -150,7 +150,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
         _touches[e.Pointer.Id] = e.GetPosition(this).ToMapsui();
 
-        _touchTracker.Update(_touches.Select(t => t.Value).ToList());
+        _touchTracker.Update(_touches.Select(t => t.Value).ToArray());
         Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
         RefreshGraphics();
     }

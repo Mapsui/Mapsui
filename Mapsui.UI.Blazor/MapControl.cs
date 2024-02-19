@@ -396,7 +396,7 @@ public partial class MapControl : ComponentBase, IMapControl
             var locations = e.TargetTouches.ToLocations(_clientRect);
             if (locations.Count >= 1)
             {
-                _touchTracker.Restart(locations);
+                _touchTracker.Restart(locations.ToArray());
             }
         }
         catch (Exception ex)
@@ -413,7 +413,7 @@ public partial class MapControl : ComponentBase, IMapControl
             var locations = e.TargetTouches.ToLocations(_clientRect);
             if (locations.Count >= 1)
             {
-                _touchTracker.Update(locations);
+                _touchTracker.Update(locations.ToArray());
                 Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
             }
         }

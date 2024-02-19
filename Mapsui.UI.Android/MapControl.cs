@@ -173,7 +173,7 @@ public partial class MapControl : ViewGroup, IMapControl
         if (args.Event != null && (_gestureDetector?.OnTouchEvent(args.Event) ?? false))
             return;
 
-        var touchPoints = GetScreenPositions(args.Event, this);
+        var touchPoints = GetScreenPositions(args.Event, this, PixelDensity);
 
         switch (args.Event?.Action)
         {
@@ -189,7 +189,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 if (touchPoints.Count >= 2)
                 {
                     _mode = TouchMode.Zooming;
-                    _touchTracker.Restart(touchPoints);
+                    _touchTracker.Restart(touchPoints.ToArray());
                 }
                 else
                 {
@@ -211,7 +211,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 if (touchPoints.Count >= 2)
                 {
                     _mode = TouchMode.Zooming;
-                    _touchTracker.Restart(touchPoints);
+                    _touchTracker.Restart(touchPoints.ToArray());
                 }
                 else
                 {
@@ -243,7 +243,7 @@ public partial class MapControl : ViewGroup, IMapControl
                             if (touchPoints.Count < 2)
                                 return;
 
-                            _touchTracker.Update(touchPoints);
+                            _touchTracker.Update(touchPoints.ToArray());
                             Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
                         }
                         break;
@@ -258,17 +258,19 @@ public partial class MapControl : ViewGroup, IMapControl
     /// <param name="motionEvent"></param>
     /// <param name="view"></param>
     /// <returns></returns>
-    private List<MPoint> GetScreenPositions(MotionEvent? motionEvent, View view)
+    private static List<MPoint> GetScreenPositions(MotionEvent? motionEvent, View view, double pixelDensity)
     {
-        if (motionEvent == null)
-            return [];
-
         var result = new List<MPoint>();
+        
+        if (motionEvent == null)
+            return result;
+
         for (var i = 0; i < motionEvent.PointerCount; i++)
         {
             var pixelCoordinate = new MPoint(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top);
-            result.Add(pixelCoordinate.ToDeviceIndependentUnits(PixelDensity));
+            result.Add(pixelCoordinate.ToDeviceIndependentUnits(pixelDensity));
         }
+
         return result;
     }
 

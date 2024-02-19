@@ -6,7 +6,7 @@ namespace Mapsui.Tests.Navigation;
 [TestFixture]
 public class TouchTrackerTests
 {
-    record Input(List<MPoint> Touches, TouchManipulation? TouchManipulation, string Message);
+    record Input(MPoint[] Touches, TouchManipulation? TouchManipulation, string Message);
 
     [Test]
     public void ManipulationSequenceTests()

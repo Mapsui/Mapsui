@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Mapsui;
 
@@ -13,9 +12,9 @@ public class TouchTracker
     /// Call this method before the first Update call. The Update method tracks the start touch angle which is needed 
     /// to for rotation snapping and the previous touch state.
     /// </summary>
-    public void Restart(List<MPoint> touches) => Restart(GetTouchState(touches));
+    public void Restart(ReadOnlySpan<MPoint> touches) => Restart(GetTouchState(touches));
 
-    public void Update(List<MPoint> touches) => Update(GetTouchState(touches));
+    public void Update(ReadOnlySpan<MPoint> touches) => Update(GetTouchState(touches));
 
     public TouchManipulation? GetTouchManipulation()
     {
@@ -34,25 +33,25 @@ public class TouchTracker
         return new TouchManipulation(_touchState.Center, _previousTouchState.Center, scaleChange, rotationChange, _totalRotationDelta);
     }
 
-    private static TouchState? GetTouchState(List<MPoint> touches)
+    private static TouchState? GetTouchState(ReadOnlySpan<MPoint> touches)
     {
-        if (touches.Count == 0)
+        if (touches.Length == 0)
             return null;
 
-        if (touches.Count == 1)
-            return new TouchState(touches[0], null, null, touches.Count);
+        if (touches.Length == 1)
+            return new TouchState(touches[0], null, null, touches.Length);
         
         var (centerX, centerY) = GetCenter(touches);
         var radius = Distance(centerX, centerY, touches[0].X, touches[0].Y);
         var angle = Math.Atan2(touches[1].Y - touches[0].Y, touches[1].X - touches[0].X) * 180.0 / Math.PI;
 
-        return new TouchState(new MPoint(centerX, centerY), radius, angle, touches.Count);
+        return new TouchState(new MPoint(centerX, centerY), radius, angle, touches.Length);
     }
 
     private static double Distance(double x1, double y1, double x2, double y2) 
         => Math.Sqrt(Math.Pow(x1 - x2, 2.0) + Math.Pow(y1 - y2, 2.0));
 
-    private static (double centerX, double centerY) GetCenter(List<MPoint> touches)
+    private static (double centerX, double centerY) GetCenter(ReadOnlySpan<MPoint> touches)
     {
         double centerX = 0;
         double centerY = 0;
@@ -63,8 +62,8 @@ public class TouchTracker
             centerY += location.Y;
         }
 
-        centerX /= touches.Count;
-        centerY /= touches.Count;
+        centerX /= touches.Length;
+        centerY /= touches.Length;
 
         return (centerX, centerY);
     }
