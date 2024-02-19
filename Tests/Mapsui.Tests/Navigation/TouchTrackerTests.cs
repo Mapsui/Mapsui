@@ -6,7 +6,7 @@ namespace Mapsui.Tests.Navigation;
 [TestFixture]
 public class TouchTrackerTests
 {
-    record Input(MPoint[] Touches, TouchManipulation? TouchManipulation, string Message);
+    record Input(MPoint[] TouchLocations, TouchManipulation? TouchManipulation, string Message);
 
     [Test]
     public void ManipulationSequenceTests()
@@ -39,7 +39,7 @@ public class TouchTrackerTests
         foreach (var input in inputs)
         {
             // Act
-            touchTracker.Update(input.Touches);
+            touchTracker.Update(input.TouchLocations);
             var touchManipulation = touchTracker.GetTouchManipulation();
 
             // Assert
