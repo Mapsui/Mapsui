@@ -1,7 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+		<!--Condition below was added to increase builds during development.-->
+    <TargetFrameworks Condition="'$(Configuration)' == 'Release'">net7.0;net8.0</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Description>Mapsui - Library for mapping</Description>
 		<IsPackable>true</IsPackable>
