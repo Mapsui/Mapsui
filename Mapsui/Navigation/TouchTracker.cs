@@ -12,9 +12,9 @@ public class TouchTracker
     /// Call this method before the first Update call. The Update method tracks the start touch angle which is needed 
     /// to for rotation snapping and the previous touch state.
     /// </summary>
-    public void Restart(ReadOnlySpan<MPoint> touches) => Restart(GetTouchState(touches));
+    public void Restart(ReadOnlySpan<MPoint> touchLocations) => Restart(GetTouchState(touchLocations));
 
-    public void Update(ReadOnlySpan<MPoint> touches) => Update(GetTouchState(touches));
+    public void Update(ReadOnlySpan<MPoint> touchLocations) => Update(GetTouchState(touchLocations));
 
     public TouchManipulation? GetTouchManipulation()
     {
@@ -33,19 +33,19 @@ public class TouchTracker
         return new TouchManipulation(_touchState.Center, _previousTouchState.Center, scaleChange, rotationChange, _totalRotationDelta);
     }
 
-    private static TouchState? GetTouchState(ReadOnlySpan<MPoint> touches)
+    private static TouchState? GetTouchState(ReadOnlySpan<MPoint> touchLocations)
     {
-        if (touches.Length == 0)
+        if (touchLocations.Length == 0)
             return null;
 
-        if (touches.Length == 1)
-            return new TouchState(touches[0], null, null, touches.Length);
+        if (touchLocations.Length == 1)
+            return new TouchState(touchLocations[0], null, null, touchLocations.Length);
         
-        var (centerX, centerY) = GetCenter(touches);
-        var radius = Distance(centerX, centerY, touches[0].X, touches[0].Y);
-        var angle = Math.Atan2(touches[1].Y - touches[0].Y, touches[1].X - touches[0].X) * 180.0 / Math.PI;
+        var (centerX, centerY) = GetCenter(touchLocations);
+        var radius = Distance(centerX, centerY, touchLocations[0].X, touchLocations[0].Y);
+        var angle = Math.Atan2(touchLocations[1].Y - touchLocations[0].Y, touchLocations[1].X - touchLocations[0].X) * 180.0 / Math.PI;
 
-        return new TouchState(new MPoint(centerX, centerY), radius, angle, touches.Length);
+        return new TouchState(new MPoint(centerX, centerY), radius, angle, touchLocations.Length);
     }
 
     private static double Distance(double x1, double y1, double x2, double y2) 
@@ -98,7 +98,7 @@ public class TouchTracker
             _totalRotationDelta += touchState.GetRotationChange(_previousTouchState);
     }
 
-    private record TouchState(MPoint Center, double? Radius, double? Angle, int FingerCount)
+    private record TouchState(MPoint Center, double? Radius, double? Angle, int TouchLocationsLength)
     {
         public double GetRotationChange(TouchState previousTouchState)
         {
