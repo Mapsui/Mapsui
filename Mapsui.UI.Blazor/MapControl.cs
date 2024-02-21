@@ -1,3 +1,4 @@
+using DotNext.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia;
@@ -404,4 +405,11 @@ public partial class MapControl : ComponentBase, IMapControl
         _previousTouchState = TouchState.FromLocations(e.TargetTouches.ToLocations(_clientRect));
         RefreshData();
     }
+
+    protected void OnMouseOut(MouseEventArgs e)
+    {
+        _previousMousePosition = null;
+        _pointerDownPosition = null;
+    }
+
 }
