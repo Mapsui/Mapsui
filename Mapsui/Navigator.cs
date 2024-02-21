@@ -91,6 +91,20 @@ public class Navigator
 
     public MouseWheelAnimation MouseWheelAnimation { get; } = new();
 
+    public void MouseWheelZoomContinuous(double mouseWheelDelta, MPoint centerOfZoomInScreenCoordinates)
+    {
+        if (!Viewport.HasSize()) return;
+        if (mouseWheelDelta == 1) return; // No change
+        if (mouseWheelDelta <= 0)
+        {
+            Logger.Log(LogLevel.Warning, "MouseWheelZoomContinuous was called with a mouseWheelDelta <= 0. This is unexpected.");
+            return;
+        }
+
+        var resolution = Viewport.Resolution * mouseWheelDelta;
+        ZoomTo(resolution, centerOfZoomInScreenCoordinates); // Not using animations for continuous zooming because the steps will be  small.
+    }
+
     public void MouseWheelZoom(int mouseWheelDelta, MPoint centerOfZoomInScreenCoordinates)
     {
         if (!Viewport.HasSize()) return;

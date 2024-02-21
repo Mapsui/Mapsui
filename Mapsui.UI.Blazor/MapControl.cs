@@ -43,6 +43,7 @@ public partial class MapControl : ComponentBase, IMapControl
     public int ZoomModifier { get; set; } = Keys.Control;
     public string ElementId => _elementId;
     public bool ZoomInOnDoubleClick { get; set; } = false;
+    public bool UseContinuousMouseWheelZoom { get; set; } = true; //!!!
     protected MapsuiJsInterop? Interop =>
             _interop == null && JsRuntime != null 
                 ? _interop ??= new MapsuiJsInterop(JsRuntime)
@@ -135,10 +136,25 @@ public partial class MapControl : ComponentBase, IMapControl
 
     protected void OnMouseWheel(WheelEventArgs e)
     {
+        Console.WriteLine($"DeltaX: {e.DeltaX}");
+        Console.WriteLine($"DeltaY: {e.DeltaY}");
+        Console.WriteLine($"DeltaZ: {e.DeltaZ}");
 
-        var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
-        var currentMousePosition = e.ToLocation(_clientRect);
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
+        Map.Navigator.MouseWheelZoomContinuous(Math.Pow(2, e.DeltaY > 0 ? 0.25 : -0.25), e.ToLocation(_clientRect));
+        
+        //if (UseContinuousMouseWheelZoom)
+        //{
+        //    var mouseWheelDelta = Math.Pow(2, e.DeltaY);
+        //    Console.WriteLine($"MouseWheelDelta: {mouseWheelDelta}");
+        //    var currentMousePosition = e.ToLocation(_clientRect);
+        //    Map.Navigator.MouseWheelZoomContinuous(mouseWheelDelta, currentMousePosition);
+        //}
+        //else
+        //{
+        //    var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
+        //    var currentMousePosition = e.ToLocation(_clientRect);
+        //    Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
+        //}
     }
 
     private async Task<BoundingClientRect> BoundingClientRectAsync()
