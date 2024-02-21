@@ -91,7 +91,7 @@ public class Navigator
 
     public MouseWheelAnimation MouseWheelAnimation { get; } = new();
 
-    public void MouseWheelZoom(int mouseWheelDelta, MPoint centerOfZoom)
+    public void MouseWheelZoom(int mouseWheelDelta, MPoint centerOfZoomInScreenCoordinates)
     {
         if (!Viewport.HasSize()) return;
 
@@ -101,7 +101,7 @@ public class Navigator
         // way to control the animation parameters.
         var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, Viewport.Resolution, ZoomBounds, Resolutions);
         if (resolution == Viewport.Resolution) return; // Don even start a animation if are already at the goalResolution.
-        ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        ZoomTo(resolution, centerOfZoomInScreenCoordinates, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
     }
 
     /// <summary>

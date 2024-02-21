@@ -42,6 +42,7 @@ public partial class MapControl : ComponentBase, IMapControl
     public int ZoomButton { get; set; } = MouseButtons.Primary;
     public int ZoomModifier { get; set; } = Keys.Control;
     public string ElementId => _elementId;
+    public bool ZoomInOnDoubleClick { get; set; } = false;
     protected MapsuiJsInterop? Interop =>
             _interop == null && JsRuntime != null 
                 ? _interop ??= new MapsuiJsInterop(JsRuntime)
@@ -185,6 +186,9 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             if (HandleWidgetPointerDown(e.ToLocation(_clientRect), e.Button == 0, 2, ShiftPressed))
                 return;
+
+            if (ZoomInOnDoubleClick)
+                Map.Navigator.MouseWheelZoom(1, e.ToLocation(_clientRect));
         }
         catch (Exception ex)
         {
@@ -410,5 +414,4 @@ public partial class MapControl : ComponentBase, IMapControl
         _previousMousePosition = null;
         _pointerDownPosition = null;
     }
-
 }
