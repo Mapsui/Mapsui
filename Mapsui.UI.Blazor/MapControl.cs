@@ -1,4 +1,3 @@
-using DotNext.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia;
