@@ -40,7 +40,7 @@ public class TouchTracker
 
         if (touchLocations.Length == 1)
             return new TouchState(touchLocations[0], null, null, touchLocations.Length);
-        
+
         var (centerX, centerY) = GetCenter(touchLocations);
         var radius = Distance(centerX, centerY, touchLocations[0].X, touchLocations[0].Y);
         var angle = Math.Atan2(touchLocations[1].Y - touchLocations[0].Y, touchLocations[1].X - touchLocations[0].X) * 180.0 / Math.PI;
@@ -48,7 +48,7 @@ public class TouchTracker
         return new TouchState(new MPoint(centerX, centerY), radius, angle, touchLocations.Length);
     }
 
-    private static double Distance(double x1, double y1, double x2, double y2) 
+    private static double Distance(double x1, double y1, double x2, double y2)
         => Math.Sqrt(Math.Pow(x1 - x2, 2.0) + Math.Pow(y1 - y2, 2.0));
 
     private static (double centerX, double centerY) GetCenter(ReadOnlySpan<MPoint> touches)
@@ -80,7 +80,7 @@ public class TouchTracker
         _previousTouchState = _touchState;
         _touchState = touchState;
 
-        if (!(touchState?.TouchLocationsLength== _previousTouchState?.TouchLocationsLength))
+        if (!(touchState?.TouchLocationsLength == _previousTouchState?.TouchLocationsLength))
         {
             // If the finger count changes this is considered a reset.
             _totalRotationChange = 0;
