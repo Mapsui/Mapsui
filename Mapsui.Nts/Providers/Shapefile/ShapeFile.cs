@@ -7,7 +7,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -707,25 +706,38 @@ public class ShapeFile : IProvider, IDisposable
 
         var offsetOfRecord = ReadIndex(); //Read the whole .idx file
 
-        if (_shapeType == ShapeType.Point)
-            for (var a = 0; a < _featureCount; ++a)
+        switch (_shapeType)
+        {
+            case ShapeType.Point:
+            case ShapeType.PointZ:
+            case ShapeType.PointM:
             {
-                _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); // Skip record number and content length
-                if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
+                for (var a = 0; a < _featureCount; ++a)
                 {
-                    var x = _brShapeFile.ReadDouble();
-                    var y = _brShapeFile.ReadDouble();
-                    yield return new MRect(x, y, x, y);
+                    _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); // Skip record number and content length
+                    if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
+                    {
+                        var x = _brShapeFile.ReadDouble();
+                        var y = _brShapeFile.ReadDouble();
+                        yield return new MRect(x, y, x, y);
+                    }
                 }
+
+                break;
             }
-        else
-            for (var a = 0; a < _featureCount; ++a)
+            default:
             {
-                _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); // Skip record number and content length
-                if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
-                    yield return new MRect(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble(),
-                                                 _brShapeFile.ReadDouble(), _brShapeFile.ReadDouble());
+                for (var a = 0; a < _featureCount; ++a)
+                {
+                    _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); // Skip record number and content length
+                    if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
+                        yield return new MRect(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble(),
+                            _brShapeFile.ReadDouble(), _brShapeFile.ReadDouble());
+                }
+
+                break;
             }
+        }
     }
 
     /// <summary>
