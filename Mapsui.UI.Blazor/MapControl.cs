@@ -42,6 +42,16 @@ public partial class MapControl : ComponentBase, IMapControl
     public int ZoomButton { get; set; } = MouseButtons.Primary;
     public int ZoomModifier { get; set; } = Keys.Control;
     public string ElementId => _elementId;
+    /// <summary>
+    /// This enables an alternative mouse wheel method where the step size on each mouse wheel event can be configured
+    /// by setting the ContinuousMouseWheelZoomStepSize.
+    /// </summary>
+    public bool UseContinuousMouseWheelZoom { get; set; } = false;
+    /// <summary>
+    /// The size of the mouse wheel steps used when UseContinuousMouseWheelZoom = true. The default is 0.1. A step 
+    /// size of 1 would doubling or halving the scale of the map on each event.    
+    /// </summary>
+    public double ContinuousMouseWheelZoomStepSize { get; set; } = 0.1;
     protected MapsuiJsInterop? Interop =>
             _interop == null && JsRuntime != null 
                 ? _interop ??= new MapsuiJsInterop(JsRuntime)
@@ -133,11 +143,19 @@ public partial class MapControl : ComponentBase, IMapControl
     }
 
     protected void OnMouseWheel(WheelEventArgs e)
-    {
-
-        var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
-        var currentMousePosition = e.ToLocation(_clientRect);
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
+    {   
+        if (UseContinuousMouseWheelZoom)
+        {
+            var stepSize = ContinuousMouseWheelZoomStepSize;
+            var scaleFactor = Math.Pow(2, e.DeltaY > 0 ? stepSize : -stepSize);
+            Map.Navigator.MouseWheelZoomContinuous(scaleFactor, e.ToLocation(_clientRect));
+        }
+        else
+        {
+            var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
+            var currentMousePosition = e.ToLocation(_clientRect);
+            Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
+        }
     }
 
     private async Task<BoundingClientRect> BoundingClientRectAsync()
@@ -410,5 +428,4 @@ public partial class MapControl : ComponentBase, IMapControl
         _previousMousePosition = null;
         _pointerDownPosition = null;
     }
-
 }

@@ -91,7 +91,24 @@ public class Navigator
 
     public MouseWheelAnimation MouseWheelAnimation { get; } = new();
 
-    public void MouseWheelZoom(int mouseWheelDelta, MPoint centerOfZoom)
+    public void MouseWheelZoomContinuous(double scaleFactor, MPoint centerOfZoomInScreenCoordinates)
+    {
+        if (!Viewport.HasSize()) return;
+        if (scaleFactor == 1) return; // No change
+        if (scaleFactor <= Constants.Epsilon)
+        {
+            Logger.Log(LogLevel.Warning, "MouseWheelZoomContinuous was called with a mouseWheelDelta <= 0. This is unexpected.");
+            return;
+        }
+
+        // MouseWheelAnimation tracks the destination resolution which allows for faster zooming in if the next tick
+        // starts before the previous animation is finished. We may want something like that here as well.
+
+        var resolution = Viewport.Resolution * scaleFactor;
+        ZoomTo(resolution, centerOfZoomInScreenCoordinates); // Not using animations for continuous zooming because the steps will be  small.
+    }
+
+    public void MouseWheelZoom(int mouseWheelDelta, MPoint centerOfZoomInScreenCoordinates)
     {
         if (!Viewport.HasSize()) return;
 
@@ -101,7 +118,7 @@ public class Navigator
         // way to control the animation parameters.
         var resolution = MouseWheelAnimation.GetResolution(mouseWheelDelta, Viewport.Resolution, ZoomBounds, Resolutions);
         if (resolution == Viewport.Resolution) return; // Don even start a animation if are already at the goalResolution.
-        ZoomTo(resolution, centerOfZoom, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        ZoomTo(resolution, centerOfZoomInScreenCoordinates, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
     }
 
     /// <summary>
