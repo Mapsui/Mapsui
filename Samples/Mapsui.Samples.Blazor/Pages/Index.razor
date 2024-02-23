@@ -154,7 +154,10 @@
             _render = false;
             FillMap();
             if (_mapControl != null)
+            {
                 _mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
+                _mapControl.UseContinuousMouseWheelZoom = true;
+            }
         }
 
     }
