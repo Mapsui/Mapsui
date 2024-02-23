@@ -15,11 +15,9 @@ using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Logging;
 using Mapsui.UI.Avalonia.Extensions;
 using Mapsui.UI.Avalonia.Utils;
 using Mapsui.Utilities;
-using Logger = Mapsui.Logging.Logger;
 
 namespace Mapsui.UI.Avalonia;
 
@@ -53,6 +51,17 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         CommonInitialize();
         Initialize();
     }
+
+    /// <summary>
+    /// This enables an alternative mouse wheel method where the step size on each mouse wheel event can be configured
+    /// by setting the ContinuousMouseWheelZoomStepSize.
+    /// </summary>
+    public bool UseContinuousMouseWheelZoom { get; set; } = false;
+    /// <summary>
+    /// The size of the mouse wheel steps used when UseContinuousMouseWheelZoom = true. The default is 0.1. A step 
+    /// size of 1 would doubling or halving the scale of the map on each event.    
+    /// </summary>
+    public double ContinuousMouseWheelZoomStepSize { get; set; } = 0.1;
 
     /// <summary> Clears the Touch State </summary>
     public void ClearTouchState()
@@ -135,16 +144,25 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlMouseWheel(object? sender, PointerWheelEventArgs e)
     {
-        // In Avalonia the touchpad can trigger the mousewheel event. In that case there are more events and the Delta.Y is a double value, 
-        // which is usually smaller than 1.0. In the code below the deltas are accumelated until they are larger than 1.0. Only then 
-        // MouseWheelZoom is called.
-        _mouseWheelPos += e.Delta.Y;
-        if (Math.Abs(_mouseWheelPos) < 1.0) return; // Ignore the mouse wheel event if the accumulated delta is still too small
-        int delta = Math.Sign(_mouseWheelPos);
-        _mouseWheelPos -= delta;
+        if (UseContinuousMouseWheelZoom)
+        {
+            var stepSize = ContinuousMouseWheelZoomStepSize;
+            var scaleFactor = Math.Pow(2, e.Delta.Y > 0 ? -stepSize : stepSize);
+            Map.Navigator.MouseWheelZoomContinuous(scaleFactor, e.GetPosition(this).ToMapsui());
+        }
+        else
+        {
+            // In Avalonia the touchpad can trigger the mouse wheel event. In that case there are more events and the Delta.Y is a double value, 
+            // which is usually smaller than 1.0. In the code below the deltas are accumulated until they are larger than 1.0. Only then 
+            // MouseWheelZoom is called.
+            _mouseWheelPos += e.Delta.Y;
+            if (Math.Abs(_mouseWheelPos) < 1.0) return; // Ignore the mouse wheel event if the accumulated delta is still too small
+            int delta = Math.Sign(_mouseWheelPos);
+            _mouseWheelPos -= delta;
 
-        _currentMousePosition = e.GetPosition(this).ToMapsui();
-        Map.Navigator.MouseWheelZoom(delta, _currentMousePosition);
+            _currentMousePosition = e.GetPosition(this).ToMapsui();
+            Map.Navigator.MouseWheelZoom(delta, _currentMousePosition);
+        }
     }
 
     private void HandleFeatureInfo(PointerReleasedEventArgs e)
