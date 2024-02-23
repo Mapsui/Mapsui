@@ -39,10 +39,7 @@ public partial class MapControl : ViewGroup, IMapControl
 {
     private View? _canvas;
     private GestureDetector? _gestureDetector;
-    private TouchMode _mode = TouchMode.None;
     private Handler? _mainLooperHandler;
-    private MPoint? _previousTouch;
-    private MPoint? _pointerDownPosition;
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
     private readonly TouchTracker _touchTracker = new();
 
@@ -170,84 +167,25 @@ public partial class MapControl : ViewGroup, IMapControl
 
     public void MapControl_Touch(object? sender, TouchEventArgs args)
     {
-        if (args.Event != null && (_gestureDetector?.OnTouchEvent(args.Event) ?? false))
+        if (args.Event is null) 
             return;
 
         var touchLocations = GetTouchLocations(args.Event, this, PixelDensity);
 
         switch (args.Event?.Action)
         {
-            case MotionEventActions.Up:
-                Refresh();
-                _mode = TouchMode.None;
-                HandleWidgetPointerUp(touchLocations.First(), _pointerDownPosition, true, 0, false);
-                break;
             case MotionEventActions.Down:
-            case MotionEventActions.Pointer1Down:
-            case MotionEventActions.Pointer2Down:
-            case MotionEventActions.Pointer3Down:
-                if (touchLocations.Count >= 2)
-                {
-                    _mode = TouchMode.Zooming;
-                    _touchTracker.Restart(touchLocations.ToArray());
-                }
-                else
-                {
-                    _previousTouch = touchLocations.First();
-                    _pointerDownPosition = touchLocations.First();
-
-                    if (HandleWidgetPointerDown(_pointerDownPosition, true, 1, false))
-                        return;
-                    _mode = TouchMode.Dragging;
-                }
-                break;
-            case MotionEventActions.Pointer1Up:
-            case MotionEventActions.Pointer2Up:
-            case MotionEventActions.Pointer3Up:
-                // Remove the touchPoint that was released from the locations to reset the
-                // starting points of the move and rotation
-                touchLocations.RemoveAt(args.Event.ActionIndex);
-
-                if (touchLocations.Count >= 2)
-                {
-                    _mode = TouchMode.Zooming;
-                    _touchTracker.Restart(touchLocations.ToArray());
-                }
-                else
-                {
-                    _mode = TouchMode.Dragging;
-                    _previousTouch = touchLocations.First();
-                }
-                Refresh();
+                _touchTracker.Restart(touchLocations);
+                Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
                 break;
             case MotionEventActions.Move:
-                switch (_mode)
-                {
-                    // There is no widget move handling in Mapsui.Android so the edit widget will not work.
-                    // If this is added there should be testing of editing and all existing functionality.
-                    case TouchMode.Dragging:
-                        {
-                            if (touchLocations.Count != 1)
-                                return;
-
-                            var touch = touchLocations.First();
-                            if (_previousTouch != null)
-                            {
-                                Map.Navigator.Drag(touch, _previousTouch);
-                            }
-                            _previousTouch = touch;
-                        }
-                        break;
-                    case TouchMode.Zooming:
-                        {
-                            if (touchLocations.Count < 2)
-                                return;
-
-                            _touchTracker.Update(touchLocations.ToArray());
-                            Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
-                        }
-                        break;
-                }
+                _touchTracker.Update(touchLocations);
+                Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+                break;
+            case MotionEventActions.Up:
+                _touchTracker.Update([]);
+                HandleWidgetPointerUp(touchLocations[0], touchLocations[0], true, 0, false);
+                Refresh();
                 break;
         }
     }
@@ -258,19 +196,12 @@ public partial class MapControl : ViewGroup, IMapControl
     /// <param name="motionEvent"></param>
     /// <param name="view"></param>
     /// <returns></returns>
-    private static List<MPoint> GetTouchLocations(MotionEvent? motionEvent, View view, double pixelDensity)
+    private static ReadOnlySpan<MPoint> GetTouchLocations(MotionEvent motionEvent, View view, double pixelDensity)
     {
-        var result = new List<MPoint>();
-        
-        if (motionEvent == null)
-            return result;
-
+        var result = new MPoint[motionEvent.PointerCount];
         for (var i = 0; i < motionEvent.PointerCount; i++)
-        {
-            var pixelCoordinate = new MPoint(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top);
-            result.Add(pixelCoordinate.ToDeviceIndependentUnits(pixelDensity));
-        }
-
+            result[i] = new MPoint(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top)
+                .ToDeviceIndependentUnits(pixelDensity);
         return result;
     }
 
