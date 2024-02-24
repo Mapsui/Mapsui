@@ -37,6 +37,7 @@
       "Samples\\Mapsui.Samples.Maui\\Mapsui.Samples.Maui.csproj",
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.Mobile\\Mapsui.Samples.Uno.WinUI.Mobile.csproj",
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.Skia.Gtk\\Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj",
+      "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.Wasm\\Mapsui.Samples.Uno.WinUI.Wasm.csproj",
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.Windows\\Mapsui.Samples.Uno.WinUI.Windows.csproj",
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.csproj",
       "Samples\\Mapsui.Samples.WinUI\\Mapsui.Samples.WinUI\\Mapsui.Samples.WinUI.csproj",
