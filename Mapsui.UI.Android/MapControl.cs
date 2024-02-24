@@ -178,13 +178,12 @@ public partial class MapControl : ViewGroup, IMapControl
 
         var touchLocations = GetTouchLocations(args.Event, this, PixelDensity);
 
-        switch (args.Event?.Action)
+        switch (args.Event.Action)
         {
             case MotionEventActions.Down:
+                _touchTracker.Restart(touchLocations);
                 if (HandleWidgetPointerDown(touchLocations[0], true, 0, false))
                     return;
-                _touchTracker.Restart(touchLocations);
-                Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
                 break;
             case MotionEventActions.Move:
                 if (HandleWidgetPointerMove(touchLocations[0], true, 0, false))
