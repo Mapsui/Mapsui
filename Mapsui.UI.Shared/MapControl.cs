@@ -364,7 +364,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Refresh();
         }
     }
-    
+
     // ReSharper restore RedundantNameQualifier
     private DisposableWrapper<Map>? _map;
 
@@ -522,7 +522,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 Handled = false
             };
         }
-        
+
 
         return null;
     }

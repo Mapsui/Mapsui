@@ -25,7 +25,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private double _mouseWheelPos = 0.0;
     private readonly ConcurrentDictionary<long, MPoint> _touchLocations = new();
     private bool _shiftPressed;
-    private readonly TouchTracker _touchTracker = new ();
+    private readonly TouchTracker _touchTracker = new();
 
     public MapControl()
     {
@@ -67,7 +67,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     }
 
     private void MapControl_Tapped(object? sender, TappedEventArgs e)
-    {        
+    {
         var tapPosition = e.GetPosition(this).ToMapsui();
         if (tapPosition != null && HandleTouchingTouched(tapPosition, _pointerDownPosition, true, 2, _shiftPressed))
         {
@@ -105,7 +105,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         _pointerDownPosition = e.GetPosition(this).ToMapsui();
         var mouseDown = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
         _touchLocations[e.Pointer.Id] = _pointerDownPosition;
-        
+
         _touchTracker.Restart(_touchLocations.Values.ToArray());
         Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
 

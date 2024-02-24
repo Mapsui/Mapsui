@@ -69,7 +69,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
         _initialized = true;
     }
-    
+
     public bool UseDoubleTap { get; set; } = true;
     public bool UseFling { get; set; } = true;
     private double ViewportWidth => Width; // Used in shared code
@@ -440,7 +440,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (touchPoints.Count == 2)
         {
             _mode = TouchMode.Zooming;
-            _touchTracker.Restart(touchPoints.ToArray());    
+            _touchTracker.Restart(touchPoints.ToArray());
         }
         else
         {

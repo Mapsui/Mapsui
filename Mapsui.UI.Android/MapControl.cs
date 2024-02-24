@@ -5,7 +5,6 @@ using Android.Util;
 using Android.Views;
 using Mapsui.Logging;
 using Mapsui.UI.Android.Extensions;
-using Mapsui.Utilities;
 using SkiaSharp.Views.Android;
 
 namespace Mapsui.UI.Android;
@@ -167,7 +166,7 @@ public partial class MapControl : ViewGroup, IMapControl
 
     public void MapControl_Touch(object? sender, TouchEventArgs args)
     {
-        if (args.Event is null) 
+        if (args.Event is null)
             return;
 
         var touchLocations = GetTouchLocations(args.Event, this, PixelDensity);

@@ -43,7 +43,7 @@ public class TouchTrackerTests
             var touchManipulation = touchTracker.GetTouchManipulation();
 
             // Assert
-            Assert.That(touchManipulation, Is.EqualTo(input.TouchManipulation), input.Message);            
+            Assert.That(touchManipulation, Is.EqualTo(input.TouchManipulation), input.Message);
         }
     }
 }

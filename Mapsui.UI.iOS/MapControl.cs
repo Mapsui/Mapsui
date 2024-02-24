@@ -201,9 +201,9 @@ public partial class MapControl : UIView, IMapControl
         }
     }
 
-    private static ReadOnlySpan<MPoint> GetTouchLocations(UIEvent uiEvent, UIView uiView)    
+    private static ReadOnlySpan<MPoint> GetTouchLocations(UIEvent uiEvent, UIView uiView)
         => uiEvent.AllTouches.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new MPoint(p.X, p.Y)).ToArray();
-    
+
 
     public override void TouchesEnded(NSSet touches, UIEvent? e)
     {
