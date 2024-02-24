@@ -75,7 +75,7 @@ public partial class MapControl : ViewGroup, IMapControl
         _gestureDetector?.Dispose();
         _gestureDetector = new GestureDetector(Context, listener);
         _gestureDetector.SingleTapConfirmed += OnSingleTapped;
-        _gestureDetector.DoubleTap += OnDoubleTapped;
+        _gestureDetector.DoubleTap += OnDoubleTapped;       
     }
 
     private void CanvasOnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
@@ -115,22 +115,26 @@ public partial class MapControl : ViewGroup, IMapControl
         }
     }
 
-    private void OnDoubleTapped(object? sender, GestureDetector.DoubleTapEventArgs e)
-    {
-        if (e.Event == null)
-            return;
-
-        var position = GetScreenPosition(e.Event, this);
-        OnInfo(CreateMapInfoEventArgs(position, position, 2));
-    }
-
     private void OnSingleTapped(object? sender, GestureDetector.SingleTapConfirmedEventArgs e)
     {
         if (e.Event == null)
             return;
 
         var position = GetScreenPosition(e.Event, this);
+        if (HandleWidgetPointerUp(position, position, true, 0, false))
+            return;
         OnInfo(CreateMapInfoEventArgs(position, position, 1));
+    }
+
+    private void OnDoubleTapped(object? sender, GestureDetector.DoubleTapEventArgs e)
+    {
+        if (e.Event == null)
+            return;
+
+        var position = GetScreenPosition(e.Event, this);
+        if (HandleWidgetPointerUp(position, position, true, 0, false))
+            return;
+        OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 
     protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
@@ -169,21 +173,29 @@ public partial class MapControl : ViewGroup, IMapControl
         if (args.Event is null)
             return;
 
+        if (_gestureDetector?.OnTouchEvent(args.Event) == true)
+            return;
+
         var touchLocations = GetTouchLocations(args.Event, this, PixelDensity);
 
         switch (args.Event?.Action)
         {
             case MotionEventActions.Down:
+                if (HandleWidgetPointerDown(touchLocations[0], true, 0, false))
+                    return;
                 _touchTracker.Restart(touchLocations);
                 Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
                 break;
             case MotionEventActions.Move:
+                if (HandleWidgetPointerMove(touchLocations[0], true, 0, false))
+                    return;
                 _touchTracker.Update(touchLocations);
                 Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
                 break;
             case MotionEventActions.Up:
-                _touchTracker.Update([]);
-                HandleWidgetPointerUp(touchLocations[0], touchLocations[0], true, 0, false);
+                // Todo: Add HandleWidgetPointerUp
+                _touchTracker.Update(touchLocations);
+                Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
                 Refresh();
                 break;
         }
