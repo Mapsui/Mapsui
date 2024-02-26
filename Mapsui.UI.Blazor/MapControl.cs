@@ -34,10 +34,15 @@ public partial class MapControl : ComponentBase, IMapControl
     public int ZoomButton { get; set; } = MouseButtons.Primary;
     public int ZoomModifier { get; set; } = Keys.Control;
     public string ElementId => _elementId;
+    /// <summary>
+    /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
+    /// </summary>
+    public int AllowedMovementInTappedGesture { get; set; } = 8;
     private MapsuiJsInterop? Interop =>
             _interop == null && JsRuntime != null
                 ? _interop ??= new MapsuiJsInterop(JsRuntime)
                 : _interop;
+
 
     protected override void OnInitialized()
     {
@@ -293,7 +298,7 @@ public partial class MapControl : ComponentBase, IMapControl
         });
     }
 
-    public void OnTouchEnd(TouchEventArgs e)
+    public void OnTouchEnd(TouchEventArgs _)
     {
         Catch.Exceptions(() =>
         {
@@ -312,11 +317,11 @@ public partial class MapControl : ComponentBase, IMapControl
         });
     }
 
-    private static bool IsTappedGesture(MPoint touchUpLocation, MPoint? touchDownLocation)
+    private bool IsTappedGesture(MPoint touchUpLocation, MPoint? touchDownLocation)
     {
         // Note: Platform gestures are preferred, but there is none for touch in browser (there is in Blazor hybrid).
         if (touchDownLocation == null)
             return false;
-        return Math.Abs(touchUpLocation.Distance(touchDownLocation)) < 40; // Todo: Make configurable
+        return Math.Abs(touchUpLocation.Distance(touchDownLocation)) < AllowedMovementInTappedGesture * PixelDensity;
     }
 }
