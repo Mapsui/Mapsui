@@ -2,7 +2,7 @@
 
 namespace Mapsui.Manipulations;
 
-public class TouchTracker
+public class ManipulationTracker
 {
     private double _totalRotationChange; // We need this to calculate snapping
     private TouchState? _touchState;

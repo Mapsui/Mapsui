@@ -23,7 +23,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private double _mouseWheelPos = 0.0;
     private readonly ConcurrentDictionary<long, MPoint> _touchLocations = new();
     private bool _shiftPressed;
-    private readonly TouchTracker _touchTracker = new();
+    private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl()
     {
@@ -88,7 +88,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         var tapPosition = e.GetPosition(this).ToMapsui();
         _touchLocations[e.Pointer.Id] = tapPosition;
 
-        _touchTracker.Restart(_touchLocations.Values.ToArray());
+        _manipulationTracker.Restart(_touchLocations.Values.ToArray());
 
         var mouseDown = IsMouseDown(e); // The name of this method is 'PointerPressed', should we not assume it is pressed?
         if (HandleWidgetPointerDown(tapPosition, mouseDown, e.ClickCount, _shiftPressed))
@@ -113,7 +113,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         var pointerLocation = e.GetPosition(this).ToMapsui();
         _touchLocations[e.Pointer.Id] = pointerLocation;
 
-        _touchTracker.Manipulate(_touchLocations.Values.ToArray(), Map.Navigator.Pinch);
+        _manipulationTracker.Manipulate(_touchLocations.Values.ToArray(), Map.Navigator.Pinch);
 
         RefreshGraphics();
     }
@@ -132,7 +132,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (HandleTouchingTouched(pointerPosition, pointerPosition, true, 0, _shiftPressed))
             return;
 
-        _touchTracker.Manipulate(_touchLocations.Values.ToArray(), Map.Navigator.Pinch);
+        _manipulationTracker.Manipulate(_touchLocations.Values.ToArray(), Map.Navigator.Pinch);
 
         Refresh();
     }

@@ -23,7 +23,7 @@ public partial class MapControl : ComponentBase, IMapControl
     private double _pixelDensityFromInterop = 1;
     private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
-    private readonly TouchTracker _touchTracker = new();
+    private readonly ManipulationTracker _manipulationTracker = new();
     private readonly TapGestureTracker _tapGestureTracker = new();
 
     [Inject]
@@ -201,7 +201,7 @@ public partial class MapControl : ComponentBase, IMapControl
             _ = UpdateBoundingRectAsync();
 
             var location = e.ToLocation(_clientRect);
-            _touchTracker.Restart([location]);
+            _manipulationTracker.Restart([location]);
 
             if (HandleWidgetPointerDown(location, true, 1, GetShiftPressed()))
                 return;
@@ -219,7 +219,7 @@ public partial class MapControl : ComponentBase, IMapControl
             if (isHovering)
                 return;
 
-            _touchTracker.Manipulate([e.ToLocation(_clientRect)], Map.Navigator.Pinch);
+            _manipulationTracker.Manipulate([e.ToLocation(_clientRect)], Map.Navigator.Pinch);
         });
     }
 
@@ -229,7 +229,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            _touchTracker.Manipulate([e.ToLocation(_clientRect)], Map.Navigator.Pinch);
+            _manipulationTracker.Manipulate([e.ToLocation(_clientRect)], Map.Navigator.Pinch);
 
             RefreshData();
         });
@@ -282,7 +282,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
             var touchLocations = e.TargetTouches.ToTouchLocations(_clientRect);
             _tapGestureTracker.Start(touchLocations[0]);
-            _touchTracker.Restart(touchLocations);
+            _manipulationTracker.Restart(touchLocations);
         });
     }
 
@@ -292,7 +292,7 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             var touchLocations = e.TargetTouches.ToTouchLocations(_clientRect);
             _tapGestureTracker.Move(touchLocations[0]);
-            _touchTracker.Manipulate(touchLocations.ToArray(), Map.Navigator.Pinch);
+            _manipulationTracker.Manipulate(touchLocations.ToArray(), Map.Navigator.Pinch);
         });
     }
 

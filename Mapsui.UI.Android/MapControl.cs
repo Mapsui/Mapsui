@@ -41,7 +41,7 @@ public partial class MapControl : ViewGroup, IMapControl
     private GestureDetector? _gestureDetector;
     private Handler? _mainLooperHandler;
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
-    private readonly TouchTracker _touchTracker = new();
+    private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl(Context context, IAttributeSet attrs) :
         base(context, attrs)
@@ -182,18 +182,18 @@ public partial class MapControl : ViewGroup, IMapControl
         switch (args.Event.Action)
         {
             case MotionEventActions.Down:
-                _touchTracker.Restart(touchLocations);
+                _manipulationTracker.Restart(touchLocations);
                 if (HandleWidgetPointerDown(touchLocations[0], true, 0, false))
                     return;
                 break;
             case MotionEventActions.Move:
                 if (HandleWidgetPointerMove(touchLocations[0], true, 0, false))
                     return;
-                _touchTracker.Manipulate(touchLocations, Map.Navigator.Pinch);
+                _manipulationTracker.Manipulate(touchLocations, Map.Navigator.Pinch);
                 break;
             case MotionEventActions.Up:
                 // Todo: Add HandleWidgetPointerUp
-                _touchTracker.Manipulate(touchLocations, Map.Navigator.Pinch);
+                _manipulationTracker.Manipulate(touchLocations, Map.Navigator.Pinch);
                 Refresh();
                 break;
         }

@@ -42,7 +42,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private readonly FlingTracker _flingTracker = new();
     private Size _oldSize;
     private static List<WeakReference<MapControl>>? _listeners;
-    private readonly TouchTracker _touchTracker = new();
+    private readonly ManipulationTracker _manipulationTracker = new();
     private MPoint? _downLocation;
 
     public MapControl()
@@ -216,7 +216,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                 _flingTracker.Clear();
 
-                _touchTracker.Restart(_touches.Values.ToArray());
+                _manipulationTracker.Restart(_touches.Values.ToArray());
             }
             else if (e.ActionType == SKTouchAction.Moved)
             {
@@ -232,7 +232,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                 _flingTracker.AddEvent(e.Id, location, DateTime.Now.Ticks);
 
-                _touchTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Pinch);
+                _manipulationTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Pinch);
 
                 RefreshGraphics();
             }
@@ -252,7 +252,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     return;
                 }
 
-                _touchTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Pinch);
+                _manipulationTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Pinch);
 
                 Refresh();
             }

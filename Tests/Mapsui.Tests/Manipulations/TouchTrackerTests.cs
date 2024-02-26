@@ -35,12 +35,12 @@ public class TouchTrackerTests
             new([new(0, 4), new(4, 0), new (0, 0), new(4, 4)], null, "Same center but reset because the finger count changed."),
         };
 
-        var touchTracker = new TouchTracker();
+        var manipulationTracker = new ManipulationTracker();
 
         foreach (var input in inputs)
         {
             // Act
-            touchTracker.Manipulate(input.TouchLocations, (m) =>
+            manipulationTracker.Manipulate(input.TouchLocations, (m) =>
             {
                 // Assert
                 Assert.That(m, Is.EqualTo(input.Manipulation), input.Message);

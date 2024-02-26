@@ -14,7 +14,7 @@ public partial class MapControl : UIView, IMapControl
     private SKCanvasView? _canvas;
     private bool _initialize;
     private MPoint? _pointerDownPosition;
-    private readonly TouchTracker _touchTracker = new();
+    private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl(CGRect frame)
         : base(frame)
@@ -170,7 +170,7 @@ public partial class MapControl : UIView, IMapControl
             base.TouchesBegan(touches, e);
             var touchLocations = GetTouchLocations(e, this);
 
-            _touchTracker.Restart(touchLocations);
+            _manipulationTracker.Restart(touchLocations);
 
             if (touchLocations.Length == 1)
             {
@@ -194,7 +194,7 @@ public partial class MapControl : UIView, IMapControl
                     return;
             }
 
-            _touchTracker.Manipulate(touchLocations, Map.Navigator.Pinch);
+            _manipulationTracker.Manipulate(touchLocations, Map.Navigator.Pinch);
         });
     }
 
@@ -205,7 +205,7 @@ public partial class MapControl : UIView, IMapControl
             base.TouchesEnded(touches, e);
             var touchLocations = GetTouchLocations(e, this);
 
-            _touchTracker.Manipulate(touchLocations, Map.Navigator.Pinch);
+            _manipulationTracker.Manipulate(touchLocations, Map.Navigator.Pinch);
 
             Refresh();
         });
