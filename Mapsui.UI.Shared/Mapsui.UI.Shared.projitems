@@ -9,8 +9,6 @@
     <Import_RootNamespace>Mapsui.UI</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Enums\TouchMode.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Enums\ZoomDirection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\FlingTracker.cs" />
   </ItemGroup>
