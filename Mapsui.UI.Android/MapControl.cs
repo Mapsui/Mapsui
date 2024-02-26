@@ -75,7 +75,7 @@ public partial class MapControl : ViewGroup, IMapControl
         _gestureDetector?.Dispose();
         _gestureDetector = new GestureDetector(Context, listener);
         _gestureDetector.SingleTapConfirmed += OnSingleTapped;
-        _gestureDetector.DoubleTap += OnDoubleTapped;       
+        _gestureDetector.DoubleTap += OnDoubleTapped;
     }
 
     private void CanvasOnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
