@@ -1,4 +1,5 @@
 using Mapsui.Extensions;
+using Mapsui.Manipulation;
 using Mapsui.UI.Blazor.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
@@ -23,7 +24,7 @@ public partial class MapControl : ComponentBase, IMapControl
     private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
     private readonly TouchTracker _touchTracker = new();
-    private MPoint? _touchDownLocation;
+    private readonly TapGestureTracker _tapGestureTracker = new();
 
     [Inject]
     private IJSRuntime? JsRuntime { get; set; }
@@ -37,7 +38,7 @@ public partial class MapControl : ComponentBase, IMapControl
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
     /// </summary>
-    public int AllowedMovementInTappedGesture { get; set; } = 8;
+    public int MaxTapGestureMovement { get; set; } = 8;
     private MapsuiJsInterop? Interop =>
             _interop == null && JsRuntime != null
                 ? _interop ??= new MapsuiJsInterop(JsRuntime)
@@ -281,9 +282,8 @@ public partial class MapControl : ComponentBase, IMapControl
             // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
             _ = UpdateBoundingRectAsync();
 
-            _touchDownLocation = e.Touches.ToTouchLocations(_clientRect)[0];
-
             var touchLocations = e.TargetTouches.ToTouchLocations(_clientRect);
+            _tapGestureTracker.Start(touchLocations[0]);
             _touchTracker.Restart(touchLocations);
         });
     }
@@ -293,6 +293,7 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var touchLocations = e.TargetTouches.ToTouchLocations(_clientRect);
+            _tapGestureTracker.Move(touchLocations[0]);
             _touchTracker.Update(touchLocations.ToArray());
             Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
         });
@@ -302,26 +303,14 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            var lastTouchLocation = _touchTracker.GetTouchManipulation()?.Center;
-            if (lastTouchLocation is null)
-                return; // If have seen this happen sometimes but not sure why.
-
-            if (IsTappedGesture(lastTouchLocation, _touchDownLocation))
+            _tapGestureTracker.IfTap((p) =>
             {
-                if (HandleWidgetPointerUp(lastTouchLocation, _touchDownLocation, true, 1, GetShiftPressed()))
+                if (HandleWidgetPointerUp(p, p, true, 1, GetShiftPressed()))
                     return;
-                OnInfo(CreateMapInfoEventArgs(lastTouchLocation, _touchDownLocation, 1));
-            }
+                OnInfo(CreateMapInfoEventArgs(p, p, 1));
+            }, MaxTapGestureMovement * PixelDensity);
 
             RefreshData();
         });
-    }
-
-    private bool IsTappedGesture(MPoint touchUpLocation, MPoint? touchDownLocation)
-    {
-        // Note: Platform gestures are preferred, but there is none for touch in browser (there is in Blazor hybrid).
-        if (touchDownLocation == null)
-            return false;
-        return Math.Abs(touchUpLocation.Distance(touchDownLocation)) < AllowedMovementInTappedGesture * PixelDensity;
     }
 }
