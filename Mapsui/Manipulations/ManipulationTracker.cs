@@ -12,9 +12,9 @@ public class ManipulationTracker
     /// Call this method before the first Update call. The Update method tracks the start touch angle which is needed 
     /// to for rotation snapping and the previous touch state.
     /// </summary>
-    public void Restart(ReadOnlySpan<MPoint> touchLocations) => Restart(GetTouchState(touchLocations));
+    public void Restart(ReadOnlySpan<MPoint> locations) => Restart(GetTouchState(locations));
 
-    public void Manipulate(ReadOnlySpan<MPoint> touchLocations, Action<Manipulation> onManipulation) => Manipulate(GetTouchState(touchLocations), onManipulation);
+    public void Manipulate(ReadOnlySpan<MPoint> locations, Action<Manipulation> onManipulation) => Manipulate(GetTouchState(locations), onManipulation);
 
     private Manipulation? GetManipulation()
     {
@@ -33,19 +33,19 @@ public class ManipulationTracker
         return new Manipulation(_touchState.Center, _previousTouchState.Center, scaleFactor, rotationChange, _totalRotationChange);
     }
 
-    private static TouchState? GetTouchState(ReadOnlySpan<MPoint> touchLocations)
+    private static TouchState? GetTouchState(ReadOnlySpan<MPoint> locations)
     {
-        if (touchLocations.Length == 0)
+        if (locations.Length == 0)
             return null;
 
-        if (touchLocations.Length == 1)
-            return new TouchState(touchLocations[0], null, null, touchLocations.Length);
+        if (locations.Length == 1)
+            return new TouchState(locations[0], null, null, locations.Length);
 
-        var (centerX, centerY) = GetCenter(touchLocations);
-        var radius = Distance(centerX, centerY, touchLocations[0].X, touchLocations[0].Y);
-        var angle = Math.Atan2(touchLocations[1].Y - touchLocations[0].Y, touchLocations[1].X - touchLocations[0].X) * 180.0 / Math.PI;
+        var (centerX, centerY) = GetCenter(locations);
+        var radius = Distance(centerX, centerY, locations[0].X, locations[0].Y);
+        var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
 
-        return new TouchState(new MPoint(centerX, centerY), radius, angle, touchLocations.Length);
+        return new TouchState(new MPoint(centerX, centerY), radius, angle, locations.Length);
     }
 
     private static double Distance(double x1, double y1, double x2, double y2)
@@ -80,7 +80,7 @@ public class ManipulationTracker
         _previousTouchState = _touchState;
         _touchState = touchState;
 
-        if (!(touchState?.TouchLocationsLength == _previousTouchState?.TouchLocationsLength))
+        if (!(touchState?.LocationsLength == _previousTouchState?.LocationsLength))
         {
             // If the finger count changes this is considered a reset.
             _totalRotationChange = 0;
@@ -102,7 +102,7 @@ public class ManipulationTracker
             onManipulation(manipulation);
     }
 
-    private record TouchState(MPoint Center, double? Radius, double? Angle, int TouchLocationsLength)
+    private record TouchState(MPoint Center, double? Radius, double? Angle, int LocationsLength)
     {
         public double GetRotationChange(TouchState previousTouchState)
         {

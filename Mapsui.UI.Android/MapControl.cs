@@ -177,23 +177,23 @@ public partial class MapControl : ViewGroup, IMapControl
         if (_gestureDetector?.OnTouchEvent(args.Event) == true)
             return;
 
-        var touchLocations = GetTouchLocations(args.Event, this, PixelDensity);
+        var locations = GetTouchLocations(args.Event, this, PixelDensity);
 
         switch (args.Event.Action)
         {
             case MotionEventActions.Down:
-                _manipulationTracker.Restart(touchLocations);
-                if (HandleWidgetPointerDown(touchLocations[0], true, 0, false))
+                _manipulationTracker.Restart(locations);
+                if (HandleWidgetPointerDown(locations[0], true, 0, false))
                     return;
                 break;
             case MotionEventActions.Move:
-                if (HandleWidgetPointerMove(touchLocations[0], true, 0, false))
+                if (HandleWidgetPointerMove(locations[0], true, 0, false))
                     return;
-                _manipulationTracker.Manipulate(touchLocations, Map.Navigator.Pinch);
+                _manipulationTracker.Manipulate(locations, Map.Navigator.Pinch);
                 break;
             case MotionEventActions.Up:
                 // Todo: Add HandleWidgetPointerUp
-                _manipulationTracker.Manipulate(touchLocations, Map.Navigator.Pinch);
+                _manipulationTracker.Manipulate(locations, Map.Navigator.Pinch);
                 Refresh();
                 break;
         }

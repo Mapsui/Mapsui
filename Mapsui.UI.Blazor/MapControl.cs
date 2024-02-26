@@ -280,9 +280,9 @@ public partial class MapControl : ComponentBase, IMapControl
             // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
             _ = UpdateBoundingRectAsync();
 
-            var touchLocations = e.TargetTouches.ToTouchLocations(_clientRect);
-            _tapGestureTracker.Start(touchLocations[0]);
-            _manipulationTracker.Restart(touchLocations);
+            var locations = e.TargetTouches.ToTouchLocations(_clientRect);
+            _tapGestureTracker.Start(locations[0]);
+            _manipulationTracker.Restart(locations);
         });
     }
 
@@ -290,9 +290,9 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            var touchLocations = e.TargetTouches.ToTouchLocations(_clientRect);
-            _tapGestureTracker.Move(touchLocations[0]);
-            _manipulationTracker.Manipulate(touchLocations.ToArray(), Map.Navigator.Pinch);
+            var locations = e.TargetTouches.ToTouchLocations(_clientRect);
+            _tapGestureTracker.Move(locations[0]);
+            _manipulationTracker.Manipulate(locations.ToArray(), Map.Navigator.Pinch);
         });
     }
 

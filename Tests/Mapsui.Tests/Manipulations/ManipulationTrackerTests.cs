@@ -7,7 +7,7 @@ namespace Mapsui.Tests.Manipulations;
 [TestFixture]
 public class ManipulationTrackerTests
 {
-    record Input(MPoint[] TouchLocations, Manipulation? Manipulation, string Message);
+    record Input(MPoint[] Locations, Manipulation? Manipulation, string Message);
 
     [Test]
     public void ManipulationSequenceTests()
@@ -40,7 +40,7 @@ public class ManipulationTrackerTests
         foreach (var input in inputs)
         {
             // Act
-            manipulationTracker.Manipulate(input.TouchLocations, (m) =>
+            manipulationTracker.Manipulate(input.Locations, (m) =>
             {
                 // Assert
                 Assert.That(m, Is.EqualTo(input.Manipulation), input.Message);

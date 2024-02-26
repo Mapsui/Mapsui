@@ -21,7 +21,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 {
     private MapsuiCustomDrawOperation? _drawOperation;
     private double _mouseWheelPos = 0.0;
-    private readonly ConcurrentDictionary<long, MPoint> _touchLocations = new();
+    private readonly ConcurrentDictionary<long, MPoint> _pointerLocations = new();
     private bool _shiftPressed;
     private readonly ManipulationTracker _manipulationTracker = new();
 
@@ -40,7 +40,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     public void ClearTouchState()
     {
         // Todo: Figure out if we need to clear the entire state, or only remove a specific pointer.
-        _touchLocations.Clear();
+        _pointerLocations.Clear();
     }
 
     private void Initialize()
@@ -86,9 +86,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControl_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var tapPosition = e.GetPosition(this).ToMapsui();
-        _touchLocations[e.Pointer.Id] = tapPosition;
+        _pointerLocations[e.Pointer.Id] = tapPosition;
 
-        _manipulationTracker.Restart(_touchLocations.Values.ToArray());
+        _manipulationTracker.Restart(_pointerLocations.Values.ToArray());
 
         var mouseDown = IsMouseDown(e); // The name of this method is 'PointerPressed', should we not assume it is pressed?
         if (HandleWidgetPointerDown(tapPosition, mouseDown, e.ClickCount, _shiftPressed))
@@ -111,9 +111,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             return; // In case of hovering we just call the widget move event and ignore the event otherwise.
 
         var pointerLocation = e.GetPosition(this).ToMapsui();
-        _touchLocations[e.Pointer.Id] = pointerLocation;
+        _pointerLocations[e.Pointer.Id] = pointerLocation;
 
-        _manipulationTracker.Manipulate(_touchLocations.Values.ToArray(), Map.Navigator.Pinch);
+        _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Pinch);
 
         RefreshGraphics();
     }
@@ -125,14 +125,14 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        _touchLocations.TryRemove(e.Pointer.Id, out _);
+        _pointerLocations.TryRemove(e.Pointer.Id, out _);
         e.Pointer.Capture(null);
 
         var pointerPosition = e.GetPosition(this).ToMapsui();
         if (HandleTouchingTouched(pointerPosition, pointerPosition, true, 0, _shiftPressed))
             return;
 
-        _manipulationTracker.Manipulate(_touchLocations.Values.ToArray(), Map.Navigator.Pinch);
+        _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Pinch);
 
         Refresh();
     }

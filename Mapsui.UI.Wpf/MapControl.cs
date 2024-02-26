@@ -9,7 +9,6 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Input.Manipulations;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using MapsuiManipulation = Mapsui.Manipulations.Manipulation;
