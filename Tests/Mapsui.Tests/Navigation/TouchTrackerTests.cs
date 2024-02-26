@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Mapsui.Manipulations;
+using NUnit.Framework;
 using System.Collections.Generic;
 
 namespace Mapsui.Tests.Navigation;

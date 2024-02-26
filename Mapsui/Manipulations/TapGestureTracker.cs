@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mapsui.Manipulation;
+namespace Mapsui.Manipulations;
 
 public class TapGestureTracker
 {

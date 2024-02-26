@@ -2,6 +2,7 @@
 using Mapsui.Extensions;
 using Mapsui.Limiting;
 using Mapsui.Logging;
+using Mapsui.Manipulations;
 using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;

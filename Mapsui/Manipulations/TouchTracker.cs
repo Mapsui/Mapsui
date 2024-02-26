@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mapsui;
+namespace Mapsui.Manipulations;
 
 public class TouchTracker
 {
