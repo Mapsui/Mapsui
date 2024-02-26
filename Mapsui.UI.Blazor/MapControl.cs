@@ -1,5 +1,4 @@
 using Mapsui.Extensions;
-using Mapsui.Logging;
 using Mapsui.UI.Blazor.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
@@ -11,28 +10,24 @@ namespace Mapsui.UI.Blazor;
 
 public partial class MapControl : ComponentBase, IMapControl
 {
-    public static bool UseGPU { get; set; } = false;
-
     protected SKCanvasView? _viewCpu;
     protected SKGLView? _viewGpu;
-
-    [Inject]
-    private IJSRuntime? JsRuntime { get; set; }
+    protected readonly string _elementId = Guid.NewGuid().ToString("N");
 
     private SKImageInfo? _canvasSize;
     private bool _onLoaded;
     private MRect? _selectRectangle;
-    private MPoint? _pointerDownPosition;
-    private MPoint? _previousMousePosition;
-    private string? _defaultCursor = Cursors.Default;
     private readonly HashSet<string> _pressedKeys = [];
     private bool _isInBoxZoomMode;
-    double _pixelDensityFromInterop = 1;
-    BoundingClientRect _clientRect = new();
-    protected readonly string _elementId = Guid.NewGuid().ToString("N");
+    private double _pixelDensityFromInterop = 1;
+    private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
     private readonly TouchTracker _touchTracker = new();
+    private MPoint? _touchDownLocation;
 
+    [Inject]
+    private IJSRuntime? JsRuntime { get; set; }
+    public static bool UseGPU { get; set; } = false;
     public string MoveCursor { get; set; } = Cursors.Move;
     public int MoveButton { get; set; } = MouseButtons.Primary;
     public int MoveModifier { get; set; } = Keys.None;
@@ -117,23 +112,18 @@ public partial class MapControl : ComponentBase, IMapControl
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     private async void OnLoadComplete()
     {
-        try
+        Catch.Exceptions(async () =>
         {
             SetViewportSize();
             await InitializingInteropAsync();
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
+        });
     }
 
     protected void OnMouseWheel(WheelEventArgs e)
     {
-
         var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
-        var currentMousePosition = e.ToLocation(_clientRect);
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
+        var mouseLocation = e.ToLocation(_clientRect);
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, mouseLocation);
     }
 
     private async Task<BoundingClientRect> BoundingClientRectAsync()
@@ -175,179 +165,76 @@ public partial class MapControl : ComponentBase, IMapControl
         action();
     }
 
-    protected void OnDblClick(MouseEventArgs e)
+    protected void OnClick(MouseEventArgs e)
     {
-        try
+        Catch.Exceptions(() =>
         {
-            if (HandleWidgetPointerDown(e.ToLocation(_clientRect), e.Button == 0, 2, GetShiftPressed()))
+            var location = e.ToLocation(_clientRect);
+            if (HandleWidgetPointerDown(location, true, 1, GetShiftPressed()))
                 return;
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
+            OnInfo(CreateMapInfoEventArgs(location, location, 1));
+        });
     }
 
-    protected void OnPointerDown(PointerEventArgs e)
+    protected void OnDblClick(MouseEventArgs e)
     {
-        try
+        Catch.Exceptions(() =>
+        {
+            var location = e.ToLocation(_clientRect);
+            if (HandleWidgetPointerDown(e.ToLocation(_clientRect), true, 2, GetShiftPressed()))
+                return;
+            OnInfo(CreateMapInfoEventArgs(location, location, 1));
+        });
+    }
+
+    protected void OnMouseDown(MouseEventArgs e)
+    {
+        Catch.Exceptions(() =>
         {
             // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
             _ = UpdateBoundingRectAsync();
 
-            _pointerDownPosition = e.ToLocation(_clientRect);
-            if (HandleWidgetPointerDown(_pointerDownPosition, e.Button == 0, 1, GetShiftPressed()))
+            var location = e.ToLocation(_clientRect);
+            _touchTracker.Restart([location]);
+
+            if (HandleWidgetPointerDown(location, true, 1, GetShiftPressed()))
                 return;
-
-            IsInBoxZoomMode = e.Button == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
-
-            bool moveMode = e.Button == MoveButton && (MoveModifier == Keys.None || ModifierPressed(MoveModifier));
-
-            if (moveMode)
-                _defaultCursor = Cursor;
-
-            if (moveMode || IsInBoxZoomMode)
-                _previousMousePosition = _pointerDownPosition;
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
+        });
     }
 
-    private bool ModifierPressed(int modifier)
-    {
-        return modifier switch
-        {
-            Keys.Alt => _pressedKeys.Contains("Alt"),
-            Keys.Control => _pressedKeys.Contains("Control"),
-            Keys.ShiftLeft => _pressedKeys.Contains("ShiftLeft") || _pressedKeys.Contains("ShiftRight") || _pressedKeys.Contains("Shift"),
-            _ => false,
-        };
-    }
-
-    private bool IsInBoxZoomMode
-    {
-        get => _isInBoxZoomMode;
-        set
-        {
-            _selectRectangle = null;
-            _isInBoxZoomMode = value;
-        }
-    }
-
-    protected void OnPointerUp(PointerEventArgs e)
-    {
-        try
-        {
-            if (HandleWidgetPointerUp(e.ToLocation(_clientRect), _pointerDownPosition, e.Button == 0, 1, GetShiftPressed()))
-            {
-                _pointerDownPosition = null;
-                _previousMousePosition = null;
-
-                return;
-            }
-
-            if (IsInBoxZoomMode)
-            {
-                if (_selectRectangle != null)
-                {
-                    var previous = Map.Navigator.Viewport.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
-                    var current = Map.Navigator.Viewport.ScreenToWorld(_selectRectangle.BottomRight.X,
-                        _selectRectangle.BottomRight.Y);
-                    ZoomToBox(previous, current);
-                }
-            }
-            else if (_pointerDownPosition != null)
-            {
-                var location = e.ToLocation(_clientRect);
-                if (IsClick(location, _pointerDownPosition))
-                    OnInfo(CreateMapInfoEventArgs(location, _pointerDownPosition, 1));
-            }
-
-            _pointerDownPosition = null;
-            _previousMousePosition = null;
-
-            Cursor = _defaultCursor;
-
-            RefreshData();
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
-    }
-
-    private static bool IsClick(MPoint currentPosition, MPoint previousPosition)
-    {
-        return Math.Abs(currentPosition.Distance(previousPosition)) < 5;
-    }
-
-    // To trigger the Info event on mobile I changed the MouseDown and MouseUp
-    // into PointerDown and PointerUp. When I also changed OnMouseDown to OnPointerDown
-    // the single finger drag gesture causes double speed panning. To fix this I kept
-    // the OnMouseMove event as it was, but conceptually it is a bit confusing. 
-    // I tested the logic on a real device and it works correctly, for pinch, pan,
-    // and Info events, so I am leaving it like this.
-    // An alternative would be keep mouse and touch events completely separate, and
-    // don't use Pointer, but that would involve some rewriting of the touch logic to
-    // support the Info event.
     protected void OnMouseMove(MouseEventArgs e)
     {
-        try
+        Catch.Exceptions(() =>
         {
-            if (HandleWidgetPointerMove(e.ToLocation(_clientRect), e.Button == 0, 0, GetShiftPressed()))
+            var isHovering = !IsMouseButtonPressed(e);
+            if (HandleWidgetPointerMove(e.ToLocation(_clientRect), !isHovering, 0, GetShiftPressed()))
                 return;
 
-            if (_previousMousePosition != null)
-            {
-                if (IsInBoxZoomMode)
-                {
-                    var x = e.ToLocation(_clientRect);
-                    if (_pointerDownPosition != null)
-                    {
-                        var y = _pointerDownPosition;
-                        _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X),
-                            Math.Max(x.Y, y.Y));
-                        _invalidate?.Invoke();
-                    }
-                }
-                else // drag/pan - mode
-                {
-                    Cursor = MoveCursor;
+            if (isHovering)
+                return;
 
-                    var currentPosition = e.ToLocation(_clientRect);
-                    Map.Navigator.Drag(currentPosition, _previousMousePosition);
-                    _previousMousePosition = e.ToLocation(_clientRect);
-                }
+            _touchTracker.Update([e.ToLocation(_clientRect)]);
+            Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+        });
+    }
 
-                // cleanout down mouse position because it is now a move
-                _pointerDownPosition = null;
-            }
-        }
-        catch (Exception ex)
+    private static bool IsMouseButtonPressed(MouseEventArgs e) => e.Buttons == 1;
+
+    protected void OnMouseUp(MouseEventArgs e)
+    {
+        Catch.Exceptions(() =>
         {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
-    }
+            _touchTracker.Update([e.ToLocation(_clientRect)]);
+            Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
 
-    public void ZoomToBox(MPoint beginPoint, MPoint endPoint)
-    {
-        var box = new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y);
-        Map.Navigator.ZoomToBox(box, duration: 300); ;
-        ClearBBoxDrawing();
-    }
-
-    private void ClearBBoxDrawing()
-    {
-        RunOnUIThread(() => IsInBoxZoomMode = false);
+            RefreshData();
+        });
     }
 
     private double GetPixelDensity()
     {
         return _pixelDensityFromInterop;
     }
-
 
     public void Dispose()
     {
@@ -370,15 +257,11 @@ public partial class MapControl : ComponentBase, IMapControl
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     public async void OpenBrowser(string url)
     {
-        try
+        Catch.Exceptions(async () =>
         {
             if (JsRuntime != null)
                 await JsRuntime.InvokeAsync<object>("open", [url, "_blank"]);
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
+        });
     }
 
     private bool GetShiftPressed()
@@ -388,36 +271,52 @@ public partial class MapControl : ComponentBase, IMapControl
 
     public void OnTouchStart(TouchEventArgs e)
     {
-        try
+        Catch.Exceptions(() =>
         {
+            // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
+            _ = UpdateBoundingRectAsync();
+
+            _touchDownLocation = e.Touches.ToTouchLocations(_clientRect)[0];
+
             var touchLocations = e.TargetTouches.ToTouchLocations(_clientRect);
             _touchTracker.Restart(touchLocations);
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message);
-        }
+        });
     }
 
     public void OnTouchMove(TouchEventArgs e)
     {
-        try
+        Catch.Exceptions(() =>
         {
             var touchLocations = e.TargetTouches.ToTouchLocations(_clientRect);
-            if (touchLocations.Length >= 1)
-            {
-                _touchTracker.Update(touchLocations.ToArray());
-                Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
-            }
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message);
-        }
+            _touchTracker.Update(touchLocations.ToArray());
+            Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+        });
     }
 
     public void OnTouchEnd(TouchEventArgs e)
     {
-        RefreshData();
+        Catch.Exceptions(() =>
+        {
+            var lastTouchLocation = _touchTracker.GetTouchManipulation()?.Center;
+            if (lastTouchLocation is null)
+                return; // If have seen this happen sometimes but not sure why.
+
+            if (IsTappedGesture(lastTouchLocation, _touchDownLocation))
+            {
+                if (HandleWidgetPointerUp(lastTouchLocation, _touchDownLocation, true, 1, GetShiftPressed()))
+                    return;
+                OnInfo(CreateMapInfoEventArgs(lastTouchLocation, _touchDownLocation, 1));
+            }
+
+            RefreshData();
+        });
+    }
+
+    private static bool IsTappedGesture(MPoint touchUpLocation, MPoint? touchDownLocation)
+    {
+        // Note: Platform gestures are preferred, but there is none for touch in browser (there is in Blazor hybrid).
+        if (touchDownLocation == null)
+            return false;
+        return Math.Abs(touchUpLocation.Distance(touchDownLocation)) < 40; // Todo: Make configurable
     }
 }
