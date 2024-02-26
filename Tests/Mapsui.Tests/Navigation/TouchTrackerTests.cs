@@ -40,11 +40,11 @@ public class TouchTrackerTests
         foreach (var input in inputs)
         {
             // Act
-            touchTracker.Update(input.TouchLocations);
-            var touchManipulation = touchTracker.GetTouchManipulation();
-
-            // Assert
-            Assert.That(touchManipulation, Is.EqualTo(input.TouchManipulation), input.Message);
+            touchTracker.Update(input.TouchLocations, (m) =>
+            {
+                // Assert
+                Assert.That(m, Is.EqualTo(input.TouchManipulation), input.Message);
+            });
         }
     }
 }
