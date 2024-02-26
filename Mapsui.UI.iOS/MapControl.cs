@@ -1,6 +1,5 @@
 using CoreFoundation;
 using Mapsui.Logging;
-using Mapsui.UI.iOS.Extensions;
 using SkiaSharp.Views.iOS;
 using System.ComponentModel;
 
@@ -11,11 +10,9 @@ public partial class MapControl : UIView, IMapControl
 {
     private SKGLView? _glCanvas;
     private SKCanvasView? _canvas;
-    private bool _init;
+    private bool _initialize;
     private MPoint? _pointerDownPosition;
     private readonly TouchTracker _touchTracker = new();
-
-    public static bool UseGPU { get; set; } = true;
 
     public MapControl(CGRect frame)
         : base(frame)
@@ -25,17 +22,20 @@ public partial class MapControl : UIView, IMapControl
     }
 
     [Preserve]
-    public MapControl(IntPtr handle) : base(handle) // used when initialized from storyboard
+    public MapControl(IntPtr handle) : base(handle) // Used when initialized from storyboard
     {
         CommonInitialize();
         Initialize();
     }
 
-    private void InitCanvas()
+    public static bool UseGPU { get; set; } = true;
+
+
+    private void InitializeCanvas()
     {
-        if (!_init)
+        if (!_initialize)
         {
-            _init = true;
+            _initialize = true;
             if (UseGPU)
             {
                 _glCanvas?.Dispose();
@@ -51,7 +51,7 @@ public partial class MapControl : UIView, IMapControl
 
     private void Initialize()
     {
-        InitCanvas();
+        InitializeCanvas();
 
         _invalidate = () =>
         {
@@ -161,62 +161,52 @@ public partial class MapControl : UIView, IMapControl
         CommonDrawControl(canvas);
     }
 
-    public override void TouchesBegan(NSSet touches, UIEvent? evt)
+    public override void TouchesBegan(NSSet touches, UIEvent? e)
     {
-        base.TouchesBegan(touches, evt);
+        base.TouchesBegan(touches, e);
+        var touchLocations = GetTouchLocations(e, this);
 
-        if (evt?.AllTouches.Count >= 2)
-            _touchTracker.Restart(GetTouchLocations(evt, this).ToArray());
+        _touchTracker.Restart(touchLocations);
 
-        if (touches.AnyObject is UITouch touch)
+        if (touchLocations.Length == 1)
         {
-            _pointerDownPosition = touch.LocationInView(this).ToMapsui();
+            _pointerDownPosition = touchLocations[0];
             if (HandleWidgetPointerDown(_pointerDownPosition, true, 1, false))
-            {
                 return;
-            }
         }
     }
 
-    public override void TouchesMoved(NSSet touches, UIEvent? evt)
+    public override void TouchesMoved(NSSet touches, UIEvent? e)
     {
-        base.TouchesMoved(touches, evt);
+        base.TouchesMoved(touches, e);
+        var touchLocations = GetTouchLocations(e, this);
 
-        if (evt?.AllTouches.Count == 1)
+        if (touchLocations.Length == 1)
         {
-            if (touches.AnyObject is UITouch touch)
-            {
-                var position = touch.LocationInView(this).ToMapsui();
-                if (HandleWidgetPointerMove(position, true, 0, false))
-                    return;
+            if (HandleWidgetPointerMove(touchLocations[0], true, 1, false))
+                return;
+        }
 
-                var previousPosition = touch.PreviousLocationInView(this).ToMapsui();
-                Map.Navigator.Drag(position, previousPosition);
-            }
-        }
-        else if (evt?.AllTouches.Count >= 2)
-        {
-            _touchTracker.Update(GetTouchLocations(evt, this));
-            Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
-        }
+        _touchTracker.Update(touchLocations);
+        Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
     }
-
-    private static ReadOnlySpan<MPoint> GetTouchLocations(UIEvent uiEvent, UIView uiView)
-        => uiEvent.AllTouches.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new MPoint(p.X, p.Y)).ToArray();
-
 
     public override void TouchesEnded(NSSet touches, UIEvent? e)
     {
-        Refresh();
+        base.TouchesEnded(touches, e);
+        var touchLocations = GetTouchLocations(e, this);
 
-        if (touches.AnyObject is UITouch touch)
-        {
-            var position = touch.LocationInView(this).ToMapsui();
-            if (HandleWidgetPointerUp(position, _pointerDownPosition, true, 1, false))
-            {
-                return;
-            }
-        }
+        _touchTracker.Update(touchLocations);
+        Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+
+        Refresh();
+    }
+
+    private static ReadOnlySpan<MPoint> GetTouchLocations(UIEvent? uiEvent, UIView uiView)
+    {
+        if (uiEvent is null)
+            return ReadOnlySpan<MPoint>.Empty;
+        return uiEvent.AllTouches.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new MPoint(p.X, p.Y)).ToArray();
     }
 
     /// <summary>
@@ -239,7 +229,7 @@ public partial class MapControl : UIView, IMapControl
         get => base.Frame;
         set
         {
-            InitCanvas();
+            InitializeCanvas();
             if (UseGPU)
             {
                 _glCanvas!.Frame = value;
@@ -257,7 +247,7 @@ public partial class MapControl : UIView, IMapControl
 
     public override void LayoutMarginsDidChange()
     {
-        InitCanvas();
+        InitializeCanvas();
         if (_glCanvas == null || _canvas == null) return;
 
         base.LayoutMarginsDidChange();
@@ -308,7 +298,7 @@ public partial class MapControl : UIView, IMapControl
     {
         get
         {
-            InitCanvas();
+            InitializeCanvas();
             return UseGPU
                 ? _glCanvas!.Frame.Width
                 : _canvas!.Frame.Width;
@@ -319,7 +309,7 @@ public partial class MapControl : UIView, IMapControl
     {
         get
         {
-            InitCanvas();
+            InitializeCanvas();
             return UseGPU
                 ? _glCanvas!.Frame.Height
                 : _canvas!.Frame.Height;
@@ -328,7 +318,7 @@ public partial class MapControl : UIView, IMapControl
 
     private double GetPixelDensity()
     {
-        InitCanvas();
+        InitializeCanvas();
         return UseGPU
             ? (double)_glCanvas!.ContentScaleFactor
             : (double)_canvas!.ContentScaleFactor;
