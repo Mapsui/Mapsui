@@ -194,8 +194,7 @@ public partial class MapControl : UIView, IMapControl
                     return;
             }
 
-            _touchTracker.Update(touchLocations);
-            Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+            _touchTracker.Update(touchLocations, Map.Navigator.Pinch);
         });
     }
 
@@ -206,8 +205,7 @@ public partial class MapControl : UIView, IMapControl
             base.TouchesEnded(touches, e);
             var touchLocations = GetTouchLocations(e, this);
 
-            _touchTracker.Update(touchLocations);
-            Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+            _touchTracker.Update(touchLocations, Map.Navigator.Pinch);
 
             Refresh();
         });

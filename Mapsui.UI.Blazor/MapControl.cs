@@ -219,8 +219,7 @@ public partial class MapControl : ComponentBase, IMapControl
             if (isHovering)
                 return;
 
-            _touchTracker.Update([e.ToLocation(_clientRect)]);
-            Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+            _touchTracker.Update([e.ToLocation(_clientRect)], Map.Navigator.Pinch);
         });
     }
 
@@ -230,8 +229,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            _touchTracker.Update([e.ToLocation(_clientRect)]);
-            Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+            _touchTracker.Update([e.ToLocation(_clientRect)], Map.Navigator.Pinch);
 
             RefreshData();
         });
@@ -294,8 +292,7 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             var touchLocations = e.TargetTouches.ToTouchLocations(_clientRect);
             _tapGestureTracker.Move(touchLocations[0]);
-            _touchTracker.Update(touchLocations.ToArray());
-            Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+            _touchTracker.Update(touchLocations.ToArray(), Map.Navigator.Pinch);
         });
     }
 

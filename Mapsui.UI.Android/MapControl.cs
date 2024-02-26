@@ -189,13 +189,11 @@ public partial class MapControl : ViewGroup, IMapControl
             case MotionEventActions.Move:
                 if (HandleWidgetPointerMove(touchLocations[0], true, 0, false))
                     return;
-                _touchTracker.Update(touchLocations);
-                Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+                _touchTracker.Update(touchLocations, Map.Navigator.Pinch);
                 break;
             case MotionEventActions.Up:
                 // Todo: Add HandleWidgetPointerUp
-                _touchTracker.Update(touchLocations);
-                Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+                _touchTracker.Update(touchLocations, Map.Navigator.Pinch);
                 Refresh();
                 break;
         }

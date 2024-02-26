@@ -14,9 +14,9 @@ public class TouchTracker
     /// </summary>
     public void Restart(ReadOnlySpan<MPoint> touchLocations) => Restart(GetTouchState(touchLocations));
 
-    public void Update(ReadOnlySpan<MPoint> touchLocations) => Update(GetTouchState(touchLocations));
+    public void Update(ReadOnlySpan<MPoint> touchLocations, Action<TouchManipulation> onManipulation) => Update(GetTouchState(touchLocations), onManipulation);
 
-    public TouchManipulation? GetTouchManipulation()
+    private TouchManipulation? GetTouchManipulation()
     {
         if (_touchState is null)
             return null;
@@ -75,7 +75,7 @@ public class TouchTracker
         _previousTouchState = null;
     }
 
-    private void Update(TouchState? touchState)
+    private void Update(TouchState? touchState, Action<TouchManipulation> onManipulation)
     {
         _previousTouchState = _touchState;
         _touchState = touchState;
@@ -96,6 +96,10 @@ public class TouchTracker
 
         if (touchState is not null && _previousTouchState is not null)
             _totalRotationChange += touchState.GetRotationChange(_previousTouchState);
+
+        var manipulation = GetTouchManipulation();
+        if (manipulation is not null)
+            onManipulation(manipulation);
     }
 
     private record TouchState(MPoint Center, double? Radius, double? Angle, int TouchLocationsLength)

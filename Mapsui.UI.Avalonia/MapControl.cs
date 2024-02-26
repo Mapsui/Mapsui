@@ -113,8 +113,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         var pointerLocation = e.GetPosition(this).ToMapsui();
         _touchLocations[e.Pointer.Id] = pointerLocation;
 
-        _touchTracker.Update(_touchLocations.Values.ToArray());
-        Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+        _touchTracker.Update(_touchLocations.Values.ToArray(), Map.Navigator.Pinch);
 
         RefreshGraphics();
     }
@@ -133,8 +132,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (HandleTouchingTouched(pointerPosition, pointerPosition, true, 0, _shiftPressed))
             return;
 
-        _touchTracker.Update(_touchLocations.Values.ToArray());
-        Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+        _touchTracker.Update(_touchLocations.Values.ToArray(), Map.Navigator.Pinch);
 
         Refresh();
     }
