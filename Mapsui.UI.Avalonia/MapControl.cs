@@ -7,6 +7,7 @@ using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Extensions;
+using Mapsui.Manipulations;
 using Mapsui.UI.Avalonia.Extensions;
 using System;
 using System.Collections.Concurrent;

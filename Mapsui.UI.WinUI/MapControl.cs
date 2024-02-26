@@ -6,6 +6,7 @@
 
 using Mapsui.Extensions;
 using Mapsui.Logging;
+using Mapsui.Manipulations;
 using Mapsui.UI.WinUI.Extensions;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;

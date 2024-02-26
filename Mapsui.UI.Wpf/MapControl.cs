@@ -1,4 +1,5 @@
 using Mapsui.Extensions;
+using Mapsui.Manipulations;
 using Mapsui.UI.Utils;
 using Mapsui.UI.Wpf.Extensions;
 using Mapsui.Utilities;

@@ -1,5 +1,5 @@
 using Mapsui.Extensions;
-using Mapsui.Manipulation;
+using Mapsui.Manipulations;
 using Mapsui.UI.Blazor.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
