@@ -216,15 +216,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
-        Map.Navigator.Pinch(ToTouchManipulation(e));
+        Map.Navigator.Pinch(ToManipulation(e));
         RefreshGraphics();
     }
 
-    private TouchManipulation ToTouchManipulation(ManipulationDeltaRoutedEventArgs e)
+    private Manipulation ToManipulation(ManipulationDeltaRoutedEventArgs e)
     {
         var previousCenter = TransformToVisual(null).Inverse.TransformPoint(e.Position).ToMapsui();
         var center = previousCenter.Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
-        return new TouchManipulation(center, previousCenter, e.Delta.Scale, e.Delta.Rotation, e.Cumulative.Rotation);
+        return new Manipulation(center, previousCenter, e.Delta.Scale, e.Delta.Rotation, e.Cumulative.Rotation);
     }
 
     public void OpenBrowser(string url)

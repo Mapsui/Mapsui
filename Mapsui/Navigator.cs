@@ -450,32 +450,32 @@ public class Navigator
         };
     }
 
-    public void Pinch(TouchManipulation? touchManipulation)
+    public void Pinch(Manipulation? manipulation)
     {
-        if (touchManipulation is null) return;
-        if (RotationLock) touchManipulation = touchManipulation with { RotationChange = 0 };
-        if (ZoomLock) touchManipulation = touchManipulation with { ScaleFactor = 0 };
-        if (PanLock) touchManipulation = touchManipulation with { Center = touchManipulation.PreviousCenter };
+        if (manipulation is null) return;
+        if (RotationLock) manipulation = manipulation with { RotationChange = 0 };
+        if (ZoomLock) manipulation = manipulation with { ScaleFactor = 0 };
+        if (PanLock) manipulation = manipulation with { Center = manipulation.PreviousCenter };
 
         ClearAnimations();
 
-        var viewport = TransformState(Viewport, touchManipulation);
+        var viewport = TransformState(Viewport, manipulation);
         SetViewportWithLimit(viewport);
     }
 
-    private Viewport TransformState(Viewport viewport, TouchManipulation touchManipulation)
+    private Viewport TransformState(Viewport viewport, Manipulation manipulation)
     {
-        var previous = viewport.ScreenToWorld(touchManipulation.PreviousCenter.X, touchManipulation.PreviousCenter.Y);
-        var current = viewport.ScreenToWorld(touchManipulation.Center.X, touchManipulation.Center.Y);
+        var previous = viewport.ScreenToWorld(manipulation.PreviousCenter.X, manipulation.PreviousCenter.Y);
+        var current = viewport.ScreenToWorld(manipulation.Center.X, manipulation.Center.Y);
 
-        var scaleFactor = touchManipulation.ScaleFactor;
-        var rotationChange = touchManipulation.RotationChange;
+        var scaleFactor = manipulation.ScaleFactor;
+        var rotationChange = manipulation.RotationChange;
 
         if (!RotationLock)
         {
-            double virtualRotation = Viewport.Rotation + touchManipulation.TotalRotationChange;
+            double virtualRotation = Viewport.Rotation + manipulation.TotalRotationChange;
             rotationChange = RotationSnapper.AdjustRotationDeltaForSnapping(
-                touchManipulation.RotationChange, viewport.Rotation, virtualRotation, UnSnapRotation, ReSnapRotation);
+                manipulation.RotationChange, viewport.Rotation, virtualRotation, UnSnapRotation, ReSnapRotation);
         }
 
         var newX = viewport.CenterX + previous.X - current.X;
@@ -503,10 +503,10 @@ public class Navigator
         if (rotationChange != 0)
         {
             // calculate current position again with adjusted resolution
-            current = viewport.ScreenToWorld(touchManipulation.Center.X, touchManipulation.Center.Y);
+            current = viewport.ScreenToWorld(manipulation.Center.X, manipulation.Center.Y);
             viewport = viewport with { Rotation = viewport.Rotation + rotationChange };
             // calculate current position again with adjusted resolution
-            var postRotation = viewport.ScreenToWorld(touchManipulation.Center.X, touchManipulation.Center.Y);
+            var postRotation = viewport.ScreenToWorld(manipulation.Center.X, manipulation.Center.Y);
             viewport = viewport with
             {
                 CenterX = viewport.CenterX - (postRotation.X - current.X),
@@ -541,7 +541,7 @@ public class Navigator
     {
         if (_animations.Any())
         {
-            _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
+            _animations = [];
         }
     }
 

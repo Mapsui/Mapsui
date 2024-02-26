@@ -14,9 +14,9 @@ public class TouchTracker
     /// </summary>
     public void Restart(ReadOnlySpan<MPoint> touchLocations) => Restart(GetTouchState(touchLocations));
 
-    public void Update(ReadOnlySpan<MPoint> touchLocations, Action<TouchManipulation> onManipulation) => Update(GetTouchState(touchLocations), onManipulation);
+    public void Update(ReadOnlySpan<MPoint> touchLocations, Action<Manipulation> onManipulation) => Update(GetTouchState(touchLocations), onManipulation);
 
-    private TouchManipulation? GetTouchManipulation()
+    private Manipulation? GetManipulation()
     {
         if (_touchState is null)
             return null;
@@ -30,7 +30,7 @@ public class TouchTracker
         if (_touchState.Equals(_previousTouchState))
             return null; // The default will not change anything so don't return a manipulation.
 
-        return new TouchManipulation(_touchState.Center, _previousTouchState.Center, scaleFactor, rotationChange, _totalRotationChange);
+        return new Manipulation(_touchState.Center, _previousTouchState.Center, scaleFactor, rotationChange, _totalRotationChange);
     }
 
     private static TouchState? GetTouchState(ReadOnlySpan<MPoint> touchLocations)
@@ -75,7 +75,7 @@ public class TouchTracker
         _previousTouchState = null;
     }
 
-    private void Update(TouchState? touchState, Action<TouchManipulation> onManipulation)
+    private void Update(TouchState? touchState, Action<Manipulation> onManipulation)
     {
         _previousTouchState = _touchState;
         _touchState = touchState;
@@ -97,7 +97,7 @@ public class TouchTracker
         if (touchState is not null && _previousTouchState is not null)
             _totalRotationChange += touchState.GetRotationChange(_previousTouchState);
 
-        var manipulation = GetTouchManipulation();
+        var manipulation = GetManipulation();
         if (manipulation is not null)
             onManipulation(manipulation);
     }
@@ -124,4 +124,4 @@ public class TouchTracker
     }
 }
 
-public record TouchManipulation(MPoint Center, MPoint PreviousCenter, double ScaleFactor, double RotationChange, double TotalRotationChange);
+public record Manipulation(MPoint Center, MPoint PreviousCenter, double ScaleFactor, double RotationChange, double TotalRotationChange);

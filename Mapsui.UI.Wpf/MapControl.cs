@@ -1,5 +1,4 @@
 using Mapsui.Extensions;
-using Mapsui.Manipulations;
 using Mapsui.UI.Utils;
 using Mapsui.UI.Wpf.Extensions;
 using Mapsui.Utilities;
@@ -10,8 +9,10 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Input.Manipulations;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using MapsuiManipulation = Mapsui.Manipulations.Manipulation;
 
 namespace Mapsui.UI.Wpf;
 
@@ -311,10 +312,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
     {
-        Map.Navigator.Pinch(ToTouchManipulation(e));
+        Map.Navigator.Pinch(ToManipulation(e));
     }
 
-    private static TouchManipulation ToTouchManipulation(ManipulationDeltaEventArgs e)
+    private static MapsuiManipulation ToManipulation(ManipulationDeltaEventArgs e)
     {
         var translation = e.DeltaManipulation.Translation;
 
@@ -323,7 +324,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         var scaleFactor = GetScaleFactor(e.DeltaManipulation.Scale);
         var rotationChange = e.DeltaManipulation.Rotation;
 
-        return new TouchManipulation(center, previousCenter, scaleFactor, rotationChange, e.CumulativeManipulation.Rotation);
+        return new MapsuiManipulation(center, previousCenter, scaleFactor, rotationChange, e.CumulativeManipulation.Rotation);
     }
 
     private static double GetScaleFactor(Vector scale)
