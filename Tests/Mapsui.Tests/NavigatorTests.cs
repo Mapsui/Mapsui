@@ -3,6 +3,7 @@ using Mapsui.Extensions;
 using NUnit.Framework;
 using System.Collections.Generic;
 using NUnit.Framework.Legacy;
+using Mapsui.Manipulations;
 
 namespace Mapsui.Tests;
 
