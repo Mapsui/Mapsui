@@ -14,7 +14,7 @@ public class TouchTracker
     /// </summary>
     public void Restart(ReadOnlySpan<MPoint> touchLocations) => Restart(GetTouchState(touchLocations));
 
-    public void Update(ReadOnlySpan<MPoint> touchLocations, Action<Manipulation> onManipulation) => Update(GetTouchState(touchLocations), onManipulation);
+    public void Manipulate(ReadOnlySpan<MPoint> touchLocations, Action<Manipulation> onManipulation) => Manipulate(GetTouchState(touchLocations), onManipulation);
 
     private Manipulation? GetManipulation()
     {
@@ -75,7 +75,7 @@ public class TouchTracker
         _previousTouchState = null;
     }
 
-    private void Update(TouchState? touchState, Action<Manipulation> onManipulation)
+    private void Manipulate(TouchState? touchState, Action<Manipulation> onManipulation)
     {
         _previousTouchState = _touchState;
         _touchState = touchState;
