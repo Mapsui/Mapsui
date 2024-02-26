@@ -42,6 +42,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private Size _oldSize;
     private static List<WeakReference<MapControl>>? _listeners;
     private readonly TouchTracker _touchTracker = new();
+    private MPoint? _downLocation;
 
     public MapControl()
     {
@@ -200,11 +201,14 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         Catch.Exceptions(() =>
         {
+            e.Handled = true;
             var location = GetScreenPosition(e.Location);
             
             if (e.ActionType == SKTouchAction.Pressed)
             {
                 _touches[e.Id] = location;
+                if (_touches.Count == 1)
+                    _downLocation = location;
 
                 if (HandleWidgetPointerDown(location, true, 1, false))
                     return;
@@ -237,12 +241,16 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 // Delete e.Id from _touches, because finger is released
                 _touches.Remove(e.Id, out var releasedTouch);
 
-                if (HandleWidgetPointerUp(location, location, true, 0, false))
-                    return;
-
                 FlingIfNeeded(e);
-
                 _flingTracker.RemoveId(e.Id);
+
+                if (IsTappedGesture(releasedTouch, _downLocation))
+                {
+                    if (HandleWidgetPointerUp(location, location, true, 1, false))
+                        return;
+                    OnInfo(CreateMapInfoEventArgs(location, location, 1));
+                    return;
+                }
 
                 _touchTracker.Update(_touches.Values.ToArray());
                 Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
@@ -269,7 +277,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             {
                 OnZoomInOrOut(e.WheelDelta, location);
             }
-            e.Handled = true;
         });
     }
 
@@ -293,16 +300,18 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Map.Navigator.Fling(velocityX, velocityY, 1000);
     }
 
-    private bool IsTappedGesture(MPoint releasedTouch, MPoint? pointerDownPosition)
+    private bool IsTappedGesture(MPoint? releasedTouch, MPoint? pointerDownPosition)
     {
-        // While tapping on screen, there could be a small movement of the finger
-        // (especially on Samsung). So check, if touch start location isn't more 
-        // than a number of pixels away from touch end location.
-
+        // It is not possible to use the MAUI gesture because it is not triggered when OnTouch is used.
         if (releasedTouch == null) return false;
         if (pointerDownPosition == null) return false;
 
-        return Algorithms.Distance(releasedTouch, pointerDownPosition) < (AllowedMovementInTappedGesture * PixelDensity);
+        // While tapping on screen, there could be a small movement of the finger
+        // (especially on Samsung). So check, if touch start location isn't more 
+        // than a number of pixels away from touch end location.
+        var allowedMovementInRawPixels = AllowedMovementInTappedGesture * PixelDensity;
+
+        return Algorithms.Distance(releasedTouch, pointerDownPosition) < allowedMovementInRawPixels;
     }
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
