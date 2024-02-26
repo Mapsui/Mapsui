@@ -107,7 +107,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             return;
 
         if (isHovering)
-            return; // In case of hovering we just call the widget move event and ignore it otherwise.
+            return; // In case of hovering we just call the widget move event and ignore the event otherwise.
 
         var pointerLocation = e.GetPosition(this).ToMapsui();
         _touchLocations[e.Pointer.Id] = pointerLocation;
