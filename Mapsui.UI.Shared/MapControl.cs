@@ -504,7 +504,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <returns>True, if something done </returns>
     private MapInfoEventArgs? CreateMapInfoEventArgs(
         MPoint? screenPosition,
-        MPoint? startScreenPosition,
+        MPoint? startScreenPosition, // Todo: Figure why this is needed and if it can be removed
         int numTaps)
     {
         if (screenPosition == null || startScreenPosition == null)
