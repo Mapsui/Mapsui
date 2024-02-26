@@ -854,21 +854,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         HideCallouts();
     }
 
-    protected override bool OnSingleTapped(MPoint screenPosition)
+    protected override void OnSingleTapped(MPoint screenPosition)
     {
         HandlerTap(new TappedEventArgs(screenPosition, 1));
-        return base.OnSingleTapped(screenPosition);
-    }
-
-    protected override bool OnDoubleTapped(MPoint screenPosition, int numOfTaps)
-    {
-        HandlerTap(new TappedEventArgs(screenPosition, numOfTaps));
-        return base.OnDoubleTapped(screenPosition, numOfTaps);
-    }
-
-    protected override bool OnTouchMove(ReadOnlySpan<MPoint> touchPoints)
-    {
-        RunOnUIThread(() => MyLocationFollow = false);
-        return base.OnTouchMove(touchPoints);
+        base.OnSingleTapped(screenPosition);
     }
 }
