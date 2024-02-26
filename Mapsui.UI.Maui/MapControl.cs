@@ -64,7 +64,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
     /// </summary>
-    public int AllowedMovementInTappedGesture { get; set; } = 8;
+    public int MaxTapGestureMovement { get; set; } = 8;
     private double ViewportWidth => Width; // Used in shared code
     private double ViewportHeight => Height; // Used in shared code
 
@@ -309,9 +309,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         // While tapping on screen, there could be a small movement of the finger
         // (especially on Samsung). So check, if touch start location isn't more 
         // than a number of pixels away from touch end location.
-        var allowedMovementInRawPixels = AllowedMovementInTappedGesture * PixelDensity;
+        var maxTapGestureMovementInRawPixels = MaxTapGestureMovement * PixelDensity;
 
-        return Algorithms.Distance(releasedTouch, pointerDownPosition) < allowedMovementInRawPixels;
+        return Algorithms.Distance(releasedTouch, pointerDownPosition) < maxTapGestureMovementInRawPixels;
     }
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
