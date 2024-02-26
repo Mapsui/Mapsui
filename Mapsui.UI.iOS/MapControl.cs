@@ -1,4 +1,5 @@
 using CoreFoundation;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 using SkiaSharp.Views.iOS;
 using System.ComponentModel;
@@ -163,43 +164,52 @@ public partial class MapControl : UIView, IMapControl
 
     public override void TouchesBegan(NSSet touches, UIEvent? e)
     {
-        base.TouchesBegan(touches, e);
-        var touchLocations = GetTouchLocations(e, this);
-
-        _touchTracker.Restart(touchLocations);
-
-        if (touchLocations.Length == 1)
+        Catch.Exceptions(() =>
         {
-            _pointerDownPosition = touchLocations[0];
-            if (HandleWidgetPointerDown(_pointerDownPosition, true, 1, false))
-                return;
-        }
+            base.TouchesBegan(touches, e);
+            var touchLocations = GetTouchLocations(e, this);
+
+            _touchTracker.Restart(touchLocations);
+
+            if (touchLocations.Length == 1)
+            {
+                _pointerDownPosition = touchLocations[0];
+                if (HandleWidgetPointerDown(_pointerDownPosition, true, 1, false))
+                    return;
+            }
+        });
     }
 
     public override void TouchesMoved(NSSet touches, UIEvent? e)
     {
-        base.TouchesMoved(touches, e);
-        var touchLocations = GetTouchLocations(e, this);
-
-        if (touchLocations.Length == 1)
+        Catch.Exceptions(() =>
         {
-            if (HandleWidgetPointerMove(touchLocations[0], true, 1, false))
-                return;
-        }
+            base.TouchesMoved(touches, e);
+            var touchLocations = GetTouchLocations(e, this);
 
-        _touchTracker.Update(touchLocations);
-        Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+            if (touchLocations.Length == 1)
+            {
+                if (HandleWidgetPointerMove(touchLocations[0], true, 1, false))
+                    return;
+            }
+
+            _touchTracker.Update(touchLocations);
+            Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+        });
     }
 
     public override void TouchesEnded(NSSet touches, UIEvent? e)
     {
-        base.TouchesEnded(touches, e);
-        var touchLocations = GetTouchLocations(e, this);
+        Catch.Exceptions(() =>
+        {
+            base.TouchesEnded(touches, e);
+            var touchLocations = GetTouchLocations(e, this);
 
-        _touchTracker.Update(touchLocations);
-        Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
+            _touchTracker.Update(touchLocations);
+            Map.Navigator.Pinch(_touchTracker.GetTouchManipulation());
 
-        Refresh();
+            Refresh();
+        });
     }
 
     private static ReadOnlySpan<MPoint> GetTouchLocations(UIEvent? uiEvent, UIView uiView)
