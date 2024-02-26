@@ -9,7 +9,7 @@ public class TapGestureTracker
     private MPoint? _tapStartPosition;
     private MPoint? _tapEndPosition;
 
-    public void IfTap(Action<MPoint> action, double maxTapDistance)
+    public void IfTap(Action<MPoint> onTap, double maxTapDistance)
     {
         if (_tapStartPosition == null) return;
         if (_tapEndPosition == null) return;
@@ -18,7 +18,7 @@ public class TapGestureTracker
         var distance = _tapEndPosition.Distance(_tapStartPosition);
         var isTap = duration < _maxTapDuration && distance < maxTapDistance;
 
-        if (isTap) action(_tapEndPosition);
+        if (isTap) onTap(_tapEndPosition);
     }
 
     public void Move(MPoint position)
