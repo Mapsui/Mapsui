@@ -58,15 +58,13 @@ public class EditingWidget : Widget, ITouchableWidget
 
         if (args.LeftButton)
         {
-            EditManipulation.Manipulate(
+            return EditManipulation.Manipulate(
                 PointerState.Dragging, screenPosition, EditManager, MapControl, args.Shift);
         }
         else
         {
-            EditManipulation.Manipulate(
+            return EditManipulation.Manipulate(
                 PointerState.Hovering, screenPosition, EditManager, MapControl, args.Shift);
         }
-
-        return false;
     }
 }

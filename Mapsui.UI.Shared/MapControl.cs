@@ -61,10 +61,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
     // old widget Collection to compare if widget Collection was changed.
     private ConcurrentQueue<IWidget>? _widgetCollection;
-    // saving list of touchable Widgets
-    private List<ITouchableWidget>? _touchableWidgets;
-    // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
-    private int _updateTouchableWidget;
     private IRenderer _renderer = new MapRenderer();
 
     private void CommonInitialize()
@@ -368,7 +364,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Refresh();
         }
     }
-    
+
     // ReSharper restore RedundantNameQualifier
     private DisposableWrapper<Map>? _map;
 
@@ -508,7 +504,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <returns>True, if something done </returns>
     private MapInfoEventArgs? CreateMapInfoEventArgs(
         MPoint? screenPosition,
-        MPoint? startScreenPosition,
+        MPoint? startScreenPosition, // Todo: Figure why this is needed and if it can be removed
         int numTaps)
     {
         if (screenPosition == null || startScreenPosition == null)
@@ -526,7 +522,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 Handled = false
             };
         }
-        
+
 
         return null;
     }
@@ -623,7 +619,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             if (widget is HyperlinkWidget hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {
                 // The HyperLink is a special case because we need platform specific code to open the
-                // link in a browswer. If the link is not handled within the widget we handle it
+                // link in a browser. If the link is not handled within the widget we handle it
                 // here and return true to indicate this is handled.
                 OpenBrowser(hyperlink.Url!);
                 return true;
@@ -638,32 +634,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private void AssureWidgets()
-    {
-        if (_widgetCollection != Map.Widgets)
-        {
-            // reset widgets
-            _touchableWidgets = null;
-            _widgetCollection = Map.Widgets;
-        }
-    }
-
     private List<ITouchableWidget> GetTouchableWidgets()
     {
-        AssureWidgets();
-        if (_updateTouchableWidget != Map.Widgets.Count || _touchableWidgets == null)
-        {
-            _updateTouchableWidget = Map.Widgets.Count;
-            _touchableWidgets = [];
-            var touchableWidgets = Map.GetWidgetsOfMapAndLayers().ToList();
-            foreach (var widget in touchableWidgets)
-            {
-                if (widget is not ITouchableWidget) continue;
-
-                _touchableWidgets.Add((ITouchableWidget)widget);
-            }
-        }
-
-        return _touchableWidgets;
+        return Map.GetWidgetsOfMapAndLayers().OfType<ITouchableWidget>().ToList();
     }
 }
