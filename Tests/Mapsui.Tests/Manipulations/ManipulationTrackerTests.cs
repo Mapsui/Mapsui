@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Mapsui.Tests.Manipulations;
 
 [TestFixture]
-public class TouchTrackerTests
+public class ManipulationTrackerTests
 {
     record Input(MPoint[] TouchLocations, Manipulation? Manipulation, string Message);
 
