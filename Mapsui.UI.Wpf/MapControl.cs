@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using MapsuiManipulation = Mapsui.Manipulations.Manipulation;
 
 namespace Mapsui.UI.Wpf;
 
@@ -22,11 +23,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private MPoint? _previousMousePosition;
     private readonly FlingTracker _flingTracker = new();
     private MPoint? _currentMousePosition;
-
-    /// <summary>
-    /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
-    /// </summary>
-    public event EventHandler<SwipedEventArgs>? Fling;
 
     public MapControl()
     {
@@ -196,31 +192,13 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
         {
             // This was the last finger on screen, so this is a fling
-            e.Handled = OnFlinged(velocityX, velocityY);
+            Map.Navigator.Fling(velocityX, velocityY, 1000);
+            e.Handled = true;
         }
         _flingTracker.RemoveId(1);
 
         _previousMousePosition = new MPoint();
         ReleaseMouseCapture();
-    }
-
-    /// <summary>
-    /// Called, when mouse/finger/pen flinged over map
-    /// </summary>
-    /// <param name="velocityX">Velocity in x direction in pixel/second</param>
-    /// <param name="velocityY">Velocity in y direction in pixel/second</param>
-    private bool OnFlinged(double velocityX, double velocityY)
-    {
-        var args = new SwipedEventArgs(velocityX, velocityY);
-
-        Fling?.Invoke(this, args);
-
-        if (args.Handled)
-            return true;
-
-        Map.Navigator.Fling(velocityX, velocityY, 1000);
-
-        return true;
     }
 
     private static bool IsClick(MPoint currentPosition, MPoint? previousPosition)
@@ -333,24 +311,23 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
     {
-        Map.Navigator.Pinch(ToPinchManipulation(e));
+        Map.Navigator.Pinch(ToManipulation(e));
     }
 
-    private PinchManipulation ToPinchManipulation(ManipulationDeltaEventArgs e)
+    private static MapsuiManipulation ToManipulation(ManipulationDeltaEventArgs e)
     {
         var translation = e.DeltaManipulation.Translation;
 
-        var previousPosition = e.ManipulationOrigin.ToMapsui();
-        var position = previousPosition.Offset(translation.X, translation.Y);
-        var radius = GetDeltaScale(e.DeltaManipulation.Scale);
-        var angle = e.DeltaManipulation.Rotation;
+        var previousCenter = e.ManipulationOrigin.ToMapsui();
+        var center = previousCenter.Offset(translation.X, translation.Y);
+        var scaleFactor = GetScaleFactor(e.DeltaManipulation.Scale);
+        var rotationChange = e.DeltaManipulation.Rotation;
 
-        return new PinchManipulation(position, previousPosition, radius, angle, e.CumulativeManipulation.Rotation);
+        return new MapsuiManipulation(center, previousCenter, scaleFactor, rotationChange, e.CumulativeManipulation.Rotation);
     }
 
-    private double GetDeltaScale(Vector scale)
+    private static double GetScaleFactor(Vector scale)
     {
-        if (Map.Navigator.ZoomLock) return 1;
         var deltaScale = (scale.X + scale.Y) / 2;
         if (Math.Abs(deltaScale) < Constants.Epsilon)
             return 1; // If there is no scaling the deltaScale will be 0.0 in Windows Phone (while it is 1.0 in wpf)

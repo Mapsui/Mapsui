@@ -1,11 +1,11 @@
 ﻿@using Mapsui.Extensions
 @inherits MapControl
 
-<div @onpointerup=@OnPointerUp @onpointerdown=@OnPointerDown 
+<div @onmouseup=@OnMouseUp @onmousedown=@OnMouseDown 
      @onmousewheel=@OnMouseWheel @onmousemove=@OnMouseMove 
-     @onkeydown=@OnKeyDown @onkeyup=@OnKeyUp @ondblclick="OnDblClick"
+     @onkeydown=@OnKeyDown @onkeyup=@OnKeyUp @onclick="OnClick"  @ondblclick="OnDblClick"
      @ontouchstart=@OnTouchStart @ontouchmove=@OnTouchMove @ontouchend=@OnTouchEnd
-     @onwheel="OnMouseWheel"
+     @onwheel="OnMouseWheel" 
      name="@_elementId" id="@_elementId">
 @if (MapControl.UseGPU)
 {

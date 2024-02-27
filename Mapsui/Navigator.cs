@@ -2,6 +2,7 @@
 using Mapsui.Extensions;
 using Mapsui.Limiting;
 using Mapsui.Logging;
+using Mapsui.Manipulations;
 using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
@@ -449,48 +450,49 @@ public class Navigator
         };
     }
 
-    public void Pinch(PinchManipulation pinchManipulation)
+    public void Pinch(Manipulation? manipulation)
     {
-        if (RotationLock) pinchManipulation = pinchManipulation with { RotationChange = 0 };
-        if (ZoomLock) pinchManipulation = pinchManipulation with { ResolutionChange = 0 };
-        if (PanLock) pinchManipulation = pinchManipulation with { Center = pinchManipulation.PreviousCenter };
+        if (manipulation is null) return;
+        if (RotationLock) manipulation = manipulation with { RotationChange = 0 };
+        if (ZoomLock) manipulation = manipulation with { ScaleFactor = 0 };
+        if (PanLock) manipulation = manipulation with { Center = manipulation.PreviousCenter };
 
         ClearAnimations();
 
-        var viewport = TransformState(Viewport, pinchManipulation);
+        var viewport = TransformState(Viewport, manipulation);
         SetViewportWithLimit(viewport);
     }
 
-    private Viewport TransformState(Viewport viewport, PinchManipulation pinchManipulation)
+    private Viewport TransformState(Viewport viewport, Manipulation manipulation)
     {
-        var previous = viewport.ScreenToWorld(pinchManipulation.PreviousCenter.X, pinchManipulation.PreviousCenter.Y);
-        var current = viewport.ScreenToWorld(pinchManipulation.Center.X, pinchManipulation.Center.Y);
+        var previous = viewport.ScreenToWorld(manipulation.PreviousCenter.X, manipulation.PreviousCenter.Y);
+        var current = viewport.ScreenToWorld(manipulation.Center.X, manipulation.Center.Y);
 
-        var resolutionChange = pinchManipulation.ResolutionChange;
-        var rotationChange = pinchManipulation.RotationChange;
+        var scaleFactor = manipulation.ScaleFactor;
+        var rotationChange = manipulation.RotationChange;
 
         if (!RotationLock)
         {
-            double virtualRotation = Viewport.Rotation + pinchManipulation.totalRotationChange;
+            double virtualRotation = Viewport.Rotation + manipulation.TotalRotationChange;
             rotationChange = RotationSnapper.AdjustRotationDeltaForSnapping(
-                pinchManipulation.RotationChange, viewport.Rotation, virtualRotation, UnSnapRotation, ReSnapRotation);
+                manipulation.RotationChange, viewport.Rotation, virtualRotation, UnSnapRotation, ReSnapRotation);
         }
 
         var newX = viewport.CenterX + previous.X - current.X;
         var newY = viewport.CenterY + previous.Y - current.Y;
 
-        if (resolutionChange == 1 && rotationChange == 0 && viewport.CenterX == newX && viewport.CenterY == newY)
+        if (scaleFactor == 1 && rotationChange == 0 && viewport.CenterX == newX && viewport.CenterY == newY)
             return viewport;
 
-        if (resolutionChange != 1)
+        if (scaleFactor != 1)
         {
-            viewport = viewport with { Resolution = viewport.Resolution / resolutionChange };
+            viewport = viewport with { Resolution = viewport.Resolution / scaleFactor };
 
             // Calculate current position again with adjusted resolution
             // Zooming should be centered on the place where the map is touched.
             // This is done with the scale correction.
-            var scaleCorrectionX = (1 - resolutionChange) * (current.X - viewport.CenterX);
-            var scaleCorrectionY = (1 - resolutionChange) * (current.Y - viewport.CenterY);
+            var scaleCorrectionX = (1 - scaleFactor) * (current.X - viewport.CenterX);
+            var scaleCorrectionY = (1 - scaleFactor) * (current.Y - viewport.CenterY);
 
             newX -= scaleCorrectionX;
             newY -= scaleCorrectionY;
@@ -501,10 +503,10 @@ public class Navigator
         if (rotationChange != 0)
         {
             // calculate current position again with adjusted resolution
-            current = viewport.ScreenToWorld(pinchManipulation.Center.X, pinchManipulation.Center.Y);
+            current = viewport.ScreenToWorld(manipulation.Center.X, manipulation.Center.Y);
             viewport = viewport with { Rotation = viewport.Rotation + rotationChange };
             // calculate current position again with adjusted resolution
-            var postRotation = viewport.ScreenToWorld(pinchManipulation.Center.X, pinchManipulation.Center.Y);
+            var postRotation = viewport.ScreenToWorld(manipulation.Center.X, manipulation.Center.Y);
             viewport = viewport with
             {
                 CenterX = viewport.CenterX - (postRotation.X - current.X),
@@ -539,7 +541,7 @@ public class Navigator
     {
         if (_animations.Any())
         {
-            _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
+            _animations = [];
         }
     }
 
