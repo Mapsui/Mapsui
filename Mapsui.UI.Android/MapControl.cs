@@ -4,8 +4,8 @@ using Android.OS;
 using Android.Util;
 using Android.Views;
 using Mapsui.Logging;
+using Mapsui.Manipulations;
 using Mapsui.UI.Android.Extensions;
-using Mapsui.Utilities;
 using SkiaSharp.Views.Android;
 
 namespace Mapsui.UI.Android;
@@ -39,11 +39,9 @@ public partial class MapControl : ViewGroup, IMapControl
 {
     private View? _canvas;
     private GestureDetector? _gestureDetector;
-    private TouchMode _mode = TouchMode.None;
     private Handler? _mainLooperHandler;
-    private MPoint? _previousTouch;
-    private MPoint? _pointerDownPosition;
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
+    private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl(Context context, IAttributeSet attrs) :
         base(context, attrs)
@@ -118,22 +116,26 @@ public partial class MapControl : ViewGroup, IMapControl
         }
     }
 
-    private void OnDoubleTapped(object? sender, GestureDetector.DoubleTapEventArgs e)
-    {
-        if (e.Event == null)
-            return;
-
-        var position = GetScreenPosition(e.Event, this);
-        OnInfo(CreateMapInfoEventArgs(position, position, 2));
-    }
-
     private void OnSingleTapped(object? sender, GestureDetector.SingleTapConfirmedEventArgs e)
     {
         if (e.Event == null)
             return;
 
         var position = GetScreenPosition(e.Event, this);
+        if (HandleWidgetPointerUp(position, position, true, 0, false))
+            return;
         OnInfo(CreateMapInfoEventArgs(position, position, 1));
+    }
+
+    private void OnDoubleTapped(object? sender, GestureDetector.DoubleTapEventArgs e)
+    {
+        if (e.Event == null)
+            return;
+
+        var position = GetScreenPosition(e.Event, this);
+        if (HandleWidgetPointerUp(position, position, true, 0, false))
+            return;
+        OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 
     protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
@@ -169,87 +171,30 @@ public partial class MapControl : ViewGroup, IMapControl
 
     public void MapControl_Touch(object? sender, TouchEventArgs args)
     {
-        if (args.Event != null && (_gestureDetector?.OnTouchEvent(args.Event) ?? false))
+        if (args.Event is null)
             return;
 
-        var touchPoints = GetScreenPositions(args.Event, this);
+        if (_gestureDetector?.OnTouchEvent(args.Event) == true)
+            return;
 
-        switch (args.Event?.Action)
+        var locations = GetTouchLocations(args.Event, this, PixelDensity);
+
+        switch (args.Event.Action)
         {
-            case MotionEventActions.Up:
-                Refresh();
-                _mode = TouchMode.None;
-                HandleWidgetPointerUp(touchPoints.First(), _pointerDownPosition, true, 0, false);
-                break;
             case MotionEventActions.Down:
-            case MotionEventActions.Pointer1Down:
-            case MotionEventActions.Pointer2Down:
-            case MotionEventActions.Pointer3Down:
-                if (touchPoints.Count >= 2)
-                {
-                    _mode = TouchMode.Zooming;
-
-                    Map.Navigator.ClearPinchState();
-                    Map.Navigator.Pinch(GetPinchState(touchPoints));
-                }
-                else
-                {
-                    _previousTouch = touchPoints.First();
-                    _pointerDownPosition = touchPoints.First();
-
-                    if (HandleWidgetPointerDown(_pointerDownPosition, true, 1, false))
-                        return;
-                    _mode = TouchMode.Dragging;
-                }
-                break;
-            case MotionEventActions.Pointer1Up:
-            case MotionEventActions.Pointer2Up:
-            case MotionEventActions.Pointer3Up:
-                // Remove the touchPoint that was released from the locations to reset the
-                // starting points of the move and rotation
-                touchPoints.RemoveAt(args.Event.ActionIndex);
-
-                if (touchPoints.Count >= 2)
-                {
-                    _mode = TouchMode.Zooming;
-
-                    Map.Navigator.ClearPinchState();
-                    Map.Navigator.Pinch(GetPinchState(touchPoints));
-                }
-                else
-                {
-                    _mode = TouchMode.Dragging;
-                    _previousTouch = touchPoints.First();
-                }
-                Refresh();
+                _manipulationTracker.Restart(locations);
+                if (HandleWidgetPointerDown(locations[0], true, 0, false))
+                    return;
                 break;
             case MotionEventActions.Move:
-                switch (_mode)
-                {
-                    // There is no widget move handling in Mapsui.Android so the edit widget will not work.
-                    // If this is added there should be testing of editing and all existing functionality.
-                    case TouchMode.Dragging:
-                        {
-                            if (touchPoints.Count != 1)
-                                return;
-
-                            var touch = touchPoints.First();
-                            if (_previousTouch != null)
-                            {
-                                Map.Navigator.Drag(touch, _previousTouch);
-                            }
-                            _previousTouch = touch;
-                        }
-                        break;
-                    case TouchMode.Zooming:
-                        {
-                            if (touchPoints.Count < 2)
-                                return;
-
-                            Map.Navigator.Pinch(GetPinchState(touchPoints));
-                        }
-                        break;
-                }
+                if (HandleWidgetPointerMove(locations[0], true, 0, false))
+                    return;
+                _manipulationTracker.Manipulate(locations, Map.Navigator.Pinch);
+                break;
+            case MotionEventActions.Up:
+                // Todo: Add HandleWidgetPointerUp
+                _manipulationTracker.Manipulate(locations, Map.Navigator.Pinch);
+                Refresh();
                 break;
         }
     }
@@ -260,17 +205,12 @@ public partial class MapControl : ViewGroup, IMapControl
     /// <param name="motionEvent"></param>
     /// <param name="view"></param>
     /// <returns></returns>
-    private List<MPoint> GetScreenPositions(MotionEvent? motionEvent, View view)
+    private static ReadOnlySpan<MPoint> GetTouchLocations(MotionEvent motionEvent, View view, double pixelDensity)
     {
-        if (motionEvent == null)
-            return [];
-
-        var result = new List<MPoint>();
+        var result = new MPoint[motionEvent.PointerCount];
         for (var i = 0; i < motionEvent.PointerCount; i++)
-        {
-            var pixelCoordinate = new MPoint(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top);
-            result.Add(pixelCoordinate.ToDeviceIndependentUnits(PixelDensity));
-        }
+            result[i] = new MPoint(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top)
+                .ToDeviceIndependentUnits(pixelDensity);
         return result;
     }
 
@@ -352,30 +292,6 @@ public partial class MapControl : ViewGroup, IMapControl
         CommonDispose(disposing);
 
         base.Dispose(disposing);
-    }
-
-    private static PinchState GetPinchState(List<MPoint> locations)
-    {
-        if (locations.Count < 2)
-            throw new ArgumentOutOfRangeException(nameof(locations));
-
-        double centerX = 0;
-        double centerY = 0;
-
-        foreach (var location in locations)
-        {
-            centerX += location.X;
-            centerY += location.Y;
-        }
-
-        centerX /= locations.Count;
-        centerY /= locations.Count;
-
-        var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
-
-        var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
-
-        return new PinchState(new MPoint(centerX, centerY), radius, angle);
     }
 
     private double ViewportWidth => ToDeviceIndependentUnits(Width);

@@ -1,18 +1,16 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Extensions;
+using Mapsui.Manipulations;
 using Mapsui.UI.Avalonia.Extensions;
-using Mapsui.Utilities;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -21,21 +19,11 @@ namespace Mapsui.UI.Avalonia;
 
 public partial class MapControl : UserControl, IMapControl, IDisposable
 {
-    private MPoint? _mousePosition;
-    private MapsuiCustomDrawOp? _drawOp;
-    private MPoint? _currentMousePosition;
-    private MPoint? _pointerDownPosition;
-    private bool _mouseDown;
-    private MPoint? _previousMousePosition;
+    private MapsuiCustomDrawOperation? _drawOperation;
     private double _mouseWheelPos = 0.0;
-
-    // Touch Handling
-    private readonly ConcurrentDictionary<long, MPoint> _touches = new();
-
+    private readonly ConcurrentDictionary<long, MPoint> _pointerLocations = new();
     private bool _shiftPressed;
-
-    public static readonly DirectProperty<MapControl, Map> MapProperty =
-    AvaloniaProperty.RegisterDirect<MapControl, Map>(nameof(Map), o => o.Map, (o, v) => o.Map = v);
+    private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl()
     {
@@ -44,10 +32,15 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         Initialize();
     }
 
-    /// <summary> Clears the Touch State </summary>
+    public static readonly DirectProperty<MapControl, Map> MapProperty =
+    AvaloniaProperty.RegisterDirect<MapControl, Map>(nameof(Map), o => o.Map, (o, v) => o.Map = v);
+
+    /// <summary> Clears the Touch State. Should only be called if the touch state seems out of sync 
+    /// in a certain situation.</summary>
     public void ClearTouchState()
     {
-        _touches.Clear();
+        // Todo: Figure out if we need to clear the entire state, or only remove a specific pointer.
+        _pointerLocations.Clear();
     }
 
     private void Initialize()
@@ -59,29 +52,22 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         // Pointer events
         PointerPressed += MapControl_PointerPressed;
         PointerReleased += MapControl_PointerReleased;
-        PointerMoved += MapControlMouseMove;
-        PointerExited += MapControlMouseLeave;
-        PointerCaptureLost += MapControlPointerCaptureLost;
-        PointerWheelChanged += MapControlMouseWheel;
-        DoubleTapped += OnDoubleTapped;
+        PointerMoved += MapControl_PointerMoved;
+        PointerExited += MapControl_PointerExited;
+        PointerCaptureLost += MapControl_PointerCaptureLost;
+        PointerWheelChanged += MapControl_PointerWheelChanged;
+
+        Tapped += MapControl_Tapped;
+        DoubleTapped += MapControl_DoubleTapped;
 
         // Needed to track the state of _shiftPressed because DoubleTapped does not have KeyModifiers.
         KeyDown += (s, e) => _shiftPressed = GetShiftPressed(e.KeyModifiers);
         KeyUp += (s, e) => _shiftPressed = GetShiftPressed(e.KeyModifiers);
     }
 
-
     private static bool GetShiftPressed(KeyModifiers keyModifiers)
     {
-
-
         return (keyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
-    }
-
-    private void MapControlPointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
-    {
-        _previousMousePosition = null;
-        ClearTouchState();
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -99,25 +85,59 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControl_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        _pointerDownPosition = e.GetPosition(this).ToMapsui();
-        _mouseDown = e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
-        _touches[e.Pointer.Id] = _pointerDownPosition;
-        OnPinchStart(_touches.Select(t => t.Value).ToList());
+        var tapPosition = e.GetPosition(this).ToMapsui();
+        _pointerLocations[e.Pointer.Id] = tapPosition;
 
-        if (HandleWidgetPointerDown(_pointerDownPosition, _mouseDown, e.ClickCount, _shiftPressed))
-        {
-            e.Handled = true;
+        _manipulationTracker.Restart(_pointerLocations.Values.ToArray());
+
+        var mouseDown = IsMouseDown(e); // The name of this method is 'PointerPressed', should we not assume it is pressed?
+        if (HandleWidgetPointerDown(tapPosition, mouseDown, e.ClickCount, _shiftPressed))
             return;
-        }
 
-        if (_mouseDown)
-        {
-            _previousMousePosition = _pointerDownPosition;
+        if (mouseDown)
             e.Pointer.Capture(this);
-        }
     }
 
-    private void MapControlMouseWheel(object? sender, PointerWheelEventArgs e)
+    private bool IsMouseDown(PointerPressedEventArgs e) => e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
+
+    private void MapControl_PointerMoved(object? sender, PointerEventArgs e)
+    {
+        var isHovering = IsHovering(e);
+        
+        if (HandleWidgetPointerMove(e.GetPosition(this).ToMapsui(), !isHovering, 0, _shiftPressed))
+            return;
+
+        if (isHovering)
+            return; // In case of hovering we just call the widget move event and ignore the event otherwise.
+
+        var pointerLocation = e.GetPosition(this).ToMapsui();
+        _pointerLocations[e.Pointer.Id] = pointerLocation;
+
+        _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Pinch);
+
+        RefreshGraphics();
+    }
+
+    private bool IsHovering(PointerEventArgs e)
+    {
+        return e.Pointer.Type == PointerType.Mouse && !e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
+    }
+
+    private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
+    {
+        _pointerLocations.TryRemove(e.Pointer.Id, out _);
+        e.Pointer.Capture(null);
+
+        var pointerPosition = e.GetPosition(this).ToMapsui();
+        if (HandleTouchingTouched(pointerPosition, pointerPosition, true, 0, _shiftPressed))
+            return;
+
+        _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Pinch);
+
+        Refresh();
+    }
+
+    private void MapControl_PointerWheelChanged(object? sender, PointerWheelEventArgs e)
     {
         // In Avalonia the touchpad can trigger the mouse wheel event. In that case there are more events and the Delta.Y is a double value, 
         // which is usually smaller than 1.0. In the code below the deltas are accumulated until they are larger than 1.0. Only then 
@@ -127,102 +147,40 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         int delta = Math.Sign(_mouseWheelPos);
         _mouseWheelPos -= delta;
 
-        _currentMousePosition = e.GetPosition(this).ToMapsui();
-        Map.Navigator.MouseWheelZoom(delta, _currentMousePosition);
+        Map.Navigator.MouseWheelZoom(delta, e.GetPosition(this).ToMapsui());
     }
 
-    private void MapControlMouseLeave(object? sender, PointerEventArgs e)
+    private void MapControl_PointerExited(object? sender, PointerEventArgs e)
     {
-        _previousMousePosition = null;
         ClearTouchState();
     }
 
-    private void MapControlMouseMove(object? sender, PointerEventArgs e)
+    private void MapControl_PointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
     {
-        _currentMousePosition = e.GetPosition(this).ToMapsui(); // Needed for both MouseMove and MouseWheel event
-        _touches[e.Pointer.Id] = _currentMousePosition;
-
-        if (_previousMousePosition is null)
-            return;
-
-        if (!_mouseDown)
-            return;
-
-        if (OnPinchMove(_touches.Select(t => t.Value).ToList()))
-        {
-            e.Handled = true;
-            return;
-        }
-
-        Map.Navigator.Drag(_currentMousePosition, _previousMousePosition);
-        _previousMousePosition = _currentMousePosition;
+        ClearTouchState();
     }
 
-    private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
+    private void MapControl_Tapped(object? sender, TappedEventArgs e)
     {
-        _touches.TryRemove(e.Pointer.Id, out _);
-
-        var leftButtonPressed = e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased;
-        if (HandleWidgetPointerUp(e.GetPosition(this).ToMapsui(), _pointerDownPosition, leftButtonPressed, 1, _shiftPressed))
-        {
-            e.Handled = true;
+        var tapPosition = e.GetPosition(this).ToMapsui();
+        if (tapPosition != null && HandleTouchingTouched(tapPosition, tapPosition, true, 2, _shiftPressed))
             return;
-        }
-
-        if (leftButtonPressed)
-        {
-            MapControlMouseLeftButtonUp(e);
-        }
-        _mouseDown = false;
-        _previousMousePosition = null;
-        e.Pointer.Capture(null);
+        OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
     }
 
-    private void MapControlMouseLeftButtonUp(PointerReleasedEventArgs e)
+    private void MapControl_DoubleTapped(object? sender, TappedEventArgs e)
     {
-        RefreshData();
-
-        if (IsClick(_currentMousePosition, _pointerDownPosition))
-        {
-            OnInfo(CreateMapInfoEventArgs(_mousePosition, _mousePosition, 1));
-        }
-    }
-
-    private static bool IsClick(MPoint? currentPosition, MPoint? previousPosition)
-    {
-        if (currentPosition == null || previousPosition == null)
-            return false;
-
-        return
-            Math.Abs(currentPosition.X - previousPosition.X) < 1 &&
-            Math.Abs(currentPosition.Y - previousPosition.Y) < 1;
-    }
-
-    protected override void OnPointerMoved(PointerEventArgs e)
-    {
-        base.OnPointerMoved(e);
-        _mousePosition = e.GetPosition(this).ToMapsui();
-        if (HandleWidgetPointerMove(_mousePosition, true, 0, _shiftPressed))
-            e.Handled = true;
-    }
-
-    private void OnDoubleTapped(object? sender, RoutedEventArgs e)
-    {
-        // We have a new interaction with the screen, so stop all navigator animations
-        var tapPosition = _mousePosition;
-        if (tapPosition != null && HandleTouchingTouched(tapPosition, _pointerDownPosition, true, 2, _shiftPressed))
-        {
-            e.Handled = true;
+        var tapPosition = e.GetPosition(this).ToMapsui();
+        if (tapPosition != null && HandleTouchingTouched(tapPosition, tapPosition, true, 2, _shiftPressed))
             return;
-        }
         OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
     }
 
     public override void Render(DrawingContext context)
     {
-        _drawOp ??= new MapsuiCustomDrawOp(new Rect(0, 0, Bounds.Width, Bounds.Height), this);
-        _drawOp.Bounds = new Rect(0, 0, Bounds.Width, Bounds.Height);
-        context.Custom(_drawOp);
+        _drawOperation ??= new MapsuiCustomDrawOperation(new Rect(0, 0, Bounds.Width, Bounds.Height), this);
+        _drawOperation.Bounds = new Rect(0, 0, Bounds.Width, Bounds.Height);
+        context.Custom(_drawOperation);
     }
 
     private void MapControlInitialized(object? sender, EventArgs eventArgs)
@@ -259,51 +217,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         return VisualRoot?.RenderScaling ?? 1d;
     }
 
-    private bool OnPinchMove(List<MPoint> touchPoints)
-    {
-        if (touchPoints.Count != 2)
-            return false;
-
-        Map.Navigator.Pinch(GetPinchState(touchPoints));
-
-        RefreshGraphics();
-        return true;
-    }
-
-    private void OnPinchStart(List<MPoint> touchPoints)
-    {
-        if (touchPoints.Count == 2)
-        {
-            Map.Navigator.ClearPinchState();
-            Map.Navigator.Pinch(GetPinchState(touchPoints));
-        }
-    }
-
-    private static PinchState GetPinchState(List<MPoint> locations)
-    {
-        if (locations.Count < 2)
-            throw new ArgumentOutOfRangeException(nameof(locations));
-
-        double centerX = 0;
-        double centerY = 0;
-
-        foreach (var location in locations)
-        {
-            centerX += location.X;
-            centerY += location.Y;
-        }
-
-        centerX /= locations.Count;
-        centerY /= locations.Count;
-
-        var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
-
-        var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
-
-        return new PinchState(new MPoint(centerX, centerY), radius, angle);
-    }
-
-    private sealed class MapsuiCustomDrawOp(Rect bounds, MapControl mapControl) : ICustomDrawOperation
+    private sealed class MapsuiCustomDrawOperation(Rect bounds, MapControl mapControl) : ICustomDrawOperation
     {
         public void Dispose()
         {
@@ -339,7 +253,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         if (disposing)
         {
-            _drawOp?.Dispose();
+            _drawOperation?.Dispose();
             Map?.Dispose();
         }
 

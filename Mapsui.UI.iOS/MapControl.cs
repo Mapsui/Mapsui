@@ -1,7 +1,7 @@
 using CoreFoundation;
+using Mapsui.Extensions;
 using Mapsui.Logging;
-using Mapsui.UI.iOS.Extensions;
-using Mapsui.Utilities;
+using Mapsui.Manipulations;
 using SkiaSharp.Views.iOS;
 using System.ComponentModel;
 
@@ -12,10 +12,9 @@ public partial class MapControl : UIView, IMapControl
 {
     private SKGLView? _glCanvas;
     private SKCanvasView? _canvas;
-    private bool _init;
+    private bool _initialize;
     private MPoint? _pointerDownPosition;
-
-    public static bool UseGPU { get; set; } = true;
+    private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl(CGRect frame)
         : base(frame)
@@ -25,17 +24,20 @@ public partial class MapControl : UIView, IMapControl
     }
 
     [Preserve]
-    public MapControl(IntPtr handle) : base(handle) // used when initialized from storyboard
+    public MapControl(IntPtr handle) : base(handle) // Used when initialized from storyboard
     {
         CommonInitialize();
         Initialize();
     }
 
-    private void InitCanvas()
+    public static bool UseGPU { get; set; } = true;
+
+
+    private void InitializeCanvas()
     {
-        if (!_init)
+        if (!_initialize)
         {
-            _init = true;
+            _initialize = true;
             if (UseGPU)
             {
                 _glCanvas?.Dispose();
@@ -51,7 +53,7 @@ public partial class MapControl : UIView, IMapControl
 
     private void Initialize()
     {
-        InitCanvas();
+        InitializeCanvas();
 
         _invalidate = () =>
         {
@@ -161,69 +163,59 @@ public partial class MapControl : UIView, IMapControl
         CommonDrawControl(canvas);
     }
 
-    public override void TouchesBegan(NSSet touches, UIEvent? evt)
+    public override void TouchesBegan(NSSet touches, UIEvent? e)
     {
-        base.TouchesBegan(touches, evt);
-
-        Map.Navigator.ClearPinchState();
-
-        if (touches.AnyObject is UITouch touch)
+        Catch.Exceptions(() =>
         {
-            _pointerDownPosition = touch.LocationInView(this).ToMapsui();
-            if (HandleWidgetPointerDown(_pointerDownPosition, true, 1, false))
-            {
-                return;
-            }
-        }
-    }
+            base.TouchesBegan(touches, e);
+            var locations = GetTouchLocations(e, this);
 
-    public override void TouchesMoved(NSSet touches, UIEvent? evt)
-    {
-        base.TouchesMoved(touches, evt);
+            _manipulationTracker.Restart(locations);
 
-        if (evt?.AllTouches.Count == 1)
-        {
-            if (touches.AnyObject is UITouch touch)
+            if (locations.Length == 1)
             {
-                var position = touch.LocationInView(this).ToMapsui();
-                if (HandleWidgetPointerMove(position, true, 0, false))
+                _pointerDownPosition = locations[0];
+                if (HandleWidgetPointerDown(_pointerDownPosition, true, 1, false))
                     return;
-
-                var previousPosition = touch.PreviousLocationInView(this).ToMapsui();
-                Map.Navigator.Drag(position, previousPosition);
-                Map.Navigator.ClearPinchState();
             }
-        }
-        else if (evt?.AllTouches.Count >= 2)
+        });
+    }
+
+    public override void TouchesMoved(NSSet touches, UIEvent? e)
+    {
+        Catch.Exceptions(() =>
         {
-            Map.Navigator.Pinch(GetPinchState(GetLocations(evt)));
-        }
-    }
+            base.TouchesMoved(touches, e);
+            var locations = GetTouchLocations(e, this);
 
-    private List<MPoint> GetPreviousLocations(UIEvent evt)
-    {
-        return evt.AllTouches.Select(t => ((UITouch)t).PreviousLocationInView(this))
-                        .Select(p => new MPoint(p.X, p.Y)).ToList();
-    }
+            if (locations.Length == 1)
+            {
+                if (HandleWidgetPointerMove(locations[0], true, 1, false))
+                    return;
+            }
 
-    private List<MPoint> GetLocations(UIEvent evt)
-    {
-        return evt.AllTouches.Select(t => ((UITouch)t).LocationInView(this))
-            .Select(p => new MPoint(p.X, p.Y)).ToList();
+            _manipulationTracker.Manipulate(locations, Map.Navigator.Pinch);
+        });
     }
 
     public override void TouchesEnded(NSSet touches, UIEvent? e)
     {
-        Refresh();
-
-        if (touches.AnyObject is UITouch touch)
+        Catch.Exceptions(() =>
         {
-            var position = touch.LocationInView(this).ToMapsui();
-            if (HandleWidgetPointerUp(position, _pointerDownPosition, true, 1, false))
-            {
-                return;
-            }
-        }
+            base.TouchesEnded(touches, e);
+            var locations = GetTouchLocations(e, this);
+
+            _manipulationTracker.Manipulate(locations, Map.Navigator.Pinch);
+
+            Refresh();
+        });
+    }
+
+    private static ReadOnlySpan<MPoint> GetTouchLocations(UIEvent? uiEvent, UIView uiView)
+    {
+        if (uiEvent is null)
+            return ReadOnlySpan<MPoint>.Empty;
+        return uiEvent.AllTouches.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new MPoint(p.X, p.Y)).ToArray();
     }
 
     /// <summary>
@@ -246,7 +238,7 @@ public partial class MapControl : UIView, IMapControl
         get => base.Frame;
         set
         {
-            InitCanvas();
+            InitializeCanvas();
             if (UseGPU)
             {
                 _glCanvas!.Frame = value;
@@ -264,7 +256,7 @@ public partial class MapControl : UIView, IMapControl
 
     public override void LayoutMarginsDidChange()
     {
-        InitCanvas();
+        InitializeCanvas();
         if (_glCanvas == null || _canvas == null) return;
 
         base.LayoutMarginsDidChange();
@@ -311,35 +303,11 @@ public partial class MapControl : UIView, IMapControl
         CommonDispose(disposing);
     }
 
-    private static PinchState GetPinchState(List<MPoint> locations)
-    {
-        if (locations.Count < 2)
-            throw new ArgumentException($"Less than two locations were passed into {nameof(GetPinchState)}");
-
-        double centerX = 0;
-        double centerY = 0;
-
-        foreach (var location in locations)
-        {
-            centerX += location.X;
-            centerY += location.Y;
-        }
-
-        centerX /= locations.Count;
-        centerY /= locations.Count;
-
-        var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
-
-        var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
-
-        return new PinchState(new MPoint(centerX, centerY), radius, angle);
-    }
-
     private double ViewportWidth
     {
         get
         {
-            InitCanvas();
+            InitializeCanvas();
             return UseGPU
                 ? _glCanvas!.Frame.Width
                 : _canvas!.Frame.Width;
@@ -350,7 +318,7 @@ public partial class MapControl : UIView, IMapControl
     {
         get
         {
-            InitCanvas();
+            InitializeCanvas();
             return UseGPU
                 ? _glCanvas!.Frame.Height
                 : _canvas!.Frame.Height;
@@ -359,7 +327,7 @@ public partial class MapControl : UIView, IMapControl
 
     private double GetPixelDensity()
     {
-        InitCanvas();
+        InitializeCanvas();
         return UseGPU
             ? (double)_glCanvas!.ContentScaleFactor
             : (double)_canvas!.ContentScaleFactor;

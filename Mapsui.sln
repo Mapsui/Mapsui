@@ -47,8 +47,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.iOS", "Sampl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Wpf", "Mapsui.UI.Wpf\Mapsui.UI.Wpf.csproj", "{AE693902-FEDA-4034-A7C5-9AA9872F7878}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{CB6BE9F9-5ECF-471B-9D93-605E2BD6825D}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.UI.Shared", "Mapsui.UI.Shared\Mapsui.UI.Shared.shproj", "{239F2B0D-13CB-4BCF-83BF-F52D696A47B7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Skia", "Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj", "{AE632270-38CA-4203-93A5-8612629CD944}"
