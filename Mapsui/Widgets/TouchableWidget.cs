@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Mapsui.Widgets;
+﻿namespace Mapsui.Widgets;
 
 /// <summary>
 /// Widget that gets touch events
@@ -36,7 +34,7 @@ public abstract class TouchableWidget : Widget, ITouchableWidget
     /// <returns>True, if the Widget had handled the touch event</returns>
     public virtual bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
-        return e.Handled;
+        return false;
     }
 
     /// <summary>
@@ -48,7 +46,7 @@ public abstract class TouchableWidget : Widget, ITouchableWidget
     /// <returns>True, if the Widget had handled the touch event</returns>
     public virtual bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
-        return e.Handled;
+        return false;
     }
 
     /// <summary>
@@ -60,7 +58,6 @@ public abstract class TouchableWidget : Widget, ITouchableWidget
     /// <returns>True, if the Widget had handled the touch event</returns>
     public virtual bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
-        return e.Handled;
+        return false;
     }
-
 }

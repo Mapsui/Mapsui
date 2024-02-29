@@ -30,9 +30,9 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
     /// <summary>
     /// Event handler which is called, when the button is touched
     /// </summary>
-    public event EventHandler<WidgetEventArgs>? Touched;
+    public Func<object, WidgetEventArgs, bool> Tapped = (s, e) => false;
 
-    private MRect _padding = new MRect(0);
+    private MRect _padding = new(0);
 
     /// <summary>
     /// Padding left and right for icon inside the Widget
@@ -106,9 +106,7 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
 
     public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
-        Touched?.Invoke(this, e);
-
-        return e.Handled;
+        return Tapped(this, e);
     }
 
     public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetEventArgs e)

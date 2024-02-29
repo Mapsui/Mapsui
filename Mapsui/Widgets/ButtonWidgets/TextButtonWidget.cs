@@ -8,7 +8,7 @@ public class TextButtonWidget : TextBoxWidget, ITouchableWidget
     /// <summary>
     /// Event which is called if widget is touched
     /// </summary>
-    public event EventHandler<WidgetEventArgs>? Touched;
+    public Func<object, WidgetEventArgs, bool> Tapped = (s, e) => false;
 
     /// <summary>
     /// Type of area to use for touch events
@@ -24,9 +24,7 @@ public class TextButtonWidget : TextBoxWidget, ITouchableWidget
     /// <returns>True, if touch is handled</returns>
     public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
-        Touched?.Invoke(this, e);
-
-        return e.Handled;
+        return Tapped(this, e);
     }
 
     public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetEventArgs e)

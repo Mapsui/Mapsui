@@ -24,11 +24,12 @@ public class ButtonSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
         var clickMeButton = CreateButton("Click me", VerticalAlignment.Top, HorizontalAlignment.Left);
-        clickMeButton.Touched += (s, a) =>
-            {
-                ((TextButtonWidget?)s!).Text = $"Clicked {++clickCount} times";
-                map.RefreshGraphics();
-            };
+        clickMeButton.Tapped = (s, a) =>
+        {
+            ((TextButtonWidget)s).Text = $"Clicked {++clickCount} times";
+            map.RefreshGraphics();
+            return false;
+        };
         map.Widgets.Add(clickMeButton);
 
         map.Widgets.Add(CreateButtonWithImage(VerticalAlignment.Top, HorizontalAlignment.Right));

@@ -126,9 +126,9 @@ public class ZoomInOutWidget : TouchableWidget
 
     public override bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
-        base.HandleWidgetTouched(navigator, position, e);
+        var result = base.HandleWidgetTouched(navigator, position, e);
 
-        if (e.Handled)
+        if (result)
             return true;
 
         if (Envelope == null)

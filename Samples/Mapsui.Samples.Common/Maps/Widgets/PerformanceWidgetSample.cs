@@ -18,35 +18,32 @@ public class PerformanceWidgetSample : IMapControlSample
 
     public string Category => "Widgets";
 
-    public void OnClick(object? sender, WidgetEventArgs e)
-    {
-        _mapControl?.Performance?.Clear();
-        _mapControl?.RefreshGraphics();
-
-        e.Handled = true;
-    }
-
     public void Setup(IMapControl mapControl)
     {
         _mapControl = mapControl;
 
-        //I like bing Hybrid
         mapControl.Map = BingSample.CreateMap(BingHybrid.DefaultCache, BruTile.Predefined.KnownTileSource.BingHybrid);
 
-        var widget = new PerformanceWidget(_performance)
-        {
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top,
-            Margin = new MRect(10),
-            TextSize = 12,
-            TextColor = Color.Black,
-            BackColor = Color.White
-        };
-
-        widget.Touched += OnClick;
+        var widget = CreatePerformanceWidget();
 
         mapControl.Map.Widgets.Add(widget);
         mapControl.Performance = _performance;
         mapControl.Renderer.WidgetRenders[typeof(PerformanceWidget)] = new PerformanceWidgetRenderer();
     }
+
+    private PerformanceWidget CreatePerformanceWidget() => new(_performance)
+    {
+        HorizontalAlignment = HorizontalAlignment.Left,
+        VerticalAlignment = VerticalAlignment.Top,
+        Margin = new MRect(10),
+        TextSize = 12,
+        TextColor = Color.Black,
+        BackColor = Color.White,
+        Tapped = (s, e) =>
+        {
+            _mapControl?.Performance?.Clear();
+            _mapControl?.RefreshGraphics();
+            return true;
+        }
+    };
 }
