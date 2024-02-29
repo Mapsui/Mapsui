@@ -812,7 +812,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         UpdateButtonPositions();
     }
 
-    private IconButtonWidget CreateButton(float x, float y, SKPicture picture, Action<object?, WidgetTouchedEventArgs> action)
+    private IconButtonWidget CreateButton(float x, float y, SKPicture picture, Action<object?, WidgetEventArgs> action)
     {
         var result = new IconButtonWidget
         {

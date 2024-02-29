@@ -18,12 +18,12 @@ public class PerformanceWidgetSample : IMapControlSample
 
     public string Category => "Widgets";
 
-    public void OnClick(object? sender, WidgetTouchedEventArgs args)
+    public void OnClick(object? sender, WidgetEventArgs e)
     {
         _mapControl?.Performance?.Clear();
         _mapControl?.RefreshGraphics();
 
-        args.Handled = true;
+        e.Handled = true;
     }
 
     public void Setup(IMapControl mapControl)

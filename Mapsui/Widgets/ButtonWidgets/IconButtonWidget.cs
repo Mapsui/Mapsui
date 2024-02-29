@@ -30,7 +30,7 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
     /// <summary>
     /// Event handler which is called, when the button is touched
     /// </summary>
-    public event EventHandler<WidgetTouchedEventArgs>? Touched;
+    public event EventHandler<WidgetEventArgs>? Touched;
 
     private MRect _padding = new MRect(0);
 
@@ -104,19 +104,19 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
 
     public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
 
-    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
-        Touched?.Invoke(this, args);
+        Touched?.Invoke(this, e);
 
-        return args.Handled;
+        return e.Handled;
     }
 
-    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         return false;
     }
 
-    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         return false;
     }

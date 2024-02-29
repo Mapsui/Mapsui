@@ -53,7 +53,7 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
         return _map;
     }
 
-    private void ChangeColor(object? sender, WidgetTouchedEventArgs e)
+    private void ChangeColor(object? sender, WidgetEventArgs e)
     {
         var layer = (_map?.Layers)?.First(f => f is RasterizingTileLayer) as RasterizingTileLayer;
         var random = new Random();

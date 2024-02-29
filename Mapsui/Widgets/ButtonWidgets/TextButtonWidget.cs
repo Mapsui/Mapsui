@@ -8,7 +8,7 @@ public class TextButtonWidget : TextBoxWidget, ITouchableWidget
     /// <summary>
     /// Event which is called if widget is touched
     /// </summary>
-    public event EventHandler<WidgetTouchedEventArgs>? Touched;
+    public event EventHandler<WidgetEventArgs>? Touched;
 
     /// <summary>
     /// Type of area to use for touch events
@@ -20,21 +20,21 @@ public class TextButtonWidget : TextBoxWidget, ITouchableWidget
     /// </summary>
     /// <param name="navigator">Navigator used by map</param>
     /// <param name="position">Position of touch</param>
-    /// <param name="args">Arguments for widget event</param>
+    /// <param name="e">Arguments for widget event</param>
     /// <returns>True, if touch is handled</returns>
-    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
-        Touched?.Invoke(this, args);
+        Touched?.Invoke(this, e);
 
-        return args.Handled;
+        return e.Handled;
     }
 
-    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         return false;
     }
 
-    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         return false;
     }
