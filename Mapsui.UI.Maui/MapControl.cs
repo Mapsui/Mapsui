@@ -211,7 +211,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 if (_touches.Count == 1)
                     _downLocation = location;
 
-                if (OnWidgetPointerPressed(location, true, 1, false))
+                if (OnWidgetPointerPressed(location, 1, false))
                     return;
 
                 _flingTracker.Clear();

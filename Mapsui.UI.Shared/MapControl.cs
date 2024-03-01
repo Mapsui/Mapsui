@@ -565,7 +565,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool OnWidgetPointerPressed(MPoint position, bool leftButton, int clickCount, bool shift)
+    private bool OnWidgetPointerPressed(MPoint position, int clickCount, bool shift)
     {
         var touchableWidgets = GetTouchableWidgets();
 
@@ -577,7 +577,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         foreach (var widget in touchedWidgets)
         {
-            var widgetArgs = new WidgetEventArgs(position, clickCount, leftButton, shift);
+            var widgetArgs = new WidgetEventArgs(position, clickCount, true, shift);
             if (widget.OnPointerPressed(Map.Navigator, position, widgetArgs))
                 return true;
         }
