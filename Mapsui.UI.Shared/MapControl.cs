@@ -558,7 +558,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         foreach (var widget in touchableWidgets)
         {
-            if (widget.HandleWidgetMoving(Map.Navigator, position, widgetArgs))
+            if (widget.OnPointerMoved(Map.Navigator, position, widgetArgs))
                 return true;
         }
 
@@ -590,7 +590,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         foreach (var widget in touchedWidgets)
         {
             var widgetArgs = new WidgetEventArgs(position, clickCount, leftButton, shift);
-            if (widget.HandleWidgetTouching(Map.Navigator, position, widgetArgs))
+            if (widget.OnPointerPressed(Map.Navigator, position, widgetArgs))
                 return true;
         }
 
@@ -624,7 +624,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
             var args = new WidgetEventArgs(position, clickCount, leftButton, shift);
 
-            if (widget.HandleWidgetTouched(Map.Navigator, position, args))
+            if (widget.OnTapped(Map.Navigator, position, args))
                 return true;
         }
 

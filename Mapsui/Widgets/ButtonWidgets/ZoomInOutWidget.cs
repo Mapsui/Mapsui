@@ -124,9 +124,9 @@ public class ZoomInOutWidget : TouchableWidget
         }
     }
 
-    public override bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public override bool OnTapped(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
-        var result = base.HandleWidgetTouched(navigator, position, e);
+        var result = base.OnTapped(navigator, position, e);
 
         if (result)
             return true;

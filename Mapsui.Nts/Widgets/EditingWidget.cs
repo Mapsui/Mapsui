@@ -18,7 +18,7 @@ public class EditingWidget : Widget, ITouchableWidget
         EditManipulation = editManipulation;
     }
 
-    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnTapped(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         if (!e.LeftButton)
             return false;
@@ -40,7 +40,7 @@ public class EditingWidget : Widget, ITouchableWidget
         return false;
     }
 
-    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnPointerPressed(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         if (!e.LeftButton)
             return false;
@@ -52,7 +52,7 @@ public class EditingWidget : Widget, ITouchableWidget
             PointerState.Down, position, EditManager, MapControl, e.Shift);
     }
 
-    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnPointerMoved(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         var screenPosition = position;
 
