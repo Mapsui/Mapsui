@@ -122,7 +122,7 @@ public partial class MapControl : ViewGroup, IMapControl
             return;
 
         var position = GetScreenPosition(e.Event, this);
-        if (HandleWidgetPointerUp(position, position, true, 0, false))
+        if (OnWidgetTapped(position, position, true, 1, false))
             return;
         OnInfo(CreateMapInfoEventArgs(position, position, 1));
     }
@@ -133,7 +133,7 @@ public partial class MapControl : ViewGroup, IMapControl
             return;
 
         var position = GetScreenPosition(e.Event, this);
-        if (HandleWidgetPointerUp(position, position, true, 0, false))
+        if (OnWidgetTapped(position, position, true, 2, false))
             return;
         OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
@@ -183,11 +183,11 @@ public partial class MapControl : ViewGroup, IMapControl
         {
             case MotionEventActions.Down:
                 _manipulationTracker.Restart(locations);
-                if (HandleWidgetPointerDown(locations[0], true, 0, false))
+                if (OnWidgetPointerPressed(locations[0], true, 0, false))
                     return;
                 break;
             case MotionEventActions.Move:
-                if (HandleWidgetPointerMove(locations[0], true, 0, false))
+                if (OnWidgetPointerMoved(locations[0], true, 0, false))
                     return;
                 _manipulationTracker.Manipulate(locations, Map.Navigator.Pinch);
                 break;

@@ -85,17 +85,18 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControl_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
+        if (!IsMouseDown(e))
+            return;
+
         var tapPosition = e.GetPosition(this).ToMapsui();
         _pointerLocations[e.Pointer.Id] = tapPosition;
 
         _manipulationTracker.Restart(_pointerLocations.Values.ToArray());
 
-        var mouseDown = IsMouseDown(e); // The name of this method is 'PointerPressed', should we not assume it is pressed?
-        if (HandleWidgetPointerDown(tapPosition, mouseDown, e.ClickCount, _shiftPressed))
+        if (OnWidgetPointerPressed(tapPosition, true, e.ClickCount, _shiftPressed))
             return;
 
-        if (mouseDown)
-            e.Pointer.Capture(this);
+        e.Pointer.Capture(this);
     }
 
     private bool IsMouseDown(PointerPressedEventArgs e) => e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
@@ -104,7 +105,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         var isHovering = IsHovering(e);
         
-        if (HandleWidgetPointerMove(e.GetPosition(this).ToMapsui(), !isHovering, 0, _shiftPressed))
+        if (OnWidgetPointerMoved(e.GetPosition(this).ToMapsui(), !isHovering, 0, _shiftPressed))
             return;
 
         if (isHovering)
@@ -129,9 +130,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         e.Pointer.Capture(null);
 
         var pointerPosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouchingTouched(pointerPosition, pointerPosition, true, 0, _shiftPressed))
-            return;
-
         _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Pinch);
 
         Refresh();
@@ -163,7 +161,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControl_Tapped(object? sender, TappedEventArgs e)
     {
         var tapPosition = e.GetPosition(this).ToMapsui();
-        if (tapPosition != null && HandleTouchingTouched(tapPosition, tapPosition, true, 2, _shiftPressed))
+        if (tapPosition != null && OnWidgetTapped(tapPosition, tapPosition, true, 1, _shiftPressed))
             return;
         OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
     }
@@ -171,7 +169,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControl_DoubleTapped(object? sender, TappedEventArgs e)
     {
         var tapPosition = e.GetPosition(this).ToMapsui();
-        if (tapPosition != null && HandleTouchingTouched(tapPosition, tapPosition, true, 2, _shiftPressed))
+        if (tapPosition != null && OnWidgetTapped(tapPosition, tapPosition, true, 2, _shiftPressed))
             return;
         OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
     }

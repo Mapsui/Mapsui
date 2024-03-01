@@ -9,6 +9,7 @@ using Mapsui.Logging;
 using Mapsui.Manipulations;
 using Mapsui.UI.WinUI.Extensions;
 using Microsoft.UI;
+using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -105,32 +106,32 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControl_PointerMoved(object sender, PointerRoutedEventArgs e)
     {
         var position = e.GetCurrentPoint(this).Position.ToMapsui();
-        if (HandleWidgetPointerMove(position, true, 0, e.KeyModifiers == VirtualKeyModifiers.Shift))
+        var isHovering = IsHovering(e);
+        if (OnWidgetPointerMoved(position, !isHovering, 0, e.KeyModifiers == VirtualKeyModifiers.Shift))
             e.Handled = true;
     }
 
-    private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+    private bool IsHovering(PointerRoutedEventArgs e)
     {
-        var tapPosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouchingTouched(tapPosition, _pointerDownPosition, true, 2, _shiftPressed))
-        {
-            e.Handled = true;
-            return;
-        }
-
-        OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
+        if (e.Pointer.PointerDeviceType == PointerDeviceType.Touch)
+            return false;
+        return !e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
     }
 
     private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
     {
-        var tabPosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouchingTouched(tabPosition, _pointerDownPosition, true, 1, _shiftPressed))
-        {
-            e.Handled = true;
+        var position = e.GetPosition(this).ToMapsui();
+        if (OnWidgetTapped(position, position, true, 1, _shiftPressed))
             return;
-        }
+        OnInfo(CreateMapInfoEventArgs(position, position, 1));
+    }
 
-        OnInfo(CreateMapInfoEventArgs(tabPosition, tabPosition, 1));
+    private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+    {
+        var position = e.GetPosition(this).ToMapsui();
+        if (OnWidgetTapped(position, position, true, 2, _shiftPressed))
+            return;        
+        OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 
     private static Rectangle CreateSelectRectangle()

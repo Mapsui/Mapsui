@@ -211,7 +211,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 if (_touches.Count == 1)
                     _downLocation = location;
 
-                if (HandleWidgetPointerDown(location, true, 1, false))
+                if (OnWidgetPointerPressed(location, true, 1, false))
                     return;
 
                 _flingTracker.Clear();
@@ -222,7 +222,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             {
                 var isHovering = !e.InContact;
 
-                if (HandleWidgetPointerMove(location, isHovering, 1, false))
+                if (OnWidgetPointerMoved(location, isHovering, 1, false))
                     return;
 
                 if (isHovering)
@@ -246,7 +246,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                 if (IsTappedGesture(releasedTouch, _downLocation))
                 {
-                    if (HandleWidgetPointerUp(location, location, true, 1, false))
+                    if (OnWidgetTapped(location, location, true, 1, false))
                         return;
                     OnInfo(CreateMapInfoEventArgs(location, location, 1));
                     return;

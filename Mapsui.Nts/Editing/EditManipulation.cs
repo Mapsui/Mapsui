@@ -39,7 +39,7 @@ public class EditManipulation
                 if (editManager.EditMode == EditMode.Scale)
                     editManager.StopScaling();
 
-                if (IsClick(screenPosition, _mouseDownPosition))
+                if (IsTap(screenPosition, _mouseDownPosition))
                 {
                     if (editManager.EditMode == EditMode.Modify)
                     {
@@ -101,7 +101,7 @@ public class EditManipulation
         }
     }
 
-    private static bool IsClick(MPoint? screenPosition, MPoint? mouseDownScreenPosition)
+    private static bool IsTap(MPoint? screenPosition, MPoint? mouseDownScreenPosition)
     {
         if (mouseDownScreenPosition == null || screenPosition == null)
             return false;
