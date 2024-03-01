@@ -159,7 +159,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
         _mouseDown = false;
-        var mousePosition = e.GetPosition(this).ToMapsui();
+        var position = e.GetPosition(this).ToMapsui();
 
 
         if (_previousMousePosition != null)
@@ -167,14 +167,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             if (IsInBoxZoomMode())
             {
                 var previous = Map.Navigator.Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
-                var current = Map.Navigator.Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
+                var current = Map.Navigator.Viewport.ScreenToWorld(position.X, position.Y);
                 ZoomToBox(previous, current);
             }
-            else if (_pointerDownPosition != null && IsTap(mousePosition, _pointerDownPosition))
+            else if (IsTap(position, _pointerDownPosition))
             {
-                if (OnWidgetTapped(mousePosition, _pointerDownPosition, true, e.ClickCount, GetShiftPressed()))
+                if (OnWidgetTapped(position, position, true, e.ClickCount, GetShiftPressed()))
                     return;
-                OnInfo(CreateMapInfoEventArgs(mousePosition, _pointerDownPosition, e.ClickCount));
+                OnInfo(CreateMapInfoEventArgs(position, position, e.ClickCount));
             }
         }
 

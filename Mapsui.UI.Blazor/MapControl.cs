@@ -304,11 +304,11 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            _tapGestureTracker.IfTap((p) =>
+            _tapGestureTracker.IfTap((position) =>
             {
-                if (OnWidgetTapped(p, p, true, 1, GetShiftPressed()))
+                if (OnWidgetTapped(position, position, true, 1, GetShiftPressed()))
                     return;
-                OnInfo(CreateMapInfoEventArgs(p, p, 1));
+                OnInfo(CreateMapInfoEventArgs(position, position, 1));
             }, MaxTapGestureMovement * PixelDensity);
 
             RefreshData();

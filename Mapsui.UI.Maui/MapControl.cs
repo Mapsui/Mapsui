@@ -244,7 +244,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 FlingIfNeeded(e);
                 _flingTracker.RemoveId(e.Id);
 
-                if (IsTappedGesture(releasedTouch, _downLocation))
+                if (IsTap(releasedTouch, _downLocation))
                 {
                     if (OnWidgetTapped(location, location, true, 1, false))
                         return;
@@ -299,18 +299,18 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Map.Navigator.Fling(velocityX, velocityY, 1000);
     }
 
-    private bool IsTappedGesture(MPoint? releasedTouch, MPoint? pointerDownPosition)
+    private bool IsTap(MPoint? releasePosition, MPoint? pressedPosition)
     {
         // It is not possible to use the MAUI gesture because it is not triggered when OnTouch is used.
-        if (releasedTouch == null) return false;
-        if (pointerDownPosition == null) return false;
+        if (releasePosition == null) return false;
+        if (pressedPosition == null) return false;
 
         // While tapping on screen, there could be a small movement of the finger
         // (especially on Samsung). So check, if touch start location isn't more 
         // than a number of pixels away from touch end location.
         var maxTapGestureMovementInRawPixels = MaxTapGestureMovement * PixelDensity;
 
-        return Algorithms.Distance(releasedTouch, pointerDownPosition) < maxTapGestureMovementInRawPixels;
+        return Algorithms.Distance(releasePosition, pressedPosition) < maxTapGestureMovementInRawPixels;
     }
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)

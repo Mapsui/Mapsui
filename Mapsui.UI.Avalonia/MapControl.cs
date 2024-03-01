@@ -160,18 +160,18 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControl_Tapped(object? sender, TappedEventArgs e)
     {
-        var tapPosition = e.GetPosition(this).ToMapsui();
-        if (tapPosition != null && OnWidgetTapped(tapPosition, tapPosition, true, 1, _shiftPressed))
+        var position = e.GetPosition(this).ToMapsui();
+        if (OnWidgetTapped(position, position, true, 1, _shiftPressed))
             return;
-        OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
+        OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 
     private void MapControl_DoubleTapped(object? sender, TappedEventArgs e)
     {
-        var tapPosition = e.GetPosition(this).ToMapsui();
-        if (tapPosition != null && OnWidgetTapped(tapPosition, tapPosition, true, 2, _shiftPressed))
+        var position = e.GetPosition(this).ToMapsui();
+        if (OnWidgetTapped(position, position, true, 2, _shiftPressed))
             return;
-        OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
+        OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 
     public override void Render(DrawingContext context)
