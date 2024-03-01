@@ -107,7 +107,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var position = e.GetCurrentPoint(this).Position.ToMapsui();
         var isHovering = IsHovering(e);
-        if (OnWidgetPointerMoved(position, !isHovering, 0, e.KeyModifiers == VirtualKeyModifiers.Shift))
+        if (OnWidgetPointerMoved(position, !isHovering, e.KeyModifiers == VirtualKeyModifiers.Shift))
             e.Handled = true;
     }
 

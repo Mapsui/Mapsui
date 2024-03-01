@@ -547,12 +547,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidateTimer = null;
     }
 
-    private bool OnWidgetPointerMoved(MPoint position, bool leftButton, int tapCount, bool shift)
+    private bool OnWidgetPointerMoved(MPoint position, bool leftButton, bool shift)
     {
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
         {
-            var widgetArgs = new WidgetEventArgs(position, tapCount, leftButton, shift);
+            var widgetArgs = new WidgetEventArgs(position, 0, leftButton, shift);
             if (widget.OnPointerMoved(Map.Navigator, position, widgetArgs))
                 return true;
         }

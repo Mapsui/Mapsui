@@ -228,7 +228,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseMove(object sender, MouseEventArgs e)
     {
         var isHovering = IsHovering(e);
-        if (OnWidgetPointerMoved(e.GetPosition(this).ToMapsui(), !isHovering, 0, GetShiftPressed()))
+        if (OnWidgetPointerMoved(e.GetPosition(this).ToMapsui(), !isHovering, GetShiftPressed()))
             return;
 
         if (IsInBoxZoomMode())

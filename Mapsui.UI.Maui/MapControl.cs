@@ -222,7 +222,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             {
                 var isHovering = !e.InContact;
 
-                if (OnWidgetPointerMoved(location, isHovering, 1, false))
+                if (OnWidgetPointerMoved(location, isHovering, false))
                     return;
 
                 if (isHovering)

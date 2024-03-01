@@ -194,7 +194,7 @@ public partial class MapControl : UIView, IMapControl
 
             if (locations.Length == 1)
             {
-                if (OnWidgetPointerMoved(locations[0], true, 1, false))
+                if (OnWidgetPointerMoved(locations[0], true, false))
                     return;
             }
 
