@@ -101,6 +101,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControl_PointerDown(object sender, PointerRoutedEventArgs e)
     {
         _pointerDownPosition = e.GetCurrentPoint(this).Position.ToMapsui();
+        if (OnWidgetPointerPressed(_pointerDownPosition, e.KeyModifiers == VirtualKeyModifiers.Shift))
+            return;
     }
 
     private void MapControl_PointerMoved(object sender, PointerRoutedEventArgs e)
@@ -108,7 +110,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         var position = e.GetCurrentPoint(this).Position.ToMapsui();
         var isHovering = IsHovering(e);
         if (OnWidgetPointerMoved(position, !isHovering, e.KeyModifiers == VirtualKeyModifiers.Shift))
-            e.Handled = true;
+            return;
     }
 
     private bool IsHovering(PointerRoutedEventArgs e)
