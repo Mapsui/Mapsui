@@ -549,15 +549,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetPointerMoved(MPoint position, bool leftButton, int clickCount, bool shift)
     {
-        var touchableWidgets = GetTouchableWidgets();
-
-        if (touchableWidgets.Count == 0)
-            return false;
-
-        var widgetArgs = new WidgetEventArgs(position, clickCount, leftButton, shift);
-
-        foreach (var widget in touchableWidgets)
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
+        foreach (var widget in touchedWidgets)
         {
+            var widgetArgs = new WidgetEventArgs(position, clickCount, leftButton, shift);
             if (widget.OnPointerMoved(Map.Navigator, position, widgetArgs))
                 return true;
         }
@@ -567,14 +562,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetPointerPressed(MPoint position, int clickCount, bool shift)
     {
-        var touchableWidgets = GetTouchableWidgets();
-
-        if (touchableWidgets.Count == 0)
-            return false;
-
-        // Todo: Should this use the shared methods for getting the touched widgets?
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, touchableWidgets);
-
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
         {
             var widgetArgs = new WidgetEventArgs(position, clickCount, true, shift);
@@ -587,18 +575,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetTapped(MPoint position, int clickCount, bool shift)
     {
-        if (position is null)
-        {
-            Logger.Log(LogLevel.Error, $"The '{nameof(position)}' is null on release. This is not expected");
-            return false;
-        }
-        var touchableWidgets = GetTouchableWidgets();
-
-        if (touchableWidgets.Count == 0)
-            return false;
-
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position,  touchableWidgets);
-
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position,  Map);
         foreach (var widget in touchedWidgets)
         {
             if (widget is HyperlinkWidget hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
@@ -611,16 +588,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             }
 
             var args = new WidgetEventArgs(position, clickCount, true, shift);
-
             if (widget.OnTapped(Map.Navigator, position, args))
                 return true;
         }
 
         return false;
-    }
-
-    private List<ITouchableWidget> GetTouchableWidgets()
-    {
-        return Map.GetWidgetsOfMapAndLayers().OfType<ITouchableWidget>().ToList();
     }
 }

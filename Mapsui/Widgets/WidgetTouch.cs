@@ -14,25 +14,19 @@ public static class WidgetTouch
     /// Returns the Widgets in the list that contain the screenPosition
     /// within it's Envelope. Returns null if there are none.
     /// </returns>
-    public static IEnumerable<ITouchableWidget> GetTouchedWidgets(MPoint screenPosition, 
-        IEnumerable<ITouchableWidget> widgets)
+    public static IEnumerable<ITouchableWidget> GetTouchedWidgets(MPoint screenPosition, Map map)
     {
         var touchedWidgets = new List<ITouchableWidget>();
 
-        foreach (var widget in widgets.Where(w => w is ITouchableWidget).Where(w => w.Enabled).Reverse())
+        var touchableWidgets = map.GetWidgetsOfMapAndLayers().OfType<ITouchableWidget>()
+            .Where(w => w.Enabled).Reverse().ToList();
+
+        foreach (var widget in touchableWidgets)
         {
             // There are two possible TouchableAreaTypes
-
-            if (widget.TouchableArea == TouchableAreaType.Viewport)
-            {
-                // Widget is always touched
+            if (widget.TouchableArea == TouchableAreaType.Viewport) // 1) The Viewport type Widget is always touched
                 touchedWidgets.Add(widget);
-                continue;
-            }
-
-            // Also check for start position, because it should be click on the widget,
-            // not a drag that ends above the widget.
-            if (widget.Envelope?.Contains(screenPosition) ?? false)
+            else if (widget.Envelope?.Contains(screenPosition) ?? false) // 2) For the Widget type the position needs to be within the envelope
                 touchedWidgets.Add(widget);
         }
 
