@@ -38,7 +38,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = [];
-        CheckForLoggingWidget();
+        Widgets.Add(CreateLoggingWidget());
         Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
     }
@@ -58,7 +58,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// Default: "EPSG:3857" (SphericalMercator).
     /// </summary>
     public string? CRS { get; set; } = "EPSG:3857";
-
+    
     /// <summary>
     /// A collection of layers. The first layer in the list is drawn first, the last one on top.
     /// </summary>
@@ -279,7 +279,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     private static MMinMax? GetMinMaxResolution(IEnumerable<double>? resolutions)
     {
         if (resolutions == null || !resolutions.Any()) return null;
-        resolutions = resolutions.OrderByDescending(r => r).ToList();
+        resolutions = [.. resolutions.OrderByDescending(r => r)];
         var mostZoomedOut = resolutions.First();
         var mostZoomedIn = resolutions.Last() * 0.5; // Divide by two to allow one extra level to zoom-in
         return new MMinMax(mostZoomedOut, mostZoomedIn);
@@ -386,31 +386,13 @@ public class Map : INotifyPropertyChanged, IDisposable
         return areAnimationsRunning;
     }
 
-    /// <summary>
-    /// Check, if a debugger is attached and, if yes, add a default LoggingWidget
-    /// </summary>
-    /// <param name="map">Map, to which LoggingWidget should add</param>
-    private void CheckForLoggingWidget()
+    private static LoggingWidget CreateLoggingWidget() => new()
     {
-        // If in debug mode ...
-        if (System.Diagnostics.Debugger.IsAttached)
-        {
-            // Is there already a LoggingWidget ...
-            if (Widgets.Where(w => w.GetType() == typeof(LoggingWidget)).Count() > 0)
-                // ... then return;
-                return;
-
-            var loggingWidget = new LoggingWidget()
-            {
-                Margin = new MRect(10),
-                VerticalAlignment = VerticalAlignment.Stretch,
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                BackColor = Color.Transparent,
-                Opacity = 0.0f,
-                LogLevelFilter = LogLevel.Trace,
-            };
-
-            Widgets.Add(loggingWidget);
-        }
-    }
+        Margin = new MRect(10),
+        VerticalAlignment = VerticalAlignment.Stretch,
+        HorizontalAlignment = HorizontalAlignment.Stretch,
+        BackColor = Color.Transparent,
+        Opacity = 0.0f,
+        LogLevelFilter = LogLevel.Trace,
+    };    
 }

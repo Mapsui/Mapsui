@@ -3,9 +3,15 @@ using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
 using System;
 using System.Collections.Concurrent;
-using System.Runtime.CompilerServices;
 
 namespace Mapsui.Widgets.InfoWidgets;
+
+public enum ShowLoggingInMap
+{
+    WhenLoggingWidgetIsEnabled,
+    WhenLoggingWidgetIsEnabledAndDebuggerIsAttached,
+    Never,
+}
 
 /// <summary>
 /// Widget which shows log entries
@@ -30,28 +36,32 @@ public class LoggingWidget : TextBoxWidget
         // Add event handle, so that LoggingWidget gets all logs
         Logger.LogDelegate += Log;
 
-#if DEBUG
-        Enabled = true;
-#else
-        Enabled = false;
-#endif
-
         Width = 250;
         Height = 142;
     }
+
+    /// <summary>
+    /// Global setting to control logging in the map. Note, that there will never be logging in the map if the 
+    /// Enabled field of the logging widget is false.
+    /// </summary>
+    public static ShowLoggingInMap ShowLoggingInMap { get; set; } 
+        = ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached;
 
     /// <summary>
     ///  Event handler for logging
     /// </summary>
     public void Log(LogLevel level, string description, Exception? exception)
     {
+        if (!ShouldLog(Enabled, ShowLoggingInMap))
+            return;
+
         var entry = new LogEntry { LogLevel = level, Description = description, Exception = exception };
 
         _listOfLogEntries.Enqueue(entry);
 
         while (_listOfLogEntries.Count > _maxNumberOfLogEntriesToKeep)
         {
-            _listOfLogEntries.TryDequeue(out var outObj);
+            _listOfLogEntries.TryDequeue(out var _);
         }
 
         Invalidate(nameof(Text));
@@ -59,15 +69,15 @@ public class LoggingWidget : TextBoxWidget
 
     public void Clear()
     {
-        while (_listOfLogEntries.Count > 0)
+        while (!_listOfLogEntries.IsEmpty)
         {
-            _listOfLogEntries.TryDequeue(out var outObj);
+            _listOfLogEntries.TryDequeue(out var _);
         }
 
         Invalidate(nameof(Text));
     }
 
-    private ConcurrentQueue<LogEntry> _listOfLogEntries;
+    private readonly ConcurrentQueue<LogEntry> _listOfLogEntries;
 
     public ConcurrentQueue<LogEntry> ListOfLogEntries => _listOfLogEntries;
 
@@ -154,16 +164,12 @@ public class LoggingWidget : TextBoxWidget
         }
     }
 
-    public override void Invalidate([CallerMemberName] string name = "")
-    {
-        if (name == nameof(Enabled))
+    private static bool ShouldLog(bool enabled, ShowLoggingInMap showLoggingInMap) =>
+        enabled && showLoggingInMap switch
         {
-            if (Enabled)
-                Logger.LogDelegate += Log;
-            else
-                Logger.LogDelegate -= Log;
-        }
-
-        base.Invalidate(name);
-    }
+            ShowLoggingInMap.WhenLoggingWidgetIsEnabled => true,
+            ShowLoggingInMap.Never => false,
+            ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached => System.Diagnostics.Debugger.IsAttached,
+            _ => throw new NotSupportedException(nameof(InfoWidgets.ShowLoggingInMap))
+        };
 }
