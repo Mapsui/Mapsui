@@ -37,6 +37,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     public Map()
     {
         BackColor = Color.White;
+        Layers = [];
         Widgets.Add(CreateLoggingWidget());
         Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
