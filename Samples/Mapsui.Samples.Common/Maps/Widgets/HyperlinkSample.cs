@@ -29,10 +29,8 @@ public class HyperlinkSample : ISample
         return Task.FromResult(map);
     }
 
-    private static IWidget CreateHyperlink(string text, string url,
-        VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
-    {
-        return new HyperlinkWidget()
+    private static HyperlinkWidget CreateHyperlink(string text, string url,
+        VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment) => new()
         {
             Text = text,
             Url = url,
@@ -44,5 +42,4 @@ public class HyperlinkSample : ISample
             BackColor = new Color(23, 162, 184),
             TextColor = Color.White,
         };
-    }
 }
