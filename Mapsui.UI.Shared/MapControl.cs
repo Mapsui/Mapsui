@@ -547,19 +547,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidateTimer = null;
     }
 
-    private bool OnWidgetPointerMoved(MPoint position, bool leftButton, bool shift)
-    {
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
-        foreach (var widget in touchedWidgets)
-        {
-            var widgetArgs = new WidgetEventArgs(position, 0, leftButton, shift);
-            if (widget.OnPointerMoved(Map.Navigator, position, widgetArgs))
-                return true;
-        }
-
-        return false;
-    }
-
+  
     private bool OnWidgetPointerPressed(MPoint position, bool shift)
     {
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
@@ -567,6 +555,19 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         {
             var widgetArgs = new WidgetEventArgs(position, 0, true, shift);
             if (widget.OnPointerPressed(Map.Navigator, position, widgetArgs))
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool OnWidgetPointerMoved(MPoint position, bool leftButton, bool shift)
+    {
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
+        foreach (var widget in touchedWidgets)
+        {
+            var widgetArgs = new WidgetEventArgs(position, 0, leftButton, shift);
+            if (widget.OnPointerMoved(Map.Navigator, position, widgetArgs))
                 return true;
         }
 
