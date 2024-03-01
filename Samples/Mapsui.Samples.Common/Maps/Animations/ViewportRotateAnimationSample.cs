@@ -41,7 +41,7 @@ public class ViewportRotateAnimationSample : ISample
         return map;
     }
 
-    private static TextButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new TextButtonWidget
+    private static ButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new()
     {
         Text = text,
         Margin = new MRect(20),

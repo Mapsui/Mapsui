@@ -813,7 +813,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     }
 
     private IconButtonWidget CreateButton(
-        float x, float y, SKPicture picture, Func<object, WidgetEventArgs, bool> tapped) => new()
+        float x, float y, SKPicture picture, Func<IconButtonWidget, WidgetEventArgs, bool> tapped) => new()
     {
         Picture = picture,
         HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,

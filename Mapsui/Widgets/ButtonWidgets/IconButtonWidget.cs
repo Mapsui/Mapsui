@@ -30,7 +30,7 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
     /// <summary>
     /// Event handler which is called, when the button is touched
     /// </summary>
-    public Func<object, WidgetEventArgs, bool> Tapped = (s, e) => false;
+    public Func<IconButtonWidget, WidgetEventArgs, bool> Tapped = (s, e) => false;
 
     private MRect _padding = new(0);
 

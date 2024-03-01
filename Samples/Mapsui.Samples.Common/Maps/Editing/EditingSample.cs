@@ -109,7 +109,7 @@ public class EditingSample : IMapControlSample
         BackColor = Color.Transparent,
     };
 
-    private TextButtonWidget CreateDeleteButton() => new TextButtonWidget
+    private ButtonWidget CreateDeleteButton() => new()
     {
         Position = new MPoint(5, 340),
         Height = 18,
@@ -133,7 +133,7 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private TextButtonWidget CreateSelectButton() => new TextButtonWidget
+    private ButtonWidget CreateSelectButton() => new()
     {
         Position = new MPoint(5, 320),
         Height = 18,
@@ -150,7 +150,7 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private TextButtonWidget CreateNoneButton() => new TextButtonWidget
+    private ButtonWidget CreateNoneButton() => new()
     {
         Position = new MPoint(5, 290),
         Height = 18,
@@ -167,7 +167,7 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private TextButtonWidget CreateScaleButton() => new TextButtonWidget
+    private ButtonWidget CreateScaleButton() => new()
     {
         Position = new MPoint(5, 270),
         Height = 18,
@@ -184,7 +184,7 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private TextButtonWidget CreateRotateButton() => new TextButtonWidget
+    private ButtonWidget CreateRotateButton() => new()
     {
         Position = new MPoint(5, 250),
         Height = 18,
@@ -201,7 +201,7 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private TextButtonWidget CreateModifyButton() => new TextButtonWidget
+    private ButtonWidget CreateModifyButton() => new()
     {
         Position = new MPoint(5, 230),
         Height = 18,
@@ -218,7 +218,7 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private TextButtonWidget CreateAddPolygonButton() => new TextButtonWidget
+    private ButtonWidget CreateAddPolygonButton() => new()
     {
         Position = new MPoint(5, 210),
         Height = 18,
@@ -239,7 +239,7 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private TextButtonWidget CreateAddLineButton() => new TextButtonWidget
+    private ButtonWidget CreateAddLineButton() => new()
     {
         Position = new MPoint(5, 190),
         Height = 18,
@@ -260,7 +260,7 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private TextButtonWidget CreateAddPointButton() => new TextButtonWidget
+    private ButtonWidget CreateAddPointButton() => new()
     {
         Position = new MPoint(5, 170),
         Height = 18,
@@ -281,7 +281,7 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private static TextBoxWidget CreateEditModesTextBox() => new TextBoxWidget
+    private static TextBoxWidget CreateEditModesTextBox() => new()
     {
         Position = new MPoint(5, 150),
         HorizontalAlignment = HorizontalAlignment.Absolute,
@@ -290,7 +290,7 @@ public class EditingSample : IMapControlSample
         BackColor = Color.Transparent,
     };
 
-    private TextButtonWidget CreateCancelButton() => new TextButtonWidget
+    private ButtonWidget CreateCancelButton() => new()
     {
         Position = new MPoint(5, 120),
         Height = 18,
@@ -317,7 +317,7 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private TextButtonWidget CreateLoadButton() => new TextButtonWidget
+    private ButtonWidget CreateLoadButton() => new()
     {
         Position = new MPoint(5, 100),
         Height = 18,
@@ -344,7 +344,7 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private TextButtonWidget CreateSaveButton() => new TextButtonWidget
+    private ButtonWidget CreateSaveButton() => new()
     {
         Position = new MPoint(5, 80),
         Height = 18,
@@ -364,7 +364,7 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private TextButtonWidget CreateSelectLayer3Button(Map map) => new TextButtonWidget
+    private ButtonWidget CreateSelectLayer3Button(Map map) => new()
     {
         Position = new MPoint(5, 60),
         Height = 18,
@@ -381,7 +381,7 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private TextButtonWidget CreateSelectLayer2Button(Map map) => new TextButtonWidget
+    private ButtonWidget CreateSelectLayer2Button(Map map) => new()
     {
         Position = new MPoint(5, 40),
         Height = 18,
@@ -398,7 +398,7 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private TextButtonWidget CreateSelectLayer1Button(Map map) => new TextButtonWidget
+    private ButtonWidget CreateSelectLayer1Button(Map map) => new()
     {
         Position = new MPoint(5, 20),
         Height = 18,
@@ -426,45 +426,37 @@ public class EditingSample : IMapControlSample
         var editLayer = CreateEditLayer();
         map.Layers.Add(editLayer);
         map.Layers.Add(new VertexOnlyLayer(editLayer) { Name = "VertexLayer" });
+
         return map;
     }
 
-    private static WritableLayer CreateEditLayer()
+    private static WritableLayer CreateEditLayer() => new()
     {
-        return new WritableLayer
-        {
-            Name = "EditLayer",
-            Style = CreateEditLayerStyle(),
-            IsMapInfoLayer = true
-        };
-    }
+        Name = "EditLayer",
+        Style = CreateEditLayerStyle(),
+        IsMapInfoLayer = true
+    };
 
-    private static StyleCollection CreateEditLayerStyle()
+    // The edit layer has two styles. That is why it needs to use a StyleCollection.
+    // In a future version of Mapsui the ILayer will have a Styles collections just
+    // as the GeometryFeature has right now.
+    // The first style is the basic style of the features in edit mode.
+    // The second style is the way to show a feature is selected.
+    private static StyleCollection CreateEditLayerStyle() => new()
     {
-        // The edit layer has two styles. That is why it needs to use a StyleCollection.
-        // In a future version of Mapsui the ILayer will have a Styles collections just
-        // as the GeometryFeature has right now.
-        // The first style is the basic style of the features in edit mode.
-        // The second style is the way to show a feature is selected.
-        return new StyleCollection
+        Styles = 
         {
-            Styles = {
-                CreateEditLayerBasicStyle(),
-                CreateSelectedStyle()
-            }
-        };
-    }
+            CreateEditLayerBasicStyle(),
+            CreateSelectedStyle()
+        }
+    };
 
-    private static VectorStyle CreateEditLayerBasicStyle()
+    private static VectorStyle CreateEditLayerBasicStyle() => new()
     {
-        var editStyle = new VectorStyle
-        {
-            Fill = new Brush(_editModeColor),
-            Line = new Pen(_editModeColor, 3),
-            Outline = new Pen(_editModeColor, 3)
-        };
-        return editStyle;
-    }
+        Fill = new Brush(_editModeColor),
+        Line = new Pen(_editModeColor, 3),
+        Outline = new Pen(_editModeColor, 3)
+    };
 
     private static readonly Color _editModeColor = new(124, 22, 111, 180);
     private static readonly Color _pointLayerColor = new(240, 240, 240, 240);
@@ -472,29 +464,24 @@ public class EditingSample : IMapControlSample
     private static readonly Color _polygonLayerColor = new(20, 20, 20, 240);
 
     private static readonly SymbolStyle? _selectedStyle = new()
-    {
-        Fill = null,
-        Outline = new Pen(Color.Red, 3),
-        Line = new Pen(Color.Red, 3)
-    };
+        {
+            Fill = null,
+            Outline = new Pen(Color.Red, 3),
+            Line = new Pen(Color.Red, 3)
+        };
 
     private static readonly SymbolStyle? _disableStyle = new() { Enabled = false };
 
-    private static ThemeStyle CreateSelectedStyle()
-    {
-        // To show the selected style a ThemeStyle is used which switches on and off the SelectedStyle
-        // depending on a "Selected" attribute.
-        return new ThemeStyle(f => (bool?)f["Selected"] == true ? _selectedStyle : _disableStyle);
-    }
+    // To show the selected style a ThemeStyle is used which switches on and off the SelectedStyle
+    // depending on a "Selected" attribute.
+    private static ThemeStyle CreateSelectedStyle() 
+        => new(f => (bool?)f["Selected"] == true ? _selectedStyle : _disableStyle);
 
-    private static WritableLayer CreatePointLayer()
+    private static WritableLayer CreatePointLayer() => new()
     {
-        return new WritableLayer
-        {
-            Name = "Layer 1",
-            Style = CreatePointStyle()
-        };
-    }
+        Name = "Layer 1",
+        Style = CreatePointStyle()
+    };
 
     private static WritableLayer CreateLineLayer()
     {

@@ -3,7 +3,7 @@
 /// <summary>
 /// Widget displaying a clickable hyperlink
 /// </summary>
-public class HyperlinkWidget : TextButtonWidget
+public class HyperlinkWidget : ButtonWidget
 {
     private string? _url = string.Empty;
 

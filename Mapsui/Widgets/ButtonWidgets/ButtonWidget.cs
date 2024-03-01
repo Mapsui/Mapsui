@@ -3,12 +3,12 @@ using System;
 
 namespace Mapsui.Widgets.ButtonWidgets;
 
-public class TextButtonWidget : TextBoxWidget, ITouchableWidget
+public class ButtonWidget : TextBoxWidget, ITouchableWidget
 {
     /// <summary>
     /// Event which is called if widget is touched
     /// </summary>
-    public Func<object, WidgetEventArgs, bool> Tapped = (s, e) => false;
+    public Func<ButtonWidget, WidgetEventArgs, bool> Tapped = (s, e) => false;
 
     /// <summary>
     /// Type of area to use for touch events

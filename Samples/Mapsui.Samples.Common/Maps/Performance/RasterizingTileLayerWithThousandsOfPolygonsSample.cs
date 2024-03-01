@@ -41,14 +41,13 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
         _map.Layers.Add(new RasterizingTileLayer(CreatePolygonLayer()));
         var home = Mercator.FromLonLat(0, 0);
         _map.Navigator.CenterOnAndZoomTo(home, _map.Navigator.Resolutions[9]);
-        var buttonWidget = new TextButtonWidget
+        _map.Widgets.Enqueue(new ButtonWidget
         {
             Text = "Change Color",
             HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Top
-        };
-        buttonWidget.Tapped = ChangeColor;
-        _map.Widgets.Enqueue(buttonWidget);
+            VerticalAlignment = VerticalAlignment.Top,
+            Tapped = ChangeColor
+        });
 
         return _map;
     }

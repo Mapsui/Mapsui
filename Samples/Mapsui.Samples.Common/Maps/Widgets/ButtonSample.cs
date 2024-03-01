@@ -26,7 +26,7 @@ public class ButtonSample : ISample
         var clickMeButton = CreateButton("Click me", VerticalAlignment.Top, HorizontalAlignment.Left);
         clickMeButton.Tapped = (s, a) =>
         {
-            ((TextButtonWidget)s).Text = $"Clicked {++clickCount} times";
+            s.Text = $"Clicked {++clickCount} times";
             map.RefreshGraphics();
             return false;
         };
@@ -39,43 +39,37 @@ public class ButtonSample : ISample
         return Task.FromResult(map);
     }
 
-    private static TextButtonWidget CreateButton(string text,
-        VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
+    private static ButtonWidget CreateButton(string text, 
+        VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment) => new()
     {
-        return new TextButtonWidget()
-        {
-            Text = text,
-            VerticalAlignment = verticalAlignment,
-            HorizontalAlignment = horizontalAlignment,
-            Margin = new MRect(30),
-            Padding = new MRect(10, 8),
-            CornerRadius = 8,
-            BackColor = new Color(0, 123, 255),
-            TextColor = Color.White,
-        };
-    }
+        Text = text,
+        VerticalAlignment = verticalAlignment,
+        HorizontalAlignment = horizontalAlignment,
+        Margin = new MRect(30),
+        Padding = new MRect(10, 8),
+        CornerRadius = 8,
+        BackColor = new Color(0, 123, 255),
+        TextColor = Color.White,
+    };
 
     private static IconButtonWidget CreateButtonWithImage(
-        VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
+        VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment) => new()
     {
-        return new IconButtonWidget()
-        {
-            SvgImage = LoadSomeSvgAsString(),
-            VerticalAlignment = verticalAlignment,
-            HorizontalAlignment = horizontalAlignment,
-            Margin = new MRect(30),
-            Padding = new MRect(10, 8),
-            CornerRadius = 8,
-            Envelope = new MRect(0, 0, 64, 64)
-        };
-    }
+        SvgImage = LoadSomeSvgAsString(),
+        VerticalAlignment = verticalAlignment,
+        HorizontalAlignment = horizontalAlignment,
+        Margin = new MRect(30),
+        Padding = new MRect(10, 8),
+        CornerRadius = 8,
+        Envelope = new MRect(0, 0, 64, 64)
+    };
 
     static string LoadSomeSvgAsString()
     {
         Assembly assembly = typeof(Map).Assembly ?? throw new ArgumentNullException("assembly");
-        using (Stream stream = assembly.GetManifestResourceStream(assembly.GetFullName("Resources.Images.MyLocationStill.svg"))
-            ?? throw new Exception("Can not find embedded resource"))
-        using (StreamReader reader = new StreamReader(stream))
-            return reader.ReadToEnd();
+        using Stream stream = assembly.GetManifestResourceStream(assembly.GetFullName("Resources.Images.MyLocationStill.svg"))
+            ?? throw new Exception("Can not find embedded resource");
+        using StreamReader reader = new StreamReader(stream);
+        return reader.ReadToEnd();
     }
 }
