@@ -161,7 +161,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         _mouseDown = false;
         var position = e.GetPosition(this).ToMapsui();
 
-
         if (_previousMousePosition != null)
         {
             if (IsInBoxZoomMode())
