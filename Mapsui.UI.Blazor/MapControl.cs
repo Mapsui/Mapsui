@@ -171,17 +171,6 @@ public partial class MapControl : ComponentBase, IMapControl
         action();
     }
 
-    protected void OnClick(MouseEventArgs e)
-    {
-        Catch.Exceptions(() =>
-        {
-            var location = e.ToLocation(_clientRect);
-            if (OnWidgetTapped(location, 1, GetShiftPressed()))
-                return;
-            OnInfo(CreateMapInfoEventArgs(location, location, 1));
-        });
-    }
-
     protected void OnDblClick(MouseEventArgs e)
     {
         Catch.Exceptions(() =>
@@ -201,7 +190,8 @@ public partial class MapControl : ComponentBase, IMapControl
             _ = UpdateBoundingRectAsync();
 
             var location = e.ToLocation(_clientRect);
-            _manipulationTracker.Restart([location]);
+            _tapGestureTracker.Start(location);
+            _manipulationTracker.Restart([]);
 
             if (OnWidgetPointerPressed(location, GetShiftPressed()))
                 return;
@@ -213,13 +203,16 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var isHovering = !IsMouseButtonPressed(e);
-            if (OnWidgetPointerMoved(e.ToLocation(_clientRect), !isHovering, GetShiftPressed()))
+            var position = e.ToLocation(_clientRect);
+            _tapGestureTracker.Move(position);
+
+            if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
                 return;
 
             if (isHovering)
                 return;
 
-            _manipulationTracker.Manipulate([e.ToLocation(_clientRect)], Map.Navigator.Pinch);
+            _manipulationTracker.Manipulate([position], Map.Navigator.Pinch);
         });
     }
 
@@ -229,8 +222,17 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            _manipulationTracker.Manipulate([e.ToLocation(_clientRect)], Map.Navigator.Pinch);
+            var location = e.ToLocation(_clientRect);
 
+            _tapGestureTracker.IfTap((position) =>
+            {
+                if (OnWidgetTapped(location, 1, GetShiftPressed()))
+                    return;
+                OnInfo(CreateMapInfoEventArgs(location, location, 1));
+
+            }, MaxTapGestureMovement * PixelDensity);
+
+            _manipulationTracker.Manipulate([e.ToLocation(_clientRect)], Map.Navigator.Pinch);
             RefreshData();
         });
     }
@@ -293,9 +295,9 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var locations = e.TargetTouches.ToTouchLocations(_clientRect);
+            _tapGestureTracker.Move(locations[0]);
             if (OnWidgetPointerMoved(locations[0], true, GetShiftPressed()))
                 return;
-            _tapGestureTracker.Move(locations[0]);
             _manipulationTracker.Manipulate(locations.ToArray(), Map.Navigator.Pinch);
         });
     }
