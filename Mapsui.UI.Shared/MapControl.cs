@@ -8,7 +8,6 @@ using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -59,8 +58,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private int _updateInterval = 16;
     // Stopwatch for measuring drawing times
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
-    // old widget Collection to compare if widget Collection was changed.
-    private ConcurrentQueue<IWidget>? _widgetCollection;
     private IRenderer _renderer = new MapRenderer();
 
     private void CommonInitialize()
@@ -621,7 +618,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 // The HyperLink is a special case because we need platform specific code to open the
                 // link in a browser. If the link is not handled within the widget we handle it
                 // here and return true to indicate this is handled.
-                OpenBrowser(hyperlink.Url!);
+                OpenBrowser(hyperlink.Url);
                 return true;
             }
 
