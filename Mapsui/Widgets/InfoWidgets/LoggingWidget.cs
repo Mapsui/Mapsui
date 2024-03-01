@@ -9,7 +9,7 @@ namespace Mapsui.Widgets.InfoWidgets;
 public enum ShowLoggingInMap
 {
     WhenLoggingWidgetIsEnabled,
-    WhenDebuggerIsAttachedAndLoggingWidgetIsEnabled,
+    WhenLoggingWidgetIsEnabledAndDebuggerIsAttached,
     Never,
 }
 
@@ -45,7 +45,7 @@ public class LoggingWidget : TextBoxWidget
     /// Enabled field of the logging widget is false.
     /// </summary>
     public static ShowLoggingInMap ShowLoggingInMap { get; set; } 
-        = ShowLoggingInMap.WhenDebuggerIsAttachedAndLoggingWidgetIsEnabled;
+        = ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached;
 
     /// <summary>
     ///  Event handler for logging
@@ -169,7 +169,7 @@ public class LoggingWidget : TextBoxWidget
         {
             ShowLoggingInMap.WhenLoggingWidgetIsEnabled => true,
             ShowLoggingInMap.Never => false,
-            ShowLoggingInMap.WhenDebuggerIsAttachedAndLoggingWidgetIsEnabled => System.Diagnostics.Debugger.IsAttached,
+            ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached => System.Diagnostics.Debugger.IsAttached,
             _ => throw new NotSupportedException(nameof(InfoWidgets.ShowLoggingInMap))
         };
 }
