@@ -161,7 +161,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControl_Tapped(object? sender, TappedEventArgs e)
     {
         var position = e.GetPosition(this).ToMapsui();
-        if (OnWidgetTapped(position, position, true, 1, _shiftPressed))
+        if (OnWidgetTapped(position, true, 1, _shiftPressed))
             return;
         OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
@@ -169,7 +169,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControl_DoubleTapped(object? sender, TappedEventArgs e)
     {
         var position = e.GetPosition(this).ToMapsui();
-        if (OnWidgetTapped(position, position, true, 2, _shiftPressed))
+        if (OnWidgetTapped(position, true, 2, _shiftPressed))
             return;
         OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }

@@ -122,7 +122,7 @@ public partial class MapControl : ViewGroup, IMapControl
             return;
 
         var position = GetScreenPosition(e.Event, this);
-        if (OnWidgetTapped(position, position, true, 1, false))
+        if (OnWidgetTapped(position, true, 1, false))
             return;
         OnInfo(CreateMapInfoEventArgs(position, position, 1));
     }
@@ -133,7 +133,7 @@ public partial class MapControl : ViewGroup, IMapControl
             return;
 
         var position = GetScreenPosition(e.Event, this);
-        if (OnWidgetTapped(position, position, true, 2, false))
+        if (OnWidgetTapped(position, true, 2, false))
             return;
         OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }

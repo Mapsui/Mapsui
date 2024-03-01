@@ -572,7 +572,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (touchableWidgets.Count == 0)
             return false;
 
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, position, touchableWidgets);
+        // Todo: Should this use the shared methods for getting the touched widgets?
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, touchableWidgets);
 
         foreach (var widget in touchedWidgets)
         {
@@ -584,11 +585,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool OnWidgetTapped(MPoint position, MPoint? startPosition, bool leftButton, int clickCount, bool shift)
+    private bool OnWidgetTapped(MPoint position, bool leftButton, int clickCount, bool shift)
     {
-        if (startPosition is null)
+        if (position is null)
         {
-            Logger.Log(LogLevel.Error, $"The '{nameof(startPosition)}' is null on release. This is not expected");
+            Logger.Log(LogLevel.Error, $"The '{nameof(position)}' is null on release. This is not expected");
             return false;
         }
         var touchableWidgets = GetTouchableWidgets();
@@ -596,7 +597,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (touchableWidgets.Count == 0)
             return false;
 
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, position, touchableWidgets);
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position,  touchableWidgets);
 
         foreach (var widget in touchedWidgets)
         {

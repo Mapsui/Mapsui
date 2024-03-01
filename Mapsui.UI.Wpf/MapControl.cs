@@ -172,7 +172,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             }
             else if (IsTap(position, _pointerDownPosition))
             {
-                if (OnWidgetTapped(position, position, true, e.ClickCount, GetShiftPressed()))
+                if (OnWidgetTapped(position, true, e.ClickCount, GetShiftPressed()))
                     return;
                 OnInfo(CreateMapInfoEventArgs(position, position, e.ClickCount));
             }

@@ -121,7 +121,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
     {
         var position = e.GetPosition(this).ToMapsui();
-        if (OnWidgetTapped(position, position, true, 1, _shiftPressed))
+        if (OnWidgetTapped(position, true, 1, _shiftPressed))
             return;
         OnInfo(CreateMapInfoEventArgs(position, position, 1));
     }
@@ -129,7 +129,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
     {
         var position = e.GetPosition(this).ToMapsui();
-        if (OnWidgetTapped(position, position, true, 2, _shiftPressed))
+        if (OnWidgetTapped(position, true, 2, _shiftPressed))
             return;        
         OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }

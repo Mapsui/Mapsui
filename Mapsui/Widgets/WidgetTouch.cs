@@ -9,13 +9,12 @@ public static class WidgetTouch
     /// Gets the widgets selected by a touched positions
     /// </summary>
     /// <param name="screenPosition">The screen position in device independent units (or DIP or DP)</param>
-    /// <param name="startScreenPosition">The start screen position in device independent units (or DIP or DP)</param>
     /// <param name="widgets">The widgets to select from.</param>
     /// <returns>
     /// Returns the Widgets in the list that contain the screenPosition
     /// within it's Envelope. Returns null if there are none.
     /// </returns>
-    public static IEnumerable<ITouchableWidget> GetTouchedWidgets(MPoint screenPosition, MPoint startScreenPosition,
+    public static IEnumerable<ITouchableWidget> GetTouchedWidgets(MPoint screenPosition, 
         IEnumerable<ITouchableWidget> widgets)
     {
         var touchedWidgets = new List<ITouchableWidget>();
@@ -33,8 +32,7 @@ public static class WidgetTouch
 
             // Also check for start position, because it should be click on the widget,
             // not a drag that ends above the widget.
-            if ((widget.Envelope?.Contains(screenPosition) ?? false) &&
-                (widget.Envelope?.Contains(startScreenPosition) ?? false))
+            if (widget.Envelope?.Contains(screenPosition) ?? false)
                 touchedWidgets.Add(widget);
         }
 
