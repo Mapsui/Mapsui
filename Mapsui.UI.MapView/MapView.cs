@@ -823,7 +823,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         Height = ButtonSize,
         Rotation = 0,
         Enabled = true,
-        Tapped = (s, e) => tapped(s, e)
+        Tapped = tapped
     };    
 
     protected override void Dispose(bool disposing)
