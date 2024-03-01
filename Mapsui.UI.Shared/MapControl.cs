@@ -585,7 +585,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool OnWidgetTapped(MPoint position, bool leftButton, int clickCount, bool shift)
+    private bool OnWidgetTapped(MPoint position, int clickCount, bool shift)
     {
         if (position is null)
         {
@@ -610,7 +610,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 return true;
             }
 
-            var args = new WidgetEventArgs(position, clickCount, leftButton, shift);
+            var args = new WidgetEventArgs(position, clickCount, true, shift);
 
             if (widget.OnTapped(Map.Navigator, position, args))
                 return true;

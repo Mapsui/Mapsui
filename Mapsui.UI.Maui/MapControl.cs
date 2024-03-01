@@ -246,7 +246,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                 if (IsTap(releasedTouch, _downLocation))
                 {
-                    if (OnWidgetTapped(location, true, 1, false))
+                    if (OnWidgetTapped(location, 1, false))
                         return;
                     OnInfo(CreateMapInfoEventArgs(location, location, 1));
                     return;
