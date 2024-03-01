@@ -37,8 +37,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     public Map()
     {
         BackColor = Color.White;
-        Layers = [];
-        AddLoggingWidgetIfNeeded();
+        Widgets.Add(CreateLoggingWidget());
         Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
     }
@@ -58,8 +57,6 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// Default: "EPSG:3857" (SphericalMercator).
     /// </summary>
     public string? CRS { get; set; } = "EPSG:3857";
-
-    private LoggingWidget? GetLoggingWidget() => Widgets.OfType<LoggingWidget>().SingleOrDefault();
     
     /// <summary>
     /// A collection of layers. The first layer in the list is drawn first, the last one on top.
@@ -281,7 +278,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     private static MMinMax? GetMinMaxResolution(IEnumerable<double>? resolutions)
     {
         if (resolutions == null || !resolutions.Any()) return null;
-        resolutions = resolutions.OrderByDescending(r => r).ToList();
+        resolutions = [.. resolutions.OrderByDescending(r => r)];
         var mostZoomedOut = resolutions.First();
         var mostZoomedIn = resolutions.Last() * 0.5; // Divide by two to allow one extra level to zoom-in
         return new MMinMax(mostZoomedOut, mostZoomedIn);
@@ -386,12 +383,6 @@ public class Map : INotifyPropertyChanged, IDisposable
         }
 
         return areAnimationsRunning;
-    }
-
-    private void AddLoggingWidgetIfNeeded()
-    {
-        if (!Widgets.Any(w => w is LoggingWidget))
-            Widgets.Add(CreateLoggingWidget());
     }
 
     private static LoggingWidget CreateLoggingWidget() => new()
