@@ -3,14 +3,14 @@
 /// <summary>
 /// Widget displaying a clickable hyperlink
 /// </summary>
-public class HyperlinkWidget : TextButtonWidget
+public class HyperlinkWidget : ButtonWidget
 {
-    private string _url = string.Empty;
+    private string? _url = string.Empty;
 
     /// <summary>
     /// URL to open when Widget is clicked
     /// </summary>
-    public string Url
+    public string? Url
     {
         get => _url;
         set

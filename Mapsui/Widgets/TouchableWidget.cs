@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Mapsui.Widgets;
+﻿namespace Mapsui.Widgets;
 
 /// <summary>
 /// Widget that gets touch events
@@ -32,11 +30,11 @@ public abstract class TouchableWidget : Widget, ITouchableWidget
     /// </summary>
     /// <param name="navigator">Navigator of MapControl</param>
     /// <param name="position">Screen position</param>
-    /// <param name="args">Arguments for this widget touch</param>
+    /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    public virtual bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public virtual bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
-        return args.Handled;
+        return false;
     }
 
     /// <summary>
@@ -44,11 +42,11 @@ public abstract class TouchableWidget : Widget, ITouchableWidget
     /// </summary>
     /// <param name="navigator">Navigator of MapControl</param>
     /// <param name="position">Screen position</param>
-    /// <param name="args">Arguments for this widget touch</param>
+    /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    public virtual bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public virtual bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
-        return args.Handled;
+        return false;
     }
 
     /// <summary>
@@ -56,11 +54,10 @@ public abstract class TouchableWidget : Widget, ITouchableWidget
     /// </summary>
     /// <param name="navigator">Navigator of MapControl</param>
     /// <param name="position">Screen position</param>
-    /// <param name="args">Arguments for this widget touch</param>
+    /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    public virtual bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public virtual bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
-        return args.Handled;
+        return false;
     }
-
 }

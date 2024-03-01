@@ -23,17 +23,25 @@ public class ViewportRotateAnimationSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
         var rotateButton = CreateButton("Click to rotate clockwise", VerticalAlignment.Top);
-        rotateButton.Touched += (s, e) => map.Navigator.RotateTo(map.Navigator.Viewport.Rotation + 45, 500, Easing.CubicIn);
+        rotateButton.Tapped = (s, e) =>
+        {
+            map.Navigator.RotateTo(map.Navigator.Viewport.Rotation + 45, 500, Easing.CubicIn);
+            return false;
+        };
         map.Widgets.Add(rotateButton);
 
         var rotateBackButton = CreateButton("Click to rotate counterclockwise", VerticalAlignment.Bottom);
-        rotateBackButton.Touched += (s, e) => map.Navigator.RotateTo(map.Navigator.Viewport.Rotation - 45, 500, Easing.CubicIn);
+        rotateBackButton.Tapped = (s, e) =>
+        {
+            map.Navigator.RotateTo(map.Navigator.Viewport.Rotation - 45, 500, Easing.CubicIn);
+            return false;
+        };
         map.Widgets.Add(rotateBackButton);
 
         return map;
     }
 
-    private static TextButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new TextButtonWidget
+    private static ButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new()
     {
         Text = text,
         Margin = new MRect(20),

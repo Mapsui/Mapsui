@@ -5,9 +5,9 @@ namespace Mapsui.Widgets;
 /// <summary>
 /// Arguments for a touched event of a widget
 /// </summary>
-public class WidgetTouchedEventArgs : EventArgs
+public class WidgetEventArgs : EventArgs
 {
-    public WidgetTouchedEventArgs(MPoint position, int clickCount = 1, bool leftButton = true, bool shift = false)
+    public WidgetEventArgs(MPoint position, int clickCount = 1, bool leftButton = true, bool shift = false)
     {
         Position = position;
         ClickCount = clickCount;
@@ -19,11 +19,6 @@ public class WidgetTouchedEventArgs : EventArgs
     /// Screen Position of touch in device independent units (or DIP or DP)
     /// </summary>
     public MPoint Position { get; }
-
-    /// <summary>
-    /// True, if this Widget had handled this event
-    /// </summary>
-    public bool Handled { get; set; }
 
     /// <summary>
     /// Number of clicks on the Widget
