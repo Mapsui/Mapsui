@@ -553,6 +553,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
         {
+            Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
             var widgetArgs = new WidgetEventArgs(position, 0, true, shift);
             if (widget.OnPointerPressed(Map.Navigator, position, widgetArgs))
                 return true;
@@ -579,6 +580,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position,  Map);
         foreach (var widget in touchedWidgets)
         {
+            Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name}");
             if (widget is HyperlinkWidget hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {
                 // The HyperLink is a special case because we need platform specific code to open the
