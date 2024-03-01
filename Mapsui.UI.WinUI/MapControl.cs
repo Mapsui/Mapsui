@@ -59,14 +59,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY | ManipulationModes.Rotate;
 
-        // Pointer events        
+        ManipulationInertiaStarting += OnManipulationInertiaStarting;
         ManipulationDelta += OnManipulationDelta;
         ManipulationCompleted += OnManipulationCompleted;
-        ManipulationInertiaStarting += OnManipulationInertiaStarting;
-        Tapped += OnSingleTapped;
-        PointerPressed += MapControl_PointerDown;
-        DoubleTapped += OnDoubleTapped;
+
+        PointerPressed += MapControl_PointerPressed;
         PointerMoved += MapControl_PointerMoved;
+        Tapped += OnSingleTapped;
+        DoubleTapped += OnDoubleTapped;
+
         PointerWheelChanged += MapControl_PointerWheelChanged;
 
         KeyDown += MapControl_KeyDown;
@@ -98,7 +99,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         RefreshData();
     }
 
-    private void MapControl_PointerDown(object sender, PointerRoutedEventArgs e)
+    private void MapControl_PointerPressed(object sender, PointerRoutedEventArgs e)
     {
         _pointerDownPosition = e.GetCurrentPoint(this).Position.ToMapsui();
         if (OnWidgetPointerPressed(_pointerDownPosition, e.KeyModifiers == VirtualKeyModifiers.Shift))
@@ -219,6 +220,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
+        if (e.PointerDeviceType == PointerDeviceType.Mouse)
+            return;
+
         Map.Navigator.Pinch(ToManipulation(e));
         RefreshGraphics();
     }
