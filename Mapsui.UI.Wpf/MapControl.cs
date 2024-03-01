@@ -142,7 +142,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         _pointerDownPosition = e.GetPosition(this).ToMapsui();
 
-        if (OnWidgetPointerPressed(_pointerDownPosition, 1, GetShiftPressed()))
+        if (OnWidgetPointerPressed(_pointerDownPosition, GetShiftPressed()))
             return;
 
         _previousMousePosition = _pointerDownPosition;

@@ -93,7 +93,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
         _manipulationTracker.Restart(_pointerLocations.Values.ToArray());
 
-        if (OnWidgetPointerPressed(tapPosition, e.ClickCount, _shiftPressed))
+        if (OnWidgetPointerPressed(tapPosition, _shiftPressed))
             return;
 
         e.Pointer.Capture(this);

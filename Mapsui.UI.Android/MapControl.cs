@@ -183,7 +183,7 @@ public partial class MapControl : ViewGroup, IMapControl
         {
             case MotionEventActions.Down:
                 _manipulationTracker.Restart(locations);
-                if (OnWidgetPointerPressed(locations[0], 0, false))
+                if (OnWidgetPointerPressed(locations[0], false))
                     return;
                 break;
             case MotionEventActions.Move:

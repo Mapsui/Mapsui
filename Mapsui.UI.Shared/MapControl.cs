@@ -547,12 +547,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidateTimer = null;
     }
 
-    private bool OnWidgetPointerMoved(MPoint position, bool leftButton, int clickCount, bool shift)
+    private bool OnWidgetPointerMoved(MPoint position, bool leftButton, int tapCount, bool shift)
     {
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
         {
-            var widgetArgs = new WidgetEventArgs(position, clickCount, leftButton, shift);
+            var widgetArgs = new WidgetEventArgs(position, tapCount, leftButton, shift);
             if (widget.OnPointerMoved(Map.Navigator, position, widgetArgs))
                 return true;
         }
@@ -560,12 +560,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool OnWidgetPointerPressed(MPoint position, int clickCount, bool shift)
+    private bool OnWidgetPointerPressed(MPoint position, bool shift)
     {
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
         {
-            var widgetArgs = new WidgetEventArgs(position, clickCount, true, shift);
+            var widgetArgs = new WidgetEventArgs(position, 0, true, shift);
             if (widget.OnPointerPressed(Map.Navigator, position, widgetArgs))
                 return true;
         }
@@ -573,7 +573,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool OnWidgetTapped(MPoint position, int clickCount, bool shift)
+    private bool OnWidgetTapped(MPoint position, int tapCount, bool shift)
     {
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position,  Map);
         foreach (var widget in touchedWidgets)
@@ -587,7 +587,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 return true;
             }
 
-            var args = new WidgetEventArgs(position, clickCount, true, shift);
+            var args = new WidgetEventArgs(position, tapCount, true, shift);
             if (widget.OnTapped(Map.Navigator, position, args))
                 return true;
         }

@@ -179,7 +179,7 @@ public partial class MapControl : UIView, IMapControl
             if (locations.Length == 1)
             {
                 _pointerDownPosition = locations[0];
-                if (OnWidgetPointerPressed(_pointerDownPosition, 1, false))
+                if (OnWidgetPointerPressed(_pointerDownPosition, false))
                     return;
             }
         });
