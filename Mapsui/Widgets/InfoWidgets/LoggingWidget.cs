@@ -3,14 +3,13 @@ using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
 using System;
 using System.Collections.Concurrent;
-using System.Runtime.CompilerServices;
 
 namespace Mapsui.Widgets.InfoWidgets;
 
 public enum ShowLoggingInMap
 {
-    Always,
-    WhenDebuggerIsAttached,
+    WhenLoggingWidgetIsEnabled,
+    WhenDebuggerIsAttachedAndLoggingWidgetIsEnabled,
     Never,
 }
 
@@ -42,10 +41,20 @@ public class LoggingWidget : TextBoxWidget
     }
 
     /// <summary>
+    /// Global setting to control logging in the map. Note, that there will never be logging in the map if the 
+    /// Enabled field of the logging widget is false.
+    /// </summary>
+    public static ShowLoggingInMap ShowLoggingInMap { get; set; } 
+        = ShowLoggingInMap.WhenDebuggerIsAttachedAndLoggingWidgetIsEnabled;
+
+    /// <summary>
     ///  Event handler for logging
     /// </summary>
     public void Log(LogLevel level, string description, Exception? exception)
     {
+        if (!ShouldLog(Enabled, ShowLoggingInMap))
+            return;
+
         var entry = new LogEntry { LogLevel = level, Description = description, Exception = exception };
 
         _listOfLogEntries.Enqueue(entry);
@@ -60,7 +69,7 @@ public class LoggingWidget : TextBoxWidget
 
     public void Clear()
     {
-        while (_listOfLogEntries.Count > 0)
+        while (!_listOfLogEntries.IsEmpty)
         {
             _listOfLogEntries.TryDequeue(out var _);
         }
@@ -155,16 +164,12 @@ public class LoggingWidget : TextBoxWidget
         }
     }
 
-    public override void Invalidate([CallerMemberName] string name = "")
-    {
-        if (name == nameof(Enabled))
+    private static bool ShouldLog(bool enabled, ShowLoggingInMap showLoggingInMap) =>
+        enabled && showLoggingInMap switch
         {
-            if (Enabled)
-                Logger.LogDelegate += Log;
-            else
-                Logger.LogDelegate -= Log;
-        }
-
-        base.Invalidate(name);
-    }
+            ShowLoggingInMap.WhenLoggingWidgetIsEnabled => true,
+            ShowLoggingInMap.Never => false,
+            ShowLoggingInMap.WhenDebuggerIsAttachedAndLoggingWidgetIsEnabled => System.Diagnostics.Debugger.IsAttached,
+            _ => throw new NotSupportedException(nameof(InfoWidgets.ShowLoggingInMap))
+        };
 }

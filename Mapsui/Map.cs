@@ -30,7 +30,6 @@ public class Map : INotifyPropertyChanged, IDisposable
     private LayerCollection _layers = [];
     private Color _backColor = Color.White;
     private IWidget[] _oldWidgets = [];
-    private ShowLoggingInMap _showLoggingInMap = ShowLoggingInMap.WhenDebuggerIsAttached;
 
     /// <summary>
     /// Initializes a new map
@@ -39,7 +38,6 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = [];
-        ShowLoggingInMap = ShowLoggingInMap.Always;
         AddLoggingWidgetIfNeeded();
         Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
@@ -60,27 +58,6 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// Default: "EPSG:3857" (SphericalMercator).
     /// </summary>
     public string? CRS { get; set; } = "EPSG:3857";
-
-    /// <summary>
-    /// To write log messages on top of the map. This is only for debugging. The default is 'WhenDebuggerIsAttached' 
-    /// which also shows the log messages if the user debugs Mapsui with a release compile of Mapsui. 
-    /// </summary>
-    public ShowLoggingInMap ShowLoggingInMap
-    {
-        get
-        {
-            return _showLoggingInMap;
-        }
-        set
-        {
-            _showLoggingInMap = value;
-
-            // If setter is called after the LoggingWidget was added:
-            var loggingWidget = GetLoggingWidget();
-            if (loggingWidget is not null) 
-                loggingWidget.Enabled = IsLoggingInMapEnabled(_showLoggingInMap);
-        }
-    }
 
     private LoggingWidget? GetLoggingWidget() => Widgets.OfType<LoggingWidget>().SingleOrDefault();
     
@@ -411,32 +388,14 @@ public class Map : INotifyPropertyChanged, IDisposable
         return areAnimationsRunning;
     }
 
-    /// <summary>
-    /// Check, if a debugger is attached and, if yes, add a default LoggingWidget
-    /// </summary>
-    /// <param name="map">Map, to which LoggingWidget should add</param>
     private void AddLoggingWidgetIfNeeded()
     {
-        if (Widgets.Any(w => w is LoggingWidget)) // Do not add a second one
-            return;
-
-        Widgets.Add(CreateLoggingWidget(ShowLoggingInMap));
+        if (!Widgets.Any(w => w is LoggingWidget))
+            Widgets.Add(CreateLoggingWidget());
     }
 
-    private static bool IsLoggingInMapEnabled(ShowLoggingInMap showLoggingInMap)
+    private static LoggingWidget CreateLoggingWidget() => new()
     {
-        if (showLoggingInMap == ShowLoggingInMap.WhenDebuggerIsAttached)
-            return System.Diagnostics.Debugger.IsAttached; // If the debugger is attached later this should be called again.
-        if (showLoggingInMap == ShowLoggingInMap.Always)
-            return true;
-        if (showLoggingInMap == ShowLoggingInMap.Never) 
-            return false;
-        throw new NotSupportedException(nameof(ShowLoggingInMap));        
-    }
-
-    private static LoggingWidget CreateLoggingWidget(ShowLoggingInMap showLoggingInMap) => new()
-    {
-        Enabled = IsLoggingInMapEnabled(showLoggingInMap),
         Margin = new MRect(10),
         VerticalAlignment = VerticalAlignment.Stretch,
         HorizontalAlignment = HorizontalAlignment.Stretch,
