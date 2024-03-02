@@ -32,7 +32,7 @@ public abstract class TouchableWidget : Widget, ITouchableWidget
     /// <param name="position">Screen position</param>
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    public virtual bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public virtual bool OnTapped(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         return false;
     }
@@ -44,7 +44,7 @@ public abstract class TouchableWidget : Widget, ITouchableWidget
     /// <param name="position">Screen position</param>
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    public virtual bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public virtual bool OnPointerPressed(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         return false;
     }
@@ -56,7 +56,7 @@ public abstract class TouchableWidget : Widget, ITouchableWidget
     /// <param name="position">Screen position</param>
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    public virtual bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public virtual bool OnPointerMoved(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         return false;
     }

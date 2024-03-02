@@ -18,14 +18,14 @@ public class EditingWidget : Widget, ITouchableWidget
         EditManipulation = editManipulation;
     }
 
-    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnTapped(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         if (!e.LeftButton)
             return false;
 
         if (MapControl.Map != null)
             MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(
-                PointerState.Up, position, EditManager, MapControl, e.Shift);
+                PointerState.Up, position, EditManager, MapControl, e);
 
         if (EditManager.SelectMode)
         {
@@ -40,7 +40,7 @@ public class EditingWidget : Widget, ITouchableWidget
         return false;
     }
 
-    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnPointerPressed(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         if (!e.LeftButton)
             return false;
@@ -49,22 +49,22 @@ public class EditingWidget : Widget, ITouchableWidget
             return false;
 
         return EditManipulation.Manipulate(
-            PointerState.Down, position, EditManager, MapControl, e.Shift);
+            PointerState.Down, position, EditManager, MapControl, e);
     }
 
-    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnPointerMoved(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         var screenPosition = position;
 
         if (e.LeftButton)
         {
             return EditManipulation.Manipulate(
-                PointerState.Dragging, screenPosition, EditManager, MapControl, e.Shift);
+                PointerState.Dragging, screenPosition, EditManager, MapControl, e);
         }
         else
         {
             return EditManipulation.Manipulate(
-                PointerState.Hovering, screenPosition, EditManager, MapControl, e.Shift);
+                PointerState.Hovering, screenPosition, EditManager, MapControl, e);
         }
     }
 }

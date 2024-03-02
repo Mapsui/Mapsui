@@ -547,72 +547,40 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidateTimer = null;
     }
 
-    private bool HandleWidgetPointerMove(MPoint position, bool leftButton, int clickCount, bool shift)
+  
+    private bool OnWidgetPointerPressed(MPoint position, bool shift)
     {
-        var touchableWidgets = GetTouchableWidgets();
-
-        if (touchableWidgets.Count == 0)
-            return false;
-
-        var widgetArgs = new WidgetEventArgs(position, clickCount, leftButton, shift);
-
-        foreach (var widget in touchableWidgets)
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
+        foreach (var widget in touchedWidgets)
         {
-            if (widget.HandleWidgetMoving(Map.Navigator, position, widgetArgs))
+            Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
+            var widgetArgs = new WidgetEventArgs(position, 0, true, shift);
+            if (widget.OnPointerPressed(Map.Navigator, position, widgetArgs))
                 return true;
         }
 
         return false;
     }
 
-    private bool HandleTouchingTouched(MPoint position, MPoint? startPosition, bool leftButton, int clickCount, bool shift)
+    private bool OnWidgetPointerMoved(MPoint position, bool leftButton, bool shift)
     {
-        bool result = HandleWidgetPointerDown(position, leftButton, clickCount, shift);
-
-        if (HandleWidgetPointerUp(position, startPosition, leftButton, clickCount, shift))
-        {
-            result = true;
-        }
-
-        return result;
-    }
-
-
-    private bool HandleWidgetPointerDown(MPoint position, bool leftButton, int clickCount, bool shift)
-    {
-        var touchableWidgets = GetTouchableWidgets();
-
-        if (touchableWidgets.Count == 0)
-            return false;
-
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, position, touchableWidgets);
-
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
         {
-            var widgetArgs = new WidgetEventArgs(position, clickCount, leftButton, shift);
-            if (widget.HandleWidgetTouching(Map.Navigator, position, widgetArgs))
+            var widgetArgs = new WidgetEventArgs(position, 0, leftButton, shift);
+            if (widget.OnPointerMoved(Map.Navigator, position, widgetArgs))
                 return true;
         }
 
         return false;
     }
 
-    private bool HandleWidgetPointerUp(MPoint position, MPoint? startPosition, bool leftButton, int clickCount, bool shift)
+    private bool OnWidgetTapped(MPoint position, int tapCount, bool shift)
     {
-        if (startPosition is null)
-        {
-            Logger.Log(LogLevel.Error, $"The '{nameof(startPosition)}' is null on release. This is not expected");
-            return false;
-        }
-        var touchableWidgets = GetTouchableWidgets();
-
-        if (touchableWidgets.Count == 0)
-            return false;
-
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, position, touchableWidgets);
-
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position,  Map);
         foreach (var widget in touchedWidgets)
         {
+            Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name}");
             if (widget is HyperlinkWidget hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {
                 // The HyperLink is a special case because we need platform specific code to open the
@@ -622,17 +590,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 return true;
             }
 
-            var args = new WidgetEventArgs(position, clickCount, leftButton, shift);
-
-            if (widget.HandleWidgetTouched(Map.Navigator, position, args))
+            var args = new WidgetEventArgs(position, tapCount, true, shift);
+            if (widget.OnTapped(Map.Navigator, position, args))
                 return true;
         }
 
         return false;
-    }
-
-    private List<ITouchableWidget> GetTouchableWidgets()
-    {
-        return Map.GetWidgetsOfMapAndLayers().OfType<ITouchableWidget>().ToList();
     }
 }

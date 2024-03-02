@@ -142,7 +142,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         _pointerDownPosition = e.GetPosition(this).ToMapsui();
 
-        if (HandleWidgetPointerDown(_pointerDownPosition, true, e.ClickCount, GetShiftPressed()))
+        if (OnWidgetPointerPressed(_pointerDownPosition, GetShiftPressed()))
             return;
 
         _previousMousePosition = _pointerDownPosition;
@@ -158,31 +158,26 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
-        var mousePosition = e.GetPosition(this).ToMapsui();
-
-        if (HandleWidgetPointerUp(mousePosition, _pointerDownPosition, true, e.ClickCount, GetShiftPressed()))
-        {
-            _mouseDown = false;
-
-            return;
-        }
+        _mouseDown = false;
+        var position = e.GetPosition(this).ToMapsui();
 
         if (_previousMousePosition != null)
         {
             if (IsInBoxZoomMode())
             {
                 var previous = Map.Navigator.Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
-                var current = Map.Navigator.Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
+                var current = Map.Navigator.Viewport.ScreenToWorld(position.X, position.Y);
                 ZoomToBox(previous, current);
             }
-            else if (_pointerDownPosition != null && IsClick(mousePosition, _pointerDownPosition))
+            else if (IsTap(position, _pointerDownPosition))
             {
-                OnInfo(CreateMapInfoEventArgs(mousePosition, _pointerDownPosition, e.ClickCount));
+                if (OnWidgetTapped(position, e.ClickCount, GetShiftPressed()))
+                    return;
+                OnInfo(CreateMapInfoEventArgs(position, position, e.ClickCount));
             }
         }
 
         RefreshData();
-        _mouseDown = false;
 
         double velocityX;
         double velocityY;
@@ -201,7 +196,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         ReleaseMouseCapture();
     }
 
-    private static bool IsClick(MPoint currentPosition, MPoint? previousPosition)
+    private static bool IsTap(MPoint currentPosition, MPoint? previousPosition)
     {
         if (previousPosition is null)
             return false;
@@ -214,7 +209,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlTouchUp(object? sender, TouchEventArgs e)
     {
         var touchPosition = e.GetTouchPoint(this).Position.ToMapsui();
-        if (IsClick(touchPosition, _pointerDownPosition))
+        if (IsTap(touchPosition, _pointerDownPosition))
         {
             OnInfo(CreateMapInfoEventArgs(touchPosition, touchPosition, 1));
         }
@@ -232,7 +227,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseMove(object sender, MouseEventArgs e)
     {
-        if (HandleWidgetPointerMove(e.GetPosition(this).ToMapsui(), e.LeftButton == MouseButtonState.Pressed, 0, GetShiftPressed()))
+        var isHovering = IsHovering(e);
+        if (OnWidgetPointerMoved(e.GetPosition(this).ToMapsui(), !isHovering, GetShiftPressed()))
             return;
 
         if (IsInBoxZoomMode())
@@ -387,5 +383,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private static bool GetShiftPressed()
     {
         return Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+    }
+
+    private static bool IsHovering(MouseEventArgs e)
+    {
+        return e.LeftButton != MouseButtonState.Pressed;
     }
 }

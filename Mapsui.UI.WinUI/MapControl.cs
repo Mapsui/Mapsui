@@ -9,6 +9,7 @@ using Mapsui.Logging;
 using Mapsui.Manipulations;
 using Mapsui.UI.WinUI.Extensions;
 using Microsoft.UI;
+using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -26,7 +27,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 {
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
-    private MPoint? _pointerDownPosition;
     bool _shiftPressed;
 
     public MapControl()
@@ -58,14 +58,16 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY | ManipulationModes.Rotate;
 
-        // Pointer events        
+        ManipulationInertiaStarting += OnManipulationInertiaStarting;
         ManipulationDelta += OnManipulationDelta;
         ManipulationCompleted += OnManipulationCompleted;
-        ManipulationInertiaStarting += OnManipulationInertiaStarting;
-        Tapped += OnSingleTapped;
-        PointerPressed += MapControl_PointerDown;
-        DoubleTapped += OnDoubleTapped;
+
+        PointerPressed += MapControl_PointerPressed;
         PointerMoved += MapControl_PointerMoved;
+        
+        Tapped += OnSingleTapped;
+        DoubleTapped += OnDoubleTapped;
+
         PointerWheelChanged += MapControl_PointerWheelChanged;
 
         KeyDown += MapControl_KeyDown;
@@ -97,40 +99,48 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         RefreshData();
     }
 
-    private void MapControl_PointerDown(object sender, PointerRoutedEventArgs e)
+    private void MapControl_PointerPressed(object sender, PointerRoutedEventArgs e)
     {
-        _pointerDownPosition = e.GetCurrentPoint(this).Position.ToMapsui();
+        var position = e.GetCurrentPoint(this).Position.ToMapsui();
+        if (OnWidgetPointerPressed(position, e.KeyModifiers == VirtualKeyModifiers.Shift))
+            return;
     }
 
     private void MapControl_PointerMoved(object sender, PointerRoutedEventArgs e)
     {
         var position = e.GetCurrentPoint(this).Position.ToMapsui();
-        if (HandleWidgetPointerMove(position, true, 0, e.KeyModifiers == VirtualKeyModifiers.Shift))
-            e.Handled = true;
+        var isHovering = IsHovering(e);
+
+        // This is complicated. The OnManipulationDelta is also fired on mouse and touch events,
+        // is sufficient except for hover events. So this method is only for mouse hover
+        if (!isHovering)
+            return;
+
+        if (OnWidgetPointerMoved(position, !isHovering, e.KeyModifiers == VirtualKeyModifiers.Shift))
+            return;
     }
 
-    private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+    private bool IsHovering(PointerRoutedEventArgs e)
     {
-        var tapPosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouchingTouched(tapPosition, _pointerDownPosition, true, 2, _shiftPressed))
-        {
-            e.Handled = true;
-            return;
-        }
-
-        OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
+        if (e.Pointer.PointerDeviceType == PointerDeviceType.Touch)
+            return false;
+        return !e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
     }
 
     private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
     {
-        var tabPosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouchingTouched(tabPosition, _pointerDownPosition, true, 1, _shiftPressed))
-        {
-            e.Handled = true;
+        var position = e.GetPosition(this).ToMapsui();
+        if (OnWidgetTapped(position, 1, _shiftPressed))
             return;
-        }
+        OnInfo(CreateMapInfoEventArgs(position, position, 1));
+    }
 
-        OnInfo(CreateMapInfoEventArgs(tabPosition, tabPosition, 1));
+    private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+    {
+        var position = e.GetPosition(this).ToMapsui();
+        if (OnWidgetTapped(position, 2, _shiftPressed))
+            return;        
+        OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 
     private static Rectangle CreateSelectRectangle()
@@ -216,13 +226,19 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
+        var manipulation = ToManipulation(e);
+        var position = manipulation.Center;
+        var isHovering = false;
+        if (OnWidgetPointerMoved(position, !isHovering, false))
+            return;
+
         Map.Navigator.Pinch(ToManipulation(e));
         RefreshGraphics();
     }
 
     private Manipulation ToManipulation(ManipulationDeltaRoutedEventArgs e)
     {
-        var previousCenter = TransformToVisual(null).Inverse.TransformPoint(e.Position).ToMapsui();
+        var previousCenter = TransformToVisual(this).Inverse.TransformPoint(e.Position).ToMapsui();
         var center = previousCenter.Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
         return new Manipulation(center, previousCenter, e.Delta.Scale, e.Delta.Rotation, e.Cumulative.Rotation);
     }

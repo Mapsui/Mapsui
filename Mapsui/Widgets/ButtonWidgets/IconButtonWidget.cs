@@ -104,17 +104,17 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
 
     public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
 
-    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnTapped(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         return Tapped(this, e);
     }
 
-    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnPointerPressed(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         return false;
     }
 
-    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnPointerMoved(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         return false;
     }

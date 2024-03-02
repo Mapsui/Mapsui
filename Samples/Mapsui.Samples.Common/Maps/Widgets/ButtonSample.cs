@@ -15,7 +15,7 @@ public class ButtonSample : ISample
     public string Name => "Button";
     public string Category => "Widgets";
 
-    private int _clickCount;
+    private int _tapCount;
 
     public Task<Map> CreateMapAsync()
     {
@@ -25,7 +25,7 @@ public class ButtonSample : ISample
 
         map.Widgets.Add(CreateButton("Tap me", VerticalAlignment.Top, HorizontalAlignment.Left, (s, a) =>
             {
-                s.Text = $"Tapped {++_clickCount} times";
+                s.Text = $"Tapped {++_tapCount} times";
                 map.RefreshGraphics();
                 return false;
             }));
