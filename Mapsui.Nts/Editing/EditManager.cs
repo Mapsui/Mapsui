@@ -392,4 +392,12 @@ public class EditManager
             _scaleInfo.Feature = null;
         }
     }
+
+    internal void ResetManipulations()
+    {
+        _dragInfo.Reset();
+        _addInfo.Reset();
+        _rotateInfo.Reset();
+        _scaleInfo.Reset();
+    }
 }

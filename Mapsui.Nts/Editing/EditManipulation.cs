@@ -95,6 +95,12 @@ public class EditManipulation
                 }
             case PointerState.Hovering:
                 editManager.HoveringVertex(mapControl.GetMapInfo(screenPosition));
+                // There is a lot to improve in the edit logic. When scaling or rotating a 
+                // geometry the editing widget captures the pointer. It does this by setting
+                // the state of info classes. Resetting it releases the capture. We call this
+                // method not on hover, which it is also a bit weird, PointerRelease would be
+                // more logical but we don't have that event yet.
+                editManager.ResetManipulations();
                 return false;
             default:
                 throw new Exception();
