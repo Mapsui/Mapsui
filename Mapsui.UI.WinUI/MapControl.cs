@@ -27,7 +27,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 {
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
-    private MPoint? _pointerDownPosition;
     bool _shiftPressed;
 
     public MapControl()
@@ -65,6 +64,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         PointerPressed += MapControl_PointerPressed;
         PointerMoved += MapControl_PointerMoved;
+        
         Tapped += OnSingleTapped;
         DoubleTapped += OnDoubleTapped;
 
@@ -101,8 +101,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerPressed(object sender, PointerRoutedEventArgs e)
     {
-        _pointerDownPosition = e.GetCurrentPoint(this).Position.ToMapsui();
-        if (OnWidgetPointerPressed(_pointerDownPosition, e.KeyModifiers == VirtualKeyModifiers.Shift))
+        var position = e.GetCurrentPoint(this).Position.ToMapsui();
+        if (OnWidgetPointerPressed(position, e.KeyModifiers == VirtualKeyModifiers.Shift))
             return;
     }
 
@@ -110,6 +110,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var position = e.GetCurrentPoint(this).Position.ToMapsui();
         var isHovering = IsHovering(e);
+
+        // This is complicated. The OnManipulationDelta is also fired on mouse and touch events,
+        // is sufficient except for hover events. So this method is only for mouse hover
+        if (!isHovering)
+            return;
+
         if (OnWidgetPointerMoved(position, !isHovering, e.KeyModifiers == VirtualKeyModifiers.Shift))
             return;
     }
@@ -220,7 +226,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
-        if (e.PointerDeviceType == PointerDeviceType.Mouse)
+        var manipulation = ToManipulation(e);
+        var position = manipulation.Center;
+        var isHovering = false;
+        if (OnWidgetPointerMoved(position, !isHovering, false))
             return;
 
         Map.Navigator.Pinch(ToManipulation(e));
@@ -229,7 +238,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private Manipulation ToManipulation(ManipulationDeltaRoutedEventArgs e)
     {
-        var previousCenter = TransformToVisual(null).Inverse.TransformPoint(e.Position).ToMapsui();
+        var previousCenter = TransformToVisual(this).Inverse.TransformPoint(e.Position).ToMapsui();
         var center = previousCenter.Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
         return new Manipulation(center, previousCenter, e.Delta.Scale, e.Delta.Rotation, e.Cumulative.Rotation);
     }
