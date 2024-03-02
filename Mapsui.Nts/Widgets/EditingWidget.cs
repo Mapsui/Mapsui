@@ -25,7 +25,7 @@ public class EditingWidget : Widget, ITouchableWidget
 
         if (MapControl.Map != null)
             MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(
-                PointerState.Up, position, EditManager, MapControl, e.Shift);
+                PointerState.Up, position, EditManager, MapControl, e);
 
         if (EditManager.SelectMode)
         {
@@ -49,7 +49,7 @@ public class EditingWidget : Widget, ITouchableWidget
             return false;
 
         return EditManipulation.Manipulate(
-            PointerState.Down, position, EditManager, MapControl, e.Shift);
+            PointerState.Down, position, EditManager, MapControl, e);
     }
 
     public bool OnPointerMoved(Navigator navigator, MPoint position, WidgetEventArgs e)
@@ -59,12 +59,12 @@ public class EditingWidget : Widget, ITouchableWidget
         if (e.LeftButton)
         {
             return EditManipulation.Manipulate(
-                PointerState.Dragging, screenPosition, EditManager, MapControl, e.Shift);
+                PointerState.Dragging, screenPosition, EditManager, MapControl, e);
         }
         else
         {
             return EditManipulation.Manipulate(
-                PointerState.Hovering, screenPosition, EditManager, MapControl, e.Shift);
+                PointerState.Hovering, screenPosition, EditManager, MapControl, e);
         }
     }
 }
