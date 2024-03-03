@@ -261,7 +261,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
     public string? Cursor { get; set; }
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
-    public async void OpenBrowser(string url)
+    public async void OpenInBrowser(string url)
     {
         Catch.Exceptions(async () =>
         {

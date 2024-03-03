@@ -196,7 +196,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         Catch.TaskRun(() => Dispatcher.UIThread.InvokeAsync(action));
     }
 
-    public void OpenBrowser(string url)
+    public void OpenInBrowser(string url)
     {
         using (Process.Start(new ProcessStartInfo
         {

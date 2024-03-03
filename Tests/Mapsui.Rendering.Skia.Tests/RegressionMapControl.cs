@@ -60,7 +60,7 @@ public sealed class RegressionMapControl : IMapControl
     }
 
     public IRenderer Renderer { get; }
-    public void OpenBrowser(string url)
+    public void OpenInBrowser(string url)
     {
         throw new NotImplementedException();
     }

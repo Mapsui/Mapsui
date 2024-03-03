@@ -270,7 +270,7 @@ public partial class MapControl : ViewGroup, IMapControl
         view.Right = r;
     }
 
-    public void OpenBrowser(string url)
+    public void OpenInBrowser(string url)
     {
         var uri = global::Android.Net.Uri.Parse(url);
         var intent = new Intent(Intent.ActionView);

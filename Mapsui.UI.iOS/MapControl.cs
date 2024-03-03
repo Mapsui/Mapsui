@@ -267,7 +267,7 @@ public partial class MapControl : UIView, IMapControl
         SetViewportSize();
     }
 
-    public async void OpenBrowser(string url)
+    public async void OpenInBrowser(string url)
     {
         try
         {

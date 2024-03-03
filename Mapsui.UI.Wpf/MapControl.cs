@@ -215,7 +215,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         }
     }
 
-    public void OpenBrowser(string url)
+    public void OpenInBrowser(string url)
     {
         Process.Start(new ProcessStartInfo
         {

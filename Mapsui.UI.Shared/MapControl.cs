@@ -586,7 +586,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 // The HyperLink is a special case because we need platform specific code to open the
                 // link in a browser. If the link is not handled within the widget we handle it
                 // here and return true to indicate this is handled.
-                OpenBrowser(hyperlink.Url);
+                OpenInBrowser(hyperlink.Url);
                 return true;
             }
 

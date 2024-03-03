@@ -138,7 +138,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         return Math.Abs(PointF.Distance(currentPosition, previousPosition)) < 5;
     }
 
-    public void OpenBrowser(string url)
+    private void OpenInBrowser(string url)
     {
         Process.Start(new ProcessStartInfo
         {
@@ -147,6 +147,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
             UseShellExecute = true
         });
     }
+
     protected override void OnMouseMove(MouseEventArgs e)
     {
         base.OnMouseMove(e);

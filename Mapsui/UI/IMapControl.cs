@@ -22,7 +22,7 @@ public interface IMapControl : IDisposable
 
     IRenderer Renderer { get; }
 
-    void OpenBrowser(string url); //todo: Perhaps remove
+    void OpenInBrowser(string url); //todo: Perhaps remove
 
     /// <summary>
     /// The number of pixel per device independent unit

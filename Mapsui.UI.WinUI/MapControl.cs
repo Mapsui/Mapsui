@@ -243,7 +243,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         return new Manipulation(center, previousCenter, e.Delta.Scale, e.Delta.Rotation, e.Cumulative.Rotation);
     }
 
-    public void OpenBrowser(string url)
+    public void OpenInBrowser(string url)
     {
         Catch.TaskRun(async () => await Launcher.LaunchUriAsync(new Uri(url)));
     }
