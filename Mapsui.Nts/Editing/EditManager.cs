@@ -392,4 +392,15 @@ public class EditManager
             _scaleInfo.Feature = null;
         }
     }
+
+    internal void ResetManipulations()
+    {
+        _dragInfo.Reset();
+        _rotateInfo.Reset();
+        _scaleInfo.Reset();
+
+        // Do not reset AddInfo, because it shows the next vertex to be added in hover mode.
+        // The AddInfo should be reset when the geometry is closed.
+        // _addInfo.Reset();
+    }
 }

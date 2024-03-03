@@ -116,19 +116,9 @@ public class ManyPinsSample : IMapViewSample
         mapControl.Map = OsmSample.CreateMap();
 
         if (mapControl.Performance == null)
-            mapControl.Performance = new Utilities.Performance();
+            mapControl.Performance = new Performance();
 
-        var widget = new PerformanceWidget(mapControl.Performance);
-
-        widget.Touched += (sender, args) =>
-        {
-            mapControl?.Performance.Clear();
-            mapControl?.RefreshGraphics();
-
-            args.Handled = true;
-        };
-
-        mapControl.Map.Widgets.Add(widget);
+        mapControl.Map.Widgets.Add(CreatePerformanceWidget(mapControl));
         mapControl.Renderer.WidgetRenders[typeof(PerformanceWidget)] = new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer();
 
         ((UI.Maui.MapView)mapControl).UseDoubleTap = true;
@@ -144,13 +134,27 @@ public class ManyPinsSample : IMapViewSample
             list.Add(CreatePin(i));
         }
 
-        var timePart1 = sw.Elapsed;
+        _ = sw.Elapsed;
 
         ((ObservableRangeCollection<Pin>)((UI.Maui.MapView)mapControl).Pins).AddRange(list);
 
-        var timePart2 = sw.Elapsed;
+        _ = sw.Elapsed;
 
         sw.Stop();
+    }
+
+    private static PerformanceWidget CreatePerformanceWidget(IMapControl mapControl)
+    {
+        ArgumentNullException.ThrowIfNull(mapControl.Performance);
+        return new PerformanceWidget(mapControl.Performance)
+        {
+            Tapped = (sender, args) =>
+            {
+                mapControl?.Performance.Clear();
+                mapControl?.RefreshGraphics();
+                return true;
+            }
+        };
     }
 
     private Pin CreatePin(int num)

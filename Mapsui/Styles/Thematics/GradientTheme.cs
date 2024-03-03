@@ -178,18 +178,16 @@ public class GradientTheme : Style, IThemeStyle
 
     private static double InterpolateDouble(double min, double max, double fraction) => (max - min) * fraction + min;
 
-    private static Brush InterpolateBrush(Brush min, Brush max, double fraction)
-        => new()
-        {
-            Color = InterpolateColor(min.Color ?? Color.Transparent, max.Color ?? Color.Transparent, fraction)
-        };
+    private static Brush InterpolateBrush(Brush min, Brush max, double fraction) => new()
+    {
+        Color = InterpolateColor(min.Color ?? Color.Transparent, max.Color ?? Color.Transparent, fraction)
+    };
 
-    private static Pen InterpolatePen(Pen min, Pen max, double fraction)
-        => new()
-        {
-            Color = InterpolateColor(min.Color, max.Color, fraction),
-            Width = InterpolateDouble(min.Width, max.Width, fraction)
-        };
+    private static Pen InterpolatePen(Pen min, Pen max, double fraction) => new()
+    {
+        Color = InterpolateColor(min.Color, max.Color, fraction),
+        Width = InterpolateDouble(min.Width, max.Width, fraction)
+    };
 
     private static Color InterpolateColor(Color minColor, Color maxColor, double fraction)
     {

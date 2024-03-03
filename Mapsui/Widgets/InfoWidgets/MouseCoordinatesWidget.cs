@@ -17,17 +17,17 @@ public class MouseCoordinatesWidget : TextBoxWidget, ITouchableWidget
         Text = "Mouse Position";
     }
 
-    public bool HandleWidgetTouched(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public bool OnTapped(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         return false;
     }
 
-    public bool HandleWidgetTouching(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public bool OnPointerPressed(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         return false;
     }
 
-    public bool HandleWidgetMoving(Navigator navigator, MPoint position, WidgetTouchedEventArgs args)
+    public bool OnPointerMoved(Navigator navigator, MPoint position, WidgetEventArgs e)
     {
         var worldPosition = navigator.Viewport.ScreenToWorld(position);
         // update the Mouse position

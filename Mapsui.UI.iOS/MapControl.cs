@@ -130,12 +130,16 @@ public partial class MapControl : UIView, IMapControl
     private void OnDoubleTapped(UITapGestureRecognizer gesture)
     {
         var position = GetScreenPosition(gesture.LocationInView(this));
+        if (OnWidgetTapped(position, 1, false))
+            return;
         OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 
     private void OnSingleTapped(UITapGestureRecognizer gesture)
     {
         var position = GetScreenPosition(gesture.LocationInView(this));
+        if (OnWidgetTapped(position, 2, false))
+            return;
         OnInfo(CreateMapInfoEventArgs(position, position, 1));
     }
 
@@ -175,7 +179,7 @@ public partial class MapControl : UIView, IMapControl
             if (locations.Length == 1)
             {
                 _pointerDownPosition = locations[0];
-                if (HandleWidgetPointerDown(_pointerDownPosition, true, 1, false))
+                if (OnWidgetPointerPressed(_pointerDownPosition, false))
                     return;
             }
         });
@@ -190,7 +194,7 @@ public partial class MapControl : UIView, IMapControl
 
             if (locations.Length == 1)
             {
-                if (HandleWidgetPointerMove(locations[0], true, 1, false))
+                if (OnWidgetPointerMoved(locations[0], true, false))
                     return;
             }
 

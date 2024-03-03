@@ -122,7 +122,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         }
         else if (_pointerDownPosition.HasValue)
         {
-            if (IsClick(e.Location, _pointerDownPosition.Value))
+            if (IsTap(e.Location, _pointerDownPosition.Value))
                 OnInfo(CreateMapInfoEventArgs(e.Location.ToMapsui(), _pointerDownPosition.Value.ToMapsui(), 1));
         }
 
@@ -133,7 +133,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         RefreshData();
     }
 
-    private static bool IsClick(PointF currentPosition, PointF previousPosition)
+    private static bool IsTap(PointF currentPosition, PointF previousPosition)
     {
         return Math.Abs(PointF.Distance(currentPosition, previousPosition)) < 5;
     }
