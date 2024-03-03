@@ -5,11 +5,11 @@ namespace Mapsui.Utilities;
 
 public static class PlatformUtilities
 {
-    private static Func<Task> OpenInBrowserFunc { get; set; } = () => throw new Exception(
+    private static Func<string, Task> OpenInBrowserFunc { get; set; } = (url) => throw new Exception(
         $"The '{nameof(OpenInBrowserFunc)}' method needs to be assigned in the MapControl constructor with the platform" +
         $" specific implementation before calling it");
 
-    public static void SetOpenInBrowserFunc(Func<Task> openInBrowserFunc)
+    public static void SetOpenInBrowserFunc(Func<string, Task> openInBrowserFunc)
     {
         ArgumentNullException.ThrowIfNull(openInBrowserFunc, nameof(openInBrowserFunc));
         OpenInBrowserFunc = openInBrowserFunc;
@@ -18,6 +18,6 @@ public static class PlatformUtilities
     public static async Task OpenInBrowserAsync(string url)
     {
         ArgumentNullException.ThrowIfNull(url, nameof(url));
-        await OpenInBrowserFunc();
+        await OpenInBrowserFunc(url);
     }
 }
