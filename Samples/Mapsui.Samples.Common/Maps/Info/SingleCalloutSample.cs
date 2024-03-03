@@ -39,8 +39,8 @@ public class SingleCalloutSample : ISample
 
     private static void MapOnInfo(object? sender, MapInfoEventArgs e)
     {
-        var calloutStyle = e.MapInfo?.Feature?.Styles.Where(s => s is CalloutStyle).Cast<CalloutStyle>().FirstOrDefault();
-        if (calloutStyle != null)
+        var calloutStyle = e.MapInfo?.Feature?.Styles.OfType<CalloutStyle>().FirstOrDefault();
+        if (calloutStyle is not null)
         {
             calloutStyle.Enabled = !calloutStyle.Enabled;
             e.MapInfo?.Layer?.DataHasChanged(); // To trigger a refresh of graphics.

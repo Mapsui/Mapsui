@@ -789,22 +789,22 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void CreateButtons()
     {
-        _mapZoomInButton ??= CreateButton(0, 0, _pictZoomIn, (s, e) => { Map.Navigator.ZoomIn(); e.Handled = true; });
+        _mapZoomInButton ??= CreateButton(0, 0, _pictZoomIn, (s, e) => { Map.Navigator.ZoomIn(); return true; });
         _mapZoomInButton.Picture = _pictZoomIn;
         _mapZoomInButton.Enabled = IsZoomButtonVisible;
         Map!.Widgets.Add(_mapZoomInButton);
 
-        _mapZoomOutButton ??= CreateButton(0, 40, _pictZoomOut, (s, e) => { Map.Navigator.ZoomOut(); e.Handled = true; });
+        _mapZoomOutButton ??= CreateButton(0, 40, _pictZoomOut, (s, e) => { Map.Navigator.ZoomOut(); return true; });
         _mapZoomOutButton.Picture = _pictZoomOut;
         _mapZoomOutButton.Enabled = IsZoomButtonVisible;
         Map!.Widgets.Add(_mapZoomOutButton);
 
-        _mapMyLocationButton ??= CreateButton(0, 88, _pictMyLocationNoCenter, (s, e) => { MyLocationFollow = true; e.Handled = true; });
+        _mapMyLocationButton ??= CreateButton(0, 88, _pictMyLocationNoCenter, (s, e) => { MyLocationFollow = true; return true; });
         _mapMyLocationButton.Picture = _pictMyLocationNoCenter;
         _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
         Map!.Widgets.Add(_mapMyLocationButton);
 
-        _mapNorthingButton ??= CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Map.Navigator.RotateTo(0)); e.Handled = true; });
+        _mapNorthingButton ??= CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Map.Navigator.RotateTo(0)); return true; });
         _mapNorthingButton.Picture = _pictNorthing;
         _mapNorthingButton.Enabled = IsNorthingButtonVisible;
         Map!.Widgets.Add(_mapNorthingButton);
@@ -812,23 +812,19 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         UpdateButtonPositions();
     }
 
-    private IconButtonWidget CreateButton(float x, float y, SKPicture picture, Action<object?, WidgetTouchedEventArgs> action)
+    private IconButtonWidget CreateButton(
+        float x, float y, SKPicture picture, Func<IconButtonWidget, WidgetEventArgs, bool> tapped) => new()
     {
-        var result = new IconButtonWidget
-        {
-            Picture = picture,
-            HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,
-            VerticalAlignment = Widgets.VerticalAlignment.Absolute,
-            Position = new MPoint(x, y),
-            Width = ButtonSize,
-            Height = ButtonSize,
-            Rotation = 0,
-            Enabled = true,
-        };
-        result.Touched += (s, e) => action(s, e);
-
-        return result;
-    }
+        Picture = picture,
+        HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,
+        VerticalAlignment = Widgets.VerticalAlignment.Absolute,
+        Position = new MPoint(x, y),
+        Width = ButtonSize,
+        Height = ButtonSize,
+        Rotation = 0,
+        Enabled = true,
+        Tapped = tapped
+    };    
 
     protected override void Dispose(bool disposing)
     {
@@ -854,21 +850,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         HideCallouts();
     }
 
-    protected override bool OnSingleTapped(MPoint screenPosition)
+    protected override void OnSingleTapped(MPoint screenPosition)
     {
         HandlerTap(new TappedEventArgs(screenPosition, 1));
-        return base.OnSingleTapped(screenPosition);
-    }
-
-    protected override bool OnDoubleTapped(MPoint screenPosition, int numOfTaps)
-    {
-        HandlerTap(new TappedEventArgs(screenPosition, numOfTaps));
-        return base.OnDoubleTapped(screenPosition, numOfTaps);
-    }
-
-    protected override bool OnTouchMove(List<MPoint> touchPoints)
-    {
-        RunOnUIThread(() => MyLocationFollow = false);
-        return base.OnTouchMove(touchPoints);
+        base.OnSingleTapped(screenPosition);
     }
 }

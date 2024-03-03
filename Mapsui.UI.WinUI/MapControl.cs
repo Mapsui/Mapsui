@@ -6,8 +6,10 @@
 
 using Mapsui.Extensions;
 using Mapsui.Logging;
+using Mapsui.Manipulations;
 using Mapsui.UI.WinUI.Extensions;
 using Microsoft.UI;
+using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -25,7 +27,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 {
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
-    private MPoint? _pointerDownPosition;
     bool _shiftPressed;
 
     public MapControl()
@@ -57,15 +58,16 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY | ManipulationModes.Rotate;
 
-        // Pointer events        
-        ManipulationStarted += OnManipulationStarted;
+        ManipulationInertiaStarting += OnManipulationInertiaStarting;
         ManipulationDelta += OnManipulationDelta;
         ManipulationCompleted += OnManipulationCompleted;
-        ManipulationInertiaStarting += OnManipulationInertiaStarting;
-        Tapped += OnSingleTapped;
-        PointerPressed += MapControl_PointerDown;
-        DoubleTapped += OnDoubleTapped;
+
+        PointerPressed += MapControl_PointerPressed;
         PointerMoved += MapControl_PointerMoved;
+        
+        Tapped += OnSingleTapped;
+        DoubleTapped += OnDoubleTapped;
+
         PointerWheelChanged += MapControl_PointerWheelChanged;
 
         KeyDown += MapControl_KeyDown;
@@ -95,48 +97,50 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
     {
         RefreshData();
-        Console.WriteLine(Guid.NewGuid());
     }
 
-    private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+    private void MapControl_PointerPressed(object sender, PointerRoutedEventArgs e)
     {
-        Map.Navigator.ClearPinchState();
-    }
-
-    private void MapControl_PointerDown(object sender, PointerRoutedEventArgs e)
-    {
-        _pointerDownPosition = e.GetCurrentPoint(this).Position.ToMapsui();
+        var position = e.GetCurrentPoint(this).Position.ToMapsui();
+        if (OnWidgetPointerPressed(position, e.KeyModifiers == VirtualKeyModifiers.Shift))
+            return;
     }
 
     private void MapControl_PointerMoved(object sender, PointerRoutedEventArgs e)
     {
         var position = e.GetCurrentPoint(this).Position.ToMapsui();
-        if (HandleWidgetPointerMove(position, true, 0, e.KeyModifiers == VirtualKeyModifiers.Shift))
-            e.Handled = true;
+        var isHovering = IsHovering(e);
+
+        // This is complicated. The OnManipulationDelta is also fired on mouse and touch events,
+        // is sufficient except for hover events. So this method is only for mouse hover
+        if (!isHovering)
+            return;
+
+        if (OnWidgetPointerMoved(position, !isHovering, e.KeyModifiers == VirtualKeyModifiers.Shift))
+            return;
     }
 
-    private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+    private bool IsHovering(PointerRoutedEventArgs e)
     {
-        var tapPosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouchingTouched(tapPosition, _pointerDownPosition, true, 2, _shiftPressed))
-        {
-            e.Handled = true;
-            return;
-        }
-
-        OnInfo(CreateMapInfoEventArgs(tapPosition, tapPosition, 2));
+        if (e.Pointer.PointerDeviceType == PointerDeviceType.Touch)
+            return false;
+        return !e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
     }
 
     private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
     {
-        var tabPosition = e.GetPosition(this).ToMapsui();
-        if (HandleTouchingTouched(tabPosition, _pointerDownPosition, true, 1, _shiftPressed))
-        {
-            e.Handled = true;
+        var position = e.GetPosition(this).ToMapsui();
+        if (OnWidgetTapped(position, 1, _shiftPressed))
             return;
-        }
+        OnInfo(CreateMapInfoEventArgs(position, position, 1));
+    }
 
-        OnInfo(CreateMapInfoEventArgs(tabPosition, tabPosition, 1));
+    private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+    {
+        var position = e.GetPosition(this).ToMapsui();
+        if (OnWidgetTapped(position, 2, _shiftPressed))
+            return;        
+        OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 
     private static Rectangle CreateSelectRectangle()
@@ -222,29 +226,21 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
-        // Because we do not have an absolute pinch state in WinUI but only the delta, we can not
-        // use the Pinch method with a single parameter, which stores the previous pinch state to compare
-        // against in the next call. To make this identical on all platforms perhaps they should all use a delta pinch state.
-        // but this would mean other platforms need to start tracking the previous pinch state to 
-        // calculate the delta. So, perhaps this is just the best solution.
-        Map.Navigator.Pinch(GetPinchState(e), GetPreviousPinchState(e));
-        e.Handled = true;
+        var manipulation = ToManipulation(e);
+        var position = manipulation.Center;
+        var isHovering = false;
+        if (OnWidgetPointerMoved(position, !isHovering, false))
+            return;
+
+        Map.Navigator.Pinch(ToManipulation(e));
+        RefreshGraphics();
     }
 
-    private PinchState GetPreviousPinchState(ManipulationDeltaRoutedEventArgs e)
+    private Manipulation ToManipulation(ManipulationDeltaRoutedEventArgs e)
     {
-        var relativePosition = TransformToVisual(null).Inverse.TransformPoint(e.Position);
-        return new PinchState(relativePosition.ToMapsui(), 1, 0);
-    }
-
-    private PinchState GetPinchState(ManipulationDeltaRoutedEventArgs e)
-    {
-        // Get position relative to the MapControl.
-        // Not sure if this is supposed to work like this, could be a bug: 
-        // https://github.com/unoplatform/uno/discussions/15421#discussioncomment-8420650
-        var relativePosition = TransformToVisual(null).Inverse.TransformPoint(e.Position);
-        var position = relativePosition.ToMapsui().Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
-        return new PinchState(position, e.Delta.Scale, e.Delta.Rotation);
+        var previousCenter = TransformToVisual(this).Inverse.TransformPoint(e.Position).ToMapsui();
+        var center = previousCenter.Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
+        return new Manipulation(center, previousCenter, e.Delta.Scale, e.Delta.Rotation, e.Cumulative.Rotation);
     }
 
     public void OpenBrowser(string url)

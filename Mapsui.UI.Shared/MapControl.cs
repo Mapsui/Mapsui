@@ -8,7 +8,6 @@ using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -59,12 +58,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private int _updateInterval = 16;
     // Stopwatch for measuring drawing times
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
-    // old widget Collection to compare if widget Collection was changed.
-    private ConcurrentQueue<IWidget>? _widgetCollection;
-    // saving list of touchable Widgets
-    private List<ITouchableWidget>? _touchableWidgets;
-    // keeps track of the widgets count to see if i need to recalculate the touchable widgets.
-    private int _updateTouchableWidget;
     private IRenderer _renderer = new MapRenderer();
 
     private void CommonInitialize()
@@ -368,7 +361,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Refresh();
         }
     }
-    
+
     // ReSharper restore RedundantNameQualifier
     private Map? _map;
 
@@ -506,7 +499,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <returns>True, if something done </returns>
     private MapInfoEventArgs? CreateMapInfoEventArgs(
         MPoint? screenPosition,
-        MPoint? startScreenPosition,
+        MPoint? startScreenPosition, // Todo: Figure why this is needed and if it can be removed
         int numTaps)
     {
         if (screenPosition == null || startScreenPosition == null)
@@ -524,7 +517,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 Handled = false
             };
         }
-        
+
 
         return null;
     }
@@ -550,116 +543,54 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidateTimer = null;
     }
 
-    private bool HandleWidgetPointerMove(MPoint position, bool leftButton, int clickCount, bool shift)
+  
+    private bool OnWidgetPointerPressed(MPoint position, bool shift)
     {
-        var touchableWidgets = GetTouchableWidgets();
-
-        if (touchableWidgets.Count == 0)
-            return false;
-
-        var widgetArgs = new WidgetTouchedEventArgs(position, clickCount, leftButton, shift);
-
-        foreach (var widget in touchableWidgets)
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
+        foreach (var widget in touchedWidgets)
         {
-            if (widget.HandleWidgetMoving(Map.Navigator, position, widgetArgs))
+            Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
+            var widgetArgs = new WidgetEventArgs(position, 0, true, shift);
+            if (widget.OnPointerPressed(Map.Navigator, position, widgetArgs))
                 return true;
         }
 
         return false;
     }
 
-    private bool HandleTouchingTouched(MPoint position, MPoint? startPosition, bool leftButton, int clickCount, bool shift)
+    private bool OnWidgetPointerMoved(MPoint position, bool leftButton, bool shift)
     {
-        bool result = HandleWidgetPointerDown(position, leftButton, clickCount, shift);
-
-        if (HandleWidgetPointerUp(position, startPosition, leftButton, clickCount, shift))
-        {
-            result = true;
-        }
-
-        return result;
-    }
-
-
-    private bool HandleWidgetPointerDown(MPoint position, bool leftButton, int clickCount, bool shift)
-    {
-        var touchableWidgets = GetTouchableWidgets();
-
-        if (touchableWidgets.Count == 0)
-            return false;
-
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, position, touchableWidgets);
-
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
         {
-            var widgetArgs = new WidgetTouchedEventArgs(position, clickCount, leftButton, shift);
-            if (widget.HandleWidgetTouching(Map.Navigator, position, widgetArgs))
+            var widgetArgs = new WidgetEventArgs(position, 0, leftButton, shift);
+            if (widget.OnPointerMoved(Map.Navigator, position, widgetArgs))
                 return true;
         }
 
         return false;
     }
 
-    private bool HandleWidgetPointerUp(MPoint position, MPoint? startPosition, bool leftButton, int clickCount, bool shift)
+    private bool OnWidgetTapped(MPoint position, int tapCount, bool shift)
     {
-        if (startPosition is null)
-        {
-            Logger.Log(LogLevel.Error, $"The '{nameof(startPosition)}' is null on release. This is not expected");
-            return false;
-        }
-        var touchableWidgets = GetTouchableWidgets();
-
-        if (touchableWidgets.Count == 0)
-            return false;
-
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, position, touchableWidgets);
-
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position,  Map);
         foreach (var widget in touchedWidgets)
         {
+            Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name}");
             if (widget is HyperlinkWidget hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {
                 // The HyperLink is a special case because we need platform specific code to open the
-                // link in a browswer. If the link is not handled within the widget we handle it
+                // link in a browser. If the link is not handled within the widget we handle it
                 // here and return true to indicate this is handled.
-                OpenBrowser(hyperlink.Url!);
+                OpenBrowser(hyperlink.Url);
                 return true;
             }
 
-            var args = new WidgetTouchedEventArgs(position, clickCount, leftButton, shift);
-
-            if (widget.HandleWidgetTouched(Map.Navigator, position, args))
+            var args = new WidgetEventArgs(position, tapCount, true, shift);
+            if (widget.OnTapped(Map.Navigator, position, args))
                 return true;
         }
 
         return false;
-    }
-
-    private void AssureWidgets()
-    {
-        if (_widgetCollection != Map.Widgets)
-        {
-            // reset widgets
-            _touchableWidgets = null;
-            _widgetCollection = Map.Widgets;
-        }
-    }
-
-    private List<ITouchableWidget> GetTouchableWidgets()
-    {
-        AssureWidgets();
-        if (_updateTouchableWidget != Map.Widgets.Count || _touchableWidgets == null)
-        {
-            _updateTouchableWidget = Map.Widgets.Count;
-            _touchableWidgets = [];
-            var touchableWidgets = Map.GetWidgetsOfMapAndLayers().ToList();
-            foreach (var widget in touchableWidgets)
-            {
-                if (widget is not ITouchableWidget) continue;
-
-                _touchableWidgets.Add((ITouchableWidget)widget);
-            }
-        }
-
-        return _touchableWidgets;
     }
 }

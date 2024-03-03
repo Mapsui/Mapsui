@@ -2,6 +2,7 @@
 using Mapsui.Extensions;
 using Mapsui.Nts.Extensions;
 using Mapsui.UI;
+using Mapsui.Widgets;
 
 namespace Mapsui.Nts.Editing;
 
@@ -21,7 +22,7 @@ public class EditManipulation
     public static int MinPixelsMovedForDrag { get; set; } = 4;
 
     public bool Manipulate(PointerState mouseState, MPoint screenPosition,
-        EditManager editManager, IMapControl mapControl, bool isShiftDown)
+        EditManager editManager, IMapControl mapControl, WidgetEventArgs e)
     {
         switch (mouseState)
         {
@@ -39,11 +40,11 @@ public class EditManipulation
                 if (editManager.EditMode == EditMode.Scale)
                     editManager.StopScaling();
 
-                if (IsClick(screenPosition, _mouseDownPosition))
+                if (IsTap(screenPosition, _mouseDownPosition))
                 {
                     if (editManager.EditMode == EditMode.Modify)
                     {
-                        if (isShiftDown)
+                        if (e.Shift || e.TapCount == 2)
                         {
                             return editManager.TryDeleteCoordinate(
                                 mapControl.GetMapInfo(screenPosition, editManager.VertexRadius), editManager.VertexRadius);
@@ -53,7 +54,7 @@ public class EditManipulation
                     }
                     else if (editManager.EditMode == EditMode.DrawingPolygon || editManager.EditMode == EditMode.DrawingLine)
                     {
-                        if (isShiftDown)
+                        if (e.Shift || e.TapCount == 2)
                         {
                             return editManager.EndEdit();
                         }
@@ -95,13 +96,19 @@ public class EditManipulation
                 }
             case PointerState.Hovering:
                 editManager.HoveringVertex(mapControl.GetMapInfo(screenPosition));
+                // There is a lot to improve in the edit logic. When scaling or rotating a 
+                // geometry the editing widget captures the pointer. It does this by setting
+                // the state of info classes. Resetting it releases the capture. We call this
+                // method not on hover, which it is also a bit weird, PointerRelease would be
+                // more logical but we don't have that event yet.
+                editManager.ResetManipulations();
                 return false;
             default:
                 throw new Exception();
         }
     }
 
-    private static bool IsClick(MPoint? screenPosition, MPoint? mouseDownScreenPosition)
+    private static bool IsTap(MPoint? screenPosition, MPoint? mouseDownScreenPosition)
     {
         if (mouseDownScreenPosition == null || screenPosition == null)
             return false;
