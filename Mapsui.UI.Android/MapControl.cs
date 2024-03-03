@@ -270,14 +270,15 @@ public partial class MapControl : ViewGroup, IMapControl
         view.Right = r;
     }
 
-    public void OpenInBrowser(string url)
+    public Task OpenInBrowserAsync(string url)
     {
         var uri = global::Android.Net.Uri.Parse(url);
-        var intent = new Intent(Intent.ActionView);
+        using var intent = new Intent(Intent.ActionView);
         intent.SetData(uri);
 
-        var chooser = Intent.CreateChooser(intent, "Open with");
+        using var chooser = Intent.CreateChooser(intent, "Open with");
         Context?.StartActivity(chooser);
+        return Task.CompletedTask;
     }
 
     protected override void Dispose(bool disposing)

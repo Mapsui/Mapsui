@@ -6,6 +6,7 @@ using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -215,14 +216,16 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         }
     }
 
-    public void OpenInBrowser(string url)
+    public Task OpenInBrowserAsync(string url)
     {
-        Process.Start(new ProcessStartInfo
+        var process = Process.Start(new ProcessStartInfo
         {
             FileName = url,
             // The default for this has changed in .net core, you have to explicitly set if to true for it to work.
             UseShellExecute = true
         });
+        process?.Dispose(); 
+        return Task.CompletedTask;
     }
 
     private void MapControlMouseMove(object sender, MouseEventArgs e)

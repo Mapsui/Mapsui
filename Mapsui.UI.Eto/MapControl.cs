@@ -5,6 +5,7 @@ using Mapsui.Extensions;
 using Mapsui.UI.Eto.Extensions;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Mapsui.UI.Eto;
 
@@ -138,14 +139,10 @@ public partial class MapControl : SkiaDrawable, IMapControl
         return Math.Abs(PointF.Distance(currentPosition, previousPosition)) < 5;
     }
 
-    private void OpenInBrowser(string url)
+    public Task OpenInBrowserAsync(string url)
     {
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = url,
-            // The default for this has changed in .net core, you have to explicitly set if to true for it to work.
-            UseShellExecute = true
-        });
+        using var process = Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+        return Task.CompletedTask;
     }
 
     protected override void OnMouseMove(MouseEventArgs e)

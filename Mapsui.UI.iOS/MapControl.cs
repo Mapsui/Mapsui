@@ -267,16 +267,14 @@ public partial class MapControl : UIView, IMapControl
         SetViewportSize();
     }
 
-    public async void OpenInBrowser(string url)
+    public Task OpenInBrowserAsync(string url)
     {
-        try
+        Catch.Exceptions(async () =>
         {
-            await UIApplication.SharedApplication.OpenUrlAsync(new NSUrl(url), new UIApplicationOpenUrlOptions());
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
+            using var nsUrl = new NSUrl(url);
+            await UIApplication.SharedApplication.OpenUrlAsync(nsUrl, new UIApplicationOpenUrlOptions());
+        });
+        return Task.CompletedTask;
     }
 
     public new void Dispose()

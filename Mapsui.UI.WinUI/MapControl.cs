@@ -17,6 +17,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 using SkiaSharp.Views.Windows;
 using System;
+using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.System;
@@ -243,9 +244,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         return new Manipulation(center, previousCenter, e.Delta.Scale, e.Delta.Rotation, e.Cumulative.Rotation);
     }
 
-    public void OpenInBrowser(string url)
+    public Task OpenInBrowserAsync(string url)
     {
         Catch.TaskRun(async () => await Launcher.LaunchUriAsync(new Uri(url)));
+        return Task.CompletedTask;
     }
 
     private double ViewportWidth => ActualWidth;

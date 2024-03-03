@@ -15,6 +15,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -375,9 +376,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// Public functions
     /// </summary>
 
-    public void OpenInBrowser(string url)
+    public async Task OpenInBrowserAsync(string url)
     {
-        Launcher.OpenAsync(new Uri(url));
+        await Launcher.OpenAsync(new Uri(url));
     }
 
     /// <summary>
