@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Rendering;
 using Mapsui.Utilities;
@@ -23,7 +22,7 @@ public interface IMapControl : IDisposable
 
     IRenderer Renderer { get; }
 
-    Task OpenInBrowserAsync(string url);  // Todo: Perhaps remove. This is only to force the platform specific implementation
+    void OpenInBrowser(string url);  // Todo: Perhaps remove. This is only to force the platform specific implementation
 
     /// <summary>
     /// The number of pixel per device independent unit

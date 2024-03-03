@@ -216,16 +216,17 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         }
     }
 
-    public Task OpenInBrowserAsync(string url)
+    public void OpenInBrowser(string url)
     {
-        var process = Process.Start(new ProcessStartInfo
+        Catch.TaskRun(() =>
         {
-            FileName = url,
-            // The default for this has changed in .net core, you have to explicitly set if to true for it to work.
-            UseShellExecute = true
+            using var process = Process.Start(new ProcessStartInfo
+            {
+                FileName = url,
+                // The default for this has changed in .net core, you have to explicitly set if to true for it to work.
+                UseShellExecute = true
+            });
         });
-        process?.Dispose(); 
-        return Task.CompletedTask;
     }
 
     private void MapControlMouseMove(object sender, MouseEventArgs e)

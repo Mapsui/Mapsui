@@ -376,9 +376,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// Public functions
     /// </summary>
 
-    public async Task OpenInBrowserAsync(string url)
+    public void OpenInBrowser(string url)
     {
-        await Launcher.OpenAsync(new Uri(url));
+        Catch.TaskRun(() => _ = Launcher.OpenAsync(new Uri(url)));
     }
 
     /// <summary>

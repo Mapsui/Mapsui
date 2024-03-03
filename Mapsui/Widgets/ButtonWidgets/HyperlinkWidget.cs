@@ -36,7 +36,7 @@ public class HyperlinkWidget : ButtonWidget
             return true; 
         }
 
-        _ = PlatformUtilities.OpenInBrowserAsync(Url);
+        PlatformUtilities.OpenInBrowser(Url);
         return true;
     }
 }

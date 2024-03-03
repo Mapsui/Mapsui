@@ -14,7 +14,6 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 
 namespace Mapsui.UI.Avalonia;
 
@@ -197,16 +196,18 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         Catch.TaskRun(() => Dispatcher.UIThread.InvokeAsync(action));
     }
 
-    public Task OpenInBrowserAsync(string url)
+    public void OpenInBrowser(string url)
     {
-        using var process = Process.Start(new ProcessStartInfo
+        Catch.TaskRun(() =>
         {
-            FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? url : "open",
-            Arguments = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? $"-e {url}" : "",
-            CreateNoWindow = true,
-            UseShellExecute = !RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+            using var process = Process.Start(new ProcessStartInfo
+            {
+                FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? url : "open",
+                Arguments = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? $"-e {url}" : "",
+                CreateNoWindow = true,
+                UseShellExecute = !RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+            });
         });
-        return Task.CompletedTask;
     }
 
     private double ViewportWidth => Bounds.Width;

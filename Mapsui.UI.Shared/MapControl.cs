@@ -62,7 +62,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void CommonInitialize()
     {
-        PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowserAsync);
+        PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowser);
         // Create timer for invalidating the control
         _invalidateTimer?.Dispose();
         _invalidateTimer = new Timer(InvalidateTimerCallback, null, Timeout.Infinite, 16);

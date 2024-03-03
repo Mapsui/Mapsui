@@ -261,14 +261,13 @@ public partial class MapControl : ComponentBase, IMapControl
 
     public string? Cursor { get; set; }
 
-    public Task OpenInBrowserAsync(string url)
+    public void OpenInBrowser(string url)
     {
-        Catch.Exceptions(async () =>
+        Catch.TaskRun(async () =>
         {
             if (JsRuntime != null)
                 await JsRuntime.InvokeAsync<object>("open", [url, "_blank"]);
-        });
-        return Task.CompletedTask;
+        });    
     }
 
     private bool GetShiftPressed()
