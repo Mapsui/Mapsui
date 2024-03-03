@@ -5,6 +5,8 @@
 using Mapsui.Layers;
 using Mapsui.UI;
 using Mapsui.Utilities;
+using System;
+using System.Collections.Generic;
 
 #pragma warning disable CS0067 // The event is never used
 #pragma warning disable IDISP008 // Don't assign member with injected and created disposables
