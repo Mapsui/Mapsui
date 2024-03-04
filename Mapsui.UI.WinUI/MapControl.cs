@@ -134,7 +134,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var position = e.GetPosition(this).ToMapsui();
         if (OnWidgetTapped(position, 2, _shiftPressed))
-            return;        
+            return;
         OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 

@@ -814,17 +814,17 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private IconButtonWidget CreateButton(
         float x, float y, SKPicture picture, Func<IconButtonWidget, WidgetEventArgs, bool> tapped) => new()
-    {
-        Picture = picture,
-        HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,
-        VerticalAlignment = Widgets.VerticalAlignment.Absolute,
-        Position = new MPoint(x, y),
-        Width = ButtonSize,
-        Height = ButtonSize,
-        Rotation = 0,
-        Enabled = true,
-        Tapped = tapped
-    };    
+        {
+            Picture = picture,
+            HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,
+            VerticalAlignment = Widgets.VerticalAlignment.Absolute,
+            Position = new MPoint(x, y),
+            Width = ButtonSize,
+            Height = ButtonSize,
+            Rotation = 0,
+            Enabled = true,
+            Tapped = tapped
+        };
 
     protected override void Dispose(bool disposing)
     {

@@ -103,7 +103,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControl_PointerMoved(object? sender, PointerEventArgs e)
     {
         var isHovering = IsHovering(e);
-        
+
         if (OnWidgetPointerMoved(e.GetPosition(this).ToMapsui(), !isHovering, _shiftPressed))
             return;
 
