@@ -1,6 +1,5 @@
 using CoreFoundation;
 using Mapsui.Extensions;
-using Mapsui.Logging;
 using Mapsui.Manipulations;
 using SkiaSharp.Views.iOS;
 using System.ComponentModel;
@@ -267,16 +266,13 @@ public partial class MapControl : UIView, IMapControl
         SetViewportSize();
     }
 
-    public async void OpenBrowser(string url)
+    public void OpenInBrowser(string url)
     {
-        try
+        Catch.TaskRun(async () =>
         {
-            await UIApplication.SharedApplication.OpenUrlAsync(new NSUrl(url), new UIApplicationOpenUrlOptions());
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
+            using var nsUrl = new NSUrl(url);
+            await UIApplication.SharedApplication.OpenUrlAsync(nsUrl, new UIApplicationOpenUrlOptions());
+        });
     }
 
     public new void Dispose()

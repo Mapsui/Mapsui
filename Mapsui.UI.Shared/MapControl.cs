@@ -62,6 +62,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void CommonInitialize()
     {
+        PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowser);
         // Create timer for invalidating the control
         _invalidateTimer?.Dispose();
         _invalidateTimer = new Timer(InvalidateTimerCallback, null, Timeout.Infinite, 16);
@@ -581,15 +582,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         foreach (var widget in touchedWidgets)
         {
             Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name}");
-            if (widget is HyperlinkWidget hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
-            {
-                // The HyperLink is a special case because we need platform specific code to open the
-                // link in a browser. If the link is not handled within the widget we handle it
-                // here and return true to indicate this is handled.
-                OpenBrowser(hyperlink.Url);
-                return true;
-            }
-
             var args = new WidgetEventArgs(position, tapCount, true, shift);
             if (widget.OnTapped(Map.Navigator, position, args))
                 return true;

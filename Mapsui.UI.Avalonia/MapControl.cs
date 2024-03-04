@@ -196,15 +196,18 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         Catch.TaskRun(() => Dispatcher.UIThread.InvokeAsync(action));
     }
 
-    public void OpenBrowser(string url)
+    public void OpenInBrowser(string url)
     {
-        using (Process.Start(new ProcessStartInfo
+        Catch.TaskRun(() =>
         {
-            FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? url : "open",
-            Arguments = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? $"-e {url}" : "",
-            CreateNoWindow = true,
-            UseShellExecute = !RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
-        })) { }
+            using var process = Process.Start(new ProcessStartInfo
+            {
+                FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? url : "open",
+                Arguments = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? $"-e {url}" : "",
+                CreateNoWindow = true,
+                UseShellExecute = !RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+            });
+        });
     }
 
     private double ViewportWidth => Bounds.Width;

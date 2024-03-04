@@ -138,15 +138,14 @@ public partial class MapControl : SkiaDrawable, IMapControl
         return Math.Abs(PointF.Distance(currentPosition, previousPosition)) < 5;
     }
 
-    public void OpenBrowser(string url)
+    public void OpenInBrowser(string url)
     {
-        Process.Start(new ProcessStartInfo
+        Catch.TaskRun(() =>
         {
-            FileName = url,
-            // The default for this has changed in .net core, you have to explicitly set if to true for it to work.
-            UseShellExecute = true
+            using var process = Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
         });
     }
+
     protected override void OnMouseMove(MouseEventArgs e)
     {
         base.OnMouseMove(e);

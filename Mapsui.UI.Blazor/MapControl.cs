@@ -260,14 +260,14 @@ public partial class MapControl : ComponentBase, IMapControl
     private double ViewportHeight => _canvasSize?.Height ?? 0;
 
     public string? Cursor { get; set; }
-    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
-    public async void OpenBrowser(string url)
+
+    public void OpenInBrowser(string url)
     {
-        Catch.Exceptions(async () =>
+        Catch.TaskRun(async () =>
         {
             if (JsRuntime != null)
                 await JsRuntime.InvokeAsync<object>("open", [url, "_blank"]);
-        });
+        });    
     }
 
     private bool GetShiftPressed()
