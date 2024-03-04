@@ -6,7 +6,6 @@ using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
-using Mapsui.Widgets.ButtonWidgets;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
