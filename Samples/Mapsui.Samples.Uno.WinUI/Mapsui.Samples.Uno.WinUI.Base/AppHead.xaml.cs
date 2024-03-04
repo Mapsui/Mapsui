@@ -1,4 +1,6 @@
+#if DEBUG
 using Microsoft.Extensions.Logging;
+#endif
 
 namespace Mapsui.Samples.Uno.WinUI;
 
