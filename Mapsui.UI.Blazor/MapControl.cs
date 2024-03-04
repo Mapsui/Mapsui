@@ -44,10 +44,13 @@ public partial class MapControl : ComponentBase, IMapControl
                 ? _interop ??= new MapsuiJsInterop(JsRuntime)
                 : _interop;
 
+    public MapControl()
+    {
+        CommonInitialize();
+    }
 
     protected override void OnInitialized()
     {
-        CommonInitialize();
         ControlInitialize();
         base.OnInitialized();
     }
