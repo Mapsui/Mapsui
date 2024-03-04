@@ -17,7 +17,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 using SkiaSharp.Views.Windows;
 using System;
-using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.System;
@@ -109,15 +108,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerMoved(object sender, PointerRoutedEventArgs e)
     {
-        var position = e.GetCurrentPoint(this).Position.ToMapsui();
-        var isHovering = IsHovering(e);
-
-        // This is complicated. The OnManipulationDelta is also fired on mouse and touch events,
-        // is sufficient except for hover events. So this method is only for mouse hover
-        if (!isHovering)
+        // This is a bit weird. The OnManipulationDelta event fires on both touch and mouse events
+        // and deals with both properly, except for mouse hover events. This handler only deals with
+        // hover events.
+        if (!IsHovering(e))
             return;
 
-        if (OnWidgetPointerMoved(position, !isHovering, e.KeyModifiers == VirtualKeyModifiers.Shift))
+        var position = e.GetCurrentPoint(this).Position.ToMapsui();
+        if (OnWidgetPointerMoved(position, false, e.KeyModifiers == VirtualKeyModifiers.Shift))
             return;
     }
 
@@ -228,11 +226,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
         var manipulation = ToManipulation(e);
-        var position = manipulation.Center;
-        var isHovering = false;
-        if (OnWidgetPointerMoved(position, !isHovering, false))
+        if (OnWidgetPointerMoved(manipulation.Center, true, false))
             return;
-
         Map.Navigator.Pinch(ToManipulation(e));
         RefreshGraphics();
     }
