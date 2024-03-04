@@ -11,7 +11,7 @@ public partial class MapControl : UIView, IMapControl
 {
     private SKGLView? _glCanvas;
     private SKCanvasView? _canvas;
-    private bool _initialize;
+    private bool _canvasInitialized;
     private MPoint? _pointerDownPosition;
     private readonly ManipulationTracker _manipulationTracker = new();
 
@@ -34,9 +34,9 @@ public partial class MapControl : UIView, IMapControl
 
     private void InitializeCanvas()
     {
-        if (!_initialize)
+        if (!_canvasInitialized)
         {
-            _initialize = true;
+            _canvasInitialized = true;
             if (UseGPU)
             {
                 _glCanvas?.Dispose();
