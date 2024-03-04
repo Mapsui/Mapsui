@@ -9,9 +9,13 @@ public static class TransformationAlgorithms
     /// CenterOfMap, for instance when using the +/- buttons. When using mouse wheel zoom the
     /// CenterOfZoom is the location of the mouse. 
     /// </summary>
-    /// <param name="centerOfZoom"></param>
+    /// <param name="centerOfZoomX"></param>
+    /// <param name="centerOfZoomY"></param>
     /// <param name="newResolution"></param>
-    /// <returns></returns>
+    /// <param name="currentCenterX"></param>
+    /// <param name="currentCenterY"></param>
+    /// <param name="currentResolution"></param>
+    /// <returns>The x and y of the center of the map.</returns>
     public static (double x, double y) CalculateCenterOfMap(
         double centerOfZoomX, double centerOfZoomY, double newResolution,
         double currentCenterX, double currentCenterY, double currentResolution)
