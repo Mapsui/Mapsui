@@ -1,7 +1,4 @@
 using System;
-using System.Drawing;
-using System.IO;
-using Mapsui.Styles;
 
 namespace Mapsui.Rendering;
 

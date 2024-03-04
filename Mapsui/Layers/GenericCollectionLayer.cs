@@ -1,14 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Extensions;
-using Mapsui.Providers;
 using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
 /// <summary>
-/// The GenericCollectionLayer uses a T of IEnumerable<IFeature> 
+/// The GenericCollectionLayer uses a T of IEnumerable of IFeature
 /// </summary>
 public class GenericCollectionLayer<T> : BaseLayer where T : IEnumerable<IFeature>, new()
 {

@@ -30,10 +30,6 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     /// <param name="layer">The Layer to be rasterized</param>
     /// <param name="delayBeforeRasterize">Delay after viewport change to start re-rasterizing</param>
     /// <param name="rasterizer">Rasterizer to use. null will use the default</param>
-    ///     Set the rasterization policy. false will trigger a rasterization on
-    ///     every viewport change. true will trigger a re-rasterization only if the viewport moves outside the existing
-    ///     rasterization.
-    /// </param>
     /// <param name="pixelDensity"></param>
     /// <param name="renderFormat">render Format png is default and skp is skia picture</param>
     public RasterizingLayer(

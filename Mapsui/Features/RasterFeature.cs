@@ -3,7 +3,7 @@
 namespace Mapsui.Layers;
 
 /// <summary>
-/// Feature representing a bitmap on the <cref="Map"/>
+/// Feature representing a bitmap on the map.
 /// </summary>
 public class  RasterFeature : BaseFeature, IFeature
 {

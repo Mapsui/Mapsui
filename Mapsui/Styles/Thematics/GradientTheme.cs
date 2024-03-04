@@ -75,7 +75,7 @@ public class GradientTheme : Style, IThemeStyle
     /// properties are linearly interpolated between max and min values.
     /// </summary>
     /// <param name="row">Feature</param>
-    /// <returns><see cref=IStyle">Style</see> calculated by a linear interpolation between the min/max styles</returns>
+    /// <returns>A <see cref="IStyle">Style</see> calculated by a linear interpolation between the min/max styles</returns>
     public IStyle? GetStyle(IFeature row)
     {
         double attr;
