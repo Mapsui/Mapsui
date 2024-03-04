@@ -33,7 +33,7 @@ public class HyperlinkWidget : ButtonWidget
         if (Url is null)
         {
             Logger.Log(LogLevel.Warning, "HyperlinkWidget: URL is not set");
-            return true; 
+            return true;
         }
 
         PlatformUtilities.OpenInBrowser(Url);

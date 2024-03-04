@@ -443,10 +443,10 @@ public class Navigator
         var previous = viewport.ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
         var current = viewport.ScreenToWorld(positionScreen.X, positionScreen.Y);
 
-        return viewport with 
+        return viewport with
         {
-            CenterX = viewport.CenterX + previous.X - current.X, 
-            CenterY = viewport.CenterY + previous.Y - current.Y 
+            CenterX = viewport.CenterX + previous.X - current.X,
+            CenterY = viewport.CenterY + previous.Y - current.Y
         };
     }
 

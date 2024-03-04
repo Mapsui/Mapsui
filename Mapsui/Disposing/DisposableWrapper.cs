@@ -14,7 +14,7 @@ public class DisposableWrapper<T>(T wrappedObject, bool ownsObject) : IDisposabl
         Dispose(true);
         GC.SuppressFinalize(this);
     }
-    
+
     public T WrappedObject => _wrappedObject;
 
     protected virtual void Dispose(bool disposing)

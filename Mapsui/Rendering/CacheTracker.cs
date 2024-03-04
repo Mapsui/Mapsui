@@ -13,13 +13,13 @@ public readonly struct CacheTracker<T> : IDisposable
         _holder = null;
         _instance = instance;
     }
-    
+
     public CacheTracker(ICacheHolder holder, T instance)
     {
         _holder = holder;
         _instance = instance;
     }
-    
+
     public T Instance => _instance;
 
     public void Dispose()
@@ -27,6 +27,6 @@ public readonly struct CacheTracker<T> : IDisposable
         if (_holder == null)
             _instance.DisposeIfDisposable();
         else
-            _holder.SetInstance(_instance!);    
+            _holder.SetInstance(_instance!);
     }
 }

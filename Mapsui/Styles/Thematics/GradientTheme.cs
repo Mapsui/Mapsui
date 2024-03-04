@@ -86,11 +86,11 @@ public class GradientTheme : Style, IThemeStyle
 
         return (MinStyle, MaxStyle) switch
         {
-            (LabelStyle minLabelStyle, LabelStyle maxLabelStyle) 
+            (LabelStyle minLabelStyle, LabelStyle maxLabelStyle)
                 => ToInterpolatedLabelStyle(minLabelStyle, maxLabelStyle, attr, this),
-            (SymbolStyle minSymbolStyle, SymbolStyle maxSymbolStyle) 
+            (SymbolStyle minSymbolStyle, SymbolStyle maxSymbolStyle)
                 => ToInterpolatedSymbolStyle(minSymbolStyle, maxSymbolStyle, attr, this),
-            (VectorStyle minVectorStyle, VectorStyle maxVectorStyle) 
+            (VectorStyle minVectorStyle, VectorStyle maxVectorStyle)
                 => ToInterpolatedVectorStyle(minVectorStyle, maxVectorStyle, attr, this),
             _ => throw new NotSupportedException($"Style type '{MinStyle.GetType()}' and/or '{MinStyle.GetType()}' can not be used in the GradientTheme")
         };

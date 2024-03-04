@@ -51,7 +51,7 @@ public sealed class RenderCache : IRenderCache
     }
 
     public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, TPaint> toPaint)
-        where TParam : notnull 
+        where TParam : notnull
         where TPaint : class
     {
         return VectorCache.GetOrCreatePaint(param, toPaint);

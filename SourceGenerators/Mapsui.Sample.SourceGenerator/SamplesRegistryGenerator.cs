@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Mapsui.Sample.SourceGenerator;
 
 [Generator]
-public class SamplesRegistryGenerator : ISourceGenerator    
+public class SamplesRegistryGenerator : ISourceGenerator
 {
     public void Initialize(GeneratorInitializationContext context)
     {
@@ -38,13 +38,13 @@ namespace {{context.Compilation.Assembly.Name}}
             _registered = true;
 
 """);
-        
+
         // using the context, get a list of syntax trees in the users compilation
         var syntaxTrees = context.Compilation.SyntaxTrees;
 
         var alreadyRegistered = new HashSet<string>();
-        var sampleInterfaces = new HashSet<string>{ "ISampleBase", "ISample", "ISampleTest", "IMapViewSample" };
-        
+        var sampleInterfaces = new HashSet<string> { "ISampleBase", "ISample", "ISampleTest", "IMapViewSample" };
+
         // add the filepath of each tree to the class we're building
         foreach (SyntaxTree tree in syntaxTrees)
         {

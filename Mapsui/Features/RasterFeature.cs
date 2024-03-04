@@ -5,7 +5,7 @@ namespace Mapsui.Layers;
 /// <summary>
 /// Feature representing a bitmap on the <cref="Map"/>
 /// </summary>
-public class  RasterFeature : BaseFeature, IFeature
+public class RasterFeature : BaseFeature, IFeature
 {
     public RasterFeature(RasterFeature rasterFeature) : base(rasterFeature)
     {

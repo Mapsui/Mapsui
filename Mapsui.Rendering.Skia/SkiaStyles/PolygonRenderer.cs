@@ -28,7 +28,7 @@ internal static class PolygonRenderer
         var extent = viewport.ToExtent();
         var rotation = viewport.Rotation;
         float lineWidth = (float)(vectorStyle.Outline?.Width ?? 1);
-        
+
         using var path = vectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth), ToPath);
         if (vectorStyle.Fill.IsVisible())
         {
