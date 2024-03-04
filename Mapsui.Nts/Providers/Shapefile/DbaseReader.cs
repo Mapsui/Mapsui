@@ -392,7 +392,6 @@ internal sealed class DbaseReader : IDisposable
     /// Gets the feature at the specified Object ID
     /// </summary>
     /// <param name="oid"></param>
-    /// <param name="table"></param>
     /// <returns></returns>
     internal GeometryFeature? GetFeature(uint oid)
     {
