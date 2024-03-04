@@ -1,5 +1,4 @@
-﻿using Mapsui.Cache;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Providers.Wms;
 using System.Threading.Tasks;
 using Mapsui.Styles;

@@ -1,3 +1,4 @@
+#pragma warning disable IDE0005
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
@@ -6,15 +7,14 @@ using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using Mapsui.Disposing;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 #if __MAUI__
 using Microsoft.Maui.Controls;
 namespace Mapsui.UI.Maui;
@@ -22,7 +22,7 @@ namespace Mapsui.UI.Maui;
 namespace Mapsui.UI.Uwp;
 #elif __ANDROID__ && !HAS_UNO_WINUI
 namespace Mapsui.UI.Android;
-#elif __IOS__ && !HAS_UNO_WINUI
+#elif __MAPSUI_IOS__
 namespace Mapsui.UI.iOS;
 #elif __WINUI__
 namespace Mapsui.UI.WinUI;
@@ -32,6 +32,7 @@ namespace Mapsui.UI.Avalonia;
 #elif __ETO_FORMS__
 namespace Mapsui.UI.Eto;
 #elif __BLAZOR__
+using Microsoft.AspNetCore.Components;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Mapsui.UI.Blazor;
@@ -547,7 +548,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidateTimer = null;
     }
 
-  
+
     private bool OnWidgetPointerPressed(MPoint position, bool shift)
     {
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
@@ -577,7 +578,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetTapped(MPoint position, int tapCount, bool shift)
     {
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position,  Map);
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
         {
             Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name}");

@@ -3,7 +3,6 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Mapsui.Tiling.Layers;

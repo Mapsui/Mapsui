@@ -5,16 +5,13 @@ using Mapsui.Samples.Common.Extensions;
 namespace Mapsui.Samples.Eto;
 
 using System;
-using System.Text;
 using System.Linq;
 using Mapsui.UI.Eto;
-using Mapsui.Logging;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 
 using global::Eto.Forms;
 using global::Eto.Drawing;
-using Mapsui;
 
 public class MainForm : Form
 {

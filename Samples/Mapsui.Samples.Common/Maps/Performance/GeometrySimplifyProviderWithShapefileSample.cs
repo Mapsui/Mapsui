@@ -7,7 +7,6 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 

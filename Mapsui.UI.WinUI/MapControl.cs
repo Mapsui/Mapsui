@@ -64,7 +64,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         PointerPressed += MapControl_PointerPressed;
         PointerMoved += MapControl_PointerMoved;
-        
+
         Tapped += OnSingleTapped;
         DoubleTapped += OnDoubleTapped;
 
@@ -138,7 +138,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var position = e.GetPosition(this).ToMapsui();
         if (OnWidgetTapped(position, 2, _shiftPressed))
-            return;        
+            return;
         OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 

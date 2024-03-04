@@ -13,7 +13,7 @@ public static class LineStringRenderer
     {
         if (vectorStyle == null)
             return;
-        
+
         SKPath ToPath((long featureId, MRect extent, double rotation, float lineWidth) valueTuple)
         {
             var result = lineString.ToSkiaPath(viewport, viewport.ToSkiaRect(), valueTuple.lineWidth);
@@ -28,7 +28,7 @@ public static class LineStringRenderer
         if (vectorStyle.Line.IsVisible())
         {
             using var paint = renderCache.GetOrCreatePaint((vectorStyle.Line, opacity), CreateSkPaint);
-            using var path = renderCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth),ToPath);
+            using var path = renderCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth), ToPath);
             canvas.DrawPath(path, paint);
         }
     }

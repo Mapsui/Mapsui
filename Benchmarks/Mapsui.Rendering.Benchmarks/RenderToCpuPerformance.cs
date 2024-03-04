@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿#pragma warning disable IDE0005
+using System.IO;
 using BenchmarkDotNet.Attributes;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;

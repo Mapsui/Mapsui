@@ -4,7 +4,7 @@ using Mapsui.Extensions;
 
 namespace Mapsui.Rendering;
 
-public sealed class CacheHolder<T>: ICacheHolder, IDisposable
+public sealed class CacheHolder<T> : ICacheHolder, IDisposable
     where T : class
 {
     private T? _instance;
@@ -28,7 +28,7 @@ public sealed class CacheHolder<T>: ICacheHolder, IDisposable
             var temp = Interlocked.Exchange(ref _instance, null);
             if (temp != null)
             {
-                return new CacheTracker<TResult>((TResult)temp);    
+                return new CacheTracker<TResult>((TResult)temp);
             }
         }
 
@@ -39,7 +39,7 @@ public sealed class CacheHolder<T>: ICacheHolder, IDisposable
     {
         SetInstance((T)instance);
     }
-    
+
     public void SetInstance(T instance)
     {
         Interlocked.Exchange(ref _instance, instance);

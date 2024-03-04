@@ -1,11 +1,3 @@
-using System;
-using Microsoft.Extensions.Logging;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
-
 namespace Mapsui.Samples.Uno.WinUI;
 
 /// <summary>
@@ -46,7 +38,7 @@ public partial class App : Application
         _window = new Window();
         _window.Activate();
 #else
-			_window = Microsoft.UI.Xaml.Window.Current;
+        _window = Microsoft.UI.Xaml.Window.Current;
 #endif
 
         var rootFrame = _window.Content as Frame;

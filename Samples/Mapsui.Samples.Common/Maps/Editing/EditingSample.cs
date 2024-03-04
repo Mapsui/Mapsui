@@ -444,7 +444,7 @@ public class EditingSample : IMapControlSample
     // The second style is the way to show a feature is selected.
     private static StyleCollection CreateEditLayerStyle() => new()
     {
-        Styles = 
+        Styles =
         {
             CreateEditLayerBasicStyle(),
             CreateSelectedStyle()
@@ -464,17 +464,17 @@ public class EditingSample : IMapControlSample
     private static readonly Color _polygonLayerColor = new(20, 20, 20, 240);
 
     private static readonly SymbolStyle? _selectedStyle = new()
-        {
-            Fill = null,
-            Outline = new Pen(Color.Red, 3),
-            Line = new Pen(Color.Red, 3)
-        };
+    {
+        Fill = null,
+        Outline = new Pen(Color.Red, 3),
+        Line = new Pen(Color.Red, 3)
+    };
 
     private static readonly SymbolStyle? _disableStyle = new() { Enabled = false };
 
     // To show the selected style a ThemeStyle is used which switches on and off the SelectedStyle
     // depending on a "Selected" attribute.
-    private static ThemeStyle CreateSelectedStyle() 
+    private static ThemeStyle CreateSelectedStyle()
         => new(f => (bool?)f["Selected"] == true ? _selectedStyle : _disableStyle);
 
     private static WritableLayer CreatePointLayer() => new()

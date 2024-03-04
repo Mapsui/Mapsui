@@ -9,6 +9,7 @@
     <Description>.Net iOS map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) ios</PackageTags>
 		<IsPackable>true</IsPackable>
+		<DefineConstants>__MAPSUI_IOS__</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <ConsolePause>false</ConsolePause>

@@ -15,9 +15,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
-
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.UI.Maui;
 
@@ -205,7 +202,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             e.Handled = true;
             var location = GetScreenPosition(e.Location);
-            
+
             if (e.ActionType == SKTouchAction.Pressed)
             {
                 _touches[e.Id] = location;
@@ -261,7 +258,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             {
                 if (!e.InContact)
                     return;
-                
+
                 _touches.Clear();
                 Refresh();
             }
@@ -295,7 +292,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
         if (Math.Abs(velocityX) <= 200 && Math.Abs(velocityY) <= 200)
             return;
-                
+
         // This was the last finger on screen, so this is a fling
         Map.Navigator.Fling(velocityX, velocityY, 1000);
     }
@@ -344,7 +341,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     }
 
     private MPoint GetScreenPosition(SKPoint point) => new MPoint(point.X / PixelDensity, point.Y / PixelDensity);
-    
+
     /// <summary>
     /// Called, when map should zoom in or out
     /// </summary>

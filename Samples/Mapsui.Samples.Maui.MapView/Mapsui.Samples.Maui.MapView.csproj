@@ -85,11 +85,11 @@
 	</ItemGroup>
 
   <!--Source Code Generators-->
-  <ItemGroup>
-    <ProjectReference Include="..\..\SourceGenerators\Mapsui.Sample.SourceGenerator\Mapsui.Sample.SourceGenerator.csproj" 
+	<ItemGroup>
+		<ProjectReference Include="..\..\SourceGenerators\Mapsui.Sample.SourceGenerator\Mapsui.Sample.SourceGenerator.csproj"
                       OutputItemType="Analyzer"
                       ReferenceOutputAssembly="false"  />
-  </ItemGroup>
+	</ItemGroup>
 
 	<Import Project="..\Mapsui.Samples.MapView\Mapsui.Samples.MapView.projitems" Label="Shared" />
 

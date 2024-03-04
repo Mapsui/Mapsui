@@ -6,6 +6,7 @@ using Microsoft.JSInterop;
 using SkiaSharp;
 using SkiaSharp.Views.Blazor;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Components;
 
 namespace Mapsui.UI.Blazor;
 

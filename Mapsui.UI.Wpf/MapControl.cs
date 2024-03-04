@@ -48,12 +48,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         MouseLeftButtonDown += MapControlMouseLeftButtonDown;
         MouseLeftButtonUp += MapControlMouseLeftButtonUp;
-        
+
         MouseMove += MapControlMouseMove;
         MouseLeave += MapControlMouseLeave;
         MouseWheel += MapControlMouseWheel;
-        
-        
+
         ManipulationInertiaStarting += OnManipulationInertiaStarting;
         ManipulationDelta += OnManipulationDelta;
         ManipulationCompleted += OnManipulationCompleted;
@@ -92,9 +91,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             HorizontalAlignment = HorizontalAlignment.Stretch
         };
     }
-
-    [Obsolete("Use Info and ILayerFeatureInfo", true)]
-    public event EventHandler<FeatureInfoEventArgs>? FeatureInfo; // todo: Remove and add sample for alternative
 
     internal void InvalidateCanvas()
     {
