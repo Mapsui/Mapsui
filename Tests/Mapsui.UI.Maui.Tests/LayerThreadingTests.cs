@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers;
 using Mapsui.UI.Maui;
-using Mapsui.UI.Objects;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 

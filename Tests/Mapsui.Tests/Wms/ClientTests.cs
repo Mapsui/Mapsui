@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml;
+﻿using System.Xml;
 using Mapsui.Providers.Wms;
 using Mapsui.Tests.Utilities;
 using NUnit.Framework;

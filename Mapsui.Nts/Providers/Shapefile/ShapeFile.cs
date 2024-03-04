@@ -7,8 +7,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -868,7 +866,6 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
     /// Gets a data row from the data source at the specified index belonging to the specified datatable
     /// </summary>
     /// <param name="rowId"></param>
-    /// <param name="features">Data table to feature should belong to.</param>
     /// <returns></returns>
     public GeometryFeature? GetFeature(uint rowId)
     {

@@ -5,13 +5,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Mapsui.Extensions;
-using Mapsui.Logging;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.UI.Wpf;
-using System.Windows.Threading;
 
 namespace Mapsui.Samples.Wpf;
 

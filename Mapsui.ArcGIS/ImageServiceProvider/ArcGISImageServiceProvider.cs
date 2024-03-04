@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Mapsui.ArcGIS.Extensions;
 using Mapsui.Cache;
-using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers;

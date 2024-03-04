@@ -7,7 +7,6 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tests.Common.TestTools;
-using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps;
 

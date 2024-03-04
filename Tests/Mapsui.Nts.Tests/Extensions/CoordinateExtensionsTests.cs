@@ -2,7 +2,6 @@
 using NetTopologySuite.Geometries;
 using NUnit.Framework;
 using Mapsui.Nts.Extensions;
-using System;
 
 namespace Mapsui.Nts.Tests;
 

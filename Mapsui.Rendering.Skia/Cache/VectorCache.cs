@@ -1,6 +1,5 @@
 ﻿using System;
 using Mapsui.Cache;
-using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Cache;
 

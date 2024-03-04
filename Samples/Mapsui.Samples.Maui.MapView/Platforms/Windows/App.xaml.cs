@@ -1,7 +1,5 @@
 ﻿using System.Runtime.Versioning;
-using Mapsui.UI.Maui;
 using Microsoft.Maui;
-using Microsoft.UI.Xaml;
 using Microsoft.Maui.Hosting;
 
 // To learn more about WinUI, the WinUI project structure,

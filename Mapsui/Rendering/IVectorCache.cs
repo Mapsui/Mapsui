@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
-using Mapsui.Styles;
 
 namespace Mapsui.Rendering;
 

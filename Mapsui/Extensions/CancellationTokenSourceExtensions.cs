@@ -1,5 +1,7 @@
-﻿using System.Threading;
+﻿#if !NET8_0_OR_GREATER
+using System.Threading;
 using System.Threading.Tasks;
+#endif
 
 namespace Mapsui.Extensions;
 public static class CancellationTokenSourceExtensions

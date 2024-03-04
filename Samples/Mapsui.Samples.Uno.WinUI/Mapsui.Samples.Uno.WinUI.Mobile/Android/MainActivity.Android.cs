@@ -1,7 +1,3 @@
-using Android.App;
-using Android.Widget;
-using Android.OS;
-using Android.Content.PM;
 using Android.Views;
 
 namespace Mapsui.Samples.Uno.WinUI;

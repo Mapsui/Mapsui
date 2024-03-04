@@ -1,20 +1,15 @@
-using Mapsui.Samples.Common.Extensions;
-
 #pragma warning disable IDISP001 // Dispose created
 
-namespace Mapsui.Samples.Eto;
-
-using System;
-using System.Text;
-using System.Linq;
-using Mapsui.UI.Eto;
-using Mapsui.Logging;
+using Eto.Drawing;
+using Eto.Forms;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Extensions;
+using Mapsui.UI.Eto;
+using System;
+using System.Linq;
 
-using global::Eto.Forms;
-using global::Eto.Drawing;
-using Mapsui;
+namespace Mapsui.Samples.Eto;
 
 public class MainForm : Form
 {

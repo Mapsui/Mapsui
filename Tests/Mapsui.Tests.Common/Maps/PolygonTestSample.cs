@@ -4,10 +4,8 @@ using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
-using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
-using Mapsui.UI;
 using NetTopologySuite.IO;
 
 namespace Mapsui.Tests.Common.Maps;

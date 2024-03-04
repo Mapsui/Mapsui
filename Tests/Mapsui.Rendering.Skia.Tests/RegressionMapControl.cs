@@ -2,14 +2,15 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
+#pragma warning disable CS0067 // The event is never used
+#pragma warning disable IDISP008 // Don't assign member with injected and created disposables
+#pragma warning disable IDE0005 // Using directive is unnecessary, there are differences between contexts
+
 using Mapsui.Layers;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
-
-#pragma warning disable CS0067 // The event is never used
-#pragma warning disable IDISP008 // Don't assign member with injected and created disposables
 
 namespace Mapsui.Rendering.Skia.Tests;
 

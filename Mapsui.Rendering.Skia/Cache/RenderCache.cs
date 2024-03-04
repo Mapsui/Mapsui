@@ -1,6 +1,5 @@
 ﻿using System;
 using Mapsui.Styles;
-using SkiaSharp;
 
 #pragma warning disable IDISP008 // Don't assign member with injected and created disposables
 

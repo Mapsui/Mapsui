@@ -1,5 +1,3 @@
-using UIKit;
-
 namespace Mapsui.Samples.Uno.WinUI;
 
 public class EntryPoint

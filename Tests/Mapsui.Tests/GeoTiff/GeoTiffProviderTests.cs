@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.IO;
 using Mapsui.Extensions.Provider;
-using Mapsui.Providers;
 using Mapsui.Tests.Utilities;
 using NUnit.Framework;
 

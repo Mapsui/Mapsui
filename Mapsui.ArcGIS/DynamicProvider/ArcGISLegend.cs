@@ -3,7 +3,6 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BruTile.Extensions;
 using Mapsui.Cache;
 using Mapsui.Logging;
 using Mapsui.Utilities;
