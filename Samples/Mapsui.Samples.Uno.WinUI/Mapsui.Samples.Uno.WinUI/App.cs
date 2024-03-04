@@ -27,13 +27,6 @@ public partial class App : Application
     /// <param name="args">Details about the launch request and process.</param>
     protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
     {
-#if DEBUG
-        if (System.Diagnostics.Debugger.IsAttached)
-        {
-            // this.DebugSettings.EnableFrameRateCounter = true;
-        }
-#endif
-
 #if NET6_0_OR_GREATER && WINDOWS && !HAS_UNO
         _window = new Window();
         _window.Activate();
