@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Fetcher;
-using Mapsui.Logging;
+//using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Styles;
 
@@ -94,9 +94,6 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
                 var features = new RasterFeature[1];
                 features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), _currentSection.Extent));
                 _cache.PushRange(features);
-#if DEBUG
-                Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
-#endif
                 OnDataChanged(new DataChangedEventArgs());
 
                 if (_modified && _layer is IAsyncDataFetcher asyncDataFetcher)
