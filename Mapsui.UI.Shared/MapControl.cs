@@ -1,4 +1,5 @@
-#pragma warning disable IDE0005
+#pragma warning disable IDE0005 // Disable unused usings. All the #ifs make this hard. Perhaps simplify that first.
+#pragma warning disable IDE0055 // Disable fix formatting but this should not be hard to fix
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
