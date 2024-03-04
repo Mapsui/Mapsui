@@ -725,9 +725,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// </summary>
     private void AddLayers()
     {
-        if (!_initialized)
-            return;
-
         // Add MapView layers
         Map?.Layers.Add(_mapDrawableLayer, _mapPinLayer, _mapCalloutLayer, MyLocationLayer);
     }
@@ -737,9 +734,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// </summary>
     private void RemoveLayers()
     {
-        if (!_initialized)
-            return;
-
         // Remove MapView layers
         Map?.Layers.Remove(MyLocationLayer, _mapCalloutLayer, _mapPinLayer, _mapDrawableLayer);
     }

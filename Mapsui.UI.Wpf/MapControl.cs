@@ -27,12 +27,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     public MapControl()
     {
-        CommonInitialize();
-        Initialize();
-    }
+        SharedConstructor();
 
-    private void Initialize()
-    {
         _invalidate = () =>
         {
             if (Dispatcher.CheckAccess()) InvalidateCanvas();

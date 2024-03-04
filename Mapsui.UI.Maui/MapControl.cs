@@ -32,10 +32,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         DeviceInfo.Platform != DevicePlatform.MacCatalyst &&
         DeviceInfo.Platform != DevicePlatform.Android;
 
-    protected readonly bool _initialized;
-
-    private SKGLView? _glView;
-    private SKCanvasView? _canvasView;
+    private readonly SKGLView? _glView;
+    private readonly SKCanvasView? _canvasView;
     private readonly ConcurrentDictionary<long, MPoint> _touches = new();
     private readonly FlingTracker _flingTracker = new();
     private Size _oldSize;
@@ -45,10 +43,48 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     public MapControl()
     {
-        CommonInitialize();
-        Initialize();
+        SharedConstructor();
 
-        _initialized = true;
+        View view;
+
+
+        BackgroundColor = KnownColor.White;
+        InitTouchesReset(this);
+
+
+        if (UseGPU)
+        {
+            // Use GPU backend
+            _glView = new SKGLView
+            {
+                HasRenderLoop = false,
+                EnableTouchEvents = true,
+            };
+            // Events
+            _glView.Touch += OnTouch;
+            _invalidate = () =>
+            {
+                // The line below sometimes has a null reference exception on application close.
+                RunOnUIThread(() => _glView.InvalidateSurface());
+            };
+            _glView.PaintSurface += OnGLPaintSurface;
+            view = _glView;
+        }
+        else
+        {
+            // Use CPU backend
+            _canvasView = new SKCanvasView
+            {
+                EnableTouchEvents = true,
+            };
+            // Events
+            _canvasView.Touch += OnTouch;
+            _invalidate = () => { RunOnUIThread(() => _canvasView.InvalidateSurface()); };
+            _canvasView.PaintSurface += OnPaintSurface;
+            view = _canvasView;
+        }
+        view.PropertyChanged += View_PropertyChanged;
+        Content = view;
     }
 
     public bool UseDoubleTap { get; set; } = true;
@@ -66,49 +102,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     public int MaxTapGestureMovement { get; set; } = 8;
     private double ViewportWidth => Width; // Used in shared code
     private double ViewportHeight => Height; // Used in shared code
-
-    private void Initialize()
-    {
-        View view;
-
-        if (UseGPU)
-        {
-            // Use GPU backend
-            _glView = new SKGLView
-            {
-                HasRenderLoop = false,
-                EnableTouchEvents = true,
-            };
-            // Events
-            _glView.Touch += OnTouch;
-            _glView.PaintSurface += OnGLPaintSurface;
-            _invalidate = () =>
-            {
-                // The line below sometimes has a null reference exception on application close.
-                RunOnUIThread(() => _glView.InvalidateSurface());
-            };
-            view = _glView;
-        }
-        else
-        {
-            // Use CPU backend
-            _canvasView = new SKCanvasView
-            {
-                EnableTouchEvents = true,
-            };
-            // Events
-            _canvasView.Touch += OnTouch;
-            _canvasView.PaintSurface += OnPaintSurface;
-            _invalidate = () => { RunOnUIThread(() => _canvasView.InvalidateSurface()); };
-            view = _canvasView;
-        }
-
-        view.PropertyChanged += View_PropertyChanged;
-
-        Content = view;
-        BackgroundColor = KnownColor.White;
-        InitTouchesReset(this);
-    }
 
     private static void InitTouchesReset(MapControl mapControl)
     {
@@ -313,7 +306,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
     {
-        if (!_initialized && _glView?.GRContext == null)
+        if (_glView?.GRContext is null)
         {
             // Could this be null before Home is called? If so we should change the logic.
             Logger.Log(LogLevel.Warning, "Refresh can not be called because GRContext is null");

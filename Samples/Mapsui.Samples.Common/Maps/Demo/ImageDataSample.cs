@@ -77,9 +77,7 @@ public class ImageDataSample : ISample
         using SKBitmap bitmap = new SKBitmap(dataPointsInX, dataPointsInY);
         for (int row = 0; row < dataPointsInY; row++)
             for (int col = 0; col < dataPointsInX; col++)
-            {
                 bitmap.SetPixel(col, row, getColorForDataPoint(col, row));
-            }
 
         using var data = bitmap.Encode(SKEncodedImageFormat.Png, 100);
         return data.ToArray();
