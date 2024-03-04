@@ -15,7 +15,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -37,8 +36,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     protected readonly bool _initialized;
 
-    private SKGLView? _glView;
-    private SKCanvasView? _canvasView;
+    private readonly SKGLView? _glView;
+    private readonly SKCanvasView? _canvasView;
     private readonly ConcurrentDictionary<long, MPoint> _touches = new();
     private readonly FlingTracker _flingTracker = new();
     private Size _oldSize;
@@ -48,30 +47,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     public MapControl()
     {
-        CommonInitialize();
-        Initialize();
+        SharedConstructor();
 
-        _initialized = true;
-    }
-
-    public bool UseDoubleTap { get; set; } = true;
-    public bool UseFling { get; set; } = true;
-
-    // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
-    // If a finger touches down and up it counts as a tap if the distance
-    // between the down and up location is smaller then the touch distance.
-    // The distance is initialized at 8. How did we get to 8? Well you could
-    // read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
-    // We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
-    /// <summary>
-    /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
-    /// </summary>
-    public int MaxTapGestureMovement { get; set; } = 8;
-    private double ViewportWidth => Width; // Used in shared code
-    private double ViewportHeight => Height; // Used in shared code
-
-    private void Initialize()
-    {
         View view;
 
         if (UseGPU)
@@ -111,7 +88,25 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Content = view;
         BackgroundColor = KnownColor.White;
         InitTouchesReset(this);
+
+        _initialized = true;
     }
+
+    public bool UseDoubleTap { get; set; } = true;
+    public bool UseFling { get; set; } = true;
+
+    // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
+    // If a finger touches down and up it counts as a tap if the distance
+    // between the down and up location is smaller then the touch distance.
+    // The distance is initialized at 8. How did we get to 8? Well you could
+    // read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
+    // We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
+    /// <summary>
+    /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
+    /// </summary>
+    public int MaxTapGestureMovement { get; set; } = 8;
+    private double ViewportWidth => Width; // Used in shared code
+    private double ViewportHeight => Height; // Used in shared code
 
     private static void InitTouchesReset(MapControl mapControl)
     {

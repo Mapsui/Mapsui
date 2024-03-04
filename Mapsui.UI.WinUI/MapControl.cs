@@ -31,12 +31,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     public MapControl()
     {
-        CommonInitialize();
-        Initialize();
-    }
+        SharedConstructor();
 
-    private void Initialize()
-    {
         _invalidate = () =>
         {
             // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
@@ -64,7 +60,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         PointerPressed += MapControl_PointerPressed;
         PointerMoved += MapControl_PointerMoved;
-        
+
         Tapped += OnSingleTapped;
         DoubleTapped += OnDoubleTapped;
 

@@ -27,12 +27,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     public MapControl()
     {
-        CommonInitialize();
-        Initialize();
-    }
+        SharedConstructor();
 
-    private void Initialize()
-    {
         _invalidate = () =>
         {
             if (Dispatcher.CheckAccess()) InvalidateCanvas();
@@ -48,12 +44,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         MouseLeftButtonDown += MapControlMouseLeftButtonDown;
         MouseLeftButtonUp += MapControlMouseLeftButtonUp;
-        
+
         MouseMove += MapControlMouseMove;
         MouseLeave += MapControlMouseLeave;
         MouseWheel += MapControlMouseWheel;
-        
-        
+
+
         ManipulationInertiaStarting += OnManipulationInertiaStarting;
         ManipulationDelta += OnManipulationDelta;
         ManipulationCompleted += OnManipulationCompleted;

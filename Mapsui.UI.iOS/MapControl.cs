@@ -18,15 +18,15 @@ public partial class MapControl : UIView, IMapControl
     public MapControl(CGRect frame)
         : base(frame)
     {
-        CommonInitialize();
-        Initialize();
+        SharedConstructor();
+        LocalConstructor();
     }
 
     [Preserve]
     public MapControl(IntPtr handle) : base(handle) // Used when initialized from storyboard
     {
-        CommonInitialize();
-        Initialize();
+        SharedConstructor();
+        LocalConstructor();
     }
 
     public static bool UseGPU { get; set; } = true;
@@ -50,7 +50,7 @@ public partial class MapControl : UIView, IMapControl
         }
     }
 
-    private void Initialize()
+    private void LocalConstructor()
     {
         InitializeCanvas();
 

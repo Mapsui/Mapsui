@@ -59,7 +59,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
     private IRenderer _renderer = new MapRenderer();
 
-    private void CommonInitialize()
+    private void SharedConstructor()
     {
         PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowser);
         // Create timer for invalidating the control

@@ -21,12 +21,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
     public MapControl()
     {
-        CommonInitialize();
-        ControlInitialize();
-    }
+        SharedConstructor();
 
-    private void ControlInitialize()
-    {
         _invalidate = () => RunOnUIThread(Invalidate);
 
         // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
