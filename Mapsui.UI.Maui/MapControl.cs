@@ -16,8 +16,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.UI.Maui;
 
 /// <summary>
@@ -34,8 +32,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         DeviceInfo.Platform != DevicePlatform.MacCatalyst &&
         DeviceInfo.Platform != DevicePlatform.Android;
 
-    protected readonly bool _initialized;
-
     private readonly SKGLView? _glView;
     private readonly SKCanvasView? _canvasView;
     private readonly ConcurrentDictionary<long, MPoint> _touches = new();
@@ -51,6 +47,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
         View view;
 
+
+        BackgroundColor = KnownColor.White;
+        InitTouchesReset(this);
+
+
         if (UseGPU)
         {
             // Use GPU backend
@@ -61,12 +62,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             };
             // Events
             _glView.Touch += OnTouch;
-            _glView.PaintSurface += OnGLPaintSurface;
             _invalidate = () =>
             {
                 // The line below sometimes has a null reference exception on application close.
                 RunOnUIThread(() => _glView.InvalidateSurface());
             };
+            _glView.PaintSurface += OnGLPaintSurface;
             view = _glView;
         }
         else
@@ -78,18 +79,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             };
             // Events
             _canvasView.Touch += OnTouch;
-            _canvasView.PaintSurface += OnPaintSurface;
             _invalidate = () => { RunOnUIThread(() => _canvasView.InvalidateSurface()); };
+            _canvasView.PaintSurface += OnPaintSurface;
             view = _canvasView;
         }
-
         view.PropertyChanged += View_PropertyChanged;
-
         Content = view;
-        BackgroundColor = KnownColor.White;
-        InitTouchesReset(this);
-
-        _initialized = true;
     }
 
     public bool UseDoubleTap { get; set; } = true;
@@ -311,7 +306,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
     {
-        if (!_initialized && _glView?.GRContext == null)
+        if (_glView?.GRContext is null)
         {
             // Could this be null before Home is called? If so we should change the logic.
             Logger.Log(LogLevel.Warning, "Refresh can not be called because GRContext is null");
