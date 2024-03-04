@@ -1,4 +1,5 @@
 using Mapsui.Extensions;
+using Mapsui.Manipulations;
 using Mapsui.UI.Utils;
 using Mapsui.UI.Wpf.Extensions;
 using Mapsui.Utilities;
@@ -22,6 +23,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private MPoint? _previousMousePosition;
     private readonly FlingTracker _flingTracker = new();
     private MPoint? _currentMousePosition;
+    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl()
     {
@@ -41,21 +43,21 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Children.Add(_selectRectangle);
 
         SkiaCanvas.PaintSurface += SKElementOnPaintSurface;
+        Loaded += MapControlLoaded;
+        SizeChanged += MapControlSizeChanged;
 
-        // Pointer events
         MouseLeftButtonDown += MapControlMouseLeftButtonDown;
         MouseLeftButtonUp += MapControlMouseLeftButtonUp;
+        
         MouseMove += MapControlMouseMove;
         MouseLeave += MapControlMouseLeave;
         MouseWheel += MapControlMouseWheel;
-        TouchUp += MapControlTouchUp;
+        
+        
+        ManipulationInertiaStarting += OnManipulationInertiaStarting;
         ManipulationDelta += OnManipulationDelta;
         ManipulationCompleted += OnManipulationCompleted;
-        ManipulationInertiaStarting += OnManipulationInertiaStarting;
-
-        Loaded += MapControlLoaded;
-
-        SizeChanged += MapControlSizeChanged;
+        TouchUp += MapControlTouchUp;
 
         IsManipulationEnabled = true;
 
