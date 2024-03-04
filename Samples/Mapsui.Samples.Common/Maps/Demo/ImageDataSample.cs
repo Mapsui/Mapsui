@@ -74,19 +74,13 @@ public class ImageDataSample : ISample
     private static byte[] CreateSquareImageData(int dataPointsInX, int dataPointsInY, Func<int, int, SKColor> getColorForDataPoint)
     {
         // Create a bitmap, that contains the image data
-        using (SKBitmap bitmap = new SKBitmap(dataPointsInX, dataPointsInY))
-        {
-            for (int row = 0; row < dataPointsInY; row++)
-                for (int col = 0; col < dataPointsInX; col++)
-                {
-                    bitmap.SetPixel(col, row, getColorForDataPoint(col, row));
-                }
+        using SKBitmap bitmap = new SKBitmap(dataPointsInX, dataPointsInY);
+        for (int row = 0; row < dataPointsInY; row++)
+            for (int col = 0; col < dataPointsInX; col++)
+                bitmap.SetPixel(col, row, getColorForDataPoint(col, row));
 
-            using (var data = bitmap.Encode(SKEncodedImageFormat.Png, 100))
-            {
-                return data.ToArray();
-            }
-        }
+        using var data = bitmap.Encode(SKEncodedImageFormat.Png, 100);
+        return data.ToArray();
     }
 
     // Uncomment this function, if you like to create larger bitmaps.
@@ -124,53 +118,45 @@ public class ImageDataSample : ISample
     private static byte[] CreatePolarImageData(int maxRadius, float stepRadius, float stepAngle, Func<float, float, SKColor> getColorForDataPoint)
     {
         // Create a bitmap, that contains the image data
-        using (SKBitmap bitmap = new SKBitmap(maxRadius * 2, maxRadius * 2))
-        {
-            var center = new SKPoint(maxRadius, maxRadius);
+        using SKBitmap bitmap = new SKBitmap(maxRadius * 2, maxRadius * 2);
+        var center = new SKPoint(maxRadius, maxRadius);
 
-            // Create a canvas, so it is possible to use normal SkiaSharp commands to draw
-            using (var canvas = new SKCanvas(bitmap))
+        // Create a canvas, so it is possible to use normal SkiaSharp commands to draw
+        using var canvas = new SKCanvas(bitmap);
+        for (float angle = 0; angle < 360; angle += stepAngle)
+            for (float radius = 0; radius < maxRadius; radius += stepRadius)
             {
-                for (float angle = 0; angle < 360; angle += stepAngle)
-                    for (float radius = 0; radius < maxRadius; radius += stepRadius)
-                    {
-                        var outerRadius = radius + stepRadius;
+                var outerRadius = radius + stepRadius;
 
-                        var innerRect = new SKRect(center.X - radius, center.Y - radius, center.X + radius, center.Y + radius);
-                        var outerRect = new SKRect(center.X - outerRadius, center.Y - outerRadius, center.X + outerRadius, center.Y + outerRadius);
+                var innerRect = new SKRect(center.X - radius, center.Y - radius, center.X + radius, center.Y + radius);
+                var outerRect = new SKRect(center.X - outerRadius, center.Y - outerRadius, center.X + outerRadius, center.Y + outerRadius);
 
-                        using (var path = new SKPath())
-                        using (var paint = new SKPaint { IsStroke = false, StrokeWidth = 2 })
-                        {
-                            var startPoint = ConvertPolarToCartesian(radius, angle - stepAngle / 2) + center;
+                using var path = new SKPath();
+                using var paint = new SKPaint { IsStroke = false, StrokeWidth = 2 };
+                var startPoint = ConvertPolarToCartesian(radius, angle - stepAngle / 2) + center;
 
-                            // Fill path
-                            path.MoveTo(startPoint);
-                            path.ArcTo(outerRect, angle - stepAngle / 2, stepAngle, false);
-                            path.ArcTo(innerRect, angle + stepAngle / 2, -stepAngle, false);
-                            path.Close();
+                // Fill path
+                path.MoveTo(startPoint);
+                path.ArcTo(outerRect, angle - stepAngle / 2, stepAngle, false);
+                path.ArcTo(innerRect, angle + stepAngle / 2, -stepAngle, false);
+                path.Close();
 
-                            paint.IsStroke = false;
-                            paint.Color = getColorForDataPoint(radius, angle);
+                paint.IsStroke = false;
+                paint.Color = getColorForDataPoint(radius, angle);
 
-                            canvas.DrawPath(path, paint);
+                canvas.DrawPath(path, paint);
 
-                            // Outline path
-                            // Remove comments, if you want to have lines between the fields
-                            //paint.IsStroke = true;
-                            //paint.StrokeWidth = 2;
-                            //paint.Color = SKColors.White;
+                // Outline path
+                // Remove comments, if you want to have lines between the fields
+                //paint.IsStroke = true;
+                //paint.StrokeWidth = 2;
+                //paint.Color = SKColors.White;
 
-                            //canvas.DrawPath(path, paint);
-                        }
-                    }
-
-                using (var data = bitmap.Encode(SKEncodedImageFormat.Png, 100))
-                {
-                    return data.ToArray();
-                }
+                //canvas.DrawPath(path, paint);
             }
-        }
+
+        using var data = bitmap.Encode(SKEncodedImageFormat.Png, 100);
+        return data.ToArray();
     }
 
     private static SKPoint ConvertPolarToCartesian(double radius, double angle)

@@ -1,4 +1,5 @@
 using Mapsui.Extensions;
+using Mapsui.Manipulations;
 using Mapsui.UI.Utils;
 using Mapsui.UI.Wpf.Extensions;
 using Mapsui.Utilities;
@@ -19,19 +20,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 {
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private MPoint? _pointerDownPosition;
-    private bool _mouseDown;
     private MPoint? _previousMousePosition;
     private readonly FlingTracker _flingTracker = new();
     private MPoint? _currentMousePosition;
+    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl()
     {
-        CommonInitialize();
-        Initialize();
-    }
+        SharedConstructor();
 
-    private void Initialize()
-    {
         _invalidate = () =>
         {
             if (Dispatcher.CheckAccess()) InvalidateCanvas();
@@ -42,21 +39,21 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Children.Add(_selectRectangle);
 
         SkiaCanvas.PaintSurface += SKElementOnPaintSurface;
+        Loaded += MapControlLoaded;
+        SizeChanged += MapControlSizeChanged;
 
-        // Pointer events
         MouseLeftButtonDown += MapControlMouseLeftButtonDown;
         MouseLeftButtonUp += MapControlMouseLeftButtonUp;
+
         MouseMove += MapControlMouseMove;
         MouseLeave += MapControlMouseLeave;
         MouseWheel += MapControlMouseWheel;
-        TouchUp += MapControlTouchUp;
+
+
+        ManipulationInertiaStarting += OnManipulationInertiaStarting;
         ManipulationDelta += OnManipulationDelta;
         ManipulationCompleted += OnManipulationCompleted;
-        ManipulationInertiaStarting += OnManipulationInertiaStarting;
-
-        Loaded += MapControlLoaded;
-
-        SizeChanged += MapControlSizeChanged;
+        TouchUp += MapControlTouchUp;
 
         IsManipulationEnabled = true;
 
@@ -146,7 +143,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             return;
 
         _previousMousePosition = _pointerDownPosition;
-        _mouseDown = true;
         _flingTracker.Clear();
         CaptureMouse();
     }
@@ -158,7 +154,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
-        _mouseDown = false;
         var position = e.GetPosition(this).ToMapsui();
 
         if (_previousMousePosition != null)
@@ -234,7 +229,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (OnWidgetPointerMoved(e.GetPosition(this).ToMapsui(), !isHovering, GetShiftPressed()))
             return;
 
-        if (IsInBoxZoomMode())
+        if (IsInBoxZoomMode() && !isHovering)
         {
             DrawRectangle(e.GetPosition(this));
             return;
@@ -242,7 +237,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         _currentMousePosition = e.GetPosition(this).ToMapsui();
 
-        if (_mouseDown)
+        if (!isHovering)
         {
             if (_previousMousePosition == null)
             {
@@ -270,34 +265,31 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         RunOnUIThread(() => _selectRectangle.Visibility = Visibility.Collapsed);
     }
 
-    private void DrawRectangle(Point newPos)
+    private void DrawRectangle(Point screenPosition)
     {
-        if (_mouseDown)
+        if (_previousMousePosition == null) return; // can happen during debug
+
+        var from = _previousMousePosition;
+        var to = screenPosition;
+
+        if (from.X > to.X)
         {
-            if (_previousMousePosition == null) return; // can happen during debug
-
-            var from = _previousMousePosition;
-            var to = newPos;
-
-            if (from.X > to.X)
-            {
-                var temp = from;
-                from.X = to.X;
-                to.X = temp.X;
-            }
-
-            if (from.Y > to.Y)
-            {
-                var temp = from;
-                from.Y = to.Y;
-                to.Y = temp.Y;
-            }
-
-            _selectRectangle.Width = to.X - from.X;
-            _selectRectangle.Height = to.Y - from.Y;
-            _selectRectangle.Margin = new Thickness(from.X, from.Y, 0, 0);
-            _selectRectangle.Visibility = Visibility.Visible;
+            var temp = from;
+            from.X = to.X;
+            to.X = temp.X;
         }
+
+        if (from.Y > to.Y)
+        {
+            var temp = from;
+            from.Y = to.Y;
+            to.Y = temp.Y;
+        }
+
+        _selectRectangle.Width = to.X - from.X;
+        _selectRectangle.Height = to.Y - from.Y;
+        _selectRectangle.Margin = new Thickness(from.X, from.Y, 0, 0);
+        _selectRectangle.Visibility = Visibility.Visible;
     }
 
     private double ViewportWidth => ActualWidth;

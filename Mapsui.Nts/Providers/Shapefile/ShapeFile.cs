@@ -713,32 +713,32 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
             case ShapeType.Point:
             case ShapeType.PointZ:
             case ShapeType.PointM:
-            {
-                for (var a = 0; a < _featureCount; ++a)
                 {
-                    _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); // Skip record number and content length
-                    if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
+                    for (var a = 0; a < _featureCount; ++a)
                     {
-                        var x = _brShapeFile.ReadDouble();
-                        var y = _brShapeFile.ReadDouble();
-                        yield return new MRect(x, y, x, y);
+                        _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); // Skip record number and content length
+                        if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
+                        {
+                            var x = _brShapeFile.ReadDouble();
+                            var y = _brShapeFile.ReadDouble();
+                            yield return new MRect(x, y, x, y);
+                        }
                     }
-                }
 
-                break;
-            }
+                    break;
+                }
             default:
-            {
-                for (var a = 0; a < _featureCount; ++a)
                 {
-                    _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); // Skip record number and content length
-                    if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
-                        yield return new MRect(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble(),
-                            _brShapeFile.ReadDouble(), _brShapeFile.ReadDouble());
-                }
+                    for (var a = 0; a < _featureCount; ++a)
+                    {
+                        _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); // Skip record number and content length
+                        if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
+                            yield return new MRect(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble(),
+                                _brShapeFile.ReadDouble(), _brShapeFile.ReadDouble());
+                    }
 
-                break;
-            }
+                    break;
+                }
         }
     }
 

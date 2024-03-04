@@ -10,7 +10,7 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
     private readonly LruCache<object, ICacheHolder> _pathParamCache = new(Math.Min(capacity, 1));
 
     public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, TPaint> toPaint)
-        where TParam : notnull 
+        where TParam : notnull
         where TPaint : class
     {
         var holder = _paintCache.GetOrCreateValue(param, f =>
@@ -22,7 +22,7 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
         return holder?.Get<TPaint>() ?? new CacheTracker<TPaint>(toPaint(param));
     }
 
-    public CacheTracker<TPaint> GetOrCreatePaint<TParam,TPaint>(TParam param, Func<TParam, ISymbolCache, TPaint> toPaint)
+    public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, ISymbolCache, TPaint> toPaint)
         where TParam : notnull
         where TPaint : class
     {
@@ -31,7 +31,7 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
             var paint = toPaint(f, symbolCache);
             return new CacheHolder<TPaint>(paint);
         });
-        
+
         return holder?.Get<TPaint>() ?? new CacheTracker<TPaint>(toPaint(param, symbolCache));
     }
 
@@ -44,7 +44,7 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
             var path = toPath(f);
             return new CacheHolder<TPath>(path);
         });
-        
+
         return holder?.Get<TPath>() ?? new CacheTracker<TPath>(toPath(param));
     }
 

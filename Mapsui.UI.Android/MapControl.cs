@@ -47,18 +47,18 @@ public partial class MapControl : ViewGroup, IMapControl
     public MapControl(Context context, IAttributeSet attrs) :
         base(context, attrs)
     {
-        CommonInitialize();
-        Initialize();
+        SharedConstructor();
+        LocalConstructor();
     }
 
     public MapControl(Context context, IAttributeSet attrs, int defStyle) :
         base(context, attrs, defStyle)
     {
-        CommonInitialize();
-        Initialize();
+        SharedConstructor();
+        LocalConstructor();
     }
 
-    private void Initialize()
+    private void LocalConstructor()
     {
         _invalidate = () => { RunOnUIThread(RefreshGraphicsWithTryCatch); };
 

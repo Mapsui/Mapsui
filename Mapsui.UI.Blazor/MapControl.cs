@@ -44,12 +44,26 @@ public partial class MapControl : ComponentBase, IMapControl
                 ? _interop ??= new MapsuiJsInterop(JsRuntime)
                 : _interop;
 
+    public MapControl()
+    {
+        SharedConstructor();
+
+        _invalidate = () =>
+        {
+            if (_viewCpu != null)
+                _viewCpu?.Invalidate();
+            else
+                _viewGpu?.Invalidate();
+        };
+
+        // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
+        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+    }
 
     protected override void OnInitialized()
     {
-        CommonInitialize();
-        ControlInitialize();
         base.OnInitialized();
+        RefreshGraphics();
     }
 
     protected void OnKeyDown(KeyboardEventArgs e)
@@ -97,22 +111,6 @@ public partial class MapControl : ComponentBase, IMapControl
         }
 
         CommonDrawControl(canvas);
-    }
-
-    protected void ControlInitialize()
-    {
-        _invalidate = () =>
-        {
-            if (_viewCpu != null)
-                _viewCpu?.Invalidate();
-            else
-                _viewGpu?.Invalidate();
-        };
-
-        // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
-        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-
-        RefreshGraphics();
     }
 
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
@@ -263,11 +261,11 @@ public partial class MapControl : ComponentBase, IMapControl
 
     public void OpenInBrowser(string url)
     {
-        Catch.TaskRun(async () =>
+        Catch.TaskRun(() =>
         {
             if (JsRuntime != null)
-                await JsRuntime.InvokeAsync<object>("open", [url, "_blank"]);
-        });    
+                _ = JsRuntime.InvokeAsync<object>("open", [url, "_blank"]);
+        });
     }
 
     private bool GetShiftPressed()

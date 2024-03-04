@@ -15,9 +15,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
-
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.UI.Maui;
 
@@ -35,10 +32,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         DeviceInfo.Platform != DevicePlatform.MacCatalyst &&
         DeviceInfo.Platform != DevicePlatform.Android;
 
-    protected readonly bool _initialized;
-
-    private SKGLView? _glView;
-    private SKCanvasView? _canvasView;
+    private readonly SKGLView? _glView;
+    private readonly SKCanvasView? _canvasView;
     private readonly ConcurrentDictionary<long, MPoint> _touches = new();
     private readonly FlingTracker _flingTracker = new();
     private Size _oldSize;
@@ -48,10 +43,48 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     public MapControl()
     {
-        CommonInitialize();
-        Initialize();
+        SharedConstructor();
 
-        _initialized = true;
+        View view;
+
+
+        BackgroundColor = KnownColor.White;
+        InitTouchesReset(this);
+
+
+        if (UseGPU)
+        {
+            // Use GPU backend
+            _glView = new SKGLView
+            {
+                HasRenderLoop = false,
+                EnableTouchEvents = true,
+            };
+            // Events
+            _glView.Touch += OnTouch;
+            _invalidate = () =>
+            {
+                // The line below sometimes has a null reference exception on application close.
+                RunOnUIThread(() => _glView.InvalidateSurface());
+            };
+            _glView.PaintSurface += OnGLPaintSurface;
+            view = _glView;
+        }
+        else
+        {
+            // Use CPU backend
+            _canvasView = new SKCanvasView
+            {
+                EnableTouchEvents = true,
+            };
+            // Events
+            _canvasView.Touch += OnTouch;
+            _invalidate = () => { RunOnUIThread(() => _canvasView.InvalidateSurface()); };
+            _canvasView.PaintSurface += OnPaintSurface;
+            view = _canvasView;
+        }
+        view.PropertyChanged += View_PropertyChanged;
+        Content = view;
     }
 
     public bool UseDoubleTap { get; set; } = true;
@@ -69,49 +102,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     public int MaxTapGestureMovement { get; set; } = 8;
     private double ViewportWidth => Width; // Used in shared code
     private double ViewportHeight => Height; // Used in shared code
-
-    private void Initialize()
-    {
-        View view;
-
-        if (UseGPU)
-        {
-            // Use GPU backend
-            _glView = new SKGLView
-            {
-                HasRenderLoop = false,
-                EnableTouchEvents = true,
-            };
-            // Events
-            _glView.Touch += OnTouch;
-            _glView.PaintSurface += OnGLPaintSurface;
-            _invalidate = () =>
-            {
-                // The line below sometimes has a null reference exception on application close.
-                RunOnUIThread(() => _glView.InvalidateSurface());
-            };
-            view = _glView;
-        }
-        else
-        {
-            // Use CPU backend
-            _canvasView = new SKCanvasView
-            {
-                EnableTouchEvents = true,
-            };
-            // Events
-            _canvasView.Touch += OnTouch;
-            _canvasView.PaintSurface += OnPaintSurface;
-            _invalidate = () => { RunOnUIThread(() => _canvasView.InvalidateSurface()); };
-            view = _canvasView;
-        }
-
-        view.PropertyChanged += View_PropertyChanged;
-
-        Content = view;
-        BackgroundColor = KnownColor.White;
-        InitTouchesReset(this);
-    }
 
     private static void InitTouchesReset(MapControl mapControl)
     {
@@ -205,7 +195,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             e.Handled = true;
             var location = GetScreenPosition(e.Location);
-            
+
             if (e.ActionType == SKTouchAction.Pressed)
             {
                 _touches[e.Id] = location;
@@ -261,7 +251,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             {
                 if (!e.InContact)
                     return;
-                
+
                 _touches.Clear();
                 Refresh();
             }
@@ -295,7 +285,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
         if (Math.Abs(velocityX) <= 200 && Math.Abs(velocityY) <= 200)
             return;
-                
+
         // This was the last finger on screen, so this is a fling
         Map.Navigator.Fling(velocityX, velocityY, 1000);
     }
@@ -316,7 +306,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
     {
-        if (!_initialized && _glView?.GRContext == null)
+        if (_glView?.GRContext is null)
         {
             // Could this be null before Home is called? If so we should change the logic.
             Logger.Log(LogLevel.Warning, "Refresh can not be called because GRContext is null");
@@ -344,7 +334,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     }
 
     private MPoint GetScreenPosition(SKPoint point) => new MPoint(point.X / PixelDensity, point.Y / PixelDensity);
-    
+
     /// <summary>
     /// Called, when map should zoom in or out
     /// </summary>

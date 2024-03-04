@@ -31,15 +31,15 @@ public class HyperlinkSample : ISample
 
     private static HyperlinkWidget CreateHyperlink(string text, string url,
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment) => new()
-    {
-        Text = text,
-        Url = url,
-        VerticalAlignment = verticalAlignment,
-        HorizontalAlignment = horizontalAlignment,
-        Margin = new MRect(30),
-        Padding = new MRect(4),
-        CornerRadius = 4,
-        BackColor = new Color(23, 162, 184),
-        TextColor = Color.White,
-    };
+        {
+            Text = text,
+            Url = url,
+            VerticalAlignment = verticalAlignment,
+            HorizontalAlignment = horizontalAlignment,
+            Margin = new MRect(30),
+            Padding = new MRect(4),
+            CornerRadius = 4,
+            BackColor = new Color(23, 162, 184),
+            TextColor = Color.White,
+        };
 }

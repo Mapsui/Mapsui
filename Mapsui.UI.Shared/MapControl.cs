@@ -6,7 +6,6 @@ using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
-using Mapsui.Widgets.ButtonWidgets;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -60,7 +59,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
     private IRenderer _renderer = new MapRenderer();
 
-    private void CommonInitialize()
+    private void SharedConstructor()
     {
         PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowser);
         // Create timer for invalidating the control
@@ -548,7 +547,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidateTimer = null;
     }
 
-  
+
     private bool OnWidgetPointerPressed(MPoint position, bool shift)
     {
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
@@ -578,7 +577,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetTapped(MPoint position, int tapCount, bool shift)
     {
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position,  Map);
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
         {
             Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name}");

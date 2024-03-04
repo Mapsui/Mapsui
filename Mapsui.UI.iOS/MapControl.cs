@@ -11,22 +11,22 @@ public partial class MapControl : UIView, IMapControl
 {
     private SKGLView? _glCanvas;
     private SKCanvasView? _canvas;
-    private bool _initialize;
+    private bool _canvasInitialized;
     private MPoint? _pointerDownPosition;
     private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl(CGRect frame)
         : base(frame)
     {
-        CommonInitialize();
-        Initialize();
+        SharedConstructor();
+        LocalConstructor();
     }
 
     [Preserve]
     public MapControl(IntPtr handle) : base(handle) // Used when initialized from storyboard
     {
-        CommonInitialize();
-        Initialize();
+        SharedConstructor();
+        LocalConstructor();
     }
 
     public static bool UseGPU { get; set; } = true;
@@ -34,9 +34,9 @@ public partial class MapControl : UIView, IMapControl
 
     private void InitializeCanvas()
     {
-        if (!_initialize)
+        if (!_canvasInitialized)
         {
-            _initialize = true;
+            _canvasInitialized = true;
             if (UseGPU)
             {
                 _glCanvas?.Dispose();
@@ -50,7 +50,7 @@ public partial class MapControl : UIView, IMapControl
         }
     }
 
-    private void Initialize()
+    private void LocalConstructor()
     {
         InitializeCanvas();
 
