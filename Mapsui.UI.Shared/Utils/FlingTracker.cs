@@ -1,4 +1,5 @@
 ﻿#pragma warning disable IDE0005
+using System;
 using System.Collections.Generic;
 
 namespace Mapsui.UI.Utils;
@@ -79,5 +80,15 @@ public class FlingTracker
         var totalTime = finalTime - firstTime;
 
         return (distanceX / totalTime, distanceY / totalTime);
+    }
+
+    public void IfFling(long eventId, Action<double, double> onFling)
+    {
+        var (velocityX, velocityY) = CalcVelocity(eventId, DateTime.Now.Ticks);
+
+        if (Math.Abs(velocityX) <= 200 && Math.Abs(velocityY) <= 200)
+            return;
+
+        onFling(velocityX, velocityY);
     }
 }

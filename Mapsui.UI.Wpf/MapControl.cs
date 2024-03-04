@@ -147,17 +147,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         RefreshData();
 
-        double velocityX;
-        double velocityY;
-
-        (velocityX, velocityY) = _flingTracker.CalcVelocity(1, DateTime.Now.Ticks);
-
-        if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
-        {
-            // This was the last finger on screen, so this is a fling
-            Map.Navigator.Fling(velocityX, velocityY, 1000);
-            e.Handled = true;
-        }
+        _flingTracker.IfFling(1, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
         _flingTracker.RemoveId(1);
 
         ReleaseMouseCapture();
