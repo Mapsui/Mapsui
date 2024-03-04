@@ -1,7 +1,6 @@
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Manipulations;
-using Mapsui.UI.Utils;
 using Mapsui.Utilities;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;

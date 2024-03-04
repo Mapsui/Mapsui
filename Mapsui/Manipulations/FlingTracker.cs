@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Mapsui.UI.Utils;
+namespace Mapsui.Manipulations;
 
 public class FlingTracker
 {
@@ -30,7 +30,7 @@ public class FlingTracker
         // Check, if we at the end of array
         if (value.Count > 2)
         {
-            while (value.Count > _maxSize || value.Peek().time < (ticks - _maxTicks))
+            while (value.Count > _maxSize || value.Peek().time < ticks - _maxTicks)
                 value.Dequeue();
         }
     }
