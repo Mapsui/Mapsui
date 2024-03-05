@@ -39,15 +39,17 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnMouseDown(e);
 
-        bool isHovering = !(e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier));
-
-        if (!isHovering)
-            _defaultCursor = Cursor;
-
-        if (isHovering)
+        if (IsHovering(e))
             return;
 
+        SetCursorInMoveMode();
         _pointerDownPosition = e.Location;
+    }
+
+    private void SetCursorInMoveMode()
+    {
+        _defaultCursor = Cursor; // And store previous cursor to restore it later
+        Cursor = MoveCursor;
     }
 
     protected override void OnMouseMove(MouseEventArgs e)
@@ -56,7 +58,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         if (_pointerDownPosition.HasValue)
         {
-            Cursor = MoveCursor;
             Map.Navigator.Drag(e.Location.ToMapsui(), _pointerDownPosition.Value.ToMapsui());
             _pointerDownPosition = e.Location;
         }
@@ -66,6 +67,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnMouseUp(e);
 
+        SetCursorInDefaultMode();
+
         if (_pointerDownPosition.HasValue)
         {
             if (IsTap(e.Location, _pointerDownPosition.Value))
@@ -73,8 +76,12 @@ public partial class MapControl : SkiaDrawable, IMapControl
         }
 
         _pointerDownPosition = null;
-        Cursor = _defaultCursor;
         RefreshData();
+    }
+
+    private void SetCursorInDefaultMode()
+    {
+        Cursor = _defaultCursor;
     }
 
     protected override void OnLoadComplete(EventArgs e)
@@ -140,5 +147,10 @@ public partial class MapControl : SkiaDrawable, IMapControl
 #pragma warning restore IDISP023 // Don't use reference types in finalizer context
 
         base.Dispose(disposing);
+    }
+
+    private bool IsHovering(MouseEventArgs e)
+    {
+        return !(e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier));
     }
 }
