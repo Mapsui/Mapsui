@@ -50,6 +50,18 @@ public partial class MapControl : SkiaDrawable, IMapControl
         _pointerDownPosition = e.Location;
     }
 
+    protected override void OnMouseMove(MouseEventArgs e)
+    {
+        base.OnMouseMove(e);
+
+        if (_pointerDownPosition.HasValue)
+        {
+            Cursor = MoveCursor;
+            Map.Navigator.Drag(e.Location.ToMapsui(), _pointerDownPosition.Value.ToMapsui());
+            _pointerDownPosition = e.Location;
+        }
+    }
+
     protected override void OnMouseUp(MouseEventArgs e)
     {
         base.OnMouseUp(e);
@@ -88,18 +100,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
         base.OnSizeChanged(e);
 
         SetViewportSize();
-    }
-
-    protected override void OnMouseMove(MouseEventArgs e)
-    {
-        base.OnMouseMove(e);
-
-        if (_pointerDownPosition.HasValue)
-        {
-            Cursor = MoveCursor;
-            Map.Navigator.Drag(e.Location.ToMapsui(), _pointerDownPosition.Value.ToMapsui());
-            _pointerDownPosition = e.Location;
-        }
     }
 
     protected override void OnPaint(SKPaintEventArgs e)
