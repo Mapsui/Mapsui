@@ -24,37 +24,15 @@ public partial class MapControl : SkiaDrawable, IMapControl
     public Keys MoveModifier { get; set; } = Keys.None;
     public MouseButtons ZoomButton { get; set; } = MouseButtons.Primary;
     public Keys ZoomModifier { get; set; } = Keys.Control;
+    private double ViewportWidth => Width;
+    private double ViewportHeight => Height;
 
-
-
-    protected override void OnLoadComplete(EventArgs e)
+    public void OpenInBrowser(string url)
     {
-        base.OnLoadComplete(e);
-
-        SetViewportSize();
-
-        CanFocus = true;
-    }
-
-    protected override void OnMouseWheel(MouseEventArgs e)
-    {
-        base.OnMouseWheel(e);
-
-        var mouseWheelDelta = (int)e.Delta.Height;
-        var currentMousePosition = e.Location.ToMapsui();
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
-    }
-
-    protected override void OnSizeChanged(EventArgs e)
-    {
-        base.OnSizeChanged(e);
-
-        SetViewportSize();
-    }
-
-    private static void RunOnUIThread(Action action)
-    {
-        Application.Instance.AsyncInvoke(action);
+        Catch.TaskRun(() =>
+        {
+            using var process = Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+        });
     }
 
     protected override void OnMouseDown(MouseEventArgs e)
@@ -85,17 +63,29 @@ public partial class MapControl : SkiaDrawable, IMapControl
         RefreshData();
     }
 
-    private static bool IsTap(PointF currentPosition, PointF previousPosition)
+    protected override void OnLoadComplete(EventArgs e)
     {
-        return Math.Abs(PointF.Distance(currentPosition, previousPosition)) < 5;
+        base.OnLoadComplete(e);
+
+        SetViewportSize();
+
+        CanFocus = true;
     }
 
-    public void OpenInBrowser(string url)
+    protected override void OnMouseWheel(MouseEventArgs e)
     {
-        Catch.TaskRun(() =>
-        {
-            using var process = Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
-        });
+        base.OnMouseWheel(e);
+
+        var mouseWheelDelta = (int)e.Delta.Height;
+        var currentMousePosition = e.Location.ToMapsui();
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
+    }
+
+    protected override void OnSizeChanged(EventArgs e)
+    {
+        base.OnSizeChanged(e);
+
+        SetViewportSize();
     }
 
     protected override void OnMouseMove(MouseEventArgs e)
@@ -109,9 +99,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
             _pointerDownPosition = e.Location;
         }
     }
-
-    private double ViewportWidth => Width;
-    private double ViewportHeight => Height;
 
     protected override void OnPaint(SKPaintEventArgs e)
     {
@@ -127,6 +114,16 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         var center = PointToScreen(Location + Size / 2);
         return Screen.FromPoint(center).LogicalPixelSize;
+    }
+
+    private static void RunOnUIThread(Action action)
+    {
+        Application.Instance.AsyncInvoke(action);
+    }
+
+    private static bool IsTap(PointF currentPosition, PointF previousPosition)
+    {
+        return Math.Abs(PointF.Distance(currentPosition, previousPosition)) < 5;
     }
 
     protected override void Dispose(bool disposing)
