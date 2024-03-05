@@ -16,8 +16,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         SharedConstructor();
         _invalidate = () => RunOnUIThread(Invalidate);
-        // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
-        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
         SizeChanged += (s, e) => SetViewportSize();
     }
 

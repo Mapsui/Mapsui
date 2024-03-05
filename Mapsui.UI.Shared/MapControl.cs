@@ -69,6 +69,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidateTimer = new Timer(InvalidateTimerCallback, null, Timeout.Infinite, 16);
         // Start the invalidation timer
         StartUpdates(false);
+        // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
+        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
     }
 
     private protected void CommonDrawControl(object canvas)

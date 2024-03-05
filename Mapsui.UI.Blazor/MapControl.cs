@@ -56,9 +56,6 @@ public partial class MapControl : ComponentBase, IMapControl
             else
                 _viewGpu?.Invalidate();
         };
-
-        // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
-        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
     }
 
     protected override void OnInitialized()
