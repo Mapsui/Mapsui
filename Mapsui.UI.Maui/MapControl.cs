@@ -1,7 +1,6 @@
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Manipulations;
-using Mapsui.UI.Utils;
 using Mapsui.Utilities;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
@@ -232,7 +231,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 // Delete e.Id from _touches, because finger is released
                 _touches.Remove(e.Id, out var releasedTouch);
 
-                FlingIfNeeded(e);
+                if (UseFling)
+                    _flingTracker.IfFling(e.Id, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
                 _flingTracker.RemoveId(e.Id);
 
                 if (IsTap(releasedTouch, _downLocation))
@@ -268,26 +268,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 OnZoomInOrOut(e.WheelDelta, location);
             }
         });
-    }
-
-    private void FlingIfNeeded(SKTouchEventArgs e)
-    {
-        if (!_touches.IsEmpty)
-            return;
-
-        if (!UseFling)
-            return;
-
-        double velocityX;
-        double velocityY;
-
-        (velocityX, velocityY) = _flingTracker.CalcVelocity(e.Id, DateTime.Now.Ticks);
-
-        if (Math.Abs(velocityX) <= 200 && Math.Abs(velocityY) <= 200)
-            return;
-
-        // This was the last finger on screen, so this is a fling
-        Map.Navigator.Fling(velocityX, velocityY, 1000);
     }
 
     private bool IsTap(MPoint? releasePosition, MPoint? pressedPosition)
