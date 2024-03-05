@@ -46,11 +46,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
         _pointerDownPosition = e.Location;
     }
 
-    private void SetCursorInMoveMode()
-    {
-        _defaultCursor = Cursor; // And store previous cursor to restore it later
-        Cursor = MoveCursor;
-    }
 
     protected override void OnMouseMove(MouseEventArgs e)
     {
@@ -77,11 +72,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         _pointerDownPosition = null;
         RefreshData();
-    }
-
-    private void SetCursorInDefaultMode()
-    {
-        Cursor = _defaultCursor;
     }
 
     protected override void OnLoadComplete(EventArgs e)
@@ -119,6 +109,20 @@ public partial class MapControl : SkiaDrawable, IMapControl
         CommonDrawControl(canvas);
     }
 
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _map?.Dispose();
+        }
+
+#pragma warning disable IDISP023 // Don't use reference types in finalizer context
+        CommonDispose(disposing);
+#pragma warning restore IDISP023 // Don't use reference types in finalizer context
+
+        base.Dispose(disposing);
+    }
+
     private double GetPixelDensity()
     {
         var center = PointToScreen(Location + Size / 2);
@@ -135,22 +139,19 @@ public partial class MapControl : SkiaDrawable, IMapControl
         return Math.Abs(PointF.Distance(currentPosition, previousPosition)) < 5;
     }
 
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            _map?.Dispose();
-        }
-
-#pragma warning disable IDISP023 // Don't use reference types in finalizer context
-        CommonDispose(disposing);
-#pragma warning restore IDISP023 // Don't use reference types in finalizer context
-
-        base.Dispose(disposing);
-    }
-
     private bool IsHovering(MouseEventArgs e)
     {
         return !(e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier));
+    }
+
+    private void SetCursorInMoveMode()
+    {
+        _defaultCursor = Cursor; // And store previous cursor to restore it later
+        Cursor = MoveCursor;
+    }
+
+    private void SetCursorInDefaultMode()
+    {
+        Cursor = _defaultCursor;
     }
 }
