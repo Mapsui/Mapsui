@@ -13,12 +13,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
     private RectangleF _selectRectangle = new();
     private PointF? _pointerDownPosition;
     private Cursor _defaultCursor = Cursors.Default;
-    public Cursor MoveCursor { get; set; } = Cursors.Move;
-    public MouseButtons MoveButton { get; set; } = MouseButtons.Primary;
-    public Keys MoveModifier { get; set; } = Keys.None;
-    public MouseButtons ZoomButton { get; set; } = MouseButtons.Primary;
-    public Keys ZoomModifier { get; set; } = Keys.Control;
-
     public MapControl()
     {
         SharedConstructor();
@@ -34,6 +28,12 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         SizeChanged += (s, e) => SetViewportSize();
     }
+
+    public Cursor MoveCursor { get; set; } = Cursors.Move;
+    public MouseButtons MoveButton { get; set; } = MouseButtons.Primary;
+    public Keys MoveModifier { get; set; } = Keys.None;
+    public MouseButtons ZoomButton { get; set; } = MouseButtons.Primary;
+    public Keys ZoomModifier { get; set; } = Keys.Control;
 
     private Drawable CreateBoundingBoxDrawable()
     {
@@ -194,7 +194,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
     private double GetPixelDensity()
     {
         var center = PointToScreen(Location + Size / 2);
-
         return Screen.FromPoint(center).LogicalPixelSize;
     }
 
