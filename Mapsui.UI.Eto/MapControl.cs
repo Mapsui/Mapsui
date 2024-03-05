@@ -39,13 +39,15 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnMouseDown(e);
 
-        bool move_mode = e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier);
+        bool isHovering = !(e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier));
 
-        if (move_mode)
+        if (!isHovering)
             _defaultCursor = Cursor;
 
-        if (move_mode)
-            _pointerDownPosition = e.Location;
+        if (isHovering)
+            return;
+
+        _pointerDownPosition = e.Location;
     }
 
     protected override void OnMouseUp(MouseEventArgs e)
@@ -77,8 +79,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
         base.OnMouseWheel(e);
 
         var mouseWheelDelta = (int)e.Delta.Height;
-        var currentMousePosition = e.Location.ToMapsui();
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
+        var mousePosition = e.Location.ToMapsui();
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
     }
 
     protected override void OnSizeChanged(EventArgs e)
