@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Mapsui.Projections;
+﻿namespace Mapsui.Projections;
 
 public interface IProjectionCrs
 {

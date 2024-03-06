@@ -1,6 +1,5 @@
 ﻿using Mapsui.Samples.Common;
 using Mapsui.Styles;
-using Mapsui.UI;
 using System.Threading.Tasks;
 
 namespace Mapsui.Tests.Common.Maps;

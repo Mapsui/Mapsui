@@ -27,24 +27,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     public MapControl()
     {
-        ClipToBounds = true;
-        CommonInitialize();
-        Initialize();
-    }
+        SharedConstructor();
 
-    public static readonly DirectProperty<MapControl, Map> MapProperty =
-    AvaloniaProperty.RegisterDirect<MapControl, Map>(nameof(Map), o => o.Map, (o, v) => o.Map = v);
-
-    /// <summary> Clears the Touch State. Should only be called if the touch state seems out of sync 
-    /// in a certain situation.</summary>
-    public void ClearTouchState()
-    {
-        // Todo: Figure out if we need to clear the entire state, or only remove a specific pointer.
-        _pointerLocations.Clear();
-    }
-
-    private void Initialize()
-    {
         _invalidate = () => { RunOnUIThread(InvalidateVisual); };
 
         Initialized += MapControlInitialized;
@@ -63,7 +47,22 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         // Needed to track the state of _shiftPressed because DoubleTapped does not have KeyModifiers.
         KeyDown += (s, e) => _shiftPressed = GetShiftPressed(e.KeyModifiers);
         KeyUp += (s, e) => _shiftPressed = GetShiftPressed(e.KeyModifiers);
+
+        ClipToBounds = true;
     }
+
+    public static readonly DirectProperty<MapControl, Map> MapProperty =
+    AvaloniaProperty.RegisterDirect<MapControl, Map>(nameof(Map), o => o.Map, (o, v) => o.Map = v);
+
+    /// <summary> Clears the Touch State. Should only be called if the touch state seems out of sync 
+    /// in a certain situation.</summary>
+    public void ClearTouchState()
+    {
+        // Todo: Figure out if we need to clear the entire state, or only remove a specific pointer.
+        _pointerLocations.Clear();
+    }
+
+
 
     private static bool GetShiftPressed(KeyModifiers keyModifiers)
     {
@@ -104,7 +103,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControl_PointerMoved(object? sender, PointerEventArgs e)
     {
         var isHovering = IsHovering(e);
-        
+
         if (OnWidgetPointerMoved(e.GetPosition(this).ToMapsui(), !isHovering, _shiftPressed))
             return;
 
@@ -196,15 +195,18 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         Catch.TaskRun(() => Dispatcher.UIThread.InvokeAsync(action));
     }
 
-    public void OpenBrowser(string url)
+    public void OpenInBrowser(string url)
     {
-        using (Process.Start(new ProcessStartInfo
+        Catch.TaskRun(() =>
         {
-            FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? url : "open",
-            Arguments = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? $"-e {url}" : "",
-            CreateNoWindow = true,
-            UseShellExecute = !RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
-        })) { }
+            using var process = Process.Start(new ProcessStartInfo
+            {
+                FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? url : "open",
+                Arguments = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? $"-e {url}" : "",
+                CreateNoWindow = true,
+                UseShellExecute = !RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+            });
+        });
     }
 
     private double ViewportWidth => Bounds.Width;

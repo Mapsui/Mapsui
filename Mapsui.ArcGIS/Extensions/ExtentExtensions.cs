@@ -1,6 +1,4 @@
-﻿using Mapsui.ArcGIS;
-
-namespace Mapsui.ArcGIS.Extensions;
+﻿namespace Mapsui.ArcGIS.Extensions;
 
 public static class ExtentExtensions
 {

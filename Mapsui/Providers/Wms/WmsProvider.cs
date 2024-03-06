@@ -7,14 +7,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -155,7 +153,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     /// </summary>
     /// <remarks>
     /// The axis order is an array of array offsets. It can be either {0, 1} or {1, 0}.
-    /// <para/>If not set explictly, <see cref="CrsAxisOrderRegistry"/> is asked for a value based on <see cref="SRID"/>.</remarks>
+    /// <para/>If not set explicitly, <see cref="CrsAxisOrderRegistry"/> is asked for a value based on <see cref="CRS"/>.</remarks>
     [AllowNull]
     public int[] AxisOrder
     {

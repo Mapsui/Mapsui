@@ -1,3 +1,5 @@
+#pragma warning disable IDE0005 // Disable unused usings. All the #ifs make this hard. Perhaps simplify that first.
+#pragma warning disable IDE0055 // Disable fix formatting but this should not be hard to fix
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
@@ -6,16 +8,14 @@ using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
-using Mapsui.Widgets.ButtonWidgets;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using Mapsui.Disposing;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 #if __MAUI__
 using Microsoft.Maui.Controls;
 namespace Mapsui.UI.Maui;
@@ -23,7 +23,7 @@ namespace Mapsui.UI.Maui;
 namespace Mapsui.UI.Uwp;
 #elif __ANDROID__ && !HAS_UNO_WINUI
 namespace Mapsui.UI.Android;
-#elif __IOS__ && !HAS_UNO_WINUI
+#elif __MAPSUI_IOS__
 namespace Mapsui.UI.iOS;
 #elif __WINUI__
 namespace Mapsui.UI.WinUI;
@@ -33,6 +33,7 @@ namespace Mapsui.UI.Avalonia;
 #elif __ETO_FORMS__
 namespace Mapsui.UI.Eto;
 #elif __BLAZOR__
+using Microsoft.AspNetCore.Components;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Mapsui.UI.Blazor;
@@ -60,13 +61,16 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
     private IRenderer _renderer = new MapRenderer();
 
-    private void CommonInitialize()
+    private void SharedConstructor()
     {
+        PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowser);
         // Create timer for invalidating the control
         _invalidateTimer?.Dispose();
         _invalidateTimer = new Timer(InvalidateTimerCallback, null, Timeout.Infinite, 16);
         // Start the invalidation timer
         StartUpdates(false);
+        // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
+        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
     }
 
     private protected void CommonDrawControl(object canvas)
@@ -543,7 +547,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidateTimer = null;
     }
 
-  
+
     private bool OnWidgetPointerPressed(MPoint position, bool shift)
     {
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
@@ -573,19 +577,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetTapped(MPoint position, int tapCount, bool shift)
     {
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position,  Map);
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
         {
             Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name}");
-            if (widget is HyperlinkWidget hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
-            {
-                // The HyperLink is a special case because we need platform specific code to open the
-                // link in a browser. If the link is not handled within the widget we handle it
-                // here and return true to indicate this is handled.
-                OpenBrowser(hyperlink.Url);
-                return true;
-            }
-
             var args = new WidgetEventArgs(position, tapCount, true, shift);
             if (widget.OnTapped(Map.Navigator, position, args))
                 return true;

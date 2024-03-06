@@ -25,8 +25,8 @@ public class IconButtonWidgetRenderer : ISkiaWidgetRenderer
         // Calc Envelope by Width/Height or, if not set, by size of content
         button.UpdateEnvelope(
             button.Width != 0 ? button.Width : picture.CullRect.Width + button.Padding.Left + button.Padding.Right,
-            button.Height != 0 ? button.Height : picture.CullRect.Height + button.Padding.Top + button.Padding .Bottom,
-            viewport.Width, 
+            button.Height != 0 ? button.Height : picture.CullRect.Height + button.Padding.Top + button.Padding.Bottom,
+            viewport.Width,
 
             viewport.Height);
 

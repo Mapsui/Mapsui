@@ -1,11 +1,3 @@
-using System;
-using Microsoft.Extensions.Logging;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
-
 namespace Mapsui.Samples.Uno.WinUI;
 
 /// <summary>
@@ -35,18 +27,11 @@ public partial class App : Application
     /// <param name="args">Details about the launch request and process.</param>
     protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
     {
-#if DEBUG
-        if (System.Diagnostics.Debugger.IsAttached)
-        {
-            // this.DebugSettings.EnableFrameRateCounter = true;
-        }
-#endif
-
 #if NET6_0_OR_GREATER && WINDOWS && !HAS_UNO
         _window = new Window();
         _window.Activate();
 #else
-			_window = Microsoft.UI.Xaml.Window.Current;
+        _window = Microsoft.UI.Xaml.Window.Current;
 #endif
 
         var rootFrame = _window.Content as Frame;

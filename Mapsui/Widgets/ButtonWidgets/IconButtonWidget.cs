@@ -43,8 +43,8 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
         set
         {
             if (_padding == value)
-              return;
-            
+                return;
+
             _padding = value;
             Invalidate();
         }

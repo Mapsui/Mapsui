@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using Avalonia;
 using Avalonia.Controls;
 
 namespace Mapsui.Samples.Avalonia.Views;

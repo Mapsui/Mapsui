@@ -1,6 +1,5 @@
 ﻿using System;
 using Mapsui.Styles;
-using SkiaSharp;
 
 #pragma warning disable IDISP008 // Don't assign member with injected and created disposables
 
@@ -51,7 +50,7 @@ public sealed class RenderCache : IRenderCache
     }
 
     public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, TPaint> toPaint)
-        where TParam : notnull 
+        where TParam : notnull
         where TPaint : class
     {
         return VectorCache.GetOrCreatePaint(param, toPaint);

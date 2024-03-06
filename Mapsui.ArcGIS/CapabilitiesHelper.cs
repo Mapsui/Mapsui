@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -8,7 +7,6 @@ using BruTile;
 using Mapsui.ArcGIS.DynamicProvider;
 using Mapsui.ArcGIS.ImageServiceProvider;
 using Mapsui.Cache;
-using Mapsui.Extensions;
 using Mapsui.Logging;
 using Newtonsoft.Json;
 

@@ -10,6 +10,5 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)MapControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utils\FlingTracker.cs" />
   </ItemGroup>
 </Project>

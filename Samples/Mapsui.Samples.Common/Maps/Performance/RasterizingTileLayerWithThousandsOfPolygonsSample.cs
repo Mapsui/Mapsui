@@ -5,7 +5,6 @@ using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using Mapsui.Nts.Providers;
 using Mapsui.Projections;
-using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Rendering.Skia.Cache;

@@ -75,9 +75,9 @@ public static class Animation
     }
 
     /// <summary>
-    /// Stop all AnimationEntrys in a given list
+    /// Stop all AnimationEntries in a given list
     /// </summary>
-    /// <param name="entry">AnimationEntry to stop</param>
+    /// <param name="entries">AnimationEntry to stop</param>
     /// <param name="callFinal">Final function is called, if callFinal is true</param>
     public static void Stop<T>(T target, IEnumerable<AnimationEntry<T>> entries, bool callFinal = true)
     {

@@ -3,7 +3,7 @@
 namespace Mapsui.Layers;
 
 /// <summary>
-/// Feature representing a point on the <cref="Map"/>
+/// Feature representing a point on the map
 /// </summary>
 public class PointFeature : BaseFeature, IFeature
 {
@@ -28,7 +28,7 @@ public class PointFeature : BaseFeature, IFeature
     }
 
     /// <summary>
-    /// Point of <cref="Map"/>
+    /// The location of the feature.
     /// </summary>
     public MPoint Point { get; }
 

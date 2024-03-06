@@ -73,7 +73,7 @@ public class MapRegressionTests
             Logger.LogDelegate = ConsoleLog;
             // At the moment of writing this comment we do not have logging in the map. To compare
             // images we disable it for now. Perhaps we want logging to be part of the test image in some cases.
-            LoggingWidget.ShowLoggingInMap = ShowLoggingInMap.Never; 
+            LoggingWidget.ShowLoggingInMap = ShowLoggingInMap.Never;
             ConsoleLog(LogLevel.Debug, $"Start MapRegressionTest {sample.GetType().Name}", null);
             await TestSampleAsync(sample, true).ConfigureAwait(false);
         }

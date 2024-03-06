@@ -443,10 +443,10 @@ public class Navigator
         var previous = viewport.ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
         var current = viewport.ScreenToWorld(positionScreen.X, positionScreen.Y);
 
-        return viewport with 
+        return viewport with
         {
-            CenterX = viewport.CenterX + previous.X - current.X, 
-            CenterY = viewport.CenterY + previous.Y - current.Y 
+            CenterX = viewport.CenterX + previous.X - current.X,
+            CenterY = viewport.CenterY + previous.Y - current.Y
         };
     }
 
@@ -548,7 +548,7 @@ public class Navigator
     /// <summary>
     /// Property change event
     /// </summary>
-    /// <param name="propertyName">Name of property that changed</param>
+    /// <param name="oldViewport">Name of property that changed</param>
     private void OnViewportChanged(Viewport oldViewport)
     {
         ViewportChanged?.Invoke(this, new ViewportChangedEventArgs(oldViewport));
@@ -641,7 +641,7 @@ public class Navigator
     /// <summary>
     /// Returns a number between 0 and 1 that represents the limiting of the resolution.
     /// </summary>
-    /// <param name="orignalResolution"></param>
+    /// <param name="originalResolution"></param>
     /// <param name="goalResolution"></param>
     /// <param name="limitedResolution"></param>
     /// <returns></returns>

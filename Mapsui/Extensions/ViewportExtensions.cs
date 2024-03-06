@@ -127,8 +127,9 @@ public static class ViewportExtensions
     /// <summary>
     /// Converts X/Y in screen pixels to a point in screen units, respecting rotation
     /// </summary>
-    /// <param name="x">Screen position x coordinate</param>
-    /// <param name="y">Screen position y coordinate</param>
+    /// <param name="viewport">The viewport used to calculate the transformation</param>
+    /// <param name="screenX">Screen position x coordinate</param>
+    /// <param name="screenY">Screen position y coordinate</param>
     /// <returns>MPoint in world units</returns>
     public static MPoint ScreenToWorld(this Viewport viewport, double screenX, double screenY)
     {
@@ -140,6 +141,7 @@ public static class ViewportExtensions
     /// Converts X/Y in world units to a point in device independent units (or DIP or DP),
     /// respecting rotation
     /// </summary>
+    /// <param name="viewport">The viewport used to calculate the transformation</param>
     /// <param name="worldX">X coordinate in world units</param>
     /// <param name="worldY">Y coordinate in world units</param>
     /// <returns>MPoint in screen pixels</returns>
@@ -198,8 +200,8 @@ public static class ViewportExtensions
     /// <summary>
     /// Converts X/Y in screen pixels to a point in screen units, respecting rotation
     /// </summary>
-    /// <param name="x">Screen position x coordinate</param>
-    /// <param name="y">Screen position y coordinate</param>
+    /// <param name="screenX">Screen position x coordinate</param>
+    /// <param name="screenY">Screen position y coordinate</param>
     /// <returns>Tuple of x and y in world coordinates</returns>
     public static (double worldX, double worldY) ScreenToWorldXY(this Viewport viewport, double screenX, double screenY)
     {

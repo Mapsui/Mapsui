@@ -9,7 +9,7 @@ public static class WidgetTouch
     /// Gets the widgets selected by a touched positions
     /// </summary>
     /// <param name="screenPosition">The screen position in device independent units (or DIP or DP)</param>
-    /// <param name="widgets">The widgets to select from.</param>
+    /// <param name="map">The map to get the widgets from.</param>
     /// <returns>
     /// Returns the Widgets in the list that contain the screenPosition
     /// within it's Envelope. Returns null if there are none.

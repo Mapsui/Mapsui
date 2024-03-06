@@ -15,16 +15,14 @@ public class WFS_XPathTextResourcesBase
     // Prefixes                                                           //
     ////////////////////////////////////////////////////////////////////////
 
-    private static readonly string _XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY =
-        // _param1 = TargetNs 
-        // _param2 = Value of the type-attribute 
-        "//xs:element[_PARAMCOMPWITHTARGETNS_(@type, $_param1, $_param2)]/@name";
+    private static readonly string _XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+        = "//xs:element[_PARAMCOMPWITHTARGETNS_(@type, $_param1, $_param2)]/@name";
 
-    private static readonly string _XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE =
-        "//xs:element[starts-with(@ref,'gml:')]/ancestor::xs:complexType[1]/ancestor::xs:element[1]/@name";
+    private static readonly string _XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+        = "//xs:element[starts-with(@ref,'gml:')]/ancestor::xs:complexType[1]/ancestor::xs:element[1]/@name";
 
-    private static readonly string _XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY =
-        "descendant::xs:element[starts-with(@ref,'gml:')]/@ref";
+    private static readonly string _XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
+        = "descendant::xs:element[starts-with(@ref,'gml:')]/@ref";
 
     private static readonly string _XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY =
         "//xs:element[starts-with(@type,'gml:')]";

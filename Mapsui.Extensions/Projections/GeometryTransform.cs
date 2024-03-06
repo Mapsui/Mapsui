@@ -1,5 +1,4 @@
-﻿using System;
-using DotSpatial.Projections;
+﻿using DotSpatial.Projections;
 
 namespace Mapsui.Nts.Projections;
 

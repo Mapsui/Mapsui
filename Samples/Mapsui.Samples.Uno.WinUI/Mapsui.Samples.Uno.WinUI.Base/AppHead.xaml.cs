@@ -1,6 +1,6 @@
-using System;
+#if DEBUG
 using Microsoft.Extensions.Logging;
-using Microsoft.UI.Xaml;
+#endif
 
 namespace Mapsui.Samples.Uno.WinUI;
 
@@ -17,7 +17,7 @@ public sealed partial class AppHead : App
     /// </summary>
     public AppHead()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     /// <summary>
@@ -36,9 +36,9 @@ public sealed partial class AppHead : App
         var factory = LoggerFactory.Create(builder =>
         {
 #if __WASM__
-			builder.AddProvider(new global::Uno.Extensions.Logging.WebAssembly.WebAssemblyConsoleLoggerProvider());
+            builder.AddProvider(new global::Uno.Extensions.Logging.WebAssembly.WebAssemblyConsoleLoggerProvider());
 #elif __IOS__ || __MACCATALYST__
-			builder.AddProvider(new global::Uno.Extensions.Logging.OSLogLoggerProvider());
+            builder.AddProvider(new global::Uno.Extensions.Logging.OSLogLoggerProvider());
 #elif NETFX_CORE
 			builder.AddDebug();
 #else
@@ -84,7 +84,7 @@ public sealed partial class AppHead : App
         global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
 
 #if HAS_UNO
-		global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
+        global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
 #endif
 #endif
     }

@@ -3,6 +3,7 @@ using Android.Graphics;
 using Android.OS;
 using Android.Util;
 using Android.Views;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Manipulations;
 using Mapsui.UI.Android.Extensions;
@@ -46,18 +47,18 @@ public partial class MapControl : ViewGroup, IMapControl
     public MapControl(Context context, IAttributeSet attrs) :
         base(context, attrs)
     {
-        CommonInitialize();
-        Initialize();
+        SharedConstructor();
+        LocalConstructor();
     }
 
     public MapControl(Context context, IAttributeSet attrs, int defStyle) :
         base(context, attrs, defStyle)
     {
-        CommonInitialize();
-        Initialize();
+        SharedConstructor();
+        LocalConstructor();
     }
 
-    private void Initialize()
+    private void LocalConstructor()
     {
         _invalidate = () => { RunOnUIThread(RefreshGraphicsWithTryCatch); };
 
@@ -270,14 +271,17 @@ public partial class MapControl : ViewGroup, IMapControl
         view.Right = r;
     }
 
-    public void OpenBrowser(string url)
+    public void OpenInBrowser(string url)
     {
-        var uri = global::Android.Net.Uri.Parse(url);
-        var intent = new Intent(Intent.ActionView);
-        intent.SetData(uri);
+        Catch.TaskRun(() =>
+        {
+            var uri = global::Android.Net.Uri.Parse(url);
+            using var intent = new Intent(Intent.ActionView);
+            intent.SetData(uri);
 
-        var chooser = Intent.CreateChooser(intent, "Open with");
-        Context?.StartActivity(chooser);
+            using var chooser = Intent.CreateChooser(intent, "Open with");
+            Context?.StartActivity(chooser);
+        });
     }
 
     protected override void Dispose(bool disposing)

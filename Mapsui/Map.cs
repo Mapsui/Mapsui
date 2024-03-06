@@ -60,7 +60,7 @@ public class Map : INotifyPropertyChanged
     /// Default: "EPSG:3857" (SphericalMercator).
     /// </summary>
     public string? CRS { get; set; } = "EPSG:3857";
-    
+
     /// <summary>
     /// A collection of layers. The first layer in the list is drawn first, the last one on top.
     /// </summary>
@@ -392,5 +392,5 @@ public class Map : INotifyPropertyChanged
         BackColor = Color.Transparent,
         Opacity = 0.0f,
         LogLevelFilter = LogLevel.Trace,
-    };    
+    };
 }

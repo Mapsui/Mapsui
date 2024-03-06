@@ -1,5 +1,5 @@
 using Mapsui.Extensions;
-using Mapsui.UI.Utils;
+using Mapsui.Manipulations;
 using Mapsui.UI.Wpf.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp.Views.Desktop;
@@ -17,21 +17,14 @@ namespace Mapsui.UI.Wpf;
 
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
-    private readonly Rectangle _selectRectangle = CreateSelectRectangle();
-    private MPoint? _pointerDownPosition;
-    private bool _mouseDown;
-    private MPoint? _previousMousePosition;
     private readonly FlingTracker _flingTracker = new();
-    private MPoint? _currentMousePosition;
+    private readonly TapGestureTracker _tapGestureTracker = new();
+    private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl()
     {
-        CommonInitialize();
-        Initialize();
-    }
+        SharedConstructor();
 
-    private void Initialize()
-    {
         _invalidate = () =>
         {
             if (Dispatcher.CheckAccess()) InvalidateCanvas();
@@ -39,24 +32,24 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         };
 
         Children.Add(SkiaCanvas);
-        Children.Add(_selectRectangle);
 
         SkiaCanvas.PaintSurface += SKElementOnPaintSurface;
+        Loaded += MapControlLoaded;
+        SizeChanged += MapControlSizeChanged;
 
-        // Pointer events
         MouseLeftButtonDown += MapControlMouseLeftButtonDown;
         MouseLeftButtonUp += MapControlMouseLeftButtonUp;
+
         MouseMove += MapControlMouseMove;
         MouseLeave += MapControlMouseLeave;
         MouseWheel += MapControlMouseWheel;
-        TouchUp += MapControlTouchUp;
+
+        ManipulationInertiaStarting += OnManipulationInertiaStarting;
         ManipulationDelta += OnManipulationDelta;
         ManipulationCompleted += OnManipulationCompleted;
-        ManipulationInertiaStarting += OnManipulationInertiaStarting;
 
-        Loaded += MapControlLoaded;
-
-        SizeChanged += MapControlSizeChanged;
+        TouchDown += MapControl_TouchDown;
+        TouchUp += MapControlTouchUp;
 
         IsManipulationEnabled = true;
 
@@ -64,36 +57,33 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         RefreshGraphics();
     }
 
-    private static Rectangle CreateSelectRectangle()
+
+    /// <summary>
+    /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
+    /// </summary>
+    public int MaxTapGestureMovement { get; set; } = 8;
+
+    private static Rectangle CreateSelectRectangle() => new()
     {
-        return new Rectangle
-        {
-            Fill = new SolidColorBrush(Colors.Red),
-            Stroke = new SolidColorBrush(Colors.Black),
-            StrokeThickness = 3,
-            RadiusX = 0.5,
-            RadiusY = 0.5,
-            StrokeDashArray = [3.0],
-            Opacity = 0.3,
-            VerticalAlignment = VerticalAlignment.Top,
-            HorizontalAlignment = HorizontalAlignment.Left,
-            Visibility = Visibility.Collapsed
-        };
-    }
+        Fill = new SolidColorBrush(Colors.Red),
+        Stroke = new SolidColorBrush(Colors.Black),
+        StrokeThickness = 3,
+        RadiusX = 0.5,
+        RadiusY = 0.5,
+        StrokeDashArray = [3.0],
+        Opacity = 0.3,
+        VerticalAlignment = VerticalAlignment.Top,
+        HorizontalAlignment = HorizontalAlignment.Left,
+        Visibility = Visibility.Collapsed
+    };
 
     private SKElement SkiaCanvas { get; } = CreateSkiaRenderElement();
 
-    private static SKElement CreateSkiaRenderElement()
+    private static SKElement CreateSkiaRenderElement() => new()
     {
-        return new SKElement
-        {
-            VerticalAlignment = VerticalAlignment.Stretch,
-            HorizontalAlignment = HorizontalAlignment.Stretch
-        };
-    }
-
-    [Obsolete("Use Info and ILayerFeatureInfo", true)]
-    public event EventHandler<FeatureInfoEventArgs>? FeatureInfo; // todo: Remove and add sample for alternative
+        VerticalAlignment = VerticalAlignment.Stretch,
+        HorizontalAlignment = HorizontalAlignment.Stretch
+    };
 
     internal void InvalidateCanvas()
     {
@@ -103,15 +93,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlLoaded(object sender, RoutedEventArgs e)
     {
         SetViewportSize();
-
         Focusable = true;
     }
 
     private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
     {
         var mouseWheelDelta = e.Delta;
-        _currentMousePosition = e.GetPosition(this).ToMapsui();
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, _currentMousePosition);
+        var mousePosition = e.GetPosition(this).ToMapsui();
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
     }
 
     private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
@@ -122,179 +111,87 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseLeave(object sender, MouseEventArgs e)
     {
-        _previousMousePosition = null;
         ReleaseMouseCapture();
     }
 
     private void RunOnUIThread(Action action)
     {
         if (!Dispatcher.CheckAccess())
-        {
             Dispatcher.BeginInvoke(action);
-        }
         else
-        {
             action();
-        }
     }
 
     private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        _pointerDownPosition = e.GetPosition(this).ToMapsui();
-
-        if (OnWidgetPointerPressed(_pointerDownPosition, GetShiftPressed()))
+        var mousePosition = e.GetPosition(this).ToMapsui();
+        _tapGestureTracker.SetDownPosition(mousePosition);
+        _manipulationTracker.Restart([mousePosition]);
+        if (OnWidgetPointerPressed(mousePosition, GetShiftPressed()))
             return;
-
-        _previousMousePosition = _pointerDownPosition;
-        _mouseDown = true;
         _flingTracker.Clear();
         CaptureMouse();
     }
 
-    private static bool IsInBoxZoomMode()
-    {
-        return Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
-    }
-
     private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
-        _mouseDown = false;
         var position = e.GetPosition(this).ToMapsui();
 
-        if (_previousMousePosition != null)
+        _tapGestureTracker.IfTap((p) =>
         {
-            if (IsInBoxZoomMode())
-            {
-                var previous = Map.Navigator.Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
-                var current = Map.Navigator.Viewport.ScreenToWorld(position.X, position.Y);
-                ZoomToBox(previous, current);
-            }
-            else if (IsTap(position, _pointerDownPosition))
-            {
-                if (OnWidgetTapped(position, e.ClickCount, GetShiftPressed()))
-                    return;
-                OnInfo(CreateMapInfoEventArgs(position, position, e.ClickCount));
-            }
-        }
+            if (OnWidgetTapped(p, 1, GetShiftPressed()))
+                return;
+            OnInfo(CreateMapInfoEventArgs(p, p, 1));
+        }, MaxTapGestureMovement * PixelDensity, position);
 
         RefreshData();
 
-        double velocityX;
-        double velocityY;
-
-        (velocityX, velocityY) = _flingTracker.CalcVelocity(1, DateTime.Now.Ticks);
-
-        if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
-        {
-            // This was the last finger on screen, so this is a fling
-            Map.Navigator.Fling(velocityX, velocityY, 1000);
-            e.Handled = true;
-        }
+        _flingTracker.IfFling(1, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
         _flingTracker.RemoveId(1);
 
-        _previousMousePosition = new MPoint();
         ReleaseMouseCapture();
     }
 
-    private static bool IsTap(MPoint currentPosition, MPoint? previousPosition)
+    private void MapControl_TouchDown(object? sender, TouchEventArgs e)
     {
-        if (previousPosition is null)
-            return false;
-
-        return
-            Math.Abs(currentPosition.X - previousPosition.X) < SystemParameters.MinimumHorizontalDragDistance &&
-            Math.Abs(currentPosition.Y - previousPosition.Y) < SystemParameters.MinimumVerticalDragDistance;
+        var touchDownPosition = e.GetTouchPoint(this).Position.ToMapsui();
+        _tapGestureTracker.SetDownPosition(touchDownPosition);
     }
 
     private void MapControlTouchUp(object? sender, TouchEventArgs e)
     {
-        var touchPosition = e.GetTouchPoint(this).Position.ToMapsui();
-        if (IsTap(touchPosition, _pointerDownPosition))
+        var touchUpPosition = e.GetTouchPoint(this).Position.ToMapsui();
+        _tapGestureTracker.IfTap((p) =>
         {
-            OnInfo(CreateMapInfoEventArgs(touchPosition, touchPosition, 1));
-        }
+            if (OnWidgetTapped(p, 1, GetShiftPressed()))
+                return;
+            OnInfo(CreateMapInfoEventArgs(p, p, 1));
+        }, MaxTapGestureMovement * PixelDensity, touchUpPosition);
     }
 
-    public void OpenBrowser(string url)
+    public void OpenInBrowser(string url)
     {
-        Process.Start(new ProcessStartInfo
+        Catch.TaskRun(() =>
         {
-            FileName = url,
-            // The default for this has changed in .net core, you have to explicitly set if to true for it to work.
-            UseShellExecute = true
+            using var process = Process.Start(new ProcessStartInfo
+            {
+                FileName = url,
+                // The default for this has changed in .net core, you have to explicitly set if to true for it to work.
+                UseShellExecute = true
+            });
         });
     }
 
     private void MapControlMouseMove(object sender, MouseEventArgs e)
     {
         var isHovering = IsHovering(e);
-        if (OnWidgetPointerMoved(e.GetPosition(this).ToMapsui(), !isHovering, GetShiftPressed()))
+        var mousePosition = e.GetPosition(this).ToMapsui();
+        if (OnWidgetPointerMoved(mousePosition, !isHovering, GetShiftPressed()))
             return;
-
-        if (IsInBoxZoomMode())
-        {
-            DrawRectangle(e.GetPosition(this));
+        if (isHovering)
             return;
-        }
-
-        _currentMousePosition = e.GetPosition(this).ToMapsui();
-
-        if (_mouseDown)
-        {
-            if (_previousMousePosition == null)
-            {
-                // Usually MapControlMouseLeftButton down initializes _previousMousePosition but in some
-                // situations it can be null. So far I could only reproduce this in debug mode when putting
-                // a breakpoint and continuing.
-                return;
-            }
-
-            _flingTracker.AddEvent(1, _currentMousePosition, DateTime.Now.Ticks);
-            Map.Navigator.Drag(_currentMousePosition, _previousMousePosition);
-            _previousMousePosition = _currentMousePosition;
-        }
-    }
-
-    public void ZoomToBox(MPoint beginPoint, MPoint endPoint)
-    {
-        var box = new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y);
-        Map.Navigator.ZoomToBox(box, duration: 300); ;
-        ClearBBoxDrawing();
-    }
-
-    private void ClearBBoxDrawing()
-    {
-        RunOnUIThread(() => _selectRectangle.Visibility = Visibility.Collapsed);
-    }
-
-    private void DrawRectangle(Point newPos)
-    {
-        if (_mouseDown)
-        {
-            if (_previousMousePosition == null) return; // can happen during debug
-
-            var from = _previousMousePosition;
-            var to = newPos;
-
-            if (from.X > to.X)
-            {
-                var temp = from;
-                from.X = to.X;
-                to.X = temp.X;
-            }
-
-            if (from.Y > to.Y)
-            {
-                var temp = from;
-                from.Y = to.Y;
-                to.Y = temp.Y;
-            }
-
-            _selectRectangle.Width = to.X - from.X;
-            _selectRectangle.Height = to.Y - from.Y;
-            _selectRectangle.Margin = new Thickness(from.X, from.Y, 0, 0);
-            _selectRectangle.Visibility = Visibility.Visible;
-        }
+        _flingTracker.AddEvent(1, mousePosition, DateTime.Now.Ticks);
+        _manipulationTracker.Manipulate([mousePosition], Map.Navigator.Pinch);
     }
 
     private double ViewportWidth => ActualWidth;
@@ -331,20 +228,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         return deltaScale;
     }
 
-    private void OnManipulationCompleted(object? sender, ManipulationCompletedEventArgs e)
-    {
-        Refresh();
-    }
+    private void OnManipulationCompleted(object? sender, ManipulationCompletedEventArgs e) => Refresh();
 
     private void SKElementOnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
     {
         if (PixelDensity <= 0)
             return;
-
         var canvas = args.Surface.Canvas;
-
         canvas.Scale(PixelDensity, PixelDensity);
-
         CommonDrawControl(canvas);
     }
 

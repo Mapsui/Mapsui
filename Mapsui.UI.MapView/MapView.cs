@@ -725,9 +725,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// </summary>
     private void AddLayers()
     {
-        if (!_initialized)
-            return;
-
         // Add MapView layers
         Map?.Layers.Add(_mapDrawableLayer, _mapPinLayer, _mapCalloutLayer, MyLocationLayer);
     }
@@ -737,9 +734,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// </summary>
     private void RemoveLayers()
     {
-        if (!_initialized)
-            return;
-
         // Remove MapView layers
         Map?.Layers.Remove(MyLocationLayer, _mapCalloutLayer, _mapPinLayer, _mapDrawableLayer);
     }
@@ -814,17 +808,17 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private IconButtonWidget CreateButton(
         float x, float y, SKPicture picture, Func<IconButtonWidget, WidgetEventArgs, bool> tapped) => new()
-    {
-        Picture = picture,
-        HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,
-        VerticalAlignment = Widgets.VerticalAlignment.Absolute,
-        Position = new MPoint(x, y),
-        Width = ButtonSize,
-        Height = ButtonSize,
-        Rotation = 0,
-        Enabled = true,
-        Tapped = tapped
-    };    
+        {
+            Picture = picture,
+            HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,
+            VerticalAlignment = Widgets.VerticalAlignment.Absolute,
+            Position = new MPoint(x, y),
+            Width = ButtonSize,
+            Height = ButtonSize,
+            Rotation = 0,
+            Enabled = true,
+            Tapped = tapped
+        };
 
     protected override void Dispose(bool disposing)
     {
