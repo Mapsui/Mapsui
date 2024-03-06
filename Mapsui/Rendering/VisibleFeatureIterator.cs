@@ -12,7 +12,7 @@ namespace Mapsui.Rendering;
 public static class VisibleFeatureIterator
 {
     private static readonly object _iterationLock = new();
-    
+
     public static void IterateLayers(Viewport viewport, IEnumerable<ILayer> layers, long iteration,
         Action<Viewport, ILayer, IStyle, IFeature, float, long> callback)
     {
@@ -26,7 +26,7 @@ public static class VisibleFeatureIterator
             // TODO: find out which Caching path causes this. Because when the caching is disabled it works.
             lock (_iterationLock)
             {
-                IterateLayer(viewport, layer, iteration, callback);    
+                IterateLayer(viewport, layer, iteration, callback);
             }
         }
     }

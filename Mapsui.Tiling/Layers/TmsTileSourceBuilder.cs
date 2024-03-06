@@ -1,15 +1,9 @@
-using System;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Tms;
 using Mapsui.Cache;
 using Mapsui.Extensions;
-using Mapsui.Logging;
 
 #pragma warning disable IDE0079 // Justification: There is an error in the tool, removing the suppression below introduced a warning.
 

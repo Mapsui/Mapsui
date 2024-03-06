@@ -41,31 +41,31 @@ public class ButtonSample : ISample
         return Task.FromResult(map);
     }
 
-    private static ButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment, 
+    private static ButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment,
         HorizontalAlignment horizontalAlignment, Func<ButtonWidget, WidgetEventArgs, bool> tapped) => new()
-    {
-        Text = text,
-        VerticalAlignment = verticalAlignment,
-        HorizontalAlignment = horizontalAlignment,
-        Margin = new MRect(30),
-        Padding = new MRect(10, 8),
-        CornerRadius = 8,
-        BackColor = new Color(0, 123, 255),
-        TextColor = Color.White,
-        Tapped = tapped
-    };
+        {
+            Text = text,
+            VerticalAlignment = verticalAlignment,
+            HorizontalAlignment = horizontalAlignment,
+            Margin = new MRect(30),
+            Padding = new MRect(10, 8),
+            CornerRadius = 8,
+            BackColor = new Color(0, 123, 255),
+            TextColor = Color.White,
+            Tapped = tapped
+        };
 
     private static IconButtonWidget CreateButtonWithImage(
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment) => new()
-    {
-        SvgImage = LoadSomeSvgAsString(),
-        VerticalAlignment = verticalAlignment,
-        HorizontalAlignment = horizontalAlignment,
-        Margin = new MRect(30),
-        Padding = new MRect(10, 8),
-        CornerRadius = 8,
-        Envelope = new MRect(0, 0, 64, 64)
-    };
+        {
+            SvgImage = LoadSomeSvgAsString(),
+            VerticalAlignment = verticalAlignment,
+            HorizontalAlignment = horizontalAlignment,
+            Margin = new MRect(30),
+            Padding = new MRect(10, 8),
+            CornerRadius = 8,
+            Envelope = new MRect(0, 0, 64, 64)
+        };
 
     static string LoadSomeSvgAsString()
     {

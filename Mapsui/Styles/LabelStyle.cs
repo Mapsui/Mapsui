@@ -143,7 +143,7 @@ public class LabelStyle : Style
     public double BorderThickness { get; set; }
 
     /// <summary>
-    /// The radius of the oval used to round the corners of the background. See <see cref="SkiaSharp.SkCanvas.DrawRoundRect"/>.
+    /// The radius of the oval used to round the corners of the background./>.
     /// </summary>
     public int CornerRounding { get; set; }
 

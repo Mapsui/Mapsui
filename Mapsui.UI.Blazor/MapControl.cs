@@ -6,6 +6,7 @@ using Microsoft.JSInterop;
 using SkiaSharp;
 using SkiaSharp.Views.Blazor;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Components;
 
 namespace Mapsui.UI.Blazor;
 
@@ -44,12 +45,23 @@ public partial class MapControl : ComponentBase, IMapControl
                 ? _interop ??= new MapsuiJsInterop(JsRuntime)
                 : _interop;
 
+    public MapControl()
+    {
+        SharedConstructor();
+
+        _invalidate = () =>
+        {
+            if (_viewCpu != null)
+                _viewCpu?.Invalidate();
+            else
+                _viewGpu?.Invalidate();
+        };
+    }
 
     protected override void OnInitialized()
     {
-        CommonInitialize();
-        ControlInitialize();
         base.OnInitialized();
+        RefreshGraphics();
     }
 
     protected void OnKeyDown(KeyboardEventArgs e)
@@ -97,22 +109,6 @@ public partial class MapControl : ComponentBase, IMapControl
         }
 
         CommonDrawControl(canvas);
-    }
-
-    protected void ControlInitialize()
-    {
-        _invalidate = () =>
-        {
-            if (_viewCpu != null)
-                _viewCpu?.Invalidate();
-            else
-                _viewGpu?.Invalidate();
-        };
-
-        // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
-        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-
-        RefreshGraphics();
     }
 
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
@@ -190,7 +186,7 @@ public partial class MapControl : ComponentBase, IMapControl
             _ = UpdateBoundingRectAsync();
 
             var location = e.ToLocation(_clientRect);
-            _tapGestureTracker.Start(location);
+            _tapGestureTracker.SetDownPosition(location);
             _manipulationTracker.Restart([]);
 
             if (OnWidgetPointerPressed(location, GetShiftPressed()))
@@ -204,7 +200,7 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             var isHovering = !IsMouseButtonPressed(e);
             var position = e.ToLocation(_clientRect);
-            _tapGestureTracker.Move(position);
+            _tapGestureTracker.SetLastMovePosition(position);
 
             if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
                 return;
@@ -260,13 +256,13 @@ public partial class MapControl : ComponentBase, IMapControl
     private double ViewportHeight => _canvasSize?.Height ?? 0;
 
     public string? Cursor { get; set; }
-    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
-    public async void OpenBrowser(string url)
+
+    public void OpenInBrowser(string url)
     {
-        Catch.Exceptions(async () =>
+        Catch.TaskRun(() =>
         {
             if (JsRuntime != null)
-                await JsRuntime.InvokeAsync<object>("open", [url, "_blank"]);
+                _ = JsRuntime.InvokeAsync<object>("open", [url, "_blank"]);
         });
     }
 
@@ -285,7 +281,7 @@ public partial class MapControl : ComponentBase, IMapControl
             var locations = e.TargetTouches.ToTouchLocations(_clientRect);
             if (OnWidgetPointerPressed(locations[0], GetShiftPressed()))
                 return;
-            _tapGestureTracker.Start(locations[0]);
+            _tapGestureTracker.SetDownPosition(locations[0]);
             _manipulationTracker.Restart(locations);
         });
     }
@@ -295,7 +291,7 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var locations = e.TargetTouches.ToTouchLocations(_clientRect);
-            _tapGestureTracker.Move(locations[0]);
+            _tapGestureTracker.SetLastMovePosition(locations[0]);
             if (OnWidgetPointerMoved(locations[0], true, GetShiftPressed()))
                 return;
             _manipulationTracker.Manipulate(locations.ToArray(), Map.Navigator.Pinch);

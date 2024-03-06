@@ -1,4 +1,7 @@
-﻿namespace Mapsui.Widgets.ButtonWidgets;
+﻿using Mapsui.Logging;
+using Mapsui.Utilities;
+
+namespace Mapsui.Widgets.ButtonWidgets;
 
 /// <summary>
 /// Widget displaying a clickable hyperlink
@@ -20,5 +23,20 @@ public class HyperlinkWidget : ButtonWidget
             _url = value ?? string.Empty;
             Invalidate();
         }
+    }
+
+    public override bool OnTapped(Navigator navigator, MPoint position, WidgetEventArgs e)
+    {
+        if (base.OnTapped(navigator, position, e))
+            return true; // The user could override the behavior in the Tapped event.
+
+        if (Url is null)
+        {
+            Logger.Log(LogLevel.Warning, "HyperlinkWidget: URL is not set");
+            return true;
+        }
+
+        PlatformUtilities.OpenInBrowser(Url);
+        return true;
     }
 }

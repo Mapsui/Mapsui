@@ -7,13 +7,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
-using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Providers.Wfs.Utilities;
 

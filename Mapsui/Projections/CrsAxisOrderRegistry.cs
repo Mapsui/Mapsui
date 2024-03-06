@@ -224,7 +224,7 @@ public class CrsAxisOrderRegistry
     /// <summary>
     /// Gets the axis order for *all* EPSG defined coordinate reference systems with an srid less than 32768
     /// </summary>
-    /// <param name="identifier">The identifier</param>
+    /// <param name="crs">The crs for which we want to axis order.</param>
     /// <returns>The axis order</returns>
     public int[] this[string crs]
     {

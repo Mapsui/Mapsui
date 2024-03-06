@@ -572,8 +572,8 @@ public class ObservableRangeCollection<T> : ObservableCollection<T>
     /// <returns></returns>
     private static bool ContainsAny(IEnumerable<T> collection)
     {
-        using (var enumerator = collection.GetEnumerator())
-            return enumerator.MoveNext();
+        using var enumerator = collection.GetEnumerator();
+        return enumerator.MoveNext();
     }
 
     /// <summary>

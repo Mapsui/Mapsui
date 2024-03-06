@@ -2,6 +2,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using Eto.SkiaDraw;
 using Mapsui.Extensions;
+using Mapsui.Manipulations;
 using Mapsui.UI.Eto.Extensions;
 using System;
 using System.Diagnostics;
@@ -10,50 +11,80 @@ namespace Mapsui.UI.Eto;
 
 public partial class MapControl : SkiaDrawable, IMapControl
 {
-    private RectangleF _selectRectangle = new();
-    private PointF? _pointerDownPosition;
     private Cursor _defaultCursor = Cursors.Default;
+    private readonly TapGestureTracker _tapGestureTracker = new();
+    private readonly ManipulationTracker _manipulationTracker = new();
+
+    public MapControl()
+    {
+        SharedConstructor();
+        _invalidate = () => RunOnUIThread(Invalidate);
+        SizeChanged += (s, e) => SetViewportSize();
+    }
+
+    /// <summary>
+    /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
+    /// </summary>
+    public int MaxTapGestureMovement { get; set; } = 8;
     public Cursor MoveCursor { get; set; } = Cursors.Move;
     public MouseButtons MoveButton { get; set; } = MouseButtons.Primary;
     public Keys MoveModifier { get; set; } = Keys.None;
     public MouseButtons ZoomButton { get; set; } = MouseButtons.Primary;
     public Keys ZoomModifier { get; set; } = Keys.Control;
+    private double ViewportWidth => Width;
+    private double ViewportHeight => Height;
 
-    public MapControl()
+    public void OpenInBrowser(string url)
     {
-        CommonInitialize();
-        ControlInitialize();
-    }
-
-    private void ControlInitialize()
-    {
-        _invalidate = () => RunOnUIThread(Invalidate);
-
-        // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
-        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-
-        RefreshGraphics();
-
-        Content = CreateBoundingBoxDrawable();
-
-        SizeChanged += (s, e) => SetViewportSize();
-    }
-
-    private Drawable CreateBoundingBoxDrawable()
-    {
-        var drawable = new Drawable { Visible = false };
-
-        drawable.Paint += (o, e) =>
+        Catch.TaskRun(() =>
         {
-            var fill = new Color(Colors.Yellow, 0.4f);
+            using var process = Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+        });
+    }
 
-            using var border = Pens.Cached(Colors.Black, 1.4f, DashStyles.Dash);
+    protected override void OnMouseDown(MouseEventArgs e)
+    {
+        base.OnMouseDown(e);
+        if (IsHovering(e))
+            return;
 
-            e.Graphics.FillRectangle(fill, _selectRectangle);
-            e.Graphics.DrawRectangle(border, _selectRectangle);
-        };
+        SetCursorInMoveMode();
+        var mouseDownPosition = e.Location.ToMapsui();
+        _manipulationTracker.Restart([]); // Todo: This should not have to be empty, but the start touch.
+        _tapGestureTracker.SetDownPosition(mouseDownPosition);
 
-        return drawable;
+        if (OnWidgetPointerPressed(mouseDownPosition, GetShiftPressed()))
+            return;
+    }
+
+    protected override void OnMouseMove(MouseEventArgs e)
+    {
+        base.OnMouseMove(e);
+
+        var mouseMovePosition = e.Location.ToMapsui();
+        var isHovering = IsHovering(e);
+        if (OnWidgetPointerMoved(mouseMovePosition, !isHovering, GetShiftPressed()))
+            return;
+        if (isHovering)
+            return;
+        _manipulationTracker.Manipulate([mouseMovePosition], Map.Navigator.Pinch);
+    }
+
+    protected override void OnMouseUp(MouseEventArgs e)
+    {
+        base.OnMouseUp(e);
+        SetCursorInDefaultMode();
+
+        var mouseUpPosition = e.Location.ToMapsui();
+        _tapGestureTracker.IfTap((p) =>
+        {
+            if (OnWidgetTapped(p, 1, GetShiftPressed()))
+                return;
+            OnInfo(CreateMapInfoEventArgs(p, p, 1));
+        }, MaxTapGestureMovement * PixelDensity, mouseUpPosition);
+
+        _manipulationTracker.Manipulate([mouseUpPosition], Map.Navigator.Pinch);
+        RefreshData();
     }
 
     protected override void OnLoadComplete(EventArgs e)
@@ -70,8 +101,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
         base.OnMouseWheel(e);
 
         var mouseWheelDelta = (int)e.Delta.Height;
-        var currentMousePosition = e.Location.ToMapsui();
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
+        var mousePosition = e.Location.ToMapsui();
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
     }
 
     protected override void OnSizeChanged(EventArgs e)
@@ -81,126 +112,14 @@ public partial class MapControl : SkiaDrawable, IMapControl
         SetViewportSize();
     }
 
-    private static void RunOnUIThread(Action action)
-    {
-        Application.Instance.AsyncInvoke(action);
-    }
-
-    protected override void OnMouseDown(MouseEventArgs e)
-    {
-        base.OnMouseDown(e);
-
-        IsInBoxZoomMode = e.Buttons == ZoomButton && (ZoomModifier == Keys.None || e.Modifiers == ZoomModifier);
-
-        bool move_mode = e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier);
-
-        if (move_mode)
-            _defaultCursor = Cursor;
-
-        if (move_mode || IsInBoxZoomMode)
-            _pointerDownPosition = e.Location;
-    }
-
-    private bool IsInBoxZoomMode
-    {
-        get => Content.Visible;
-        set
-        {
-            _selectRectangle = RectangleF.Empty;
-            Content.Visible = value;
-        }
-    }
-    protected override void OnMouseUp(MouseEventArgs e)
-    {
-        base.OnMouseUp(e);
-
-        if (IsInBoxZoomMode)
-        {
-            var previous = Map.Navigator.Viewport.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
-            var current = Map.Navigator.Viewport.ScreenToWorld(_selectRectangle.BottomRight.X, _selectRectangle.BottomRight.Y);
-            ZoomToBox(previous, current);
-        }
-        else if (_pointerDownPosition.HasValue)
-        {
-            if (IsTap(e.Location, _pointerDownPosition.Value))
-                OnInfo(CreateMapInfoEventArgs(e.Location.ToMapsui(), _pointerDownPosition.Value.ToMapsui(), 1));
-        }
-
-        _pointerDownPosition = null;
-
-        Cursor = _defaultCursor;
-
-        RefreshData();
-    }
-
-    private static bool IsTap(PointF currentPosition, PointF previousPosition)
-    {
-        return Math.Abs(PointF.Distance(currentPosition, previousPosition)) < 5;
-    }
-
-    public void OpenBrowser(string url)
-    {
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = url,
-            // The default for this has changed in .net core, you have to explicitly set if to true for it to work.
-            UseShellExecute = true
-        });
-    }
-    protected override void OnMouseMove(MouseEventArgs e)
-    {
-        base.OnMouseMove(e);
-
-        if (_pointerDownPosition.HasValue)
-        {
-            if (IsInBoxZoomMode)
-            {
-                _selectRectangle.TopLeft = PointF.Min(e.Location, _pointerDownPosition.Value);
-                _selectRectangle.BottomRight = PointF.Max(e.Location, _pointerDownPosition.Value);
-                Content.Invalidate();
-            }
-            else // drag/pan - mode
-            {
-                Cursor = MoveCursor;
-
-                Map.Navigator.Drag(e.Location.ToMapsui(), _pointerDownPosition.Value.ToMapsui());
-                _pointerDownPosition = e.Location;
-            }
-        }
-    }
-
-    public void ZoomToBox(MPoint beginPoint, MPoint endPoint)
-    {
-        var box = new MRect(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y);
-        Map.Navigator.ZoomToBox(box, duration: 300); ;
-        ClearBBoxDrawing();
-    }
-
-    private void ClearBBoxDrawing()
-    {
-        RunOnUIThread(() => IsInBoxZoomMode = false);
-    }
-
-    private double ViewportWidth => Width;
-    private double ViewportHeight => Height;
-
     protected override void OnPaint(SKPaintEventArgs e)
     {
         if (PixelDensity <= 0)
             return;
 
         var canvas = e.Surface.Canvas;
-
         canvas.Scale(PixelDensity, PixelDensity);
-
         CommonDrawControl(canvas);
-    }
-
-    private double GetPixelDensity()
-    {
-        var center = PointToScreen(Location + Size / 2);
-
-        return Screen.FromPoint(center).LogicalPixelSize;
     }
 
     protected override void Dispose(bool disposing)
@@ -215,5 +134,42 @@ public partial class MapControl : SkiaDrawable, IMapControl
 #pragma warning restore IDISP023 // Don't use reference types in finalizer context
 
         base.Dispose(disposing);
+    }
+
+    private double GetPixelDensity()
+    {
+        var center = PointToScreen(Location + Size / 2);
+        return Screen.FromPoint(center).LogicalPixelSize;
+    }
+
+    private static void RunOnUIThread(Action action)
+    {
+        Application.Instance.AsyncInvoke(action);
+    }
+
+    private static bool IsTap(PointF currentPosition, PointF previousPosition)
+    {
+        return Math.Abs(PointF.Distance(currentPosition, previousPosition)) < 5;
+    }
+
+    private bool IsHovering(MouseEventArgs e)
+    {
+        return !(e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier));
+    }
+
+    private void SetCursorInMoveMode()
+    {
+        _defaultCursor = Cursor; // And store previous cursor to restore it later
+        Cursor = MoveCursor;
+    }
+
+    private void SetCursorInDefaultMode()
+    {
+        Cursor = _defaultCursor;
+    }
+
+    private bool GetShiftPressed()
+    {
+        return false; // Todo: Implement
     }
 }

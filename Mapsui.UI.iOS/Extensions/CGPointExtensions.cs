@@ -1,5 +1,3 @@
-using CoreGraphics;
-
 namespace Mapsui.UI.iOS.Extensions;
 
 internal static class CGPointExtensions

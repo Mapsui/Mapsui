@@ -44,7 +44,7 @@ public class LoggingWidget : TextBoxWidget
     /// Global setting to control logging in the map. Note, that there will never be logging in the map if the 
     /// Enabled field of the logging widget is false.
     /// </summary>
-    public static ShowLoggingInMap ShowLoggingInMap { get; set; } 
+    public static ShowLoggingInMap ShowLoggingInMap { get; set; }
         = ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached;
 
     /// <summary>

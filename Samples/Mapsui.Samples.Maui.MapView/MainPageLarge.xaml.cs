@@ -1,5 +1,4 @@
-﻿using Mapsui.Rendering.Skia;
-using Mapsui.Samples.Common;
+﻿using Mapsui.Samples.Common;
 using Mapsui.Extensions;
 using Mapsui.Samples.CustomWidget;
 using System;

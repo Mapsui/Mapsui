@@ -8,7 +8,7 @@ public static class SkCanvasExtensions
     {
         canvas.DrawPath(path.Instance, paint.Instance);
     }
-    
+
     public static void DrawRect(this SKCanvas canvas, SKRect rect, CacheTracker<SKPaint> paint)
     {
         canvas.DrawRect(rect, paint.Instance);

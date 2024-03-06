@@ -1,15 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BruTile;
-using Mapsui.Extensions;
+﻿using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Limiting;
-using Mapsui.Projections;
 using Mapsui.Providers.Wms;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps.Navigation;
 using Mapsui.Styles;
-using Mapsui.Tiling.Extensions;
 
 namespace Mapsui.Tests.Common.Maps;
 
