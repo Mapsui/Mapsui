@@ -315,10 +315,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private MPoint GetScreenPosition(SKPoint point) => new MPoint(point.X / PixelDensity, point.Y / PixelDensity);
 
-    /// <summary>
-    /// Called, when map should zoom in or out
-    /// </summary>
-    /// <param name="currentMousePosition">Center of zoom out event</param>
     private void OnZoomInOrOut(int mouseWheelDelta, MPoint currentMousePosition)
         => Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
 
