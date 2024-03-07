@@ -113,7 +113,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         var pointerLocation = e.GetPosition(this).ToMapsui();
         _pointerLocations[e.Pointer.Id] = pointerLocation;
 
-        _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Navigate);
+        _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Manipulate);
 
         RefreshGraphics();
     }
@@ -129,7 +129,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         e.Pointer.Capture(null);
 
         var pointerPosition = e.GetPosition(this).ToMapsui();
-        _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Navigate);
+        _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Manipulate);
 
         Refresh();
     }

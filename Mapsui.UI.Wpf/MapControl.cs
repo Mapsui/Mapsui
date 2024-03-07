@@ -191,7 +191,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (isHovering)
             return;
         _flingTracker.AddEvent(1, mousePosition, DateTime.Now.Ticks);
-        _manipulationTracker.Manipulate([mousePosition], Map.Navigator.Navigate);
+        _manipulationTracker.Manipulate([mousePosition], Map.Navigator.Manipulate);
     }
 
     private double ViewportWidth => ActualWidth;
@@ -204,7 +204,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
     {
-        Map.Navigator.Navigate(ToManipulation(e));
+        Map.Navigator.Manipulate(ToManipulation(e));
     }
 
     private static MapsuiManipulation ToManipulation(ManipulationDeltaEventArgs e)

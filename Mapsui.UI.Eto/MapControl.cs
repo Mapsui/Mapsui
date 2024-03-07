@@ -67,7 +67,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
             return;
         if (isHovering)
             return;
-        _manipulationTracker.Manipulate([mouseMovePosition], Map.Navigator.Navigate);
+        _manipulationTracker.Manipulate([mouseMovePosition], Map.Navigator.Manipulate);
     }
 
     protected override void OnMouseUp(MouseEventArgs e)
@@ -83,7 +83,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
             OnInfo(CreateMapInfoEventArgs(p, p, 1));
         }, MaxTapGestureMovement * PixelDensity, mouseUpPosition);
 
-        _manipulationTracker.Manipulate([mouseUpPosition], Map.Navigator.Navigate);
+        _manipulationTracker.Manipulate([mouseUpPosition], Map.Navigator.Manipulate);
         RefreshData();
     }
 

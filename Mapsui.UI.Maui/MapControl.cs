@@ -222,7 +222,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                 _flingTracker.AddEvent(e.Id, location, DateTime.Now.Ticks);
 
-                _manipulationTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Navigate);
+                _manipulationTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Manipulate);
 
                 RefreshGraphics();
             }
@@ -243,7 +243,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     return;
                 }
 
-                _manipulationTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Navigate);
+                _manipulationTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Manipulate);
 
                 Refresh();
             }

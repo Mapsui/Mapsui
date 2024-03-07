@@ -197,7 +197,7 @@ public partial class MapControl : UIView, IMapControl
                     return;
             }
 
-            _manipulationTracker.Manipulate(locations, Map.Navigator.Navigate);
+            _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
         });
     }
 
@@ -208,7 +208,7 @@ public partial class MapControl : UIView, IMapControl
             base.TouchesEnded(touches, e);
             var locations = GetTouchLocations(e, this);
 
-            _manipulationTracker.Manipulate(locations, Map.Navigator.Navigate);
+            _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
 
             Refresh();
         });

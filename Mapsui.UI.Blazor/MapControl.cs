@@ -208,7 +208,7 @@ public partial class MapControl : ComponentBase, IMapControl
             if (isHovering)
                 return;
 
-            _manipulationTracker.Manipulate([position], Map.Navigator.Navigate);
+            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
         });
     }
 
@@ -228,7 +228,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
             }, MaxTapGestureMovement * PixelDensity);
 
-            _manipulationTracker.Manipulate([e.ToLocation(_clientRect)], Map.Navigator.Navigate);
+            _manipulationTracker.Manipulate([e.ToLocation(_clientRect)], Map.Navigator.Manipulate);
             RefreshData();
         });
     }
@@ -294,7 +294,7 @@ public partial class MapControl : ComponentBase, IMapControl
             _tapGestureTracker.SetLastMovePosition(locations[0]);
             if (OnWidgetPointerMoved(locations[0], true, GetShiftPressed()))
                 return;
-            _manipulationTracker.Manipulate(locations.ToArray(), Map.Navigator.Navigate);
+            _manipulationTracker.Manipulate(locations.ToArray(), Map.Navigator.Manipulate);
         });
     }
 
