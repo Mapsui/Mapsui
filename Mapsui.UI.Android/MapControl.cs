@@ -190,11 +190,11 @@ public partial class MapControl : ViewGroup, IMapControl
             case MotionEventActions.Move:
                 if (OnWidgetPointerMoved(locations[0], true, false))
                     return;
-                _manipulationTracker.Manipulate(locations, Map.Navigator.Pinch);
+                _manipulationTracker.Manipulate(locations, Map.Navigator.Navigate);
                 break;
             case MotionEventActions.Up:
                 // Todo: Add HandleWidgetPointerUp
-                _manipulationTracker.Manipulate(locations, Map.Navigator.Pinch);
+                _manipulationTracker.Manipulate(locations, Map.Navigator.Navigate);
                 Refresh();
                 break;
         }

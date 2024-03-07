@@ -224,7 +224,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         var manipulation = ToManipulation(e);
         if (OnWidgetPointerMoved(manipulation.Center, true, false))
             return;
-        Map.Navigator.Pinch(ToManipulation(e));
+        Map.Navigator.Navigate(ToManipulation(e));
         RefreshGraphics();
     }
 

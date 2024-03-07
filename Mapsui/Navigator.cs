@@ -450,7 +450,7 @@ public class Navigator
         };
     }
 
-    public void Pinch(Manipulation? manipulation)
+    public void Navigate(Manipulation? manipulation)
     {
         if (manipulation is null) return;
         if (RotationLock) manipulation = manipulation with { RotationChange = 0 };
