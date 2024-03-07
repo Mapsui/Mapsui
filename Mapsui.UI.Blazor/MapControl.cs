@@ -108,8 +108,7 @@ public partial class MapControl : ComponentBase, IMapControl
         CommonDrawControl(canvas);
     }
 
-    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
-    private async void OnLoadComplete()
+    private void OnLoadComplete()
     {
         Catch.Exceptions(async () =>
         {
