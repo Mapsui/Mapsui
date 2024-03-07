@@ -220,11 +220,11 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             var location = e.ToLocation(_clientRect);
 
-            _tapGestureTracker.IfTap((position) =>
+            _tapGestureTracker.IfTap((p) =>
             {
-                if (OnWidgetTapped(location, 1, GetShiftPressed()))
+                if (OnWidgetTapped(p, 1, GetShiftPressed()))
                     return;
-                OnInfo(CreateMapInfoEventArgs(location, location, 1));
+                OnInfo(CreateMapInfoEventArgs(p, p, 1));
 
             }, MaxTapGestureMovement * PixelDensity);
 
