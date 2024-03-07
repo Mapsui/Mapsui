@@ -50,7 +50,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         SetCursorInMoveMode();
         var mouseDownPosition = e.Location.ToMapsui();
-        _manipulationTracker.Restart([]); // Todo: This should not have to be empty, but the start touch.
+        _manipulationTracker.Restart([mouseDownPosition]);
         _tapGestureTracker.SetDownPosition(mouseDownPosition);
 
         if (OnWidgetPointerPressed(mouseDownPosition, GetShiftPressed()))
