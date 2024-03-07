@@ -454,7 +454,7 @@ public class Navigator
     {
         if (manipulation is null) return;
         if (RotationLock) manipulation = manipulation with { RotationChange = 0 };
-        if (ZoomLock) manipulation = manipulation with { ScaleFactor = 0 };
+        if (ZoomLock) manipulation = manipulation with { ScaleFactor = 1 };
         if (PanLock) manipulation = manipulation with { Center = manipulation.PreviousCenter };
 
         ClearAnimations();
