@@ -15,12 +15,9 @@ public partial class MapControl : ComponentBase, IMapControl
     protected SKCanvasView? _viewCpu;
     protected SKGLView? _viewGpu;
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
-
     private SKImageInfo? _canvasSize;
     private bool _onLoaded;
-    private MRect? _selectRectangle;
     private readonly HashSet<string> _pressedKeys = [];
-    private bool _isInBoxZoomMode;
     private double _pixelDensityFromInterop = 1;
     private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
