@@ -188,14 +188,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             {
                 _touches[e.Id] = location;
                 if (_touches.Count == 1)
-                    _tapGestureTracker.SetDownPosition(location);
-
-                if (OnWidgetPointerPressed(location, false))
-                    return;
-
-                _flingTracker.Clear();
-
-                _manipulationTracker.Restart(_touches.Values.ToArray());
+                {
+                    _tapGestureTracker.Restart(location);
+                    _flingTracker.Restart();
+                    _manipulationTracker.Restart(_touches.Values.ToArray());
+                    if (OnWidgetPointerPressed(location, false))
+                        return;
+                }
             }
             else if (e.ActionType == SKTouchAction.Moved)
             {

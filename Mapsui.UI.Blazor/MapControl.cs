@@ -166,7 +166,7 @@ public partial class MapControl : ComponentBase, IMapControl
             _ = UpdateBoundingRectAsync();
 
             var location = e.ToLocation(_clientRect);
-            _tapGestureTracker.SetDownPosition(location);
+            _tapGestureTracker.Restart(location);
             _manipulationTracker.Restart([]);
 
             if (OnWidgetPointerPressed(location, GetShiftPressed()))
@@ -260,7 +260,7 @@ public partial class MapControl : ComponentBase, IMapControl
             var locations = e.TargetTouches.ToTouchLocations(_clientRect);
             if (OnWidgetPointerPressed(locations[0], GetShiftPressed()))
                 return;
-            _tapGestureTracker.SetDownPosition(locations[0]);
+            _tapGestureTracker.Restart(locations[0]);
             _manipulationTracker.Restart(locations);
         });
     }

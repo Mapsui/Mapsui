@@ -137,7 +137,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 _manipulationTracker.Restart(locations);
                 if (locations.Length == 1)
                 {
-                    _tapGestureTracker.SetDownPosition(locations[0]);
+                    _tapGestureTracker.Restart(locations[0]);
                     if (OnWidgetPointerPressed(locations[0], false))
                         return;
                 }

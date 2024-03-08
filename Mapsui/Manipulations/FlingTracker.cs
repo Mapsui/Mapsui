@@ -41,7 +41,7 @@ public class FlingTracker
         _events.Remove(id);
     }
 
-    public void Clear()
+    public void Restart()
     {
         _events.Clear();
     }

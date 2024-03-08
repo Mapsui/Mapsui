@@ -119,11 +119,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         var mousePosition = e.GetPosition(this).ToMapsui();
-        _tapGestureTracker.SetDownPosition(mousePosition);
+        _tapGestureTracker.Restart(mousePosition);
         _manipulationTracker.Restart([mousePosition]);
         if (OnWidgetPointerPressed(mousePosition, GetShiftPressed()))
             return;
-        _flingTracker.Clear();
+        _flingTracker.Restart();
         CaptureMouse();
     }
 
@@ -149,7 +149,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControl_TouchDown(object? sender, TouchEventArgs e)
     {
         var touchDownPosition = e.GetTouchPoint(this).Position.ToMapsui();
-        _tapGestureTracker.SetDownPosition(touchDownPosition);
+        _tapGestureTracker.Restart(touchDownPosition);
     }
 
     private void MapControlTouchUp(object? sender, TouchEventArgs e)

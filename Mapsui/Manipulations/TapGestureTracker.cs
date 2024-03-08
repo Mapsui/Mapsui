@@ -56,13 +56,13 @@ public class TapGestureTracker
     {
         _waitingForDoubleTap = true;
         await Task.Delay(_millisecondsToWaitForDoubleTap);
+        _waitingForDoubleTap = false;
     }
 
-    public void SetDownPosition(MPoint position)
+    public void Restart(MPoint position)
     {
         _tapStartTime = DateTime.Now;
         _tapStartPosition = position;
-        _waitingForDoubleTap = false;
     }
 
     private async Task OnTapAfterDelayAsync(Action<MPoint, int> onTap, MPoint position)

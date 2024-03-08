@@ -4,6 +4,7 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.ButtonWidgets;
 using System.Threading.Tasks;
+using Mapsui.Widgets.InfoWidgets;
 
 namespace Mapsui.Samples.Common.Maps.Demo;
 
@@ -26,6 +27,7 @@ public class OsmSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(new ScaleBarWidget(map) { TextAlignment = Alignment.Center, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Top });
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
+        map.Widgets.Add(new MouseCoordinatesWidget());
         return map;
     }
 }
