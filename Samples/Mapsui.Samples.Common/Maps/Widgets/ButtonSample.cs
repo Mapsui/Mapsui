@@ -26,6 +26,8 @@ public class ButtonSample : ISample
 
         map.Widgets.Add(CreateButton("Tap me", VerticalAlignment.Top, HorizontalAlignment.Left, (s, a) =>
             {
+                if (a.TapCount != 1)
+                    return false;
                 s.Text = $"Tapped {++_tapCount} times";
                 map.RefreshGraphics();
                 return false;
@@ -39,7 +41,7 @@ public class ButtonSample : ISample
             }));
         map.Widgets.Add(CreateButton("Double Tap me", VerticalAlignment.Bottom, HorizontalAlignment.Left, (s, a) =>
         {
-            if (a.TapCount < 2)
+            if (a.TapCount != 2)
                 return false;
             s.Text = $"Double Tapped {++_doubleTapCount} times";
             map.RefreshGraphics();
