@@ -85,7 +85,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Content = view;
     }
 
-    public bool UseDoubleTap { get; set; } = true;
     public bool UseFling { get; set; } = true;
 
     private double ViewportWidth => Width; // Used in shared code

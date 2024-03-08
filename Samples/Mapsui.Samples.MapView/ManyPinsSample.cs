@@ -121,7 +121,6 @@ public class ManyPinsSample : IMapViewSample
         mapControl.Map.Widgets.Add(CreatePerformanceWidget(mapControl));
         mapControl.Renderer.WidgetRenders[typeof(PerformanceWidget)] = new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer();
 
-        ((UI.Maui.MapView)mapControl).UseDoubleTap = true;
         ((UI.Maui.MapView)mapControl).UniqueCallout = true;
 
         var sw = new Stopwatch();
