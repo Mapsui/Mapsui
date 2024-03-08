@@ -1,4 +1,5 @@
-﻿using Mapsui.Widgets.BoxWidgets;
+﻿using Mapsui.Manipulations;
+using Mapsui.Widgets.BoxWidgets;
 using System;
 
 namespace Mapsui.Widgets.ButtonWidgets;
@@ -22,17 +23,17 @@ public class ButtonWidget : TextBoxWidget, ITouchableWidget
     /// <param name="position">Position of touch</param>
     /// <param name="e">Arguments for widget event</param>
     /// <returns>True, if touch is handled</returns>
-    public virtual bool OnTapped(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public virtual bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
     {
         return Tapped(this, e);
     }
 
-    public virtual bool OnPointerPressed(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public virtual bool OnPointerPressed(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
     {
         return false;
     }
 
-    public virtual bool OnPointerMoved(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public virtual bool OnPointerMoved(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
     {
         return false;
     }

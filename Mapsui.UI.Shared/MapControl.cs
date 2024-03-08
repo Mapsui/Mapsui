@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Mapsui.Manipulations;
 #if __MAUI__
 using Microsoft.Maui.Controls;
 namespace Mapsui.UI.Maui;
@@ -479,19 +480,19 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void OnInfo(MapInfoEventArgs? mapInfoEventArgs)
     {
-        if (mapInfoEventArgs == null) return;
+        if (mapInfoEventArgs is null) return;
 
         Map?.OnInfo(mapInfoEventArgs); // Also propagate to Map
         Info?.Invoke(this, mapInfoEventArgs);
     }
 
     /// <inheritdoc />
-    public MapInfo? GetMapInfo(MPoint? screenPosition, int margin = 0)
+    public MapInfo? GetMapInfo(ScreenPosition? screenPosition, int margin = 0)
     {
-        if (screenPosition == null)
+        if (screenPosition is null)
             return null;
 
-        return Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
+        return Renderer?.GetMapInfo(screenPosition.Value.X, screenPosition.Value.Y, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
     }
 
     /// <inheritdoc />
@@ -509,15 +510,15 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <param name="numTaps">Number of clicks/taps</param>
     /// <returns>True, if something done </returns>
     private MapInfoEventArgs? CreateMapInfoEventArgs(
-        MPoint? screenPosition,
-        MPoint? startScreenPosition, // Todo: Figure why this is needed and if it can be removed
+        ScreenPosition? screenPosition,
+        ScreenPosition? startScreenPosition, // Todo: Figure why this is needed and if it can be removed
         int numTaps)
     {
-        if (screenPosition == null || startScreenPosition == null)
+        if (screenPosition is null || startScreenPosition is null)
             return null;
 
         // Check which features in the map were tapped.
-        var mapInfo = Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? []);
+        var mapInfo = Renderer?.GetMapInfo(screenPosition.Value.X, screenPosition.Value.Y, Map.Navigator.Viewport, Map?.Layers ?? []);
 
         if (mapInfo != null)
         {
@@ -557,7 +558,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
 
-    private bool OnWidgetPointerPressed(MPoint position, bool shift)
+    private bool OnWidgetPointerPressed(ScreenPosition position, bool shift)
     {
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
@@ -571,7 +572,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool OnWidgetPointerMoved(MPoint position, bool leftButton, bool shift)
+    private bool OnWidgetPointerMoved(ScreenPosition position, bool leftButton, bool shift)
     {
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
@@ -584,7 +585,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool OnWidgetTapped(MPoint position, int tapCount, bool shift)
+    private bool OnWidgetTapped(ScreenPosition position, int tapCount, bool shift)
     {
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)

@@ -12,9 +12,9 @@ public class ManipulationTracker
     /// Call this method before the first Update call. The Update method tracks the start touch angle which is needed 
     /// to for rotation snapping and the previous touch state.
     /// </summary>
-    public void Restart(ReadOnlySpan<MPoint> locations) => Restart(GetTouchState(locations));
+    public void Restart(ReadOnlySpan<ScreenPosition> locations) => Restart(GetTouchState(locations));
 
-    public void Manipulate(ReadOnlySpan<MPoint> locations, Action<Manipulation> onManipulation) => Manipulate(GetTouchState(locations), onManipulation);
+    public void Manipulate(ReadOnlySpan<ScreenPosition> locations, Action<Manipulation> onManipulation) => Manipulate(GetTouchState(locations), onManipulation);
 
     private Manipulation? GetManipulation()
     {
@@ -33,7 +33,7 @@ public class ManipulationTracker
         return new Manipulation(_touchState.Center, _previousTouchState.Center, scaleFactor, rotationChange, _totalRotationChange);
     }
 
-    private static TouchState? GetTouchState(ReadOnlySpan<MPoint> locations)
+    private static TouchState? GetTouchState(ReadOnlySpan<ScreenPosition> locations)
     {
         if (locations.Length == 0)
             return null;
@@ -45,13 +45,13 @@ public class ManipulationTracker
         var radius = Distance(centerX, centerY, locations[0].X, locations[0].Y);
         var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
 
-        return new TouchState(new MPoint(centerX, centerY), radius, angle, locations.Length);
+        return new TouchState(new ScreenPosition(centerX, centerY), radius, angle, locations.Length);
     }
 
     private static double Distance(double x1, double y1, double x2, double y2)
         => Math.Sqrt(Math.Pow(x1 - x2, 2.0) + Math.Pow(y1 - y2, 2.0));
 
-    private static (double centerX, double centerY) GetCenter(ReadOnlySpan<MPoint> touches)
+    private static (double centerX, double centerY) GetCenter(ReadOnlySpan<ScreenPosition> touches)
     {
         double centerX = 0;
         double centerY = 0;
@@ -102,7 +102,7 @@ public class ManipulationTracker
             onManipulation(manipulation);
     }
 
-    private record TouchState(MPoint Center, double? Radius, double? Angle, int LocationsLength)
+    private record TouchState(ScreenPosition Center, double? Radius, double? Angle, int LocationsLength)
     {
         public double GetRotationChange(TouchState previousTouchState)
         {
@@ -124,4 +124,4 @@ public class ManipulationTracker
     }
 }
 
-public record Manipulation(MPoint Center, MPoint PreviousCenter, double ScaleFactor, double RotationChange, double TotalRotationChange);
+public record Manipulation(ScreenPosition Center, ScreenPosition PreviousCenter, double ScaleFactor, double RotationChange, double TotalRotationChange);

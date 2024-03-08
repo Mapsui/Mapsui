@@ -136,11 +136,11 @@ public partial class MapControl : UIView, IMapControl
         Catch.Exceptions(() =>
         {
             base.TouchesBegan(touches, e);
-            var locations = GetTouchLocations(e, this);
+            var positions = GetScreenPositions(e, this);
 
-            if (locations.Length == 1)
+            if (positions.Length == 1)
             {
-                var position = locations[0];
+                var position = positions[0];
                 _tapGestureTracker.Restart(position);
                 _manipulationTracker.Restart([position]);
                 if (OnWidgetPointerPressed(position, false))
@@ -154,7 +154,7 @@ public partial class MapControl : UIView, IMapControl
         Catch.Exceptions(() =>
         {
             base.TouchesMoved(touches, e);
-            var locations = GetTouchLocations(e, this);
+            var locations = GetScreenPositions(e, this);
 
             if (locations.Length == 1)
                 if (OnWidgetPointerMoved(locations[0], true, false))
@@ -168,7 +168,7 @@ public partial class MapControl : UIView, IMapControl
         Catch.Exceptions(() =>
         {
             base.TouchesEnded(touches, e);
-            var locations = GetTouchLocations(e, this);
+            var locations = GetScreenPositions(e, this);
 
             if (locations.Length == 1)
             {
@@ -187,11 +187,11 @@ public partial class MapControl : UIView, IMapControl
         });
     }
 
-    private static ReadOnlySpan<MPoint> GetTouchLocations(UIEvent? uiEvent, UIView uiView)
+    private static ReadOnlySpan<ScreenPosition> GetScreenPositions(UIEvent? uiEvent, UIView uiView)
     {
         if (uiEvent is null)
-            return ReadOnlySpan<MPoint>.Empty;
-        return uiEvent.AllTouches.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new MPoint(p.X, p.Y)).ToArray();
+            return [];
+        return uiEvent.AllTouches.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new ScreenPosition(p.X, p.Y)).ToArray();
     }
 
     /// <summary>

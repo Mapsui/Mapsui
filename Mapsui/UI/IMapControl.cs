@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Mapsui.Layers;
+using Mapsui.Manipulations;
 using Mapsui.Rendering;
 using Mapsui.Utilities;
 
@@ -48,7 +49,7 @@ public interface IMapControl : IDisposable
     /// </summary>
     /// <param name="screenPosition">Screen position to check for widgets and features</param>
     /// <param name="margin">An optional extra margin around the feature to enlarge the hit area.</param>
-    MapInfo? GetMapInfo(MPoint screenPosition, int margin = 0);
+    MapInfo? GetMapInfo(ScreenPosition? screenPosition, int margin = 0);
 
     /// <summary>
     /// Create a snapshot form map as PNG image

@@ -16,7 +16,7 @@ public class FlingTracker
         _events = [];
     }
 
-    public void AddEvent(long id, MPoint location, long ticks)
+    public void AddEvent(long id, ScreenPosition location, long ticks)
     {
         // Save event data
         if (!_events.TryGetValue(id, out var value))

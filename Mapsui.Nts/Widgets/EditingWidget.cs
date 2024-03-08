@@ -1,4 +1,5 @@
-﻿using Mapsui.Nts.Editing;
+﻿using Mapsui.Manipulations;
+using Mapsui.Nts.Editing;
 using Mapsui.UI;
 using Mapsui.Widgets;
 
@@ -18,7 +19,7 @@ public class EditingWidget : Widget, ITouchableWidget
         EditManipulation = editManipulation;
     }
 
-    public bool OnTapped(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
     {
         if (!e.LeftButton)
             return false;
@@ -40,7 +41,7 @@ public class EditingWidget : Widget, ITouchableWidget
         return false;
     }
 
-    public bool OnPointerPressed(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnPointerPressed(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
     {
         if (!e.LeftButton)
             return false;
@@ -52,19 +53,11 @@ public class EditingWidget : Widget, ITouchableWidget
             PointerState.Down, position, EditManager, MapControl, e);
     }
 
-    public bool OnPointerMoved(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnPointerMoved(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
     {
-        var screenPosition = position;
-
         if (e.LeftButton)
-        {
-            return EditManipulation.Manipulate(
-                PointerState.Dragging, screenPosition, EditManager, MapControl, e);
-        }
+            return EditManipulation.Manipulate(PointerState.Dragging, position, EditManager, MapControl, e);
         else
-        {
-            return EditManipulation.Manipulate(
-                PointerState.Hovering, screenPosition, EditManager, MapControl, e);
-        }
+            return EditManipulation.Manipulate(PointerState.Hovering, position, EditManager, MapControl, e);
     }
 }

@@ -2,6 +2,7 @@
 using Mapsui.Utilities;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Manipulations;
 
 namespace Mapsui.Extensions;
 
@@ -33,7 +34,7 @@ public static class ViewportExtensions
         // taken to form the new box. In this case the result is
         // not a real transformation because an MRect can not be
         // rotated.
-        var screenPoints = new List<MPoint>
+        var screenPoints = new List<ScreenPosition>
         {
             viewport.WorldToScreen(rect.BottomLeft),
             viewport.WorldToScreen(rect.BottomRight),
@@ -108,7 +109,7 @@ public static class ViewportExtensions
     /// </summary>
     /// <param name="worldPosition">Coordinate in world units</param>
     /// <returns>MPoint in screen pixels</returns>  
-    public static MPoint WorldToScreen(this Viewport viewport, MPoint worldPosition)
+    public static ScreenPosition WorldToScreen(this Viewport viewport, MPoint worldPosition)
     {
         return viewport.WorldToScreen(worldPosition.X, worldPosition.Y);
     }
@@ -119,7 +120,7 @@ public static class ViewportExtensions
     /// <param name="screenPosition">Coordinate in screen units</param>
     /// <returns>MPoint in world units</returns>
     /// <inheritdoc />
-    public static MPoint ScreenToWorld(this Viewport viewport, MPoint screenPosition)
+    public static MPoint ScreenToWorld(this Viewport viewport, ScreenPosition screenPosition)
     {
         return viewport.ScreenToWorld(screenPosition.X, screenPosition.Y);
     }
@@ -145,10 +146,10 @@ public static class ViewportExtensions
     /// <param name="worldX">X coordinate in world units</param>
     /// <param name="worldY">Y coordinate in world units</param>
     /// <returns>MPoint in screen pixels</returns>
-    public static MPoint WorldToScreen(this Viewport viewport, double worldX, double worldY)
+    public static ScreenPosition WorldToScreen(this Viewport viewport, double worldX, double worldY)
     {
         var (x, y) = viewport.WorldToScreenXY(worldX, worldY);
-        return new MPoint(x, y);
+        return new ScreenPosition(x, y);
     }
 
     /// <summary>
