@@ -8,9 +8,13 @@ public class TapGestureTracker
     private readonly double _maxTapDuration = 0.5;
     private DateTime _tapStartTime;
     private MPoint? _tapStartPosition;
-    private int _millisecondsToWaitForDoubleTap = 250;
+    private int _millisecondsToWaitForDoubleTap = 300;
     private bool _waitingForDoubleTap;
     private int _tapCount = 1;
+
+    // This causes a delay on the single tap. This is not always the desired behavior. When this is set to false
+    // The single tap will fire each time before the double tap. This is the default behavior in most systems.
+    public bool DoNotFireSingleTapOnDoubleTap { get; set; } = false;
 
     // This fields was added as a workaround for that in Blazor the touch up does not have a location (or I do not know how to get it).
     public MPoint? LastMovePosition { get; set; }
@@ -24,16 +28,41 @@ public class TapGestureTracker
         var distance = tapEndPosition.Distance(_tapStartPosition);
         var isTap = duration < _maxTapDuration && distance < maxTapDistance;
 
-        if (_waitingForDoubleTap)
-            _tapCount = 2;
-        else if (isTap)
-            _ = OnTapAfterDelayAsync(onTap, tapEndPosition); // Fire and forget
+        if (DoNotFireSingleTapOnDoubleTap)
+        {
+            if (_waitingForDoubleTap)
+                _tapCount = 2;
+            else if (isTap)
+                _ = OnTapAfterDelayAsync(onTap, tapEndPosition); // Fire and forget
+        }
+        else
+        {
+            if (_waitingForDoubleTap)
+            {
+                onTap(tapEndPosition, 2); // Within wait period so fire.
+            }
+            else
+            {
+                // This is the first tap. Fire right away and start waiting for second tap.
+                // If the second tap is within the wait period we should fire a double tap
+                // but not another single tap.
+                onTap(tapEndPosition, 1);
+                _ = StartWaitingForSecondTapAsync(); // Fire and forget
+            }
+        }
+    }
+
+    private async Task StartWaitingForSecondTapAsync()
+    {
+        _waitingForDoubleTap = true;
+        await Task.Delay(_millisecondsToWaitForDoubleTap);
     }
 
     public void SetDownPosition(MPoint position)
     {
         _tapStartTime = DateTime.Now;
         _tapStartPosition = position;
+        _waitingForDoubleTap = false;
     }
 
     private async Task OnTapAfterDelayAsync(Action<MPoint, int> onTap, MPoint position)
