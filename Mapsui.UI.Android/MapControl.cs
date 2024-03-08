@@ -17,25 +17,6 @@ public enum SkiaRenderMode
     Software
 }
 
-internal class MapControlGestureListener : GestureDetector.SimpleOnGestureListener
-{
-    public EventHandler<GestureDetector.FlingEventArgs>? Fling;
-#if NET7_0
-    public override bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
-#else
-    public override bool OnFling(MotionEvent? e1, MotionEvent e2, float velocityX, float velocityY)
-#endif
-    {
-        if (Fling != null)
-        {
-            Fling?.Invoke(this, new GestureDetector.FlingEventArgs(false, e1, e2, velocityX, velocityY));
-            return true;
-        }
-
-        return base.OnFling(e1, e2, velocityX, velocityY);
-    }
-}
-
 public partial class MapControl : ViewGroup, IMapControl
 {
     private View? _canvas;
@@ -72,8 +53,6 @@ public partial class MapControl : ViewGroup, IMapControl
 
         // Pointer events
         Touch += MapControl_Touch;
-        var listener = new MapControlGestureListener(); // Todo: Find out if/why we need this custom gesture detector. Why not the _gestureDetector?
-        listener.Fling += OnFling;
     }
 
     private void CanvasOnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
