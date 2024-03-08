@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using SkiaSharp;
 using SkiaSharp.Views.Blazor;
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components;
 
 namespace Mapsui.UI.Blazor;
@@ -15,12 +14,9 @@ public partial class MapControl : ComponentBase, IMapControl
     protected SKCanvasView? _viewCpu;
     protected SKGLView? _viewGpu;
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
-
     private SKImageInfo? _canvasSize;
     private bool _onLoaded;
-    private MRect? _selectRectangle;
     private readonly HashSet<string> _pressedKeys = [];
-    private bool _isInBoxZoomMode;
     private double _pixelDensityFromInterop = 1;
     private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
@@ -111,8 +107,7 @@ public partial class MapControl : ComponentBase, IMapControl
         CommonDrawControl(canvas);
     }
 
-    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
-    private async void OnLoadComplete()
+    private void OnLoadComplete()
     {
         Catch.Exceptions(async () =>
         {
@@ -208,7 +203,7 @@ public partial class MapControl : ComponentBase, IMapControl
             if (isHovering)
                 return;
 
-            _manipulationTracker.Manipulate([position], Map.Navigator.Pinch);
+            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
         });
     }
 
@@ -220,15 +215,15 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             var location = e.ToLocation(_clientRect);
 
-            _tapGestureTracker.IfTap((position) =>
+            _tapGestureTracker.IfTap((p) =>
             {
-                if (OnWidgetTapped(location, 1, GetShiftPressed()))
+                if (OnWidgetTapped(p, 1, GetShiftPressed()))
                     return;
-                OnInfo(CreateMapInfoEventArgs(location, location, 1));
+                OnInfo(CreateMapInfoEventArgs(p, p, 1));
 
             }, MaxTapGestureMovement * PixelDensity);
 
-            _manipulationTracker.Manipulate([e.ToLocation(_clientRect)], Map.Navigator.Pinch);
+            _manipulationTracker.Manipulate([e.ToLocation(_clientRect)], Map.Navigator.Manipulate);
             RefreshData();
         });
     }
@@ -294,7 +289,7 @@ public partial class MapControl : ComponentBase, IMapControl
             _tapGestureTracker.SetLastMovePosition(locations[0]);
             if (OnWidgetPointerMoved(locations[0], true, GetShiftPressed()))
                 return;
-            _manipulationTracker.Manipulate(locations.ToArray(), Map.Navigator.Pinch);
+            _manipulationTracker.Manipulate(locations.ToArray(), Map.Navigator.Manipulate);
         });
     }
 

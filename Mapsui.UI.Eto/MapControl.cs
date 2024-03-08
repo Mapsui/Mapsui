@@ -1,4 +1,3 @@
-using Eto.Drawing;
 using Eto.Forms;
 using Eto.SkiaDraw;
 using Mapsui.Extensions;
@@ -50,7 +49,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         SetCursorInMoveMode();
         var mouseDownPosition = e.Location.ToMapsui();
-        _manipulationTracker.Restart([]); // Todo: This should not have to be empty, but the start touch.
+        _manipulationTracker.Restart([mouseDownPosition]);
         _tapGestureTracker.SetDownPosition(mouseDownPosition);
 
         if (OnWidgetPointerPressed(mouseDownPosition, GetShiftPressed()))
@@ -67,14 +66,14 @@ public partial class MapControl : SkiaDrawable, IMapControl
             return;
         if (isHovering)
             return;
-        _manipulationTracker.Manipulate([mouseMovePosition], Map.Navigator.Pinch);
+        _manipulationTracker.Manipulate([mouseMovePosition], Map.Navigator.Manipulate);
     }
 
     protected override void OnMouseUp(MouseEventArgs e)
     {
         base.OnMouseUp(e);
-        SetCursorInDefaultMode();
 
+        SetCursorInDefaultMode();
         var mouseUpPosition = e.Location.ToMapsui();
         _tapGestureTracker.IfTap((p) =>
         {
@@ -83,7 +82,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
             OnInfo(CreateMapInfoEventArgs(p, p, 1));
         }, MaxTapGestureMovement * PixelDensity, mouseUpPosition);
 
-        _manipulationTracker.Manipulate([mouseUpPosition], Map.Navigator.Pinch);
+        _manipulationTracker.Manipulate([mouseUpPosition], Map.Navigator.Manipulate);
         RefreshData();
     }
 
@@ -92,7 +91,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
         base.OnLoadComplete(e);
 
         SetViewportSize();
-
         CanFocus = true;
     }
 
@@ -142,20 +140,10 @@ public partial class MapControl : SkiaDrawable, IMapControl
         return Screen.FromPoint(center).LogicalPixelSize;
     }
 
-    private static void RunOnUIThread(Action action)
-    {
-        Application.Instance.AsyncInvoke(action);
-    }
-
-    private static bool IsTap(PointF currentPosition, PointF previousPosition)
-    {
-        return Math.Abs(PointF.Distance(currentPosition, previousPosition)) < 5;
-    }
+    private static void RunOnUIThread(Action action) => Application.Instance.AsyncInvoke(action);
 
     private bool IsHovering(MouseEventArgs e)
-    {
-        return !(e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier));
-    }
+        => !(e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier));
 
     private void SetCursorInMoveMode()
     {
@@ -163,10 +151,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         Cursor = MoveCursor;
     }
 
-    private void SetCursorInDefaultMode()
-    {
-        Cursor = _defaultCursor;
-    }
+    private void SetCursorInDefaultMode() => Cursor = _defaultCursor;
 
     private bool GetShiftPressed()
     {
