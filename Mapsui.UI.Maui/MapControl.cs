@@ -1,7 +1,6 @@
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Manipulations;
-using Mapsui.Utilities;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Devices;
@@ -38,7 +37,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private Size _oldSize;
     private static List<WeakReference<MapControl>>? _listeners;
     private readonly ManipulationTracker _manipulationTracker = new();
-    private MPoint? _downLocation;
+    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl()
     {
@@ -86,19 +85,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Content = view;
     }
 
-    public bool UseDoubleTap { get; set; } = true;
     public bool UseFling { get; set; } = true;
 
-    // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
-    // If a finger touches down and up it counts as a tap if the distance
-    // between the down and up location is smaller then the touch distance.
-    // The distance is initialized at 8. How did we get to 8? Well you could
-    // read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
-    // We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
-    /// <summary>
-    /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
-    /// </summary>
-    public int MaxTapGestureMovement { get; set; } = 8;
     private double ViewportWidth => Width; // Used in shared code
     private double ViewportHeight => Height; // Used in shared code
 
@@ -199,14 +187,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             {
                 _touches[e.Id] = location;
                 if (_touches.Count == 1)
-                    _downLocation = location;
-
-                if (OnWidgetPointerPressed(location, false))
-                    return;
-
-                _flingTracker.Clear();
-
-                _manipulationTracker.Restart(_touches.Values.ToArray());
+                {
+                    _tapGestureTracker.Restart(location);
+                    _flingTracker.Restart();
+                    _manipulationTracker.Restart(_touches.Values.ToArray());
+                    if (OnWidgetPointerPressed(location, false))
+                        return;
+                }
             }
             else if (e.ActionType == SKTouchAction.Moved)
             {
@@ -222,7 +209,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                 _flingTracker.AddEvent(e.Id, location, DateTime.Now.Ticks);
 
-                _manipulationTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Pinch);
+                _manipulationTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Manipulate);
 
                 RefreshGraphics();
             }
@@ -235,16 +222,15 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     _flingTracker.IfFling(e.Id, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
                 _flingTracker.RemoveId(e.Id);
 
-                if (IsTap(releasedTouch, _downLocation))
+                _tapGestureTracker.IfTap(releasedTouch!, MaxTapGestureMovement, (p, c) =>
                 {
-                    if (OnWidgetTapped(location, 1, false))
+                    if (OnWidgetTapped(p, c, false))
                         return;
-                    OnInfo(CreateMapInfoEventArgs(location, location, 1));
-                    return;
-                }
+                    OnInfo(CreateMapInfoEventArgs(p, p, 1));
 
-                _manipulationTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Pinch);
+                });
 
+                _manipulationTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Manipulate);
                 Refresh();
             }
             else if (e.ActionType == SKTouchAction.Cancelled)
@@ -268,20 +254,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 OnZoomInOrOut(e.WheelDelta, location);
             }
         });
-    }
-
-    private bool IsTap(MPoint? releasePosition, MPoint? pressedPosition)
-    {
-        // It is not possible to use the MAUI gesture because it is not triggered when OnTouch is used.
-        if (releasePosition == null) return false;
-        if (pressedPosition == null) return false;
-
-        // While tapping on screen, there could be a small movement of the finger
-        // (especially on Samsung). So check, if touch start location isn't more 
-        // than a number of pixels away from touch end location.
-        var maxTapGestureMovementInRawPixels = MaxTapGestureMovement * PixelDensity;
-
-        return Algorithms.Distance(releasePosition, pressedPosition) < maxTapGestureMovementInRawPixels;
     }
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
@@ -315,10 +287,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private MPoint GetScreenPosition(SKPoint point) => new MPoint(point.X / PixelDensity, point.Y / PixelDensity);
 
-    /// <summary>
-    /// Called, when map should zoom in or out
-    /// </summary>
-    /// <param name="currentMousePosition">Center of zoom out event</param>
     private void OnZoomInOrOut(int mouseWheelDelta, MPoint currentMousePosition)
         => Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
 

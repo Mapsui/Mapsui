@@ -24,6 +24,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private readonly ConcurrentDictionary<long, MPoint> _pointerLocations = new();
     private bool _shiftPressed;
     private readonly ManipulationTracker _manipulationTracker = new();
+    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl()
     {
@@ -40,9 +41,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         PointerExited += MapControl_PointerExited;
         PointerCaptureLost += MapControl_PointerCaptureLost;
         PointerWheelChanged += MapControl_PointerWheelChanged;
-
-        Tapped += MapControl_Tapped;
-        DoubleTapped += MapControl_DoubleTapped;
 
         // Needed to track the state of _shiftPressed because DoubleTapped does not have KeyModifiers.
         KeyDown += (s, e) => _shiftPressed = GetShiftPressed(e.KeyModifiers);
@@ -84,43 +82,38 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControl_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (!IsMouseDown(e))
+        if (IsHovering(e))
             return;
 
         var tapPosition = e.GetPosition(this).ToMapsui();
         _pointerLocations[e.Pointer.Id] = tapPosition;
 
-        _manipulationTracker.Restart(_pointerLocations.Values.ToArray());
-
-        if (OnWidgetPointerPressed(tapPosition, _shiftPressed))
-            return;
-
+        if (_pointerLocations.Count() == 1)
+        {
+            _tapGestureTracker.Restart(tapPosition);
+            _manipulationTracker.Restart(_pointerLocations.Values.ToArray());
+            if (OnWidgetPointerPressed(tapPosition, _shiftPressed))
+                return;
+        }
         e.Pointer.Capture(this);
     }
-
-    private bool IsMouseDown(PointerPressedEventArgs e) => e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
 
     private void MapControl_PointerMoved(object? sender, PointerEventArgs e)
     {
         var isHovering = IsHovering(e);
 
-        if (OnWidgetPointerMoved(e.GetPosition(this).ToMapsui(), !isHovering, _shiftPressed))
+        var position = e.GetPosition(this).ToMapsui();
+        if (OnWidgetPointerMoved(position, !isHovering, _shiftPressed))
             return;
 
         if (isHovering)
             return; // In case of hovering we just call the widget move event and ignore the event otherwise.
 
-        var pointerLocation = e.GetPosition(this).ToMapsui();
-        _pointerLocations[e.Pointer.Id] = pointerLocation;
+        _pointerLocations[e.Pointer.Id] = position;
 
-        _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Pinch);
+        _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Manipulate);
 
         RefreshGraphics();
-    }
-
-    private bool IsHovering(PointerEventArgs e)
-    {
-        return e.Pointer.Type == PointerType.Mouse && !e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
     }
 
     private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
@@ -128,10 +121,21 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         _pointerLocations.TryRemove(e.Pointer.Id, out _);
         e.Pointer.Capture(null);
 
-        var pointerPosition = e.GetPosition(this).ToMapsui();
-        _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Pinch);
+        var position = e.GetPosition(this).ToMapsui();
+        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
+        {
+            if (OnWidgetTapped(p, c, _shiftPressed))
+                return;
+            OnInfo(CreateMapInfoEventArgs(p, p, c));
+        });
+        _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Manipulate);
 
         Refresh();
+    }
+
+    private bool IsHovering(PointerEventArgs e)
+    {
+        return e.Pointer.Type == PointerType.Mouse && !e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
     }
 
     private void MapControl_PointerWheelChanged(object? sender, PointerWheelEventArgs e)
@@ -155,22 +159,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControl_PointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
     {
         ClearTouchState();
-    }
-
-    private void MapControl_Tapped(object? sender, TappedEventArgs e)
-    {
-        var position = e.GetPosition(this).ToMapsui();
-        if (OnWidgetTapped(position, 1, _shiftPressed))
-            return;
-        OnInfo(CreateMapInfoEventArgs(position, position, 2));
-    }
-
-    private void MapControl_DoubleTapped(object? sender, TappedEventArgs e)
-    {
-        var position = e.GetPosition(this).ToMapsui();
-        if (OnWidgetTapped(position, 2, _shiftPressed))
-            return;
-        OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 
     public override void Render(DrawingContext context)

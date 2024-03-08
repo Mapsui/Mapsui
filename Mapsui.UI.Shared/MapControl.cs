@@ -61,6 +61,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
     private IRenderer _renderer = new MapRenderer();
 
+    /// <summary>
+    /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
+    /// </summary>
+    public int MaxTapGestureMovement { get; set; } = 8;
+
     private void SharedConstructor()
     {
         PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowser);
@@ -584,7 +589,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
         {
-            Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name}");
+            Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapCount: {tapCount} KeyState: {shift}");
             var args = new WidgetEventArgs(position, tapCount, true, shift);
             if (widget.OnTapped(Map.Navigator, position, args))
                 return true;

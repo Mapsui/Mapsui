@@ -41,12 +41,12 @@ public class FlingTracker
         _events.Remove(id);
     }
 
-    public void Clear()
+    public void Restart()
     {
         _events.Clear();
     }
 
-    public (double vx, double vy) CalcVelocity(long id, long now)
+    private (double vx, double vy) CalcVelocity(long id, long now)
     {
         double distanceX = 0;
         double distanceY = 0;

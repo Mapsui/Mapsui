@@ -17,32 +17,13 @@ public enum SkiaRenderMode
     Software
 }
 
-internal class MapControlGestureListener : GestureDetector.SimpleOnGestureListener
-{
-    public EventHandler<GestureDetector.FlingEventArgs>? Fling;
-#if NET7_0
-    public override bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
-#else
-    public override bool OnFling(MotionEvent? e1, MotionEvent e2, float velocityX, float velocityY)
-#endif
-    {
-        if (Fling != null)
-        {
-            Fling?.Invoke(this, new GestureDetector.FlingEventArgs(false, e1, e2, velocityX, velocityY));
-            return true;
-        }
-
-        return base.OnFling(e1, e2, velocityX, velocityY);
-    }
-}
-
 public partial class MapControl : ViewGroup, IMapControl
 {
     private View? _canvas;
-    private GestureDetector? _gestureDetector;
     private Handler? _mainLooperHandler;
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
     private readonly ManipulationTracker _manipulationTracker = new();
+    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl(Context context, IAttributeSet attrs) :
         base(context, attrs)
@@ -72,12 +53,6 @@ public partial class MapControl : ViewGroup, IMapControl
 
         // Pointer events
         Touch += MapControl_Touch;
-        var listener = new MapControlGestureListener(); // Todo: Find out if/why we need this custom gesture detector. Why not the _gestureDetector?
-        listener.Fling += OnFling;
-        _gestureDetector?.Dispose();
-        _gestureDetector = new GestureDetector(Context, listener);
-        _gestureDetector.SingleTapConfirmed += OnSingleTapped;
-        _gestureDetector.DoubleTap += OnDoubleTapped;
     }
 
     private void CanvasOnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
@@ -117,27 +92,6 @@ public partial class MapControl : ViewGroup, IMapControl
         }
     }
 
-    private void OnSingleTapped(object? sender, GestureDetector.SingleTapConfirmedEventArgs e)
-    {
-        if (e.Event == null)
-            return;
-
-        var position = GetScreenPosition(e.Event, this);
-        if (OnWidgetTapped(position, 1, false))
-            return;
-        OnInfo(CreateMapInfoEventArgs(position, position, 1));
-    }
-
-    private void OnDoubleTapped(object? sender, GestureDetector.DoubleTapEventArgs e)
-    {
-        if (e.Event == null)
-            return;
-
-        var position = GetScreenPosition(e.Event, this);
-        if (OnWidgetTapped(position, 2, false))
-            return;
-        OnInfo(CreateMapInfoEventArgs(position, position, 2));
-    }
 
     protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
     {
@@ -175,26 +129,35 @@ public partial class MapControl : ViewGroup, IMapControl
         if (args.Event is null)
             return;
 
-        if (_gestureDetector?.OnTouchEvent(args.Event) == true)
-            return;
-
         var locations = GetTouchLocations(args.Event, this, PixelDensity);
 
         switch (args.Event.Action)
         {
             case MotionEventActions.Down:
                 _manipulationTracker.Restart(locations);
-                if (OnWidgetPointerPressed(locations[0], false))
-                    return;
+                if (locations.Length == 1)
+                {
+                    _tapGestureTracker.Restart(locations[0]);
+                    if (OnWidgetPointerPressed(locations[0], false))
+                        return;
+                }
                 break;
             case MotionEventActions.Move:
-                if (OnWidgetPointerMoved(locations[0], true, false))
-                    return;
-                _manipulationTracker.Manipulate(locations, Map.Navigator.Pinch);
+                if (locations.Length == 1)
+                    if (OnWidgetPointerMoved(locations[0], true, false))
+                        return;
+                _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
                 break;
             case MotionEventActions.Up:
-                // Todo: Add HandleWidgetPointerUp
-                _manipulationTracker.Manipulate(locations, Map.Navigator.Pinch);
+                if (locations.Length == 1)
+                    _tapGestureTracker.IfTap(locations[0], MaxTapGestureMovement * PixelDensity, (p, c) =>
+                    {
+                        if (OnWidgetTapped(p, c, false))
+                            return;
+                        OnInfo(CreateMapInfoEventArgs(p, p, c));
+
+                    });
+                _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
                 Refresh();
                 break;
         }
@@ -291,7 +254,6 @@ public partial class MapControl : ViewGroup, IMapControl
             _map?.Dispose();
             _mainLooperHandler?.Dispose();
             _canvas?.Dispose();
-            _gestureDetector?.Dispose();
         }
         CommonDispose(disposing);
 

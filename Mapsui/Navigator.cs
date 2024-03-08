@@ -426,35 +426,11 @@ public class Navigator
         _animations = FlingAnimation.Create(velocityX, velocityY, maxDuration);
     }
 
-    /// <summary>
-    /// To pan the map when dragging with mouse or single finger. This method is called from
-    /// the MapControl and is usually not called from user code. This method does not call
-    /// Navigated. So, Navigated needs to be called from the MapControl on mouse/touch up.
-    /// </summary>
-    /// <param name="positionScreen">Screen position of the dragging mouse or finger.</param>
-    /// <param name="previousPositionScreen">Previous position of the dragging mouse or finger.</param>
-    public void Drag(MPoint positionScreen, MPoint previousPositionScreen)
-    {
-        Viewport = Drag(positionScreen, previousPositionScreen, Viewport);
-    }
-
-    private static Viewport Drag(MPoint positionScreen, MPoint previousPositionScreen, Viewport viewport)
-    {
-        var previous = viewport.ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
-        var current = viewport.ScreenToWorld(positionScreen.X, positionScreen.Y);
-
-        return viewport with
-        {
-            CenterX = viewport.CenterX + previous.X - current.X,
-            CenterY = viewport.CenterY + previous.Y - current.Y
-        };
-    }
-
-    public void Pinch(Manipulation? manipulation)
+    public void Manipulate(Manipulation? manipulation)
     {
         if (manipulation is null) return;
         if (RotationLock) manipulation = manipulation with { RotationChange = 0 };
-        if (ZoomLock) manipulation = manipulation with { ScaleFactor = 0 };
+        if (ZoomLock) manipulation = manipulation with { ScaleFactor = 1 };
         if (PanLock) manipulation = manipulation with { Center = manipulation.PreviousCenter };
 
         ClearAnimations();

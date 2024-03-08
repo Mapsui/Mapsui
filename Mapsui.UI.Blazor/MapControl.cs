@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using SkiaSharp;
 using SkiaSharp.Views.Blazor;
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components;
 
 namespace Mapsui.UI.Blazor;
@@ -15,12 +14,9 @@ public partial class MapControl : ComponentBase, IMapControl
     protected SKCanvasView? _viewCpu;
     protected SKGLView? _viewGpu;
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
-
     private SKImageInfo? _canvasSize;
     private bool _onLoaded;
-    private MRect? _selectRectangle;
     private readonly HashSet<string> _pressedKeys = [];
-    private bool _isInBoxZoomMode;
     private double _pixelDensityFromInterop = 1;
     private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
@@ -36,10 +32,6 @@ public partial class MapControl : ComponentBase, IMapControl
     public int ZoomButton { get; set; } = MouseButtons.Primary;
     public int ZoomModifier { get; set; } = Keys.Control;
     public string ElementId => _elementId;
-    /// <summary>
-    /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
-    /// </summary>
-    public int MaxTapGestureMovement { get; set; } = 8;
     private MapsuiJsInterop? Interop =>
             _interop == null && JsRuntime != null
                 ? _interop ??= new MapsuiJsInterop(JsRuntime)
@@ -111,8 +103,7 @@ public partial class MapControl : ComponentBase, IMapControl
         CommonDrawControl(canvas);
     }
 
-    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
-    private async void OnLoadComplete()
+    private void OnLoadComplete()
     {
         Catch.Exceptions(async () =>
         {
@@ -167,17 +158,6 @@ public partial class MapControl : ComponentBase, IMapControl
         action();
     }
 
-    protected void OnDblClick(MouseEventArgs e)
-    {
-        Catch.Exceptions(() =>
-        {
-            var location = e.ToLocation(_clientRect);
-            if (OnWidgetTapped(location, 2, GetShiftPressed()))
-                return;
-            OnInfo(CreateMapInfoEventArgs(location, location, 1));
-        });
-    }
-
     protected void OnMouseDown(MouseEventArgs e)
     {
         Catch.Exceptions(() =>
@@ -186,7 +166,7 @@ public partial class MapControl : ComponentBase, IMapControl
             _ = UpdateBoundingRectAsync();
 
             var location = e.ToLocation(_clientRect);
-            _tapGestureTracker.SetDownPosition(location);
+            _tapGestureTracker.Restart(location);
             _manipulationTracker.Restart([]);
 
             if (OnWidgetPointerPressed(location, GetShiftPressed()))
@@ -200,7 +180,6 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             var isHovering = !IsMouseButtonPressed(e);
             var position = e.ToLocation(_clientRect);
-            _tapGestureTracker.SetLastMovePosition(position);
 
             if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
                 return;
@@ -208,7 +187,7 @@ public partial class MapControl : ComponentBase, IMapControl
             if (isHovering)
                 return;
 
-            _manipulationTracker.Manipulate([position], Map.Navigator.Pinch);
+            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
         });
     }
 
@@ -218,18 +197,18 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            var location = e.ToLocation(_clientRect);
+            var position = e.ToLocation(_clientRect);
 
-            _tapGestureTracker.IfTap((position) =>
+            _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
             {
-                if (OnWidgetTapped(location, 1, GetShiftPressed()))
+                if (OnWidgetTapped(p, c, GetShiftPressed()))
                     return;
-                OnInfo(CreateMapInfoEventArgs(location, location, 1));
+                OnInfo(CreateMapInfoEventArgs(p, p, c));
 
-            }, MaxTapGestureMovement * PixelDensity);
+            });
 
-            _manipulationTracker.Manipulate([e.ToLocation(_clientRect)], Map.Navigator.Pinch);
-            RefreshData();
+            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
+            Refresh();
         });
     }
 
@@ -281,7 +260,7 @@ public partial class MapControl : ComponentBase, IMapControl
             var locations = e.TargetTouches.ToTouchLocations(_clientRect);
             if (OnWidgetPointerPressed(locations[0], GetShiftPressed()))
                 return;
-            _tapGestureTracker.SetDownPosition(locations[0]);
+            _tapGestureTracker.Restart(locations[0]);
             _manipulationTracker.Restart(locations);
         });
     }
@@ -291,10 +270,14 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var locations = e.TargetTouches.ToTouchLocations(_clientRect);
-            _tapGestureTracker.SetLastMovePosition(locations[0]);
-            if (OnWidgetPointerMoved(locations[0], true, GetShiftPressed()))
-                return;
-            _manipulationTracker.Manipulate(locations.ToArray(), Map.Navigator.Pinch);
+            if (locations.Length == 1)
+            {
+                var position = locations[0];
+                _tapGestureTracker.LastMovePosition = position;
+                if (OnWidgetPointerMoved(position, true, GetShiftPressed()))
+                    return;
+            }
+            _manipulationTracker.Manipulate(locations.ToArray(), Map.Navigator.Manipulate);
         });
     }
 
@@ -302,12 +285,15 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            _tapGestureTracker.IfTap((position) =>
+            if (_tapGestureTracker.LastMovePosition == null)
+                return;
+
+            _tapGestureTracker.IfTap(_tapGestureTracker.LastMovePosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
             {
-                if (OnWidgetTapped(position, 1, GetShiftPressed()))
+                if (OnWidgetTapped(p, c, GetShiftPressed()))
                     return;
-                OnInfo(CreateMapInfoEventArgs(position, position, 1));
-            }, MaxTapGestureMovement * PixelDensity);
+                OnInfo(CreateMapInfoEventArgs(p, p, c));
+            });
 
             RefreshData();
         });
