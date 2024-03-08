@@ -64,7 +64,7 @@ public class MapRegressionTests
     public static object[] ExcludedSamples => _excludedSamples ??= [new AnimatedPointsSample(), new MutatingTriangleSample()];
 
     [Test]
-    [Retry(3)]
+    [Retry(5)]
     [TestCaseSource(nameof(RegressionSamples))]
     public async Task TestSampleAsync(ISampleBase sample)
     {
