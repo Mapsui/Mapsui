@@ -9,29 +9,29 @@ public class TapGestureTracker
     private MPoint? _tapStartPosition;
     private MPoint? _tapEndPosition;
 
-    public void IfTap(Action<MPoint> onTap, double maxTapDistance, MPoint tapEndPosition)
+    public void IfTap(double maxTapDistance, MPoint tapEndPosition, Action<MPoint> onTap)
     {
         if (_tapStartPosition == null) return;
         if (tapEndPosition == null) return; // Note, this uses the tapEndPosition parameter.
 
-        IfTap(onTap, maxTapDistance, _tapStartPosition, tapEndPosition);
+        IfTap(maxTapDistance, _tapStartPosition, tapEndPosition, onTap);
     }
 
     /// <summary>
     /// Use this method in Blazor or other platforms where the mouse up position is unknown. Use this in combination 
     /// with SetLastMovePosition.
     /// </summary>
-    /// <param name="onTap"></param>
     /// <param name="maxTapDistance"></param>
-    public void IfTap(Action<MPoint> onTap, double maxTapDistance)
+    /// <param name="onTap"></param>
+    public void IfTap(double maxTapDistance, Action<MPoint> onTap)
     {
         if (_tapStartPosition == null) return;
         if (_tapEndPosition == null) return; // Note, this uses the _tapEndPosition field.
 
-        IfTap(onTap, maxTapDistance, _tapStartPosition, _tapEndPosition);
+        IfTap(maxTapDistance, _tapStartPosition, _tapEndPosition, onTap);
     }
 
-    private void IfTap(Action<MPoint> onTap, double maxTapDistance, MPoint tapStartPosition, MPoint tapEndPosition)
+    private void IfTap(double maxTapDistance, MPoint tapStartPosition, MPoint tapEndPosition, Action<MPoint> onTap)
     {
         if (tapStartPosition == null) return;
         if (tapEndPosition == null) return;

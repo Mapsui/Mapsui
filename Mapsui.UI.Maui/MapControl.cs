@@ -234,13 +234,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     _flingTracker.IfFling(e.Id, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
                 _flingTracker.RemoveId(e.Id);
 
-                _tapGestureTracker.IfTap((p) =>
+                _tapGestureTracker.IfTap(MaxTapGestureMovement, releasedTouch!, (p) =>
                 {
                     if (OnWidgetTapped(location, 1, false))
                         return;
                     OnInfo(CreateMapInfoEventArgs(location, location, 1));
 
-                }, MaxTapGestureMovement, releasedTouch!);
+                });
 
                 _manipulationTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Manipulate);
                 Refresh();

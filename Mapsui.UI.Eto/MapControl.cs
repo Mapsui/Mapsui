@@ -75,12 +75,12 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         SetCursorInDefaultMode();
         var mouseUpPosition = e.Location.ToMapsui();
-        _tapGestureTracker.IfTap((p) =>
+        _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, mouseUpPosition, (p) =>
         {
             if (OnWidgetTapped(p, 1, GetShiftPressed()))
                 return;
             OnInfo(CreateMapInfoEventArgs(p, p, 1));
-        }, MaxTapGestureMovement * PixelDensity, mouseUpPosition);
+        });
 
         _manipulationTracker.Manipulate([mouseUpPosition], Map.Navigator.Manipulate);
         RefreshData();

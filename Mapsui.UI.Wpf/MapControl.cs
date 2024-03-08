@@ -137,12 +137,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var position = e.GetPosition(this).ToMapsui();
 
-        _tapGestureTracker.IfTap((p) =>
+        _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, position, (p) =>
         {
             if (OnWidgetTapped(p, 1, GetShiftPressed()))
                 return;
             OnInfo(CreateMapInfoEventArgs(p, p, 1));
-        }, MaxTapGestureMovement * PixelDensity, position);
+        });
 
         RefreshData();
 
@@ -161,12 +161,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlTouchUp(object? sender, TouchEventArgs e)
     {
         var touchUpPosition = e.GetTouchPoint(this).Position.ToMapsui();
-        _tapGestureTracker.IfTap((p) =>
+        _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, touchUpPosition, (p) =>
         {
             if (OnWidgetTapped(p, 1, GetShiftPressed()))
                 return;
             OnInfo(CreateMapInfoEventArgs(p, p, 1));
-        }, MaxTapGestureMovement * PixelDensity, touchUpPosition);
+        });
     }
 
     public void OpenInBrowser(string url)
