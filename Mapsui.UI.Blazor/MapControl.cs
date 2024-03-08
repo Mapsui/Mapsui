@@ -32,10 +32,6 @@ public partial class MapControl : ComponentBase, IMapControl
     public int ZoomButton { get; set; } = MouseButtons.Primary;
     public int ZoomModifier { get; set; } = Keys.Control;
     public string ElementId => _elementId;
-    /// <summary>
-    /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
-    /// </summary>
-    public int MaxTapGestureMovement { get; set; } = 8;
     private MapsuiJsInterop? Interop =>
             _interop == null && JsRuntime != null
                 ? _interop ??= new MapsuiJsInterop(JsRuntime)

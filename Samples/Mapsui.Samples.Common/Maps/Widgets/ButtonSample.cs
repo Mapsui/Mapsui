@@ -16,6 +16,7 @@ public class ButtonSample : ISample
     public string Category => "Widgets";
 
     private int _tapCount;
+    private int _doubleTapCount;
 
     public Task<Map> CreateMapAsync()
     {
@@ -36,7 +37,14 @@ public class ButtonSample : ISample
                 map.RefreshGraphics();
                 return false;
             }));
-        map.Widgets.Add(CreateButtonWithImage(VerticalAlignment.Bottom, HorizontalAlignment.Left));
+        map.Widgets.Add(CreateButton("Double Tap me", VerticalAlignment.Bottom, HorizontalAlignment.Left, (s, a) =>
+        {
+            if (a.TapCount < 2)
+                return false;
+            s.Text = $"Double Tapped {++_doubleTapCount} times";
+            map.RefreshGraphics();
+            return false;
+        }));
 
         return Task.FromResult(map);
     }

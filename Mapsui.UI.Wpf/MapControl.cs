@@ -57,12 +57,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         RefreshGraphics();
     }
 
-
-    /// <summary>
-    /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
-    /// </summary>
-    public int MaxTapGestureMovement { get; set; } = 8;
-
     private static Rectangle CreateSelectRectangle() => new()
     {
         Fill = new SolidColorBrush(Colors.Red),
@@ -137,7 +131,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var position = e.GetPosition(this).ToMapsui();
 
-        _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, position, (p, c) =>
+        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
             if (OnWidgetTapped(p, c, GetShiftPressed()))
                 return;
@@ -161,7 +155,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlTouchUp(object? sender, TouchEventArgs e)
     {
         var touchUpPosition = e.GetTouchPoint(this).Position.ToMapsui();
-        _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, touchUpPosition, (p, c) =>
+        _tapGestureTracker.IfTap(touchUpPosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
             if (OnWidgetTapped(p, c, GetShiftPressed()))
                 return;

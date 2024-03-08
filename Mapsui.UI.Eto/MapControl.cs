@@ -21,10 +21,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
         SizeChanged += (s, e) => SetViewportSize();
     }
 
-    /// <summary>
-    /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
-    /// </summary>
-    public int MaxTapGestureMovement { get; set; } = 8;
     public Cursor MoveCursor { get; set; } = Cursors.Move;
     public MouseButtons MoveButton { get; set; } = MouseButtons.Primary;
     public Keys MoveModifier { get; set; } = Keys.None;
@@ -75,7 +71,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         SetCursorInDefaultMode();
         var mouseUpPosition = e.Location.ToMapsui();
-        _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, mouseUpPosition, (p, c) =>
+        _tapGestureTracker.IfTap(mouseUpPosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
             if (OnWidgetTapped(p, c, GetShiftPressed()))
                 return;

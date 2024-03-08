@@ -88,16 +88,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     public bool UseDoubleTap { get; set; } = true;
     public bool UseFling { get; set; } = true;
 
-    // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
-    // If a finger touches down and up it counts as a tap if the distance
-    // between the down and up location is smaller then the touch distance.
-    // The distance is initialized at 8. How did we get to 8? Well you could
-    // read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
-    // We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
-    /// <summary>
-    /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
-    /// </summary>
-    public int MaxTapGestureMovement { get; set; } = 8;
     private double ViewportWidth => Width; // Used in shared code
     private double ViewportHeight => Height; // Used in shared code
 
@@ -234,7 +224,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     _flingTracker.IfFling(e.Id, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
                 _flingTracker.RemoveId(e.Id);
 
-                _tapGestureTracker.IfTap(MaxTapGestureMovement, releasedTouch!, (p, c) =>
+                _tapGestureTracker.IfTap(releasedTouch!, MaxTapGestureMovement, (p, c) =>
                 {
                     if (OnWidgetTapped(p, c, false))
                         return;

@@ -9,16 +9,16 @@ public class TapGestureTracker
     private DateTime _tapStartTime;
     private MPoint? _tapStartPosition;
     private MPoint? _tapEndPosition;
-    private int _millisecondsToWaitForDoubleTap = 300;
+    private int _millisecondsToWaitForDoubleTap = 250;
     private bool _waitingForDoubleTap;
     private int _tapCount = 1;
 
-    public void IfTap(double maxTapDistance, MPoint tapEndPosition, Action<MPoint, int> onTap)
+    public void IfTap(MPoint tapEndPosition, double maxTapDistance, Action<MPoint, int> onTap)
     {
         if (_tapStartPosition == null) return;
         if (tapEndPosition == null) return; // Note, this uses the tapEndPosition parameter.
 
-        IfTap(maxTapDistance, _tapStartPosition, tapEndPosition, onTap);
+        IfTap(_tapStartPosition, tapEndPosition, maxTapDistance, onTap);
     }
 
     /// <summary>
@@ -32,10 +32,10 @@ public class TapGestureTracker
         if (_tapStartPosition == null) return;
         if (_tapEndPosition == null) return; // Note, this uses the _tapEndPosition field.
 
-        IfTap(maxTapDistance, _tapStartPosition, _tapEndPosition, onTap);
+        IfTap(_tapStartPosition, _tapEndPosition, maxTapDistance, onTap);
     }
 
-    private void IfTap(double maxTapDistance, MPoint tapStartPosition, MPoint tapEndPosition, Action<MPoint, int> onTap)
+    private void IfTap(MPoint tapStartPosition, MPoint tapEndPosition, double maxTapDistance, Action<MPoint, int> onTap)
     {
         if (tapStartPosition == null) return;
         if (tapEndPosition == null) return;
@@ -67,6 +67,12 @@ public class TapGestureTracker
 
     private async Task OnTapAfterDelayAsync(Action<MPoint, int> onTap, MPoint position)
     {
+        // In the current implementation we always wait for the double tap. This is not 
+        // always the desired behavior. Sometimes you want to respond directly. But in that
+        // case a double tap will always be preceded by a single tap. Options to resolve this:
+        // - Make it configurable
+        // - Add an OnSingleTap event (so 3 types, to make it more comprehensible OnDoubleTap should be real event).
+        // - Invoke the OnTap also in the OnSingleTap scenario but with different parameters.
         _waitingForDoubleTap = true;
         await Task.Delay(_millisecondsToWaitForDoubleTap);
 
