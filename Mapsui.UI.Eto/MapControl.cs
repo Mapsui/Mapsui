@@ -1,4 +1,3 @@
-using Eto.Drawing;
 using Eto.Forms;
 using Eto.SkiaDraw;
 using Mapsui.Extensions;
@@ -22,10 +21,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
         SizeChanged += (s, e) => SetViewportSize();
     }
 
-    /// <summary>
-    /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
-    /// </summary>
-    public int MaxTapGestureMovement { get; set; } = 8;
     public Cursor MoveCursor { get; set; } = Cursors.Move;
     public MouseButtons MoveButton { get; set; } = MouseButtons.Primary;
     public Keys MoveModifier { get; set; } = Keys.None;
@@ -50,8 +45,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         SetCursorInMoveMode();
         var mouseDownPosition = e.Location.ToMapsui();
-        _manipulationTracker.Restart([]); // Todo: This should not have to be empty, but the start touch.
-        _tapGestureTracker.SetDownPosition(mouseDownPosition);
+        _manipulationTracker.Restart([mouseDownPosition]);
+        _tapGestureTracker.Restart(mouseDownPosition);
 
         if (OnWidgetPointerPressed(mouseDownPosition, GetShiftPressed()))
             return;
@@ -67,23 +62,23 @@ public partial class MapControl : SkiaDrawable, IMapControl
             return;
         if (isHovering)
             return;
-        _manipulationTracker.Manipulate([mouseMovePosition], Map.Navigator.Pinch);
+        _manipulationTracker.Manipulate([mouseMovePosition], Map.Navigator.Manipulate);
     }
 
     protected override void OnMouseUp(MouseEventArgs e)
     {
         base.OnMouseUp(e);
-        SetCursorInDefaultMode();
 
+        SetCursorInDefaultMode();
         var mouseUpPosition = e.Location.ToMapsui();
-        _tapGestureTracker.IfTap((p) =>
+        _tapGestureTracker.IfTap(mouseUpPosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
-            if (OnWidgetTapped(p, 1, GetShiftPressed()))
+            if (OnWidgetTapped(p, c, GetShiftPressed()))
                 return;
             OnInfo(CreateMapInfoEventArgs(p, p, 1));
-        }, MaxTapGestureMovement * PixelDensity, mouseUpPosition);
+        });
 
-        _manipulationTracker.Manipulate([mouseUpPosition], Map.Navigator.Pinch);
+        _manipulationTracker.Manipulate([mouseUpPosition], Map.Navigator.Manipulate);
         RefreshData();
     }
 
@@ -92,7 +87,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
         base.OnLoadComplete(e);
 
         SetViewportSize();
-
         CanFocus = true;
     }
 
@@ -137,20 +131,10 @@ public partial class MapControl : SkiaDrawable, IMapControl
         return Screen.FromPoint(center).LogicalPixelSize;
     }
 
-    private static void RunOnUIThread(Action action)
-    {
-        Application.Instance.AsyncInvoke(action);
-    }
-
-    private static bool IsTap(PointF currentPosition, PointF previousPosition)
-    {
-        return Math.Abs(PointF.Distance(currentPosition, previousPosition)) < 5;
-    }
+    private static void RunOnUIThread(Action action) => Application.Instance.AsyncInvoke(action);
 
     private bool IsHovering(MouseEventArgs e)
-    {
-        return !(e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier));
-    }
+        => !(e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier));
 
     private void SetCursorInMoveMode()
     {
@@ -158,10 +142,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         Cursor = MoveCursor;
     }
 
-    private void SetCursorInDefaultMode()
-    {
-        Cursor = _defaultCursor;
-    }
+    private void SetCursorInDefaultMode() => Cursor = _defaultCursor;
 
     private bool GetShiftPressed()
     {

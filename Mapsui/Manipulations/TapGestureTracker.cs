@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Mapsui.Manipulations;
 
@@ -7,54 +8,77 @@ public class TapGestureTracker
     private readonly double _maxTapDuration = 0.5;
     private DateTime _tapStartTime;
     private MPoint? _tapStartPosition;
-    private MPoint? _tapEndPosition;
+    private int _millisecondsToWaitForDoubleTap = 300;
+    private bool _waitingForDoubleTap;
+    private int _tapCount = 1;
 
-    public void IfTap(Action<MPoint> onTap, double maxTapDistance, MPoint tapEndPosition)
+    // This causes a delay on the single tap. This is not always the desired behavior. When this is set to false
+    // The single tap will fire each time before the double tap. This is the default behavior in most systems.
+    public bool DoNotFireSingleTapOnDoubleTap { get; set; } = false;
+
+    // This fields was added as a workaround for that in Blazor the touch up does not have a location (or I do not know how to get it).
+    public MPoint? LastMovePosition { get; set; }
+
+    public void IfTap(MPoint tapEndPosition, double maxTapDistance, Action<MPoint, int> onTap)
     {
         if (_tapStartPosition == null) return;
         if (tapEndPosition == null) return; // Note, this uses the tapEndPosition parameter.
 
-        IfTap(onTap, maxTapDistance, _tapStartPosition, tapEndPosition);
-    }
-
-    /// <summary>
-    /// Use this method in Blazor or other platforms where the mouse up position is unknown. Use this in combination 
-    /// with SetLastMovePosition.
-    /// </summary>
-    /// <param name="onTap"></param>
-    /// <param name="maxTapDistance"></param>
-    public void IfTap(Action<MPoint> onTap, double maxTapDistance)
-    {
-        if (_tapStartPosition == null) return;
-        if (_tapEndPosition == null) return; // Note, this uses the _tapEndPosition field.
-
-        IfTap(onTap, maxTapDistance, _tapStartPosition, _tapEndPosition);
-    }
-
-    private void IfTap(Action<MPoint> onTap, double maxTapDistance, MPoint tapStartPosition, MPoint tapEndPosition)
-    {
-        if (tapStartPosition == null) return;
-        if (tapEndPosition == null) return;
-
         var duration = (DateTime.Now - _tapStartTime).TotalSeconds;
-        var distance = tapEndPosition.Distance(tapStartPosition);
+        var distance = tapEndPosition.Distance(_tapStartPosition);
         var isTap = duration < _maxTapDuration && distance < maxTapDistance;
 
-        if (isTap) onTap(tapEndPosition);
+        if (DoNotFireSingleTapOnDoubleTap)
+        {
+            if (_waitingForDoubleTap)
+                _tapCount = 2;
+            else if (isTap)
+                _ = OnTapAfterDelayAsync(onTap, tapEndPosition); // Fire and forget
+        }
+        else
+        {
+            if (_waitingForDoubleTap)
+            {
+                onTap(tapEndPosition, 2); // Within wait period so fire.
+            }
+            else
+            {
+                // This is the first tap. Fire right away and start waiting for second tap.
+                // If the second tap is within the wait period we should fire a double tap
+                // but not another single tap.
+                onTap(tapEndPosition, 1);
+                _ = StartWaitingForSecondTapAsync(); // Fire and forget
+            }
+        }
     }
 
-    /// <summary>
-    /// Call this method during move if the platform does not provide the mouse up position.
-    /// </summary>
-    /// <param name="position"></param>
-    public void SetLastMovePosition(MPoint position)
+    private async Task StartWaitingForSecondTapAsync()
     {
-        _tapEndPosition = position;
+        _waitingForDoubleTap = true;
+        await Task.Delay(_millisecondsToWaitForDoubleTap);
+        _waitingForDoubleTap = false;
     }
 
-    public void SetDownPosition(MPoint position)
+    public void Restart(MPoint position)
     {
         _tapStartTime = DateTime.Now;
         _tapStartPosition = position;
+    }
+
+    private async Task OnTapAfterDelayAsync(Action<MPoint, int> onTap, MPoint position)
+    {
+        // In the current implementation we always wait for the double tap. This is not 
+        // always the desired behavior. Sometimes you want to respond directly. But in that
+        // case a double tap will always be preceded by a single tap. Options to resolve this:
+        // - Make it configurable
+        // - Add an OnSingleTap event (so 3 types, to make it more comprehensible OnDoubleTap should be real event).
+        // - Invoke the OnTap also in the OnSingleTap scenario but with different parameters.
+        _waitingForDoubleTap = true;
+        await Task.Delay(_millisecondsToWaitForDoubleTap);
+
+        onTap(position, _tapCount); // The tap count could be set to 2 during waiting.
+
+        _waitingForDoubleTap = false;
+        _tapCount = 1;
     }
 }
