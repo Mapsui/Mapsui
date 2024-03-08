@@ -7,6 +7,7 @@ using Mapsui.Disposing;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Manipulations;
 using Mapsui.Nts.Widgets;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
@@ -216,7 +217,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         var tasks = new List<Task>();
 
         var list = new List<MapInfoRecord>[mapInfoLayers.Count];
-        var result = new MapInfo(new MPoint(x, y), viewport.ScreenToWorld(x, y), viewport.Resolution);
+        var result = new MapInfo(new ScreenPosition(x, y), viewport.ScreenToWorld(x, y), viewport.Resolution);
 
         if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return result;
 

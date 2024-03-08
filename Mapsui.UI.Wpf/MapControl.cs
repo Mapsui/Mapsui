@@ -93,7 +93,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
     {
         var mouseWheelDelta = e.Delta;
-        var mousePosition = e.GetPosition(this).ToMapsui();
+        var mousePosition = e.GetPosition(this).ToScreenPosition();
         Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
     }
 
@@ -118,7 +118,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        var mousePosition = e.GetPosition(this).ToMapsui();
+        var mousePosition = e.GetPosition(this).ToScreenPosition();
         _tapGestureTracker.Restart(mousePosition);
         _manipulationTracker.Restart([mousePosition]);
         if (OnWidgetPointerPressed(mousePosition, GetShiftPressed()))
@@ -129,7 +129,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
-        var position = e.GetPosition(this).ToMapsui();
+        var position = e.GetPosition(this).ToScreenPosition();
 
         _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
@@ -148,13 +148,13 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_TouchDown(object? sender, TouchEventArgs e)
     {
-        var touchDownPosition = e.GetTouchPoint(this).Position.ToMapsui();
+        var touchDownPosition = e.GetTouchPoint(this).Position.ToScreenPosition();
         _tapGestureTracker.Restart(touchDownPosition);
     }
 
     private void MapControlTouchUp(object? sender, TouchEventArgs e)
     {
-        var touchUpPosition = e.GetTouchPoint(this).Position.ToMapsui();
+        var touchUpPosition = e.GetTouchPoint(this).Position.ToScreenPosition();
         _tapGestureTracker.IfTap(touchUpPosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
             if (OnWidgetTapped(p, c, GetShiftPressed()))
@@ -179,7 +179,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseMove(object sender, MouseEventArgs e)
     {
         var isHovering = IsHovering(e);
-        var position = e.GetPosition(this).ToMapsui();
+        var position = e.GetPosition(this).ToScreenPosition();
         if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
             return;
         if (isHovering)
@@ -205,7 +205,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var translation = e.DeltaManipulation.Translation;
 
-        var previousCenter = e.ManipulationOrigin.ToMapsui();
+        var previousCenter = e.ManipulationOrigin.ToScreenPosition();
         var center = previousCenter.Offset(translation.X, translation.Y);
         var scaleFactor = GetScaleFactor(e.DeltaManipulation.Scale);
         var rotationChange = e.DeltaManipulation.Rotation;

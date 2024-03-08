@@ -136,11 +136,11 @@ public partial class MapControl : UIView, IMapControl
         Catch.Exceptions(() =>
         {
             base.TouchesBegan(touches, e);
-            var locations = GetTouchLocations(e, this);
+            var positions = GetScreenPositions(e, this);
 
-            if (locations.Length == 1)
+            if (positions.Length == 1)
             {
-                var position = locations[0];
+                var position = positions[0];
                 _tapGestureTracker.Restart(position);
                 _manipulationTracker.Restart([position]);
                 if (OnWidgetPointerPressed(position, false))
@@ -154,12 +154,12 @@ public partial class MapControl : UIView, IMapControl
         Catch.Exceptions(() =>
         {
             base.TouchesMoved(touches, e);
-            var locations = GetTouchLocations(e, this);
+            var positions = GetScreenPositions(e, this);
 
-            if (locations.Length == 1)
-                if (OnWidgetPointerMoved(locations[0], true, false))
+            if (positions.Length == 1)
+                if (OnWidgetPointerMoved(positions[0], true, false))
                     return;
-            _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
+            _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
         });
     }
 
@@ -168,11 +168,11 @@ public partial class MapControl : UIView, IMapControl
         Catch.Exceptions(() =>
         {
             base.TouchesEnded(touches, e);
-            var locations = GetTouchLocations(e, this);
+            var positions = GetScreenPositions(e, this);
 
-            if (locations.Length == 1)
+            if (positions.Length == 1)
             {
-                var position = locations[0];
+                var position = positions[0];
                 _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
                 {
                     if (OnWidgetTapped(p, c, false))
@@ -181,17 +181,17 @@ public partial class MapControl : UIView, IMapControl
                 });
             }
 
-            _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
+            _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
 
             Refresh();
         });
     }
 
-    private static ReadOnlySpan<MPoint> GetTouchLocations(UIEvent? uiEvent, UIView uiView)
+    private static ReadOnlySpan<ScreenPosition> GetScreenPositions(UIEvent? uiEvent, UIView uiView)
     {
         if (uiEvent is null)
-            return ReadOnlySpan<MPoint>.Empty;
-        return uiEvent.AllTouches.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new MPoint(p.X, p.Y)).ToArray();
+            return [];
+        return uiEvent.AllTouches.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new ScreenPosition(p.X, p.Y)).ToArray();
     }
 
     /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Mapsui.Manipulations;
 using Mapsui.Rendering;
 
 namespace Mapsui;
@@ -8,20 +9,20 @@ public class MapInfo : MapInfoBase
 {
     private readonly Task? _task;
 
-    public MapInfo(MPoint screenPosition,
+    public MapInfo(ScreenPosition screenPosition,
         MPoint worldPosition,
         double resolution) : base(screenPosition, worldPosition, resolution, new List<MapInfoRecord>())
     {
     }
 
-    public MapInfo(MPoint screenPosition,
+    public MapInfo(ScreenPosition screenPosition,
         MPoint worldPosition,
         double resolution,
         IEnumerable<MapInfoRecord> records) : base(screenPosition, worldPosition, resolution, records)
     {
     }
 
-    public MapInfo(MPoint screenPosition,
+    public MapInfo(ScreenPosition screenPosition,
         MPoint worldPosition,
         double resolution,
         IEnumerable<MapInfoRecord> records,

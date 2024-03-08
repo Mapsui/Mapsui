@@ -7,6 +7,7 @@
 #pragma warning disable IDE0005 // Using directive is unnecessary, there are differences between contexts
 
 using Mapsui.Layers;
+using Mapsui.Manipulations;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using System;
@@ -80,7 +81,7 @@ public sealed class RegressionMapControl : IMapControl
         throw new NotImplementedException();
     }
 
-    public MapInfo? GetMapInfo(MPoint screenPosition, int margin = 0)
+    public MapInfo? GetMapInfo(ScreenPosition? screenPosition, int margin = 0)
     {
         throw new NotImplementedException();
     }

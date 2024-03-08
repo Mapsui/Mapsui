@@ -1,11 +1,12 @@
-﻿
-namespace Mapsui.UI.Eto.Extensions;
+﻿namespace Mapsui.UI.Eto.Extensions;
 
 using global::Eto.Drawing;
+using Mapsui.Manipulations;
+
 public static class Extensions
 {
-    public static MPoint ToMapsui(this PointF point)
+    public static ScreenPosition ToScreenPosition(this PointF point)
     {
-        return new MPoint(point.X, point.Y);
+        return new ScreenPosition(point.X, point.Y);
     }
 }

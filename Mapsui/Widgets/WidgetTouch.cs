@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Mapsui.Manipulations;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Mapsui.Widgets;
@@ -14,7 +15,7 @@ public static class WidgetTouch
     /// Returns the Widgets in the list that contain the screenPosition
     /// within it's Envelope. Returns null if there are none.
     /// </returns>
-    public static IEnumerable<ITouchableWidget> GetTouchedWidgets(MPoint screenPosition, Map map)
+    public static IEnumerable<ITouchableWidget> GetTouchedWidgets(ScreenPosition screenPosition, Map map)
     {
         var touchedWidgets = new List<ITouchableWidget>();
 
@@ -26,7 +27,7 @@ public static class WidgetTouch
             // There are two possible TouchableAreaTypes
             if (widget.TouchableArea == TouchableAreaType.Viewport) // 1) The Viewport type Widget is always touched
                 touchedWidgets.Add(widget);
-            else if (widget.Envelope?.Contains(screenPosition) ?? false) // 2) For the Widget type the position needs to be within the envelope
+            else if (widget.Envelope?.Contains(screenPosition.X, screenPosition.Y) ?? false) // 2) For the Widget type the position needs to be within the envelope
                 touchedWidgets.Add(widget);
         }
 

@@ -1,4 +1,6 @@
-﻿namespace Mapsui.Widgets;
+﻿using Mapsui.Manipulations;
+
+namespace Mapsui.Widgets;
 
 public interface ITouchableWidget : IWidget
 {
@@ -14,7 +16,7 @@ public interface ITouchableWidget : IWidget
     /// <param name="position">Screen position</param>
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    bool OnTapped(Navigator navigator, MPoint position, WidgetEventArgs e);
+    bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e);
 
     /// <summary>
     /// Function, which handles the widget pointer pressed event
@@ -23,7 +25,7 @@ public interface ITouchableWidget : IWidget
     /// <param name="position">Screen position</param>
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    bool OnPointerPressed(Navigator navigator, MPoint position, WidgetEventArgs e);
+    bool OnPointerPressed(Navigator navigator, ScreenPosition position, WidgetEventArgs e);
 
     /// <summary>
     /// Function, which handles the widget pointer moved event
@@ -32,5 +34,5 @@ public interface ITouchableWidget : IWidget
     /// <param name="position">Screen position</param>
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    bool OnPointerMoved(Navigator navigator, MPoint position, WidgetEventArgs e);
+    bool OnPointerMoved(Navigator navigator, ScreenPosition position, WidgetEventArgs e);
 }
