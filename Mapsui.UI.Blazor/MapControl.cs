@@ -158,17 +158,6 @@ public partial class MapControl : ComponentBase, IMapControl
         action();
     }
 
-    protected void OnDblClick(MouseEventArgs e)
-    {
-        Catch.Exceptions(() =>
-        {
-            var location = e.ToLocation(_clientRect);
-            if (OnWidgetTapped(location, 2, GetShiftPressed()))
-                return;
-            OnInfo(CreateMapInfoEventArgs(location, location, 1));
-        });
-    }
-
     protected void OnMouseDown(MouseEventArgs e)
     {
         Catch.Exceptions(() =>
@@ -191,7 +180,6 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             var isHovering = !IsMouseButtonPressed(e);
             var position = e.ToLocation(_clientRect);
-            _tapGestureTracker.SetLastMovePosition(position);
 
             if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
                 return;
@@ -209,18 +197,18 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            var location = e.ToLocation(_clientRect);
+            var position = e.ToLocation(_clientRect);
 
-            _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, (p, c) =>
+            _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
             {
                 if (OnWidgetTapped(p, c, GetShiftPressed()))
                     return;
-                OnInfo(CreateMapInfoEventArgs(p, p, 1));
+                OnInfo(CreateMapInfoEventArgs(p, p, c));
 
             });
 
-            _manipulationTracker.Manipulate([e.ToLocation(_clientRect)], Map.Navigator.Manipulate);
-            RefreshData();
+            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
+            Refresh();
         });
     }
 
@@ -282,7 +270,7 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var locations = e.TargetTouches.ToTouchLocations(_clientRect);
-            _tapGestureTracker.SetLastMovePosition(locations[0]);
+            _tapGestureTracker.LastMovePosition = locations[0];
             if (OnWidgetPointerMoved(locations[0], true, GetShiftPressed()))
                 return;
             _manipulationTracker.Manipulate(locations.ToArray(), Map.Navigator.Manipulate);
@@ -293,7 +281,10 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, (p, c) =>
+            if (_tapGestureTracker.LastMovePosition == null)
+                return;
+
+            _tapGestureTracker.IfTap(_tapGestureTracker.LastMovePosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
             {
                 if (OnWidgetTapped(p, c, GetShiftPressed()))
                     return;

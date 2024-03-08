@@ -8,55 +8,26 @@ public class TapGestureTracker
     private readonly double _maxTapDuration = 0.5;
     private DateTime _tapStartTime;
     private MPoint? _tapStartPosition;
-    private MPoint? _tapEndPosition;
     private int _millisecondsToWaitForDoubleTap = 250;
     private bool _waitingForDoubleTap;
     private int _tapCount = 1;
+
+    // This fields was added as a workaround for that in Blazor the touch up does not have a location (or I do not know how to get it).
+    public MPoint? LastMovePosition { get; set; }
 
     public void IfTap(MPoint tapEndPosition, double maxTapDistance, Action<MPoint, int> onTap)
     {
         if (_tapStartPosition == null) return;
         if (tapEndPosition == null) return; // Note, this uses the tapEndPosition parameter.
 
-        IfTap(_tapStartPosition, tapEndPosition, maxTapDistance, onTap);
-    }
-
-    /// <summary>
-    /// Use this method in Blazor or other platforms where the mouse up position is unknown. Use this in combination 
-    /// with SetLastMovePosition.
-    /// </summary>
-    /// <param name="maxTapDistance"></param>
-    /// <param name="onTap"></param>
-    public void IfTap(double maxTapDistance, Action<MPoint, int> onTap)
-    {
-        if (_tapStartPosition == null) return;
-        if (_tapEndPosition == null) return; // Note, this uses the _tapEndPosition field.
-
-        IfTap(_tapStartPosition, _tapEndPosition, maxTapDistance, onTap);
-    }
-
-    private void IfTap(MPoint tapStartPosition, MPoint tapEndPosition, double maxTapDistance, Action<MPoint, int> onTap)
-    {
-        if (tapStartPosition == null) return;
-        if (tapEndPosition == null) return;
-
         var duration = (DateTime.Now - _tapStartTime).TotalSeconds;
-        var distance = tapEndPosition.Distance(tapStartPosition);
+        var distance = tapEndPosition.Distance(_tapStartPosition);
         var isTap = duration < _maxTapDuration && distance < maxTapDistance;
 
         if (_waitingForDoubleTap)
             _tapCount = 2;
         else if (isTap)
             _ = OnTapAfterDelayAsync(onTap, tapEndPosition); // Fire and forget
-    }
-
-    /// <summary>
-    /// Call this method during move if the platform does not provide the mouse up position.
-    /// </summary>
-    /// <param name="position"></param>
-    public void SetLastMovePosition(MPoint position)
-    {
-        _tapEndPosition = position;
     }
 
     public void SetDownPosition(MPoint position)
