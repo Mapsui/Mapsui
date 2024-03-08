@@ -137,14 +137,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var position = e.GetPosition(this).ToMapsui();
 
-        _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, position, (p) =>
+        _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, position, (p, c) =>
         {
-            if (OnWidgetTapped(p, 1, GetShiftPressed()))
+            if (OnWidgetTapped(p, c, GetShiftPressed()))
                 return;
             OnInfo(CreateMapInfoEventArgs(p, p, 1));
         });
 
-        RefreshData();
+        Refresh();
 
         _flingTracker.IfFling(1, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
         _flingTracker.RemoveId(1);
@@ -161,9 +161,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlTouchUp(object? sender, TouchEventArgs e)
     {
         var touchUpPosition = e.GetTouchPoint(this).Position.ToMapsui();
-        _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, touchUpPosition, (p) =>
+        _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, touchUpPosition, (p, c) =>
         {
-            if (OnWidgetTapped(p, 1, GetShiftPressed()))
+            if (OnWidgetTapped(p, c, GetShiftPressed()))
                 return;
             OnInfo(CreateMapInfoEventArgs(p, p, 1));
         });

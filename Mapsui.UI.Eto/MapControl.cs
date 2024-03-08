@@ -75,9 +75,9 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         SetCursorInDefaultMode();
         var mouseUpPosition = e.Location.ToMapsui();
-        _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, mouseUpPosition, (p) =>
+        _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, mouseUpPosition, (p, c) =>
         {
-            if (OnWidgetTapped(p, 1, GetShiftPressed()))
+            if (OnWidgetTapped(p, c, GetShiftPressed()))
                 return;
             OnInfo(CreateMapInfoEventArgs(p, p, 1));
         });

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Mapsui.Manipulations;
 
@@ -8,8 +9,11 @@ public class TapGestureTracker
     private DateTime _tapStartTime;
     private MPoint? _tapStartPosition;
     private MPoint? _tapEndPosition;
+    private int _millisecondsToWaitForDoubleTap = 300;
+    private bool _waitingForDoubleTap;
+    private int _tapCount = 1;
 
-    public void IfTap(double maxTapDistance, MPoint tapEndPosition, Action<MPoint> onTap)
+    public void IfTap(double maxTapDistance, MPoint tapEndPosition, Action<MPoint, int> onTap)
     {
         if (_tapStartPosition == null) return;
         if (tapEndPosition == null) return; // Note, this uses the tapEndPosition parameter.
@@ -23,7 +27,7 @@ public class TapGestureTracker
     /// </summary>
     /// <param name="maxTapDistance"></param>
     /// <param name="onTap"></param>
-    public void IfTap(double maxTapDistance, Action<MPoint> onTap)
+    public void IfTap(double maxTapDistance, Action<MPoint, int> onTap)
     {
         if (_tapStartPosition == null) return;
         if (_tapEndPosition == null) return; // Note, this uses the _tapEndPosition field.
@@ -31,7 +35,7 @@ public class TapGestureTracker
         IfTap(maxTapDistance, _tapStartPosition, _tapEndPosition, onTap);
     }
 
-    private void IfTap(double maxTapDistance, MPoint tapStartPosition, MPoint tapEndPosition, Action<MPoint> onTap)
+    private void IfTap(double maxTapDistance, MPoint tapStartPosition, MPoint tapEndPosition, Action<MPoint, int> onTap)
     {
         if (tapStartPosition == null) return;
         if (tapEndPosition == null) return;
@@ -40,7 +44,10 @@ public class TapGestureTracker
         var distance = tapEndPosition.Distance(tapStartPosition);
         var isTap = duration < _maxTapDuration && distance < maxTapDistance;
 
-        if (isTap) onTap(tapEndPosition);
+        if (_waitingForDoubleTap)
+            _tapCount = 2;
+        else if (isTap)
+            _ = OnTapAfterDelayAsync(onTap, tapEndPosition); // Fire and forget
     }
 
     /// <summary>
@@ -56,5 +63,16 @@ public class TapGestureTracker
     {
         _tapStartTime = DateTime.Now;
         _tapStartPosition = position;
+    }
+
+    private async Task OnTapAfterDelayAsync(Action<MPoint, int> onTap, MPoint position)
+    {
+        _waitingForDoubleTap = true;
+        await Task.Delay(_millisecondsToWaitForDoubleTap);
+
+        onTap(position, _tapCount); // The tap count could be set to 2 during waiting.
+
+        _waitingForDoubleTap = false;
+        _tapCount = 1;
     }
 }

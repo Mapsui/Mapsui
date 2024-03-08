@@ -215,9 +215,9 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             var location = e.ToLocation(_clientRect);
 
-            _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, (p) =>
+            _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, (p, c) =>
             {
-                if (OnWidgetTapped(p, 1, GetShiftPressed()))
+                if (OnWidgetTapped(p, c, GetShiftPressed()))
                     return;
                 OnInfo(CreateMapInfoEventArgs(p, p, 1));
 
@@ -297,11 +297,11 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, (position) =>
+            _tapGestureTracker.IfTap(MaxTapGestureMovement * PixelDensity, (p, c) =>
             {
-                if (OnWidgetTapped(position, 1, GetShiftPressed()))
+                if (OnWidgetTapped(p, c, GetShiftPressed()))
                     return;
-                OnInfo(CreateMapInfoEventArgs(position, position, 1));
+                OnInfo(CreateMapInfoEventArgs(p, p, c));
             });
 
             RefreshData();
