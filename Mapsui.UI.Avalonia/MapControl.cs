@@ -102,14 +102,14 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         var isHovering = IsHovering(e);
 
-        if (OnWidgetPointerMoved(e.GetPosition(this).ToMapsui(), !isHovering, _shiftPressed))
+        var position = e.GetPosition(this).ToMapsui();
+        if (OnWidgetPointerMoved(position, !isHovering, _shiftPressed))
             return;
 
         if (isHovering)
             return; // In case of hovering we just call the widget move event and ignore the event otherwise.
 
-        var pointerLocation = e.GetPosition(this).ToMapsui();
-        _pointerLocations[e.Pointer.Id] = pointerLocation;
+        _pointerLocations[e.Pointer.Id] = position;
 
         _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Manipulate);
 

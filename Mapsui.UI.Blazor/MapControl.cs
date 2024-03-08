@@ -270,9 +270,13 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var locations = e.TargetTouches.ToTouchLocations(_clientRect);
-            _tapGestureTracker.LastMovePosition = locations[0];
-            if (OnWidgetPointerMoved(locations[0], true, GetShiftPressed()))
-                return;
+            if (locations.Length == 1)
+            {
+                var position = locations[0];
+                _tapGestureTracker.LastMovePosition = position;
+                if (OnWidgetPointerMoved(position, true, GetShiftPressed()))
+                    return;
+            }
             _manipulationTracker.Manipulate(locations.ToArray(), Map.Navigator.Manipulate);
         });
     }

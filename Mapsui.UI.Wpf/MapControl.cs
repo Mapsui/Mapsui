@@ -179,13 +179,13 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseMove(object sender, MouseEventArgs e)
     {
         var isHovering = IsHovering(e);
-        var mousePosition = e.GetPosition(this).ToMapsui();
-        if (OnWidgetPointerMoved(mousePosition, !isHovering, GetShiftPressed()))
+        var position = e.GetPosition(this).ToMapsui();
+        if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
             return;
         if (isHovering)
             return;
-        _flingTracker.AddEvent(1, mousePosition, DateTime.Now.Ticks);
-        _manipulationTracker.Manipulate([mousePosition], Map.Navigator.Manipulate);
+        _flingTracker.AddEvent(1, position, DateTime.Now.Ticks);
+        _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
     }
 
     private double ViewportWidth => ActualWidth;
