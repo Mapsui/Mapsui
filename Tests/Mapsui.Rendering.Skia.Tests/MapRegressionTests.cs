@@ -63,7 +63,7 @@ public class MapRegressionTests
     public static object[] ExcludedSamples => _excludedSamples ??= [new AnimatedPointsSample()];
 
     [Test]
-    [Retry(5)]
+    [Retry(3)]
     [TestCaseSource(nameof(RegressionSamples))]
     public async Task TestSampleAsync(ISampleBase sample)
     {
@@ -131,7 +131,7 @@ public class MapRegressionTests
                     }
                     else
                     {
-                        ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.99));
+                        ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995));
                     }
                 }
                 else
