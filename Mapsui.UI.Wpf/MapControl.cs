@@ -57,12 +57,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         RefreshGraphics();
     }
 
-
-    /// <summary>
-    /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
-    /// </summary>
-    public int MaxTapGestureMovement { get; set; } = 8;
-
     private static Rectangle CreateSelectRectangle() => new()
     {
         Fill = new SolidColorBrush(Colors.Red),
@@ -125,11 +119,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         var mousePosition = e.GetPosition(this).ToMapsui();
-        _tapGestureTracker.SetDownPosition(mousePosition);
+        _tapGestureTracker.Restart(mousePosition);
         _manipulationTracker.Restart([mousePosition]);
         if (OnWidgetPointerPressed(mousePosition, GetShiftPressed()))
             return;
-        _flingTracker.Clear();
+        _flingTracker.Restart();
         CaptureMouse();
     }
 
@@ -137,14 +131,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var position = e.GetPosition(this).ToMapsui();
 
-        _tapGestureTracker.IfTap((p) =>
+        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
-            if (OnWidgetTapped(p, 1, GetShiftPressed()))
+            if (OnWidgetTapped(p, c, GetShiftPressed()))
                 return;
             OnInfo(CreateMapInfoEventArgs(p, p, 1));
-        }, MaxTapGestureMovement * PixelDensity, position);
+        });
 
-        RefreshData();
+        Refresh();
 
         _flingTracker.IfFling(1, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
         _flingTracker.RemoveId(1);
@@ -155,18 +149,18 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControl_TouchDown(object? sender, TouchEventArgs e)
     {
         var touchDownPosition = e.GetTouchPoint(this).Position.ToMapsui();
-        _tapGestureTracker.SetDownPosition(touchDownPosition);
+        _tapGestureTracker.Restart(touchDownPosition);
     }
 
     private void MapControlTouchUp(object? sender, TouchEventArgs e)
     {
         var touchUpPosition = e.GetTouchPoint(this).Position.ToMapsui();
-        _tapGestureTracker.IfTap((p) =>
+        _tapGestureTracker.IfTap(touchUpPosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
-            if (OnWidgetTapped(p, 1, GetShiftPressed()))
+            if (OnWidgetTapped(p, c, GetShiftPressed()))
                 return;
             OnInfo(CreateMapInfoEventArgs(p, p, 1));
-        }, MaxTapGestureMovement * PixelDensity, touchUpPosition);
+        });
     }
 
     public void OpenInBrowser(string url)
@@ -185,13 +179,13 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseMove(object sender, MouseEventArgs e)
     {
         var isHovering = IsHovering(e);
-        var mousePosition = e.GetPosition(this).ToMapsui();
-        if (OnWidgetPointerMoved(mousePosition, !isHovering, GetShiftPressed()))
+        var position = e.GetPosition(this).ToMapsui();
+        if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
             return;
         if (isHovering)
             return;
-        _flingTracker.AddEvent(1, mousePosition, DateTime.Now.Ticks);
-        _manipulationTracker.Manipulate([mousePosition], Map.Navigator.Manipulate);
+        _flingTracker.AddEvent(1, position, DateTime.Now.Ticks);
+        _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
     }
 
     private double ViewportWidth => ActualWidth;

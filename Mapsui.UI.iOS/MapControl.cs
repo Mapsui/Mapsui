@@ -12,8 +12,8 @@ public partial class MapControl : UIView, IMapControl
     private SKGLView? _glCanvas;
     private SKCanvasView? _canvas;
     private bool _canvasInitialized;
-    private MPoint? _pointerDownPosition;
     private readonly ManipulationTracker _manipulationTracker = new();
+    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl(CGRect frame)
         : base(frame)
@@ -108,38 +108,7 @@ public partial class MapControl : UIView, IMapControl
         MultipleTouchEnabled = true;
         UserInteractionEnabled = true;
 
-        var doubleTapGestureRecognizer = new UITapGestureRecognizer(OnDoubleTapped)
-        {
-            NumberOfTapsRequired = 2,
-            CancelsTouchesInView = false,
-        };
-        AddGestureRecognizer(doubleTapGestureRecognizer);
-
-        var tapGestureRecognizer = new UITapGestureRecognizer(OnSingleTapped)
-        {
-            NumberOfTapsRequired = 1,
-            CancelsTouchesInView = false,
-        };
-        tapGestureRecognizer.RequireGestureRecognizerToFail(doubleTapGestureRecognizer);
-        AddGestureRecognizer(tapGestureRecognizer);
-
         Map.Navigator.SetSize(ViewportWidth, ViewportHeight);
-    }
-
-    private void OnDoubleTapped(UITapGestureRecognizer gesture)
-    {
-        var position = GetScreenPosition(gesture.LocationInView(this));
-        if (OnWidgetTapped(position, 1, false))
-            return;
-        OnInfo(CreateMapInfoEventArgs(position, position, 2));
-    }
-
-    private void OnSingleTapped(UITapGestureRecognizer gesture)
-    {
-        var position = GetScreenPosition(gesture.LocationInView(this));
-        if (OnWidgetTapped(position, 2, false))
-            return;
-        OnInfo(CreateMapInfoEventArgs(position, position, 1));
     }
 
     private void OnPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
@@ -148,9 +117,7 @@ public partial class MapControl : UIView, IMapControl
             return;
 
         var canvas = args.Surface.Canvas;
-
         canvas.Scale(PixelDensity, PixelDensity);
-
         CommonDrawControl(canvas);
     }
 
@@ -160,9 +127,7 @@ public partial class MapControl : UIView, IMapControl
             return;
 
         var canvas = args.Surface.Canvas;
-
         canvas.Scale(PixelDensity, PixelDensity);
-
         CommonDrawControl(canvas);
     }
 
@@ -173,12 +138,12 @@ public partial class MapControl : UIView, IMapControl
             base.TouchesBegan(touches, e);
             var locations = GetTouchLocations(e, this);
 
-            _manipulationTracker.Restart(locations);
-
             if (locations.Length == 1)
             {
-                _pointerDownPosition = locations[0];
-                if (OnWidgetPointerPressed(_pointerDownPosition, false))
+                var position = locations[0];
+                _tapGestureTracker.Restart(position);
+                _manipulationTracker.Restart([position]);
+                if (OnWidgetPointerPressed(position, false))
                     return;
             }
         });
@@ -192,11 +157,8 @@ public partial class MapControl : UIView, IMapControl
             var locations = GetTouchLocations(e, this);
 
             if (locations.Length == 1)
-            {
                 if (OnWidgetPointerMoved(locations[0], true, false))
                     return;
-            }
-
             _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
         });
     }
@@ -207,6 +169,17 @@ public partial class MapControl : UIView, IMapControl
         {
             base.TouchesEnded(touches, e);
             var locations = GetTouchLocations(e, this);
+
+            if (locations.Length == 1)
+            {
+                var position = locations[0];
+                _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
+                {
+                    if (OnWidgetTapped(p, c, false))
+                        return;
+                    OnInfo(CreateMapInfoEventArgs(p, p, c));
+                });
+            }
 
             _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
 

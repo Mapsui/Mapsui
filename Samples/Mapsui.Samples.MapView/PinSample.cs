@@ -143,14 +143,5 @@ public class PinSample : IMapViewSample
     }
 
     public void Setup(IMapControl mapControl)
-    {
-        //OSM never displays....
-        //mapControl.Map = OsmSample.CreateMap();
-
-        //I like bing Hybrid
-        mapControl.Map = BingSample.CreateMap(BingHybrid.DefaultCache, BruTile.Predefined.KnownTileSource.BingHybrid);
-
-        ((UI.Maui.MapView)mapControl).UseDoubleTap = true;
-        //((MapView)mapControl).UniqueCallout = true;
-    }
+        => mapControl.Map = BingSample.CreateMap(BingHybrid.DefaultCache, BruTile.Predefined.KnownTileSource.BingHybrid);
 }

@@ -23,7 +23,6 @@ public class MyLocationSample : IMapViewSample
 
         mapView.MyLocationLayer.IsMoving = mapView.MyLocationEnabled;
         mapView.MyLocationEnabled = true;
-        mapView.UseDoubleTap = true;
 
         return false;
     }

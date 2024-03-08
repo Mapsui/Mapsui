@@ -52,7 +52,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         MyLocationFollow = false;
 
         IsClippedToBounds = true;
-        UseDoubleTap = false;
 
         MyLocationLayer = new Objects.MyLocationLayer(this) { Enabled = true };
         _mapCalloutLayer = new ObservableMemoryLayer<Callout>(f => f.Feature) { Name = _calloutLayerName, IsMapInfoLayer = true };

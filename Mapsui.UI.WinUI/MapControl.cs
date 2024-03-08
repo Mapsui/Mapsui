@@ -28,6 +28,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
     bool _shiftPressed;
+    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl()
     {
@@ -60,9 +61,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         PointerPressed += MapControl_PointerPressed;
         PointerMoved += MapControl_PointerMoved;
-
-        Tapped += OnSingleTapped;
-        DoubleTapped += OnDoubleTapped;
+        PointerReleased += MapControl_PointerReleased;
 
         PointerWheelChanged += MapControl_PointerWheelChanged;
 
@@ -98,6 +97,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControl_PointerPressed(object sender, PointerRoutedEventArgs e)
     {
         var position = e.GetCurrentPoint(this).Position.ToMapsui();
+        _tapGestureTracker.Restart(position);
         if (OnWidgetPointerPressed(position, e.KeyModifiers == VirtualKeyModifiers.Shift))
             return;
     }
@@ -115,27 +115,22 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             return;
     }
 
+    private void MapControl_PointerReleased(object sender, PointerRoutedEventArgs e)
+    {
+        var position = e.GetCurrentPoint(this).Position.ToMapsui();
+        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
+        {
+            if (OnWidgetTapped(p, c, _shiftPressed))
+                return;
+            OnInfo(CreateMapInfoEventArgs(p, p, c));
+        });
+    }
+
     private bool IsHovering(PointerRoutedEventArgs e)
     {
         if (e.Pointer.PointerDeviceType == PointerDeviceType.Touch)
             return false;
         return !e.GetCurrentPoint(this).Properties.IsLeftButtonPressed;
-    }
-
-    private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
-    {
-        var position = e.GetPosition(this).ToMapsui();
-        if (OnWidgetTapped(position, 1, _shiftPressed))
-            return;
-        OnInfo(CreateMapInfoEventArgs(position, position, 1));
-    }
-
-    private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-    {
-        var position = e.GetPosition(this).ToMapsui();
-        if (OnWidgetTapped(position, 2, _shiftPressed))
-            return;
-        OnInfo(CreateMapInfoEventArgs(position, position, 2));
     }
 
     private static Rectangle CreateSelectRectangle()

@@ -52,7 +52,5 @@ public class PolylineSample : IMapViewSample
     public void Setup(IMapControl mapControl)
     {
         mapControl.Map = OsmSample.CreateMap();
-
-        ((UI.Maui.MapView)mapControl).UseDoubleTap = false;
     }
 }
