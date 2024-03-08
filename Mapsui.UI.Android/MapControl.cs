@@ -129,35 +129,35 @@ public partial class MapControl : ViewGroup, IMapControl
         if (args.Event is null)
             return;
 
-        var locations = GetScreenPositions(args.Event, this, PixelDensity);
+        var positions = GetScreenPositions(args.Event, this, PixelDensity);
 
         switch (args.Event.Action)
         {
             case MotionEventActions.Down:
-                _manipulationTracker.Restart(locations);
-                if (locations.Length == 1)
+                _manipulationTracker.Restart(positions);
+                if (positions.Length == 1)
                 {
-                    _tapGestureTracker.Restart(locations[0]);
-                    if (OnWidgetPointerPressed(locations[0], false))
+                    _tapGestureTracker.Restart(positions[0]);
+                    if (OnWidgetPointerPressed(positions[0], false))
                         return;
                 }
                 break;
             case MotionEventActions.Move:
-                if (locations.Length == 1)
-                    if (OnWidgetPointerMoved(locations[0], true, false))
+                if (positions.Length == 1)
+                    if (OnWidgetPointerMoved(positions[0], true, false))
                         return;
-                _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
+                _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
                 break;
             case MotionEventActions.Up:
-                if (locations.Length == 1)
-                    _tapGestureTracker.IfTap(locations[0], MaxTapGestureMovement * PixelDensity, (p, c) =>
+                if (positions.Length == 1)
+                    _tapGestureTracker.IfTap(positions[0], MaxTapGestureMovement * PixelDensity, (p, c) =>
                     {
                         if (OnWidgetTapped(p, c, false))
                             return;
                         OnInfo(CreateMapInfoEventArgs(p, p, c));
 
                     });
-                _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
+                _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
                 Refresh();
                 break;
         }

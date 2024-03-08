@@ -16,7 +16,7 @@ public class FlingTracker
         _events = [];
     }
 
-    public void AddEvent(long id, ScreenPosition location, long ticks)
+    public void AddEvent(long id, ScreenPosition position, long ticks)
     {
         // Save event data
         if (!_events.TryGetValue(id, out var value))
@@ -25,7 +25,7 @@ public class FlingTracker
             _events.Add(id, value);
         }
 
-        value.Enqueue((location.X, location.Y, ticks));
+        value.Enqueue((position.X, position.Y, ticks));
 
         // Check, if we at the end of array
         if (value.Count > 2)

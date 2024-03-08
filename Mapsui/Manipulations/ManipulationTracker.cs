@@ -12,9 +12,10 @@ public class ManipulationTracker
     /// Call this method before the first Update call. The Update method tracks the start touch angle which is needed 
     /// to for rotation snapping and the previous touch state.
     /// </summary>
-    public void Restart(ReadOnlySpan<ScreenPosition> locations) => Restart(GetTouchState(locations));
+    public void Restart(ReadOnlySpan<ScreenPosition> positions) => Restart(GetTouchState(positions));
 
-    public void Manipulate(ReadOnlySpan<ScreenPosition> locations, Action<Manipulation> onManipulation) => Manipulate(GetTouchState(locations), onManipulation);
+    public void Manipulate(ReadOnlySpan<ScreenPosition> positions, Action<Manipulation> onManipulation)
+        => Manipulate(GetTouchState(positions), onManipulation);
 
     private Manipulation? GetManipulation()
     {
@@ -33,19 +34,19 @@ public class ManipulationTracker
         return new Manipulation(_touchState.Center, _previousTouchState.Center, scaleFactor, rotationChange, _totalRotationChange);
     }
 
-    private static TouchState? GetTouchState(ReadOnlySpan<ScreenPosition> locations)
+    private static TouchState? GetTouchState(ReadOnlySpan<ScreenPosition> positions)
     {
-        if (locations.Length == 0)
+        if (positions.Length == 0)
             return null;
 
-        if (locations.Length == 1)
-            return new TouchState(locations[0], null, null, locations.Length);
+        if (positions.Length == 1)
+            return new TouchState(positions[0], null, null, positions.Length);
 
-        var (centerX, centerY) = GetCenter(locations);
-        var radius = Distance(centerX, centerY, locations[0].X, locations[0].Y);
-        var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
+        var (centerX, centerY) = GetCenter(positions);
+        var radius = Distance(centerX, centerY, positions[0].X, positions[0].Y);
+        var angle = Math.Atan2(positions[1].Y - positions[0].Y, positions[1].X - positions[0].X) * 180.0 / Math.PI;
 
-        return new TouchState(new ScreenPosition(centerX, centerY), radius, angle, locations.Length);
+        return new TouchState(new ScreenPosition(centerX, centerY), radius, angle, positions.Length);
     }
 
     private static double Distance(double x1, double y1, double x2, double y2)

@@ -154,12 +154,12 @@ public partial class MapControl : UIView, IMapControl
         Catch.Exceptions(() =>
         {
             base.TouchesMoved(touches, e);
-            var locations = GetScreenPositions(e, this);
+            var positions = GetScreenPositions(e, this);
 
-            if (locations.Length == 1)
-                if (OnWidgetPointerMoved(locations[0], true, false))
+            if (positions.Length == 1)
+                if (OnWidgetPointerMoved(positions[0], true, false))
                     return;
-            _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
+            _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
         });
     }
 
@@ -168,11 +168,11 @@ public partial class MapControl : UIView, IMapControl
         Catch.Exceptions(() =>
         {
             base.TouchesEnded(touches, e);
-            var locations = GetScreenPositions(e, this);
+            var positions = GetScreenPositions(e, this);
 
-            if (locations.Length == 1)
+            if (positions.Length == 1)
             {
-                var position = locations[0];
+                var position = positions[0];
                 _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
                 {
                     if (OnWidgetTapped(p, c, false))
@@ -181,7 +181,7 @@ public partial class MapControl : UIView, IMapControl
                 });
             }
 
-            _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
+            _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
 
             Refresh();
         });

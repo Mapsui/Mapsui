@@ -54,18 +54,12 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     /// <summary> Clears the Touch State. Should only be called if the touch state seems out of sync 
     /// in a certain situation.</summary>
-    public void ClearTouchState()
-    {
-        // Todo: Figure out if we need to clear the entire state, or only remove a specific pointer.
-        _pointerPositions.Clear();
-    }
 
-
+    // Todo: Figure out if we need to clear the entire state, or only remove a specific pointer.
+    public void ClearTouchState() => _pointerPositions.Clear();
 
     private static bool GetShiftPressed(KeyModifiers keyModifiers)
-    {
-        return (keyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
-    }
+        => (keyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {

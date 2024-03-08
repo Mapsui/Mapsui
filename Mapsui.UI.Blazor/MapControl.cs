@@ -165,11 +165,11 @@ public partial class MapControl : ComponentBase, IMapControl
             // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
             _ = UpdateBoundingRectAsync();
 
-            var location = e.ToScreenPosition(_clientRect);
-            _tapGestureTracker.Restart(location);
+            var position = e.ToScreenPosition(_clientRect);
+            _tapGestureTracker.Restart(position);
             _manipulationTracker.Restart([]);
 
-            if (OnWidgetPointerPressed(location, GetShiftPressed()))
+            if (OnWidgetPointerPressed(position, GetShiftPressed()))
                 return;
         });
     }
@@ -257,11 +257,11 @@ public partial class MapControl : ComponentBase, IMapControl
             // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
             _ = UpdateBoundingRectAsync();
 
-            var locations = e.TargetTouches.ToScreenPositions(_clientRect);
-            if (OnWidgetPointerPressed(locations[0], GetShiftPressed()))
+            var positions = e.TargetTouches.ToScreenPositions(_clientRect);
+            if (OnWidgetPointerPressed(positions[0], GetShiftPressed()))
                 return;
-            _tapGestureTracker.Restart(locations[0]);
-            _manipulationTracker.Restart(locations);
+            _tapGestureTracker.Restart(positions[0]);
+            _manipulationTracker.Restart(positions);
         });
     }
 
@@ -269,15 +269,15 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            var locations = e.TargetTouches.ToScreenPositions(_clientRect);
-            if (locations.Length == 1)
+            var positions = e.TargetTouches.ToScreenPositions(_clientRect);
+            if (positions.Length == 1)
             {
-                var position = locations[0];
+                var position = positions[0];
                 _tapGestureTracker.LastMovePosition = position;
                 if (OnWidgetPointerMoved(position, true, GetShiftPressed()))
                     return;
             }
-            _manipulationTracker.Manipulate(locations.ToArray(), Map.Navigator.Manipulate);
+            _manipulationTracker.Manipulate(positions.ToArray(), Map.Navigator.Manipulate);
         });
     }
 
