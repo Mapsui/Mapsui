@@ -17,7 +17,6 @@ namespace Mapsui.UI.Wpf;
 
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
-    private readonly FlingTracker _flingTracker = new();
     private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl()
@@ -123,7 +122,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (OnMapPointerPressed([position]))
             return;
 
-        _flingTracker.Restart();
         CaptureMouse();
     }
 
@@ -131,7 +129,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var position = e.GetPosition(this).ToScreenPosition();
         OnMapPointerReleased([position]);
-        _flingTracker.FlingIfNeeded((vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
         ReleaseMouseCapture();
     }
 
@@ -171,10 +168,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             return;
 
         if (!isHovering)
-        {
-            _flingTracker.AddEvent(position, DateTime.Now.Ticks);
             _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
-        }
     }
 
     private double ViewportWidth => ActualWidth;

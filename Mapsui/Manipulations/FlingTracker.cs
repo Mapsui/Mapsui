@@ -41,6 +41,9 @@ public class FlingTracker
         var eventQueue = _events;
         var eventsArray = eventQueue.ToArray();
 
+        if (eventsArray.Length == 0)
+            return (0, 0);
+
         (_, _, var firstTime) = eventsArray[0];
 
         long finalTime = 0;
