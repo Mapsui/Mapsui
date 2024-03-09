@@ -613,6 +613,15 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
+    private bool OnMapPointerMoved(ReadOnlySpan<ScreenPosition> positions, bool isHovering = false)
+    {
+        if (positions.Length != 1)
+            return false;
+        if (OnWidgetPointerMoved(positions[0], !isHovering, GetShiftPressed()))
+            return true;
+        return false;
+    }
+
     private bool OnMapPointerReleased(ReadOnlySpan<ScreenPosition> positions)
     {
         if (positions.Length != 1)

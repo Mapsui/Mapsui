@@ -155,9 +155,9 @@ public partial class MapControl : UIView, IMapControl
             base.TouchesMoved(touches, e);
             var positions = GetScreenPositions(e, this);
 
-            if (positions.Length == 1)
-                if (OnWidgetPointerMoved(positions[0], true, false))
-                    return;
+            if (OnMapPointerMoved(positions))
+                return;
+
             _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
         });
     }

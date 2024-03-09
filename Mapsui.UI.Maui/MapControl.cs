@@ -198,17 +198,22 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             {
                 var isHovering = !e.InContact;
 
-                if (OnWidgetPointerMoved(position, !isHovering, false))
-                    return;
-
                 if (isHovering)
-                    return;
+                {
+                    // In case of hovering we need to send the current position which added to the _positions array
+                    if (OnMapPointerMoved([position], isHovering))
+                        return;
+                }
+                else
+                {
+                    _positions[e.Id] = position;
 
-                _positions[e.Id] = position;
+                    if (OnMapPointerMoved(_positions.Values.ToArray(), isHovering))
+                        return;
 
-                _flingTracker.AddEvent(position, DateTime.Now.Ticks);
-
-                _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
+                    _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
+                    _flingTracker.AddEvent(position, DateTime.Now.Ticks);
+                }
 
                 RefreshGraphics();
             }

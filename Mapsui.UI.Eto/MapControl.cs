@@ -55,13 +55,14 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnMouseMove(e);
 
-        var position = e.Location.ToScreenPosition();
         var isHovering = IsHovering(e);
-        if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
+        var position = e.Location.ToScreenPosition();
+
+        if (OnMapPointerMoved([position], isHovering))
             return;
-        if (isHovering)
-            return;
-        _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
+
+        if (!isHovering)
+            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
     }
 
     protected override void OnMouseUp(MouseEventArgs e)

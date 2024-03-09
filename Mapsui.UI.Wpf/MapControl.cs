@@ -164,12 +164,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         var isHovering = IsHovering(e);
         var position = e.GetPosition(this).ToScreenPosition();
 
-        if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
+        if (OnMapPointerMoved([position], isHovering))
             return;
-        if (isHovering)
-            return;
-        _flingTracker.AddEvent(position, DateTime.Now.Ticks);
-        _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
+
+        if (!isHovering)
+        {
+            _flingTracker.AddEvent(position, DateTime.Now.Ticks);
+            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
+        }
     }
 
     private double ViewportWidth => ActualWidth;

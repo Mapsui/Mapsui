@@ -97,7 +97,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var position = e.GetCurrentPoint(this).Position.ToScreenPosition();
         _tapGestureTracker.Restart(position);
-        if (OnWidgetPointerPressed(position, e.KeyModifiers == VirtualKeyModifiers.Shift))
+        if (OnWidgetPointerPressed(position, GetShiftPressed()))
             return;
     }
 
@@ -108,10 +108,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         // hover events.
         if (!IsHovering(e))
             return;
-
         var position = e.GetCurrentPoint(this).Position.ToScreenPosition();
-        if (OnWidgetPointerMoved(position, false, e.KeyModifiers == VirtualKeyModifiers.Shift))
+
+        if (OnMapPointerMoved([position], true)) // Only for hover events
             return;
+
+        RefreshGraphics();
     }
 
     private void MapControl_PointerReleased(object sender, PointerRoutedEventArgs e)
@@ -210,8 +212,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
         var manipulation = ToManipulation(e);
-        if (OnWidgetPointerMoved(manipulation.Center, true, false))
+
+        if (OnMapPointerMoved([manipulation.Center]))
             return;
+
         Map.Navigator.Manipulate(ToManipulation(e));
         RefreshGraphics();
     }

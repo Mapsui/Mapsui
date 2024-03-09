@@ -181,13 +181,11 @@ public partial class MapControl : ComponentBase, IMapControl
             var isHovering = !IsMouseButtonPressed(e);
             var position = e.ToScreenPosition(_clientRect);
 
-            if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
+            if (OnMapPointerMoved([position], isHovering))
                 return;
 
-            if (isHovering)
-                return;
-
-            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
+            if (!isHovering)
+                _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
         });
     }
 
@@ -261,12 +259,12 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             var positions = e.TargetTouches.ToScreenPositions(_clientRect);
             if (positions.Length == 1)
-            {
-                var position = positions[0];
-                _lastMovePosition = position;
-                if (OnWidgetPointerMoved(position, true, GetShiftPressed()))
-                    return;
-            }
+                _lastMovePosition = positions[0]; // Workaround for missing touch-up location.
+
+            if (OnMapPointerMoved(positions))
+                return;
+
+
             _manipulationTracker.Manipulate(positions.ToArray(), Map.Navigator.Manipulate);
         });
     }

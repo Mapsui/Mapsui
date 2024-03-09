@@ -142,9 +142,8 @@ public partial class MapControl : ViewGroup, IMapControl
                 }
                 break;
             case MotionEventActions.Move:
-                if (positions.Length == 1)
-                    if (OnWidgetPointerMoved(positions[0], true, false))
-                        return;
+                if (OnMapPointerMoved(positions, false))
+                    return;
                 _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
                 break;
             case MotionEventActions.Up:
