@@ -39,15 +39,13 @@ public partial class MapControl : SkiaDrawable, IMapControl
     protected override void OnMouseDown(MouseEventArgs e)
     {
         base.OnMouseDown(e);
-        if (IsHovering(e))
-            return;
 
         SetCursorInMoveMode();
         var position = e.Location.ToScreenPosition();
-        _manipulationTracker.Restart([position]);
-        _tapGestureTracker.Restart(position);
 
-        if (OnWidgetPointerPressed(position, GetShiftPressed()))
+        _manipulationTracker.Restart([position]);
+
+        if (OnMapPointerPressed([position]))
             return;
     }
 

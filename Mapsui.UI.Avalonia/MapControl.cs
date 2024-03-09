@@ -78,16 +78,15 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (IsHovering(e))
             return;
 
-        var tapPosition = e.GetPosition(this).ToScreenPosition();
-        _positions[e.Pointer.Id] = tapPosition;
+        var position = e.GetPosition(this).ToScreenPosition();
+        _positions[e.Pointer.Id] = position;
 
-        if (_positions.Count() == 1)
-        {
-            _tapGestureTracker.Restart(tapPosition);
+        if (_positions.Count == 1) // Not sure if this check is necessary.
             _manipulationTracker.Restart(_positions.Values.ToArray());
-            if (OnWidgetPointerPressed(tapPosition, GetShiftPressed()))
-                return;
-        }
+
+        if (OnMapPointerPressed(_positions.Values.ToArray()))
+            return;
+
         e.Pointer.Capture(this);
     }
 
@@ -114,9 +113,11 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
         _positions.TryRemove(e.Pointer.Id, out _);
-        e.Pointer.Capture(null);
         var position = e.GetPosition(this).ToScreenPosition();
+
         OnMapPointerReleased([position]);
+
+        e.Pointer.Capture(null);
     }
 
     private bool IsHovering(PointerEventArgs e)

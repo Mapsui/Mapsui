@@ -187,12 +187,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 _positions[e.Id] = position;
                 if (_positions.Count == 1)
                 {
-                    _tapGestureTracker.Restart(position);
                     _flingTracker.Restart();
                     _manipulationTracker.Restart(_positions.Values.ToArray());
-                    if (OnWidgetPointerPressed(position, false))
-                        return;
                 }
+
+                if (OnMapPointerPressed(_positions.Values.ToArray()))
+                    return;
             }
             else if (e.ActionType == SKTouchAction.Moved)
             {

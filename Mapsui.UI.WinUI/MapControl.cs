@@ -96,8 +96,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControl_PointerPressed(object sender, PointerRoutedEventArgs e)
     {
         var position = e.GetCurrentPoint(this).Position.ToScreenPosition();
-        _tapGestureTracker.Restart(position);
-        if (OnWidgetPointerPressed(position, GetShiftPressed()))
+
+        if (OnMapPointerPressed([position]))
             return;
     }
 

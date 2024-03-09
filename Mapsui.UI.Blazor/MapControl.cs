@@ -164,12 +164,11 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
             _ = UpdateBoundingRectAsync();
-
             var position = e.ToScreenPosition(_clientRect);
-            _tapGestureTracker.Restart(position);
-            _manipulationTracker.Restart([]);
 
-            if (OnWidgetPointerPressed(position, GetShiftPressed()))
+            _manipulationTracker.Restart([position]);
+
+            if (OnMapPointerPressed([position]))
                 return;
         });
     }
@@ -244,12 +243,11 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
             _ = UpdateBoundingRectAsync();
-
             var positions = e.TargetTouches.ToScreenPositions(_clientRect);
-            if (OnWidgetPointerPressed(positions[0], GetShiftPressed()))
-                return;
-            _tapGestureTracker.Restart(positions[0]);
             _manipulationTracker.Restart(positions);
+
+            if (OnMapPointerPressed(positions))
+                return;
         });
     }
 

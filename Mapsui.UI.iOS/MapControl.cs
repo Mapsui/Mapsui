@@ -138,13 +138,10 @@ public partial class MapControl : UIView, IMapControl
             var positions = GetScreenPositions(e, this);
 
             if (positions.Length == 1)
-            {
-                var position = positions[0];
-                _tapGestureTracker.Restart(position);
-                _manipulationTracker.Restart([position]);
-                if (OnWidgetPointerPressed(position, false))
-                    return;
-            }
+                _manipulationTracker.Restart(positions);
+
+            if (OnMapPointerPressed(positions))
+                return;
         });
     }
 

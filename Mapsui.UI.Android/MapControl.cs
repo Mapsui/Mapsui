@@ -118,11 +118,6 @@ public partial class MapControl : ViewGroup, IMapControl
         CommonDrawControl(canvas);
     }
 
-    public void OnFling(object? sender, GestureDetector.FlingEventArgs args)
-    {
-        Map.Navigator.Fling(args.VelocityX / 10, args.VelocityY / 10, 1000);
-    }
-
     public void MapControl_Touch(object? sender, TouchEventArgs args)
     {
         if (args.Event is null)
@@ -134,12 +129,8 @@ public partial class MapControl : ViewGroup, IMapControl
         {
             case MotionEventActions.Down:
                 _manipulationTracker.Restart(positions);
-                if (positions.Length == 1)
-                {
-                    _tapGestureTracker.Restart(positions[0]);
-                    if (OnWidgetPointerPressed(positions[0], false))
-                        return;
-                }
+                if (OnMapPointerPressed(positions))
+                    return;
                 break;
             case MotionEventActions.Move:
                 if (OnMapPointerMoved(positions, false))
