@@ -276,7 +276,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             {
 
                 // Get size of content
-                var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(callout.Content);
+                using var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(callout.Content);
 
                 switch (bitmapInfo?.Type)
                 {
