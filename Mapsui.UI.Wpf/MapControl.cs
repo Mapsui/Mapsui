@@ -130,7 +130,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var position = e.GetPosition(this).ToScreenPosition();
         OnMapPointerReleased([position]);
-        _flingTracker.IfFling(1, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
+        _flingTracker.FlingIfNeeded(1, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
         _flingTracker.RemoveId(1);
         Refresh();
         ReleaseMouseCapture();

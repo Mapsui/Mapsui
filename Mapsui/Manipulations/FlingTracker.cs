@@ -82,7 +82,7 @@ public class FlingTracker
         return (distanceX / totalTime, distanceY / totalTime);
     }
 
-    public void IfFling(long eventId, Action<double, double> onFling)
+    public void FlingIfNeeded(long eventId, Action<double, double> onFling)
     {
         var (velocityX, velocityY) = CalcVelocity(eventId, DateTime.Now.Ticks);
 

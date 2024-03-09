@@ -11,7 +11,7 @@ public class TapGestureTracker
     private readonly int _millisecondsToWaitForDoubleTap = 300;
     private bool _waitingForDoubleTap;
 
-    public void IfTap(ScreenPosition? tapEndPosition, double maxTapDistance, Action<ScreenPosition, int> onTap)
+    public void TapIfNeeded(ScreenPosition? tapEndPosition, double maxTapDistance, Action<ScreenPosition, int> onTap)
     {
         if (_tapStartPosition is null) return;
         if (tapEndPosition is null) return; // Note, this uses the tapEndPosition parameter.

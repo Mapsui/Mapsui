@@ -620,7 +620,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var handled = false;
         if (OnWidgetPointerReleased(positions[0], GetShiftPressed()))
             handled = true; // Set to handled but still handle tap in the next line
-        _tapGestureTracker.IfTap(positions[0], MaxTapGestureMovement * PixelDensity, (p, c) =>
+        _tapGestureTracker.TapIfNeeded(positions[0], MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
             handled = OnMapTapped(p, c);
         });
