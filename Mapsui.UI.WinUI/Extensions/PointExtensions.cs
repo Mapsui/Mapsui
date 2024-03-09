@@ -5,7 +5,7 @@ namespace Mapsui.UI.WinUI.Extensions;
 
 public static class PointExtensions
 {
-    public static ScreenPosition ScreenPosition(this Point point)
+    public static ScreenPosition ToScreenPosition(this Point point)
     {
         return new ScreenPosition(point.X, point.Y);
     }

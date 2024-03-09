@@ -11,10 +11,12 @@ public class TapGestureTracker
     private readonly int _millisecondsToWaitForDoubleTap = 300;
     private bool _waitingForDoubleTap;
 
-    public void IfTap(ScreenPosition? tapEndPosition, double maxTapDistance, Action<ScreenPosition, int> onTap)
+    /// <returns>Indicates if the event was handled. If it is handled the called should not do any further
+    /// handling. The implementation of the tap event determines if the event is handled.</returns>
+    public bool TapIfNeeded(ScreenPosition? tapEndPosition, double maxTapDistance, Func<ScreenPosition, int, bool> onTap)
     {
-        if (_tapStartPosition is null) return;
-        if (tapEndPosition is null) return; // Note, this uses the tapEndPosition parameter.
+        if (_tapStartPosition is null) return false;
+        if (tapEndPosition is null) return false; // Note, this uses the tapEndPosition parameter.
 
         var duration = (DateTime.Now - _tapStartTime).TotalSeconds;
         var distance = tapEndPosition.Value.Distance(_tapStartPosition.Value);
@@ -24,17 +26,19 @@ public class TapGestureTracker
         {
             if (_waitingForDoubleTap)
             {
-                onTap(tapEndPosition.Value, 2); // Within wait period so fire.
+                // Todo: For double tap we need to check against the previous tapEndPosition
+                return onTap(tapEndPosition.Value, 2); // Within wait period so fire.
             }
             else
             {
                 // This is the first tap. Fire right away and start waiting for second tap.
                 // If the second tap is within the wait period we should fire a double tap
                 // but not another single tap.
-                onTap(tapEndPosition.Value, 1);
                 _ = StartWaitingForSecondTapAsync(); // Fire and forget
+                return onTap(tapEndPosition.Value, 1);
             }
         }
+        return false;
     }
 
     private async Task StartWaitingForSecondTapAsync()

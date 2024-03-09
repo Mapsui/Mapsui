@@ -61,6 +61,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // Stopwatch for measuring drawing times
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
     private IRenderer _renderer = new MapRenderer();
+    private readonly TapGestureTracker _tapGestureTracker = new();
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
@@ -609,6 +610,45 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
                 return true;
         }
 
+        return false;
+    }
+
+    private bool OnMapPointerPressed(ReadOnlySpan<ScreenPosition> positions)
+    {
+        if (positions.Length != 1)
+            return false;
+
+        _tapGestureTracker.Restart(positions[0]);
+        return OnWidgetPointerPressed(positions[0], GetShiftPressed());
+    }
+
+    private bool OnMapPointerMoved(ReadOnlySpan<ScreenPosition> positions, bool isHovering = false)
+    {
+        if (positions.Length != 1)
+            return false;
+        if (OnWidgetPointerMoved(positions[0], !isHovering, GetShiftPressed()))
+            return true;
+        return false;
+    }
+
+    private bool OnMapPointerReleased(ReadOnlySpan<ScreenPosition> positions)
+    {
+        if (positions.Length != 1)
+            return false;        
+        var handled = false;
+        if (OnWidgetPointerReleased(positions[0], GetShiftPressed()))
+            handled = true; // Set to handled but still handle tap in the next line
+        if (_tapGestureTracker.TapIfNeeded(positions[0], MaxTapGestureMovement * PixelDensity, OnMapTapped))
+            handled = true;
+        Refresh();
+        return handled;
+    }
+
+    private bool OnMapTapped(ScreenPosition p, int c)
+    {
+        if (OnWidgetTapped(p, c, GetShiftPressed()))
+            return true;
+        OnInfo(CreateMapInfoEventArgs(p, p, 1));
         return false;
     }
 }

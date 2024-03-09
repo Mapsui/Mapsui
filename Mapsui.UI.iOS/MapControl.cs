@@ -13,7 +13,6 @@ public partial class MapControl : UIView, IMapControl
     private SKCanvasView? _canvas;
     private bool _canvasInitialized;
     private readonly ManipulationTracker _manipulationTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl(CGRect frame)
         : base(frame)
@@ -139,13 +138,10 @@ public partial class MapControl : UIView, IMapControl
             var positions = GetScreenPositions(e, this);
 
             if (positions.Length == 1)
-            {
-                var position = positions[0];
-                _tapGestureTracker.Restart(position);
-                _manipulationTracker.Restart([position]);
-                if (OnWidgetPointerPressed(position, false))
-                    return;
-            }
+                _manipulationTracker.Restart(positions);
+
+            if (OnMapPointerPressed(positions))
+                return;
         });
     }
 
@@ -156,9 +152,9 @@ public partial class MapControl : UIView, IMapControl
             base.TouchesMoved(touches, e);
             var positions = GetScreenPositions(e, this);
 
-            if (positions.Length == 1)
-                if (OnWidgetPointerMoved(positions[0], true, false))
-                    return;
+            if (OnMapPointerMoved(positions))
+                return;
+
             _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
         });
     }
@@ -169,23 +165,7 @@ public partial class MapControl : UIView, IMapControl
         {
             base.TouchesEnded(touches, e);
             var positions = GetScreenPositions(e, this);
-
-            if (positions.Length == 1)
-            {
-                var position = positions[0];
-
-                if (OnWidgetPointerReleased(position, false))
-                    return;
-                _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-                {
-                    if (OnWidgetTapped(p, c, false))
-                        return;
-                    OnInfo(CreateMapInfoEventArgs(p, p, c));
-                });
-            }
-
-            _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
-            Refresh();
+            OnMapPointerReleased(positions);
         });
     }
 
@@ -307,4 +287,6 @@ public partial class MapControl : UIView, IMapControl
             ? (double)_glCanvas!.ContentScaleFactor
             : (double)_canvas!.ContentScaleFactor;
     }
+
+    private static bool GetShiftPressed() => false;
 }

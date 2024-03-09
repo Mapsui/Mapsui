@@ -37,7 +37,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private Size _oldSize;
     private static List<WeakReference<MapControl>>? _listeners;
     private readonly ManipulationTracker _manipulationTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl()
     {
@@ -188,28 +187,33 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 _positions[e.Id] = position;
                 if (_positions.Count == 1)
                 {
-                    _tapGestureTracker.Restart(position);
                     _flingTracker.Restart();
                     _manipulationTracker.Restart(_positions.Values.ToArray());
-                    if (OnWidgetPointerPressed(position, false))
-                        return;
                 }
+
+                if (OnMapPointerPressed(_positions.Values.ToArray()))
+                    return;
             }
             else if (e.ActionType == SKTouchAction.Moved)
             {
                 var isHovering = !e.InContact;
 
-                if (OnWidgetPointerMoved(position, !isHovering, false))
-                    return;
-
                 if (isHovering)
-                    return;
+                {
+                    // In case of hovering we need to send the current position which added to the _positions array
+                    if (OnMapPointerMoved([position], isHovering))
+                        return;
+                }
+                else
+                {
+                    _positions[e.Id] = position;
 
-                _positions[e.Id] = position;
+                    if (OnMapPointerMoved(_positions.Values.ToArray(), isHovering))
+                        return;
 
-                _flingTracker.AddEvent(e.Id, position, DateTime.Now.Ticks);
-
-                _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
+                    _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
+                    _flingTracker.AddEvent(position, DateTime.Now.Ticks);
+                }
 
                 RefreshGraphics();
             }
@@ -219,20 +223,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 _positions.Remove(e.Id, out var releasedTouch);
 
                 if (UseFling)
-                    _flingTracker.IfFling(e.Id, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
-                _flingTracker.RemoveId(e.Id);
-
-                if (OnWidgetPointerReleased(position, false))
-                    return;
-                _tapGestureTracker.IfTap(releasedTouch!, MaxTapGestureMovement, (p, c) =>
-                {
-                    if (OnWidgetTapped(p, c, false))
-                        return;
-                    OnInfo(CreateMapInfoEventArgs(p, p, 1));
-                });
-
-                _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
-                Refresh();
+                    _flingTracker.FlingIfNeeded((vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
+                OnMapPointerReleased([position]);
             }
             else if (e.ActionType == SKTouchAction.Cancelled)
             {
@@ -367,4 +359,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             ? _glView!.CanvasSize.Width / Width
             : _canvasView!.CanvasSize.Width / Width;
     }
+
+    private static bool GetShiftPressed() => false;
 }
