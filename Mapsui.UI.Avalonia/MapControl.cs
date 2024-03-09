@@ -85,7 +85,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         {
             _tapGestureTracker.Restart(tapPosition);
             _manipulationTracker.Restart(_pointerPositions.Values.ToArray());
-            if (OnWidgetPointerPressed(tapPosition, _shiftPressed))
+            if (OnWidgetPointerPressed(tapPosition, GetShiftPressed()))
                 return;
         }
         e.Pointer.Capture(this);
@@ -96,7 +96,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         var isHovering = IsHovering(e);
 
         var position = e.GetPosition(this).ToScreenPosition();
-        if (OnWidgetPointerMoved(position, !isHovering, _shiftPressed))
+        if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
             return;
 
         if (isHovering)
@@ -248,4 +248,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         Dispose(true);
         GC.SuppressFinalize(this);
     }
+
+    private bool GetShiftPressed() => _shiftPressed;
 }

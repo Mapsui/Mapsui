@@ -319,4 +319,6 @@ public partial class MapControl : ViewGroup, IMapControl
     {
         return Resources?.DisplayMetrics?.Density ?? 0d;
     }
+
+    private static bool GetShiftPressed() => false;
 }

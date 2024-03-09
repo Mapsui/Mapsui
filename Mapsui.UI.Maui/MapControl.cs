@@ -366,4 +366,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             ? _glView!.CanvasSize.Width / Width
             : _canvasView!.CanvasSize.Width / Width;
     }
+
+    private static bool GetShiftPressed() => false;
 }

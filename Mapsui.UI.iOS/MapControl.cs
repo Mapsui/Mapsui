@@ -306,4 +306,6 @@ public partial class MapControl : UIView, IMapControl
             ? (double)_glCanvas!.ContentScaleFactor
             : (double)_canvas!.ContentScaleFactor;
     }
+
+    private static bool GetShiftPressed() => false;
 }

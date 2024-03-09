@@ -241,6 +241,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private double GetPixelDensity() => XamlRoot?.RasterizationScale ?? 1d;
 
+    private bool GetShiftPressed() => _shiftPressed;
+
 #if __ANDROID__
     protected override void Dispose(bool disposing)
 #elif __IOS__ || __MACOS__
