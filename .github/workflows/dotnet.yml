@@ -329,8 +329,8 @@ jobs:
     # Samples Uno
     - name: Mapsui.Samples.Uno.Mobile
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Mobile/Mapsui.Samples.Uno.Mobile.csproj
-    #- name: Mapsui.Samples.Uno.Skia.Gtk
-    #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Skia.Gtk/Mapsui.Samples.Uno.Skia.Gtk.csproj
+    - name: Mapsui.Samples.Uno.Skia.Gtk
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Skia.Gtk/Mapsui.Samples.Uno.Skia.Gtk.csproj
     - name: Mapsui.Samples.Uno.Skia.Linux.FrameBuffer
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Skia.Linux.FrameBuffer/Mapsui.Samples.Uno.Skia.Linux.FrameBuffer.csproj
     - name: Mapsui.Samples.Uno.Skia.Tizen
