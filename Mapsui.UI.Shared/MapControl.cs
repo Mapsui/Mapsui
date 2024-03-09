@@ -62,11 +62,18 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
     private IRenderer _renderer = new MapRenderer();
     private readonly TapGestureTracker _tapGestureTracker = new();
+    private readonly FlingTracker _flingTracker = new();
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
     /// </summary>
     public int MaxTapGestureMovement { get; set; } = 8;
+
+    /// <summary>
+    /// Use fling gesture to move the map. Default is true. Fling means that the map will continue to move for a 
+    /// short time after the user has lifted the finger.
+    /// </summary>
+    public bool UseFling { get; set; } = true;
 
     private void SharedConstructor()
     {
@@ -618,6 +625,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (positions.Length != 1)
             return false;
 
+        _flingTracker.Restart();
         _tapGestureTracker.Restart(positions[0]);
         return OnWidgetPointerPressed(positions[0], GetShiftPressed());
     }
@@ -628,6 +636,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             return false;
         if (OnWidgetPointerMoved(positions[0], !isHovering, GetShiftPressed()))
             return true;
+        if (!isHovering)
+            _flingTracker.AddEvent(positions[0], DateTime.Now.Ticks);
         return false;
     }
 
@@ -640,6 +650,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             handled = true; // Set to handled but still handle tap in the next line
         if (_tapGestureTracker.TapIfNeeded(positions[0], MaxTapGestureMovement * PixelDensity, OnMapTapped))
             handled = true;
+        if (UseFling)
+            _flingTracker.FlingIfNeeded((vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
         Refresh();
         return handled;
     }
