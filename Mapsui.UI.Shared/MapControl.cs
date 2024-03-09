@@ -606,13 +606,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool OnWidgetTapped(ScreenPosition position, int tapCount, bool shift)
+    private bool OnWidgetTapped(ScreenPosition position, TapType tapType, bool shift)
     {
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
         {
-            Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapCount: {tapCount} KeyState: {shift}");
-            var args = new WidgetEventArgs(position, tapCount, true, shift);
+            Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapCount: {tapType} KeyState: {shift}");
+            var args = new WidgetEventArgs(position, tapType, true, shift);
             if (widget.OnTapped(Map.Navigator, position, args))
                 return true;
         }
@@ -656,9 +656,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return handled;
     }
 
-    private bool OnMapTapped(ScreenPosition p, int c)
+    private bool OnMapTapped(ScreenPosition p, TapType tapType)
     {
-        if (OnWidgetTapped(p, c, GetShiftPressed()))
+        if (OnWidgetTapped(p, tapType, GetShiftPressed()))
             return true;
         OnInfo(CreateMapInfoEventArgs(p, p, 1));
         return false;
