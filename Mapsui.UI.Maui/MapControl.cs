@@ -218,8 +218,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 _positions.Remove(e.Id, out var releasedTouch);
 
                 if (UseFling)
-                    _flingTracker.FlingIfNeeded(e.Id, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
-                _flingTracker.RemoveId(e.Id);
+                    _flingTracker.FlingIfNeeded((vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
                 OnMapPointerReleased([position]);
             }
             else if (e.ActionType == SKTouchAction.Cancelled)
