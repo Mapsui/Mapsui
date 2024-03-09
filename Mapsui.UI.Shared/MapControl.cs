@@ -61,11 +61,19 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // Stopwatch for measuring drawing times
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
     private IRenderer _renderer = new MapRenderer();
+    private readonly TapGestureTracker _tapGestureTracker = new();
+    private readonly FlingTracker _flingTracker = new();
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
     /// </summary>
     public int MaxTapGestureMovement { get; set; } = 8;
+
+    /// <summary>
+    /// Use fling gesture to move the map. Default is true. Fling means that the map will continue to move for a 
+    /// short time after the user has lifted the finger.
+    /// </summary>
+    public bool UseFling { get; set; } = true;
 
     private void SharedConstructor()
     {
@@ -581,17 +589,74 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool OnWidgetTapped(ScreenPosition position, int tapCount, bool shift)
+    private bool OnWidgetPointerReleased(ScreenPosition position, bool shift)
     {
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
         foreach (var widget in touchedWidgets)
         {
-            Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapCount: {tapCount} KeyState: {shift}");
-            var args = new WidgetEventArgs(position, tapCount, true, shift);
+            var widgetArgs = new WidgetEventArgs(position, 0, true, shift);
+            if (widget.OnPointerReleased(Map.Navigator, position, widgetArgs))
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool OnWidgetTapped(ScreenPosition position, TapType tapType, bool shift)
+    {
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
+        foreach (var widget in touchedWidgets)
+        {
+            Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapCount: {tapType} KeyState: {shift}");
+            var args = new WidgetEventArgs(position, tapType, true, shift);
             if (widget.OnTapped(Map.Navigator, position, args))
                 return true;
         }
 
+        return false;
+    }
+
+    private bool OnMapPointerPressed(ReadOnlySpan<ScreenPosition> positions)
+    {
+        if (positions.Length != 1)
+            return false;
+
+        _flingTracker.Restart();
+        _tapGestureTracker.Restart(positions[0]);
+        return OnWidgetPointerPressed(positions[0], GetShiftPressed());
+    }
+
+    private bool OnMapPointerMoved(ReadOnlySpan<ScreenPosition> positions, bool isHovering = false)
+    {
+        if (positions.Length != 1)
+            return false;
+        if (OnWidgetPointerMoved(positions[0], !isHovering, GetShiftPressed()))
+            return true;
+        if (!isHovering)
+            _flingTracker.AddEvent(positions[0], DateTime.Now.Ticks);
+        return false;
+    }
+
+    private bool OnMapPointerReleased(ReadOnlySpan<ScreenPosition> positions)
+    {
+        if (positions.Length != 1)
+            return false;        
+        var handled = false;
+        if (OnWidgetPointerReleased(positions[0], GetShiftPressed()))
+            handled = true; // Set to handled but still handle tap in the next line
+        if (_tapGestureTracker.TapIfNeeded(positions[0], MaxTapGestureMovement * PixelDensity, OnMapTapped))
+            handled = true;
+        if (UseFling)
+            _flingTracker.FlingIfNeeded((vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
+        Refresh();
+        return handled;
+    }
+
+    private bool OnMapTapped(ScreenPosition p, TapType tapType)
+    {
+        if (OnWidgetTapped(p, tapType, GetShiftPressed()))
+            return true;
+        OnInfo(CreateMapInfoEventArgs(p, p, 1));
         return false;
     }
 }

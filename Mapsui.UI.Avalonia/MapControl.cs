@@ -21,10 +21,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 {
     private MapsuiCustomDrawOperation? _drawOperation;
     private double _mouseWheelPos = 0.0;
-    private readonly ConcurrentDictionary<long, ScreenPosition> _pointerPositions = new();
+    private readonly ConcurrentDictionary<long, ScreenPosition> _positions = new();
     private bool _shiftPressed;
     private readonly ManipulationTracker _manipulationTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl()
     {
@@ -56,7 +55,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     /// in a certain situation.</summary>
 
     // Todo: Figure out if we need to clear the entire state, or only remove a specific pointer.
-    public void ClearTouchState() => _pointerPositions.Clear();
+    public void ClearTouchState() => _positions.Clear();
 
     private static bool GetShiftPressed(KeyModifiers keyModifiers)
         => (keyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
@@ -79,16 +78,15 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (IsHovering(e))
             return;
 
-        var tapPosition = e.GetPosition(this).ToScreenPosition();
-        _pointerPositions[e.Pointer.Id] = tapPosition;
+        var position = e.GetPosition(this).ToScreenPosition();
+        _positions[e.Pointer.Id] = position;
 
-        if (_pointerPositions.Count() == 1)
-        {
-            _tapGestureTracker.Restart(tapPosition);
-            _manipulationTracker.Restart(_pointerPositions.Values.ToArray());
-            if (OnWidgetPointerPressed(tapPosition, _shiftPressed))
-                return;
-        }
+        if (_positions.Count == 1) // Not sure if this check is necessary.
+            _manipulationTracker.Restart(_positions.Values.ToArray());
+
+        if (OnMapPointerPressed(_positions.Values.ToArray()))
+            return;
+
         e.Pointer.Capture(this);
     }
 
@@ -97,34 +95,29 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         var isHovering = IsHovering(e);
 
         var position = e.GetPosition(this).ToScreenPosition();
-        if (OnWidgetPointerMoved(position, !isHovering, _shiftPressed))
-            return;
-
         if (isHovering)
-            return; // In case of hovering we just call the widget move event and ignore the event otherwise.
-
-        _pointerPositions[e.Pointer.Id] = position;
-
-        _manipulationTracker.Manipulate(_pointerPositions.Values.ToArray(), Map.Navigator.Manipulate);
-
+        {
+            if (OnMapPointerMoved([position], isHovering))
+                return;
+        }
+        else
+        {
+            _positions[e.Pointer.Id] = position;
+            if (OnMapPointerMoved(_positions.Values.ToArray(), isHovering))
+                return;
+            _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
+        }
         RefreshGraphics();
     }
 
     private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        _pointerPositions.TryRemove(e.Pointer.Id, out _);
-        e.Pointer.Capture(null);
-
+        _positions.TryRemove(e.Pointer.Id, out _);
         var position = e.GetPosition(this).ToScreenPosition();
-        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-        {
-            if (OnWidgetTapped(p, c, _shiftPressed))
-                return;
-            OnInfo(CreateMapInfoEventArgs(p, p, c));
-        });
-        _manipulationTracker.Manipulate(_pointerPositions.Values.ToArray(), Map.Navigator.Manipulate);
 
-        Refresh();
+        OnMapPointerReleased([position]);
+
+        e.Pointer.Capture(null);
     }
 
     private bool IsHovering(PointerEventArgs e)
@@ -246,4 +239,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         Dispose(true);
         GC.SuppressFinalize(this);
     }
+
+    private bool GetShiftPressed() => _shiftPressed;
 }

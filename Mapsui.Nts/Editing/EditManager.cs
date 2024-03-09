@@ -403,4 +403,9 @@ public class EditManager
         // The AddInfo should be reset when the geometry is closed.
         // _addInfo.Reset();
     }
+
+    internal bool IsManipulating()
+    {
+        return _dragInfo.Feature != null || _rotateInfo.Feature != null || _scaleInfo.Feature != null;
+    }
 }

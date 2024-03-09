@@ -23,7 +23,6 @@ public partial class MapControl : ViewGroup, IMapControl
     private Handler? _mainLooperHandler;
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
     private readonly ManipulationTracker _manipulationTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl(Context context, IAttributeSet attrs) :
         base(context, attrs)
@@ -119,11 +118,6 @@ public partial class MapControl : ViewGroup, IMapControl
         CommonDrawControl(canvas);
     }
 
-    public void OnFling(object? sender, GestureDetector.FlingEventArgs args)
-    {
-        Map.Navigator.Fling(args.VelocityX / 10, args.VelocityY / 10, 1000);
-    }
-
     public void MapControl_Touch(object? sender, TouchEventArgs args)
     {
         if (args.Event is null)
@@ -135,30 +129,18 @@ public partial class MapControl : ViewGroup, IMapControl
         {
             case MotionEventActions.Down:
                 _manipulationTracker.Restart(positions);
-                if (positions.Length == 1)
-                {
-                    _tapGestureTracker.Restart(positions[0]);
-                    if (OnWidgetPointerPressed(positions[0], false))
-                        return;
-                }
+                if (OnMapPointerPressed(positions))
+                    return;
                 break;
             case MotionEventActions.Move:
-                if (positions.Length == 1)
-                    if (OnWidgetPointerMoved(positions[0], true, false))
-                        return;
+                if (OnMapPointerMoved(positions, false))
+                    return;
                 _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
                 break;
             case MotionEventActions.Up:
-                if (positions.Length == 1)
-                    _tapGestureTracker.IfTap(positions[0], MaxTapGestureMovement * PixelDensity, (p, c) =>
-                    {
-                        if (OnWidgetTapped(p, c, false))
-                            return;
-                        OnInfo(CreateMapInfoEventArgs(p, p, c));
+                OnMapPointerReleased(positions);
 
-                    });
-                _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
-                Refresh();
+
                 break;
         }
     }
@@ -313,4 +295,6 @@ public partial class MapControl : ViewGroup, IMapControl
     {
         return Resources?.DisplayMetrics?.Density ?? 0d;
     }
+
+    private static bool GetShiftPressed() => false;
 }

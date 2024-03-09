@@ -17,8 +17,6 @@ namespace Mapsui.UI.Wpf;
 
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
-    private readonly FlingTracker _flingTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl()
@@ -118,49 +116,34 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        var mousePosition = e.GetPosition(this).ToScreenPosition();
-        _tapGestureTracker.Restart(mousePosition);
-        _manipulationTracker.Restart([mousePosition]);
-        if (OnWidgetPointerPressed(mousePosition, GetShiftPressed()))
+        var position = e.GetPosition(this).ToScreenPosition();
+        _manipulationTracker.Restart([position]);
+
+        if (OnMapPointerPressed([position]))
             return;
-        _flingTracker.Restart();
+
         CaptureMouse();
     }
 
     private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
         var position = e.GetPosition(this).ToScreenPosition();
-
-        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-        {
-            if (OnWidgetTapped(p, c, GetShiftPressed()))
-                return;
-            OnInfo(CreateMapInfoEventArgs(p, p, 1));
-        });
-
-        Refresh();
-
-        _flingTracker.IfFling(1, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
-        _flingTracker.RemoveId(1);
-
+        OnMapPointerReleased([position]);
         ReleaseMouseCapture();
     }
 
     private void MapControl_TouchDown(object? sender, TouchEventArgs e)
     {
-        var touchDownPosition = e.GetTouchPoint(this).Position.ToScreenPosition();
-        _tapGestureTracker.Restart(touchDownPosition);
+        var position = e.GetTouchPoint(this).Position.ToScreenPosition();
+        if (OnMapPointerPressed([position]))
+            return;
     }
 
     private void MapControlTouchUp(object? sender, TouchEventArgs e)
     {
-        var touchUpPosition = e.GetTouchPoint(this).Position.ToScreenPosition();
-        _tapGestureTracker.IfTap(touchUpPosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
-        {
-            if (OnWidgetTapped(p, c, GetShiftPressed()))
-                return;
-            OnInfo(CreateMapInfoEventArgs(p, p, 1));
-        });
+        var position = e.GetTouchPoint(this).Position.ToScreenPosition();
+        if (OnMapPointerReleased([position]))
+            return;
     }
 
     public void OpenInBrowser(string url)
@@ -180,12 +163,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var isHovering = IsHovering(e);
         var position = e.GetPosition(this).ToScreenPosition();
-        if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
+
+        if (OnMapPointerMoved([position], isHovering))
             return;
-        if (isHovering)
-            return;
-        _flingTracker.AddEvent(1, position, DateTime.Now.Ticks);
-        _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
+
+        if (!isHovering)
+            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
     }
 
     private double ViewportWidth => ActualWidth;

@@ -11,7 +11,6 @@ namespace Mapsui.UI.Eto;
 public partial class MapControl : SkiaDrawable, IMapControl
 {
     private Cursor _defaultCursor = Cursors.Default;
-    private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl()
@@ -40,15 +39,13 @@ public partial class MapControl : SkiaDrawable, IMapControl
     protected override void OnMouseDown(MouseEventArgs e)
     {
         base.OnMouseDown(e);
-        if (IsHovering(e))
-            return;
 
         SetCursorInMoveMode();
-        var mouseDownPosition = e.Location.ToScreenPosition();
-        _manipulationTracker.Restart([mouseDownPosition]);
-        _tapGestureTracker.Restart(mouseDownPosition);
+        var position = e.Location.ToScreenPosition();
 
-        if (OnWidgetPointerPressed(mouseDownPosition, GetShiftPressed()))
+        _manipulationTracker.Restart([position]);
+
+        if (OnMapPointerPressed([position]))
             return;
     }
 
@@ -56,13 +53,14 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnMouseMove(e);
 
-        var mouseMovePosition = e.Location.ToScreenPosition();
         var isHovering = IsHovering(e);
-        if (OnWidgetPointerMoved(mouseMovePosition, !isHovering, GetShiftPressed()))
+        var position = e.Location.ToScreenPosition();
+
+        if (OnMapPointerMoved([position], isHovering))
             return;
-        if (isHovering)
-            return;
-        _manipulationTracker.Manipulate([mouseMovePosition], Map.Navigator.Manipulate);
+
+        if (!isHovering)
+            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
     }
 
     protected override void OnMouseUp(MouseEventArgs e)
@@ -70,16 +68,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
         base.OnMouseUp(e);
 
         SetCursorInDefaultMode();
-        var mouseUpPosition = e.Location.ToScreenPosition();
-        _tapGestureTracker.IfTap(mouseUpPosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
-        {
-            if (OnWidgetTapped(p, c, GetShiftPressed()))
-                return;
-            OnInfo(CreateMapInfoEventArgs(p, p, 1));
-        });
-
-        _manipulationTracker.Manipulate([mouseUpPosition], Map.Navigator.Manipulate);
-        RefreshData();
+        var position = e.Location.ToScreenPosition();
+        OnMapPointerReleased([position]);
     }
 
     protected override void OnLoadComplete(EventArgs e)

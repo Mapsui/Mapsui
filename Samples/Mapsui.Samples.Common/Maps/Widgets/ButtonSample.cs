@@ -1,4 +1,5 @@
 ﻿using Mapsui.Extensions;
+using Mapsui.Manipulations;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
@@ -26,7 +27,7 @@ public class ButtonSample : ISample
 
         map.Widgets.Add(CreateButton("Tap me", VerticalAlignment.Top, HorizontalAlignment.Left, (s, a) =>
             {
-                if (a.TapCount != 1)
+                if (a.TapType == TapType.Double)
                     return false;
                 s.Text = $"Tapped {++_tapCount} times";
                 map.RefreshGraphics();
@@ -41,7 +42,7 @@ public class ButtonSample : ISample
             }));
         map.Widgets.Add(CreateButton("Double Tap me", VerticalAlignment.Bottom, HorizontalAlignment.Left, (s, a) =>
         {
-            if (a.TapCount != 2)
+            if (a.TapType == TapType.Single)
                 return false;
             s.Text = $"Double Tapped {++_doubleTapCount} times";
             map.RefreshGraphics();

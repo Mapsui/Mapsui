@@ -119,4 +119,9 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
     {
         return false;
     }
+
+    public bool OnPointerReleased(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    {
+        return false;
+    }
 }
