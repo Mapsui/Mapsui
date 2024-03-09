@@ -8,7 +8,7 @@
 	<PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net7.0;net7.0-android;net8.0;net8.0-android</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) or $([MSBuild]::IsOSPlatform('osx'))">$(TargetFrameworks);net7.0-ios;net8.0-ios</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);uap10.0.19041;net7.0-windows10.0.19041.0;net8.0-windows10.0.19041.0</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);uap10.0.19041</TargetFrameworks>
 		<!-- Ensures the .xr.xml files are generated in a proper layout folder -->
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 		<RootNamespace>Mapsui.UI.Uwp</RootNamespace>
@@ -37,7 +37,7 @@
     <PackageReference Include="Uno.UI" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0' or '$(TargetFramework)'=='net6.0' or '$(TargetFramework)'=='uap10.0.19041'">
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0' or '$(TargetFramework)'=='net6.0' or '$(TargetFramework)'!='uap10.0.19041'">
     <PackageReference Include="Uno.UI" VersionOverride="4.10.26" />
   </ItemGroup>
 
