@@ -23,7 +23,6 @@ public partial class MapControl : ViewGroup, IMapControl
     private Handler? _mainLooperHandler;
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
     private readonly ManipulationTracker _manipulationTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl(Context context, IAttributeSet attrs) :
         base(context, attrs)

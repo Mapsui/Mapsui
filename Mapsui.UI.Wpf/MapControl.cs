@@ -18,7 +18,6 @@ namespace Mapsui.UI.Wpf;
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
     private readonly FlingTracker _flingTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl()

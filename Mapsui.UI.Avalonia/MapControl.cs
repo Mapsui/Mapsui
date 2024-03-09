@@ -24,7 +24,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private readonly ConcurrentDictionary<long, ScreenPosition> _pointerPositions = new();
     private bool _shiftPressed;
     private readonly ManipulationTracker _manipulationTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl()
     {

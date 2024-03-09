@@ -28,7 +28,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
     bool _shiftPressed;
-    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl()
     {

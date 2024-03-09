@@ -37,7 +37,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private Size _oldSize;
     private static List<WeakReference<MapControl>>? _listeners;
     private readonly ManipulationTracker _manipulationTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl()
     {

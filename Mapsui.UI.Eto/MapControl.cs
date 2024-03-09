@@ -11,7 +11,6 @@ namespace Mapsui.UI.Eto;
 public partial class MapControl : SkiaDrawable, IMapControl
 {
     private Cursor _defaultCursor = Cursors.Default;
-    private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl()

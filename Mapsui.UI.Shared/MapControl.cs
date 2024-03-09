@@ -61,6 +61,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // Stopwatch for measuring drawing times
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
     private IRenderer _renderer = new MapRenderer();
+    private readonly TapGestureTracker _tapGestureTracker = new();
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.

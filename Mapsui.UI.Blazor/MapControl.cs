@@ -21,7 +21,6 @@ public partial class MapControl : ComponentBase, IMapControl
     private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
     private readonly ManipulationTracker _manipulationTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
     public ScreenPosition? _lastMovePosition; // Workaround for missing touch position on touch-up.
 
     [Inject]
