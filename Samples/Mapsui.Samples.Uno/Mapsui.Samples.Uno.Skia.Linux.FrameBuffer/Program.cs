@@ -1,5 +1,6 @@
 using System;
 using Uno.UI.Runtime.Skia;
+using Uno.UI.Runtime.Skia.Linux.FrameBuffer;
 
 namespace Mapsui.Samples.Uno;
 
