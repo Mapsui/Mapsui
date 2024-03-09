@@ -56,8 +56,10 @@
     <PackageVersion Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="[6.2.14,7.0.0)" />
     <PackageVersion Include="Microsoft.UI.Xaml" Version="[2.6.2,3.0.0)" />
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="[17.6.40,18.0.0)" />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="[1.5.240227000,2.0.0)"  />
     <PackageVersion Include="Microsoft.Windows.CsWin32" Version="[0.1.588-beta,1.0.0)" />
     <PackageVersion Include="Microsoft.Windows.CsWinRT" Version="[2.0.0,3.0.0)" />
+    <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26031-preview" />
     <PackageVersion Include="NetTopologySuite" Version="[2.5.0,3.0.0)" />
     <PackageVersion Include="NetTopologySuite.IO.GeoJSON4STJ" Version="[4.0.0,5.0.0)" />
     <PackageVersion Include="Newtonsoft.Json" Version="[13.0.2,14.0.0)" />
@@ -89,15 +91,15 @@
     <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="[1.6.0,2.0.0)" />
     <PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="[4.0.1,5.0.0)" />
     <PackageVersion Include="Uno.UniversalImageLoader" Version="[1.9.36,2.0.0)" />
-    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="[5.0.48,6.0.0)" />
+    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="[5.1.31,6.0.0)" />
     <PackageVersion Include="Uno.Resizetizer" Version="[1.0.4, 2.0.0)" />
     <PackageVersion Include="Uno.Wasm.Bootstrap" Version="[8.0.0,9.0.0)" />
     <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="[8.0.0,9.0.0)" />
-    <PackageVersion Include="Uno.WinUI" Version="[5.0.48,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="[5.0.48,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="[5.0.48,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Wpf" Version="[5.0.48,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.RemoteControl" Version="[5.0.48,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.WebAssembly" Version="[5.0.48,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI" Version="[5.1.31,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="[5.1.31,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="[5.1.31,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.Skia.Wpf" Version="[5.1.31,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.RemoteControl" Version="[5.1.31,6.0.0)" />
+    <PackageVersion Include="Uno.WinUI.WebAssembly" Version="[5.1.31,6.0.0)" />
   </ItemGroup>
 </Project>
