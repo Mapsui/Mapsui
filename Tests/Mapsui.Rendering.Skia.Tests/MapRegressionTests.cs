@@ -141,6 +141,8 @@ public class MapRegressionTests
                     ClassicAssert.True(true);
                 }
             }
+
+            map?.Layers.Clear();
         }
         finally
         {
