@@ -168,23 +168,7 @@ public partial class MapControl : UIView, IMapControl
         {
             base.TouchesEnded(touches, e);
             var positions = GetScreenPositions(e, this);
-
-            if (positions.Length == 1)
-            {
-                var position = positions[0];
-
-                if (OnWidgetPointerReleased(position, false))
-                    return;
-                _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-                {
-                    if (OnWidgetTapped(p, c, false))
-                        return;
-                    OnInfo(CreateMapInfoEventArgs(p, p, c));
-                });
-            }
-
-            _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
-            Refresh();
+            OnMapPointerReleased(positions);
         });
     }
 

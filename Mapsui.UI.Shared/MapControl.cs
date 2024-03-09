@@ -612,4 +612,27 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         return false;
     }
+
+    private bool OnMapPointerReleased(ReadOnlySpan<ScreenPosition> positions)
+    {
+        if (positions.Length != 1)
+            return false;        
+        var handled = false;
+        if (OnWidgetPointerReleased(positions[0], GetShiftPressed()))
+            handled = true; // Set to handled but still handle tap in the next line
+        _tapGestureTracker.IfTap(positions[0], MaxTapGestureMovement * PixelDensity, (p, c) =>
+        {
+            handled = OnMapTapped(p, c);
+        });
+        Refresh();
+        return handled;
+    }
+
+    private bool OnMapTapped(ScreenPosition p, int c)
+    {
+        if (OnWidgetTapped(p, c, GetShiftPressed()))
+            return true;
+        OnInfo(CreateMapInfoEventArgs(p, p, 1));
+        return false;
+    }
 }

@@ -220,18 +220,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 if (UseFling)
                     _flingTracker.IfFling(e.Id, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
                 _flingTracker.RemoveId(e.Id);
-
-                if (OnWidgetPointerReleased(position, false))
-                    return;
-                _tapGestureTracker.IfTap(releasedTouch!, MaxTapGestureMovement, (p, c) =>
-                {
-                    if (OnWidgetTapped(p, c, false))
-                        return;
-                    OnInfo(CreateMapInfoEventArgs(p, p, 1));
-                });
-
-                _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
-                Refresh();
+                OnMapPointerReleased([position]);
             }
             else if (e.ActionType == SKTouchAction.Cancelled)
             {

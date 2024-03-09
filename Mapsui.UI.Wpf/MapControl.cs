@@ -129,22 +129,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
         var position = e.GetPosition(this).ToScreenPosition();
-
-        if (OnWidgetPointerReleased(position, false))
-            return;
-        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-        {
-            if (OnWidgetTapped(p, c, GetShiftPressed()))
-                return;
-            OnInfo(CreateMapInfoEventArgs(p, p, 1));
-        });
-
+        OnMapPointerReleased([position]);
         _flingTracker.IfFling(1, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
         _flingTracker.RemoveId(1);
-
         Refresh();
         ReleaseMouseCapture();
-
     }
 
     private void MapControl_TouchDown(object? sender, TouchEventArgs e)
@@ -156,15 +145,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlTouchUp(object? sender, TouchEventArgs e)
     {
         var position = e.GetTouchPoint(this).Position.ToScreenPosition();
-
-        if (OnWidgetPointerReleased(position, false))
-            return;
-        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-        {
-            if (OnWidgetTapped(p, c, GetShiftPressed()))
-                return;
-            OnInfo(CreateMapInfoEventArgs(p, p, 1));
-        });
+        OnMapPointerReleased([position]);
     }
 
     public void OpenInBrowser(string url)

@@ -95,7 +95,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerPressed(object sender, PointerRoutedEventArgs e)
     {
-        var position = e.GetCurrentPoint(this).Position.ScreenPosition();
+        var position = e.GetCurrentPoint(this).Position.ToScreenPosition();
         _tapGestureTracker.Restart(position);
         if (OnWidgetPointerPressed(position, e.KeyModifiers == VirtualKeyModifiers.Shift))
             return;
@@ -109,23 +109,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (!IsHovering(e))
             return;
 
-        var position = e.GetCurrentPoint(this).Position.ScreenPosition();
+        var position = e.GetCurrentPoint(this).Position.ToScreenPosition();
         if (OnWidgetPointerMoved(position, false, e.KeyModifiers == VirtualKeyModifiers.Shift))
             return;
     }
 
     private void MapControl_PointerReleased(object sender, PointerRoutedEventArgs e)
     {
-        var position = e.GetCurrentPoint(this).Position.ScreenPosition();
-
-        if (OnWidgetPointerReleased(position, false))
-            return;
-        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-        {
-            if (OnWidgetTapped(p, c, _shiftPressed))
-                return;
-            OnInfo(CreateMapInfoEventArgs(p, p, c));
-        });
+        var position = e.GetCurrentPoint(this).Position.ToScreenPosition();
+        OnMapPointerReleased([position]);
     }
 
     private bool IsHovering(PointerRoutedEventArgs e)
@@ -226,7 +218,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private Manipulation ToManipulation(ManipulationDeltaRoutedEventArgs e)
     {
-        var previousCenter = TransformToVisual(this).Inverse.TransformPoint(e.Position).ScreenPosition();
+        var previousCenter = TransformToVisual(this).Inverse.TransformPoint(e.Position).ToScreenPosition();
         var center = previousCenter.Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
         return new Manipulation(center, previousCenter, e.Delta.Scale, e.Delta.Rotation, e.Cumulative.Rotation);
     }

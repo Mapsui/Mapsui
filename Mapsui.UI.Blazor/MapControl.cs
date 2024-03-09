@@ -198,18 +198,7 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var position = e.ToScreenPosition(_clientRect);
-
-            if (OnWidgetPointerReleased(position, false))
-                return;
-            _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-            {
-                if (OnWidgetTapped(p, c, GetShiftPressed()))
-                    return;
-                OnInfo(CreateMapInfoEventArgs(p, p, c));
-            });
-
-            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
-            Refresh();
+            OnMapPointerReleased([position]);
         });
     }
 
@@ -289,17 +278,7 @@ public partial class MapControl : ComponentBase, IMapControl
             if (_lastMovePosition is null)
                 return;
             var position = _lastMovePosition.Value;
-
-            if (OnWidgetPointerReleased(position, false))
-                return;
-            _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-            {
-                if (OnWidgetTapped(p, c, GetShiftPressed()))
-                    return;
-                OnInfo(CreateMapInfoEventArgs(p, p, c));
-            });
-            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
-            Refresh();
+            OnMapPointerReleased([position]);
         });
     }
 }

@@ -70,18 +70,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         SetCursorInDefaultMode();
         var position = e.Location.ToScreenPosition();
-
-        if (OnWidgetPointerReleased(position, false))
-            return;
-        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-        {
-            if (OnWidgetTapped(p, c, GetShiftPressed()))
-                return;
-            OnInfo(CreateMapInfoEventArgs(p, p, 1));
-        });
-
-        _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
-        Refresh();
+        OnMapPointerReleased([position]);
     }
 
     protected override void OnLoadComplete(EventArgs e)
