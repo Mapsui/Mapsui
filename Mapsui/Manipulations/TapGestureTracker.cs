@@ -26,6 +26,7 @@ public class TapGestureTracker
         {
             if (_waitingForDoubleTap)
             {
+                // Todo: For double tap we need to check against the previous tapEndPosition
                 return onTap(tapEndPosition.Value, 2); // Within wait period so fire.
             }
             else
