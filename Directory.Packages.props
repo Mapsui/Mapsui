@@ -98,7 +98,7 @@
     <PackageVersion Include="sqlite-net-pcl" Version="[1.8.116,2.0.0)" />
     <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="[2.1.6,3.0.0)" />
     <PackageVersion Include="Svg.Skia" Version="[1.0.0.3,2.0.0)" />
-    <PackageVersion Include="System.Drawing.Common" Version="8.0.0" />
+    <PackageVersion Include="System.Drawing.Common" Version="8.0.2" />
     <PackageVersion Include="System.Text.Encoding.CodePages" Version="8.0.0" />
     <PackageVersion Include="System.Memory" Version="[4.5.5,5.0.0)" />
     <PackageVersion Include="Topten.RichTextKit" Version="[0.4.166,1.0.0)" />
@@ -116,8 +116,8 @@
     <PackageVersion Include="Uno.UI.Skia.Tizen" Version="[5.1.31,6.0.0)" />
     <PackageVersion Include="Uno.UI.Skia.Wpf" Version="[5.1.31,6.0.0)" />
     <PackageVersion Include="Uno.UI.WebAssembly" Version="[5.1.31,6.0.0)" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap" Version="[7.0.24,8.0.0)" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="[7.0.24,8.0.0)" />
+    <PackageVersion Include="Uno.Wasm.Bootstrap" Version="[8.0.9,9.0.0)" />
+    <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="[8.0.9,9.0.0)" />
     <PackageVersion Include="Uno.WinUI" Version="5.1.31" />
     <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="5.1.31" />
     <PackageVersion Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="5.1.31" />
