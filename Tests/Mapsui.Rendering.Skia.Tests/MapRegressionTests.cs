@@ -203,15 +203,6 @@ public class MapRegressionTests
         var fetchInfo = new FetchInfo(mapControl.Map.Navigator.Viewport.ToSection(), mapControl.Map.CRS);
         mapControl.Map.RefreshData(fetchInfo);
 
-        // TODO: MapView should be available for all Targets
-        ////if (sample is IFormsSample formsSample)
-        ////{
-        ////    var mReadOnlyPoint = mapControl.Viewport.Center;
-        ////    var position = new Position(mReadOnlyPoint.X, mReadOnlyPoint.Y);
-        ////    var eventArgs = new MapClickedEventArgs(position, 1);
-        ////    formsSample.OnClick(mapControl, eventArgs);
-        ////}
-
         return mapControl;
     }
 

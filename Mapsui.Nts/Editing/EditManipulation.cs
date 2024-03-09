@@ -35,7 +35,7 @@ public class EditManipulation
 
                 if (editManager.EditMode == EditMode.Modify)
                 {
-                    if (e.Shift || e.TapCount == 2)
+                    if (e.Shift || e.TapType == TapType.Double)
                     {
                         return editManager.TryDeleteCoordinate(
                             mapControl.GetMapInfo(screenPosition, editManager.VertexRadius), editManager.VertexRadius);
@@ -45,7 +45,7 @@ public class EditManipulation
                 }
                 else if (editManager.EditMode == EditMode.DrawingPolygon || editManager.EditMode == EditMode.DrawingLine)
                 {
-                    if (e.Shift || e.TapCount == 2)
+                    if (e.Shift || e.TapType == TapType.Double)
                     {
                         return editManager.EndEdit();
                     }

@@ -3,6 +3,12 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Manipulations;
 
+public enum TapType
+{
+    Single,
+    Double
+}
+
 public class TapGestureTracker
 {
     private readonly double _maxTapDuration = 0.5;
@@ -13,7 +19,7 @@ public class TapGestureTracker
 
     /// <returns>Indicates if the event was handled. If it is handled the called should not do any further
     /// handling. The implementation of the tap event determines if the event is handled.</returns>
-    public bool TapIfNeeded(ScreenPosition? tapEndPosition, double maxTapDistance, Func<ScreenPosition, int, bool> onTap)
+    public bool TapIfNeeded(ScreenPosition? tapEndPosition, double maxTapDistance, Func<ScreenPosition, TapType, bool> onTap)
     {
         if (_tapStartPosition is null) return false;
         if (tapEndPosition is null) return false; // Note, this uses the tapEndPosition parameter.
@@ -27,7 +33,7 @@ public class TapGestureTracker
             if (_waitingForDoubleTap)
             {
                 // Todo: For double tap we need to check against the previous tapEndPosition
-                return onTap(tapEndPosition.Value, 2); // Within wait period so fire.
+                return onTap(tapEndPosition.Value, TapType.Double); // Within wait period so fire.
             }
             else
             {
@@ -35,7 +41,7 @@ public class TapGestureTracker
                 // If the second tap is within the wait period we should fire a double tap
                 // but not another single tap.
                 _ = StartWaitingForSecondTapAsync(); // Fire and forget
-                return onTap(tapEndPosition.Value, 1);
+                return onTap(tapEndPosition.Value, TapType.Single);
             }
         }
         return false;
