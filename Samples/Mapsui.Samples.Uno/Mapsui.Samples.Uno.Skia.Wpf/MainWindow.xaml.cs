@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Uno.UI.Runtime.Skia.Wpf;
 
 namespace Mapsui.Samples.Uno.WPF.Host;
 
@@ -24,6 +25,6 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        root.Content = new global::Uno.UI.Skia.Platform.WpfHost(Dispatcher, () => new Uno.App());
+        root.Content = new WpfHost(Dispatcher, () => new Uno.App());
     }
 }
