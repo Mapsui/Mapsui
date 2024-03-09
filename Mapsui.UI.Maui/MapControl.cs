@@ -206,7 +206,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                 _positions[e.Id] = position;
 
-                _flingTracker.AddEvent(e.Id, position, DateTime.Now.Ticks);
+                _flingTracker.AddEvent(position, DateTime.Now.Ticks);
 
                 _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
 

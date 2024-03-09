@@ -16,7 +16,7 @@ public class FlingTracker
         _events = [];
     }
 
-    public void AddEvent(long id, ScreenPosition position, long ticks)
+    public void AddEvent(ScreenPosition position, long ticks)
     {
         _events.Enqueue((position.X, position.Y, ticks));
 

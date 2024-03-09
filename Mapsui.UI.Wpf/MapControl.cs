@@ -168,7 +168,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             return;
         if (isHovering)
             return;
-        _flingTracker.AddEvent(1, position, DateTime.Now.Ticks);
+        _flingTracker.AddEvent(position, DateTime.Now.Ticks);
         _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
     }
 
