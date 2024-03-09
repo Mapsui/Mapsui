@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System.ComponentModel;
 using Mapsui.Fetcher;
 using Mapsui.UI;

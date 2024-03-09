@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Mapsui.Fetcher;
+﻿using Mapsui.Fetcher;
 using Mapsui.UI;
 
 namespace Mapsui.Tests.UI;

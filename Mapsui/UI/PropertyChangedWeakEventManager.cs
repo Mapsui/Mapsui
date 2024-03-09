@@ -1,5 +1,4 @@
-﻿using Mapsui.Fetcher;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Mapsui.UI;
 

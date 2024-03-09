@@ -11,7 +11,6 @@ using Mapsui.Widgets;
 using System.ComponentModel;
 using System.Net;
 using System.Runtime.CompilerServices;
-using Mapsui.Disposing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +28,7 @@ namespace Mapsui.UI.iOS;
 #elif __WINUI__
 namespace Mapsui.UI.WinUI;
 #elif __AVALONIA__
-using Avalonia;
+
 namespace Mapsui.UI.Avalonia;
 #elif __ETO_FORMS__
 namespace Mapsui.UI.Eto;
