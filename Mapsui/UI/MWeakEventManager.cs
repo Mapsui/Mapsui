@@ -6,14 +6,14 @@ namespace Mapsui.UI;
 public abstract class MWeakEventManager
 {
     protected readonly Dictionary<object, List<WeakReference>> EventHandlers = new();
-    
+
     public void AddListener(object source, Delegate? handler)
     {
         if (!EventHandlers.TryGetValue(source, out var handlers))
         {
             EventHandlers[source] = handlers = new List<WeakReference>();
         }
-        
+
         handlers.Add(new WeakReference(handler));
     }
 

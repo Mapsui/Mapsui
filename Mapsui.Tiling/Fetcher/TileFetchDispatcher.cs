@@ -68,7 +68,7 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
         }
         remove => _eventMangerDataChanged?.RemoveListener(this, value);
     }
-    
+
     public int NumberTilesNeeded { get; private set; }
 
     public static int MaxTilesInOneRequest { get; set; } = 128;

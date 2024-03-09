@@ -8,7 +8,7 @@ namespace Mapsui.Tests.UI;
 public class TestDataChanged
 {
     private DataChangedWeakEventManager? _eventMangerDataChanged;
-    
+
     /// <summary>
     /// Called whenever a property changed
     /// </summary>

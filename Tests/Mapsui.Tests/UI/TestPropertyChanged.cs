@@ -7,7 +7,7 @@ namespace Mapsui.Tests.UI;
 public class TestPropertyChanged : INotifyPropertyChanged
 {
     private PropertyChangedWeakEventManager? _eventMangerPropertyChanged;
-    
+
     /// <summary>
     /// Called whenever a property changed
     /// </summary>

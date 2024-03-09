@@ -40,7 +40,7 @@ public class WeakEventManagerTests
     {
         _changed = true;
     }
-    
+
     private void TestDataChanged2(object sender, DataChangedEventArgs e)
     {
         _changed = true;
@@ -58,7 +58,7 @@ public class WeakEventManagerTests
         eventManager.RaiseEvent(this, new DataChangedEventArgs());
         Assert.That(_changed, Is.EqualTo(false));
     }
-    
+
     [Test]
     public void RemoveEventWorks_DataChanged_DifferentMethods()
     {
