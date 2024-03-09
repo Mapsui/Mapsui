@@ -1,4 +1,5 @@
-﻿using Mapsui.Styles;
+﻿using Mapsui.Manipulations;
+using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
 using System;
 
@@ -104,17 +105,17 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
 
     public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
 
-    public bool OnTapped(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
     {
         return Tapped(this, e);
     }
 
-    public bool OnPointerPressed(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnPointerPressed(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
     {
         return false;
     }
 
-    public bool OnPointerMoved(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public bool OnPointerMoved(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
     {
         return false;
     }

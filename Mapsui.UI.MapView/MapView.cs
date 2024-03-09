@@ -1,6 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Manipulations;
 using Mapsui.UI.Maui.Extensions;
 using Mapsui.UI.Objects;
 using Mapsui.Utilities;
@@ -563,7 +564,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
                 SelectedPinChanged?.Invoke(this, new SelectedPinChangedEventArgs(SelectedPin));
 
-                if (e.MapInfo!.ScreenPosition == null)
+                if (e.MapInfo?.ScreenPosition is null)
                     return;
 
                 var pinArgs = new PinClickedEventArgs(clickedPin, Map.Navigator.Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(), e.NumTaps);
@@ -843,7 +844,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         HideCallouts();
     }
 
-    protected override void OnSingleTapped(MPoint screenPosition)
+    protected override void OnSingleTapped(ScreenPosition screenPosition)
     {
         HandlerTap(new TappedEventArgs(screenPosition, 1));
         base.OnSingleTapped(screenPosition);

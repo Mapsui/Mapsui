@@ -77,6 +77,16 @@ public class MRect : IEquatable<MRect>
         return new MRect(Min.X, Min.Y, Max.X, Max.Y);
     }
 
+    public bool Contains(double x, double y)
+    {
+        if (x < Min.X) return false;
+        if (y < Min.Y) return false;
+        if (x > Max.X) return false;
+        if (y > Max.Y) return false;
+
+        return true;
+    }
+
     public bool Contains(MPoint? point)
     {
         if (point is null) return false;

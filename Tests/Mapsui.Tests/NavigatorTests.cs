@@ -46,8 +46,8 @@ public class NavigatorTests
         navigator.SetSize(100, 100);
         navigator.OverridePanBounds = new MRect(-100, -100, 100, 100);
         navigator.CenterOn(10, 20);
-        var currentTouchCenter = new MPoint(10, 10);
-        var previousTouchCenter = new MPoint(20, 20);
+        var currentTouchCenter = new ScreenPosition(10, 10);
+        var previousTouchCenter = new ScreenPosition(20, 20);
 
         // Act
         navigator.Manipulate(new Manipulation(currentTouchCenter, previousTouchCenter, scaleFactor, 0, 0));

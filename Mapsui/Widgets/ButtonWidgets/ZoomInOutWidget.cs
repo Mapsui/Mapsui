@@ -1,4 +1,5 @@
-﻿using Mapsui.Styles;
+﻿using Mapsui.Manipulations;
+using Mapsui.Styles;
 
 namespace Mapsui.Widgets.ButtonWidgets;
 
@@ -124,7 +125,7 @@ public class ZoomInOutWidget : TouchableWidget
         }
     }
 
-    public override bool OnTapped(Navigator navigator, MPoint position, WidgetEventArgs e)
+    public override bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
     {
         var result = base.OnTapped(navigator, position, e);
 

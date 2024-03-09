@@ -72,6 +72,7 @@
 
   <ItemGroup>
     <Compile Include="..\Mapsui.UI.WinUI\Extensions\PointExtensions.cs" Link="Extensions\PointExtensions.cs" />
+		<Compile Include="..\Mapsui.UI.WinUI\Extensions\PointerPointExtensions.cs" Link="Extensions\PointerPointExtensions.cs" />
     <Compile Include="..\Mapsui.UI.WinUI\MapControl.cs" Link="MapControl.cs" />
   </ItemGroup>
 

@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using Mapsui.Manipulations;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace Mapsui.UI.Blazor.Extensions;
 internal static class MouseEventArgsExtensions
 {
-    public static MPoint ToLocation(this MouseEventArgs e, BoundingClientRect clientRect)
+    public static ScreenPosition ToScreenPosition(this MouseEventArgs e, BoundingClientRect clientRect)
     {
-        return new MPoint(e.ClientX - clientRect.Left, e.ClientY - clientRect.Top);
+        return new ScreenPosition(e.ClientX - clientRect.Left, e.ClientY - clientRect.Top);
     }
 }

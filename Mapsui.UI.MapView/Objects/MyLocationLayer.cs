@@ -214,6 +214,7 @@ public class MyLocationLayer : BaseLayer
     /// Updates my location
     /// </summary>
     /// <param name="newLocation">New location</param>
+    /// <param name="animated">true if there is an animation from the old to the new location.</param>
     public void UpdateMyLocation(Position newLocation, bool animated = false)
     {
         if (!MyLocation.Equals(newLocation))

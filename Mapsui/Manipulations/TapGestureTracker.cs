@@ -7,7 +7,7 @@ public class TapGestureTracker
 {
     private readonly double _maxTapDuration = 0.5;
     private DateTime _tapStartTime;
-    private MPoint? _tapStartPosition;
+    private ScreenPosition? _tapStartPosition;
     private int _millisecondsToWaitForDoubleTap = 300;
     private bool _waitingForDoubleTap;
     private int _tapCount = 1;
@@ -17,15 +17,15 @@ public class TapGestureTracker
     public bool DoNotFireSingleTapOnDoubleTap { get; set; } = false;
 
     // This fields was added as a workaround for that in Blazor the touch up does not have a location (or I do not know how to get it).
-    public MPoint? LastMovePosition { get; set; }
+    public ScreenPosition? LastMovePosition { get; set; }
 
-    public void IfTap(MPoint tapEndPosition, double maxTapDistance, Action<MPoint, int> onTap)
+    public void IfTap(ScreenPosition? tapEndPosition, double maxTapDistance, Action<ScreenPosition, int> onTap)
     {
-        if (_tapStartPosition == null) return;
-        if (tapEndPosition == null) return; // Note, this uses the tapEndPosition parameter.
+        if (_tapStartPosition is null) return;
+        if (tapEndPosition is null) return; // Note, this uses the tapEndPosition parameter.
 
         var duration = (DateTime.Now - _tapStartTime).TotalSeconds;
-        var distance = tapEndPosition.Distance(_tapStartPosition);
+        var distance = tapEndPosition.Value.Distance(_tapStartPosition.Value);
         var isTap = duration < _maxTapDuration && distance < maxTapDistance;
 
         if (DoNotFireSingleTapOnDoubleTap)
@@ -33,20 +33,20 @@ public class TapGestureTracker
             if (_waitingForDoubleTap)
                 _tapCount = 2;
             else if (isTap)
-                _ = OnTapAfterDelayAsync(onTap, tapEndPosition); // Fire and forget
+                _ = OnTapAfterDelayAsync(onTap, tapEndPosition.Value); // Fire and forget
         }
         else
         {
             if (_waitingForDoubleTap)
             {
-                onTap(tapEndPosition, 2); // Within wait period so fire.
+                onTap(tapEndPosition.Value, 2); // Within wait period so fire.
             }
             else
             {
                 // This is the first tap. Fire right away and start waiting for second tap.
                 // If the second tap is within the wait period we should fire a double tap
                 // but not another single tap.
-                onTap(tapEndPosition, 1);
+                onTap(tapEndPosition.Value, 1);
                 _ = StartWaitingForSecondTapAsync(); // Fire and forget
             }
         }
@@ -59,13 +59,13 @@ public class TapGestureTracker
         _waitingForDoubleTap = false;
     }
 
-    public void Restart(MPoint position)
+    public void Restart(ScreenPosition position)
     {
         _tapStartTime = DateTime.Now;
         _tapStartPosition = position;
     }
 
-    private async Task OnTapAfterDelayAsync(Action<MPoint, int> onTap, MPoint position)
+    private async Task OnTapAfterDelayAsync(Action<ScreenPosition, int> onTap, ScreenPosition position)
     {
         // In the current implementation we always wait for the double tap. This is not 
         // always the desired behavior. Sometimes you want to respond directly. But in that

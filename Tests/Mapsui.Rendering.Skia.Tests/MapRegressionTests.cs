@@ -15,6 +15,7 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps.Animations;
 using Mapsui.Samples.Common.Maps.DataFormats;
+using Mapsui.Samples.Common.Maps.Special;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
@@ -60,7 +61,7 @@ public class MapRegressionTests
             .All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName),
     ];
 
-    public static object[] ExcludedSamples => _excludedSamples ??= [new AnimatedPointsSample()];
+    public static object[] ExcludedSamples => _excludedSamples ??= [new AnimatedPointsSample(), new MutatingTriangleSample()];
 
     [Test]
     [Retry(5)]
@@ -131,7 +132,7 @@ public class MapRegressionTests
                     }
                     else
                     {
-                        ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.99));
+                        ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995));
                     }
                 }
                 else

@@ -1,5 +1,6 @@
 ﻿using System;
 using Mapsui.Extensions;
+using Mapsui.Manipulations;
 using Mapsui.Nts.Extensions;
 using Mapsui.UI;
 using Mapsui.Widgets;
@@ -16,12 +17,12 @@ public enum PointerState
 
 public class EditManipulation
 {
-    private MPoint? _mouseDownPosition;
+    private ScreenPosition? _mouseDownPosition;
     private bool _inDoubleClick;
 
     public static int MinPixelsMovedForDrag { get; set; } = 4;
 
-    public bool Manipulate(PointerState mouseState, MPoint screenPosition,
+    public bool Manipulate(PointerState mouseState, ScreenPosition screenPosition,
         EditManager editManager, IMapControl mapControl, WidgetEventArgs e)
     {
         switch (mouseState)
@@ -108,10 +109,10 @@ public class EditManipulation
         }
     }
 
-    private static bool IsTap(MPoint? screenPosition, MPoint? mouseDownScreenPosition)
+    private static bool IsTap(ScreenPosition? screenPosition, ScreenPosition? mouseDownScreenPosition)
     {
-        if (mouseDownScreenPosition == null || screenPosition == null)
+        if (mouseDownScreenPosition is null || screenPosition is null)
             return false;
-        return mouseDownScreenPosition.Distance(screenPosition) < MinPixelsMovedForDrag;
+        return mouseDownScreenPosition.Value.Distance(screenPosition.Value) < MinPixelsMovedForDrag;
     }
 }

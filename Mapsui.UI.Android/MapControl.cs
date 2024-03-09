@@ -129,35 +129,35 @@ public partial class MapControl : ViewGroup, IMapControl
         if (args.Event is null)
             return;
 
-        var locations = GetTouchLocations(args.Event, this, PixelDensity);
+        var positions = GetScreenPositions(args.Event, this, PixelDensity);
 
         switch (args.Event.Action)
         {
             case MotionEventActions.Down:
-                _manipulationTracker.Restart(locations);
-                if (locations.Length == 1)
+                _manipulationTracker.Restart(positions);
+                if (positions.Length == 1)
                 {
-                    _tapGestureTracker.Restart(locations[0]);
-                    if (OnWidgetPointerPressed(locations[0], false))
+                    _tapGestureTracker.Restart(positions[0]);
+                    if (OnWidgetPointerPressed(positions[0], false))
                         return;
                 }
                 break;
             case MotionEventActions.Move:
-                if (locations.Length == 1)
-                    if (OnWidgetPointerMoved(locations[0], true, false))
+                if (positions.Length == 1)
+                    if (OnWidgetPointerMoved(positions[0], true, false))
                         return;
-                _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
+                _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
                 break;
             case MotionEventActions.Up:
-                if (locations.Length == 1)
-                    _tapGestureTracker.IfTap(locations[0], MaxTapGestureMovement * PixelDensity, (p, c) =>
+                if (positions.Length == 1)
+                    _tapGestureTracker.IfTap(positions[0], MaxTapGestureMovement * PixelDensity, (p, c) =>
                     {
                         if (OnWidgetTapped(p, c, false))
                             return;
                         OnInfo(CreateMapInfoEventArgs(p, p, c));
 
                     });
-                _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
+                _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
                 Refresh();
                 break;
         }
@@ -169,11 +169,11 @@ public partial class MapControl : ViewGroup, IMapControl
     /// <param name="motionEvent"></param>
     /// <param name="view"></param>
     /// <returns></returns>
-    private static ReadOnlySpan<MPoint> GetTouchLocations(MotionEvent motionEvent, View view, double pixelDensity)
+    private static ReadOnlySpan<ScreenPosition> GetScreenPositions(MotionEvent motionEvent, View view, double pixelDensity)
     {
-        var result = new MPoint[motionEvent.PointerCount];
+        var result = new ScreenPosition[motionEvent.PointerCount];
         for (var i = 0; i < motionEvent.PointerCount; i++)
-            result[i] = new MPoint(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top)
+            result[i] = new ScreenPosition(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top)
                 .ToDeviceIndependentUnits(pixelDensity);
         return result;
     }
@@ -184,7 +184,7 @@ public partial class MapControl : ViewGroup, IMapControl
     /// <param name="motionEvent"></param>
     /// <param name="view"></param>
     /// <returns></returns>
-    private MPoint GetScreenPosition(MotionEvent motionEvent, View view)
+    private ScreenPosition GetScreenPosition(MotionEvent motionEvent, View view)
     {
         return GetScreenPositionInPixels(motionEvent, view).ToDeviceIndependentUnits(PixelDensity);
     }
@@ -195,9 +195,9 @@ public partial class MapControl : ViewGroup, IMapControl
     /// <param name="motionEvent"></param>
     /// <param name="view"></param>
     /// <returns></returns>
-    private static MPoint GetScreenPositionInPixels(MotionEvent motionEvent, View view)
+    private static ScreenPosition GetScreenPositionInPixels(MotionEvent motionEvent, View view)
     {
-        return new MPoint(motionEvent.GetX(0) - view.Left, motionEvent.GetY(0) - view.Top);
+        return new ScreenPosition(motionEvent.GetX(0) - view.Left, motionEvent.GetY(0) - view.Top);
     }
 
     private void RefreshGraphicsWithTryCatch()

@@ -96,7 +96,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerPressed(object sender, PointerRoutedEventArgs e)
     {
-        var position = e.GetCurrentPoint(this).Position.ToMapsui();
+        var position = e.GetCurrentPoint(this).Position.ScreenPosition();
         _tapGestureTracker.Restart(position);
         if (OnWidgetPointerPressed(position, e.KeyModifiers == VirtualKeyModifiers.Shift))
             return;
@@ -110,14 +110,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (!IsHovering(e))
             return;
 
-        var position = e.GetCurrentPoint(this).Position.ToMapsui();
+        var position = e.GetCurrentPoint(this).Position.ScreenPosition();
         if (OnWidgetPointerMoved(position, false, e.KeyModifiers == VirtualKeyModifiers.Shift))
             return;
     }
 
     private void MapControl_PointerReleased(object sender, PointerRoutedEventArgs e)
     {
-        var position = e.GetCurrentPoint(this).Position.ToMapsui();
+        var position = e.GetCurrentPoint(this).Position.ScreenPosition();
         _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
             if (OnWidgetTapped(p, c, _shiftPressed))
@@ -162,11 +162,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
     {
-        var currentPoint = e.GetCurrentPoint(this);
-        var currentMousePosition = new MPoint(currentPoint.Position.X, currentPoint.Position.Y);
-        var mouseWheelDelta = currentPoint.Properties.MouseWheelDelta;
+        var mousePointerPoint = e.GetCurrentPoint(this);
+        var mouseWheelDelta = mousePointerPoint.Properties.MouseWheelDelta;
 
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePointerPoint.ToScreenPosition());
 
         e.Handled = true;
     }
@@ -225,7 +224,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private Manipulation ToManipulation(ManipulationDeltaRoutedEventArgs e)
     {
-        var previousCenter = TransformToVisual(this).Inverse.TransformPoint(e.Position).ToMapsui();
+        var previousCenter = TransformToVisual(this).Inverse.TransformPoint(e.Position).ScreenPosition();
         var center = previousCenter.Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
         return new Manipulation(center, previousCenter, e.Delta.Scale, e.Delta.Rotation, e.Cumulative.Rotation);
     }

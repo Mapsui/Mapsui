@@ -44,7 +44,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
             return;
 
         SetCursorInMoveMode();
-        var mouseDownPosition = e.Location.ToMapsui();
+        var mouseDownPosition = e.Location.ToScreenPosition();
         _manipulationTracker.Restart([mouseDownPosition]);
         _tapGestureTracker.Restart(mouseDownPosition);
 
@@ -56,7 +56,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnMouseMove(e);
 
-        var mouseMovePosition = e.Location.ToMapsui();
+        var mouseMovePosition = e.Location.ToScreenPosition();
         var isHovering = IsHovering(e);
         if (OnWidgetPointerMoved(mouseMovePosition, !isHovering, GetShiftPressed()))
             return;
@@ -70,7 +70,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         base.OnMouseUp(e);
 
         SetCursorInDefaultMode();
-        var mouseUpPosition = e.Location.ToMapsui();
+        var mouseUpPosition = e.Location.ToScreenPosition();
         _tapGestureTracker.IfTap(mouseUpPosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
             if (OnWidgetTapped(p, c, GetShiftPressed()))
@@ -95,7 +95,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         base.OnMouseWheel(e);
 
         var mouseWheelDelta = (int)e.Delta.Height;
-        var mousePosition = e.Location.ToMapsui();
+        var mousePosition = e.Location.ToScreenPosition();
         Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
     }
 
