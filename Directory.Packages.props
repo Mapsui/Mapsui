@@ -93,8 +93,8 @@
     <PackageVersion Include="Uno.UniversalImageLoader" Version="[1.9.36,2.0.0)" />
     <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="[5.1.31,6.0.0)" />
     <PackageVersion Include="Uno.Resizetizer" Version="[1.0.4, 2.0.0)" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap" Version="[8.0.0,9.0.0)" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="[8.0.0,9.0.0)" />
+    <PackageVersion Include="Uno.Wasm.Bootstrap" Version="[8.0.9,9.0.0)" />
+    <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="[8.0.9,9.0.0)" />
     <PackageVersion Include="Uno.WinUI" Version="[5.1.31,6.0.0)" />
     <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="[5.1.31,6.0.0)" />
     <PackageVersion Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="[5.1.31,6.0.0)" />
