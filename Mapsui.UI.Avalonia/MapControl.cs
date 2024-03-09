@@ -114,16 +114,18 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         _pointerPositions.TryRemove(e.Pointer.Id, out _);
         e.Pointer.Capture(null);
-
         var position = e.GetPosition(this).ToScreenPosition();
+
+        if (OnWidgetPointerReleased(position, false))
+            return;
         _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
             if (OnWidgetTapped(p, c, _shiftPressed))
                 return;
             OnInfo(CreateMapInfoEventArgs(p, p, c));
         });
-        _manipulationTracker.Manipulate(_pointerPositions.Values.ToArray(), Map.Navigator.Manipulate);
 
+        _manipulationTracker.Manipulate(_pointerPositions.Values.ToArray(), Map.Navigator.Manipulate);
         Refresh();
     }
 

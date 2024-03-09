@@ -37,4 +37,9 @@ public class ButtonWidget : TextBoxWidget, ITouchableWidget
     {
         return false;
     }
+
+    public virtual bool OnPointerReleased(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    {
+        return false;
+    }
 }

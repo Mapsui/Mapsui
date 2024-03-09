@@ -35,4 +35,13 @@ public interface ITouchableWidget : IWidget
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
     bool OnPointerMoved(Navigator navigator, ScreenPosition position, WidgetEventArgs e);
+
+    /// <summary>
+    /// Function, which handles the widget pointer released event
+    /// </summary>
+    /// <param name="navigator">Navigator of MapControl</param>
+    /// <param name="position">Screen position</param>
+    /// <param name="e">Arguments for this widget touch</param>
+    /// <returns>True, if the Widget had handled the touch event</returns>
+    bool OnPointerReleased(Navigator navigator, ScreenPosition position, WidgetEventArgs e);
 }

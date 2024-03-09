@@ -131,6 +131,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var position = e.GetPosition(this).ToScreenPosition();
 
+        if (OnWidgetPointerReleased(position, false))
+            return;
         _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
             if (OnWidgetTapped(p, c, GetShiftPressed()))
@@ -138,12 +140,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             OnInfo(CreateMapInfoEventArgs(p, p, 1));
         });
 
-        Refresh();
-
         _flingTracker.IfFling(1, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
         _flingTracker.RemoveId(1);
 
+        Refresh();
         ReleaseMouseCapture();
+
     }
 
     private void MapControl_TouchDown(object? sender, TouchEventArgs e)
@@ -154,8 +156,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlTouchUp(object? sender, TouchEventArgs e)
     {
-        var touchUpPosition = e.GetTouchPoint(this).Position.ToScreenPosition();
-        _tapGestureTracker.IfTap(touchUpPosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
+        var position = e.GetTouchPoint(this).Position.ToScreenPosition();
+
+        if (OnWidgetPointerReleased(position, false))
+            return;
+        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
             if (OnWidgetTapped(p, c, GetShiftPressed()))
                 return;
@@ -180,6 +185,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var isHovering = IsHovering(e);
         var position = e.GetPosition(this).ToScreenPosition();
+
         if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
             return;
         if (isHovering)

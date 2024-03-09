@@ -35,4 +35,9 @@ public class MouseCoordinatesWidget : TextBoxWidget, ITouchableWidget
         Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
         return false;
     }
+
+    public bool OnPointerReleased(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    {
+        return false;
+    }
 }
