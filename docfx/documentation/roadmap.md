@@ -20,9 +20,12 @@ Branch: [develop/4.1](https://github.com/Mapsui/Mapsui/tree/develop/4.1). Milest
 
 ## Mapsui 5
 
+Focus: More shared code in platforms. This will affect MapControls, Widgets and manipulation (touch and mouse).
+
 Branch: [main](https://github.com/Mapsui/Mapsui/tree/main). Milestone: [v5.0](https://github.com/Mapsui/Mapsui/milestone/10). We are working on a series of preview releases.
 
-- [ ] Everything to .NET 6
+- [x] To .NET 6 for everything we release
+- [x] All samples and tests to .NET 8.
 - [ ] Cleanup:
   - [ ] Use `<Nullable>enable</Nullable>` everywhere (Add to Directory.Build.props) and go through the current suppressions to see if there is a better way.
   - [ ] Fix the remaining warnings wrt IDispose.
@@ -34,18 +37,21 @@ Branch: [main](https://github.com/Mapsui/Mapsui/tree/main). Milestone: [v5.0](ht
   - [ ] Remove all scripts and configurations we do not use anymore.
   - [ ] Simplify the build scripts now that we do not need the workarounds.
   - [x] Rename master to main.
-- [ ] Remove older frameworks:
-  - [ ] Remove Xamarin.Forms (but not Mapsui.MAUI, Mapsui.iOS and Mapsui.Android).
+- [x] Remove older frameworks:
+  - [x] Remove Xamarin.Forms (but not Mapsui.MAUI, Mapsui.iOS and Mapsui.Android).
   - [x] Remove Uno UWP (but not Mapsui.Uno.WinUI)
   - [x] Remove Avalonia.V0 (but not Avalonia)
 - [ ] Merge MapView functionality into MapControl. We need to work this out in more detail.
 
 ## Mapsui 6 and later
 
-This is mostly speculation. You could browse through the ['design discussion' tags](https://github.com/Mapsui/Mapsui/labels/design%20discussion) to get an impression of the options.
+Focus: Rendering.
 
 - [ ] Two step rendering. In the draw loop only draw skia object, create skia object in an earlier step https://github.com/Mapsui/Mapsui/issues/1448
+- [ ] All redering through a single pipeline https://github.com/Mapsui/Mapsui/issues/2269
 - [ ] World wrap https://github.com/Mapsui/Mapsui/issues/518
 - [ ] Add vector tiles https://github.com/Mapsui/Mapsui/issues/1478
-- [ ] All redering through a single pipeline https://github.com/Mapsui/Mapsui/issues/2269
+
+Other options:
 - [ ] Add support for GeoParquet https://github.com/Mapsui/Mapsui/issues/2282
+- [ ] For possible other options you could  browse through the ['design discussion' tags](https://github.com/Mapsui/Mapsui/labels/design%20discussion) .
