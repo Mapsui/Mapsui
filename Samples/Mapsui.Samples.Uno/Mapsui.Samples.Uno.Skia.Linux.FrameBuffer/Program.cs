@@ -12,7 +12,7 @@ class Program
         {
             Console.CursorVisible = false;
 
-            var host = new FrameBufferHost(() => new App(), args);
+            var host = new FrameBufferHost(() => new App());
             host.Run();
         }
         finally
