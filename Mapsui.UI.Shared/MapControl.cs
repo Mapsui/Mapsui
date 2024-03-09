@@ -585,6 +585,19 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
+    private bool OnWidgetPointerReleased(ScreenPosition position, bool shift)
+    {
+        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
+        foreach (var widget in touchedWidgets)
+        {
+            var widgetArgs = new WidgetEventArgs(position, 0, true, shift);
+            if (widget.OnPointerReleased(Map.Navigator, position, widgetArgs))
+                return true;
+        }
+
+        return false;
+    }
+
     private bool OnWidgetTapped(ScreenPosition position, int tapCount, bool shift)
     {
         var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);

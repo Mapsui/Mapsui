@@ -44,11 +44,11 @@ public partial class MapControl : SkiaDrawable, IMapControl
             return;
 
         SetCursorInMoveMode();
-        var mouseDownPosition = e.Location.ToScreenPosition();
-        _manipulationTracker.Restart([mouseDownPosition]);
-        _tapGestureTracker.Restart(mouseDownPosition);
+        var position = e.Location.ToScreenPosition();
+        _manipulationTracker.Restart([position]);
+        _tapGestureTracker.Restart(position);
 
-        if (OnWidgetPointerPressed(mouseDownPosition, GetShiftPressed()))
+        if (OnWidgetPointerPressed(position, GetShiftPressed()))
             return;
     }
 
@@ -56,13 +56,13 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnMouseMove(e);
 
-        var mouseMovePosition = e.Location.ToScreenPosition();
+        var position = e.Location.ToScreenPosition();
         var isHovering = IsHovering(e);
-        if (OnWidgetPointerMoved(mouseMovePosition, !isHovering, GetShiftPressed()))
+        if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
             return;
         if (isHovering)
             return;
-        _manipulationTracker.Manipulate([mouseMovePosition], Map.Navigator.Manipulate);
+        _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
     }
 
     protected override void OnMouseUp(MouseEventArgs e)
@@ -70,16 +70,19 @@ public partial class MapControl : SkiaDrawable, IMapControl
         base.OnMouseUp(e);
 
         SetCursorInDefaultMode();
-        var mouseUpPosition = e.Location.ToScreenPosition();
-        _tapGestureTracker.IfTap(mouseUpPosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
+        var position = e.Location.ToScreenPosition();
+
+        if (OnWidgetPointerReleased(position, false))
+            return;
+        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
             if (OnWidgetTapped(p, c, GetShiftPressed()))
                 return;
             OnInfo(CreateMapInfoEventArgs(p, p, 1));
         });
 
-        _manipulationTracker.Manipulate([mouseUpPosition], Map.Navigator.Manipulate);
-        RefreshData();
+        _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
+        Refresh();
     }
 
     protected override void OnLoadComplete(EventArgs e)

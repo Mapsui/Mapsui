@@ -62,4 +62,16 @@ public abstract class TouchableWidget : Widget, ITouchableWidget
     {
         return false;
     }
+
+    /// <summary>
+    /// Function, which handles the widget released event
+    /// </summary>
+    /// <param name="navigator">Navigator of MapControl</param>
+    /// <param name="position">Screen position</param>
+    /// <param name="e">Arguments for this widget touch</param>
+    /// <returns>True, if the Widget had handled the touch event</returns>
+    public virtual bool OnPointerReleased(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    {
+        return false;
+    }
 }

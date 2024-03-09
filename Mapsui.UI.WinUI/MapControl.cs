@@ -118,6 +118,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControl_PointerReleased(object sender, PointerRoutedEventArgs e)
     {
         var position = e.GetCurrentPoint(this).Position.ScreenPosition();
+
+        if (OnWidgetPointerReleased(position, false))
+            return;
         _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
         {
             if (OnWidgetTapped(p, c, _shiftPressed))

@@ -22,6 +22,7 @@ public partial class MapControl : ComponentBase, IMapControl
     private MapsuiJsInterop? _interop;
     private readonly ManipulationTracker _manipulationTracker = new();
     private readonly TapGestureTracker _tapGestureTracker = new();
+    public ScreenPosition? _lastMovePosition; // Workaround for missing touch position on touch-up.
 
     [Inject]
     private IJSRuntime? JsRuntime { get; set; }
@@ -199,12 +200,13 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             var position = e.ToScreenPosition(_clientRect);
 
+            if (OnWidgetPointerReleased(position, false))
+                return;
             _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
             {
                 if (OnWidgetTapped(p, c, GetShiftPressed()))
                     return;
                 OnInfo(CreateMapInfoEventArgs(p, p, c));
-
             });
 
             _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
@@ -273,7 +275,7 @@ public partial class MapControl : ComponentBase, IMapControl
             if (positions.Length == 1)
             {
                 var position = positions[0];
-                _tapGestureTracker.LastMovePosition = position;
+                _lastMovePosition = position;
                 if (OnWidgetPointerMoved(position, true, GetShiftPressed()))
                     return;
             }
@@ -285,17 +287,20 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            if (_tapGestureTracker.LastMovePosition == null)
+            if (_lastMovePosition is null)
                 return;
+            var position = _lastMovePosition.Value;
 
-            _tapGestureTracker.IfTap(_tapGestureTracker.LastMovePosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
+            if (OnWidgetPointerReleased(position, false))
+                return;
+            _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
             {
                 if (OnWidgetTapped(p, c, GetShiftPressed()))
                     return;
                 OnInfo(CreateMapInfoEventArgs(p, p, c));
             });
-
-            RefreshData();
+            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
+            Refresh();
         });
     }
 }
