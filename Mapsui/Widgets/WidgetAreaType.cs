@@ -3,11 +3,11 @@
 public enum WidgetAreaType
 {
     /// <summary>
-    /// Only Envelope gets touch events
+    /// Will be called for manipulations (or hover) over within the widget area.
     /// </summary>
-    Widget,
+    WidgetArea,
     /// <summary>
-    /// Whole Viewport is touchable
+    /// Will be called for manipulations (or hover) over the entire map.
     /// </summary>
-    Viewport
+    MapArea
 }

@@ -11,7 +11,7 @@ public class MouseCoordinatesWidget : TextBoxWidget
 {
     public MouseCoordinatesWidget()
     {
-        TouchableArea = WidgetAreaType.Viewport;
+        WidgetAreaType = WidgetAreaType.MapArea;
         HorizontalAlignment = HorizontalAlignment.Center;
         VerticalAlignment = VerticalAlignment.Bottom;
         Text = "Mouse Position";
@@ -24,6 +24,4 @@ public class MouseCoordinatesWidget : TextBoxWidget
         Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
         return false;
     }
-
-
 }

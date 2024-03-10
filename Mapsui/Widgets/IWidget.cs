@@ -52,7 +52,7 @@ public interface IWidget
     /// <summary>
     /// Type of area to use for manipulation events
     /// </summary>
-    WidgetAreaType TouchableArea { get; }
+    WidgetAreaType WidgetAreaType { get; }
 
     /// <summary>
     /// Function, which handles the widget tapped event
