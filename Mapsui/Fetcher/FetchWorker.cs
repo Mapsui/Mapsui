@@ -6,16 +6,13 @@ using Mapsui.Logging;
 
 namespace Mapsui.Fetcher;
 
-public class FetchWorker : IDisposable // Todo: Make internal
+public class FetchWorker(IFetchDispatcher fetchDispatcher) : IDisposable // Todo: Make internal
 {
-    private readonly IFetchDispatcher _fetchDispatcher;
+    private readonly IFetchDispatcher _fetchDispatcher = fetchDispatcher;
     private CancellationTokenSource? _fetchLoopCancellationTokenSource;
+#pragma warning disable CA2211 // Non-constant fields should not be visible - This is a very special case.
     public static long RestartCounter;
-
-    public FetchWorker(IFetchDispatcher fetchDispatcher)
-    {
-        _fetchDispatcher = fetchDispatcher;
-    }
+#pragma warning restore CA2211
 
     public void Start()
     {

@@ -169,9 +169,9 @@ public class CapabilitiesHelper
         });
     }
 
-    private string RemoveTrailingSlash(string url)
+    private static string RemoveTrailingSlash(string url)
     {
-        if (url[url.Length - 1].Equals('/'))
+        if (url[^1].Equals('/'))
             url = url.Remove(url.Length - 1);
 
         return url;
