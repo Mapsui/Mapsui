@@ -18,12 +18,6 @@ public class GetFeatureInfo
     public const string TextXmlSubtypeGml = "text/xml; subtype=gml/3.1.1";
     private string? _infoFormat;
     private string? _layerName;
-
-    [Obsolete("Use RequestAsync")]
-    public event StatusEventHandler? IdentifyFinished;
-
-    [Obsolete("Use RequestAsync")]
-    public event StatusEventHandler? IdentifyFailed;
     private readonly Func<string, Task<Stream>> _getStreamAsync;
 
     public GetFeatureInfo(Func<string, Task<Stream>>? getStreamAsync = null)
