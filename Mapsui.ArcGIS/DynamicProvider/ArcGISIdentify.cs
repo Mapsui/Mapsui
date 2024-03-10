@@ -59,7 +59,7 @@ public class ArcGISIdentify
         Catch.TaskRun(async () =>
         {
             //remove trailing slash from url
-            if (url.Length > 0 && url[url.Length - 1].Equals('/'))
+            if (url.Length > 0 && url[^1].Equals('/'))
                 url = url.Remove(url.Length - 1, 1);
 
             var pointGeom = string.Format(CultureInfo.InvariantCulture, "{0},{1}", x, y);
@@ -144,7 +144,7 @@ public class ArcGISIdentify
         return layerString;
     }
 
-    private static Stream CopyAndClose(Stream inputStream)
+    private static MemoryStream CopyAndClose(Stream inputStream)
     {
         const int readSize = 256;
         var buffer = new byte[readSize];

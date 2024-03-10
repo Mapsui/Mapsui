@@ -105,7 +105,7 @@ public class Client
         public string[] Keywords;
 
         /// <summary>
-        /// Latitudal/longitudal extent of this layer
+        /// Extent of this layer in latitudinal/longitudinal coordinates
         /// </summary>
         public MRect LatLonBoundingBox;
 
@@ -216,13 +216,13 @@ public class Client
         var strReq = new StringBuilder(url);
         if (!url.Contains('?'))
             strReq.Append('?');
-        if (!strReq.ToString().EndsWith("&") && !strReq.ToString().EndsWith('?'))
+        if (!strReq.ToString().EndsWith('&') && !strReq.ToString().EndsWith('?'))
             strReq.Append('&');
-        if (!url.ToLower().Contains("service=wms"))
+        if (!url.Contains("service=wms", StringComparison.OrdinalIgnoreCase))
             strReq.AppendFormat("SERVICE=WMS&");
-        if (!url.ToLower().Contains("request=getcapabilities"))
+        if (!url.Contains("request=getcapabilities", StringComparison.OrdinalIgnoreCase))
             strReq.AppendFormat("REQUEST=GetCapabilities&");
-        if (!url.ToLower().Contains("version=") && !string.IsNullOrEmpty(wmsVersion))
+        if (!url.Contains("version=", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(wmsVersion))
             strReq.AppendFormat("VERSION={0}&", wmsVersion);
         var xml = await client.GetRemoteXmlAsync(strReq.ToString().TrimEnd('&'));
         client.ParseCapabilities(xml);
@@ -238,18 +238,18 @@ public class Client
     {
         _userAgent = userAgent;
         _persistentCache = persistentCache;
-        _getStreamAsync = InitialiseGetStreamAsyncMethod(getStreamAsync);
+        _getStreamAsync = InitializeGetStreamAsyncMethod(getStreamAsync);
     }
 
     public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>>? getStreamAsync = null, string? userAgent = null)
     {
         _userAgent = userAgent;
-        _getStreamAsync = InitialiseGetStreamAsyncMethod(getStreamAsync);
+        _getStreamAsync = InitializeGetStreamAsyncMethod(getStreamAsync);
         _nsmgr = new XmlNamespaceManager(capabilitiesXmlDocument.NameTable);
         ParseCapabilities(capabilitiesXmlDocument);
     }
 
-    private Func<string, Task<Stream>> InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
+    private Func<string, Task<Stream>> InitializeGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
     {
         return getStreamAsync ?? GetStreamAsync;
     }
@@ -428,7 +428,7 @@ public class Client
             var rootLayer = layers[0];
             rootLayer.Name = "__auto_generated_root_layer__";
             rootLayer.Title = "";
-            rootLayer.ChildLayers = layers.ToArray();
+            rootLayer.ChildLayers = [.. layers];
             _layer = rootLayer;
         }
         else
@@ -505,7 +505,7 @@ public class Client
         using var xnlFormats = getFeatureInfoRequestNodes.SelectNodes("sm:Format", _nsmgr);
         if (xnlFormats != null)
         {
-            _getFeatureInfoOutputFormats = new Collection<string>();
+            _getFeatureInfoOutputFormats = [];
             for (var i = 0; i < xnlFormats.Count; i++)
                 _getFeatureInfoOutputFormats.Add(xnlFormats[i]?.InnerText ?? string.Empty);
         }
@@ -539,9 +539,9 @@ public class Client
         using var xnlFormats = getMapRequestNodes?.SelectNodes("sm:Format", _nsmgr);
         if (xnlFormats != null)
         {
-            _getMapOutputFormats = new Collection<string>();
+            _getMapOutputFormats = [];
             for (var i = 0; i < xnlFormats.Count; i++)
-                _getMapOutputFormats.Add(xnlFormats[i]?.InnerText ?? String.Empty);
+                _getMapOutputFormats.Add(xnlFormats[i]?.InnerText ?? string.Empty);
         }
     }
 
@@ -578,7 +578,7 @@ public class Client
                 wmsServerLayer.Keywords[i] = xnlKeywords[i]?.InnerText ?? string.Empty;
         }
 
-        wmsServerLayer.CRS = ParseCrses(xmlLayer);
+        wmsServerLayer.CRS = ParseCrsNode(xmlLayer);
 
         using var xnlBoundingBox = xmlLayer.SelectNodes("sm:BoundingBox", _nsmgr);
         if (xnlBoundingBox != null)
@@ -660,27 +660,27 @@ public class Client
         return wmsServerLayer;
     }
 
-    private string[] ParseCrses(XmlNode xmlLayer)
+    private string[] ParseCrsNode(XmlNode xmlLayer)
     {
-        var crses = new List<string>();
+        var crsList = new List<string>();
 
         if (_nsmgr == null)
-            return crses.ToArray();
+            return [.. crsList];
 
         using var xnlSrs = xmlLayer.SelectNodes("sm:SRS", _nsmgr);
         if (xnlSrs != null)
         {
             for (var i = 0; i < xnlSrs.Count; i++)
-                crses.Add(xnlSrs[i]?.InnerText ?? string.Empty);
+                crsList.Add(xnlSrs[i]?.InnerText ?? string.Empty);
         }
 
         using var xnlCrs = xmlLayer.SelectNodes("sm:CRS", _nsmgr);
         if (xnlCrs != null)
         {
             for (var i = 0; i < xnlCrs.Count; i++)
-                crses.Add(xnlCrs[i]?.InnerText ?? string.Empty);
+                crsList.Add(xnlCrs[i]?.InnerText ?? string.Empty);
         }
 
-        return crses.ToArray();
+        return [.. crsList];
     }
 }

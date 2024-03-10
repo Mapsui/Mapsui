@@ -25,8 +25,6 @@ public class LayerCollection : IEnumerable<ILayer>
 
     public int Count => _layers.Count;
 
-    public bool IsReadOnly => false;
-
     public IEnumerator<ILayer> GetEnumerator()
     {
         return _layers.GetEnumerator();
@@ -90,12 +88,12 @@ public class LayerCollection : IEnumerable<ILayer>
 
         _layers = new ConcurrentQueue<ILayer>(copy);
         OnLayerMoved(layer);
-        OnChanged(null, null, new[] { layer });
+        OnChanged(null, null, [layer]);
     }
 
     public void Insert(int index, params ILayer[] layers)
     {
-        if (layers == null || !layers.Any())
+        if (layers == null || layers.Length == 0)
             throw new ArgumentException("Layers cannot be null or empty");
 
         var copy = _layers.ToArray().ToList();
@@ -152,7 +150,7 @@ public class LayerCollection : IEnumerable<ILayer>
 
     private void AddLayers(ILayer[] layers)
     {
-        if (layers == null || !layers.Any())
+        if (layers == null || layers.Length == 0)
             throw new ArgumentException("Layers cannot be null or empty");
 
         foreach (var layer in layers)
@@ -206,8 +204,8 @@ public class LayerCollection : IEnumerable<ILayer>
         Changed?.Invoke(this, new LayerCollectionChangedEventArgs(added, removed, moved));
     }
 
-    public IEnumerable<ILayer> FindLayer(string layername)
+    public IEnumerable<ILayer> FindLayer(string layerName)
     {
-        return _layers.Where(layer => layer.Name.Contains(layername));
+        return _layers.Where(layer => layer.Name.Contains(layerName));
     }
 }
