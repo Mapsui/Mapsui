@@ -160,7 +160,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
 
         _isFetching = false;
 
-        if (features.Any())
+        if (features.Length != 0)
         {
             _sets.Add(new FeatureSets { TimeRequested = state == null ? 0 : (long)state, Features = features });
 
