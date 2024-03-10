@@ -2,9 +2,10 @@
 using Mapsui.Nts.Editing;
 using Mapsui.UI;
 using Mapsui.Widgets;
+using Mapsui.Widgets.BoxWidgets;
 
 namespace Mapsui.Nts.Widgets;
-public class EditingWidget : Widget
+public class EditingWidget : BoxWidget // Derived from BoxWidget to have default renderer. Perhaps we to have a more explicit way to indicate a widget needs no renderer.
 {
     public IMapControl MapControl { get; }
     public EditManager EditManager { get; }
@@ -12,6 +13,7 @@ public class EditingWidget : Widget
 
     public EditingWidget(IMapControl mapControl, EditManager editManager, EditManipulation editManipulation)
     {
+        WidgetAreaType = WidgetAreaType.Map;
         MapControl = mapControl;
         EditManager = editManager;
         EditManipulation = editManipulation;

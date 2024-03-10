@@ -3,7 +3,7 @@ using Mapsui.Widgets;
 
 namespace Mapsui.Samples.CustomWidget;
 
-public class CustomWidget : IWidget
+public class CustomWidget : Widget
 {
     public HorizontalAlignment HorizontalAlignment { get; set; }
     public VerticalAlignment VerticalAlignment { get; set; }

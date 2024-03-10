@@ -12,7 +12,7 @@ public abstract class Widget : IWidget
     /// Type of area to use for touch events. The default is WidgetArea. MapArea widgets need
     /// to set this to MapArea in their constructor.
     /// </summary>
-    public WidgetAreaType WidgetAreaType { get; init; } = WidgetAreaType.WidgetArea;
+    public WidgetAreaType WidgetAreaType { get; init; } = WidgetAreaType.Widget;
 
     /// <summary>
     /// Horizontal alignment of Widget

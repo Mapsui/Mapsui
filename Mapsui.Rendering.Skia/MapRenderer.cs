@@ -8,7 +8,6 @@ using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Manipulations;
-using Mapsui.Nts.Widgets;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
@@ -64,7 +63,6 @@ public sealed class MapRenderer : IRenderer, IDisposable
         WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
         WidgetRenders[typeof(IconButtonWidget)] = new IconButtonWidgetRenderer();
         WidgetRenders[typeof(BoxWidget)] = new BoxWidgetRenderer();
-        WidgetRenders[typeof(EditingWidget)] = new EditingWidgetRenderer();
         WidgetRenders[typeof(LoggingWidget)] = new LoggingWidgetRenderer();
     }
 
