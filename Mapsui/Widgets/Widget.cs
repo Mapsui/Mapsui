@@ -11,7 +11,7 @@ public abstract class Widget : IWidget
     /// <summary>
     /// Type of area to use for touch events
     /// </summary>
-    public TouchableAreaType TouchableArea { get; init; } = TouchableAreaType.Widget;
+    public WidgetAreaType TouchableArea { get; init; } = WidgetAreaType.Widget;
 
     /// <summary>
     /// Horizontal alignment of Widget

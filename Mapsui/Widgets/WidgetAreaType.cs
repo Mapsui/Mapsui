@@ -1,6 +1,6 @@
 ﻿namespace Mapsui.Widgets;
 
-public enum TouchableAreaType
+public enum WidgetAreaType
 {
     /// <summary>
     /// Only Envelope gets touch events

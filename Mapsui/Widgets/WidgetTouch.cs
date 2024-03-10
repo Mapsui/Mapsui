@@ -24,7 +24,7 @@ public static class WidgetTouch
         foreach (var widget in touchableWidgets)
         {
             // There are two possible TouchableAreaTypes
-            if (widget.TouchableArea == TouchableAreaType.Viewport) // 1) The Viewport type Widget is always touched
+            if (widget.TouchableArea == WidgetAreaType.Viewport) // 1) The Viewport type Widget is always touched
                 touchedWidgets.Add(widget);
             else if (widget.Envelope?.Contains(screenPosition.X, screenPosition.Y) ?? false) // 2) For the Widget type the position needs to be within the envelope
                 touchedWidgets.Add(widget);

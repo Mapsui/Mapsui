@@ -50,9 +50,9 @@ public interface IWidget
     bool NeedsRedraw { get; set; }
 
     /// <summary>
-    /// Type of area to use for touch events
+    /// Type of area to use for manipulation events
     /// </summary>
-    TouchableAreaType TouchableArea { get; }
+    WidgetAreaType TouchableArea { get; }
 
     /// <summary>
     /// Function, which handles the widget tapped event
