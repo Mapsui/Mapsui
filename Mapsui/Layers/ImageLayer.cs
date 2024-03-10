@@ -145,7 +145,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
                 Logger.Log(LogLevel.Error, ex.Message, ex);
                 OnDataChanged(new DataChangedEventArgs(ex, false, null));
             }
-        });
+        }, fetchInfo.CancellationToken);
     }
 
     private void DataArrived(IEnumerable<IFeature>? arrivingFeatures, object? state)

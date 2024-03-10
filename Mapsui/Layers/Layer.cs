@@ -93,7 +93,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     private void DelayedFetch(FetchInfo fetchInfo)
     {
         _fetchDispatcher.SetViewport(fetchInfo);
-        _fetchMachine.Start();
+        _fetchMachine.Start(fetchInfo.CancellationToken);
     }
 
     /// <summary>
@@ -138,7 +138,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
         if (DataSource == null) return;
         if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
-        Delayer.ExecuteDelayed(() => DelayedFetch(fetchInfo));
+        Delayer.ExecuteDelayed(() => DelayedFetch(fetchInfo), fetchInfo.CancellationToken);
     }
 
     public override bool UpdateAnimations()

@@ -14,14 +14,17 @@ public class FetchWorker(IFetchDispatcher fetchDispatcher) : IDisposable // Todo
     public static long RestartCounter;
 #pragma warning restore CA2211
 
-    public void Start()
+    public void Start(CancellationToken? cancellationToken = null)
     {
         if (_fetchLoopCancellationTokenSource == null || _fetchLoopCancellationTokenSource.IsCancellationRequested)
         {
             Interlocked.Increment(ref RestartCounter);
             _fetchLoopCancellationTokenSource?.Dispose();
-            _fetchLoopCancellationTokenSource = new CancellationTokenSource();
-            Catch.TaskRun(async () => await FetchAsync(_fetchLoopCancellationTokenSource));
+            _fetchLoopCancellationTokenSource = cancellationToken != null
+                ? CancellationTokenSource.CreateLinkedTokenSource(cancellationToken.Value)
+                : new CancellationTokenSource();
+
+            Catch.TaskRun(async () => await FetchAsync(_fetchLoopCancellationTokenSource), cancellationToken);
         }
     }
 

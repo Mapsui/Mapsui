@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 
 namespace Mapsui.Fetcher;
 
@@ -14,11 +15,11 @@ public class FetchMachine // Todo: Make internal
         }
     }
 
-    public void Start()
+    public void Start(CancellationToken? cancellationToken = null)
     {
         foreach (var worker in _worker)
         {
-            worker.Start();
+            worker.Start(cancellationToken);
         }
     }
 

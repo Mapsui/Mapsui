@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Logging;
 
@@ -32,34 +33,70 @@ public static class Catch
     }
 
     [SuppressMessage("Usage", "VSTHRD110:Observe result of async calls")]
-    public static void TaskRun(Action func)
+    public static void TaskRun(Action func, CancellationToken? cancellationToken = null)
     {
-        Task.Run(() =>
+        if (cancellationToken != null)
         {
-            try
-            {
-                func();
-            }
-            catch (Exception e)
-            {
-                Logger.Log(LogLevel.Error, e.Message, e);
-            }
-        });
+            Task.Run(() =>
+                {
+                    try
+                    {
+                        func();
+                    }
+                    catch (Exception e)
+                    {
+                        Logger.Log(LogLevel.Error, e.Message, e);
+                    }
+                },
+                cancellationToken.Value);
+        }
+        else
+        {
+            Task.Run(() =>
+                {
+                    try
+                    {
+                        func();
+                    }
+                    catch (Exception e)
+                    {
+                        Logger.Log(LogLevel.Error, e.Message, e);
+                    }
+                });
+        }
     }
 
     [SuppressMessage("Usage", "VSTHRD110:Observe result of async calls")]
-    public static void TaskRun(Func<Task> func)
+    public static void TaskRun(Func<Task> func, CancellationToken? cancellationToken = null)
     {
-        Task.Run(async () =>
+        if (cancellationToken != null)
         {
-            try
+            Task.Run(async () =>
             {
-                await func();
-            }
-            catch (Exception e)
+                try
+                {
+                    await func();
+                }
+                catch (Exception e)
+                {
+                    Logger.Log(LogLevel.Error, e.Message, e);
+                }
+            },
+                cancellationToken.Value);
+        }
+        else
+        {
+            Task.Run(async () =>
             {
-                Logger.Log(LogLevel.Error, e.Message, e);
-            }
-        });
+                try
+                {
+                    await func();
+                }
+                catch (Exception e)
+                {
+                    Logger.Log(LogLevel.Error, e.Message, e);
+                }
+            });
+        }
     }
 }

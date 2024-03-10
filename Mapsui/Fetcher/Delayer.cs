@@ -33,8 +33,10 @@ public class Delayer : IDisposable
     /// <param name="action">The action to be executed after the possible delay</param>
     /// <remarks>When the previous call was more than 'MillisecondsToWait' ago there will
     /// be no delay.</remarks>
-    public void ExecuteDelayed(Action action)
+    public void ExecuteDelayed(Action action, CancellationToken? cancellationToken = null)
     {
+        cancellationToken?.Register(CancelledWaiting);
+
         if (_waiting)
         {
             // If waiting, just assign the action and wait for it to be called.
@@ -94,5 +96,11 @@ public class Delayer : IDisposable
     {
         _waiting = false;
         _waitTimer.Change(Timeout.Infinite, Timeout.Infinite);
+    }
+
+    private void CancelledWaiting()
+    {
+        _action = null;
+        StopWaiting();
     }
 }

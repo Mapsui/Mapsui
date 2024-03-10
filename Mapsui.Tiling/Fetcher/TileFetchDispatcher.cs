@@ -132,7 +132,7 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
 
     public void StartFetching()
     {
-        _fetchMachine.Start();
+        _fetchMachine.Start(_fetchInfo?.CancellationToken);
     }
 
     private void OnPropertyChanged(string propertyName)
