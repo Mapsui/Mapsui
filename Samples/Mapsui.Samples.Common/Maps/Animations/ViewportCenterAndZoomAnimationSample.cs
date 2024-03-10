@@ -14,8 +14,6 @@ public class ViewportCenterAndZoomAnimationSample : ISample
     public string Name => "Animated Viewport - Zoom On Center";
     public string Category => "Animations";
 
-    public static int mode = 1;
-
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
@@ -29,7 +27,7 @@ public class ViewportCenterAndZoomAnimationSample : ISample
         {
             if (a.MapInfo?.WorldPosition != null)
             {
-                // Animate to the new center and new resultion
+                // Animate to the new center and new resolution
                 map.Navigator.CenterOnAndZoomTo(a.MapInfo.WorldPosition, a.MapInfo.Resolution * 0.5, 500, Easing.CubicOut);
             }
         };
@@ -37,7 +35,7 @@ public class ViewportCenterAndZoomAnimationSample : ISample
         return map;
     }
 
-    private static IWidget CreateTextBox(string text) => new TextBoxWidget()
+    private static TextBoxWidget CreateTextBox(string text) => new()
     {
         Text = text,
         VerticalAlignment = VerticalAlignment.Top,

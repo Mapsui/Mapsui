@@ -13,7 +13,7 @@ namespace Mapsui;
 public class Navigator
 {
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
-    private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
+    private IEnumerable<AnimationEntry<Viewport>> _animations = [];
     private readonly List<Action> _initialization = [];
     private MMinMax? _defaultZoomBounds;
     private MRect? _defaultPanBounds;
@@ -562,7 +562,7 @@ public class Navigator
         Viewport = Limit(viewport);
     }
 
-    private bool ShouldAnimationsBeHaltedBecauseOfLimiting(Viewport input, Viewport output)
+    private static bool ShouldAnimationsBeHaltedBecauseOfLimiting(Viewport input, Viewport output)
     {
         var zoomLimited = input.Resolution != output.Resolution;
         var fullyLimited =
@@ -686,7 +686,7 @@ public class Navigator
     internal int GetAnimationsCount => _animations.Count();
 
     /// <summary> Default Resolutions automatically set on Layers changed </summary>
-    internal IReadOnlyList<double> DefaultResolutions { get; set; } = new List<double>();
+    internal IReadOnlyList<double> DefaultResolutions { get; set; } = [];
 
     /// <summary> Default Zoom Bounds automatically set on Layers changed </summary>
 

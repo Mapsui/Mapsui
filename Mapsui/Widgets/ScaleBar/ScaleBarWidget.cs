@@ -42,11 +42,11 @@ public class ScaleBarWidget : Widget
     ///
     /// Default position of the scale bar.
     ///
-    private static readonly HorizontalAlignment DefaultScaleBarHorizontalAlignment = HorizontalAlignment.Left;
-    private static readonly VerticalAlignment DefaultScaleBarVerticalAlignment = VerticalAlignment.Bottom;
-    private static readonly Alignment DefaultScaleBarAlignment = Alignment.Left;
-    private static readonly ScaleBarMode DefaultScaleBarMode = ScaleBarMode.Single;
-    private static readonly Font DefaultFont = new() { FontFamily = "Arial", Size = 10 };
+    private static readonly HorizontalAlignment _defaultScaleBarHorizontalAlignment = HorizontalAlignment.Left;
+    private static readonly VerticalAlignment _defaultScaleBarVerticalAlignment = VerticalAlignment.Bottom;
+    private static readonly Alignment _defaultScaleBarAlignment = Alignment.Left;
+    private static readonly ScaleBarMode _defaultScaleBarMode = ScaleBarMode.Single;
+    private static readonly Font _defaultFont = new() { FontFamily = "Arial", Size = 10 };
 
 
     public ScaleBarWidget(Map map, IProjection? projection = null)
@@ -54,13 +54,13 @@ public class ScaleBarWidget : Widget
         _map = map;
         _projection = projection;
 
-        HorizontalAlignment = DefaultScaleBarHorizontalAlignment;
-        VerticalAlignment = DefaultScaleBarVerticalAlignment;
+        HorizontalAlignment = _defaultScaleBarHorizontalAlignment;
+        VerticalAlignment = _defaultScaleBarVerticalAlignment;
 
         _maxWidth = 100;
         Height = 100;
-        _textAlignment = DefaultScaleBarAlignment;
-        _scaleBarMode = DefaultScaleBarMode;
+        _textAlignment = _defaultScaleBarAlignment;
+        _scaleBarMode = _defaultScaleBarMode;
 
         _unitConverter = MetricUnitConverter.Instance;
     }
@@ -157,16 +157,16 @@ public class ScaleBarWidget : Widget
     /// <summary>
     /// Margin between end of tick and text
     /// </summary>
-    public double TextMargin => 1;
+    public static double TextMargin => 1;
 
-    private Font? _font = DefaultFont;
+    private Font? _font = _defaultFont;
 
     /// <summary>
     /// Font to use for drawing text
     /// </summary>
     public Font? Font
     {
-        get => _font ?? DefaultFont;
+        get => _font ?? _defaultFont;
         set
         {
             if (_font == value)
@@ -187,15 +187,9 @@ public class ScaleBarWidget : Widget
         get => _unitConverter;
         set
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException($"{nameof(UnitConverter)} must not be null");
-            }
+            ArgumentNullException.ThrowIfNull(value);
             if (_unitConverter == value)
-            {
                 return;
-            }
-
             _unitConverter = value;
             Invalidate();
         }
@@ -386,7 +380,6 @@ public class ScaleBarWidget : Widget
     /// Calculates the top-left-position of upper and lower text
     /// </summary>
     /// <param name="viewport">The viewport</param>
-    /// <param name="textSize">Default text size for the string "9999 m"</param>
     /// <param name="textSize1">Size of upper text of scalebar</param>
     /// <param name="textSize2">Size of lower text of scalebar</param>
     /// <param name="stroke">Width of line</param>
@@ -396,8 +389,7 @@ public class ScaleBarWidget : Widget
     /// posX2 as left position of lower scalebar text
     /// posY2 as top position of lower scalebar text
     /// </returns>
-    public (double posX1, double posY1, double posX2, double posY2) GetScaleBarTextPositions(Viewport viewport,
-        MRect textSize, MRect textSize1, MRect textSize2, double stroke)
+    public (double posX1, double posY1, double posX2, double posY2) GetScaleBarTextPositions(Viewport viewport, MRect textSize1, MRect textSize2, double stroke)
     {
         var drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
 
@@ -493,7 +485,7 @@ public class ScaleBarWidget : Widget
         var groundResolution = viewport.Resolution * Math.Cos(y / 180.0 * Math.PI);
 
         // Convert in units of UnitConverter
-        groundResolution = groundResolution / unitConverter.MeterRatio;
+        groundResolution /= unitConverter.MeterRatio;
 
         var scaleBarValues = unitConverter.ScaleBarValues;
 

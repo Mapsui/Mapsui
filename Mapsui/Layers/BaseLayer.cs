@@ -178,7 +178,7 @@ public abstract class BaseLayer : ILayer
     public HyperlinkWidget Attribution { get; set; } = new();
 
     /// <inheritdoc />
-    public virtual IReadOnlyList<double> Resolutions { get; } = new List<double>();
+    public virtual IReadOnlyList<double> Resolutions { get; } = [];
 
     /// <inheritdoc />
     public bool IsMapInfoLayer { get; set; }

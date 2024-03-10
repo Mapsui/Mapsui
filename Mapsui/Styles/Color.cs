@@ -401,10 +401,10 @@ public class Color
         from = from.Trim().ToLower();
 
         // Check, if it is a known color
-        if (KnownColors.ContainsKey(from))
-            from = KnownColors[from];
+        if (KnownColors.TryGetValue(from, out var value))
+            from = value;
 
-        if (from.StartsWith("#"))
+        if (from.StartsWith('#'))
         {
             if (from.Length == 7)
             {
