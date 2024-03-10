@@ -1,5 +1,4 @@
-﻿using Mapsui.Manipulations;
-using Mapsui.Widgets.BoxWidgets;
+﻿using Mapsui.Widgets.BoxWidgets;
 using System;
 
 namespace Mapsui.Widgets.ButtonWidgets;
@@ -16,10 +15,9 @@ public class ButtonWidget : TextBoxWidget
     /// Handle touch to Widget
     /// </summary>
     /// <param name="navigator">Navigator used by map</param>
-    /// <param name="position">Position of touch</param>
     /// <param name="e">Arguments for widget event</param>
     /// <returns>True, if touch is handled</returns>
-    public override bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
         return Tapped(this, e);
     }

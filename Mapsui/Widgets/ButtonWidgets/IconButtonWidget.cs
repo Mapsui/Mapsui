@@ -1,5 +1,4 @@
-﻿using Mapsui.Manipulations;
-using Mapsui.Styles;
+﻿using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
 using System;
 
@@ -103,7 +102,7 @@ public class IconButtonWidget : BoxWidget
         }
     }
 
-    public override bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
         return Tapped(this, e);
     }

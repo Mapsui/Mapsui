@@ -1,5 +1,4 @@
 ﻿using Mapsui.Extensions;
-using Mapsui.Manipulations;
 using Mapsui.Widgets.BoxWidgets;
 
 namespace Mapsui.Widgets.InfoWidgets;
@@ -17,9 +16,9 @@ public class MouseCoordinatesWidget : TextBoxWidget
         Text = "Mouse Position";
     }
 
-    public override bool OnPointerMoved(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
     {
-        var worldPosition = navigator.Viewport.ScreenToWorld(position);
+        var worldPosition = navigator.Viewport.ScreenToWorld(e.Position);
         // update the Mouse position
         Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
         return false;

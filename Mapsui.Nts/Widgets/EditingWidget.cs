@@ -1,5 +1,4 @@
-﻿using Mapsui.Manipulations;
-using Mapsui.Nts.Editing;
+﻿using Mapsui.Nts.Editing;
 using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidgets;
@@ -19,18 +18,18 @@ public class EditingWidget : BoxWidget // Derived from BoxWidget to have default
         EditManipulation = editManipulation;
     }
 
-    public override bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
         if (!e.LeftButton)
             return false;
 
         if (MapControl.Map != null)
             MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(
-                PointerState.Tapped, position, EditManager, MapControl, e);
+                PointerState.Tapped, e.Position, EditManager, MapControl, e);
 
         if (EditManager.SelectMode)
         {
-            var infoArgs = MapControl.GetMapInfo(position);
+            var infoArgs = MapControl.GetMapInfo(e.Position);
             if (infoArgs?.Feature != null)
             {
                 var currentValue = (bool?)infoArgs.Feature["Selected"] == true;
@@ -41,7 +40,7 @@ public class EditingWidget : BoxWidget // Derived from BoxWidget to have default
         return false;
     }
 
-    public override bool OnPointerPressed(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)
     {
         if (!e.LeftButton)
             return false;
@@ -50,19 +49,19 @@ public class EditingWidget : BoxWidget // Derived from BoxWidget to have default
             return false;
 
         return EditManipulation.Manipulate(
-            PointerState.Down, position, EditManager, MapControl, e);
+            PointerState.Down, e.Position, EditManager, MapControl, e);
     }
 
-    public override bool OnPointerMoved(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
     {
         if (e.LeftButton)
-            return EditManipulation.Manipulate(PointerState.Dragging, position, EditManager, MapControl, e);
+            return EditManipulation.Manipulate(PointerState.Dragging, e.Position, EditManager, MapControl, e);
         else
-            return EditManipulation.Manipulate(PointerState.Hovering, position, EditManager, MapControl, e);
+            return EditManipulation.Manipulate(PointerState.Hovering, e.Position, EditManager, MapControl, e);
     }
 
-    public override bool OnPointerReleased(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
     {
-        return EditManipulation.Manipulate(PointerState.Up, position, EditManager, MapControl, e);
+        return EditManipulation.Manipulate(PointerState.Up, e.Position, EditManager, MapControl, e);
     }
 }

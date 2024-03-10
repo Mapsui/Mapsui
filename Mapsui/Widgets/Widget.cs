@@ -1,5 +1,4 @@
-﻿using Mapsui.Manipulations;
-using System;
+﻿using System;
 using System.Runtime.CompilerServices;
 
 namespace Mapsui.Widgets;
@@ -171,25 +170,25 @@ public abstract class Widget : IWidget
     }
 
     /// <inheritdoc/>
-    public virtual bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public virtual bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
         return false;
     }
 
     /// <inheritdoc/>
-    public virtual bool OnPointerPressed(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public virtual bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)
     {
         return false;
     }
 
     /// <inheritdoc/>
-    public virtual bool OnPointerMoved(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public virtual bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
     {
         return false;
     }
 
     /// <inheritdoc/>
-    public virtual bool OnPointerReleased(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public virtual bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
     {
         return false;
     }

@@ -16,9 +16,9 @@ public class CustomWidget : Widget
 
     public Color? Color { get; set; }
 
-    public override bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
-        base.OnTapped(navigator, position, e);
+        base.OnTapped(navigator, e);
 
         if (e.TapType == TapType.Single)
             Color = GenerateRandomColor();

@@ -1,5 +1,4 @@
-﻿using Mapsui.Manipulations;
-using Mapsui.Styles;
+﻿using Mapsui.Styles;
 
 namespace Mapsui.Widgets.ButtonWidgets;
 
@@ -125,9 +124,9 @@ public class ZoomInOutWidget : Widget
         }
     }
 
-    public override bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
-        var result = base.OnTapped(navigator, position, e);
+        var result = base.OnTapped(navigator, e);
 
         if (result)
             return true;
@@ -135,8 +134,8 @@ public class ZoomInOutWidget : Widget
         if (Envelope == null)
             return false;
 
-        if (Orientation == Orientation.Vertical && position.Y < Envelope.MinY + Envelope.Height * 0.5 ||
-            Orientation == Orientation.Horizontal && position.X < Envelope.MinX + Envelope.Width * 0.5)
+        if (Orientation == Orientation.Vertical && e.Position.Y < Envelope.MinY + Envelope.Height * 0.5 ||
+            Orientation == Orientation.Horizontal && e.Position.X < Envelope.MinX + Envelope.Width * 0.5)
         {
             navigator.ZoomIn(500);
         }
