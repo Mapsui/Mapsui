@@ -184,7 +184,7 @@ public class GetFeatureInfo
                                        "FEATURE_COUNT=200&" +
                                        "FORMAT=image/png&STYLES=",
 
-            baseUrl, baseUrl.Contains("?") ? "&" : "?", //1 = Prefix
+            baseUrl, baseUrl.Contains('?') ? "&" : "?", //1 = Prefix
             wmsVersion,
             layer,
             crsParam,

@@ -89,8 +89,8 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
                 "None of the formats provided by the WMS service are supported");
         }
 
-        LayerList = new Collection<string>();
-        StylesList = new Collection<string>();
+        LayerList = [];
+        StylesList = [];
     }
 
     private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
@@ -116,12 +116,12 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     /// <summary>
     /// Gets the list of available formats
     /// </summary>
-    public Collection<string> OutputFormats => _wmsClient?.GetMapOutputFormats ?? new Collection<string>();
+    public Collection<string> OutputFormats => _wmsClient?.GetMapOutputFormats ?? [];
 
     /// <summary>
     /// Gets the list of available FeatureInfo Output Format
     /// </summary>
-    public Collection<string> GetFeatureInfoFormats => _wmsClient?.GetFeatureInfoOutputFormats ?? new Collection<string>();
+    public Collection<string> GetFeatureInfoFormats => _wmsClient?.GetFeatureInfoOutputFormats ?? [];
 
     /// <summary>
     /// Gets the service description from this server
@@ -388,7 +388,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         var strReq = new StringBuilder(resource.OnlineResource);
         if (!resource.OnlineResource?.Contains('?') ?? false)
             strReq.Append('?');
-        if (!strReq.ToString().EndsWith("&") && !strReq.ToString().EndsWith("?"))
+        if (!strReq.ToString().EndsWith('&') && !strReq.ToString().EndsWith('?'))
             strReq.Append('&');
         if (box != null)
         {
@@ -542,15 +542,15 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
 
     public MRect? GetExtent()
     {
-        if (CRS != null && _wmsClient != null && _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS))
+        if (CRS != null && _wmsClient != null && _wmsClient.Layer.BoundingBoxes.TryGetValue(CRS, out var value))
         {
             if (AxisOrder.IsNaturalOrder())
             {
-                return _wmsClient.Layer.BoundingBoxes[CRS];
+                return value;
             }
 
             // change x with y
-            var temp = _wmsClient.Layer.BoundingBoxes[CRS];
+            var temp = value;
             return new MRect(temp.MinY, temp.MinX, temp.MaxY, temp.MaxX);
 
         }
@@ -569,7 +569,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         var (success, raster) = await TryGetMapAsync(fetchInfo.Section);
         if (success)
             return new[] { new RasterFeature(raster) };
-        return Enumerable.Empty<IFeature>();
+        return [];
     }
 
     private async Task<Stream> GetStreamAsync(string url)
@@ -643,7 +643,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
                     }
                 }
 
-                result[featureInfo.LayerName] = new List<IFeature>() { feature };
+                result[featureInfo.LayerName] = [feature];
             }
 
         }

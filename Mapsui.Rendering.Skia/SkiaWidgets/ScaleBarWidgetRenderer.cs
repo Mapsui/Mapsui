@@ -59,7 +59,7 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         // Do this, because height of text changes sometimes (e.g. from 2 m to 1 m)
         _paintScaleTextStroke.MeasureText("9999 m", ref textSize);
 
-        var scaleBarHeight = textSize.Height + (scaleBar.TickLength + scaleBar.StrokeWidthHalo * 0.5f + scaleBar.TextMargin) * scaleBar.Scale;
+        var scaleBarHeight = textSize.Height + (scaleBar.TickLength + scaleBar.StrokeWidthHalo * 0.5f + ScaleBarWidget.TextMargin) * scaleBar.Scale;
 
         if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
         {
@@ -110,7 +110,7 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
             _paintScaleTextStroke.MeasureText(scaleBarText2, ref textSize2);
         }
 
-        var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, textSize.ToMRect(), textSize1.ToMRect(), textSize2.ToMRect(), scaleBar.StrokeWidthHalo);
+        var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, textSize1.ToMRect(), textSize2.ToMRect(), scaleBar.StrokeWidthHalo);
 
         // Now draw text
         canvas.DrawText(scaleBarText1, (float)posX1, (float)(posY1 - textSize1.Top), _paintScaleTextStroke);

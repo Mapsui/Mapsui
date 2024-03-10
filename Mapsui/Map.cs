@@ -244,10 +244,10 @@ public class Map : INotifyPropertyChanged, IDisposable
 
     private void LayersCollectionChanged(object sender, LayerCollectionChangedEventArgs args)
     {
-        foreach (var layer in args.RemovedLayers ?? Enumerable.Empty<ILayer>())
+        foreach (var layer in args.RemovedLayers ?? [])
             LayerRemoved(layer);
 
-        foreach (var layer in args.AddedLayers ?? Enumerable.Empty<ILayer>())
+        foreach (var layer in args.AddedLayers ?? [])
             LayerAdded(layer);
 
         LayersChanged();
@@ -316,7 +316,7 @@ public class Map : INotifyPropertyChanged, IDisposable
             }
         }
 
-        return items.Select(i => i.Value).OrderByDescending(i => i).ToList();
+        return [.. items.Select(i => i.Value).OrderByDescending(i => i)];
     }
 
     private void LayerPropertyChanged(object? sender, PropertyChangedEventArgs e)

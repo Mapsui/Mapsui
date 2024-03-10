@@ -29,7 +29,7 @@ public class CustomSvgStyleSample : ISample
         "This allows users to change the fill and outline of an SVG with different colors.";
 
     private const double _circumferenceOfTheEarth = 40075017;
-    private Random _random = new(1337);
+    private readonly Random _random = new(1337);
 
     public Task<Map> CreateMapAsync()
     {

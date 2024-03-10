@@ -10,11 +10,11 @@ namespace Mapsui.Utilities;
 
 public static class Algorithms
 {
-    private const double TO_RADIANS = Math.PI / 180.0;
-    private const double TO_DEGREES = 180.0 / Math.PI;
+    private const double _toRadians = Math.PI / 180.0;
+    private const double _toDegrees = 180.0 / Math.PI;
 
     /// <summary>
-    ///     Gets the euclidean distance between two points.
+    ///     Gets the Euclidean distance between two points.
     /// </summary>
     /// <param name="x1">The first point's X coordinate.</param>
     /// <param name="y1">The first point's Y coordinate.</param>
@@ -36,15 +36,9 @@ public static class Algorithms
     /// </summary>
     /// <param name="degrees">Angle to convert (degrees)</param>
     /// <returns>Returns the angle in radians</returns>
-    public static double DegreesToRadians(double degrees)
-    {
-        return degrees * TO_RADIANS;
-    }
+    public static double DegreesToRadians(double degrees) => degrees * _toRadians;
 
-    public static double RadiansToDegrees(double radians)
-    {
-        return radians * TO_DEGREES;
-    }
+    public static double RadiansToDegrees(double radians) => radians * _toDegrees;
 
     /// <summary>
     ///     Rotates the specified point clockwise about the origin

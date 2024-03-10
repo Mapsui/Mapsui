@@ -146,7 +146,9 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// <param name="map">Map, to which this layer belongs</param>
     public MyLocationLayer(Map map)
     {
-        _map = map ?? throw new ArgumentNullException("Map shouldn't be null", nameof(map));
+        ArgumentNullException.ThrowIfNull(map);
+
+        _map = map;
         _map.Info += HandleClicked;
 
         Enabled = true;
