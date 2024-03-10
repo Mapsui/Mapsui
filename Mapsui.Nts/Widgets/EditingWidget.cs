@@ -4,13 +4,11 @@ using Mapsui.UI;
 using Mapsui.Widgets;
 
 namespace Mapsui.Nts.Widgets;
-public class EditingWidget : Widget, ITouchableWidget
+public class EditingWidget : Widget
 {
     public IMapControl MapControl { get; }
     public EditManager EditManager { get; }
     public EditManipulation EditManipulation { get; }
-
-    public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
 
     public EditingWidget(IMapControl mapControl, EditManager editManager, EditManipulation editManipulation)
     {
@@ -19,7 +17,7 @@ public class EditingWidget : Widget, ITouchableWidget
         EditManipulation = editManipulation;
     }
 
-    public bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
     {
         if (!e.LeftButton)
             return false;
@@ -41,7 +39,7 @@ public class EditingWidget : Widget, ITouchableWidget
         return false;
     }
 
-    public bool OnPointerPressed(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnPointerPressed(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
     {
         if (!e.LeftButton)
             return false;
@@ -53,7 +51,7 @@ public class EditingWidget : Widget, ITouchableWidget
             PointerState.Down, position, EditManager, MapControl, e);
     }
 
-    public bool OnPointerMoved(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnPointerMoved(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
     {
         if (e.LeftButton)
             return EditManipulation.Manipulate(PointerState.Dragging, position, EditManager, MapControl, e);
@@ -61,7 +59,7 @@ public class EditingWidget : Widget, ITouchableWidget
             return EditManipulation.Manipulate(PointerState.Hovering, position, EditManager, MapControl, e);
     }
 
-    public bool OnPointerReleased(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnPointerReleased(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
     {
         return EditManipulation.Manipulate(PointerState.Up, position, EditManager, MapControl, e);
     }

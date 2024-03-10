@@ -15,12 +15,11 @@ public static class WidgetTouch
     /// Returns the Widgets in the list that contain the screenPosition
     /// within it's Envelope. Returns null if there are none.
     /// </returns>
-    public static IEnumerable<ITouchableWidget> GetTouchedWidgets(ScreenPosition screenPosition, Map map)
+    public static IEnumerable<IWidget> GetTouchedWidgets(ScreenPosition screenPosition, Map map)
     {
-        var touchedWidgets = new List<ITouchableWidget>();
+        var touchedWidgets = new List<IWidget>();
 
-        var touchableWidgets = map.GetWidgetsOfMapAndLayers().OfType<ITouchableWidget>()
-            .Where(w => w.Enabled).Reverse().ToList();
+        var touchableWidgets = map.GetWidgetsOfMapAndLayers().Where(w => w.Enabled).Reverse().ToList();
 
         foreach (var widget in touchableWidgets)
         {

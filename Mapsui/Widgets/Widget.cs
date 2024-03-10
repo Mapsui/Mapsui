@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapsui.Manipulations;
+using System;
 using System.Runtime.CompilerServices;
 
 namespace Mapsui.Widgets;
@@ -6,6 +7,11 @@ namespace Mapsui.Widgets;
 public abstract class Widget : IWidget
 {
     private HorizontalAlignment _horizontalAlignment = HorizontalAlignment.Right;
+
+    /// <summary>
+    /// Type of area to use for touch events
+    /// </summary>
+    public TouchableAreaType TouchableArea { get; init; } = TouchableAreaType.Widget;
 
     /// <summary>
     /// Horizontal alignment of Widget
@@ -159,6 +165,30 @@ public abstract class Widget : IWidget
     public virtual void Invalidate([CallerMemberName] string name = "")
     {
         NeedsRedraw = true;
+    }
+
+    /// <inheritdoc/>
+    public virtual bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    {
+        return false;
+    }
+
+    /// <inheritdoc/>
+    public virtual bool OnPointerPressed(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    {
+        return false;
+    }
+
+    /// <inheritdoc/>
+    public virtual bool OnPointerMoved(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    {
+        return false;
+    }
+
+    /// <inheritdoc/>
+    public virtual bool OnPointerReleased(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    {
+        return false;
     }
 
     private double CalculatePositionX(double left, double right, double width) => HorizontalAlignment switch

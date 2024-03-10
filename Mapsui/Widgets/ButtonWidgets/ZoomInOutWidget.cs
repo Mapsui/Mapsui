@@ -21,7 +21,7 @@ namespace Mapsui.Widgets.ButtonWidgets;
 /// Opacity: Opacity of buttons
 /// ZoomFactor: Factor for changing Resolution. Default is 2;
 /// </summary>
-public class ZoomInOutWidget : TouchableWidget
+public class ZoomInOutWidget : Widget
 {
     private double _size = 40;
 
