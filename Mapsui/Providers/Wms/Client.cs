@@ -105,7 +105,7 @@ public class Client
         public string[] Keywords;
 
         /// <summary>
-        /// Latitudal/longitudal extent of this layer
+        /// Extent of this layer in latitudinal/longitudinal coordinates
         /// </summary>
         public MRect LatLonBoundingBox;
 
@@ -238,18 +238,18 @@ public class Client
     {
         _userAgent = userAgent;
         _persistentCache = persistentCache;
-        _getStreamAsync = InitialiseGetStreamAsyncMethod(getStreamAsync);
+        _getStreamAsync = InitializeGetStreamAsyncMethod(getStreamAsync);
     }
 
     public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>>? getStreamAsync = null, string? userAgent = null)
     {
         _userAgent = userAgent;
-        _getStreamAsync = InitialiseGetStreamAsyncMethod(getStreamAsync);
+        _getStreamAsync = InitializeGetStreamAsyncMethod(getStreamAsync);
         _nsmgr = new XmlNamespaceManager(capabilitiesXmlDocument.NameTable);
         ParseCapabilities(capabilitiesXmlDocument);
     }
 
-    private Func<string, Task<Stream>> InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
+    private Func<string, Task<Stream>> InitializeGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
     {
         return getStreamAsync ?? GetStreamAsync;
     }

@@ -317,7 +317,7 @@ public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
 
         while (current != null)
         {
-            if (hashcode == current.Hashcode && _comparer.Equals(current.Item, item))
+            if (hashcode == current.HashCode && _comparer.Equals(current.Item, item))
             {
                 return true;
             }
@@ -358,7 +358,7 @@ public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
                 {
                     Debug.Assert(previous == null && current == tables.Buckets[bucketNo] || previous?.Next == current);
 
-                    if (hashcode == current.Hashcode && _comparer.Equals(current.Item, item))
+                    if (hashcode == current.HashCode && _comparer.Equals(current.Item, item))
                     {
                         if (previous == null)
                         {
@@ -499,7 +499,7 @@ public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
                 for (var current = tables.Buckets[bucketNo]; current != null; current = current.Next)
                 {
                     Debug.Assert(previous == null && current == tables.Buckets[bucketNo] || previous?.Next == current);
-                    if (hashcode == current.Hashcode && _comparer.Equals(current.Item, item))
+                    if (hashcode == current.HashCode && _comparer.Equals(current.Item, item))
                     {
                         return false;
                     }
@@ -546,16 +546,16 @@ public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
         }
     }
 
-    private static int GetBucket(int hashcode, int bucketCount)
+    private static int GetBucket(int hashCode, int bucketCount)
     {
-        var bucketNo = (hashcode & 0x7fffffff) % bucketCount;
+        var bucketNo = (hashCode & 0x7fffffff) % bucketCount;
         Debug.Assert(bucketNo >= 0 && bucketNo < bucketCount);
         return bucketNo;
     }
 
-    private static void GetBucketAndLockNo(int hashcode, out int bucketNo, out int lockNo, int bucketCount, int lockCount)
+    private static void GetBucketAndLockNo(int hashCode, out int bucketNo, out int lockNo, int bucketCount, int lockCount)
     {
-        bucketNo = (hashcode & 0x7fffffff) % bucketCount;
+        bucketNo = (hashCode & 0x7fffffff) % bucketCount;
         lockNo = bucketNo % lockCount;
 
         Debug.Assert(bucketNo >= 0 && bucketNo < bucketCount);
@@ -670,9 +670,9 @@ public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
                 while (current != null)
                 {
                     var next = current.Next;
-                    GetBucketAndLockNo(current.Hashcode, out var newBucketNo, out var newLockNo, newBuckets.Length, newLocks.Length);
+                    GetBucketAndLockNo(current.HashCode, out var newBucketNo, out var newLockNo, newBuckets.Length, newLocks.Length);
 
-                    newBuckets[newBucketNo] = new Node(current.Item, current.Hashcode, newBuckets[newBucketNo]);
+                    newBuckets[newBucketNo] = new Node(current.Item, current.HashCode, newBuckets[newBucketNo]);
 
                     checked
                     {
@@ -763,7 +763,7 @@ public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
     private class Node(T item, int hashCode, ConcurrentHashSet<T>.Node next)
     {
         public readonly T Item = item;
-        public readonly int Hashcode = hashCode;
+        public readonly int HashCode = hashCode;
 
         public volatile Node Next = next;
     }

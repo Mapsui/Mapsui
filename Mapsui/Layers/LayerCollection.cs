@@ -204,8 +204,8 @@ public class LayerCollection : IEnumerable<ILayer>
         Changed?.Invoke(this, new LayerCollectionChangedEventArgs(added, removed, moved));
     }
 
-    public IEnumerable<ILayer> FindLayer(string layername)
+    public IEnumerable<ILayer> FindLayer(string layerName)
     {
-        return _layers.Where(layer => layer.Name.Contains(layername));
+        return _layers.Where(layer => layer.Name.Contains(layerName));
     }
 }

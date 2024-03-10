@@ -49,7 +49,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
         : this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache ?? DefaultCache)
     {
-        InitialiseGetStreamAsyncMethod(getStreamAsync);
+        InitializeGetStreamAsyncMethod(getStreamAsync);
     }
 
     /// <summary>
@@ -67,14 +67,14 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         {
             UserAgent = userAgent
         };
-        provider.InitialiseGetStreamAsyncMethod(getStreamAsync);
+        provider.InitializeGetStreamAsyncMethod(getStreamAsync);
         return provider;
     }
 
     private WmsProvider(Client wmsClient, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
     {
         _persistentCache = persistentCache ?? DefaultCache;
-        InitialiseGetStreamAsyncMethod(getStreamAsync);
+        InitializeGetStreamAsyncMethod(getStreamAsync);
         _wmsClient = wmsClient;
         TimeOut = 10000;
         ContinueOnError = true;
@@ -93,7 +93,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         StylesList = [];
     }
 
-    private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
+    private void InitializeGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
     {
         _getStreamAsync = getStreamAsync ?? GetStreamAsync;
     }
@@ -227,9 +227,9 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
             return true;
         }
 
-        foreach (var childlayer in layer.ChildLayers)
+        foreach (var childLayer in layer.ChildLayers)
         {
-            if (FindLayer(childlayer, name, out result))
+            if (FindLayer(childLayer, name, out result))
                 return true;
         }
         return false;
@@ -324,7 +324,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     public void SetImageFormat(string mimeType)
     {
         if (!OutputFormats.Contains(mimeType))
-            throw new ArgumentException("WMS service doesn't not offer mimetype '" + mimeType + "'");
+            throw new ArgumentException("WMS service doesn't not offer mime type '" + mimeType + "'");
         _mimeType = mimeType;
     }
 
@@ -400,7 +400,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
 
             if (wmsVersion.Equals("1.3.0") && CRS != null && !AxisOrder.IsNaturalOrder())
             {
-                // This is a fix for the inverted X/Y coordinates in WMS 1.3.0 suggesed by der1Mac here:
+                // This is a fix for the inverted X/Y coordinates in WMS 1.3.0 suggested by der1Mac here:
                 // https://github.com/Mapsui/Mapsui/issues/1925#issuecomment-1493411132
                 // Who based this on:
                 // https://viswaug.wordpress.com/2009/03/15/reversed-co-ordinate-axis-order-for-epsg4326-vs-crs84-when-requesting-wms-130-images/

@@ -27,7 +27,7 @@ public class ViewportCenterAndZoomAnimationSample : ISample
         {
             if (a.MapInfo?.WorldPosition != null)
             {
-                // Animate to the new center and new resultion
+                // Animate to the new center and new resolution
                 map.Navigator.CenterOnAndZoomTo(a.MapInfo.WorldPosition, a.MapInfo.Resolution * 0.5, 500, Easing.CubicOut);
             }
         };
