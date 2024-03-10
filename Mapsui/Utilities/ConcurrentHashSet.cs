@@ -304,12 +304,12 @@ public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
         if (item == null)
             return false;
 
-        var hashcode = _comparer.GetHashCode(item);
+        var hashCode = _comparer.GetHashCode(item);
 
         // We must capture the _buckets field in a local variable. It is set to a new table on each table resize.
         var tables = _tables;
 
-        var bucketNo = GetBucket(hashcode, tables.Buckets.Length);
+        var bucketNo = GetBucket(hashCode, tables.Buckets.Length);
 
         // We can get away w/out a lock here.
         // The Volatile.Read ensures that the load of the fields of 'n' doesn't move before the load from buckets[i].
@@ -317,7 +317,7 @@ public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
 
         while (current != null)
         {
-            if (hashcode == current.HashCode && _comparer.Equals(current.Item, item))
+            if (hashCode == current.HashCode && _comparer.Equals(current.Item, item))
             {
                 return true;
             }
