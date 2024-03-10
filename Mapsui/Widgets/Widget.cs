@@ -153,6 +153,8 @@ public abstract class Widget : IWidget
     /// </summary>
     public bool NeedsRedraw { get; set; } = false;
 
+    public bool InputTransparent { get; init; }
+
     public void UpdateEnvelope(double maxWidth, double maxHeight, double screenWidth, double screenHeight)
     {
         var minX = CalculatePositionX(0, screenWidth, maxWidth);

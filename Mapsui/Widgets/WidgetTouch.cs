@@ -19,7 +19,7 @@ public static class WidgetTouch
     {
         var touchedWidgets = new List<IWidget>();
 
-        var touchableWidgets = map.GetWidgetsOfMapAndLayers().Where(w => w.Enabled).Reverse().ToList();
+        var touchableWidgets = map.GetWidgetsOfMapAndLayers().Where(w => w.Enabled && w.InputTransparent == false).Reverse().ToList();
 
         foreach (var widget in touchableWidgets)
         {

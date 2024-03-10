@@ -21,7 +21,7 @@ public class CustomWidgetSample : ISample
             Margin = new MRect(20),
             Width = 100,
             Height = 20,
-            Color = Color.GoldenRod
+            Color = new Color(218, 165, 32, 127)
         });
 
         return Task.FromResult(map);

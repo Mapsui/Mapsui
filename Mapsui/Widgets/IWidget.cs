@@ -54,6 +54,8 @@ public interface IWidget
     /// </summary>
     WidgetAreaType WidgetAreaType { get; }
 
+    bool InputTransparent { get; init; }
+
     /// <summary>
     /// Function, which handles the widget tapped event
     /// </summary>
