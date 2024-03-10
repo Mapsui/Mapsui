@@ -20,15 +20,15 @@ namespace Mapsui.Providers.Wfs.Utilities;
 /// <summary>
 /// This class provides an easy to use interface for HTTP-GET and HTTP-POST requests.
 /// </summary>
-public class HttpClientUtil : IDisposable
+public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisposable
 {
 
-    private readonly Dictionary<string, string?> _requestHeaders;
+    private readonly Dictionary<string, string?> _requestHeaders = [];
     private byte[]? _postData;
     private string? _proxyUrl;
     private string? _url;
     private ICredentials? _credentials;
-    private readonly IUrlPersistentCache? _persistentCache;
+    private readonly IUrlPersistentCache? _persistentCache = persistentCache;
 
     /// <summary>
     /// Gets ans sets the Url of the request.
@@ -63,15 +63,6 @@ public class HttpClientUtil : IDisposable
     {
         get => _credentials;
         set => _credentials = value;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="HttpClientUtil"/> class.
-    /// </summary>
-    public HttpClientUtil(IUrlPersistentCache? persistentCache = null)
-    {
-        _persistentCache = persistentCache;
-        _requestHeaders = [];
     }
 
 

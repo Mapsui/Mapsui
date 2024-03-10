@@ -11,34 +11,34 @@ public static class UrlQueryHelper
         // remove lending /
         if (url.EndsWith(@"/"))
         {
-            url = url.Substring(0, url.Length - 1);
+            url = url[..^1];
         }
 
-        if (url.Contains("?"))
+        if (url.Contains('?'))
         {
             // is already a query string
 
             // remove starting ?
-            if (query.StartsWith("?"))
+            if (query.StartsWith('?'))
             {
-                query = query.Substring(1, query.Length - 1);
+                query = query[1..];
             }
 
             // remove starting &
-            if (query.StartsWith("&"))
+            if (query.StartsWith('&'))
             {
-                query = query.Substring(1, query.Length - 1);
+                query = query[1..];
             }
 
             // Add & if necessary
-            if (!url.EndsWith("&"))
+            if (!url.EndsWith('&'))
             {
-                url = url + "&";
+                url += '&';
             }
         }
         else
         {
-            if (!query.StartsWith("?"))
+            if (!query.StartsWith('?'))
             {
                 // add ? to query
                 query = "?" + query;

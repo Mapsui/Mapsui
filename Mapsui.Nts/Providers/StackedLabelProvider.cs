@@ -9,28 +9,20 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Providers;
 
-public class StackedLabelProvider : IProvider
+public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen? rectangleLine = null,
+    Brush? rectangleFill = null) : IProvider
 {
-    private const int SymbolSize = 32; // todo: determine margin by symbol size
-    private const int BoxMargin = SymbolSize / 2;
+    private const int _symbolSize = 32; // todo: determine margin by symbol size
+    private const int _boxMargin = _symbolSize / 2;
 
-    private readonly IProvider _provider;
-    private readonly LabelStyle _labelStyle;
-
-    public StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen? rectangleLine = null,
-        Brush? rectangleFill = null)
-    {
-        _provider = provider;
-        _labelStyle = labelStyle;
-        _rectangleLine = rectangleLine ?? new Pen(Color.Gray);
-        _rectangleFill = rectangleFill;
-    }
+    private readonly IProvider _provider = provider;
+    private readonly LabelStyle _labelStyle = labelStyle;
 
     public string? CRS { get; set; }
 
-    private readonly Brush? _rectangleFill;
+    private readonly Brush? _rectangleFill = rectangleFill;
 
-    private readonly Pen _rectangleLine;
+    private readonly Pen _rectangleLine = rectangleLine ?? new Pen(Color.Gray);
 
     public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
@@ -47,7 +39,7 @@ public class StackedLabelProvider : IProvider
         IEnumerable<IFeature>? features, Pen line, Brush? fill)
     {
         if (features == null)
-            return Enumerable.Empty<IFeature>();
+            return [];
 
         var margin = resolution * 50;
         var clusters = ClusterFeatures(features, margin, labelStyle, resolution);
@@ -88,7 +80,7 @@ public class StackedLabelProvider : IProvider
     private static double CalculateOffsetY(double offsetY, int textHeight)
     {
         if (double.IsNaN(offsetY)) // first time
-            offsetY = textHeight * 0.5 + BoxMargin;
+            offsetY = textHeight * 0.5 + _boxMargin;
         else
             offsetY += textHeight; // todo: get size from text (or just pass stack nr)
         return offsetY;
@@ -173,20 +165,15 @@ public class StackedLabelProvider : IProvider
             if (found) continue;
 
             if (feature.Extent != null)
-                clusters.Add(new Cluster(feature.Extent.Copy(), new List<IFeature> { feature }));
+                clusters.Add(new Cluster(feature.Extent.Copy(), [feature]));
         }
 
         return clusters;
     }
 
-    private class Cluster
+    private class Cluster(MRect box, IList<IFeature> features)
     {
-        public Cluster(MRect box, IList<IFeature> features)
-        {
-            Box = box;
-            Features = features;
-        }
-        public MRect Box { get; set; }
-        public IList<IFeature> Features { get; }
+        public MRect Box { get; set; } = box;
+        public IList<IFeature> Features { get; } = features;
     }
 }

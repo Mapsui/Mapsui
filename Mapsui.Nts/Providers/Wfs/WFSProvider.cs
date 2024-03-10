@@ -515,7 +515,7 @@ public class WFSProvider : IProvider, IDisposable
     public async Task<IEnumerable<IFeature>> ExecuteIntersectionQueryAsync(MRect? bbox)
     {
         await InitAsync();
-        if (_featureTypeInfo == null) return new List<IFeature>();
+        if (_featureTypeInfo == null) return [];
 
         var features = new List<IFeature>();
 
