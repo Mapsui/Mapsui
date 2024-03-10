@@ -157,11 +157,20 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         };
     }
 
-    public virtual void Dispose()
+    public void Dispose()
     {
-        _paintScaleBar?.Dispose();
-        _paintScaleBarStroke?.Dispose();
-        _paintScaleText?.Dispose();
-        _paintScaleTextStroke?.Dispose();
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _paintScaleBar?.Dispose();
+            _paintScaleBarStroke?.Dispose();
+            _paintScaleText?.Dispose();
+            _paintScaleTextStroke?.Dispose();
+        }
     }
 }

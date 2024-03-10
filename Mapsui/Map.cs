@@ -361,16 +361,20 @@ public class Map : INotifyPropertyChanged, IDisposable
         Info?.Invoke(this, mapInfoEventArgs);
     }
 
-    public virtual void Dispose()
+    public void Dispose()
     {
-        foreach (var layer in Layers)
-        {
-            // remove Event so that no memory leaks occur
-            LayerRemoved(layer);
-        }
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
-        // clear the layers
-        Layers.Clear();
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            foreach (var layer in Layers)
+                LayerRemoved(layer); // Remove Event so that no memory leaks occur
+            Layers.Clear();
+        }
     }
 
     public bool UpdateAnimations()
