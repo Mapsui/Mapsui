@@ -64,7 +64,7 @@ public class ColorBlend
         if (Positions[0] != 0f)
             throw new ArgumentException("First position value must be 0.0f");
         // ReSharper disable once CompareOfFloatsByEqualityOperator
-        if (Positions[Positions.Length - 1] != 1f)
+        if (Positions[^1] != 1f)
             throw new ArgumentException("Last position value must be 1.0f");
         if (pos > 1 || pos < 0) pos -= Math.Floor(pos);
         var i = 1;
@@ -114,8 +114,14 @@ public class ColorBlend
             var i = 0;
             for (double f = 0; f <= 1; f += 1.0f / 6)
                 cb.Positions[i++] = f;
-            cb.Colors = new[] {
-                Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Blue, Color.Indigo, Color.Violet};
+            cb.Colors = [
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Green,
+                Color.Blue,
+                Color.Indigo,
+                Color.Violet];
             return cb;
         }
     }
@@ -127,49 +133,48 @@ public class ColorBlend
     /// Colors span the following with an interval of 0.25:
     /// { Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue }
     /// </remarks>
-    public static ColorBlend Rainbow5 => new ColorBlend(
-                new[] { Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue },
-                new[] { 0, 0.25, 0.5, 0.75, 1 });
+    public static ColorBlend Rainbow5
+        => new([Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue], [0, 0.25, 0.5, 0.75, 1]);
 
     /// <summary>
     /// Gets a linear gradient scale from black to white
     /// </summary>
-    public static ColorBlend BlackToWhite => new ColorBlend(new[] { Color.Black, Color.White }, new[] { 0.0, 1.0 });
+    public static ColorBlend BlackToWhite => new([Color.Black, Color.White], [0.0, 1.0]);
 
     /// <summary>
     /// Gets a linear gradient scale from white to black
     /// </summary>
-    public static ColorBlend WhiteToBlack => new ColorBlend(new[] { Color.White, Color.Black }, new[] { 0.0, 1.0 });
+    public static ColorBlend WhiteToBlack => new([Color.White, Color.Black], [0.0, 1.0]);
 
     /// <summary>
     /// Gets a linear gradient scale from red to green
     /// </summary>
-    public static ColorBlend RedToGreen => new ColorBlend(new[] { Color.Red, Color.Green }, new[] { 0.0, 1.0 });
+    public static ColorBlend RedToGreen => new([Color.Red, Color.Green], [0.0, 1.0]);
 
     /// <summary>
     /// Gets a linear gradient scale from green to red
     /// </summary>
-    public static ColorBlend GreenToRed => new ColorBlend(new[] { Color.Green, Color.Red }, new[] { 0.0, 1.0 });
+    public static ColorBlend GreenToRed => new([Color.Green, Color.Red], [0.0, 1.0]);
 
     /// <summary>
     /// Gets a linear gradient scale from blue to green
     /// </summary>
-    public static ColorBlend BlueToGreen => new ColorBlend(new[] { Color.Blue, Color.Green }, new[] { 0.0, 1.0 });
+    public static ColorBlend BlueToGreen => new([Color.Blue, Color.Green], [0.0, 1.0]);
 
     /// <summary>
     /// Gets a linear gradient scale from green to blue
     /// </summary>
-    public static ColorBlend GreenToBlue => new ColorBlend(new[] { Color.Green, Color.Blue }, new[] { 0.0, 1.0 });
+    public static ColorBlend GreenToBlue => new([Color.Green, Color.Blue], [0.0, 1.0]);
 
     /// <summary>
     /// Gets a linear gradient scale from red to blue
     /// </summary>
-    public static ColorBlend RedToBlue => new ColorBlend(new[] { Color.Red, Color.Blue }, new[] { 0.0, 1.0 });
+    public static ColorBlend RedToBlue => new([Color.Red, Color.Blue], [0.0, 1.0]);
 
     /// <summary>
     /// Gets a linear gradient scale from blue to red
     /// </summary>
-    public static ColorBlend BlueToRed => new ColorBlend(new[] { Color.Blue, Color.Red }, new[] { 0.0, 1.0 });
+    public static ColorBlend BlueToRed => new([Color.Blue, Color.Red], [0.0, 1.0]);
 
 
 
@@ -181,7 +186,7 @@ public class ColorBlend
     /// <returns></returns>
     public static ColorBlend TwoColors(Color fromColor, Color toColor)
     {
-        return new ColorBlend(new[] { fromColor, toColor }, new[] { 0.0, 1.0 });
+        return new ColorBlend([fromColor, toColor], [0.0, 1.0]);
     }
 
     /// <summary>
@@ -189,7 +194,6 @@ public class ColorBlend
     /// </summary>
     public static ColorBlend ThreeColors(Color fromColor, Color middleColor, Color toColor)
     {
-        return new ColorBlend(new[] { fromColor, middleColor, toColor }, new[] { 0, 0.5, 1 });
+        return new ColorBlend([fromColor, middleColor, toColor], [0, 0.5, 1]);
     }
-
 }

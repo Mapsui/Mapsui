@@ -25,3 +25,6 @@ Resnap
 openstreetmap
 rasters
 flinged
+esri
+nuget
+onscroll

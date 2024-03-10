@@ -1,4 +1,3 @@
-using Mapsui.Extensions;
 using Mapsui.Logging;
 using System;
 using System.Collections.Generic;
@@ -19,12 +18,6 @@ public class GetFeatureInfo
     public const string TextXmlSubtypeGml = "text/xml; subtype=gml/3.1.1";
     private string? _infoFormat;
     private string? _layerName;
-
-    [Obsolete("Use RequestAsync")]
-    public event StatusEventHandler? IdentifyFinished;
-
-    [Obsolete("Use RequestAsync")]
-    public event StatusEventHandler? IdentifyFailed;
     private readonly Func<string, Task<Stream>> _getStreamAsync;
 
     public GetFeatureInfo(Func<string, Task<Stream>>? getStreamAsync = null)
@@ -44,52 +37,6 @@ public class GetFeatureInfo
     /// Provides the base authentication interface for retrieving credentials for Web client authentication.
     /// </summary>
     public ICredentials? Credentials { get; set; }
-
-    /// <summary>
-    /// Request FeatureInfo for a WMS Server
-    /// </summary>
-    /// <param name="baseUrl">Base URL of the WMS server</param>
-    /// <param name="wmsVersion">WMS Version</param>
-    /// <param name="infoFormat">Format of response (text/xml, text/plain, etc)</param>
-    /// <param name="srs">EPSG Code of the coordinate system</param>
-    /// <param name="layer">Layer to get FeatureInfo From</param>
-    /// <param name="extendXmin"></param>
-    /// <param name="extendYmin"></param>
-    /// <param name="extendXmax"></param>
-    /// <param name="extendYmax"></param>
-    /// <param name="x">Coordinate in pixels x</param>
-    /// <param name="y">Coordinate in pixels y</param>
-    /// <param name="mapWidth">Width of the map</param>
-    /// <param name="mapHeight">Height of the map</param>
-    [Obsolete("Use RequestAsync")]
-    public void Request(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, int x, int y, int mapWidth, int mapHeight)
-    {
-        _infoFormat = infoFormat;
-        var requestUrl = CreateRequestUrl(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight);
-
-        Catch.TaskRun(async () =>
-        {
-            using var task = await _getStreamAsync(requestUrl);
-            try
-            {
-                var parser = GetParserFromFormat(_infoFormat);
-
-                if (parser == null)
-                {
-                    OnIdentifyFailed();
-                    return;
-                }
-
-                var featureInfo = parser.ParseWMSResult(_layerName, task);
-                OnIdentifyFinished(featureInfo);
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(LogLevel.Error, ex.Message, ex);
-                OnIdentifyFailed();
-            }
-        });
-    }
 
     /// <summary>
     /// Request FeatureInfo for a WMS Server
@@ -184,7 +131,7 @@ public class GetFeatureInfo
                                        "FEATURE_COUNT=200&" +
                                        "FORMAT=image/png&STYLES=",
 
-            baseUrl, baseUrl.Contains("?") ? "&" : "?", //1 = Prefix
+            baseUrl, baseUrl.Contains('?') ? "&" : "?", //1 = Prefix
             wmsVersion,
             layer,
             crsParam,
@@ -224,17 +171,5 @@ public class GetFeatureInfo
             return null;
 
         return null;
-    }
-
-    private void OnIdentifyFinished(FeatureInfo featureInfo)
-    {
-        var handler = IdentifyFinished;
-        handler?.Invoke(this, featureInfo);
-    }
-
-    private void OnIdentifyFailed()
-    {
-        var handler = IdentifyFailed;
-        handler?.Invoke(this, null);
     }
 }

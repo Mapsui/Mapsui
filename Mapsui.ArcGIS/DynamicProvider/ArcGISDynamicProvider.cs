@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -75,7 +74,7 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
         set
         {
             _url = value;
-            if (!string.IsNullOrEmpty(value) && value[value.Length - 1].Equals('/'))
+            if (!string.IsNullOrEmpty(value) && value[^1].Equals('/'))
                 _url = value.Remove(value.Length - 1);
         }
     }
@@ -99,14 +98,14 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
     {
         //If there are no layers (probably not initialised) return nothing
         if (ArcGisDynamicCapabilities.layers == null)
-            return Enumerable.Empty<IFeature>();
+            return [];
 
         var (success, raster) = await TryGetMapAsync(fetchInfo.Section);
         if (success)
         {
-            return new IFeature[] { new RasterFeature(raster) };
+            return [new RasterFeature(raster)];
         }
-        return Enumerable.Empty<IFeature>();
+        return [];
     }
 
     public MRect? GetExtent()
@@ -124,11 +123,8 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
 
     private void CapabilitiesHelperCapabilitiesReceived(object? sender, EventArgs e)
     {
-        var capabilities = sender as ArcGISDynamicCapabilities;
-        if (capabilities == null)
-            return;
-
-        ArcGisDynamicCapabilities = capabilities;
+        if (sender is ArcGISDynamicCapabilities capabilities)
+            ArcGisDynamicCapabilities = capabilities;
     }
 
     /// <summary>
@@ -226,7 +222,7 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
                     continue;
 
                 if (oneAdded)
-                    strReq.Append(",");
+                    strReq.Append(',');
 
                 strReq.AppendFormat("{0}", t.id);
                 oneAdded = true;
@@ -244,7 +240,7 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
         if (crs == null)
             throw new Exception("crs type not supported");
 
-        if (crs.StartsWith(CrsHelper.EsriStringPrefix)) return "{\"wkt\":\"" + crs.Substring(CrsHelper.EsriStringPrefix.Length).Replace("\"", "\\\"") + "\"}";
+        if (crs.StartsWith(CrsHelper.EsriStringPrefix)) return "{\"wkt\":\"" + crs[CrsHelper.EsriStringPrefix.Length..].Replace("\"", "\\\"") + "\"}";
         if (crs.StartsWith(CrsHelper.EpsgPrefix)) return CrsHelper.ToEpsgCode(crs).ToString();
         throw new Exception("crs type not supported");
     }

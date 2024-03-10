@@ -22,13 +22,13 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
     private class FeatureSets
     {
         public long TimeRequested { get; set; }
-        public IEnumerable<RasterFeature> Features { get; set; } = new List<RasterFeature>();
+        public IEnumerable<RasterFeature> Features { get; set; } = [];
     }
 
     private bool _isFetching;
     private bool _needsUpdate = true;
     private FetchInfo? _fetchInfo;
-    private List<FeatureSets> _sets = new();
+    private List<FeatureSets> _sets = [];
     private readonly Timer? _startFetchTimer;
     private IProvider? _dataSource;
     private readonly int _numberOfFeaturesReturned;
@@ -150,21 +150,21 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
 
     private void DataArrived(IEnumerable<IFeature>? arrivingFeatures, object? state)
     {
-        //the data in the cache is stored in the map projection so it projected only once.
-        var features = arrivingFeatures?.Cast<RasterFeature>().ToList() ?? throw new ArgumentException("argument features may not be null");
+        ArgumentNullException.ThrowIfNull(arrivingFeatures);
+
+        // The data in the cache is stored in the map projection so it projected only once.
+        var features = arrivingFeatures.Cast<RasterFeature>().ToArray();
 
         // We can get 0 features if some error was occurred up call stack
         // We should not add new FeatureSets if we have not any feature
 
         _isFetching = false;
 
-        if (features.Any())
+        if (features.Length != 0)
         {
-            features = features.ToList();
-
             _sets.Add(new FeatureSets { TimeRequested = state == null ? 0 : (long)state, Features = features });
 
-            //Keep only two most recent sets. The older ones will be removed
+            // Keep only two most recent sets. The older ones will be removed
             _sets = _sets.OrderByDescending(c => c.TimeRequested).Take(_numberOfFeaturesReturned).ToList();
 
             OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
@@ -184,7 +184,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
     {
         foreach (var cache in _sets)
         {
-            cache.Features = new List<RasterFeature>();
+            cache.Features = [];
         }
     }
 
