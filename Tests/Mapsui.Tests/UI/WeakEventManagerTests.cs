@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Mapsui.Fetcher;
 using Mapsui.UI;
-﻿using NUnit.Framework;
+using NUnit.Framework;
 
 namespace Mapsui.Tests.UI;
 
