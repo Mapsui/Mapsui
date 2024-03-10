@@ -9,8 +9,8 @@ public abstract class Widget : IWidget
     private HorizontalAlignment _horizontalAlignment = HorizontalAlignment.Right;
 
     /// <summary>
-    /// Type of area to use for touch events. The default is WidgetArea. MapArea widgets need
-    /// to set this to MapArea in their constructor.
+    /// Type of area to use for touch events. The default is WidgetArea. This needs to be set to 
+    /// 'Map' in the constructor if widget want to receive manipulation events from all over the map.
     /// </summary>
     public WidgetAreaType WidgetAreaType { get; init; } = WidgetAreaType.Widget;
 
