@@ -386,7 +386,6 @@ public class ScaleBarWidget : BaseWidget
     /// Calculates the top-left-position of upper and lower text
     /// </summary>
     /// <param name="viewport">The viewport</param>
-    /// <param name="textSize">Default text size for the string "9999 m"</param>
     /// <param name="textSize1">Size of upper text of scalebar</param>
     /// <param name="textSize2">Size of lower text of scalebar</param>
     /// <param name="stroke">Width of line</param>
@@ -396,8 +395,8 @@ public class ScaleBarWidget : BaseWidget
     /// posX2 as left position of lower scalebar text
     /// posY2 as top position of lower scalebar text
     /// </returns>
-    public (double posX1, double posY1, double posX2, double posY2) GetScaleBarTextPositions(Viewport viewport,
-        MRect textSize, MRect textSize1, MRect textSize2, double stroke)
+    public (double posX1, double posY1, double posX2, double posY2) GetScaleBarTextPositions(
+        Viewport viewport, MRect textSize1, MRect textSize2, double stroke)
     {
         var drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
 

@@ -1,10 +1,9 @@
 ﻿using Mapsui.Nts.Editing;
 using Mapsui.UI;
 using Mapsui.Widgets;
-using Mapsui.Widgets.BoxWidgets;
 
 namespace Mapsui.Nts.Widgets;
-public class EditingWidget : BoxWidget // Derived from BoxWidget to have default renderer. Perhaps we need a more explicit way to indicate a widget needs no renderer.
+public class EditingWidget : InputOnlyWidget // Derived from InputOnlyWidget because the EditingWidget does not need to draw anything
 {
     public IMapControl MapControl { get; }
     public EditManager EditManager { get; }
