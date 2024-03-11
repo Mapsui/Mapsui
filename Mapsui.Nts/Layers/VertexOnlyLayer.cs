@@ -18,7 +18,7 @@ public class VertexOnlyLayer : BaseLayer
     {
         Source = source;
         Source.DataChanged += (_, args) => OnDataChanged(args);
-        Style = new SymbolStyle { SymbolScale = 0.7 };
+        Style = new SymbolStyle { SymbolScale = 0.5 };
     }
 
     public FeatureKeyCreator<(long, int)> FeatureKeyCreator
