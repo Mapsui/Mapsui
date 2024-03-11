@@ -1,5 +1,4 @@
-﻿using Mapsui.Manipulations;
-using Mapsui.Styles;
+﻿using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
 using System;
 
@@ -21,7 +20,7 @@ namespace Mapsui.Widgets.ButtonWidgets;
 /// Rotation: Value for rotation in degrees
 /// Opacity: Opacity of button
 /// </remarks>
-public class IconButtonWidget : BoxWidget, ITouchableWidget
+public class IconButtonWidget : BoxWidget
 {
     public IconButtonWidget() : base()
     {
@@ -103,25 +102,8 @@ public class IconButtonWidget : BoxWidget, ITouchableWidget
         }
     }
 
-    public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
-
-    public bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
         return Tapped(this, e);
-    }
-
-    public bool OnPointerPressed(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
-    {
-        return false;
-    }
-
-    public bool OnPointerMoved(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
-    {
-        return false;
-    }
-
-    public bool OnPointerReleased(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
-    {
-        return false;
     }
 }

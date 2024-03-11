@@ -199,7 +199,7 @@ public class BinaryTree<T, TU> where T : IComparable<T?>
     {
         if (root == null)
             yield break;
-        if (string.Compare(root.Item.Value?.ToString()?.Substring(0, val.Length).ToUpper(),
+        if (string.Compare(root.Item.Value?.ToString()?[..val.Length].ToUpper(),
                 val, StringComparison.Ordinal) > 0)
             if (root.LeftNode != null)
                 if (root.LeftNode.Item.Value?.ToString()?.ToUpper().StartsWith(val) ?? false)
@@ -211,7 +211,7 @@ public class BinaryTree<T, TU> where T : IComparable<T?>
 
         if (string.Compare(root.Item.Value?.ToString(), val, StringComparison.Ordinal) < 0)
             if (root.RightNode != null)
-                if (string.Compare(root.RightNode.Item.Value?.ToString()?.Substring(0, val.Length).ToUpper(), val, StringComparison.Ordinal) > 0)
+                if (string.Compare(root.RightNode.Item.Value?.ToString()?[..val.Length].ToUpper(), val, StringComparison.Ordinal) > 0)
                     foreach (var item in ScanString(val, root.RightNode))
                         yield return item;
     }
@@ -254,27 +254,21 @@ public class BinaryTree<T, TU> where T : IComparable<T?>
     /// <summary>
     /// A value in a <see cref="BinaryTree&lt;T, U&gt;"/>.
     /// </summary>
-    public struct ItemValue
+    /// <remarks>
+    /// Creates an instance of an item in a <see cref="BinaryTree&lt;T, U&gt;"/>.
+    /// </remarks>
+    /// <param name="value">Value</param>
+    /// <param name="id">Identifier for the value</param>
+    public struct ItemValue(T value, TU id)
     {
         /// <summary>
         /// Identifier for the value
         /// </summary>
-        public TU? Id;
+        public TU? Id = id;
 
         /// <summary>
         /// Value
         /// </summary>
-        public T? Value;
-
-        /// <summary>
-        /// Creates an instance of an item in a <see cref="BinaryTree&lt;T, U&gt;"/>.
-        /// </summary>
-        /// <param name="value">Value</param>
-        /// <param name="id">Identifier for the value</param>
-        public ItemValue(T value, TU id)
-        {
-            Value = value;
-            Id = id;
-        }
+        public T? Value = value;
     }
 }

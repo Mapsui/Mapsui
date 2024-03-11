@@ -568,52 +568,42 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetPointerPressed(ScreenPosition position, bool shift)
     {
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
-        foreach (var widget in touchedWidgets)
+        foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
-            var widgetArgs = new WidgetEventArgs(position, 0, true, shift);
-            if (widget.OnPointerPressed(Map.Navigator, position, widgetArgs))
+            if (widget.OnPointerPressed(Map.Navigator, new WidgetEventArgs(position, 0, true, shift)))
                 return true;
         }
-
         return false;
     }
 
     private bool OnWidgetPointerMoved(ScreenPosition position, bool leftButton, bool shift)
     {
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
-        foreach (var widget in touchedWidgets)
-        {
-            var widgetArgs = new WidgetEventArgs(position, 0, leftButton, shift);
-            if (widget.OnPointerMoved(Map.Navigator, position, widgetArgs))
+        foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
+            if (widget.OnPointerMoved(Map.Navigator, new WidgetEventArgs(position, 0, leftButton, shift)))
                 return true;
-        }
-
         return false;
     }
 
     private bool OnWidgetPointerReleased(ScreenPosition position, bool shift)
     {
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
-        foreach (var widget in touchedWidgets)
+        foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
         {
-            var widgetArgs = new WidgetEventArgs(position, 0, true, shift);
-            if (widget.OnPointerReleased(Map.Navigator, position, widgetArgs))
+            Logger.Log(LogLevel.Information, $"Widget.Released: {widget.GetType().Name}");
+            if (widget.OnPointerReleased(Map.Navigator, new WidgetEventArgs(position, 0, true, shift)))
                 return true;
         }
-
         return false;
     }
 
     private bool OnWidgetTapped(ScreenPosition position, TapType tapType, bool shift)
     {
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
+        var touchedWidgets = WidgetInput.GetWidgetsAtPosition(position, Map);
         foreach (var widget in touchedWidgets)
         {
             Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapCount: {tapType} KeyState: {shift}");
-            var args = new WidgetEventArgs(position, tapType, true, shift);
-            if (widget.OnTapped(Map.Navigator, position, args))
+            var e = new WidgetEventArgs(position, tapType, true, shift);
+            if (widget.OnTapped(Map.Navigator, e))
                 return true;
         }
 
@@ -634,6 +624,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (positions.Length != 1)
             return false;
+
         if (OnWidgetPointerMoved(positions[0], !isHovering, GetShiftPressed()))
             return true;
         if (!isHovering)
@@ -644,7 +635,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private bool OnMapPointerReleased(ReadOnlySpan<ScreenPosition> positions)
     {
         if (positions.Length != 1)
-            return false;        
+            return false;    
+
         var handled = false;
         if (OnWidgetPointerReleased(positions[0], GetShiftPressed()))
             handled = true; // Set to handled but still handle tap in the next line
@@ -656,11 +648,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return handled;
     }
 
-    private bool OnMapTapped(ScreenPosition p, TapType tapType)
+    private bool OnMapTapped(ScreenPosition position, TapType tapType)
     {
-        if (OnWidgetTapped(p, tapType, GetShiftPressed()))
+        if (OnWidgetTapped(position, tapType, GetShiftPressed()))
             return true;
-        OnInfo(CreateMapInfoEventArgs(p, p, 1));
+        OnInfo(CreateMapInfoEventArgs(position, position, 1));
         return false;
     }
 }

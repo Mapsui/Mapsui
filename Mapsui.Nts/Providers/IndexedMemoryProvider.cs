@@ -20,7 +20,7 @@ public class IndexedMemoryProvider : IProvider
     private int _itemsLookedUp;
 
     // lock object
-    private object _lock = new();
+    private readonly object _lock = new();
     private ConcurrentDictionary<string, Dictionary<object, IFeature>> _lookups = new();
 
     /// <summary>
@@ -29,7 +29,7 @@ public class IndexedMemoryProvider : IProvider
 
     public IndexedMemoryProvider()
     {
-        Features = new List<IFeature>();
+        Features = [];
         _boundingBox = MemoryProvider.GetExtent(Features);
     }
 
@@ -68,7 +68,7 @@ public class IndexedMemoryProvider : IProvider
     /// <param name="feature">Feature to be in this dataSource</param>
     public IndexedMemoryProvider(IFeature feature)
     {
-        Features = new List<IFeature> { feature };
+        Features = [feature];
         _boundingBox = MemoryProvider.GetExtent(Features);
     }
 
@@ -93,8 +93,8 @@ public class IndexedMemoryProvider : IProvider
 
     public virtual Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
-        if (fetchInfo == null) throw new ArgumentNullException(nameof(fetchInfo));
-        if (fetchInfo.Extent == null) throw new ArgumentNullException(nameof(fetchInfo.Extent));
+        ArgumentNullException.ThrowIfNull(fetchInfo);
+        ArgumentNullException.ThrowIfNull(fetchInfo.Extent);
 
         var index = GetIndex();
 
@@ -133,7 +133,7 @@ public class IndexedMemoryProvider : IProvider
 
         if (!_lookups.TryGetValue(fieldName, out var lookup))
         {
-            lookup = new Dictionary<object, IFeature>();
+            lookup = [];
             foreach (var feature in Features)
             {
                 var val = feature[fieldName];
@@ -161,7 +161,7 @@ public class IndexedMemoryProvider : IProvider
 
     public void Clear()
     {
-        Features = new List<IFeature>();
+        Features = [];
         _index = null;
     }
 }

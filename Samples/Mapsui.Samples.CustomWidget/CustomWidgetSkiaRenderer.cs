@@ -16,7 +16,7 @@ public class CustomWidgetSkiaRenderer : ISkiaWidgetRenderer
         widget.Envelope = ToEnvelope(customWidget);
 
         // Use the envelope to draw
-        using var skPaint = new SKPaint { Color = customWidget.Color.ToSkia(0.5f) };
+        using var skPaint = new SKPaint { Color = customWidget.Color.ToSkia(layerOpacity) };
         canvas.DrawRect(widget.Envelope.ToSkia(), skPaint);
     }
 

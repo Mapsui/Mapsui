@@ -2,11 +2,10 @@
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets;
-public class EditingWidgetRenderer : ISkiaWidgetRenderer
+public class InputOnlyWidgetRenderer : ISkiaWidgetRenderer
 {
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
     {
-        // use all of the canvas
-        widget.Envelope = new MRect(0, 0, viewport.Width, viewport.Height);
+        // Do nothing. Widgets derived from the InputOnlyWidget class are not drawn.
     }
 }
