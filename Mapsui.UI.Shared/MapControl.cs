@@ -533,7 +533,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             return new MapInfoEventArgs
             {
                 MapInfo = mapInfo,
-                NumTaps = numTaps,
+                TapType = numTaps,
                 Handled = false
             };
         }
