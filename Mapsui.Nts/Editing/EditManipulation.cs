@@ -7,19 +7,25 @@ namespace Mapsui.Nts.Editing;
 
 public class EditManipulation
 {
-    public static bool OnPointerReleased(EditManager editManager)
+    public static bool OnPointerPressed(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl)
     {
-        if (editManager.IsManipulating())
+        // Take into account VertexRadius in feature select, because the objective
+        // is to select the vertex.
+        var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
+        if (editManager.EditMode == EditMode.Modify && mapInfo?.Feature != null)
         {
-            // The EditingWidget captures the pointer when scaling or rotating.
-            // It does this in an implicit way, by setting
-            // the state of info classes. Resetting it releases the capture. 
-            editManager.ResetManipulations();
-            return true;
+            return editManager.StartDragging(mapInfo, editManager.VertexRadius);
+        }
+        if (editManager.EditMode == EditMode.Rotate && mapInfo?.Feature != null)
+        {
+            return editManager.StartRotating(mapInfo);
+        }
+        if (editManager.EditMode == EditMode.Scale && mapInfo?.Feature != null)
+        {
+            return editManager.StartScaling(mapInfo);
         }
         return false;
     }
-
     public static bool OnPointerMoved(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl, bool isHovering)
     {
         if (isHovering)
@@ -38,22 +44,15 @@ public class EditManipulation
         return false;
     }
 
-    public static bool OnPointerPressed(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl)
+    public static bool OnPointerReleased(EditManager editManager)
     {
-        // Take into account VertexRadius in feature select, because the objective
-        // is to select the vertex.
-        var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
-        if (editManager.EditMode == EditMode.Modify && mapInfo?.Feature != null)
+        if (editManager.IsManipulating())
         {
-            return editManager.StartDragging(mapInfo, editManager.VertexRadius);
-        }
-        if (editManager.EditMode == EditMode.Rotate && mapInfo?.Feature != null)
-        {
-            return editManager.StartRotating(mapInfo);
-        }
-        if (editManager.EditMode == EditMode.Scale && mapInfo?.Feature != null)
-        {
-            return editManager.StartScaling(mapInfo);
+            // The EditingWidget captures the pointer when scaling or rotating.
+            // It does this in an implicit way, by setting
+            // the state of info classes. Resetting it releases the capture. 
+            editManager.ResetManipulations();
+            return true;
         }
         return false;
     }
