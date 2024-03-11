@@ -492,7 +492,7 @@ public class ScaleBarWidget : BaseWidget
         var groundResolution = viewport.Resolution * Math.Cos(y / 180.0 * Math.PI);
 
         // Convert in units of UnitConverter
-        groundResolution = groundResolution / unitConverter.MeterRatio;
+        groundResolution /= unitConverter.MeterRatio;
 
         var scaleBarValues = unitConverter.ScaleBarValues;
 
