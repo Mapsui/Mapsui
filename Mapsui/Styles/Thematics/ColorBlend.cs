@@ -115,7 +115,13 @@ public class ColorBlend
             for (double f = 0; f <= 1; f += 1.0f / 6)
                 cb.Positions[i++] = f;
             cb.Colors = [
-                Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Blue, Color.Indigo, Color.Violet];
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Green,
+                Color.Blue,
+                Color.Indigo,
+                Color.Violet];
             return cb;
         }
     }
