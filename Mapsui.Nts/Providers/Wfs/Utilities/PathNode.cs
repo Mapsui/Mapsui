@@ -89,7 +89,7 @@ internal class PathNode : IPathNode
 internal class AlternativePathNodesCollection : IPathNode
 {
 
-    private readonly List<IPathNode> _pathNodes = new List<IPathNode>();
+    private readonly List<IPathNode> _pathNodes = [];
 
 
 
@@ -99,7 +99,8 @@ internal class AlternativePathNodesCollection : IPathNode
     /// <param name="pathNodes">A collection of instances implementing <see cref="IPathNode"/></param>
     internal AlternativePathNodesCollection(params IPathNode[] pathNodes)
     {
-        if (pathNodes == null) throw new ArgumentNullException();
+        ArgumentNullException.ThrowIfNull(pathNodes);
+
         _pathNodes.AddRange(pathNodes);
     }
 
