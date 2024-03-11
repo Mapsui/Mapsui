@@ -1,40 +1,13 @@
-﻿using System;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Manipulations;
 using Mapsui.Nts.Extensions;
 using Mapsui.UI;
-using Mapsui.Widgets;
 
 namespace Mapsui.Nts.Editing;
 
-public enum PointerState
-{
-    Down,
-    Tapped,
-    Dragging, // Moving with pointer down
-    Hovering, // Moving with pointer up. Will not occur on touch which should not be a problem because it is only used as preview.
-    Up
-}
-
 public class EditManipulation
 {
-    public static int MinPixelsMovedForDrag { get; set; } = 4;
-
-    public bool Manipulate(PointerState mouseState, ScreenPosition screenPosition,
-        EditManager editManager, IMapControl mapControl, WidgetEventArgs e)
-    {
-        return mouseState switch
-        {
-            PointerState.Tapped => OnTapped(screenPosition, editManager, mapControl, e),
-            PointerState.Down => OnPointerPressed(screenPosition, editManager, mapControl),
-            PointerState.Dragging => OnPointerMoved(screenPosition, editManager, mapControl, false),
-            PointerState.Hovering => OnPointerMoved(screenPosition, editManager, mapControl, true),
-            PointerState.Up => OnPointerReleased(editManager),
-            _ => throw new Exception(),
-        };
-    }
-
-    private static bool OnPointerReleased(EditManager editManager)
+    public static bool OnPointerReleased(EditManager editManager)
     {
         if (editManager.IsManipulating())
         {
@@ -47,7 +20,7 @@ public class EditManipulation
         return false;
     }
 
-    private static bool OnPointerMoved(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl, bool isHovering)
+    public static bool OnPointerMoved(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl, bool isHovering)
     {
         if (isHovering)
         {
@@ -65,7 +38,7 @@ public class EditManipulation
         return false;
     }
 
-    private static bool OnPointerPressed(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl)
+    public static bool OnPointerPressed(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl)
     {
         // Take into account VertexRadius in feature select, because the objective
         // is to select the vertex.
@@ -85,7 +58,7 @@ public class EditManipulation
         return false;
     }
 
-    private static bool OnTapped(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl, WidgetEventArgs e)
+    public static bool OnTapped(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl, TapType tapType, bool shift)
     {
         if (editManager.EditMode == EditMode.Modify)
             editManager.StopDragging();
@@ -96,7 +69,7 @@ public class EditManipulation
 
         if (editManager.EditMode == EditMode.Modify)
         {
-            if (e.Shift || e.TapType == TapType.Double)
+            if (shift || tapType == TapType.Double)
             {
                 return editManager.TryDeleteCoordinate(
                     mapControl.GetMapInfo(screenPosition, editManager.VertexRadius), editManager.VertexRadius);
@@ -106,7 +79,7 @@ public class EditManipulation
         }
         else if (editManager.EditMode == EditMode.DrawingPolygon || editManager.EditMode == EditMode.DrawingLine)
         {
-            if (e.Shift || e.TapType == TapType.Double)
+            if (shift || tapType == TapType.Double)
             {
                 return editManager.EndEdit();
             }

@@ -19,12 +19,8 @@ public class EditingWidget : InputOnlyWidget // Derived from InputOnlyWidget bec
 
     public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
-        if (!e.LeftButton)
-            return false;
-
         if (MapControl.Map != null)
-            MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(
-                PointerState.Tapped, e.Position, EditManager, MapControl, e);
+            MapControl.Map.Navigator.PanLock = EditManipulation.OnTapped(e.Position, EditManager, MapControl, e.TapType, e.Shift);
 
         if (EditManager.SelectMode)
         {
@@ -41,26 +37,16 @@ public class EditingWidget : InputOnlyWidget // Derived from InputOnlyWidget bec
 
     public override bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)
     {
-        if (!e.LeftButton)
-            return false;
-
-        if (MapControl.Map == null)
-            return false;
-
-        return EditManipulation.Manipulate(
-            PointerState.Down, e.Position, EditManager, MapControl, e);
+        return EditManipulation.OnPointerPressed(e.Position, EditManager, MapControl);
     }
 
     public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
     {
-        if (e.LeftButton)
-            return EditManipulation.Manipulate(PointerState.Dragging, e.Position, EditManager, MapControl, e);
-        else
-            return EditManipulation.Manipulate(PointerState.Hovering, e.Position, EditManager, MapControl, e);
+        return EditManipulation.OnPointerMoved(e.Position, EditManager, MapControl, !e.LeftButton);
     }
 
     public override bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
     {
-        return EditManipulation.Manipulate(PointerState.Up, e.Position, EditManager, MapControl, e);
+        return EditManipulation.OnPointerReleased(EditManager);
     }
 }
