@@ -648,11 +648,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return handled;
     }
 
-    private bool OnMapTapped(ScreenPosition p, TapType tapType)
+    private bool OnMapTapped(ScreenPosition position, TapType tapType)
     {
-        if (OnWidgetTapped(p, tapType, GetShiftPressed()))
+        if (OnWidgetTapped(position, tapType, GetShiftPressed()))
             return true;
-        OnInfo(CreateMapInfoEventArgs(p, p, 1));
+        OnInfo(CreateMapInfoEventArgs(position, position, 1));
         return false;
     }
 }
