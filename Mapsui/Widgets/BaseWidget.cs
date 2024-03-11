@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Mapsui.Widgets;
 
-public abstract class Widget : IWidget
+public abstract class BaseWidget : IWidget
 {
     private HorizontalAlignment _horizontalAlignment = HorizontalAlignment.Right;
 

@@ -5,7 +5,7 @@ using System;
 
 namespace Mapsui.Samples.CustomWidget;
 
-public class CustomWidget : Widget
+public class CustomWidget : BaseWidget
 {
     private static readonly Random _random = new();
 
