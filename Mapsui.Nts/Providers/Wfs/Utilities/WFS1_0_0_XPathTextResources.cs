@@ -18,47 +18,43 @@ public class WFS_1_0_0_XPathTextResources : WFS_XPathTextResourcesBase
     // GetCapabilities WFS 1.0.0                                          //
     ////////////////////////////////////////////////////////////////////////
 
-
     /// <summary>
     /// Gets an XPath string addressing the SRID of a FeatureType in 'GetCapabilities'.
     /// </summary>
-    public static string XPATH_SRS => "/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType[_PARAMCOMP_(wfs:Name, $_param1)]/wfs:SRS";
+    public string XPATH_SRS => "/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType[_PARAMCOMP_(wfs:Name, $_param1)]/wfs:SRS";
 
     /// <summary>
     /// Gets an XPath string addressing the bounding box of a featuretype in 'GetCapabilities'.
     /// </summary>
-    public static string XPATH_BBOX => "/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType[_PARAMCOMP_(wfs:Name, $_param1)]/wfs:LatLongBoundingBox";
+    public string XPATH_BBOX => "/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType[_PARAMCOMP_(wfs:Name, $_param1)]/wfs:LatLongBoundingBox";
 
     /// <summary>
     /// Gets an XPath string addressing the URI of 'GetFeature'in 'GetCapabilities'.
     /// </summary>
-    public static string XPATH_GETFEATURERESOURCE => "/wfs:WFS_Capabilities/wfs:Capability/wfs:Request/wfs:GetFeature/wfs:DCPType/wfs:HTTP/wfs:Post/@onlineResource";
+    public string XPATH_GETFEATURERESOURCE => "/wfs:WFS_Capabilities/wfs:Capability/wfs:Request/wfs:GetFeature/wfs:DCPType/wfs:HTTP/wfs:Post/@onlineResource";
 
     /// <summary>
     /// Gets an XPath string addressing the URI of 'DescribeFeatureType'in 'GetCapabilities'.
     /// </summary>
-    public static string XPATH_DESCRIBEFEATURETYPERESOURCE => "/wfs:WFS_Capabilities/wfs:Capability/wfs:Request/wfs:DescribeFeatureType/wfs:DCPType/wfs:HTTP/wfs:Post/@onlineResource";
+    public string XPATH_DESCRIBEFEATURETYPERESOURCE => "/wfs:WFS_Capabilities/wfs:Capability/wfs:Request/wfs:DescribeFeatureType/wfs:DCPType/wfs:HTTP/wfs:Post/@onlineResource";
 
     /// <summary>
     /// Gets an XPath string addressing the 'minx'-attribute of a featuretype's bounding box in 'GetCapabilities'.
     /// </summary>
-    public static string XPATH_BOUNDINGBOXMINX => "@minx";
+    public string XPATH_BOUNDINGBOXMINX => "@minx";
 
     /// <summary>
     /// Gets an XPath string addressing the 'maxx'-attribute of a featuretype's bounding box in 'GetCapabilities'.
     /// </summary>
-    public static string XPATH_BOUNDINGBOXMAXX => "@maxx";
+    public string XPATH_BOUNDINGBOXMAXX => "@maxx";
 
     /// <summary>
     /// Gets an XPath string addressing the 'miny'-attribute of a featuretype's bounding box in 'GetCapabilities'.
     /// </summary>
-    public static string XPATH_BOUNDINGBOXMINY => "@miny";
+    public string XPATH_BOUNDINGBOXMINY => "@miny";
 
     /// <summary>
     /// Gets an XPath string addressing the 'maxy'-attribute of a featuretype's bounding box in 'GetCapabilities'.
     /// </summary>
-    public static string XPATH_BOUNDINGBOXMAXY => "@maxy";
-
-
-
+    public string XPATH_BOUNDINGBOXMAXY => "@maxy";
 }
