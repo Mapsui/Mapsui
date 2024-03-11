@@ -1,4 +1,5 @@
 ﻿using Mapsui.Extensions;
+using Mapsui.Manipulations;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Styles;
@@ -41,7 +42,7 @@ public class ManyPinsSample : IMapViewSample
 
         switch (e?.TapType)
         {
-            case 1:
+            case TapType.Single:
                 var pin = new Pin(mapView)
                 {
                     Label = $"PinType.Pin {markerNum++}",
@@ -76,7 +77,7 @@ public class ManyPinsSample : IMapViewSample
                 mapView.Pins.Add(pin);
                 pin.ShowCallout();
                 break;
-            case 2:
+            case TapType.Double:
                 foreach (var r in assembly.GetManifestResourceNames())
                     System.Diagnostics.Debug.WriteLine(r);
 
@@ -95,17 +96,8 @@ public class ManyPinsSample : IMapViewSample
                 }
 
                 break;
-            case 3:
-                var icon = assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png")!.ToBytes();
-                mapView?.Pins.Add(new Pin(mapView)
-                {
-                    Label = $"PinType.Icon {markerNum++}",
-                    Position = e.Point,
-                    Type = PinType.Icon,
-                    Scale = 0.5f,
-                    Icon = icon
-                });
-                break;
+            default:
+                throw new Exception("Unknown TapType. This is bug in Mapsui.");
         }
 
         return true;

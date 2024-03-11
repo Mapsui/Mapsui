@@ -81,7 +81,7 @@ public sealed class RegressionMapControl : IMapControl
         throw new NotImplementedException();
     }
 
-    public MapInfo? GetMapInfo(ScreenPosition? screenPosition, int margin = 0)
+    public MapInfo GetMapInfo(ScreenPosition screenPosition, int margin = 0)
     {
         throw new NotImplementedException();
     }

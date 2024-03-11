@@ -493,12 +493,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     /// <inheritdoc />
-    public MapInfo GetMapInfo(ScreenPosition? screenPosition, int margin = 0)
+    public MapInfo GetMapInfo(ScreenPosition screenPosition, int margin = 0)
     {
-        if (screenPosition is null)
-            return null;
-
-        return Renderer.GetMapInfo(screenPosition.Value.X, screenPosition.Value.Y, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
+        return Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
     }
 
     /// <inheritdoc />
@@ -550,7 +547,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
-            if (widget.OnPointerPressed(Map.Navigator, new WidgetEventArgs(position, 0, true, shiftPressed)))
+            if (widget.OnPointerPressed(Map.Navigator, new WidgetEventArgs(position, 0, true, shiftPressed, () => GetMapInfo(position))))
                 return true;
         }
         return false;
@@ -559,7 +556,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private bool OnWidgetPointerMoved(ScreenPosition position, bool leftButton, bool shiftPressed)
     {
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
-            if (widget.OnPointerMoved(Map.Navigator, new WidgetEventArgs(position, 0, leftButton, shiftPressed)))
+            if (widget.OnPointerMoved(Map.Navigator, new WidgetEventArgs(position, 0, leftButton, shiftPressed, () => GetMapInfo(position))))
                 return true;
         return false;
     }
@@ -569,7 +566,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.Released: {widget.GetType().Name}");
-            if (widget.OnPointerReleased(Map.Navigator, new WidgetEventArgs(position, 0, true, shiftPressed)))
+            if (widget.OnPointerReleased(Map.Navigator, new WidgetEventArgs(position, 0, true, shiftPressed, () => GetMapInfo(position))))
                 return true;
         }
         return false;
@@ -581,7 +578,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         foreach (var widget in touchedWidgets)
         {
             Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapCount: {tapType} KeyState: {shiftPressed}");
-            var e = new WidgetEventArgs(position, tapType, true, shiftPressed);
+            var e = new WidgetEventArgs(position, tapType, true, shiftPressed, () => GetMapInfo(position));
             if (widget.OnTapped(Map.Navigator, e))
                 return true;
         }
