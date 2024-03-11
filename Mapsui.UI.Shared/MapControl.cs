@@ -486,21 +486,19 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         Map.RefreshData(changeType);
     }
 
-    private void OnInfo(MapInfoEventArgs? mapInfoEventArgs)
+    protected void OnMapInfo(MapInfoEventArgs mapInfoEventArgs)
     {
-        if (mapInfoEventArgs is null) return;
-
         Map?.OnInfo(mapInfoEventArgs); // Also propagate to Map
         Info?.Invoke(this, mapInfoEventArgs);
     }
 
     /// <inheritdoc />
-    public MapInfo? GetMapInfo(ScreenPosition? screenPosition, int margin = 0)
+    public MapInfo GetMapInfo(ScreenPosition? screenPosition, int margin = 0)
     {
         if (screenPosition is null)
             return null;
 
-        return Renderer?.GetMapInfo(screenPosition.Value.X, screenPosition.Value.Y, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
+        return Renderer.GetMapInfo(screenPosition.Value.X, screenPosition.Value.Y, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
     }
 
     /// <inheritdoc />
@@ -514,32 +512,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// Check if a widget or feature at a given screen position is clicked/tapped
     /// </summary>
     /// <param name="screenPosition">Screen position to check for widgets and features</param>
-    /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
     /// <param name="tapType">single or double tap</param>
     /// <returns>True, if something done </returns>
-    private MapInfoEventArgs? CreateMapInfoEventArgs(
-        ScreenPosition? screenPosition,
-        ScreenPosition? startScreenPosition, // Todo: Figure why this is needed and if it can be removed
-        TapType tapType)
+    private MapInfoEventArgs CreateMapInfoEventArgs(ScreenPosition screenPosition, TapType tapType)
     {
-        if (screenPosition is null || startScreenPosition is null)
-            return null;
+        var mapInfo = Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? []);
 
-        // Check which features in the map were tapped.
-        var mapInfo = Renderer?.GetMapInfo(screenPosition.Value.X, screenPosition.Value.Y, Map.Navigator.Viewport, Map?.Layers ?? []);
-
-        if (mapInfo != null)
-        {
-            return new MapInfoEventArgs
-            {
-                MapInfo = mapInfo,
-                TapType = tapType,
-                Handled = false
-            };
-        }
-
-
-        return null;
+        return new MapInfoEventArgs(mapInfo, tapType, false);
     }
 
     private void SetViewportSize()
@@ -652,7 +631,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (OnWidgetTapped(position, tapType, GetShiftPressed()))
             return true;
-        OnInfo(CreateMapInfoEventArgs(position, position, TapType.Single));
+        OnMapInfo(CreateMapInfoEventArgs(position, TapType.Single));
         return false;
     }
 }

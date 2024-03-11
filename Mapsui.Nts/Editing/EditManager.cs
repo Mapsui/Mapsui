@@ -71,11 +71,11 @@ public class EditManager
         return false;
     }
 
-    public void HoveringVertex(MapInfo? mapInfo)
+    public void HoveringVertex(MapInfo mapInfo)
     {
         if (_addInfo.Vertex != null)
         {
-            _addInfo.Vertex.SetXY(mapInfo?.WorldPosition);
+            _addInfo.Vertex.SetXY(mapInfo.WorldPosition);
             _addInfo.Feature?.Modified();
             Layer?.DataHasChanged();
         }
@@ -262,14 +262,14 @@ public class EditManager
         }
     }
 
-    public bool TryDeleteCoordinate(MapInfo? mapInfo, double screenDistance)
+    public bool TryDeleteCoordinate(MapInfo mapInfo, double screenDistance)
     {
-        if (mapInfo?.Feature is GeometryFeature geometryFeature)
+        if (mapInfo.Feature is GeometryFeature geometryFeature)
         {
-            var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainCoordinates() ?? new List<Coordinate>(), screenDistance);
+            var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainCoordinates() ?? [], screenDistance);
             if (vertexTouched != null)
             {
-                var vertices = geometryFeature.Geometry?.MainCoordinates() ?? new List<Coordinate>();
+                var vertices = geometryFeature.Geometry?.MainCoordinates() ?? [];
                 var index = vertices.IndexOf(vertexTouched);
                 if (index >= 0)
                 {
@@ -283,10 +283,8 @@ public class EditManager
         return false;
     }
 
-    public bool TryInsertCoordinate(MapInfo? mapInfo)
+    public bool TryInsertCoordinate(MapInfo mapInfo)
     {
-        if (mapInfo?.WorldPosition is null) return false;
-
         if (mapInfo.Feature is GeometryFeature geometryFeature)
         {
             if (geometryFeature.Geometry is null) return false;

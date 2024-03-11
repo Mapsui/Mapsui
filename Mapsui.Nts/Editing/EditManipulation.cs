@@ -12,11 +12,11 @@ public static class EditManipulation
         // Take into account VertexRadius in feature select, because the objective
         // is to select the vertex.
         var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
-        if (editManager.EditMode == EditMode.Modify && mapInfo?.Feature != null)
+        if (editManager.EditMode == EditMode.Modify && mapInfo.Feature != null)
             return editManager.StartDragging(mapInfo, editManager.VertexRadius);
-        if (editManager.EditMode == EditMode.Rotate && mapInfo?.Feature != null)
+        if (editManager.EditMode == EditMode.Rotate && mapInfo.Feature != null)
             return editManager.StartRotating(mapInfo);
-        if (editManager.EditMode == EditMode.Scale && mapInfo?.Feature != null)
+        if (editManager.EditMode == EditMode.Scale && mapInfo.Feature != null)
             return editManager.StartScaling(mapInfo);
         return false;
     }
@@ -88,11 +88,11 @@ public static class EditManipulation
 
         if (editManager.SelectMode)
         {
-            var infoArgs = mapControl.GetMapInfo(screenPosition);
-            if (infoArgs?.Feature != null)
+            var mapInfo = mapControl.GetMapInfo(screenPosition);
+            if (mapInfo.Feature != null)
             {
-                var currentValue = (bool?)infoArgs.Feature["Selected"] == true;
-                infoArgs.Feature["Selected"] = !currentValue; // invert current value
+                var currentValue = (bool?)mapInfo.Feature["Selected"] == true;
+                mapInfo.Feature["Selected"] = !currentValue; // invert current value
             }
         }
 

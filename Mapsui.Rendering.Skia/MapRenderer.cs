@@ -203,10 +203,10 @@ public sealed class MapRenderer : IRenderer, IDisposable
         WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
     }
 
-    public MapInfo? GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+    public MapInfo GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
     {
-        // todo: use margin to increase the pixel area
-        // todo: We will need to select on style instead of layer
+        // Todo: Use margin to increase the pixel area
+        // Todo: Select on style instead of layer
 
         var mapInfoLayers = layers
             .Select(l => l is ISourceLayer sl and not ILayerFeatureInfo ? sl.SourceLayer : l)
@@ -235,7 +235,11 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
             using (var surface = SKSurface.Create(imageInfo))
             {
-                if (surface == null) return null;
+                if (surface == null)
+                {
+                    Logger.Log(LogLevel.Error, "SKSurface is null while getting MapInfo.  This is not expected.");
+                    return result;
+                }
 
                 surface.Canvas.ClipRect(new SKRect((float)(x - 1), (float)(y - 1), (float)(x + 1), (float)(y + 1)));
                 surface.Canvas.Clear(SKColors.Transparent);
@@ -254,7 +258,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                             try
                             {
                                 // creating new list to avoid multithreading problems
-                                mapList = new List<MapInfoRecord>();
+                                mapList = [];
                                 // get information from ILayer Feature Info
                                 var features = await layerFeatureInfo.GetFeatureInfoAsync(viewport, x, y);
                                 foreach (var it in features)
@@ -277,7 +281,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                     else
                     {
                         // get information from ILayer
-                        VisibleFeatureIterator.IterateLayers(viewport, new[] { infoLayer }, 0,
+                        VisibleFeatureIterator.IterateLayers(viewport, [infoLayer], 0,
                             (v, layer, style, feature, opacity, iteration) =>
                             {
                                 try

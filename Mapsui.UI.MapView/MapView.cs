@@ -663,7 +663,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             // Check if we hit a drawable/pin/callout etc
             var mapInfo = GetMapInfo(e.ScreenPosition);
 
-            var mapInfoEventArgs = new MapInfoEventArgs { MapInfo = mapInfo, Handled = e.Handled, TapType = e.TapType };
+            var mapInfoEventArgs = new MapInfoEventArgs(mapInfo, e.TapType, e.Handled);
 
             HandlerInfo(mapInfoEventArgs);
 
@@ -844,9 +844,8 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         HideCallouts();
     }
 
-    protected override void OnSingleTapped(ScreenPosition screenPosition)
+    private void OnTapped(ScreenPosition screenPosition)
     {
-        HandlerTap(new TappedEventArgs(screenPosition, TapType.Single));
-        base.OnSingleTapped(screenPosition);
+        // Todo: Implement to test simple scenarios.
     }
 }
