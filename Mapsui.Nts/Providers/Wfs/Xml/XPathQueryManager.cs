@@ -28,7 +28,7 @@ public class XPathQueryManager : IXPathQueryManager
     private XPathNavigator? _xNav;
     private XPathDocument? _xPathDoc;
     private bool _initialized;
-    private HttpClientUtil? _httpClientUtil;
+    private readonly HttpClientUtil? _httpClientUtil;
 
 
 
@@ -133,8 +133,7 @@ public class XPathQueryManager : IXPathQueryManager
     /// <param name="ns">The namespace URI</param>
     public void AddNamespace(string prefix, string ns)
     {
-        if (_paramContext != null)
-            _paramContext.AddNamespace(prefix, ns);
+        _paramContext?.AddNamespace(prefix, ns);
     }
 
     /// <summary>
@@ -175,8 +174,7 @@ public class XPathQueryManager : IXPathQueryManager
     /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
     public XPathNodeIterator? GetIterator(XPathExpression xPath, DictionaryEntry[] queryParameters)
     {
-        if (_paramContext != null)
-            _paramContext.AddParam(queryParameters);
+        _paramContext?.AddParam(queryParameters);
         return GetIterator(xPath);
     }
 
@@ -218,8 +216,7 @@ public class XPathQueryManager : IXPathQueryManager
     /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
     public List<string> GetValuesFromNodes(XPathExpression xPath, DictionaryEntry[] queryParameters)
     {
-        if (_paramContext != null)
-            _paramContext.AddParam(queryParameters);
+        _paramContext?.AddParam(queryParameters);
         return GetValuesFromNodes(xPath);
     }
 
@@ -375,7 +372,7 @@ public class XPathQueryManager : IXPathQueryManager
     public class CustomQueryContext : XsltContext
     {
 
-        private readonly XsltArgumentList _argumentList = new XsltArgumentList();
+        private readonly XsltArgumentList _argumentList = new();
 
 
 
@@ -528,13 +525,21 @@ public class XPathQueryManager : IXPathQueryManager
     /// <summary>
     /// This class is the base class of <see cref="ParamCompare"/> and <see cref="ParamCompareWithTargetNs"/>.
     /// </summary>
-    public abstract class ParamBase
+    /// <remarks>
+    /// Protected constructor for the abstract class.
+    /// </remarks>
+    /// <param name="argTypes">The argument types of the function</param>
+    /// <param name="returnType">The return type of the function</param>
+    /// <param name="minArgs">The minimum number of arguments allowed</param>
+    /// <param name="maxArgs">The maximum number of arguments allowed</param>
+    public abstract class ParamBase(XPathResultType[] argTypes, XPathResultType returnType,
+                        int minArgs, int maxArgs)
     {
 
-        private readonly XPathResultType[] _argTypes;
-        private readonly int _maxArgs;
-        private readonly int _minArgs;
-        private readonly XPathResultType _returnType;
+        private readonly XPathResultType[] _argTypes = argTypes;
+        private readonly int _maxArgs = maxArgs;
+        private readonly int _minArgs = minArgs;
+        private readonly XPathResultType _returnType = returnType;
 
 
 
@@ -557,25 +562,6 @@ public class XPathQueryManager : IXPathQueryManager
         /// Gets the maximum number of arguments allowed.
         /// </summary>
         public int Maxargs => _maxArgs;
-
-
-
-        /// <summary>
-        /// Protected constructor for the abstract class.
-        /// </summary>
-        /// <param name="argTypes">The argument types of the function</param>
-        /// <param name="returnType">The return type of the function</param>
-        /// <param name="minArgs">The minimum number of arguments allowed</param>
-        /// <param name="maxArgs">The maximum number of arguments allowed</param>
-        protected ParamBase(XPathResultType[] argTypes, XPathResultType returnType,
-                            int minArgs, int maxArgs)
-        {
-            _argTypes = argTypes;
-            _returnType = returnType;
-            _minArgs = minArgs;
-            _maxArgs = maxArgs;
-        }
-
     }
 
 
@@ -583,26 +569,19 @@ public class XPathQueryManager : IXPathQueryManager
     /// <summary>
     /// This class performs a string comparison in an XPath expression.
     /// </summary>
-    public class ParamCompare : ParamBase, IXsltContextFunction
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="ParamCompare"/> class.
+    /// </remarks>
+    /// <param name="argTypes">The argument types of the function</param>
+    /// <param name="minArgs">The minimum number of arguments allowed</param>
+    /// <param name="maxArgs">The maximum number of arguments allowed</param>
+    public class ParamCompare(XPathResultType[] argTypes, int minArgs, int maxArgs) : ParamBase(argTypes, XPathResultType.Boolean, minArgs, maxArgs), IXsltContextFunction
     {
 
         /// <summary>
         /// The name to use when embedding the function in an XPath expression.
         /// </summary>
         public static readonly string FunctionName = "_PARAMCOMP_";
-
-
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ParamCompare"/> class.
-        /// </summary>
-        /// <param name="argTypes">The argument types of the function</param>
-        /// <param name="minArgs">The minimum number of arguments allowed</param>
-        /// <param name="maxArgs">The maximum number of arguments allowed</param>
-        public ParamCompare(XPathResultType[] argTypes, int minArgs, int maxArgs)
-            : base(argTypes, XPathResultType.Boolean, minArgs, maxArgs)
-        {
-        }
 
 
 
@@ -628,8 +607,7 @@ public class XPathQueryManager : IXPathQueryManager
         {
             if (arg is string)
                 return arg.ToString();
-            var iterator = arg as XPathNodeIterator;
-            if (iterator != null)
+            if (arg is XPathNodeIterator iterator)
             {
                 if (iterator.MoveNext())
                     return iterator.Current?.Value;
@@ -648,12 +626,12 @@ public class XPathQueryManager : IXPathQueryManager
         /// <param name="xsltContext">The Xslt context for namespace resolving</param>
         private string? ResolveNsPrefix(string? args, XsltContext xsltContext)
         {
-            if (args?.Contains(":") ?? false)
+            if (args?.Contains(':') ?? false)
             {
-                var prefix = args.Substring(0, args.IndexOf(":", StringComparison.Ordinal));
+                var prefix = args[..args.IndexOf(':', StringComparison.Ordinal)];
                 string ns;
                 if (!string.IsNullOrEmpty((ns = xsltContext.LookupNamespace(prefix) ?? string.Empty)))
-                    args = args.Replace(prefix + ":", ns);
+                    args = args.Replace(prefix + ':', ns);
             }
             return args;
         }
@@ -666,26 +644,19 @@ public class XPathQueryManager : IXPathQueryManager
     /// This class performs a string comparison in an XPath expression.
     /// It is specifically created for using in XML schema documents.
     /// </summary>
-    public class ParamCompareWithTargetNs : ParamCompare
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="ParamCompareWithTargetNs"/> class.
+    /// </remarks>
+    /// <param name="argTypes">The argument types of the function</param>
+    /// <param name="minArgs">The minimum number of arguments allowed</param>
+    /// <param name="maxArgs">The maximum number of arguments allowed</param>
+    public class ParamCompareWithTargetNs(XPathResultType[] argTypes, int minArgs, int maxArgs) : ParamCompare(argTypes, minArgs, maxArgs)
     {
 
         /// <summary>
         /// The name to use when embedding the function in an XPath expression.
         /// </summary>
         public static readonly new string FunctionName = "_PARAMCOMPWITHTARGETNS_";
-
-
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ParamCompareWithTargetNs"/> class.
-        /// </summary>
-        /// <param name="argTypes">The argument types of the function</param>
-        /// <param name="minArgs">The minimum number of arguments allowed</param>
-        /// <param name="maxArgs">The maximum number of arguments allowed</param>
-        public ParamCompareWithTargetNs(XPathResultType[] argTypes, int minArgs, int maxArgs)
-            : base(argTypes, minArgs, maxArgs)
-        {
-        }
 
 
 
@@ -699,10 +670,8 @@ public class XPathQueryManager : IXPathQueryManager
         public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
         {
             return (((string)args[1] + ResolveArgument(args[2]))).Equals(
-                resolveNsPrefix(ResolveArgument(args[0]), (string)args[1], docContext), StringComparison.Ordinal);
+                ResolveNsPrefix(ResolveArgument(args[0]), (string)args[1], docContext), StringComparison.Ordinal);
         }
-
-
 
         /// <summary>
         /// This method resolves the prefix of an argument.
@@ -712,11 +681,11 @@ public class XPathQueryManager : IXPathQueryManager
         /// <param name="args">An argument of the function to be resolved</param>
         /// <param name="targetNs"></param>
         /// <param name="docContext"></param>
-        private static string resolveNsPrefix(string? args, string targetNs, XPathNavigator docContext)
+        private static string ResolveNsPrefix(string? args, string targetNs, XPathNavigator docContext)
         {
-            if (args?.Contains(":") ?? false)
+            if (args?.Contains(':') ?? false)
             {
-                var prefix = args.Substring(0, args.IndexOf(":", StringComparison.Ordinal));
+                var prefix = args[..args.IndexOf(':', StringComparison.Ordinal)];
                 string ns;
                 if (!string.IsNullOrEmpty((ns = docContext.LookupNamespace(prefix) ?? string.Empty)))
                     return args.Replace(prefix + ":", ns);
@@ -732,21 +701,14 @@ public class XPathQueryManager : IXPathQueryManager
     /// <summary>
     /// This class represents a variable in an XPath expression.
     /// </summary>
-    public class ParamFunctionVar : IXsltContextVariable
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="ParamFunctionVar"/> class.
+    /// </remarks>
+    /// <param name="param">The parameter</param>
+    public class ParamFunctionVar(object param) : IXsltContextVariable
     {
 
-        private readonly object _param;
-
-
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ParamFunctionVar"/> class.
-        /// </summary>
-        /// <param name="param">The parameter</param>
-        public ParamFunctionVar(object param)
-        {
-            _param = param;
-        }
+        private readonly object _param = param;
 
 
 

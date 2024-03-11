@@ -16,19 +16,14 @@ using NetTopologySuite.IO.Converters;
 
 namespace Mapsui.Nts.Providers;
 
-public class GeoJsonProvider : IProvider, IProviderExtended
+public class GeoJsonProvider(string geoJson) : IProvider, IProviderExtended
 {
-    private static ReadOnlySpan<byte> Utf8Bom => new byte[] { 0xEF, 0xBB, 0xBF };
-    private readonly string _geoJson;
+    private static ReadOnlySpan<byte> Utf8Bom => [0xEF, 0xBB, 0xBF];
+    private readonly string _geoJson = geoJson;
     private readonly object _lock = new();
     private STRtree<GeometryFeature>? _index;
     private MRect? _extent;
     private FeatureKeyCreator<string>? _featureKeyCreator;
-
-    public GeoJsonProvider(string geoJson)
-    {
-        _geoJson = geoJson;
-    }
 
     public int Id { get; } = BaseLayer.NextId();
 
@@ -62,7 +57,7 @@ public class GeoJsonProvider : IProvider, IProviderExtended
         // Read past the UTF-8 BOM bytes if a BOM exists.
         if (b.StartsWith(Utf8Bom))
         {
-            b = b.Slice(Utf8Bom.Length);
+            b = b[Utf8Bom.Length..];
         }
 
         var r = new Utf8JsonReader(b);
@@ -71,7 +66,7 @@ public class GeoJsonProvider : IProvider, IProviderExtended
         r.Read();
         var res = JsonSerializer.Deserialize<FeatureCollection>(ref r, options);
 
-        return res ?? new FeatureCollection();
+        return res ?? [];
     }
 
     /// <summary> Is Geo Json Content </summary>
@@ -81,10 +76,10 @@ public class GeoJsonProvider : IProvider, IProviderExtended
         if (string.IsNullOrWhiteSpace(_geoJson))
             return false;
 
-        return (_geoJson.Contains("{", StringComparison.CurrentCulture)
-            && _geoJson.Contains("}", StringComparison.CurrentCulture))
-            || (_geoJson.Contains("[", StringComparison.CurrentCulture)
-            && _geoJson.Contains("]", StringComparison.CurrentCulture));
+        return (_geoJson.Contains('{', StringComparison.CurrentCulture)
+            && _geoJson.Contains('}', StringComparison.CurrentCulture))
+            || (_geoJson.Contains('[', StringComparison.CurrentCulture)
+            && _geoJson.Contains(']', StringComparison.CurrentCulture));
     }
 
     public FeatureKeyCreator<string> FeatureKeyCreator
