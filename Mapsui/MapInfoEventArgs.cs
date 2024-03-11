@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapsui.Manipulations;
+using System;
 
 namespace Mapsui;
 
@@ -9,7 +10,7 @@ public class MapInfoEventArgs : EventArgs
     /// <summary>
     /// Number of times the user tapped the location
     /// </summary>
-    public int TapType { get; init; }
+    public TapType TapType { get; init; }
 
     /// <summary>
     /// If the interaction was handled by the event subscriber

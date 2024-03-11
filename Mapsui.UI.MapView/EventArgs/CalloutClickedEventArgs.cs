@@ -1,4 +1,5 @@
 ﻿using System;
+using Mapsui.Manipulations;
 using Microsoft.Maui.Graphics;
 
 namespace Mapsui.UI.Maui;
@@ -23,7 +24,7 @@ public sealed class CalloutClickedEventArgs : EventArgs
     /// <summary>
     /// Number of taps
     /// </summary>
-    public int NumOfTaps { get; }
+    public TapType TapType { get; }
 
     /// <summary>
     /// Flag, if this event was handled
@@ -31,11 +32,11 @@ public sealed class CalloutClickedEventArgs : EventArgs
     /// <value><c>true</c> if handled; otherwise, <c>false</c>.</value>
     public bool Handled { get; set; } = false;
 
-    internal CalloutClickedEventArgs(Callout? callout, Position point, Point screenPoint, int numOfTaps)
+    internal CalloutClickedEventArgs(Callout? callout, Position point, Point screenPoint, TapType tapType)
     {
         Callout = callout;
         Point = point;
         ScreenPoint = screenPoint;
-        NumOfTaps = numOfTaps;
+        TapType = tapType;
     }
 }

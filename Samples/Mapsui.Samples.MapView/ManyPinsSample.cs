@@ -39,7 +39,7 @@ public class ManyPinsSample : IMapViewSample
         foreach (var str in assembly.GetManifestResourceNames())
             System.Diagnostics.Debug.WriteLine(str);
 
-        switch (e?.NumOfTaps)
+        switch (e?.TapType)
         {
             case 1:
                 var pin = new Pin(mapView)

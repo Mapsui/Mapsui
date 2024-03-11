@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapsui.Manipulations;
+using System;
 
 namespace Mapsui.UI.Maui;
 
@@ -17,7 +18,7 @@ public sealed class PinClickedEventArgs : EventArgs
     /// <summary>
     /// Number of taps
     /// </summary>
-    public int NumOfTaps { get; }
+    public TapType TapType { get; }
 
     /// <summary>
     /// Flag, if this event was handled
@@ -25,10 +26,10 @@ public sealed class PinClickedEventArgs : EventArgs
     /// <value><c>true</c> if handled; otherwise, <c>false</c>.</value>
     public bool Handled { get; set; } = false;
 
-    internal PinClickedEventArgs(Pin pin, Position point, int numOfTaps)
+    internal PinClickedEventArgs(Pin pin, Position point, TapType tapType)
     {
         Pin = pin;
         Point = point;
-        NumOfTaps = numOfTaps;
+        TapType = tapType;
     }
 }

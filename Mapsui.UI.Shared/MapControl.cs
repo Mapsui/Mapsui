@@ -515,12 +515,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </summary>
     /// <param name="screenPosition">Screen position to check for widgets and features</param>
     /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
-    /// <param name="numTaps">Number of clicks/taps</param>
+    /// <param name="tapType">single or double tap</param>
     /// <returns>True, if something done </returns>
     private MapInfoEventArgs? CreateMapInfoEventArgs(
         ScreenPosition? screenPosition,
         ScreenPosition? startScreenPosition, // Todo: Figure why this is needed and if it can be removed
-        int numTaps)
+        TapType tapType)
     {
         if (screenPosition is null || startScreenPosition is null)
             return null;
@@ -533,7 +533,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             return new MapInfoEventArgs
             {
                 MapInfo = mapInfo,
-                TapType = numTaps,
+                TapType = tapType,
                 Handled = false
             };
         }
@@ -652,7 +652,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (OnWidgetTapped(position, tapType, GetShiftPressed()))
             return true;
-        OnInfo(CreateMapInfoEventArgs(position, position, 1));
+        OnInfo(CreateMapInfoEventArgs(position, position, TapType.Single));
         return false;
     }
 }

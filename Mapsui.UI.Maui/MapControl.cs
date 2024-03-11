@@ -288,7 +288,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// <returns>True, if the event is handled</returns>
     protected virtual void OnSingleTapped(ScreenPosition screenPosition)
     {
-        OnInfo(CreateMapInfoEventArgs(screenPosition, screenPosition, 1));
+        OnInfo(CreateMapInfoEventArgs(screenPosition, screenPosition, TapType.Single));
     }
 
     /// <summary>

@@ -663,7 +663,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             // Check if we hit a drawable/pin/callout etc
             var mapInfo = GetMapInfo(e.ScreenPosition);
 
-            var mapInfoEventArgs = new MapInfoEventArgs { MapInfo = mapInfo, Handled = e.Handled, TapType = e.NumOfTaps };
+            var mapInfoEventArgs = new MapInfoEventArgs { MapInfo = mapInfo, Handled = e.Handled, TapType = e.TapType };
 
             HandlerInfo(mapInfoEventArgs);
 
@@ -672,7 +672,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             if (!e.Handled)
             {
                 // if nothing else was hit, then we hit the map
-                var args = new MapClickedEventArgs(Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToNative(), e.NumOfTaps);
+                var args = new MapClickedEventArgs(Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToNative(), e.TapType);
                 MapClicked?.Invoke(this, args);
 
                 if (args.Handled)
@@ -846,7 +846,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     protected override void OnSingleTapped(ScreenPosition screenPosition)
     {
-        HandlerTap(new TappedEventArgs(screenPosition, 1));
+        HandlerTap(new TappedEventArgs(screenPosition, TapType.Single));
         base.OnSingleTapped(screenPosition);
     }
 }

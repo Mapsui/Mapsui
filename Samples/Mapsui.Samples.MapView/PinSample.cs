@@ -11,6 +11,7 @@ using Mapsui.UI.Maui;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui;
 using Color = Microsoft.Maui.Graphics.Color;
+using Mapsui.Manipulations;
 
 namespace Mapsui.Samples.Maui;
 
@@ -37,7 +38,7 @@ public class PinSample : IMapViewSample
         foreach (var str in assembly.GetManifestResourceNames())
             System.Diagnostics.Debug.WriteLine(str);
 
-        switch (mapClickedArgs.NumOfTaps)
+        switch (mapClickedArgs.TapType)
         {
             case 1:
                 var pin = new Pin(mapView)
@@ -82,7 +83,7 @@ public class PinSample : IMapViewSample
                 }
                 pin.Callout.CalloutClicked += (s, e) =>
                 {
-                    if (e.NumOfTaps == 2)
+                    if (e.TapType == TapType.Double)
                     {
                         // Double click on callout moves pin
                         var p = e.Callout?.Pin;
