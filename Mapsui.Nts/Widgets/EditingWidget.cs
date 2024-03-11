@@ -5,26 +5,23 @@ using Mapsui.Widgets;
 namespace Mapsui.Nts.Widgets;
 public class EditingWidget : InputOnlyWidget // Derived from InputOnlyWidget because the EditingWidget does not need to draw anything
 {
-    public IMapControl MapControl { get; }
-    public EditManager EditManager { get; }
-    public EditManipulation EditManipulation { get; }
+    private IMapControl _mapControl;
+    private EditManager _editManager;
 
-    public EditingWidget(IMapControl mapControl, EditManager editManager, EditManipulation editManipulation)
+    public EditingWidget(IMapControl mapControl, EditManager editManager)
     {
         InputAreaType = InputAreaType.Map;
-        MapControl = mapControl;
-        EditManager = editManager;
-        EditManipulation = editManipulation;
+        _mapControl = mapControl;
+        _editManager = editManager;
     }
 
     public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
-        if (MapControl.Map != null)
-            MapControl.Map.Navigator.PanLock = EditManipulation.OnTapped(e.Position, EditManager, MapControl, e.TapType, e.ShiftPressed);
+        _mapControl.Map.Navigator.PanLock = EditManipulation.OnTapped(e.Position, _editManager, _mapControl, e.TapType, e.ShiftPressed);
 
-        if (EditManager.SelectMode)
+        if (_editManager.SelectMode)
         {
-            var infoArgs = MapControl.GetMapInfo(e.Position);
+            var infoArgs = _mapControl.GetMapInfo(e.Position);
             if (infoArgs?.Feature != null)
             {
                 var currentValue = (bool?)infoArgs.Feature["Selected"] == true;
@@ -37,16 +34,16 @@ public class EditingWidget : InputOnlyWidget // Derived from InputOnlyWidget bec
 
     public override bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)
     {
-        return EditManipulation.OnPointerPressed(e.Position, EditManager, MapControl);
+        return EditManipulation.OnPointerPressed(e.Position, _editManager, _mapControl);
     }
 
     public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
     {
-        return EditManipulation.OnPointerMoved(e.Position, EditManager, MapControl, !e.LeftButton);
+        return EditManipulation.OnPointerMoved(e.Position, _editManager, _mapControl, !e.LeftButton);
     }
 
     public override bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
     {
-        return EditManipulation.OnPointerReleased(EditManager);
+        return EditManipulation.OnPointerReleased(_editManager);
     }
 }

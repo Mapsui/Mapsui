@@ -5,7 +5,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Nts.Editing;
 
-public class EditManipulation
+public static class EditManipulation
 {
     public static bool OnPointerPressed(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl)
     {
@@ -26,6 +26,7 @@ public class EditManipulation
         }
         return false;
     }
+
     public static bool OnPointerMoved(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl, bool isHovering)
     {
         if (isHovering)

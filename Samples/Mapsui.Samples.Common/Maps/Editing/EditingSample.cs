@@ -51,15 +51,13 @@ public class EditingSample : IMapControlSample
 
         editManager.EditMode = editMode;
 
-        var editManipulation = new EditManipulation();
-
         if (editManager.Layer.Extent != null)
         {
             var extent = editManager.Layer.Extent!.Grow(editManager.Layer.Extent.Width * 0.2);
             map.Navigator.ZoomToBox(extent);
         }
 
-        map.Widgets.Add(new EditingWidget(mapControl, editManager, editManipulation));
+        map.Widgets.Add(new EditingWidget(mapControl, editManager));
         mapControl.Map = map;
         return editManager;
     }
