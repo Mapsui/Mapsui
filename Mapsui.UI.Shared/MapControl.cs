@@ -568,41 +568,31 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetPointerPressed(ScreenPosition position, bool shift)
     {
-        var touchedWidgets = WidgetInput.GetWidgetsAtPosition(position, Map);
-        foreach (var widget in touchedWidgets)
+        foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
-            var widgetArgs = new WidgetEventArgs(position, 0, true, shift);
-            if (widget.OnPointerPressed(Map.Navigator, widgetArgs))
+            if (widget.OnPointerPressed(Map.Navigator, new WidgetEventArgs(position, 0, true, shift)))
                 return true;
         }
-
         return false;
     }
 
     private bool OnWidgetPointerMoved(ScreenPosition position, bool leftButton, bool shift)
     {
-        var touchedWidgets = WidgetInput.GetWidgetsAtPosition(position, Map);
-        foreach (var widget in touchedWidgets)
-        {
-            var e = new WidgetEventArgs(position, 0, leftButton, shift);
-            if (widget.OnPointerMoved(Map.Navigator, e))
+        foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
+            if (widget.OnPointerMoved(Map.Navigator, new WidgetEventArgs(position, 0, leftButton, shift)))
                 return true;
-        }
-
         return false;
     }
 
     private bool OnWidgetPointerReleased(ScreenPosition position, bool shift)
     {
-        var touchedWidgets = WidgetInput.GetWidgetsAtPosition(position, Map);
-        foreach (var widget in touchedWidgets)
+        foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
         {
-            var e = new WidgetEventArgs(position, 0, true, shift);
-            if (widget.OnPointerReleased(Map.Navigator, e))
+            Logger.Log(LogLevel.Information, $"Widget.Released: {widget.GetType().Name}");
+            if (widget.OnPointerReleased(Map.Navigator, new WidgetEventArgs(position, 0, true, shift)))
                 return true;
         }
-
         return false;
     }
 
