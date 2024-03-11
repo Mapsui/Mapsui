@@ -29,20 +29,24 @@ public static class EditManipulation
 
     public static bool OnPointerMoved(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl, bool isHovering)
     {
+        var result = false;
         if (isHovering)
         {
             editManager.HoveringVertex(mapControl.GetMapInfo(screenPosition));
-            return false;
+            result = false;
         }
-
-        var args = mapControl.GetMapInfo(screenPosition);
-        if (editManager.EditMode == EditMode.Modify)
-            return editManager.Dragging(args?.WorldPosition?.ToPoint());
-        if (editManager.EditMode == EditMode.Rotate)
-            return editManager.Rotating(args?.WorldPosition?.ToPoint());
-        if (editManager.EditMode == EditMode.Scale)
-            return editManager.Scaling(args?.WorldPosition?.ToPoint());
-        return false;
+        else
+        {
+            var args = mapControl.GetMapInfo(screenPosition);
+            if (editManager.EditMode == EditMode.Modify)
+                result = editManager.Dragging(args?.WorldPosition?.ToPoint());
+            if (editManager.EditMode == EditMode.Rotate)
+                result = editManager.Rotating(args?.WorldPosition?.ToPoint());
+            if (editManager.EditMode == EditMode.Scale)
+                result = editManager.Scaling(args?.WorldPosition?.ToPoint());
+        }
+        mapControl.RefreshGraphics();
+        return result;
     }
 
     public static bool OnPointerReleased(EditManager editManager)

@@ -32,6 +32,7 @@ public class EditingSample : IMapControlSample
     public void Setup(IMapControl mapControl)
     {
         _editManager = InitEditMode(mapControl, EditMode.Modify);
+        mapControl.Map.Navigator.ZoomToBox(_editManager.GetGrownExtent());
         InitEditWidgets(mapControl.Map);
         _mapControl = mapControl;
     }
@@ -50,12 +51,6 @@ public class EditingSample : IMapControlSample
         targetLayer.Clear();
 
         editManager.EditMode = editMode;
-
-        if (editManager.Layer.Extent != null)
-        {
-            var extent = editManager.Layer.Extent!.Grow(editManager.Layer.Extent.Width * 0.2);
-            map.Navigator.ZoomToBox(extent);
-        }
 
         map.Widgets.Add(new EditingWidget(mapControl, editManager));
         mapControl.Map = map;
@@ -304,6 +299,7 @@ public class EditingSample : IMapControlSample
             {
                 _targetLayer.Clear();
                 _targetLayer.AddRange(_tempFeatures.Copy());
+                _targetLayer.DataHasChanged();
                 _mapControl?.RefreshGraphics();
             }
 

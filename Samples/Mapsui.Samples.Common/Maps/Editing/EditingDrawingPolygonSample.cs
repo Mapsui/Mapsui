@@ -11,6 +11,7 @@ public class EditingDrawingPolygonSample : IMapControlSample
     public string Category => "Editing";
     public void Setup(IMapControl mapControl)
     {
-        EditingSample.InitEditMode(mapControl, EditMode.DrawingPolygon);
+        var editManager = EditingSample.InitEditMode(mapControl, EditMode.DrawingPolygon);
+        mapControl.Map.Navigator.ZoomToBox(editManager.GetGrownExtent());
     }
 }

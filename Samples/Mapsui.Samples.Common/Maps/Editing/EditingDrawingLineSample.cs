@@ -11,6 +11,7 @@ public class EditingDrawingLineSample : IMapControlSample
     public string Category => "Editing";
     public void Setup(IMapControl mapControl)
     {
-        EditingSample.InitEditMode(mapControl, EditMode.DrawingLine);
+        var editManager = EditingSample.InitEditMode(mapControl, EditMode.DrawingLine);
+        mapControl.Map.Navigator.ZoomToBox(editManager.GetGrownExtent());
     }
 }

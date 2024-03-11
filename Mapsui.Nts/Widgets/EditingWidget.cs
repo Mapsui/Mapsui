@@ -5,14 +5,29 @@ using Mapsui.Widgets;
 namespace Mapsui.Nts.Widgets;
 public class EditingWidget : InputOnlyWidget // Derived from InputOnlyWidget because the EditingWidget does not need to draw anything
 {
-    private IMapControl _mapControl;
-    private EditManager _editManager;
+    private readonly IMapControl _mapControl;
+    private readonly EditManager _editManager;
 
     public EditingWidget(IMapControl mapControl, EditManager editManager)
     {
         InputAreaType = InputAreaType.Map;
         _mapControl = mapControl;
         _editManager = editManager;
+    }
+
+    public override bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)
+    {
+        return EditManipulation.OnPointerPressed(e.Position, _editManager, _mapControl);
+    }
+
+    public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
+    {
+        return EditManipulation.OnPointerMoved(e.Position, _editManager, _mapControl, !e.LeftButton);
+    }
+
+    public override bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
+    {
+        return EditManipulation.OnPointerReleased(_editManager);
     }
 
     public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
@@ -30,20 +45,5 @@ public class EditingWidget : InputOnlyWidget // Derived from InputOnlyWidget bec
         }
 
         return false;
-    }
-
-    public override bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)
-    {
-        return EditManipulation.OnPointerPressed(e.Position, _editManager, _mapControl);
-    }
-
-    public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
-    {
-        return EditManipulation.OnPointerMoved(e.Position, _editManager, _mapControl, !e.LeftButton);
-    }
-
-    public override bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
-    {
-        return EditManipulation.OnPointerReleased(_editManager);
     }
 }
