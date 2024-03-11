@@ -568,7 +568,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetPointerPressed(ScreenPosition position, bool shift)
     {
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
+        var touchedWidgets = WidgetInput.GetWidgetsAtPosition(position, Map);
         foreach (var widget in touchedWidgets)
         {
             Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
@@ -582,11 +582,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetPointerMoved(ScreenPosition position, bool leftButton, bool shift)
     {
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
+        var touchedWidgets = WidgetInput.GetWidgetsAtPosition(position, Map);
         foreach (var widget in touchedWidgets)
         {
-            var widgetArgs = new WidgetEventArgs(position, 0, leftButton, shift);
-            if (widget.OnPointerMoved(Map.Navigator, widgetArgs))
+            var e = new WidgetEventArgs(position, 0, leftButton, shift);
+            if (widget.OnPointerMoved(Map.Navigator, e))
                 return true;
         }
 
@@ -595,11 +595,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetPointerReleased(ScreenPosition position, bool shift)
     {
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
+        var touchedWidgets = WidgetInput.GetWidgetsAtPosition(position, Map);
         foreach (var widget in touchedWidgets)
         {
-            var widgetArgs = new WidgetEventArgs(position, 0, true, shift);
-            if (widget.OnPointerReleased(Map.Navigator, widgetArgs))
+            var e = new WidgetEventArgs(position, 0, true, shift);
+            if (widget.OnPointerReleased(Map.Navigator, e))
                 return true;
         }
 
@@ -608,12 +608,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetTapped(ScreenPosition position, TapType tapType, bool shift)
     {
-        var touchedWidgets = WidgetTouch.GetTouchedWidgets(position, Map);
+        var touchedWidgets = WidgetInput.GetWidgetsAtPosition(position, Map);
         foreach (var widget in touchedWidgets)
         {
             Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapCount: {tapType} KeyState: {shift}");
-            var args = new WidgetEventArgs(position, tapType, true, shift);
-            if (widget.OnTapped(Map.Navigator, args))
+            var e = new WidgetEventArgs(position, tapType, true, shift);
+            if (widget.OnTapped(Map.Navigator, e))
                 return true;
         }
 
@@ -634,6 +634,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (positions.Length != 1)
             return false;
+
         if (OnWidgetPointerMoved(positions[0], !isHovering, GetShiftPressed()))
             return true;
         if (!isHovering)
@@ -644,7 +645,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private bool OnMapPointerReleased(ReadOnlySpan<ScreenPosition> positions)
     {
         if (positions.Length != 1)
-            return false;        
+            return false;    
+
         var handled = false;
         if (OnWidgetPointerReleased(positions[0], GetShiftPressed()))
             handled = true; // Set to handled but still handle tap in the next line
