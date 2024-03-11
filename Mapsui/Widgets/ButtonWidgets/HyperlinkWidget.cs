@@ -1,5 +1,4 @@
 ﻿using Mapsui.Logging;
-using Mapsui.Manipulations;
 using Mapsui.Utilities;
 
 namespace Mapsui.Widgets.ButtonWidgets;
@@ -26,9 +25,9 @@ public class HyperlinkWidget : ButtonWidget
         }
     }
 
-    public override bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
-        if (base.OnTapped(navigator, position, e))
+        if (base.OnTapped(navigator, e))
             return true; // The user could override the behavior in the Tapped event.
 
         if (Url is null)

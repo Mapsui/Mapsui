@@ -5,7 +5,7 @@ namespace Mapsui.Widgets.BoxWidgets;
 /// <summary>
 /// Widget displaying a box
 /// </summary>
-public class BoxWidget : Widget
+public class BoxWidget : BaseWidget
 {
     private double _cornerRadius = 8;
 
