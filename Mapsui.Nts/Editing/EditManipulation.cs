@@ -13,17 +13,11 @@ public static class EditManipulation
         // is to select the vertex.
         var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
         if (editManager.EditMode == EditMode.Modify && mapInfo?.Feature != null)
-        {
             return editManager.StartDragging(mapInfo, editManager.VertexRadius);
-        }
         if (editManager.EditMode == EditMode.Rotate && mapInfo?.Feature != null)
-        {
             return editManager.StartRotating(mapInfo);
-        }
         if (editManager.EditMode == EditMode.Scale && mapInfo?.Feature != null)
-        {
             return editManager.StartScaling(mapInfo);
-        }
         return false;
     }
 
@@ -88,6 +82,18 @@ public static class EditManipulation
                 return editManager.EndEdit();
             }
         }
-        return editManager.AddVertex(mapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
+        var result = editManager.AddVertex(mapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
+
+        if (editManager.SelectMode)
+        {
+            var infoArgs = mapControl.GetMapInfo(screenPosition);
+            if (infoArgs?.Feature != null)
+            {
+                var currentValue = (bool?)infoArgs.Feature["Selected"] == true;
+                infoArgs.Feature["Selected"] = !currentValue; // invert current value
+            }
+        }
+
+        return result;
     }
 }
