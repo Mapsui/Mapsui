@@ -31,6 +31,9 @@ public class EditManager
 
     public EditMode EditMode { get; set; }
 
+    // In the current implementation you have to tap within the polygon itself to get a hit,
+    // no matter how big the vertex is. This could be resolved by introducing a VertexOnlyStyle
+    // to replace the VertexOnlyLayer.
     public int VertexRadius { get; set; } = 12;
     public bool SelectMode { get; set; }
 
