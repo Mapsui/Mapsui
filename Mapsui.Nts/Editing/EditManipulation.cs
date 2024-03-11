@@ -58,7 +58,7 @@ public class EditManipulation
         return false;
     }
 
-    public static bool OnTapped(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl, TapType tapType, bool shift)
+    public static bool OnTapped(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl, TapType tapType, bool shiftPressed)
     {
         if (editManager.EditMode == EditMode.Modify)
             editManager.StopDragging();
@@ -69,7 +69,7 @@ public class EditManipulation
 
         if (editManager.EditMode == EditMode.Modify)
         {
-            if (shift || tapType == TapType.Double)
+            if (shiftPressed || tapType == TapType.Double)
             {
                 return editManager.TryDeleteCoordinate(
                     mapControl.GetMapInfo(screenPosition, editManager.VertexRadius), editManager.VertexRadius);
@@ -79,7 +79,7 @@ public class EditManipulation
         }
         else if (editManager.EditMode == EditMode.DrawingPolygon || editManager.EditMode == EditMode.DrawingLine)
         {
-            if (shift || tapType == TapType.Double)
+            if (shiftPressed || tapType == TapType.Double)
             {
                 return editManager.EndEdit();
             }

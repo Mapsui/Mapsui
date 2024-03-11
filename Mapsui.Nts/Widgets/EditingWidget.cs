@@ -20,7 +20,7 @@ public class EditingWidget : InputOnlyWidget // Derived from InputOnlyWidget bec
     public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
         if (MapControl.Map != null)
-            MapControl.Map.Navigator.PanLock = EditManipulation.OnTapped(e.Position, EditManager, MapControl, e.TapType, e.Shift);
+            MapControl.Map.Navigator.PanLock = EditManipulation.OnTapped(e.Position, EditManager, MapControl, e.TapType, e.ShiftPressed);
 
         if (EditManager.SelectMode)
         {
