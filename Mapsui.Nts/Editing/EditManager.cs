@@ -41,6 +41,7 @@ public class EditManager
 
         if (EditMode == EditMode.DrawingLine)
         {
+            _addInfo.Vertices.RemoveAt(_addInfo.Vertices.Count - 1); // Remove the last vertex, because it is the hover vertex
             _addInfo.Feature.Geometry = new LineString([.. _addInfo.Vertices]);
 
             _addInfo.Feature = null;
@@ -52,9 +53,10 @@ public class EditManager
             var polygon = _addInfo.Feature.Geometry as Polygon;
             if (polygon == null) return false;
 
+            _addInfo.Vertices.RemoveAt(_addInfo.Vertices.Count - 1); // Remove the last vertex, because it is the hover vertex
             var linearRing = _addInfo.Vertices.ToList();
             linearRing.Add(linearRing[0].Copy()); // Add first coordinate at end to close the ring.
-            _addInfo.Feature.Geometry = new Polygon(new LinearRing(linearRing.ToArray()));
+            _addInfo.Feature.Geometry = new Polygon(new LinearRing([.. linearRing]));
 
             _addInfo.Feature.Modified(); // You need to clear the cache to see changes.
             _addInfo.Feature = null;
@@ -89,7 +91,7 @@ public class EditManager
             // Add a second point right away. The second one will be the 'hover' vertex
             var secondPoint = worldPosition.Copy();
             _addInfo.Vertex = secondPoint;
-            _addInfo.Feature = new GeometryFeature { Geometry = new LineString(new[] { firstPoint, secondPoint }) };
+            _addInfo.Feature = new GeometryFeature { Geometry = new LineString([firstPoint, secondPoint]) };
             _addInfo.Vertices = _addInfo.Feature.Geometry.MainCoordinates();
             Layer?.Add(_addInfo.Feature);
             Layer?.DataHasChanged();
@@ -104,7 +106,7 @@ public class EditManager
             _addInfo.Vertex.SetXY(worldPosition);
             _addInfo.Vertex = worldPosition.Copy(); // and create a new hover vertex
             _addInfo.Vertices.Add(_addInfo.Vertex);
-            _addInfo.Feature.Geometry = new LineString(_addInfo.Vertices.ToArray());
+            _addInfo.Feature.Geometry = new LineString([.. _addInfo.Vertices]);
             _addInfo.Feature?.Modified();
             Layer?.DataHasChanged();
         }

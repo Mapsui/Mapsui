@@ -75,14 +75,16 @@ public static class EditManipulation
             return editManager.TryInsertCoordinate(
                 mapControl.GetMapInfo(screenPosition, editManager.VertexRadius));
         }
-        else if (editManager.EditMode == EditMode.DrawingPolygon || editManager.EditMode == EditMode.DrawingLine)
+        else if (editManager.EditMode is EditMode.DrawingPolygon or EditMode.DrawingLine)
         {
             if (shiftPressed || tapType == TapType.Double)
-            {
                 return editManager.EndEdit();
-            }
+            else
+                editManager.AddVertex(mapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
         }
-        var result = editManager.AddVertex(mapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
+        else if (editManager.EditMode is EditMode.AddPoint or EditMode.AddLine or EditMode.AddPolygon)
+            if (tapType == TapType.Single)
+                editManager.AddVertex(mapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
 
         if (editManager.SelectMode)
         {
@@ -94,6 +96,6 @@ public static class EditManipulation
             }
         }
 
-        return result;
+        return false;
     }
 }
