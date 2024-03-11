@@ -11,7 +11,7 @@ public abstract class BaseWidget : IWidget
     /// Type of area to use for touch events. The default is WidgetArea. This needs to be set to 
     /// 'Map' in the constructor if widget want to receive manipulation events from all over the map.
     /// </summary>
-    public WidgetAreaType WidgetAreaType { get; init; } = WidgetAreaType.Widget;
+    public InputAreaType InputAreaType { get; init; } = InputAreaType.Widget;
 
     /// <summary>
     /// Horizontal alignment of Widget

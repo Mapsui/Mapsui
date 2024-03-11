@@ -11,7 +11,7 @@ public class EditingWidget : InputOnlyWidget // Derived from InputOnlyWidget bec
 
     public EditingWidget(IMapControl mapControl, EditManager editManager, EditManipulation editManipulation)
     {
-        WidgetAreaType = WidgetAreaType.Map;
+        InputAreaType = InputAreaType.Map;
         MapControl = mapControl;
         EditManager = editManager;
         EditManipulation = editManipulation;

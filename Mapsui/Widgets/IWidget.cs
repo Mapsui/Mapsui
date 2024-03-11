@@ -48,9 +48,9 @@ public interface IWidget
     bool NeedsRedraw { get; set; }
 
     /// <summary>
-    /// Type of area to use for manipulation events
+    /// Type of area used for  manipulation (e.g. touch, mouse) input events.
     /// </summary>
-    WidgetAreaType WidgetAreaType { get; }
+    InputAreaType InputAreaType { get; }
 
     bool InputTransparent { get; init; }
 

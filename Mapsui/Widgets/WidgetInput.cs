@@ -26,7 +26,7 @@ public static class WidgetInput
         foreach (var widget in touchableWidgets)
         {
             // There are two options:
-            if (widget.WidgetAreaType == WidgetAreaType.Map) // 1) When type is 'Map' the widget is always touched.
+            if (widget.InputAreaType == InputAreaType.Map) // 1) When type is 'Map' the widget is always touched.
                 touchedWidgets.Add(widget);
             else if (widget.Envelope?.Contains(position.X, position.Y) ?? false) // 2) When type is 'Widget' the position needs to be within the envelope.
                 touchedWidgets.Add(widget);

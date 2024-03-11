@@ -1,6 +1,6 @@
 ﻿namespace Mapsui.Widgets;
 
-public enum WidgetAreaType
+public enum InputAreaType
 {
     /// <summary>
     /// Events will be called for interactions within the widget area.
