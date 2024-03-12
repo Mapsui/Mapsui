@@ -9,6 +9,7 @@ public class EditingModifySample : IMapControlSample
     public string Category => "Editing";
     public void Setup(IMapControl mapControl)
     {
-        EditingSample.InitEditMode(mapControl, EditMode.Modify);
+        var editManager = EditingSample.InitEditMode(mapControl, EditMode.Modify);
+        mapControl.Map.Navigator.ZoomToBox(editManager.GetGrownExtent());
     }
 }

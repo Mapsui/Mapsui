@@ -566,43 +566,43 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
 
-    private bool OnWidgetPointerPressed(ScreenPosition position, bool shift)
+    private bool OnWidgetPointerPressed(ScreenPosition position, bool shiftPressed)
     {
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
-            if (widget.OnPointerPressed(Map.Navigator, new WidgetEventArgs(position, 0, true, shift)))
+            if (widget.OnPointerPressed(Map.Navigator, new WidgetEventArgs(position, 0, true, shiftPressed)))
                 return true;
         }
         return false;
     }
 
-    private bool OnWidgetPointerMoved(ScreenPosition position, bool leftButton, bool shift)
+    private bool OnWidgetPointerMoved(ScreenPosition position, bool leftButton, bool shiftPressed)
     {
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
-            if (widget.OnPointerMoved(Map.Navigator, new WidgetEventArgs(position, 0, leftButton, shift)))
+            if (widget.OnPointerMoved(Map.Navigator, new WidgetEventArgs(position, 0, leftButton, shiftPressed)))
                 return true;
         return false;
     }
 
-    private bool OnWidgetPointerReleased(ScreenPosition position, bool shift)
+    private bool OnWidgetPointerReleased(ScreenPosition position, bool shiftPressed)
     {
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.Released: {widget.GetType().Name}");
-            if (widget.OnPointerReleased(Map.Navigator, new WidgetEventArgs(position, 0, true, shift)))
+            if (widget.OnPointerReleased(Map.Navigator, new WidgetEventArgs(position, 0, true, shiftPressed)))
                 return true;
         }
         return false;
     }
 
-    private bool OnWidgetTapped(ScreenPosition position, TapType tapType, bool shift)
+    private bool OnWidgetTapped(ScreenPosition position, TapType tapType, bool shiftPressed)
     {
         var touchedWidgets = WidgetInput.GetWidgetsAtPosition(position, Map);
         foreach (var widget in touchedWidgets)
         {
-            Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapCount: {tapType} KeyState: {shift}");
-            var e = new WidgetEventArgs(position, tapType, true, shift);
+            Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapCount: {tapType} KeyState: {shiftPressed}");
+            var e = new WidgetEventArgs(position, tapType, true, shiftPressed);
             if (widget.OnTapped(Map.Navigator, e))
                 return true;
         }

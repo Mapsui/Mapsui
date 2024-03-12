@@ -31,6 +31,9 @@ public class EditManager
 
     public EditMode EditMode { get; set; }
 
+    // In the current implementation you have to tap within the polygon itself to get a hit,
+    // no matter how big the vertex is. This could be resolved by introducing a VertexOnlyStyle
+    // to replace the VertexOnlyLayer.
     public int VertexRadius { get; set; } = 12;
     public bool SelectMode { get; set; }
 
@@ -41,7 +44,8 @@ public class EditManager
 
         if (EditMode == EditMode.DrawingLine)
         {
-            _addInfo.Feature.Geometry = new LineString(_addInfo.Vertices.ToArray());
+            _addInfo.Vertices.RemoveAt(_addInfo.Vertices.Count - 1); // Remove the last vertex, because it is the hover vertex
+            _addInfo.Feature.Geometry = new LineString([.. _addInfo.Vertices]);
 
             _addInfo.Feature = null;
             _addInfo.Vertex = null;
@@ -52,9 +56,10 @@ public class EditManager
             var polygon = _addInfo.Feature.Geometry as Polygon;
             if (polygon == null) return false;
 
+            _addInfo.Vertices.RemoveAt(_addInfo.Vertices.Count - 1); // Remove the last vertex, because it is the hover vertex
             var linearRing = _addInfo.Vertices.ToList();
             linearRing.Add(linearRing[0].Copy()); // Add first coordinate at end to close the ring.
-            _addInfo.Feature.Geometry = new Polygon(new LinearRing(linearRing.ToArray()));
+            _addInfo.Feature.Geometry = new Polygon(new LinearRing([.. linearRing]));
 
             _addInfo.Feature.Modified(); // You need to clear the cache to see changes.
             _addInfo.Feature = null;
@@ -89,7 +94,7 @@ public class EditManager
             // Add a second point right away. The second one will be the 'hover' vertex
             var secondPoint = worldPosition.Copy();
             _addInfo.Vertex = secondPoint;
-            _addInfo.Feature = new GeometryFeature { Geometry = new LineString(new[] { firstPoint, secondPoint }) };
+            _addInfo.Feature = new GeometryFeature { Geometry = new LineString([firstPoint, secondPoint]) };
             _addInfo.Vertices = _addInfo.Feature.Geometry.MainCoordinates();
             Layer?.Add(_addInfo.Feature);
             Layer?.DataHasChanged();
@@ -104,7 +109,7 @@ public class EditManager
             _addInfo.Vertex.SetXY(worldPosition);
             _addInfo.Vertex = worldPosition.Copy(); // and create a new hover vertex
             _addInfo.Vertices.Add(_addInfo.Vertex);
-            _addInfo.Feature.Geometry = new LineString(_addInfo.Vertices.ToArray());
+            _addInfo.Feature.Geometry = new LineString([.. _addInfo.Vertices]);
             _addInfo.Feature?.Modified();
             Layer?.DataHasChanged();
         }
@@ -114,11 +119,11 @@ public class EditManager
             // Add a second point right away. The second one will be the 'hover' vertex
             var secondPoint = worldPosition.Copy();
             _addInfo.Vertex = secondPoint;
-            _addInfo.Vertices = new List<Coordinate>(new[] { firstPoint, secondPoint });
+            _addInfo.Vertices = new List<Coordinate>([firstPoint, secondPoint]);
 
             _addInfo.Feature = new GeometryFeature
             {
-                Geometry = new Polygon(new LinearRing(new[] { firstPoint, secondPoint, firstPoint })) // A LinearRing needs at least three coordinates
+                Geometry = new Polygon(new LinearRing([firstPoint, secondPoint, firstPoint])) // A LinearRing needs at least three coordinates
             };
             Layer?.Add(_addInfo.Feature);
             Layer?.DataHasChanged();
@@ -136,7 +141,7 @@ public class EditManager
 
             var linearRing = _addInfo.Vertices.ToList();
             linearRing.Add(linearRing[0]); // Add first coordinate at end to close the ring.
-            _addInfo.Feature.Geometry = new Polygon(new LinearRing(linearRing.ToArray()));
+            _addInfo.Feature.Geometry = new Polygon(new LinearRing([.. linearRing]));
 
             _addInfo.Feature?.Modified();
             Layer?.DataHasChanged();
@@ -161,7 +166,7 @@ public class EditManager
             {
                 if (mapInfo.Feature is GeometryFeature geometryFeature)
                 {
-                    var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainCoordinates() ?? new List<Coordinate>(), screenDistance);
+                    var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainCoordinates() ?? [], screenDistance);
                     _dragInfo.Feature = geometryFeature;
                     _dragInfo.Vertex = vertexTouched;
                     if (mapInfo.WorldPosition != null)
@@ -393,7 +398,7 @@ public class EditManager
         }
     }
 
-    internal void ResetManipulations()
+    public void ResetManipulations()
     {
         _dragInfo.Reset();
         _rotateInfo.Reset();
@@ -404,8 +409,16 @@ public class EditManager
         // _addInfo.Reset();
     }
 
-    internal bool IsManipulating()
+    public bool IsManipulating()
     {
         return _dragInfo.Feature != null || _rotateInfo.Feature != null || _scaleInfo.Feature != null;
+    }
+
+    public MRect? GetGrownExtent()
+    {
+        if (Layer?.Extent is null)
+            return null;
+
+        return Layer.Extent!.Grow(Layer.Extent.Width * 0.2);
     }
 }
