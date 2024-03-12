@@ -25,9 +25,9 @@ public class PinSample : IMapViewSample
 
     public bool UpdateLocation => true;
 
-    public bool OnClick(object? sender, EventArgs args)
+    public bool OnTap(object? sender, EventArgs args)
     {
-        var mapView = sender as MapView;
+        var mapView = sender as UI.Maui.MapView; // The namespace prefix is somehow necessary on Linux.
         var mapClickedArgs = (MapClickedEventArgs)args;
 
         if (mapView == null)

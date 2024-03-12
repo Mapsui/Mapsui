@@ -5,7 +5,7 @@ namespace Mapsui.Samples.Maui;
 
 public interface IMapViewSample : IMapControlSample
 {
-    bool OnClick(object? sender, EventArgs args);
+    bool OnTap(object? sender, EventArgs args);
 
     bool UpdateLocation { get; }
 }
