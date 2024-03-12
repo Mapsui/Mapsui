@@ -488,7 +488,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     protected void OnMapInfo(MapInfoEventArgs mapInfoEventArgs)
     {
-        Map?.OnInfo(mapInfoEventArgs); // Also propagate to Map
+        Map?.OnMapInfo(mapInfoEventArgs); // Also propagate to Map
         Info?.Invoke(this, mapInfoEventArgs);
     }
 
