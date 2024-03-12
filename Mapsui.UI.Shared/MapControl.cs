@@ -75,6 +75,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// short time after the user has lifted the finger.
     /// </summary>
     public bool UseFling { get; set; } = true;
+    
+    /// <summary>Gets Cancellation Token Is Canceled when the Control is disposed </summary>
+    public CancellationToken CancellationToken => _cancellationTokenSource.Token;
 
     private void SharedConstructor()
     {

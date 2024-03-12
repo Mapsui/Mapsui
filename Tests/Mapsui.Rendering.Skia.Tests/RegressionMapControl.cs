@@ -12,6 +12,7 @@ using Mapsui.UI;
 using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Mapsui.Rendering.Skia.Tests;
 
@@ -19,7 +20,7 @@ public sealed class RegressionMapControl : IMapControl
 {
     private Map _map;
     private CancellationTokenSource _cancellationTokenSource = new();
-    
+
     public RegressionMapControl(MapRenderer? mapRenderer = null)
     {
         Renderer = mapRenderer ?? new MapRenderer();

@@ -61,7 +61,7 @@ public interface IMapControl : IDisposable
 
     /// <summary> Gets or sets the performance. </summary>
     Performance? Performance { get; set; }
-    
+
     /// <summary>Gets Cancellation Token Is Canceled when the Control is disposed </summary>
     CancellationToken CancellationToken { get; }
 }

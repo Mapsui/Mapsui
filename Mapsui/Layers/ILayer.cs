@@ -7,7 +7,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Threading;
 using Mapsui.Animations;
 using Mapsui.Fetcher;
 using Mapsui.Styles;
