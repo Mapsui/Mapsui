@@ -16,6 +16,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 
 namespace Mapsui;
 
@@ -174,23 +175,23 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Refresh data of the map and than repaint it
     /// </summary>
-    public void Refresh(ChangeType changeType = ChangeType.Discrete)
+    public void Refresh(ChangeType changeType = ChangeType.Discrete, CancellationToken? cancellationToken = null)
     {
-        RefreshData(changeType);
+        RefreshData(changeType, cancellationToken);
         RefreshGraphics();
     }
 
     /// <summary>
     /// Refresh data of Map, but don't paint it
     /// </summary>
-    public void RefreshData(ChangeType changeType = ChangeType.Discrete)
+    public void RefreshData(ChangeType changeType = ChangeType.Discrete, CancellationToken? cancellationToken = null)
     {
         if (Navigator.Viewport.ToExtent() is null)
             return;
         if (Navigator.Viewport.ToExtent().GetArea() <= 0)
             return;
 
-        var fetchInfo = new FetchInfo(Navigator.Viewport.ToSection(), CRS, changeType);
+        var fetchInfo = new FetchInfo(Navigator.Viewport.ToSection(), CRS, changeType, cancellationToken);
         RefreshData(fetchInfo);
     }
 

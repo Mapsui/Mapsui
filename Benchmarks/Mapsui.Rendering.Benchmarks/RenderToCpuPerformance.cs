@@ -78,7 +78,7 @@ public class RenderToCpuPerformance : IDisposable
         mapControl.Map.Navigator.ZoomOut();
 
         // fetch data first time
-        var fetchInfo = new FetchInfo(mapControl.Map.Navigator.Viewport.ToSection(), mapControl.Map.CRS);
+        var fetchInfo = new FetchInfo(mapControl.Map.Navigator.Viewport.ToSection(), mapControl.Map.CRS, cancellationToken: mapControl.CancellationToken);
         mapControl.Map.RefreshData(fetchInfo);
         await mapControl.Map.Layers.WaitForLoadingAsync();
 

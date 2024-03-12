@@ -18,7 +18,8 @@ namespace Mapsui.Rendering.Skia.Tests;
 public sealed class RegressionMapControl : IMapControl
 {
     private Map _map;
-
+    private CancellationTokenSource _cancellationTokenSource = new();
+    
     public RegressionMapControl(MapRenderer? mapRenderer = null)
     {
         Renderer = mapRenderer ?? new MapRenderer();
@@ -43,6 +44,8 @@ public sealed class RegressionMapControl : IMapControl
         }
     }
 
+    public CancellationToken CancellationToken => _cancellationTokenSource.Token;
+
     public event EventHandler<MapInfoEventArgs>? Info;
     public event EventHandler? ViewportInitialized;
 
@@ -51,12 +54,12 @@ public sealed class RegressionMapControl : IMapControl
         throw new NotImplementedException();
     }
 
-    public void RefreshData(ChangeType changeType = ChangeType.Discrete)
+    public void RefreshData(ChangeType changeType = ChangeType.Discrete, CancellationToken? cancellationToken = null)
     {
         throw new NotImplementedException();
     }
 
-    public void Refresh(ChangeType changeType = ChangeType.Discrete)
+    public void Refresh(ChangeType changeType = ChangeType.Discrete, CancellationToken? cancellationToken = null)
     {
         throw new NotImplementedException();
     }
@@ -99,6 +102,8 @@ public sealed class RegressionMapControl : IMapControl
 
     public void Dispose()
     {
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource.Dispose();
         Renderer.Dispose();
     }
 }

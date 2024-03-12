@@ -47,7 +47,7 @@ public class ProjectingProvider : IProvider
         _projection.Project(CRS!, _provider.CRS!, extentToProject);
         var scale = fetchInfo.Extent.Width / extentToProject.Width;
         var projectedResolution = fetchInfo.Resolution / scale;
-        fetchInfo = new FetchInfo(new MSection(extentToProject, projectedResolution), CRS, fetchInfo.ChangeType);
+        fetchInfo = new FetchInfo(new MSection(extentToProject, projectedResolution), CRS, fetchInfo.ChangeType, fetchInfo.CancellationToken);
         return false;
     }
 

@@ -60,6 +60,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private int _updateInterval = 16;
     // Stopwatch for measuring drawing times
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
+    private readonly CancellationTokenSource _cancellationTokenSource = new();
     private IRenderer _renderer = new MapRenderer();
     private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly FlingTracker _flingTracker = new();
@@ -310,9 +311,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         localMap.AbortFetch();
     }
 
-    public void Refresh(ChangeType changeType = ChangeType.Discrete)
+    public void Refresh(ChangeType changeType = ChangeType.Discrete, CancellationToken? cancellationToken = null)
     {
-        Map.Refresh(changeType);
+        cancellationToken = cancellationToken != null 
+            ? CancellationTokenSource.CreateLinkedTokenSource(cancellationToken.Value, _cancellationTokenSource.Token).Token 
+            : _cancellationTokenSource.Token;
+
+        Map.Refresh(changeType, cancellationToken);
     }
 
     public void RefreshGraphics()
@@ -481,9 +486,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Refresh data of Map, but don't paint it
     /// </summary>
-    public void RefreshData(ChangeType changeType = ChangeType.Discrete)
+    public void RefreshData(ChangeType changeType = ChangeType.Discrete, CancellationToken? cancellationToken = null)
     {
-        Map.RefreshData(changeType);
+        cancellationToken = cancellationToken != null 
+            ? CancellationTokenSource.CreateLinkedTokenSource(cancellationToken.Value, _cancellationTokenSource.Token).Token 
+            : _cancellationTokenSource.Token;
+        
+        Map.RefreshData(changeType, cancellationToken);
     }
 
     private void OnInfo(MapInfoEventArgs? mapInfoEventArgs)
@@ -561,6 +570,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             _renderer.Dispose();
             _map?.Dispose();
             _map = null;
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource.Dispose();
         }
         _invalidateTimer = null;
     }

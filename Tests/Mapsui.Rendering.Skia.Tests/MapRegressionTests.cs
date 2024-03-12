@@ -200,7 +200,7 @@ public class MapRegressionTests
         }
 
         await mapControl.WaitForLoadingAsync();
-        var fetchInfo = new FetchInfo(mapControl.Map.Navigator.Viewport.ToSection(), mapControl.Map.CRS);
+        var fetchInfo = new FetchInfo(mapControl.Map.Navigator.Viewport.ToSection(), mapControl.Map.CRS, cancellationToken: mapControl.CancellationToken);
         mapControl.Map.RefreshData(fetchInfo);
 
         return mapControl;

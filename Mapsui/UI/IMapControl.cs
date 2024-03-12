@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Mapsui.Layers;
 using Mapsui.Manipulations;
 using Mapsui.Rendering;
@@ -15,9 +16,9 @@ public interface IMapControl : IDisposable
 
     void RefreshGraphics();
 
-    void RefreshData(ChangeType changeType = ChangeType.Discrete);
+    void RefreshData(ChangeType changeType = ChangeType.Discrete, CancellationToken? cancellationToken = null);
 
-    void Refresh(ChangeType changeType = ChangeType.Discrete);
+    void Refresh(ChangeType changeType = ChangeType.Discrete, CancellationToken? cancellationToken = null);
 
     void Unsubscribe();
 
@@ -58,5 +59,9 @@ public interface IMapControl : IDisposable
     /// <returns>Byte array with snapshot in png format. If there are any problems than returns null.</returns>
     byte[] GetSnapshot(IEnumerable<ILayer>? layers = null);
 
+    /// <summary> Gets or sets the performance. </summary>
     Performance? Performance { get; set; }
+    
+    /// <summary>Gets Cancellation Token Is Canceled when the Control is disposed </summary>
+    CancellationToken CancellationToken { get; }
 }
