@@ -11,6 +11,7 @@ public class EditingAddPointSample : IMapControlSample
     public string Category => "Editing";
     public void Setup(IMapControl mapControl)
     {
-        EditingSample.InitEditMode(mapControl, EditMode.AddPoint);
+        var editManager = EditingSample.InitEditMode(mapControl, EditMode.AddPoint);
+        mapControl.Map.Navigator.ZoomToBox(editManager.GetGrownExtent());
     }
 }

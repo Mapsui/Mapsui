@@ -13,7 +13,6 @@ namespace Mapsui.Layers;
 public abstract class BaseLayer : ILayer
 {
     private PropertyChangedWeakEventManager? _eventMangerPropertyChanged;
-    private DataChangedWeakEventManager? _eventMangerDataChanged;
     private static int _instanceCounter;
     private bool _busy;
     private bool _enabled;
@@ -69,15 +68,7 @@ public abstract class BaseLayer : ILayer
     }
 
     /// <inheritdoc />
-    public event DataChangedEventHandler? DataChanged
-    {
-        add
-        {
-            _eventMangerDataChanged ??= new();
-            _eventMangerDataChanged.AddListener(this, value);
-        }
-        remove => _eventMangerDataChanged?.RemoveListener(this, value);
-    }
+    public event DataChangedEventHandler? DataChanged;
 
     /// <inheritdoc />
     public int Id { get; }
@@ -210,7 +201,7 @@ public abstract class BaseLayer : ILayer
 
     public void DataHasChanged()
     {
-        _eventMangerDataChanged?.RaiseEvent(this, new DataChangedEventArgs());
+        DataChanged?.Invoke(this, new DataChangedEventArgs());
     }
 
     public override string ToString()
@@ -225,7 +216,7 @@ public abstract class BaseLayer : ILayer
 
     protected void OnDataChanged(DataChangedEventArgs args)
     {
-        _eventMangerDataChanged?.RaiseEvent(this, args);
+        DataChanged?.Invoke(this, args);
     }
 
     protected virtual void Dispose(bool disposing)
