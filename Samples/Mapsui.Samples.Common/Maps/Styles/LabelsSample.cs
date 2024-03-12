@@ -21,10 +21,9 @@ public class LabelsSample : ISample
         return Task.FromResult(map);
     }
 
-    public static ILayer CreateLayer()
-    {
-        var features = new List<IFeature>
-        {
+    public static MemoryLayer CreateLayer() => new() { Name = "Points with labels", Features = CreateFeatures() };
+
+    private static List<IFeature> CreateFeatures() => [
             CreateFeatureWithDefaultStyle(),
             CreateFeatureWithRightAlignedStyle(),
             CreateFeatureWithBottomAlignedStyle(),
@@ -38,123 +37,81 @@ public class LabelsSample : ISample
             CreateFeatureWithWordWrapCenter(),
             CreateFeatureWithWordWrapRight(),
             CreateFeatureWithCharacterWrap(),
-        };
+        ];
 
-        return new MemoryLayer { Name = "Points with labels", Features = features };
-    }
-
-    private static PointFeature CreateFeatureWithDefaultStyle()
+    private static PointFeature CreateFeatureWithDefaultStyle() => new(new MPoint(0, 0))
     {
-        var featureWithDefaultStyle = new PointFeature(new MPoint(0, 0));
-        featureWithDefaultStyle.Styles.Add(new LabelStyle { Text = "Default Label" });
-        return featureWithDefaultStyle;
-    }
+        Styles = [new LabelStyle { Text = "Default Label" }]
+    };
 
     private static PointFeature CreateFeatureWithColors()
-    {
-        var featureWithColors = new PointFeature(new MPoint(0, -7000000));
-        featureWithColors.Styles.Add(CreateColoredLabelStyle());
-        return featureWithColors;
-    }
+        => new(new MPoint(0, -7000000)) { Styles = [CreateColoredLabelStyle()] };
 
     private static PointFeature CreateFeatureWithBottomAlignedStyle()
-    {
-        var featureWithBottomAlignedStyle = new PointFeature(new MPoint(0, -5000000));
-        featureWithBottomAlignedStyle.Styles.Add(new LabelStyle
-        {
-            Text = "Bottom\nAligned",
-            BackColor = new Brush(Color.Gray),
-            VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom
-        });
-        return featureWithBottomAlignedStyle;
-    }
+        => new(new MPoint(0, -5000000)) { Styles = [CreateBottomAlignedStyle()] };
 
-    private static PointFeature CreateFeatureWithRightAlignedStyle()
+    private static LabelStyle CreateBottomAlignedStyle() => new()
     {
-        var featureWithRightAlignedStyle = new PointFeature(new MPoint(0, -2000000));
-        featureWithRightAlignedStyle.Styles.Add(new LabelStyle
-        {
-            Text = "Right Aligned",
-            BackColor = new Brush(Color.Gray),
-            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right
-        });
-        return featureWithRightAlignedStyle;
-    }
+        Text = "Bottom\nAligned",
+        BackColor = new Brush(Color.Gray),
+        VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom
+    };
 
-    private static GeometryFeature CreatePolygonWithLabel()
+    private static PointFeature CreateFeatureWithRightAlignedStyle() => new(new MPoint(0, -2000000))
     {
-        var polygon = new GeometryFeature
-        {
-            Geometry = new WKTReader().Read(
-                "POLYGON((-1000000 -10000000, 1000000 -10000000, 1000000 -8000000, -1000000 -8000000, -1000000 -10000000))")
-        };
-        polygon.Styles.Add(new LabelStyle
-        {
-            Text = "Polygon",
-            BackColor = new Brush(Color.Gray),
-            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center
-        });
-        return polygon;
-    }
+        Styles = [CreateRightAlignedLabelStyle()]
+    };
 
-    private static LabelStyle CreateColoredLabelStyle()
+    private static LabelStyle CreateRightAlignedLabelStyle() => new()
     {
-        return new LabelStyle
-        {
-            Text = "Colors",
-            BackColor = new Brush(Color.Blue),
-            ForeColor = Color.White
-        };
-    }
+        Text = "Right Aligned",
+        BackColor = new Brush(Color.Gray),
+        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right
+    };
+
+    private static GeometryFeature CreatePolygonWithLabel() => new()
+    {
+        Geometry = CreatePolygon(),
+        Styles = [CreatePolygonLabel()]
+    };
+
+    private static LabelStyle CreatePolygonLabel() => new()
+    {
+        Text = "Polygon",
+        BackColor = new Brush(Color.Gray),
+        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center
+    };
+
+    private static NetTopologySuite.Geometries.Geometry CreatePolygon()
+        => new WKTReader().Read("POLYGON((-1000000 -10000000, 1000000 -10000000, 1000000 -8000000, -1000000 -8000000, -1000000 -10000000))");
+
+    private static LabelStyle CreateColoredLabelStyle() => new()
+    {
+        Text = "Colors",
+        BackColor = new Brush(Color.Blue),
+        ForeColor = Color.White
+    };
 
     private static PointFeature CreateFeatureWithTailTruncation()
-    {
-        var featureWithColors = new PointFeature(new MPoint(8000000, 2000000));
-        featureWithColors.Styles.Add(CreateLabelStyleWithTailTrunction());
-        return featureWithColors;
-    }
+        => new(new MPoint(8000000, 2000000)) { Styles = [CreateLabelStyleWithTailTruncation()] };
 
     private static PointFeature CreateFeatureWithHeadTruncation()
-    {
-        var featureWithColors = new PointFeature(new MPoint(-8000000, 2000000));
-        featureWithColors.Styles.Add(CreateLabelStyleWithHeadTruncation());
-        return featureWithColors;
-    }
+        => new(new MPoint(-8000000, 2000000)) { Styles = [CreateLabelStyleWithHeadTruncation()] };
 
     private static PointFeature CreateFeatureWithMiddleTruncation()
-    {
-        var featureWithColors = new PointFeature(new MPoint(0, 2000000));
-        featureWithColors.Styles.Add(CreateLabelStyleWithMiddleTruncation());
-        return featureWithColors;
-    }
+        => new(new MPoint(0, 2000000)) { Styles = [CreateLabelStyleWithMiddleTruncation()] };
 
     private static PointFeature CreateFeatureWithWordWrapLeft()
-    {
-        var featureWithColors = new PointFeature(new MPoint(-8000000, 6000000));
-        featureWithColors.Styles.Add(CreateLabelStyleWithWordWrapLeft());
-        return featureWithColors;
-    }
+        => new(new MPoint(-8000000, 6000000)) { Styles = [CreateLabelStyleWithWordWrapLeft()] };
 
     private static PointFeature CreateFeatureWithWordWrapCenter()
-    {
-        var featureWithColors = new PointFeature(new MPoint(0, 6000000));
-        featureWithColors.Styles.Add(CreateLabelStyleWithWordWrapCenter());
-        return featureWithColors;
-    }
+        => new(new MPoint(0, 6000000)) { Styles = [CreateLabelStyleWithWordWrapCenter()] };
 
     private static PointFeature CreateFeatureWithWordWrapRight()
-    {
-        var featureWithColors = new PointFeature(new MPoint(8000000, 6000000));
-        featureWithColors.Styles.Add(CreateLabelStyleWithWordWrapRight());
-        return featureWithColors;
-    }
+        => new(new MPoint(8000000, 6000000)) { Styles = [CreateLabelStyleWithWordWrapRight()] };
 
     private static PointFeature CreateFeatureWithCharacterWrap()
-    {
-        var featureWithColors = new PointFeature(new MPoint(0, 10000000));
-        featureWithColors.Styles.Add(CreateLabelStyleWithCharacterWrap());
-        return featureWithColors;
-    }
+        => new(new MPoint(0, 10000000)) { Styles = [CreateLabelStyleWithCharacterWrap()] };
 
     private static PointFeature CreateFeatureWithHalo() => new(new MPoint(0, -12000000)) { Styles = [CreateHaloStyle()] };
 
@@ -178,7 +135,7 @@ public class LabelsSample : ISample
         WordWrap = LabelStyle.LineBreakMode.HeadTruncation
     };
 
-    private static LabelStyle CreateLabelStyleWithTailTrunction() => new()
+    private static LabelStyle CreateLabelStyleWithTailTruncation() => new()
     {
         Text = "Long line break mode test",
         Font = new Font { FontFamily = "Courier New", Bold = true, Italic = true, },
