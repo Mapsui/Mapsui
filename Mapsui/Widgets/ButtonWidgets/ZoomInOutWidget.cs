@@ -1,5 +1,4 @@
-﻿using Mapsui.Manipulations;
-using Mapsui.Styles;
+﻿using Mapsui.Styles;
 
 namespace Mapsui.Widgets.ButtonWidgets;
 
@@ -21,7 +20,7 @@ namespace Mapsui.Widgets.ButtonWidgets;
 /// Opacity: Opacity of buttons
 /// ZoomFactor: Factor for changing Resolution. Default is 2;
 /// </summary>
-public class ZoomInOutWidget : TouchableWidget
+public class ZoomInOutWidget : BaseWidget
 {
     private double _size = 40;
 
@@ -125,9 +124,9 @@ public class ZoomInOutWidget : TouchableWidget
         }
     }
 
-    public override bool OnTapped(Navigator navigator, ScreenPosition position, WidgetEventArgs e)
+    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
-        var result = base.OnTapped(navigator, position, e);
+        var result = base.OnTapped(navigator, e);
 
         if (result)
             return true;
@@ -135,8 +134,8 @@ public class ZoomInOutWidget : TouchableWidget
         if (Envelope == null)
             return false;
 
-        if (Orientation == Orientation.Vertical && position.Y < Envelope.MinY + Envelope.Height * 0.5 ||
-            Orientation == Orientation.Horizontal && position.X < Envelope.MinX + Envelope.Width * 0.5)
+        if (Orientation == Orientation.Vertical && e.Position.Y < Envelope.MinY + Envelope.Height * 0.5 ||
+            Orientation == Orientation.Horizontal && e.Position.X < Envelope.MinX + Envelope.Width * 0.5)
         {
             navigator.ZoomIn(500);
         }

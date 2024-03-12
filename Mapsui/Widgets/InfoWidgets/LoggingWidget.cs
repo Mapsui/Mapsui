@@ -38,6 +38,7 @@ public class LoggingWidget : TextBoxWidget
 
         Width = 250;
         Height = 142;
+        InputTransparent = true;
     }
 
     /// <summary>
