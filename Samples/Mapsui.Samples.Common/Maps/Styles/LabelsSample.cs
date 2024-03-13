@@ -24,7 +24,7 @@ public class LabelsSample : ISample
     public static MemoryLayer CreateLayer() => new() { Name = "Points with labels", Features = CreateFeatures() };
 
     private static List<IFeature> CreateFeatures() => [
-            CreateFeatureWithDefaultStyle(),
+        CreateFeatureWithDefaultStyle(),
         CreateFeatureWithRightAlignedStyle(),
         CreateFeatureWithBottomAlignedStyle(),
         CreateFeatureWithColors(),
