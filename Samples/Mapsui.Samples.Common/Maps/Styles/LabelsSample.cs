@@ -25,19 +25,19 @@ public class LabelsSample : ISample
 
     private static List<IFeature> CreateFeatures() => [
             CreateFeatureWithDefaultStyle(),
-            CreateFeatureWithRightAlignedStyle(),
-            CreateFeatureWithBottomAlignedStyle(),
-            CreateFeatureWithColors(),
-            CreatePolygonWithLabel(),
-            CreateFeatureWithHalo(),
-            CreateFeatureWithTailTruncation(),
-            CreateFeatureWithMiddleTruncation(),
-            CreateFeatureWithHeadTruncation(),
-            CreateFeatureWithWordWrapLeft(),
-            CreateFeatureWithWordWrapCenter(),
-            CreateFeatureWithWordWrapRight(),
-            CreateFeatureWithCharacterWrap(),
-        ];
+        CreateFeatureWithRightAlignedStyle(),
+        CreateFeatureWithBottomAlignedStyle(),
+        CreateFeatureWithColors(),
+        CreatePolygonWithLabel(),
+        CreateFeatureWithHalo(),
+        CreateFeatureWithTailTruncation(),
+        CreateFeatureWithMiddleTruncation(),
+        CreateFeatureWithHeadTruncation(),
+        CreateFeatureWithWordWrapLeft(),
+        CreateFeatureWithWordWrapCenter(),
+        CreateFeatureWithWordWrapRight(),
+        CreateFeatureWithCharacterWrap(),
+    ];
 
     private static PointFeature CreateFeatureWithDefaultStyle() => new(new MPoint(0, 0))
     {
