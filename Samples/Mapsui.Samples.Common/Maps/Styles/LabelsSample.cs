@@ -44,58 +44,46 @@ public class LabelsSample : ISample
         Styles = [new LabelStyle { Text = "Default Label" }]
     };
 
-    private static PointFeature CreateFeatureWithColors()
+    private static PointFeature CreateFeatureWithColors() => new(new MPoint(0, -7000000))
     {
-        return new(new MPoint(0, -7000000))
+        Styles = [new LabelStyle
         {
-            Styles = [new LabelStyle
-            {
-                Text = "Colors",
-                BackColor = new Brush(Color.Blue),
-                ForeColor = Color.White
-            }]
-        };
-    }
+            Text = "Colors",
+            BackColor = new Brush(Color.Blue),
+            ForeColor = Color.White
+        }]
+    };
 
-    private static PointFeature CreateFeatureWithBottomAlignedStyle()
+    private static PointFeature CreateFeatureWithBottomAlignedStyle() => new(new MPoint(0, -5000000))
     {
-        return new(new MPoint(0, -5000000))
+        Styles = [new LabelStyle
         {
-            Styles = [new LabelStyle
-            {
-                Text = "Bottom\nAligned",
-                BackColor = new Brush(Color.Gray),
-                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom
-            }]
-        };
-    }
+            Text = "Bottom\nAligned",
+            BackColor = new Brush(Color.Gray),
+            VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom
+        }]
+    };
 
-    private static PointFeature CreateFeatureWithRightAlignedStyle()
+    private static PointFeature CreateFeatureWithRightAlignedStyle() => new(new MPoint(0, -2000000))
     {
-        return new(new MPoint(0, -2000000))
+        Styles = [new LabelStyle
         {
-            Styles = [new LabelStyle
-            {
-                Text = "Right Aligned",
-                BackColor = new Brush(Color.Gray),
-                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right
-            }]
-        };
-    }
+            Text = "Right Aligned",
+            BackColor = new Brush(Color.Gray),
+            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right
+        }]
+    };
 
-    private static GeometryFeature CreatePolygonWithLabel()
+    private static GeometryFeature CreatePolygonWithLabel() => new()
     {
-        return new()
+        Geometry = new WKTReader().Read("POLYGON((-1000000 -10000000, 1000000 -10000000, 1000000 -8000000, -1000000 -8000000, -1000000 -10000000))"),
+        Styles = [new LabelStyle
         {
-            Geometry = new WKTReader().Read("POLYGON((-1000000 -10000000, 1000000 -10000000, 1000000 -8000000, -1000000 -8000000, -1000000 -10000000))"),
-            Styles = [new LabelStyle
-            {
-                Text = "Polygon",
-                BackColor = new Brush(Color.Gray),
-                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center
-            }]
-        };
-    }
+            Text = "Polygon",
+            BackColor = new Brush(Color.Gray),
+            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center
+        }]
+    };
 
     private static PointFeature CreateFeatureWithTailTruncation()
     {
