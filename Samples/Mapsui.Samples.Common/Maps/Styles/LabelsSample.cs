@@ -45,166 +45,194 @@ public class LabelsSample : ISample
     };
 
     private static PointFeature CreateFeatureWithColors()
-        => new(new MPoint(0, -7000000)) { Styles = [CreateColoredLabelStyle()] };
+    {
+        return new(new MPoint(0, -7000000))
+        {
+            Styles = [new LabelStyle
+            {
+                Text = "Colors",
+                BackColor = new Brush(Color.Blue),
+                ForeColor = Color.White
+            }]
+        };
+    }
 
     private static PointFeature CreateFeatureWithBottomAlignedStyle()
-        => new(new MPoint(0, -5000000)) { Styles = [CreateBottomAlignedStyle()] };
-
-    private static LabelStyle CreateBottomAlignedStyle() => new()
     {
-        Text = "Bottom\nAligned",
-        BackColor = new Brush(Color.Gray),
-        VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom
-    };
+        return new(new MPoint(0, -5000000))
+        {
+            Styles = [new LabelStyle
+            {
+                Text = "Bottom\nAligned",
+                BackColor = new Brush(Color.Gray),
+                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom
+            }]
+        };
+    }
 
-    private static PointFeature CreateFeatureWithRightAlignedStyle() => new(new MPoint(0, -2000000))
+    private static PointFeature CreateFeatureWithRightAlignedStyle()
     {
-        Styles = [CreateRightAlignedLabelStyle()]
-    };
+        return new(new MPoint(0, -2000000))
+        {
+            Styles = [new LabelStyle
+            {
+                Text = "Right Aligned",
+                BackColor = new Brush(Color.Gray),
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right
+            }]
+        };
+    }
 
-    private static LabelStyle CreateRightAlignedLabelStyle() => new()
+    private static GeometryFeature CreatePolygonWithLabel()
     {
-        Text = "Right Aligned",
-        BackColor = new Brush(Color.Gray),
-        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right
-    };
-
-    private static GeometryFeature CreatePolygonWithLabel() => new()
-    {
-        Geometry = CreatePolygon(),
-        Styles = [CreatePolygonLabel()]
-    };
-
-    private static LabelStyle CreatePolygonLabel() => new()
-    {
-        Text = "Polygon",
-        BackColor = new Brush(Color.Gray),
-        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center
-    };
-
-    private static NetTopologySuite.Geometries.Geometry CreatePolygon()
-        => new WKTReader().Read("POLYGON((-1000000 -10000000, 1000000 -10000000, 1000000 -8000000, -1000000 -8000000, -1000000 -10000000))");
-
-    private static LabelStyle CreateColoredLabelStyle() => new()
-    {
-        Text = "Colors",
-        BackColor = new Brush(Color.Blue),
-        ForeColor = Color.White
-    };
+        return new()
+        {
+            Geometry = new WKTReader().Read("POLYGON((-1000000 -10000000, 1000000 -10000000, 1000000 -8000000, -1000000 -8000000, -1000000 -10000000))"),
+            Styles = [new LabelStyle
+            {
+                Text = "Polygon",
+                BackColor = new Brush(Color.Gray),
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center
+            }]
+        };
+    }
 
     private static PointFeature CreateFeatureWithTailTruncation()
-        => new(new MPoint(8000000, 2000000)) { Styles = [CreateLabelStyleWithTailTruncation()] };
+    {
+        return new(new MPoint(8000000, 2000000))
+        {
+            Styles = [new LabelStyle
+            {
+                Text = "Long line break mode test",
+                Font = new Font { FontFamily = "Courier New", Bold = true, Italic = true, },
+                BackColor = new Brush(Color.Transparent),
+                ForeColor = Color.White,
+                Halo = new Pen(Color.Black, 2),
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
+                MaxWidth = 10,
+                WordWrap = LabelStyle.LineBreakMode.TailTruncation
+            }]
+        };
+    }
 
     private static PointFeature CreateFeatureWithHeadTruncation()
-        => new(new MPoint(-8000000, 2000000)) { Styles = [CreateLabelStyleWithHeadTruncation()] };
+    {
+        return new(new MPoint(-8000000, 2000000))
+        {
+            Styles = [new LabelStyle
+            {
+                Text = "Long line break mode test",
+                Font = new Font { Size = 16, Bold = true, Italic = false, },
+                BackColor = new Brush(Color.Transparent),
+                ForeColor = Color.White,
+                Halo = new Pen(Color.Black, 2),
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right,
+                MaxWidth = 10,
+                WordWrap = LabelStyle.LineBreakMode.HeadTruncation
+            }]
+        };
+    }
 
     private static PointFeature CreateFeatureWithMiddleTruncation()
-        => new(new MPoint(0, 2000000)) { Styles = [CreateLabelStyleWithMiddleTruncation()] };
+    {
+        return new(new MPoint(0, 2000000))
+        {
+            Styles = [new LabelStyle
+            {
+                Text = "Long line break mode test",
+                Font = new Font { Size = 30 },
+                BackColor = new Brush(Color.Transparent),
+                ForeColor = Color.White,
+                Halo = new Pen(Color.Black, 2),
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                MaxWidth = 10,
+                WordWrap = LabelStyle.LineBreakMode.MiddleTruncation
+            }]
+        };
+    }
 
     private static PointFeature CreateFeatureWithWordWrapLeft()
-        => new(new MPoint(-8000000, 6000000)) { Styles = [CreateLabelStyleWithWordWrapLeft()] };
+    {
+        return new(new MPoint(-8000000, 6000000))
+        {
+            Styles = [new LabelStyle
+            {
+                Text = "Long line break mode test",
+                BackColor = new Brush(Color.Gray),
+                ForeColor = Color.White,
+                Halo = new Pen(Color.Black, 2),
+                MaxWidth = 10,
+                WordWrap = LabelStyle.LineBreakMode.WordWrap,
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
+                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Top,
+            }]
+        };
+    }
 
     private static PointFeature CreateFeatureWithWordWrapCenter()
-        => new(new MPoint(0, 6000000)) { Styles = [CreateLabelStyleWithWordWrapCenter()] };
+    {
+        return new(new MPoint(0, 6000000))
+        {
+            Styles = [new LabelStyle
+            {
+                Text = "Long line break mode test",
+                BackColor = new Brush(Color.Transparent),
+                ForeColor = Color.White,
+                Halo = new Pen(Color.Black, 2),
+                MaxWidth = 10,
+                LineHeight = 1.2,
+                WordWrap = LabelStyle.LineBreakMode.WordWrap,
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
+            }]
+        };
+    }
 
     private static PointFeature CreateFeatureWithWordWrapRight()
-        => new(new MPoint(8000000, 6000000)) { Styles = [CreateLabelStyleWithWordWrapRight()] };
+    {
+        return new(new MPoint(8000000, 6000000))
+        {
+            Styles = [new LabelStyle
+            {
+                Text = "Long line break mode test",
+                BackColor = new Brush(Color.Gray),
+                ForeColor = Color.White,
+                MaxWidth = 12,
+                WordWrap = LabelStyle.LineBreakMode.WordWrap,
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right,
+                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom,
+            }]
+        };
+    }
 
     private static PointFeature CreateFeatureWithCharacterWrap()
-        => new(new MPoint(0, 10000000)) { Styles = [CreateLabelStyleWithCharacterWrap()] };
-
-    private static PointFeature CreateFeatureWithHalo() => new(new MPoint(0, -12000000)) { Styles = [CreateHaloStyle()] };
-
-    private static LabelStyle CreateHaloStyle() => new()
     {
-        Text = "Halo Halo Halo",
-        BackColor = new Brush(Color.Transparent),
-        ForeColor = Color.White,
-        Halo = new Pen(Color.Black, 2)
-    };
+        return new(new MPoint(0, 10000000))
+        {
+            Styles = [new LabelStyle
+            {
+                Text = "Long line break mode test",
+                BackColor = null,
+                ForeColor = Color.Black,
+                MaxWidth = 6,
+                WordWrap = LabelStyle.LineBreakMode.CharacterWrap,
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
+            }]
+        };
+    }
 
-    private static LabelStyle CreateLabelStyleWithHeadTruncation() => new()
+    private static PointFeature CreateFeatureWithHalo()
     {
-        Text = "Long line break mode test",
-        Font = new Font { Size = 16, Bold = true, Italic = false, },
-        BackColor = new Brush(Color.Transparent),
-        ForeColor = Color.White,
-        Halo = new Pen(Color.Black, 2),
-        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right,
-        MaxWidth = 10,
-        WordWrap = LabelStyle.LineBreakMode.HeadTruncation
-    };
-
-    private static LabelStyle CreateLabelStyleWithTailTruncation() => new()
-    {
-        Text = "Long line break mode test",
-        Font = new Font { FontFamily = "Courier New", Bold = true, Italic = true, },
-        BackColor = new Brush(Color.Transparent),
-        ForeColor = Color.White,
-        Halo = new Pen(Color.Black, 2),
-        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
-        MaxWidth = 10,
-        WordWrap = LabelStyle.LineBreakMode.TailTruncation
-    };
-
-
-    private static LabelStyle CreateLabelStyleWithMiddleTruncation() => new()
-    {
-        Text = "Long line break mode test",
-        Font = new Font { Size = 30 },
-        BackColor = new Brush(Color.Transparent),
-        ForeColor = Color.White,
-        Halo = new Pen(Color.Black, 2),
-        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
-        MaxWidth = 10,
-        WordWrap = LabelStyle.LineBreakMode.MiddleTruncation
-    };
-
-    private static LabelStyle CreateLabelStyleWithWordWrapLeft() => new()
-    {
-        Text = "Long line break mode test",
-        BackColor = new Brush(Color.Gray),
-        ForeColor = Color.White,
-        Halo = new Pen(Color.Black, 2),
-        MaxWidth = 10,
-        WordWrap = LabelStyle.LineBreakMode.WordWrap,
-        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
-        VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Top,
-    };
-
-
-    private static LabelStyle CreateLabelStyleWithWordWrapCenter() => new()
-    {
-        Text = "Long line break mode test",
-        BackColor = new Brush(Color.Transparent),
-        ForeColor = Color.White,
-        Halo = new Pen(Color.Black, 2),
-        MaxWidth = 10,
-        LineHeight = 1.2,
-        WordWrap = LabelStyle.LineBreakMode.WordWrap,
-        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
-        VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
-    };
-
-    private static LabelStyle CreateLabelStyleWithWordWrapRight() => new()
-    {
-        Text = "Long line break mode test",
-        BackColor = new Brush(Color.Gray),
-        ForeColor = Color.White,
-        MaxWidth = 12,
-        WordWrap = LabelStyle.LineBreakMode.WordWrap,
-        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right,
-        VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom,
-    };
-
-    private static LabelStyle CreateLabelStyleWithCharacterWrap() => new()
-    {
-        Text = "Long line break mode test",
-        BackColor = null,
-        ForeColor = Color.Black,
-        MaxWidth = 6,
-        WordWrap = LabelStyle.LineBreakMode.CharacterWrap,
-        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
-        VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
-    };
+        return new(new MPoint(0, -12000000))
+        {
+            Styles = [new LabelStyle
+            {
+                Text = "Halo Halo Halo",
+                BackColor = new Brush(Color.Transparent),
+                ForeColor = Color.White,
+                Halo = new Pen(Color.Black, 2)
+            }]
+        };
+    }
 }
