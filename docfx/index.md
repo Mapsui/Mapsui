@@ -1,10 +1,10 @@
 # **Mapsui** documentation.
 
 This is the documentation of the Mapsui open source map component.
-- [General documentation](https://mapsui.com/documentation/home.html)
-- [API documentation](https://mapsui.com/api/index.html)
+- [General documentation Mapsui v5](https://mapsui.com/v5/documentation/home.html)
+- [API documentation Mapsui v5](https://mapsui.com/v5/api/index.html)
 - [Mapsui on GitHub](https://github.com/mapsui/mapsui)
-- [Online samples in Blazor](https://mapsui.com/samples/)
+- [Online samples in Blazor for Mapsui v5](https://mapsui.com/v5/samples/)
 
 ## Projects that use Mapsui
 
