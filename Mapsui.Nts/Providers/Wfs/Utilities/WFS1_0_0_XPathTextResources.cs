@@ -18,7 +18,6 @@ public class WFS_1_0_0_XPathTextResources : WFS_XPathTextResourcesBase
     // GetCapabilities WFS 1.0.0                                          //
     ////////////////////////////////////////////////////////////////////////
 
-
     /// <summary>
     /// Gets an XPath string addressing the SRID of a FeatureType in 'GetCapabilities'.
     /// </summary>
@@ -58,7 +57,4 @@ public class WFS_1_0_0_XPathTextResources : WFS_XPathTextResourcesBase
     /// Gets an XPath string addressing the 'maxy'-attribute of a featuretype's bounding box in 'GetCapabilities'.
     /// </summary>
     public string XPATH_BOUNDINGBOXMAXY => "@maxy";
-
-
-
 }

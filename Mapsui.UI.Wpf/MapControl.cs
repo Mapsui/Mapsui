@@ -17,8 +17,6 @@ namespace Mapsui.UI.Wpf;
 
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
-    private readonly FlingTracker _flingTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl()
@@ -93,7 +91,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
     {
         var mouseWheelDelta = e.Delta;
-        var mousePosition = e.GetPosition(this).ToMapsui();
+        var mousePosition = e.GetPosition(this).ToScreenPosition();
         Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
     }
 
@@ -118,49 +116,34 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        var mousePosition = e.GetPosition(this).ToMapsui();
-        _tapGestureTracker.Restart(mousePosition);
-        _manipulationTracker.Restart([mousePosition]);
-        if (OnWidgetPointerPressed(mousePosition, GetShiftPressed()))
+        var position = e.GetPosition(this).ToScreenPosition();
+        _manipulationTracker.Restart([position]);
+
+        if (OnMapPointerPressed([position]))
             return;
-        _flingTracker.Restart();
+
         CaptureMouse();
     }
 
     private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
-        var position = e.GetPosition(this).ToMapsui();
-
-        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-        {
-            if (OnWidgetTapped(p, c, GetShiftPressed()))
-                return;
-            OnInfo(CreateMapInfoEventArgs(p, p, 1));
-        });
-
-        Refresh();
-
-        _flingTracker.IfFling(1, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
-        _flingTracker.RemoveId(1);
-
+        var position = e.GetPosition(this).ToScreenPosition();
+        OnMapPointerReleased([position]);
         ReleaseMouseCapture();
     }
 
     private void MapControl_TouchDown(object? sender, TouchEventArgs e)
     {
-        var touchDownPosition = e.GetTouchPoint(this).Position.ToMapsui();
-        _tapGestureTracker.Restart(touchDownPosition);
+        var position = e.GetTouchPoint(this).Position.ToScreenPosition();
+        if (OnMapPointerPressed([position]))
+            return;
     }
 
     private void MapControlTouchUp(object? sender, TouchEventArgs e)
     {
-        var touchUpPosition = e.GetTouchPoint(this).Position.ToMapsui();
-        _tapGestureTracker.IfTap(touchUpPosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
-        {
-            if (OnWidgetTapped(p, c, GetShiftPressed()))
-                return;
-            OnInfo(CreateMapInfoEventArgs(p, p, 1));
-        });
+        var position = e.GetTouchPoint(this).Position.ToScreenPosition();
+        if (OnMapPointerReleased([position]))
+            return;
     }
 
     public void OpenInBrowser(string url)
@@ -179,13 +162,13 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseMove(object sender, MouseEventArgs e)
     {
         var isHovering = IsHovering(e);
-        var position = e.GetPosition(this).ToMapsui();
-        if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
+        var position = e.GetPosition(this).ToScreenPosition();
+
+        if (OnMapPointerMoved([position], isHovering))
             return;
-        if (isHovering)
-            return;
-        _flingTracker.AddEvent(1, position, DateTime.Now.Ticks);
-        _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
+
+        if (!isHovering)
+            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
     }
 
     private double ViewportWidth => ActualWidth;
@@ -205,7 +188,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var translation = e.DeltaManipulation.Translation;
 
-        var previousCenter = e.ManipulationOrigin.ToMapsui();
+        var previousCenter = e.ManipulationOrigin.ToScreenPosition();
         var center = previousCenter.Offset(translation.X, translation.Y);
         var scaleFactor = GetScaleFactor(e.DeltaManipulation.Scale);
         var rotationChange = e.DeltaManipulation.Rotation;

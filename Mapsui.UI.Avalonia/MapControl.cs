@@ -21,10 +21,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 {
     private MapsuiCustomDrawOperation? _drawOperation;
     private double _mouseWheelPos = 0.0;
-    private readonly ConcurrentDictionary<long, MPoint> _pointerLocations = new();
+    private readonly ConcurrentDictionary<long, ScreenPosition> _positions = new();
     private bool _shiftPressed;
     private readonly ManipulationTracker _manipulationTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl()
     {
@@ -54,18 +53,12 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     /// <summary> Clears the Touch State. Should only be called if the touch state seems out of sync 
     /// in a certain situation.</summary>
-    public void ClearTouchState()
-    {
-        // Todo: Figure out if we need to clear the entire state, or only remove a specific pointer.
-        _pointerLocations.Clear();
-    }
 
-
+    // Todo: Figure out if we need to clear the entire state, or only remove a specific pointer.
+    public void ClearTouchState() => _positions.Clear();
 
     private static bool GetShiftPressed(KeyModifiers keyModifiers)
-    {
-        return (keyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
-    }
+        => (keyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
@@ -85,16 +78,15 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (IsHovering(e))
             return;
 
-        var tapPosition = e.GetPosition(this).ToMapsui();
-        _pointerLocations[e.Pointer.Id] = tapPosition;
+        var position = e.GetPosition(this).ToScreenPosition();
+        _positions[e.Pointer.Id] = position;
 
-        if (_pointerLocations.Count() == 1)
-        {
-            _tapGestureTracker.Restart(tapPosition);
-            _manipulationTracker.Restart(_pointerLocations.Values.ToArray());
-            if (OnWidgetPointerPressed(tapPosition, _shiftPressed))
-                return;
-        }
+        if (_positions.Count == 1) // Not sure if this check is necessary.
+            _manipulationTracker.Restart(_positions.Values.ToArray());
+
+        if (OnMapPointerPressed(_positions.Values.ToArray()))
+            return;
+
         e.Pointer.Capture(this);
     }
 
@@ -102,35 +94,30 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         var isHovering = IsHovering(e);
 
-        var position = e.GetPosition(this).ToMapsui();
-        if (OnWidgetPointerMoved(position, !isHovering, _shiftPressed))
-            return;
-
+        var position = e.GetPosition(this).ToScreenPosition();
         if (isHovering)
-            return; // In case of hovering we just call the widget move event and ignore the event otherwise.
-
-        _pointerLocations[e.Pointer.Id] = position;
-
-        _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Manipulate);
-
+        {
+            if (OnMapPointerMoved([position], isHovering))
+                return;
+        }
+        else
+        {
+            _positions[e.Pointer.Id] = position;
+            if (OnMapPointerMoved(_positions.Values.ToArray(), isHovering))
+                return;
+            _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
+        }
         RefreshGraphics();
     }
 
     private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        _pointerLocations.TryRemove(e.Pointer.Id, out _);
+        _positions.TryRemove(e.Pointer.Id, out _);
+        var position = e.GetPosition(this).ToScreenPosition();
+
+        OnMapPointerReleased([position]);
+
         e.Pointer.Capture(null);
-
-        var position = e.GetPosition(this).ToMapsui();
-        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-        {
-            if (OnWidgetTapped(p, c, _shiftPressed))
-                return;
-            OnInfo(CreateMapInfoEventArgs(p, p, c));
-        });
-        _manipulationTracker.Manipulate(_pointerLocations.Values.ToArray(), Map.Navigator.Manipulate);
-
-        Refresh();
     }
 
     private bool IsHovering(PointerEventArgs e)
@@ -148,7 +135,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         int delta = Math.Sign(_mouseWheelPos);
         _mouseWheelPos -= delta;
 
-        Map.Navigator.MouseWheelZoom(delta, e.GetPosition(this).ToMapsui());
+        Map.Navigator.MouseWheelZoom(delta, e.GetPosition(this).ToScreenPosition());
     }
 
     private void MapControl_PointerExited(object? sender, PointerEventArgs e)
@@ -253,4 +240,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         Dispose(true);
         GC.SuppressFinalize(this);
     }
+
+    private bool GetShiftPressed() => _shiftPressed;
 }

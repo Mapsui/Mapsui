@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapsui.Manipulations;
+using System;
 
 namespace Mapsui.UI.Maui;
 
@@ -12,7 +13,7 @@ public sealed class MapClickedEventArgs : EventArgs
     /// <summary>
     /// Number of taps
     /// </summary>
-    public int NumOfTaps { get; }
+    public TapType TapType { get; }
 
     /// <summary>
     /// Flag, if this event was handled
@@ -20,9 +21,9 @@ public sealed class MapClickedEventArgs : EventArgs
     /// <value><c>true</c> if handled; otherwise, <c>false</c>.</value>
     public bool Handled { get; set; } = false;
 
-    public MapClickedEventArgs(Position point, int numOfTaps)
+    public MapClickedEventArgs(Position point, TapType tapType)
     {
         Point = point;
-        NumOfTaps = numOfTaps;
+        TapType = tapType;
     }
 }

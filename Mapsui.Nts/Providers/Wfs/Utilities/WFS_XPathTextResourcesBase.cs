@@ -4,7 +4,7 @@
 
 // WFS provider by Peter Robineau (www.geoimpact.ch)
 
-// ReSharper disable InconsistentNaming
+#pragma warning disable IDE1006 // Naming Styles
 namespace Mapsui.Providers.Wfs.Utilities;
 
 public class WFS_XPathTextResourcesBase
@@ -15,41 +15,39 @@ public class WFS_XPathTextResourcesBase
     // Prefixes                                                           //
     ////////////////////////////////////////////////////////////////////////
 
-    private static readonly string _XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+    private const string _XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
         = "//xs:element[_PARAMCOMPWITHTARGETNS_(@type, $_param1, $_param2)]/@name";
 
-    private static readonly string _XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+    private const string _XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
         = "//xs:element[starts-with(@ref,'gml:')]/ancestor::xs:complexType[1]/ancestor::xs:element[1]/@name";
 
-    private static readonly string _XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
+    private const string _XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
         = "descendant::xs:element[starts-with(@ref,'gml:')]/@ref";
 
-    private static readonly string _XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY =
+    private const string _XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY =
         "//xs:element[starts-with(@type,'gml:')]";
 
-    private static readonly string _XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY =
+    private const string _XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY =
         "//xs:element[starts-with(@ref,'gml:')]/ancestor::xs:complexType[1]";
 
-    private static readonly string _XPATH_NAMEATTRIBUTEQUERY = "@name";
+    private const string _XPATH_NAMEATTRIBUTEQUERY = "@name";
 
-    private static readonly string _XPATH_TARGETNS =
-        "/xs:schema/@targetNamespace";
+    private const string _XPATH_TARGETNS = "/xs:schema/@targetNamespace";
 
-    private static readonly string _XPATH_TYPEATTRIBUTEQUERY = "@type";
-    private readonly string _NSFEATURETYPEPREFIX = "feature";
-    private readonly string _NSGML = "http://www.opengis.net/gml";
-    private readonly string _NSGMLPREFIX = "gml";
-    private readonly string _NSOGC = "http://www.opengis.net/ogc";
-
-    private readonly string _NSOGCPREFIX = "ogc";
-    private readonly string _NSOWS = "http://www.opengis.net/ows";
-    private readonly string _NSOWSPREFIX = "ows";
-    private readonly string _NSSCHEMA = "http://www.w3.org/2001/XMLSchema";
-    private readonly string _NSSCHEMAPREFIX = "xs";
-    private readonly string _NSWFS = "http://www.opengis.net/wfs";
-    private readonly string _NSWFSPREFIX = "wfs";
-    private readonly string _NSXLINK = "http://www.w3.org/1999/xlink";
-    private readonly string _NSXLINKPREFIX = "xlink";
+    private const string _XPATH_TYPEATTRIBUTEQUERY = "@type";
+    private const string _NSFEATURETYPEPREFIX = "feature";
+    private const string _NSGML = "http://www.opengis.net/gml";
+    private const string _NSGMLPREFIX = "gml";
+    private const string _NSOGC = "http://www.opengis.net/ogc";
+    private const string _NSOGCPREFIX = "ogc";
+    private const string _NSOWS = "http://www.opengis.net/ows";
+    private const string _NSOWSPREFIX = "ows";
+    private const string _NSSCHEMA = "http://www.w3.org/2001/XMLSchema";
+    private const string _NSSCHEMAPREFIX = "xs";
+    private const string _NSWFS = "http://www.opengis.net/wfs";
+    private const string _NSWFSPREFIX = "wfs";
+    private const string _NSXLINK = "http://www.w3.org/1999/xlink";
+    private const string _NSXLINKPREFIX = "xlink";
 
     /// <summary>
     /// Prefix used for OGC namespace
@@ -168,5 +166,4 @@ public class WFS_XPathTextResourcesBase
     /// This is for querying the name of the GML geometry element.
     /// </summary>
     public string XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY => _XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY;
-
 }

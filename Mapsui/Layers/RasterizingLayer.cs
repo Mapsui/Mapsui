@@ -88,7 +88,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
                 _currentSection = _fetchInfo.Section;
 
                 using var bitmapStream = _rasterizer.RenderToBitmapStream(ToViewport(_currentSection),
-                    new[] { _layer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
+                    [_layer], pixelDensity: _pixelDensity, renderFormat: _renderFormat);
 
                 _cache.Clear();
                 var features = new RasterFeature[1];
@@ -110,7 +110,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
 
     public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
     {
-        if (box == null) throw new ArgumentNullException(nameof(box));
+        ArgumentNullException.ThrowIfNull(box);
 
         var features = _cache.ToArray();
 

@@ -1,21 +1,22 @@
-﻿using System;
+﻿using Mapsui.Manipulations;
+using System;
 
 namespace Mapsui.Widgets;
 
 /// <summary>
 /// Arguments for a touched event of a widget
 /// </summary>
-public class WidgetEventArgs(MPoint position, int tapCount = 1, bool leftButton = true, bool shift = false) : EventArgs
+public class WidgetEventArgs(ScreenPosition position, TapType tapType, bool leftButton, bool shiftPressed, Func<MapInfo> getMapInfo) : EventArgs
 {
     /// <summary>
     /// Screen Position of touch in device independent units (or DIP or DP)
     /// </summary>
-    public MPoint Position { get; } = position;
+    public ScreenPosition Position { get; } = position;
 
     /// <summary>
     /// Number of clicks on the Widget
     /// </summary>
-    public int TapCount { get; } = tapCount;
+    public TapType TapType { get; } = tapType;
 
     /// <summary>
     /// Left button used while touching
@@ -25,5 +26,10 @@ public class WidgetEventArgs(MPoint position, int tapCount = 1, bool leftButton 
     /// <summary>
     /// Shift key pressed while touching
     /// </summary>
-    public bool Shift { get; } = shift;
+    public bool ShiftPressed { get; } = shiftPressed;
+
+    /// <summary>
+    /// Function to get the MapInfo for the WidgetEventArgs.Position.
+    /// </summary>
+    public Func<MapInfo> GetMapInfo { get; } = getMapInfo;
 }

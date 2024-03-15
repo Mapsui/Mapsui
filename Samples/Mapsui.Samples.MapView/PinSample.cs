@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Samples.Common.PersistentCaches;
@@ -11,13 +10,14 @@ using Mapsui.UI.Maui;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui;
 using Color = Microsoft.Maui.Graphics.Color;
+using Mapsui.Manipulations;
 
 namespace Mapsui.Samples.Maui;
 
 public class PinSample : IMapViewSample
 {
     int _markerNum = 1;
-    readonly Random _random = new Random(4);
+    readonly Random _random = new(4);
 
     public string Name => "Add Pin Sample";
 
@@ -25,9 +25,9 @@ public class PinSample : IMapViewSample
 
     public bool UpdateLocation => true;
 
-    public bool OnClick(object? sender, EventArgs args)
+    public bool OnTap(object? sender, EventArgs args)
     {
-        var mapView = sender as UI.Maui.MapView;
+        var mapView = sender as UI.Maui.MapView; // The namespace prefix is somehow necessary on Linux.
         var mapClickedArgs = (MapClickedEventArgs)args;
 
         if (mapView == null)
@@ -37,9 +37,9 @@ public class PinSample : IMapViewSample
         foreach (var str in assembly.GetManifestResourceNames())
             System.Diagnostics.Debug.WriteLine(str);
 
-        switch (mapClickedArgs.NumOfTaps)
+        switch (mapClickedArgs.TapType)
         {
-            case 1:
+            case TapType.Single:
                 var pin = new Pin(mapView)
                 {
                     Label = $"PinType.Pin {_markerNum++}",
@@ -82,7 +82,7 @@ public class PinSample : IMapViewSample
                 }
                 pin.Callout.CalloutClicked += (s, e) =>
                 {
-                    if (e.NumOfTaps == 2)
+                    if (e.TapType == TapType.Double)
                     {
                         // Double click on callout moves pin
                         var p = e.Callout?.Pin;
@@ -104,7 +104,7 @@ public class PinSample : IMapViewSample
                 mapView.Pins.Add(pin);
                 pin.ShowCallout();
                 break;
-            case 2:
+            case TapType.Double:
                 var resourceName = "Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
                 var stream = assembly.GetManifestResourceStream(resourceName);
                 if (stream == null) throw new Exception($"Could not find EmbeddedResource {resourceName}");
@@ -122,20 +122,6 @@ public class PinSample : IMapViewSample
                     });
                 }
 
-                break;
-            case 3:
-                using (var manifestResourceStream = assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png"))
-                {
-                    var icon = manifestResourceStream!.ToBytes();
-                    mapView.Pins.Add(new Pin(mapView)
-                    {
-                        Label = $"PinType.Icon {_markerNum++}",
-                        Position = mapClickedArgs.Point,
-                        Type = PinType.Icon,
-                        Scale = 0.5f,
-                        Icon = icon
-                    });
-                }
                 break;
         }
 

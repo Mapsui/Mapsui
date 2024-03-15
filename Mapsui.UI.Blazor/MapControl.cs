@@ -21,7 +21,7 @@ public partial class MapControl : ComponentBase, IMapControl
     private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
     private readonly ManipulationTracker _manipulationTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
+    public ScreenPosition? _lastMovePosition; // Workaround for missing touch position on touch-up.
 
     [Inject]
     private IJSRuntime? JsRuntime { get; set; }
@@ -115,8 +115,8 @@ public partial class MapControl : ComponentBase, IMapControl
     protected void OnMouseWheel(WheelEventArgs e)
     {
         var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
-        var mouseLocation = e.ToLocation(_clientRect);
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, mouseLocation);
+        var mousePosition = e.ToScreenPosition(_clientRect);
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
     }
 
     private async Task<BoundingClientRect> BoundingClientRectAsync()
@@ -164,12 +164,11 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
             _ = UpdateBoundingRectAsync();
+            var position = e.ToScreenPosition(_clientRect);
 
-            var location = e.ToLocation(_clientRect);
-            _tapGestureTracker.Restart(location);
-            _manipulationTracker.Restart([]);
+            _manipulationTracker.Restart([position]);
 
-            if (OnWidgetPointerPressed(location, GetShiftPressed()))
+            if (OnMapPointerPressed([position]))
                 return;
         });
     }
@@ -179,15 +178,13 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var isHovering = !IsMouseButtonPressed(e);
-            var position = e.ToLocation(_clientRect);
+            var position = e.ToScreenPosition(_clientRect);
 
-            if (OnWidgetPointerMoved(position, !isHovering, GetShiftPressed()))
+            if (OnMapPointerMoved([position], isHovering))
                 return;
 
-            if (isHovering)
-                return;
-
-            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
+            if (!isHovering)
+                _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
         });
     }
 
@@ -197,18 +194,8 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            var position = e.ToLocation(_clientRect);
-
-            _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-            {
-                if (OnWidgetTapped(p, c, GetShiftPressed()))
-                    return;
-                OnInfo(CreateMapInfoEventArgs(p, p, c));
-
-            });
-
-            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
-            Refresh();
+            var position = e.ToScreenPosition(_clientRect);
+            OnMapPointerReleased([position]);
         });
     }
 
@@ -256,12 +243,11 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
             _ = UpdateBoundingRectAsync();
+            var positions = e.TargetTouches.ToScreenPositions(_clientRect);
+            _manipulationTracker.Restart(positions);
 
-            var locations = e.TargetTouches.ToTouchLocations(_clientRect);
-            if (OnWidgetPointerPressed(locations[0], GetShiftPressed()))
+            if (OnMapPointerPressed(positions))
                 return;
-            _tapGestureTracker.Restart(locations[0]);
-            _manipulationTracker.Restart(locations);
         });
     }
 
@@ -269,15 +255,15 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            var locations = e.TargetTouches.ToTouchLocations(_clientRect);
-            if (locations.Length == 1)
-            {
-                var position = locations[0];
-                _tapGestureTracker.LastMovePosition = position;
-                if (OnWidgetPointerMoved(position, true, GetShiftPressed()))
-                    return;
-            }
-            _manipulationTracker.Manipulate(locations.ToArray(), Map.Navigator.Manipulate);
+            var positions = e.TargetTouches.ToScreenPositions(_clientRect);
+            if (positions.Length == 1)
+                _lastMovePosition = positions[0]; // Workaround for missing touch-up location.
+
+            if (OnMapPointerMoved(positions))
+                return;
+
+
+            _manipulationTracker.Manipulate(positions.ToArray(), Map.Navigator.Manipulate);
         });
     }
 
@@ -285,17 +271,10 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            if (_tapGestureTracker.LastMovePosition == null)
+            if (_lastMovePosition is null)
                 return;
-
-            _tapGestureTracker.IfTap(_tapGestureTracker.LastMovePosition, MaxTapGestureMovement * PixelDensity, (p, c) =>
-            {
-                if (OnWidgetTapped(p, c, GetShiftPressed()))
-                    return;
-                OnInfo(CreateMapInfoEventArgs(p, p, c));
-            });
-
-            RefreshData();
+            var position = _lastMovePosition.Value;
+            OnMapPointerReleased([position]);
         });
     }
 }

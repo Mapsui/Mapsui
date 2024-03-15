@@ -32,12 +32,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private readonly SKGLView? _glView;
     private readonly SKCanvasView? _canvasView;
-    private readonly ConcurrentDictionary<long, MPoint> _touches = new();
-    private readonly FlingTracker _flingTracker = new();
+    private readonly ConcurrentDictionary<long, ScreenPosition> _positions = new();
     private Size _oldSize;
     private static List<WeakReference<MapControl>>? _listeners;
     private readonly ManipulationTracker _manipulationTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl()
     {
@@ -45,10 +43,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
         View view;
 
-
         BackgroundColor = KnownColor.White;
         InitTouchesReset(this);
-
 
         if (UseGPU)
         {
@@ -84,8 +80,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         view.PropertyChanged += View_PropertyChanged;
         Content = view;
     }
-
-    public bool UseFling { get; set; } = true;
 
     private double ViewportWidth => Width; // Used in shared code
     private double ViewportHeight => Height; // Used in shared code
@@ -181,64 +175,51 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Catch.Exceptions(() =>
         {
             e.Handled = true;
-            var location = GetScreenPosition(e.Location);
+            var position = GetScreenPosition(e.Location);
 
             if (e.ActionType == SKTouchAction.Pressed)
             {
-                _touches[e.Id] = location;
-                if (_touches.Count == 1)
-                {
-                    _tapGestureTracker.Restart(location);
-                    _flingTracker.Restart();
-                    _manipulationTracker.Restart(_touches.Values.ToArray());
-                    if (OnWidgetPointerPressed(location, false))
-                        return;
-                }
+                _positions[e.Id] = position;
+                if (_positions.Count == 1) // Not sure if this check is necessary.
+                    _manipulationTracker.Restart(_positions.Values.ToArray());
+
+                if (OnMapPointerPressed(_positions.Values.ToArray()))
+                    return;
             }
             else if (e.ActionType == SKTouchAction.Moved)
             {
                 var isHovering = !e.InContact;
 
-                if (OnWidgetPointerMoved(location, !isHovering, false))
-                    return;
-
                 if (isHovering)
-                    return;
+                {
+                    // In case of hovering we need to send the current position which added to the _positions array
+                    if (OnMapPointerMoved([position], isHovering))
+                        return;
+                }
+                else
+                {
+                    _positions[e.Id] = position;
 
-                _touches[e.Id] = location;
+                    if (OnMapPointerMoved(_positions.Values.ToArray(), isHovering))
+                        return;
 
-                _flingTracker.AddEvent(e.Id, location, DateTime.Now.Ticks);
-
-                _manipulationTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Manipulate);
+                    _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
+                }
 
                 RefreshGraphics();
             }
             else if (e.ActionType == SKTouchAction.Released)
             {
                 // Delete e.Id from _touches, because finger is released
-                _touches.Remove(e.Id, out var releasedTouch);
-
-                if (UseFling)
-                    _flingTracker.IfFling(e.Id, (vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
-                _flingTracker.RemoveId(e.Id);
-
-                _tapGestureTracker.IfTap(releasedTouch!, MaxTapGestureMovement, (p, c) =>
-                {
-                    if (OnWidgetTapped(p, c, false))
-                        return;
-                    OnInfo(CreateMapInfoEventArgs(p, p, 1));
-
-                });
-
-                _manipulationTracker.Manipulate(_touches.Values.ToArray(), Map.Navigator.Manipulate);
-                Refresh();
+                _positions.Remove(e.Id, out var releasedTouch);
+                OnMapPointerReleased([position]);
             }
             else if (e.ActionType == SKTouchAction.Cancelled)
             {
                 if (!e.InContact)
                     return;
 
-                _touches.Clear();
+                _positions.Clear();
                 Refresh();
             }
             else if (e.ActionType == SKTouchAction.Exited)
@@ -246,12 +227,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 if (!e.InContact)
                     return;
 
-                _touches.Remove(e.Id, out var exitedTouch); // Why not clear?
+                _positions.Remove(e.Id, out var exitedTouch); // Why not clear?
                 Refresh();
             }
             else if (e.ActionType == SKTouchAction.WheelChanged)
             {
-                OnZoomInOrOut(e.WheelDelta, location);
+                OnZoomInOrOut(e.WheelDelta, position);
             }
         });
     }
@@ -285,30 +266,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         CommonDrawControl(canvas);
     }
 
-    private MPoint GetScreenPosition(SKPoint point) => new MPoint(point.X / PixelDensity, point.Y / PixelDensity);
+    private ScreenPosition GetScreenPosition(SKPoint point) => new ScreenPosition(point.X / PixelDensity, point.Y / PixelDensity);
 
-    private void OnZoomInOrOut(int mouseWheelDelta, MPoint currentMousePosition)
+    private void OnZoomInOrOut(int mouseWheelDelta, ScreenPosition currentMousePosition)
         => Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
-
-    /// <summary>
-    /// Called, when mouse/finger/pen tapped on map 2 or more times
-    /// </summary>
-    /// <param name="screenPosition">First clicked/touched position on screen</param>
-    protected virtual void OnDoubleTapped(MPoint screenPosition)
-    {
-        // Zoom in on double tap
-        OnZoomInOrOut(1, screenPosition); // mouseWheelDelta > 0 to zoom in
-    }
-
-    /// <summary>
-    /// Called, when mouse/finger/pen tapped on map one time
-    /// </summary>
-    /// <param name="screenPosition">Clicked/touched position on screen</param>
-    /// <returns>True, if the event is handled</returns>
-    protected virtual void OnSingleTapped(MPoint screenPosition)
-    {
-        OnInfo(CreateMapInfoEventArgs(screenPosition, screenPosition, 1));
-    }
 
     /// <summary>
     /// Public functions
@@ -324,7 +285,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// </summary>
     public void ClearTouchState()
     {
-        _touches.Clear();
+        _positions.Clear();
     }
 
     protected void RunOnUIThread(Action action)
@@ -366,4 +327,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             ? _glView!.CanvasSize.Width / Width
             : _canvasView!.CanvasSize.Width / Width;
     }
+
+    private static bool GetShiftPressed() => false;
 }

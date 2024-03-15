@@ -16,7 +16,7 @@ public class CircleSample : IMapViewSample
 
     public bool UpdateLocation => true;
 
-    public bool OnClick(object? sender, EventArgs args)
+    public bool OnTap(object? sender, EventArgs args)
     {
         var mapView = sender as UI.Maui.MapView;
         var e = args as MapClickedEventArgs;

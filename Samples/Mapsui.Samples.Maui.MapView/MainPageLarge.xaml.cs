@@ -14,6 +14,7 @@ using Mapsui.UI.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Dispatching;
 using Microsoft.Maui.Devices.Sensors;
+using Mapsui.Manipulations;
 
 namespace Mapsui.Samples.Maui;
 
@@ -127,7 +128,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         _clicker = null;
         if (sample is IMapViewSample formsSample)
         {
-            _clicker = formsSample.OnClick;
+            _clicker = formsSample.OnTap;
             _updateLocation = formsSample.UpdateLocation;
         }
         else
@@ -140,13 +141,13 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
     {
         if (e.Pin != null)
         {
-            if (e.NumOfTaps == 2)
+            if (e.TapType == TapType.Double)
             {
                 // Hide Pin when double click
                 //DisplayAlert($"Pin {e.Pin.Label}", $"Is at position {e.Pin.Position}", "Ok");
                 e.Pin.IsVisible = false;
             }
-            if (e.NumOfTaps == 1)
+            if (e.TapType == TapType.Single)
                 if (e.Pin.Callout.IsVisible)
                     e.Pin.HideCallout();
                 else

@@ -146,7 +146,9 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// <param name="map">Map, to which this layer belongs</param>
     public MyLocationLayer(Map map)
     {
-        _map = map ?? throw new ArgumentNullException("Map shouldn't be null", nameof(map));
+        ArgumentNullException.ThrowIfNull(map);
+
+        _map = map;
         _map.Info += HandleClicked;
 
         Enabled = true;
@@ -307,6 +309,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// </summary>
     /// <param name="newDirection">New direction</param>
     /// <param name="newViewportRotation">New viewport rotation</param>
+    /// <param name="animated">true if animated</param>
     public void UpdateMyDirection(double newDirection, double newViewportRotation, bool animated = false)
     {
         var newRotation = (int)(newDirection - newViewportRotation);

@@ -13,7 +13,7 @@ namespace Mapsui;
 public class Navigator
 {
     private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
-    private IEnumerable<AnimationEntry<Viewport>> _animations = Enumerable.Empty<AnimationEntry<Viewport>>();
+    private IEnumerable<AnimationEntry<Viewport>> _animations = [];
     private readonly List<Action> _initialization = [];
     private MMinMax? _defaultZoomBounds;
     private MRect? _defaultPanBounds;
@@ -148,7 +148,7 @@ public class Navigator
 
     public MouseWheelAnimation MouseWheelAnimation { get; } = new();
 
-    public void MouseWheelZoom(int mouseWheelDelta, MPoint centerOfZoom)
+    public void MouseWheelZoom(int mouseWheelDelta, ScreenPosition centerOfZoom)
     {
         // It is unexpected that this method uses the MouseWheelAnimation.Animation and Easing. 
         // At the moment this solution allows the user to change these fields, so I don't want
@@ -256,7 +256,7 @@ public class Navigator
     /// position as center.</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The easing of the animation when duration is > 0</param>
-    public void ZoomTo(double resolution, MPoint centerOfZoomScreen, long duration = -1, Easing? easing = default)
+    public void ZoomTo(double resolution, ScreenPosition centerOfZoomScreen, long duration = -1, Easing? easing = default)
     {
         if (!IsInitialized)
         {
@@ -313,7 +313,7 @@ public class Navigator
     /// center of zoom.</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-    public void ZoomIn(MPoint centerOfZoom, long duration = -1, Easing? easing = default)
+    public void ZoomIn(ScreenPosition centerOfZoom, long duration = -1, Easing? easing = default)
     {
         var resolution = ZoomHelper.GetResolutionToZoomIn(Resolutions, Viewport.Resolution);
         ZoomTo(resolution, centerOfZoom, duration, easing);
@@ -327,7 +327,7 @@ public class Navigator
     /// center of zoom.</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-    public void ZoomOut(MPoint centerOfZoom, long duration = -1, Easing? easing = default)
+    public void ZoomOut(ScreenPosition centerOfZoom, long duration = -1, Easing? easing = default)
     {
         var resolution = ZoomHelper.GetResolutionToZoomOut(Resolutions, Viewport.Resolution);
         ZoomTo(resolution, centerOfZoom, duration, easing);
@@ -562,7 +562,7 @@ public class Navigator
         Viewport = Limit(viewport);
     }
 
-    private bool ShouldAnimationsBeHaltedBecauseOfLimiting(Viewport input, Viewport output)
+    private static bool ShouldAnimationsBeHaltedBecauseOfLimiting(Viewport input, Viewport output)
     {
         var zoomLimited = input.Resolution != output.Resolution;
         var fullyLimited =
@@ -686,7 +686,7 @@ public class Navigator
     internal int GetAnimationsCount => _animations.Count();
 
     /// <summary> Default Resolutions automatically set on Layers changed </summary>
-    internal IReadOnlyList<double> DefaultResolutions { get; set; } = new List<double>();
+    internal IReadOnlyList<double> DefaultResolutions { get; set; } = [];
 
     /// <summary> Default Zoom Bounds automatically set on Layers changed </summary>
 

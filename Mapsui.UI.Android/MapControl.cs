@@ -23,7 +23,6 @@ public partial class MapControl : ViewGroup, IMapControl
     private Handler? _mainLooperHandler;
     private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
     private readonly ManipulationTracker _manipulationTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl(Context context, IAttributeSet attrs) :
         base(context, attrs)
@@ -119,46 +118,29 @@ public partial class MapControl : ViewGroup, IMapControl
         CommonDrawControl(canvas);
     }
 
-    public void OnFling(object? sender, GestureDetector.FlingEventArgs args)
-    {
-        Map.Navigator.Fling(args.VelocityX / 10, args.VelocityY / 10, 1000);
-    }
-
     public void MapControl_Touch(object? sender, TouchEventArgs args)
     {
         if (args.Event is null)
             return;
 
-        var locations = GetTouchLocations(args.Event, this, PixelDensity);
+        var positions = GetScreenPositions(args.Event, this, PixelDensity);
 
         switch (args.Event.Action)
         {
             case MotionEventActions.Down:
-                _manipulationTracker.Restart(locations);
-                if (locations.Length == 1)
-                {
-                    _tapGestureTracker.Restart(locations[0]);
-                    if (OnWidgetPointerPressed(locations[0], false))
-                        return;
-                }
+                _manipulationTracker.Restart(positions);
+                if (OnMapPointerPressed(positions))
+                    return;
                 break;
             case MotionEventActions.Move:
-                if (locations.Length == 1)
-                    if (OnWidgetPointerMoved(locations[0], true, false))
-                        return;
-                _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
+                if (OnMapPointerMoved(positions, false))
+                    return;
+                _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
                 break;
             case MotionEventActions.Up:
-                if (locations.Length == 1)
-                    _tapGestureTracker.IfTap(locations[0], MaxTapGestureMovement * PixelDensity, (p, c) =>
-                    {
-                        if (OnWidgetTapped(p, c, false))
-                            return;
-                        OnInfo(CreateMapInfoEventArgs(p, p, c));
+                OnMapPointerReleased(positions);
 
-                    });
-                _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
-                Refresh();
+
                 break;
         }
     }
@@ -169,11 +151,11 @@ public partial class MapControl : ViewGroup, IMapControl
     /// <param name="motionEvent"></param>
     /// <param name="view"></param>
     /// <returns></returns>
-    private static ReadOnlySpan<MPoint> GetTouchLocations(MotionEvent motionEvent, View view, double pixelDensity)
+    private static ReadOnlySpan<ScreenPosition> GetScreenPositions(MotionEvent motionEvent, View view, double pixelDensity)
     {
-        var result = new MPoint[motionEvent.PointerCount];
+        var result = new ScreenPosition[motionEvent.PointerCount];
         for (var i = 0; i < motionEvent.PointerCount; i++)
-            result[i] = new MPoint(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top)
+            result[i] = new ScreenPosition(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top)
                 .ToDeviceIndependentUnits(pixelDensity);
         return result;
     }
@@ -184,7 +166,7 @@ public partial class MapControl : ViewGroup, IMapControl
     /// <param name="motionEvent"></param>
     /// <param name="view"></param>
     /// <returns></returns>
-    private MPoint GetScreenPosition(MotionEvent motionEvent, View view)
+    private ScreenPosition GetScreenPosition(MotionEvent motionEvent, View view)
     {
         return GetScreenPositionInPixels(motionEvent, view).ToDeviceIndependentUnits(PixelDensity);
     }
@@ -195,9 +177,9 @@ public partial class MapControl : ViewGroup, IMapControl
     /// <param name="motionEvent"></param>
     /// <param name="view"></param>
     /// <returns></returns>
-    private static MPoint GetScreenPositionInPixels(MotionEvent motionEvent, View view)
+    private static ScreenPosition GetScreenPositionInPixels(MotionEvent motionEvent, View view)
     {
-        return new MPoint(motionEvent.GetX(0) - view.Left, motionEvent.GetY(0) - view.Top);
+        return new ScreenPosition(motionEvent.GetX(0) - view.Left, motionEvent.GetY(0) - view.Top);
     }
 
     private void RefreshGraphicsWithTryCatch()
@@ -314,4 +296,6 @@ public partial class MapControl : ViewGroup, IMapControl
     {
         return Resources?.DisplayMetrics?.Density ?? 0d;
     }
+
+    private static bool GetShiftPressed() => false;
 }

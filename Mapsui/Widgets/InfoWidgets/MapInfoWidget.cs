@@ -11,6 +11,7 @@ public class MapInfoWidget : TextBoxWidget
 
     public MapInfoWidget(Map map)
     {
+        // Todo: Avoid Map in the constructor. Perhaps the event args should have a GetMapInfoAsync method
         _map = map;
         _map.Info += Map_Info;
 
@@ -29,7 +30,7 @@ public class MapInfoWidget : TextBoxWidget
         _map.RefreshGraphics();
         if (a.MapInfo != null)
         {
-            // see If I can load Async Data
+            // Try to load async data
             Catch.Exceptions(async () =>
             {
                 var info = await a.MapInfo.GetMapInfoAsync();

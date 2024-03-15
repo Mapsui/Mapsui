@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using Mapsui.Manipulations;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace Mapsui.UI.Blazor.Extensions;
 public static class TouchPointExtensions
 {
-    public static MPoint ToTouchLocation(this TouchPoint touchPoint, BoundingClientRect clientRect)
+    public static ScreenPosition ToScreenPosition(this TouchPoint touchPoint, BoundingClientRect clientRect)
     {
-        return new MPoint(touchPoint.ClientX - clientRect.Left, touchPoint.ClientY - clientRect.Top);
+        return new ScreenPosition(touchPoint.ClientX - clientRect.Left, touchPoint.ClientY - clientRect.Top);
     }
 
-    public static ReadOnlySpan<MPoint> ToTouchLocations(this IEnumerable<TouchPoint> touchPoints, BoundingClientRect clientRect)
+    public static ReadOnlySpan<ScreenPosition> ToScreenPositions(this IEnumerable<TouchPoint> touchPoints, BoundingClientRect clientRect)
     {
-        return touchPoints.Select(p => p.ToTouchLocation(clientRect)).ToArray();
+        return touchPoints.Select(p => p.ToScreenPosition(clientRect)).ToArray();
     }
 }

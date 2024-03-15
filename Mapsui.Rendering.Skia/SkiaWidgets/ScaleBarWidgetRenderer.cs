@@ -110,7 +110,7 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
             _paintScaleTextStroke.MeasureText(scaleBarText2, ref textSize2);
         }
 
-        var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, textSize.ToMRect(), textSize1.ToMRect(), textSize2.ToMRect(), scaleBar.StrokeWidthHalo);
+        var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, textSize1.ToMRect(), textSize2.ToMRect(), scaleBar.StrokeWidthHalo);
 
         // Now draw text
         canvas.DrawText(scaleBarText1, (float)posX1, (float)(posY1 - textSize1.Top), _paintScaleTextStroke);
@@ -157,11 +157,20 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         };
     }
 
-    public virtual void Dispose()
+    public void Dispose()
     {
-        _paintScaleBar?.Dispose();
-        _paintScaleBarStroke?.Dispose();
-        _paintScaleText?.Dispose();
-        _paintScaleTextStroke?.Dispose();
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _paintScaleBar?.Dispose();
+            _paintScaleBarStroke?.Dispose();
+            _paintScaleText?.Dispose();
+            _paintScaleTextStroke?.Dispose();
+        }
     }
 }

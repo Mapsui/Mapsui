@@ -3,68 +3,28 @@ using Mapsui.UI;
 using Mapsui.Widgets;
 
 namespace Mapsui.Nts.Widgets;
-public class EditingWidget : Widget, ITouchableWidget
+public class EditingWidget : InputOnlyWidget // Derived from InputOnlyWidget because the EditingWidget does not need to draw anything
 {
-    public IMapControl MapControl { get; }
-    public EditManager EditManager { get; }
-    public EditManipulation EditManipulation { get; }
+    private readonly IMapControl _mapControl;
+    private readonly EditManager _editManager;
 
-    public TouchableAreaType TouchableArea => TouchableAreaType.Widget;
-
-    public EditingWidget(IMapControl mapControl, EditManager editManager, EditManipulation editManipulation)
+    public EditingWidget(IMapControl mapControl, EditManager editManager)
     {
-        MapControl = mapControl;
-        EditManager = editManager;
-        EditManipulation = editManipulation;
+        _mapControl = mapControl;
+        _editManager = editManager;
+
+        InputAreaType = InputAreaType.Map;
     }
 
-    public bool OnTapped(Navigator navigator, MPoint position, WidgetEventArgs e)
-    {
-        if (!e.LeftButton)
-            return false;
+    public override bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)
+        => EditManipulation.OnPointerPressed(e.Position, _editManager, _mapControl);
 
-        if (MapControl.Map != null)
-            MapControl.Map.Navigator.PanLock = EditManipulation.Manipulate(
-                PointerState.Up, position, EditManager, MapControl, e);
+    public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e) =>
+        EditManipulation.OnPointerMoved(e.Position, _editManager, _mapControl, !e.LeftButton);
 
-        if (EditManager.SelectMode)
-        {
-            var infoArgs = MapControl.GetMapInfo(position);
-            if (infoArgs?.Feature != null)
-            {
-                var currentValue = (bool?)infoArgs.Feature["Selected"] == true;
-                infoArgs.Feature["Selected"] = !currentValue; // invert current value
-            }
-        }
+    public override bool OnPointerReleased(Navigator navigator, WidgetEventArgs e) =>
+        EditManipulation.OnPointerReleased(_editManager);
 
-        return false;
-    }
-
-    public bool OnPointerPressed(Navigator navigator, MPoint position, WidgetEventArgs e)
-    {
-        if (!e.LeftButton)
-            return false;
-
-        if (MapControl.Map == null)
-            return false;
-
-        return EditManipulation.Manipulate(
-            PointerState.Down, position, EditManager, MapControl, e);
-    }
-
-    public bool OnPointerMoved(Navigator navigator, MPoint position, WidgetEventArgs e)
-    {
-        var screenPosition = position;
-
-        if (e.LeftButton)
-        {
-            return EditManipulation.Manipulate(
-                PointerState.Dragging, screenPosition, EditManager, MapControl, e);
-        }
-        else
-        {
-            return EditManipulation.Manipulate(
-                PointerState.Hovering, screenPosition, EditManager, MapControl, e);
-        }
-    }
+    public override bool OnTapped(Navigator navigator, WidgetEventArgs e) =>
+        EditManipulation.OnTapped(e.Position, _editManager, _mapControl, e.TapType, e.ShiftPressed);
 }

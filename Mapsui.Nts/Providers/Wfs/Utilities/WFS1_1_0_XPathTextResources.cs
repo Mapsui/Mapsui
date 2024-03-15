@@ -4,7 +4,7 @@
 
 // WFS provider by Peter Robineau (www.geoimpact.ch)
 
-// ReSharper disable InconsistentNaming
+#pragma warning disable IDE1006 // Naming Styles
 namespace Mapsui.Providers.Wfs.Utilities;
 
 /// <summary>

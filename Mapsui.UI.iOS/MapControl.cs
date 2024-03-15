@@ -13,7 +13,6 @@ public partial class MapControl : UIView, IMapControl
     private SKCanvasView? _canvas;
     private bool _canvasInitialized;
     private readonly ManipulationTracker _manipulationTracker = new();
-    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl(CGRect frame)
         : base(frame)
@@ -136,16 +135,13 @@ public partial class MapControl : UIView, IMapControl
         Catch.Exceptions(() =>
         {
             base.TouchesBegan(touches, e);
-            var locations = GetTouchLocations(e, this);
+            var positions = GetScreenPositions(e, this);
 
-            if (locations.Length == 1)
-            {
-                var position = locations[0];
-                _tapGestureTracker.Restart(position);
-                _manipulationTracker.Restart([position]);
-                if (OnWidgetPointerPressed(position, false))
-                    return;
-            }
+            if (positions.Length == 1)
+                _manipulationTracker.Restart(positions);
+
+            if (OnMapPointerPressed(positions))
+                return;
         });
     }
 
@@ -154,12 +150,12 @@ public partial class MapControl : UIView, IMapControl
         Catch.Exceptions(() =>
         {
             base.TouchesMoved(touches, e);
-            var locations = GetTouchLocations(e, this);
+            var positions = GetScreenPositions(e, this);
 
-            if (locations.Length == 1)
-                if (OnWidgetPointerMoved(locations[0], true, false))
-                    return;
-            _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
+            if (OnMapPointerMoved(positions))
+                return;
+
+            _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
         });
     }
 
@@ -168,30 +164,16 @@ public partial class MapControl : UIView, IMapControl
         Catch.Exceptions(() =>
         {
             base.TouchesEnded(touches, e);
-            var locations = GetTouchLocations(e, this);
-
-            if (locations.Length == 1)
-            {
-                var position = locations[0];
-                _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-                {
-                    if (OnWidgetTapped(p, c, false))
-                        return;
-                    OnInfo(CreateMapInfoEventArgs(p, p, c));
-                });
-            }
-
-            _manipulationTracker.Manipulate(locations, Map.Navigator.Manipulate);
-
-            Refresh();
+            var positions = GetScreenPositions(e, this);
+            OnMapPointerReleased(positions);
         });
     }
 
-    private static ReadOnlySpan<MPoint> GetTouchLocations(UIEvent? uiEvent, UIView uiView)
+    private static ReadOnlySpan<ScreenPosition> GetScreenPositions(UIEvent? uiEvent, UIView uiView)
     {
         if (uiEvent is null)
-            return ReadOnlySpan<MPoint>.Empty;
-        return uiEvent.AllTouches.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new MPoint(p.X, p.Y)).ToArray();
+            return [];
+        return uiEvent.AllTouches.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new ScreenPosition(p.X, p.Y)).ToArray();
     }
 
     /// <summary>
@@ -305,4 +287,6 @@ public partial class MapControl : UIView, IMapControl
             ? (double)_glCanvas!.ContentScaleFactor
             : (double)_canvas!.ContentScaleFactor;
     }
+
+    private static bool GetShiftPressed() => false;
 }

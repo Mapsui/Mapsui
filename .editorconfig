@@ -253,6 +253,7 @@ dotnet_code_quality_unused_parameters = all:suggestion
 dotnet_diagnostic.CS1591.severity = none # CS1591: Missing XML comment for publicly visible type or member
 dotnet_diagnostic.IDE0055.severity = error # fix formatting
 dotnet_diagnostic.IDE0005.severity = error # Remove unused usings, works only while editing, not when running dotnet format
+dotnet_diagnostic.CA1512.severity = silent # CA1512: Use ArgumentOutOfRangeException throw helper - Why set to silent? Because we use net7 and it is not supported there.
 
 # Spelling
 spelling_exclusion_path = spelling_exclusion.txt

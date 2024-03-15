@@ -28,7 +28,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas _canvas = CreateRenderTarget();
     bool _shiftPressed;
-    private readonly TapGestureTracker _tapGestureTracker = new();
 
     public MapControl()
     {
@@ -96,9 +95,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerPressed(object sender, PointerRoutedEventArgs e)
     {
-        var position = e.GetCurrentPoint(this).Position.ToMapsui();
-        _tapGestureTracker.Restart(position);
-        if (OnWidgetPointerPressed(position, e.KeyModifiers == VirtualKeyModifiers.Shift))
+        var position = e.GetCurrentPoint(this).Position.ToScreenPosition();
+
+        if (OnMapPointerPressed([position]))
             return;
     }
 
@@ -109,21 +108,18 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         // hover events.
         if (!IsHovering(e))
             return;
+        var position = e.GetCurrentPoint(this).Position.ToScreenPosition();
 
-        var position = e.GetCurrentPoint(this).Position.ToMapsui();
-        if (OnWidgetPointerMoved(position, false, e.KeyModifiers == VirtualKeyModifiers.Shift))
+        if (OnMapPointerMoved([position], true)) // Only for hover events
             return;
+
+        RefreshGraphics();
     }
 
     private void MapControl_PointerReleased(object sender, PointerRoutedEventArgs e)
     {
-        var position = e.GetCurrentPoint(this).Position.ToMapsui();
-        _tapGestureTracker.IfTap(position, MaxTapGestureMovement * PixelDensity, (p, c) =>
-        {
-            if (OnWidgetTapped(p, c, _shiftPressed))
-                return;
-            OnInfo(CreateMapInfoEventArgs(p, p, c));
-        });
+        var position = e.GetCurrentPoint(this).Position.ToScreenPosition();
+        OnMapPointerReleased([position]);
     }
 
     private bool IsHovering(PointerRoutedEventArgs e)
@@ -162,11 +158,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
     {
-        var currentPoint = e.GetCurrentPoint(this);
-        var currentMousePosition = new MPoint(currentPoint.Position.X, currentPoint.Position.Y);
-        var mouseWheelDelta = currentPoint.Properties.MouseWheelDelta;
+        var mousePointerPoint = e.GetCurrentPoint(this);
+        var mouseWheelDelta = mousePointerPoint.Properties.MouseWheelDelta;
 
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePointerPoint.ToScreenPosition());
 
         e.Handled = true;
     }
@@ -217,15 +212,17 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
     {
         var manipulation = ToManipulation(e);
-        if (OnWidgetPointerMoved(manipulation.Center, true, false))
+
+        if (OnMapPointerMoved([manipulation.Center]))
             return;
+
         Map.Navigator.Manipulate(ToManipulation(e));
         RefreshGraphics();
     }
 
     private Manipulation ToManipulation(ManipulationDeltaRoutedEventArgs e)
     {
-        var previousCenter = TransformToVisual(this).Inverse.TransformPoint(e.Position).ToMapsui();
+        var previousCenter = TransformToVisual(this).Inverse.TransformPoint(e.Position).ToScreenPosition();
         var center = previousCenter.Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
         return new Manipulation(center, previousCenter, e.Delta.Scale, e.Delta.Rotation, e.Cumulative.Rotation);
     }
@@ -239,6 +236,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private double ViewportHeight => ActualHeight;
 
     private double GetPixelDensity() => XamlRoot?.RasterizationScale ?? 1d;
+
+    private bool GetShiftPressed() => _shiftPressed;
 
 #if __ANDROID__
     protected override void Dispose(bool disposing)

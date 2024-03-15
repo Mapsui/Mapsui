@@ -39,7 +39,7 @@ public sealed class AnimatedMyLocationSample : IMapViewSample, IDisposable
     }
 
     public bool UpdateLocation => false;
-    public bool OnClick(object? sender, EventArgs args)
+    public bool OnTap(object? sender, EventArgs args)
     {
         return true;
     }

@@ -7,7 +7,7 @@ using Mapsui.Disposing;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Nts.Widgets;
+using Mapsui.Manipulations;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
@@ -63,8 +63,8 @@ public sealed class MapRenderer : IRenderer, IDisposable
         WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
         WidgetRenders[typeof(IconButtonWidget)] = new IconButtonWidgetRenderer();
         WidgetRenders[typeof(BoxWidget)] = new BoxWidgetRenderer();
-        WidgetRenders[typeof(EditingWidget)] = new EditingWidgetRenderer();
         WidgetRenders[typeof(LoggingWidget)] = new LoggingWidgetRenderer();
+        WidgetRenders[typeof(InputOnlyWidget)] = new InputOnlyWidgetRenderer();
     }
 
     public MapRenderer()
@@ -203,10 +203,10 @@ public sealed class MapRenderer : IRenderer, IDisposable
         WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
     }
 
-    public MapInfo? GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+    public MapInfo GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
     {
-        // todo: use margin to increase the pixel area
-        // todo: We will need to select on style instead of layer
+        // Todo: Use margin to increase the pixel area
+        // Todo: Select on style instead of layer
 
         var mapInfoLayers = layers
             .Select(l => l is ISourceLayer sl and not ILayerFeatureInfo ? sl.SourceLayer : l)
@@ -216,7 +216,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         var tasks = new List<Task>();
 
         var list = new List<MapInfoRecord>[mapInfoLayers.Count];
-        var result = new MapInfo(new MPoint(x, y), viewport.ScreenToWorld(x, y), viewport.Resolution);
+        var result = new MapInfo(new ScreenPosition(x, y), viewport.ScreenToWorld(x, y), viewport.Resolution);
 
         if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return result;
 
@@ -235,7 +235,11 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
             using (var surface = SKSurface.Create(imageInfo))
             {
-                if (surface == null) return null;
+                if (surface == null)
+                {
+                    Logger.Log(LogLevel.Error, "SKSurface is null while getting MapInfo.  This is not expected.");
+                    return result;
+                }
 
                 surface.Canvas.ClipRect(new SKRect((float)(x - 1), (float)(y - 1), (float)(x + 1), (float)(y + 1)));
                 surface.Canvas.Clear(SKColors.Transparent);
@@ -254,7 +258,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                             try
                             {
                                 // creating new list to avoid multithreading problems
-                                mapList = new List<MapInfoRecord>();
+                                mapList = [];
                                 // get information from ILayer Feature Info
                                 var features = await layerFeatureInfo.GetFeatureInfoAsync(viewport, x, y);
                                 foreach (var it in features)
@@ -277,7 +281,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                     else
                     {
                         // get information from ILayer
-                        VisibleFeatureIterator.IterateLayers(viewport, new[] { infoLayer }, 0,
+                        VisibleFeatureIterator.IterateLayers(viewport, [infoLayer], 0,
                             (v, layer, style, feature, opacity, iteration) =>
                             {
                                 try

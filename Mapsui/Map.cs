@@ -244,10 +244,10 @@ public class Map : INotifyPropertyChanged, IDisposable
 
     private void LayersCollectionChanged(object sender, LayerCollectionChangedEventArgs args)
     {
-        foreach (var layer in args.RemovedLayers ?? Enumerable.Empty<ILayer>())
+        foreach (var layer in args.RemovedLayers ?? [])
             LayerRemoved(layer);
 
-        foreach (var layer in args.AddedLayers ?? Enumerable.Empty<ILayer>())
+        foreach (var layer in args.AddedLayers ?? [])
             LayerAdded(layer);
 
         LayersChanged();
@@ -316,7 +316,7 @@ public class Map : INotifyPropertyChanged, IDisposable
             }
         }
 
-        return items.Select(i => i.Value).OrderByDescending(i => i).ToList();
+        return [.. items.Select(i => i.Value).OrderByDescending(i => i)];
     }
 
     private void LayerPropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -354,23 +354,25 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// This method is to invoke the Info event from the Map. This method is called
     /// by the MapControl/MapView and should usually not be called from user code.
     /// </summary>
-    public void OnInfo(MapInfoEventArgs? mapInfoEventArgs)
+    public void OnMapInfo(MapInfoEventArgs e)
     {
-        if (mapInfoEventArgs == null) return;
-
-        Info?.Invoke(this, mapInfoEventArgs);
+        Info?.Invoke(this, e);
     }
 
-    public virtual void Dispose()
+    public void Dispose()
     {
-        foreach (var layer in Layers)
-        {
-            // remove Event so that no memory leaks occur
-            LayerRemoved(layer);
-        }
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
-        // clear the layers
-        Layers.Clear();
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            foreach (var layer in Layers)
+                LayerRemoved(layer); // Remove Event so that no memory leaks occur
+            Layers.Clear();
+        }
     }
 
     public bool UpdateAnimations()

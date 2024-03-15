@@ -9,36 +9,23 @@ public class FlingTracker
     private const int _maxSize = 50;
     private const long _maxTicks = 200 * 10000;  // Use only events from the last 200 ms
 
-    private readonly Dictionary<long, Queue<(double x, double y, long time)>> _events;
+    private readonly Queue<(double x, double y, long time)> _events;
 
     public FlingTracker()
     {
         _events = [];
     }
 
-    public void AddEvent(long id, MPoint location, long ticks)
+    public void AddEvent(ScreenPosition position, long ticks)
     {
-        // Save event data
-        if (!_events.TryGetValue(id, out var value))
-        {
-            value = new Queue<(double x, double y, long time)>();
-            _events.Add(id, value);
-        }
-
-        value.Enqueue((location.X, location.Y, ticks));
+        _events.Enqueue((position.X, position.Y, ticks));
 
         // Check, if we at the end of array
-        if (value.Count > 2)
+        if (_events.Count > 2)
         {
-            while (value.Count > _maxSize || value.Peek().time < ticks - _maxTicks)
-                value.Dequeue();
+            while (_events.Count > _maxSize || _events.Peek().time < ticks - _maxTicks)
+                _events.Dequeue();
         }
-    }
-
-    // STOP TRACKING THIS ONE
-    public void RemoveId(long id)
-    {
-        _events.Remove(id);
     }
 
     public void Restart()
@@ -46,16 +33,16 @@ public class FlingTracker
         _events.Clear();
     }
 
-    private (double vx, double vy) CalcVelocity(long id, long now)
+    private (double vx, double vy) CalcVelocity(long now)
     {
         double distanceX = 0;
         double distanceY = 0;
 
-        if (!_events.TryGetValue(id, out var eventItem) || eventItem.Count < 2)
-            return (0d, 0d);
-
-        var eventQueue = eventItem;
+        var eventQueue = _events;
         var eventsArray = eventQueue.ToArray();
+
+        if (eventsArray.Length == 0)
+            return (0, 0);
 
         (_, _, var firstTime) = eventsArray[0];
 
@@ -82,9 +69,9 @@ public class FlingTracker
         return (distanceX / totalTime, distanceY / totalTime);
     }
 
-    public void IfFling(long eventId, Action<double, double> onFling)
+    public void FlingIfNeeded(Action<double, double> onFling)
     {
-        var (velocityX, velocityY) = CalcVelocity(eventId, DateTime.Now.Ticks);
+        var (velocityX, velocityY) = CalcVelocity(DateTime.Now.Ticks);
 
         if (Math.Abs(velocityX) <= 200 && Math.Abs(velocityY) <= 200)
             return;

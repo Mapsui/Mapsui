@@ -576,7 +576,7 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
 
         for (var x = 0; x < _featureCount; ++x)
         {
-            offsetOfRecord[x] = 2 * SwapByteOrder(_brShapeIndex.ReadInt32()); // Read shape data position // ibuffer);
+            offsetOfRecord[x] = 2 * SwapByteOrder(_brShapeIndex.ReadInt32()); // Read shape data position
             _brShapeIndex.BaseStream.Seek(_brShapeIndex.BaseStream.Position + 4, 0); // Skip content length
         }
         return offsetOfRecord;
@@ -863,7 +863,7 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
     }
 
     /// <summary>
-    /// Gets a data row from the data source at the specified index belonging to the specified datatable
+    /// Gets a data row from the data source at the specified index belonging to the specified data table
     /// </summary>
     /// <param name="rowId"></param>
     /// <returns></returns>

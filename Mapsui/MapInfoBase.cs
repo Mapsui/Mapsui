@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Layers;
+using Mapsui.Manipulations;
 using Mapsui.Rendering;
 
 namespace Mapsui;
@@ -11,7 +12,7 @@ public class MapInfoBase
     private List<MapInfoRecord>? _mapInfoRecords;
     private MapInfoRecord? _mapInfoRecord;
 
-    protected MapInfoBase(MPoint screenPosition,
+    protected MapInfoBase(ScreenPosition screenPosition,
         MPoint worldPosition,
         double resolution,
         IEnumerable<MapInfoRecord> records)
@@ -48,7 +49,7 @@ public class MapInfoBase
     /// <summary>
     /// Screen position of the place the user touched
     /// </summary>
-    public MPoint ScreenPosition { get; }
+    public ScreenPosition ScreenPosition { get; }
 
     /// <summary>
     /// The resolution at which the info was retrieved. This can

@@ -3,9 +3,15 @@ using System.Runtime.CompilerServices;
 
 namespace Mapsui.Widgets;
 
-public abstract class Widget : IWidget
+public abstract class BaseWidget : IWidget
 {
     private HorizontalAlignment _horizontalAlignment = HorizontalAlignment.Right;
+
+    /// <summary>
+    /// Type of area to use for touch events. The default is WidgetArea. This needs to be set to 
+    /// 'Map' in the constructor if widget want to receive manipulation events from all over the map.
+    /// </summary>
+    public InputAreaType InputAreaType { get; init; } = InputAreaType.Widget;
 
     /// <summary>
     /// Horizontal alignment of Widget
@@ -146,6 +152,8 @@ public abstract class Widget : IWidget
     /// </summary>
     public bool NeedsRedraw { get; set; } = false;
 
+    public bool InputTransparent { get; init; }
+
     public void UpdateEnvelope(double maxWidth, double maxHeight, double screenWidth, double screenHeight)
     {
         var minX = CalculatePositionX(0, screenWidth, maxWidth);
@@ -159,6 +167,30 @@ public abstract class Widget : IWidget
     public virtual void Invalidate([CallerMemberName] string name = "")
     {
         NeedsRedraw = true;
+    }
+
+    /// <inheritdoc/>
+    public virtual bool OnTapped(Navigator navigator, WidgetEventArgs e)
+    {
+        return false;
+    }
+
+    /// <inheritdoc/>
+    public virtual bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)
+    {
+        return false;
+    }
+
+    /// <inheritdoc/>
+    public virtual bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
+    {
+        return false;
+    }
+
+    /// <inheritdoc/>
+    public virtual bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
+    {
+        return false;
     }
 
     private double CalculatePositionX(double left, double right, double width) => HorizontalAlignment switch

@@ -1,12 +1,12 @@
-﻿using Windows.Foundation;
+﻿using Mapsui.Manipulations;
+using Windows.Foundation;
 
 namespace Mapsui.UI.WinUI.Extensions;
 
-
 public static class PointExtensions
 {
-    public static MPoint ToMapsui(this Point point)
+    public static ScreenPosition ToScreenPosition(this Point point)
     {
-        return new MPoint(point.X, point.Y);
+        return new ScreenPosition(point.X, point.Y);
     }
 }

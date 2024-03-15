@@ -15,7 +15,7 @@ public class MemoryProvider : IProvider
 
     public MemoryProvider()
     {
-        Features = new List<IFeature>();
+        Features = [];
         _boundingBox = GetExtent(Features);
     }
 
@@ -25,7 +25,7 @@ public class MemoryProvider : IProvider
     /// <param name="feature">Feature to be in this dataSource</param>
     public MemoryProvider(IFeature feature)
     {
-        Features = new List<IFeature> { feature };
+        Features = [feature];
         _boundingBox = GetExtent(Features);
     }
 
@@ -51,8 +51,8 @@ public class MemoryProvider : IProvider
 
     public virtual Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
-        if (fetchInfo == null) throw new ArgumentNullException(nameof(fetchInfo));
-        if (fetchInfo.Extent == null) throw new ArgumentNullException(nameof(fetchInfo.Extent));
+        ArgumentNullException.ThrowIfNull(fetchInfo);
+        ArgumentNullException.ThrowIfNull(fetchInfo.Extent);
 
         var features = Features.ToArray(); // An Array is faster than a List
 
@@ -98,6 +98,6 @@ public class MemoryProvider : IProvider
 
     public void Clear()
     {
-        Features = new List<IFeature>();
+        Features = [];
     }
 }

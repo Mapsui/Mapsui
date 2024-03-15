@@ -7,7 +7,7 @@ namespace Mapsui.Widgets.BoxWidgets;
 /// </summary>
 public class TextBoxWidget : BoxWidget
 {
-    private MRect _padding = new MRect(3);
+    private MRect _padding = new(3);
 
     /// <summary>
     /// Padding for left, top, right and bottom for text inside the Widget
