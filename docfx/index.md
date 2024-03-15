@@ -1,4 +1,4 @@
-# **Mapsui** documentation.
+# **Mapsui v4.1** documentation.
 
 This is the documentation of the Mapsui open source map component.
 - [General documentation](https://mapsui.com/documentation/home.html)
