@@ -43,4 +43,4 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./website
 #        destination_dir: v5
-        keep_files: true
+        keep_files: false
