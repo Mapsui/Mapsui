@@ -22,9 +22,10 @@ Branch: [develop/4.1](https://github.com/Mapsui/Mapsui/tree/develop/4.1). Milest
 
 Branch: [main](https://github.com/Mapsui/Mapsui/tree/main). Milestone: [v5.0](https://github.com/Mapsui/Mapsui/milestone/10). We are working on a series of preview releases.
 
-The main objective of v5 is to reduce technical debt, remove everything that makes development slower. Support less and support it better. Release a version that is easy to maintain while working on v6.
+Focus: More shared code in platforms. This will affect MapControls, Widgets and manipulation (touch and mouse). The underlying objective is to make the development process faster by removing everything that slows us down. 
 
 - [x] Lowest supported version to .NET 6 (remove .netstandard)
+- [x] All samples and tests to .NET 8.
 - [ ] Cleanup:
     * [x] Rename master to main.
     * [x] Run dotnet format on the entire solution.
@@ -51,16 +52,15 @@ The main objective of v5 is to reduce technical debt, remove everything that mak
 - [ ] Make Map dispose a layer when create function is used https://github.com/Mapsui/Mapsui/issues/2284.
 - [ ] Dispose the samples if needed.
 
-## Mapsui 6 and later
+## Mapsui 6
 
-There are many things we eagerly want to work on. You could browse through the ['design discussion' tags](https://github.com/Mapsui/Mapsui/labels/design%20discussion) to get an impression of the options.
+Focus: Rendering.
 
 - [ ] Two step rendering. In the draw loop only draw skia object, create skia object in an earlier step https://github.com/Mapsui/Mapsui/issues/1448
+- [ ] All redering through a single pipeline https://github.com/Mapsui/Mapsui/issues/2269
 - [ ] World wrap https://github.com/Mapsui/Mapsui/issues/518
 - [ ] Add vector tiles https://github.com/Mapsui/Mapsui/issues/1478
-- [ ] All redering through a single pipeline https://github.com/Mapsui/Mapsui/issues/2269
+
+Other options:
 - [ ] Add support for GeoParquet https://github.com/Mapsui/Mapsui/issues/2282
-- [ ] Make the MapControl disposable not the Map https://github.com/Mapsui/Mapsui/issues/2372
-- [ ] Only one type of layer. Defined in Mapsui and sealed. All DataSources can be mutable. All layers have a related DataSource, which is not a member of the layer so the layer does not need Dispose. There are different types of DataSource which require different kinds of fetching (continues fetching like in the tile layer, discrete fetching like in WMS)
-- [ ] The render is responsible for performance optimizations like we use in the RasteringLayer, RasterizingTileLayer
-- [ ] Centralized data projection. This should be taken into account when working on centralized data fetching and two step rendering.
+- [ ] For possible other options you could  browse through the ['design discussion' tags](https://github.com/Mapsui/Mapsui/labels/design%20discussion) .
