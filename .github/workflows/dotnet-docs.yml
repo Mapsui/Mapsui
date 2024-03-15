@@ -4,14 +4,14 @@ env:
 on:
   push:
     branches:  
-      - master   
+      - develop/4.1   
       
 permissions:
   contents: write
   # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
   pages: write      # to deploy to Pages
   id-token: write   # to verify the deployment originates from an appropriate source
-
+  
 jobs:
   build-and-publish-website:
     runs-on: windows-latest
@@ -27,6 +27,8 @@ jobs:
          dotnet-version: |
            8.0.x
          include-prerelease: false
+    - name: install wasm-tools
+      run: dotnet workload install wasm-tools
     - name: Run DocFx
       # Use a .cmd so this script can be run locally for testing
       run: docfx\build-site.cmd
