@@ -1,4 +1,3 @@
-
 # build Samples website to release folder
 dotnet publish -c Release Samples\Mapsui.Samples.Blazor\Mapsui.Samples.Blazor.csproj -o release --nologo
 # change base url
@@ -11,5 +10,3 @@ cp release/wwwroot/index.html release/wwwroot/404.html -Force
 New-Item -Path "website\samples" -ItemType Directory -Force
 # copy it to website/samples
 Copy-Item -Path "release/wwwroot/*" -Destination "website/samples" -Recurse -Force
-
-
