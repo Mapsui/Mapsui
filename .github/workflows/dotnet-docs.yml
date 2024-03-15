@@ -1,6 +1,5 @@
 name: Build Website
-env:
-  PUBLISH_DIR: website/Samples/
+
 on:
   push:
     branches:  
