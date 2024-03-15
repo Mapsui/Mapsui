@@ -567,7 +567,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 if (e.MapInfo?.ScreenPosition is null)
                     return;
 
-                var pinArgs = new PinClickedEventArgs(clickedPin, Map.Navigator.Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(), e.NumTaps);
+                var pinArgs = new PinClickedEventArgs(clickedPin, Map.Navigator.Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(), e.TapType);
 
                 PinClicked?.Invoke(this, pinArgs);
 
@@ -593,12 +593,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 }
             }
 
-            if (e.MapInfo!.ScreenPosition == null)
-                return;
-
             var calloutArgs = new CalloutClickedEventArgs(clickedCallout,
                 Map.Navigator.Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
-                new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
+                new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.TapType);
 
             clickedCallout?.HandleCalloutClicked(this, calloutArgs);
 
@@ -611,9 +608,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         {
             var drawables = _drawables.ToList();
 
-            if (e.MapInfo!.ScreenPosition == null)
-                return;
-
             foreach (var rec in e.MapInfo.MapInfoRecords)
             {
                 foreach (var drawable in drawables)
@@ -624,7 +618,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                     {
                         var drawableArgs = new DrawableClickedEventArgs(
                             Map.Navigator.Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
-                            new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
+                            new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.TapType);
 
                         drawable?.HandleClicked(drawableArgs);
 
@@ -639,12 +633,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         // Check for clicked myLocation
         else if (e.MapInfo?.Layer == MyLocationLayer)
         {
-            if (e.MapInfo!.ScreenPosition == null)
-                return;
-
             var args = new DrawableClickedEventArgs(
                 Map.Navigator.Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
-                new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
+                new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.TapType);
 
             MyLocationLayer?.HandleClicked(args);
 
@@ -663,7 +654,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             // Check if we hit a drawable/pin/callout etc
             var mapInfo = GetMapInfo(e.ScreenPosition);
 
-            var mapInfoEventArgs = new MapInfoEventArgs { MapInfo = mapInfo, Handled = e.Handled, NumTaps = e.NumOfTaps };
+            var mapInfoEventArgs = new MapInfoEventArgs(mapInfo, e.TapType, e.Handled);
 
             HandlerInfo(mapInfoEventArgs);
 
@@ -672,7 +663,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             if (!e.Handled)
             {
                 // if nothing else was hit, then we hit the map
-                var args = new MapClickedEventArgs(Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToNative(), e.NumOfTaps);
+                var args = new MapClickedEventArgs(Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToNative(), e.TapType);
                 MapClicked?.Invoke(this, args);
 
                 if (args.Handled)
@@ -844,9 +835,8 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         HideCallouts();
     }
 
-    protected override void OnSingleTapped(ScreenPosition screenPosition)
+    private void OnTapped(ScreenPosition screenPosition)
     {
-        HandlerTap(new TappedEventArgs(screenPosition, 1));
-        base.OnSingleTapped(screenPosition);
+        // Todo: Implement to test simple scenarios.
     }
 }

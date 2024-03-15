@@ -272,26 +272,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         => Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
 
     /// <summary>
-    /// Called, when mouse/finger/pen tapped on map 2 or more times
-    /// </summary>
-    /// <param name="screenPosition">First clicked/touched position on screen</param>
-    protected virtual void OnDoubleTapped(ScreenPosition screenPosition)
-    {
-        // Zoom in on double tap
-        OnZoomInOrOut(1, screenPosition); // mouseWheelDelta > 0 to zoom in
-    }
-
-    /// <summary>
-    /// Called, when mouse/finger/pen tapped on map one time
-    /// </summary>
-    /// <param name="screenPosition">Clicked/touched position on screen</param>
-    /// <returns>True, if the event is handled</returns>
-    protected virtual void OnSingleTapped(ScreenPosition screenPosition)
-    {
-        OnInfo(CreateMapInfoEventArgs(screenPosition, screenPosition, 1));
-    }
-
-    /// <summary>
     /// Public functions
     /// </summary>
 

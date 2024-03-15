@@ -58,7 +58,7 @@ public partial class MainPage : ContentPage
 
         clicker = null;
         if (sample is IMapViewSample formsSample)
-            clicker = formsSample.OnClick;
+            clicker = formsSample.OnTap;
 
         if (sample != null)
             (Application.Current?.MainPage as NavigationPage)?.PushAsync(new MapPage(sample, clicker));

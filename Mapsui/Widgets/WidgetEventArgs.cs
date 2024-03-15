@@ -6,7 +6,7 @@ namespace Mapsui.Widgets;
 /// <summary>
 /// Arguments for a touched event of a widget
 /// </summary>
-public class WidgetEventArgs(ScreenPosition position, TapType tapType = TapType.Single, bool leftButton = true, bool shiftPressed = false) : EventArgs
+public class WidgetEventArgs(ScreenPosition position, TapType tapType, bool leftButton, bool shiftPressed, Func<MapInfo> getMapInfo) : EventArgs
 {
     /// <summary>
     /// Screen Position of touch in device independent units (or DIP or DP)
@@ -27,4 +27,9 @@ public class WidgetEventArgs(ScreenPosition position, TapType tapType = TapType.
     /// Shift key pressed while touching
     /// </summary>
     public bool ShiftPressed { get; } = shiftPressed;
+
+    /// <summary>
+    /// Function to get the MapInfo for the WidgetEventArgs.Position.
+    /// </summary>
+    public Func<MapInfo> GetMapInfo { get; } = getMapInfo;
 }

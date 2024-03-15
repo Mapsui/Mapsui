@@ -354,11 +354,9 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// This method is to invoke the Info event from the Map. This method is called
     /// by the MapControl/MapView and should usually not be called from user code.
     /// </summary>
-    public void OnInfo(MapInfoEventArgs? mapInfoEventArgs)
+    public void OnMapInfo(MapInfoEventArgs e)
     {
-        if (mapInfoEventArgs == null) return;
-
-        Info?.Invoke(this, mapInfoEventArgs);
+        Info?.Invoke(this, e);
     }
 
     public void Dispose()
