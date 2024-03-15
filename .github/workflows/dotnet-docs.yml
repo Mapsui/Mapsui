@@ -56,10 +56,9 @@ jobs:
       run: |
         ./Scripts/BuildSamplesWebsite.ps1     
     - name: Upload artifact
-      uses: actions/upload-pages-artifact@v1
+      uses: peaceiris/actions-gh-pages@v3
       with:
-      # Upload the 'website' folder as artifact
-        path: 'website'
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v1
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./website
+        destination_dir: v5
+        keep_files: true

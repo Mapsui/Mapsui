@@ -20,9 +20,13 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0 # Prevent a shallow clone to allow git describe --tags
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
 
     - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.5
+      uses: NuGet/setup-nuget@v1.1.1
 
     # .Net 7 update     
     - name: Setup .NET 7 SDK
@@ -31,8 +35,8 @@ jobs:
          dotnet-version: |
            8.0.x
          include-prerelease: true
-       
-      # The version tag needs to be set before the release. If not if will fail on nuget publish.
+
+    # The version tag needs to be set before the release. If not if will fail on nuget publish.
     - name: Set VERSION_OF_RELEASE to last tag
       run: |
         echo ("VERSION_OF_RELEASE=" + $(git describe --tags --abbrev=0)) >> $env:GITHUB_ENV
@@ -43,9 +47,9 @@ jobs:
 
     - name: Test
       run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
-
+      
     - name: Pack
-      # The dlls and nupkgs will be built 'inputs.release_version' as version, overriding the version number in the Directory.Build.props.
+  # The dlls and nupkgs will be built 'inputs.release_version' as version, overriding the version number in the Directory.Build.props.
       run: dotnet pack ${{ env.SOLUTION }} --configuration Release /p:Version=${{ env.VERSION_OF_RELEASE }} -o nugets
 
     - name: Upload nugets

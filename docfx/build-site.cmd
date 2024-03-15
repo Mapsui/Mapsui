@@ -11,4 +11,4 @@ mkdir website
 ECHO COPY CNAME file which is used by github to determine the domain name.
 copy docfx\CNAME website /Y || exit /b 
 ECHO COPY _site TO website
-xcopy docfx\_site website /E /Y || exit /b 
+xcopy docfx\_site website\  /E /Y || exit /b 
