@@ -28,7 +28,7 @@ jobs:
            8.0.x
          include-prerelease: false
     - name: install wasm-tools
-      run: dotnet workload install wasm-tools
+      run: dotnet workload install wasm-tools-net7 
     - name: Run DocFx
       # Use a .cmd so this script can be run locally for testing
       run: docfx\build-site.cmd
