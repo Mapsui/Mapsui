@@ -50,7 +50,7 @@ public class LabelsSample : ISample
         {
             Text = "Colors",
             BackColor = new Brush(Color.Blue),
-            ForeColor = Color.White
+            ForeColor = Color.White,
         }]
     };
 
@@ -60,7 +60,7 @@ public class LabelsSample : ISample
         {
             Text = "Bottom\nAligned",
             BackColor = new Brush(Color.Gray),
-            VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom
+            VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom,
         }]
     };
 
@@ -70,7 +70,7 @@ public class LabelsSample : ISample
         {
             Text = "Right Aligned",
             BackColor = new Brush(Color.Gray),
-            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right
+            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right,
         }]
     };
 
@@ -81,7 +81,6 @@ public class LabelsSample : ISample
         {
             Text = "Polygon",
             BackColor = new Brush(Color.Gray),
-            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center
         }]
     };
 
@@ -96,7 +95,7 @@ public class LabelsSample : ISample
             Halo = new Pen(Color.Black, 2),
             HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
             MaxWidth = 10,
-            WordWrap = LabelStyle.LineBreakMode.TailTruncation
+            WordWrap = LabelStyle.LineBreakMode.TailTruncation,
         }]
     };
 
@@ -111,7 +110,7 @@ public class LabelsSample : ISample
             Halo = new Pen(Color.Black, 2),
             HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right,
             MaxWidth = 10,
-            WordWrap = LabelStyle.LineBreakMode.HeadTruncation
+            WordWrap = LabelStyle.LineBreakMode.HeadTruncation,
         }]
     };
 
@@ -126,7 +125,7 @@ public class LabelsSample : ISample
             Halo = new Pen(Color.Black, 2),
             HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
             MaxWidth = 10,
-            WordWrap = LabelStyle.LineBreakMode.MiddleTruncation
+            WordWrap = LabelStyle.LineBreakMode.MiddleTruncation,
         }]
     };
 
@@ -156,8 +155,6 @@ public class LabelsSample : ISample
             MaxWidth = 10,
             LineHeight = 1.2,
             WordWrap = LabelStyle.LineBreakMode.WordWrap,
-            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
-            VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
         }]
     };
 
@@ -184,8 +181,6 @@ public class LabelsSample : ISample
             ForeColor = Color.Black,
             MaxWidth = 6,
             WordWrap = LabelStyle.LineBreakMode.CharacterWrap,
-            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
-            VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
         }]
     };
 
@@ -196,7 +191,7 @@ public class LabelsSample : ISample
             Text = "Halo Halo Halo",
             BackColor = new Brush(Color.Transparent),
             ForeColor = Color.White,
-            Halo = new Pen(Color.Black, 2)
+            Halo = new Pen(Color.Black, 2),
         }]
     };
 }
