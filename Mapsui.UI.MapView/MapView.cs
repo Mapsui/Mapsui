@@ -593,9 +593,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 }
             }
 
-            if (e.MapInfo!.ScreenPosition == null)
-                return;
-
             var calloutArgs = new CalloutClickedEventArgs(clickedCallout,
                 Map.Navigator.Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
                 new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.TapType);
@@ -610,9 +607,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         else if (e.MapInfo?.Layer == _mapDrawableLayer)
         {
             var drawables = _drawables.ToList();
-
-            if (e.MapInfo!.ScreenPosition == null)
-                return;
 
             foreach (var rec in e.MapInfo.MapInfoRecords)
             {
@@ -639,9 +633,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         // Check for clicked myLocation
         else if (e.MapInfo?.Layer == MyLocationLayer)
         {
-            if (e.MapInfo!.ScreenPosition == null)
-                return;
-
             var args = new DrawableClickedEventArgs(
                 Map.Navigator.Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
                 new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.TapType);
