@@ -17,7 +17,6 @@
       "Samples\\Avalonia\\Mapsui.Samples.Avalonia.iOS\\Mapsui.Samples.Avalonia.iOS.csproj",
       "Samples\\Avalonia\\Mapsui.Samples.Avalonia\\Mapsui.Samples.Avalonia.csproj",
       "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",
-      "Samples\\Mapsui.Samples.CustomWidget\\Mapsui.Samples.CustomWidget.csproj",
       "SourceGenerators\\Mapsui.Sample.SourceGenerator\\Mapsui.Sample.SourceGenerator.csproj",
       "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
       "Tests\\Mapsui.Rendering.Skia.Tests\\Mapsui.Rendering.Skia.Tests.csproj",

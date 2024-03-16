@@ -12,7 +12,6 @@
       "Mapsui.UI.Wpf\\Mapsui.UI.Wpf.csproj",
       "Mapsui\\Mapsui.csproj",
       "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",
-      "Samples\\Mapsui.Samples.CustomWidget\\Mapsui.Samples.CustomWidget.csproj",
       "Samples\\Mapsui.Samples.Wpf\\Mapsui.Samples.Wpf.csproj",
       "SourceGenerators\\Mapsui.Sample.SourceGenerator\\Mapsui.Sample.SourceGenerator.csproj",
       "SourceGenerators\\Mapsui.SourceGenerator\\Mapsui.SourceGenerator.csproj",
