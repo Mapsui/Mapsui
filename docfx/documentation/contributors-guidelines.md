@@ -47,6 +47,7 @@ For instance, we have a direct dependency on SkiaSharp, but we also use Svg.Skia
 
 ## PR titles should be written as release notes
 Github can generate release notes from PR titles, so the PR titles should be written as release notes entries. Let's do it like this:
+
 - Use imperative mood. See something about this in [this post](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/) about commit messages (which should also use imperative mood). Most of the time the title will begin with a verb, like Fix, Update or Add.
 - Don't use the number of the issue it is referencing in the title but in the branch name (in the format suggested by github when you click the 'create a branch' link next to an issue). It will automatically be associated with the issue.
 - The title should be self explanatory and the interpretation should not depend on the content of the issue it is referring to.
@@ -71,6 +72,7 @@ canvas.DrawPath(path, paint);
 
 ## Keep the renderer behind and interface
 As of v4 Mapsui has only one renderer, SkiaSharp. Although we have only one renderer and have currently no plans to add others we will keep it behind an interface. There are costs to keeping the abstraction but we keep it because a change could happen again, even though it does not seem likely now. In the past we had to switch renderers many times, a list:
+
 - System.Drawing
 - System.Drawing for PocketPC
 - Silverlight XAML
@@ -86,6 +88,7 @@ Mapsui's Map can be in any coordinate system. If you do not specify a coordinate
 
 ## Full implementation of the feature matrix
 These are some of the feature dimensions:
+
 - Renderers: WPF and Skia
 - Geometries: Point, LineString, Polygon etc.
 - Operations on Geometries: Distance, Contains.

@@ -1,6 +1,7 @@
 # Mapsui components
 
 This part will talk about a few of Mapsui's core components. These are:
+
 - **MapControl**: UI component to add to your page.
 - **Map**: UI indepenent part which holds most of the state of the map. 
 - **Navigator**: Controls all mutations of the Viewport.
@@ -18,6 +19,7 @@ The most important property of the MapControl is the Map. Unlike the MapControl 
 ### Navigator
 
 Is responsible for all Viewport manipulations, this includes:
+
 - It checks `PanLock`, `ZoomLock`, `RotationLock`. 
 - It checks the pan bounds (`PanBounds`) and zoom bounds (`ZoomBounds`). Both depend on the kind of limiter that is used. 
 - It controls the animations. It makes sure only one viewport animation is executed at one time and a previous animation is cancelled before the new one is started. 

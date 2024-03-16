@@ -13,6 +13,7 @@ The coordinates of EPSG:3857 happen to be based on the circumference of the eart
 
 ### I am just interested in meters / pixel and don't care about the coordinate system
 That makes sense but at the moment there is no good solution for that in Mapsui. What makes this complicated:
+
 - The meters / pixel can be different in the x and y direction because of distortion of the map projection.
 - The meters / pixel can be different for different locations within a single map view.
 - To implement this for a coordinate system we need projection support for that coordinate system, which we may not have. 
