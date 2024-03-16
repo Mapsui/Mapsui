@@ -9,6 +9,7 @@ To get smooth performance while panning and zooming data needs to be fetched on 
 *(ChangeType was introduced in V3, in V2 the majorType boolean has this purpose)*
 
 When calling the RefreshData method on the layers we pass in a ChangeType parameter which could be:
+
 - Continous - During dragging, pinching zoom, or animations.
 - Discrete - On zoom in/out button press, on touch up, or at the end of an animation.
 
@@ -22,10 +23,12 @@ For rendering the cache is only read. For data fetching the cache is primarily w
 
 ### Strategies
 Both the fetcher and the renderer can use some smart tricks to optimize the experience, for example:
+
 - The fetcher can pre‐fetch tiles that are not directly needed but could be in the future.
 - The renderer could search for alternative tiles (higher or lower levels) when the optimal tiles are not available. 
 
 The implementation of these strategies can be overridden by the user by implementing interfaces that can be passed into the TileLayer constructor.
+
 - The **IDataFetchStrategy** *(IFetchStrategy in V2)* determines which tiles are fetched from the data source to be stored in the cache. There is a DataFetchStrategy default implementation and a MinimalDataFetchStrategy which only fetches the tiles directly needed.
 - The **IRenderFetchStrategy** *(IRenderGetStrategy in V2)* determines which tiles are fetched from the cache to use for rendering. There is a RenderFetchStrategy default implementation and a MinimalRenderFetchStrategy which only fetches the tiles directly needed.
 

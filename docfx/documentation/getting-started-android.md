@@ -41,7 +41,6 @@ protected override void OnCreate(Bundle savedInstanceState)
     SetContentView(Resource.Layout.Main);
 
     var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-
     var map = new Map();
     map.Layers.Add(OpenStreetMap.CreateTileLayer());
     mapControl.Map = map;
