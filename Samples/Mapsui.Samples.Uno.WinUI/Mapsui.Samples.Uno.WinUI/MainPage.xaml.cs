@@ -2,10 +2,10 @@
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
 using Mapsui.UI.WinUI;
 using RadioButton = Microsoft.UI.Xaml.Controls.RadioButton;
+using Mapsui.Samples.Common.Maps.Widgets;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -29,7 +29,7 @@ public sealed partial class MainPage : Page
 
         MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
         MapControl.Map.Navigator.RotationLock = false;
-        MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
+        MapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
 
         CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
 

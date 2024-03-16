@@ -1,6 +1,5 @@
 ﻿using Mapsui.Samples.Common;
 using Mapsui.Extensions;
-using Mapsui.Samples.CustomWidget;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -15,6 +14,7 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Dispatching;
 using Microsoft.Maui.Devices.Sensors;
 using Mapsui.Manipulations;
+using Mapsui.Samples.Common.Maps.Widgets;
 
 namespace Mapsui.Samples.Maui;
 
@@ -59,7 +59,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         mapView.IsNorthingButtonVisible = true;
 
         mapView.Info += MapView_Info;
-        mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
+        mapView.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
 
         StartGPS();
     }
