@@ -4,7 +4,6 @@ using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Nts.Editing;
-using Mapsui.Nts.Layers;
 using Mapsui.Nts.Widgets;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
@@ -419,7 +418,6 @@ public class EditingSample : IMapControlSample
         map.Layers.Add(CreatePolygonLayer());
         var editLayer = CreateEditLayer();
         map.Layers.Add(editLayer);
-        map.Layers.Add(new VertexOnlyLayer(editLayer) { Name = "VertexLayer" });
 
         return map;
     }
@@ -441,9 +439,12 @@ public class EditingSample : IMapControlSample
         Styles =
         {
             CreateEditLayerBasicStyle(),
-            CreateSelectedStyle()
+            CreateSelectedStyle(),
+            CreateStyleToShowTheVertices(),
         }
     };
+
+    private static SymbolStyle CreateStyleToShowTheVertices() => new() { SymbolScale = 0.5 };
 
     private static VectorStyle CreateEditLayerBasicStyle() => new()
     {
