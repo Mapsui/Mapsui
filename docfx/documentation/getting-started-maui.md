@@ -14,9 +14,9 @@ PM> Install-Package Mapsui.Maui -pre
 IMPORTANT: In MauiProgram.cs add **.UseSkiaSharp()** to the builder like this:
 ```csharp
 builder
-  .UseMauiApp<App>()
-  .UseSkiaSharp(true)
-  .ConfigureFonts(fonts =>  
+    .UseMauiApp<App>()
+    .UseSkiaSharp(true)
+    .ConfigureFonts(fonts =>  
 ```
 
 and add namespace 'SkiaSharp.Views.Maui.Controls.Hosting':
