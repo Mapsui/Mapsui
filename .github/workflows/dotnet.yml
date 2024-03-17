@@ -224,7 +224,7 @@ jobs:
       run: dotnet test Tests/Mapsui.UI.Maui.Tests/bin/Debug/net8.0-windows10.0.19041.0/Mapsui.UI.Maui.Tests.dll
     # Release Build
     - name: Build nuget packages
-      run: Scripts\buildpack $(git describe --tags)
+      run: dotnet pack Mapsui.sln --configuration Release /p:Version=$(git describe --tags) -o Artifacts
     - name: Cleanup
       run: git clean -fx -d -e Artifacts
     # Change Project References to nuget package references in samples    
