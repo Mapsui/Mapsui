@@ -1,6 +1,6 @@
 using CommunityToolkit.Maui.Markup;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.CustomWidget;
+using Mapsui.Samples.Common.Maps.Widgets;
 using Mapsui.Samples.Maui.ViewModel;
 using Mapsui.UI.Maui;
 
@@ -28,7 +28,7 @@ public sealed class MainPage : ContentPage, IDisposable
 
         // The CustomWidgetSkiaRenderer needs to be registered to make the CustomWidget sample work.
         // Perhaps it is possible to let the sample itself do this so we do not have to do this for each platform.
-        mapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
+        mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
 
         Content = new Grid
         {

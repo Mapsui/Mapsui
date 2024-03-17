@@ -6,7 +6,6 @@ using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Samples.CustomWidget;
 using Mapsui.Styles;
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Controls;
@@ -14,6 +13,7 @@ using Microsoft.Maui.Devices.Sensors;
 using Compass = Microsoft.Maui.Devices.Sensors.Compass;
 using Microsoft.Maui.Dispatching;
 using Mapsui.Manipulations;
+using Mapsui.Samples.Common.Maps.Widgets;
 
 namespace Mapsui.Samples.Maui;
 
@@ -49,7 +49,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
         mapView.MyLocationLayer.UpdateMyLocation(new Mapsui.UI.Maui.Position());
 
         mapView.Info += MapView_Info;
-        mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
+        mapView.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
 
         Catch.TaskRun(StartGPS);
 

@@ -64,7 +64,6 @@
 	  <ProjectReference Include="..\..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj" />
 	  <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
 	  <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
-	  <ProjectReference Include="..\..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
 	</ItemGroup>
   <PropertyGroup>
     <!-- Workaround for Error NU1008 Projects that use central package version management should not define the version on the PackageReference ..-->

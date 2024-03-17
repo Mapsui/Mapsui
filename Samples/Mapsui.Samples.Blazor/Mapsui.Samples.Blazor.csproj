@@ -23,7 +23,7 @@
     <PackageReference Include="SkiaSharp.Views.Blazor" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" VersionOverride="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" VersionOverride="8.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" VersionOverride="8.0.0" PrivateAssets="all"/>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" VersionOverride="8.0.0" PrivateAssets="all" />
 		<!--still needed for direct project reference the nuget package of blazor doesn't need this anymore-->
 		<NativeFileReference Include="libHarfBuzzSharp.a" />
 	  <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
@@ -34,7 +34,6 @@
     <ProjectReference Include="..\..\Mapsui.UI.Blazor\Mapsui.UI.Blazor.csproj" />
     <ProjectReference Include="..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
     <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
-    <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
 
 </Project>
