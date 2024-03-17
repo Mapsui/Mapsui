@@ -16,7 +16,6 @@ public partial class MapControl : ComponentBase, IMapControl
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
     private SKImageInfo? _canvasSize;
     private bool _onLoaded;
-    private readonly HashSet<string> _pressedKeys = [];
     private double _pixelDensityFromInterop = 1;
     private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
@@ -54,16 +53,6 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         base.OnInitialized();
         RefreshGraphics();
-    }
-
-    protected void OnKeyDown(KeyboardEventArgs e)
-    {
-        _pressedKeys.Add(e.Code);
-    }
-
-    protected void OnKeyUp(KeyboardEventArgs e)
-    {
-        _pressedKeys.Remove(e.Code);
     }
 
     protected void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e)
@@ -232,11 +221,6 @@ public partial class MapControl : ComponentBase, IMapControl
         });
     }
 
-    private bool GetShiftPressed()
-    {
-        return _pressedKeys.Contains("ShiftLeft") || _pressedKeys.Contains("ShiftRight") || _pressedKeys.Contains("Shift");
-    }
-
     public void OnTouchStart(TouchEventArgs e)
     {
         Catch.Exceptions(() =>
@@ -277,4 +261,6 @@ public partial class MapControl : ComponentBase, IMapControl
             OnMapPointerReleased([position]);
         });
     }
+
+    private bool GetShiftPressed() => false; // Could not get keydown/up to work. Please try to get this to work if possible. 
 }
