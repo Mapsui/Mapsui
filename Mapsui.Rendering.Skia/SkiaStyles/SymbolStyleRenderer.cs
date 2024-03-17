@@ -1,13 +1,10 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Nts;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
-using NetTopologySuite.Geometries;
 using SkiaSharp;
 using System;
-using System.Collections.Generic;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -16,42 +13,13 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
     {
         var symbolStyle = (SymbolStyle)style;
-        switch (feature)
+        feature.CoordinateVisitor((x, y, setter) =>
         {
-            case PointFeature pointFeature:
-                DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, symbolStyle, renderCache);
-                break;
-            case GeometryFeature geometryFeature:
-                switch (geometryFeature.Geometry)
-                {
-                    case GeometryCollection collection:
-                        foreach (var point in GetPoints(collection))
-                            DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache);
-                        break;
-                    case Point point:
-                        DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache);
-                        break;
-                }
-                break;
-        }
-
+            DrawXY(canvas, viewport, layer, x, y, symbolStyle, renderCache);
+        });
         return true;
     }
 
-    private static IEnumerable<Point> GetPoints(GeometryCollection geometryCollection)
-    {
-        foreach (var geometry in geometryCollection)
-        {
-            if (geometry is Point point)
-                yield return point;
-            if (geometry is GeometryCollection collection)
-            {
-                var points = GetPoints(collection);
-                foreach (var p in points)
-                    yield return p;
-            }
-        }
-    }
 
     public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderCache renderCache)
     {
