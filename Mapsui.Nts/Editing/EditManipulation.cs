@@ -72,7 +72,7 @@ public static class EditManipulation
                 return editManager.TryDeleteCoordinate(
                     mapInfo, editManager.VertexRadius);
             }
-            if (mapInfo.MapInfoRecord?.Style is not SymbolStyle) // Do not add a vertex when tapping on a vertex because that is not usually what you want.
+            else if (mapInfo.MapInfoRecord?.Style is not SymbolStyle) // Do not add a vertex when tapping on a vertex because that is not usually what you want.
             {
                 return editManager.TryInsertCoordinate(
                     mapControl.GetMapInfo(screenPosition, editManager.VertexRadius));
