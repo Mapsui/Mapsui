@@ -1,6 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Manipulations;
 using Mapsui.Nts.Extensions;
+using Mapsui.Styles;
 using Mapsui.UI;
 
 namespace Mapsui.Nts.Editing;
@@ -9,8 +10,6 @@ public static class EditManipulation
 {
     public static bool OnPointerPressed(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl)
     {
-        // Take into account VertexRadius in feature select, because the objective
-        // is to select the vertex.
         var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
         if (editManager.EditMode == EditMode.Modify && mapInfo.Feature != null)
             return editManager.StartDragging(mapInfo, editManager.VertexRadius);
@@ -67,13 +66,17 @@ public static class EditManipulation
 
         if (editManager.EditMode == EditMode.Modify)
         {
+            var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
             if (shiftPressed || tapType == TapType.Double)
             {
                 return editManager.TryDeleteCoordinate(
-                    mapControl.GetMapInfo(screenPosition, editManager.VertexRadius), editManager.VertexRadius);
+                    mapInfo, editManager.VertexRadius);
             }
-            return editManager.TryInsertCoordinate(
-                mapControl.GetMapInfo(screenPosition, editManager.VertexRadius));
+            if (mapInfo.MapInfoRecord?.Style is not SymbolStyle) // Do not add vertex when tapping on a vertex.
+            {
+                return editManager.TryInsertCoordinate(
+                    mapControl.GetMapInfo(screenPosition, editManager.VertexRadius));
+            }
         }
         else if (editManager.EditMode is EditMode.DrawingPolygon or EditMode.DrawingLine)
         {

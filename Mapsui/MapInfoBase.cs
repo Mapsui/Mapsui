@@ -35,7 +35,7 @@ public class MapInfoBase
     /// <summary>
     ///  Current Map Info Record
     /// </summary>
-    private MapInfoRecord? MapInfoRecord => _mapInfoRecord ??= MapInfoRecords.FirstOrDefault();
+    public MapInfoRecord? MapInfoRecord => _mapInfoRecord ??= MapInfoRecords.FirstOrDefault();
 
     /// <summary>
     ///  The style of feature touched by the user
