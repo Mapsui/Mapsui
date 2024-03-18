@@ -328,5 +328,5 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             : _canvasView!.CanvasSize.Width / Width;
     }
 
-    private static bool GetShiftPressed() => false;
+    private static bool GetShiftPressed() => false; // Work in progress: https://github.com/dotnet/maui/issues/16202
 }

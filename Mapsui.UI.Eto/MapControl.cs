@@ -12,6 +12,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
 {
     private Cursor _defaultCursor = Cursors.Default;
     private readonly ManipulationTracker _manipulationTracker = new();
+    private bool _shiftPressed;
 
     public MapControl()
     {
@@ -120,6 +121,19 @@ public partial class MapControl : SkiaDrawable, IMapControl
         base.Dispose(disposing);
     }
 
+
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        base.OnKeyDown(e);
+        _shiftPressed = e.Shift;
+    }
+
+    protected override void OnKeyUp(KeyEventArgs e)
+    {
+        base.OnKeyUp(e);
+        _shiftPressed = e.Shift;
+    }
+
     private double GetPixelDensity()
     {
         var center = PointToScreen(Location + Size / 2);
@@ -141,6 +155,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
     private bool GetShiftPressed()
     {
-        return false; // Todo: Implement
+        return _shiftPressed;
     }
 }
