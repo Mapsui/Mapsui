@@ -6,7 +6,7 @@ using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets.InfoWidgets;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -56,7 +56,7 @@ public class CustomCalloutSample : ISample
         const string path = "Mapsui.Samples.Common.GeoData.Json.congo.json";
         var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
         using var stream = assembly.GetManifestResourceStream(path) ?? throw new NullReferenceException();
-        var cities = DeserializeFromStream<City>(stream);
+        var cities = DeserializeFromStream(stream);
 
         return cities.Select(c =>
         {
@@ -136,11 +136,18 @@ public class CustomCalloutSample : ISample
         public double Lng { get; set; }
     }
 
-    public static IEnumerable<T> DeserializeFromStream<T>(Stream stream)
+    private static List<City> DeserializeFromStream(Stream stream)
     {
-        var serializer = new JsonSerializer();
-        using var sr = new StreamReader(stream);
-        using var jsonTextReader = new JsonTextReader(sr);
-        return serializer.Deserialize<List<T>>(jsonTextReader) ?? new List<T>();
+        using var streamReader = new StreamReader(stream);
+        var str = streamReader.ReadToEnd();
+        var jArray = JArray.Parse(str);
+
+        return jArray.Select(c => new City
+        {
+            Name = c[nameof(City.Name)]?.Value<string>(),
+            Country = c[nameof(City.Country)]?.Value<string>(),
+            Lat = c[nameof(City.Lat)]?.Value<double>() ?? 0,
+            Lng = c[nameof(City.Lng)]?.Value<double>() ?? 0
+        }).ToList();
     }
 }
