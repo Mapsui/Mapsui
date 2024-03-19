@@ -139,17 +139,15 @@ public class CustomCalloutSample : ISample
     private static List<City> DeserializeFromStream(Stream stream)
     {
         using var streamReader = new StreamReader(stream);
-
         var str = streamReader.ReadToEnd();
-        JObject jObject = JObject.Parse(str);
-        var cities = jObject["features"]?.Select(c => new City
-        {
-            Name = c["properties"]?["name"]?.Value<string>(),
-            Country = c["properties"]?["country"]?.Value<string>(),
-            Lat = c["geometry"]?["coordinates"]?[1]?.Value<double>() ?? 0,
-            Lng = c["geometry"]?["coordinates"]?[0]?.Value<double>() ?? 0
-        }).ToList();
+        var jArray = JArray.Parse(str);
 
-        return cities ?? [];
+        return jArray.Select(c => new City
+        {
+            Name = c[nameof(City.Name)]?.Value<string>(),
+            Country = c[nameof(City.Country)]?.Value<string>(),
+            Lat = c[nameof(City.Lat)]?.Value<double>() ?? 0,
+            Lng = c[nameof(City.Lng)]?.Value<double>() ?? 0
+        }).ToList();
     }
 }
