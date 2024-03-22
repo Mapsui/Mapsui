@@ -248,6 +248,7 @@ dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
 insert_final_newline = true
 dotnet_style_prefer_compound_assignment = true:suggestion
 dotnet_code_quality_unused_parameters = all:suggestion
+dotnet_style_collection_initializer = true:suggestion
 
 ### dotnet_diagnostic
 dotnet_diagnostic.CS1591.severity = none # CS1591: Missing XML comment for publicly visible type or member
