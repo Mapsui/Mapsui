@@ -577,7 +577,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var touchedWidgets = WidgetInput.GetWidgetsAtPosition(position, Map);
         foreach (var widget in touchedWidgets)
         {
-            Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapCount: {tapType} KeyState: {shiftPressed}");
+            Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapType: {tapType} KeyState: {shiftPressed}");
             var e = new WidgetEventArgs(position, tapType, true, shiftPressed, () => GetMapInfo(position));
             if (widget.OnTapped(Map.Navigator, e))
                 return true;
