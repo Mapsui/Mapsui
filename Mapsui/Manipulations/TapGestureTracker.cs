@@ -6,12 +6,15 @@ namespace Mapsui.Manipulations;
 public enum TapType
 {
     Single,
-    Double
+    Double,
+    Long
 }
 
 public class TapGestureTracker
 {
     private readonly double _maxTapDuration = 0.5;
+    private readonly double _noTapInterval = 0.25;
+    private readonly double _maxLongTapDuration = 3;
     private DateTime _tapStartTime;
     private ScreenPosition? _tapStartPosition;
     private readonly int _millisecondsToWaitForDoubleTap = 300;
@@ -48,6 +51,17 @@ public class TapGestureTracker
                 _ = StartWaitingForSecondTapAsync(); // Fire and forget
                 return onTap(tapEndPosition.Value, TapType.Single);
             }
+        }
+        else
+        {
+            var minLongTapDuration = _maxTapDuration + _noTapInterval; // Not sure how useful the no-tap interval is, made it up myself.
+            var isLongTap =
+                duration > minLongTapDuration
+                && duration < _maxLongTapDuration
+                && distance < maxTapDistance;
+
+            if (isLongTap)
+                return onTap(tapEndPosition.Value, TapType.Long);
         }
         return false;
     }
