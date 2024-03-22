@@ -25,6 +25,7 @@
 
 # How Things Work
 ## [Mapsui Components](mapsui-components.md)
+## [Touch and Mouse input](touch-and-mouse-input.md)
 ## [Asynchronous Data Fetching](async-fetching.md)
 ## [Resolution](resolution.md)
 ## [Device Independent Units](device-independent-units.md)
