@@ -110,6 +110,7 @@ public class EditManager
             _addInfo.Vertex = worldPosition.Copy(); // and create a new hover vertex
             _addInfo.Vertices.Add(_addInfo.Vertex);
             _addInfo.Feature.Geometry = new LineString([.. _addInfo.Vertices]);
+
             _addInfo.Feature?.Modified();
             Layer?.DataHasChanged();
         }
@@ -121,10 +122,8 @@ public class EditManager
             _addInfo.Vertex = secondPoint;
             _addInfo.Vertices = new List<Coordinate>([firstPoint, secondPoint]);
 
-            _addInfo.Feature = new GeometryFeature
-            {
-                Geometry = new Polygon(new LinearRing([firstPoint, secondPoint, firstPoint])) // A LinearRing needs at least three coordinates
-            };
+            _addInfo.Feature = new GeometryFeature(new Polygon(ToLinearRing(_addInfo.Vertices)));
+
             Layer?.Add(_addInfo.Feature);
             Layer?.DataHasChanged();
             EditMode = EditMode.DrawingPolygon;
@@ -138,15 +137,19 @@ public class EditManager
             _addInfo.Vertex.SetXY(worldPosition);
             _addInfo.Vertex = worldPosition.Copy(); // and create a new hover vertex
             _addInfo.Vertices.Add(_addInfo.Vertex);
-
-            var linearRing = _addInfo.Vertices.ToList();
-            linearRing.Add(linearRing[0]); // Add first coordinate at end to close the ring.
-            _addInfo.Feature.Geometry = new Polygon(new LinearRing([.. linearRing]));
+            _addInfo.Feature.Geometry = new Polygon(ToLinearRing(_addInfo.Vertices));
 
             _addInfo.Feature?.Modified();
             Layer?.DataHasChanged();
         }
         return false;
+    }
+
+    private static LinearRing ToLinearRing(IList<Coordinate> vertices)
+    {
+        var linearRing = vertices.ToList();
+        linearRing.Add(linearRing[0]); // Add first coordinate at end to close the ring.
+        return new LinearRing([.. linearRing]);
     }
 
     private static Coordinate? FindVertexTouched(MapInfo mapInfo, IEnumerable<Coordinate> vertices, double screenDistance)
@@ -202,22 +205,24 @@ public class EditManager
             {
                 _dragInfo.Vertex.SetXY(worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex);
 
-                if (_dragInfo.Feature
-                        .Geometry is Polygon
-                    polygon) // Not this only works correctly it the feature is in the outer ring.
+                if (_dragInfo.Feature.Geometry is Polygon polygon)
                 {
+                    // Note, this only works correctly if the feature is in the outer ring.
                     var count = polygon.ExteriorRing?.Coordinates.Length ?? 0;
                     var vertices = polygon.ExteriorRing?.Coordinates ?? Array.Empty<Coordinate>();
                     var index = vertices.ToList().IndexOf(_dragInfo.Vertex!);
                     if (index >= 0)
+                    {
                         // It is a ring where the first should be the same as the last.
-                        // So if the first was removed than set the last to the value of the new first
-                        if (index == 0) vertices[count - 1].SetXY(vertices[0]);
-                        // If the last was removed then set the first to the value of the new last
-                        else if (index == vertices.Length) vertices[0].SetXY(vertices[count - 1]);
+                        // So if the first was modified than set the last to the value of the new first
+                        if (index == 0)
+                            vertices[count - 1].SetXY(vertices[0]);
+                        if (index == count - 1)
+                            vertices[0].SetXY(vertices[count - 1]);
+                    }
                 }
             }
-            else // NEW: try to drag the whole feature when the position of dragging is inside the geometry
+            else // Try to drag the whole feature when the position of dragging is inside the geometry
             {
                 MPoint previousVertex = _dragInfo.Vertex.ToMPoint(); // record the previous position
                 MPoint newVertex = worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex; // new position
@@ -225,9 +230,9 @@ public class EditManager
                 if (_dragInfo.Feature.Geometry is Polygon polygon)
                 {
                     var vertices = polygon.ExteriorRing?.Coordinates ?? Array.Empty<Coordinate>();
-                    foreach (Coordinate vtx in vertices) // modify every vertex on the ring
+                    foreach (Coordinate vtx in vertices) // Modify every vertex on the ring
                     {
-                        vtx.SetXY(vtx.ToMPoint() + (newVertex - previousVertex)); // adding the offset
+                        vtx.SetXY(vtx.ToMPoint() + (newVertex - previousVertex)); // Adding the offset
                     }
                 }
                 else if (_dragInfo.Feature.Geometry is LineString lineString)
@@ -235,13 +240,13 @@ public class EditManager
                     var vertices = lineString.Coordinates ?? Array.Empty<Coordinate>();
                     foreach (Coordinate vtx in vertices) // modify every vertex on the line
                     {
-                        vtx.SetXY(vtx.ToMPoint() + (newVertex - previousVertex)); // adding the offset
+                        vtx.SetXY(vtx.ToMPoint() + (newVertex - previousVertex)); // Adding the offset
                     }
                 }
                 else if (_dragInfo.Feature.Geometry is Point point)
                 {
                     var vertex = point.Coordinate;
-                    vertex.SetXY(vertex.ToMPoint() + (newVertex - previousVertex)); // adding the offset
+                    vertex.SetXY(vertex.ToMPoint() + (newVertex - previousVertex)); // Adding the offset
                 }
 
                 _dragInfo.Vertex.SetXY(worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex);
@@ -310,7 +315,7 @@ public class EditManager
             _rotateInfo.PreviousPosition = mapInfo.WorldPosition.ToPoint();
             _rotateInfo.Center = geometryFeature.Geometry?.Centroid;
         }
-        return true; // to signal pan lock
+        return true; // To signal pan lock
     }
 
     public bool Rotating(Point? worldPosition)
