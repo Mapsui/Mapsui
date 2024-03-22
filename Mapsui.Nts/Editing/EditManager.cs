@@ -217,7 +217,7 @@ public class EditManager
                         // So if the first was modified than set the last to the value of the new first
                         if (index == 0)
                             vertices[count - 1].SetXY(vertices[0]);
-                        if (index == count - 1)
+                        else if (index == count - 1)
                             vertices[0].SetXY(vertices[count - 1]);
                     }
                 }
