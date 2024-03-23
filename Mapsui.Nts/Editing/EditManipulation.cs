@@ -67,7 +67,7 @@ public static class EditManipulation
         if (editManager.EditMode == EditMode.Modify)
         {
             var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
-            if (shiftPressed || tapType == TapType.Double)
+            if (shiftPressed || tapType == TapType.Double || tapType == TapType.Long)
             {
                 return editManager.TryDeleteCoordinate(
                     mapInfo, editManager.VertexRadius);
@@ -80,8 +80,12 @@ public static class EditManipulation
         }
         else if (editManager.EditMode is EditMode.DrawingPolygon or EditMode.DrawingLine)
         {
-            if (shiftPressed || tapType == TapType.Double)
+            if (shiftPressed || tapType == TapType.Double || tapType == TapType.Long)
+            {
+                if (tapType != TapType.Double) // Add last vertex but not on a double tap because it is preceded by a single tap.
+                    editManager.AddVertex(mapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
                 return editManager.EndEdit();
+            }
             else
                 editManager.AddVertex(mapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
         }
