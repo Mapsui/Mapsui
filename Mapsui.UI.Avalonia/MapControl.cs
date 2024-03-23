@@ -229,7 +229,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (disposing)
         {
             _drawOperation?.Dispose();
-            Map?.Dispose();
+            Map?.AbortFetch();
         }
 
         CommonDispose(disposing);

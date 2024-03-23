@@ -17,7 +17,7 @@ internal class MapRendererTests
     public void RenderPointsWithVectorStyle()
     {
         // arrange
-        using var map = VectorStyleSample.CreateMap();
+        var map = VectorStyleSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "vector_symbol.png";
 
@@ -30,13 +30,14 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        map.AbortFetch();
     }
 
     [Test]
     public void RenderPointWithBitmapSymbols()
     {
         // arrange
-        using var map = BitmapSymbolSample.CreateMap();
+        var map = BitmapSymbolSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_symbolstyle.png";
 
@@ -49,13 +50,14 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        map.AbortFetch();
     }
 
     [Test]
     public void RenderPointWithBitmapSymbolsInCollection()
     {
         // arrange
-        using var map = BitmapSymbolInCollectionSample.CreateMap();
+        var map = BitmapSymbolInCollectionSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_symbolstyle.png"; // Todo: Do not reuse the png.
 
@@ -68,13 +70,14 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        map.AbortFetch();
     }
 
     [Test]
     public void RenderPointWithSvgSymbols()
     {
         // arrange
-        using var map = SvgSymbolSample.CreateMap();
+        var map = SvgSymbolSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_svgsymbolstyle.png";
 
@@ -87,13 +90,14 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        map.AbortFetch();
     }
 
     [Test]
     public void RenderBitmapAtlas()
     {
         // arrange
-        using var map = BitmapAtlasSample.CreateMap();
+        var map = BitmapAtlasSample.CreateMap();
         var viewport = new Viewport(256, 200, 1, 0, 512, 400);
         const string fileName = "bitmap_atlas.png";
 
@@ -106,13 +110,14 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        map.AbortFetch();
     }
 
     [Test]
     public void RenderRotatedBitmapSymbolWithOffset()
     {
         // arrange
-        using var map = BitmapSymbolWithRotationAndOffsetSample.CreateMap();
+        var map = BitmapSymbolWithRotationAndOffsetSample.CreateMap();
         var viewport = map.Extent!.Multiply(4).ToViewport(200);
         const string fileName = "bitmap_symbol.png";
 
@@ -125,13 +130,14 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        map.AbortFetch();
     }
 
     [Test]
     public void RenderPointsWithDifferentSymbolTypes()
     {
         // arrange
-        using var map = SymbolTypesSample.CreateMap();
+        var map = SymbolTypesSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "vector_symbol_symboltype.png";
 
@@ -144,13 +150,14 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        map.AbortFetch();
     }
 
     [Test]
     public void RenderSymbolWithWorldUnits()
     {
         // arrange
-        using var map = PointInWorldUnitsSample.CreateMap();
+        var map = PointInWorldUnitsSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "vector_symbol_unittype.png";
 
@@ -163,13 +170,14 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        map.AbortFetch();
     }
 
     [Test]
     public void RenderPolygon()
     {
         // arrange
-        using var map = PolygonTestSample.CreateMap();
+        var map = PolygonTestSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "polygon.png";
 
@@ -182,13 +190,14 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+        map.AbortFetch();
     }
 
     [Test]
     public void RenderLine()
     {
         // arrange
-        using var map = LineSample.CreateMap();
+        var map = LineSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "line.png";
 
@@ -201,13 +210,14 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+        map.AbortFetch();
     }
 
     [Test]
     public async Task RenderTilesAsync()
     {
         // arrange
-        using var map = await (new TilesSample()).CreateMapAsync();
+        var map = await (new TilesSample()).CreateMapAsync();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "tilelayer.png";
 
@@ -220,13 +230,14 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        map.AbortFetch();
     }
 
     [Test]
     public void RenderLabels()
     {
         // arrange
-        using var map = LabelSample.CreateMap();
+        var map = LabelSample.CreateMap();
         var viewport = map.Extent!.Multiply(2).ToViewport(300);
         const string fileName = "labels.png";
 
@@ -239,13 +250,14 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        map.AbortFetch();
     }
 
     [Test]
     public void RenderProjection()
     {
         // arrange
-        using var map = ProjectionTestSample.CreateMap();
+        var map = ProjectionTestSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "projection.png";
 
@@ -258,13 +270,14 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        map.AbortFetch();
     }
 
     [Test]
     public void RenderStackedLabelsLayer()
     {
         // arrange
-        using var map = StackedLabelsTestSample.CreateMap();
+        var map = StackedLabelsTestSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.2).ToViewport(600);
         const string fileName = "stacked_labels.png";
 
@@ -277,13 +290,14 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.995));
+        map.AbortFetch();
     }
 
     [Test]
     public void Widgets()
     {
         // arrange
-        using var map = WidgetsSample.CreateMap();
+        var map = WidgetsSample.CreateMap();
         var viewport = new Viewport(0, 0, 1, 0, 600, 600);
         const string fileName = "widgets.png";
 
@@ -296,6 +310,7 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        map.AbortFetch();
     }
 
     private static bool CompareColors(SKColor color1, SKColor color2, int allowedColorDistance)

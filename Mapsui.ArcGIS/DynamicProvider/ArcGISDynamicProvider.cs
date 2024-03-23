@@ -167,7 +167,7 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
                 catch (PlatformNotSupportedException e)
                 {
                     Logger.Log(LogLevel.Error, e.Message, e);
-                };
+                }
 
                 using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
 

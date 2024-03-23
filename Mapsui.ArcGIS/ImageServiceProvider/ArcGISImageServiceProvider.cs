@@ -137,7 +137,7 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
             catch (PlatformNotSupportedException e)
             {
                 Logger.Log(LogLevel.Error, e.Message, e);
-            };
+            }
 
             try
             {

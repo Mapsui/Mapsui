@@ -78,7 +78,8 @@ public class ArcGISIdentify
             catch (PlatformNotSupportedException e)
             {
                 Logger.Log(LogLevel.Error, e.Message, e);
-            };
+            }
+
             using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
             using var response = await client.GetAsync(requestUrl).ConfigureAwait(false);
 
