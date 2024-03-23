@@ -28,7 +28,7 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo, cancellationToken));
         var tileMachine = new FetchMachine(fetchDispatcher);
         var level = 3;
         var expectedTiles = 64;
@@ -55,7 +55,7 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo, cancellationToken));
         var tileMachine = new FetchMachine(fetchDispatcher);
         var level = 3;
         var expectedTiles = 64;
@@ -87,7 +87,7 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo, cancellationToken));
         var tileMachine = new FetchMachine(fetchDispatcher);
         var level = 3;
         var tilesInLevel = 64;
@@ -113,7 +113,7 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo, cancellationToken));
         var tileMachine = new FetchMachine(fetchDispatcher);
         var level = 3;
         var tilesInLevel = 64;
@@ -141,7 +141,7 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo, cancellationToken));
         var tileMachine = new FetchMachine(fetchDispatcher);
         var level = 3;
         var tilesInLevel = 64;
@@ -173,7 +173,7 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo, cancellationToken));
         var tileMachine = new FetchMachine(fetchDispatcher);
         var numberOfWorkers = 8;
         var numberOfRestarts = 3;
@@ -191,7 +191,7 @@ public class FetchMachineTests
         ClassicAssert.Greater(numberOfWorkers * numberOfRestarts, FetchWorker.RestartCounter);
     }
 
-    private async Task<RasterFeature> TileToFeatureAsync(ITileSource tileProvider, TileInfo tileInfo)
+    private async Task<RasterFeature> TileToFeatureAsync(ITileSource tileProvider, TileInfo tileInfo, CancellationToken cancellationToken)
     {
         var tile = await tileProvider.GetTileAsync(tileInfo);
         // A tile layer can return a null value. This indicates the tile is not

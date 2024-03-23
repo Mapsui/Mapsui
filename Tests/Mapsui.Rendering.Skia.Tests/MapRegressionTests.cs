@@ -125,7 +125,7 @@ public class MapRegressionTests
                 // assert
                 if (compareImages)
                 {
-                    using var originalStream = File.ReadFromOriginalRegressionFolder(fileName);
+                    await using var originalStream = File.ReadFromOriginalRegressionFolder(fileName);
                     if (originalStream == null)
                     {
                         Assert.Inconclusive($"No Regression Test Data for {sample.Name}");

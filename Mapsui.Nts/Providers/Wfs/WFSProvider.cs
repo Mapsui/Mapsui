@@ -343,21 +343,26 @@ public class WFSProvider : IProvider, IDisposable
         _geometryType = geometryType;
     }
 
+    public async Task InitAsync()
+    {
+        await InitAsync(CancellationToken.None).ConfigureAwait(false);
+    }
+
     /// <summary>Init Async</summary>
     /// <returns></returns>
-    public async Task InitAsync()
+    public async Task InitAsync(CancellationToken cancellationToken)
     {
         if (_initialized)
             return;
 
-        await _init.WaitAsync();
+        await _init.WaitAsync(cancellationToken);
         try
         {
             // test again could be already initialized
             if (_initialized)
                 return;
 
-            await GetFeatureTypeInfoAsync();
+            await GetFeatureTypeInfoAsync(cancellationToken);
         }
         finally
         {
@@ -512,9 +517,9 @@ public class WFSProvider : IProvider, IDisposable
     /// </summary>
     /// <param name="bbox"></param>
     /// <returns>Features within the specified <see cref="WfsFeatureTypeInfo.BoundingBox"/></returns>
-    public async Task<IEnumerable<IFeature>> ExecuteIntersectionQueryAsync(MRect? bbox)
+    public async Task<IEnumerable<IFeature>> ExecuteIntersectionQueryAsync(MRect? bbox, CancellationToken cancellationToken)
     {
-        await InitAsync();
+        await InitAsync(cancellationToken);
         if (_featureTypeInfo == null) return [];
 
         var features = new List<IFeature>();
@@ -699,7 +704,7 @@ public class WFSProvider : IProvider, IDisposable
     /// <summary>
     /// This method gets metadata about the featuretype to query from 'GetCapabilities' and 'DescribeFeatureType'.
     /// </summary>
-    private async Task GetFeatureTypeInfoAsync()
+    private async Task GetFeatureTypeInfoAsync(CancellationToken cancellationToken)
     {
 
         _featureTypeInfo = new WfsFeatureTypeInfo();
@@ -848,7 +853,7 @@ public class WFSProvider : IProvider, IDisposable
         describeFeatureTypeQueryManager.ResetNamespaces();
         await describeFeatureTypeQueryManager.SetDocumentToParseAsync(config.ConfigureForWfsDescribeFeatureTypeRequest
                                                                (httpClientUtil, describeFeatureTypeUri!, // is set in constructor
-                                                                featureQueryName));
+                                                                featureQueryName), cancellationToken);
 
         /* Namespaces for XPath queries */
         describeFeatureTypeQueryManager.AddNamespace(_textResources.NSSCHEMAPREFIX, _textResources.NSSCHEMA);
@@ -1100,8 +1105,8 @@ public class WFSProvider : IProvider, IDisposable
     /// <summary>
     /// Gets the features within the specified <see cref="FetchInfo"/>."/>
     /// </summary>
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
-        return await ExecuteIntersectionQueryAsync(fetchInfo.Extent);
+        return await ExecuteIntersectionQueryAsync(fetchInfo.Extent, cancellationToken);
     }
 }

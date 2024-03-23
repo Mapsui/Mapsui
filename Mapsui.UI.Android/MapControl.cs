@@ -233,7 +233,7 @@ public partial class MapControl : ViewGroup, IMapControl
     {
         if (disposing)
         {
-            _map?.Dispose();
+            _map?.AbortFetch();
             _mainLooperHandler?.Dispose();
             _canvas?.Dispose();
         }

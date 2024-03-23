@@ -18,7 +18,7 @@ public class ImageLayerTests
     private class FakeProvider : IProvider
     {
         public string? CRS { get; set; }
-        public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+        public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
         {
             throw new Exception(ExceptionMessage);
         }
@@ -35,7 +35,7 @@ public class ImageLayerTests
         // arrange
         var provider = new FakeProvider();
         using var imageLayer = new ImageLayer("imageLayer") { DataSource = provider };
-        using var map = new Map();
+        var map = new Map();
         map.Layers.Add(imageLayer);
         using var waitHandle = new AutoResetEvent(false);
         Exception? exception = null;
@@ -54,5 +54,6 @@ public class ImageLayerTests
         // assert
         waitHandle.WaitOne();
         ClassicAssert.AreEqual(ExceptionMessage, exception?.Message);
+        map.AbortFetch();
     }
 }

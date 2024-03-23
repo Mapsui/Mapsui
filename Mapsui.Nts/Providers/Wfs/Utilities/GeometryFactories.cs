@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Logging;
@@ -58,9 +59,14 @@ internal abstract class GeometryFactory : IDisposable
         _httpClientUtil = httpClientUtil;
     }
 
+    public async Task InitAsync()
+    {
+        await InitAsync(CancellationToken.None).ConfigureAwait(false);
+    }
+
     /// <summary>Init Async </summary>
     /// <returns></returns>
-    public async Task InitAsync()
+    public async Task InitAsync(CancellationToken cancellationToken)
     {
         if (_initialized)
             return;
@@ -69,7 +75,7 @@ internal abstract class GeometryFactory : IDisposable
             return;
 
         _initialized = true;
-        XmlReader = await CreateReaderAsync(_httpClientUtil);
+        XmlReader = await CreateReaderAsync(_httpClientUtil, cancellationToken);
 
         try
         {
@@ -247,7 +253,7 @@ internal abstract class GeometryFactory : IDisposable
     /// This method initializes the XmlReader member.
     /// </summary>
     /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
-    private static async Task<XmlReader> CreateReaderAsync(HttpClientUtil httpClientUtil)
+    private static async Task<XmlReader> CreateReaderAsync(HttpClientUtil httpClientUtil, CancellationToken cancellationToken)
     {
         var xmlReaderSettings = new XmlReaderSettings
         {
@@ -258,7 +264,7 @@ internal abstract class GeometryFactory : IDisposable
             Async = true,
         };
         return XmlReader.Create(
-            await httpClientUtil.GetDataStreamAsync() ?? throw new ArgumentException("HttpClientUtil.GetDataStreamAsync returned null"),
+            await httpClientUtil.GetDataStreamAsync(cancellationToken) ?? throw new ArgumentException("HttpClientUtil.GetDataStreamAsync returned null"),
             xmlReaderSettings);
     }
 

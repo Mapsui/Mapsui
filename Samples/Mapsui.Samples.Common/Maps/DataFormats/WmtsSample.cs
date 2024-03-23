@@ -32,7 +32,7 @@ public class WmtsSample : ISample
     {
         var url = "https://geodata.nationaalgeoregister.nl/wmts/top10nl?VERSION=1.0.0&request=GetCapabilities";
 
-        using var response = await (DefaultCache as IUrlPersistentCache).UrlCachedStreamAsync(url);
+        await using var response = await (DefaultCache as IUrlPersistentCache).UrlCachedStreamAsync(url);
         var tileSources = WmtsParser.Parse(response);
         var nature2000TileSource = tileSources.FirstOrDefault(t => t.Name == "top1000raster") ?? tileSources.First();
         if (DefaultCache != null)

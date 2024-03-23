@@ -111,7 +111,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         if (disposing)
         {
-            _map?.Dispose();
+            _map?.AbortFetch();
         }
 
 #pragma warning disable IDISP023 // Don't use reference types in finalizer context

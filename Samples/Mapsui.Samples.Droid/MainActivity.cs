@@ -35,7 +35,7 @@ public class MainActivity : AppCompatActivity
         _mapControl.Map.Navigator.RotationLock = true;
         _mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-        var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout) ?? throw new NullReferenceException(); ;
+        var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout) ?? throw new NullReferenceException();
         _mapControl.Map.Layers.Clear();
         var sample = new OsmSample();
 

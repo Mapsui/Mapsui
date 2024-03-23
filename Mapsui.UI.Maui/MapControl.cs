@@ -309,7 +309,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
         if (disposing)
         {
-            Map?.Dispose();
+            Map?.AbortFetch();
         }
         CommonDispose(disposing);
     }
