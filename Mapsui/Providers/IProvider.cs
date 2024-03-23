@@ -31,5 +31,5 @@ public interface IProvider
         return GetFeaturesAsync(fetchInfo, CancellationToken.None);
     }
 
-    abstract Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken);
+    Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken);
 }
