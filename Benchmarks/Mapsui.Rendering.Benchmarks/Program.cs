@@ -2,8 +2,8 @@
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static void Main()
     {
-        var summary = BenchmarkRunner.Run(typeof(Program).Assembly);
+        _ = BenchmarkRunner.Run(typeof(Program).Assembly);
     }
 }
