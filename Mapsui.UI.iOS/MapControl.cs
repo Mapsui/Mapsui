@@ -240,19 +240,11 @@ public partial class MapControl : UIView, IMapControl
     {
         if (disposing)
         {
-            IosCommonDispose(disposing);
-            base.Dispose(disposing);
-        }
-    }
-
-    private void IosCommonDispose(bool disposing)
-    {
-        if (disposing)
-        {
             _map?.Dispose();
             Unsubscribe();
             _glCanvas?.Dispose();
             _canvas?.Dispose();
+            base.Dispose(disposing);
         }
 
         CommonDispose(disposing);
