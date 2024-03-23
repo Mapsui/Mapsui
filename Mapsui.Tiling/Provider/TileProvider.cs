@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
@@ -35,7 +36,7 @@ public class TileProvider : IProvider
         _source = tileSource;
     }
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
         var box = fetchInfo.Extent;
         var extent = new Extent(box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
@@ -49,7 +50,7 @@ public class TileProvider : IProvider
             if (_bitmaps.Find(info.Index) != null) continue;
             if (_queue.Contains(info.Index)) continue;
             _queue.Add(info.Index);
-            tasks.Add(info.Index, Task.Run(async () => await GetTileOnThreadAsync(new object[] { _source, info, _bitmaps })));
+            tasks.Add(info.Index, Task.Run(async () => await GetTileOnThreadAsync(new object[] { _source, info, _bitmaps }), cancellationToken));
         }
 
         foreach (var info in infos)

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.ArcGIS.Extensions;
 using Mapsui.Cache;
@@ -93,9 +94,9 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
         set => _timeOut = value;
     }
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
-        var (success, raster) = await TryGetMapAsync(fetchInfo.Section);
+        var (success, raster) = await TryGetMapAsync(fetchInfo.Section, cancellationToken);
         if (success)
         {
             return new[] { new RasterFeature(raster) };
@@ -104,6 +105,11 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
     }
 
     public async Task<(bool Success, MRaster? Raster)> TryGetMapAsync(MSection section)
+    {
+        return await TryGetMapAsync(section, CancellationToken.None).ConfigureAwait(false);
+    }
+
+    public async Task<(bool Success, MRaster? Raster)> TryGetMapAsync(MSection section, CancellationToken cancellationToken)
     {
         int width;
         int height;
@@ -139,8 +145,8 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
                 if (bytes == null)
                 {
                     using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
-                    using var response = await client.GetAsync(uri);
-                    using var dataStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                    using var response = await client.GetAsync(uri, cancellationToken);
+                    await using var dataStream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
 
                     bytes = BruTile.Utilities.ReadFully(dataStream);
                     _persistentCache?.Add(uri.ToString(), bytes);

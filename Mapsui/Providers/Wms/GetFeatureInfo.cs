@@ -59,7 +59,7 @@ public class GetFeatureInfo
         _infoFormat = infoFormat;
         var requestUrl = CreateRequestUrl(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight);
 
-        using var task = await _getStreamAsync(requestUrl).ConfigureAwait(false);
+        await using var task = await _getStreamAsync(requestUrl).ConfigureAwait(false);
         try
         {
             var parser = GetParserFromFormat(_infoFormat);

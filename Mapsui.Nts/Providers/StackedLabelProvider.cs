@@ -5,6 +5,7 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Mapsui.Providers;
@@ -24,9 +25,9 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
 
     private readonly Pen _rectangleLine = rectangleLine ?? new Pen(Color.Gray);
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
-        var features = await _provider.GetFeaturesAsync(fetchInfo);
+        var features = await _provider.GetFeaturesAsync(fetchInfo, cancellationToken);
         return GetFeaturesInView(fetchInfo.Resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
     }
 

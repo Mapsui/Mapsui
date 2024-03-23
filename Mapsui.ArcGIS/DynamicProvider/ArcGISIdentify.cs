@@ -99,7 +99,7 @@ public class ArcGISIdentify
 
                     var serializer = new JsonSerializer();
                     var jToken = JObject.Parse(jsonString);
-                    using var jTokenReader = new JTokenReader(jToken);
+                    await using var jTokenReader = new JTokenReader(jToken);
                     _featureInfo = serializer.Deserialize(jTokenReader, typeof(ArcGISFeatureInfo)) as ArcGISFeatureInfo;
 
                     dataStream.Position = 0;

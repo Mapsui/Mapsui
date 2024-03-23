@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -65,7 +66,7 @@ public class ObservableCollectionProvider<T> : IProvider where T : IFeatureProvi
         }
     }
 
-    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
         if (_shadowCollection.Count == 0)
             return Task.FromResult(Enumerable.Empty<IFeature>());

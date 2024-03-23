@@ -10,6 +10,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Security;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Cache;
 using Mapsui.Logging;
@@ -77,10 +78,15 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
         _requestHeaders.Add(name, value);
     }
 
+    public async Task<Stream?> GetDataStreamAsync()
+    {
+        return await GetDataStreamAsync(CancellationToken.None).ConfigureAwait(false);
+    }
+
     /// <summary>
     /// Performs a HTTP-GET or HTTP-POST request and returns a data stream for reading.
     /// </summary>
-    public async Task<Stream?> GetDataStreamAsync()
+    public async Task<Stream?> GetDataStreamAsync(CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(_url))
             throw new Exception($"Property {nameof(Url)} was not set");
@@ -147,15 +153,15 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
             if (_postData != null)
             {
                 var httpContent = new ByteArrayContent(_postData);
-                webResponse = await httpClient.PostAsync(_url, httpContent);
+                webResponse = await httpClient.PostAsync(_url, httpContent, cancellationToken);
             }
             /* HTTP GET */
             else
-                webResponse = await httpClient.GetAsync(_url).ConfigureAwait(false);
+                webResponse = await httpClient.GetAsync(_url, cancellationToken).ConfigureAwait(false);
 
             if (_persistentCache != null)
             {
-                using var stream = await webResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                await using var stream = await webResponse.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
                 if (stream != null && _url != null)
                 {
                     bytes = StreamHelper.ReadFully(stream);

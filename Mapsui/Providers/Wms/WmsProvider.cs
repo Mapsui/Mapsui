@@ -14,6 +14,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Cache;
@@ -330,6 +331,11 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
 
     public async Task<(bool Success, MRaster?)> TryGetMapAsync(MSection section)
     {
+        return await TryGetMapAsync(section, CancellationToken.None).ConfigureAwait(false);
+    }
+
+    public async Task<(bool Success, MRaster?)> TryGetMapAsync(MSection section, CancellationToken cancellationToken)
+    {
 
         int width;
         int height;
@@ -498,7 +504,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
             if (_getStreamAsync == null)
                 yield break;
 
-            using var task = await _getStreamAsync(url);
+            await using var task = await _getStreamAsync(url);
             var bytes = StreamHelper.ReadFully(task);
             yield return new MemoryStream(bytes);
         }
@@ -564,9 +570,9 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
     }
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
-        var (success, raster) = await TryGetMapAsync(fetchInfo.Section);
+        var (success, raster) = await TryGetMapAsync(fetchInfo.Section, cancellationToken);
         if (success)
             return new[] { new RasterFeature(raster) };
         return [];

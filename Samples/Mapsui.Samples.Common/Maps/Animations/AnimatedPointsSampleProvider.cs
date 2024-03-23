@@ -31,7 +31,7 @@ internal class AnimatedPointsSampleProvider : MemoryProvider, IDynamic, IDisposa
 
     public event DataChangedEventHandler? DataChanged;
 
-    public override Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public override Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
         var features = new List<PointFeature>();
         var points = RandomPointsBuilder.GenerateRandomPoints(fetchInfo.Extent, 10, _random).ToList();

@@ -6,6 +6,7 @@
 
 using System.Collections;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.XPath;
 using Mapsui.Providers.Wfs.Utilities;
@@ -121,9 +122,9 @@ public abstract class XPathQueryManagerDecoratorBase
     /// </summary>
     /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
     /// <returns>Task</returns>
-    public virtual async Task SetDocumentToParseAsync(HttpClientUtil httpClientUtil)
+    public virtual async Task SetDocumentToParseAsync(HttpClientUtil httpClientUtil, CancellationToken cancellationToken)
     {
-        await XPathQueryManager.SetDocumentToParseAsync(httpClientUtil);
+        await XPathQueryManager.SetDocumentToParseAsync(httpClientUtil, cancellationToken);
     }
 
 }

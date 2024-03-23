@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Features;
 using Mapsui.Layers;
@@ -31,9 +32,9 @@ public class GeometryIntersectionProvider : IProvider, IProviderExtended
         set => _featureKeyCreator = value;
     }
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
-        return IterateFeatures(fetchInfo, await _provider.GetFeaturesAsync(fetchInfo));
+        return IterateFeatures(fetchInfo, await _provider.GetFeaturesAsync(fetchInfo, cancellationToken));
     }
 
     private IEnumerable<IFeature> IterateFeatures(FetchInfo fetchInfo, IEnumerable<IFeature> features)

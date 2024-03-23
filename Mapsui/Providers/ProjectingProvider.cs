@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
@@ -25,12 +26,12 @@ public class ProjectingProvider : IProvider
     /// </summary>
     public string? CRS { get; set; }
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
         if (GetFetchInfo(ref fetchInfo))
             return Enumerable.Empty<IFeature>();
 
-        var features = await _provider.GetFeaturesAsync(fetchInfo);
+        var features = await _provider.GetFeaturesAsync(fetchInfo, cancellationToken);
         return features.Project(_provider.CRS, CRS, _projection);
     }
 
