@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -24,22 +25,22 @@ internal class FeatureFetchDispatcher<T> : IFetchDispatcher where T : IFeature
         _cache = cache;
     }
 
-    public bool TryTake([NotNullWhen(true)] out Func<Task>? method)
+    public bool TryTake([NotNullWhen(true)] out Func<CancellationToken, Task>? method)
     {
         method = null;
         if (!_modified) return false;
         if (_fetchInfo == null) return false;
 
-        method = async () => await FetchOnThreadAsync(new FetchInfo(_fetchInfo)).ConfigureAwait(false);
+        method = async (cancellationToken) => await FetchOnThreadAsync(new FetchInfo(_fetchInfo), cancellationToken).ConfigureAwait(false);
         _modified = false;
         return true;
     }
 
-    public async Task FetchOnThreadAsync(FetchInfo fetchInfo)
+    public async Task FetchOnThreadAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
         try
         {
-            var features = DataSource != null ? await DataSource.GetFeaturesAsync(fetchInfo).ConfigureAwait(false) : new List<IFeature>();
+            var features = DataSource != null ? await DataSource.GetFeaturesAsync(fetchInfo, cancellationToken).ConfigureAwait(false) : new List<IFeature>();
 
             FetchCompleted(features, null);
         }
