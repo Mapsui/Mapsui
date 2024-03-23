@@ -86,7 +86,7 @@ public class ManipulationTracker
             // If the finger count changes this is considered a reset.
             _totalRotationChange = 0;
             _previousTouchState = null;
-            // Note, there is the unlikely change that one finger is lifted exactly when 
+            // Note, there is the unlikely probability that one finger is lifted exactly when 
             // another is touched down. This should also be ignored, but we can only
             // do that if we had the touch ids. We accept this problem. It will not crash the system.
             return;
