@@ -36,3 +36,4 @@
 ## [Contributors Guidelines](contributors-guidelines.md)
 ## [Rendering Tests](rendering-tests.md)
 ## [Documentation](documentation.md)
+## [Touch and mouse handling](touch-and-mouse-handling.md)
