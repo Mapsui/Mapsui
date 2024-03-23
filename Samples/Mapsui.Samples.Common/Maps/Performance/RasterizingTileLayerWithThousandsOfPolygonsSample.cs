@@ -82,19 +82,19 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
         var result = new List<Polygon>();
 
         Polygon polygon1;
-        int factor = 0;
+        int factor;
 
         for (int i = 0; i < 900000; i++)
         {
             factor = i - 100 * (int)Math.Round((double)(i / 100));
             polygon1 = new Polygon(
-                new LinearRing(new[] {
+                new LinearRing([
                     new Coordinate(1000*(factor-1), 1000*(factor-1)-(Math.Round((double)(i/100))*1000)),
                     new Coordinate(1000*(factor-1), 1000*(factor)-(Math.Round((double)(i/100))*1000)),
                     new Coordinate(1000*(factor), 1000*(factor)-(Math.Round((double)(i/100))*1000)),
                     new Coordinate(1000*(factor), 1000*(factor-1)-(Math.Round((double)(i/100))*1000)),
                     new Coordinate(1000*(factor-1), 1000*(factor-1)-(Math.Round((double)(i/100))*1000))
-                }));
+                ]));
 
             result.Add(polygon1);
         }
