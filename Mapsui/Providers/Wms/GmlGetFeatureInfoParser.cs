@@ -13,19 +13,19 @@ public class GmlGetFeatureInfoParser : IGetFeatureInfoParser
 
     public FeatureInfo ParseWMSResult(string? layerName, Stream result)
     {
-        _featureInfo = new FeatureInfo { LayerName = layerName, FeatureInfos = new List<Dictionary<string, string>>() };
-        XDocument xdoc;
+        _featureInfo = new FeatureInfo { LayerName = layerName, FeatureInfos = [] };
+        XDocument xDocument;
 
         try
         {
-            xdoc = XDocument.Load(result);
+            xDocument = XDocument.Load(result);
         }
         catch (XmlException e)
         {
             throw new ApplicationException("Bad formatted XML response", e);
         }
 
-        ExtractFeatureInfo(xdoc.Root);
+        ExtractFeatureInfo(xDocument.Root);
 
         return _featureInfo;
     }
@@ -66,7 +66,7 @@ public class GmlGetFeatureInfoParser : IGetFeatureInfoParser
         }
     }
 
-    private Dictionary<string, string> ExtractFeatureElements(XElement layerElement)
+    private static Dictionary<string, string> ExtractFeatureElements(XElement layerElement)
     {
         try
         {

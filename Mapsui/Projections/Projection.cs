@@ -10,11 +10,8 @@ namespace Mapsui.Projections;
 /// </summary>
 public class Projection : IProjection
 {
-    private readonly IDictionary<string, Func<double, double, (double, double)>> _toLonLat =
-        new Dictionary<string, Func<double, double, (double, double)>>();
-
-    private readonly IDictionary<string, Func<double, double, (double, double)>> _fromLonLat =
-        new Dictionary<string, Func<double, double, (double, double)>>();
+    private readonly Dictionary<string, Func<double, double, (double, double)>> _toLonLat = [];
+    private readonly Dictionary<string, Func<double, double, (double, double)>> _fromLonLat = [];
 
     public Projection()
     {

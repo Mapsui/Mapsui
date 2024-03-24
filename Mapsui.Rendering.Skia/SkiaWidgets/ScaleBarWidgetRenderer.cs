@@ -59,7 +59,7 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         // Do this, because height of text changes sometimes (e.g. from 2 m to 1 m)
         _paintScaleTextStroke.MeasureText("9999 m", ref textSize);
 
-        var scaleBarHeight = textSize.Height + (scaleBar.TickLength + scaleBar.StrokeWidthHalo * 0.5f + scaleBar.TextMargin) * scaleBar.Scale;
+        var scaleBarHeight = textSize.Height + (scaleBar.TickLength + scaleBar.StrokeWidthHalo * 0.5f + ScaleBarWidget.TextMargin) * scaleBar.Scale;
 
         if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
         {

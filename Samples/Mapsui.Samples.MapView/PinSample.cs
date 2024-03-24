@@ -27,10 +27,10 @@ public class PinSample : IMapViewSample
 
     public bool OnTap(object? sender, EventArgs args)
     {
-        var mapView = sender as UI.Maui.MapView; // The namespace prefix is somehow necessary on Linux.
+        // The namespace prefix is somehow necessary on Linux.
         var mapClickedArgs = (MapClickedEventArgs)args;
 
-        if (mapView == null)
+        if (sender is not UI.Maui.MapView mapView)
             return false;
 
         var assembly = typeof(AllSamples).GetTypeInfo().Assembly;
@@ -106,8 +106,8 @@ public class PinSample : IMapViewSample
                 break;
             case TapType.Double:
                 var resourceName = "Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
-                var stream = assembly.GetManifestResourceStream(resourceName);
-                if (stream == null) throw new Exception($"Could not find EmbeddedResource {resourceName}");
+                var stream = assembly.GetManifestResourceStream(resourceName)
+                    ?? throw new Exception($"Could not find EmbeddedResource {resourceName}");
                 using (var reader = new StreamReader(stream))
                 {
                     string svgString = reader.ReadToEnd();

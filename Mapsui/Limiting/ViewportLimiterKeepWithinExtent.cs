@@ -20,7 +20,7 @@ public class ViewportLimiterKeepWithinExtent : IViewportLimiter
         return LimitExtent(LimitResolution(viewport, zoomBounds), panBounds, zoomBounds);
     }
 
-    private Viewport LimitResolution(Viewport viewport, MMinMax? zoomBounds)
+    private static Viewport LimitResolution(Viewport viewport, MMinMax? zoomBounds)
     {
         if (zoomBounds is null) return viewport;
 
@@ -30,7 +30,7 @@ public class ViewportLimiterKeepWithinExtent : IViewportLimiter
         return viewport;
     }
 
-    private Viewport LimitExtent(Viewport viewport, MRect? panBounds, MMinMax? zoomBounds)
+    private static Viewport LimitExtent(Viewport viewport, MRect? panBounds, MMinMax? zoomBounds)
     {
         if (panBounds is null) return viewport;
 
@@ -42,7 +42,7 @@ public class ViewportLimiterKeepWithinExtent : IViewportLimiter
         var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(viewport.Width, viewport.Height, panBounds);
         if (viewportFillingResolution < zoomBounds?.Min == true)
         {
-            Logger.Log(LogLevel.Error, "Error in limiter configuration. The minimum zoomlevel does not cover the entire extent");
+            Logger.Log(LogLevel.Error, "Error in limiter configuration. The minimum zoom level does not cover the entire extent");
         }
         if (viewportFillingResolution < viewport.Resolution)
             viewport = viewport with { Resolution = viewportFillingResolution };

@@ -9,8 +9,8 @@ namespace Mapsui.Styles;
 public class BitmapRegistry
 {
     private static BitmapRegistry? _instance;
-    private readonly IDictionary<int, object> _register = new Dictionary<int, object>();
-    private readonly IDictionary<string, int> _lookup = new Dictionary<string, int>();
+    private readonly Dictionary<int, object> _register = [];
+    private readonly Dictionary<string, int> _lookup = [];
     private BitmapRegistry() { }
     private int _counter = 1;
 

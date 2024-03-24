@@ -22,8 +22,7 @@ public static class EmbeddedResourceLoader
         var assembly = typeInAssemblyOfEmbeddedResource.GetTypeInfo().Assembly;
         var fullName = assembly.GetFullName(relativePathToEmbeddedResource);
         var result = assembly.GetManifestResourceStream(fullName);
-        if (result == null) throw new Exception(ConstructExceptionMessage(relativePathToEmbeddedResource, assembly));
-        return result;
+        return result ?? throw new Exception(ConstructExceptionMessage(relativePathToEmbeddedResource, assembly));
     }
 
     private static string ConstructExceptionMessage(string path, Assembly assembly)
@@ -43,11 +42,11 @@ public static class EmbeddedResourceLoader
 
         // Give feedback if there are resources with similar names
         var similarNames = resourceNames.Where(name => path.ToLower().Split('.')
-            .Any(s => name.ToLower().Contains(s.ToLower()))).ToArray();
+            .Any(s => name.Contains(s, StringComparison.OrdinalIgnoreCase))).ToArray();
         if (similarNames.Length <= 0) return stringBuilder.ToString();
         var nameLength = assembly.GetAssemblyName()?.Length ?? 0;
         similarNames = similarNames.Select(fullName => fullName.Remove(0, nameLength + 1)).ToArray();
-        stringBuilder.Append(" Did you try to get any of these embedded resources: " + string.Join("\n ", similarNames.ToArray()) + ".");
+        stringBuilder.Append(" Did you try to get any of these embedded resources: " + string.Join("\n ", [.. similarNames]) + ".");
 
         return stringBuilder.ToString();
     }
