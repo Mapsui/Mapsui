@@ -179,13 +179,13 @@ public class RenderToCpuPerformance : IDisposable
     [Benchmark]
     public void RenderRasterizingPng()
     {
-        _mapRenderer.Render(_skCanvas, _rasterizingPngMap.Map.Navigator.Viewport, _rasterizingPngMap.Map.Layers, _rasterizingPngMap.Map!.Widgets, Color.White);
+        _mapRenderer.Render(_skCanvas, _rasterizingPngMap.Map.Navigator.Viewport, _rasterizingPngMap.Map.Layers, _rasterizingPngMap.Map.Widgets, Color.White);
     }
 
     [Benchmark]
     public void RenderRasterizingSkp()
     {
-        _mapRenderer.Render(_skCanvas, _rasterizingSkpMap.Map.Navigator.Viewport, _rasterizingSkpMap.Map.Layers, _rasterizingSkpMap.Map!.Widgets, Color.White);
+        _mapRenderer.Render(_skCanvas, _rasterizingSkpMap.Map.Navigator.Viewport, _rasterizingSkpMap.Map.Layers, _rasterizingSkpMap.Map.Widgets, Color.White);
     }
 
     [Benchmark]
