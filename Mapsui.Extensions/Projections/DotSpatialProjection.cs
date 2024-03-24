@@ -18,9 +18,9 @@ namespace Mapsui.Extensions.Projections;
 
 public class DotSpatialProjection : IProjection, IProjectionCrs
 {
-    private static readonly ConcurrentDictionary<int, ProjectionInfo> Projections = new();
-    private static readonly ConcurrentDictionary<(int From, int To), GeometryTransform> GeometryTransformations = new();
-    private static readonly ConcurrentDictionary<string, string> CrsFromEsriLookup = new();
+    private static readonly ConcurrentDictionary<int, ProjectionInfo> _projections = new();
+    private static readonly ConcurrentDictionary<(int From, int To), GeometryTransform> _geometryTransformations = new();
+    private static readonly ConcurrentDictionary<string, string> _crsFromEsriLookup = new();
     private static bool _initialized;
 
     public static void Init()
@@ -178,10 +178,10 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
     /// <returns>Coordinate system, or null if SRID was not found.</returns>
     private static ProjectionInfo? GetCoordinateSystemById(int id)
     {
-        if (!Projections.TryGetValue(id, out var result))
+        if (!_projections.TryGetValue(id, out var result))
         {
             result = ProjectionInfo.FromEpsgCode(id);
-            Projections[id] = result;
+            _projections[id] = result;
         }
 
         return result;
@@ -196,10 +196,10 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         if (transformation == null) return null;
 
         var key = (fromId!.Value, toId!.Value);
-        if (!GeometryTransformations.TryGetValue(key, out var result))
+        if (!_geometryTransformations.TryGetValue(key, out var result))
         {
             result = new GeometryTransform(transformation.Value);
-            GeometryTransformations[key] = result;
+            _geometryTransformations[key] = result;
         }
 
         return result;
@@ -220,10 +220,10 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
 
     public string? CrsFromEsri(string esriString)
     {
-        if (!CrsFromEsriLookup.TryGetValue(esriString, out var result))
+        if (!_crsFromEsriLookup.TryGetValue(esriString, out var result))
         {
             var projection = ProjectionInfo.FromEsriString(esriString);
-            if (!CrsFromEsriLookup.TryGetValue(projection.ToEsriString(), out result))
+            if (!_crsFromEsriLookup.TryGetValue(projection.ToEsriString(), out result))
             {
                 // Initialize Authority Code Handler
                 var instance = AuthorityCodeHandler.Instance;
@@ -232,10 +232,10 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
                 if (dictionary != null)
                     foreach (var it in dictionary)
                     {
-                        CrsFromEsriLookup[it.Value.ToEsriString()] = it.Key;
+                        _crsFromEsriLookup[it.Value.ToEsriString()] = it.Key;
                         if (projection.Equals(it.Value))
                         {
-                            CrsFromEsriLookup[esriString] = it.Key;
+                            _crsFromEsriLookup[esriString] = it.Key;
                             return it.Key;
                         }
                     }
@@ -245,20 +245,20 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         return result;
     }
 
-    public static void Register(string crs, string esriString)
+    public void Register(string crs, string esriString)
     {
         var id = GetIdFromCrs(crs);
         InitProjections();
 
         var projection = ProjectionInfo.FromEsriString(esriString);
-        Projections[id] = projection;
+        _projections[id] = projection;
 
-        CrsFromEsriLookup[esriString] = crs;
+        _crsFromEsriLookup[esriString] = crs;
     }
 
     private static void InitProjections()
     {
-        if (!Projections.IsEmpty)
+        if (!_projections.IsEmpty)
             return;
 
         // Initialize Authority Code Handler
@@ -268,9 +268,9 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         if (dictionary != null)
             foreach (var it in dictionary)
             {
-                CrsFromEsriLookup[it.Value.ToEsriString()] = it.Key;
+                _crsFromEsriLookup[it.Value.ToEsriString()] = it.Key;
                 var id = GetIdFromCrs(it.Key);
-                Projections[id] = it.Value;
+                _projections[id] = it.Value;
             }
     }
 }
