@@ -33,17 +33,15 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         }
     }
 
-    public static int? GetIdFromCrs(string? crs)
+    private static int GetIdFromCrs(string crs)
     {
-        if (crs == null) return null;
-
         var splits = crs.Split(':');
         if (splits.Length == 2)
             if (string.Compare(splits[0], "epsg", StringComparison.InvariantCultureIgnoreCase) == 0)
                 if (int.TryParse(splits[1], out var number))
                     return number;
 
-        return null;
+        throw new ArgumentException("Could not parse CRS");
     }
 
     public (double X, double Y) Project(string fromCRS, string toCRS, double x, double y)
@@ -51,8 +49,7 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         var fromId = GetIdFromCrs(fromCRS);
         var toId = GetIdFromCrs(toCRS);
         if (fromId == toId)
-            // no transformation needed
-            return (x, y);
+            return (x, y); // No transformation needed
 
         var transform = GetTransformation(fromId, toId);
         if (transform == null) throw new ArgumentException();
@@ -99,20 +96,16 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
 
     public bool IsProjectionSupported(string? fromCRS, string? toCRS)
     {
+        if (fromCRS == null || toCRS == null)
+            return false;
         var fromId = GetIdFromCrs(fromCRS);
         var toId = GetIdFromCrs(toCRS);
         if (fromId == toId)
-            // no transformation needed
-            return true;
+            return true; // No transformation needed
 
-        if (fromId == null) return false;
-
-        var fromCoordinateSystem = GetCoordinateSystemById(fromId.Value);
+        var fromCoordinateSystem = GetCoordinateSystemById(fromId);
         if (fromCoordinateSystem == null) return false;
-
-        if (toId == null) return false;
-
-        var toCoordinateSystem = GetCoordinateSystemById(toId.Value);
+        var toCoordinateSystem = GetCoordinateSystemById(toId);
         if (toCoordinateSystem == null) return false;
 
         return true;
@@ -123,14 +116,10 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         var fromId = GetIdFromCrs(fromCRS);
         var toId = GetIdFromCrs(toCRS);
         if (fromId == toId)
-            // no transformation needed
-            return;
+            return; // No transformation needed
 
-        var geometryTransform = GetGeometryTransformation(fromId, toId);
-        if (geometryTransform == null) throw new ArgumentException();
-        var transform = GetTransformation(fromId, toId);
-        if (transform == null) throw new ArgumentException();
-
+        var geometryTransform = GetGeometryTransformation(fromId, toId) ?? throw new ArgumentException();
+        var transform = GetTransformation(fromId, toId) ?? throw new ArgumentException();
         foreach (var feature in features)
             if (feature is GeometryFeature geometryFeature)
             {
@@ -157,15 +146,13 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
 
         if (feature is GeometryFeature geometryFeature)
         {
-            var geometryTransform = GetGeometryTransformation(fromId, toId);
-            if (geometryTransform == null) throw new ArgumentException();
+            var geometryTransform = GetGeometryTransformation(fromId, toId) ?? throw new ArgumentException();
             var geometry = geometryFeature.Geometry;
             if (geometry != null) Transform(geometry, geometryTransform);
         }
         else
         {
-            var transform = GetTransformation(fromId, toId);
-            if (transform == null) throw new ArgumentException();
+            var transform = GetTransformation(fromId, toId) ?? throw new ArgumentException();
             feature.CoordinateVisitor((x, y, setter) =>
             {
                 var (xOut, yOut) = Transform(x, y, transform);
@@ -202,7 +189,10 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
 
     private static GeometryTransform? GetGeometryTransformation(int? fromId, int? toId)
     {
-        var transformation = GetTransformation(fromId, toId);
+        if (fromId is null) return null;
+        if (toId is null) return null;
+
+        var transformation = GetTransformation(fromId.Value, toId.Value);
         if (transformation == null) return null;
 
         var key = (fromId!.Value, toId!.Value);
@@ -215,12 +205,10 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         return result;
     }
 
-    public static (ProjectionInfo From, ProjectionInfo To)? GetTransformation(int? fromId, int? toId)
+    public static (ProjectionInfo From, ProjectionInfo To)? GetTransformation(int fromId, int toId)
     {
-        if (fromId == null || toId == null) return null;
-
-        var fromCoordinateSystem = GetCoordinateSystemById(fromId.Value);
-        var toCoordinateSystem = GetCoordinateSystemById(toId.Value);
+        var fromCoordinateSystem = GetCoordinateSystemById(fromId);
+        var toCoordinateSystem = GetCoordinateSystemById(toId);
 
         if (fromCoordinateSystem == null || toCoordinateSystem == null)
         {
@@ -257,23 +245,20 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         return result;
     }
 
-    public void Register(string crs, string esriString)
+    public static void Register(string crs, string esriString)
     {
         var id = GetIdFromCrs(crs);
-        if (id == null)
-            throw new ArgumentException(nameof(crs));
-
         InitProjections();
 
         var projection = ProjectionInfo.FromEsriString(esriString);
-        Projections[id.Value] = projection;
+        Projections[id] = projection;
 
         CrsFromEsriLookup[esriString] = crs;
     }
 
     private static void InitProjections()
     {
-        if (Projections.Count > 0)
+        if (!Projections.IsEmpty)
             return;
 
         // Initialize Authority Code Handler
@@ -285,10 +270,7 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
             {
                 CrsFromEsriLookup[it.Value.ToEsriString()] = it.Key;
                 var id = GetIdFromCrs(it.Key);
-                if (id != null)
-                {
-                    Projections[id.Value] = it.Value;
-                }
+                Projections[id] = it.Value;
             }
     }
 }
