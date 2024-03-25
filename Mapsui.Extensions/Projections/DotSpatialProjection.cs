@@ -49,7 +49,7 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         var fromId = GetIdFromCrs(fromCRS);
         var toId = GetIdFromCrs(toCRS);
         if (fromId == toId)
-            return (x, y); // No transformation needed
+            return (x, y);
 
         var transform = GetTransformation(fromId, toId);
         if (transform == null) throw new ArgumentException();
@@ -61,7 +61,7 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         [DisallowNull] (ProjectionInfo From, ProjectionInfo To)? transform)
     {
         var pointsXy = new[] { x, y };
-        Reproject.ReprojectPoints(pointsXy, Array.Empty<double>(), transform.Value.From, transform.Value.To, 0, 1);
+        Reproject.ReprojectPoints(pointsXy, [], transform.Value.From, transform.Value.To, 0, 1);
         return (pointsXy[0], pointsXy[1]);
     }
 
@@ -70,7 +70,6 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         var fromId = GetIdFromCrs(fromCRS);
         var toId = GetIdFromCrs(toCRS);
         if (fromId == toId)
-            // no transformation needed
             return;
 
         var transform = GetTransformation(fromId, toId);
@@ -84,7 +83,6 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         var fromId = GetIdFromCrs(fromCRS);
         var toId = GetIdFromCrs(toCRS);
         if (fromId == toId)
-            // no transformation needed
             return;
 
         var transform = GetTransformation(fromId, toId);
@@ -101,7 +99,7 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         var fromId = GetIdFromCrs(fromCRS);
         var toId = GetIdFromCrs(toCRS);
         if (fromId == toId)
-            return true; // No transformation needed
+            return true; // This is supported because we do not need to project
 
         var fromCoordinateSystem = GetCoordinateSystemById(fromId);
         if (fromCoordinateSystem == null) return false;
@@ -141,7 +139,6 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
         var fromId = GetIdFromCrs(fromCRS);
         var toId = GetIdFromCrs(toCRS);
         if (fromId == toId)
-            // no transformation needed
             return;
 
         if (feature is GeometryFeature geometryFeature)
