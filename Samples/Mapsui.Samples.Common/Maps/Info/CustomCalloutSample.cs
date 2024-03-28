@@ -6,13 +6,14 @@ using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets.InfoWidgets;
-using Newtonsoft.Json.Linq;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
@@ -128,7 +129,7 @@ public class CustomCalloutSample : ISample
         return memStream;
     }
 
-    private class City
+    internal class City
     {
         public string? Country { get; set; }
         public string? Name { get; set; }
@@ -138,16 +139,11 @@ public class CustomCalloutSample : ISample
 
     private static List<City> DeserializeFromStream(Stream stream)
     {
-        using var streamReader = new StreamReader(stream);
-        var str = streamReader.ReadToEnd();
-        var jArray = JArray.Parse(str);
-
-        return jArray.Select(c => new City
-        {
-            Name = c[nameof(City.Name)]?.Value<string>(),
-            Country = c[nameof(City.Country)]?.Value<string>(),
-            Lat = c[nameof(City.Lat)]?.Value<double>() ?? 0,
-            Lng = c[nameof(City.Lng)]?.Value<double>() ?? 0
-        }).ToList();
+        return JsonSerializer.Deserialize(stream, CustomCalloutSampleContext.Default.ListCity) ?? [];
     }
+}
+
+[JsonSerializable(typeof(List<CustomCalloutSample.City>))]
+internal partial class CustomCalloutSampleContext : JsonSerializerContext
+{
 }

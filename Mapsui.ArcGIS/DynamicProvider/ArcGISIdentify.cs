@@ -4,10 +4,9 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Text.Json;
 using Mapsui.Extensions;
 using Mapsui.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Mapsui.ArcGIS.DynamicProvider;
 
@@ -94,13 +93,7 @@ public class ArcGISIdentify
 
                 if (dataStream != null)
                 {
-                    using var sReader = new StreamReader(dataStream);
-                    var jsonString = await sReader.ReadToEndAsync();
-
-                    var serializer = new JsonSerializer();
-                    var jToken = JObject.Parse(jsonString);
-                    using var jTokenReader = new JTokenReader(jToken);
-                    _featureInfo = serializer.Deserialize(jTokenReader, typeof(ArcGISFeatureInfo)) as ArcGISFeatureInfo;
+                    _featureInfo = JsonSerializer.Deserialize(dataStream, ArcGISContext.Default.ArcGISFeatureInfo);
 
                     dataStream.Position = 0;
 
