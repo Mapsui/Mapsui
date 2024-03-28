@@ -56,7 +56,7 @@
     <PackageVersion Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="[6.2.14,7.0.0)" />
     <PackageVersion Include="Microsoft.UI.Xaml" Version="[2.6.2,3.0.0)" />
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="[17.6.40,18.0.0)" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="[1.5.240227000,2.0.0)"  />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="[1.5.240227000,2.0.0)" />
     <PackageVersion Include="Microsoft.Windows.CsWin32" Version="[0.1.588-beta,1.0.0)" />
     <PackageVersion Include="Microsoft.Windows.CsWinRT" Version="[2.0.0,3.0.0)" />
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26031-preview" />
@@ -84,8 +84,8 @@
     <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="[2.88.7,3.0.0)" />
     <PackageVersion Include="sqlite-net-pcl" Version="[1.8.116,2.0.0)" />
     <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="[2.1.6,3.0.0)" />
-    <PackageVersion Include="Svg.Skia" Version="[1.0.0.7,2.0.0)" />
-    <PackageVersion Include="Topten.RichTextKit" Version="[0.4.166,1.0.0)" />
+    <PackageVersion Include="Svg.Skia" Version="1.0.0.17" />
+    <PackageVersion Include="Topten.RichTextKit" Version="0.4.167" />
     <PackageVersion Include="Uno.Core" Version="[4.0.1,5.0.0)" />
     <PackageVersion Include="Uno.Extensions.Logging.OSLog" Version="[1.6.0,2.0.0)" />
     <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="[1.6.0,2.0.0)" />
