@@ -382,6 +382,7 @@
   <ItemGroup>
     <None Remove="Resources\Images\OriginalRegression\AnimatedBusSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\AnimatedPointsSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\ArcGISDynamicServiceSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\EditingAddLineSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\EditingAddPointSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\EditingAddPolygonSample.Regression.png" />

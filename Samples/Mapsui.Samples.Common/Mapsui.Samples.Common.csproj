@@ -148,7 +148,7 @@
 
   <ItemGroup>
     <PackageReference Include="BruTile" />
-    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="System.Text.Json" />
     <PackageReference Include="BruTile.MbTiles" />
   </ItemGroup>
 
