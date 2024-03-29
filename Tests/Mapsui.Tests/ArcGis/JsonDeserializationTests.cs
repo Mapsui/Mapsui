@@ -453,9 +453,9 @@ public class JsonDeserializationTests
             var result = JsonSerializer.Deserialize(json, ArcGISContext.Default.ArcGISImageCapabilities);
         });
     }
-    
-      [Test]
-    public void DeserializeArcGisCapabilitiesTest()
+
+    [Test]
+    public void DeserializeArcGisDynamicCapabilitiesTest()
     {
         var json = """
                    {
