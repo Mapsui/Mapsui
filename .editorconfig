@@ -27,7 +27,7 @@ csharp_style_expression_bodied_accessors = true:silent
 csharp_style_expression_bodied_lambdas = true:silent
 csharp_style_expression_bodied_local_functions = false:silent
 csharp_style_inlined_variable_declaration = true:suggestion
-csharp_style_deconstructed_variable_declaration = true:suggestion
+csharp_style_deconstructed_variable_declaration = true:silent
 csharp_style_var_for_built_in_types = true:silent
 csharp_style_var_when_type_is_apparent = true:silent
 csharp_style_var_elsewhere = true:silent
@@ -251,11 +251,12 @@ dotnet_code_quality_unused_parameters = all:suggestion
 dotnet_style_collection_initializer = true:suggestion
 
 ### dotnet_diagnostic
-dotnet_diagnostic.CS1591.severity = none # CS1591: Missing XML comment for publicly visible type or member
+dotnet_diagnostic.CS1591.severity = silent # CS1591: Missing XML comment for publicly visible type or member
 dotnet_diagnostic.IDE0055.severity = error # fix formatting
 dotnet_diagnostic.IDE0005.severity = error # Remove unused usings, works only while editing, not when running dotnet format
 dotnet_diagnostic.CA1512.severity = silent # CA1512: Use ArgumentOutOfRangeException throw helper - Why set to silent? Because we use net7 and it is not supported there.
 dotnet_diagnostic.IDE0059.severity = warning # IDE0059: Unnecessary assignment of a value
+dotnet_diagnostic.CA2208.severity = silent # CA2208: Instantiate argument exceptions correctly
 
 # Spelling
 spelling_exclusion_path = spelling_exclusion.txt
