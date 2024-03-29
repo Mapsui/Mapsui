@@ -78,8 +78,7 @@ public class ArcGISIdentify
             catch (PlatformNotSupportedException e)
             {
                 Logger.Log(LogLevel.Error, e.Message, e);
-            }
-
+            };
             using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
             using var response = await client.GetAsync(requestUrl).ConfigureAwait(false);
 
@@ -95,13 +94,7 @@ public class ArcGISIdentify
 
                 if (dataStream != null)
                 {
-                    using var sReader = new StreamReader(dataStream);
-                    var jsonString = await sReader.ReadToEndAsync();
-
-                    var serializer = new JsonSerializer();
-                    var jToken = JObject.Parse(jsonString);
-                    await using var jTokenReader = new JTokenReader(jToken);
-                    _featureInfo = serializer.Deserialize(jTokenReader, typeof(ArcGISFeatureInfo)) as ArcGISFeatureInfo;
+                    _featureInfo = JsonSerializer.Deserialize(dataStream, ArcGISContext.Default.ArcGISFeatureInfo);
 
                     dataStream.Position = 0;
 
