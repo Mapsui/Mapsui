@@ -422,6 +422,6 @@ public class EditManager
         if (Layer?.Extent is null)
             return null;
 
-        return Layer.Extent!.Grow(Layer.Extent.Width * 0.2);
+        return Layer.Extent.Grow(Layer.Extent.Width * 0.2);
     }
 }

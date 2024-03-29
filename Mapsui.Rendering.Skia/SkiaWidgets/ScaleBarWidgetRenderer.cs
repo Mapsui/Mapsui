@@ -9,10 +9,10 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets;
 
 public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
 {
-    private SKPaint? _paintScaleBar;
-    private SKPaint? _paintScaleBarStroke;
-    private SKPaint? _paintScaleText;
-    private SKPaint? _paintScaleTextStroke;
+    private readonly SKPaint _paintScaleBar = CreateScaleBarPaint(SKPaintStyle.Fill);
+    private readonly SKPaint _paintScaleBarStroke = CreateScaleBarPaint(SKPaintStyle.Stroke);
+    private readonly SKPaint _paintScaleText = CreateTextPaint(SKPaintStyle.Fill);
+    private readonly SKPaint _paintScaleTextStroke = CreateTextPaint(SKPaintStyle.Stroke);
 
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget,
         float layerOpacity)
@@ -20,20 +20,10 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         var scaleBar = (ScaleBarWidget)widget;
         if (!scaleBar.CanProject()) return;
 
-        // If this is the first time, we call this renderer, ...
-        if (_paintScaleBar == null)
-        {
-            // ... than create the paints
-            _paintScaleBar = CreateScaleBarPaint(SKPaintStyle.Fill);
-            _paintScaleBarStroke = CreateScaleBarPaint(SKPaintStyle.Stroke);
-            _paintScaleText = CreateTextPaint(SKPaintStyle.Fill);
-            _paintScaleTextStroke = CreateTextPaint(SKPaintStyle.Stroke);
-        }
-
         // Update paints with new values
         _paintScaleBar.Color = scaleBar.TextColor.ToSkia(layerOpacity);
         _paintScaleBar.StrokeWidth = (float)(scaleBar.StrokeWidth * scaleBar.Scale);
-        _paintScaleBarStroke!.Color = scaleBar.Halo.ToSkia(layerOpacity);
+        _paintScaleBarStroke.Color = scaleBar.Halo.ToSkia(layerOpacity);
         _paintScaleBarStroke.StrokeWidth = (float)(scaleBar.StrokeWidthHalo * scaleBar.Scale);
         _paintScaleText!.Color = scaleBar.TextColor.ToSkia(layerOpacity);
         _paintScaleText.StrokeWidth = (float)(scaleBar.StrokeWidth * scaleBar.Scale);
@@ -167,10 +157,10 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
     {
         if (disposing)
         {
-            _paintScaleBar?.Dispose();
-            _paintScaleBarStroke?.Dispose();
-            _paintScaleText?.Dispose();
-            _paintScaleTextStroke?.Dispose();
+            _paintScaleBar.Dispose();
+            _paintScaleBarStroke.Dispose();
+            _paintScaleText.Dispose();
+            _paintScaleTextStroke.Dispose();
         }
     }
 }
