@@ -62,7 +62,6 @@
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26031-preview" />
     <PackageVersion Include="NetTopologySuite" Version="[2.5.0,3.0.0)" />
     <PackageVersion Include="NetTopologySuite.IO.GeoJSON4STJ" Version="[4.0.0,5.0.0)" />
-    <PackageVersion Include="Newtonsoft.Json" Version="[13.0.2,14.0.0)" />
     <PackageVersion Include="NUnit" Version="[4.0.1,5.0.0)" />
     <PackageVersion Include="NUnit3TestAdapter" Version="[4.5.0,5.0.0)" />
     <PackageVersion Include="SkiaSharp" Version="[2.88.7,3.0.0)" />
@@ -86,6 +85,7 @@
     <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="[2.1.6,3.0.0)" />
     <PackageVersion Include="Svg.Skia" Version="1.0.0.17" />
     <PackageVersion Include="Topten.RichTextKit" Version="0.4.167" />
+    <PackageVersion Include="System.Text.Json" Version="[8.0.3,9.0.0)" />
     <PackageVersion Include="Uno.Core" Version="[4.0.1,5.0.0)" />
     <PackageVersion Include="Uno.Extensions.Logging.OSLog" Version="[1.6.0,2.0.0)" />
     <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="[1.6.0,2.0.0)" />

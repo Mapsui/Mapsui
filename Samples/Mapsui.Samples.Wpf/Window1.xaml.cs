@@ -6,7 +6,6 @@ using System.Windows.Controls.Primitives;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.UI.Wpf;
 using Mapsui.Samples.Common.Maps.Widgets;
 
 namespace Mapsui.Samples.Wpf;

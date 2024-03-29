@@ -2,12 +2,11 @@ using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Mapsui.Cache;
 using Mapsui.Logging;
 using Mapsui.Utilities;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Mapsui.ArcGIS.DynamicProvider;
 
@@ -121,13 +120,7 @@ public class ArcGisLegend
     {
         if (dataStream != null)
         {
-            using var sReader = new StreamReader(dataStream);
-            var jsonString = sReader.ReadToEnd();
-
-            var serializer = new JsonSerializer();
-            var jToken = JObject.Parse(jsonString);
-            using var jTokenReader = new JTokenReader(jToken);
-            var legendResponse = serializer.Deserialize(jTokenReader, typeof(ArcGISLegendResponse)) as ArcGISLegendResponse;
+            var legendResponse = JsonSerializer.Deserialize(dataStream, ArcGISContext.Default.ArcGISLegendResponse);
 
 #pragma warning disable IDISP007 // don't dispose injected
             dataStream.Dispose();

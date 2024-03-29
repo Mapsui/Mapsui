@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="BruTile" />
-    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="System.Text.Json" />
   </ItemGroup>
 
   <ItemGroup>
