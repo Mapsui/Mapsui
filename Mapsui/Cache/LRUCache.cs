@@ -23,21 +23,20 @@ public class LruCache<TKey, TValue>(int capacity)
 
     private void InternalPut(TKey key, TValue value)
     {
-        if (_cache.ContainsKey(key)) // Key already exists.
+        if (_cache.TryGetValue(key, out var item)) // Key already exists.
         {
-            var node = _cache[key];
             // dispose disposable values
-            if (node.Value is IDisposable disposable)
+            if (item.Value is IDisposable disposable)
             {
 #pragma warning disable IDISP007 // Don't dispose injected                    
                 disposable.Dispose();
 #pragma warning restore IDISP007                    
             }
 
-            _list.Remove(node.Node);
-            _list.AddFirst(node.Node);
+            _list.Remove(item.Node);
+            _list.AddFirst(item.Node);
 
-            _cache[key] = (node.Node, value);
+            _cache[key] = (item.Node, value);
         }
         else
         {
@@ -65,16 +64,15 @@ public class LruCache<TKey, TValue>(int capacity)
     {
         lock (_lock)
         {
-            if (!_cache.ContainsKey(key))
+            if (!_cache.TryGetValue(key, out var item))
             {
                 return default;
             }
 
-            var node = _cache[key];
-            _list.Remove(node.Node);
-            _list.AddFirst(node.Node);
+            _list.Remove(item.Node);
+            _list.AddFirst(item.Node);
 
-            return node.Value;
+            return item.Value;
         }
     }
 
@@ -104,17 +102,16 @@ public class LruCache<TKey, TValue>(int capacity)
 
     private bool InternalTryGetValue(TKey key, out TValue? value)
     {
-        if (!_cache.ContainsKey(key))
+        if (!_cache.TryGetValue(key, out var item))
         {
             value = default;
             return false;
         }
 
-        var node = _cache[key];
-        _list.Remove(node.Node);
-        _list.AddFirst(node.Node);
+        _list.Remove(item.Node);
+        _list.AddFirst(item.Node);
 
-        value = node.Value;
+        value = item.Value;
         return true;
     }
 
@@ -129,9 +126,9 @@ public class LruCache<TKey, TValue>(int capacity)
     {
         lock (_lock)
         {
-            foreach (var value in _cache.Values)
+            foreach (var (Node, Value) in _cache.Values)
             {
-                value.Value.DisposeIfDisposable();
+                Value.DisposeIfDisposable();
             }
 
             _cache.Clear();
