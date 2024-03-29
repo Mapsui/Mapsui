@@ -40,7 +40,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         var test = listView ?? throw new InvalidOperationException();
         var test2 = featureInfo ?? throw new InvalidOperationException();
 
-        _allSamples = AllSamples.GetSamples() ?? new List<ISampleBase>();
+        _allSamples = AllSamples.GetSamples() ?? [];
 
         var categories = _allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
         picker!.ItemsSource = categories.ToList();
@@ -202,7 +202,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
     }
 
     /// <summary>
-    /// New informations from Geolocator arrived
+    /// New information from Geolocator arrived
     /// </summary>        
     /// <param name="e">Event arguments for new position</param>
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
