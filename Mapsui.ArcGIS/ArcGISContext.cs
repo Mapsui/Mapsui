@@ -15,6 +15,6 @@ namespace Mapsui.ArcGIS;
 [JsonSerializable(typeof(ArcGISLegendResponse))]
 [JsonSerializable(typeof(ArcGISDynamicCapabilities))]
 [JsonSerializable(typeof(ArcGISImageCapabilities))]
-internal partial class ArcGISContext : JsonSerializerContext
+public partial class ArcGISContext : JsonSerializerContext
 {
 }
