@@ -7,8 +7,6 @@ using System.Net.Http;
 using System.Text.Json;
 using Mapsui.Extensions;
 using Mapsui.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Mapsui.ArcGIS.DynamicProvider;
 
