@@ -100,7 +100,17 @@ public class ArcGisLegend
             Logger.Log(LogLevel.Error, e.Message, e);
         }
 
-        if (credentials != null) httpClientHandler.Credentials = credentials;
+        if (credentials != null)
+        {
+            try
+            {
+                httpClientHandler.Credentials = credentials;
+            }
+            catch (PlatformNotSupportedException e)
+            {
+                Logger.Log(LogLevel.Error, e.Message, e);
+            }
+        }
 
         var httpClient = new HttpClient(httpClientHandler)
         {

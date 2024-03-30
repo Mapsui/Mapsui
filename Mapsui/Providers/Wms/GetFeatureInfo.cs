@@ -82,7 +82,16 @@ public class GetFeatureInfo
 
     private async Task<Stream> GetStreamAsync(string url)
     {
-        var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
+        var handler = new HttpClientHandler();
+        try
+        {
+            handler.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
+        }
+        catch (PlatformNotSupportedException e)
+        {
+            Logger.Log(LogLevel.Error, e.Message, e);
+        }
+
         var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
         client.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent ?? "If you use Mapsui please specify a user-agent specific to your app");
         var req = new HttpRequestMessage(HttpMethod.Get, url);

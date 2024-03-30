@@ -109,8 +109,15 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
 
         if (Credentials != null)
         {
-            httpClientHandler.UseDefaultCredentials = false;
-            httpClientHandler.Credentials = Credentials;
+            try
+            {
+                httpClientHandler.UseDefaultCredentials = false;
+                httpClientHandler.Credentials = Credentials;
+            }
+            catch (PlatformNotSupportedException e)
+            {
+                Logger.Log(LogLevel.Error, e.Message, e);
+            }
         }
 
         // To do: Dispose:

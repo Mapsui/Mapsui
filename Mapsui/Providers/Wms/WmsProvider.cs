@@ -579,9 +579,9 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         {
             handler.Credentials = Credentials;
         }
-        catch (NotSupportedException)
+        catch (PlatformNotSupportedException e)
         {
-            // Ignore not supported exception (fixes blazor)
+            Logger.Log(LogLevel.Error, e.Message, e);
         }
 
         var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
