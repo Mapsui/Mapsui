@@ -74,7 +74,7 @@ public class ArcGISIdentify
                 // Blazor does not support this,
                 handler.Credentials = credentials ?? CredentialCache.DefaultCredentials;
             }
-            catch (PlatformNotSupportedException e)
+            catch (NotSupportedException e)
             {
                 Logger.Log(LogLevel.Error, e.Message, e);
             };

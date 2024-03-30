@@ -112,7 +112,7 @@ public class CapabilitiesHelper
                         // Blazor does not support this,
                         handler.Credentials = credentials ?? CredentialCache.DefaultCredentials;
                     }
-                    catch (PlatformNotSupportedException e)
+                    catch (NotSupportedException e)
                     {
                         Logger.Log(LogLevel.Error, e.Message, e);
                     };

@@ -579,7 +579,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         {
             handler.Credentials = Credentials;
         }
-        catch (PlatformNotSupportedException e)
+        catch (NotSupportedException e)
         {
             Logger.Log(LogLevel.Error, e.Message, e);
         }

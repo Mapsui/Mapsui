@@ -106,7 +106,7 @@ public class ArcGisLegend
             {
                 httpClientHandler.Credentials = credentials;
             }
-            catch (PlatformNotSupportedException e)
+            catch (NotSupportedException e)
             {
                 Logger.Log(LogLevel.Error, e.Message, e);
             }

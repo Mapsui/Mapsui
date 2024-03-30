@@ -128,7 +128,7 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
                 // Blazor does not support this,
                 handler.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
             }
-            catch (PlatformNotSupportedException e)
+            catch (NotSupportedException e)
             {
                 Logger.Log(LogLevel.Error, e.Message, e);
             };
