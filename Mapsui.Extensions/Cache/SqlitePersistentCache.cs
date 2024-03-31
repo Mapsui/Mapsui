@@ -240,7 +240,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
                     return (result, _brotliCompression);
                 }
             }
-            catch (PlatformNotSupportedException)
+            catch (NotSupportedException)
             {
                 // Ignore error and save uncompressed
                 // and disable compression
@@ -276,7 +276,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 
                         return outputStream.ToArray();
                     }
-                    catch (PlatformNotSupportedException)
+                    catch (NotSupportedException)
                     {
                         // Ignore error and save uncompressed
                         // and disable compression

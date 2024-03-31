@@ -114,7 +114,7 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
                 httpClientHandler.UseDefaultCredentials = false;
                 httpClientHandler.Credentials = Credentials;
             }
-            catch (PlatformNotSupportedException e)
+            catch (NotSupportedException e)
             {
                 Logger.Log(LogLevel.Error, e.Message, e);
             }

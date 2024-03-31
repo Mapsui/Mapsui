@@ -95,7 +95,7 @@ public class ArcGisLegend
             // Blazor does not support this.
             httpClientHandler.UseDefaultCredentials = credentials == null;
         }
-        catch (PlatformNotSupportedException e)
+        catch (NotSupportedException e)
         {
             Logger.Log(LogLevel.Error, e.Message, e);
         }
