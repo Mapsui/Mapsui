@@ -54,10 +54,6 @@ public class WFSProvider : IProvider, IDisposable
         /// Version 1.1.0
         /// </summary>
         WFS_1_1_0,
-        /// <summary>
-        /// Version 2.0.0
-        /// </summary>
-        WFS_2_0_0
     }
 
 
@@ -330,9 +326,11 @@ public class WFSProvider : IProvider, IDisposable
         _getCapabilitiesUri = getCapabilitiesUri;
         _featureType = featureType;
 
-        if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
-            _textResources = new WFS_1_0_0_TextResources();
-        else _textResources = new WFS_1_1_0_TextResources();
+        _textResources = wfsVersion switch
+        {
+            WFSVersionEnum.WFS_1_0_0 => new WFS_1_0_0_TextResources(),
+            _ => new WFS_1_1_0_TextResources(),
+        };
 
         _wfsVersion = wfsVersion;
 
@@ -778,7 +776,7 @@ public class WFSProvider : IProvider, IDisposable
                         null
                             ? bboxVal
                             : "0.0", formatInfo);
-            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0 || _wfsVersion == WFSVersionEnum.WFS_2_0_0)
+            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
                 bbox.MinLat =
                     Convert.ToDouble(
                         (bboxVal =
@@ -795,7 +793,7 @@ public class WFSProvider : IProvider, IDisposable
                         null
                             ? bboxVal
                             : "0.0", formatInfo);
-            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0 || _wfsVersion == WFSVersionEnum.WFS_2_0_0)
+            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
                 bbox.MaxLat =
                     Convert.ToDouble(
                         (bboxVal =
@@ -812,7 +810,7 @@ public class WFSProvider : IProvider, IDisposable
                         null
                             ? bboxVal
                             : "0.0", formatInfo);
-            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0 || _wfsVersion == WFSVersionEnum.WFS_2_0_0)
+            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
                 bbox.MinLong =
                     Convert.ToDouble(
                         (bboxVal =
@@ -829,7 +827,7 @@ public class WFSProvider : IProvider, IDisposable
                         null
                             ? bboxVal
                             : "0.0", formatInfo);
-            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0 || _wfsVersion == WFSVersionEnum.WFS_2_0_0)
+            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
                 bbox.MaxLong =
                     Convert.ToDouble(
                         (bboxVal =

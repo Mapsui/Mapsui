@@ -65,7 +65,7 @@ public class WfsPointsSample : ISample
             "https://vogis.cnv.at/geoserver/vogis/laser_2002_04_punkte/ows",
             "vogis",
             "laser_2002_04_punkte",
-            WFSProvider.WFSVersionEnum.WFS_2_0_0);
+            WFSProvider.WFSVersionEnum.WFS_1_1_0);
 
         provider.CRS = crs;
         provider.AxisOrder = new[] { 0, 1 };
