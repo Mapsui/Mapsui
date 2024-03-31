@@ -85,6 +85,13 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
                 Add Compression VARCHAR(2) NOT NULL Default ('{_noCompression}');");
                 command.ExecuteNonQuery();
             }
+
+            if (!ColumnExists(connection, nameof(UrlCache), nameof(UrlCache.PostData)))
+            {
+                var command = connection.CreateCommand(@$"Alter TABLE UrlCache 
+                Add PostData BLOB NULL;");
+                command.ExecuteNonQuery();
+            }
         }
         catch (SQLiteException ex)
         {
@@ -171,7 +178,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         return result;
     }
 
-    public void Add(string url, byte[] tile)
+    public void Add(string url, byte[]? postData, byte[] tile)
     {
         var compress = Compress(tile);
 
@@ -179,6 +186,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         var data = new UrlCache
         {
             Url = url,
+            PostData = postData,
             Created = DateTime.Now,
             Data = compress.data,
             Compression = compress.Compression,
@@ -186,22 +194,22 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         connection.InsertOrReplace(data);
     }
 
-    public void Remove(string url)
+    public void Remove(string url, byte[]? postData)
     {
         using var connection = CreateConnection();
-        connection.Table<UrlCache>().Delete(f => f.Url == url);
+        connection.Table<UrlCache>().Delete(f => f.Url == url && f.PostData == postData);
     }
 
-    public byte[]? Find(string url)
+    public byte[]? Find(string url, byte[]? postData)
     {
         using var connection = CreateConnection();
-        var tile = connection.Table<UrlCache>().FirstOrDefault(f => f.Url == url);
+        var tile = connection.Table<UrlCache>().FirstOrDefault(f => f.Url == url && f.PostData == postData);
         if (_cacheExpireTime != TimeSpan.Zero)
         {
             if (tile.Created.Add(_cacheExpireTime) < DateTime.Now)
             {
                 // expired
-                Remove(url);
+                Remove(url, postData);
                 return null;
             }
         }

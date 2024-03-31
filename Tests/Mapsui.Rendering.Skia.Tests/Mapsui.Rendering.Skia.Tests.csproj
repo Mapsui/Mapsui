@@ -60,9 +60,6 @@
     <None Update="Resources\Cache\TmsSample.sqlite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Cache\WfsSample.sqlite">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Resources\Cache\WmsSample.sqlite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

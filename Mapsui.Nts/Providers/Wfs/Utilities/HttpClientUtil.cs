@@ -85,7 +85,7 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
         if (string.IsNullOrEmpty(_url))
             throw new Exception($"Property {nameof(Url)} was not set");
 
-        var bytes = _persistentCache?.Find(_url!);
+        var bytes = _persistentCache?.Find(_url!, _postData);
         if (bytes != null)
         {
             return new MemoryStream(bytes);
@@ -166,7 +166,7 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
                 if (stream != null && _url != null)
                 {
                     bytes = StreamHelper.ReadFully(stream);
-                    _persistentCache?.Add(_url, bytes);
+                    _persistentCache?.Add(_url, _postData, bytes);
                     return new MemoryStream(bytes);
                 }
 
