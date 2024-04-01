@@ -2,13 +2,12 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using BruTile;
 using Mapsui.ArcGIS.DynamicProvider;
-using Mapsui.ArcGIS.ImageServiceProvider;
 using Mapsui.Cache;
 using Mapsui.Logging;
-using Newtonsoft.Json;
 
 namespace Mapsui.ArcGIS;
 
@@ -140,9 +139,9 @@ public class CapabilitiesHelper
                 }
 
                 if (_capabilitiesType == CapabilitiesType.DynamicServiceCapabilities)
-                    _arcGisCapabilities = JsonConvert.DeserializeObject<ArcGISDynamicCapabilities>(dataStream);
+                    _arcGisCapabilities = JsonSerializer.Deserialize(dataStream, ArcGISContext.Default.ArcGISDynamicCapabilities);
                 else if (_capabilitiesType == CapabilitiesType.ImageServiceCapabilities)
-                    _arcGisCapabilities = JsonConvert.DeserializeObject<ArcGISImageCapabilities>(dataStream);
+                    _arcGisCapabilities = JsonSerializer.Deserialize(dataStream, ArcGISContext.Default.ArcGISImageCapabilities);
 
                 if (_arcGisCapabilities == null)
                 {

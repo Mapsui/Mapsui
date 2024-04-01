@@ -22,19 +22,19 @@ public class WritableLayer : BaseLayer
 
     private MRect? GetExtent()
     {
-        // todo: Calculate extent only once. Use a _modified field to determine when this is needed.
+        // Todo: Calculate extent only once. Use a _modified field to determine when this is needed.
 
         var extents = _cache
-            .Select(f => f.Extent)
-            .Where(g => g != null)
+            .Where(f => f.Extent is not null)
+            .Select(f => f.Extent!)
             .ToList();
 
         if (extents.Count == 0) return null;
 
-        var minX = extents.Min(g => g!.MinX);
-        var minY = extents.Min(g => g!.MinY);
-        var maxX = extents.Max(g => g!.MaxX);
-        var maxY = extents.Max(g => g!.MaxY);
+        var minX = extents.Min(e => e.MinX);
+        var minY = extents.Min(e => e.MinY);
+        var maxX = extents.Max(e => e.MaxX);
+        var maxY = extents.Max(e => e.MaxY);
 
         return new MRect(minX, minY, maxX, maxY);
     }

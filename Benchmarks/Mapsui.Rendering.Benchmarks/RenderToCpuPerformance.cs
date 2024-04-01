@@ -1,5 +1,4 @@
 ﻿#pragma warning disable IDE0005
-using System.IO;
 using BenchmarkDotNet.Attributes;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
@@ -14,11 +13,6 @@ using Mapsui.Rendering.Skia.Tests;
 using Mapsui.Styles.Thematics;
 using Mapsui.Nts.Providers;
 using SkiaSharp;
-using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Jobs;
-using BenchmarkDotNet.Toolchains.InProcess.Emit;
-using Mapsui.Rendering.Skia.Cache;
-using Mapsui.Utilities;
 
 #pragma warning disable IDISP001
 #pragma warning disable IDISP003
@@ -179,25 +173,25 @@ public class RenderToCpuPerformance : IDisposable
     [Benchmark]
     public void RenderRasterizingPng()
     {
-        _mapRenderer.Render(_skCanvas, _rasterizingPngMap.Map.Navigator.Viewport, _rasterizingPngMap.Map!.Layers, _rasterizingPngMap.Map!.Widgets, Color.White);
+        _mapRenderer.Render(_skCanvas, _rasterizingPngMap.Map.Navigator.Viewport, _rasterizingPngMap.Map.Layers, _rasterizingPngMap.Map.Widgets, Color.White);
     }
 
     [Benchmark]
     public void RenderRasterizingSkp()
     {
-        _mapRenderer.Render(_skCanvas, _rasterizingSkpMap.Map.Navigator.Viewport, _rasterizingSkpMap.Map!.Layers, _rasterizingSkpMap.Map!.Widgets, Color.White);
+        _mapRenderer.Render(_skCanvas, _rasterizingSkpMap.Map.Navigator.Viewport, _rasterizingSkpMap.Map.Layers, _rasterizingSkpMap.Map.Widgets, Color.White);
     }
 
     [Benchmark]
     public void RenderRasterizingTilingSkp()
     {
-        _mapRenderer.Render(_skCanvas, _rasterizingTilingSkpMap.Map.Navigator.Viewport, _rasterizingTilingSkpMap.Map!.Layers, _rasterizingTilingSkpMap.Map!.Widgets, Color.White);
+        _mapRenderer.Render(_skCanvas, _rasterizingTilingSkpMap.Map.Navigator.Viewport, _rasterizingTilingSkpMap.Map.Layers, _rasterizingTilingSkpMap.Map.Widgets, Color.White);
     }
 
     [Benchmark]
     public void RenderTilingPng()
     {
-        _mapRenderer.Render(_skCanvas, _tilingPngMap.Map.Navigator.Viewport, _tilingPngMap.Map!.Layers, _tilingPngMap.Map!.Widgets, Color.White);
+        _mapRenderer.Render(_skCanvas, _tilingPngMap.Map.Navigator.Viewport, _tilingPngMap.Map.Layers, _tilingPngMap.Map.Widgets, Color.White);
     }
 
     [Benchmark]

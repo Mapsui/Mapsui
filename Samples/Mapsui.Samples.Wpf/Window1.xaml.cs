@@ -1,14 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Mapsui.Extensions;
-using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.UI.Wpf;
 using Mapsui.Samples.Common.Maps.Widgets;
 
 namespace Mapsui.Samples.Wpf;
@@ -90,20 +87,6 @@ public partial class Window1
             });
         };
         return radioButton;
-    }
-
-    private static string ToMultiLineString(LimitedQueue<LogModel> logMessages)
-    {
-        var result = new StringBuilder();
-
-        var copy = logMessages.ToList();
-        foreach (var logMessage in copy)
-        {
-            if (logMessage == null) continue;
-            result.Append($"{logMessage.LogLevel} {logMessage.Message}{Environment.NewLine}");
-        }
-
-        return result.ToString();
     }
 
     private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

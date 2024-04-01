@@ -3,7 +3,6 @@ using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Tiling;
-using Mapsui.UI.WinUI;
 using RadioButton = Microsoft.UI.Xaml.Controls.RadioButton;
 using Mapsui.Samples.Common.Maps.Widgets;
 
