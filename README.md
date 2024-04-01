@@ -1,14 +1,17 @@
 ## Mapsui (pronounced map-su-wii)
 
-Mapsui is a map component to use in apps on platforms like MAUI, Avalonia, Uno, WPF and Blazor. For a list of all supported platforms see the table below. The right most column has a link to the guickstart guide.
+Mapsui is a map component for apps built with: MAUI, WPF, Avalonia, Uno, Blazor, WinUI, Eto, .NET Android and .NET iOS. 
+
+## Quick Start
+Below is a table with the nuget packages for all the supported UI frameworks. The right most column has a link to the guickstart.
 
 ## Samples
-After going through the guickstart guide you could look into the samples. All samples work the same on all platforms. You can view online samples presented in Blazor [here](https://mapsui.com/samples/). Each sample has an accompaning 'source code' tab you can check out. 
+After going through the guickstart you should look into the samples. All samples work the same on all platforms. You can view online samples presented in Blazor [here](https://mapsui.com/samples/). Each sample has an accompaning 'source code' tab you can use to build your own version. 
 
 ## Documentation
 The documentation can be found at [mapsui.com](https://mapsui.com).
 
-## Platform Nugets
+## UI Framework Nugets
 
 | Package | Version  | Downloads | Quickstart Guide |
 | ---------------|:-------------:|:-------------:|:------------------------------------------------------------------------------------:|
@@ -52,7 +55,7 @@ The documentation can be found at [mapsui.com](https://mapsui.com).
 - Use screenshots and capture gif animations for issues that are hard to explain.
 - Create minimal reproducible samples if possible. This speeds up fixing the issue a lot.
 - Make yourself heard. We need to know what you are struggling with. Sure, you need to be respectful but don't be too modest.
-- You can vote on [feature-request issues](https://github.com/Mapsui/Mapsui/issues?q=is%3Aopen+label%3Afeature-request+sort%3Areactions-%2B1-desc) by adding a thumbs up on the first post of the issue.
+- You can vote on [issues](https://github.com/Mapsui/Mapsui/issues?q=is%3Aopen+sort%3Areactions-%2B1-desc) by adding a thumbs up on the first post of the issue.
 - Close an issue if your question is answered.
 
 ## Contributing
@@ -60,6 +63,8 @@ See the [guidelines](http://mapsui.com/documentation/contributors-guidelines.htm
 
 ## Thanks go to
 - The developers of SharpMap from which this project was born.
+- The contributors to [NTS](https://github.com/NetTopologySuite/NetTopologySuite) and [BruTile](https://github.com/BruTile/BruTile), components that we depend on.
+- [SkiaSharp](https://github.com/mono/SkiaSharp) which we use for all our rendering.
 - Our users. Do not underestimate the value of good bug reports and tests.
 - [realinfo](https://github.com/reallinfo) for providing the logo
 - Our fantastic [contributors](https://github.com/Mapsui/Mapsui/graphs/contributors)!
