@@ -1,194 +1,12 @@
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.Drawing;
 using System.Globalization;
 
-namespace Mapsui.Styles1;
+namespace Mapsui.Extensions;
 
-public class Color
+public static class ColorFunctions
 {
-    public Color()
-    {
-        A = 255;
-    }
-
-    public Color(Color color)
-    {
-        R = color.R;
-        G = color.G;
-        B = color.B;
-        A = color.A;
-    }
-
-    public Color(int red, int green, int blue, int alpha = 255)
-    {
-        R = red;
-        G = green;
-        B = blue;
-        A = alpha;
-    }
-
-    public int R { get; set; }
-    public int G { get; set; }
-    public int B { get; set; }
-    public int A { get; set; }
-
-    /// <summary>
-    /// Known HTML color names and hex code for RGB color
-    /// </summary>
-    public static readonly Dictionary<string, string> KnownColors = new()
-    {
-        { "AliceBlue".ToLower(), "#F0F8FF" },
-        { "AntiqueWhite".ToLower(), "#FAEBD7" },
-        { "Aqua".ToLower(), "#00FFFF" },
-        { "Aquamarine".ToLower(), "#7FFFD4" },
-        { "Azure".ToLower(), "#F0FFFF" },
-        { "Beige".ToLower(), "#F5F5DC" },
-        { "Bisque".ToLower(), "#FFE4C4" },
-        { "Black".ToLower(), "#000000" },
-        { "BlanchedAlmond".ToLower(), "#FFEBCD" },
-        { "Blue".ToLower(), "#0000FF" },
-        { "BlueViolet".ToLower(), "#8A2BE2" },
-        { "Brown".ToLower(), "#A52A2A" },
-        { "BurlyWood".ToLower(), "#DEB887" },
-        { "CadetBlue".ToLower(), "#5F9EA0" },
-        { "Chartreuse".ToLower(), "#7FFF00" },
-        { "Chocolate".ToLower(), "#D2691E" },
-        { "Coral".ToLower(), "#FF7F50" },
-        { "CornflowerBlue".ToLower(), "#6495ED" },
-        { "Cornsilk".ToLower(), "#FFF8DC" },
-        { "Crimson".ToLower(), "#DC143C" },
-        { "Cyan".ToLower(), "#00FFFF" },
-        { "DarkBlue".ToLower(), "#00008B" },
-        { "DarkCyan".ToLower(), "#008B8B" },
-        { "DarkGoldenRod".ToLower(), "#B8860B" },
-        { "DarkGray".ToLower(), "#A9A9A9" },
-        { "DarkGrey".ToLower(), "#A9A9A9" },
-        { "DarkGreen".ToLower(), "#006400" },
-        { "DarkKhaki".ToLower(), "#BDB76B" },
-        { "DarkMagenta".ToLower(), "#8B008B" },
-        { "DarkOliveGreen".ToLower(), "#556B2F" },
-        { "DarkOrange".ToLower(), "#FF8C00" },
-        { "DarkOrchid".ToLower(), "#9932CC" },
-        { "DarkRed".ToLower(), "#8B0000" },
-        { "DarkSalmon".ToLower(), "#E9967A" },
-        { "DarkSeaGreen".ToLower(), "#8FBC8F" },
-        { "DarkSlateBlue".ToLower(), "#483D8B" },
-        { "DarkSlateGray".ToLower(), "#2F4F4F" },
-        { "DarkSlateGrey".ToLower(), "#2F4F4F" },
-        { "DarkTurquoise".ToLower(), "#00CED1" },
-        { "DarkViolet".ToLower(), "#9400D3" },
-        { "DeepPink".ToLower(), "#FF1493" },
-        { "DeepSkyBlue".ToLower(), "#00BFFF" },
-        { "DimGray".ToLower(), "#696969" },
-        { "DimGrey".ToLower(), "#696969" },
-        { "DodgerBlue".ToLower(), "#1E90FF" },
-        { "FireBrick".ToLower(), "#B22222" },
-        { "FloralWhite".ToLower(), "#FFFAF0" },
-        { "ForestGreen".ToLower(), "#228B22" },
-        { "Fuchsia".ToLower(), "#FF00FF" },
-        { "Gainsboro".ToLower(), "#DCDCDC" },
-        { "GhostWhite".ToLower(), "#F8F8FF" },
-        { "Gold".ToLower(), "#FFD700" },
-        { "GoldenRod".ToLower(), "#DAA520" },
-        { "Gray".ToLower(), "#808080" },
-        { "Grey".ToLower(), "#808080" },
-        { "Green".ToLower(), "#008000" },
-        { "GreenYellow".ToLower(), "#ADFF2F" },
-        { "HoneyDew".ToLower(), "#F0FFF0" },
-        { "HotPink".ToLower(), "#FF69B4" },
-        { "IndianRed ".ToLower(), "#CD5C5C" },
-        { "Indigo ".ToLower(), "#4B0082" },
-        { "Ivory".ToLower(), "#FFFFF0" },
-        { "Khaki".ToLower(), "#F0E68C" },
-        { "Lavender".ToLower(), "#E6E6FA" },
-        { "LavenderBlush".ToLower(), "#FFF0F5" },
-        { "LawnGreen".ToLower(), "#7CFC00" },
-        { "LemonChiffon".ToLower(), "#FFFACD" },
-        { "LightBlue".ToLower(), "#ADD8E6" },
-        { "LightCoral".ToLower(), "#F08080" },
-        { "LightCyan".ToLower(), "#E0FFFF" },
-        { "LightGoldenRodYellow".ToLower(), "#FAFAD2" },
-        { "LightGray".ToLower(), "#D3D3D3" },
-        { "LightGrey".ToLower(), "#D3D3D3" },
-        { "LightGreen".ToLower(), "#90EE90" },
-        { "LightPink".ToLower(), "#FFB6C1" },
-        { "LightSalmon".ToLower(), "#FFA07A" },
-        { "LightSeaGreen".ToLower(), "#20B2AA" },
-        { "LightSkyBlue".ToLower(), "#87CEFA" },
-        { "LightSlateGray".ToLower(), "#778899" },
-        { "LightSlateGrey".ToLower(), "#778899" },
-        { "LightSteelBlue".ToLower(), "#B0C4DE" },
-        { "LightYellow".ToLower(), "#FFFFE0" },
-        { "Lime".ToLower(), "#00FF00" },
-        { "LimeGreen".ToLower(), "#32CD32" },
-        { "Linen".ToLower(), "#FAF0E6" },
-        { "Magenta".ToLower(), "#FF00FF" },
-        { "Maroon".ToLower(), "#800000" },
-        { "MediumAquaMarine".ToLower(), "#66CDAA" },
-        { "MediumBlue".ToLower(), "#0000CD" },
-        { "MediumOrchid".ToLower(), "#BA55D3" },
-        { "MediumPurple".ToLower(), "#9370DB" },
-        { "MediumSeaGreen".ToLower(), "#3CB371" },
-        { "MediumSlateBlue".ToLower(), "#7B68EE" },
-        { "MediumSpringGreen".ToLower(), "#00FA9A" },
-        { "MediumTurquoise".ToLower(), "#48D1CC" },
-        { "MediumVioletRed".ToLower(), "#C71585" },
-        { "MidnightBlue".ToLower(), "#191970" },
-        { "MintCream".ToLower(), "#F5FFFA" },
-        { "MistyRose".ToLower(), "#FFE4E1" },
-        { "Moccasin".ToLower(), "#FFE4B5" },
-        { "NavajoWhite".ToLower(), "#FFDEAD" },
-        { "Navy".ToLower(), "#000080" },
-        { "OldLace".ToLower(), "#FDF5E6" },
-        { "Olive".ToLower(), "#808000" },
-        { "OliveDrab".ToLower(), "#6B8E23" },
-        { "Orange".ToLower(), "#FFA500" },
-        { "OrangeRed".ToLower(), "#FF4500" },
-        { "Orchid".ToLower(), "#DA70D6" },
-        { "PaleGoldenRod".ToLower(), "#EEE8AA" },
-        { "PaleGreen".ToLower(), "#98FB98" },
-        { "PaleTurquoise".ToLower(), "#AFEEEE" },
-        { "PaleVioletRed".ToLower(), "#DB7093" },
-        { "PapayaWhip".ToLower(), "#FFEFD5" },
-        { "PeachPuff".ToLower(), "#FFDAB9" },
-        { "Peru".ToLower(), "#CD853F" },
-        { "Pink".ToLower(), "#FFC0CB" },
-        { "Plum".ToLower(), "#DDA0DD" },
-        { "PowderBlue".ToLower(), "#B0E0E6" },
-        { "Purple".ToLower(), "#800080" },
-        { "RebeccaPurple".ToLower(), "#663399" },
-        { "Red".ToLower(), "#FF0000" },
-        { "RosyBrown".ToLower(), "#BC8F8F" },
-        { "RoyalBlue".ToLower(), "#4169E1" },
-        { "SaddleBrown".ToLower(), "#8B4513" },
-        { "Salmon".ToLower(), "#FA8072" },
-        { "SandyBrown".ToLower(), "#F4A460" },
-        { "SeaGreen".ToLower(), "#2E8B57" },
-        { "SeaShell".ToLower(), "#FFF5EE" },
-        { "Sienna".ToLower(), "#A0522D" },
-        { "Silver".ToLower(), "#C0C0C0" },
-        { "SkyBlue".ToLower(), "#87CEEB" },
-        { "SlateBlue".ToLower(), "#6A5ACD" },
-        { "SlateGray".ToLower(), "#708090" },
-        { "SlateGrey".ToLower(), "#708090" },
-        { "Snow".ToLower(), "#FFFAFA" },
-        { "SpringGreen".ToLower(), "#00FF7F" },
-        { "SteelBlue".ToLower(), "#4682B4" },
-        { "Tan".ToLower(), "#D2B48C" },
-        { "Teal".ToLower(), "#008080" },
-        { "Thistle".ToLower(), "#D8BFD8" },
-        { "Tomato".ToLower(), "#FF6347" },
-        { "Turquoise".ToLower(), "#40E0D0" },
-        { "Violet".ToLower(), "#EE82EE" },
-        { "Wheat".ToLower(), "#F5DEB3" },
-        { "White".ToLower(), "#FFFFFF" },
-        { "WhiteSmoke".ToLower(), "#F5F5F5" },
-        { "Yellow".ToLower(), "#FFFF00" },
-        { "YellowGreen".ToLower(), "#9ACD32" }
-    };
-
-    public static Color Transparent => new() { A = 0, R = 255, G = 255, B = 255 };
-
+    public static readonly Color Transparent = Color.FromArgb(0, 255, 255, 255);
     public static readonly Color AliceBlue = FromString("#F0F8FF");
     public static readonly Color AntiqueWhite = FromString("#FAEBD7");
     public static readonly Color Aqua = FromString("#00FFFF");
@@ -338,44 +156,6 @@ public class Color
     public static readonly Color Yellow = FromString("#FFFF00");
     public static readonly Color YellowGreen = FromString("#9ACD32");
 
-    public static Color FromArgb(int a, int r, int g, int b)
-    {
-        return new Color { A = a, R = r, G = g, B = b };
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (obj is not Color color)
-            return false;
-        return Equals(color);
-    }
-
-    public bool Equals(Color? color)
-    {
-        if (color == null)
-            return false;
-
-        if (R != color.R) return false;
-        if (G != color.G) return false;
-        if (B != color.B) return false;
-        if (A != color.A) return false;
-        return true;
-    }
-
-    public override int GetHashCode()
-    {
-        return R.GetHashCode() ^ G.GetHashCode() ^ B.GetHashCode() ^ A.GetHashCode();
-    }
-
-    public static bool operator ==(Color? color1, Color? color2)
-    {
-        return Equals(color1, color2);
-    }
-
-    public static bool operator !=(Color? color1, Color? color2)
-    {
-        return !Equals(color1, color2);
-    }
 
     /// <summary>
     /// Converts a string in Mapbox GL format to a Mapsui Color
@@ -398,17 +178,13 @@ public class Color
 
         from = from.Trim().ToLower();
 
-        // Check, if it is a known color
-        if (KnownColors.TryGetValue(from, out var value))
-            from = value;
-
         if (from.StartsWith('#'))
         {
             if (from.Length == 7)
             {
                 var color = int.Parse(from[1..], NumberStyles.AllowHexSpecifier,
                     CultureInfo.InvariantCulture);
-                result = new Color(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF);
+                result = Color.FromArgb(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF);
             }
             else if (from.Length == 4)
             {
@@ -417,7 +193,7 @@ public class Color
                 var r = (color >> 8 & 0xF) * 16 + (color >> 8 & 0xF);
                 var g = (color >> 4 & 0xF) * 16 + (color >> 4 & 0xF);
                 var b = (color & 0xF) * 16 + (color & 0xF);
-                result = new Color(r, g, b);
+                result = Color.FromArgb(r, g, b);
             }
         }
         else if (from.StartsWith("rgba"))
@@ -432,7 +208,7 @@ public class Color
             var b = int.Parse(split[2].Trim(), CultureInfo.InvariantCulture);
             var a = float.Parse(split[3].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture);
 
-            result = new Color(r, g, b, (int)(a * 255));
+            result = Color.FromArgb((int)(a * 255), r, g, b);
         }
         else if (from.StartsWith("rgb"))
         {
@@ -445,7 +221,7 @@ public class Color
             var g = int.Parse(split[1].Trim(), CultureInfo.InvariantCulture);
             var b = int.Parse(split[2].Trim(), CultureInfo.InvariantCulture);
 
-            result = new Color(r, g, b);
+            result = Color.FromArgb(r, g, b);
         }
         else if (from.StartsWith("hsla"))
         {
@@ -479,7 +255,7 @@ public class Color
         {
             throw new ArgumentException($"Could not create color from input string '{from}'");
         }
-        return result;
+        return result.Value;
     }
 
     /// <summary>
@@ -515,7 +291,7 @@ public class Color
                 b = GetColorComponent(temp1, temp2, h - 1.0f / 3.0f);
             }
         }
-        return FromArgb(a,
+        return Color.FromArgb(a,
             (int)Math.Round(r * 255.0f),
             (int)Math.Round(g * 255.0f),
             (int)Math.Round(b * 255.0f));
@@ -557,6 +333,6 @@ public class Color
         if (opacity == null)
             return color;
 
-        return new Color(color.R, color.G, color.B, (int)Math.Round(color.A * (float)opacity));
+        return Color.FromArgb((int)Math.Round(color.A * (float)opacity), color.R, color.G, color.B);
     }
 }

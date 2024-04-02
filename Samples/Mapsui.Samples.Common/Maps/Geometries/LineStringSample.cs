@@ -1,5 +1,4 @@
-﻿using Mapsui.Extensions;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
 using Mapsui.Projections;
@@ -7,6 +6,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -50,7 +50,7 @@ public class LineStringSample : ISample
             Fill = null,
             Outline = null,
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
-            Line = { Color = ColorExtensions2.FromString("YellowGreen"), Width = 4 }
+            Line = { Color = Color.YellowGreen, Width = 4 }
         };
     }
 

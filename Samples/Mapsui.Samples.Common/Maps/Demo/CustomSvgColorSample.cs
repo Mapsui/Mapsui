@@ -99,10 +99,10 @@ public class CustomSvgStyleSample : ISample
 
     private static Color GetTypeColor(int type) => type switch
     {
-        0 => ColorExtensions2.FromString("#D8737F"),
-        1 => ColorExtensions2.FromString("#AB6C82"),
-        2 => ColorExtensions2.FromString("#685D79"),
-        3 => ColorExtensions2.FromString("#475C7A"),
+        0 => ColorFunctions.FromString("#D8737F"),
+        1 => ColorFunctions.FromString("#AB6C82"),
+        2 => ColorFunctions.FromString("#685D79"),
+        3 => ColorFunctions.FromString("#475C7A"),
         _ => throw new Exception("Unknown type"),
     };
 

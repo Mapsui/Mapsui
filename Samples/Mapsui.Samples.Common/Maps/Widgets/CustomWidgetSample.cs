@@ -52,7 +52,7 @@ public class CustomWidget : BaseWidget
         if (e.TapType == TapType.Single)
             Color = GenerateRandomColor();
         else
-            Color = ColorExtensions2.Transparent;
+            Color = ColorFunctions.Transparent;
         return false;
     }
 

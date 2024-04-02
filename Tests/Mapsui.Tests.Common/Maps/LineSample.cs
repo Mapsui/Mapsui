@@ -22,7 +22,7 @@ public class LineSample : ISample
     {
         var map = new Map
         {
-            BackColor = ColorExtensions2.FromString("WhiteSmoke"),
+            BackColor = ColorFunctions.WhiteSmoke,
         };
 
         map.Navigator.ZoomToPanBounds(MBoxFit.Fit);
