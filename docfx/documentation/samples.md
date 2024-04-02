@@ -1,13 +1,6 @@
 # Samples
 
-The best way to get started with mapsui is to download the source and run a samples app. There are sample apps for each supported platform. Try for instance the Avalonia app (runs on Windows, Mac and Linux) [Mapsui.Samples.Avalonia](https://github.com/Mapsui/Mapsui/tree/main/Samples/Mapsui.Samples.Avalonia). If you run any of the sample you will see there is a way to selected a category and and within that category several specific samples. 
+After going through the guickstart you should look into the samples. All samples work the same on all platforms. You can view online samples presented in Blazor [here](https://mapsui.com/samples/). Each sample has an accompaning 'source code' tab you can use to build your own version. 
 
-Running the samples will help you to see what Mapsui can do. All these samples correspond to a specific sample class that is derived from ISample (or IMapControlSample). The most easy way to find them is to search for the name of the sample that is displayed including quotes. For instance, searching for `"1 Points"` will lead you to the file PointsSample.cs. 
-
-## Where can I find the code for the samples?
-The samples can be found in this folder: Samples\Mapsui\Mapsui.Samples.Common\Maps. 
-- For main look [here](https://github.com/Mapsui/Mapsui/tree/main/Samples/Mapsui.Samples.Common/Maps)
-- For 3.0 look [here](https://github.com/Mapsui/Mapsui/tree/develop/3.0/Samples/Mapsui.Samples.Common/Maps)
-
-## Online Blazor samples
-[Blazor samples](https://mapsui.com/samples/)
+## Download samples if you have to
+Currently the source code of the samples does not always contain all needed code. In that case you may need to [clone the project](https://github.com/mapsui/mapsui) and open the .slnf of your favorite UI framework. Then set Mapsui.Samples.'YourFavorityUIFramework'.csproj as startup project. If you run any of the samplea you will see there is a way to selected a category and within that category several specific samples. All these samples correspond to a specific sample class that is derived from ISample (or IMapControlSample). The most easy way to find them is to search for the name of the sample that is displayed including quotes. For instance, searching for `"Points"` will lead you to the file PointsSample.cs. 
