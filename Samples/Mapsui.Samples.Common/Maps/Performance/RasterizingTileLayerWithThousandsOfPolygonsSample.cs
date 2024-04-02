@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using Mapsui.Nts.Providers;
 using Mapsui.Projections;
@@ -14,6 +11,10 @@ using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using NetTopologySuite.Geometries;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 
 #pragma warning disable IDISP001 // Dispose created
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
@@ -56,7 +57,7 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
         var layer = (_map?.Layers)?.First(f => f is RasterizingTileLayer) as RasterizingTileLayer;
         var random = new Random();
         // random color
-        Color color = new Color(random.Next(255), random.Next(255), random.Next(255));
+        Color color = Color.FromArgb(random.Next(255), random.Next(255), random.Next(255));
         layer!.SourceLayer.Style = new VectorStyle
         {
             Fill = new Brush(color),

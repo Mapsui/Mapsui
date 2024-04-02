@@ -5,6 +5,7 @@ using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets.InfoWidgets;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Projection;

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Samples.Common;
@@ -20,7 +22,7 @@ public class LineSample : ISample
     {
         var map = new Map
         {
-            BackColor = Color.FromString("WhiteSmoke"),
+            BackColor = ColorExtensions2.FromString("WhiteSmoke"),
         };
 
         map.Navigator.ZoomToPanBounds(MBoxFit.Fit);

@@ -7,6 +7,7 @@ using Mapsui.Tiling;
 using Mapsui.Widgets.InfoWidgets;
 using System.Collections.Generic;
 using System.Net;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;

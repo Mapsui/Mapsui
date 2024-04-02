@@ -1,7 +1,9 @@
 ﻿using Mapsui.Layers.AnimatedLayers;
 using Mapsui.Styles;
-using System.Threading.Tasks;
 using Mapsui.Tiling;
+using System.Drawing;
+using System.Threading.Tasks;
+
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 

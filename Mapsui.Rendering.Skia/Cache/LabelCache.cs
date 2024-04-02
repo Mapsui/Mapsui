@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using Mapsui.Extensions;
 using Mapsui.Styles;
+using System.Drawing;
 
 namespace Mapsui.Rendering.Skia.Cache;
 

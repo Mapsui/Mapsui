@@ -3,6 +3,7 @@ using Mapsui.Projections;
 using Mapsui.Styles;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Mapsui.Widgets.ScaleBar;
 
@@ -85,7 +86,7 @@ public class ScaleBarWidget : BaseWidget
         }
     }
 
-    private Color _textColor = new(0, 0, 0);
+    private Color _textColor = Color.FromArgb(0, 0, 0);
 
     /// <summary>
     /// Foreground color of scalebar and text
@@ -102,7 +103,7 @@ public class ScaleBarWidget : BaseWidget
         }
     }
 
-    private Color _haloColor = new(255, 255, 255);
+    private Color _haloColor = Color.FromArgb(255, 255, 255);
 
     /// <summary>
     /// Halo color of scalebar and text, so that it is better visible

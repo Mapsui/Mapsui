@@ -4,8 +4,8 @@ using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using Mapsui.Widgets.ScaleBar;
+using System.Drawing;
 using System.Threading.Tasks;
-using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
@@ -59,7 +59,7 @@ public class ViewportZoomToResolutionAnimationSample : ISample
         Padding = new MRect(10),
         HorizontalAlignment = HorizontalAlignment.Left,
         VerticalAlignment = verticalAlignment,
-        BackColor = new Color(0, 123, 255),
+        BackColor = Color.FromArgb(0, 123, 255),
         TextColor = Color.White
     };
 }

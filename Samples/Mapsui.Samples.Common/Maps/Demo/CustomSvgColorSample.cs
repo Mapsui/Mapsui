@@ -1,22 +1,23 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Extensions;
+using Mapsui.Layers;
 using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Samples.Common.Maps.Styles;
+using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
 using Mapsui.Utilities;
+using Mapsui.Widgets.BoxWidgets;
+using SkiaSharp;
+using Svg;
 using Svg.Model;
 using Svg.Skia;
-using Svg;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using SkiaSharp;
-using Mapsui.Styles;
-using System.Diagnostics.CodeAnalysis;
-using Mapsui.Samples.Common.Maps.Styles;
-using Mapsui.Widgets.BoxWidgets;
-using Mapsui.Extensions;
 
 namespace Mapsui.Samples.Common.Maps.Demo;
 
@@ -98,10 +99,10 @@ public class CustomSvgStyleSample : ISample
 
     private static Color GetTypeColor(int type) => type switch
     {
-        0 => Color.FromString("#D8737F"),
-        1 => Color.FromString("#AB6C82"),
-        2 => Color.FromString("#685D79"),
-        3 => Color.FromString("#475C7A"),
+        0 => ColorExtensions2.FromString("#D8737F"),
+        1 => ColorExtensions2.FromString("#AB6C82"),
+        2 => ColorExtensions2.FromString("#685D79"),
+        3 => ColorExtensions2.FromString("#475C7A"),
         _ => throw new Exception("Unknown type"),
     };
 

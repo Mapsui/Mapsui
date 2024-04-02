@@ -5,6 +5,7 @@
 // This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 
 using System;
+using System.Drawing;
 
 namespace Mapsui.Styles;
 
@@ -101,7 +102,7 @@ public class LabelStyle : Style
         Font = new Font(labelStyle.Font);
         Offset = new Offset(labelStyle.Offset);
         CollisionDetection = false;
-        ForeColor = new Color(labelStyle.ForeColor);
+        ForeColor = labelStyle.ForeColor;
         BackColor = (labelStyle.BackColor == null) ? null : new Brush(labelStyle.BackColor);
         HorizontalAlignment = HorizontalAlignmentEnum.Center;
         VerticalAlignment = VerticalAlignmentEnum.Center;

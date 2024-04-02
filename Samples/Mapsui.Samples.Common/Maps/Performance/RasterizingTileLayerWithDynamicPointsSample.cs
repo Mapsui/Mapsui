@@ -1,11 +1,12 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 using System;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Threading.Tasks;
-using Mapsui.Tiling.Layers;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 

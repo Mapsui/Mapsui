@@ -8,6 +8,7 @@ using Mapsui.Tiling;
 using Mapsui.Widgets.InfoWidgets;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;

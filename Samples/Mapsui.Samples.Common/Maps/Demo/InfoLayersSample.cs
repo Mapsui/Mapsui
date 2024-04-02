@@ -9,6 +9,7 @@ using Mapsui.Widgets.InfoWidgets;
 using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
@@ -170,7 +171,7 @@ public class InfoLayersSample : ISample, ISampleTest
         return new SymbolStyle
         {
             SymbolScale = 0.8,
-            Fill = new Brush(new Color(213, 234, 194)),
+            Fill = new Brush(Color.FromArgb(213, 234, 194)),
             Outline = { Color = Color.Gray, Width = 1 }
         };
     }

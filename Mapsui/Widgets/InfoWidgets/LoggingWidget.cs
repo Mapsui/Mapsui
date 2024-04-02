@@ -1,8 +1,8 @@
 ﻿using Mapsui.Logging;
-using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
 using System;
 using System.Collections.Concurrent;
+using System.Drawing;
 
 namespace Mapsui.Widgets.InfoWidgets;
 

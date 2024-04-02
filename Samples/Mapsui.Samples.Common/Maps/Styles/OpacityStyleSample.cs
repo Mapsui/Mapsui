@@ -4,6 +4,7 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using NetTopologySuite.Geometries;
+using System.Drawing;
 using System.Threading.Tasks;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
@@ -31,7 +32,7 @@ public class OpacityStyleSample : ISample
             DataSource = new MemoryProvider(CreatePolygon().ToFeature()),
             Style = new VectorStyle
             {
-                Fill = new Brush(new Color(150, 150, 30)),
+                Fill = new Brush(Color.FromArgb(150, 150, 30)),
                 Outline = new Pen
                 {
                     Color = Color.Orange,
@@ -52,7 +53,7 @@ public class OpacityStyleSample : ISample
             {
                 Line = new Pen
                 {
-                    Color = new Color(new Color(30, 150, 150)),
+                    Color = Color.FromArgb(30, 150, 150),
                     PenStrokeCap = PenStrokeCap.Round,
                     PenStyle = PenStyle.Solid,
                     Width = 10,

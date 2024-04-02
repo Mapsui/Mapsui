@@ -8,6 +8,7 @@ using Mapsui.UI;
 using Mapsui.Widgets.InfoWidgets;
 using NetTopologySuite.Geometries;
 using System.Collections.Generic;
+using System.Drawing;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.

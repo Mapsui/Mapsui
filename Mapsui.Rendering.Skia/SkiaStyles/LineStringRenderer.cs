@@ -3,6 +3,7 @@ using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
+using System.Drawing;
 
 namespace Mapsui.Rendering.Skia;
 

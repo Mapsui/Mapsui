@@ -4,6 +4,7 @@ using Mapsui.Nts.Extensions;
 using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Navigation;

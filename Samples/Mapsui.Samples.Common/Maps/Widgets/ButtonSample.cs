@@ -1,10 +1,10 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Manipulations;
-using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -61,7 +61,7 @@ public class ButtonSample : ISample
             Margin = new MRect(30),
             Padding = new MRect(10, 8),
             CornerRadius = 8,
-            BackColor = new Color(0, 123, 255),
+            BackColor = Color.FromArgb(0, 123, 255),
             TextColor = Color.White,
             Tapped = tapped
         };

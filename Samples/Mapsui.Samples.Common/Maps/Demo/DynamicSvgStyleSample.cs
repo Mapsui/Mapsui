@@ -6,6 +6,7 @@ using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
 using Mapsui.Utilities;
 using System;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 

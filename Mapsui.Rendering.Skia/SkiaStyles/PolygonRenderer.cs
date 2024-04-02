@@ -3,6 +3,7 @@ using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
+using System.Drawing;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -75,9 +76,9 @@ internal static class PolygonRenderer
 
         var paintFill = new SKPaint { IsAntialias = true };
 
-        if (brush != null)
+        if (brush?.Color is not null)
         {
-            fillColor = brush.Color;
+            fillColor = brush.Color.Value;
         }
 
         // Is there a FillStyle?

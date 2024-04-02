@@ -4,9 +4,10 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.UI;
-using System.IO;
 using Mapsui.Nts.Providers;
 using Mapsui.Tiling.Layers;
+using System.Drawing;
+using System.IO;
 
 #pragma warning disable IDISP001 // Dispose created
 

@@ -6,6 +6,7 @@ using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
 using Mapsui.Widgets.InfoWidgets;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 

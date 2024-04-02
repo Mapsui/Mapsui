@@ -8,6 +8,7 @@ using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling.Layers;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 

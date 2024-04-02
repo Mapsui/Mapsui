@@ -1,5 +1,4 @@
 ﻿using Mapsui.Samples.Common;
-using Mapsui.Styles;
 using System.Threading.Tasks;
 
 namespace Mapsui.Tests.Common.Maps;
@@ -16,7 +15,7 @@ public class EmptySample : ISample
     {
         var map = new Map
         {
-            BackColor = Color.FromString("WhiteSmoke"),
+            BackColor = System.Drawing.Color.WhiteSmoke,
         };
 
         map.Navigator.CenterOnAndZoomTo(new MPoint(0, 0), 1);

@@ -1,7 +1,7 @@
 ﻿using Mapsui.Extensions;
-using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
 using System;
+using System.Drawing;
 using System.Text;
 
 namespace Mapsui.Widgets.InfoWidgets;
@@ -20,7 +20,7 @@ public class MapInfoWidget : TextBoxWidget
         Margin = new MRect(16);
         Padding = new MRect(10);
         CornerRadius = 4;
-        BackColor = new Color(108, 117, 125);
+        BackColor = Color.FromArgb(108, 117, 125);
         TextColor = Color.White;
     }
 

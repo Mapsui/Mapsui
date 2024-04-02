@@ -1,11 +1,11 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Manipulations;
 using Mapsui.Rendering.Skia.SkiaWidgets;
-using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using SkiaSharp;
 using System;
+using System.Drawing;
 using System.Threading.Tasks;
 using Mapsui.Rendering.Skia.Extensions;
 
@@ -27,7 +27,7 @@ public class CustomWidgetSample : ISample
             Margin = new MRect(20),
             Width = 100,
             Height = 20,
-            Color = new Color(218, 165, 32, 127)
+            Color = Color.FromArgb(127, 218, 165, 32)
         });
 
         return Task.FromResult(map);
@@ -52,7 +52,7 @@ public class CustomWidget : BaseWidget
         if (e.TapType == TapType.Single)
             Color = GenerateRandomColor();
         else
-            Color = Color.Transparent;
+            Color = ColorExtensions2.Transparent;
         return false;
     }
 
@@ -60,7 +60,7 @@ public class CustomWidget : BaseWidget
     {
         byte[] rgb = new byte[3];
         _random.NextBytes(rgb);
-        return new Color(rgb[0], rgb[1], rgb[2]);
+        return System.Drawing.Color.FromArgb(rgb[0], rgb[1], rgb[2]);
     }
 }
 

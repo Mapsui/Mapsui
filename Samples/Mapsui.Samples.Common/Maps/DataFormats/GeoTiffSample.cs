@@ -2,8 +2,8 @@
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Utilities;
-using Mapsui.Styles;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,6 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using SkiaSharp;
-using Color = Mapsui.Styles.Color;
 
 namespace Mapsui.Extensions.Provider;
 

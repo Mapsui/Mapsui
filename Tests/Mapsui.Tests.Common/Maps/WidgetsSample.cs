@@ -1,8 +1,8 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Samples.Common;
-using Mapsui.Styles;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Mapsui.Tests.Common.Maps;
@@ -20,7 +20,7 @@ public class WidgetsSample : ISample
     {
         var map = new Map
         {
-            BackColor = Color.FromString("WhiteSmoke"),
+            BackColor = Color.WhiteSmoke,
             CRS = "EPSG:3857",
         };
 

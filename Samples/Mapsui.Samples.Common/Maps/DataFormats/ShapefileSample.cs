@@ -1,12 +1,13 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
+using System.Drawing;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
@@ -126,7 +127,7 @@ public class ShapefileSample : ISample
     private static GradientTheme CreateCountryLabelTheme()
     {
         // Lets scale the labels so that big countries have larger texts as well
-        var backColor = new Brush { Color = new Color(255, 255, 255, 128) };
+        var backColor = new Brush { Color = Color.FromArgb(128, 255, 255, 255) };
 
         var lblMin = new LabelStyle
         {

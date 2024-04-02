@@ -4,6 +4,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using NetTopologySuite.IO;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Styles;

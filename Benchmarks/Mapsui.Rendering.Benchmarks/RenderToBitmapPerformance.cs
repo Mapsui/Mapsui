@@ -11,6 +11,7 @@ using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Tests;
 using Mapsui.Styles.Thematics;
 using Mapsui.Nts.Providers;
+using System.Drawing;
 
 #pragma warning disable IDISP001
 #pragma warning disable IDISP003
@@ -128,8 +129,8 @@ public class RenderToBitmapPerformance
         // In this case we will just use the default values and override the fill-colors
         // using a color blender. If different line-widths, line- and fill-colors where used
         // in the min and max styles, these would automatically get linearly interpolated.
-        var min = new VectorStyle { Outline = new Pen { Color = Color.Black } };
-        var max = new VectorStyle { Outline = new Pen { Color = Color.Black } };
+        var min = new VectorStyle { Outline = new Styles.Pen { Color = Color.Black } };
+        var max = new VectorStyle { Outline = new Styles.Pen { Color = Color.Black } };
 
         // Create theme using a density from 0 (min) to 400 (max)
         return new GradientTheme("POPDENS", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };

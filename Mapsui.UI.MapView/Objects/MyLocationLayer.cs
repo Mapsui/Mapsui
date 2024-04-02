@@ -1,14 +1,15 @@
-﻿using Mapsui.Layers;
-using Mapsui.Styles;
-using System;
-using System.Collections.Generic;
-using Mapsui.Animations;
+﻿using Mapsui.Animations;
 using Mapsui.Extensions;
+using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
-using Mapsui.Utilities;
-using Animation = Mapsui.Animations.Animation;
+using Mapsui.Styles;
 using Mapsui.UI.Maui;
+using Mapsui.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using Animation = Mapsui.Animations.Animation;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -189,14 +190,14 @@ public class MyLocationLayer : BaseLayer
             Enabled = false,
             Type = CalloutType.Single,
             Title = "",
-            TitleFontColor = Styles.Color.Black,
+            TitleFontColor = Color.Black,
             ArrowAlignment = ArrowAlignment.Top,
             ArrowPosition = 0,
             SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
             MaxWidth = 300,
             RotateWithMap = true,
             SymbolOffsetRotatesWithMap = true,
-            Color = Styles.Color.White,
+            Color = Color.White,
             StrokeWidth = 0,
             ShadowWidth = 0
         };

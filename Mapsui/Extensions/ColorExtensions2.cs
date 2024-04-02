@@ -1,37 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 
-namespace Mapsui.Styles1;
+namespace Mapsui.Extensions;
 
-public class Color
+public static class ColorExtensions2
 {
-    public Color()
-    {
-        A = 255;
-    }
-
-    public Color(Color color)
-    {
-        R = color.R;
-        G = color.G;
-        B = color.B;
-        A = color.A;
-    }
-
-    public Color(int red, int green, int blue, int alpha = 255)
-    {
-        R = red;
-        G = green;
-        B = blue;
-        A = alpha;
-    }
-
-    public int R { get; set; }
-    public int G { get; set; }
-    public int B { get; set; }
-    public int A { get; set; }
-
     /// <summary>
     /// Known HTML color names and hex code for RGB color
     /// </summary>
@@ -187,7 +162,7 @@ public class Color
         { "YellowGreen".ToLower(), "#9ACD32" }
     };
 
-    public static Color Transparent => new() { A = 0, R = 255, G = 255, B = 255 };
+    public static Color Transparent => Color.FromArgb(0, 255, 255, 255);
 
     public static readonly Color AliceBlue = FromString("#F0F8FF");
     public static readonly Color AntiqueWhite = FromString("#FAEBD7");
@@ -338,44 +313,6 @@ public class Color
     public static readonly Color Yellow = FromString("#FFFF00");
     public static readonly Color YellowGreen = FromString("#9ACD32");
 
-    public static Color FromArgb(int a, int r, int g, int b)
-    {
-        return new Color { A = a, R = r, G = g, B = b };
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (obj is not Color color)
-            return false;
-        return Equals(color);
-    }
-
-    public bool Equals(Color? color)
-    {
-        if (color == null)
-            return false;
-
-        if (R != color.R) return false;
-        if (G != color.G) return false;
-        if (B != color.B) return false;
-        if (A != color.A) return false;
-        return true;
-    }
-
-    public override int GetHashCode()
-    {
-        return R.GetHashCode() ^ G.GetHashCode() ^ B.GetHashCode() ^ A.GetHashCode();
-    }
-
-    public static bool operator ==(Color? color1, Color? color2)
-    {
-        return Equals(color1, color2);
-    }
-
-    public static bool operator !=(Color? color1, Color? color2)
-    {
-        return !Equals(color1, color2);
-    }
 
     /// <summary>
     /// Converts a string in Mapbox GL format to a Mapsui Color
@@ -408,7 +345,7 @@ public class Color
             {
                 var color = int.Parse(from[1..], NumberStyles.AllowHexSpecifier,
                     CultureInfo.InvariantCulture);
-                result = new Color(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF);
+                result = Color.FromArgb(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF);
             }
             else if (from.Length == 4)
             {
@@ -417,7 +354,7 @@ public class Color
                 var r = (color >> 8 & 0xF) * 16 + (color >> 8 & 0xF);
                 var g = (color >> 4 & 0xF) * 16 + (color >> 4 & 0xF);
                 var b = (color & 0xF) * 16 + (color & 0xF);
-                result = new Color(r, g, b);
+                result = Color.FromArgb(r, g, b);
             }
         }
         else if (from.StartsWith("rgba"))
@@ -432,7 +369,7 @@ public class Color
             var b = int.Parse(split[2].Trim(), CultureInfo.InvariantCulture);
             var a = float.Parse(split[3].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture);
 
-            result = new Color(r, g, b, (int)(a * 255));
+            result = Color.FromArgb((int)(a * 255), r, g, b);
         }
         else if (from.StartsWith("rgb"))
         {
@@ -445,7 +382,7 @@ public class Color
             var g = int.Parse(split[1].Trim(), CultureInfo.InvariantCulture);
             var b = int.Parse(split[2].Trim(), CultureInfo.InvariantCulture);
 
-            result = new Color(r, g, b);
+            result = Color.FromArgb(r, g, b);
         }
         else if (from.StartsWith("hsla"))
         {
@@ -479,7 +416,7 @@ public class Color
         {
             throw new ArgumentException($"Could not create color from input string '{from}'");
         }
-        return result;
+        return result.Value;
     }
 
     /// <summary>
@@ -515,7 +452,7 @@ public class Color
                 b = GetColorComponent(temp1, temp2, h - 1.0f / 3.0f);
             }
         }
-        return FromArgb(a,
+        return Color.FromArgb(a,
             (int)Math.Round(r * 255.0f),
             (int)Math.Round(g * 255.0f),
             (int)Math.Round(b * 255.0f));
@@ -557,6 +494,6 @@ public class Color
         if (opacity == null)
             return color;
 
-        return new Color(color.R, color.G, color.B, (int)Math.Round(color.A * (float)opacity));
+        return Color.FromArgb((int)Math.Round(color.A * (float)opacity), color.R, color.G, color.B);
     }
 }

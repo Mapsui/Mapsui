@@ -1,5 +1,5 @@
-﻿using Mapsui.Styles;
-using SkiaSharp;
+﻿using SkiaSharp;
+using System.Drawing;
 
 namespace Mapsui.Rendering.Skia.Extensions;
 
@@ -7,6 +7,6 @@ public static class SKColorExtensions
 {
     public static Color ToMapsui(this SKColor color)
     {
-        return new Color(color.Red, color.Green, color.Blue, color.Alpha);
+        return Color.FromArgb(color.Alpha, color.Red, color.Green, color.Blue);
     }
 }

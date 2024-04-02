@@ -4,6 +4,7 @@ using Mapsui.Tiling;
 using Mapsui.Tiling.Layers;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable

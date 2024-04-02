@@ -28,7 +28,7 @@ public class BitmapSymbolInCollectionSample : ISample
 
         var map = new Map
         {
-            BackColor = Color.FromString("WhiteSmoke"),
+            BackColor = System.Drawing.Color.WhiteSmoke,
         };
 
         map.Navigator.ZoomToBox(layer.Extent!.Grow(layer.Extent.Width * 2));
@@ -51,7 +51,7 @@ public class BitmapSymbolInCollectionSample : ISample
             new GeometryFeature
             {
                 Geometry = new  GeometryCollection(new Geometry[]  { new Point(50, 50) } ),
-                Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
+                Styles = new[] {new VectorStyle {Fill = new Brush(System.Drawing.Color.Red)}}
             },
             new GeometryFeature
             {
@@ -66,7 +66,7 @@ public class BitmapSymbolInCollectionSample : ISample
             new GeometryFeature
             {
                 Geometry = new GeometryCollection(new Geometry[]  {  new Point(100, 100) } ),
-                Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
+                Styles = new[] {new VectorStyle {Fill = new Brush(System.Drawing.Color.Green), Outline = null}}
             }
         };
     }

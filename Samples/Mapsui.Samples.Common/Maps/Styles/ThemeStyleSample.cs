@@ -8,7 +8,7 @@ using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Widgets.InfoWidgets;
-using NetTopologySuite.Geometries;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -57,7 +57,7 @@ public class ThemeStyleSample : ISample
         return new ThemeStyle(f =>
         {
             if (f is GeometryFeature geometryFeature)
-                if (geometryFeature.Geometry is Point)
+                if (geometryFeature.Geometry is NetTopologySuite.Geometries.Point)
                     return null;
 
             var style = new VectorStyle();

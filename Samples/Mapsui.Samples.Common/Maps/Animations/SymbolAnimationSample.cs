@@ -5,6 +5,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -98,7 +99,7 @@ public class SymbolAnimationSample : ISample, IPrepareSampleTest, ISampleTest
                 var end = (Color)e.End;
                 if (symbolStyle.Fill != null)
                 {
-                    symbolStyle.Fill.Color = new Color(
+                    symbolStyle.Fill.Color = Color.FromArgb(
                         (int)(start.R * (1.0 - v) + end.R * v),
                         (int)(start.G * (1.0 - v) + end.G * v),
                         (int)(start.B * (1.0 - v) + end.B * v));

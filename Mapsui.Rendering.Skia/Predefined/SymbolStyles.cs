@@ -1,4 +1,5 @@
 ﻿using Mapsui.Utilities;
+using System.Drawing;
 
 namespace Mapsui.Styles;
 

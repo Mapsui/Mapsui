@@ -1,7 +1,7 @@
 ﻿using BruTile.Cache;
 using BruTile.Predefined;
+using Mapsui.Extensions;
 using Mapsui.Samples.Common.PersistentCaches;
-using Mapsui.Styles;
 using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Layers;
 using System.Threading.Tasks;
@@ -28,7 +28,7 @@ public class BingSample : ISample
             Name = "Bing Aerial",
         });
         map.Navigator.CenterOnAndZoomTo(new MPoint(1059114.80157058, 5179580.75916194), map.Navigator.Resolutions[14]);
-        map.BackColor = Color.FromString("#000613");
+        map.BackColor = ColorExtensions2.FromString("#000613");
 
         return map;
     }

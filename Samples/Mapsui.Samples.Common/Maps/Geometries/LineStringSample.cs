@@ -1,4 +1,5 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Extensions;
+using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
 using Mapsui.Projections;
@@ -49,7 +50,7 @@ public class LineStringSample : ISample
             Fill = null,
             Outline = null,
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
-            Line = { Color = Color.FromString("YellowGreen"), Width = 4 }
+            Line = { Color = ColorExtensions2.FromString("YellowGreen"), Width = 4 }
         };
     }
 

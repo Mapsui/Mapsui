@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
@@ -27,7 +28,7 @@ public class PolygonTestSample : ISample
 
         var map = new Map
         {
-            BackColor = Color.FromString("WhiteSmoke"),
+            BackColor = Color.WhiteSmoke,
         };
 
         map.Navigator.ZoomToPanBounds(MBoxFit.Fit);
@@ -61,8 +62,8 @@ public class PolygonTestSample : ISample
         feature.Styles.Add(new VectorStyle
         {
             Enabled = true,
-            Fill = CreateBrush(new Color(255, 0, 0, 120), FillStyle.BitmapRotated, _bitmapId),
-            Outline = CreatePen(new Color(255, 255, 0), 2, PenStyle.DashDot),
+            Fill = CreateBrush(Color.FromArgb(120, 255, 0, 0), FillStyle.BitmapRotated, _bitmapId),
+            Outline = CreatePen(Color.FromArgb(255, 255, 0), 2, PenStyle.DashDot),
             Line = null
         });
 

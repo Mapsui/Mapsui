@@ -10,6 +10,7 @@ using Mapsui.Widgets.InfoWidgets;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
@@ -104,6 +105,6 @@ public class CustomStyleSample : IMapControlSample
 
     private static IStyle SmalleDot()
     {
-        return new SymbolStyle { SymbolScale = 0.2, Fill = new Brush(new Color(40, 40, 40)) };
+        return new SymbolStyle { SymbolScale = 0.2, Fill = new Brush(Color.FromArgb(40, 40, 40)) };
     }
 }

@@ -5,6 +5,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using NetTopologySuite.Geometries;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Geometries;
@@ -29,7 +30,7 @@ public class PolygonGeometrySample : ISample
             DataSource = new MemoryProvider(CreatePolygon().ToFeatures()),
             Style = new VectorStyle
             {
-                Fill = new Brush(new Color(150, 150, 30, 128)),
+                Fill = new Brush(Color.FromArgb(128, 150, 150, 30)),
                 Outline = new Pen
                 {
                     Color = Color.Orange,

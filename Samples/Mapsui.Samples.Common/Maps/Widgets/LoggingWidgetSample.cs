@@ -1,10 +1,10 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Projections;
-using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;

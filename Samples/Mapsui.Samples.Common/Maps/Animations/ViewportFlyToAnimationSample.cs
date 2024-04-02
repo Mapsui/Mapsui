@@ -2,9 +2,9 @@
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
-using System.Threading.Tasks;
-using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
+using System.Drawing;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
@@ -44,7 +44,7 @@ public class ViewportFlyToAnimationSample : ISample
         Margin = new MRect(10),
         Padding = new MRect(8),
         CornerRadius = 4,
-        BackColor = new Color(108, 117, 125, 128),
+        BackColor = Color.FromArgb(128, 108, 117, 125),
         TextColor = Color.White,
     };
 }

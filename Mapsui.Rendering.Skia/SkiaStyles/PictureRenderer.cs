@@ -3,6 +3,7 @@ using Mapsui.Styles;
 using SkiaSharp;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 
 namespace Mapsui.Rendering.Skia;
 

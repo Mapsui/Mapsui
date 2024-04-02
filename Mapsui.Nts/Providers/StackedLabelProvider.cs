@@ -4,6 +4,7 @@ using Mapsui.Nts.Extensions;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 

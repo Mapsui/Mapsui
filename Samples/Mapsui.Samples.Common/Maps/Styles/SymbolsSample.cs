@@ -6,6 +6,7 @@ using Mapsui.Tiling;
 using Mapsui.Utilities;
 using Mapsui.Widgets.InfoWidgets;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -64,7 +65,7 @@ public class SymbolsSample : ISample
 
     private static IStyle SmalleDot()
     {
-        return new SymbolStyle { SymbolScale = 0.2, Fill = new Brush(new Color(40, 40, 40)) };
+        return new SymbolStyle { SymbolScale = 0.2, Fill = new Brush(Color.FromArgb(40, 40, 40)) };
     }
 
     private static IEnumerable<IStyle> CreateDiverseStyles()

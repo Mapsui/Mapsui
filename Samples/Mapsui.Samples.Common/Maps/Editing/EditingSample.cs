@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Layers;
@@ -453,10 +454,10 @@ public class EditingSample : IMapControlSample
         Outline = new Pen(_editModeColor, 3)
     };
 
-    private static readonly Color _editModeColor = new(124, 22, 111, 180);
-    private static readonly Color _pointLayerColor = new(240, 240, 240, 240);
-    private static readonly Color _lineLayerColor = new(150, 150, 150, 240);
-    private static readonly Color _polygonLayerColor = new(20, 20, 20, 240);
+    private static readonly Color _editModeColor = Color.FromArgb(180, 124, 22, 111);
+    private static readonly Color _pointLayerColor = Color.FromArgb(240, 240, 240, 240);
+    private static readonly Color _lineLayerColor = Color.FromArgb(240, 150, 150, 150);
+    private static readonly Color _polygonLayerColor = Color.FromArgb(240, 20, 20, 20);
 
     private static readonly SymbolStyle? _selectedStyle = new()
     {
@@ -530,7 +531,7 @@ public class EditingSample : IMapControlSample
     {
         return new VectorStyle
         {
-            Fill = new Brush(new Color(_polygonLayerColor)),
+            Fill = new Brush(_polygonLayerColor),
             Line = new Pen(_polygonLayerColor, 3),
             Outline = new Pen(_polygonLayerColor, 3)
         };

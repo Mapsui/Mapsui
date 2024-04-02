@@ -4,6 +4,7 @@ using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Mapsui.Tests.Common.Maps;
@@ -22,7 +23,7 @@ public class BitmapAtlasSample : ISample
 
         var map = new Map
         {
-            BackColor = Color.FromString("WhiteSmoke"),
+            BackColor = Color.WhiteSmoke,
         };
 
         map.Navigator.CenterOnAndZoomTo(new MPoint(256, 200), 1);

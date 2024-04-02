@@ -1,4 +1,4 @@
-﻿using Mapsui.Styles;
+﻿using System.Drawing;
 
 namespace Mapsui.Widgets.BoxWidgets;
 
@@ -58,7 +58,7 @@ public class TextBoxWidget : BoxWidget
         }
     }
 
-    private Color _textColor = new(0, 0, 0);
+    private Color _textColor = Color.FromArgb(0, 0, 0);
 
     /// <summary>
     /// Text color of text inside of box

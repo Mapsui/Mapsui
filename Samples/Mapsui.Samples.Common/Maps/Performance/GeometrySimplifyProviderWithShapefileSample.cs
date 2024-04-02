@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers;
 using Mapsui.Nts.Providers.Shapefile;
@@ -7,6 +6,8 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
+using System.Drawing;
+using System.IO;
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 

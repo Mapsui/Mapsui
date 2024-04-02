@@ -1,8 +1,8 @@
 ﻿using Mapsui.Extensions;
-using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
@@ -39,7 +39,7 @@ public class HyperlinkSample : ISample
             Margin = new MRect(30),
             Padding = new MRect(4),
             CornerRadius = 4,
-            BackColor = new Color(23, 162, 184),
+            BackColor = Color.FromArgb(23, 162, 184),
             TextColor = Color.White,
         };
 }

@@ -4,6 +4,7 @@ using Mapsui.Tiling;
 using Mapsui.UI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 

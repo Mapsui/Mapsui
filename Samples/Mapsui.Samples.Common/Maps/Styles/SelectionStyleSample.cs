@@ -5,6 +5,7 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
 using Mapsui.Widgets.InfoWidgets;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -71,7 +72,7 @@ internal class SelectionStyleSample : ISample
 
     private static SymbolStyle CreateSymbol()
     {
-        return new SymbolStyle { Fill = new Brush(new Color(150, 150, 30)) };
+        return new SymbolStyle { Fill = new Brush(Color.FromArgb(150, 150, 30)) };
     }
 
     private static MPoint[] CreatePoints()

@@ -1,4 +1,6 @@
-﻿namespace Mapsui.UI.Maui.Extensions;
+﻿using System.Drawing;
+
+namespace Mapsui.UI.Maui.Extensions;
 
 public static class ColorExtensions
 {
@@ -7,12 +9,12 @@ public static class ColorExtensions
     /// </summary>
     /// <param name="color">Color in Mapsui format</param>
     /// <returns>Color in Microsoft.Maui.Graphics format</returns>
-    public static Microsoft.Maui.Graphics.Color ToMaui(this Styles.Color color)
+    public static Microsoft.Maui.Graphics.Color ToMaui(this Color color)
     {
         return color.ToNative();
     }
 
-    public static Microsoft.Maui.Graphics.Color ToNative(this Styles.Color color)
+    public static Microsoft.Maui.Graphics.Color ToNative(this Color color)
     {
         return new Microsoft.Maui.Graphics.Color(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f, color.A / 255.0f);
     }
@@ -22,8 +24,8 @@ public static class ColorExtensions
     /// </summary>
     /// <param name="color">Color in Microsoft.Maui.Graphics.Color format </param>
     /// <returns>Color in Mapsui.Styles.Color format</returns>
-    public static Styles.Color ToMapsui(this Microsoft.Maui.Graphics.Color color)
+    public static Color ToMapsui(this Microsoft.Maui.Graphics.Color color)
     {
-        return new Styles.Color((int)(color.Red * 255), (int)(color.Green * 255), (int)(color.Blue * 255), (int)(color.Alpha * 255));
+        return Color.FromArgb((int)(color.Alpha * 255), (int)(color.Red * 255), (int)(color.Green * 255), (int)(color.Blue * 255));
     }
 }

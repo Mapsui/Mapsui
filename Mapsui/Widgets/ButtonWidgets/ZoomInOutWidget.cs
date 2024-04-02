@@ -1,4 +1,4 @@
-﻿using Mapsui.Styles;
+﻿using System.Drawing;
 
 namespace Mapsui.Widgets.ButtonWidgets;
 
@@ -56,7 +56,7 @@ public class ZoomInOutWidget : BaseWidget
         }
     }
 
-    private Color _strokeColor = new(192, 192, 192);
+    private Color _strokeColor = Color.FromArgb(192, 192, 192);
 
     /// <summary>
     /// Color of button frames
@@ -73,7 +73,7 @@ public class ZoomInOutWidget : BaseWidget
         }
     }
 
-    private Color _textColor = new(192, 192, 192);
+    private Color _textColor = Color.FromArgb(192, 192, 192);
 
     /// <summary>
     /// Color of "+" and "-" sign
@@ -90,7 +90,7 @@ public class ZoomInOutWidget : BaseWidget
         }
     }
 
-    private Color _backColor = new(224, 224, 224);
+    private Color _backColor = Color.FromArgb(224, 224, 224);
 
     /// <summary>
     /// Color of background

@@ -8,13 +8,13 @@ using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Styles;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 
 namespace Mapsui;

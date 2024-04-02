@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
@@ -31,7 +32,7 @@ public class ProjectionTestSample : ISample
         var map = new Map
         {
             CRS = "EPSG:3857", // The Map CRS needs to be set
-            BackColor = Color.FromString("WhiteSmoke")
+            BackColor = Color.WhiteSmoke
         };
         map.Layers.Add(geometryLayer);
         map.Layers.Add(CreateCenterOfAmsterdamLayer());

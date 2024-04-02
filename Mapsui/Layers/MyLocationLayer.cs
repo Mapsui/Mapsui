@@ -4,6 +4,7 @@ using Mapsui.Styles;
 using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using Animation = Mapsui.Animations.Animation;
 
 namespace Mapsui.Layers;
@@ -205,14 +206,14 @@ public class MyLocationLayer : BaseLayer, IDisposable
             Enabled = false,
             Type = CalloutType.Single,
             Title = "",
-            TitleFontColor = Styles.Color.Black,
+            TitleFontColor = Color.Black,
             ArrowAlignment = ArrowAlignment.Top,
             ArrowPosition = 0,
             SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
             MaxWidth = 300,
             RotateWithMap = true,
             SymbolOffsetRotatesWithMap = true,
-            Color = Styles.Color.White,
+            Color = Color.White,
             StrokeWidth = 0,
             ShadowWidth = 0
         };

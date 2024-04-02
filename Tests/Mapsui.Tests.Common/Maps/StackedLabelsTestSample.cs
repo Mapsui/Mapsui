@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -27,7 +28,7 @@ public class StackedLabelsTestSample : ISample
 
         var map = new Map
         {
-            BackColor = Color.FromString("WhiteSmoke"),
+            BackColor = Color.WhiteSmoke,
         };
 
         map.Navigator.ZoomToBox(layer.Extent!.Grow(layer.Extent.Width * 0.3));
@@ -52,7 +53,7 @@ public class StackedLabelsTestSample : ISample
         return new MemoryLayer
         {
             Features = features,
-            Style = new SymbolStyle { SymbolScale = 1, Fill = new Brush(new Color { A = 128, R = 8, G = 20, B = 192 }) }
+            Style = new SymbolStyle { SymbolScale = 1, Fill = new Brush(Color.FromArgb(128, 8, 20, 192)) },
         };
     }
 }

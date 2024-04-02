@@ -1,8 +1,8 @@
 ﻿using Mapsui.Extensions;
-using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidgets;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
@@ -43,7 +43,7 @@ public class TextBoxSample : ISample
             Margin = new MRect(10),
             Padding = new MRect(4),
             CornerRadius = 4,
-            BackColor = new Color(108, 117, 125),
+            BackColor = Color.FromArgb(108, 117, 125),
             TextColor = Color.White,
         };
     }

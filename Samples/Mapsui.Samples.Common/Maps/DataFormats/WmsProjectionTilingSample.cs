@@ -8,6 +8,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 

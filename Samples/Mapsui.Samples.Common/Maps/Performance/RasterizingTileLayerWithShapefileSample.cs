@@ -8,6 +8,7 @@ using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling.Layers;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -115,7 +116,7 @@ public class ShapefileTileSample : ISample
     private static GradientTheme CreateCountryLabelTheme()
     {
         // Lets scale the labels so that big countries have larger texts as well
-        var backColor = new Brush { Color = new Color(255, 255, 255, 128) };
+        var backColor = new Brush { Color = Color.FromArgb(128, 255, 255, 255) };
 
         var lblMin = new LabelStyle
         {

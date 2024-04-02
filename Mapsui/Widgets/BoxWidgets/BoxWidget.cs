@@ -1,4 +1,4 @@
-﻿using Mapsui.Styles;
+﻿using System.Drawing;
 
 namespace Mapsui.Widgets.BoxWidgets;
 
@@ -24,7 +24,7 @@ public class BoxWidget : BaseWidget
         }
     }
 
-    private Color? _backColor = new(255, 255, 255, 128);
+    private Color? _backColor = Color.FromArgb(128, 255, 255, 255);
 
     /// <summary>
     /// Background color of box

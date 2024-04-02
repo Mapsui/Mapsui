@@ -5,6 +5,7 @@ using Mapsui.Providers.Wfs;
 using Mapsui.Styles;
 using Mapsui.Widgets.InfoWidgets;
 using System.Net;
+using System.Drawing;
 using System.Threading.Tasks;
 
 #pragma warning disable IDISP001 // Dispose created

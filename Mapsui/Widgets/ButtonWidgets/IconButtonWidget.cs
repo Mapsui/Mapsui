@@ -1,6 +1,6 @@
-﻿using Mapsui.Styles;
-using Mapsui.Widgets.BoxWidgets;
+﻿using Mapsui.Widgets.BoxWidgets;
 using System;
+using System.Drawing;
 
 namespace Mapsui.Widgets.ButtonWidgets;
 

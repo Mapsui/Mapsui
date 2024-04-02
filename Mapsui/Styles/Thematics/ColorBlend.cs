@@ -5,6 +5,7 @@
 // This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 
 using System;
+using System.Drawing;
 
 namespace Mapsui.Styles.Thematics;
 
@@ -76,7 +77,7 @@ public class ColorBlend
         var blue = (int)Math.Round((Colors[i - 1].B * (1 - frac) + Colors[i].B * frac));
         var alpha = (int)Math.Round((Colors[i - 1].A * (1 - frac) + Colors[i].A * frac));
 
-        return new Color { A = alpha, R = red, G = green, B = blue }; //Not sure how to assign in case of equal naming
+        return Color.FromArgb(alpha, red, green, blue);
 
     }
 

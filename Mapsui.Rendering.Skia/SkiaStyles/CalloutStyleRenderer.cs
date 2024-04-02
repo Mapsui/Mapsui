@@ -5,6 +5,7 @@ using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
+using System.Drawing;
 using Topten.RichTextKit;
 
 namespace Mapsui.Rendering.Skia;
@@ -426,6 +427,6 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     public static SKColor ToSkia(Color? color)
     {
         if (color == null) return new SKColor(128, 128, 128, 0);
-        return new SKColor((byte)color.R, (byte)color.G, (byte)color.B, (byte)color.A);
+        return new SKColor((byte)color.Value.A, (byte)color.Value.R, (byte)color.Value.G, (byte)color.Value.B);
     }
 }
