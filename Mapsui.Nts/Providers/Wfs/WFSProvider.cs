@@ -737,6 +737,7 @@ public class WFSProvider : IProvider, IDisposable
         /* Service URI (for WFS GetFeature request) */
         _featureTypeInfo.ServiceUri = _featureTypeInfoQueryManager.GetValueFromNode
             (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_GETFEATURERESOURCE));
+        _featureTypeInfo.ServiceUri = _featureTypeInfo.ServiceUri.AssureUriScheme(_uriScheme);
         /* If no GetFeature URI could be found, try GetCapabilities URI */
         if (_featureTypeInfo.ServiceUri == null) _featureTypeInfo.ServiceUri = _getCapabilitiesUri;
         else if (_featureTypeInfo.ServiceUri.EndsWith("?", StringComparison.Ordinal))
