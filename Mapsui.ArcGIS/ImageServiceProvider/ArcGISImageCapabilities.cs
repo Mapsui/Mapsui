@@ -27,7 +27,7 @@ public class ArcGISImageCapabilities : IArcGISCapabilities
     public InterpolationType Interpolation { get; set; }
     public string Format { get; set; }
     public string ServiceUrl { get; set; }
-    public string? currentVersion { get; set; }
+    public double? currentVersion { get; set; }
     public bool singleFusedMapCache { get; set; }
     public Extent? fullExtent { get; set; }
     public SpatialReference? spatialReference { get; set; }
@@ -51,7 +51,7 @@ public class ArcGISImageCapabilities : IArcGISCapabilities
     public double[]? stdvValues { get; set; }
     public string? objectIdField { get; set; }
     public Field[]? fields { get; set; }
-    public string? defaultCompressionQuality { get; set; }
+    public double? defaultCompressionQuality { get; set; }
     public string? defaultResamplingMethod { get; set; }
     public double maxImageHeight { get; set; }
     public double maxImageWidth { get; set; }

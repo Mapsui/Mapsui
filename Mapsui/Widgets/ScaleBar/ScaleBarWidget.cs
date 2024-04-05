@@ -43,11 +43,11 @@ public class ScaleBarWidget : BaseWidget
     ///
     /// Default position of the scale bar.
     ///
-    private static readonly HorizontalAlignment DefaultScaleBarHorizontalAlignment = HorizontalAlignment.Left;
-    private static readonly VerticalAlignment DefaultScaleBarVerticalAlignment = VerticalAlignment.Bottom;
-    private static readonly Alignment DefaultScaleBarAlignment = Alignment.Left;
-    private static readonly ScaleBarMode DefaultScaleBarMode = ScaleBarMode.Single;
-    private static readonly Font DefaultFont = new() { FontFamily = "Arial", Size = 10 };
+    private static readonly HorizontalAlignment _defaultScaleBarHorizontalAlignment = HorizontalAlignment.Left;
+    private static readonly VerticalAlignment _defaultScaleBarVerticalAlignment = VerticalAlignment.Bottom;
+    private static readonly Alignment _defaultScaleBarAlignment = Alignment.Left;
+    private static readonly ScaleBarMode _defaultScaleBarMode = ScaleBarMode.Single;
+    private static readonly Font _defaultFont = new() { FontFamily = "Arial", Size = 10 };
 
 
     public ScaleBarWidget(Map map, IProjection? projection = null)
@@ -55,13 +55,13 @@ public class ScaleBarWidget : BaseWidget
         _map = map;
         _projection = projection;
 
-        HorizontalAlignment = DefaultScaleBarHorizontalAlignment;
-        VerticalAlignment = DefaultScaleBarVerticalAlignment;
+        HorizontalAlignment = _defaultScaleBarHorizontalAlignment;
+        VerticalAlignment = _defaultScaleBarVerticalAlignment;
 
         _maxWidth = 100;
         Height = 100;
-        _textAlignment = DefaultScaleBarAlignment;
-        _scaleBarMode = DefaultScaleBarMode;
+        _textAlignment = _defaultScaleBarAlignment;
+        _scaleBarMode = _defaultScaleBarMode;
 
         _unitConverter = MetricUnitConverter.Instance;
     }
@@ -158,16 +158,16 @@ public class ScaleBarWidget : BaseWidget
     /// <summary>
     /// Margin between end of tick and text
     /// </summary>
-    public double TextMargin => 1;
+    public static double TextMargin => 1;
 
-    private Font? _font = DefaultFont;
+    private Font? _font = _defaultFont;
 
     /// <summary>
     /// Font to use for drawing text
     /// </summary>
     public Font? Font
     {
-        get => _font ?? DefaultFont;
+        get => _font ?? _defaultFont;
         set
         {
             if (_font == value)
@@ -188,14 +188,9 @@ public class ScaleBarWidget : BaseWidget
         get => _unitConverter;
         set
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException($"{nameof(UnitConverter)} must not be null");
-            }
+            ArgumentNullException.ThrowIfNull(value);
             if (_unitConverter == value)
-            {
                 return;
-            }
 
             _unitConverter = value;
             Invalidate();
