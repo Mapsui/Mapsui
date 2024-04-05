@@ -79,6 +79,7 @@ public class WFSProvider : IProvider, IDisposable
     private readonly CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
     private readonly SemaphoreSlim _init = new(1, 1);
     private bool _initialized;
+    private readonly string? _uriScheme;
 
     // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
     // It helps to accelerate the rendering process significantly.
@@ -325,6 +326,7 @@ public class WFSProvider : IProvider, IDisposable
         _persistentCache = persistentCache;
         _getCapabilitiesUri = getCapabilitiesUri;
         _featureType = featureType;
+        _uriScheme = getCapabilitiesUri.UriScheme();
 
         _textResources = wfsVersion switch
         {
@@ -744,6 +746,7 @@ public class WFSProvider : IProvider, IDisposable
         /* URI for DescribeFeatureType request */
         var describeFeatureTypeUri = _featureTypeInfoQueryManager.GetValueFromNode
             (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_DESCRIBEFEATURETYPERESOURCE));
+        describeFeatureTypeUri = describeFeatureTypeUri.AssureUriScheme(_uriScheme);
         /* If no DescribeFeatureType URI could be found, try GetCapabilities URI */
         if (describeFeatureTypeUri == null) describeFeatureTypeUri = _getCapabilitiesUri;
         else if (describeFeatureTypeUri.EndsWith("?", StringComparison.Ordinal))
