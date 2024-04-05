@@ -70,7 +70,8 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             if (!TableExists(connection, nameof(UrlCache)))
             {
                 var command = connection.CreateCommand(@"CREATE TABLE UrlCache (
-                Url TEXT NOT NULL,                
+                Url TEXT NOT NULL,
+                PostData BLOB NULL,
                 Created DateTime NOT NULL,
                 Compression VARCHAR(2) NOT NULL,
                 Data BLOB,
