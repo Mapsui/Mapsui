@@ -91,15 +91,7 @@ public class ArcGisLegend
     private HttpClient CreateRequest(ICredentials? credentials)
     {
         HttpClientHandler httpClientHandler = new HttpClientHandler();
-        try
-        {
-            // Blazor does not support this.
-            httpClientHandler.UseDefaultCredentials = credentials == null;
-        }
-        catch (NotSupportedException e)
-        {
-            Logger.Log(LogLevel.Error, e.Message, e);
-        }
+        httpClientHandler.SetUseDefaultCredentials(credentials == null);
 
         if (credentials != null)
         {
