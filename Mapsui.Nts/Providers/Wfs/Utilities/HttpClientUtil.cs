@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Security;
 using System.Threading.Tasks;
 using Mapsui.Cache;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Utilities;
 
@@ -109,15 +110,8 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
 
         if (Credentials != null)
         {
-            try
-            {
-                httpClientHandler.UseDefaultCredentials = false;
-                httpClientHandler.Credentials = Credentials;
-            }
-            catch (NotSupportedException e)
-            {
-                Logger.Log(LogLevel.Error, e.Message, e);
-            }
+            httpClientHandler.SetUseDefaultCredentials(false);
+            httpClientHandler.SetCredentials(Credentials);
         }
 
         // To do: Dispose:

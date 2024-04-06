@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Mapsui.Cache;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Utilities;
 
@@ -102,14 +103,7 @@ public class ArcGisLegend
 
         if (credentials != null)
         {
-            try
-            {
-                httpClientHandler.Credentials = credentials;
-            }
-            catch (NotSupportedException e)
-            {
-                Logger.Log(LogLevel.Error, e.Message, e);
-            }
+            httpClientHandler.SetCredentials(credentials);
         }
 
         var httpClient = new HttpClient(httpClientHandler)

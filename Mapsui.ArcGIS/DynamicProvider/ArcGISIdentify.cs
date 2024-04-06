@@ -69,15 +69,7 @@ public class ArcGISIdentify
                 $"{url}/identify?f=pjson&geometryType=esriGeometryPoint&geometry={pointGeom}&tolerance={tolerance}{layersString}&mapExtent={mapExtend}&imageDisplay={imageDisplay}&returnGeometry={returnGeometry}{(sr != int.MinValue ? $"&sr={sr}" : "")}";
 
             var handler = new HttpClientHandler();
-            try
-            {
-                // Blazor does not support this,
-                handler.Credentials = credentials ?? CredentialCache.DefaultCredentials;
-            }
-            catch (NotSupportedException e)
-            {
-                Logger.Log(LogLevel.Error, e.Message, e);
-            };
+            handler.SetCredentials(credentials ?? CredentialCache.DefaultCredentials);
             using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
             using var response = await client.GetAsync(requestUrl).ConfigureAwait(false);
 

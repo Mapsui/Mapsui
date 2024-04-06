@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Mapsui.ArcGIS.Extensions;
 using Mapsui.Cache;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers;
@@ -123,15 +124,7 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
         try
         {
             using var handler = new HttpClientHandler();
-            try
-            {
-                // Blazor does not support this,
-                handler.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
-            }
-            catch (NotSupportedException e)
-            {
-                Logger.Log(LogLevel.Error, e.Message, e);
-            };
+            handler.SetCredentials(Credentials ?? CredentialCache.DefaultCredentials);
 
             try
             {
