@@ -6,7 +6,7 @@ namespace Mapsui.Styles;
 /// <summary>
 /// Class for managing all bitmaps, which are registered for Mapsui drawing
 /// </summary>
-public class BitmapRegistry
+public class BitmapRegistry : IBitmapRegistry
 {
     private static BitmapRegistry? _instance;
     private readonly Dictionary<int, object> _register = [];
