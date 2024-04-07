@@ -21,7 +21,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
         _parent = parent;
     }
 
-    private int _counter = 0;
+    private static int _counter = 0;
 
     /// <summary>
     /// Singleton of BitmapRegistry class
@@ -47,11 +47,8 @@ public sealed class BitmapRegistry : IBitmapRegistry
         return id;
     }
 
-    public int NextBitmapId()
+    private static int NextBitmapId()
     {
-        if (_parent != null)
-            return _parent.NextBitmapId();
-
         return Interlocked.Increment(ref _counter);
     }
 

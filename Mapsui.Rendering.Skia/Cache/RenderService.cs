@@ -116,10 +116,5 @@ public sealed class RenderService : IRenderService
         return BitmapRegistry.TryGetBitmapId(key, out bitmapId);
     }
 
-    public int NextBitmapId()
-    {
-        return BitmapRegistry.NextBitmapId();
-    }
-
     public IBitmapRegistry BitmapRegistry { get; }
 }

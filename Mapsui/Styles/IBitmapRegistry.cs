@@ -37,6 +37,4 @@ public interface IBitmapRegistry : IDisposable
     /// <param name="bitmapId">bitmap id</param>
     /// <returns>true if found</returns>
     bool TryGetBitmapId(string key, out int bitmapId);
-
-    int NextBitmapId();
 }
