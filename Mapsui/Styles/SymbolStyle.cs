@@ -29,6 +29,8 @@ public class SymbolStyle : VectorStyle
 
     private int _bitmapId = -1;
 
+    private object? _bitmap;
+
     /// <summary>
     /// Id of the image in the BitmapRegistry, if SymbolType is Image
     /// </summary>
@@ -39,6 +41,20 @@ public class SymbolStyle : VectorStyle
         {
             _bitmapId = value;
             if (value >= 0)
+                SymbolType = SymbolType.Image;
+        }
+    }
+
+    /// <summary>
+    /// Bitmap of the image to display during rendering a BitmapId is assigned.
+    /// </summary>
+    public object? Bitmap
+    {
+        get => _bitmap;
+        set
+        {
+            _bitmap = value;
+            if (value != null)
                 SymbolType = SymbolType.Image;
         }
     }
@@ -123,6 +139,10 @@ public class SymbolStyle : VectorStyle
             return false;
 
         if (Math.Abs(Opacity - symbolStyle.Opacity) > Constants.Epsilon)
+            return false;
+
+        // if BitmapId is not assigned use Bitmap to compare styles
+        if (BitmapId < 0 && !object.Equals(Bitmap, symbolStyle.Bitmap))
             return false;
 
         return true;
