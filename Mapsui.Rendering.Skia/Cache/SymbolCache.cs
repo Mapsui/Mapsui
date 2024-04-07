@@ -15,10 +15,6 @@ public sealed class SymbolCache : ISymbolCache
         _bitmapRegistry = bitmapRegistry;
     }
 
-    public SymbolCache() : this(BitmapRegistry.Instance)
-    {
-    }
-
     public IBitmapInfo GetOrCreate(int bitmapId)
     {
         if (_cache.TryGetValue(bitmapId, out var result))
