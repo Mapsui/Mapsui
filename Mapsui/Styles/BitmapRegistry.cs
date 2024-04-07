@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Mapsui.Styles;
 
@@ -20,7 +21,7 @@ public class BitmapRegistry : IBitmapRegistry
         _parent = parent;
     }
 
-    private int _counter = 1;
+    private int _counter = 0;
 
     /// <summary>
     /// Singleton of BitmapRegistry class
@@ -51,9 +52,7 @@ public class BitmapRegistry : IBitmapRegistry
         if (_parent != null)
             return _parent.NextBitmapId();
 
-        var id = _counter;
-        _counter++;
-        return id;
+        return Interlocked.Increment(ref _counter);
     }
 
     /// <summary> Unregister an existing bitmap </summary>
