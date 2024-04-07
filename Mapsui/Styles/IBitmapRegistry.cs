@@ -2,7 +2,7 @@
 
 namespace Mapsui.Styles;
 
-public interface IBitmapRegistry: IDisposable
+public interface IBitmapRegistry : IDisposable
 {
     /// <summary>
     /// Register a new bitmap

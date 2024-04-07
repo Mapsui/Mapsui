@@ -11,7 +11,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class CalloutStyleRenderer : ISkiaStyleRenderer
 {
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, Styles.IStyle style, IRenderCache renderCache, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, Styles.IStyle style, IRenderService renderService, long iteration)
     {
         if (!style.Enabled)
             return false;
@@ -38,7 +38,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
                 UpdateContent(calloutStyle);
             }
 
-            RenderCallout(calloutStyle, renderCache.SymbolCache);
+            RenderCallout(calloutStyle, renderService);
         }
 
         // Now we have the complete callout rendered, so we could draw it
@@ -79,7 +79,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         return true;
     }
 
-    public static void RenderCallout(CalloutStyle callout, ISymbolCache symbolCache)
+    public static void RenderCallout(CalloutStyle callout, IRenderService renderService)
     {
         if (callout.Content < 0)
             return;
@@ -90,7 +90,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
         if (callout.Type == CalloutType.Custom)
         {
-            var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(callout.Content);
+            var bitmapInfo = (BitmapInfo)renderService.GetOrCreate(callout.Content);
 
             contentWidth = bitmapInfo?.Width ?? 0;
             contentHeight = bitmapInfo?.Height ?? 0;
@@ -117,15 +117,15 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             DrawCallout(callout, canvas, path);
 
             // Draw content
-            DrawContent(callout, canvas, symbolCache);
+            DrawContent(callout, canvas, renderService);
 
             // Create SKPicture from canvas
             var picture = rec.EndRecording();
 
             if (callout.BitmapId < 0)
-                callout.BitmapId = BitmapRegistry.Instance.Register(picture);
+                callout.BitmapId = renderService.Register(picture);
             else
-                BitmapRegistry.Instance.Set(callout.BitmapId, picture);
+                renderService.Set(callout.BitmapId, picture);
         }
 
         callout.Invalidated = false;

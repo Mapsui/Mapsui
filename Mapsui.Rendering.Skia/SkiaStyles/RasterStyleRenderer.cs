@@ -10,7 +10,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class RasterStyleRenderer : ISkiaStyleRenderer
 {
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long currentIteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderService, long currentIteration)
     {
         try
         {
@@ -25,9 +25,9 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
             if (style is not RasterStyle)
                 return false;
 
-            renderCache.TileCache.UpdateCache(currentIteration);
+            renderService.TileCache.UpdateCache(currentIteration);
 
-            if (renderCache.TileCache.GetOrCreate(raster, currentIteration) is not BitmapInfo bitmapInfo)
+            if (renderService.TileCache.GetOrCreate(raster, currentIteration) is not BitmapInfo bitmapInfo)
                 return false;
 
             var extent = feature.Extent;
