@@ -21,7 +21,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     }
 
 
-    public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderCache renderCache)
+    public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderService renderCache)
     {
         if (symbolStyle.SymbolType == SymbolType.Image)
         {
@@ -33,16 +33,17 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    private static bool DrawImage(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, ISymbolCache symbolCache)
+    private static bool DrawImage(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderService renderService)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
         var (destX, destY) = viewport.WorldToScreenXY(x, y);
 
+        LoadBitmapId(symbolStyle, renderService);
         if (symbolStyle.BitmapId < 0)
             return false;
 
-        var bitmap = (BitmapInfo)symbolCache.GetOrCreate(symbolStyle.BitmapId);
+        var bitmap = (BitmapInfo)renderService.GetOrCreate(symbolStyle.BitmapId);
         if (bitmap == null)
             return false;
 
@@ -93,7 +94,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 var sprite = bitmap.Sprite;
                 if (sprite.Data == null)
                 {
-                    var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.Atlas);
+                    var bitmapAtlas = (BitmapInfo)renderService.GetOrCreate(sprite.Atlas);
                     sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
                         sprite.Y + sprite.Height));
                 }
@@ -107,6 +108,14 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
 
         return true;
+    }
+
+    private static void LoadBitmapId(SymbolStyle symbolStyle, IBitmapRegistry renderService)
+    {
+        if (symbolStyle is { BitmapId: < 0, Bitmap: not null })
+        {
+            symbolStyle.BitmapId = renderService.Register(symbolStyle.Bitmap);
+        }
     }
 
     private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IVectorCache vectorCache)

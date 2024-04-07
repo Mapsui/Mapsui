@@ -55,7 +55,10 @@ public class SymbolStyle : VectorStyle
         {
             _bitmap = value;
             if (value != null)
+            {
                 SymbolType = SymbolType.Image;
+                _bitmapId = -1;
+            }
         }
     }
 

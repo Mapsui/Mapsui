@@ -28,6 +28,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
         var (x, y) = viewport.WorldToScreenXY(centroid.X, centroid.Y);
 
+        LoadBitmapId(calloutStyle, renderService);
         if (calloutStyle.BitmapId < 0 || calloutStyle.Invalidated)
         {
             if (calloutStyle.Content < 0 && calloutStyle.Type == CalloutType.Custom)
@@ -77,6 +78,14 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         canvas.Restore();
 
         return true;
+    }
+
+    private void LoadBitmapId(CalloutStyle calloutStyle, IBitmapRegistry renderService)
+    {
+        if (calloutStyle is { BitmapId: < 0, Bitmap: not null })
+        {
+            calloutStyle.BitmapId = renderService.Register(calloutStyle.Bitmap);
+        }
     }
 
     public static void RenderCallout(CalloutStyle callout, IRenderService renderService)
