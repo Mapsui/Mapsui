@@ -35,7 +35,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
             if (calloutStyle.Invalidated)
             {
-                UpdateContent(calloutStyle);
+                UpdateContent(calloutStyle, renderService);
             }
 
             RenderCallout(calloutStyle, renderService);
@@ -45,7 +45,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         if (calloutStyle.BitmapId < 0)
             return false;
 
-        var picture = (SKPicture)BitmapRegistry.Instance.Get(calloutStyle.BitmapId);
+        var picture = (SKPicture)renderService.Get(calloutStyle.BitmapId);
 
         // Calc offset (relative or absolute)
         var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(picture.CullRect.Width, picture.CullRect.Height);
@@ -184,7 +184,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     /// <summary>
     /// Update content for single and detail
     /// </summary>
-    public static void UpdateContent(CalloutStyle callout)
+    public static void UpdateContent(CalloutStyle callout, IBitmapRegistry bitmapRegistry)
     {
         if (callout.Type == CalloutType.Custom)
             return;
@@ -242,16 +242,16 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         var picture = rec.EndRecording();
         if (callout.InternalContent >= 0)
         {
-            BitmapRegistry.Instance.Set(callout.InternalContent, picture);
+            bitmapRegistry.Set(callout.InternalContent, picture);
         }
         else
         {
-            callout.InternalContent = BitmapRegistry.Instance.Register(picture);
+            callout.InternalContent = bitmapRegistry.Register(picture);
         }
         callout.Content = callout.InternalContent;
     }
 
-    private static void DrawContent(CalloutStyle callout, SKCanvas canvas, ISymbolCache symbolCache)
+    private static void DrawContent(CalloutStyle callout, SKCanvas canvas, IRenderService renderService)
     {
         // Draw content
         if (callout.Content >= 0)
@@ -276,7 +276,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             {
 
                 // Get size of content
-                var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(callout.Content);
+                var bitmapInfo = (BitmapInfo)renderService.GetOrCreate(callout.Content);
 
                 switch (bitmapInfo?.Type)
                 {
@@ -297,7 +297,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             }
             else if (callout.Type == CalloutType.Single || callout.Type == CalloutType.Detail)
             {
-                var picture = (SKPicture)BitmapRegistry.Instance.Get(callout.Content);
+                var picture = (SKPicture)renderService.Get(callout.Content);
                 using var skPaint = new SKPaint() { IsAntialias = true };
                 canvas.DrawPicture(picture, offset, skPaint);
             }
