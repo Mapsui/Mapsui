@@ -15,7 +15,7 @@ public sealed class RenderService : IRenderService
         _vectorCache = new VectorCache(SymbolCache, capacity);
         TileCache = new TileCache();
         LabelCache = new LabelCache();
-        BitmapRegistry = Styles.BitmapRegistry.Instance;
+        BitmapRegistry = new Styles.BitmapRegistry(Styles.BitmapRegistry.Instance);
     }
 
     public ILabelCache LabelCache { get; set; }
@@ -112,6 +112,11 @@ public sealed class RenderService : IRenderService
     public bool TryGetBitmapId(string key, out int bitmapId)
     {
         return BitmapRegistry.TryGetBitmapId(key, out bitmapId);
+    }
+
+    public int NextBitmapId()
+    {
+        return BitmapRegistry.NextBitmapId();
     }
 
     public IBitmapRegistry BitmapRegistry { get; }

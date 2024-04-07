@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace Mapsui.Styles;
@@ -9,9 +10,16 @@ namespace Mapsui.Styles;
 public class BitmapRegistry : IBitmapRegistry
 {
     private static BitmapRegistry? _instance;
-    private readonly Dictionary<int, object> _register = [];
-    private readonly Dictionary<string, int> _lookup = [];
+    private readonly ConcurrentDictionary<int, object> _register = [];
+    private readonly ConcurrentDictionary<string, int> _lookup = [];
+    private readonly IBitmapRegistry? _parent;
     private BitmapRegistry() { }
+
+    public BitmapRegistry(IBitmapRegistry parent)
+    {
+        _parent = parent;
+    }
+
     private int _counter = 1;
 
     /// <summary>
@@ -29,8 +37,7 @@ public class BitmapRegistry : IBitmapRegistry
     {
         CheckBitmapData(bitmapData);
 
-        var id = _counter;
-        _counter++;
+        var id = NextBitmapId();
         _register[id] = bitmapData;
         if (key != null)
         {
@@ -39,14 +46,24 @@ public class BitmapRegistry : IBitmapRegistry
         return id;
     }
 
+    public int NextBitmapId()
+    {
+        if (_parent != null)
+            return _parent.NextBitmapId();
+
+        var id = _counter;
+        _counter++;
+        return id;
+    }
+
     /// <summary> Unregister an existing bitmap </summary>
     /// <param name="id">Id of registered bitmap data</param>
     /// <returns>The unregistered object</returns>
     public object? Unregister(int id)
     {
-        _register.TryGetValue(id, out var val);
-        _register.Remove(id);
-        return val;
+        return _register.Remove(id, out var val) ?
+            val :
+            _parent?.Unregister(id);
     }
 
     /// <summary>
@@ -56,7 +73,12 @@ public class BitmapRegistry : IBitmapRegistry
     /// <returns></returns>
     public object Get(int id)
     {
-        return _register[id];
+        if (_register.TryGetValue(id, out var val))
+        {
+            return val;
+        }
+
+        return _parent?.Get(id) ?? throw new KeyNotFoundException();
     }
 
     /// <summary>
@@ -101,6 +123,11 @@ public class BitmapRegistry : IBitmapRegistry
     /// <returns>true if found</returns>
     public bool TryGetBitmapId(string key, out int bitmapId)
     {
-        return _lookup.TryGetValue(key, out bitmapId);
+        if (_lookup.TryGetValue(key, out bitmapId))
+        {
+            return true;
+        }
+
+        return _parent?.TryGetBitmapId(key, out bitmapId) ?? false;
     }
 }
