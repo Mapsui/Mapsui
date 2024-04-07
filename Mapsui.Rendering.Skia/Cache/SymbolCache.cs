@@ -8,19 +8,28 @@ namespace Mapsui.Rendering.Skia.Cache;
 public sealed class SymbolCache : ISymbolCache
 {
     private readonly IDictionary<int, BitmapInfo> _cache = new ConcurrentDictionary<int, BitmapInfo>();
+    private readonly IBitmapRegistry _bitmapRegistry;
+
+    public SymbolCache(IBitmapRegistry bitmapRegistry)
+    {
+        _bitmapRegistry = bitmapRegistry;
+    }
+
+    public SymbolCache() : this(BitmapRegistry.Instance)
+    {
+    }
 
     public IBitmapInfo GetOrCreate(int bitmapId)
     {
-        if (_cache.ContainsKey(bitmapId))
+        if (_cache.TryGetValue(bitmapId, out var result))
         {
-            var result = _cache[bitmapId];
             if (!BitmapHelper.InvalidBitmapInfo(result))
             {
                 return result;
             }
         }
 
-        var bitmapStream = BitmapRegistry.Instance.Get(bitmapId);
+        var bitmapStream = _bitmapRegistry.Get(bitmapId);
         bool ownsBitmap = bitmapStream is not IDisposable;
         var loadBitmap = BitmapHelper.LoadBitmap(bitmapStream, ownsBitmap) ?? throw new ArgumentNullException(nameof(bitmapId));
         return _cache[bitmapId] = loadBitmap;
