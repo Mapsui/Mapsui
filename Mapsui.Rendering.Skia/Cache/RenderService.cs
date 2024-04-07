@@ -87,6 +87,7 @@ public sealed class RenderService : IRenderService
         SymbolCache.Dispose();
         VectorCache.Dispose();
         TileCache.Dispose();
+        BitmapRegistry.Dispose();
     }
 
     public int Register(object bitmapData, string? key = null)

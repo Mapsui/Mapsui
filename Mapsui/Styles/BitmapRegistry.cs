@@ -130,4 +130,17 @@ public class BitmapRegistry : IBitmapRegistry
 
         return _parent?.TryGetBitmapId(key, out bitmapId) ?? false;
     }
+
+    public void Dispose()
+    {
+        _lookup.Clear();
+        foreach (var it in _register)
+        {
+            if (it.Value is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
+        }
+        _register.Clear();
+    }
 }

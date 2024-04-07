@@ -1,6 +1,8 @@
-﻿namespace Mapsui.Styles;
+﻿using System;
 
-public interface IBitmapRegistry
+namespace Mapsui.Styles;
+
+public interface IBitmapRegistry: IDisposable
 {
     /// <summary>
     /// Register a new bitmap
