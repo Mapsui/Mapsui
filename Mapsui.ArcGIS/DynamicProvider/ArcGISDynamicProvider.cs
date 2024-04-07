@@ -112,8 +112,15 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
     {
         if (ArcGisDynamicCapabilities.initialExtent == null)
             return null;
+        if (CRS is null)
+            return null;
+        var extent = ArcGisDynamicCapabilities.initialExtent.ToMRect();
+        if (extent is null)
+            return null;
 
-        return ArcGisDynamicCapabilities.initialExtent.ToMRect();
+        ProjectionDefaults.Projection.Project("EPSG:4326", CRS, extent);
+
+        return extent;
     }
 
     private void CapabilitiesHelperCapabilitiesFailed(object? sender, EventArgs e)
