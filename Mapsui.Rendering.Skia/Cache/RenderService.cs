@@ -11,11 +11,11 @@ public sealed class RenderService : IRenderService
 
     public RenderService(int capacity = 10000)
     {
-        _vectorCache = new VectorCache(SymbolCache, capacity);
         TileCache = new TileCache();
         LabelCache = new LabelCache();
         BitmapRegistry = new Styles.BitmapRegistry(Styles.BitmapRegistry.Instance);
         SymbolCache = new SymbolCache(BitmapRegistry);
+        _vectorCache = new VectorCache(SymbolCache, capacity);
 
     }
 
