@@ -97,7 +97,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         }
         else if (callout.Type == CalloutType.Single || callout.Type == CalloutType.Detail)
         {
-            var picture = (SKPicture)BitmapRegistry.Instance.Get(callout.Content);
+            var picture = (SKPicture)renderService.Get(callout.Content);
 
             contentWidth = picture.CullRect.Width;
             contentHeight = picture.CullRect.Height;
