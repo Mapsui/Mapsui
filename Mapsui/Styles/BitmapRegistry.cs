@@ -92,9 +92,7 @@ public class BitmapRegistry : IBitmapRegistry
         CheckBitmapData(bitmapData);
 
         if (id < 0 || !_register.ContainsKey(id))
-        {
             return _parent?.Set(id, bitmapData) ?? false;
-        }
 
         _register[id] = bitmapData;
 
