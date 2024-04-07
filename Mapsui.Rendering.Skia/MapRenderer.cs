@@ -69,7 +69,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public MapRenderer()
     {
-        _renderCache = new DisposableWrapper<IRenderCache>(new RenderCache(), true);
+        _renderCache = new DisposableWrapper<IRenderCache>(new RenderService(), true);
         InitRenderer();
     }
 

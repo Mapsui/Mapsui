@@ -5,16 +5,17 @@ using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class RenderCache : IRenderCache
+public sealed class RenderService : IRenderService
 {
     private IVectorCache _vectorCache;
 
-    public RenderCache(int capacity = 10000)
+    public RenderService(int capacity = 10000)
     {
         SymbolCache = new SymbolCache();
         _vectorCache = new VectorCache(SymbolCache, capacity);
         TileCache = new TileCache();
         LabelCache = new LabelCache();
+        BitmapRegistry = Styles.BitmapRegistry.Instance;
     }
 
     public ILabelCache LabelCache { get; set; }
@@ -87,4 +88,31 @@ public sealed class RenderCache : IRenderCache
         VectorCache.Dispose();
         TileCache.Dispose();
     }
+
+    public int Register(object bitmapData, string? key = null)
+    {
+        return BitmapRegistry.Register(bitmapData, key);
+    }
+
+    public object? Unregister(int id)
+    {
+        return BitmapRegistry.Unregister(id);
+    }
+
+    public object Get(int id)
+    {
+        return BitmapRegistry.Get(id);
+    }
+
+    public bool Set(int id, object bitmapData)
+    {
+        return BitmapRegistry.Set(id, bitmapData);
+    }
+
+    public bool TryGetBitmapId(string key, out int bitmapId)
+    {
+        return BitmapRegistry.TryGetBitmapId(key, out bitmapId);
+    }
+
+    public IBitmapRegistry BitmapRegistry { get; }
 }
