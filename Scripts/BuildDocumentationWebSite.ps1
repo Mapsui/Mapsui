@@ -11,7 +11,7 @@ Write-Output "Generating website in docfx\_site folder"
 docfx docfx\docfx.json
 
 Write-Output "Deleting existing website folder and contents"
-Remove-Item -Path "website" -Recurse -Force
+Remove-Item -Path "website" -Recurse -Force -ErrorAction SilentlyContinue
 
 Write-Output "Creating a new website folder"
 New-Item -ItemType Directory -Path "website"
