@@ -4,7 +4,7 @@ namespace Mapsui.Utilities;
 
 public class Runtime
 {
-    private bool? isWasm;
+    private static bool? isWasm;
 
     public static bool IsWasm
     {
