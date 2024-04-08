@@ -20,6 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Android", "Mapsui
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB6CAC-1C30-42C9-B628-BACEBF790AB9}"
 	ProjectSection(SolutionItems) = preProject
+		Scripts\BuildDocumentationWebSite.ps1 = Scripts\BuildDocumentationWebSite.ps1
 		Scripts\BuildSamplesDocumentation.ps1 = Scripts\BuildSamplesDocumentation.ps1
 		Scripts\BuildSamplesWebsite.ps1 = Scripts\BuildSamplesWebsite.ps1
 		Scripts\CopyGeneratedImagesOverOriginalImages.ps1 = Scripts\CopyGeneratedImagesOverOriginalImages.ps1
@@ -54,7 +55,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.iOS", "Mapsui.UI.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docfx", "docfx", "{97458DE1-C297-4DED-AECB-5FEFED2B5610}"
 	ProjectSection(SolutionItems) = preProject
-		docfx\build-site.cmd = docfx\build-site.cmd
 		docfx\CNAME = docfx\CNAME
 		docfx\docfx.json = docfx\docfx.json
 		docfx\index.md = docfx\index.md

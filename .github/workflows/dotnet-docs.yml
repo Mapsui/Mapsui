@@ -47,13 +47,12 @@ jobs:
     - name: install wasm-tools
       run: dotnet workload install wasm-tools
     - name: Run DocFx
-      # Use a .cmd so this script can be run locally for testing
-      run: docfx\build-site.cmd
+      shell: pwsh
+      run: ./Scripts/BuildDocumentationWebSite.ps1
       # build blazor samples to website/samples/
     - name: Build Blazor Website Sample
       shell: pwsh
-      run: |
-        ./Scripts/BuildSamplesWebsite.ps1     
+      run: ./Scripts/BuildSamplesWebsite.ps1     
     - name: Upload artifact
       uses: peaceiris/actions-gh-pages@v3
       with:
