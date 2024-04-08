@@ -20,8 +20,6 @@ using Mapsui.Widgets.InfoWidgets;
 using Mapsui.Widgets.ScaleBar;
 using SkiaSharp;
 
-#pragma warning disable IDISP008 // Don't assign member with injected created disposable
-
 namespace Mapsui.Rendering.Skia;
 
 public sealed class MapRenderer : IRenderer, IDisposable
@@ -124,7 +122,9 @@ public sealed class MapRenderer : IRenderer, IDisposable
                         using var skCanvas = surface.Canvas;
                         RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas);
                         using var image = surface.Snapshot();
-                        using var data = image.Encode(SKEncodedImageFormat.Png, 100);
+                        var options = new SKPngEncoderOptions(SKPngEncoderFilterFlags.AllFilters, 9); // 9 is the highest compression
+                        using var peekPixels = image.PeekPixels();
+                        using var data = peekPixels.Encode(options);
                         data.SaveTo(memoryStream);
                         break;
                     }
@@ -250,7 +250,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
                 for (var index = 0; index < mapInfoLayers.Count; index++)
                 {
-                    var mapList = list[index] = new List<MapInfoRecord>();
+                    var mapList = list[index] = [];
                     var infoLayer = mapInfoLayers[index];
                     if (infoLayer is ILayerFeatureInfo layerFeatureInfo)
                     {
