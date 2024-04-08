@@ -6,12 +6,12 @@ namespace Mapsui.Rendering.Skia.Tests;
 
 internal static class File
 {
-    private static readonly string ImagesFolder = Path.Combine(AssemblyDirectory, "Resources", "Images");
-    private static readonly string ImagesOriginalTestFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "OriginalTest");
-    private static readonly string ImagesGeneratedTestFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "GeneratedTest");
-    private static readonly string ImagesOriginalRegressionFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "OriginalRegression");
-    private static readonly string ImagesGeneratedRegressionFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "GeneratedRegression");
-    private static readonly string CacheFolder = Path.Combine(AssemblyDirectory, "Resources", "Cache");
+    private static readonly string _imagesFolder = Path.Combine(AssemblyDirectory, "Resources", "Images");
+    private static readonly string _imagesOriginalTestFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "OriginalTest");
+    private static readonly string _imagesGeneratedTestFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "GeneratedTest");
+    private static readonly string _imagesOriginalRegressionFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "OriginalRegression");
+    private static readonly string _imagesGeneratedRegressionFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "GeneratedRegression");
+    private static readonly string _cacheFolder = Path.Combine(AssemblyDirectory, "Resources", "Cache");
 
     static File()
     {
@@ -20,18 +20,17 @@ internal static class File
 
     public static void WriteToGeneratedTestImagesFolder(string fileName, MemoryStream? stream)
     {
-        WriteToGeneratedImagesFolder(ImagesGeneratedTestFolder, fileName, stream);
+        WriteToGeneratedImagesFolder(_imagesGeneratedTestFolder, fileName, stream);
     }
     public static void WriteToGeneratedRegressionFolder(string fileName, MemoryStream? stream)
     {
-        WriteToGeneratedImagesFolder(ImagesGeneratedRegressionFolder, fileName, stream);
+        WriteToGeneratedImagesFolder(_imagesGeneratedRegressionFolder, fileName, stream);
     }
 
     private static void WriteToGeneratedImagesFolder(string folderName, string fileName, MemoryStream? stream)
     {
         var filePath = Path.Combine(folderName, fileName);
-        var folder = Path.GetDirectoryName(filePath);
-        if (folder == null) throw new Exception("Images folder was not found");
+        var folder = Path.GetDirectoryName(filePath) ?? throw new Exception("Images folder was not found");
         if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
 
         if (System.IO.File.Exists(filePath))
@@ -47,29 +46,27 @@ internal static class File
     {
         get
         {
-            var path = System.AppContext.BaseDirectory;
-            if (path == null)
-                throw new Exception($"Assembly.GetExecutingAssembly().Location was null");
-
+            var path = System.AppContext.BaseDirectory
+                ?? throw new Exception($"Assembly.GetExecutingAssembly().Location was null");
             return Path.GetDirectoryName(path)!;
         }
     }
 
     public static Stream ReadFromImagesFolder(string fileName)
     {
-        var filePath = Path.Combine(ImagesFolder, fileName);
+        var filePath = Path.Combine(_imagesFolder, fileName);
         return new FileStream(filePath, FileMode.Open, FileAccess.Read);
     }
 
     public static Stream ReadFromOriginalFolder(string fileName)
     {
-        var filePath = Path.Combine(ImagesOriginalTestFolder, fileName);
+        var filePath = Path.Combine(_imagesOriginalTestFolder, fileName);
         return new FileStream(filePath, FileMode.Open, FileAccess.Read);
     }
 
     public static Stream? ReadFromOriginalRegressionFolder(string fileName)
     {
-        var filePath = Path.Combine(ImagesOriginalRegressionFolder, fileName);
+        var filePath = Path.Combine(_imagesOriginalRegressionFolder, fileName);
         if (!System.IO.File.Exists(filePath))
         {
             return null;
@@ -79,7 +76,7 @@ internal static class File
 
     public static SqlitePersistentCache ReadFromCacheFolder(string fileName)
     {
-        var filePath = Path.Combine(CacheFolder, fileName);
-        return new SqlitePersistentCache(filePath, folder: CacheFolder);
+        var filePath = Path.Combine(_cacheFolder, fileName);
+        return new SqlitePersistentCache(filePath, folder: _cacheFolder);
     }
 }
