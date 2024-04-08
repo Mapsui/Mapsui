@@ -2,13 +2,16 @@
 using System.Net;
 using System.Net.Http;
 using Mapsui.Logging;
+using Mapsui.Utilities;
 
 namespace Mapsui.Extensions;
 
 public static class HttpClientHandlerExtensions
 {
-    private static bool _credentialsSupported = true;
-    private static bool _useDefaultCredentialsSupported = true;
+    // credentials and use default credentials are not supported on Wasm So set them to false 
+    // when running on wasm
+    private static bool _credentialsSupported = !Runtime.IsWasm;
+    private static bool _useDefaultCredentialsSupported = !Runtime.IsWasm; 
 
     public static void SetCredentials(this HttpClientHandler httpClientHandler, ICredentials? credentials)
     {
