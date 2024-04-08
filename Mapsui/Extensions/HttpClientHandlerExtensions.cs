@@ -11,7 +11,7 @@ public static class HttpClientHandlerExtensions
     // credentials and use default credentials are not supported on Wasm So set them to false 
     // when running on wasm
     private static bool _credentialsSupported = !Runtime.IsWasm;
-    private static bool _useDefaultCredentialsSupported = !Runtime.IsWasm; 
+    private static bool _useDefaultCredentialsSupported = !Runtime.IsWasm;
 
     public static void SetCredentials(this HttpClientHandler httpClientHandler, ICredentials? credentials)
     {
