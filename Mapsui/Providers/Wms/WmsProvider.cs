@@ -575,14 +575,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     private async Task<Stream> GetStreamAsync(string url)
     {
         var handler = new HttpClientHandler();
-        try
-        {
-            handler.Credentials = Credentials;
-        }
-        catch (NotSupportedException)
-        {
-            // Ignore not supported exception (fixes blazor)
-        }
+        handler.SetCredentials(Credentials);
 
         var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
         client.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent ?? "If you use Mapsui please specify a user-agent specific to your app");
