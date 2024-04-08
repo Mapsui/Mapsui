@@ -1,88 +1,92 @@
 {
-  "metadata": [
-    {
-      "src": [
-        {
-          "cwd": "../",
-          "files": [
-            "Mapsui/*.csproj",
-            "Mapsui.ArcGis/*.csproj",
-            "Mapsui.Extensions/*.csproj",
-            "Mapsui.Nts/*.csproj",
-            "Mapsui.Rendering.Skia/*.csproj",
-            "Mapsui.Tiling/*.csproj",
-            "Mapsui.UI.*/*.csproj"
-          ],
-          "exclude": [
-            "**/obj/**",
-            "**/bin/**",
-            "_site/**"
-          ]
-        }
-      ],
-      "dest": "api",
-      "disableGitFeatures": false,
-      "properties": {
-        "TargetFramework": "net6.0"
-      }
-    }
-  ],
-  "build": {
-    "content": [
-      {
-        "files": [
-          "api/**.yml",
-          "api/index.md",
-          "documentation/**.md",
-          "documentation/**/toc.md",
-          "documentation/**.png",
-    		  "codesamples/**.md",
-          "toc.yml",
-          "*.md"
-        ],
-        "exclude": [
-          "obj/**",
-          "_site/**"
-        ]
-      }
-    ],
-    "resource": [
-      {
-        "files": [
-          "documentation/images/**",
-          "images/**"
-        ],
-        "exclude": [
-          "obj/**",
-          "_site/**"
-        ]
-      }
-    ],
-    "overwrite": [
-      {
-        "files": [
-          "apidoc/**.md"
-        ],
-        "exclude": [
-          "obj/**",
-          "_site/**"
-        ]
-      }
-    ],
-    "xrefService": [
-      "https://xref.docs.microsoft.com/query?uid={uid}"
-    ],
-    "dest": "_site",
-    "globalMetadataFiles": [ "metadata.json" ],
-    "fileMetadataFiles": [],
-    "markdownEngineName": "markdig",
-    "template": [
-      "default"
-    ],
-    "postProcessors": [ "ExtractSearchIndex" ],
-    "noLangKeyword": false,
-    "keepFileLink": false,
-    "cleanupCacheHistory": false,
-    "disableGitFeatures": false
-  }
+	"metadata": [
+		{
+			"src": [
+				{
+					"cwd": "../",
+					"files": [
+						"Mapsui/*.csproj",
+						"Mapsui.ArcGis/*.csproj",
+						"Mapsui.Extensions/*.csproj",
+						"Mapsui.Nts/*.csproj",
+						"Mapsui.Rendering.Skia/*.csproj",
+						"Mapsui.Tiling/*.csproj",
+						"Mapsui.UI.*/*.csproj"
+					],
+					"exclude": [
+						"**/obj/**",
+						"**/bin/**",
+						"_site/**"
+					]
+				}
+			],
+			"dest": "api",
+			"disableGitFeatures": false,
+			"properties": {
+				"TargetFramework": "net6.0"
+			}
+		}
+	],
+	"build": {
+		"content": [
+			{
+				"files": [
+					"api/**.yml",
+					"api/index.md",
+					"documentation/**.md",
+					"documentation/**/toc.md",
+					"documentation/**.png",
+					"codesamples/**.md",
+					"toc.yml",
+					"*.md"
+				],
+				"exclude": [
+					"obj/**",
+					"_site/**"
+				]
+			}
+		],
+		"resource": [
+			{
+				"files": [
+					"documentation/images/**",
+					"images/**"
+				],
+				"exclude": [
+					"obj/**",
+					"_site/**"
+				]
+			}
+		],
+		"overwrite": [
+			{
+				"files": [
+					"apidoc/**.md"
+				],
+				"exclude": [
+					"obj/**",
+					"_site/**"
+				]
+			}
+		],
+		"xrefService": [
+			"https://xref.docs.microsoft.com/query?uid={uid}"
+		],
+		"dest": "_site",
+		"globalMetadataFiles": [
+			"metadata.json"
+		],
+		"fileMetadataFiles": [],
+		"markdownEngineName": "markdig",
+		"template": [
+			"default"
+		],
+		"postProcessors": [
+			"ExtractSearchIndex"
+		],
+		"noLangKeyword": false,
+		"keepFileLink": false,
+		"cleanupCacheHistory": false,
+		"disableGitFeatures": false
+	}
 }
