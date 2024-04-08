@@ -2,11 +2,11 @@
 
 public static class StringExtensions
 {
-    public static string? UriScheme(this string? url)
+    public static string GetUriScheme(this string url)
     {
         if (string.IsNullOrEmpty(url))
         {
-            return null;
+            throw new ArgumentException(url);
         }
 
         if (Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out var uri))
@@ -14,23 +14,25 @@ public static class StringExtensions
             return uri.Scheme;
         }
 
-        return null;
+        throw new ArgumentException(url);
     }
 
-    public static string? AssureUriScheme(this string? url, string? scheme)
+    public static string AssureUriScheme(this string url, string scheme)
     {
         if (string.IsNullOrEmpty(scheme) || string.IsNullOrEmpty(url))
         {
-            return url;
+            throw new ArgumentException(scheme);
         }
 
         if (!url.StartsWith(scheme, StringComparison.InvariantCultureIgnoreCase))
         {
-            var currentScheme = url.UriScheme();
-            if (!string.IsNullOrEmpty(currentScheme))
+            var currentScheme = url.GetUriScheme();
+            if (string.IsNullOrEmpty(currentScheme))
             {
-                return url.Replace(currentScheme, scheme, StringComparison.InvariantCultureIgnoreCase);
+                throw new ArgumentException(url);
             }
+
+            return url.Replace(currentScheme, scheme, StringComparison.InvariantCultureIgnoreCase);
         }
 
         return url;

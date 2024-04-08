@@ -326,7 +326,7 @@ public class WFSProvider : IProvider, IDisposable
         _persistentCache = persistentCache;
         _getCapabilitiesUri = getCapabilitiesUri;
         _featureType = featureType;
-        _uriScheme = getCapabilitiesUri.UriScheme();
+        _uriScheme = getCapabilitiesUri.GetUriScheme();
 
         _textResources = wfsVersion switch
         {
