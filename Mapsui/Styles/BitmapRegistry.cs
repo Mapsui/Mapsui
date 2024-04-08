@@ -90,7 +90,12 @@ public sealed class BitmapRegistry : IBitmapRegistry
         if (id < 0 || id > _counter && !_register.ContainsKey(id))
             return _parent?.Set(id, bitmapData) ?? false;
 
+        _register.TryGetValue(id, out var oldBitmap);
         _register[id] = bitmapData;
+        if (oldBitmap is IDisposable disposable)
+        {
+            disposable.Dispose();
+        }
 
         return true;
     }
