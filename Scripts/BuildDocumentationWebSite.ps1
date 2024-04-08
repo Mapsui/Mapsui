@@ -8,7 +8,7 @@ Write-Output "Installing DocFX"
 dotnet tool update -g docfx --version 2.75.3
 
 Write-Output "Generating website in docfx\_site folder"
-docfx docfx\docfx.json
+docfx docfx\docfx.json -t statictoc
 
 Write-Output "Deleting existing website folder and contents"
 Remove-Item -Path "website" -Recurse -Force -ErrorAction SilentlyContinue
