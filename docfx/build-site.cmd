@@ -1,14 +1,23 @@
+# Install .NET 6 SDK using winget (uncomment if needed)
+# winget install Microsoft.DotNet.SDK.6 --silent
 
-REM ECHO INSTALL .NET 6 SDK (was necessary on my machine where I develop all kinds of .NET apps)
-REM Perhaps we need: winget install Microsoft.DotNet.SDK.6 --silent
-mkdocs build -f docfx/mkdocs.yml || exit /b
-ECHO INSTALL docfx
-dotnet tool update -g docfx --version 2.75.3 || exit /b 
-ECHO Generate website in docfx\_site folder
-docfx docfx\docfx.json || exit /b 
-del website /s /q
-mkdir website
-ECHO COPY CNAME file which is used by github to determine the domain name.
-copy docfx\CNAME website /Y || exit /b 
-ECHO COPY _site TO website
-xcopy docfx\_site website\  /E /Y || exit /b 
+Write-Output "Building documentation using MkDocs"
+mkdocs build -f docfx/mkdocs.yml
+
+Write-Output "Installing DocFX"
+dotnet tool update -g docfx --version 2.75.3
+
+Write-Output "Generating website in docfx\_site folder"
+docfx docfx\docfx.json
+
+Write-Output "Deleting existing website folder and contents"
+Remove-Item -Path "website" -Recurse -Force
+
+Write-Output "Creating a new website folder"
+New-Item -ItemType Directory -Path "website"
+
+Write-Output "Copying CNAME file to website. This is necessary for the mapsui.com domain"
+Copy-Item -Path "docfx\CNAME" -Destination "website" -Force
+
+Write-Output "Copying _site to website"
+Copy-Item -Path "docfx\_site\*" -Destination "website" -Recurse -Force
