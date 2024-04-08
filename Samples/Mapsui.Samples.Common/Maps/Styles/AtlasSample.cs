@@ -55,8 +55,8 @@ public class AtlasSample : ISample
 
             var x = 0 + Random.Next(0, 12) * 21;
             var y = 64 + Random.Next(0, 6) * 21;
-            var bitmapId = BitmapRegistry.Instance.Register(new Sprite(_atlasBitmapId, x, y, 21, 21, 1));
-            feature.Styles.Add(new SymbolStyle { BitmapId = bitmapId });
+            var bitmap = new Sprite(_atlasBitmapId, x, y, 21, 21, 1);
+            feature.Styles.Add(new SymbolStyle { Bitmap = bitmap });
             counter++;
             return feature;
         }).ToList();

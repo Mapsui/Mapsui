@@ -102,6 +102,23 @@ public class SymbolStyleFeatureSizeTests
         ClassicAssert.AreEqual(size, 100);
     }
 
+    [Test]
+    public void BitmapInfoFeatureSizeFromBitmap()
+    {
+        using var symbolCache = new SymbolCache(BitmapRegistry.Instance);
+
+        var bitmap = CreatePng(100, 100);
+
+        var symbolStyle = new SymbolStyle
+        {
+            Bitmap = bitmap,
+        };
+
+        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
+
+        ClassicAssert.AreEqual(size, 100);
+    }
+
     private object CreatePng(int x, int y)
     {
         var imageInfo = new SKImageInfo(x, y);

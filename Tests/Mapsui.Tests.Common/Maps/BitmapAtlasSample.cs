@@ -49,33 +49,33 @@ public class BitmapAtlasSample : ISample
         var spriteClothingStore15 = new Sprite(atlas, 84, 106, 21, 21, 1);
         var spriteDentist15 = new Sprite(atlas, 147, 64, 21, 21, 1);
         var spritePedestrianPolygon = new Sprite(atlas, 0, 0, 64, 64, 1);
-        var svgTigerBitmapId = typeof(BitmapAtlasSample).LoadSvgId("Resources.Images.Ghostscript_Tiger.svg");
+        var svgTigerBitmap = typeof(BitmapAtlasSample).LoadSvg("Resources.Images.Ghostscript_Tiger.svg");
 
         return new List<IFeature>
         {
             new PointFeature(new MPoint(256, 124))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = atlas} }
+                Styles = new[] {new SymbolStyle { Bitmap = atlas} }
             },
             new PointFeature(new MPoint(20, 280))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = BitmapRegistry.Instance.Register(spriteAmusementPark15)} }
+                Styles = new[] {new SymbolStyle { Bitmap = spriteAmusementPark15} }
             },
             new PointFeature(new MPoint(60, 280))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = BitmapRegistry.Instance.Register(spriteClothingStore15)} }
+                Styles = new[] {new SymbolStyle { Bitmap = spriteClothingStore15} }
             },
             new PointFeature(new MPoint(100, 280))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = BitmapRegistry.Instance.Register(spriteDentist15)} }
+                Styles = new[] {new SymbolStyle { Bitmap = spriteDentist15} }
             },
             new PointFeature(new MPoint(180, 300))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = BitmapRegistry.Instance.Register(spritePedestrianPolygon)} }
+                Styles = new[] {new SymbolStyle { Bitmap = spritePedestrianPolygon} }
             },
             new PointFeature(new MPoint(380, 280))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = svgTigerBitmapId, SymbolScale = 0.1} }
+                Styles = new[] {new SymbolStyle { Bitmap = svgTigerBitmap, SymbolScale = 0.1} }
             }
         };
     }
