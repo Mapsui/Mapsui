@@ -80,7 +80,7 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
     }
 
     /// <summary>
-    /// Timeout of webrequest in milliseconds. Default is 10 seconds
+    /// Timeout of web request in milliseconds. Default is 10 seconds
     /// </summary>
     public int TimeOut
     {
@@ -96,7 +96,7 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
 
     public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
-        //If there are no layers (probably not initialised) return nothing
+        //If there are no layers (probably not initialized) return nothing
         if (ArcGisDynamicCapabilities.layers == null)
             return [];
 
@@ -118,10 +118,13 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
         if (extent is null)
             return null;
 
-        ProjectionDefaults.Projection.Project("EPSG:4326", CRS, extent);
+        ProjectionDefaults.Projection.Project(GetFromCRS(ArcGisDynamicCapabilities.spatialReference), CRS, extent);
 
         return extent;
     }
+
+    private static string GetFromCRS(SpatialReference? spatialReference) =>
+        spatialReference is not null ? $"EPSG:{spatialReference.wkid}" : "EPSG:4326";
 
     private void CapabilitiesHelperCapabilitiesFailed(object? sender, EventArgs e)
     {
@@ -194,7 +197,7 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
     }
 
     /// <summary>
-    /// Gets the URL for a map export request base on current settings, the image size and boundingbox
+    /// Gets the URL for a map export request base on current settings, the image size and boundingBox
     /// </summary>
     /// <param name="box">Area the request should cover</param>
     /// <param name="width"> </param>
