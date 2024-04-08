@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Mapsui.Utilities;
 
@@ -10,7 +11,7 @@ public class Runtime
     {
         get
         {
-            return isWasm ??= RuntimeInformation.FrameworkDescription.Contains("WebAssembly");
+            return isWasm ??= RuntimeInformation.RuntimeIdentifier.Contains("wasm", StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }
