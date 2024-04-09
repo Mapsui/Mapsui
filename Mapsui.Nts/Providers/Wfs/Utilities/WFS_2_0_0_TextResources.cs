@@ -38,7 +38,7 @@ public class WFS_2_0_0_TextResources : WFS_2_0_0_XPathTextResources, IWFS_TextRe
     /// <param name="featureTypeName">The name of the featuretype to query</param>
     public string DescribeFeatureTypeRequest(string featureTypeName)
     {
-        return "?SERVICE=WFS&Version=2.0.0&REQUEST=DescribeFeatureType&TYPENAME=" + featureTypeName +
+        return "?SERVICE=WFS&Version=2.0.0&REQUEST=DescribeFeatureType&TYPENAMES=" + featureTypeName +
                "&NAMESPACE=xmlns(app=http://www.deegree.org/app)";
     }
 
@@ -58,7 +58,7 @@ public class WFS_2_0_0_TextResources : WFS_2_0_0_XPathTextResources, IWFS_TextRe
 
         var paramBuilder = new StringBuilder();
 
-        paramBuilder.Append("?SERVICE=WFS&Version=2.0.0&REQUEST=GetFeature&TYPENAME=");
+        paramBuilder.Append("?SERVICE=WFS&Version=2.0.0&REQUEST=GetFeature&TYPENAMES=");
         paramBuilder.Append(HttpUtility.UrlEncode(qualification + featureTypeInfo.Name));
         paramBuilder.Append("&srsName=");
         paramBuilder.Append(HttpUtility.UrlEncode(CrsHelper.EpsgPrefix + featureTypeInfo.SRID));
