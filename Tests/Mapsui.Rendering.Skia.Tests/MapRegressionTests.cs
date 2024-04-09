@@ -53,6 +53,7 @@ public class MapRegressionTests
         WmsProvider.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
         WFSProvider.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
         ArcGISImageServiceSample.DefaultCache ??= File.ReadFromCacheFolder("ArcGisImageServiceSample");
+        ArcGISDynamicServiceSample.DefaultCache ??= File.ReadFromCacheFolder("ArcGisImageServiceSample");
     }
 
     public static object[] RegressionSamples => _regressionSamples ??=

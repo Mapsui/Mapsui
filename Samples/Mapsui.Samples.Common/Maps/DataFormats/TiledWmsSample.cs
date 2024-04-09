@@ -34,10 +34,10 @@ public class TiledWmsSample : ISample
 
     public static ITileSource CreateTileSource()
     {
-        const string url = "https://geodata.nationaalgeoregister.nl/omgevingswarmte/wms?SERVICE=WMS&VERSION=1.1.1";
+        const string url = "https://service.pdok.nl/rvo/omgevingswarmte/wms/v1_0";
         // You need to know the schema. This can be a problem. Usally it is GlobalSphericalMercator
         var schema = new WkstNederlandSchema { Format = "image/png", Srs = "EPSG:28992" };
-        var request = new WmscRequest(new Uri(url), schema, new[] { "koudegeslotenwkobuurt" }.ToList(), Array.Empty<string>().ToList());
+        var request = new WmscRequest(new Uri(url), schema, new[] { "koudegeslotenwkobuurt" }.ToList(), [string.Empty], version: "1.3.0");
         var provider = new HttpTileProvider(request, DefaultCache);
         return new TileSource(provider, schema) { Name = "Omgevingswarmte (PDOK)" };
     }
