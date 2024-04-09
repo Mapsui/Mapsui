@@ -790,73 +790,65 @@ public class WFSProvider : IProvider, IDisposable
             var formatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
             string? bboxVal;
 
-            if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                bbox.MinLat =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
-                        null
-                            ? bboxVal
-                            : "0.0", formatInfo);
-            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                bbox.MinLat =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
-                        null
-                            ? bboxVal[(bboxVal.IndexOf(' ') + 1)..]
-                            : "0.0", formatInfo);
+            bbox.MinLat = _wfsVersion switch
+            {
+                WFSVersionEnum.WFS_1_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
+                    null
+                        ? bboxVal
+                        : "0.0", formatInfo),
+                WFSVersionEnum.WFS_1_1_0 or WFSVersionEnum.WFS_2_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
+                    null
+                        ? bboxVal[(bboxVal.IndexOf(' ') + 1)..]
+                        : "0.0", formatInfo),
+                _ => bbox.MinLat
+            };
 
-            if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                bbox.MaxLat =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
-                        null
-                            ? bboxVal
-                            : "0.0", formatInfo);
-            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                bbox.MaxLat =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
-                        null
-                            ? bboxVal[(bboxVal.IndexOf(' ') + 1)..]
-                            : "0.0", formatInfo);
+            bbox.MaxLat = _wfsVersion switch
+            {
+                WFSVersionEnum.WFS_1_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
+                    null
+                        ? bboxVal
+                        : "0.0", formatInfo),
+                WFSVersionEnum.WFS_1_1_0 or WFSVersionEnum.WFS_2_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
+                    null
+                        ? bboxVal[(bboxVal.IndexOf(' ') + 1)..]
+                        : "0.0", formatInfo),
+                _ => bbox.MaxLat
+            };
 
-            if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                bbox.MinLong =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
-                        null
-                            ? bboxVal
-                            : "0.0", formatInfo);
-            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                bbox.MinLong =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
-                        null
-                            ? bboxVal[..(bboxVal.IndexOf(' ') + 1)]
-                            : "0.0", formatInfo);
+            bbox.MinLong = _wfsVersion switch
+            {
+                WFSVersionEnum.WFS_1_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
+                    null
+                        ? bboxVal
+                        : "0.0", formatInfo),
+                WFSVersionEnum.WFS_1_1_0 or WFSVersionEnum.WFS_2_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
+                    null
+                        ? bboxVal[..(bboxVal.IndexOf(' ') + 1)]
+                        : "0.0", formatInfo),
+                _ => bbox.MinLong
+            };
 
-            if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                bbox.MaxLong =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
-                        null
-                            ? bboxVal
-                            : "0.0", formatInfo);
-            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                bbox.MaxLong =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
-                        null
-                            ? bboxVal[..(bboxVal.IndexOf(' ') + 1)]
-                            : "0.0", formatInfo);
+            bbox.MaxLong = _wfsVersion switch
+            {
+                WFSVersionEnum.WFS_1_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
+                    null
+                        ? bboxVal
+                        : "0.0", formatInfo),
+                WFSVersionEnum.WFS_1_1_0 or WFSVersionEnum.WFS_2_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
+                    null
+                        ? bboxVal[..(bboxVal.IndexOf(' ') + 1)]
+                        : "0.0", formatInfo),
+                _ => bbox.MaxLong
+            };
 
             _featureTypeInfo.BBox = bbox;
         }
