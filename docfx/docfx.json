@@ -17,7 +17,8 @@
 						"**/obj/**",
 						"**/bin/**",
 						"_site/**"
-					]
+					],
+					"rootTocPath": "~/toc.html"
 				}
 			],
 			"dest": "api",
