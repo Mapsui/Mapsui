@@ -755,23 +755,23 @@ public class WFSProvider : IProvider, IDisposable
         /* Service URI (for WFS GetFeature request) */
         _featureTypeInfo.ServiceUri = _featureTypeInfoQueryManager.GetValueFromNode
             (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_GETFEATURERESOURCE));
-        _featureTypeInfo.ServiceUri = _featureTypeInfo.ServiceUri.AssureUriScheme(_uriScheme);
         /* If no GetFeature URI could be found, try GetCapabilities URI */
         if (_featureTypeInfo.ServiceUri == null) _featureTypeInfo.ServiceUri = _getCapabilitiesUri;
         else if (_featureTypeInfo.ServiceUri.EndsWith("?", StringComparison.Ordinal))
             _featureTypeInfo.ServiceUri =
                 _featureTypeInfo.ServiceUri.Remove(_featureTypeInfo.ServiceUri.Length - 1);
 
+        _featureTypeInfo.ServiceUri = _featureTypeInfo.ServiceUri.AssureUriScheme(_uriScheme);
         /* URI for DescribeFeatureType request */
         var describeFeatureTypeUri = _featureTypeInfoQueryManager.GetValueFromNode
             (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_DESCRIBEFEATURETYPERESOURCE));
-        describeFeatureTypeUri = describeFeatureTypeUri.AssureUriScheme(_uriScheme);
         /* If no DescribeFeatureType URI could be found, try GetCapabilities URI */
         if (describeFeatureTypeUri == null) describeFeatureTypeUri = _getCapabilitiesUri;
         else if (describeFeatureTypeUri.EndsWith("?", StringComparison.Ordinal))
             describeFeatureTypeUri =
                 describeFeatureTypeUri.Remove(describeFeatureTypeUri.Length - 1);
 
+        describeFeatureTypeUri = describeFeatureTypeUri.AssureUriScheme(_uriScheme);
         /* Spatial reference ID */
         var srid = _featureTypeInfoQueryManager.GetValueFromNode
             (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_SRS), [new DictionaryEntry("_param1", featureQueryName)]);
