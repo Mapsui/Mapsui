@@ -382,13 +382,13 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     bool IFeatureSize.NeedsFeature => true;
 
-    double IFeatureSize.FeatureSize(IStyle style, IRenderCache renderingCache, IFeature? feature)
+    double IFeatureSize.FeatureSize(IStyle style, IRenderService renderService, IFeature? feature)
     {
         if (feature == null) throw new ArgumentNullException(nameof(feature));
 
         if (style is LabelStyle labelStyle)
         {
-            return FeatureSize(feature, labelStyle, _paint, renderingCache);
+            return FeatureSize(feature, labelStyle, _paint, renderService);
         }
 
         return 0;

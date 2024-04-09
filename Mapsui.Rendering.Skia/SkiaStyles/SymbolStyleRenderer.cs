@@ -234,26 +234,26 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     bool IFeatureSize.NeedsFeature => false;
 
-    double IFeatureSize.FeatureSize(IStyle style, IRenderCache renderCache, IFeature? feature)
+    double IFeatureSize.FeatureSize(IStyle style, IRenderService renderService, IFeature? feature)
     {
         if (style is SymbolStyle symbolStyle)
         {
-            return FeatureSize(symbolStyle, renderCache);
+            return FeatureSize(symbolStyle, renderService);
         }
 
         return 0;
     }
 
-    public static double FeatureSize(SymbolStyle symbolStyle, ISymbolCache symbolCache)
+    public static double FeatureSize(SymbolStyle symbolStyle, IRenderService renderService)
     {
         Size symbolSize = new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
-
+        LoadBitmapId(symbolStyle, renderService);
         switch (symbolStyle.SymbolType)
         {
             case SymbolType.Image:
                 if (symbolStyle.BitmapId >= 0)
                 {
-                    var bitmapSize = symbolCache.GetSize(symbolStyle.BitmapId);
+                    var bitmapSize = renderService.GetSize(symbolStyle.BitmapId);
                     if (bitmapSize != null)
                     {
                         symbolSize = bitmapSize;

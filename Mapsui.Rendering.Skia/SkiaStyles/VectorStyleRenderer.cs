@@ -64,7 +64,7 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     bool IFeatureSize.NeedsFeature => false;
 
-    double IFeatureSize.FeatureSize(IStyle style, IRenderCache renderCache, IFeature? feature)
+    double IFeatureSize.FeatureSize(IStyle style, IRenderService renderService, IFeature? feature)
     {
         if (style is VectorStyle vectorStyle)
         {
