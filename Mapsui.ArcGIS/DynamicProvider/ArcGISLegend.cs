@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Mapsui.Cache;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Utilities;
 
@@ -90,17 +91,12 @@ public class ArcGisLegend
     private HttpClient CreateRequest(ICredentials? credentials)
     {
         HttpClientHandler httpClientHandler = new HttpClientHandler();
-        try
-        {
-            // Blazor does not support this.
-            httpClientHandler.UseDefaultCredentials = credentials == null;
-        }
-        catch (PlatformNotSupportedException e)
-        {
-            Logger.Log(LogLevel.Error, e.Message, e);
-        }
+        httpClientHandler.SetUseDefaultCredentials(credentials == null);
 
-        if (credentials != null) httpClientHandler.Credentials = credentials;
+        if (credentials != null)
+        {
+            httpClientHandler.SetCredentials(credentials);
+        }
 
         var httpClient = new HttpClient(httpClientHandler)
         {

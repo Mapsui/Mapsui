@@ -6,6 +6,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 
 namespace Mapsui.Providers.Wms;
 
@@ -82,7 +83,9 @@ public class GetFeatureInfo
 
     private async Task<Stream> GetStreamAsync(string url)
     {
-        var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
+        var handler = new HttpClientHandler();
+        handler.SetCredentials(Credentials ?? CredentialCache.DefaultCredentials);
+
         var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
         client.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent ?? "If you use Mapsui please specify a user-agent specific to your app");
         var req = new HttpRequestMessage(HttpMethod.Get, url);

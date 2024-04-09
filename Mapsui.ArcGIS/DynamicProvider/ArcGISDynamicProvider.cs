@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.ArcGIS.Extensions;
 using Mapsui.Cache;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Projections;
@@ -169,20 +170,10 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
             if (bytes == null)
             {
                 var handler = new HttpClientHandler();
-                try
-                {
-                    // Blazor does not support this,
-                    handler.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
-                }
-                catch (PlatformNotSupportedException e)
-                {
-                    Logger.Log(LogLevel.Error, e.Message, e);
-                }
-
+                handler.SetCredentials(Credentials ?? CredentialCache.DefaultCredentials);
                 using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
-
-                using var response = await client.GetAsync(uri, cancellationToken).ConfigureAwait(false);
-                await using var readAsStreamAsync = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+                using var response = await client.GetAsync(uri).ConfigureAwait(false);
+                using var readAsStreamAsync = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
                 bytes = BruTile.Utilities.ReadFully(readAsStreamAsync);
                 _persistentCache?.Add(uri.ToString(), bytes);
             }

@@ -53,7 +53,7 @@ public class WFSProvider : IProvider, IDisposable
         /// <summary>
         /// Version 1.1.0
         /// </summary>
-        WFS_1_1_0
+        WFS_1_1_0,
     }
 
 
@@ -79,6 +79,7 @@ public class WFSProvider : IProvider, IDisposable
     private readonly CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
     private readonly SemaphoreSlim _init = new(1, 1);
     private bool _initialized;
+    private readonly string? _uriScheme;
 
     // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
     // It helps to accelerate the rendering process significantly.
@@ -325,10 +326,13 @@ public class WFSProvider : IProvider, IDisposable
         _persistentCache = persistentCache;
         _getCapabilitiesUri = getCapabilitiesUri;
         _featureType = featureType;
+        _uriScheme = getCapabilitiesUri.GetUriScheme();
 
-        if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
-            _textResources = new WFS_1_0_0_TextResources();
-        else _textResources = new WFS_1_1_0_TextResources();
+        _textResources = wfsVersion switch
+        {
+            WFSVersionEnum.WFS_1_0_0 => new WFS_1_0_0_TextResources(),
+            _ => new WFS_1_1_0_TextResources(),
+        };
 
         _wfsVersion = wfsVersion;
 
@@ -738,6 +742,7 @@ public class WFSProvider : IProvider, IDisposable
         /* Service URI (for WFS GetFeature request) */
         _featureTypeInfo.ServiceUri = _featureTypeInfoQueryManager.GetValueFromNode
             (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_GETFEATURERESOURCE));
+        _featureTypeInfo.ServiceUri = _featureTypeInfo.ServiceUri.AssureUriScheme(_uriScheme);
         /* If no GetFeature URI could be found, try GetCapabilities URI */
         if (_featureTypeInfo.ServiceUri == null) _featureTypeInfo.ServiceUri = _getCapabilitiesUri;
         else if (_featureTypeInfo.ServiceUri.EndsWith("?", StringComparison.Ordinal))
@@ -747,6 +752,7 @@ public class WFSProvider : IProvider, IDisposable
         /* URI for DescribeFeatureType request */
         var describeFeatureTypeUri = _featureTypeInfoQueryManager.GetValueFromNode
             (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_DESCRIBEFEATURETYPERESOURCE));
+        describeFeatureTypeUri = describeFeatureTypeUri.AssureUriScheme(_uriScheme);
         /* If no DescribeFeatureType URI could be found, try GetCapabilities URI */
         if (describeFeatureTypeUri == null) describeFeatureTypeUri = _getCapabilitiesUri;
         else if (describeFeatureTypeUri.EndsWith("?", StringComparison.Ordinal))

@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.ArcGIS.Extensions;
 using Mapsui.Cache;
@@ -94,9 +93,9 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
         set => _timeOut = value;
     }
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
-        var (success, raster) = await TryGetMapAsync(fetchInfo.Section, cancellationToken);
+        var (success, raster) = await TryGetMapAsync(fetchInfo.Section);
         if (success)
         {
             return new[] { new RasterFeature(raster) };
@@ -129,15 +128,7 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
         try
         {
             using var handler = new HttpClientHandler();
-            try
-            {
-                // Blazor does not support this,
-                handler.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
-            }
-            catch (PlatformNotSupportedException e)
-            {
-                Logger.Log(LogLevel.Error, e.Message, e);
-            }
+            handler.SetCredentials(Credentials ?? CredentialCache.DefaultCredentials);
 
             try
             {
