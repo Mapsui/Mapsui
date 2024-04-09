@@ -17,8 +17,7 @@
 						"**/obj/**",
 						"**/bin/**",
 						"_site/**"
-					],
-					"rootTocPath": "~/toc.html"
+					]
 				}
 			],
 			"dest": "api",
@@ -34,6 +33,7 @@
 				"files": [
 					"api/**.yml",
 					"api/index.md",
+					"api/toc.yml",
 					"documentation/**.md",
 					"documentation/**/toc.md",
 					"documentation/**.png",
