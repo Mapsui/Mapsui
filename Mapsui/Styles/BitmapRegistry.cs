@@ -104,16 +104,19 @@ public sealed class BitmapRegistry : IBitmapRegistry
     /// Check bitmap data for correctness
     /// </summary>
     /// <param name="bitmapData">Bitmap data to check</param>
-    private void CheckBitmapData(object bitmapData)
+    public void CheckBitmapData(object bitmapData)
     {
         if (bitmapData == null)
             throw new ArgumentException("The bitmap data that is registered is null. Was the image loaded correctly?");
 
         if (bitmapData is Sprite sprite)
         {
-            if (sprite.Atlas < 0 || !_register.ContainsKey(sprite.Atlas))
+            if (sprite.Atlas < 0 || sprite.Atlas > _counter || !_register.ContainsKey(sprite.Atlas))
             {
-                throw new ArgumentException("Sprite has no corresponding atlas bitmap.");
+                if (_parent != null)
+                    _parent.CheckBitmapData(bitmapData);
+                else
+                    throw new ArgumentException("Sprite has no corresponding atlas bitmap.");
             }
         }
     }

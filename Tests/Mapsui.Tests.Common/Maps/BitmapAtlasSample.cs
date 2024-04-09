@@ -55,7 +55,7 @@ public class BitmapAtlasSample : ISample
         {
             new PointFeature(new MPoint(256, 124))
             {
-                Styles = new[] {new SymbolStyle { Bitmap = atlas} }
+                Styles = new[] {new SymbolStyle { BitmapId = atlas} }
             },
             new PointFeature(new MPoint(20, 280))
             {
