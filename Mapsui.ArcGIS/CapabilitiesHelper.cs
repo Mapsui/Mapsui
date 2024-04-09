@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BruTile;
 using Mapsui.ArcGIS.DynamicProvider;
 using Mapsui.Cache;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 
 namespace Mapsui.ArcGIS;
@@ -114,7 +115,7 @@ public class CapabilitiesHelper
 
                     if (!response.IsSuccessStatusCode)
                     {
-                        OnCapabilitiesFailed(new EventArgs());
+                        OnCapabilitiesFailed(EventArgs.Empty);
                         return;
                     }
 
