@@ -54,6 +54,10 @@ public class WFSProvider : IProvider, IDisposable
         /// Version 1.1.0
         /// </summary>
         WFS_1_1_0,
+        /// <summary>
+        /// Version 2.0.0
+        /// </summary>
+        WFS_2_0_0,
     }
 
 
@@ -331,7 +335,9 @@ public class WFSProvider : IProvider, IDisposable
         _textResources = wfsVersion switch
         {
             WFSVersionEnum.WFS_1_0_0 => new WFS_1_0_0_TextResources(),
-            _ => new WFS_1_1_0_TextResources(),
+            WFSVersionEnum.WFS_1_1_0 => new WFS_1_1_0_TextResources(),
+            WFSVersionEnum.WFS_2_0_0 => new WFS_2_0_0_TextResources(),
+            _ => throw new ArgumentException(nameof(wfsVersion))
         };
 
         _wfsVersion = wfsVersion;
@@ -384,9 +390,13 @@ public class WFSProvider : IProvider, IDisposable
         _persistentCache = persistentCache ?? DefaultCache;
         _featureTypeInfo = featureTypeInfo;
 
-        if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
-            _textResources = new WFS_1_0_0_TextResources();
-        else _textResources = new WFS_1_1_0_TextResources();
+        _textResources = wfsVersion switch
+        {
+            WFSVersionEnum.WFS_1_0_0 => new WFS_1_0_0_TextResources(),
+            WFSVersionEnum.WFS_1_1_0 => new WFS_1_1_0_TextResources(),
+            WFSVersionEnum.WFS_2_0_0 => new WFS_2_0_0_TextResources(),
+            _ => throw new ArgumentException(nameof(wfsVersion))
+        };
 
         _wfsVersion = wfsVersion;
     }
@@ -419,9 +429,13 @@ public class WFSProvider : IProvider, IDisposable
         _featureTypeInfo = new WfsFeatureTypeInfo(serviceUri, nsPrefix, featureTypeNamespace, featureType,
                                                   geometryName, geometryType);
 
-        if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
-            _textResources = new WFS_1_0_0_TextResources();
-        else _textResources = new WFS_1_1_0_TextResources();
+        _textResources = wfsVersion switch
+        {
+            WFSVersionEnum.WFS_1_0_0 => new WFS_1_0_0_TextResources(),
+            WFSVersionEnum.WFS_1_1_0 => new WFS_1_1_0_TextResources(),
+            WFSVersionEnum.WFS_2_0_0 => new WFS_2_0_0_TextResources(),
+            _ => throw new ArgumentException(nameof(wfsVersion))
+        };
 
         _wfsVersion = wfsVersion;
     }
@@ -474,9 +488,13 @@ public class WFSProvider : IProvider, IDisposable
         _persistentCache = persistentCache ?? DefaultCache;
         _featureTypeInfoQueryManager = getCapabilitiesCache;
 
-        if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
-            _textResources = new WFS_1_0_0_TextResources();
-        else _textResources = new WFS_1_1_0_TextResources();
+        _textResources = wfsVersion switch
+        {
+            WFSVersionEnum.WFS_1_0_0 => new WFS_1_0_0_TextResources(),
+            WFSVersionEnum.WFS_1_1_0 => new WFS_1_1_0_TextResources(),
+            WFSVersionEnum.WFS_2_0_0 => new WFS_2_0_0_TextResources(),
+            _ => throw new ArgumentException(nameof(wfsVersion))
+        };
 
         _wfsVersion = wfsVersion;
 
