@@ -149,7 +149,7 @@ public class WFS_2_0_0_TextResources : WFS_2_0_0_XPathTextResources, IWFS_TextRe
                 xWriter.WriteElementString("PropertyName", featureTypeInfo.Geometry.GeometryName);
             xWriter.WriteStartElement("gml", "Envelope", NSGML);
             xWriter.WriteAttributeString("srsName",
-                "http://www.opengis.net/gml/srs/epsg.xml#" + featureTypeInfo.SRID);
+                "http://www.opengis.net/gml/3.2/srs/epsg.xml#" + featureTypeInfo.SRID);
             xWriter.WriteElementString("lowerCorner", NSGML,
                 XmlConvert.ToString(boundingBox.Left) + " " +
                 XmlConvert.ToString(boundingBox.Bottom));

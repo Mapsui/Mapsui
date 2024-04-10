@@ -35,6 +35,10 @@ public class WFS_2_0_0_XPathTextResources : WFS_XPathTextResourcesBase
     private static readonly string _XPATH_SRS =
         "/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType[_PARAMCOMP_(wfs:Name, $_param1)]/wfs:DefaultSRS";
 
+    private const string _NSGML = "http://www.opengis.net/gml/3.2";
+
+    public string NSGML => _NSGML;
+
     /// <summary>
     /// Gets an XPath string addressing the SRID of a featuretype in 'GetCapabilities'.
     /// </summary>
