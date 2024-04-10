@@ -18,14 +18,6 @@ namespace Mapsui.Providers.Wfs.Utilities;
 
 public class WFS_2_0_0_TextResources : WFS_2_0_0_XPathTextResources, IWFS_TextResources
 {
-    private const string _NSWFS = "http://www.opengis.net/wfs/2.0";
-
-    private const string _NSOWS = "http://www.opengis.net/ows/1.1";
-
-    public string NSWFS => _NSWFS;
-
-    public string NSOWS => _NSOWS;
-
     ////////////////////////////////////////////////////////////////////////
     // HTTP Configuration                                                 //                      
     // POST & GET                                                         //

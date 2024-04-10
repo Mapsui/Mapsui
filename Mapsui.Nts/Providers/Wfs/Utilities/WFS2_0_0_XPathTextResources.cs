@@ -37,7 +37,15 @@ public class WFS_2_0_0_XPathTextResources : WFS_XPathTextResourcesBase
 
     private const string _NSGML = "http://www.opengis.net/gml/3.2";
 
-    public string NSGML => _NSGML;
+    private const string _NSWFS = "http://www.opengis.net/wfs/2.0";
+
+    private const string _NSOWS = "http://www.opengis.net/ows/1.1";
+
+    public override string NSWFS => _NSWFS;
+
+    public override string NSOWS => _NSOWS;
+
+    public override string NSGML => _NSGML;
 
     /// <summary>
     /// Gets an XPath string addressing the SRID of a featuretype in 'GetCapabilities'.
