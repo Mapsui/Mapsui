@@ -3,7 +3,7 @@
     {
       "src": [
         {
-          "cwd": "../",
+          "src": "../",
           "files": [
             "Mapsui/*.csproj",
             "Mapsui.ArcGis/*.csproj",
@@ -12,19 +12,11 @@
             "Mapsui.Rendering.Skia/*.csproj",
             "Mapsui.Tiling/*.csproj",
             "Mapsui.UI.*/*.csproj"
-          ],
-          "exclude": [
-            "**/obj/**",
-            "**/bin/**",
-            "_site/**"
           ]
         }
       ],
       "dest": "api",
-      "disableGitFeatures": false,
-      "properties": {
-        "TargetFramework": "netstandard2.0"
-      }
+      "disableGitFeatures": false
     }
   ],
   "build": {
@@ -36,7 +28,7 @@
           "documentation/**.md",
           "documentation/**/toc.md",
           "documentation/**.png",
-		  "codesamples/**.md",
+          "codesamples/**.md",
           "toc.yml",
           "*.md"
         ],
@@ -73,13 +65,17 @@
       "https://xref.docs.microsoft.com/query?uid={uid}"
     ],
     "dest": "_site",
-    "globalMetadataFiles": [ "metadata.json" ],
+    "globalMetadataFiles": [
+      "metadata.json"
+    ],
     "fileMetadataFiles": [],
     "markdownEngineName": "markdig",
     "template": [
       "default"
     ],
-    "postProcessors": [ "ExtractSearchIndex" ],
+    "postProcessors": [
+      "ExtractSearchIndex"
+    ],
     "noLangKeyword": false,
     "keepFileLink": false,
     "cleanupCacheHistory": false,
