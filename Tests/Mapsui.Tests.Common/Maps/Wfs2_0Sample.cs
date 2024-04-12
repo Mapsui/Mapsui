@@ -69,7 +69,7 @@ public class Wfs2_0Sample : ISample
 
         provider.GetFeatureGetRequest = true;
         provider.CRS = crs;
-        provider.AxisOrder = new[] { 0, 1 };
+        provider.AxisOrder = [0, 1];
 
         await provider.InitAsync();
 
