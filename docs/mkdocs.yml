@@ -22,9 +22,8 @@ nav:
   - 'nuget-of-latest-build.md'
 
   - Upgrade guides:
-    - 'v2.0-upgrade-guide.md'
     - 'v4.0-upgrade-guide.md'
-
+    - 'v5.0-upgrade-guide.md'
   - How Things Work:
     - 'mapsui-components.md'
     - 'async-fetching.md'
@@ -38,6 +37,7 @@ nav:
     - 'contributors-guidelines.md'
     - 'rendering-tests.md'
     - 'documentation.md'
+    - 'touch-and-mouse-handling.md'
 
 repo_url: https://github.com/Mapsui/Mapsui/
 edit_uri: blob/master/docs/general/
