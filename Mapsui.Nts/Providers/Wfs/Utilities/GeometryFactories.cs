@@ -45,7 +45,7 @@ internal abstract class GeometryFactory : IDisposable
     /// </summary>
     internal int[] AxisOrder { get; set; } = [0, 1]; // default value
 
-    protected string GmlNs => FeatureTypeInfo.NSGML;
+    protected string GmlNs => FeatureTypeInfo.GmlNs;
 
     /// <summary>
     /// Protected constructor for the abstract class.

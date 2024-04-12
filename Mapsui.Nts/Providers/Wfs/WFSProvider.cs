@@ -426,9 +426,6 @@ public class WFSProvider : IProvider, IDisposable
                string geometryName, GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
         _persistentCache = persistentCache ?? DefaultCache;
-        _featureTypeInfo = new WfsFeatureTypeInfo(serviceUri, nsPrefix, featureTypeNamespace, featureType,
-                                                  geometryName, geometryType);
-
         _textResources = wfsVersion switch
         {
             WFSVersionEnum.WFS_1_0_0 => new WFS_1_0_0_TextResources(),
@@ -437,6 +434,8 @@ public class WFSProvider : IProvider, IDisposable
             _ => throw new ArgumentException(nameof(wfsVersion))
         };
 
+        _featureTypeInfo = new WfsFeatureTypeInfo(serviceUri, nsPrefix, featureTypeNamespace, featureType,
+            geometryName, geometryType, _textResources.NSGML);
         _wfsVersion = wfsVersion;
     }
 
@@ -725,7 +724,7 @@ public class WFSProvider : IProvider, IDisposable
     {
 
         _featureTypeInfo = new WfsFeatureTypeInfo();
-        _featureTypeInfo.NSGML = _textResources.NSGML;
+        _featureTypeInfo.GmlNs = _textResources.NSGML;
         var config = new WFSClientHttpConfigurator(_textResources);
 
         _featureTypeInfo.Prefix = _nsPrefix;

@@ -158,29 +158,30 @@ public class WfsFeatureTypeInfo
     public List<string>? LabelFields { get; set; } // temp solution 
 
     // Namespace Ns GML
-    public string NSGML { get; set; } = "http://www.opengis.net/gml";
+    public string GmlNs { get; set; } = "http://www.opengis.net/gml";
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WfsFeatureTypeInfo"/> class.
     /// </summary>
     /// <param name="serviceUri"></param>
     /// <param name="nsPrefix">
-    /// Use an empty string or 'null', if there is no prefix for the featuretype.
+    ///     Use an empty string or 'null', if there is no prefix for the featuretype.
     /// </param>
     /// <param name="featureTypeNamespace">
-    /// Use an empty string or 'null', if there is no namespace for the featuretype.
-    /// You don't need to know the namespace of the feature type, if you use the quick geometries option.
+    ///     Use an empty string or 'null', if there is no namespace for the featuretype.
+    ///     You don't need to know the namespace of the feature type, if you use the quick geometries option.
     /// </param>
     /// <param name="featureType"></param>
     /// <param name="geometryName">
-    /// The geometry name is the property of the featuretype from which geometry information can be obtained from.
-    /// Usually this property is called something like 'Shape' or 'geom'. It is absolutely necessary to give this parameter. 
+    ///     The geometry name is the property of the featuretype from which geometry information can be obtained from.
+    ///     Usually this property is called something like 'Shape' or 'geom'. It is absolutely necessary to give this parameter. 
     /// </param>
     /// <param name="geometryType">
-    /// Specifying the geometry type helps to accelerate the rendering process.   
+    ///     Specifying the geometry type helps to accelerate the rendering process.   
     /// </param>
+    /// <param name="textResourcesNsgml"></param>
     public WfsFeatureTypeInfo(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType,
-                              string geometryName, GeometryTypeEnum geometryType)
+        string geometryName, GeometryTypeEnum geometryType, string gmlNs)
     {
         _serviceUri = serviceUri;
         _prefix = nsPrefix;
@@ -188,6 +189,7 @@ public class WfsFeatureTypeInfo
         _name = featureType;
         _geometry.GeometryName = geometryName;
         _geometry.GeometryType = geometryType.ToString();
+        GmlNs = gmlNs;
     }
 
     /// <summary>
@@ -206,9 +208,10 @@ public class WfsFeatureTypeInfo
     /// The geometry name is the property of the featuretype from which geometry information can be obtained from.
     /// Usually this property is called something like 'Shape' or 'geom'. It is absolutely necessary to give this parameter. 
     /// </param>
+    /// <param name="gmlNs">Gml Namespace for WFS 1.1 and lower it is "http://www.opengis.net/gml for WFS 2.0 it is "http://www.opengis.net/gml/3.2""</param>
     public WfsFeatureTypeInfo(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType,
-                              string geometryName)
-        : this(serviceUri, nsPrefix, featureTypeNamespace, featureType, geometryName, GeometryTypeEnum.Unknown)
+                              string geometryName, string gmlNs)
+        : this(serviceUri, nsPrefix, featureTypeNamespace, featureType, geometryName, GeometryTypeEnum.Unknown, gmlNs)
     {
     }
 
