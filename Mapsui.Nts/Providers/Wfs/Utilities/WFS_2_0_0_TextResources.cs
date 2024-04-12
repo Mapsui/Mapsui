@@ -59,7 +59,6 @@ public class WFS_2_0_0_TextResources : WFS_2_0_0_XPathTextResources, IWFS_TextRe
 
         paramBuilder.Append("?SERVICE=WFS&Version=2.0.0&REQUEST=GetFeature&TYPENAMES=");
         paramBuilder.Append(HttpUtility.UrlEncode(qualification + featureTypeInfo.Name));
-        paramBuilder.Append("&STARTINDEX=0&COUNT=1000000");
         paramBuilder.Append("&srsName=");
         paramBuilder.Append(HttpUtility.UrlEncode(CrsHelper.EpsgPrefix + featureTypeInfo.SRID));
 
@@ -149,7 +148,7 @@ public class WFS_2_0_0_TextResources : WFS_2_0_0_XPathTextResources, IWFS_TextRe
                 xWriter.WriteElementString("PropertyName", featureTypeInfo.Geometry.GeometryName);
             xWriter.WriteStartElement("gml", "Envelope", NSGML);
             xWriter.WriteAttributeString("srsName",
-                "http://www.opengis.net/gml/srs/epsg.xml" + featureTypeInfo.SRID);
+                "EPSG:" + featureTypeInfo.SRID);
             xWriter.WriteElementString("lowerCorner", NSGML,
                 XmlConvert.ToString(boundingBox.Left) + " " +
                 XmlConvert.ToString(boundingBox.Bottom));
