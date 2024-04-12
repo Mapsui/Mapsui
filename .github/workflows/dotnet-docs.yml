@@ -37,15 +37,13 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0 
-    # .Net 8 update     
     - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
            8.0.x
-         include-prerelease: true
-    - name: install wasm-tools
-      run: dotnet workload install wasm-tools
+    - name: install workloads
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Run DocFx
       shell: pwsh
       run: ./Scripts/BuildDocumentationWebSite.ps1
