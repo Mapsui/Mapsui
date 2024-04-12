@@ -15,7 +15,7 @@
 					]
 				}
 			],
-			"dest": "api",
+			"dest": "pages",
 			"disableGitFeatures": false
 		}
 	],
@@ -23,9 +23,9 @@
 		"content": [
 			{
 				"files": [
-					"api/**.yml",
-					"api/index.md",
-					"api/toc.yml",
+					"pages/**.yml",
+					"pages/index.md",
+					"pages/toc.yml",
 					"documentation/**.md",
 					"documentation/**/toc.md",
 					"documentation/**.png",
