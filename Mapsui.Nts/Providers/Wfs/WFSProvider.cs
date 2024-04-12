@@ -725,6 +725,7 @@ public class WFSProvider : IProvider, IDisposable
     {
 
         _featureTypeInfo = new WfsFeatureTypeInfo();
+        _featureTypeInfo.NSGML = _textResources.NSGML;
         var config = new WFSClientHttpConfigurator(_textResources);
 
         _featureTypeInfo.Prefix = _nsPrefix;

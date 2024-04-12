@@ -157,7 +157,8 @@ public class WfsFeatureTypeInfo
 
     public List<string>? LabelFields { get; set; } // temp solution 
 
-
+    // Namespace Ns GML
+    public string NSGML { get; set; } = "http://www.opengis.net/gml";
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WfsFeatureTypeInfo"/> class.
