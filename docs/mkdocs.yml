@@ -1,6 +1,6 @@
 site_name: Mapsui Documentation
 docs_dir: documentation
-site_dir: _site/documentation2
+site_dir: _site
 theme:
   name: 'material'
   features:
@@ -40,7 +40,7 @@ nav:
     - 'documentation.md'
 
 repo_url: https://github.com/Mapsui/Mapsui/
-edit_uri: blob/master/mkdocs/documentation/
+edit_uri: blob/master/docs/general/
 plugins:
   - glightbox
   - search:
