@@ -3,7 +3,7 @@
 		{
 			"src": [
 				{
-					"cwd": "../",
+					"src": "../",
 					"files": [
 						"Mapsui/*.csproj",
 						"Mapsui.ArcGis/*.csproj",
@@ -12,19 +12,11 @@
 						"Mapsui.Rendering.Skia/*.csproj",
 						"Mapsui.Tiling/*.csproj",
 						"Mapsui.UI.*/*.csproj"
-					],
-					"exclude": [
-						"**/obj/**",
-						"**/bin/**",
-						"_site/**"
 					]
 				}
 			],
 			"dest": "api",
-			"disableGitFeatures": false,
-			"properties": {
-				"TargetFramework": "net6.0"
-			}
+			"disableGitFeatures": false
 		}
 	],
 	"build": {
