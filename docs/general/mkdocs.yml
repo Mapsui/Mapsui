@@ -1,5 +1,5 @@
 site_name: Mapsui Documentation
-docs_dir: general
+docs_dir: ./
 site_dir: _site
 theme:
   name: 'material'
@@ -24,6 +24,7 @@ nav:
   - Upgrade guides:
     - 'v4.0-upgrade-guide.md'
     - 'v5.0-upgrade-guide.md'
+
   - How Things Work:
     - 'mapsui-components.md'
     - 'async-fetching.md'
