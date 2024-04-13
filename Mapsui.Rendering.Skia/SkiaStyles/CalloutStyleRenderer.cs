@@ -80,11 +80,11 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         return true;
     }
 
-    private void LoadBitmapId(CalloutStyle calloutStyle, IBitmapRegistry renderService)
+    private void LoadBitmapId(CalloutStyle calloutStyle, IBitmapRegistry bitmapRegistry)
     {
-        if (calloutStyle is { BitmapId: < 0, Bitmap: not null })
+        if (calloutStyle is { BitmapId: < 0, BitmapPath: not null })
         {
-            calloutStyle.BitmapId = renderService.Register(calloutStyle.Bitmap);
+            calloutStyle.BitmapId = bitmapRegistry.Register(calloutStyle.BitmapPath);
         }
     }
 

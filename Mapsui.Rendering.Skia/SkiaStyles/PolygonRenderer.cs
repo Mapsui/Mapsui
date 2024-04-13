@@ -220,13 +220,15 @@ internal static class PolygonRenderer
             if (sprite == null)
                 return null;
 
-            if (sprite.Data == null)
+            if (sprite.BitmapId < 0)
             {
                 var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.Atlas);
-                sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
+                var skImage = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
                     sprite.Y + sprite.Height));
+                sprite.BitmapId = symbolCache.BitmapRegistry.Register(skImage);
             }
-            return (SKImage?)sprite.Data;
+
+            return (SKImage?)symbolCache.BitmapRegistry.Get(sprite.BitmapId);
         }
         return null;
     }

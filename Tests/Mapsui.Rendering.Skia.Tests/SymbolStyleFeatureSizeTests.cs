@@ -108,15 +108,27 @@ public class SymbolStyleFeatureSizeTests
         using var renderService = new RenderService();
 
         var bitmap = CreatePng(100, 100);
+        var bitmapId = renderService.BitmapRegistry.Register(bitmap);
 
         var symbolStyle = new SymbolStyle
         {
-            Bitmap = bitmap,
+            BitmapId = bitmapId,
         };
 
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
 
         ClassicAssert.AreEqual(size, 100);
+    }
+
+    [Test]
+    public void UriTests()
+    {
+        var file = new Uri("file://myfolder/myimage.png");
+        var http = new Uri("http://mywebsite.com/myimage.png");
+        var resource = new Uri("embeddedResource://myassembly.resourses.images.myimage.png");
+        Assert.That(file.Scheme == "file");
+        Assert.That(http.Scheme == "http");
+        Assert.That(resource.Scheme == "embeddedresource");
     }
 
     private object CreatePng(int x, int y)

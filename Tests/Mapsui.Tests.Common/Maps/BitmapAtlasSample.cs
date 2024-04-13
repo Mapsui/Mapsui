@@ -49,7 +49,7 @@ public class BitmapAtlasSample : ISample
         var spriteClothingStore15 = new Sprite(atlas, 84, 106, 21, 21, 1);
         var spriteDentist15 = new Sprite(atlas, 147, 64, 21, 21, 1);
         var spritePedestrianPolygon = new Sprite(atlas, 0, 0, 64, 64, 1);
-        var svgTigerBitmap = typeof(BitmapAtlasSample).LoadSvg("Resources.Images.Ghostscript_Tiger.svg");
+        var svgTigerBitmap = typeof(BitmapAtlasSample).LoadSvgId("Resources.Images.Ghostscript_Tiger.svg");
 
         return new List<IFeature>
         {
@@ -75,7 +75,7 @@ public class BitmapAtlasSample : ISample
             },
             new PointFeature(new MPoint(380, 280))
             {
-                Styles = new[] {new SymbolStyle { Bitmap = svgTigerBitmap, SymbolScale = 0.1} }
+                Styles = new[] {new SymbolStyle { BitmapId = svgTigerBitmap, SymbolScale = 0.1} }
             }
         };
     }

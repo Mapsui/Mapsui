@@ -49,4 +49,6 @@ public sealed class SymbolCache : ISymbolCache
 
         _cache.Clear();
     }
+
+    public IBitmapRegistry BitmapRegistry => _bitmapRegistry;
 }

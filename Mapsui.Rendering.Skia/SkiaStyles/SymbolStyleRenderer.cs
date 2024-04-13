@@ -92,13 +92,16 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     return false;
 
                 var sprite = bitmap.Sprite;
-                if (sprite.Data == null)
+                if (sprite.BitmapId < 0)
                 {
                     var bitmapAtlas = (BitmapInfo)renderService.SymbolCache.GetOrCreate(sprite.Atlas);
-                    sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
+                    var image = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
                         sprite.Y + sprite.Height));
+                    sprite.BitmapId = renderService.BitmapRegistry.Register(image);
                 }
-                if (sprite.Data is SKImage skImage)
+
+                var data = renderService.BitmapRegistry.Get(sprite.BitmapId);
+                if (data is SKImage skImage)
                     BitmapRenderer.Draw(canvas, skImage,
                         (float)destX, (float)destY,
                         rotation,
@@ -112,9 +115,9 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     private static void LoadBitmapId(SymbolStyle symbolStyle, IBitmapRegistry renderService)
     {
-        if (symbolStyle is { BitmapId: < 0, Bitmap: not null })
+        if (symbolStyle is { BitmapId: < 0, BitmapPath: not null })
         {
-            symbolStyle.BitmapId = renderService.Register(symbolStyle.Bitmap);
+            symbolStyle.BitmapId = renderService.Register(symbolStyle.BitmapPath);
         }
     }
 
