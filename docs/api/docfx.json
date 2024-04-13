@@ -3,19 +3,19 @@
 		{
 			"src": [
 				{
-					"src": "../",
+					"src": "../../",
 					"files": [
-						"Mapsui/*.csproj",
-						"Mapsui.ArcGis/*.csproj",
-						"Mapsui.Extensions/*.csproj",
-						"Mapsui.Nts/*.csproj",
-						"Mapsui.Rendering.Skia/*.csproj",
-						"Mapsui.Tiling/*.csproj",
+						"Mapsui/Mapsui.csproj",
+						"Mapsui.ArcGis/Mapsui.ArcGis.csproj",
+						"Mapsui.Extensions/Mapsui.Extensions.csproj",
+						"Mapsui.Nts/Mapsui.Nts.csproj",
+						"Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj",
+						"Mapsui.Tiling/Mapsui.Tiling.csproj",
 						"Mapsui.UI.*/*.csproj"
 					]
 				}
 			],
-			"dest": "api",
+			"dest": "pages",
 			"disableGitFeatures": false
 		}
 	],
@@ -23,13 +23,10 @@
 		"content": [
 			{
 				"files": [
-					"api/**.yml",
-					"api/index.md",
-					"api/toc.yml",
-					"documentation/**.md",
-					"documentation/**/toc.md",
-					"documentation/**.png",
-					"codesamples/**.md",
+					"pages/**.yml",
+					"pages/index.md",
+					"pages/toc.yml",
+					"../codesamples/**.md",
 					"toc.yml",
 					"*.md"
 				],
