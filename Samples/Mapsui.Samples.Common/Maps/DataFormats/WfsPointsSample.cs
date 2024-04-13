@@ -68,6 +68,7 @@ public class WfsPointsSample : ISample
             "laser_2002_04_punkte",
             WFSProvider.WFSVersionEnum.WFS_1_1_0);
 
+        provider.GetFeatureGetRequest = true;
         provider.CRS = crs;
         provider.AxisOrder = new[] { 0, 1 };
 

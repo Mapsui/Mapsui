@@ -82,7 +82,7 @@ public class WFS_XPathTextResourcesBase
     /// <summary>
     /// WFS namespace URI 
     /// </summary>
-    public string NSWFS => _NSWFS;
+    public virtual string NSWFS => _NSWFS;
 
     /// <summary>
     /// Prefix used for GML namespace
@@ -92,7 +92,7 @@ public class WFS_XPathTextResourcesBase
     /// <summary>
     /// GML namespace URI 
     /// </summary>
-    public string NSGML => _NSGML;
+    public virtual string NSGML => _NSGML;
 
     /// <summary>
     /// Prefix used for OWS namespace
@@ -102,7 +102,7 @@ public class WFS_XPathTextResourcesBase
     /// <summary>
     /// OWS namespace URI 
     /// </summary>
-    public string NSOWS => _NSOWS;
+    public virtual string NSOWS => _NSOWS;
 
     /// <summary>
     /// Prefix used for XML schema namespace
