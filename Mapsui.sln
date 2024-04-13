@@ -153,7 +153,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{0A9944CE-3B13-47A0-AA2B-2288029A26B4}"
 	ProjectSection(SolutionItems) = preProject
 		docs\CNAME = docs\CNAME
-		docs\mkdocs.yml = docs\mkdocs.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{AB4B602C-BCDE-48AF-B5A5-A6CC5340CBB8}"
@@ -162,6 +161,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{AB4B602C-BCD
 		docs\api\index.md = docs\api\index.md
 		docs\api\metadata.json = docs\api\metadata.json
 		docs\api\toc.yml = docs\api\toc.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "general", "general", "{15A727DB-FD4E-4F3D-BD55-C1DDF4EAF5DC}"
+	ProjectSection(SolutionItems) = preProject
+		docs\general\mkdocs.yml = docs\general\mkdocs.yml
 	EndProjectSection
 EndProject
 Global
@@ -2702,6 +2706,7 @@ Global
 		{A8808FA9-B3FC-4C13-8C22-22DC2C9A1EA7} = {B93C3A95-D9A5-48BC-9CD5-888D51A3F996}
 		{AE094043-B696-49D4-8F58-2523047A6210} = {F6CFD2E9-A26C-4255-AEAC-6C85A1402F09}
 		{AB4B602C-BCDE-48AF-B5A5-A6CC5340CBB8} = {0A9944CE-3B13-47A0-AA2B-2288029A26B4}
+		{15A727DB-FD4E-4F3D-BD55-C1DDF4EAF5DC} = {0A9944CE-3B13-47A0-AA2B-2288029A26B4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D684C3-0BD3-4D8A-AB23-748FB5527F6F}
