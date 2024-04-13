@@ -25,8 +25,6 @@ namespace Mapsui.Providers.Wfs.Utilities;
 /// </summary>
 internal abstract class GeometryFactory : IDisposable
 {
-
-    protected const string GmlNs = "http://www.opengis.net/gml";
     private readonly NumberFormatInfo _formatInfo = new();
     private readonly HttpClientUtil? _httpClientUtil;
     private readonly List<IPathNode> _pathNodes = [];
@@ -47,6 +45,8 @@ internal abstract class GeometryFactory : IDisposable
     /// Gets or sets the axis order
     /// </summary>
     internal int[] AxisOrder { get; set; } = [0, 1]; // default value
+
+    protected string GmlNs => FeatureTypeInfo.GmlNs;
 
     /// <summary>
     /// Protected constructor for the abstract class.
@@ -273,11 +273,11 @@ internal abstract class GeometryFactory : IDisposable
     /// </summary>
     private void InitializePathNodes()
     {
-        IPathNode coordinatesNode = new PathNode("http://www.opengis.net/gml", "coordinates",
+        IPathNode coordinatesNode = new PathNode(GmlNs, "coordinates",
             (NameTable)XmlReader!.NameTable);
-        IPathNode posListNode = new PathNode("http://www.opengis.net/gml", "posList",
+        IPathNode posListNode = new PathNode(GmlNs, "posList",
             (NameTable)XmlReader.NameTable);
-        IPathNode posNode = new PathNode("http://www.opengis.net/gml", "pos",
+        IPathNode posNode = new PathNode(GmlNs, "pos",
             (NameTable)XmlReader.NameTable);
         IPathNode ogcServiceExceptionNode = new PathNode("http://www.opengis.net/ogc", "ServiceException",
             (NameTable)XmlReader.NameTable);
