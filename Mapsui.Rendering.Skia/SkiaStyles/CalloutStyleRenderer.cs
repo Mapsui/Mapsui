@@ -28,7 +28,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
         var (x, y) = viewport.WorldToScreenXY(centroid.X, centroid.Y);
 
-        LoadBitmapId(calloutStyle, renderService);
+        LoadBitmapId(calloutStyle, renderService.BitmapRegistry);
         if (calloutStyle.BitmapId < 0 || calloutStyle.Invalidated)
         {
             if (calloutStyle.Content < 0 && calloutStyle.Type == CalloutType.Custom)
@@ -36,7 +36,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
             if (calloutStyle.Invalidated)
             {
-                UpdateContent(calloutStyle, renderService);
+                UpdateContent(calloutStyle, renderService.BitmapRegistry);
             }
 
             RenderCallout(calloutStyle, renderService);
@@ -46,7 +46,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         if (calloutStyle.BitmapId < 0)
             return false;
 
-        var picture = (SKPicture)renderService.Get(calloutStyle.BitmapId);
+        var picture = (SKPicture)renderService.BitmapRegistry.Get(calloutStyle.BitmapId);
 
         // Calc offset (relative or absolute)
         var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(picture.CullRect.Width, picture.CullRect.Height);
@@ -99,14 +99,14 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
         if (callout.Type == CalloutType.Custom)
         {
-            var bitmapInfo = (BitmapInfo)renderService.GetOrCreate(callout.Content);
+            var bitmapInfo = (BitmapInfo)renderService.SymbolCache.GetOrCreate(callout.Content);
 
             contentWidth = bitmapInfo?.Width ?? 0;
             contentHeight = bitmapInfo?.Height ?? 0;
         }
         else if (callout.Type == CalloutType.Single || callout.Type == CalloutType.Detail)
         {
-            var picture = (SKPicture)renderService.Get(callout.Content);
+            var picture = (SKPicture)renderService.BitmapRegistry.Get(callout.Content);
 
             contentWidth = picture.CullRect.Width;
             contentHeight = picture.CullRect.Height;
@@ -132,9 +132,9 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             var picture = rec.EndRecording();
 
             if (callout.BitmapId < 0)
-                callout.BitmapId = renderService.Register(picture);
+                callout.BitmapId = renderService.BitmapRegistry.Register(picture);
             else
-                renderService.Set(callout.BitmapId, picture);
+                renderService.BitmapRegistry.Set(callout.BitmapId, picture);
         }
 
         callout.Invalidated = false;
@@ -285,7 +285,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             {
 
                 // Get size of content
-                var bitmapInfo = (BitmapInfo)renderService.GetOrCreate(callout.Content);
+                var bitmapInfo = (BitmapInfo)renderService.SymbolCache.GetOrCreate(callout.Content);
 
                 switch (bitmapInfo?.Type)
                 {
@@ -306,7 +306,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             }
             else if (callout.Type == CalloutType.Single || callout.Type == CalloutType.Detail)
             {
-                var picture = (SKPicture)renderService.Get(callout.Content);
+                var picture = (SKPicture)renderService.BitmapRegistry.Get(callout.Content);
                 using var skPaint = new SKPaint() { IsAntialias = true };
                 canvas.DrawPicture(picture, offset, skPaint);
             }

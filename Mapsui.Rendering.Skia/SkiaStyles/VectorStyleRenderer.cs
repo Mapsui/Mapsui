@@ -27,13 +27,13 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     switch (geometryFeature.Geometry)
                     {
                         case GeometryCollection collection:
-                            GeometryCollectionRenderer.Draw(canvas, viewport, vectorStyle, feature, collection, opacity, renderService);
+                            GeometryCollectionRenderer.Draw(canvas, viewport, vectorStyle, feature, collection, opacity, renderService.VectorCache);
                             break;
                         case Point point:
                             SymbolStyleRenderer.DrawXY(canvas, viewport, layer, point.X, point.Y, CreateSymbolStyle(vectorStyle), renderService);
                             break;
                         case Polygon polygon:
-                            PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderService);
+                            PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderService.VectorCache);
                             break;
                         case LineString lineString:
                             LineStringRenderer.Draw(canvas, viewport, vectorStyle, feature, lineString, opacity, renderService);

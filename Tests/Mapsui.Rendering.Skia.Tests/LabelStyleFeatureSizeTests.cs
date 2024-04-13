@@ -29,7 +29,7 @@ public class LabelStyleFeatureSizeTests
 
         using var skPaint = new SKPaint();
         using var renderCache = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderCache.LabelCache);
 
         ClassicAssert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize, 0));
     }
@@ -49,7 +49,7 @@ public class LabelStyleFeatureSizeTests
 
         using var skPaint = new SKPaint();
         using var renderCache = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderCache.LabelCache);
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
@@ -76,7 +76,7 @@ public class LabelStyleFeatureSizeTests
 
         using var skPaint = new SKPaint();
         using var renderCache = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderCache.LabelCache);
 
         ClassicAssert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + 2 * 2, 0));
     }
@@ -95,7 +95,7 @@ public class LabelStyleFeatureSizeTests
 
         using var skPaint = new SKPaint();
         using var renderCache = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderCache.LabelCache);
 
         ClassicAssert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + 2 * 2, 0));
     }
@@ -114,7 +114,7 @@ public class LabelStyleFeatureSizeTests
 
         using var skPaint = new SKPaint();
         using var renderCache = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderCache.LabelCache);
 
         ClassicAssert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + Math.Sqrt(2 * 2 + 2 * 2) * 2, 0));
     }

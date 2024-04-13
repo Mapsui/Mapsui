@@ -29,7 +29,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
         else
         {
-            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderCache);
+            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderCache.VectorCache);
         }
     }
 
@@ -39,11 +39,11 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         var (destX, destY) = viewport.WorldToScreenXY(x, y);
 
-        LoadBitmapId(symbolStyle, renderService);
+        LoadBitmapId(symbolStyle, renderService.BitmapRegistry);
         if (symbolStyle.BitmapId < 0)
             return false;
 
-        var bitmap = (BitmapInfo)renderService.GetOrCreate(symbolStyle.BitmapId);
+        var bitmap = (BitmapInfo)renderService.SymbolCache.GetOrCreate(symbolStyle.BitmapId);
         if (bitmap == null)
             return false;
 
@@ -94,7 +94,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 var sprite = bitmap.Sprite;
                 if (sprite.Data == null)
                 {
-                    var bitmapAtlas = (BitmapInfo)renderService.GetOrCreate(sprite.Atlas);
+                    var bitmapAtlas = (BitmapInfo)renderService.SymbolCache.GetOrCreate(sprite.Atlas);
                     sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
                         sprite.Y + sprite.Height));
                 }
@@ -247,13 +247,13 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     public static double FeatureSize(SymbolStyle symbolStyle, IRenderService renderService)
     {
         Size symbolSize = new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
-        LoadBitmapId(symbolStyle, renderService);
+        LoadBitmapId(symbolStyle, renderService.BitmapRegistry);
         switch (symbolStyle.SymbolType)
         {
             case SymbolType.Image:
                 if (symbolStyle.BitmapId >= 0)
                 {
-                    var bitmapSize = renderService.GetSize(symbolStyle.BitmapId);
+                    var bitmapSize = renderService.SymbolCache.GetSize(symbolStyle.BitmapId);
                     if (bitmapSize != null)
                     {
                         symbolSize = bitmapSize;

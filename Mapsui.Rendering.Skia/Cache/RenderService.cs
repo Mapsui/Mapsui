@@ -13,7 +13,7 @@ public sealed class RenderService : IRenderService
     {
         TileCache = new TileCache();
         LabelCache = new LabelCache();
-        BitmapRegistry = new Styles.BitmapRegistry(Styles.BitmapRegistry.Instance);
+        BitmapRegistry = new BitmapRegistry(Styles.BitmapRegistry.Instance);
         SymbolCache = new SymbolCache(BitmapRegistry);
         _vectorCache = new VectorCache(SymbolCache, capacity);
 
@@ -31,57 +31,6 @@ public sealed class RenderService : IRenderService
 
     public ITileCache TileCache { get; set; }
 
-    public Size? GetSize(int bitmapId)
-    {
-        return SymbolCache.GetSize(bitmapId);
-    }
-
-    public IBitmapInfo GetOrCreate(int bitmapID)
-    {
-        return SymbolCache.GetOrCreate(bitmapID);
-    }
-
-    public T GetOrCreateTypeface<T>(Font font, Func<Font, T> createTypeFace) where T : class
-    {
-        return LabelCache.GetOrCreateTypeface(font, createTypeFace);
-    }
-
-    public T GetOrCreateLabel<T>(string? text, LabelStyle style, float opacity, Func<LabelStyle, string?, float, ILabelCache, T> createLabelAsBitmap) where T : IBitmapInfo
-    {
-        return LabelCache.GetOrCreateLabel(text, style, opacity, createLabelAsBitmap);
-    }
-
-    public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, TPaint> toPaint)
-        where TParam : notnull
-        where TPaint : class
-    {
-        return VectorCache.GetOrCreatePaint(param, toPaint);
-    }
-
-    public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, ISymbolCache, TPaint> toPaint)
-        where TParam : notnull
-        where TPaint : class
-    {
-        return VectorCache.GetOrCreatePaint(param, toPaint);
-    }
-
-    public CacheTracker<TPath> GetOrCreatePath<TParam, TPath>(TParam param, Func<TParam, TPath> toSkRect)
-        where TParam : notnull
-        where TPath : class
-    {
-        return VectorCache.GetOrCreatePath(param, toSkRect);
-    }
-
-    public IBitmapInfo? GetOrCreate(MRaster raster, long currentIteration)
-    {
-        return TileCache.GetOrCreate(raster, currentIteration);
-    }
-
-    public void UpdateCache(long iteration)
-    {
-        TileCache.UpdateCache(iteration);
-    }
-
     public void Dispose()
     {
         LabelCache.Dispose();
@@ -91,35 +40,5 @@ public sealed class RenderService : IRenderService
         BitmapRegistry.Dispose();
     }
 
-    public int Register(object bitmapData, string? key = null)
-    {
-        return BitmapRegistry.Register(bitmapData, key);
-    }
-
-    public object? Unregister(int id)
-    {
-        return BitmapRegistry.Unregister(id);
-    }
-
-    public object Get(int id)
-    {
-        return BitmapRegistry.Get(id);
-    }
-
-    public bool Set(int id, object bitmapData)
-    {
-        return BitmapRegistry.Set(id, bitmapData);
-    }
-
-    public bool TryGetBitmapId(string key, out int bitmapId)
-    {
-        return BitmapRegistry.TryGetBitmapId(key, out bitmapId);
-    }
-
-    public void CheckBitmapData(object bitmapData)
-    {
-        BitmapRegistry.CheckBitmapData(bitmapData);
-    }
-
-    public IBitmapRegistry BitmapRegistry { get; }
+    public IBitmapRegistry BitmapRegistry { get; set; }
 }
