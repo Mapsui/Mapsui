@@ -1,5 +1,5 @@
 # Install .NET 6 SDK using winget (uncomment if needed)
-// Currently mkdocs needs to be installed manually. Perhaps it is better to install it in this script.
+# Currently mkdocs needs to be installed manually. Perhaps it is better to install it in this script.
 
 Write-Output "Create general documentation with mkdocs in 'docs/general/_site'"
 mkdocs build -f docs/general/mkdocs.yml

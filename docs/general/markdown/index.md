@@ -1,5 +1,19 @@
 # Introduction
-Mapsui is a .NET map component that supports all main .NET UI frameworks. Try the quick-start for your specific platform below.
+Mapsui is a .NET map component that supports all main .NET UI frameworks. 
+
+| UI Framework | NuGet  |
+| ---------------|:-------------:|
+| Mapsui.Maui   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Maui.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Maui/) |
+| Mapsui.Wpf     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Wpf/) |
+| Mapsui.Avalonia     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Avalonia/) |
+| Mapsui.Uno.WinUI     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.WinUI.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uno.WinUI.svg)](https://www.nuget.org/packages/Mapsui.Uno.WinUI) |
+| Mapsui.Blazor     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Blazor.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Blazor/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Blazor.svg)](https://www.nuget.org/packages/Mapsui.Blazor) |
+| Mapsui.WinUI     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WinUI.svg?style=flat)](https://www.nuget.org/packages/Mapsui.WinUI/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.WinUI.svg)](https://www.nuget.org/packages/Mapsui.WinUI) |
+| Mapsui.Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Android.svg)](https://www.nuget.org/packages/Mapsui.Android) |
+| Mapsui.iOS     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.iOS.svg)](https://www.nuget.org/packages/Mapsui.iOS) |
+| Mapsui.Eto     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Eto/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Eto.svg)](https://www.nuget.org/packages/Mapsui.Eto) |
+
+Try the quick-start for your favorite framework below.
 
 !!! Quickstart guides
 
@@ -523,11 +537,29 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks. Try th
         Upgrading to the latest Uno.UI Dev Version should help too.
 
 
-
-
 ## Functionality
 - Points, Lines and Polygons using [NTS](https://github.com/NetTopologySuite/NetTopologySuite), a mature library which support all kinds of geometric operations. 
 - OpenStreetMap tiles based on [BruTile library](https://github.com/BruTile/BruTile) and almost all other tile sources.
 - OGC standards with data providers for WMS, WFS and WMTS.
 - Offline maps are possible using MBTiles implemented with [BruTile.MBTiles](https://www.nuget.org/packages/BruTile.MbTiles). This stores map tiles in a sqlite file.
 - Generates static map images to could be embedded in PDFs. 
+
+## Other resources:
+- [API documentation Mapsui](https://mapsui.com/v5/api)
+- [Mapsui on GitHub](https://github.com/mapsui/mapsui)
+- [Online samples in Blazor for Mapsui](https://mapsui.com/v5/samples/)
+
+## Projects that use Mapsui
+
+### Breath Companion
+
+[![Breath Companion website](images/breath-companion.png)](https://software-notion.de/apps/breath-companion)
+
+### Squadra
+
+[![Squadra](images/squadra.png)](https://bertt.github.io/squadra/)
+
+## Support
+
+For paid support in the form of contract work or consoluting mail: [info.mapsui@gmail.com](mailto:info.mapsui@gmail.com).
+
