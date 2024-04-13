@@ -9,7 +9,7 @@ namespace Mapsui.Rendering.Skia;
 public static class LineStringRenderer
 {
     public static void Draw(SKCanvas canvas, Viewport viewport, VectorStyle? vectorStyle,
-        IFeature feature, LineString lineString, float opacity, IRenderCache renderCache)
+        IFeature feature, LineString lineString, float opacity, IRenderService renderCache)
     {
         if (vectorStyle == null)
             return;
