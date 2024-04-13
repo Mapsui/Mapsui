@@ -41,6 +41,9 @@ public sealed class BitmapRegistry : IBitmapRegistry
     /// <returns>Id of registered bitmap data</returns>
     public int Register(object bitmapData, string? key = null)
     {
+        if (bitmapData is Uri uri)
+            return Register(uri);
+        
         CheckBitmapData(bitmapData);
 
         var id = NextBitmapId();
