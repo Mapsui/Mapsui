@@ -54,6 +54,10 @@ public class WFSProvider : IProvider, IDisposable
         /// Version 1.1.0
         /// </summary>
         WFS_1_1_0,
+        /// <summary>
+        /// Version 2.0.0
+        /// </summary>
+        WFS_2_0_0,
     }
 
 
@@ -331,7 +335,9 @@ public class WFSProvider : IProvider, IDisposable
         _textResources = wfsVersion switch
         {
             WFSVersionEnum.WFS_1_0_0 => new WFS_1_0_0_TextResources(),
-            _ => new WFS_1_1_0_TextResources(),
+            WFSVersionEnum.WFS_1_1_0 => new WFS_1_1_0_TextResources(),
+            WFSVersionEnum.WFS_2_0_0 => new WFS_2_0_0_TextResources(),
+            _ => throw new ArgumentException(nameof(wfsVersion))
         };
 
         _wfsVersion = wfsVersion;
@@ -384,9 +390,13 @@ public class WFSProvider : IProvider, IDisposable
         _persistentCache = persistentCache ?? DefaultCache;
         _featureTypeInfo = featureTypeInfo;
 
-        if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
-            _textResources = new WFS_1_0_0_TextResources();
-        else _textResources = new WFS_1_1_0_TextResources();
+        _textResources = wfsVersion switch
+        {
+            WFSVersionEnum.WFS_1_0_0 => new WFS_1_0_0_TextResources(),
+            WFSVersionEnum.WFS_1_1_0 => new WFS_1_1_0_TextResources(),
+            WFSVersionEnum.WFS_2_0_0 => new WFS_2_0_0_TextResources(),
+            _ => throw new ArgumentException(nameof(wfsVersion))
+        };
 
         _wfsVersion = wfsVersion;
     }
@@ -416,13 +426,16 @@ public class WFSProvider : IProvider, IDisposable
                string geometryName, GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
         _persistentCache = persistentCache ?? DefaultCache;
+        _textResources = wfsVersion switch
+        {
+            WFSVersionEnum.WFS_1_0_0 => new WFS_1_0_0_TextResources(),
+            WFSVersionEnum.WFS_1_1_0 => new WFS_1_1_0_TextResources(),
+            WFSVersionEnum.WFS_2_0_0 => new WFS_2_0_0_TextResources(),
+            _ => throw new ArgumentException(nameof(wfsVersion))
+        };
+
         _featureTypeInfo = new WfsFeatureTypeInfo(serviceUri, nsPrefix, featureTypeNamespace, featureType,
-                                                  geometryName, geometryType);
-
-        if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
-            _textResources = new WFS_1_0_0_TextResources();
-        else _textResources = new WFS_1_1_0_TextResources();
-
+            geometryName, geometryType, _textResources.NSGML);
         _wfsVersion = wfsVersion;
     }
 
@@ -474,9 +487,13 @@ public class WFSProvider : IProvider, IDisposable
         _persistentCache = persistentCache ?? DefaultCache;
         _featureTypeInfoQueryManager = getCapabilitiesCache;
 
-        if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
-            _textResources = new WFS_1_0_0_TextResources();
-        else _textResources = new WFS_1_1_0_TextResources();
+        _textResources = wfsVersion switch
+        {
+            WFSVersionEnum.WFS_1_0_0 => new WFS_1_0_0_TextResources(),
+            WFSVersionEnum.WFS_1_1_0 => new WFS_1_1_0_TextResources(),
+            WFSVersionEnum.WFS_2_0_0 => new WFS_2_0_0_TextResources(),
+            _ => throw new ArgumentException(nameof(wfsVersion))
+        };
 
         _wfsVersion = wfsVersion;
 
@@ -707,6 +724,7 @@ public class WFSProvider : IProvider, IDisposable
     {
 
         _featureTypeInfo = new WfsFeatureTypeInfo();
+        _featureTypeInfo.GmlNs = _textResources.NSGML;
         var config = new WFSClientHttpConfigurator(_textResources);
 
         _featureTypeInfo.Prefix = _nsPrefix;
@@ -737,23 +755,23 @@ public class WFSProvider : IProvider, IDisposable
         /* Service URI (for WFS GetFeature request) */
         _featureTypeInfo.ServiceUri = _featureTypeInfoQueryManager.GetValueFromNode
             (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_GETFEATURERESOURCE));
-        _featureTypeInfo.ServiceUri = _featureTypeInfo.ServiceUri.AssureUriScheme(_uriScheme);
         /* If no GetFeature URI could be found, try GetCapabilities URI */
         if (_featureTypeInfo.ServiceUri == null) _featureTypeInfo.ServiceUri = _getCapabilitiesUri;
         else if (_featureTypeInfo.ServiceUri.EndsWith("?", StringComparison.Ordinal))
             _featureTypeInfo.ServiceUri =
                 _featureTypeInfo.ServiceUri.Remove(_featureTypeInfo.ServiceUri.Length - 1);
 
+        _featureTypeInfo.ServiceUri = _featureTypeInfo.ServiceUri.AssureUriScheme(_uriScheme);
         /* URI for DescribeFeatureType request */
         var describeFeatureTypeUri = _featureTypeInfoQueryManager.GetValueFromNode
             (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_DESCRIBEFEATURETYPERESOURCE));
-        describeFeatureTypeUri = describeFeatureTypeUri.AssureUriScheme(_uriScheme);
         /* If no DescribeFeatureType URI could be found, try GetCapabilities URI */
         if (describeFeatureTypeUri == null) describeFeatureTypeUri = _getCapabilitiesUri;
         else if (describeFeatureTypeUri.EndsWith("?", StringComparison.Ordinal))
             describeFeatureTypeUri =
                 describeFeatureTypeUri.Remove(describeFeatureTypeUri.Length - 1);
 
+        describeFeatureTypeUri = describeFeatureTypeUri.AssureUriScheme(_uriScheme);
         /* Spatial reference ID */
         var srid = _featureTypeInfoQueryManager.GetValueFromNode
             (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_SRS), [new DictionaryEntry("_param1", featureQueryName)]);
@@ -772,73 +790,65 @@ public class WFSProvider : IProvider, IDisposable
             var formatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
             string? bboxVal;
 
-            if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                bbox.MinLat =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
-                        null
-                            ? bboxVal
-                            : "0.0", formatInfo);
-            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                bbox.MinLat =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
-                        null
-                            ? bboxVal[(bboxVal.IndexOf(' ') + 1)..]
-                            : "0.0", formatInfo);
+            bbox.MinLat = _wfsVersion switch
+            {
+                WFSVersionEnum.WFS_1_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
+                    null
+                        ? bboxVal
+                        : "0.0", formatInfo),
+                WFSVersionEnum.WFS_1_1_0 or WFSVersionEnum.WFS_2_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
+                    null
+                        ? bboxVal[(bboxVal.IndexOf(' ') + 1)..]
+                        : "0.0", formatInfo),
+                _ => bbox.MinLat
+            };
 
-            if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                bbox.MaxLat =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
-                        null
-                            ? bboxVal
-                            : "0.0", formatInfo);
-            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                bbox.MaxLat =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
-                        null
-                            ? bboxVal[(bboxVal.IndexOf(' ') + 1)..]
-                            : "0.0", formatInfo);
+            bbox.MaxLat = _wfsVersion switch
+            {
+                WFSVersionEnum.WFS_1_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
+                    null
+                        ? bboxVal
+                        : "0.0", formatInfo),
+                WFSVersionEnum.WFS_1_1_0 or WFSVersionEnum.WFS_2_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
+                    null
+                        ? bboxVal[(bboxVal.IndexOf(' ') + 1)..]
+                        : "0.0", formatInfo),
+                _ => bbox.MaxLat
+            };
 
-            if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                bbox.MinLong =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
-                        null
-                            ? bboxVal
-                            : "0.0", formatInfo);
-            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                bbox.MinLong =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
-                        null
-                            ? bboxVal[..(bboxVal.IndexOf(' ') + 1)]
-                            : "0.0", formatInfo);
+            bbox.MinLong = _wfsVersion switch
+            {
+                WFSVersionEnum.WFS_1_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
+                    null
+                        ? bboxVal
+                        : "0.0", formatInfo),
+                WFSVersionEnum.WFS_1_1_0 or WFSVersionEnum.WFS_2_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
+                    null
+                        ? bboxVal[..(bboxVal.IndexOf(' ') + 1)]
+                        : "0.0", formatInfo),
+                _ => bbox.MinLong
+            };
 
-            if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                bbox.MaxLong =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
-                        null
-                            ? bboxVal
-                            : "0.0", formatInfo);
-            else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                bbox.MaxLong =
-                    Convert.ToDouble(
-                        (bboxVal =
-                         bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
-                        null
-                            ? bboxVal[..(bboxVal.IndexOf(' ') + 1)]
-                            : "0.0", formatInfo);
+            bbox.MaxLong = _wfsVersion switch
+            {
+                WFSVersionEnum.WFS_1_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
+                    null
+                        ? bboxVal
+                        : "0.0", formatInfo),
+                WFSVersionEnum.WFS_1_1_0 or WFSVersionEnum.WFS_2_0_0 => Convert.ToDouble(
+                    (bboxVal = bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
+                    null
+                        ? bboxVal[..(bboxVal.IndexOf(' ') + 1)]
+                        : "0.0", formatInfo),
+                _ => bbox.MaxLong
+            };
 
             _featureTypeInfo.BBox = bbox;
         }
