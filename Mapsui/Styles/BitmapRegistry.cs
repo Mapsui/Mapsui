@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
+using Mapsui.Logging;
 
 namespace Mapsui.Styles;
 
@@ -88,7 +89,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"An error occurred: {ex.Message}");
+                    Logger.Log(LogLevel.Error, $"Could not load from uri {bitmapPath} : { ex.Message}", ex);
                 }
                 break;
         }
