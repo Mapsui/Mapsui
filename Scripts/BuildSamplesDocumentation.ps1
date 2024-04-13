@@ -1,5 +1,5 @@
 $rootFolder = ".\samples"
-$outputFolder = ".\docfx\codesamples"
+$outputFolder = ".\docs\codesamples"
 $rootPath = Convert-Path .\
 
 Get-ChildItem -Path $rootFolder -Recurse -Filter "*sample.cs" | ForEach-Object {
@@ -15,7 +15,7 @@ Get-ChildItem -Path $rootFolder -Recurse -Filter "*sample.cs" | ForEach-Object {
 }
 
 $rootFolder = ".\Tests"
-$outputFolder = ".\docfx\codesamples"
+$outputFolder = ".\docs\codesamples"
 $rootPath = Convert-Path .\
 
 Get-ChildItem -Path $rootFolder -Recurse -Filter "*sample.cs" | ForEach-Object {
