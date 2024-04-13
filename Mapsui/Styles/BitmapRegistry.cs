@@ -1,7 +1,12 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
 using System.Threading;
+using System.Threading.Tasks;
+using Mapsui.Extensions;
 
 namespace Mapsui.Styles;
 
@@ -45,6 +50,49 @@ public sealed class BitmapRegistry : IBitmapRegistry
             _lookup[key] = id;
         }
         return id;
+    }
+
+    public int Register(Uri bitmapPath)
+    {
+        var key = bitmapPath.ToString();
+        Stream? stream = null;
+        switch (bitmapPath.Scheme)
+        {
+            case "embeddedresource":
+                foreach(var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    var name = assembly.GetName().Name;
+                    if (name != null)
+                        if (bitmapPath.LocalPath.StartsWith(name))
+                        {
+                            stream = assembly.GetManifestResourceStream(bitmapPath.LocalPath);
+                            if (stream != null)
+                                break;
+                        }
+                  
+                }
+                break;
+            case "file":
+                stream = File.OpenRead(bitmapPath.LocalPath);
+                break;
+            default:
+                try
+                {
+                    using HttpClient client = new HttpClient();
+                    using HttpResponseMessage response = client.GetAsync(bitmapPath, HttpCompletionOption.ResponseHeadersRead).Result;
+                    response.EnsureSuccessStatusCode(); // Throws an exception if the HTTP response status is unsuccessful
+                    stream = response.Content.ReadAsStreamAsync().Result;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
+                break;
+        }
+        
+        if (stream == null)
+            throw new ArgumentException("Resource not found: " + key);
+        return Register(stream, key);
     }
 
     private static int NextBitmapId()
