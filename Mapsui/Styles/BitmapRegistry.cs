@@ -81,7 +81,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
                             }
                     }
                 }
-              
+
                 break;
             case "file":
                 stream = File.OpenRead(bitmapPath.LocalPath);

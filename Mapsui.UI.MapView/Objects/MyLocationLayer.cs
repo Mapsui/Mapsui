@@ -29,9 +29,9 @@ public class MyLocationLayer : BaseLayer
     private SymbolStyle _dirStyle;  // style for the view-direction indicator
     private CalloutStyle _coStyle;  // style for the callout
 
-    private static int _bitmapMovingId = -1;
-    private static int _bitmapStillId = -1;
-    private static int _bitmapDirId = -1;
+    private static Uri? _bitmapMovingPath;
+    private static Uri? _bitmapStillPath;
+    private static Uri? _bitmapDirPath;
 
     private Position _animationMyLocationStart;
     private Position _animationMyLocationEnd;
@@ -49,7 +49,7 @@ public class MyLocationLayer : BaseLayer
             if (_isMoving != value)
             {
                 _isMoving = value;
-                _locStyle.BitmapId = _isMoving ? _bitmapMovingId : _bitmapStillId;
+                _locStyle.BitmapPath = _isMoving ? _bitmapMovingPath : _bitmapStillPath;
             }
         }
     }
@@ -139,25 +139,19 @@ public class MyLocationLayer : BaseLayer
         Enabled = false;
         IsMapInfoLayer = true;
 
-        if (_bitmapMovingId == -1)
+        if (_bitmapMovingPath == null)
         {
-            var bitmapMoving = typeof(MyLocationLayer).LoadBitmapId(@"Images.MyLocationMoving.svg");
-            // Register bitmap
-            _bitmapMovingId = bitmapMoving;
+            _bitmapMovingPath = typeof(MyLocationLayer).LoadBitmapPath(@"Images.MyLocationMoving.svg");
         }
 
-        if (_bitmapStillId == -1)
+        if (_bitmapStillPath == null)
         {
-            var bitmapStill = typeof(MyLocationLayer).LoadBitmapId(@"Images.MyLocationStill.svg");
-            // Register bitmap
-            _bitmapStillId = bitmapStill;
+            _bitmapStillPath = typeof(MyLocationLayer).LoadBitmapPath(@"Images.MyLocationStill.svg");
         }
 
-        if (_bitmapDirId == -1)
+        if (_bitmapDirPath == null)
         {
-            var bitmapDir = typeof(MyLocationLayer).LoadBitmapId(@"Images.MyLocationDir.svg");
-            // Register bitmap
-            _bitmapDirId = bitmapDir;
+            _bitmapDirPath = typeof(MyLocationLayer).LoadBitmapPath(@"Images.MyLocationDir.svg");
         }
 
         _feature = new GeometryFeature
@@ -169,7 +163,7 @@ public class MyLocationLayer : BaseLayer
         _locStyle = new SymbolStyle
         {
             Enabled = true,
-            BitmapId = _bitmapStillId,
+            BitmapPath = _bitmapStillPath,
             SymbolScale = Scale,
             SymbolRotation = Direction,
             SymbolOffset = new Offset(0, 0),
@@ -178,7 +172,7 @@ public class MyLocationLayer : BaseLayer
         _dirStyle = new SymbolStyle
         {
             Enabled = false,
-            BitmapId = _bitmapDirId,
+            BitmapPath = _bitmapDirPath,
             SymbolScale = 0.2,
             SymbolRotation = 0,
             SymbolOffset = new Offset(0, 0),
