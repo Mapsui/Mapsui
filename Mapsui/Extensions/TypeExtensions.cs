@@ -15,18 +15,13 @@ public static class TypeExtensions
         if (bitmapRegistry.TryGetBitmapId(fullName, out var bitmapId))
         {
 #pragma warning disable IDISP001 // Dispose created.
-            var result = LoadBitmap(typeInAssemblyOfEmbeddedResource, relativePathToEmbeddedResource);
+            var result1 = EmbeddedResourceLoader.Load(relativePathToEmbeddedResource, typeInAssemblyOfEmbeddedResource);
+            var result = result1;
 #pragma warning restore IDISP001 // Dispose created.            
             bitmapId = bitmapRegistry.Register(result, fullName);
             return bitmapId;
         }
 
         return bitmapId;
-    }
-
-    public static Stream LoadBitmap(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource)
-    {
-        var result = EmbeddedResourceLoader.Load(relativePathToEmbeddedResource, typeInAssemblyOfEmbeddedResource);
-        return result;
     }
 }

@@ -79,13 +79,4 @@ public static class SvgHelper
 
         return bitmapId;
     }
-
-    public static SKPicture? LoadSvg(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource)
-    {
-        var assembly = typeInAssemblyOfEmbeddedResource.GetTypeInfo().Assembly;
-        var fullName = assembly.GetFullName(relativePathToEmbeddedResource);
-
-        var result = assembly.GetManifestResourceStream(fullName).LoadSvgPicture();
-        return result;
-    }
 }
