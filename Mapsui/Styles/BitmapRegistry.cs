@@ -60,9 +60,9 @@ public sealed class BitmapRegistry : IBitmapRegistry
         switch (bitmapPath.Scheme)
         {
             case "embeddedresource":
-                if (resourceCache.TryGetValue(bitmapPath.LocalPath, out var foundAssembly))
+                if (resourceCache.TryGetValue(bitmapPath.Host, out var foundAssembly))
                 {
-                    stream = foundAssembly.GetManifestResourceStream(bitmapPath.LocalPath);
+                    stream = foundAssembly.GetManifestResourceStream(bitmapPath.Host);
                 }
                 else
                 {
@@ -70,12 +70,12 @@ public sealed class BitmapRegistry : IBitmapRegistry
                     {
                         var name = assembly.GetName().Name;
                         if (name != null)
-                            if (bitmapPath.LocalPath.StartsWith(name))
+                            if (bitmapPath.Host.StartsWith(name, StringComparison.InvariantCultureIgnoreCase))
                             {
-                                stream = assembly.GetManifestResourceStream(bitmapPath.LocalPath);
+                                stream = assembly.GetManifestResourceStream(bitmapPath.Host);
                                 if (stream != null)
                                 {
-                                    resourceCache[bitmapPath.LocalPath] = assembly;
+                                    resourceCache[bitmapPath.Host] = assembly;
                                     break;
                                 }
                             }
