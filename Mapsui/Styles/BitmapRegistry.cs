@@ -81,6 +81,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
                 {
                     using HttpClientHandler handler = new HttpClientHandler { AllowAutoRedirect = true };
                     using HttpClient client = new HttpClient(handler);
+// TODO: Make this async                    
 #pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
                     using HttpResponseMessage response = client.GetAsync(bitmapPath, HttpCompletionOption.ResponseHeadersRead).Result;
                     response.EnsureSuccessStatusCode(); // Throws an exception if the HTTP response status is unsuccessful
