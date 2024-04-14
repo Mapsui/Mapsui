@@ -160,6 +160,58 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHubTemplates", "GitHubTe
 		.github\ISSUE_TEMPLATE\pull_request_template.md = .github\ISSUE_TEMPLATE\pull_request_template.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{0A9944CE-3B13-47A0-AA2B-2288029A26B4}"
+	ProjectSection(SolutionItems) = preProject
+		docs\CNAME = docs\CNAME
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{AB4B602C-BCDE-48AF-B5A5-A6CC5340CBB8}"
+	ProjectSection(SolutionItems) = preProject
+		docs\api\docfx.json = docs\api\docfx.json
+		docs\api\index.md = docs\api\index.md
+		docs\api\metadata.json = docs\api\metadata.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "general", "general", "{15A727DB-FD4E-4F3D-BD55-C1DDF4EAF5DC}"
+	ProjectSection(SolutionItems) = preProject
+		docs\general\mkdocs.yml = docs\general\mkdocs.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "markdown", "markdown", "{121DA248-0D5E-435F-B950-0FE91691564A}"
+	ProjectSection(SolutionItems) = preProject
+		docs\general\markdown\async-fetching.md = docs\general\markdown\async-fetching.md
+		docs\general\markdown\contributors-guidelines.md = docs\general\markdown\contributors-guidelines.md
+		docs\general\markdown\custom-style-renders.md = docs\general\markdown\custom-style-renders.md
+		docs\general\markdown\device-independent-units.md = docs\general\markdown\device-independent-units.md
+		docs\general\markdown\documentation.md = docs\general\markdown\documentation.md
+		docs\general\markdown\faq.md = docs\general\markdown\faq.md
+		docs\general\markdown\getting-started-android.md = docs\general\markdown\getting-started-android.md
+		docs\general\markdown\getting-started-avalonia.md = docs\general\markdown\getting-started-avalonia.md
+		docs\general\markdown\getting-started-blazor.md = docs\general\markdown\getting-started-blazor.md
+		docs\general\markdown\getting-started-eto.md = docs\general\markdown\getting-started-eto.md
+		docs\general\markdown\getting-started-ios.md = docs\general\markdown\getting-started-ios.md
+		docs\general\markdown\getting-started-maui.md = docs\general\markdown\getting-started-maui.md
+		docs\general\markdown\getting-started-uno-winui.md = docs\general\markdown\getting-started-uno-winui.md
+		docs\general\markdown\getting-started-uno.md = docs\general\markdown\getting-started-uno.md
+		docs\general\markdown\getting-started-winui.md = docs\general\markdown\getting-started-winui.md
+		docs\general\markdown\getting-started-wpf.md = docs\general\markdown\getting-started-wpf.md
+		docs\general\markdown\getting-started-xamarin-forms.md = docs\general\markdown\getting-started-xamarin-forms.md
+		docs\general\markdown\how-to-work-with-mapsui.md = docs\general\markdown\how-to-work-with-mapsui.md
+		docs\general\markdown\index.md = docs\general\markdown\index.md
+		docs\general\markdown\logging.md = docs\general\markdown\logging.md
+		docs\general\markdown\mapsui-components.md = docs\general\markdown\mapsui-components.md
+		docs\general\markdown\nuget-of-latest-build.md = docs\general\markdown\nuget-of-latest-build.md
+		docs\general\markdown\performance-widget.md = docs\general\markdown\performance-widget.md
+		docs\general\markdown\projections.md = docs\general\markdown\projections.md
+		docs\general\markdown\rendering-tests.md = docs\general\markdown\rendering-tests.md
+		docs\general\markdown\resolution.md = docs\general\markdown\resolution.md
+		docs\general\markdown\roadmap.md = docs\general\markdown\roadmap.md
+		docs\general\markdown\samples.md = docs\general\markdown\samples.md
+		docs\general\markdown\touch-and-mouse-handling.md = docs\general\markdown\touch-and-mouse-handling.md
+		docs\general\markdown\v4.0-upgrade-guide.md = docs\general\markdown\v4.0-upgrade-guide.md
+		docs\general\markdown\v5.0-upgrade-guide.md = docs\general\markdown\v5.0-upgrade-guide.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|AnyCPU = Ad-Hoc|AnyCPU
@@ -2672,9 +2724,6 @@ Global
 		{512DB2DB-61A0-4723-A6AC-E9AE23243283} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{81BB36D2-4D01-44E3-9024-E7CBD10DA316} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
-		{7D976D37-0542-4A0D-99E6-6BAA180E7011} = {97458DE1-C297-4DED-AECB-5FEFED2B5610}
-		{52C84C7C-1D60-454E-804A-1F9691BD61A3} = {7D976D37-0542-4A0D-99E6-6BAA180E7011}
-		{5BB9C8BA-0FF4-40E7-BC36-8D671A951C82} = {97458DE1-C297-4DED-AECB-5FEFED2B5610}
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{F8B5F48E-5412-4D7A-A76F-01198D6E1768} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{A1FFEB6C-BE22-4659-83D2-F80333A6E7FB} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
@@ -2692,7 +2741,6 @@ Global
 		{10B6CC78-FA95-4E28-8F74-FD278714B9AD} = {671AF0DE-73BD-46C9-81F0-087703E010AE}
 		{BA0E8B89-ADBC-43B8-86D0-A1BC2427AE7F} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{741484E5-6E06-46E3-BCC6-22953A31FE9F} = {B12E8967-0E5B-4728-B877-F3BDFE0871F2}
-		{F161CDAC-1F47-4942-976B-FB7B154A542E} = {97458DE1-C297-4DED-AECB-5FEFED2B5610}
 		{D5E9ECB0-9621-49D8-8D50-B3BA642D368C} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{B93C3A95-D9A5-48BC-9CD5-888D51A3F996} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{6114232D-689A-415E-8079-88CFD5A5678A} = {B93C3A95-D9A5-48BC-9CD5-888D51A3F996}
@@ -2701,6 +2749,9 @@ Global
 		{3769BDA6-14B3-42B5-8E16-4BED13979597} = {B93C3A95-D9A5-48BC-9CD5-888D51A3F996}
 		{A8808FA9-B3FC-4C13-8C22-22DC2C9A1EA7} = {B93C3A95-D9A5-48BC-9CD5-888D51A3F996}
 		{AE094043-B696-49D4-8F58-2523047A6210} = {F6CFD2E9-A26C-4255-AEAC-6C85A1402F09}
+		{AB4B602C-BCDE-48AF-B5A5-A6CC5340CBB8} = {0A9944CE-3B13-47A0-AA2B-2288029A26B4}
+		{15A727DB-FD4E-4F3D-BD55-C1DDF4EAF5DC} = {0A9944CE-3B13-47A0-AA2B-2288029A26B4}
+		{121DA248-0D5E-435F-B950-0FE91691564A} = {15A727DB-FD4E-4F3D-BD55-C1DDF4EAF5DC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D684C3-0BD3-4D8A-AB23-748FB5527F6F}

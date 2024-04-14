@@ -1,5 +1,19 @@
 # Introduction
-Mapsui is a .NET map component that supports all main .NET UI frameworks. Try the quick-start for your specific platform below.
+Mapsui is a .NET map component that supports all main .NET UI frameworks. 
+
+| UI Framework | NuGet  |
+| ---------------|-------------:|
+| MAUI | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Maui.svg?style=flat&logo=nuget&label=Mapsui.Maui)](https://www.nuget.org/packages/Mapsui.Maui/) |
+| WPF | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat&logo=nuget&label=Mapsui.Wpf)](https://www.nuget.org/packages/Mapsui.Wpf/) |
+| Avalonia | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.svg?style=flat&logo=nuget&label=Mapsui.Avalonia)](https://www.nuget.org/packages/Mapsui.Avalonia/) |
+| Uno Platform | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.WinUI.svg?style=flat&logo=nuget&label=Mapsui.Uno.WinUI)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) |
+| Blazor | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Blazor.svg?style=flat&logo=nuget&label=Mapsui.Blazor)](https://www.nuget.org/packages/Mapsui.Blazor/) |
+| WinUI | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WinUI.svg?style=flat&logo=nuget&label=Mapsui.WinUI)](https://www.nuget.org/packages/Mapsui.WinUI/) |
+| .NET for Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat&logo=nuget&label=Mapsui.Android)](https://www.nuget.org/packages/Mapsui.Android/) |
+| .NET for iOS | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat&logo=nuget&label=Mapsui.iOS)](https://www.nuget.org/packages/Mapsui.iOS/)
+| Eto Forms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat&logo=nuget&label=Mapsui.Eto)](https://www.nuget.org/packages/Mapsui.Eto/) |
+
+Try the quick-start for your favorite framework below.
 
 !!! Quickstart guides
 
@@ -277,75 +291,6 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks. Try th
 
         **Step 4:** Run it and you should see a map of the world.
 
-    === "Xamarin"
-
-        **Step 1:** Create a normal Xamarin.Forms project
-
-        **Step 2:** In the package manager console type:
-
-        ```console
-        PM> Install-Package Mapsui.Forms
-        ```
-
-        **Step 3:** Add this line to the xaml file: 
-        ```xml
-        xmlns:mapsui="clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms"
-        ```
-
-        **Step 4:** Add the Mapsui.Forms view with
-
-        ```xml
-        <mapsui:MapView x:Name="mapView"
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="Fill"
-            BackgroundColor="Gray" />
-        ```
-        to the Xaml <ContentPage> part file.
-            
-        Nest the MapView element inside a container, this child element needs to be placed inside a parent Layout 
-        for the view to be correctly setup and attached to the code behind, for instance,
-
-        ```xml
-        <?xml version="1.0" encoding="utf-8" ?>
-        <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-                    xmlns:mapsui="clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms"
-                    mc:Ignorable="d">
-
-            <StackLayout>
-                <mapsui:MapView x:Name="mapView"
-                VerticalOptions="FillAndExpand"
-                HorizontalOptions="Fill"
-                BackgroundColor="Gray" />
-            </StackLayout>
-
-        </ContentPage>
-        ```
-        the Xaml file should look similar to this after this step.
-
-        **Step 5:** Add in the code behind the following
-
-        ```csharp
-        var map = new Map
-        {
-            CRS = "EPSG:3857",
-            Transformation = new MinimalTransformation()
-        };
-
-        var tileLayer = OpenStreetMap.CreateTileLayer();
-        map.Layers.Add(tileLayer);
-        map.Widgets.Add(new Widgets.ScaleBar.ScaleBarWidget(map) { 
-            TextAlignment = Widgets.Alignment.Center, 
-            HorizontalAlignment = Widgets.HorizontalAlignment.Left, 
-            VerticalAlignment = Widgets.VerticalAlignment.Bottom 
-        });
-        mapView.Map = map;
-        ```
-
-        **Step 6:** Run it and you should see a map of the world.
-
     === ".NET for iOS"
 
         **Step 1:** Create new 'Single View App' in Visual Studio
@@ -452,78 +397,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks. Try th
         ```
 
         **Step 4:** Run it and you should see a map of the world.
-
-    === "Uno UWP"
-
-        **Preparation:** [See the Uno Platform getting started](https://platform.uno/docs/articles/get-started-vs.html)
-
-        **Step 1:** Create new 'Uno App (Xamarin,UWP)' in Visual Studio
-
-        **Step 2:** In the package manager console type:
-
-        ```console
-        PM> Install-Package Mapsui.Uno
-        ```
-
-        Repeat this for all the targets you are using (Change the default Project in the Package Manager Console)
-
-        **Step 3:** Open MainPage.xaml and add namespace:
-
-        ```xml
-        xmlns:mapsui="clr-namespace:Mapsui.UI.Uwp;assembly=Mapsui.UI.Uno"
-        ```
-
-        Add MapControl to the Grid:
-
-        ```xml
-        <Grid>
-        <mapsui:MapControl x:Name="MyMap" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-        </Grid>
-        ```
-
-        In MainPage.xaml.cs, add namespace:
-
-        ```csharp
-        using Mapsui.Utilities;
-        ```
-
-        Add code to the constructor:
-
-        ```csharp
-        public MainPage()
-        {
-            this.InitializeComponent();
-            MyMap.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        }
-        ```
-
-        **Step 4:** Run it and you should see a map of the world.
-
-        **Troubleshooting:**
-
-        - Unable to resolve the .NET SDK version as specified in the global.json.
-        global.json (change the version to "6.0.400" or what is installed on the Computer)
-
-        - Duplicate Attribute errors:
-        Add following line to the ...Wpf.csproj.
-
-        ```xml
-            <!-- Work around https://github.com/dotnet/wpf/issues/6792 -->
-            <ItemGroup>
-            <FilteredAnalyzer Include="@(Analyzer->Distinct())" />
-            <Analyzer Remove="@(Analyzer)" />
-            <Analyzer Include="@(FilteredAnalyzer)" />
-            </ItemGroup>
-        </Target>
-        ```
-        
-        - System.MissingMethodException: Method not found:
-        See for solution [here](https://github.com/unoplatform/uno/issues/9297).
-        
-        Upgrading to the latest Uno.UI Dev Version should help too.
-
-
-
+    
 
 ## Functionality
 - Points, Lines and Polygons using [NTS](https://github.com/NetTopologySuite/NetTopologySuite), a mature library which support all kinds of geometric operations. 
@@ -531,3 +405,22 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks. Try th
 - OGC standards with data providers for WMS, WFS and WMTS.
 - Offline maps are possible using MBTiles implemented with [BruTile.MBTiles](https://www.nuget.org/packages/BruTile.MbTiles). This stores map tiles in a sqlite file.
 - Generates static map images to could be embedded in PDFs. 
+
+## Other resources:
+- [API documentation Mapsui](https://mapsui.com/v5/api)
+- [Mapsui on GitHub](https://github.com/mapsui/mapsui)
+- [Online samples in Blazor for Mapsui](https://mapsui.com/v5/samples/)
+
+## Projects that use Mapsui
+
+### Breath Companion
+
+[![Breath Companion website](images/breath-companion.png)](https://software-notion.de/apps/breath-companion)
+
+### Squadra
+
+[![Squadra](images/squadra.png)](https://bertt.github.io/squadra/)
+
+## Support
+
+For paid support in the form of contract work or consoluting mail: [info.mapsui@gmail.com](mailto:info.mapsui@gmail.com).

@@ -1,6 +1,6 @@
 site_name: Mapsui Documentation
-docs_dir: documentation
-site_dir: _site/documentation2
+docs_dir: markdown
+site_dir: _site
 theme:
   name: 'material'
   features:
@@ -22,8 +22,8 @@ nav:
   - 'nuget-of-latest-build.md'
 
   - Upgrade guides:
-    - 'v2.0-upgrade-guide.md'
     - 'v4.0-upgrade-guide.md'
+    - 'v5.0-upgrade-guide.md'
 
   - How Things Work:
     - 'mapsui-components.md'
@@ -38,9 +38,10 @@ nav:
     - 'contributors-guidelines.md'
     - 'rendering-tests.md'
     - 'documentation.md'
+    - 'touch-and-mouse-handling.md'
 
 repo_url: https://github.com/Mapsui/Mapsui/
-edit_uri: blob/master/mkdocs/documentation/
+edit_uri: blob/master/docs/general/markdown
 plugins:
   - glightbox
   - search:
