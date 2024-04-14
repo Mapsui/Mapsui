@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading;
@@ -27,7 +28,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
     }
 
     private int _counter;
-    private readonly ConcurrentDictionary<string, Assembly> resourceCache = new();
+    private readonly ConcurrentDictionary<string, (Assembly assembly, string realResourceName)> resourceCache = new();
 
     /// <summary>
     /// Singleton of BitmapRegistry class
@@ -60,9 +61,9 @@ public sealed class BitmapRegistry : IBitmapRegistry
         switch (bitmapPath.Scheme)
         {
             case "embeddedresource":
-                if (resourceCache.TryGetValue(bitmapPath.Host, out var foundAssembly))
+                if (resourceCache.TryGetValue(bitmapPath.Host, out var found))
                 {
-                    stream = foundAssembly.GetManifestResourceStream(bitmapPath.Host);
+                    stream = found.assembly.GetManifestResourceStream(found.realResourceName);
                 }
                 else
                 {
@@ -72,11 +73,16 @@ public sealed class BitmapRegistry : IBitmapRegistry
                         if (name != null)
                             if (bitmapPath.Host.StartsWith(name, StringComparison.InvariantCultureIgnoreCase))
                             {
-                                stream = assembly.GetManifestResourceStream(bitmapPath.Host);
-                                if (stream != null)
+                                string[] resourceNames = assembly.GetManifestResourceNames();
+                                var realResourceName = resourceNames.FirstOrDefault(r => r.Equals(bitmapPath.Host, StringComparison.InvariantCultureIgnoreCase));
+                                if (realResourceName != null)
                                 {
-                                    resourceCache[bitmapPath.Host] = assembly;
-                                    break;
+                                    stream = assembly.GetManifestResourceStream(realResourceName);
+                                    if (stream != null)
+                                    {
+                                        resourceCache[bitmapPath.Host] = (assembly, realResourceName);
+                                        break;
+                                    }
                                 }
                             }
                     }
